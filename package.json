@@ -11,6 +11,7 @@
   "scripts": {
     "setup": "git submodule update --init --recursive && bun install",
     "fetch:tuxemon": "sh tools/fetch-tuxemon.sh",
+    "import": "bun importer/index.ts",
     "build:wasm": "bun vendor/pocket-rpgkit/vendor/pocketjs/tools/wasm.ts",
     "test": "bun test tests/",
     "tsc": "bunx tsc --noEmit"
