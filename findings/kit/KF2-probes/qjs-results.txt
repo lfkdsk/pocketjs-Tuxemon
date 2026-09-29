@@ -1,0 +1,30 @@
+== base mbp=0
+BOOT 313.4 ms frames=3410
+REP 0 all p50 0.329 p95 0.576 max 1.734 total 1347 ms | walking n=623 p50 0.537 p95 0.582 max 0.930 | spyder_route1@14,19
+REP 1 all p50 0.323 p95 0.574 max 0.908 total 1337 ms | walking n=623 p50 0.535 p95 0.578 max 0.908 | spyder_route1@14,19
+REP 2 all p50 0.320 p95 0.577 max 1.349 total 1321 ms | walking n=623 p50 0.534 p95 0.581 max 1.349 | spyder_route1@14,19
+== branch mbp=0
+BOOT 319.3 ms frames=3410
+REP 0 all p50 0.326 p95 0.587 max 1.294 total 1338 ms | walking n=665 p50 0.540 p95 0.594 max 0.963 | spyder_route1@14,19
+REP 1 all p50 0.315 p95 0.575 max 1.894 total 1314 ms | walking n=665 p50 0.529 p95 0.576 max 1.894 | spyder_route1@14,19
+REP 2 all p50 0.314 p95 0.570 max 1.463 total 1298 ms | walking n=665 p50 0.535 p95 0.574 max 0.955 | spyder_route1@14,19
+== branch mbp=1
+BOOT 306.9 ms frames=3410
+REP 0 all p50 0.325 p95 0.571 max 1.196 total 1309 ms | walking n=665 p50 0.523 p95 0.578 max 0.747 | spyder_route1@14,19
+REP 1 all p50 0.311 p95 0.568 max 0.999 total 1271 ms | walking n=665 p50 0.518 p95 0.576 max 0.727 | spyder_route1@14,19
+REP 2 all p50 0.314 p95 0.579 max 1.033 total 1314 ms | walking n=665 p50 0.539 p95 0.585 max 0.905 | spyder_route1@14,19
+== base mbp=0
+BOOT 311.2 ms frames=3410
+REP 0 all p50 0.330 p95 0.566 max 0.971 total 1316 ms | walking n=623 p50 0.525 p95 0.570 max 0.729 | spyder_route1@14,19
+REP 1 all p50 0.320 p95 0.573 max 0.993 total 1326 ms | walking n=623 p50 0.538 p95 0.575 max 0.737 | spyder_route1@14,19
+REP 2 all p50 0.320 p95 0.582 max 1.147 total 1340 ms | walking n=623 p50 0.537 p95 0.649 max 1.117 | spyder_route1@14,19
+== branch mbp=0
+BOOT 305.1 ms frames=3410
+REP 0 all p50 0.320 p95 0.573 max 2.094 total 1309 ms | walking n=665 p50 0.531 p95 0.576 max 1.842 | spyder_route1@14,19
+REP 1 all p50 0.316 p95 0.578 max 2.115 total 1314 ms | walking n=665 p50 0.528 p95 0.580 max 0.850 | spyder_route1@14,19
+REP 2 all p50 0.310 p95 0.565 max 0.990 total 1264 ms | walking n=665 p50 0.505 p95 0.569 max 0.990 | spyder_route1@14,19
+== branch mbp=1
+BOOT 312.5 ms frames=3410
+REP 0 all p50 0.325 p95 0.584 max 1.007 total 1333 ms | walking n=665 p50 0.534 p95 0.579 max 0.779 | spyder_route1@14,19
+REP 1 all p50 0.312 p95 0.566 max 0.789 total 1268 ms | walking n=665 p50 0.526 p95 0.572 max 0.655 | spyder_route1@14,19
+REP 2 all p50 0.309 p95 0.570 max 0.775 total 1285 ms | walking n=665 p50 0.534 p95 0.575 max 0.767 | spyder_route1@14,19
