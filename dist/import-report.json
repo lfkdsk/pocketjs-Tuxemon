@@ -4,6 +4,15 @@
   "maps": "mods/tuxemon/maps",
   "locale": "en_US"
  },
+ "options": {
+  "areas": true,
+  "facing": true,
+  "condAll": true,
+  "localReset": true,
+  "place": true,
+  "inputLock": true,
+  "routes": false
+ },
  "maps": [
   "37707_tower",
   "37707_town",
@@ -272,11 +281,11 @@
  "schemaErrors": [],
  "byFate": {
   "T3-dropped": 5024,
-  "T1": 17948,
+  "T1": 23230,
   "T3-placeholder": 2157,
   "T4-dropped": 4885,
-  "T1-lowered": 7477,
-  "T2-dropped": 3589,
+  "T1-lowered": 3667,
+  "T2-dropped": 2100,
   "structural": 772
  },
  "rows": [
@@ -491,10 +500,10 @@
    "note": "presentation / meta"
   },
   {
-   "key": "act:create_npc:T1-lowered",
-   "fate": "T1-lowered",
+   "key": "act:create_npc:T1",
+   "fate": "T1",
    "count": 1324,
-   "note": "local.npc.<slug> = 1 (spawn position other than the event's is T2 place)"
+   "note": "local.npc.<slug> = 1 plus K1 place"
   },
   {
    "key": "act:daycare:T4-dropped",
@@ -539,10 +548,10 @@
    "note": "import-time events gated until this action runs"
   },
   {
-   "key": "act:lock_controls:T1-lowered",
-   "fate": "T1-lowered",
+   "key": "act:lock_controls:T1",
+   "fate": "T1",
    "count": 323,
-   "note": "blocking fibers already freeze the player (cross-event locks are T2)"
+   "note": "K1 cross-event input lock command"
   },
   {
    "key": "act:modify_bill:T4-dropped",
@@ -641,8 +650,8 @@
    "note": "trainer teams are P2"
   },
   {
-   "key": "act:remove_collision:T1-lowered",
-   "fate": "T1-lowered",
+   "key": "act:remove_collision:T1",
+   "fate": "T1",
    "count": 5,
    "note": "keyed collision becomes a variable-gated blocking event"
   },
@@ -653,8 +662,8 @@
    "note": "sys.party_size -= 1 when non-empty"
   },
   {
-   "key": "act:remove_npc:T1-lowered",
-   "fate": "T1-lowered",
+   "key": "act:remove_npc:T1",
+   "fate": "T1",
    "count": 217,
    "note": "local.npc.<slug> = 0"
   },
@@ -857,10 +866,10 @@
    "note": "presentation / meta"
   },
   {
-   "key": "act:unlock_controls:T1-lowered",
-   "fate": "T1-lowered",
+   "key": "act:unlock_controls:T1",
+   "fate": "T1",
    "count": 328,
-   "note": "blocking fibers already freeze the player (cross-event locks are T2)"
+   "note": "K1 cross-event input lock command"
   },
   {
    "key": "act:update_tile_properties:T4-dropped",
@@ -953,15 +962,21 @@
    "note": "player never defeated in P1; NPC: switch defeated.<slug>"
   },
   {
-   "key": "cond:is char_exists:T1-lowered",
-   "fate": "T1-lowered",
+   "key": "cond:is char_exists:T1",
+   "fate": "T1",
    "count": 3,
-   "note": "local.npc.<slug> presence variable (per-visit reset is T2)"
+   "note": "local.npc.<slug> presence resets on map entry"
+  },
+  {
+   "key": "cond:is char_facing:T1",
+   "fate": "T1",
+   "count": 1489,
+   "note": "K1 facing page condition"
   },
   {
    "key": "cond:is char_facing:T2-dropped",
    "fate": "T2-dropped",
-   "count": 1497,
+   "count": 8,
    "note": "trigger predicate unavailable in v1"
   },
   {
@@ -1187,10 +1202,10 @@
    "note": "player never defeated in P1; NPC: switch defeated.<slug>"
   },
   {
-   "key": "cond:not char_exists:T1-lowered",
-   "fate": "T1-lowered",
+   "key": "cond:not char_exists:T1",
+   "fate": "T1",
    "count": 1231,
-   "note": "local.npc.<slug> presence variable (per-visit reset is T2)"
+   "note": "local.npc.<slug> presence resets on map entry"
   },
   {
    "key": "cond:not char_gender:T3-dropped",
@@ -1325,39 +1340,27 @@
    "note": "page/if variable compare on the enum code"
   },
   {
-   "key": "trigger:action:facingTile:T1",
+   "key": "trigger:action:facingTile(area):T1",
    "fate": "T1",
-   "count": 380,
-   "note": "action"
+   "count": 431,
+   "note": "K1 rectangular event area (overlaps partitioned after guard sampling)"
   },
   {
-   "key": "trigger:action:facingTile:T1-lowered",
-   "fate": "T1-lowered",
-   "count": 51,
-   "note": "area expanded to one event per cell"
-  },
-  {
-   "key": "trigger:action:other:T1",
+   "key": "trigger:action:other(area):T1",
    "fate": "T1",
    "count": 1,
-   "note": "action"
+   "note": "K1 rectangular event area (overlaps partitioned after guard sampling)"
   },
   {
-   "key": "trigger:action:standingOn:T1",
+   "key": "trigger:action:standingOn(area):T1",
    "fate": "T1",
-   "count": 64,
-   "note": "action"
-  },
-  {
-   "key": "trigger:action:standingOn:T1-lowered",
-   "fate": "T1-lowered",
-   "count": 11,
-   "note": "area expanded to one event per cell"
+   "count": 75,
+   "note": "K1 rectangular event area (overlaps partitioned after guard sampling)"
   },
   {
    "key": "trigger:guard(compound):T1-lowered",
    "fate": "T1-lowered",
-   "count": 206,
+   "count": 11,
    "note": "derived switch evaluator (T2 condition.all removes it)"
   },
   {
@@ -1391,16 +1394,22 @@
    "note": "every action was removed, so no project event was emitted"
   },
   {
+   "key": "trigger:orphan input lock repair:T1-lowered",
+   "fate": "T1-lowered",
+   "count": 1,
+   "note": "safety unlock appended to taba_ba_br_master_foyer:e003_stop_and_talk_r001"
+  },
+  {
    "key": "trigger:spawn:T1-lowered",
    "fate": "T1-lowered",
    "count": 690,
    "note": "parallel page: guard -> local.npc.<slug> = 1"
   },
   {
-   "key": "trigger:stacked events on one cell:T1-lowered",
+   "key": "trigger:stacked event areas:T1-lowered",
    "fate": "T1-lowered",
-   "count": 46,
-   "note": "merged: match flags then bodies"
+   "count": 223,
+   "note": "partitioned: match flags then bodies"
   },
   {
    "key": "trigger:talk:T1",
@@ -1409,34 +1418,16 @@
    "note": "NPC event action page (if-chain over talk guards)"
   },
   {
-   "key": "trigger:touch:facing:T1",
+   "key": "trigger:touch:facing(area):T1",
    "fate": "T1",
-   "count": 812,
-   "note": "playerTouch"
+   "count": 931,
+   "note": "K1 rectangular event area (overlaps partitioned after guard sampling)"
   },
   {
-   "key": "trigger:touch:facing:T1-lowered",
-   "fate": "T1-lowered",
-   "count": 119,
-   "note": "area expanded to one event per cell"
-  },
-  {
-   "key": "trigger:touch:on(whole-map tracker):T1-lowered",
-   "fate": "T1-lowered",
-   "count": 17,
-   "note": "parallel visit tracker avoids expanding the full map"
-  },
-  {
-   "key": "trigger:touch:on:T1",
+   "key": "trigger:touch:on(area):T1",
    "fate": "T1",
-   "count": 165,
-   "note": "playerTouch"
-  },
-  {
-   "key": "trigger:touch:on:T1-lowered",
-   "fate": "T1-lowered",
-   "count": 164,
-   "note": "area expanded to one event per cell"
+   "count": 346,
+   "note": "K1 rectangular event area (overlaps partitioned after guard sampling)"
   }
  ],
  "transferRepairs": [
@@ -1498,11 +1489,11 @@
    "summary": {
     "types": 98,
     "uses": 13617,
-    "native": 6161,
-    "degraded": 2822,
+    "native": 8346,
+    "degraded": 637,
     "placeholder": 433,
     "dropped": 4201,
-    "nativePercent": 45.2,
+    "nativePercent": 61.3,
     "executablePercent": 69.1,
     "tier1": {
      "uses": 6099,
@@ -1893,13 +1884,13 @@
     {
      "type": "create_npc",
      "total": 1503,
-     "native": 0,
-     "degraded": 1324,
+     "native": 1324,
+     "degraded": 0,
      "placeholder": 0,
      "dropped": 179,
      "reasons": {
-      "degraded": [
-       "local.npc.<slug> = 1 (spawn position other than the event's is T2 place)"
+      "native": [
+       "local.npc.<slug> = 1 plus K1 place"
       ],
       "dropped": [
        "source event is not materialized by any map",
@@ -2042,13 +2033,13 @@
     {
      "type": "lock_controls",
      "total": 323,
-     "native": 0,
-     "degraded": 317,
+     "native": 317,
+     "degraded": 0,
      "placeholder": 0,
      "dropped": 6,
      "reasons": {
-      "degraded": [
-       "blocking fibers already freeze the player (cross-event locks are T2)"
+      "native": [
+       "K1 cross-event input lock command"
       ],
       "dropped": [
        "fixed-false guard prevents the source event from starting"
@@ -2309,12 +2300,12 @@
     {
      "type": "remove_collision",
      "total": 5,
-     "native": 0,
-     "degraded": 5,
+     "native": 5,
+     "degraded": 0,
      "placeholder": 0,
      "dropped": 0,
      "reasons": {
-      "degraded": [
+      "native": [
        "keyed collision becomes a variable-gated blocking event"
       ]
      }
@@ -2338,12 +2329,12 @@
     {
      "type": "remove_npc",
      "total": 224,
-     "native": 0,
-     "degraded": 217,
+     "native": 217,
+     "degraded": 0,
      "placeholder": 0,
      "dropped": 7,
      "reasons": {
-      "degraded": [
+      "native": [
        "local.npc.<slug> = 0"
       ],
       "dropped": [
@@ -2824,13 +2815,13 @@
     {
      "type": "unlock_controls",
      "total": 330,
-     "native": 0,
-     "degraded": 322,
+     "native": 322,
+     "degraded": 0,
      "placeholder": 0,
      "dropped": 8,
      "reasons": {
-      "degraded": [
-       "blocking fibers already freeze the player (cross-event locks are T2)"
+      "native": [
+       "K1 cross-event input lock command"
       ],
       "dropped": [
        "fixed-false guard prevents the source event from starting"
@@ -2915,12 +2906,12 @@
    "summary": {
     "types": 64,
     "uses": 8663,
-    "native": 3529,
-    "degraded": 1238,
+    "native": 5749,
+    "degraded": 12,
     "placeholder": 850,
-    "dropped": 3046,
-    "nativePercent": 40.7,
-    "executablePercent": 64.8,
+    "dropped": 2052,
+    "nativePercent": 66.4,
+    "executablePercent": 76.3,
     "tier1": {
      "uses": 3529,
      "percent": 40.74,
@@ -3024,13 +3015,13 @@
     {
      "type": "is char_exists",
      "total": 9,
-     "native": 0,
-     "degraded": 3,
+     "native": 3,
+     "degraded": 0,
      "placeholder": 0,
      "dropped": 6,
      "reasons": {
-      "degraded": [
-       "local.npc.<slug> presence variable (per-visit reset is T2)"
+      "native": [
+       "local.npc.<slug> presence resets on map entry"
       ],
       "dropped": [
        "source event is not materialized by any map"
@@ -3040,11 +3031,14 @@
     {
      "type": "is char_facing",
      "total": 1008,
-     "native": 0,
+     "native": 994,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 1008,
+     "dropped": 14,
      "reasons": {
+      "native": [
+       "K1 facing page condition"
+      ],
       "dropped": [
        "trigger predicate unavailable in v1",
        "Tuxemon's integer tile boundary never contains a point for a zero-size TMX event",
@@ -3534,13 +3528,13 @@
     {
      "type": "not char_exists",
      "total": 1400,
-     "native": 0,
-     "degraded": 1223,
+     "native": 1223,
+     "degraded": 0,
      "placeholder": 0,
      "dropped": 177,
      "reasons": {
-      "degraded": [
-       "local.npc.<slug> presence variable (per-visit reset is T2)"
+      "native": [
+       "local.npc.<slug> presence resets on map entry"
       ],
       "dropped": [
        "source event is not materialized by any map",

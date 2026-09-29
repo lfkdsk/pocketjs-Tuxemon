@@ -6,6 +6,7 @@ import {
   availableMapIds,
   buildProject,
   DEFAULT_IMPORT_OPTIONS,
+  K1_IMPORT_OPTIONS,
 } from "../importer/project.ts";
 import { jsonBytes, writeImport } from "../importer/index.ts";
 import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
@@ -315,6 +316,16 @@ test("ImportOptions.inputLock emits K1 cross-event lock commands", () => {
   expect(result.report.options?.inputLock).toBeTrue();
 });
 
+test("K1 appends a safety unlock when a source map has no unlock path", () => {
+  const result = buildProject(["taba_ba_br_master_foyer"], K1_IMPORT_OPTIONS);
+  const stop = result.project.maps[0]!.events!.find((event) => event.name === "Stop and talk")!;
+  expect(stop.pages[0]!.commands.at(-1)).toEqual({ op: "unlockInput" });
+  expect(result.report.rows).toContainEqual(expect.objectContaining({
+    key: "trigger:orphan input lock repair:T1-lowered",
+    count: 1,
+  }));
+});
+
 test("a blocking spawn cutscene survives its own presence write and unlocks input", () => {
   const options = {
     areas: true,
@@ -358,10 +369,10 @@ test("ImportOptions.routes emits K2 arbitrary targets and path steps", () => {
   expect(result.report.options?.routes).toBeTrue();
 });
 
-test("Spyder opening completes identically at 60, 30, and 20 Hz", () => {
-  writeImport(availableMapIds());
+test("Spyder opening completes identically at 60, 30, 20, and 4 Hz", () => {
+  writeImport(availableMapIds(), undefined, K1_IMPORT_OPTIONS);
   const transcripts: string[] = [];
-  for (const hz of [60, 30, 20]) {
+  for (const hz of [60, 30, 20, 4]) {
     const run = spawnSync(process.execPath, ["tools/smoke-spyder.ts"], {
       cwd: ROOT,
       encoding: "utf8",
@@ -371,12 +382,17 @@ test("Spyder opening completes identically at 60, 30, and 20 Hz", () => {
     if (run.status !== 0) {
       throw new Error(`smoke ${hz} Hz failed\n${run.stdout}\n${run.stderr}`);
     }
-    expect(run.stdout.match(/PASS  /g)).toHaveLength(11);
+    expect(run.stdout.match(/PASS  /g)).toHaveLength(12);
+    expect(run.stdout).toContain('"map":"spyder_route1"');
     transcripts.push(run.stdout.replace(/\[\s*\d+\]/g, "[frame]"));
   }
   const beats = (transcript: string) => transcript
     .split("\n")
-    .filter((line) => /(?:TEXT|PICK|MAP|PASS|RESULT)/.test(line));
+    // PASS lines can straddle a new map's first autorun text at low host
+    // rates because one folded host frame advances both. The observable
+    // story sequence and final state must still be identical.
+    .filter((line) => /(?:TEXT|PICK|MAP|RESULT)/.test(line));
   expect(beats(transcripts[1]!)).toEqual(beats(transcripts[0]!));
   expect(beats(transcripts[2]!)).toEqual(beats(transcripts[0]!));
+  expect(beats(transcripts[3]!)).toEqual(beats(transcripts[0]!));
 }, 120_000);

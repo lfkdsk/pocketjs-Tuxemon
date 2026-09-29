@@ -78,6 +78,18 @@ export const KIT_V2_IMPORT_OPTIONS: Readonly<ImportOptions> = Object.freeze({
   routes: true,
 });
 
+/** The first playable milestone: every merged K1 construct is enabled while
+ * K2's arbitrary-target routing remains off until that runtime lands. */
+export const K1_IMPORT_OPTIONS: Readonly<ImportOptions> = Object.freeze({
+  areas: true,
+  facing: true,
+  condAll: true,
+  localReset: true,
+  place: true,
+  inputLock: true,
+  routes: false,
+});
+
 const resolveOptions = (options: Partial<ImportOptions> = {}): ImportOptions => ({
   ...DEFAULT_IMPORT_OPTIONS,
   ...options,
@@ -1019,6 +1031,16 @@ const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(
 const BLOCKING = new Set<Command["op"]>(["text", "choices", "wait", "transfer", "moveRoute"]);
 const hasBlocking = (cmds: Command[]): boolean =>
   cmds.some((c) => BLOCKING.has(c.op) || (c.op === "if" && (hasBlocking(c.then) || hasBlocking(c.else ?? []))) || (c.op === "choices"));
+const hasCommand = (cmds: readonly Command[], wanted: FutureCommand["op"]): boolean =>
+  cmds.some((c) => {
+    if ((c as FutureCommand).op === wanted) return true;
+    if (c.op === "if") return hasCommand(c.then, wanted) || hasCommand(c.else ?? [], wanted);
+    if (c.op === "choices") {
+      return c.options.some((option) => hasCommand(option.commands, wanted)) ||
+        hasCommand(c.cancel?.commands ?? [], wanted);
+    }
+    return false;
+  });
 
 interface NpcAgg {
   slug: string;
@@ -1422,6 +1444,24 @@ function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: 
           },
         ],
       });
+    }
+  }
+
+  // A handful of source cutscenes intentionally pass a control lock to a
+  // second event, but one source map has no unlock action anywhere. Such a
+  // lock cannot have a continuation in this map (and K1 resets locks only on
+  // transfer), so close each affected page with a deterministic safety
+  // unlock. This is corpus-derived rather than a per-map patch.
+  if (options.inputLock) {
+    const pages = events.flatMap((event) => event.pages.map((page) => ({ event, page })));
+    const mapHasLock = pages.some(({ page }) => hasCommand(page.commands, "lockInput"));
+    const mapHasUnlock = pages.some(({ page }) => hasCommand(page.commands, "unlockInput"));
+    if (mapHasLock && !mapHasUnlock) {
+      for (const { event, page } of pages) {
+        if (!hasCommand(page.commands, "lockInput")) continue;
+        page.commands.push(command({ op: "unlockInput" }));
+        note("trigger", "orphan input lock repair", "T1-lowered", `safety unlock appended to ${m.slug}:${event.id}`);
+      }
     }
   }
 

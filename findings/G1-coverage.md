@@ -10,8 +10,8 @@ When conversion discards a whole event, every source rule in it is Dropped.
 
 | Kind | Kinds | Uses | Native | Degraded | Placeholder | Dropped | S1 T1 baseline |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Actions | 98 | 13617 | 6161 | 2822 | 433 | 4201 | 6099 / 6246 (44.79% / 45.9%) |
-| Conditions | 64 | 8663 | 3529 | 1238 | 850 | 3046 | 3529 / 4591 (40.74% / 53.0%) |
+| Actions | 98 | 13617 | 8346 | 637 | 433 | 4201 | 6099 / 6246 (44.79% / 45.9%) |
+| Conditions | 64 | 8663 | 5749 | 12 | 850 | 2052 | 3529 / 4591 (40.74% / 53.0%) |
 
 The S1 acceptance baselines are 6,246 action uses (45.9%) and 4,591
 condition uses (53.0%). Only T1 source types whose disposition is Native or
@@ -20,11 +20,11 @@ Degraded count toward them. This import records 6099
 (40.74%), respectively: 147
 action uses and 1062 condition uses below the S1 baselines. The old
 type-table Native figure was 5,448 / 13,617 (40.0%); conversion-path accounting
-supersedes it with 6161 / 13617
-(45.2%). “Executable”
+supersedes it with 8346 / 13617
+(61.3%). “Executable”
 (native + degraded + deliberate P1 placeholder) is
 69.1% for actions and
-64.8% for conditions.
+76.3% for conditions.
 
 Definitions:
 
@@ -76,7 +76,7 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `clear_variable` | 32 | 0 | 0 | 4 | 36 |
 | Action | `copy_variable` | 0 | 0 | 0 | 2 | 2 |
 | Action | `create_kennel` | 0 | 0 | 0 | 1 | 1 |
-| Action | `create_npc` | 0 | 1324 | 0 | 179 | 1503 |
+| Action | `create_npc` | 1324 | 0 | 0 | 179 | 1503 |
 | Action | `daycare` | 0 | 0 | 0 | 2 | 2 |
 | Action | `dojo_method` | 0 | 0 | 0 | 3 | 3 |
 | Action | `evolution` | 0 | 0 | 0 | 2 | 2 |
@@ -87,7 +87,7 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `get_player_monster` | 0 | 0 | 0 | 17 | 17 |
 | Action | `info` | 0 | 0 | 0 | 1 | 1 |
 | Action | `load_yaml` | 0 | 7 | 0 | 0 | 7 |
-| Action | `lock_controls` | 0 | 317 | 0 | 6 | 323 |
+| Action | `lock_controls` | 317 | 0 | 0 | 6 | 323 |
 | Action | `modify_bill` | 0 | 0 | 0 | 3 | 3 |
 | Action | `modify_money` | 18 | 0 | 0 | 1 | 19 |
 | Action | `modify_monster_bond` | 0 | 0 | 0 | 1 | 1 |
@@ -106,9 +106,9 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `random_encounter` | 0 | 0 | 0 | 476 | 476 |
 | Action | `random_integer` | 1 | 0 | 0 | 0 | 1 |
 | Action | `random_monster` | 0 | 0 | 0 | 39 | 39 |
-| Action | `remove_collision` | 0 | 5 | 0 | 0 | 5 |
+| Action | `remove_collision` | 5 | 0 | 0 | 0 | 5 |
 | Action | `remove_monster` | 0 | 0 | 4 | 1 | 5 |
-| Action | `remove_npc` | 0 | 217 | 0 | 7 | 224 |
+| Action | `remove_npc` | 217 | 0 | 0 | 7 | 224 |
 | Action | `remove_step_tracker` | 0 | 0 | 0 | 5 | 5 |
 | Action | `remove_tech` | 0 | 0 | 0 | 2 | 2 |
 | Action | `rename_monster` | 0 | 0 | 0 | 2 | 2 |
@@ -142,7 +142,7 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `translated_dialog` | 2006 | 0 | 0 | 62 | 2068 |
 | Action | `translated_dialog_choice` | 134 | 10 | 0 | 5 | 149 |
 | Action | `tune_radio` | 0 | 0 | 0 | 2 | 2 |
-| Action | `unlock_controls` | 0 | 322 | 0 | 8 | 330 |
+| Action | `unlock_controls` | 322 | 0 | 0 | 8 | 330 |
 | Action | `update_tile_properties` | 0 | 0 | 0 | 2 | 2 |
 | Action | `update_time` | 0 | 0 | 0 | 3 | 3 |
 | Action | `variable_math` | 0 | 0 | 0 | 5 | 5 |
@@ -162,8 +162,8 @@ census.
 | Condition | `is button_pressed` | 396 | 0 | 0 | 23 | 419 |
 | Condition | `is char_at` | 1352 | 0 | 0 | 459 | 1811 |
 | Condition | `is char_defeated` | 0 | 0 | 0 | 10 | 10 |
-| Condition | `is char_exists` | 0 | 3 | 0 | 6 | 9 |
-| Condition | `is char_facing` | 0 | 0 | 0 | 1008 | 1008 |
+| Condition | `is char_exists` | 3 | 0 | 0 | 6 | 9 |
+| Condition | `is char_facing` | 994 | 0 | 0 | 14 | 1008 |
 | Condition | `is char_facing_tile` | 317 | 0 | 0 | 27 | 344 |
 | Condition | `is char_gender` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `is char_healed` | 0 | 0 | 0 | 1 | 1 |
@@ -198,7 +198,7 @@ census.
 | Condition | `not battle_outcome_count` | 0 | 0 | 9 | 0 | 9 |
 | Condition | `not bill_exists` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `not char_defeated` | 0 | 0 | 179 | 2 | 181 |
-| Condition | `not char_exists` | 0 | 1223 | 0 | 177 | 1400 |
+| Condition | `not char_exists` | 1223 | 0 | 0 | 177 | 1400 |
 | Condition | `not char_gender` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `not char_healed` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `not char_in` | 0 | 0 | 0 | 6 | 6 |
