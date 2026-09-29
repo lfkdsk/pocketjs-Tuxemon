@@ -5,15 +5,15 @@
   "frames": [
     {
       "name": "bedroom",
-      "frame": 1723,
+      "frame": 1064,
       "map": "spyder_bedroom",
       "position": [
         3,
         4
       ],
-      "file": "g6-bedroom.1723.png",
-      "rgbaFnv1a": "437c8a18",
-      "pngSha256": "02eb105c229ffa49a687a6a34edba229202de35164484ac67d2db156d28df875",
+      "file": "g6-bedroom.1064.png",
+      "rgbaFnv1a": "00af3e6f",
+      "pngSha256": "3e63b2f4c0e4ac5215d04834dfb41e8ba113400c1af001b1c87cad95ece12c67",
       "camera": [
         0,
         0
@@ -27,21 +27,21 @@
           48,
           64
         ],
-        "facing": 2,
+        "facing": 0,
         "phase": 0,
-        "image": "assets/characters/player-adventurer-idle-2.png",
+        "image": "assets/characters/player-adventurer-idle-0.png",
         "height": 32
       }
     },
     {
       "name": "downstairs-mom",
-      "frame": 1951,
+      "frame": 1292,
       "map": "spyder_downstairs",
       "position": [
         3,
         6
       ],
-      "file": "g6-downstairs-mom.1951.png",
+      "file": "g6-downstairs-mom.1292.png",
       "rgbaFnv1a": "d39d7b7e",
       "pngSha256": "a430bf1404c085ab0b7283a2fa722bf1e506299bd4b461915ee3f4bd37e8aa8d",
       "camera": [
@@ -81,13 +81,13 @@
     },
     {
       "name": "paper-town",
-      "frame": 2017,
+      "frame": 1367,
       "map": "spyder_paper_town",
       "position": [
         10,
         8
       ],
-      "file": "g6-paper-town.2017.png",
+      "file": "g6-paper-town.1367.png",
       "rgbaFnv1a": "4380c25c",
       "pngSha256": "5a43f4c6939d3addba62e32e414bce0e4326c1df8d1e404860129f9087fa8d27",
       "camera": [
@@ -111,13 +111,13 @@
     },
     {
       "name": "route-1",
-      "frame": 3409,
+      "frame": 2727,
       "map": "spyder_route1",
       "position": [
         14,
         19
       ],
-      "file": "g6-route-1.3409.png",
+      "file": "g6-route-1.2727.png",
       "rgbaFnv1a": "aa358549",
       "pngSha256": "a089d5b5ba2fadd051766f308308cd573cc011f9a6466619b1add230d5042da6",
       "camera": [

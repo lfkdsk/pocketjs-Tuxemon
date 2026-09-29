@@ -131,11 +131,33 @@ function bfs(tx: number, ty: number): Dir4[] | null {
   return path;
 }
 
+function blockingNpcAt(tx: number, ty: number): boolean {
+  return Object.values(st.chars.chars).some((character) =>
+    character.blocks && character.tx === tx && character.ty === ty
+  );
+}
+
+/** A wandering NPC may occupy a requested destination between route calls.
+ * Let the world advance until it vacates the tile, with a deterministic
+ * host-rate-scaled ceiling so a genuinely blocked target still fails. */
+function waitForOpenGoal(tx: number, ty: number, map: string): boolean {
+  const maxWaitFrames = Math.max(8, Math.ceil(HZ * 10));
+  for (let waited = 0; blockingNpcAt(tx, ty) && waited < maxWaitFrames; waited++) {
+    tick();
+    if (st.mapId !== map || st.interp.modal || st.interp.main) return false;
+  }
+  return !blockingNpcAt(tx, ty);
+}
+
 /** Walk to a cell; stops early (returns false) when an event takes over. */
 function walkTo(tx: number, ty: number, soft = false): boolean {
   const map = st.mapId;
   if (st.interp.modal || st.interp.main) return false;
   if (st.move.tx === tx && st.move.ty === ty && !st.move.moving) return true;
+  if (!waitForOpenGoal(tx, ty, map)) {
+    if (soft) return false;
+    throw new Error(`walkTo ${tx},${ty}: destination stayed occupied for 10 seconds`);
+  }
   const width = project.maps.find((candidate) => candidate.id === map)!.width;
   const avoid = new Set([...touchCells()].map((cell) => {
     const [x, y] = cell.split(",").map(Number);

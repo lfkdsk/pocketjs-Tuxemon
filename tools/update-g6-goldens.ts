@@ -3,7 +3,7 @@
 // (the adaptive reducer driver freezes the exact 60 Hz input tape).
 
 import { createHash } from "node:crypto";
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { bootWorld, fnv1a } from "../vendor/pocket-rpgkit/vendor/pocketjs/hosts/sim/sim.ts";
 import { encodePNG } from "../vendor/pocket-rpgkit/vendor/pocketjs/tests/png.ts";
@@ -42,6 +42,9 @@ writeFileSync(
 const wanted = new Map(journey.checkpoints.map((mark) => [mark.frame, mark]));
 const dir = join(ROOT, "tests/goldens");
 mkdirSync(dir, { recursive: true });
+for (const file of readdirSync(dir)) {
+  if (/^g6-.*\.png$/.test(file)) rmSync(join(dir, file));
+}
 const world = await bootWorld(bundle, 60, undefined, undefined, { width: 480, height: 272 });
 const frames: Record<string, unknown>[] = [];
 const actorAt: Readonly<Record<string, string>> = {
