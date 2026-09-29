@@ -67,7 +67,12 @@ function tick(buttons = 0, edges: { confirm?: boolean; down?: boolean; up?: bool
   if (st.interp.error) throw new Error(st.interp.error.message);
 }
 
-const v = (id: string) => st.sw.variables[id] ?? 0;
+const v = (id: string): number => {
+  const value = st.sw.variables[id];
+  if (value === undefined) return 0;
+  if (typeof value !== "number") throw new Error(`expected numeric variable ${id}, got ${typeof value}`);
+  return value;
+};
 
 /** Advance text boxes; answer choice boxes from `answers` (label wanted). */
 function settle(answers: string[] = [], maxFrames = 3000): void {

@@ -15,10 +15,35 @@ import { applyTerrain, importTerrain } from "../importer/terrain.ts";
 import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
 import { canStepFrom, type Dir4 } from "../vendor/pocket-rpgkit/src/engine/passability.ts";
 import { createSwitchState } from "../vendor/pocket-rpgkit/src/engine/interpreter.ts";
-import { createSession, startSession, stepSession } from "../vendor/pocket-rpgkit/src/engine/session.ts";
+import {
+  createSession,
+  startSession,
+  stepSession,
+  type SessionState,
+} from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import type { Command } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
+
+type TransferCommand = Extract<Command, { op: "transfer" }>;
+type LiteralTransferCommand = TransferCommand & { map: string; x: number; y: number };
+
+function assertLiteralTransfer(command: TransferCommand): asserts command is LiteralTransferCommand {
+  if (
+    typeof command.map !== "string" ||
+    typeof command.x !== "number" ||
+    typeof command.y !== "number"
+  ) {
+    throw new Error("importer produced a variable-addressed transfer");
+  }
+}
+
+function numericVariable(state: SessionState, id: string): number {
+  const value = state.sw.variables[id];
+  if (value === undefined) return 0;
+  if (typeof value !== "number") throw new Error(`expected numeric variable ${id}, got ${typeof value}`);
+  return value;
+}
 
 function objectNodes(value: unknown, out: Record<string, unknown>[] = []): Record<string, unknown>[] {
   if (Array.isArray(value)) {
@@ -121,6 +146,7 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   const visit = (commands: readonly Command[]): void => {
     for (const command of commands) {
       if (command.op === "transfer") {
+        assertLiteralTransfer(command);
         transfers++;
         const target = maps.get(command.map);
         expect(target, `missing transfer target ${command.map}`).toBeDefined();
@@ -212,6 +238,7 @@ test("clamped transfers use the nearest deterministic walkable landing", () => {
   const collect = (commands: readonly Command[]): void => {
     for (const command of commands) {
       if (command.op === "transfer" && command.map === "flower_city") {
+        assertLiteralTransfer(command);
         landings.push({ x: command.x, y: command.y });
       } else if (command.op === "if") {
         collect(command.then);
@@ -385,11 +412,11 @@ test("a blocking spawn cutscene survives its own presence write and unlocks inpu
       upEdge: false,
       downEdge: false,
     });
-    if ((state.sw.variables["v.proftalk2"] ?? 0) > 0 && !state.interp.modal) break;
+    if (numericVariable(state, "v.proftalk2") > 0 && !state.interp.modal) break;
   }
   expect([...seen].some((line) => line.includes("I'll take 12 potions please."))).toBeTrue();
   expect([...seen].some((line) => line.includes("My name is Kay Wren"))).toBeTrue();
-  expect(state.sw.variables["v.proftalk2"]).toBeGreaterThan(0);
+  expect(numericVariable(state, "v.proftalk2")).toBeGreaterThan(0);
   expect(state.interp.inputLocked).toBeFalse();
   expect(state.interp.error).toBeUndefined();
 });
@@ -462,8 +489,8 @@ test("simultaneously eligible route1 automatic events run concurrently and relea
   }
   expect(locked).toBeTrue();
   expect(state.interp.inputLocked).toBeFalse();
-  expect(state.sw.variables["v.completethis"]).toBeGreaterThan(0);
-  expect(state.sw.variables["v.left"]).toBeGreaterThan(0);
+  expect(numericVariable(state, "v.completethis")).toBeGreaterThan(0);
+  expect(numericVariable(state, "v.left")).toBeGreaterThan(0);
   expect(state.interp.error).toBeUndefined();
 });
 

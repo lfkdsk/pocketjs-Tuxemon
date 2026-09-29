@@ -14,6 +14,13 @@ const ROOT = resolve(import.meta.dir, "..");
 const project = JSON.parse(readFileSync(resolve(ROOT, "dist/project.json"), "utf8")) as Project;
 const NONE = { buttons: 0, confirmEdge: false, cancelEdge: false, upEdge: false, downEdge: false };
 
+function numericVariable(state: SessionState, id: string): number {
+  const value = state.sw.variables[id];
+  if (value === undefined) return 0;
+  if (typeof value !== "number") throw new Error(`expected numeric variable ${id}, got ${typeof value}`);
+  return value;
+}
+
 function bedroom(x = 4, y = 4, dir: "down" | "left" = "down") {
   const runProject: Project = { ...project, start: { map: "spyder_bedroom", x, y, dir } };
   const session = createSession(runProject, 60);
@@ -80,7 +87,7 @@ test("declining the skip cannot escape the CEO monologue and preserves story ord
     }
     expect(state.interp.modal?.fiber).toContain("e005_spyder_intro");
     expect([state.mapId, state.move.tx, state.move.ty]).toEqual(["spyder_bedroom", 4, 4]);
-    expect(state.sw.variables["v.spyder_intro"] ?? 0).toBe(0);
+    expect(numericVariable(state, "v.spyder_intro")).toBe(0);
   }
 
   // With normal confirmation input, question_intro is committed first, then
@@ -100,7 +107,7 @@ test("declining the skip cannot escape the CEO monologue and preserves story ord
       }
       state = stepSession(session, state, { ...NONE, confirmEdge });
       for (const id of ["v.question_intro", "v.spyder_intro"] as const) {
-        if (seen[id] === undefined && (state.sw.variables[id] ?? 0) > 0) seen[id] = frame;
+        if (seen[id] === undefined && numericVariable(state, id) > 0) seen[id] = frame;
       }
       if (state.mapId !== "spyder_bedroom") {
         seen.transfer = frame;

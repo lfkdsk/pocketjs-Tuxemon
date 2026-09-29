@@ -17,8 +17,15 @@ import { materializeShardedProject } from "./generated-project.ts";
 
 function collectLandings(commands: readonly Command[], landing: Map<string, [number, number]>): void {
   for (const command of commands) {
-    if (command.op === "transfer" && !landing.has(command.map)) {
-      landing.set(command.map, [command.x, command.y]);
+    if (command.op === "transfer") {
+      if (
+        typeof command.map !== "string" ||
+        typeof command.x !== "number" ||
+        typeof command.y !== "number"
+      ) {
+        throw new Error("freeze scan requires importer-authored literal transfers");
+      }
+      if (!landing.has(command.map)) landing.set(command.map, [command.x, command.y]);
     } else if (command.op === "if") {
       collectLandings(command.then, landing);
       collectLandings(command.else ?? [], landing);

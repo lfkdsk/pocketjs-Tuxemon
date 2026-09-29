@@ -1616,6 +1616,13 @@ function transferErrors(project: Project): TransferError[] {
   const visit = (sourceMap: string, event: string, commands: readonly Command[]): void => {
     for (const command of commands) {
       if (command.op === "transfer") {
+        if (
+          typeof command.map !== "string" ||
+          typeof command.x !== "number" ||
+          typeof command.y !== "number"
+        ) {
+          throw new Error("importer invariant: generated transfers must use literal destinations");
+        }
         const target = maps.get(command.map);
         const reason = !target
           ? "missing-map"

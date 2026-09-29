@@ -33,7 +33,9 @@ for viewport in "480 272" "960 544"; do
     G6_BENCH_W="$width" G6_BENCH_H="$height" \
     "$binary" g6_quickjs_bench::journey --ignored --exact --nocapture
   actual=$(sha256sum "$state" | cut -d' ' -f1)
-  expected=937ca7f719f79d2a1de6c6d22b7a4827ef9cae378904c254e7bcf592be56eb48
+  # KB1/KB2 adds default ext/scene/pendingBattles fields; the legacy view
+  # (with only those fields removed) retains the former 937ca7f7... hash.
+  expected=ce3ec0ac665936c0c6388d5a890c3d9e1f463ab816ba0fea3a0075275d38e5f1
   test "$actual" = "$expected"
   echo "STATE viewport=${width}x${height} canonical_sha256=$actual"
 done

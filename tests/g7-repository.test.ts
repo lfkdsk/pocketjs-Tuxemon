@@ -31,7 +31,9 @@ const ROOT = resolve(import.meta.dir, "..");
 const journey = JSON.parse(readFileSync(join(ROOT, "data/g6-journey.json"), "utf8")) as {
   masks: number[];
 };
-const EXPECTED_TERMINAL_STATE_SHA256 = "937ca7f719f79d2a1de6c6d22b7a4827ef9cae378904c254e7bcf592be56eb48";
+// KB1/KB2 adds the default ext/scene slots and empty battle queue to saved
+// state. Removing only those fields still produces the former 937ca7f7… hash.
+const EXPECTED_TERMINAL_STATE_SHA256 = "ce3ec0ac665936c0c6388d5a890c3d9e1f463ab816ba0fea3a0075275d38e5f1";
 
 function input(mask: number, previous: number): SessionInput {
   const pressed = mask & ~previous;
