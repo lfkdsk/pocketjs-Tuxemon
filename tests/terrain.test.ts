@@ -113,6 +113,8 @@ describe("Tuxemon terrain import", () => {
     expect(merged.maps[0]!.name).toBe("kept name");
     expect(merged.maps[0]!.events?.[0]?.id).toBe("kept");
     expect(merged.maps[0]!.ground).toEqual(build.fragment.maps[0]!.ground);
+    expect(merged.maps[0]!.passage).toEqual(build.fragment.maps[0]!.passage);
+    expect(merged.maps[0]!.passage).not.toContainEqual([0, "pass"]);
     expect(merged.maps[0]!.sheets).toContain(TERRAIN_SHEET_ID);
     expect(merged.sheets.at(-1)?.id).toBe(TERRAIN_SHEET_ID);
   });

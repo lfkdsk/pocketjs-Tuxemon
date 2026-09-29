@@ -33,6 +33,7 @@ function objectNodes(value: unknown, out: Record<string, unknown>[] = []): Recor
 
 test("all maps pass schema and reference valid transfer destinations", () => {
   const result = buildProject(availableMapIds());
+  expect(result.project.system).toEqual({ messageBlocksPlayer: true });
   expect(result.project.maps).toHaveLength(263);
   expect(result.report.schemaErrors).toEqual([]);
   expect(result.report.transferErrors).toEqual([]);
@@ -234,11 +235,11 @@ test("clamped transfers use the nearest deterministic walkable landing", () => {
   expect(exits.length).toBeGreaterThan(0);
 });
 
-test("ImportOptions defaults preserve the v1 output byte-for-byte", () => {
+test("default import output remains byte-pinned", () => {
   const maps = ["spyder_downstairs", "spyder_paper_town"];
   const bytes = jsonBytes(buildProject(maps, DEFAULT_IMPORT_OPTIONS));
   expect(createHash("sha256").update(bytes).digest("hex")).toBe(
-    "e9cb28f18c7d1390c3b30284ba54238999f7d548b1b1c48e0444a53d981c13fa",
+    "1f4aa5b232b560d9de776188ea4787d08fc8a68e8a12df503767c0d0948d428c",
   );
 });
 
@@ -402,6 +403,19 @@ test("ImportOptions.routes emits K2 arbitrary targets and path steps", () => {
   expect(nodes.some((node) => node.pathTo !== undefined)).toBeTrue();
   expect(nodes.some((node) => node.approach !== undefined)).toBeTrue();
   expect(nodes.some((node) => node.turnToward !== undefined)).toBeTrue();
+  const routeNodes = objectNodes(buildProject(["route1"], { routes: true }).project);
+  const charMoves = routeNodes.filter((node) =>
+    node.op === "moveRoute" && node.wait === true &&
+    typeof node.route === "object" && node.route !== null &&
+    Array.isArray((node.route as { steps?: unknown }).steps) &&
+    (node.route as { steps: unknown[] }).steps.every((step) =>
+      typeof step === "string" && step.startsWith("move")
+    )
+  );
+  expect(charMoves.length).toBeGreaterThan(0);
+  expect(charMoves.every((node) =>
+    (node.route as { skippable?: boolean }).skippable === true
+  )).toBeTrue();
   expect(result.report.options?.routes).toBeTrue();
 });
 
@@ -456,7 +470,7 @@ test("simultaneously eligible route1 automatic events run concurrently and relea
 test("Spyder opening completes identically at 60, 30, 20, and 4 Hz", () => {
   const maintainedProject = resolve(ROOT, "dist/project.json");
   const before = readFileSync(maintainedProject);
-  const scratchParent = "/var/tmp/fleet/1862";
+  const scratchParent = resolve(process.env.G6_SCRATCH_ROOT ?? "/var/tmp/fleet/pocket-tuxemon");
   mkdirSync(scratchParent, { recursive: true });
   const isolatedRoot = mkdtempSync(join(scratchParent, "g6-hz-"));
   const transcripts: string[] = [];

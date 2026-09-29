@@ -72,7 +72,7 @@ function generate(outputRoot: string): void {
   if (proc.exitCode !== 0) throw new Error(`G6 determinism: generator exited ${proc.exitCode}`);
 }
 
-const scratchParent = "/var/tmp/fleet/1862";
+const scratchParent = resolve(process.env.G6_SCRATCH_ROOT ?? "/var/tmp/fleet/pocket-tuxemon");
 mkdirSync(scratchParent, { recursive: true });
 const firstRoot = mkdtempSync(join(scratchParent, "g6-determinism-a-"));
 const secondRoot = mkdtempSync(join(scratchParent, "g6-determinism-b-"));

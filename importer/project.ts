@@ -896,7 +896,10 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         noteAction(a, a.type, ctx.options.routes && who !== "player" && !isSelf(who) ? "T1" : "T1-lowered", "moveRoute steps");
         const target = who === "player" ? "player" as const
           : isSelf(who) ? "this" as const : { event: `npc_${slug(who)}` };
-        out.push(command({ op: "moveRoute", target, wait: true, route: { steps, repeat: false, skippable: false } }));
+        // Tuxemon's char_move stops the route when a step is obstructed, then
+        // lets the event continue. A skippable kit route has that same
+        // contract; a non-skippable waiter would hold the cutscene forever.
+        out.push(command({ op: "moveRoute", target, wait: true, route: { steps, repeat: false, skippable: true } }));
         break;
       }
       case "transition_teleport": {
@@ -1699,6 +1702,9 @@ export function buildProject(
     format: "rpgkit-project/v1",
     title: "Pocket Tuxemon",
     tileSize: 16,
+    // Tuxemon's dialog state consumes movement and interaction input no
+    // matter which event fiber opened the box.
+    system: { messageBlocksPlayer: true },
     start: {
       map: startId,
       x: Math.min(4, startMap.width - 1),

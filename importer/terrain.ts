@@ -1003,7 +1003,10 @@ export function applyTerrain(project: Project, fragment: TerrainFragment): Proje
       ...map,
       sheets: [...new Set([...(map.sheets ?? []), TERRAIN_SHEET_ID])],
       ground: [...patch.ground],
-      passage: [...(map.passage ?? []).filter(([index]) => !patch.passage.some(([candidate]) => candidate === index)), ...patch.passage],
+      // The TMX terrain pass is authoritative for every cell. Keeping a G1
+      // rectangle merely because the final restriction lives in dirEdges
+      // turns one-way stairs back into fully blocked cells.
+      passage: [...patch.passage],
     };
   });
   const missing = fragment.maps.filter((map) => !project.maps.some((candidate) => candidate.id === map.id));
