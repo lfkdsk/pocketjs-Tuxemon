@@ -11,6 +11,7 @@
   "scripts": {
     "setup": "git submodule update --init --recursive && bun install",
     "fetch:tuxemon": "sh tools/fetch-tuxemon.sh",
+    "import": "bun importer/index.ts",
     "gen-assets": "bun gen-assets.ts",
     "verify:terrain:determinism": "bun tools/verify-terrain-determinism.ts",
     "verify:terrain:collision": "python3 tools/verify-terrain-collision.py",
