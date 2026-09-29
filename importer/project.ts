@@ -76,6 +76,15 @@ for (const ev of loadAllFileEvents()) {
   }
   for (const c of ev.conds) if (c.type === "variable_set") for (const p of c.args) { const i = p.indexOf(":"); if (i >= 0 && p.slice(i + 1) !== "") addValue(p.slice(0, i), p.slice(i + 1)); }
 }
+for (const map of allMaps.values()) {
+  for (const event of map.events) {
+    for (const action of event.acts) {
+      if (action.type === "load_yaml" && action.args[0]) {
+        addValue(`__loaded_yaml.${map.slug}.${action.args[0]}`, "yes");
+      }
+    }
+  }
+}
 for (const v of ["won", "lost", "draw"]) addValue("battle_last_result", v);
 addValue("battle_last_winner", "player");
 const enumTable = new Map([...enumValues.entries()].map(([k, s]) => [k, [...s].sort()]));
@@ -281,6 +290,25 @@ function dialog(key: string, m: TuxMap): Command[] {
   return out.length ? out : [{ op: "text", lines: [" "] }];
 }
 
+function enumChoice(options: readonly string[], variable: string): Command {
+  const make = (remaining: readonly string[]): Command => {
+    const take = remaining.length <= 4 ? remaining.length : 3;
+    const page: { text: string; commands: Command[] }[] = remaining.slice(0, take).map((option) => ({
+      text: (po.get(option) ?? option).slice(0, 24) || option.slice(0, 24),
+      commands: [{
+        op: "variable" as const,
+        id: varId(variable),
+        set: { op: "set" as const, value: code(variable, option) },
+      }],
+    }));
+    if (take < remaining.length) {
+      page.push({ text: "Next >", commands: [make(remaining.slice(take))] });
+    }
+    return { op: "choices", prompt: "", options: page };
+  };
+  return make(options);
+}
+
 const npcName = (slug: string) => (po.get(slug) ?? slug).slice(0, 40);
 
 // ---------------------------------------------------------------------------
@@ -290,6 +318,7 @@ const DIRS = new Set(["up", "down", "left", "right"]);
 const FACE: Record<string, MoveStep> = { up: "faceUp", down: "faceDown", left: "faceLeft", right: "faceRight" };
 const MOVE: Record<string, MoveStep> = { up: "moveUp", down: "moveDown", left: "moveLeft", right: "moveRight" };
 const items = new Map<string, Item>();
+const transferRepairs: TransferRepair[] = [];
 const INSTANT = new Set(["set_variable", "clear_variable", "add_item", "add_tracker", "create_npc", "remove_npc", "modify_money", "set_teleport_faint", "set_monster_health", "set_monster_status", "unlock_controls", "lock_controls", "park_experience", "remove_step_tracker", "set_layer"]);
 
 interface Ctx {
@@ -325,16 +354,16 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         break;
       case "translated_dialog_choice": case "choice_monster": case "choice_npc": {
         const opts = g[0]!.split(":");
-        const fate: Fate = a.type === "translated_dialog_choice" ? (opts.length > 4 ? "T2-dropped" : "T1") : "T3-placeholder";
-        note("act", a.type + (opts.length > 4 ? "(>4 options)" : ""), fate, opts.length > 4 ? "kit choices hold 2..4 options: truncated" : "choices -> enum code");
-        out.push({
-          op: "choices",
-          prompt: "",
-          options: opts.slice(0, 4).map((o) => ({
-            text: (po.get(o) ?? o).slice(0, 24) || o.slice(0, 24),
-            commands: [{ op: "variable", id: varId(g[1]!), set: { op: "set", value: code(g[1]!, o) } }],
-          })),
-        });
+        const fate: Fate = a.type === "translated_dialog_choice"
+          ? (opts.length > 4 ? "T1-lowered" : "T1")
+          : "T3-placeholder";
+        note(
+          "act",
+          a.type + (opts.length > 4 ? "(paginated)" : ""),
+          fate,
+          opts.length > 4 ? "nested choice pages retain every option" : "choices -> enum code",
+        );
+        out.push(enumChoice(opts, g[1]!));
         break;
       }
       case "set_variable":
@@ -424,10 +453,32 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
           else note("act", `${b.type}(after teleport)`, "T4-dropped", "runs on the old map during the fade");
         }
         out.push(...convertActions(hoisted, ctx));
-        note("act", a.type, "T1", "transfer (terminal; dir from trailing char_face)");
-        out.push({ op: "transfer", map: g[1]!.replace(/\.tmx$/, ""), x: Number(g[2]), y: Number(g[3]), dir, fade: Math.min(2, Number(g[4] ?? 0.3)) });
+        const map = g[1]!.replace(/\.tmx$/, "");
+        const target = allMaps.get(map);
+        if (!target) {
+          note("act", `${a.type}(missing map)`, "T4-dropped", `unknown target ${map}`);
+          return out;
+        }
+        const requested = { x: Number(g[2]), y: Number(g[3]) };
+        const x = Math.max(0, Math.min(target.width - 1, requested.x));
+        const y = Math.max(0, Math.min(target.height - 1, requested.y));
+        if (x !== requested.x || y !== requested.y) {
+          transferRepairs.push({ sourceMap: ctx.m.slug, targetMap: map, requested, emitted: { x, y } });
+          note("act", `${a.type}(clamped)`, "T1-lowered", "upstream landing point clamped into target bounds");
+        } else {
+          note("act", a.type, "T1", "transfer (terminal; dir from trailing char_face)");
+        }
+        out.push({ op: "transfer", map, x, y, dir, fade: Math.min(2, Number(g[4] ?? 0.3)) });
         return out;
       }
+      case "load_yaml":
+        note("act", a.type, "T1-lowered", "import-time events gated until this action runs");
+        out.push({
+          op: "variable",
+          id: varId(`__loaded_yaml.${ctx.m.slug}.${g[0]}`),
+          set: { op: "set", value: code(`__loaded_yaml.${ctx.m.slug}.${g[0]}`, "yes") },
+        });
+        break;
       case "start_battle": case "start_double_battle": {
         const opp = g[0] === "player" ? g[1]! : g[0]!;
         note("act", a.type, "T3-placeholder", "inline placeholder: text + outcome writes");
@@ -539,12 +590,34 @@ function convertMap(m: TuxMap): { map: MapDef; sprites: Record<string, SpriteDef
     const cmds = convertActions(e.acts, { m });
     if (!cmds.length) { note("trigger", "no-op after conversion", "T4-dropped", "every action dropped"); continue; }
     const cells: [number, number][] = [];
-    for (let dy = 0; dy < Math.max(1, e.h); dy++) for (let dx = 0; dx < Math.max(1, e.w); dx++) cells.push([e.x + dx, e.y + dy]);
+    for (let dy = 0; dy < Math.max(1, e.h); dy++) {
+      for (let dx = 0; dx < Math.max(1, e.w); dx++) {
+        const x = e.x + dx;
+        const y = e.y + dy;
+        if (x >= 0 && y >= 0 && x < m.width && y < m.height) cells.push([x, y]);
+      }
+    }
 
     if (k.startsWith("touch") || k.startsWith("action")) {
       const trigger = k.startsWith("touch") ? "playerTouch" : "action";
       if (e.conds.some((c) => c.type === "char_facing")) note("cond", "is char_facing(player)", "T2-dropped", "no facing filter on triggers in v1");
-      if (cells.length > AREA_CELL_CAP) { note("trigger", `${k}(area>${AREA_CELL_CAP})`, "T2-dropped", "needs event areas"); continue; }
+      if (!cells.length) { note("trigger", `${k}(outside map)`, "T4-dropped", "source trigger area is outside map bounds"); continue; }
+      if (cells.length > AREA_CELL_CAP) {
+        if (!hasBlocking(cmds) && e.acts.some((action) => action.type === "add_tracker")) {
+          const { cond, rest } = pageCondition(live);
+          events.push({
+            id: nextId(e.name),
+            name: `${e.name} (whole-map lowering)`,
+            x: cells[0]![0],
+            y: cells[0]![1],
+            pages: [{ trigger: "parallel", condition: cond, sprite: null, commands: guard(rest, cmds) }],
+          });
+          note("trigger", `${k}(whole-map tracker)`, "T1-lowered", "parallel visit tracker avoids expanding the full map");
+        } else {
+          note("trigger", `${k}(area>${AREA_CELL_CAP})`, "T2-dropped", "needs event areas");
+        }
+        continue;
+      }
       const base = nextId(e.name);
       cells.forEach(([x, y], i) => {
         const key = `${trigger}|${x},${y}`;
@@ -635,7 +708,20 @@ function convertMap(m: TuxMap): { map: MapDef; sprites: Record<string, SpriteDef
       commands: chain,
     };
     if (!agg.wander && agg.face) present.moveRoute = { steps: [FACE[agg.face]!], repeat: true, skippable: true };
-    events.push({ id: `npc_${slug(agg.slug)}`, name: agg.slug, x: agg.x, y: agg.y, pages: [{ trigger: "action", sprite: null, commands: [] }, present] });
+    events.push({
+      id: `npc_${slug(agg.slug)}`,
+      name: agg.slug,
+      x: Math.max(0, Math.min(m.width - 1, agg.x)),
+      y: Math.max(0, Math.min(m.height - 1, agg.y)),
+      pages: [{ trigger: "action", sprite: null, commands: [] }, present],
+    });
+  }
+
+  // Pure guard events do not use their coordinates, but the kit data model
+  // still requires every event to live on its map.
+  for (const event of events) {
+    event.x = Math.max(0, Math.min(m.width - 1, event.x));
+    event.y = Math.max(0, Math.min(m.height - 1, event.y));
   }
 
   // terrain placeholder: one pass tile, Tuxemon collision rects blocked
@@ -672,6 +758,24 @@ export interface ImportReport {
   schemaErrors: { path: string; msg: string }[];
   byFate: Record<string, number>;
   rows: ImportLogRow[];
+  transferRepairs: TransferRepair[];
+  transferErrors: TransferError[];
+}
+
+export interface TransferRepair {
+  sourceMap: string;
+  targetMap: string;
+  requested: { x: number; y: number };
+  emitted: { x: number; y: number };
+}
+
+export interface TransferError {
+  sourceMap: string;
+  event: string;
+  targetMap: string;
+  x: number;
+  y: number;
+  reason: "missing-map" | "out-of-bounds";
 }
 
 export interface ImportBuild {
@@ -684,9 +788,47 @@ export function availableMapIds(): string[] {
   return [...allMaps.keys()].sort();
 }
 
+function transferErrors(project: Project): TransferError[] {
+  const maps = new Map(project.maps.map((map) => [map.id, map]));
+  const errors: TransferError[] = [];
+  const visit = (sourceMap: string, event: string, commands: readonly Command[]): void => {
+    for (const command of commands) {
+      if (command.op === "transfer") {
+        const target = maps.get(command.map);
+        const reason = !target
+          ? "missing-map"
+          : command.x < 0 || command.y < 0 || command.x >= target.width || command.y >= target.height
+            ? "out-of-bounds"
+            : null;
+        if (reason) errors.push({
+          sourceMap,
+          event,
+          targetMap: command.map,
+          x: command.x,
+          y: command.y,
+          reason,
+        });
+      } else if (command.op === "if") {
+        visit(sourceMap, event, command.then);
+        visit(sourceMap, event, command.else ?? []);
+      } else if (command.op === "choices") {
+        for (const option of command.options) visit(sourceMap, event, option.commands);
+        visit(sourceMap, event, command.cancel?.commands ?? []);
+      }
+    }
+  };
+  for (const map of project.maps) {
+    for (const event of map.events ?? []) {
+      for (const page of event.pages) visit(map.id, event.id, page.commands);
+    }
+  }
+  return errors;
+}
+
 export function buildProject(want: readonly string[] = DEFAULT_MAPS): ImportBuild {
   log.clear();
   items.clear();
+  transferRepairs.length = 0;
 
   const mapDefs: MapDef[] = [];
   const sprites: Record<string, SpriteDef> = {};
@@ -713,7 +855,7 @@ export function buildProject(want: readonly string[] = DEFAULT_MAPS): ImportBuil
     id: varId(k!),
     set: { op: "set", value: code(k!, v!) },
   }) as Command);
-  startMap.events!.unshift({
+  if (startId === "spyder_bedroom") startMap.events!.unshift({
     id: "e000_boot",
     name: "start_tuxemon (Spyder)",
     x: 0,
@@ -733,7 +875,12 @@ export function buildProject(want: readonly string[] = DEFAULT_MAPS): ImportBuil
     format: "rpgkit-project/v1",
     title: "Pocket Tuxemon",
     tileSize: 16,
-    start: { map: startId, x: 4, y: 4, dir: "down" },
+    start: {
+      map: startId,
+      x: Math.min(4, startMap.width - 1),
+      y: Math.min(4, startMap.height - 1),
+      dir: "down",
+    },
     initialGold: 500,
     sheets: [{
       id: "tux",
@@ -777,6 +924,13 @@ export function buildProject(want: readonly string[] = DEFAULT_MAPS): ImportBuil
   return {
     project,
     variables,
-    report: { maps: [...want], schemaErrors, byFate, rows },
+    report: {
+      maps: [...want],
+      schemaErrors,
+      byFate,
+      rows,
+      transferRepairs: [...transferRepairs],
+      transferErrors: transferErrors(project),
+    },
   };
 }

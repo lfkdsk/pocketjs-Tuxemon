@@ -24,6 +24,15 @@ export function writeImport(
       .join("\n");
     throw new Error(`${result.report.schemaErrors.length} schema error(s)\n${detail}`);
   }
+  if (result.report.transferErrors.length) {
+    const detail = result.report.transferErrors
+      .slice(0, 20)
+      .map((error) =>
+        `${error.sourceMap}/${error.event}: ${error.targetMap}@${error.x},${error.y} (${error.reason})`
+      )
+      .join("\n");
+    throw new Error(`${result.report.transferErrors.length} invalid transfer(s)\n${detail}`);
+  }
   mkdirSync(outDir, { recursive: true });
   const paths: ImportPaths = {
     project: resolve(outDir, "project.json"),
@@ -38,10 +47,10 @@ export function writeImport(
 
 function main(): void {
   const args = process.argv.slice(2);
-  const mapIds = args.includes("--all")
-    ? availableMapIds()
-    : args.filter((arg) => !arg.startsWith("--"));
-  const selected = mapIds.length ? mapIds : DEFAULT_MAPS;
+  const named = args.filter((arg) => !arg.startsWith("--"));
+  const selected = args.includes("--sample")
+    ? DEFAULT_MAPS
+    : named.length ? named : availableMapIds();
   const paths = writeImport(selected);
   console.log(`Imported ${selected.length} map(s); schema errors: 0`);
   console.log(`Project: ${paths.project}`);

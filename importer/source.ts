@@ -25,7 +25,7 @@ export interface Cond extends Rule {
 export interface TuxEvent {
   /** file the event was read from (tmx or yaml basename) */
   source: string;
-  origin: "tmx" | "yaml" | "scenario";
+  origin: "tmx" | "yaml" | "scenario" | "loaded";
   kind: "event" | "init";
   name: string;
   /** TMX object id (yaml events: null) */
@@ -148,7 +148,7 @@ export function readTmx(path: string): { width: number; height: number; props: R
   return { width: Number(mapTag.width), height: Number(mapTag.height), props, events };
 }
 
-export function readYamlEvents(path: string, origin: "yaml" | "scenario"): TuxEvent[] {
+export function readYamlEvents(path: string, origin: "yaml" | "scenario" | "loaded"): TuxEvent[] {
   const doc = Bun.YAML.parse(readFileSync(path, "utf8")) as { events?: Record<string, any> } | null;
   const source = path.split("/").pop()!;
   const out: TuxEvent[] = [];
@@ -187,6 +187,35 @@ export function loadAllMaps(): TuxMap[] {
     if (scen) {
       const sp = join(MAPS_DIR, `${scen}.yaml`);
       if (existsSync(sp)) events.push(...readYamlEvents(sp, "scenario"));
+    }
+    // load_yaml appends another YAML's events at runtime. Statically include
+    // those events with a per-map gate; the converter flips that gate at the
+    // original load_yaml action. Tuxemon de-duplicates loaded event/init names.
+    const seen = {
+      event: new Set(events.filter((event) => event.kind === "event").map((event) => event.name)),
+      init: new Set(events.filter((event) => event.kind === "init").map((event) => event.name)),
+    };
+    const loads = events.flatMap((event) =>
+      event.acts.filter((action) => action.type === "load_yaml")
+    );
+    for (const action of loads) {
+      const file = action.args[0];
+      if (!file) continue;
+      const loadedPath = join(MAPS_DIR, `${file}.yaml`);
+      if (!existsSync(loadedPath)) {
+        throw new Error(`load_yaml target does not exist: ${file}.yaml`);
+      }
+      for (const event of readYamlEvents(loadedPath, "loaded")) {
+        if (seen[event.kind].has(event.name)) continue;
+        seen[event.kind].add(event.name);
+        events.push({
+          ...event,
+          conds: [
+            parseCondition(`is variable_set __loaded_yaml.${slug}.${file}:yes`),
+            ...event.conds,
+          ],
+        });
+      }
     }
     maps.push({ slug, width: tmx.width, height: tmx.height, props: tmx.props, events });
   }
