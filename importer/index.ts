@@ -4,6 +4,8 @@ import {
   availableMapIds,
   buildProject,
   DEFAULT_MAPS,
+  KIT_V2_IMPORT_OPTIONS,
+  type ImportOptions,
   type ImportReport,
 } from "./project.ts";
 
@@ -100,8 +102,9 @@ ${rows("Condition", conditions.rows)}
 export function writeImport(
   mapIds: readonly string[],
   outDir = resolve(import.meta.dir, "../dist"),
+  options: Partial<ImportOptions> = {},
 ): ImportPaths {
-  const result = buildProject(mapIds);
+  const result = buildProject(mapIds, options);
   if (result.report.schemaErrors.length) {
     const detail = result.report.schemaErrors
       .slice(0, 20)
@@ -138,7 +141,11 @@ function main(): void {
   const selected = args.includes("--sample")
     ? DEFAULT_MAPS
     : named.length ? named : availableMapIds();
-  const paths = writeImport(selected);
+  const paths = writeImport(
+    selected,
+    resolve(import.meta.dir, "../dist"),
+    args.includes("--kit=v2") ? KIT_V2_IMPORT_OPTIONS : {},
+  );
   console.log(`Imported ${selected.length} map(s); schema errors: 0`);
   console.log(`Project: ${paths.project}`);
   console.log(`Variables: ${paths.variables}`);

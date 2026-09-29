@@ -41,6 +41,65 @@ export const DEFAULT_MAPS = ["spyder_bedroom", "spyder_paper_scoop", "spyder_dow
 const PLAYER_NAME = "Red"; // mod.yaml starting_names: npc_red -> "Red"
 const AREA_CELL_CAP = 64; // v1 has no event areas: expand up to this many cells
 
+export interface ImportOptions {
+  /** K1: emit one rectangular event instead of one event per covered cell. */
+  areas: boolean;
+  /** K1: retain player-facing trigger predicates. */
+  facing: boolean;
+  /** K1: emit PageCondition.all instead of derived switches/nested ifs. */
+  condAll: boolean;
+  /** K1: rely on per-map reset semantics for importer-owned local.* state. */
+  localReset: boolean;
+  /** K1: emit place commands and page initial directions for dynamic NPCs. */
+  place: boolean;
+  /** K1: emit cross-event lockInput/unlockInput commands. */
+  inputLock: boolean;
+  /** K2: target arbitrary events and emit turn/path/approach route steps. */
+  routes: boolean;
+}
+
+export const DEFAULT_IMPORT_OPTIONS: Readonly<ImportOptions> = Object.freeze({
+  areas: false,
+  facing: false,
+  condAll: false,
+  localReset: false,
+  place: false,
+  inputLock: false,
+  routes: false,
+});
+
+export const KIT_V2_IMPORT_OPTIONS: Readonly<ImportOptions> = Object.freeze({
+  areas: true,
+  facing: true,
+  condAll: true,
+  localReset: true,
+  place: true,
+  inputLock: true,
+  routes: true,
+});
+
+const resolveOptions = (options: Partial<ImportOptions> = {}): ImportOptions => ({
+  ...DEFAULT_IMPORT_OPTIONS,
+  ...options,
+});
+
+type FutureCondition = Condition | { kind: "facing"; dir: Dir };
+type FuturePageCondition = PageCondition & { all?: FutureCondition[] };
+type FutureMoveStep = MoveStep
+  | "turnTowardPlayer"
+  | { turnToward: string }
+  | { pathTo: { x: number; y: number } }
+  | { approach: { target: string; side?: string; distance?: number } };
+type FutureCommand = Command
+  | { op: "lockInput" }
+  | { op: "unlockInput" }
+  | { op: "place"; target: "this" | { event: string }; x: number; y: number; dir?: Dir }
+  | { op: "moveRoute"; target: "player" | "this" | { event: string }; wait?: boolean; route: { steps: FutureMoveStep[]; repeat: boolean; skippable: boolean } };
+type FutureGameEvent = GameEvent & { w?: number; h?: number };
+
+const command = (value: FutureCommand): Command => value as Command;
+const gameEvent = (value: FutureGameEvent): GameEvent => value;
+
 // ---------------------------------------------------------------------------
 // sources
 
@@ -264,6 +323,7 @@ type Clause =
   | { k: "sw"; id: string; on: boolean }
   | { k: "item"; id: string; count: number; has: boolean }
   | { k: "gold"; amount: number; has: boolean }
+  | { k: "facing"; dir: Dir }
   | { k: "const"; value: boolean };
 
 const npcVar = (slug: string) => `local.npc.${slug.replace(/[^A-Za-z0-9_.-]/g, "_")}`;
@@ -292,11 +352,16 @@ function cmpClause(id: string, op: string, n: number, negate: boolean): Clause {
 
 /** One Tuxemon condition -> clauses (AND), or null when it is a trigger-
  *  shape condition consumed by the trigger choice. */
-function clauses(c: Cond, m: TuxMap): Clause[] | null {
+function clauses(c: Cond, m: TuxMap, options: ImportOptions): Clause[] | null {
   const a = c.args;
   const not = c.op === "not";
   const K = (value: boolean): Clause[] => [{ k: "const", value: not ? !value : value }];
   if (TRIGGER_CONDS.has(c.type)) {
+    if (c.type === "char_facing" && options.facing && c.op === "is" &&
+        c.args[0] === "player" && DIRS.has(c.args[1]!)) {
+      noteCondition(c, `${c.op} ${c.type}`, "T1", "K1 facing page condition");
+      return [{ k: "facing", dir: c.args[1] as Dir }];
+    }
     const native = c.type === "button_pressed" || c.type === "char_at" ||
       c.type === "char_moved" || c.type === "char_facing_tile";
     noteCondition(
@@ -320,7 +385,14 @@ function clauses(c: Cond, m: TuxMap): Clause[] | null {
       });
     }
     case "char_exists":
-      noteCondition(c, `${c.op} char_exists`, "T1-lowered", "local.npc.<slug> presence variable (per-visit reset is T2)");
+      noteCondition(
+        c,
+        `${c.op} char_exists`,
+        options.localReset ? "T1" : "T1-lowered",
+        options.localReset
+          ? "local.npc.<slug> presence resets on map entry"
+          : "local.npc.<slug> presence variable (per-visit reset is T2)",
+      );
       return [{ k: "var", id: npcVar(a[0]!), op: not ? "==" : "!=", value: 0 }];
     case "battle_outcome":
       if (a[1] !== "won") { noteCondition(c, `${c.op} battle_outcome(${a[1]})`, "T3-placeholder", "P1 never loses"); return K(false); }
@@ -407,6 +479,10 @@ function toIf(cl: Clause): { cond: Condition; negate: boolean } {
     case "sw": return { cond: { kind: "switch", id: cl.id, value: cl.on }, negate: false };
     case "item": return { cond: { kind: "item", id: cl.id, count: cl.count }, negate: !cl.has };
     case "gold": return { cond: { kind: "gold", amount: cl.amount }, negate: !cl.has };
+    case "facing": return {
+      cond: { kind: "facing", dir: cl.dir } as unknown as Condition,
+      negate: false,
+    };
     case "const": throw new Error("const clause");
   }
 }
@@ -422,16 +498,33 @@ function guard(cls: Clause[], body: Command[]): Command[] {
 }
 
 /** Split clauses into the one v1 PageCondition can carry and the rest. */
-function pageCondition(cls: Clause[]): { cond?: PageCondition; rest: Clause[] } {
+function pageCondition(
+  cls: Clause[],
+  options: ImportOptions,
+): { cond?: FuturePageCondition; rest: Clause[] } {
+  if (options.condAll && cls.length) {
+    const converted = cls.map((cl): FutureCondition | null => {
+      if (cl.k === "const") return null;
+      const { cond, negate } = toIf(cl);
+      return negate ? null : cond as FutureCondition;
+    });
+    if (converted.every((condition): condition is FutureCondition => condition !== null)) {
+      return { cond: { all: converted }, rest: [] };
+    }
+  }
   const cond: PageCondition = {};
   const rest: Clause[] = [];
+  const facing: FutureCondition[] = [];
   for (const cl of cls) {
-    if (cl.k === "var" && !cond.variable) cond.variable = { id: cl.id, op: cl.op, value: cl.value };
+    if (cl.k === "facing" && options.facing) facing.push({ kind: "facing", dir: cl.dir });
+    else if (cl.k === "var" && !cond.variable) cond.variable = { id: cl.id, op: cl.op, value: cl.value };
     else if (cl.k === "sw" && cl.on && cond.switch === undefined) cond.switch = cl.id;
     else if (cl.k === "item" && cl.has && cl.count === 1 && cond.item === undefined) cond.item = cl.id;
     else rest.push(cl);
   }
-  return { cond: Object.keys(cond).length ? cond : undefined, rest };
+  const future = cond as FuturePageCondition;
+  if (facing.length) future.all = facing;
+  return { cond: Object.keys(future).length ? future : undefined, rest };
 }
 
 // ---------------------------------------------------------------------------
@@ -558,6 +651,7 @@ function nearestWalkableTransferCell(map: TuxMap, startX: number, startY: number
 
 interface Ctx {
   m: TuxMap;
+  options: ImportOptions;
   /** the NPC slug whose event runs these commands (talk pages), if any */
   self?: string;
 }
@@ -664,35 +758,80 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         out.push({ op: "switch", id: `tracker.${g[1]}`, value: true });
         break;
       case "create_npc":
-        noteAction(a, a.type, "T1-lowered", "local.npc.<slug> = 1 (spawn position other than the event's is T2 place)");
+        noteAction(
+          a,
+          a.type,
+          ctx.options.place && ctx.options.localReset ? "T1" : "T1-lowered",
+          ctx.options.place
+            ? "local.npc.<slug> = 1 plus K1 place"
+            : "local.npc.<slug> = 1 (spawn position other than the event's is T2 place)",
+        );
         out.push({ op: "variable", id: npcVar(g[0]!), set: { op: "set", value: 1 } });
+        if (ctx.options.place) {
+          out.push(command({
+            op: "place",
+            target: { event: `npc_${slug(g[0]!)}` },
+            x: Math.max(0, Math.min(ctx.m.width - 1, Number(g[1]))),
+            y: Math.max(0, Math.min(ctx.m.height - 1, Number(g[2]))),
+          }));
+        }
         break;
       case "remove_npc":
-        noteAction(a, a.type, "T1-lowered", "local.npc.<slug> = 0");
+        noteAction(a, a.type, ctx.options.localReset ? "T1" : "T1-lowered", "local.npc.<slug> = 0");
         out.push({ op: "variable", id: npcVar(g[0]!), set: { op: "set", value: 0 } });
         break;
-      case "lock_controls": case "unlock_controls": case "char_stop":
+      case "lock_controls": case "unlock_controls":
+        if (ctx.options.inputLock) {
+          noteAction(a, a.type, "T1", "K1 cross-event input lock command");
+          out.push(command({ op: a.type === "lock_controls" ? "lockInput" : "unlockInput" }));
+        } else {
+          noteAction(a, a.type, "T1-lowered", "blocking fibers already freeze the player (cross-event locks are T2)");
+        }
+        break;
+      case "char_stop":
         noteAction(a, a.type, "T1-lowered", "blocking fibers already freeze the player (cross-event locks are T2)");
         break;
       case "char_face": {
         const [who, dir] = [g[0]!, g[1]!];
-        if (!DIRS.has(dir)) { noteAction(a, "char_face(toward char)", "T2-dropped", "needs turnToward step"); break; }
+        const target = who === "player"
+          ? "player" as const
+          : isSelf(who) ? "this" as const : { event: `npc_${slug(who)}` };
+        if (!DIRS.has(dir)) {
+          if (ctx.options.routes) {
+            noteAction(a, "char_face(toward char)", "T1", "K2 arbitrary-target turn-toward route");
+            const step: FutureMoveStep = dir === "player"
+              ? "turnTowardPlayer"
+              : { turnToward: `npc_${slug(dir)}` };
+            out.push(command({ op: "moveRoute", target, wait: false, route: { steps: [step], repeat: false, skippable: true } }));
+          } else {
+            noteAction(a, "char_face(toward char)", "T2-dropped", "needs turnToward step");
+          }
+          break;
+        }
         if (who === "player" || isSelf(who)) {
           noteAction(a, a.type, "T1-lowered", `moveRoute ${who === "player" ? "player" : "this"} face`);
           out.push({ op: "moveRoute", target: who === "player" ? "player" : "this", wait: false, route: { steps: [FACE[dir]!], repeat: false, skippable: true } });
+        } else if (ctx.options.routes) {
+          noteAction(a, a.type, "T1", "K2 moveRoute targets an arbitrary event");
+          out.push(command({ op: "moveRoute", target, wait: false, route: { steps: [FACE[dir]!], repeat: false, skippable: true } }));
         } else noteAction(a, "char_face(other npc)", "T2-dropped", "moveRoute target must be an event id");
         break;
       }
       case "char_move": {
         const who = g[0]!;
-        if (who !== "player" && !isSelf(who)) { noteAction(a, "char_move(other npc)", "T2-dropped", "moveRoute target must be an event id"); break; }
+        if (who !== "player" && !isSelf(who) && !ctx.options.routes) {
+          noteAction(a, "char_move(other npc)", "T2-dropped", "moveRoute target must be an event id");
+          break;
+        }
         const steps: MoveStep[] = [];
         for (const mv of g.slice(1)) {
           const [d, n] = mv.trim().split(/\s+/);
           for (let k = 0; k < Number(n ?? 1); k++) steps.push(MOVE[d!]!);
         }
-        noteAction(a, a.type, "T1-lowered", "moveRoute steps");
-        out.push({ op: "moveRoute", target: who === "player" ? "player" : "this", wait: true, route: { steps, repeat: false, skippable: false } });
+        noteAction(a, a.type, ctx.options.routes && who !== "player" && !isSelf(who) ? "T1" : "T1-lowered", "moveRoute steps");
+        const target = who === "player" ? "player" as const
+          : isSelf(who) ? "this" as const : { event: `npc_${slug(who)}` };
+        out.push(command({ op: "moveRoute", target, wait: true, route: { steps, repeat: false, skippable: false } }));
         break;
       }
       case "transition_teleport": {
@@ -751,7 +890,12 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         });
         break;
       case "remove_collision":
-        noteAction(a, a.type, "T1-lowered", "keyed collision becomes a variable-gated blocking event");
+        noteAction(
+          a,
+          a.type,
+          ctx.options.localReset ? "T1" : "T1-lowered",
+          "keyed collision becomes a variable-gated blocking event",
+        );
         out.push({
           op: "variable",
           id: collisionVar(ctx.m.slug, g[0]!),
@@ -803,7 +947,50 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
       case "random_encounter":
         noteAction(a, a.type, "T3-placeholder", "intentionally silent in P1");
         break;
-      case "pathfind": case "pathfind_to_char": case "char_wander": case "char_speed": case "char_run":
+      case "pathfind": {
+        if (!ctx.options.routes) {
+          noteAction(a, a.type, "T2-dropped", "runtime pathfinding / other-event routes / NPC motion props");
+          break;
+        }
+        const who = g[0]!;
+        const target = who === "player" ? "player" as const
+          : isSelf(who) ? "this" as const : { event: `npc_${slug(who)}` };
+        noteAction(a, a.type, "T1", "K2 deterministic pathTo route");
+        out.push(command({
+          op: "moveRoute",
+          target,
+          wait: true,
+          route: {
+            steps: [{ pathTo: { x: Number(g[1]), y: Number(g[2]) } }],
+            repeat: false,
+            skippable: false,
+          },
+        }));
+        break;
+      }
+      case "pathfind_to_char": {
+        if (!ctx.options.routes) {
+          noteAction(a, a.type, "T2-dropped", "runtime pathfinding / other-event routes / NPC motion props");
+          break;
+        }
+        const [toward, who, side, distance] = g;
+        const target = who === "player" ? "player" as const
+          : isSelf(who) ? "this" as const : { event: `npc_${slug(who!)}` };
+        const approach: { target: string; side?: string; distance?: number } = {
+          target: toward === "player" ? "player" : `npc_${slug(toward!)}`,
+        };
+        if (side) approach.side = side;
+        if (distance !== undefined && distance !== "") approach.distance = Number(distance);
+        noteAction(a, a.type, "T1", "K2 deterministic approach route");
+        out.push(command({
+          op: "moveRoute",
+          target,
+          wait: true,
+          route: { steps: [{ approach }], repeat: false, skippable: false },
+        }));
+        break;
+      }
+      case "char_wander": case "char_speed": case "char_run":
       case "set_facing_mode": case "char_position":
         noteAction(a, a.type, "T2-dropped", "runtime pathfinding / other-event routes / NPC motion props");
         break;
@@ -842,7 +1029,7 @@ interface NpcAgg {
   talks: { cls: Clause[]; cmds: Command[] }[];
 }
 
-function convertMap(m: TuxMap): { map: MapDef; sprites: Record<string, SpriteDef> } {
+function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: Record<string, SpriteDef> } {
   const events: GameEvent[] = [];
   const sprites: Record<string, SpriteDef> = {};
   const npcs = new Map<string, NpcAgg>();
@@ -877,7 +1064,7 @@ function convertMap(m: TuxMap): { map: MapDef; sprites: Record<string, SpriteDef
         note("trigger", "inert(zero-size TMX area)", "T4-dropped", reason);
         continue;
       }
-      const cls0 = e.conds.map((c) => clauses(c, m));
+      const cls0 = e.conds.map((c) => clauses(c, m, options));
       const cls: Clause[] = cls0.filter((x): x is Clause[] => x !== null).flat();
       if (cls.some((c) => c.k === "const" && !c.value)) {
         const reason = "fixed-false guard prevents the source event from starting";
@@ -909,8 +1096,8 @@ function convertMap(m: TuxMap): { map: MapDef; sprites: Record<string, SpriteDef
             }
           }
         }
-        const cmds = convertActions(e.acts.filter((a) => a.type !== "char_face" && a.type !== "char_wander"), { m });
-        const { cond, rest } = pageCondition(live);
+        const cmds = convertActions(e.acts.filter((a) => a.type !== "char_face" && a.type !== "char_wander"), { m, options });
+        const { cond, rest } = pageCondition(live, options);
         events.push({ id: nextId(e.name), name: `${e.name} (spawn guard)`, x: e.x, y: e.y, pages: [{ trigger: "parallel", condition: cond, sprite: null, commands: guard(rest, cmds) }] });
         note("trigger", "spawn", "T1-lowered", "parallel page: guard -> local.npc.<slug> = 1");
         continue;
@@ -920,12 +1107,12 @@ function convertMap(m: TuxMap): { map: MapDef; sprites: Record<string, SpriteDef
       const talk = e.behavs.find((b) => b.type === "talk");
       if (talk) {
         const agg = npcOf(talk.args[0]!);
-        agg.talks.push({ cls: live, cmds: convertActions(e.acts, { m, self: talk.args[0] }) });
+        agg.talks.push({ cls: live, cmds: convertActions(e.acts, { m, options, self: talk.args[0] }) });
         note("trigger", "talk", "T1", "NPC event action page (if-chain over talk guards)");
         continue;
       }
 
-      const cmds = convertActions(e.acts, { m });
+      const cmds = convertActions(e.acts, { m, options });
       if (!cmds.length) {
         const reason = "every action was removed, so no project event was emitted";
         eventCoverage.dropAll(reason);
@@ -949,9 +1136,27 @@ function convertMap(m: TuxMap): { map: MapDef; sprites: Record<string, SpriteDef
           note("trigger", `${k}(outside map)`, "T4-dropped", reason);
           continue;
         }
+        if (options.areas && cells.length > 1) {
+          const x = Math.max(0, e.x);
+          const y = Math.max(0, e.y);
+          const right = Math.min(m.width, e.x + e.w);
+          const bottom = Math.min(m.height, e.y + e.h);
+          const { cond, rest } = pageCondition(live, options);
+          events.push(gameEvent({
+            id: nextId(e.name),
+            name: e.name,
+            x,
+            y,
+            w: right - x,
+            h: bottom - y,
+            pages: [{ trigger, condition: cond, sprite: null, commands: guard(rest, cmds) }],
+          }));
+          note("trigger", `${k}(area)`, "T1", "K1 rectangular event area");
+          continue;
+        }
         if (cells.length > AREA_CELL_CAP) {
           if (!hasBlocking(cmds) && e.acts.some((action) => action.type === "add_tracker")) {
-            const { cond, rest } = pageCondition(live);
+            const { cond, rest } = pageCondition(live, options);
             events.push({
               id: nextId(e.name),
               name: `${e.name} (whole-map lowering)`,
@@ -983,10 +1188,10 @@ function convertMap(m: TuxMap): { map: MapDef; sprites: Record<string, SpriteDef
       if (!live.length) {
         events.push({ id: nextId(e.name), name: e.name, x: e.x, y: e.y, pages: [{ trigger: blocking ? "autorun" : "parallel", sprite: null, commands: body }] });
       } else if (!blocking) {
-        const { cond, rest } = pageCondition(live);
+        const { cond, rest } = pageCondition(live, options);
         events.push({ id: nextId(e.name), name: e.name, x: e.x, y: e.y, pages: [{ trigger: "parallel", condition: cond, sprite: null, commands: guard(rest, body) }] });
       } else {
-        const { cond, rest } = pageCondition(live);
+        const { cond, rest } = pageCondition(live, options);
         const id = nextId(e.name);
         if (!rest.length) {
           events.push({ id, name: e.name, x: e.x, y: e.y, pages: [{ trigger: "autorun", condition: cond, sprite: null, commands: body }] });
@@ -1020,7 +1225,7 @@ function convertMap(m: TuxMap): { map: MapDef; sprites: Record<string, SpriteDef
   for (const list of cellPages.values()) {
     const first = list[0]!;
     if (list.length === 1) {
-      const { cond, rest } = pageCondition(first.cls);
+      const { cond, rest } = pageCondition(first.cls, options);
       events.push({ id: first.id, name: first.name, x: first.x, y: first.y, pages: [{ trigger: first.trigger, condition: cond, sprite: null, commands: guard(rest, first.cmds) }] });
       continue;
     }
@@ -1051,7 +1256,19 @@ function convertMap(m: TuxMap): { map: MapDef; sprites: Record<string, SpriteDef
       if (!t.cls.length) chain.push(...t.cmds);
       else chain.push({ op: "if", if: { kind: "switch", id: flag(i), value: true }, then: t.cmds });
     });
-    if (agg.talks.length) note("behav", "talk(char_face npc,player)", "T2-dropped", "turn toward the player needs a turnTowardPlayer move step");
+    if (agg.talks.length) {
+      if (options.routes) {
+        chain.unshift(command({
+          op: "moveRoute",
+          target: "this",
+          wait: false,
+          route: { steps: ["turnTowardPlayer"], repeat: false, skippable: true },
+        }));
+        note("behav", "talk(char_face npc,player)", "T1", "K2 turnTowardPlayer route step");
+      } else {
+        note("behav", "talk(char_face npc,player)", "T2-dropped", "turn toward the player needs a turnTowardPlayer move step");
+      }
+    }
     const present: Page = {
       condition: { variable: { id: npcVar(agg.slug), op: "==", value: 1 } },
       trigger: "action",
@@ -1060,7 +1277,10 @@ function convertMap(m: TuxMap): { map: MapDef; sprites: Record<string, SpriteDef
       moveType: agg.wander ? "random" : "static",
       commands: chain,
     };
-    if (!agg.wander && agg.face) present.moveRoute = { steps: [FACE[agg.face]!], repeat: true, skippable: true };
+    if (!agg.wander && agg.face) {
+      if (options.place) (present as Page & { dir?: Dir }).dir = agg.face as Dir;
+      else present.moveRoute = { steps: [FACE[agg.face]!], repeat: true, skippable: true };
+    }
     events.push({
       id: `npc_${slug(agg.slug)}`,
       name: agg.slug,
@@ -1145,6 +1365,7 @@ export interface ImportReport {
     maps: "mods/tuxemon/maps";
     locale: "en_US";
   };
+  options?: ImportOptions;
   maps: string[];
   schemaErrors: { path: string; msg: string }[];
   byFate: Record<string, number>;
@@ -1218,7 +1439,11 @@ function transferErrors(project: Project): TransferError[] {
   return errors;
 }
 
-export function buildProject(want: readonly string[] = DEFAULT_MAPS): ImportBuild {
+export function buildProject(
+  want: readonly string[] = DEFAULT_MAPS,
+  requestedOptions: Partial<ImportOptions> = {},
+): ImportBuild {
+  const options = resolveOptions(requestedOptions);
   log.clear();
   items.clear();
   transferRepairs.length = 0;
@@ -1229,7 +1454,7 @@ export function buildProject(want: readonly string[] = DEFAULT_MAPS): ImportBuil
   for (const s of want) {
     const m = allMaps.get(s);
     if (!m) throw new Error(`no map ${s}`);
-    const r = convertMap(m);
+    const r = convertMap(m, options);
     mapDefs.push(r.map);
     Object.assign(sprites, r.sprites);
   }
@@ -1322,6 +1547,7 @@ export function buildProject(want: readonly string[] = DEFAULT_MAPS): ImportBuil
     report: {
       format: "pocket-tuxemon/import-report/v1",
       source: { maps: "mods/tuxemon/maps", locale: "en_US" },
+      ...(Object.values(options).some(Boolean) ? { options } : {}),
       maps: [...want],
       schemaErrors,
       byFate,

@@ -1,7 +1,11 @@
 import { expect, test } from "bun:test";
 import { spawnSync } from "node:child_process";
 import { resolve } from "node:path";
-import { availableMapIds, buildProject } from "../importer/project.ts";
+import {
+  availableMapIds,
+  buildProject,
+  DEFAULT_IMPORT_OPTIONS,
+} from "../importer/project.ts";
 import { jsonBytes, writeImport } from "../importer/index.ts";
 import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
 import { canStepFrom, type Dir4 } from "../vendor/pocket-rpgkit/src/engine/passability.ts";
@@ -9,6 +13,17 @@ import { createSession, startSession, stepSession } from "../vendor/pocket-rpgki
 import type { Command } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
+
+function objectNodes(value: unknown, out: Record<string, unknown>[] = []): Record<string, unknown>[] {
+  if (Array.isArray(value)) {
+    for (const child of value) objectNodes(child, out);
+  } else if (value !== null && typeof value === "object") {
+    const object = value as Record<string, unknown>;
+    out.push(object);
+    for (const child of Object.values(object)) objectNodes(child, out);
+  }
+  return out;
+}
 
 test("all maps pass schema and reference valid transfer destinations", () => {
   const result = buildProject(availableMapIds());
@@ -211,6 +226,81 @@ test("clamped transfers use the nearest deterministic walkable landing", () => {
     canStepFrom(flower, repair!.emitted.x, repair!.emitted.y, dir)
   );
   expect(exits.length).toBeGreaterThan(0);
+});
+
+test("ImportOptions defaults preserve the v1 output byte-for-byte", () => {
+  const maps = ["spyder_downstairs", "spyder_paper_town"];
+  expect(jsonBytes(buildProject(maps, DEFAULT_IMPORT_OPTIONS))).toBe(
+    jsonBytes(buildProject(maps)),
+  );
+});
+
+test("ImportOptions.areas emits a K1 rectangular event", () => {
+  const result = buildProject(["spyder_candy_town"], { areas: true });
+  const event = result.project.maps[0]!.events?.find((candidate) =>
+    candidate.name === "Entry Candy"
+  ) as (Record<string, unknown> | undefined);
+  expect(event).toMatchObject({ x: 14, y: 3, w: 22, h: 1 });
+  expect(result.report.options?.areas).toBeTrue();
+});
+
+test("ImportOptions.facing emits a K1 facing condition", () => {
+  const result = buildProject(["spyder_downstairs"], { facing: true });
+  const nodes = objectNodes(result.project);
+  expect(nodes.some((node) => node.kind === "facing" && node.dir === "down")).toBeTrue();
+  expect(result.report.options?.facing).toBeTrue();
+});
+
+test("ImportOptions.condAll emits a K1 compound page condition", () => {
+  const result = buildProject(["spyder_paper_town"], { condAll: true });
+  const compound = objectNodes(result.project).find((node) =>
+    Array.isArray(node.all) && node.all.length >= 2
+  );
+  expect(compound).toBeDefined();
+  expect(result.report.options?.condAll).toBeTrue();
+});
+
+test("ImportOptions.localReset selects K1 local-state semantics", () => {
+  const result = buildProject(["spyder_paper_town"], { localReset: true });
+  expect(JSON.stringify(result.project)).toContain("local.npc.");
+  const row = result.report.coverage.conditions.rows.find(
+    (candidate) => candidate.type === "not char_exists",
+  )!;
+  expect(row.native).toBeGreaterThan(0);
+  expect(row.degraded).toBe(0);
+  expect(result.report.options?.localReset).toBeTrue();
+});
+
+test("ImportOptions.place emits K1 place and page-direction constructs", () => {
+  const result = buildProject(["spyder_candy_town"], { place: true });
+  const nodes = objectNodes(result.project);
+  expect(nodes.some((node) =>
+    node.op === "place" && typeof node.target === "object"
+  )).toBeTrue();
+  expect(nodes.some((node) =>
+    node.trigger === "action" && typeof node.dir === "string"
+  )).toBeTrue();
+  expect(result.report.options?.place).toBeTrue();
+});
+
+test("ImportOptions.inputLock emits K1 cross-event lock commands", () => {
+  const result = buildProject(["spyder_paper_town"], { inputLock: true });
+  const ops = objectNodes(result.project).map((node) => node.op);
+  expect(ops).toContain("lockInput");
+  expect(ops).toContain("unlockInput");
+  expect(result.report.options?.inputLock).toBeTrue();
+});
+
+test("ImportOptions.routes emits K2 arbitrary targets and path steps", () => {
+  const result = buildProject(["spyder_paper_town"], { routes: true });
+  const nodes = objectNodes(result.project);
+  expect(nodes.some((node) =>
+    node.op === "moveRoute" && node.target !== null && typeof node.target === "object"
+  )).toBeTrue();
+  expect(nodes.some((node) => node.pathTo !== undefined)).toBeTrue();
+  expect(nodes.some((node) => node.approach !== undefined)).toBeTrue();
+  expect(nodes.some((node) => node.turnToward !== undefined)).toBeTrue();
+  expect(result.report.options?.routes).toBeTrue();
 });
 
 test("Spyder opening completes identically at 60, 30, and 20 Hz", () => {
