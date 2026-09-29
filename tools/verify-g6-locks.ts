@@ -21,20 +21,35 @@ export interface LockCheckRow {
   page: number;
   trigger: Page["trigger"];
   locks: number;
-  outcome: "local-unlock" | "local-transfer" | "unlocked" | "transferred" | "reachable" | "unresolved" | "error";
+  outcome: "unlocked" | "transferred" | "unresolved" | "error";
   lockedAt: number;
   resolvedAt: number;
   finalMap: string;
+  /** Structural analysis is diagnostic only; it never changes outcome. */
+  staticHint?: "local-unlock" | "local-transfer" | "reachable";
   resolutionPath?: string[];
+  checks: LockCheckAttempt[];
+  error?: string;
+}
+
+export interface LockCheckAttempt {
+  lock: number;
+  outcome: LockCheckRow["outcome"];
+  lockedAt: number;
+  resolvedAt: number;
+  finalMap: string;
+  seededBy?: string;
   error?: string;
 }
 
 export interface LockCheckReport {
-  format: "pocket-tuxemon/g6-lock-check/v1";
+  format: "pocket-tuxemon/g6-lock-check/v2";
   pages: number;
   lockCommands: number;
+  dynamicChecks: number;
   outcomes: Record<LockCheckRow["outcome"], number>;
   failures: LockCheckRow[];
+  exceptions: { map: string; event: string; page: number; explanation: string }[];
   rows: LockCheckRow[];
 }
 
@@ -61,22 +76,47 @@ function containsLock(commands: readonly Command[]): boolean {
   return countOp(commands, "lockInput") > 0;
 }
 
-/** Conditions on one executable branch leading to the first lock. */
-function lockPath(commands: readonly Command[]): Condition[] {
+function lockCommands(commands: readonly Command[]): Command[] {
+  const locks: Command[] = [];
+  walk(commands, (command) => { if (command.op === "lockInput") locks.push(command); });
+  return locks;
+}
+
+function containsCommand(commands: readonly Command[], target: Command): boolean {
+  let found = false;
+  walk(commands, (command) => { if (command === target) found = true; });
+  return found;
+}
+
+/** Instrument one real lock branch. Ancestor guards/choices are selected so
+ * the requested lock is reached, other lock-bearing sibling branches are
+ * suppressed, and a one-tick wait makes an instant lock/unlock observable. */
+function forceLockBranch(commands: readonly Command[], target: Command): Command[] {
+  const out: Command[] = [];
   for (const command of commands) {
-    if (command.op === "lockInput") return [];
-    if (command.op === "if") {
-      if (containsLock(command.then)) return [command.if, ...lockPath(command.then)];
-      if (containsLock(command.else ?? [])) return [...lockPath(command.else ?? [])];
-    }
-    if (command.op === "choices") {
-      for (const option of command.options) {
-        if (containsLock(option.commands)) return lockPath(option.commands);
+    if (command === target) {
+      out.push(command, { op: "wait", seconds: 1 / 60 });
+    } else if (command.op === "lockInput") {
+      // A different lock on this merged page gets its own dynamic run.
+    } else if (command.op === "if") {
+      if (containsCommand(command.then, target)) {
+        out.push(...forceLockBranch(command.then, target));
+      } else if (containsCommand(command.else ?? [], target)) {
+        out.push(...forceLockBranch(command.else ?? [], target));
+      } else if (!containsLock(command.then) && !containsLock(command.else ?? [])) {
+        out.push(command);
       }
-      if (containsLock(command.cancel?.commands ?? [])) return lockPath(command.cancel?.commands ?? []);
+    } else if (command.op === "choices") {
+      const selected = command.options.find((option) => containsCommand(option.commands, target))?.commands ??
+        (containsCommand(command.cancel?.commands ?? [], target) ? command.cancel!.commands : undefined);
+      if (selected) out.push(...forceLockBranch(selected, target));
+      else if (!command.options.some((option) => containsLock(option.commands)) &&
+        !containsLock(command.cancel?.commands ?? [])) out.push(command);
+    } else {
+      out.push(command);
     }
   }
-  return [];
+  return out;
 }
 
 function pageConditions(condition: PageCondition | undefined): Condition[] {
@@ -134,10 +174,25 @@ function startCell(project: Project, mapId: string, event: GameEvent, dir: Dir):
   return { x: Math.max(0, event.x - DX[d]!), y: Math.max(0, event.y - DY[d]!) };
 }
 
-function checkPage(project: Project, mapId: string, event: GameEvent, page: Page, pageIndex: number): LockCheckRow {
-  const locks = countOp(page.commands, "lockInput");
+function checkPage(
+  project: Project,
+  mapId: string,
+  event: GameEvent,
+  page: Page,
+  target: Command,
+  lockIndex: number,
+  seed?: ResolutionSeed,
+): LockCheckAttempt {
   const eventKey = `${mapId}/${event.id}`;
-  const initial = satisfy([...pageConditions(page.condition), ...lockPath(page.commands)], eventKey);
+  const initial = satisfy(pageConditions(page.condition), eventKey);
+  if (seed) {
+    const extra = satisfy(seed.conditions, seed.eventKey);
+    Object.assign(initial.sw.variables, extra.sw.variables);
+    Object.assign(initial.sw.switches, extra.sw.switches);
+    Object.assign(initial.sw.self, extra.sw.self);
+    Object.assign(initial.sw.items, extra.sw.items);
+    Object.assign(initial.localVariables, extra.localVariables);
+  }
   const start = startCell(project, mapId, event, initial.facing);
   const forced: GameEvent = {
     ...event,
@@ -145,7 +200,7 @@ function checkPage(project: Project, mapId: string, event: GameEvent, page: Page
       ...page,
       trigger: "autorun",
       condition: undefined,
-      commands: [...page.commands, { op: "erase" }],
+      commands: [...forceLockBranch(page.commands, target), { op: "erase" }],
     }],
   };
   const runProject: Project = {
@@ -160,12 +215,12 @@ function checkPage(project: Project, mapId: string, event: GameEvent, page: Page
   Object.assign(state.sw.variables, initial.localVariables);
   let lockedAt = -1;
   let resolvedAt = -1;
-  let outcome: LockCheckRow["outcome"] = "unresolved";
+  let outcome: LockCheckAttempt["outcome"] = "unresolved";
   for (let frame = 0; frame < 12_000; frame++) {
     const modal = state.interp.modal;
     state = stepSession(session, state, {
       buttons: 0,
-      confirmEdge: modal !== undefined && frame % 2 === 0,
+      confirmEdge: modal !== null && frame % 2 === 0,
       cancelEdge: false,
       upEdge: false,
       downEdge: false,
@@ -188,16 +243,13 @@ function checkPage(project: Project, mapId: string, event: GameEvent, page: Page
     }
   }
   return {
-    map: mapId,
-    event: event.id,
-    name: event.name ?? "",
-    page: pageIndex,
-    trigger: page.trigger,
-    locks,
+    lock: lockIndex,
     outcome,
     lockedAt,
     resolvedAt,
     finalMap: state.mapId,
+    ...(seed ? { seededBy: seed.label } : {}),
+    ...(lockedAt < 0 && !state.interp.error ? { error: "instrumented lock was not reached" } : {}),
     ...(state.interp.error ? { error: state.interp.error.message } : {}),
   };
 }
@@ -335,6 +387,69 @@ function crossEventPath(map: Project["maps"][number], source: GameEvent, page: P
   return undefined;
 }
 
+function negate(condition: Condition): Condition | undefined {
+  if (condition.kind === "switch" || condition.kind === "selfSwitch") {
+    return { ...condition, value: !(condition.value ?? true) };
+  }
+  if (condition.kind === "variable") {
+    if (condition.op === "==") return { ...condition, op: "!=" };
+    if (condition.op === "!=") return { ...condition, op: "==" };
+    if (condition.op === ">=") return { ...condition, op: "<=", value: condition.value - 1 };
+    return { ...condition, op: ">=", value: condition.value + 1 };
+  }
+  if (condition.kind === "facing") {
+    return { kind: "facing", dir: DIRS.find((dir) => dir !== condition.dir)! };
+  }
+  return undefined;
+}
+
+/** Conditions on one branch leading to a dynamic resolution command. */
+function resolutionConditions(commands: readonly Command[]): Condition[] | undefined {
+  for (const command of commands) {
+    if (command.op === "unlockInput" || command.op === "transfer") return [];
+    if (command.op === "if") {
+      const yes = resolutionConditions(command.then);
+      if (yes) return [command.if, ...yes];
+      const no = resolutionConditions(command.else ?? []);
+      const inverse = negate(command.if);
+      if (no && inverse) return [inverse, ...no];
+    } else if (command.op === "choices") {
+      for (const option of command.options) {
+        const path = resolutionConditions(option.commands);
+        if (path) return path;
+      }
+      const path = resolutionConditions(command.cancel?.commands ?? []);
+      if (path) return path;
+    }
+  }
+  return undefined;
+}
+
+interface ResolutionSeed {
+  label: string;
+  eventKey: string;
+  conditions: Condition[];
+}
+
+function resolutionSeed(
+  map: Project["maps"][number],
+  path: readonly string[] | undefined,
+): ResolutionSeed | undefined {
+  const id = path?.at(-1);
+  const event = id ? map.events?.find((candidate) => candidate.id === id) : undefined;
+  if (!event) return undefined;
+  for (const page of event.pages) {
+    const conditions = resolutionConditions(page.commands);
+    if (!conditions) continue;
+    return {
+      label: event.id,
+      eventKey: `${map.id}/${event.id}`,
+      conditions: [...pageConditions(page.condition), ...conditions],
+    };
+  }
+  return undefined;
+}
+
 export function verifyProjectLocks(project: Project): LockCheckReport {
   const rows: LockCheckRow[] = [];
   for (const map of project.maps) {
@@ -342,40 +457,77 @@ export function verifyProjectLocks(project: Project): LockCheckReport {
       event.pages.forEach((page, pageIndex) => {
         if (!containsLock(page.commands)) return;
         const local = localResolution(page.commands);
-        if (local) {
-          rows.push({
-            map: map.id, event: event.id, name: event.name ?? "", page: pageIndex,
-            trigger: page.trigger, locks: countOp(page.commands, "lockInput"), outcome: local,
-            lockedAt: -1, resolvedAt: -1, finalMap: map.id,
-          });
-          return;
-        }
-        const dynamic = checkPage(project, map.id, event, page, pageIndex);
-        if (dynamic.outcome === "unlocked" || dynamic.outcome === "transferred") {
-          rows.push(dynamic);
-          return;
-        }
-        const path = crossEventPath(map, event, page);
-        rows.push(path ? { ...dynamic, outcome: "reachable", resolutionPath: path } : dynamic);
+        const path = local ? undefined : crossEventPath(map, event, page);
+        const seed = resolutionSeed(map, path);
+        const locks = lockCommands(page.commands);
+        const checks = locks.map((target, lockIndex) => {
+          let result = checkPage(project, map.id, event, page, target, lockIndex);
+          if (result.outcome !== "unresolved" || !seed) return result;
+
+          // The source page writes the linking fact; the seed supplies any
+          // additional guard needed by the downstream automatic release page.
+          result = checkPage(
+            project,
+            map.id,
+            event,
+            page,
+            target,
+            lockIndex,
+            seed,
+          );
+          return result;
+        });
+        const outcome: LockCheckRow["outcome"] = checks.some((check) => check.outcome === "error")
+          ? "error"
+          : checks.some((check) => check.outcome === "unresolved")
+            ? "unresolved"
+            : checks.every((check) => check.outcome === "transferred")
+              ? "transferred"
+              : "unlocked";
+        const lockedFrames = checks.map((check) => check.lockedAt).filter((frame) => frame >= 0);
+        const resolvedFrames = checks.map((check) => check.resolvedAt).filter((frame) => frame >= 0);
+        rows.push({
+          map: map.id,
+          event: event.id,
+          name: event.name ?? "",
+          page: pageIndex,
+          trigger: page.trigger,
+          locks: locks.length,
+          outcome,
+          lockedAt: lockedFrames.length ? Math.min(...lockedFrames) : -1,
+          resolvedAt: resolvedFrames.length ? Math.max(...resolvedFrames) : -1,
+          finalMap: checks.at(-1)?.finalMap ?? map.id,
+          ...(local ? { staticHint: local } : path ? { staticHint: "reachable" as const, resolutionPath: path } : {}),
+          checks,
+          ...(outcome === "unresolved" || outcome === "error"
+            ? { error: checks.filter((check) => check.outcome === "unresolved" || check.outcome === "error")
+              .map((check) => `lock ${check.lock}: ${check.error ?? check.outcome}`).join("; ") }
+            : {}),
+        });
       });
     }
   }
   const outcomes: LockCheckReport["outcomes"] = {
-    "local-unlock": 0,
-    "local-transfer": 0,
     unlocked: 0,
     transferred: 0,
-    reachable: 0,
     unresolved: 0,
     error: 0,
   };
   for (const row of rows) outcomes[row.outcome]++;
+  const failures = rows.filter((row) => row.outcome === "unresolved" || row.outcome === "error");
   return {
-    format: "pocket-tuxemon/g6-lock-check/v1",
+    format: "pocket-tuxemon/g6-lock-check/v2",
     pages: rows.length,
     lockCommands: rows.reduce((sum, row) => sum + row.locks, 0),
+    dynamicChecks: rows.reduce((sum, row) => sum + row.checks.length, 0),
     outcomes,
-    failures: rows.filter((row) => row.outcome === "unresolved" || row.outcome === "error"),
+    failures,
+    exceptions: failures.map((row) => ({
+      map: row.map,
+      event: row.event,
+      page: row.page,
+      explanation: row.error ?? "dynamic execution did not release the input lock",
+    })),
     rows,
   };
 }
@@ -388,7 +540,13 @@ if (import.meta.main) {
   const project = JSON.parse(readFileSync(projectPath, "utf8")) as Project;
   const report = verifyProjectLocks(project);
   writeFileSync(outPath, JSON.stringify(report, null, 2) + "\n");
-  console.log(JSON.stringify({ pages: report.pages, lockCommands: report.lockCommands, outcomes: report.outcomes }));
+  console.log(JSON.stringify({
+    pages: report.pages,
+    lockCommands: report.lockCommands,
+    dynamicChecks: report.dynamicChecks,
+    outcomes: report.outcomes,
+    exceptions: report.exceptions.length,
+  }));
   if (report.failures.length) {
     for (const failure of report.failures) console.error(JSON.stringify(failure));
     process.exitCode = 1;
