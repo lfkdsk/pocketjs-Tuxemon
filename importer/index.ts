@@ -31,7 +31,7 @@ export function coverageMarkdown(report: ImportReport): string {
     .join("\n");
   const repairs = report.transferRepairs.length
     ? report.transferRepairs.map((repair) =>
-      `- \`${repair.sourceMap}\` → \`${repair.targetMap}\`: (${repair.requested.x}, ${repair.requested.y}) → (${repair.emitted.x}, ${repair.emitted.y})`
+      `- \`${repair.sourceMap}\` → \`${repair.targetMap}\`: requested (${repair.requested.x}, ${repair.requested.y}), clamped (${repair.clamped.x}, ${repair.clamped.y}), emitted (${repair.emitted.x}, ${repair.emitted.y})`
     ).join("\n")
     : "- None.";
   return `# G1 import coverage
@@ -75,7 +75,8 @@ Definitions:
 
 The generated project has ${report.transferErrors.length} invalid transfers.
 ${report.transferRepairs.length} out-of-range coordinates in the upstream data
-are clamped deterministically:
+are clamped deterministically. If the clamped cell has no walkable exit, a
+four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 
 ${repairs}
 

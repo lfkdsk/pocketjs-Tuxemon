@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 import { availableMapIds, buildProject } from "../importer/project.ts";
 import { jsonBytes, writeImport } from "../importer/index.ts";
 import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
+import { canStepFrom, type Dir4 } from "../vendor/pocket-rpgkit/src/engine/passability.ts";
 import { createSession, startSession, stepSession } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import type { Command } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 
@@ -170,6 +171,46 @@ test("inert source events cannot freeze the Cotton Cafe", () => {
   expect(transfers.reasons.dropped).toContain(
     "Tuxemon's integer tile boundary never contains a point for a zero-size TMX event",
   );
+});
+
+test("clamped transfers use the nearest deterministic walkable landing", () => {
+  const result = buildProject(availableMapIds());
+  const repair = result.report.transferRepairs.find(
+    (entry) => entry.sourceMap === "leather_town" && entry.targetMap === "flower_city",
+  );
+  expect(repair).toEqual({
+    sourceMap: "leather_town",
+    targetMap: "flower_city",
+    requested: { x: 59, y: 0 },
+    clamped: { x: 39, y: 0 },
+    emitted: { x: 38, y: 3 },
+  });
+
+  const landings: { x: number; y: number }[] = [];
+  const collect = (commands: readonly Command[]): void => {
+    for (const command of commands) {
+      if (command.op === "transfer" && command.map === "flower_city") {
+        landings.push({ x: command.x, y: command.y });
+      } else if (command.op === "if") {
+        collect(command.then);
+        collect(command.else ?? []);
+      } else if (command.op === "choices") {
+        for (const option of command.options) collect(option.commands);
+      }
+    }
+  };
+  const leather = result.project.maps.find((map) => map.id === "leather_town")!;
+  for (const event of leather.events ?? []) {
+    for (const page of event.pages) collect(page.commands);
+  }
+  expect(landings).toEqual([{ x: 38, y: 3 }, { x: 38, y: 3 }]);
+
+  const session = createSession(result.project);
+  const flower = session.tables.get("flower_city")!;
+  const exits = ([0, 1, 2, 3] as Dir4[]).filter((dir) =>
+    canStepFrom(flower, repair!.emitted.x, repair!.emitted.y, dir)
+  );
+  expect(exits.length).toBeGreaterThan(0);
 });
 
 test("Spyder opening completes identically at 60, 30, and 20 Hz", () => {

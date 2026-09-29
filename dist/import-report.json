@@ -815,10 +815,10 @@
    "note": "presentation / meta"
   },
   {
-   "key": "act:transition_teleport(clamped):T1-lowered",
+   "key": "act:transition_teleport(repaired):T1-lowered",
    "fate": "T1-lowered",
    "count": 3,
-   "note": "upstream landing point clamped into target bounds"
+   "note": "clamped landing was isolated; deterministic BFS selected the nearest walkable cell"
   },
   {
    "key": "act:transition_teleport:T1",
@@ -1447,9 +1447,13 @@
     "x": 59,
     "y": 0
    },
-   "emitted": {
+   "clamped": {
     "x": 39,
     "y": 0
+   },
+   "emitted": {
+    "x": 38,
+    "y": 3
    }
   },
   {
@@ -1459,9 +1463,13 @@
     "x": 59,
     "y": 0
    },
-   "emitted": {
+   "clamped": {
     "x": 39,
     "y": 0
+   },
+   "emitted": {
+    "x": 38,
+    "y": 3
    }
   },
   {
@@ -1469,6 +1477,10 @@
    "targetMap": "water_volcano_village",
    "requested": {
     "x": 20,
+    "y": 0
+   },
+   "clamped": {
+    "x": 19,
     "y": 0
    },
    "emitted": {
@@ -2752,6 +2764,7 @@
        "transfer (terminal; dir from trailing char_face)"
       ],
       "degraded": [
+       "clamped landing was isolated; deterministic BFS selected the nearest walkable cell",
        "upstream landing point clamped into target bounds"
       ],
       "dropped": [

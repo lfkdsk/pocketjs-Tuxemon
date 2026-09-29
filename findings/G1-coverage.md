@@ -39,11 +39,12 @@ Definitions:
 
 The generated project has 0 invalid transfers.
 3 out-of-range coordinates in the upstream data
-are clamped deterministically:
+are clamped deterministically. If the clamped cell has no walkable exit, a
+four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 
-- `leather_town` → `flower_city`: (59, 0) → (39, 0)
-- `leather_town` → `flower_city`: (59, 0) → (39, 0)
-- `water_volcano_path` → `water_volcano_village`: (20, 0) → (19, 0)
+- `leather_town` → `flower_city`: requested (59, 0), clamped (39, 0), emitted (38, 3)
+- `leather_town` → `flower_city`: requested (59, 0), clamped (39, 0), emitted (38, 3)
+- `water_volcano_path` → `water_volcano_village`: requested (20, 0), clamped (19, 0), emitted (19, 0)
 
 ## Actions
 

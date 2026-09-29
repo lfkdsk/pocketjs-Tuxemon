@@ -508,7 +508,53 @@ const FACE: Record<string, MoveStep> = { up: "faceUp", down: "faceDown", left: "
 const MOVE: Record<string, MoveStep> = { up: "moveUp", down: "moveDown", left: "moveLeft", right: "moveRight" };
 const items = new Map<string, Item>();
 const transferRepairs: TransferRepair[] = [];
+const transferCollision = new Map<string, Set<string>>();
 const INSTANT = new Set(["set_variable", "clear_variable", "add_item", "add_tracker", "create_npc", "remove_npc", "modify_money", "set_teleport_faint", "set_monster_health", "set_monster_status", "unlock_controls", "lock_controls", "park_experience", "remove_step_tracker", "set_layer"]);
+
+const TRANSFER_NEIGHBORS = [
+  [0, 1],
+  [-1, 0],
+  [0, -1],
+  [1, 0],
+] as const;
+
+function transferCellIsWalkable(map: TuxMap, x: number, y: number): boolean {
+  if (x < 0 || y < 0 || x >= map.width || y >= map.height) return false;
+  const blocked = transferCollision.get(map.slug) ?? (() => {
+    const cells = readCollisionCells(join(MAPS_DIR, `${map.slug}.tmx`));
+    transferCollision.set(map.slug, cells);
+    return cells;
+  })();
+  if (blocked.has(`${x},${y}`)) return false;
+  return TRANSFER_NEIGHBORS.some(([dx, dy]) => {
+    const nx = x + dx;
+    const ny = y + dy;
+    return nx >= 0 && ny >= 0 && nx < map.width && ny < map.height &&
+      !blocked.has(`${nx},${ny}`);
+  });
+}
+
+/** Geometric four-neighbour BFS from a clamped upstream coordinate. The
+ * search crosses blocked cells while looking for the nearest usable landing;
+ * collision connectivity cannot be assumed when the starting point itself is
+ * bad. Neighbour order is fixed for byte-stable tie breaking. */
+function nearestWalkableTransferCell(map: TuxMap, startX: number, startY: number): { x: number; y: number } {
+  const queue: { x: number; y: number }[] = [{ x: startX, y: startY }];
+  const seen = new Set([`${startX},${startY}`]);
+  for (let head = 0; head < queue.length; head++) {
+    const cell = queue[head]!;
+    if (transferCellIsWalkable(map, cell.x, cell.y)) return cell;
+    for (const [dx, dy] of TRANSFER_NEIGHBORS) {
+      const x = cell.x + dx;
+      const y = cell.y + dy;
+      const key = `${x},${y}`;
+      if (x < 0 || y < 0 || x >= map.width || y >= map.height || seen.has(key)) continue;
+      seen.add(key);
+      queue.push({ x, y });
+    }
+  }
+  throw new Error(`map ${map.slug} has no walkable transfer landing`);
+}
 
 interface Ctx {
   m: TuxMap;
@@ -672,15 +718,28 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
           return out;
         }
         const requested = { x: Number(g[2]), y: Number(g[3]) };
-        const x = Math.max(0, Math.min(target.width - 1, requested.x));
-        const y = Math.max(0, Math.min(target.height - 1, requested.y));
-        if (x !== requested.x || y !== requested.y) {
-          transferRepairs.push({ sourceMap: ctx.m.slug, targetMap: map, requested, emitted: { x, y } });
-          noteAction(a, `${a.type}(clamped)`, "T1-lowered", "upstream landing point clamped into target bounds");
+        const clamped = {
+          x: Math.max(0, Math.min(target.width - 1, requested.x)),
+          y: Math.max(0, Math.min(target.height - 1, requested.y)),
+        };
+        let emitted = clamped;
+        if (clamped.x !== requested.x || clamped.y !== requested.y) {
+          if (!transferCellIsWalkable(target, clamped.x, clamped.y)) {
+            emitted = nearestWalkableTransferCell(target, clamped.x, clamped.y);
+          }
+          transferRepairs.push({ sourceMap: ctx.m.slug, targetMap: map, requested, clamped, emitted });
+          noteAction(
+            a,
+            `${a.type}(repaired)`,
+            "T1-lowered",
+            emitted === clamped
+              ? "upstream landing point clamped into target bounds"
+              : "clamped landing was isolated; deterministic BFS selected the nearest walkable cell",
+          );
         } else {
           noteAction(a, a.type, "T1", "transfer (terminal; dir from trailing char_face)");
         }
-        out.push({ op: "transfer", map, x, y, dir, fade: Math.min(2, Number(g[4] ?? 0.3)) });
+        out.push({ op: "transfer", map, x: emitted.x, y: emitted.y, dir, fade: Math.min(2, Number(g[4] ?? 0.3)) });
         return out;
       }
       case "load_yaml":
@@ -1099,6 +1158,7 @@ export interface TransferRepair {
   sourceMap: string;
   targetMap: string;
   requested: { x: number; y: number };
+  clamped: { x: number; y: number };
   emitted: { x: number; y: number };
 }
 
