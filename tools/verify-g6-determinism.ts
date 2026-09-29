@@ -3,7 +3,7 @@
 // animated atlases, manifests, and coverage/report outputs.
 
 import { createHash } from "node:crypto";
-import { readdirSync, readFileSync, statSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync } from "node:fs";
 import { join, relative, resolve } from "node:path";
 
 const ROOT = resolve(import.meta.dir, "..");
@@ -44,13 +44,13 @@ function filesAt(path: string): string[] {
   return out;
 }
 
-function snapshot(): Snapshot {
+function snapshot(root: string): Snapshot {
   const tree = createHash("sha256");
   const entries = new Map<string, string>();
   let bytes = 0;
   for (const source of GENERATED) {
-    for (const path of filesAt(join(ROOT, source))) {
-      const name = relative(ROOT, path).replaceAll("\\", "/");
+    for (const path of filesAt(join(root, source))) {
+      const name = relative(root, path).replaceAll("\\", "/");
       const data = readFileSync(path);
       const digest = createHash("sha256").update(data).digest("hex");
       entries.set(name, digest);
@@ -61,24 +61,34 @@ function snapshot(): Snapshot {
   return { sha256: tree.digest("hex"), files: entries.size, bytes, entries };
 }
 
-function generate(): void {
+function generate(outputRoot: string): void {
   const proc = Bun.spawnSync({
     cmd: [process.execPath, join(ROOT, "gen-assets.ts")],
     cwd: ROOT,
+    env: { ...process.env, G6_OUTPUT_ROOT: outputRoot },
     stdout: "inherit",
     stderr: "inherit",
   });
   if (proc.exitCode !== 0) throw new Error(`G6 determinism: generator exited ${proc.exitCode}`);
 }
 
-generate();
-const first = snapshot();
-generate();
-const second = snapshot();
-const names = new Set([...first.entries.keys(), ...second.entries.keys()]);
-const changed = [...names].filter((name) => first.entries.get(name) !== second.entries.get(name));
-if (changed.length) throw new Error(`G6 determinism: changed files:\n${changed.join("\n")}`);
-if (first.sha256 !== second.sha256) throw new Error("G6 determinism: aggregate digest changed");
-console.log(
-  `G6 determinism: PASS files=${second.files} bytes=${second.bytes} sha256=${second.sha256}`,
-);
+const scratchParent = "/var/tmp/fleet/1862";
+mkdirSync(scratchParent, { recursive: true });
+const firstRoot = mkdtempSync(join(scratchParent, "g6-determinism-a-"));
+const secondRoot = mkdtempSync(join(scratchParent, "g6-determinism-b-"));
+try {
+  generate(firstRoot);
+  const first = snapshot(firstRoot);
+  generate(secondRoot);
+  const second = snapshot(secondRoot);
+  const names = new Set([...first.entries.keys(), ...second.entries.keys()]);
+  const changed = [...names].filter((name) => first.entries.get(name) !== second.entries.get(name));
+  if (changed.length) throw new Error(`G6 determinism: changed files:\n${changed.join("\n")}`);
+  if (first.sha256 !== second.sha256) throw new Error("G6 determinism: aggregate digest changed");
+  console.log(
+    `G6 determinism: PASS isolatedRoots=2 files=${second.files} bytes=${second.bytes} sha256=${second.sha256}`,
+  );
+} finally {
+  rmSync(firstRoot, { recursive: true, force: true });
+  rmSync(secondRoot, { recursive: true, force: true });
+}

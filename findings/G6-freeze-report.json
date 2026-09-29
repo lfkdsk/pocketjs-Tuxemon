@@ -1,0 +1,11 @@
+{
+  "format": "pocket-tuxemon/frozen-k1/v2",
+  "maps": 263,
+  "windowFrames": 6000,
+  "scannedFramesPerMap": 12000,
+  "permanentLocks": 0,
+  "permanentBlockingFibers": 0,
+  "errors": 0,
+  "flagged": [],
+  "project": "/home/tangollvm/.fleet/worktrees/task-1833/dist/project.json"
+}
