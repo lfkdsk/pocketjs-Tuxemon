@@ -11,11 +11,15 @@
   "scripts": {
     "setup": "git submodule update --init --recursive && bun install",
     "fetch:tuxemon": "sh tools/fetch-tuxemon.sh",
-    "import": "bun importer/index.ts",
+    "import": "bun gen-assets.ts",
     "gen-assets": "bun gen-assets.ts",
     "verify:terrain:determinism": "bun tools/verify-terrain-determinism.ts",
     "verify:terrain:collision": "python3 tools/verify-terrain-collision.py",
     "build:wasm": "bun vendor/pocket-rpgkit/vendor/pocketjs/tools/wasm.ts",
+    "build": "bun tools/build.ts",
+    "desktop": "bun tools/desktop.ts",
+    "web": "bun gen-assets.ts && bun vendor/pocket-rpgkit/tools/web.ts --project-root . pocket-tuxemon",
+    "web:verify": "bun vendor/pocket-rpgkit/tools/web-verify.ts --site dist/web --out dist/web-verify",
     "test": "bun test tests/",
     "tsc": "bunx tsc --noEmit"
   },

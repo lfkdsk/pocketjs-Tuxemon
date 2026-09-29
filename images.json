@@ -1,0 +1,5579 @@
+{
+ "assets/characters/npc-npc-37707-female-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-female-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-female-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-female-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-female-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-female-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-female-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-female-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-female-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-female-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-female-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-female-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-female-missing-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-female-missing-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-female-missing-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-female-missing-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-female-missing-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-female-missing-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-female-missing-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-female-missing-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-female-missing-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-female-missing-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-female-missing-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-female-missing-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-male-missing-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-male-missing-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-male-missing-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-male-missing-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-male-missing-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-male-missing-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-male-missing-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-male-missing-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-male-missing-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-male-missing-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-male-missing-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-37707-male-missing-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-blonde-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-blonde-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-blonde-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-blonde-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-blonde-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-blonde-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-blonde-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-blonde-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-blonde-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-blonde-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-blonde-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-blonde-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-red-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-red-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-red-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-red-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-red-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-red-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-red-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-red-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-red-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-red-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-red-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-barmaid-red-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-black-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-black-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-black-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-black-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-black-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-black-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-black-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-black-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-black-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-black-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-black-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-black-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-blue-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-blue-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-blue-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-blue-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-blue-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-blue-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-blue-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-blue-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-blue-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-blue-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-blue-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-blue-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-copper-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-copper-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-copper-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-copper-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-copper-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-copper-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-copper-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-copper-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-copper-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-copper-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-copper-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-copper-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-fiery-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-fiery-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-fiery-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-fiery-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-fiery-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-fiery-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-fiery-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-fiery-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-fiery-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-fiery-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-fiery-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-fiery-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-gray-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-gray-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-gray-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-gray-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-gray-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-gray-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-gray-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-gray-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-gray-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-gray-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-gray-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-beachcomber-gray-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-bob-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-bob-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-bob-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-bob-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-bob-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-bob-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-bob-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-bob-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-bob-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-bob-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-bob-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-bob-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-orange-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-orange-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-orange-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-orange-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-orange-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-orange-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-orange-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-orange-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-orange-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-orange-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-orange-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-orange-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-red-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-red-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-red-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-red-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-red-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-red-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-red-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-red-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-red-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-red-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-red-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boss-red-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-boulder-static.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-box-static.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blonde-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blonde-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blonde-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blonde-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blonde-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blonde-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blonde-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blonde-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blonde-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blonde-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blonde-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blonde-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blue-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blue-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blue-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blue-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blue-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blue-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blue-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blue-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blue-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blue-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blue-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-blue-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-fiery-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-fiery-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-fiery-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-fiery-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-fiery-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-fiery-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-fiery-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-fiery-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-fiery-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-fiery-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-fiery-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-fiery-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-green-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-green-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-green-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-green-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-green-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-green-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-green-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-green-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-green-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-green-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-green-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-green-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-violet-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-violet-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-violet-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-violet-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-violet-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-violet-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-violet-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-violet-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-violet-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-violet-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-violet-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-catgirl-violet-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ceo-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ceo-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ceo-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ceo-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ceo-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ceo-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ceo-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ceo-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ceo-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ceo-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ceo-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ceo-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-black-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-black-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-black-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-black-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-black-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-black-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-black-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-black-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-black-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-black-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-black-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-black-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-blonde-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-blonde-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-blonde-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-blonde-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-blonde-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-blonde-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-blonde-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-blonde-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-blonde-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-blonde-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-blonde-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-blonde-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-fiery-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-fiery-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-fiery-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-fiery-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-fiery-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-fiery-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-fiery-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-fiery-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-fiery-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-fiery-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-fiery-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-childactor-fiery-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-christie-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-christie-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-christie-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-christie-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-christie-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-christie-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-christie-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-christie-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-christie-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-christie-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-christie-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-christie-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-conileaf-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-conileaf-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-conileaf-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-conileaf-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-conileaf-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-conileaf-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-conileaf-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-conileaf-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-conileaf-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-conileaf-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-conileaf-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-conileaf-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-black-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-black-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-black-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-black-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-black-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-black-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-black-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-black-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-black-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-black-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-black-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-black-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-blue-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-blue-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-blue-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-blue-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-blue-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-blue-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-blue-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-blue-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-blue-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-blue-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-blue-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-blue-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-fiery-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-fiery-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-fiery-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-fiery-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-fiery-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-fiery-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-fiery-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-fiery-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-fiery-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-fiery-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-fiery-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-cooldude-fiery-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-disciple-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-disciple-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-disciple-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-disciple-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-disciple-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-disciple-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-disciple-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-disciple-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-disciple-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-disciple-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-disciple-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-disciple-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-black-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-black-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-black-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-black-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-black-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-black-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-black-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-black-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-black-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-black-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-black-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-black-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-blue-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-blue-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-blue-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-blue-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-blue-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-blue-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-blue-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-blue-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-blue-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-blue-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-blue-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-blue-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-fiery-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-fiery-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-fiery-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-fiery-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-fiery-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-fiery-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-fiery-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-fiery-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-fiery-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-fiery-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-fiery-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-fiery-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-green-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-green-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-green-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-green-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-green-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-green-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-green-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-green-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-green-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-green-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-green-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-dragonrider-green-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-drokoro-static.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-fiery-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-fiery-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-fiery-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-fiery-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-fiery-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-fiery-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-fiery-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-fiery-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-fiery-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-fiery-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-fiery-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fashionista-fiery-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firefighter-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firefighter-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firefighter-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firefighter-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firefighter-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firefighter-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firefighter-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firefighter-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firefighter-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firefighter-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firefighter-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firefighter-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firenymph-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firenymph-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firenymph-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firenymph-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firenymph-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firenymph-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firenymph-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firenymph-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firenymph-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firenymph-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firenymph-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-firenymph-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-fiery-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-fiery-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-fiery-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-fiery-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-fiery-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-fiery-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-fiery-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-fiery-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-fiery-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-fiery-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-fiery-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-fisher-fiery-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-black-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-black-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-black-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-black-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-black-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-black-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-black-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-black-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-black-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-black-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-black-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-black-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-blue-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-blue-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-blue-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-blue-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-blue-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-blue-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-blue-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-blue-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-blue-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-blue-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-blue-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-blue-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-brown-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-brown-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-brown-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-brown-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-brown-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-brown-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-brown-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-brown-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-brown-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-brown-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-brown-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-brown-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-fiery-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-fiery-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-fiery-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-fiery-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-fiery-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-fiery-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-fiery-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-fiery-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-fiery-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-fiery-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-fiery-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-fiery-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-rose-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-rose-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-rose-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-rose-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-rose-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-rose-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-rose-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-rose-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-rose-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-rose-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-rose-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-florist-rose-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-girl1-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-girl1-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-girl1-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-girl1-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-girl1-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-girl1-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-girl1-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-girl1-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-girl1-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-girl1-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-girl1-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-girl1-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-goth-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-goth-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-goth-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-goth-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-goth-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-goth-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-goth-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-goth-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-goth-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-goth-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-goth-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-goth-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-green-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-green-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-green-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-green-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-green-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-green-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-green-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-green-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-green-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-green-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-green-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-green-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-lapi-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-lapi-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-lapi-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-lapi-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-lapi-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-lapi-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-lapi-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-lapi-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-lapi-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-lapi-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-lapi-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-lapi-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-yellow-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-yellow-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-yellow-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-yellow-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-yellow-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-yellow-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-yellow-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-yellow-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-yellow-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-yellow-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-yellow-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-granny-yellow-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-brown-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-brown-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-brown-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-brown-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-brown-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-brown-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-brown-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-brown-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-brown-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-brown-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-brown-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-brown-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-red-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-red-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-red-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-red-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-red-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-red-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-red-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-red-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-red-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-red-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-red-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-heroine-red-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-black-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-black-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-black-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-black-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-black-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-black-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-black-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-black-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-black-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-black-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-black-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-black-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-blonde-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-blonde-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-blonde-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-blonde-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-blonde-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-blonde-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-blonde-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-blonde-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-blonde-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-blonde-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-blonde-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-blonde-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-fiery-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-fiery-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-fiery-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-fiery-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-fiery-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-fiery-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-fiery-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-fiery-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-fiery-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-fiery-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-fiery-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-homemaker-fiery-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-green-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-green-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-green-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-green-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-green-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-green-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-green-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-green-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-green-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-green-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-green-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-green-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-red-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-red-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-red-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-red-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-red-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-red-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-red-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-red-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-red-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-red-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-red-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-red-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-yellow-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-yellow-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-yellow-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-yellow-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-yellow-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-yellow-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-yellow-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-yellow-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-yellow-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-yellow-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-yellow-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knight-yellow-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knightlord-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knightlord-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knightlord-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knightlord-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knightlord-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knightlord-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knightlord-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knightlord-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knightlord-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knightlord-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knightlord-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-knightlord-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-landrace-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-landrace-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-landrace-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-landrace-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-landrace-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-landrace-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-landrace-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-landrace-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-landrace-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-landrace-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-landrace-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-landrace-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-black-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-black-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-black-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-black-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-black-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-black-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-black-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-black-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-black-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-black-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-black-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-black-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-blonde-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-blonde-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-blonde-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-blonde-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-blonde-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-blonde-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-blonde-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-blonde-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-blonde-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-blonde-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-blonde-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-blonde-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-brown-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-brown-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-brown-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-brown-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-brown-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-brown-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-brown-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-brown-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-brown-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-brown-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-brown-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-brown-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-fiery-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-fiery-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-fiery-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-fiery-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-fiery-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-fiery-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-fiery-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-fiery-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-fiery-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-fiery-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-fiery-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-fiery-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-grey-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-grey-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-grey-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-grey-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-grey-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-grey-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-grey-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-grey-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-grey-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-grey-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-grey-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-magician-grey-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-green-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-green-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-green-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-green-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-green-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-green-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-green-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-green-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-green-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-green-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-green-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-green-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-rose-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-rose-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-rose-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-rose-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-rose-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-rose-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-rose-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-rose-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-rose-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-rose-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-rose-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-rose-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-violet-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-violet-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-violet-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-violet-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-violet-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-violet-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-violet-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-violet-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-violet-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-violet-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-violet-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-violet-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-yellow-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-yellow-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-yellow-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-yellow-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-yellow-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-yellow-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-yellow-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-yellow-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-yellow-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-yellow-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-yellow-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-maniac-yellow-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-blue-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-blue-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-blue-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-blue-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-blue-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-blue-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-blue-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-blue-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-blue-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-blue-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-blue-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-blue-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-green-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-green-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-green-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-green-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-green-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-green-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-green-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-green-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-green-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-green-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-green-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-green-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-red-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-red-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-red-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-red-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-red-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-red-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-red-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-red-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-red-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-red-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-red-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-red-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-yellow-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-yellow-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-yellow-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-yellow-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-yellow-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-yellow-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-yellow-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-yellow-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-yellow-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-yellow-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-yellow-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-miner-yellow-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-missing-missing.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-black-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-black-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-black-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-black-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-black-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-black-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-black-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-black-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-black-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-black-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-black-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-black-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-blue-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-blue-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-blue-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-blue-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-blue-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-blue-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-blue-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-blue-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-blue-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-blue-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-blue-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-blue-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-green-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-green-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-green-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-green-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-green-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-green-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-green-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-green-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-green-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-green-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-green-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-green-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-orange-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-orange-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-orange-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-orange-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-orange-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-orange-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-orange-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-orange-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-orange-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-orange-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-orange-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-orange-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-red-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-red-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-red-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-red-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-red-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-red-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-red-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-red-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-red-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-red-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-red-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-monk-red-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-blue-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-blue-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-blue-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-blue-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-blue-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-blue-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-blue-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-blue-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-blue-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-blue-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-blue-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-blue-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-red-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-red-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-red-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-red-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-red-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-red-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-red-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-red-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-red-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-red-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-red-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-ninja-red-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blonde-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blonde-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blonde-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blonde-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blonde-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blonde-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blonde-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blonde-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blonde-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blonde-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blonde-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blonde-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blue-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blue-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blue-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blue-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blue-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blue-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blue-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blue-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blue-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blue-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blue-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-blue-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-green-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-green-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-green-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-green-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-green-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-green-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-green-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-green-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-green-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-green-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-green-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-green-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-lapi-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-lapi-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-lapi-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-lapi-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-lapi-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-lapi-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-lapi-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-lapi-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-lapi-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-lapi-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-lapi-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-lapi-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-red-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-red-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-red-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-red-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-red-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-red-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-red-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-red-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-red-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-red-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-red-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-nurse-red-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-omnichannelallie-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-omnichannelallie-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-omnichannelallie-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-omnichannelallie-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-omnichannelallie-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-omnichannelallie-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-omnichannelallie-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-omnichannelallie-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-omnichannelallie-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-omnichannelallie-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-omnichannelallie-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-omnichannelallie-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-overseer-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-overseer-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-overseer-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-overseer-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-overseer-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-overseer-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-overseer-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-overseer-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-overseer-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-overseer-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-overseer-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-overseer-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-p-five-static.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-p-four-static.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-p-one-static.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-p-three-static.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-p-two-static.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-picnicker-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-picnicker-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-picnicker-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-picnicker-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-picnicker-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-picnicker-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-picnicker-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-picnicker-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-picnicker-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-picnicker-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-picnicker-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-picnicker-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-green-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-green-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-green-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-green-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-green-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-green-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-green-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-green-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-green-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-green-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-green-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-green-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-red-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-red-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-red-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-red-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-red-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-red-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-red-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-red-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-red-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-red-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-red-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-postboy-red-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-black-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-black-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-black-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-black-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-black-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-black-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-black-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-black-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-black-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-black-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-black-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-black-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-blue-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-blue-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-blue-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-blue-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-blue-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-blue-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-blue-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-blue-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-blue-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-blue-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-blue-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-blue-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-brown-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-brown-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-brown-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-brown-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-brown-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-brown-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-brown-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-brown-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-brown-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-brown-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-brown-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-brown-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-fiery-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-fiery-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-fiery-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-fiery-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-fiery-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-fiery-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-fiery-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-fiery-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-fiery-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-fiery-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-fiery-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-fiery-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-green-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-green-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-green-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-green-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-green-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-green-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-green-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-green-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-green-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-green-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-green-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-green-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-lapi-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-lapi-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-lapi-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-lapi-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-lapi-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-lapi-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-lapi-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-lapi-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-lapi-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-lapi-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-lapi-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-professor-lapi-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-riverboatcaptain-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-riverboatcaptain-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-riverboatcaptain-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-riverboatcaptain-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-riverboatcaptain-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-riverboatcaptain-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-riverboatcaptain-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-riverboatcaptain-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-riverboatcaptain-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-riverboatcaptain-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-riverboatcaptain-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-riverboatcaptain-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-robot-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-robot-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-robot-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-robot-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-robot-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-robot-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-robot-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-robot-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-robot-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-robot-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-robot-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-robot-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rockitten-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rockitten-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rockitten-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rockitten-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rockitten-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rockitten-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rockitten-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rockitten-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rockitten-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rockitten-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rockitten-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rockitten-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-copper-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-copper-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-copper-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-copper-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-copper-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-copper-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-copper-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-copper-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-copper-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-copper-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-copper-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-copper-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-green-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-green-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-green-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-green-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-green-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-green-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-green-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-green-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-green-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-green-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-green-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-green-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-red-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-red-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-red-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-red-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-red-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-red-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-red-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-red-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-red-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-red-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-red-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-rogue-red-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-black-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-black-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-black-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-black-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-black-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-black-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-black-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-black-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-black-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-black-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-black-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-black-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-brown-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-brown-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-brown-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-brown-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-brown-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-brown-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-brown-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-brown-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-brown-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-brown-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-brown-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-brown-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-fiery-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-fiery-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-fiery-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-fiery-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-fiery-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-fiery-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-fiery-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-fiery-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-fiery-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-fiery-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-fiery-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-scientist-fiery-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-screen-static.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-screen-small-static.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-black-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-black-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-black-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-black-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-black-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-black-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-black-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-black-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-black-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-black-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-black-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-black-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-grey-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-grey-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-grey-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-grey-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-grey-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-grey-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-grey-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-grey-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-grey-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-grey-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-grey-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-grey-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-red-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-red-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-red-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-red-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-red-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-red-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-red-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-red-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-red-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-red-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-red-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopassistant-red-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-blonde-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-blonde-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-blonde-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-blonde-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-blonde-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-blonde-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-blonde-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-blonde-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-blonde-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-blonde-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-blonde-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-blonde-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-brown-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-brown-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-brown-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-brown-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-brown-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-brown-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-brown-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-brown-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-brown-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-brown-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-brown-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-shopkeeper-brown-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-sign-static.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-snugglepot-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-snugglepot-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-snugglepot-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-snugglepot-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-snugglepot-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-snugglepot-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-snugglepot-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-snugglepot-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-snugglepot-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-snugglepot-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-snugglepot-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-snugglepot-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-soldier-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-soldier-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-soldier-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-soldier-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-soldier-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-soldier-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-soldier-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-soldier-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-soldier-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-soldier-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-soldier-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-soldier-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-blonde-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-blonde-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-blonde-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-blonde-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-blonde-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-blonde-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-blonde-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-blonde-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-blonde-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-blonde-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-blonde-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-blonde-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-fiery-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-fiery-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-fiery-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-fiery-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-fiery-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-fiery-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-fiery-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-fiery-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-fiery-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-fiery-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-fiery-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-fiery-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-green-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-green-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-green-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-green-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-green-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-green-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-green-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-green-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-green-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-green-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-green-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-green-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-lapi-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-lapi-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-lapi-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-lapi-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-lapi-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-lapi-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-lapi-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-lapi-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-lapi-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-lapi-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-lapi-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderboss-lapi-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderrookie-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderrookie-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderrookie-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderrookie-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderrookie-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderrookie-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderrookie-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderrookie-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderrookie-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderrookie-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderrookie-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-spyderrookie-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-statue-blue-static.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-statue-green-static.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-statue-grey-static.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-statue-orange-static.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-statue-orange-tipped-static.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-statue-red-static.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-blue-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-blue-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-blue-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-blue-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-blue-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-blue-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-blue-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-blue-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-blue-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-blue-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-blue-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-blue-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-green-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-green-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-green-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-green-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-green-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-green-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-green-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-green-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-green-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-green-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-green-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-green-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-orange-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-orange-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-orange-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-orange-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-orange-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-orange-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-orange-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-orange-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-orange-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-orange-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-orange-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-orange-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-red-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-red-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-red-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-red-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-red-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-red-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-red-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-red-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-red-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-red-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-red-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-swimmer-red-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-fiery-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-fiery-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-fiery-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-fiery-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-fiery-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-fiery-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-fiery-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-fiery-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-fiery-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-fiery-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-fiery-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-fiery-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-green-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-green-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-green-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-green-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-green-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-green-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-green-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-green-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-green-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-green-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-green-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-green-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-lapi-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-lapi-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-lapi-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-lapi-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-lapi-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-lapi-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-lapi-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-lapi-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-lapi-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-lapi-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-lapi-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tennisplayer-lapi-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tuxeball-green-static.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tuxeball-red-static.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-tuxeball-yellow-static.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-varmint-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-varmint-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-varmint-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-varmint-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-varmint-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-varmint-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-varmint-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-varmint-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-varmint-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-varmint-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-varmint-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-varmint-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-volcoli-static.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-warrior-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-warrior-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-warrior-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-warrior-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-warrior-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-warrior-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-warrior-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-warrior-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-warrior-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-warrior-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-warrior-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-warrior-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-water-jemuar-static.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-woodnymph-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-woodnymph-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-woodnymph-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-woodnymph-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-woodnymph-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-woodnymph-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-woodnymph-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-woodnymph-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-woodnymph-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-woodnymph-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-woodnymph-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-woodnymph-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-xerogrunt-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-xerogrunt-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-xerogrunt-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-xerogrunt-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-xerogrunt-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-xerogrunt-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-xerogrunt-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-xerogrunt-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-xerogrunt-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-xerogrunt-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-xerogrunt-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/npc-npc-xerogrunt-walk-r-3.png": {
+  "psm": 3
+ },
+ "assets/characters/player-adventurer-idle-0.png": {
+  "psm": 3
+ },
+ "assets/characters/player-adventurer-idle-1.png": {
+  "psm": 3
+ },
+ "assets/characters/player-adventurer-idle-2.png": {
+  "psm": 3
+ },
+ "assets/characters/player-adventurer-idle-3.png": {
+  "psm": 3
+ },
+ "assets/characters/player-adventurer-walk-l-0.png": {
+  "psm": 3
+ },
+ "assets/characters/player-adventurer-walk-l-1.png": {
+  "psm": 3
+ },
+ "assets/characters/player-adventurer-walk-l-2.png": {
+  "psm": 3
+ },
+ "assets/characters/player-adventurer-walk-l-3.png": {
+  "psm": 3
+ },
+ "assets/characters/player-adventurer-walk-r-0.png": {
+  "psm": 3
+ },
+ "assets/characters/player-adventurer-walk-r-1.png": {
+  "psm": 3
+ },
+ "assets/characters/player-adventurer-walk-r-2.png": {
+  "psm": 3
+ },
+ "assets/characters/player-adventurer-walk-r-3.png": {
+  "psm": 3
+ }
+}

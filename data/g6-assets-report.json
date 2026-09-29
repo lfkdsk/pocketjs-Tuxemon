@@ -1,0 +1,39 @@
+{
+ "format": "pocket-tuxemon/g6-assets/v1",
+ "sourceRevision": "9e6258ff726b786040a267e8bdbbf037b560285e",
+ "project": {
+  "maps": 263,
+  "collisionBodies": 14,
+  "k1": {
+   "areas": true,
+   "facing": true,
+   "condAll": true,
+   "localReset": true,
+   "place": true,
+   "inputLock": true,
+   "routes": false
+  }
+ },
+ "terrain": {
+  "entries": 430,
+  "pakBytes": 21575296,
+  "gzipBytes": 2358327,
+  "animatedPlacements": 5785
+ },
+ "animation": {
+  "sourceSequences": 86,
+  "atlases": 86,
+  "atlasBytes": 27543
+ },
+ "characters": {
+  "source": "/var/tmp/tuxemon-src",
+  "spriteKeys": 175,
+  "walkers": 152,
+  "staticObjects": 22,
+  "tallStaticObjects": 12,
+  "placeholders": 1,
+  "playerSheet": "sprites/adventurer.png",
+  "imageFiles": 1859,
+  "imageBytes": 509537
+ }
+}

@@ -1,0 +1,20 @@
+{
+  "title": "Pocket Tuxemon",
+  "intro": "Tuxemon's world, automatically imported into Pocket RPG Kit.",
+  "games": {
+    "pocket-tuxemon": {
+      "title": "Pocket Tuxemon",
+      "description": "Walk from Spyder's bedroom through Paper Town and Route 1, with imported maps, NPCs, dialogue, events, and visible battle placeholders.",
+      "controls": [
+        {
+          "button": "DPAD",
+          "action": "Walk / choose"
+        },
+        {
+          "button": "CIRCLE",
+          "action": "Talk / confirm"
+        }
+      ]
+    }
+  }
+}

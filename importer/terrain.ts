@@ -93,7 +93,14 @@ export interface AnimatedTerrainCell {
   x: number;
   y: number;
   above: boolean;
+  /** Stable in-memory/cooked sequence id used by the R2 atlas manifest. */
+  sequence: string;
   frames: readonly { tile: number; durationMs: number }[];
+}
+
+export interface TerrainAnimationSequence {
+  id: string;
+  frames: readonly { rgba: Uint8Array; durationMs: number }[];
 }
 
 export interface TerrainMapPatch extends Pick<MapDef, "id" | "width" | "height" | "ground"> {
@@ -169,6 +176,9 @@ export interface TerrainBuild {
   streamMaps: StreamManifestMap[];
   fragment: TerrainFragment;
   animations: Readonly<Record<string, readonly AnimatedTerrainCell[]>>;
+  /** Pixel frames stay in memory for the asset cooker; terrain-animations.json
+   *  records only placements/tile ids and therefore remains inspectable. */
+  animationSequences: readonly TerrainAnimationSequence[];
   report: TerrainReport;
 }
 
@@ -751,6 +761,7 @@ export function importTerrain(options: GenerateTerrainOptions = {}): TerrainBuil
   const streamMaps: StreamManifestMap[] = [];
   const patches: TerrainMapPatch[] = [];
   const animations: Record<string, AnimatedTerrainCell[]> = {};
+  const animationSequences = new Map<string, TerrainAnimationSequence>();
   const byMap: Record<string, TerrainMapReport> = {};
 
   for (const file of files) {
@@ -791,10 +802,23 @@ export function importTerrain(options: GenerateTerrainOptions = {}): TerrainBuil
         if (flags) flipCells++;
         if (animation) {
           animatedCells++;
+          const sequenceKey = `${tileset.imagePath}\0${localId}\0${flags}\0${layer.opacity}`;
+          let sequence = animationSequences.get(sequenceKey);
+          if (!sequence) {
+            sequence = {
+              id: `terrain-anim-${String(animationSequences.size).padStart(3, "0")}`,
+              frames: animation.map((frame) => ({
+                rgba: transformedCell(tileset, frame.tileId, flags, layer.opacity, images),
+                durationMs: frame.durationMs,
+              })),
+            };
+            animationSequences.set(sequenceKey, sequence);
+          }
           animCells.push({
             x,
             y,
             above,
+            sequence: sequence.id,
             frames: animation.map((frame) => ({ tile: tileset.firstGid + frame.tileId, durationMs: frame.durationMs })),
           });
         }
@@ -875,7 +899,7 @@ export function importTerrain(options: GenerateTerrainOptions = {}): TerrainBuil
     directedEdgeMismatches: Object.values(byMap).reduce((sum, map) => sum + map.directedEdgeMismatches, 0),
     byMap,
   };
-  return { entries, streamMaps, fragment, animations, report };
+  return { entries, streamMaps, fragment, animations, animationSequences: [...animationSequences.values()], report };
 }
 
 function stableJson(value: unknown): string {
