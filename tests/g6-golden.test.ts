@@ -13,10 +13,33 @@ const journey = JSON.parse(readFileSync(join(ROOT, "data/g6-journey.json"), "utf
   masks: number[];
   checkpoints: { name: string; frame: number; map: string; position: [number, number] }[];
 };
+interface PaintMark {
+  tile: [number, number];
+  pixel: [number, number];
+  facing: number;
+  phase: number;
+  image: string;
+  height: 16 | 32;
+}
+interface GoldenFrame {
+  name: string;
+  frame: number;
+  map: string;
+  position: [number, number];
+  file: string;
+  rgbaFnv1a: string;
+  pngSha256: string;
+  camera: [number, number];
+  player: PaintMark;
+  actor?: PaintMark & { id: string; sprite: string };
+}
 const manifest = JSON.parse(readFileSync(join(ROOT, "data/g6-goldens.json"), "utf8")) as {
   width: number;
   height: number;
-  frames: { name: string; frame: number; map: string; position: [number, number]; file: string; rgbaFnv1a: string; pngSha256: string }[];
+  frames: GoldenFrame[];
+};
+const project = JSON.parse(readFileSync(join(ROOT, "dist/project.json"), "utf8")) as {
+  maps: { id: string; width: number; height: number }[];
 };
 
 function load(name: string) {
@@ -47,11 +70,37 @@ const exact = (rr: number, gg: number, bb: number) => (r: number, g: number, b: 
   r === rr && g === gg && b === bb;
 const PLAYER_BLUE = (r: number, g: number, b: number) => b > 120 && b > r * 1.2 && b > g * 1.05;
 
+function matchingOpaquePixels(frame: GoldenFrame, mark: PaintMark): { opaque: number; matching: number } {
+  const target = load(frame.name).image;
+  const sprite = decodePng(new Uint8Array(readFileSync(join(ROOT, mark.image))), mark.image);
+  const map = project.maps.find((candidate) => candidate.id === frame.map)!;
+  const offsetX = Math.max(0, Math.floor((manifest.width - map.width * 16) / 2));
+  const offsetY = Math.max(0, Math.floor((manifest.height - map.height * 16) / 2));
+  const x0 = offsetX + mark.pixel[0] - frame.camera[0];
+  const y0 = offsetY + mark.pixel[1] - frame.camera[1] + 16 - mark.height;
+  let opaque = 0;
+  let matching = 0;
+  for (let y = 0; y < sprite.height; y++) for (let x = 0; x < sprite.width; x++) {
+    const source = (y * sprite.width + x) * 4;
+    if (sprite.rgba[source + 3] !== 255) continue;
+    opaque++;
+    const targetIndex = ((y0 + y) * target.width + x0 + x) * 4;
+    if (
+      sprite.rgba[source] === target.rgba[targetIndex] &&
+      sprite.rgba[source + 1] === target.rgba[targetIndex + 1] &&
+      sprite.rgba[source + 2] === target.rgba[targetIndex + 2] &&
+      sprite.rgba[source + 3] === target.rgba[targetIndex + 3]
+    ) matching++;
+  }
+  return { opaque, matching };
+}
+
 describe("G6 maintained keyframes", () => {
-  test("manifest pins the three intended maps and PNG bytes", () => {
+  test("manifest pins the intended maps and PNG bytes", () => {
     expect(manifest).toMatchObject({ width: 480, height: 272 });
     expect(manifest.frames.map(({ name, map }) => [name, map])).toEqual([
       ["bedroom", "spyder_bedroom"],
+      ["downstairs-mom", "spyder_downstairs"],
       ["paper-town", "spyder_paper_town"],
       ["route-1", "spyder_route1"],
     ]);
@@ -71,12 +120,24 @@ describe("G6 maintained keyframes", () => {
     expect(count(image.rgba, image.width, 210, 110, 242, 160, PLAYER_BLUE)).toBeGreaterThan(60);
   });
 
-  test("Paper Town shows grass, roads, forest, and the blue mart", () => {
-    const { image } = load("paper-town");
+  test("downstairs mom is painted at her live NPC tile", () => {
+    const frame = manifest.frames.find((candidate) => candidate.name === "downstairs-mom")!;
+    expect(frame.actor).toMatchObject({ id: "npc_spyder_papertown_mom", sprite: "npc.homemaker" });
+    expect(frame.actor!.pixel).toEqual([frame.actor!.tile[0] * 16, frame.actor!.tile[1] * 16]);
+    const pixels = matchingOpaquePixels(frame, frame.actor!);
+    expect(pixels.opaque).toBeGreaterThan(80);
+    expect(pixels.matching).toBe(pixels.opaque);
+  });
+
+  test("Paper Town shows grass, roads, forest, the blue mart, and a visible player", () => {
+    const { entry, image } = load("paper-town");
     expect(count(image.rgba, image.width, 0, 0, 480, 272, exact(64, 176, 128))).toBeGreaterThan(40_000);
     expect(count(image.rgba, image.width, 0, 0, 480, 272, exact(216, 200, 128))).toBeGreaterThan(20_000);
-    expect(count(image.rgba, image.width, 130, 115, 260, 220, exact(0, 107, 219))).toBeGreaterThan(1_500);
-    expect(count(image.rgba, image.width, 400, 0, 480, 272, exact(48, 96, 56))).toBeGreaterThan(1_000);
+    expect(count(image.rgba, image.width, 250, 115, 420, 240, exact(0, 107, 219))).toBeGreaterThan(1_500);
+    expect(count(image.rgba, image.width, 0, 0, 110, 220, exact(48, 96, 56))).toBeGreaterThan(1_000);
+    const pixels = matchingOpaquePixels(entry, entry.player);
+    expect(pixels.opaque).toBeGreaterThan(80);
+    expect(pixels.matching).toBe(pixels.opaque);
   });
 
   test("Route 1 shows water, crop rows, forest, and the 16x32 player", () => {

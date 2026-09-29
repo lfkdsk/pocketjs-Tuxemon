@@ -220,10 +220,19 @@ for (let tries = 0; tries < 20 && v("v.spokenmom") === 0; tries++) {
   settle();
 }
 expect("talking to mom ran her first talk page", v("v.spokenmom") > 0);
+goTo(3, 6);
+for (let i = 0; i < 120; i++) {
+  const mom = st.chars.chars["npc_spyder_papertown_mom"];
+  if (mom && !mom.moving && mom.phase === 0) break;
+  tick();
+}
+checkpoint("downstairs-mom");
 goTo(4, 6);
 tick(BTN_BITS.DOWN); // K1 facing guard on the front-door mat
 settle();
 expect("the front door leads to Paper Town", st.mapId === "spyder_paper_town");
+goTo(10, 8);
+checkpoint("paper-town");
 walkTo(24, 13);
 settle();
 expect("the first-monster strip (touch area) ran Dante's scene", v("v.dantebin") > 0);
@@ -233,7 +242,6 @@ settle(["Yes"]);
 expect("choosing Rockitten gave a monster (placeholder party)", v("sys.party_size") === 1);
 expect("the first fight ran the battle placeholder", st.sw.switches["bo.spyder_billie.won"] === true);
 expect("the win branch closed the fight (firstfightend=no)", v("v.firstfightend") > 0 && v("v.firstfightdue") > 0);
-checkpoint("paper-town");
 let requested = "";
 try {
   goTo(14, 1);

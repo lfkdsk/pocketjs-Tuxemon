@@ -5,39 +5,139 @@
   "frames": [
     {
       "name": "bedroom",
-      "frame": 587,
+      "frame": 1723,
       "map": "spyder_bedroom",
       "position": [
         3,
         4
       ],
-      "file": "g6-bedroom.587.png",
+      "file": "g6-bedroom.1723.png",
       "rgbaFnv1a": "437c8a18",
-      "pngSha256": "02eb105c229ffa49a687a6a34edba229202de35164484ac67d2db156d28df875"
+      "pngSha256": "02eb105c229ffa49a687a6a34edba229202de35164484ac67d2db156d28df875",
+      "camera": [
+        0,
+        0
+      ],
+      "player": {
+        "tile": [
+          3,
+          4
+        ],
+        "pixel": [
+          48,
+          64
+        ],
+        "facing": 2,
+        "phase": 0,
+        "image": "assets/characters/player-adventurer-idle-2.png",
+        "height": 32
+      }
+    },
+    {
+      "name": "downstairs-mom",
+      "frame": 1951,
+      "map": "spyder_downstairs",
+      "position": [
+        3,
+        6
+      ],
+      "file": "g6-downstairs-mom.1951.png",
+      "rgbaFnv1a": "d39d7b7e",
+      "pngSha256": "a430bf1404c085ab0b7283a2fa722bf1e506299bd4b461915ee3f4bd37e8aa8d",
+      "camera": [
+        0,
+        0
+      ],
+      "player": {
+        "tile": [
+          3,
+          6
+        ],
+        "pixel": [
+          48,
+          96
+        ],
+        "facing": 3,
+        "phase": 0,
+        "image": "assets/characters/player-adventurer-idle-3.png",
+        "height": 32
+      },
+      "actor": {
+        "id": "npc_spyder_papertown_mom",
+        "tile": [
+          4,
+          6
+        ],
+        "pixel": [
+          64,
+          96
+        ],
+        "facing": 0,
+        "phase": 0,
+        "sprite": "npc.homemaker",
+        "image": "assets/characters/npc-npc-homemaker-idle-0.png",
+        "height": 32
+      }
     },
     {
       "name": "paper-town",
-      "frame": 1373,
+      "frame": 2017,
       "map": "spyder_paper_town",
       "position": [
-        21,
-        9
+        10,
+        8
       ],
-      "file": "g6-paper-town.1373.png",
-      "rgbaFnv1a": "f8b80b35",
-      "pngSha256": "824d35825a912e9a9f05c221614f8a01f677dce4b89d321e770e92e5aa6db1ea"
+      "file": "g6-paper-town.2017.png",
+      "rgbaFnv1a": "4380c25c",
+      "pngSha256": "5a43f4c6939d3addba62e32e414bce0e4326c1df8d1e404860129f9087fa8d27",
+      "camera": [
+        0,
+        0
+      ],
+      "player": {
+        "tile": [
+          10,
+          8
+        ],
+        "pixel": [
+          160,
+          128
+        ],
+        "facing": 0,
+        "phase": 0,
+        "image": "assets/characters/player-adventurer-idle-0.png",
+        "height": 32
+      }
     },
     {
       "name": "route-1",
-      "frame": 1683,
+      "frame": 3409,
       "map": "spyder_route1",
       "position": [
         14,
         19
       ],
-      "file": "g6-route-1.1683.png",
+      "file": "g6-route-1.3409.png",
       "rgbaFnv1a": "aa358549",
-      "pngSha256": "a089d5b5ba2fadd051766f308308cd573cc011f9a6466619b1add230d5042da6"
+      "pngSha256": "a089d5b5ba2fadd051766f308308cd573cc011f9a6466619b1add230d5042da6",
+      "camera": [
+        0,
+        48
+      ],
+      "player": {
+        "tile": [
+          14,
+          19
+        ],
+        "pixel": [
+          224,
+          304
+        ],
+        "facing": 2,
+        "phase": 0,
+        "image": "assets/characters/player-adventurer-idle-2.png",
+        "height": 32
+      }
     }
   ]
 }
