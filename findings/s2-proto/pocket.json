@@ -1,0 +1,18 @@
+{
+  "$schema": "https://pocketjs.dev/schema/pocket-2.json",
+  "pocket": 2,
+  "id": "dev.lfkdsk.pocket-tuxemon-s2-proto",
+  "name": "s2-proto",
+  "title": "Scout S2 render prototype",
+  "version": "0.0.1",
+  "engine": { "capabilities": { "requires": ["input.buttons"], "enhances": ["display.viewport.live"] } },
+  "app": {
+    "entry": "findings/s2-proto/s2-proto.tsx",
+    "output": "s2-proto",
+    "framework": "solid",
+    "viewport": {
+      "fixed": { "logical": [480, 272], "presentation": "integer-fit" },
+      "dynamic": { "default": [960, 544], "min": [480, 272], "max": [4096, 4096] }
+    }
+  }
+}

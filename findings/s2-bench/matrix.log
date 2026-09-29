@@ -1,0 +1,13 @@
+done chunks classic_gym_pyra 480x272
+done chunks taba_town 480x272
+done chunks buddha_mountain 480x272
+done nodes classic_gym_pyra 480x272
+done nodes taba_town 480x272
+done nodes buddha_mountain 480x272
+done chunks classic_gym_pyra 960x544
+done chunks taba_town 960x544
+done chunks buddha_mountain 960x544
+done nodes classic_gym_pyra 960x544
+done nodes taba_town 960x544
+done nodes buddha_mountain 960x544
+exit=0

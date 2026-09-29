@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": { "noEmit": true },
+  "include": [
+    "*.ts",
+    "*.tsx",
+    "../../vendor/pocket-rpgkit/src",
+    "../../vendor/pocket-rpgkit/vendor/pocketjs/framework/src",
+    "../../vendor/pocket-rpgkit/vendor/pocketjs/contracts/spec"
+  ],
+  "exclude": [
+    "assets",
+    "../../vendor/pocket-rpgkit/vendor/pocketjs/framework/compiler",
+    "../../vendor/pocket-rpgkit/vendor/pocketjs/framework/src/service-client.ts",
+    "../../vendor/pocket-rpgkit/vendor/pocketjs/framework/src/media-service.ts"
+  ]
+}

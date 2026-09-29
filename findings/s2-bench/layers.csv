@@ -1,0 +1,1099 @@
+map,index,name,above,nonempty,cells
+37707_tower,0,Tile Layer 1,0,506,576
+37707_tower,1,Tile Layer 2,0,127,576
+37707_tower,2,Tile Layer 3,0,21,576
+37707_tower,3,Above player,1,134,576
+37707_town,0,Tile Layer 1,0,1536,1536
+37707_town,1,Tile Layer 2,0,868,1536
+37707_town,2,Tile Layer 3,0,70,1536
+37707_town,3,Tile Layer 4,1,432,1536
+37707_town,4,Above Player,1,7,1536
+37707_town_missing,0,Tile Layer 1,0,1536,1536
+37707_town_missing,1,Tile Layer 2,0,705,1536
+37707_town_missing,2,Tile Layer 3,0,40,1536
+37707_town_missing,3,Tile Layer 4,1,287,1536
+37707_town_missing,4,Above Player,1,6,1536
+azure_town,0,Tile Layer 1,0,2500,2500
+azure_town,1,Tile Layer 2,0,591,2500
+azure_town,2,Tile Layer 3,0,2,2500
+azure_town,3,Above Player,1,0,2500
+azure_town_hall,0,Tile Layer 1,0,600,600
+azure_town_hall,1,Tile Layer 2,0,87,600
+azure_town_hall,2,Tile Layer 3,0,0,600
+azure_town_hall,3,Above Player,1,0,600
+bedroom_test,0,Tile Layer 1,0,63,63
+bedroom_test,1,Tile Layer 2,0,28,63
+bedroom_test,2,Tile Layer 3,0,6,63
+bedroom_test,3,Above player,1,4,63
+buddha_mountain,0,Layer1 Mountain Terrain,0,10000,10000
+buddha_mountain,1,"Layer2 Signs, Plants, Statues",0,1182,10000
+buddha_mountain,2,Layer3 Extra Mountain,0,281,10000
+buddha_mountain,3,Above Player,1,0,10000
+candy_town,0,Tile Layer 1,0,1600,1600
+candy_town,1,Tile Layer 2,0,435,1600
+candy_town,2,Tile Layer 3,0,237,1600
+candy_town,3,Above Player,1,53,1600
+city1_mart_junkyard,0,Tile Layer 1,0,725,735
+city1_mart_junkyard,1,Tile Layer 2,0,98,735
+city1_mart_junkyard,2,Tile Layer 3,0,6,735
+city1_mart_junkyard,3,Above Player,1,2,735
+citypark,0,Tile Layer 1,0,1600,1600
+citypark,1,Tile Layer 2,0,163,1600
+citypark,2,Tile Layer 3,0,880,1600
+citypark,3,Above Player,1,5,1600
+citypark_house1,0,Tile Layer 2,0,80,80
+citypark_house1,1,Tile Layer 3,0,31,80
+citypark_house1,2,Tile Layer 4,0,0,80
+citypark_house1,3,Above player,1,0,80
+classic_aerolume_city,0,Tile Layer 1,0,800,800
+classic_aerolume_city,1,Tile Layer 2,0,12,800
+classic_aerolume_city,2,Tile Layer 3,0,0,800
+classic_aerolume_city,3,Tile Layer 4,1,0,800
+classic_aerolume_city,4,Above Player,1,0,800
+classic_gym_astra,0,Layer 1,0,400,400
+classic_gym_astra,1,Layer 2,0,3,400
+classic_gym_astra,2,Layer 3,0,0,400
+classic_gym_astra,3,Above Player,1,0,400
+classic_gym_bravion,0,Layer 1,0,400,400
+classic_gym_bravion,1,Layer 2,0,3,400
+classic_gym_bravion,2,Layer 3,0,0,400
+classic_gym_bravion,3,Above Player,1,0,400
+classic_gym_ferrum,0,Layer 1,0,400,400
+classic_gym_ferrum,1,Layer 2,0,3,400
+classic_gym_ferrum,2,Layer 3,0,0,400
+classic_gym_ferrum,3,Above Player,1,0,400
+classic_gym_granite,0,Layer 1,0,400,400
+classic_gym_granite,1,Layer 2,0,3,400
+classic_gym_granite,2,Layer 3,0,0,400
+classic_gym_granite,3,Above Player,1,0,400
+classic_gym_marin,0,Layer 1,0,400,400
+classic_gym_marin,1,Layer 2,0,3,400
+classic_gym_marin,2,Layer 3,0,0,400
+classic_gym_marin,3,Above Player,1,0,400
+classic_gym_mila,0,Layer 1,0,400,400
+classic_gym_mila,1,Layer 2,0,3,400
+classic_gym_mila,2,Layer 3,0,0,400
+classic_gym_mila,3,Above Player,1,0,400
+classic_gym_orion,0,Layer 1,0,400,400
+classic_gym_orion,1,Layer 2,0,3,400
+classic_gym_orion,2,Layer 3,0,0,400
+classic_gym_orion,3,Above Player,1,0,400
+classic_gym_pyra,0,Layer 1,0,400,400
+classic_gym_pyra,1,Layer 2,0,3,400
+classic_gym_pyra,2,Layer 3,0,0,400
+classic_gym_pyra,3,Above Player,1,0,400
+classic_gym_shade,0,Layer 1,0,400,400
+classic_gym_shade,1,Layer 2,0,3,400
+classic_gym_shade,2,Layer 3,0,0,400
+classic_gym_shade,3,Above Player,1,0,400
+classic_gym_sylva,0,Layer 1,0,400,400
+classic_gym_sylva,1,Layer 2,0,3,400
+classic_gym_sylva,2,Layer 3,0,0,400
+classic_gym_sylva,3,Above Player,1,0,400
+classic_gym_voltessa,0,Layer 1,0,400,400
+classic_gym_voltessa,1,Layer 2,0,3,400
+classic_gym_voltessa,2,Layer 3,0,0,400
+classic_gym_voltessa,3,Above Player,1,0,400
+classic_gym_vyre,0,Layer 1,0,400,400
+classic_gym_vyre,1,Layer 2,0,3,400
+classic_gym_vyre,2,Layer 3,0,0,400
+classic_gym_vyre,3,Above Player,1,0,400
+classic_gym_zephra,0,Layer 1,0,400,400
+classic_gym_zephra,1,Layer 2,0,3,400
+classic_gym_zephra,2,Layer 3,0,0,400
+classic_gym_zephra,3,Above Player,1,0,400
+classic_hearthrock_city,0,Tile Layer 1,0,800,800
+classic_hearthrock_city,1,Tile Layer 2,0,478,800
+classic_hearthrock_city,2,Tile Layer 3,0,12,800
+classic_hearthrock_city,3,Tile Layer 4,1,0,800
+classic_hearthrock_city,4,Above Player,1,36,800
+classic_route_1,0,Tile Layer 1,0,800,800
+classic_route_1,1,Tile Layer 2,0,625,800
+classic_route_1,2,Tile Layer 3,0,0,800
+classic_route_1,3,Tile Layer 4,1,0,800
+classic_route_1,4,Above Player,1,22,800
+classic_route_2,0,Tile Layer 1,0,800,800
+classic_route_2,1,Tile Layer 2,0,12,800
+classic_route_2,2,Tile Layer 3,0,0,800
+classic_route_2,3,Tile Layer 4,1,0,800
+classic_route_2,4,Above Player,1,0,800
+classic_route_3,0,Tile Layer 1,0,800,800
+classic_route_3,1,Tile Layer 2,0,80,800
+classic_route_3,2,Tile Layer 3,0,0,800
+classic_route_3,3,Tile Layer 4,1,0,800
+classic_route_3,4,Above Player,1,0,800
+classic_route_4,0,Tile Layer 1,0,800,800
+classic_route_4,1,Tile Layer 2,0,144,800
+classic_route_4,2,Tile Layer 3,0,0,800
+classic_route_4,3,Tile Layer 4,1,0,800
+classic_route_4,4,Above Player,1,0,800
+classic_route_5,0,Tile Layer 1,0,800,800
+classic_route_5,1,Tile Layer 2,0,12,800
+classic_route_5,2,Tile Layer 3,0,0,800
+classic_route_5,3,Tile Layer 4,1,0,800
+classic_route_5,4,Above Player,1,0,800
+classic_route_6,0,Tile Layer 1,0,800,800
+classic_route_6,1,Tile Layer 2,0,12,800
+classic_route_6,2,Tile Layer 3,0,0,800
+classic_route_6,3,Tile Layer 4,1,0,800
+classic_route_6,4,Above Player,1,0,800
+classic_route_7,0,Tile Layer 1,0,800,800
+classic_route_7,1,Tile Layer 2,0,16,800
+classic_route_7,2,Tile Layer 3,0,0,800
+classic_route_7,3,Tile Layer 4,1,0,800
+classic_route_7,4,Above Player,1,0,800
+classic_route_8,0,Tile Layer 1,0,800,800
+classic_route_8,1,Tile Layer 2,0,136,800
+classic_route_8,2,Tile Layer 3,0,0,800
+classic_route_8,3,Tile Layer 4,1,0,800
+classic_route_8,4,Above Player,1,0,800
+classic_steamshore_city,0,Tile Layer 1,0,800,800
+classic_steamshore_city,1,Tile Layer 2,0,352,800
+classic_steamshore_city,2,Tile Layer 3,0,0,800
+classic_steamshore_city,3,Tile Layer 4,1,0,800
+classic_steamshore_city,4,Above Player,1,26,800
+classic_stormpeak_city,0,Tile Layer 1,0,800,800
+classic_stormpeak_city,1,Tile Layer 2,0,259,800
+classic_stormpeak_city,2,Tile Layer 3,0,0,800
+classic_stormpeak_city,3,Tile Layer 4,1,0,800
+classic_stormpeak_city,4,Above Player,1,0,800
+classic_thornwood_city,0,Tile Layer 1,0,800,800
+classic_thornwood_city,1,Tile Layer 2,0,32,800
+classic_thornwood_city,2,Tile Layer 3,0,0,800
+classic_thornwood_city,3,Tile Layer 4,1,0,800
+classic_thornwood_city,4,Above Player,1,0,800
+classic_umbrastar_city,0,Tile Layer 1,0,800,800
+classic_umbrastar_city,1,Tile Layer 2,0,6,800
+classic_umbrastar_city,2,Tile Layer 3,0,0,800
+classic_umbrastar_city,3,Tile Layer 4,1,0,800
+classic_umbrastar_city,4,Above Player,1,0,800
+classic_valorhold_city,0,Tile Layer 1,0,800,800
+classic_valorhold_city,1,Tile Layer 2,0,520,800
+classic_valorhold_city,2,Tile Layer 3,0,0,800
+classic_valorhold_city,3,Tile Layer 4,1,0,800
+classic_valorhold_city,4,Above Player,1,84,800
+cotton_cafe,0,Tile Layer 1,0,144,144
+cotton_cafe,1,Tile Layer 5,0,49,144
+cotton_cafe,2,Tile Layer 4,0,9,144
+cotton_cafe,3,Above Player,1,17,144
+cotton_cafe_basement,0,Tile Layer 1,0,144,144
+cotton_cafe_basement,1,Tile Layer 5,0,38,144
+cotton_cafe_basement,2,Tile Layer 4,0,39,144
+cotton_cafe_basement,3,Above Player,1,10,144
+cotton_cathedral,0,Tile Layer 1,0,143,143
+cotton_cathedral,1,Tile Layer 2,0,34,143
+cotton_cathedral,2,Tile Layer 3,0,4,143
+cotton_cathedral,3,Above player,1,5,143
+cotton_daycare,0,Layer 1,0,108,108
+cotton_daycare,1,Layer 2,0,72,108
+cotton_daycare,2,Layer 3,0,42,108
+cotton_daycare,3,Above Player,1,7,108
+cotton_misa_house,0,Tile Layer 1,0,63,63
+cotton_misa_house,1,Tile Layer 2,0,24,63
+cotton_misa_house,2,Tile Layer 3,0,3,63
+cotton_misa_house,3,Above Player,1,4,63
+cotton_misa_house_upstairs,0,Tile Layer 1,0,63,63
+cotton_misa_house_upstairs,1,Tile Layer 2,0,13,63
+cotton_misa_house_upstairs,2,Tile Layer 3,0,2,63
+cotton_misa_house_upstairs,3,Above Player,1,0,63
+cotton_scoop,0,Layer 1,0,143,143
+cotton_scoop,1,Layer 2,0,58,143
+cotton_scoop,2,Layer 3,0,5,143
+cotton_scoop,3,Above Player,1,14,143
+cotton_town,0,Tile Layer 1,0,1600,1600
+cotton_town,1,Tile Layer 2,0,685,1600
+cotton_town,2,Tile Layer 3,0,130,1600
+cotton_town,3,Above Player,1,195,1600
+cotton_underground,0,Tile Layer 1,0,1600,1600
+cotton_underground,1,Tile Layer 2,0,332,1600
+cotton_underground,2,Tile Layer 3,0,2,1600
+cotton_underground,3,Above Player,1,0,1600
+dojo1,0,Tile Layer 1,0,288,288
+dojo1,1,Tile Layer 2,0,8,288
+dojo1,2,Tile Layer 3,0,33,288
+dojo1,3,Above Player,1,17,288
+dojo2,0,Layer 1,0,81,288
+dojo2,1,Layer 2,0,170,288
+dojo2,2,Layer 3,0,0,288
+dojo2,3,Above Player,1,1,288
+dojo3,0,Tile Layer 1,0,81,288
+dojo3,1,Tile Layer 2,0,169,288
+dojo3,2,Tile Layer 3,0,0,288
+dojo3,3,Above Player,1,0,288
+downstairs_test,0,Tile Layer 1,0,63,63
+downstairs_test,1,Tile Layer 2,0,31,63
+downstairs_test,2,Tile Layer 3,0,5,63
+downstairs_test,3,Above player,1,4,63
+dragonscave,0,Tile Layer 1,0,800,800
+dragonscave,1,Tile Layer 2,0,27,800
+dragonscave,2,Tile Layer 3,0,37,800
+dragonscave,3,Tile Layer 4,1,6,800
+dragonscave,4,Above Player,1,599,800
+dryadsgrove,0,Tile Layer 1,0,800,800
+dryadsgrove,1,Tile Layer 2,0,386,800
+dryadsgrove,2,Tile Layer 3,0,25,800
+dryadsgrove,3,Above Player,1,38,800
+eclipse_crystal_bank1,0,Tile Layer 1,0,294,294
+eclipse_crystal_bank1,1,Tile Layer 2,0,140,294
+eclipse_crystal_bank1,2,Tile Layer 3,0,55,294
+eclipse_crystal_bank1,3,Above Player,1,1,294
+eclipse_crystal_bank2,0,Tile Layer 1,0,294,294
+eclipse_crystal_bank2,1,Tile Layer 2,0,106,294
+eclipse_crystal_bank2,2,Tile Layer 3,0,73,294
+eclipse_crystal_bank2,3,Above Player,1,0,294
+eclipse_crystal_bank3,0,Tile Layer 1,0,294,294
+eclipse_crystal_bank3,1,Tile Layer 2,0,108,294
+eclipse_crystal_bank3,2,Tile Layer 3,0,99,294
+eclipse_crystal_bank3,3,Tile Layer 4,1,22,294
+eclipse_crystal_center,0,Tile Layer 1,0,143,143
+eclipse_crystal_center,1,Tile Layer 2,0,30,143
+eclipse_crystal_center,2,Tile Layer 3,0,4,143
+eclipse_crystal_center,3,Above player,1,5,143
+eclipse_crystal_town,0,Tile Layer 1,0,800,800
+eclipse_crystal_town,1,Tile Layer 2,0,516,800
+eclipse_crystal_town,2,Tile Layer 3,0,0,800
+eclipse_crystal_town,3,Above Player,1,13,800
+eclipse_crystal_town_cafe,0,Tile Layer 1,0,144,144
+eclipse_crystal_town_cafe,1,Tile Layer 2,0,40,144
+eclipse_crystal_town_cafe,2,Tile Layer 3,0,0,144
+eclipse_crystal_town_cafe,3,Above Player,1,13,144
+eclipse_crystal_town_house,0,Tile Layer 1,0,72,72
+eclipse_crystal_town_house,1,Tile Layer 2,0,25,72
+eclipse_crystal_town_house,2,Tile Layer 3,0,4,72
+eclipse_crystal_town_house,3,Above player,1,4,72
+eclipse_lion_mountain_high,0,Tile Layer 1,0,1600,1600
+eclipse_lion_mountain_high,1,Tile Layer 2,0,455,1600
+eclipse_lion_mountain_high,2,Tile Layer 3,0,0,1600
+eclipse_lion_mountain_high,3,Above Player,1,0,1600
+eclipse_lion_mountain_low,0,Tile Layer 1,0,800,800
+eclipse_lion_mountain_low,1,Tile Layer 2,0,303,800
+eclipse_lion_mountain_low,2,Tile Layer 3,0,0,800
+eclipse_lion_mountain_low,3,Above Player,1,0,800
+eclipse_lion_mountain_middle,0,Tile Layer 1,0,1600,1600
+eclipse_lion_mountain_middle,1,Tile Layer 2,0,573,1600
+eclipse_lion_mountain_middle,2,Tile Layer 3,0,0,1600
+eclipse_lion_mountain_middle,3,Above Player,1,0,1600
+eclipse_obsidian_center,0,Tile Layer 1,0,143,143
+eclipse_obsidian_center,1,Tile Layer 2,0,30,143
+eclipse_obsidian_center,2,Tile Layer 3,0,4,143
+eclipse_obsidian_center,3,Above player,1,5,143
+eclipse_obsidian_town,0,Tile Layer 1,0,800,800
+eclipse_obsidian_town,1,Tile Layer 2,0,356,800
+eclipse_obsidian_town,2,Tile Layer 3,0,11,800
+eclipse_obsidian_town,3,Above Player,1,0,800
+eclipse_obsidian_town_house,0,Tile Layer 1,0,72,72
+eclipse_obsidian_town_house,1,Tile Layer 2,0,19,72
+eclipse_obsidian_town_house,2,Tile Layer 3,0,0,72
+eclipse_obsidian_town_house,3,Above player,1,0,72
+eclipse_park,0,Tile Layer 1,0,1600,1600
+eclipse_park,1,Tile Layer 2,0,1291,1600
+eclipse_park,2,Tile Layer 3,0,67,1600
+eclipse_park,3,Above Player,1,0,1600
+eclipse_park_cabin,0,Tile Layer 1,0,60,60
+eclipse_park_cabin,1,Tile Layer 2,0,15,60
+eclipse_park_cabin,2,Tile Layer 3,0,0,60
+eclipse_park_cabin,3,Above player,1,0,60
+eclipse_park_cave,0,Tile Layer 1,0,455,455
+eclipse_park_cave,1,Tile Layer 2,0,421,455
+eclipse_park_cave,2,Tile Layer 3,0,0,455
+eclipse_park_cave,3,Above Player,1,0,455
+eclipse_park_entrance,0,Layer 1,0,100,100
+eclipse_park_entrance,1,Layer 2,0,46,100
+eclipse_park_entrance,2,Layer 3,0,0,100
+eclipse_park_entrance,3,Above Player,1,0,100
+eclipse_park_south,0,Tile Layer 1,0,2400,2400
+eclipse_park_south,1,Tile Layer 2,0,1808,2400
+eclipse_park_south,2,Tile Layer 3,0,0,2400
+eclipse_park_south,3,Above Player,1,6,2400
+eclipse_route7,0,Tile Layer 1,0,1600,1600
+eclipse_route7,1,Tile Layer 2,0,1365,1600
+eclipse_route7,2,Tile Layer 3,0,2,1600
+eclipse_route7,3,Above Player,1,1,1600
+eclipse_routef,0,Tile Layer 1,0,800,800
+eclipse_routef,1,Tile Layer 2,0,799,800
+eclipse_routef,2,Tile Layer 3,0,66,800
+eclipse_routef,3,Above Player,1,0,800
+eclipse_routeg,0,Tile Layer 1,0,1600,1600
+eclipse_routeg,1,Tile Layer 2,0,932,1600
+eclipse_routeg,2,Tile Layer 3,0,5,1600
+eclipse_routeg,3,Above Player,1,6,1600
+eclipse_routeh,0,Tile Layer 1,0,1600,1600
+eclipse_routeh,1,Tile Layer 2,0,991,1600
+eclipse_routeh,2,Tile Layer 3,0,0,1600
+eclipse_routeh,3,Above Player,1,0,1600
+eclipse_routei,0,Tile Layer 1,0,1600,1600
+eclipse_routei,1,Tile Layer 2,0,1024,1600
+eclipse_routei,2,Tile Layer 3,0,54,1600
+eclipse_routei,3,Above Player,1,0,1600
+flower_city,0,Layer 1,0,1600,1600
+flower_city,1,Layer 2,0,92,1600
+flower_city,2,Layer 3,0,405,1600
+flower_city,3,Above Player,1,328,1600
+gadget_store1,0,Tile Layer 1,0,260,260
+gadget_store1,1,Tile Layer 2,0,1,260
+gadget_store1,2,Tile Layer 3,0,0,260
+gadget_store1,3,Above Player,1,1,260
+gaming_hall,0,Layer 1,0,279,304
+gaming_hall,1,Layer 2,0,196,304
+gaming_hall,2,Layer 3,0,18,304
+gaming_hall,3,Above Player,1,6,304
+healing_center,0,Tile Layer 1,0,143,143
+healing_center,1,Tile Layer 2,0,30,143
+healing_center,2,Tile Layer 3,0,4,143
+healing_center,3,Above player,1,5,143
+leather_scoop,0,Layer 1,0,143,143
+leather_scoop,1,Layer 2,0,65,143
+leather_scoop,2,Layer 3,0,6,143
+leather_scoop,3,Above Player,1,9,143
+leather_shaft1,0,Tile Layer 1,0,225,225
+leather_shaft1,1,Tile Layer 2,0,54,225
+leather_shaft1,2,Tile Layer 3,0,2,225
+leather_shaft1,3,Above Player,1,23,225
+leather_shaft2,0,Tile Layer 1,0,100,100
+leather_shaft2,1,Tile Layer 2,0,42,100
+leather_shaft2,2,Tile Layer 3,0,9,100
+leather_shaft2,3,Above player,1,4,100
+leather_town,0,Layer 1,0,1600,1600
+leather_town,1,Layer 2,0,294,1600
+leather_town,2,Layer 3,0,699,1600
+leather_town,3,Above Player,1,97,1600
+manhattan_beach,0,Tile Layer 1,0,792,1200
+manhattan_beach,1,Tile Layer 2,0,741,1200
+manhattan_beach,2,Tile Layer 3,0,67,1200
+manhattan_beach,3,Above Player,1,0,1200
+mansion,0,Tile Layer 1,0,324,324
+mansion,1,Tile Layer 2,0,148,324
+mansion,2,Tile Layer 3,0,133,324
+mansion,3,Above Player,1,3,324
+mansion_basement,0,Tile Layer 1,0,490,528
+mansion_basement,1,Tile Layer 2,0,213,528
+mansion_basement,2,Tile Layer 3,0,72,528
+mansion_basement,3,Above Player,1,4,528
+mansion_top,0,Tile Layer 1,0,437,437
+mansion_top,1,Tile Layer 2,0,193,437
+mansion_top,2,Tile Layer 3,0,33,437
+mansion_top,3,Tile Layer 4,1,0,437
+mansion_top,4,Tile Layer 5,1,1,437
+maple_bedroom,0,Tile Layer 1,0,63,63
+maple_bedroom,1,Tile Layer 2,0,18,63
+maple_bedroom,2,Tile Layer 3,0,3,63
+maple_bedroom,3,Above player,1,2,63
+maple_house,0,Tile Layer 1,0,143,143
+maple_house,1,Tile Layer 2,0,36,143
+maple_house,2,Tile Layer 3,0,8,143
+maple_house,3,Above Player,1,3,143
+omnichannel0,0,Tile Layer 1,0,294,294
+omnichannel0,1,Tile Layer 2,0,157,294
+omnichannel0,2,Tile Layer 3,0,0,294
+omnichannel0,3,Above Player,1,0,294
+omnichannel1,0,Tile Layer 1,0,294,294
+omnichannel1,1,Tile Layer 2,0,138,294
+omnichannel1,2,Tile Layer 3,0,0,294
+omnichannel1,3,Above Player,1,0,294
+omnichannel2,0,Tile Layer 1,0,294,294
+omnichannel2,1,Tile Layer 2,0,136,294
+omnichannel2,2,Tile Layer 3,0,0,294
+omnichannel2,3,Above Player,1,0,294
+omnichannel3,0,Tile Layer 1,0,294,294
+omnichannel3,1,Tile Layer 2,0,135,294
+omnichannel3,2,Tile Layer 3,0,0,294
+omnichannel3,3,Above Player,1,0,294
+omnichannel4,0,Tile Layer 1,0,294,294
+omnichannel4,1,Tile Layer 2,0,129,294
+omnichannel4,2,Tile Layer 3,0,0,294
+omnichannel4,3,Above Player,1,0,294
+player_house_bedroom,0,Tile Layer 1,0,63,63
+player_house_bedroom,1,Tile Layer 2,0,26,63
+player_house_bedroom,2,Tile Layer 3,0,2,63
+player_house_bedroom,3,Above player,1,4,63
+player_house_downstairs,0,Tile Layer 1,0,63,63
+player_house_downstairs,1,Tile Layer 2,0,36,63
+player_house_downstairs,2,Tile Layer 3,0,1,63
+player_house_downstairs,3,Above player,1,1,63
+professor_lab,0,Tile Layer 1,0,234,234
+professor_lab,1,Tile Layer 2,0,61,234
+professor_lab,2,Tile Layer 3,0,0,234
+professor_lab,3,Above player,1,14,234
+professor_lab,4,Above Player 2,1,0,234
+route1,0,Tile Layer 1,0,2478,2478
+route1,1,Tile Layer 2,0,1418,2478
+route1,2,Tile Layer 3,0,250,2478
+route1,3,Above Player,1,784,2478
+route1_sanglorian,0,Tile Layer 1,0,800,800
+route1_sanglorian,1,Tile Layer 2,0,527,800
+route1_sanglorian,2,Tile Layer 3,0,415,800
+route1_sanglorian,3,Above Player,1,16,800
+route2,0,Layer 1,0,800,800
+route2,1,Layer 2,0,105,800
+route2,2,Layer 3,0,346,800
+route2,3,Above Player,1,21,800
+route3,0,Layer 1,0,1600,1600
+route3,1,Layer 2,0,406,1600
+route3,2,Layer 3,0,446,1600
+route3,3,Above Player,1,20,1600
+route4,0,Tile Layer 1,0,800,800
+route4,1,Tile Layer 2,0,508,800
+route4,2,Tile Layer 3,0,4,800
+route4,3,Above Player,1,0,800
+route5,0,Tile Layer 1,0,800,800
+route5,1,Long Grass,0,394,800
+route5,2,Path,0,353,800
+route5,3,Gravestones,1,294,800
+route5,4,Tile Layer 8,1,2,800
+route6,0,Tile Layer 1,0,800,800
+route6,1,Tile Layer 2,0,329,800
+route6,2,Tile Layer 3,0,0,800
+route6,3,Above Player,1,0,800
+routea,0,Layer 1,0,800,800
+routea,1,Layer 2,0,380,800
+routea,2,Layer 3,0,44,800
+routea,3,Above Player,1,83,800
+routec,0,Tile Layer 1,0,797,800
+routec,1,Tile Layer 2,0,18,800
+routec,2,Tile Layer 3,0,146,800
+routec,3,Above Player,1,0,800
+rubberduck_cave_01,0,base_floor,0,5679,5680
+rubberduck_cave_01,1,under_player,0,80,5680
+rubberduck_cave_01,2,under_player_2,0,20,5680
+rubberduck_cave_01,3,over_player_1,1,1549,5680
+rubberduck_cave_01,4,over_player_2,1,405,5680
+rubberduck_city_01,0,Lower_1,0,4130,4130
+rubberduck_city_01,1,Lower_2,0,1765,4130
+rubberduck_city_01,2,Lower_3,0,260,4130
+rubberduck_city_01,3,Above_1,1,632,4130
+rubberduck_city_01,4,Above_2,1,19,4130
+rubberduck_route_01,0,Lower_1,0,2438,2438
+rubberduck_route_01,1,Lower_2,0,1118,2438
+rubberduck_route_01,2,Lower_3,0,236,2438
+rubberduck_route_01,3,Above_1,1,304,2438
+rubberduck_route_01,4,Above_2,1,399,2438
+russell_practice_1,0,Tile Layer 1,0,420,420
+russell_practice_1,1,Tile Layer 2,0,138,420
+russell_practice_1,2,Tile Layer 3,1,108,420
+russell_practice_1,3,Tile Layer 4,1,108,420
+scoop1,0,Tile Layer 1,0,315,315
+scoop1,1,Tile Layer 2,0,154,315
+scoop1,2,Tile Layer 5,0,2,315
+scoop1,3,Above Player,1,8,315
+scoop2,0,Tile Layer 1,0,35,40
+scoop2,1,Tile Layer 2,0,8,40
+scoop2,2,Tile Layer 3,0,0,40
+scoop2,3,Above Player,1,0,40
+scoop3,0,Tile Layer 1,0,144,144
+scoop3,1,Tile Layer 2,0,44,144
+scoop3,2,Tile Layer 3,0,2,144
+scoop3,3,Tile Layer 4,1,11,144
+scoop4,0,Tile Layer 1,0,264,264
+scoop4,1,Tile Layer 2,0,81,264
+scoop4,2,Tile Layer 3,0,5,264
+scoop4,3,Above Player,1,0,264
+sphalian_center,0,Tile Layer 1,0,143,143
+sphalian_center,1,Tile Layer 2,0,31,143
+sphalian_center,2,Tile Layer 3,0,4,143
+sphalian_center,3,Above player,1,6,143
+sphalian_town,0,Tile Layer 1,0,575,575
+sphalian_town,1,Tile Layer 2,0,429,575
+sphalian_town,2,Tile Layer 3,0,0,575
+sphalian_town,3,Above Player,1,1,575
+sphalian_town_house,0,Tile Layer 1,0,63,99
+sphalian_town_house,1,Tile Layer 2,0,33,99
+sphalian_town_house,2,Tile Layer 3,0,5,99
+sphalian_town_house,3,Above player,1,12,99
+spyder_bedroom,0,Tile Layer 1,0,63,63
+spyder_bedroom,1,Tile Layer 2,0,28,63
+spyder_bedroom,2,Tile Layer 3,0,6,63
+spyder_bedroom,3,Above player,1,4,63
+spyder_brideswood,0,Tile Layer 1,0,1600,1600
+spyder_brideswood,1,Tile Layer 2,0,1152,1600
+spyder_brideswood,2,Tile Layer 3,0,0,1600
+spyder_brideswood,3,Above Player,1,538,1600
+spyder_candy_cafe,0,Tile Layer 1,0,144,144
+spyder_candy_cafe,1,Tile Layer 2,0,48,144
+spyder_candy_cafe,2,Tile Layer 3,0,0,144
+spyder_candy_cafe,3,Above Player,1,11,144
+spyder_candy_center,0,Tile Layer 1,0,220,220
+spyder_candy_center,1,Tile Layer 2,0,75,220
+spyder_candy_center,2,Tile Layer 3,0,20,220
+spyder_candy_center,3,Above player,1,9,220
+spyder_candy_hospital1,0,Tile Layer 1,0,400,400
+spyder_candy_hospital1,1,Tile Layer 2,0,36,400
+spyder_candy_hospital1,2,Tile Layer 3,0,86,400
+spyder_candy_hospital1,3,Tile Layer 4,1,4,400
+spyder_candy_hospital2,0,Tile Layer 1,0,400,400
+spyder_candy_hospital2,1,Tile Layer 2,0,40,400
+spyder_candy_hospital2,2,Tile Layer 3,0,105,400
+spyder_candy_hospital2,3,Tile Layer 4,1,6,400
+spyder_candy_hospital3,0,Tile Layer 1,0,240,240
+spyder_candy_hospital3,1,Tile Layer 2,0,16,240
+spyder_candy_hospital3,2,Tile Layer 3,0,12,240
+spyder_candy_hospital3,3,Above Player,1,12,240
+spyder_candy_house1,0,Tile Layer 2,0,80,80
+spyder_candy_house1,1,Tile Layer 3,0,17,80
+spyder_candy_house1,2,Tile Layer 4,0,8,80
+spyder_candy_house1,3,Above player,1,8,80
+spyder_candy_house2,0,Tile Layer 1,0,80,80
+spyder_candy_house2,1,Tile Layer 2,0,41,80
+spyder_candy_house2,2,Tile Layer 3,0,12,80
+spyder_candy_house2,3,Above player,1,0,80
+spyder_candy_house3,0,Tile Layer 2,0,80,80
+spyder_candy_house3,1,Tile Layer 3,0,41,80
+spyder_candy_house3,2,Tile Layer 4,0,2,80
+spyder_candy_house3,3,Above player,1,10,80
+spyder_candy_inn1,0,Tile Layer 1,0,209,240
+spyder_candy_inn1,1,Tile Layer 4,0,71,240
+spyder_candy_inn1,2,Tile Layer 5,0,2,240
+spyder_candy_inn1,3,Above Player,1,16,240
+spyder_candy_inn2,0,Tile Layer 1,0,212,240
+spyder_candy_inn2,1,Tile Layer 2,0,51,240
+spyder_candy_inn2,2,Tile Layer 3,0,0,240
+spyder_candy_inn2,3,Above Player,1,0,240
+spyder_candy_port,0,Tile Layer 1,0,800,800
+spyder_candy_port,1,Tile Layer 2,0,347,800
+spyder_candy_port,2,Tile Layer 3,0,1,800
+spyder_candy_port,3,Above Player,1,9,800
+spyder_candy_scoop,0,Layer 1,0,143,143
+spyder_candy_scoop,1,Layer 2,0,61,143
+spyder_candy_scoop,2,Layer 3,0,5,143
+spyder_candy_scoop,3,Above Player,1,14,143
+spyder_candy_town,0,Tile Layer 1,0,1600,1600
+spyder_candy_town,1,Tile Layer 4,0,459,1600
+spyder_candy_town,2,Tile Layer 2,0,194,1600
+spyder_candy_town,3,Above Player,1,121,1600
+spyder_citypark,0,Tile Layer 1,0,1600,1600
+spyder_citypark,1,Tile Layer 2,0,230,1600
+spyder_citypark,2,Tile Layer 3,0,816,1600
+spyder_citypark,3,Above Player,1,6,1600
+spyder_citypark_house1,0,Tile Layer 2,0,80,80
+spyder_citypark_house1,1,Tile Layer 3,0,31,80
+spyder_citypark_house1,2,Tile Layer 4,0,0,80
+spyder_citypark_house1,3,Above player,1,0,80
+spyder_cotton_artshop,0,Layer 1,0,226,242
+spyder_cotton_artshop,1,Layer 2,0,22,242
+spyder_cotton_artshop,2,Layer 3,0,5,242
+spyder_cotton_artshop,3,Above Player,1,3,242
+spyder_cotton_cafe,0,Tile Layer 1,0,144,144
+spyder_cotton_cafe,1,Tile Layer 5,0,46,144
+spyder_cotton_cafe,2,Tile Layer 4,0,9,144
+spyder_cotton_cafe,3,Above Player,1,17,144
+spyder_cotton_house1,0,Tile Layer 2,0,80,80
+spyder_cotton_house1,1,Tile Layer 3,0,22,80
+spyder_cotton_house1,2,Tile Layer 4,0,9,80
+spyder_cotton_house1,3,Above player,1,0,80
+spyder_cotton_house2,0,Tile Layer 2,0,80,80
+spyder_cotton_house2,1,Tile Layer 3,0,30,80
+spyder_cotton_house2,2,Tile Layer 4,0,16,80
+spyder_cotton_house2,3,Above player,1,0,80
+spyder_cotton_scoop,0,Layer 1,0,143,143
+spyder_cotton_scoop,1,Layer 2,0,61,143
+spyder_cotton_scoop,2,Layer 3,0,5,143
+spyder_cotton_scoop,3,Above Player,1,14,143
+spyder_cotton_town,0,Tile Layer 1,0,1600,1600
+spyder_cotton_town,1,Tile Layer 2,0,684,1600
+spyder_cotton_town,2,Tile Layer 3,0,121,1600
+spyder_cotton_town,3,Above Player,1,182,1600
+spyder_cotton_tunnel,0,Lowest Level,0,800,800
+spyder_cotton_tunnel,1,Pit,0,205,800
+spyder_cotton_tunnel,2,Walls,0,498,800
+spyder_cotton_tunnel,3,Above Player,1,0,800
+spyder_datacenter,0,Tile Layer 1,0,400,400
+spyder_datacenter,1,Tile Layer 2,0,126,400
+spyder_datacenter,2,Tile Layer 3,0,0,400
+spyder_datacenter,3,Tile Layer 4,1,0,400
+spyder_diamond_hill,0,Tile Layer 1,0,1200,1200
+spyder_diamond_hill,1,Tile Layer 2,0,490,1200
+spyder_diamond_hill,2,Tile Layer 3,0,0,1200
+spyder_diamond_hill,3,Above Player,1,0,1200
+spyder_dojo1,0,Tile Layer 1,0,288,288
+spyder_dojo1,1,Tile Layer 2,0,40,288
+spyder_dojo1,2,Tile Layer 3,0,9,288
+spyder_dojo1,3,Above Player,1,9,288
+spyder_dojo2,0,Layer 1,0,81,288
+spyder_dojo2,1,Layer 2,0,170,288
+spyder_dojo2,2,Layer 3,0,0,288
+spyder_dojo2,3,Above Player,1,1,288
+spyder_dojo3,0,Layer 1,0,81,288
+spyder_dojo3,1,Layer 2,0,170,288
+spyder_dojo3,2,Layer 3,0,0,288
+spyder_dojo3,3,Above Player,1,1,288
+spyder_dojo4,0,Tile Layer 1,0,55,288
+spyder_dojo4,1,Tile Layer 2,0,183,288
+spyder_dojo4,2,Tile Layer 3,0,0,288
+spyder_dojo4,3,Above Player,1,0,288
+spyder_downstairs,0,Tile Layer 1,0,63,63
+spyder_downstairs,1,Tile Layer 2,0,31,63
+spyder_downstairs,2,Tile Layer 3,0,5,63
+spyder_downstairs,3,Above player,1,4,63
+spyder_dragonscave,0,Tile Layer 1,0,800,800
+spyder_dragonscave,1,Tile Layer 2,0,18,800
+spyder_dragonscave,2,Tile Layer 3,0,57,800
+spyder_dragonscave,3,Tile Layer 4,1,0,800
+spyder_dragonscave,4,Above Player,1,593,800
+spyder_dryadsgrove,0,Tile Layer 1,0,1600,1600
+spyder_dryadsgrove,1,Tile Layer 2,0,697,1600
+spyder_dryadsgrove,2,Tile Layer 3,0,0,1600
+spyder_dryadsgrove,3,Above Player,1,183,1600
+spyder_flower_center,0,Tile Layer 1,0,143,143
+spyder_flower_center,1,Tile Layer 2,0,30,143
+spyder_flower_center,2,Tile Layer 3,0,4,143
+spyder_flower_center,3,Above player,1,5,143
+spyder_flower_city,0,Layer 1,0,1600,1600
+spyder_flower_city,1,Layer 2,0,421,1600
+spyder_flower_city,2,Layer 3,0,244,1600
+spyder_flower_city,3,Above Player,1,228,1600
+spyder_flower_house1,0,Tile Layer 2,0,80,80
+spyder_flower_house1,1,Tile Layer 3,0,20,80
+spyder_flower_house1,2,Tile Layer 4,0,32,80
+spyder_flower_house1,3,Above player,1,0,80
+spyder_flower_house2,0,Tile Layer 2,0,80,80
+spyder_flower_house2,1,Tile Layer 3,0,27,80
+spyder_flower_house2,2,Tile Layer 4,0,4,80
+spyder_flower_house2,3,Above player,1,1,80
+spyder_flower_petshop,0,Tile Layer 1,0,126,126
+spyder_flower_petshop,1,Tile Layer 2,0,40,126
+spyder_flower_petshop,2,Tile Layer 3,0,0,126
+spyder_flower_petshop,3,Tile Layer 4,1,4,126
+spyder_flower_petshop,4,Tile Layer 5,1,0,126
+spyder_flower_scoop,0,Layer 1,0,143,143
+spyder_flower_scoop,1,Layer 2,0,61,143
+spyder_flower_scoop,2,Layer 3,0,5,143
+spyder_flower_scoop,3,Above Player,1,14,143
+spyder_greenwash,0,Tile Layer 1,0,512,512
+spyder_greenwash,1,Tile Layer 2,0,82,512
+spyder_greenwash,2,Tile Layer 3,0,82,512
+spyder_greenwash,3,Tile Layer 4,1,9,512
+spyder_greenwash_greenhouse,0,Tile Layer 1,0,512,512
+spyder_greenwash_greenhouse,1,Tile Layer 2,0,267,512
+spyder_greenwash_greenhouse,2,Tile Layer 3,0,71,512
+spyder_greenwash_greenhouse,3,Tile Layer 4,1,43,512
+spyder_greenwash_greenhouse,4,Tile Layer 5,1,50,512
+spyder_greenwash_level2,0,Tile Layer 1,0,511,512
+spyder_greenwash_level2,1,Tile Layer 2,0,196,512
+spyder_greenwash_level2,2,Tile Layer 3,0,0,512
+spyder_greenwash_level2,3,Above Player,1,58,512
+spyder_greenwash_level3,0,Tile Layer 1,0,224,224
+spyder_greenwash_level3,1,Tile Layer 2,0,100,224
+spyder_greenwash_level3,2,Tile Layer 3,0,7,224
+spyder_greenwash_level3,3,Above Player,1,4,224
+spyder_healing_center,0,Tile Layer 1,0,143,143
+spyder_healing_center,1,Tile Layer 2,0,30,143
+spyder_healing_center,2,Tile Layer 3,0,4,143
+spyder_healing_center,3,Above player,1,5,143
+spyder_leather_center,0,Tile Layer 1,0,143,143
+spyder_leather_center,1,Tile Layer 2,0,30,143
+spyder_leather_center,2,Tile Layer 3,0,4,143
+spyder_leather_center,3,Above player,1,5,143
+spyder_leather_gym,0,Layer 1,0,275,275
+spyder_leather_gym,1,Layer 2,0,85,275
+spyder_leather_gym,2,Layer 3,0,64,275
+spyder_leather_gym,3,Above Player,1,5,275
+spyder_leather_house1,0,Tile Layer 2,0,80,80
+spyder_leather_house1,1,Tile Layer 3,0,8,80
+spyder_leather_house1,2,Tile Layer 4,0,32,80
+spyder_leather_house1,3,Above player,1,4,80
+spyder_leather_house2,0,Tile Layer 2,0,80,80
+spyder_leather_house2,1,Tile Layer 3,0,28,80
+spyder_leather_house2,2,Tile Layer 4,0,3,80
+spyder_leather_house2,3,Above player,1,0,80
+spyder_leather_museum,0,Layer 1,0,303,330
+spyder_leather_museum,1,Layer 2,0,8,330
+spyder_leather_museum,2,Layer 3,0,43,330
+spyder_leather_museum,3,Layer 4,1,1,330
+spyder_leather_museum,4,Above Player,1,9,330
+spyder_leather_scoop,0,Layer 1,0,143,143
+spyder_leather_scoop,1,Layer 2,0,65,143
+spyder_leather_scoop,2,Layer 3,0,6,143
+spyder_leather_scoop,3,Above Player,1,10,143
+spyder_leather_shaft1,0,Tile Layer 1,0,225,225
+spyder_leather_shaft1,1,Tile Layer 2,0,54,225
+spyder_leather_shaft1,2,Tile Layer 3,0,2,225
+spyder_leather_shaft1,3,Above Player,1,23,225
+spyder_leather_shaft2,0,Tile Layer 1,0,100,100
+spyder_leather_shaft2,1,Tile Layer 2,0,42,100
+spyder_leather_shaft2,2,Tile Layer 3,0,9,100
+spyder_leather_shaft2,3,Above player,1,4,100
+spyder_leather_town,0,Layer 1,0,1600,1600
+spyder_leather_town,1,Layer 2,0,302,1600
+spyder_leather_town,2,Layer 3,0,627,1600
+spyder_leather_town,3,Above Player,1,113,1600
+spyder_leather_town,4,Above Player 2,1,5,1600
+spyder_mansion,0,Tile Layer 1,0,324,324
+spyder_mansion,1,Tile Layer 2,0,176,324
+spyder_mansion,2,Tile Layer 3,0,134,324
+spyder_mansion,3,Above Player,1,3,324
+spyder_mansion_basement,0,Tile Layer 1,0,490,528
+spyder_mansion_basement,1,Tile Layer 2,0,213,528
+spyder_mansion_basement,2,Tile Layer 3,0,72,528
+spyder_mansion_basement,3,Above Player,1,4,528
+spyder_mansion_top,0,Tile Layer 1,0,437,437
+spyder_mansion_top,1,Tile Layer 2,0,201,437
+spyder_mansion_top,2,Tile Layer 3,0,33,437
+spyder_mansion_top,3,Tile Layer 4,1,0,437
+spyder_mansion_top,4,Tile Layer 5,1,1,437
+spyder_nimrod_bottom,0,Tile Layer 1,0,324,360
+spyder_nimrod_bottom,1,Tile Layer 2,0,256,360
+spyder_nimrod_bottom,2,Tile Layer 3,0,17,360
+spyder_nimrod_bottom,3,Above Player,1,7,360
+spyder_nimrod_middle,0,Tile Layer 1,0,356,360
+spyder_nimrod_middle,1,Tile Layer 2,0,25,360
+spyder_nimrod_middle,2,Tile Layer 3,0,78,360
+spyder_nimrod_middle,3,Above Player,1,22,360
+spyder_nimrod_room,0,Tile Layer 1,0,63,63
+spyder_nimrod_room,1,Tile Layer 2,0,31,63
+spyder_nimrod_room,2,Tile Layer 3,0,14,63
+spyder_nimrod_room,3,Above player,1,0,63
+spyder_nimrod_top,0,Tile Layer 1,0,360,360
+spyder_nimrod_top,1,Tile Layer 2,0,53,360
+spyder_nimrod_top,2,Tile Layer 3,0,83,360
+spyder_nimrod_top,3,Above Player,1,9,360
+spyder_omnichannel1,0,Tile Layer 1,0,294,294
+spyder_omnichannel1,1,Tile Layer 2,0,91,294
+spyder_omnichannel1,2,Tile Layer 3,0,75,294
+spyder_omnichannel1,3,Above Player,1,0,294
+spyder_omnichannel2,0,Tile Layer 1,0,393,441
+spyder_omnichannel2,1,Tile Layer 2,0,123,441
+spyder_omnichannel2,2,Tile Layer 3,0,97,441
+spyder_omnichannel2,3,Above Player,1,0,441
+spyder_omnichannel3,0,Tile Layer 1,0,294,294
+spyder_omnichannel3,1,Tile Layer 2,0,92,294
+spyder_omnichannel3,2,Tile Layer 3,0,66,294
+spyder_omnichannel3,3,Above Player,1,0,294
+spyder_omnichannel4,0,Tile Layer 1,0,294,294
+spyder_omnichannel4,1,Tile Layer 2,0,124,294
+spyder_omnichannel4,2,Tile Layer 3,0,82,294
+spyder_omnichannel4,3,Tile Layer 4,1,9,294
+spyder_paper_daycare,0,Layer 1,0,126,126
+spyder_paper_daycare,1,Layer 2,0,78,126
+spyder_paper_daycare,2,Layer 3,0,42,126
+spyder_paper_daycare,3,Above Player,1,7,126
+spyder_paper_manor,0,Tile Layer 1,0,80,80
+spyder_paper_manor,1,Tile Layer 2,0,27,80
+spyder_paper_manor,2,Tile Layer 3,0,4,80
+spyder_paper_manor,3,Above player,1,2,80
+spyder_paper_rival_bedroom,0,Tile Layer 1,0,49,49
+spyder_paper_rival_bedroom,1,Tile Layer 2,0,29,49
+spyder_paper_rival_bedroom,2,Tile Layer 3,0,1,49
+spyder_paper_rival_bedroom,3,Above player,1,0,49
+spyder_paper_rival_downstairs,0,Tile Layer 1,0,104,132
+spyder_paper_rival_downstairs,1,Tile Layer 2,0,31,132
+spyder_paper_rival_downstairs,2,Tile Layer 3,0,1,132
+spyder_paper_rival_downstairs,3,Above player,1,0,132
+spyder_paper_rival_office,0,Tile Layer 1,0,49,49
+spyder_paper_rival_office,1,Tile Layer 2,0,20,49
+spyder_paper_rival_office,2,Tile Layer 3,0,4,49
+spyder_paper_rival_office,3,Above player,1,4,49
+spyder_paper_scoop,0,Tile Layer 1,0,143,143
+spyder_paper_scoop,1,Tile Layer 2,0,21,143
+spyder_paper_scoop,2,Tile Layer 3,0,4,143
+spyder_paper_scoop,3,Tile Layer 4,1,14,143
+spyder_paper_scoop,4,Above player,1,20,143
+spyder_paper_town,0,Tile Layer 1,0,800,800
+spyder_paper_town,1,Tile Layer 2,0,368,800
+spyder_paper_town,2,Tile Layer 3,0,263,800
+spyder_paper_town,3,Tile Layer 4,1,20,800
+spyder_paper_town,4,Above Player,1,56,800
+spyder_radiotower,0,Tile Layer 1,0,294,294
+spyder_radiotower,1,Tile Layer 2,0,37,294
+spyder_radiotower,2,Tile Layer 3,0,20,294
+spyder_radiotower,3,Tile Layer 4,1,8,294
+spyder_route1,0,Tile Layer 1,0,800,800
+spyder_route1,1,Tile Layer 2,0,410,800
+spyder_route1,2,Tile Layer 3,0,294,800
+spyder_route1,3,Tile Layer 4,1,40,800
+spyder_route1,4,Above Player,1,9,800
+spyder_route2,0,Layer 1,0,800,800
+spyder_route2,1,Layer 2,0,184,800
+spyder_route2,2,Layer 3,0,368,800
+spyder_route2,3,Layer 4,1,35,800
+spyder_route2,4,Above Player,1,4,800
+spyder_route3,0,Layer 1,0,1600,1600
+spyder_route3,1,Layer 2,0,436,1600
+spyder_route3,2,Layer 3,0,404,1600
+spyder_route3,3,Layer 4,1,2,1600
+spyder_route3,4,Above Player,1,15,1600
+spyder_route4,0,Tile Layer 1,0,800,800
+spyder_route4,1,Tile Layer 2,0,474,800
+spyder_route4,2,Tile Layer 3,0,4,800
+spyder_route4,3,Above Player,1,0,800
+spyder_route5,0,Tile Layer 1,0,800,800
+spyder_route5,1,Long Grass,0,415,800
+spyder_route5,2,Path,0,654,800
+spyder_route5,3,Tile Layer 5,1,12,800
+spyder_route5,4,Tile Layer 8,1,134,800
+spyder_route6,0,Tile Layer 1,0,800,800
+spyder_route6,1,Tile Layer 2,0,430,800
+spyder_route6,2,Tile Layer 3,0,0,800
+spyder_route6,3,Above Player,1,0,800
+spyder_routea,0,Layer 1,0,800,800
+spyder_routea,1,Layer 2,0,456,800
+spyder_routea,2,Layer 3,0,48,800
+spyder_routea,3,Above Player,1,18,800
+spyder_routeb,0,Tile Layer 1,0,800,800
+spyder_routeb,1,Tile Layer 2,0,572,800
+spyder_routeb,2,Tile Layer 3,0,1,800
+spyder_routeb,3,Above Player,1,1,800
+spyder_routec,0,Tile Layer 1,0,1600,1600
+spyder_routec,1,Tile Layer 2,0,67,1600
+spyder_routec,2,Tile Layer 3,0,287,1600
+spyder_routec,3,Tile Layer 4,1,18,1600
+spyder_routed,0,Tile Layer 1,0,1600,1600
+spyder_routed,1,Tile Layer 2,0,830,1600
+spyder_routed,2,Tile Layer 3,0,0,1600
+spyder_routed,3,Above Player,1,0,1600
+spyder_routee,0,Tile Layer 1,0,400,400
+spyder_routee,1,Tile Layer 2,0,275,400
+spyder_routee,2,Tile Layer 3,0,0,400
+spyder_routee,3,Above Player,1,6,400
+spyder_scoop1,0,Tile Layer 1,0,315,315
+spyder_scoop1,1,Tile Layer 2,0,154,315
+spyder_scoop1,2,Tile Layer 5,0,2,315
+spyder_scoop1,3,Above Player,1,8,315
+spyder_scoop2,0,Tile Layer 1,0,35,40
+spyder_scoop2,1,Tile Layer 2,0,8,40
+spyder_scoop2,2,Tile Layer 3,0,0,40
+spyder_scoop2,3,Above Player,1,0,40
+spyder_scoop3,0,Tile Layer 1,0,144,144
+spyder_scoop3,1,Tile Layer 2,0,47,144
+spyder_scoop3,2,Tile Layer 3,0,2,144
+spyder_scoop3,3,Tile Layer 4,1,11,144
+spyder_scoop4,0,Tile Layer 1,0,264,264
+spyder_scoop4,1,Tile Layer 2,0,81,264
+spyder_scoop4,2,Tile Layer 3,0,5,264
+spyder_scoop4,3,Tile Layer 4,1,35,264
+spyder_scoop4,4,Above Player,1,2,264
+spyder_test_map,0,Tile Layer 1,0,1600,1600
+spyder_test_map,1,Tile Layer 2,0,345,1600
+spyder_test_map,2,Tile Layer 3,0,2,1600
+spyder_test_map,3,Above Player,1,0,1600
+spyder_timber_cafe,0,Tile Layer 1,0,144,144
+spyder_timber_cafe,1,Tile Layer 2,0,44,144
+spyder_timber_cafe,2,Tile Layer 3,0,0,144
+spyder_timber_cafe,3,Above Player,1,19,144
+spyder_timber_center,0,Tile Layer 1,0,143,143
+spyder_timber_center,1,Tile Layer 2,0,30,143
+spyder_timber_center,2,Tile Layer 3,0,4,143
+spyder_timber_center,3,Above player,1,5,143
+spyder_timber_house,0,Tile Layer 1,0,80,80
+spyder_timber_house,1,Tile Layer 2,0,22,80
+spyder_timber_house,2,Tile Layer 3,0,4,80
+spyder_timber_house,3,Above player,1,2,80
+spyder_timber_scoop,0,Layer 1,0,143,143
+spyder_timber_scoop,1,Layer 2,0,61,143
+spyder_timber_scoop,2,Layer 3,0,5,143
+spyder_timber_scoop,3,Above Player,1,14,143
+spyder_timber_town,0,Tile Layer 1,0,1600,1600
+spyder_timber_town,1,Tile Layer 2,0,161,1600
+spyder_timber_town,2,Tile Layer 3,0,745,1600
+spyder_timber_town,3,Tile Layer 5,1,10,1600
+spyder_timber_town,4,Tile Layer 4,1,43,1600
+spyder_timber_walledgarden1,0,Tile Layer 1,0,179,192
+spyder_timber_walledgarden1,1,Tile Layer 2,0,104,192
+spyder_timber_walledgarden1,2,Tile Layer 3,0,46,192
+spyder_timber_walledgarden1,3,Above Player,1,0,192
+spyder_timber_walledgarden2,0,Tile Layer 1,0,320,320
+spyder_timber_walledgarden2,1,Tile Layer 2,0,30,320
+spyder_timber_walledgarden2,2,Tile Layer 3,0,4,320
+spyder_timber_walledgarden2,3,Above Player,1,2,320
+spyder_tunnel,0,Lowest Level,0,800,800
+spyder_tunnel,1,Obstacles,0,274,800
+spyder_tunnel,2,Obstacles 2,0,78,800
+spyder_tunnel,3,Above Player,1,2,800
+spyder_tunnel_below,0,Lowest Level,0,800,800
+spyder_tunnel_below,1,Pit,0,94,800
+spyder_tunnel_below,2,Layer 3,0,0,800
+spyder_tunnel_below,3,Wall,1,571,800
+spyder_wayfarer_inn1,0,Tile Layer 1,0,205,240
+spyder_wayfarer_inn1,1,Tile Layer 4,0,76,240
+spyder_wayfarer_inn1,2,Tile Layer 5,0,15,240
+spyder_wayfarer_inn1,3,Above Player,1,0,240
+spyder_wayfarer_inn2,0,Tile Layer 1,0,205,240
+spyder_wayfarer_inn2,1,Tile Layer 2,0,35,240
+spyder_wayfarer_inn2,2,Tile Layer 3,0,13,240
+spyder_wayfarer_inn2,3,Tile Layer 4,1,2,240
+spyder_wayfarer_inn2,4,Above Player,1,5,240
+start_tuxemon,0,Tile Layer 1,0,0,64
+start_tuxemon,1,Tile Layer 2,0,0,64
+start_tuxemon,2,Tile Layer 3,0,0,64
+start_tuxemon,3,Above Player,1,0,64
+taba_ba_br_1,0,Tile Layer 1,0,224,256
+taba_ba_br_1,1,Tile Layer 2,0,0,256
+taba_ba_br_1,2,Tile Layer 3,0,0,256
+taba_ba_br_1,3,Above Player,1,3,256
+taba_ba_br_2,0,Tile Layer 1,0,194,256
+taba_ba_br_2,1,Tile Layer 2,0,4,256
+taba_ba_br_2,2,Tile Layer 3,0,0,256
+taba_ba_br_2,3,Above Player,1,0,256
+taba_ba_br_3,0,Tile Layer 1,0,225,256
+taba_ba_br_3,1,Tile Layer 2,0,1,256
+taba_ba_br_3,2,Tile Layer 3,0,0,256
+taba_ba_br_3,3,Above Player,1,2,256
+taba_ba_br_4,0,Tile Layer 1,0,222,256
+taba_ba_br_4,1,Tile Layer 2,0,2,256
+taba_ba_br_4,2,Tile Layer 3,0,0,256
+taba_ba_br_4,3,Above Player,1,13,256
+taba_ba_br_master,0,Tile Layer 1,0,327,400
+taba_ba_br_master,1,Tile Layer 2,0,40,400
+taba_ba_br_master,2,Tile Layer 3,0,12,400
+taba_ba_br_master,3,Above Player,1,0,400
+taba_ba_br_master_foyer,0,Tile Layer 1,0,125,238
+taba_ba_br_master_foyer,1,Tile Layer 2,0,92,238
+taba_ba_br_master_foyer,2,Tile Layer 3,0,0,238
+taba_ba_br_master_foyer,3,Above Player,1,0,238
+taba_ba_foyer,0,Tile Layer 1,0,50,50
+taba_ba_foyer,1,Tile Layer 2,0,8,50
+taba_ba_foyer,2,Tile Layer 3,0,0,50
+taba_ba_foyer,3,Above Player,1,0,50
+taba_ba_main,0,Tile Layer 1,0,285,285
+taba_ba_main,1,Tile Layer 2,0,49,285
+taba_ba_main,2,Tile Layer 3,0,0,285
+taba_ba_main,3,Above Player,1,2,285
+taba_ba_passageway_1,0,Tile Layer 1,0,115,400
+taba_ba_passageway_1,1,Tile Layer 2,0,167,400
+taba_ba_passageway_1,2,Tile Layer 3,0,0,400
+taba_ba_passageway_1,3,Above Player,1,18,400
+taba_ba_passageway_2,0,Tile Layer 1,0,82,400
+taba_ba_passageway_2,1,Tile Layer 2,0,128,400
+taba_ba_passageway_2,2,Tile Layer 3,0,0,400
+taba_ba_passageway_2,3,Above Player,1,12,400
+taba_ba_passageway_3,0,Tile Layer 1,0,246,400
+taba_ba_passageway_3,1,Tile Layer 2,0,27,400
+taba_ba_passageway_3,2,Tile Layer 3,0,0,400
+taba_ba_passageway_3,3,Above Player,1,5,400
+taba_ba_passageway_4,0,Tile Layer 1,0,84,160
+taba_ba_passageway_4,1,Tile Layer 2,0,64,160
+taba_ba_passageway_4,2,Tile Layer 3,0,0,160
+taba_ba_passageway_4,3,Above Player,1,4,160
+taba_ba_stairwell_1,0,Tile Layer 1,0,132,144
+taba_ba_stairwell_1,1,Tile Layer 2,0,93,144
+taba_ba_stairwell_1,2,Tile Layer 3,0,2,144
+taba_ba_stairwell_1,3,Above Player,1,0,144
+taba_ba_stairwell_2,0,Tile Layer 1,0,174,256
+taba_ba_stairwell_2,1,Tile Layer 2,0,56,256
+taba_ba_stairwell_2,2,Tile Layer 3,0,0,256
+taba_ba_stairwell_2,3,Above Player,1,15,256
+taba_house1,0,Tile Layer 1,0,63,63
+taba_house1,1,Tile Layer 2,0,12,63
+taba_house1,2,Tile Layer 3,0,10,63
+taba_house1,3,Above player,1,1,63
+taba_house2,0,Tile Layer 1,0,62,63
+taba_house2,1,Tile Layer 2,0,29,63
+taba_house2,2,Tile Layer 3,0,5,63
+taba_house2,3,Above player,1,0,63
+taba_house2_upstairs,0,Tile Layer 1,0,63,63
+taba_house2_upstairs,1,Tile Layer 2,0,20,63
+taba_house2_upstairs,2,Tile Layer 3,0,1,63
+taba_house2_upstairs,3,Above player,1,8,63
+taba_house3,0,Tile Layer 1,0,84,84
+taba_house3,1,Tile Layer 2,0,32,84
+taba_house3,2,Tile Layer 3,0,0,84
+taba_house3,3,Above player,1,12,84
+taba_house3_upstairs,0,Tile Layer 1,0,84,84
+taba_house3_upstairs,1,Tile Layer 2,0,34,84
+taba_house3_upstairs,2,Tile Layer 3,0,0,84
+taba_house3_upstairs,3,Above player,1,3,84
+taba_house4,0,Tile Layer 1,0,84,84
+taba_house4,1,Tile Layer 2,0,42,84
+taba_house4,2,Tile Layer 3,0,7,84
+taba_house4,3,Above player,1,0,84
+taba_town,0,Tile Layer 1,0,3840,3840
+taba_town,1,Tile Layer 2,0,2241,3840
+taba_town,2,Tile Layer 3,0,738,3840
+taba_town,3,Above Player,1,725,3840
+tabathas,0,Tile Layer 1,0,144,144
+tabathas,1,Tile Layer 2,0,30,144
+tabathas,2,Tile Layer 3,0,36,144
+tabathas,3,Above Player,1,0,144
+test_npcs,0,Tile Layer 1,0,1600,1600
+test_npcs,1,Tile Layer 2,0,268,1600
+test_npcs,2,Tile Layer 3,0,0,1600
+test_npcs,3,Above Player,1,0,1600
+timber_town,0,Tile Layer 1,0,1600,1600
+timber_town,1,Tile Layer 2,0,168,1600
+timber_town,2,Tile Layer 3,0,752,1600
+timber_town,3,Tile Layer 4,1,50,1600
+tt_forest_route1,0,Tile Layer 1,0,1120,1120
+tt_forest_route1,1,Tile Layer 4,0,704,1120
+tt_forest_route1,2,Tile Layer 5,0,524,1120
+tt_forest_route1,3,Above Player,1,468,1120
+tt_forest_route1,4,Above Player 2,1,23,1120
+tt_paper_town,0,PTT,0,880,880
+tt_paper_town,1,PTT2,0,45,880
+tt_paper_town,2,PTT3,0,0,880
+tt_paper_town,3,Above Player,1,0,880
+tt_searoute1,0,Tile Layer 3,0,1600,1600
+tt_searoute1,1,Tile Layer 4,0,548,1600
+tt_searoute1,2,Tile Layer 5,0,325,1600
+tt_searoute1,3,Tile Layer 6,1,269,1600
+tt_searoute1,4,Tile Layer 7,1,125,1600
+tunnel,0,Lowest Level,0,800,800
+tunnel,1,Obstacles,0,344,800
+tunnel,2,Tile Layer 3,0,1,800
+tunnel,3,Above Player,1,0,800
+tunnel_below,0,Lowest Level,0,800,800
+tunnel_below,1,Pit,0,94,800
+tunnel_below,2,Layer 3,0,0,800
+tunnel_below,3,Wall,1,589,800
+tuxe_mart_taba,0,Tile Layer 1,0,143,143
+tuxe_mart_taba,1,Tile Layer 2,0,21,143
+tuxe_mart_taba,2,Tile Layer 3,0,4,143
+tuxe_mart_taba,3,Tile Layer 4,1,12,143
+tuxe_mart_taba,4,Above player,1,20,143
+water_cathedral,0,Tile Layer 1,0,2988,3000
+water_cathedral,1,Tile Layer 2,0,1400,3000
+water_cathedral,2,Tile Layer 3,0,0,3000
+water_cathedral,3,Tile Layer 4,1,0,3000
+water_end_of_desert,0,Tile Layer 1,0,512,2000
+water_end_of_desert,1,Tile Layer 2,0,433,2000
+water_end_of_desert,2,Tile Layer 3,0,64,2000
+water_end_of_desert,3,Tile Layer 4,1,0,2000
+water_lower_village,0,Tile Layer 1,0,706,1008
+water_lower_village,1,Tile Layer 2,0,535,1008
+water_lower_village,2,Tile Layer 3,0,148,1008
+water_lower_village,3,Tile Layer 4,1,15,1008
+water_lower_village,4,Tile Layer 5,1,13,1008
+water_lower_village,5,Tile Layer 6,1,8,1008
+water_outskirts,0,Tile Layer 1,0,403,900
+water_outskirts,1,Tile Layer 2,0,367,900
+water_outskirts,2,Tile Layer 3,0,52,900
+water_outskirts,3,Tile Layer 4,1,53,900
+water_outskirts,4,Tile Layer 5,1,57,900
+water_outskirts,5,Tile Layer 6,1,57,900
+water_river_village,0,Tile Layer 1,0,577,600
+water_river_village,1,Tile Layer 2,0,102,600
+water_river_village,2,Tile Layer 3,0,93,600
+water_river_village,3,Tile Layer 4,1,44,600
+water_route_grass,0,Tile Layer 1,0,810,1500
+water_route_grass,1,Tile Layer 2,0,162,1500
+water_route_grass,2,Tile Layer 3,0,113,1500
+water_route_grass,3,Tile Layer 4,1,0,1500
+water_route_ice,0,Tile Layer 1,0,900,900
+water_route_ice,1,Tile Layer 2,0,65,900
+water_route_ice,2,Tile Layer 3,0,125,900
+water_route_ice,3,Tile Layer 4,1,0,900
+water_snow_village,0,Tile Layer 1,0,899,900
+water_snow_village,1,Tile Layer 2,0,213,900
+water_snow_village,2,Tile Layer 3,0,149,900
+water_snow_village,3,Tile Layer 4,1,93,900
+water_underwater,0,Tile Layer 1,0,316,2500
+water_underwater,1,Tile Layer 3,0,0,2500
+water_underwater,2,Tile Layer 4,1,0,2500
+water_volcano_path,0,Tile Layer 1,0,384,400
+water_volcano_path,1,Tile Layer 2,0,136,400
+water_volcano_path,2,Tile Layer 3,0,0,400
+water_volcano_path,3,Tile Layer 4,1,0,400
+water_volcano_village,0,Tile Layer 1,0,600,600
+water_volcano_village,1,Tile Layer 2,0,76,600
+water_volcano_village,2,Tile Layer 3,0,92,600
+water_volcano_village,3,Tile Layer 4,1,0,600
+wayfarer_inn1,0,Tile Layer 1,0,205,240
+wayfarer_inn1,1,Tile Layer 4,0,77,240
+wayfarer_inn1,2,Tile Layer 5,0,15,240
+wayfarer_inn1,3,Above Player,1,1,240
+wayfarer_inn2,0,Tile Layer 1,0,205,240
+wayfarer_inn2,1,Tile Layer 2,0,35,240
+wayfarer_inn2,2,Tile Layer 3,0,13,240
+wayfarer_inn2,3,Tile Layer 4,1,2,240
+wayfarer_inn2,4,Above Player,1,5,240
+witcher_route_7,0,Tile Layer 1,0,600,600
+witcher_route_7,1,Tile Layer 2,0,218,600
+witcher_route_7,2,Tile Layer 3,0,56,600
+witcher_route_7,3,Above Player,1,0,600
