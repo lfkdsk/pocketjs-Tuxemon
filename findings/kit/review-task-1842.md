@@ -15,7 +15,7 @@
 1. 把 passage 预烘成 `solid` 数组后，现有 wander 示例的运行期碰撞坏了。
 2. 「被挡住后最多 N 次重试」的上限只在 `retries: 0` 时生效。默认值（10）和任何 ≥1 的值都会无限重算，等待中的 fiber 永远不恢复。
 3. 分帧 BFS 搜索进行中，用 builder 自己的整状态存档（`snapshotFull`，即 JSON）读回后结果不一致。
-4. `bun.lock` 被整体改写成内部镜像 `internal-npm-mirror.invalid` 的 URL 并提交了。
+4. `bun.lock` 被整体改写成内部镜像的 URL 并提交了。
 
 另有若干非阻断问题：`dirBlock` 旧语义在边角情况下有漂移、测试缺口、文档不一致、注释里有 fleet 编号 `proposal 1643`。
 
@@ -66,7 +66,7 @@
 
 ### B4　`bun.lock` 被整体改写为内部镜像 URL 并提交（混在 `974e344` 功能提交里）
 
-- `974e344 feat(engine): one-sided directional passage edges` 同时改了 `bun.lock` 的 610 行。把 URL 归一化后，与 `d8324b0` 的 `bun.lock` 完全相同（`diff` 输出「IDENTICAL after normalizing registry URLs」）。也就是说，唯一的改动是把 305 个包的 resolved 从 `""`（默认 registry）改成了 `https://internal-npm-mirror.invalid/...`。
+- `974e344 feat(engine): one-sided directional passage edges` 同时改了 `bun.lock` 的 610 行。把 URL 归一化后，与 `d8324b0` 的 `bun.lock` 完全相同（`diff` 输出「IDENTICAL after normalizing registry URLs」）。也就是说，唯一的改动是把 305 个包的 resolved 从 `""`（默认 registry）改成了 `https://<internal-mirror>/...`。
 - `main`/`7cf590c` 里这类 URL 为 0 处；KF1（1844）的 worktree 里有同样的改写，但没有提交。可见这是本机 `bun install` 带来的环境噪音。
 - 危害：公开仓的 lockfile 会指向内部镜像；GitHub Pages CI 在 `.github/workflows/pages.yml:53` 执行 `bun install --frozen-lockfile`，会去这个主机拉包。修法：`git checkout d8324b0 -- bun.lock` 后单独提交，或者整理提交时剔除这个文件。
 

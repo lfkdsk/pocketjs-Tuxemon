@@ -54,7 +54,7 @@ builder 报告里「修复没有造成可观测的 QuickJS 回退」的结论只
 | B2 重试上限（`retry-bound.ts`，20,000 tick） | pathTo retries=1/3/默认、approach 2/默认都「STILL PARKED」 | pathTo 0/1/3/默认 在 8/15/29/78 tick 恢复；approach 0/2/默认 在 8/22/78 tick 恢复 | **修复** |
 | B2 轨迹（`retry-trace.ts`，retries=2） | 60 tick 内建了 9 个 plan，没有结束 | 建 3 个 plan（初始 1 个 + 重试 2 个），t22 起 route 清空，`scene done: A` | **修复** |
 | B3 搜索中途 JSON 往返（`midsearch-roundtrip.ts`） | frame 500：`(1,57)` 对 `(1,55)`；frame 1000：`(22,98)` 对 `(21,98)` | 各采样帧位置全部一致，最后都到 `(99,98)` | **修复** |
-| B4 lockfile | `974e344` 把 305 个包的 URL 改写成内部镜像 | `git diff d8324b0 HEAD -- bun.lock` 为 0 行；blob `01862b5b…` 与 `d8324b0` 相同；HEAD 树的 `bun.lock` 里 `internal-mirror|internal` 出现 0 次，`https://` 出现 0 次；修复后只有 `6380b74` 这一个提交（只改 `bun.lock`）碰过它 | **修复** |
+| B4 lockfile | `974e344` 把 305 个包的 URL 改写成内部镜像 | `git diff d8324b0 HEAD -- bun.lock` 为 0 行；blob `01862b5b…` 与 `d8324b0` 相同；HEAD 树的 `bun.lock` 里 `<internal-mirror>` 出现 0 次，`https://` 出现 0 次；修复后只有 `6380b74` 这一个提交（只改 `bun.lock`）碰过它 | **修复** |
 
 补充的对抗检查：
 - **B1 语义**（`review-task-1847/passage-diff2.ts`）：3,000 张随机图、124,268 格、2,236,824 个布尔查询，另有 10,117 次运行期写入（`d8324b0` 直接写 `overrides`，HEAD 调 `setPassageOverride`，覆盖 BLOCK/PASS/清零）。`isStandable`、`canEnter`、`canEnter(entry)`、`canStepFrom`、`cellBlocksExit`、`overrides` 数组本身全部零差异。唯一的差异是导出的辅助函数 `cellBlocksEntry`（见 N-b）。
