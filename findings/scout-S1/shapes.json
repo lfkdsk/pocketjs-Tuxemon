@@ -1,0 +1,355 @@
+{
+ "events": 4578,
+ "classes": [
+  {
+   "class": "touch:facing",
+   "events": 933,
+   "multiCellArea": 119,
+   "cellsInAreas": 369,
+   "topShapes": [
+    [
+     "is char_at player & is char_facing player,up",
+     336
+    ],
+    [
+     "is char_at player & is char_facing player,down",
+     299
+    ],
+    [
+     "is char_at player & is char_facing player,right",
+     138
+    ],
+    [
+     "is char_at player & is char_facing player,left",
+     121
+    ],
+    [
+     "is char_at player & is char_facing player,bottom",
+     7
+    ],
+    [
+     "is char_at player & is char_facing player,down & not char_defeated _",
+     5
+    ],
+    [
+     "is char_at player & is char_facing player,down & not variable_set _",
+     4
+    ],
+    [
+     "is char_at player & is char_facing player,down & is variable_set _",
+     3
+    ]
+   ],
+   "example": "37707_tower.tmx \"Go Outside\""
+  },
+  {
+   "class": "guard",
+   "events": 905,
+   "multiCellArea": 4,
+   "cellsInAreas": 10,
+   "topShapes": [
+    [
+     "is variable_set _",
+     203
+    ],
+    [
+     "not music_playing _",
+     195
+    ],
+    [
+     "is variable_set _ & not variable_set _",
+     96
+    ],
+    [
+     "not environment_is _",
+     63
+    ],
+    [
+     "is time_is _ & not environment_is _",
+     41
+    ],
+    [
+     "not environment_is _ & not time_is _",
+     37
+    ],
+    [
+     "is char_sprite player & is check_char_parameter player & is current_state _ & is environment_is _",
+     28
+    ],
+    [
+     "is variable_set _ & not variable_set _ & not variable_set _",
+     17
+    ]
+   ],
+   "example": "37707_tower.tmx \"Enter\""
+  },
+  {
+   "class": "talk",
+   "events": 787,
+   "multiCellArea": 0,
+   "cellsInAreas": 0,
+   "topShapes": [
+    [
+     "",
+     223
+    ],
+    [
+     "is battle_outcome player",
+     196
+    ],
+    [
+     "not battle_outcome player",
+     128
+    ],
+    [
+     "not variable_set _",
+     70
+    ],
+    [
+     "is variable_set _",
+     50
+    ],
+    [
+     "is variable_set _ & not variable_set _",
+     11
+    ],
+    [
+     "is has_monster player & not variable_set _",
+     8
+    ],
+    [
+     "not has_monster player & not variable_set _",
+     6
+    ]
+   ],
+   "example": "37707_town.tmx \"Villager Female Talk 1\""
+  },
+  {
+   "class": "spawn",
+   "events": 732,
+   "multiCellArea": 0,
+   "cellsInAreas": 0,
+   "topShapes": [
+    [
+     "not char_exists _",
+     517
+    ],
+    [
+     "not char_exists _ & not variable_set _",
+     96
+    ],
+    [
+     "not battle_outcome player & not char_exists _",
+     33
+    ],
+    [
+     "is variable_set _ & not char_exists _",
+     32
+    ],
+    [
+     "not char_exists _ & not has_item player",
+     6
+    ],
+    [
+     "not battle_outcome_count player & not char_exists _",
+     6
+    ],
+    [
+     "is variable_set _ & not char_exists _ & not variable_set _",
+     5
+    ],
+    [
+     "is party_size player & not char_exists _",
+     4
+    ]
+   ],
+   "example": "37707_town.tmx \"Villager Male\""
+  },
+  {
+   "class": "touch:step",
+   "events": 454,
+   "multiCellArea": 335,
+   "cellsInAreas": 6593,
+   "topShapes": [
+    [
+     "is char_at player & is char_moved player",
+     411
+    ],
+    [
+     "is char_at player & is char_moved player & is current_state _",
+     25
+    ],
+    [
+     "is char_at player & is char_moved player & is variable_set _",
+     9
+    ],
+    [
+     "is char_at player & is char_moved player & is party_size player",
+     9
+    ]
+   ],
+   "example": "37707_town.tmx \"Random Battle 1\""
+  },
+  {
+   "class": "touch:on",
+   "events": 349,
+   "multiCellArea": 183,
+   "cellsInAreas": 17311,
+   "topShapes": [
+    [
+     "is char_at player & not battle_outcome player & not char_defeated _",
+     166
+    ],
+    [
+     "is char_at player",
+     72
+    ],
+    [
+     "is char_at player & not variable_set _",
+     32
+    ],
+    [
+     "is char_at player & is variable_set _ & not variable_set _",
+     27
+    ],
+    [
+     "is char_at player & not tracker player",
+     21
+    ],
+    [
+     "is char_at player & is variable_set _ & not battle_outcome player & not char_defeated _",
+     3
+    ],
+    [
+     "is char_at player & not has_item player",
+     2
+    ],
+    [
+     "is char_at player & is has_item player",
+     2
+    ]
+   ],
+   "example": "bedroom_test.tmx \"Go Downstairs\""
+  },
+  {
+   "class": "action:facingTile",
+   "events": 338,
+   "multiCellArea": 52,
+   "cellsInAreas": 219,
+   "topShapes": [
+    [
+     "is button_pressed _ & is char_facing_tile player",
+     266
+    ],
+    [
+     "is button_pressed _ & is char_facing_tile player & not variable_set _",
+     28
+    ],
+    [
+     "is button_pressed _ & is char_facing_tile player & is variable_set _",
+     11
+    ],
+    [
+     "is button_pressed _ & is char_facing_tile player & is party_size player",
+     6
+    ],
+    [
+     "is button_pressed _ & is char_facing_tile player & is variable_set _ & not variable_set _",
+     5
+    ],
+    [
+     "is button_pressed _ & is char_facing_tile player & not variable_set _ & not variable_set _",
+     5
+    ],
+    [
+     "is button_pressed _ & is char_facing_tile player & is money_is player & not has_item player",
+     3
+    ],
+    [
+     "is button_pressed _ & is char_facing_tile player & is time_is _",
+     3
+    ]
+   ],
+   "example": "37707_tower.tmx \"Change\""
+  },
+  {
+   "class": "action:standingOn",
+   "events": 75,
+   "multiCellArea": 11,
+   "cellsInAreas": 26,
+   "topShapes": [
+    [
+     "is button_pressed _ & is char_at player & is char_facing player,up",
+     34
+    ],
+    [
+     "is button_pressed _ & is char_at player & is char_facing player,right",
+     7
+    ],
+    [
+     "is button_pressed _ & is char_at player & is char_facing player,down",
+     6
+    ],
+    [
+     "is button_pressed _ & is char_at player",
+     4
+    ],
+    [
+     "is button_pressed _ & is char_at player & is char_facing player,up & is variable_set _",
+     3
+    ],
+    [
+     "is button_pressed _ & is char_at player & is char_facing player,down & is variable_set _",
+     3
+    ],
+    [
+     "is button_pressed _ & is char_at player & is char_facing player,left & is variable_set _",
+     2
+    ],
+    [
+     "is button_pressed _ & is char_at player & is char_facing player,up & is variable_set _ & not variable_set _ & not variable_set _",
+     2
+    ]
+   ],
+   "example": "37707_town.tmx \"Give Tuxemon\""
+  },
+  {
+   "class": "facingTile:noButton",
+   "events": 4,
+   "multiCellArea": 0,
+   "cellsInAreas": 0,
+   "topShapes": [
+    [
+     "is char_facing player,down & is char_facing_tile player & is current_state _ & is tile_property_updated _ & is variable_set _ & not char_in player",
+     1
+    ],
+    [
+     "is char_facing player,left & is char_facing_tile player & is current_state _ & is tile_property_updated _ & is variable_set _ & not char_in player",
+     1
+    ],
+    [
+     "is char_facing player,right & is char_facing_tile player & is current_state _ & is tile_property_updated _ & is variable_set _ & not char_in player",
+     1
+    ],
+    [
+     "is char_facing player,up & is char_facing_tile player & is current_state _ & is tile_property_updated _ & is variable_set _ & not char_in player",
+     1
+    ]
+   ],
+   "example": "spyder.yaml \"Push Into Water Down\""
+  },
+  {
+   "class": "action:other",
+   "events": 1,
+   "multiCellArea": 0,
+   "cellsInAreas": 0,
+   "topShapes": [
+    [
+     "is button_pressed _ & is player_facing_tile & not variable_set _",
+     1
+    ]
+   ],
+   "example": "water_underwater.tmx \"Water Gemuar Battle\""
+  }
+ ]
+}

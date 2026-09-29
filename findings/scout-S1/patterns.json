@@ -1,0 +1,187 @@
+{
+ "lockControls": {
+  "eventsWithBoth": 301,
+  "lockOnly": 21,
+  "unlockOnly": 27,
+  "unlockBeforeLock": 0,
+  "lockOnlyExamples": [
+   "player_house_downstairs.tmx:announcement",
+   "player_house_downstairs.tmx:new possibilities",
+   "professor_lab.tmx:whyhellothere",
+   "professor_lab.tmx:shesarrived",
+   "route1.tmx:they're angry",
+   "route1.tmx:battle!"
+  ]
+ },
+ "npcLifecycle": {
+  "createNpcEventsByTriggerClass": {
+   "spawn": 732,
+   "guard": 36,
+   "touch:on": 32,
+   "action:standingOn": 1,
+   "touch:facing": 1
+  },
+  "removeNpcEventsByTriggerClass": {
+   "guard": 91,
+   "talk": 51,
+   "touch:on": 32,
+   "action:facingTile": 2
+  },
+  "createsPerEvent": {
+   "1": 762,
+   "2": 23,
+   "3": 8,
+   "4": 2,
+   "5": 1,
+   "6": 1,
+   "7": 1,
+   "8": 1,
+   "13": 1,
+   "124": 1,
+   "500": 1
+  },
+  "createNpcBehaviourArg": {
+   "wander": 707,
+   "stand": 88
+  },
+  "mapSlugPairs": 1455,
+  "mapSlugPairsWithSeveralPositions": 29,
+  "severalPositionsExamples": [
+   "player_house_downstairs.tmx|callie_wren 8,3 0,5",
+   "route1.tmx|omnigrunt4 34,27 34,26",
+   "route1.tmx|kyle 32,32 54,33",
+   "spyder_candy_town.tmx|spyder_candy_henrik 21,4 30,0",
+   "spyder_cotton_cafe.tmx|spyder_cottontown_barmaid 2,3 0,4",
+   "spyder_cotton_town.tmx|spyder_cottontown_hacker 25,30 31,23 24,33",
+   "spyder_cotton_town.tmx|spyder_statue_blue 4,9 8,11",
+   "spyder_flower_city.tmx|spyder_flower_monk 34,18 33,18"
+  ]
+ },
+ "charFace": {
+  "total": 2027,
+  "target": {
+   "player": 1153,
+   "npc": 874
+  },
+  "direction": {
+   "up": 583,
+   "down": 525,
+   "right": 382,
+   "left": 357,
+   "character-slug": 168,
+   "player": 12
+  }
+ },
+ "movement": {
+  "pathfindMover": {
+   "npc": 278,
+   "player": 58
+  },
+  "pathfindToCharTarget": {
+   "player": 201
+  },
+  "pathfindToCharMover": {
+   "npc": 201
+  },
+  "pathfindToCharDirectionGiven": 20,
+  "charMoveMover": {
+   "npc": 65,
+   "player": 12
+  },
+  "charStop": {
+   "player": 88
+  },
+  "charWanderArgc": {
+   "2": 24,
+   "4": 4,
+   "6": 5
+  }
+ },
+ "transitionTeleport": {
+  "total": 1049,
+  "mover": {
+   "player": 1049
+  },
+  "targetMapMissing": 0,
+  "missingExamples": [],
+  "transTime": {
+   "1": 5,
+   "0.3": 819,
+   "0.5": 170,
+   "(default 0.3)": 52,
+   "1.5": 2,
+   "0.1": 1
+  },
+  "eventsWithActionsAfterTeleport": 897,
+  "actionsAfterTeleport": {
+   "char_face": 884,
+   "set_variable": 11,
+   "set_teleport_faint": 8,
+   "park_experience": 7,
+   "set_layer": 4,
+   "add_item": 4,
+   "remove_step_tracker": 4,
+   "remove_npc": 3,
+   "clear_variable": 2,
+   "unlock_controls": 2,
+   "wait": 1
+  },
+  "sameMapTeleports": 14
+ },
+ "buttons": {
+  "INTERACT": 418,
+  "K_RETURN": 1
+ },
+ "charAtSubjects": {
+  "player": 1811
+ },
+ "charFacingSubjects": {
+  "player": 1008
+ },
+ "dialog": {
+  "translatedDialogUses": 2068,
+  "distinctKeys": 1626,
+  "keysMissingFromEnUS": 5,
+  "missingKeyExamples": [
+   "spyder_flower_sandy_willtrade",
+   "aardornforyou",
+   "resetcleo",
+   "addlevel",
+   "water_nice_mayor12"
+  ],
+  "poEntries": 5370,
+  "usesWithOnePage": 1449,
+  "pagesTotal": 3115,
+  "pageLengthChars": {
+   "p50": 59,
+   "p90": 109,
+   "p99": 138,
+   "max": 184
+  },
+  "pagesNeedingMoreThanOneBoxAt52x4": 0
+ },
+ "choices": {
+  "uses": 149,
+  "optionCountHistogram": {
+   "2": 112,
+   "3": 23,
+   "4": 4,
+   "5": 6,
+   "8": 4
+  },
+  "optionLabelMaxLen": 33,
+  "optionLabelsOver24": 2
+ },
+ "charTalk": {
+  "uses": 772,
+  "field": {
+   "post_battle_lose": 471,
+   "pre_battle": 301
+  }
+ },
+ "eventsPerMapLoaded": {
+  "p50": 19,
+  "p90": 62,
+  "max": 133
+ }
+}

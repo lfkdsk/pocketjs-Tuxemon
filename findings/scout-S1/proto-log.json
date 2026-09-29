@@ -1,0 +1,578 @@
+{
+ "maps": [
+  "spyder_bedroom",
+  "spyder_paper_scoop",
+  "spyder_downstairs",
+  "spyder_paper_town"
+ ],
+ "schemaErrors": [],
+ "byFate": {
+  "T3-dropped": 168,
+  "T1": 471,
+  "T3-placeholder": 51,
+  "T4-dropped": 195,
+  "T1-lowered": 150,
+  "T2-dropped": 115,
+  "structural": 17
+ },
+ "rows": [
+  {
+   "key": "act:access_pc",
+   "fate": "T3-dropped",
+   "count": 1,
+   "note": "monster/combat subsystem (P2)"
+  },
+  {
+   "key": "act:add_item",
+   "fate": "T1",
+   "count": 3,
+   "note": "item add/sub"
+  },
+  {
+   "key": "act:add_monster",
+   "fate": "T3-placeholder",
+   "count": 5,
+   "note": "sys.party_size += 1, switch mon.<slug>"
+  },
+  {
+   "key": "act:add_monster(npc)",
+   "fate": "T3-dropped",
+   "count": 1,
+   "note": "trainer teams are P2"
+  },
+  {
+   "key": "act:add_step_tracker",
+   "fate": "T4-dropped",
+   "count": 4,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:add_tracker",
+   "fate": "T1-lowered",
+   "count": 2,
+   "note": "switch tracker.<map>"
+  },
+  {
+   "key": "act:autosave",
+   "fate": "T4-dropped",
+   "count": 1,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:change_bg",
+   "fate": "T4-dropped",
+   "count": 4,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:change_bg_char",
+   "fate": "T4-dropped",
+   "count": 1,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:change_bg_monster",
+   "fate": "T4-dropped",
+   "count": 5,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:char_face",
+   "fate": "T1",
+   "count": 8,
+   "note": "moveRoute player face"
+  },
+  {
+   "key": "act:char_face(other npc)",
+   "fate": "T2-dropped",
+   "count": 23,
+   "note": "moveRoute target must be an event id"
+  },
+  {
+   "key": "act:char_face(toward char)",
+   "fate": "T2-dropped",
+   "count": 4,
+   "note": "needs turnToward step"
+  },
+  {
+   "key": "act:char_stop",
+   "fate": "T1-lowered",
+   "count": 6,
+   "note": "blocking fibers already freeze the player (cross-event locks are T2)"
+  },
+  {
+   "key": "act:choice_monster(>4 options)",
+   "fate": "T3-placeholder",
+   "count": 1,
+   "note": "kit choices hold 2..4 options: truncated"
+  },
+  {
+   "key": "act:create_kennel",
+   "fate": "T4-dropped",
+   "count": 4,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:create_npc",
+   "fate": "T1-lowered",
+   "count": 22,
+   "note": "local.npc.<slug> = 1 (spawn position other than the event's is T2 place)"
+  },
+  {
+   "key": "act:format_variable",
+   "fate": "T3-dropped",
+   "count": 8,
+   "note": "monster/combat subsystem (P2)"
+  },
+  {
+   "key": "act:lock_controls",
+   "fate": "T1-lowered",
+   "count": 9,
+   "note": "blocking fibers already freeze the player (cross-event locks are T2)"
+  },
+  {
+   "key": "act:open_journal",
+   "fate": "T3-dropped",
+   "count": 10,
+   "note": "monster/combat subsystem (P2)"
+  },
+  {
+   "key": "act:pathfind",
+   "fate": "T2-dropped",
+   "count": 39,
+   "note": "runtime pathfinding / other-event routes / NPC motion props"
+  },
+  {
+   "key": "act:pathfind_to_char",
+   "fate": "T2-dropped",
+   "count": 7,
+   "note": "runtime pathfinding / other-event routes / NPC motion props"
+  },
+  {
+   "key": "act:play_music",
+   "fate": "T2-dropped",
+   "count": 4,
+   "note": "bgm hook (P1: silent)"
+  },
+  {
+   "key": "act:remove_npc",
+   "fate": "T1-lowered",
+   "count": 13,
+   "note": "local.npc.<slug> = 0"
+  },
+  {
+   "key": "act:rename_player",
+   "fate": "T2-dropped",
+   "count": 1,
+   "note": "name entry (P1: fixed name)"
+  },
+  {
+   "key": "act:screen_transition",
+   "fate": "T1-lowered",
+   "count": 1,
+   "note": "fade out+in -> wait 2t (visual fade is T2)"
+  },
+  {
+   "key": "act:set_bill",
+   "fate": "T3-dropped",
+   "count": 8,
+   "note": "monster/combat subsystem (P2)"
+  },
+  {
+   "key": "act:set_environment",
+   "fate": "T3-dropped",
+   "count": 1,
+   "note": "monster/combat subsystem (P2)"
+  },
+  {
+   "key": "act:set_monster_attribute",
+   "fate": "T3-dropped",
+   "count": 1,
+   "note": "monster/combat subsystem (P2)"
+  },
+  {
+   "key": "act:set_monster_health",
+   "fate": "T3-dropped",
+   "count": 3,
+   "note": "monster/combat subsystem (P2)"
+  },
+  {
+   "key": "act:set_monster_status",
+   "fate": "T3-dropped",
+   "count": 3,
+   "note": "monster/combat subsystem (P2)"
+  },
+  {
+   "key": "act:set_teleport_faint",
+   "fate": "T3-dropped",
+   "count": 2,
+   "note": "monster/combat subsystem (P2)"
+  },
+  {
+   "key": "act:set_variable",
+   "fate": "T1",
+   "count": 64,
+   "note": "variable set enum code"
+  },
+  {
+   "key": "act:start_battle",
+   "fate": "T3-placeholder",
+   "count": 1,
+   "note": "inline placeholder: text + outcome writes"
+  },
+  {
+   "key": "act:transition_teleport",
+   "fate": "T1",
+   "count": 23,
+   "note": "transfer (terminal; dir from trailing char_face)"
+  },
+  {
+   "key": "act:translated_dialog",
+   "fate": "T1",
+   "count": 83,
+   "note": "text boxes from en_US .po (layout args ignored)"
+  },
+  {
+   "key": "act:translated_dialog_choice",
+   "fate": "T1",
+   "count": 13,
+   "note": "choices -> enum code"
+  },
+  {
+   "key": "act:translated_dialog_choice(>4 options)",
+   "fate": "T2-dropped",
+   "count": 1,
+   "note": "kit choices hold 2..4 options: truncated"
+  },
+  {
+   "key": "act:unlock_controls",
+   "fate": "T1-lowered",
+   "count": 10,
+   "note": "blocking fibers already freeze the player (cross-event locks are T2)"
+  },
+  {
+   "key": "act:update_tile_properties",
+   "fate": "T4-dropped",
+   "count": 8,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:wait",
+   "fate": "T1",
+   "count": 23,
+   "note": "wait seconds"
+  },
+  {
+   "key": "behav:talk",
+   "fate": "structural",
+   "count": 17,
+   "note": "talk -> NPC action page"
+  },
+  {
+   "key": "behav:talk(char_face npc,player)",
+   "fate": "T2-dropped",
+   "count": 5,
+   "note": "turn toward the player needs a turnTowardPlayer move step"
+  },
+  {
+   "key": "cond:is battle_outcome",
+   "fate": "T3-placeholder",
+   "count": 4,
+   "note": "switch bo.<opp>.won written by the battle placeholder"
+  },
+  {
+   "key": "cond:is char_defeated",
+   "fate": "T3-placeholder",
+   "count": 8,
+   "note": "player never defeated in P1; NPC: switch defeated.<slug>"
+  },
+  {
+   "key": "cond:is char_exists",
+   "fate": "T1-lowered",
+   "count": 1,
+   "note": "local.npc.<slug> presence variable (per-visit reset is T2)"
+  },
+  {
+   "key": "cond:is char_facing(player)",
+   "fate": "T2-dropped",
+   "count": 9,
+   "note": "no facing filter on triggers in v1"
+  },
+  {
+   "key": "cond:is char_in",
+   "fate": "T3-dropped",
+   "count": 4,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is char_sprite",
+   "fate": "T3-dropped",
+   "count": 14,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is check_char_parameter",
+   "fate": "T3-dropped",
+   "count": 6,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is check_evolution",
+   "fate": "T3-dropped",
+   "count": 4,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is check_max_tech",
+   "fate": "T3-dropped",
+   "count": 4,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is check_world",
+   "fate": "T3-dropped",
+   "count": 8,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is current_state",
+   "fate": "T4-dropped",
+   "count": 50,
+   "note": "WorldState is the only overworld state"
+  },
+  {
+   "key": "cond:is environment_is",
+   "fate": "T3-dropped",
+   "count": 2,
+   "note": "battle backdrop only"
+  },
+  {
+   "key": "cond:is has_item",
+   "fate": "T1",
+   "count": 12,
+   "note": "item count >= n"
+  },
+  {
+   "key": "cond:is kennel",
+   "fate": "T3-dropped",
+   "count": 8,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is location_inside",
+   "fate": "T1-lowered",
+   "count": 4,
+   "note": "static map property, folded at import"
+  },
+  {
+   "key": "cond:is location_type",
+   "fate": "T1-lowered",
+   "count": 4,
+   "note": "static map property, folded at import"
+  },
+  {
+   "key": "cond:is party_size",
+   "fate": "T3-placeholder",
+   "count": 29,
+   "note": "variable sys.party_size kept by add_monster"
+  },
+  {
+   "key": "cond:is step_tracker",
+   "fate": "T3-dropped",
+   "count": 4,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is tile_property_updated",
+   "fate": "T3-dropped",
+   "count": 16,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is time_is",
+   "fate": "T2-dropped",
+   "count": 13,
+   "note": "no clock in P1: fixed daytime"
+  },
+  {
+   "key": "cond:is variable_set",
+   "fate": "T1",
+   "count": 87,
+   "note": "page/if variable compare on the enum code"
+  },
+  {
+   "key": "cond:not battle_outcome",
+   "fate": "T3-placeholder",
+   "count": 2,
+   "note": "switch bo.<opp>.won written by the battle placeholder"
+  },
+  {
+   "key": "cond:not bill_exists",
+   "fate": "T3-dropped",
+   "count": 4,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:not char_exists",
+   "fate": "T1-lowered",
+   "count": 17,
+   "note": "local.npc.<slug> presence variable (per-visit reset is T2)"
+  },
+  {
+   "key": "cond:not char_in",
+   "fate": "T3-dropped",
+   "count": 24,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:not char_sprite",
+   "fate": "T3-dropped",
+   "count": 6,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:not check_world",
+   "fate": "T3-dropped",
+   "count": 4,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:not environment_is",
+   "fate": "T3-dropped",
+   "count": 10,
+   "note": "battle backdrop only"
+  },
+  {
+   "key": "cond:not kennel",
+   "fate": "T3-dropped",
+   "count": 4,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:not location_inside",
+   "fate": "T1-lowered",
+   "count": 8,
+   "note": "static map property, folded at import"
+  },
+  {
+   "key": "cond:not location_type",
+   "fate": "T1-lowered",
+   "count": 4,
+   "note": "static map property, folded at import"
+  },
+  {
+   "key": "cond:not music_playing",
+   "fate": "T4-dropped",
+   "count": 4,
+   "note": "no music in P1"
+  },
+  {
+   "key": "cond:not party_size",
+   "fate": "T3-placeholder",
+   "count": 1,
+   "note": "variable sys.party_size kept by add_monster"
+  },
+  {
+   "key": "cond:not tile_property_updated",
+   "fate": "T3-dropped",
+   "count": 8,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:not time_is",
+   "fate": "T2-dropped",
+   "count": 9,
+   "note": "no clock in P1: fixed daytime"
+  },
+  {
+   "key": "cond:not variable_set",
+   "fate": "T1",
+   "count": 74,
+   "note": "page/if variable compare on the enum code"
+  },
+  {
+   "key": "trigger:action",
+   "fate": "T1",
+   "count": 14,
+   "note": "action"
+  },
+  {
+   "key": "trigger:action",
+   "fate": "T1",
+   "count": 1,
+   "note": "action"
+  },
+  {
+   "key": "trigger:action",
+   "fate": "T1-lowered",
+   "count": 7,
+   "note": "area expanded to one event per cell"
+  },
+  {
+   "key": "trigger:guard",
+   "fate": "T1",
+   "count": 35,
+   "note": "autorun"
+  },
+  {
+   "key": "trigger:guard(compound)",
+   "fate": "T1-lowered",
+   "count": 12,
+   "note": "derived switch evaluator (T2 condition.all removes it)"
+  },
+  {
+   "key": "trigger:never-true guard",
+   "fate": "T4-dropped",
+   "count": 87,
+   "note": "a fixed-false clause (music/env/time/...) gates it"
+  },
+  {
+   "key": "trigger:no-op after conversion",
+   "fate": "T4-dropped",
+   "count": 27,
+   "note": "every action dropped"
+  },
+  {
+   "key": "trigger:spawn",
+   "fate": "T1-lowered",
+   "count": 11,
+   "note": "parallel page: guard -> local.npc.<slug> = 1"
+  },
+  {
+   "key": "trigger:stacked events on one cell",
+   "fate": "T1-lowered",
+   "count": 12,
+   "note": "merged: match flags then bodies"
+  },
+  {
+   "key": "trigger:talk",
+   "fate": "T1",
+   "count": 17,
+   "note": "NPC event action page (if-chain over talk guards)"
+  },
+  {
+   "key": "trigger:touch",
+   "fate": "T1",
+   "count": 7,
+   "note": "playerTouch"
+  },
+  {
+   "key": "trigger:touch",
+   "fate": "T1",
+   "count": 7,
+   "note": "playerTouch"
+  },
+  {
+   "key": "trigger:touch",
+   "fate": "T1-lowered",
+   "count": 6,
+   "note": "area expanded to one event per cell"
+  },
+  {
+   "key": "trigger:touch",
+   "fate": "T1-lowered",
+   "count": 1,
+   "note": "area expanded to one event per cell"
+  }
+ ]
+}

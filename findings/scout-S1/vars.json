@@ -1,0 +1,10988 @@
+{
+ "variables": 486,
+ "maxValuesPerVariable": 10,
+ "histogramValuesPerVariable": {
+  "0": 19,
+  "1": 294,
+  "2": 97,
+  "3": 45,
+  "4": 16,
+  "5": 8,
+  "6": 2,
+  "8": 3,
+  "10": 2
+ },
+ "testedButNeverWritten": [
+  "badge",
+  "battle_last_trainer",
+  "battle_last_winner",
+  "check_vividactil_morph",
+  "check_viviphyta_morph",
+  "check_vivisource_morph",
+  "check_viviteel_morph",
+  "check_vivitrans_morph",
+  "check_vivitron_morph",
+  "difficulty",
+  "maple_bedroom1",
+  "proftalk",
+  "route6rigel",
+  "spyder_boulder"
+ ],
+ "writtenButNeverTested": 30,
+ "numericish": [
+  "brad_points",
+  "cathedral_interest",
+  "cathedral_interest_full",
+  "cathedral_share",
+  "cathedral_share_full",
+  "chad_points",
+  "luckgiveegg",
+  "party_lost_hp",
+  "scoop_price"
+ ],
+ "dynamic": [
+  "budaye",
+  "cateye",
+  "chillimp",
+  "chosen_tech",
+  "dojo_stage",
+  "elianeoutput",
+  "grintot",
+  "ignibus",
+  "potion_xiang",
+  "probably_agnite",
+  "rename",
+  "rhincus",
+  "ruff_back",
+  "shammer",
+  "sold",
+  "tasteful_zhu",
+  "tweesher"
+ ],
+ "rows": [
+  {
+   "name": "1stbattle",
+   "values": [
+    "done"
+   ],
+   "written": [
+    "done"
+   ],
+   "tested": [
+    "done"
+   ],
+   "testedBare": 0,
+   "cleared": 2,
+   "writers": [
+    "clear_variable",
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "2ndbattle",
+   "values": [
+    "done"
+   ],
+   "written": [
+    "done"
+   ],
+   "tested": [
+    "done"
+   ],
+   "testedBare": 0,
+   "cleared": 2,
+   "writers": [
+    "clear_variable",
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "37707_female",
+   "values": [
+    "spoke"
+   ],
+   "written": [
+    "spoke"
+   ],
+   "tested": [
+    "spoke"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "37707_male",
+   "values": [
+    "spoke"
+   ],
+   "written": [
+    "spoke"
+   ],
+   "tested": [
+    "spoke"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "37707_sign",
+   "values": [
+    "read"
+   ],
+   "written": [
+    "read"
+   ],
+   "tested": [
+    "read"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "37707_tower",
+   "values": [
+    "activated",
+    "entered",
+    "visited"
+   ],
+   "written": [
+    "activated",
+    "entered",
+    "visited"
+   ],
+   "tested": [
+    "activated",
+    "entered"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 3
+  },
+  {
+   "name": "3rdbattle",
+   "values": [
+    "done"
+   ],
+   "written": [
+    "done"
+   ],
+   "tested": [
+    "done"
+   ],
+   "testedBare": 0,
+   "cleared": 2,
+   "writers": [
+    "clear_variable",
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "acolyte1",
+   "values": [
+    "done"
+   ],
+   "written": [
+    "done"
+   ],
+   "tested": [
+    "done"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "acolyte2battledone",
+   "values": [
+    "maybe",
+    "yes"
+   ],
+   "written": [
+    "maybe",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "acolyte3",
+   "values": [
+    "gone"
+   ],
+   "written": [
+    "gone"
+   ],
+   "tested": [
+    "gone"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "aeble_talk",
+   "values": [
+    "1",
+    "2"
+   ],
+   "written": [
+    "1",
+    "2"
+   ],
+   "tested": [
+    "1",
+    "2"
+   ],
+   "testedBare": 0,
+   "cleared": 1,
+   "writers": [
+    "clear_variable",
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "after_gemuar",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "agnitechosen",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "all_three_choice",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "allergicbee",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "allthree",
+   "values": [
+    "andfour",
+    "done"
+   ],
+   "written": [
+    "andfour",
+    "done"
+   ],
+   "tested": [
+    "done"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 3
+  },
+  {
+   "name": "announce_trials",
+   "values": [
+    "1",
+    "2",
+    "3",
+    "4"
+   ],
+   "written": [
+    "1",
+    "2",
+    "3",
+    "4"
+   ],
+   "tested": [
+    "1",
+    "2",
+    "3",
+    "4"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "announcetwo",
+   "values": [
+    "done"
+   ],
+   "written": [
+    "done"
+   ],
+   "tested": [
+    "done"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "anthem_started",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "areyousure",
+   "values": [
+    "no",
+    "none",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "none",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "artshop_billie",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "backhome",
+   "values": [
+    "no"
+   ],
+   "written": [
+    "no"
+   ],
+   "tested": [
+    "no"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "badge",
+   "values": [
+    "yes"
+   ],
+   "written": [],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "barmaid_monsters",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "barmaid_sell_bundle",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "barmaid_starry",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "barmaid_trepidation",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "battle_last_result",
+   "values": [
+    "clear",
+    "draw",
+    "lost",
+    "none",
+    "won"
+   ],
+   "written": [
+    "clear",
+    "none"
+   ],
+   "tested": [
+    "draw",
+    "lost",
+    "won"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 9
+  },
+  {
+   "name": "battle_last_trainer",
+   "values": [
+    "acolyte"
+   ],
+   "written": [],
+   "tested": [
+    "acolyte"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "battle_last_winner",
+   "values": [
+    "spyder_leathergym_brad",
+    "spyder_leathergym_chad",
+    "spyder_nimrod_argon",
+    "spyder_nimrod_zircon"
+   ],
+   "written": [],
+   "tested": [
+    "spyder_leathergym_brad",
+    "spyder_leathergym_chad",
+    "spyder_nimrod_argon",
+    "spyder_nimrod_zircon"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "battledone",
+   "values": [
+    "redo",
+    "start",
+    "yes"
+   ],
+   "written": [
+    "redo",
+    "start",
+    "yes"
+   ],
+   "tested": [
+    "redo",
+    "start",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "beeevent",
+   "values": [
+    "done",
+    "end",
+    "start",
+    "stung"
+   ],
+   "written": [
+    "done",
+    "end",
+    "start",
+    "stung"
+   ],
+   "tested": [
+    "done",
+    "end",
+    "start",
+    "stung"
+   ],
+   "testedBare": 4,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "beereaction",
+   "values": [
+    "spyder_allergic_mild",
+    "spyder_allergic_severe"
+   ],
+   "written": [
+    "spyder_allergic_mild",
+    "spyder_allergic_severe"
+   ],
+   "tested": [
+    "spyder_allergic_mild",
+    "spyder_allergic_severe"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "beesissue",
+   "values": [
+    "taba_house3_choice1",
+    "taba_house3_choice2"
+   ],
+   "written": [
+    "taba_house3_choice1",
+    "taba_house3_choice2"
+   ],
+   "tested": [
+    "taba_house3_choice1",
+    "taba_house3_choice2"
+   ],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "begone",
+   "values": [
+    "gone",
+    "now"
+   ],
+   "written": [
+    "gone",
+    "now"
+   ],
+   "tested": [
+    "gone",
+    "now"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "billcathedral",
+   "values": [
+    "no",
+    "null",
+    "proceed",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "null",
+    "proceed",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "proceed",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "billie_choice",
+   "values": [
+    "bamboon",
+    "bigfin",
+    "budaye",
+    "dollfin",
+    "eruptibus",
+    "grintot",
+    "grintrock",
+    "ignibus",
+    "memnomnom",
+    "miaownolith"
+   ],
+   "written": [
+    "bamboon",
+    "bigfin",
+    "budaye",
+    "dollfin",
+    "eruptibus",
+    "grintot",
+    "grintrock",
+    "ignibus",
+    "memnomnom",
+    "miaownolith"
+   ],
+   "tested": [
+    "budaye",
+    "dollfin",
+    "grintot",
+    "ignibus",
+    "memnomnom"
+   ],
+   "testedBare": 5,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "billie_grandma",
+   "values": [
+    "done",
+    "no",
+    "yes"
+   ],
+   "written": [
+    "done",
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "done",
+    "yes"
+   ],
+   "testedBare": 2,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "billie_tv",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 1,
+   "writers": [
+    "clear_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "binary144",
+   "values": [
+    "drokoro",
+    "rhincus",
+    "shammer"
+   ],
+   "written": [
+    "drokoro",
+    "rhincus",
+    "shammer"
+   ],
+   "tested": [
+    "shammer"
+   ],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "binary193",
+   "values": [
+    "baobaraffe",
+    "exclawvate",
+    "statursus"
+   ],
+   "written": [
+    "baobaraffe",
+    "exclawvate",
+    "statursus"
+   ],
+   "tested": [
+    "baobaraffe"
+   ],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "binary77",
+   "values": [
+    "narcileaf",
+    "ruption",
+    "shybulb"
+   ],
+   "written": [
+    "narcileaf",
+    "ruption",
+    "shybulb"
+   ],
+   "tested": [
+    "shybulb"
+   ],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "blackout_no_monsters",
+   "values": [
+    "false",
+    "true"
+   ],
+   "written": [
+    "false",
+    "true"
+   ],
+   "tested": [
+    "true"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 3
+  },
+  {
+   "name": "both_fossils",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "bought_bundle",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "bought_monsters_eyes",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "bought_starry",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "bought_trepidation",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "brad_points",
+   "values": [
+    "0"
+   ],
+   "written": [
+    "0"
+   ],
+   "tested": [],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "format_variable",
+    "set_variable",
+    "variable_math"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "budaye",
+   "values": [],
+   "written": [],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "get_player_monster"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "bumpintomom",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "cady_hastraded",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "cady_willtrade",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "cafe_done",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "cafebattle",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "cammove",
+   "values": [
+    "gone",
+    "now"
+   ],
+   "written": [
+    "gone",
+    "now"
+   ],
+   "tested": [
+    "now"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "can_exit_town",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "candy_dante_commiserates",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "candy_tmleafbarrage",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "captainreturns",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 8
+  },
+  {
+   "name": "cardilingball",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "cardilingchoice",
+   "values": [
+    "empty",
+    "finished",
+    "no",
+    "yes"
+   ],
+   "written": [
+    "empty",
+    "finished",
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "cateye",
+   "values": [],
+   "written": [],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "get_player_monster"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "catgirl_candy_hastraded",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "catgirl_candy_willtrade",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "cathedral_fee",
+   "values": [
+    "100"
+   ],
+   "written": [
+    "100"
+   ],
+   "tested": [],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "cathedral_interest",
+   "values": [
+    "0.1"
+   ],
+   "written": [
+    "0.1"
+   ],
+   "tested": [],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "format_variable",
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "cathedral_interest_full",
+   "values": [],
+   "written": [],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "copy_variable",
+    "format_variable",
+    "variable_math"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "cathedral_share",
+   "values": [
+    "0.5"
+   ],
+   "written": [
+    "0.5"
+   ],
+   "tested": [],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "format_variable",
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "cathedral_share_full",
+   "values": [],
+   "written": [],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "copy_variable",
+    "format_variable",
+    "variable_math"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "cctv_scoop",
+   "values": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "chad_points",
+   "values": [
+    "0"
+   ],
+   "written": [
+    "0"
+   ],
+   "tested": [],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "format_variable",
+    "set_variable",
+    "variable_math"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "chadvsbrad",
+   "values": [
+    "done",
+    "null"
+   ],
+   "written": [
+    "done",
+    "null"
+   ],
+   "tested": [
+    "done"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "cheat_apex",
+   "values": [
+    "enabled"
+   ],
+   "written": [
+    "enabled"
+   ],
+   "tested": [
+    "enabled"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "check_vividactil_morph",
+   "values": [
+    "yes"
+   ],
+   "written": [],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "check_vivipere_morph",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "check_viviphyta_morph",
+   "values": [
+    "yes"
+   ],
+   "written": [],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "check_vivisource_morph",
+   "values": [
+    "yes"
+   ],
+   "written": [],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "check_viviteel_morph",
+   "values": [
+    "yes"
+   ],
+   "written": [],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "check_vivitrans_morph",
+   "values": [
+    "yes"
+   ],
+   "written": [],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "check_vivitron_morph",
+   "values": [
+    "yes"
+   ],
+   "written": [],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "chillimp",
+   "values": [],
+   "written": [],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "get_player_monster"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "choice_floor",
+   "values": [
+    "0floor",
+    "1floor",
+    "2floor",
+    "no",
+    "null"
+   ],
+   "written": [
+    "0floor",
+    "1floor",
+    "2floor",
+    "no",
+    "null"
+   ],
+   "tested": [
+    "0floor",
+    "1floor",
+    "2floor"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 3
+  },
+  {
+   "name": "choice_phase",
+   "values": [
+    "next",
+    "progress",
+    "yes"
+   ],
+   "written": [
+    "next",
+    "progress",
+    "yes"
+   ],
+   "tested": [
+    "next",
+    "progress",
+    "yes"
+   ],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "choicechosen",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "choose",
+   "values": [
+    "chose",
+    "no",
+    "yes"
+   ],
+   "written": [
+    "chose",
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "chose",
+    "no"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "chooses",
+   "values": [
+    "no",
+    "none",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "none",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 9
+  },
+  {
+   "name": "chosen_tech",
+   "values": [],
+   "written": [],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "get_pending_moves"
+   ],
+   "readers": [],
+   "maps": 2
+  },
+  {
+   "name": "christieknows",
+   "values": [
+    "gone",
+    "nobody",
+    "somebody",
+    "stop"
+   ],
+   "written": [
+    "gone",
+    "nobody",
+    "somebody",
+    "stop"
+   ],
+   "tested": [
+    "nobody",
+    "somebody",
+    "stop"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "citypark_cd1",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "citypark_cd2",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "citypark_potion1",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "citypark_potion2",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "citypark_restoration",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "cityparkchoice",
+   "values": [
+    "mistaken",
+    "thats_me"
+   ],
+   "written": [
+    "mistaken",
+    "thats_me"
+   ],
+   "tested": [
+    "mistaken",
+    "thats_me"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "close1",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "comeinside",
+   "values": [
+    "done",
+    "dope",
+    "stahp",
+    "yes"
+   ],
+   "written": [
+    "done",
+    "stahp",
+    "yes"
+   ],
+   "tested": [
+    "done",
+    "dope",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 1,
+   "writers": [
+    "clear_variable",
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "completethis",
+   "values": [
+    "now"
+   ],
+   "written": [
+    "now"
+   ],
+   "tested": [
+    "now"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "confiscation_candy",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "confiscation_done",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "confusedchoice",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "conifrost_joined",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "consoleme",
+   "values": [
+    "now"
+   ],
+   "written": [
+    "now"
+   ],
+   "tested": [
+    "now"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "coproblight_choice",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "cottontunnel_candy",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "cottontunnel_cureall",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "cottontunnel_dung",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "cottontunnel_melee",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "cottontunnel_potion",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "cottontunnel_tea",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "cottontunnelbenden",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "curfewz",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "cut_scenes1",
+   "values": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "cut_scenes2",
+   "values": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "dantebin",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "dantefirst",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "datacenterbillie",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "datascreen1",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "datascreen2",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "datascreen3",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "datascreen4",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "datascreen5",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "datascreen6",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "datascreen7",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "dempsey_flashback",
+   "values": [
+    "done",
+    "no",
+    "yes"
+   ],
+   "written": [
+    "done",
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "done",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "difficulty",
+   "values": [
+    "beginner",
+    "easy",
+    "expert",
+    "hard",
+    "normal"
+   ],
+   "written": [],
+   "tested": [
+    "beginner",
+    "easy",
+    "expert",
+    "hard",
+    "normal"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "dojo_notech",
+   "values": [],
+   "written": [],
+   "tested": [],
+   "testedBare": 2,
+   "cleared": 1,
+   "writers": [
+    "clear_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "dojo_stage",
+   "values": [
+    "no_choice"
+   ],
+   "written": [],
+   "tested": [
+    "no_choice"
+   ],
+   "testedBare": 0,
+   "cleared": 1,
+   "writers": [
+    "clear_variable",
+    "get_player_monster"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "dojobillie",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "dojomagician",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "dojothrichoice",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "dojothrimonster",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "done_with_jeff_opening",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "donewithyou",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "dragonscavebenden2",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "dragonscavedrokoro",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 3
+  },
+  {
+   "name": "dragonscavemal",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "dryadsgrovevolcoli",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "eclipse_bank_zircon",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "eclipse_difficulty",
+   "values": [
+    "level_beginner",
+    "level_easy",
+    "level_expert",
+    "level_hard",
+    "level_normal"
+   ],
+   "written": [
+    "level_beginner",
+    "level_easy",
+    "level_expert",
+    "level_hard",
+    "level_normal"
+   ],
+   "tested": [
+    "level_beginner",
+    "level_easy",
+    "level_expert",
+    "level_hard",
+    "level_normal"
+   ],
+   "testedBare": 2,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "eclipse_event1",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "eclipse_event10",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "eclipse_event11",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 3
+  },
+  {
+   "name": "eclipse_event12",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 3
+  },
+  {
+   "name": "eclipse_event13",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "eclipse_event14",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "eclipse_event15",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "eclipse_event2",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "eclipse_event3",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "eclipse_event3_question",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "eclipse_event4",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "eclipse_event4_question",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "eclipse_event5",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "eclipse_event6",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "eclipse_event7",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "eclipse_event8",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "eclipse_event9",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "eclipse_first",
+   "values": [
+    "first_mon"
+   ],
+   "written": [
+    "first_mon"
+   ],
+   "tested": [
+    "first_mon"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "eclipse_rubbish",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "eclipse_waking_up",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "eighthdialog",
+   "values": [
+    "end"
+   ],
+   "written": [
+    "end"
+   ],
+   "tested": [
+    "end"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "elianeoutput",
+   "values": [
+    "antidote_grapes",
+    "cure_festering",
+    "cureall",
+    "none",
+    "potion",
+    "refreshing_slice",
+    "restoration",
+    "tea"
+   ],
+   "written": [
+    "none"
+   ],
+   "tested": [
+    "antidote_grapes",
+    "cure_festering",
+    "cureall",
+    "potion",
+    "refreshing_slice",
+    "restoration",
+    "tea"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_random_variable",
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "elianetalkedtoday",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "endbattleprof",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "enforcers_response",
+   "values": [
+    "done",
+    "no",
+    "yes"
+   ],
+   "written": [
+    "done",
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "done",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "faint_set",
+   "values": [
+    "null",
+    "pending"
+   ],
+   "written": [
+    "null",
+    "pending"
+   ],
+   "tested": [
+    "pending"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 6
+  },
+  {
+   "name": "fanatics_in_junkyard",
+   "values": [
+    "true"
+   ],
+   "written": [
+    "true"
+   ],
+   "tested": [
+    "true"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "fanatics_in_junkyard2",
+   "values": [
+    "true"
+   ],
+   "written": [
+    "true"
+   ],
+   "tested": [
+    "true"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "fanatics_in_junkyard3",
+   "values": [
+    "true"
+   ],
+   "written": [
+    "true"
+   ],
+   "tested": [
+    "true"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "fanatics_in_junkyard4",
+   "values": [
+    "true"
+   ],
+   "written": [
+    "true"
+   ],
+   "tested": [
+    "true"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "fanatics_in_junkyard5",
+   "values": [
+    "true"
+   ],
+   "written": [
+    "true"
+   ],
+   "tested": [
+    "true"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "fez_hastraded",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "fez_willtrade",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "fifthdialog",
+   "values": [
+    "end"
+   ],
+   "written": [
+    "end"
+   ],
+   "tested": [
+    "end"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "finishedbattle",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "fire_timber_hastraded",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "fire_timber_willtrade",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "firstbattledone",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "firstfightdue",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "firstfightend",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "firstgo",
+   "values": [
+    "gone",
+    "no",
+    "yes"
+   ],
+   "written": [
+    "gone",
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "gone",
+    "no",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "flashback",
+   "values": [
+    "off",
+    "on"
+   ],
+   "written": [
+    "off",
+    "on"
+   ],
+   "tested": [
+    "on"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 11
+  },
+  {
+   "name": "flashback27apr",
+   "values": [
+    "done"
+   ],
+   "written": [
+    "done"
+   ],
+   "tested": [],
+   "testedBare": 2,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "florists_cafe",
+   "values": [
+    "done",
+    "no",
+    "yes"
+   ],
+   "written": [
+    "done",
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "done",
+    "no",
+    "yes"
+   ],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "flower_talkedpetshop",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "foome",
+   "values": [
+    "ye"
+   ],
+   "written": [
+    "ye"
+   ],
+   "tested": [
+    "ye"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "fought_fanatics_in_junkyard",
+   "values": [
+    "true"
+   ],
+   "written": [
+    "true"
+   ],
+   "tested": [
+    "true"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "foundcaptain",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "fourthacolyte",
+   "values": [
+    "finished"
+   ],
+   "written": [
+    "finished"
+   ],
+   "tested": [
+    "finished"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "fourthdialog",
+   "values": [
+    "end"
+   ],
+   "written": [
+    "end"
+   ],
+   "tested": [
+    "end"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "foyer_move",
+   "values": [
+    "done"
+   ],
+   "written": [
+    "done"
+   ],
+   "tested": [
+    "done"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "foyer_talk",
+   "values": [
+    "start"
+   ],
+   "written": [
+    "start"
+   ],
+   "tested": [
+    "start"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "friends",
+   "values": [
+    "maybe"
+   ],
+   "written": [
+    "maybe"
+   ],
+   "tested": [
+    "maybe"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "fufirsttime",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "game_over",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "gatherback",
+   "values": [
+    "done",
+    "yes"
+   ],
+   "written": [
+    "done",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "gender_choice",
+   "values": [
+    "gender_female",
+    "gender_male",
+    "gender_nonbinary"
+   ],
+   "written": [
+    "gender_female",
+    "gender_male",
+    "gender_nonbinary"
+   ],
+   "tested": [],
+   "testedBare": 8,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "getaway",
+   "values": [
+    "pls",
+    "weregone"
+   ],
+   "written": [
+    "pls",
+    "weregone"
+   ],
+   "tested": [
+    "pls",
+    "weregone"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "gettuxemon",
+   "values": [
+    "now"
+   ],
+   "written": [
+    "now"
+   ],
+   "tested": [
+    "now"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "giveegg",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "go_get_tuxemon",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 3
+  },
+  {
+   "name": "goodbyeoldknight",
+   "values": [
+    "finallydone",
+    "heback",
+    "hedead",
+    "helpme",
+    "herewegoagain",
+    "howcaniresistyou",
+    "mama",
+    "mamamia",
+    "ohwell",
+    "yes"
+   ],
+   "written": [
+    "finallydone",
+    "heback",
+    "hedead",
+    "helpme",
+    "herewegoagain",
+    "howcaniresistyou",
+    "mama",
+    "mamamia",
+    "ohwell",
+    "yes"
+   ],
+   "tested": [
+    "finallydone",
+    "heback",
+    "hedead",
+    "helpme",
+    "herewegoagain",
+    "howcaniresistyou",
+    "mama",
+    "mamamia",
+    "ohwell",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "got_Bamboon",
+   "values": [
+    "true"
+   ],
+   "written": [
+    "true"
+   ],
+   "tested": [
+    "true"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "got_Fruitera",
+   "values": [
+    "true"
+   ],
+   "written": [
+    "true"
+   ],
+   "tested": [
+    "true"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "got_all_three",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "got_both_fossils",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "got_coproblight",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "got_first_tuxemon",
+   "values": [
+    "true"
+   ],
+   "written": [
+    "true"
+   ],
+   "tested": [
+    "true"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "got_pd_rhincus",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "got_pd_shammer",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "got_rhincus",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "got_shammer",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "gotbotbot",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "grampsask",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "greeter_greets",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "grinflaretype",
+   "values": [
+    "earth",
+    "fire"
+   ],
+   "written": [
+    "earth",
+    "fire"
+   ],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "grintot",
+   "values": [],
+   "written": [],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "get_player_monster"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "happy",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "has_sold_painting",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "has_sold_paintings",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "havetuxemon",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "healed_josephine",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "heardcapture",
+   "values": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "heaviest",
+   "values": [
+    "apeoro",
+    "jemuar",
+    "mauai"
+   ],
+   "written": [
+    "apeoro",
+    "jemuar",
+    "mauai"
+   ],
+   "tested": [
+    "jemuar"
+   ],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "henrik_react",
+   "values": [
+    "start",
+    "yes"
+   ],
+   "written": [
+    "start",
+    "yes"
+   ],
+   "tested": [
+    "start",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "hospitalbillie",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "hospitalcure",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 6
+  },
+  {
+   "name": "iamsecret",
+   "values": [
+    "ohno",
+    "yes"
+   ],
+   "written": [
+    "ohno",
+    "yes"
+   ],
+   "tested": [
+    "ohno",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "ignibus",
+   "values": [],
+   "written": [],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "get_player_monster"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "incident_greenwash",
+   "values": [
+    "done",
+    "no",
+    "yes"
+   ],
+   "written": [
+    "done",
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "done",
+    "no",
+    "yes"
+   ],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "intro_fossilisator",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "intro_scoop",
+   "values": [
+    "done"
+   ],
+   "written": [
+    "done"
+   ],
+   "tested": [
+    "done"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "introdcottoncafe2",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "introducedaycare",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "invention_choice",
+   "values": [
+    "xp_feeder",
+    "xp_transmitter"
+   ],
+   "written": [
+    "xp_feeder",
+    "xp_transmitter"
+   ],
+   "tested": [
+    "xp_feeder",
+    "xp_transmitter"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "invention_given",
+   "values": [
+    "xp_feeder",
+    "xp_transmitter"
+   ],
+   "written": [
+    "xp_feeder",
+    "xp_transmitter"
+   ],
+   "tested": [],
+   "testedBare": 6,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "invention_swap_feeder",
+   "values": [
+    "no",
+    "none",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "none",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "invention_swap_transmitter",
+   "values": [
+    "no",
+    "none",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "none",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "isitok",
+   "values": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "jason",
+   "values": [
+    "gone"
+   ],
+   "written": [
+    "gone"
+   ],
+   "tested": [
+    "gone"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "kernelquest",
+   "values": [
+    "done",
+    "yes"
+   ],
+   "written": [
+    "done",
+    "yes"
+   ],
+   "tested": [
+    "done",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 7
+  },
+  {
+   "name": "kernelquestbegin",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "killgrace",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "kyletalkafter4th",
+   "values": [
+    "done"
+   ],
+   "written": [
+    "done"
+   ],
+   "tested": [
+    "done"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "lambertchosen",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "leavemealone",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "leavescoophq",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 1,
+   "cleared": 2,
+   "writers": [
+    "clear_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "left",
+   "values": [
+    "true"
+   ],
+   "written": [
+    "true"
+   ],
+   "tested": [
+    "true"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "letmechoose",
+   "values": [
+    "pls"
+   ],
+   "written": [
+    "pls"
+   ],
+   "tested": [
+    "pls"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "letusthrough",
+   "values": [
+    "almost",
+    "maybe",
+    "no"
+   ],
+   "written": [
+    "almost",
+    "maybe"
+   ],
+   "tested": [
+    "almost",
+    "maybe",
+    "no"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "level_65",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "level_boost10",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "lightest",
+   "values": [
+    "furnursus",
+    "snokari",
+    "woodoor"
+   ],
+   "written": [
+    "furnursus",
+    "snokari",
+    "woodoor"
+   ],
+   "tested": [
+    "snokari"
+   ],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "likehoney",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [],
+   "testedBare": 2,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "lionmountainenforcer",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "lossbattle",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "luckgiveegg",
+   "values": [
+    "9"
+   ],
+   "written": [],
+   "tested": [
+    "9"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "random_integer"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "maniac_achievements",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "maniac_help",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "mansion_berry",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "mansion_grandtux",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "mansion_potion",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "mansion_tea",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "mansion_tmiceshield",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "mansion_tmubuntu",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "maple_bedroom1",
+   "values": [
+    "true"
+   ],
+   "written": [],
+   "tested": [
+    "true"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "maple_got_tuxemon1",
+   "values": [
+    "true"
+   ],
+   "written": [
+    "true"
+   ],
+   "tested": [
+    "true"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "maplecotton",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [],
+   "testedBare": 2,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "method_money",
+   "values": [
+    "conserved"
+   ],
+   "written": [
+    "conserved"
+   ],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "mieke_hastraded",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "mieke_willtrade",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "misaisgone",
+   "values": [
+    "true"
+   ],
+   "written": [
+    "true"
+   ],
+   "tested": [
+    "true"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "momquest",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "momthanked",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "monsters",
+   "values": [
+    "full"
+   ],
+   "written": [
+    "full"
+   ],
+   "tested": [
+    "full"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "movealong",
+   "values": [
+    "now"
+   ],
+   "written": [
+    "now"
+   ],
+   "tested": [
+    "now"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "moveit2",
+   "values": [
+    "now"
+   ],
+   "written": [
+    "now"
+   ],
+   "tested": [
+    "now"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "moveit3",
+   "values": [
+    "now"
+   ],
+   "written": [
+    "now"
+   ],
+   "tested": [
+    "now"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "moveon",
+   "values": [
+    "bye",
+    "yes"
+   ],
+   "written": [
+    "bye",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "moveonnow",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "moveplayer",
+   "values": [
+    "false",
+    "true"
+   ],
+   "written": [
+    "false",
+    "true"
+   ],
+   "tested": [
+    "true"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "movingon",
+   "values": [
+    "now"
+   ],
+   "written": [
+    "now"
+   ],
+   "tested": [
+    "now"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "muse_bought",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "muse_bundle",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "muse_monsters",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "muse_starry",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "muse_trepidation",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "myintrochoice",
+   "values": [
+    "budaye",
+    "dollfin",
+    "grintot",
+    "ignibus",
+    "memnomnom"
+   ],
+   "written": [
+    "budaye",
+    "dollfin",
+    "grintot",
+    "ignibus",
+    "memnomnom"
+   ],
+   "tested": [
+    "budaye",
+    "dollfin",
+    "grintot",
+    "ignibus",
+    "memnomnom"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "choice_monster"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "mymonchoice",
+   "values": [
+    "agnite",
+    "lambert",
+    "nut",
+    "rockitten",
+    "tweesher"
+   ],
+   "written": [
+    "agnite",
+    "lambert",
+    "nut",
+    "rockitten",
+    "tweesher"
+   ],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "notpaidmuseum",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "npcs_are_created",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "nurse_spyder",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "nutchosen",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "ocaptain",
+   "values": [
+    "done",
+    "no",
+    "yes"
+   ],
+   "written": [
+    "done",
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "offer_josephine",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "ohnotyou",
+   "values": [
+    "gasp",
+    "gone",
+    "itsme",
+    "removed"
+   ],
+   "written": [
+    "gasp",
+    "gone",
+    "itsme",
+    "removed"
+   ],
+   "tested": [
+    "gasp",
+    "gone",
+    "itsme"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "omnichannel-ready-wall",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "omnichannel1wall",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 4
+  },
+  {
+   "name": "omnichannel2wall",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "omnichannelhere",
+   "values": [
+    "here"
+   ],
+   "written": [
+    "here"
+   ],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "omnichannelradioannounce",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 3
+  },
+  {
+   "name": "openthree",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 3
+  },
+  {
+   "name": "opentwo",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 3
+  },
+  {
+   "name": "park_out",
+   "values": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "party_lost_hp",
+   "values": [],
+   "written": [],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "format_variable"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "party_sick",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "passcode_color",
+   "values": [
+    "black",
+    "blue",
+    "green",
+    "indigo",
+    "orange",
+    "red",
+    "violet",
+    "yellow"
+   ],
+   "written": [
+    "black",
+    "blue",
+    "green",
+    "indigo",
+    "orange",
+    "red",
+    "violet",
+    "yellow"
+   ],
+   "tested": [
+    "blue"
+   ],
+   "testedBare": 2,
+   "cleared": 6,
+   "writers": [
+    "clear_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "passcode_number",
+   "values": [
+    "..---",
+    "02",
+    "05",
+    "10",
+    "2!",
+    "2F",
+    "B",
+    "II"
+   ],
+   "written": [
+    "..---",
+    "02",
+    "05",
+    "10",
+    "2!",
+    "2F",
+    "B",
+    "II"
+   ],
+   "tested": [
+    "10"
+   ],
+   "testedBare": 6,
+   "cleared": 6,
+   "writers": [
+    "clear_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "paygallery",
+   "values": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "paymuseum",
+   "values": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "paypark",
+   "values": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "pd_rhincus_choice",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "pd_shammer_choice",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "potion_xiang",
+   "values": [
+    "no_choice"
+   ],
+   "written": [],
+   "tested": [
+    "no_choice"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "get_player_monster"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "probably_agnite",
+   "values": [],
+   "written": [],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "get_player_monster"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "prof_candy_hastraded",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "prof_choice",
+   "values": [
+    "cardiling",
+    "rockitten",
+    "tweesher"
+   ],
+   "written": [
+    "cardiling",
+    "rockitten",
+    "tweesher"
+   ],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "prof_willtrade",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "proftalk",
+   "values": [
+    "true"
+   ],
+   "written": [],
+   "tested": [
+    "true"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "proftalk1",
+   "values": [
+    "false",
+    "true"
+   ],
+   "written": [
+    "false",
+    "true"
+   ],
+   "tested": [
+    "true"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "proftalk2",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "pronoun_choice",
+   "values": [
+    "pronoun_he",
+    "pronoun_she",
+    "pronoun_they"
+   ],
+   "written": [
+    "pronoun_he",
+    "pronoun_she",
+    "pronoun_they"
+   ],
+   "tested": [
+    "pronoun_he",
+    "pronoun_she",
+    "pronoun_they"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "quarantine_darling",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "quarantine_garvan",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "quarantine_lesley",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "quarantine_melanie",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "quarantine_qua2",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "quebotbot",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "question_intro",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "question_xero",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "race_choice",
+   "values": [
+    "black_female",
+    "black_male",
+    "gender_enby",
+    "gender_whatever",
+    "white_female",
+    "white_male"
+   ],
+   "written": [
+    "black_female",
+    "black_male",
+    "gender_enby",
+    "gender_whatever",
+    "white_female",
+    "white_male"
+   ],
+   "tested": [
+    "black_female",
+    "black_male",
+    "gender_enby",
+    "gender_whatever",
+    "white_female",
+    "white_male"
+   ],
+   "testedBare": 6,
+   "cleared": 0,
+   "writers": [
+    "choice_npc"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "redo",
+   "values": [
+    "finished",
+    "please"
+   ],
+   "written": [
+    "finished",
+    "please"
+   ],
+   "tested": [
+    "please"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "rename",
+   "values": [],
+   "written": [],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "get_player_monster"
+   ],
+   "readers": [],
+   "maps": 2
+  },
+  {
+   "name": "replaceomnigrunt4",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "return_monster",
+   "values": [
+    "no",
+    "null"
+   ],
+   "written": [
+    "null"
+   ],
+   "tested": [
+    "no"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "returnruff",
+   "values": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "rhincus",
+   "values": [],
+   "written": [],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "get_player_monster"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "rhincus_choice",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "rivals",
+   "values": [
+    "maybe"
+   ],
+   "written": [
+    "maybe"
+   ],
+   "tested": [
+    "maybe"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "rivergoto",
+   "values": [
+    "candy_port",
+    "flower_city",
+    "leather_town",
+    "nothing",
+    "paper_town",
+    "timber_town"
+   ],
+   "written": [
+    "candy_port",
+    "flower_city",
+    "leather_town",
+    "nothing",
+    "paper_town",
+    "timber_town"
+   ],
+   "tested": [
+    "candy_port",
+    "flower_city",
+    "leather_town",
+    "paper_town",
+    "timber_town"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 5
+  },
+  {
+   "name": "rockittenball",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "rockittenchoice",
+   "values": [
+    "empty",
+    "finished",
+    "no",
+    "yes"
+   ],
+   "written": [
+    "empty",
+    "finished",
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "rockittenchosen",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "route2billie",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "route2billiefought",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "route2choice",
+   "values": [
+    "again",
+    "not_really",
+    "sure_i_do"
+   ],
+   "written": [
+    "again",
+    "not_really",
+    "sure_i_do"
+   ],
+   "tested": [
+    "again",
+    "not_really",
+    "sure_i_do"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "route4_boost",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "route4_super",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "route4_tea",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "route4billie",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "route6billie",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "route6mom",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "route6rigel",
+   "values": [
+    "yes"
+   ],
+   "written": [],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "routea_cureall",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "routea_super",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "routea_tea",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "routeabillie",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "routebbillie",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "routebelectra",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "routec_tm_altitude",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "ruff",
+   "values": [
+    "no",
+    "null",
+    "proceed",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "null",
+    "proceed",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "proceed",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "ruff_back",
+   "values": [],
+   "written": [],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "get_player_monster"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "sadsong",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "sandy_hastraded",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "sandy_willtrade",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "sarah_flashback",
+   "values": [
+    "",
+    "done",
+    "no",
+    "yes"
+   ],
+   "written": [
+    "",
+    "done",
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "done",
+    "no",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "save1",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "save2",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "save3",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "scenario_choice",
+   "values": [
+    "spyder_campaign",
+    "water_campaign",
+    "xero_campaign"
+   ],
+   "written": [
+    "spyder_campaign",
+    "water_campaign",
+    "xero_campaign"
+   ],
+   "tested": [
+    "spyder_campaign",
+    "water_campaign",
+    "xero_campaign"
+   ],
+   "testedBare": 2,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "scene",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 2,
+   "writers": [
+    "clear_variable",
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "scoop_coeff",
+   "values": [
+    "50"
+   ],
+   "written": [
+    "50"
+   ],
+   "tested": [],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "scoop_price",
+   "values": [],
+   "written": [],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "format_variable",
+    "variable_math"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "scoopcochinia",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "scoopcochinib",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "scoopcochinic",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "scooplandrace",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 3
+  },
+  {
+   "name": "scooplapinoua",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "scooplapinoub",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "scooplapinouc",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "screendown",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 3
+  },
+  {
+   "name": "seconddialog",
+   "values": [
+    "end",
+    "start"
+   ],
+   "written": [
+    "end",
+    "start"
+   ],
+   "tested": [
+    "end",
+    "start"
+   ],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "secondgo",
+   "values": [
+    "gone",
+    "yes"
+   ],
+   "written": [
+    "gone",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "secret_ball",
+   "values": [
+    "found"
+   ],
+   "written": [
+    "found"
+   ],
+   "tested": [
+    "found"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "seencandy",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 6
+  },
+  {
+   "name": "seentimber",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 5
+  },
+  {
+   "name": "seizedtimber",
+   "values": [
+    "thats_crazy",
+    "thats_wild"
+   ],
+   "written": [
+    "thats_crazy",
+    "thats_wild"
+   ],
+   "tested": [],
+   "testedBare": 2,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "selltuxemon",
+   "values": [
+    "no",
+    "null",
+    "proceed",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "null",
+    "proceed",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "proceed",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "seventhdialog",
+   "values": [
+    "end"
+   ],
+   "written": [
+    "end"
+   ],
+   "tested": [
+    "end"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "shady",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "shaftscheme",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "shammer",
+   "values": [],
+   "written": [],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "get_player_monster"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "shammer_choice",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "shown_hints",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "shows_vivicinder",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "shows_vividactil",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "shows_viviphyta",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "shows_vivisource",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "shows_viviteel",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "shows_vivitrans",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "shows_vivitron",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "sixthdialog",
+   "values": [
+    "end"
+   ],
+   "written": [
+    "end"
+   ],
+   "tested": [
+    "end"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "skadoosh",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "smallest",
+   "values": [
+    "ignibus",
+    "possessun",
+    "squink"
+   ],
+   "written": [
+    "ignibus",
+    "possessun",
+    "squink"
+   ],
+   "tested": [
+    "ignibus"
+   ],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "snark",
+   "values": [
+    "now"
+   ],
+   "written": [
+    "now"
+   ],
+   "tested": [
+    "now"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "snarlonmountain",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "sold",
+   "values": [],
+   "written": [],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "get_player_monster"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "soldier_on_mission",
+   "values": [
+    "on"
+   ],
+   "written": [
+    "on"
+   ],
+   "tested": [
+    "on"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "sowhat",
+   "values": [
+    "spyder_candyinn_james2",
+    "spyder_candyinn_james3"
+   ],
+   "written": [
+    "spyder_candyinn_james2",
+    "spyder_candyinn_james3"
+   ],
+   "tested": [
+    "spyder_candyinn_james2",
+    "spyder_candyinn_james3"
+   ],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "spokencottonhacker",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "spokendante",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "spokengrannypiper",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "spokenmom",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "spokenmomcotton",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "spyder_boulder",
+   "values": [
+    "remove_entity"
+   ],
+   "written": [],
+   "tested": [
+    "remove_entity"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "spyder_intro",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "stahp",
+   "values": [
+    "stop"
+   ],
+   "written": [
+    "stop"
+   ],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "start_bonding",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 1,
+   "writers": [
+    "clear_variable",
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "startchoice",
+   "values": [
+    "continue",
+    "maybe",
+    "no",
+    "yes"
+   ],
+   "written": [
+    "continue",
+    "maybe",
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "continue",
+    "no",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "startfirstbattle",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "stoptalking",
+   "values": [
+    "now"
+   ],
+   "written": [
+    "now"
+   ],
+   "tested": [
+    "now"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "student1_yn",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 1,
+   "cleared": 2,
+   "writers": [
+    "clear_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "student2_yn",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 1,
+   "cleared": 2,
+   "writers": [
+    "clear_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "swimming",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "tabaacolyte4battle",
+   "values": [
+    "finished"
+   ],
+   "written": [
+    "finished"
+   ],
+   "tested": [
+    "finished"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "talked_to_maple_junkyard",
+   "values": [
+    "true"
+   ],
+   "written": [
+    "true"
+   ],
+   "tested": [
+    "true"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "talkedonce",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "talkpls",
+   "values": [
+    "gone",
+    "yes"
+   ],
+   "written": [
+    "gone",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "tallest",
+   "values": [
+    "pigabyte",
+    "pythock",
+    "snarlon"
+   ],
+   "written": [
+    "pigabyte",
+    "pythock",
+    "snarlon"
+   ],
+   "tested": [
+    "snarlon"
+   ],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "tasteful_zhu",
+   "values": [],
+   "written": [],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "get_player_monster"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "tealucy",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "techchoice",
+   "values": [
+    "menu_item",
+    "menu_monster"
+   ],
+   "written": [
+    "menu_item",
+    "menu_monster"
+   ],
+   "tested": [
+    "menu_item",
+    "menu_monster"
+   ],
+   "testedBare": 0,
+   "cleared": 10,
+   "writers": [
+    "clear_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 5
+  },
+  {
+   "name": "testcleo",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "testmap_potion1",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "testmap_potion2",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "thewifedidspeak",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "theyrehere",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "thirddialog",
+   "values": [
+    "end"
+   ],
+   "written": [
+    "end"
+   ],
+   "tested": [
+    "end"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "threemusketeers",
+   "values": [
+    "done",
+    "yay"
+   ],
+   "written": [
+    "done",
+    "yay"
+   ],
+   "tested": [
+    "yay"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "thriquestion",
+   "values": [
+    "strategy",
+    "strength"
+   ],
+   "written": [
+    "strategy",
+    "strength"
+   ],
+   "tested": [
+    "strategy",
+    "strength"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "timberdantewarn",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "timbermom",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "timetomove",
+   "values": [
+    "done",
+    "finite",
+    "yes"
+   ],
+   "written": [
+    "done",
+    "finite",
+    "yes"
+   ],
+   "tested": [
+    "done",
+    "finite",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "treestumps",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [],
+   "testedBare": 2,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "trigger_fossilator",
+   "values": [
+    "no"
+   ],
+   "written": [
+    "no"
+   ],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "trigger_fossilisator",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "tuintro",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "tunnelb_rhincus",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "tunnelb_shammer",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "tuxchoice",
+   "values": [
+    "end",
+    "fruitera",
+    "hydrone",
+    "rockitten",
+    "welcome"
+   ],
+   "written": [
+    "end",
+    "fruitera",
+    "hydrone",
+    "rockitten",
+    "welcome"
+   ],
+   "tested": [
+    "end",
+    "fruitera",
+    "hydrone",
+    "rockitten"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "choice_monster",
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "tweesher",
+   "values": [],
+   "written": [],
+   "tested": [],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "get_player_monster"
+   ],
+   "readers": [],
+   "maps": 1
+  },
+  {
+   "name": "tweesherball",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "tweesherchoice",
+   "values": [
+    "empty",
+    "finished",
+    "no",
+    "yes"
+   ],
+   "written": [
+    "empty",
+    "finished",
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "tweesherchosen",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "unhinged",
+   "values": [
+    "consequences",
+    "escaped",
+    "second",
+    "start"
+   ],
+   "written": [
+    "consequences",
+    "escaped",
+    "second",
+    "start"
+   ],
+   "tested": [
+    "consequences",
+    "escaped",
+    "second",
+    "start"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "unveildefossilator",
+   "values": [
+    "done",
+    "no",
+    "yes"
+   ],
+   "written": [
+    "done",
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "done",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "vincefirst",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "vincesecond",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "visitcottonmart",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 3
+  },
+  {
+   "name": "visitedcottoncafe",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 3
+  },
+  {
+   "name": "walledbillie",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "walledmidas",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "wanintro",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "water_dude_steals",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "water_intro",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "waterdefeatedguy1",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "watermayortalked1",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "watermayortalked2",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 3
+  },
+  {
+   "name": "wayfarer1_botbot",
+   "values": [
+    "no",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "no",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "wemoving",
+   "values": [
+    "completenow",
+    "done",
+    "finished",
+    "now"
+   ],
+   "written": [
+    "completenow",
+    "done",
+    "finished",
+    "now"
+   ],
+   "tested": [
+    "done",
+    "finished",
+    "now"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "which_taste",
+   "values": [
+    "null",
+    "taste_cold",
+    "taste_warm"
+   ],
+   "written": [
+    "null",
+    "taste_cold",
+    "taste_warm"
+   ],
+   "tested": [
+    "taste_cold",
+    "taste_warm"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "whoartthou",
+   "values": [
+    "done",
+    "finished",
+    "florist",
+    "person",
+    "tuxemon"
+   ],
+   "written": [
+    "done",
+    "finished",
+    "florist",
+    "person",
+    "tuxemon"
+   ],
+   "tested": [
+    "done",
+    "florist",
+    "person",
+    "tuxemon"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "x1",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "xeon_creation",
+   "values": [
+    "done",
+    "no",
+    "yes"
+   ],
+   "written": [
+    "done",
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "done",
+    "no",
+    "yes"
+   ],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "xero_intro",
+   "values": [
+    "done"
+   ],
+   "written": [
+    "done"
+   ],
+   "tested": [
+    "done"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "xiang_potion_choice",
+   "values": [
+    "null",
+    "yes"
+   ],
+   "written": [
+    "null",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "xiang_yn",
+   "values": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "xiangfirsttime",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "yahoo",
+   "values": [
+    "maybe"
+   ],
+   "written": [
+    "maybe"
+   ],
+   "tested": [
+    "maybe"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "yinfirsttime",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "zhu_taste_choice",
+   "values": [
+    "null",
+    "yes"
+   ],
+   "written": [
+    "null",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "zhu_taste_done",
+   "values": [
+    "null",
+    "yes"
+   ],
+   "written": [
+    "null",
+    "yes"
+   ],
+   "tested": [
+    "null",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "zhu_yn",
+   "values": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "written": [
+    "no",
+    "null",
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "zhufirsttime",
+   "values": [
+    "yes"
+   ],
+   "written": [
+    "yes"
+   ],
+   "tested": [
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  },
+  {
+   "name": "zircon_argon",
+   "values": [
+    "done",
+    "no",
+    "yes"
+   ],
+   "written": [
+    "done",
+    "no",
+    "yes"
+   ],
+   "tested": [
+    "done",
+    "no",
+    "yes"
+   ],
+   "testedBare": 1,
+   "cleared": 0,
+   "writers": [
+    "set_variable",
+    "translated_dialog_choice"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 2
+  },
+  {
+   "name": "zircon_vs_argon",
+   "values": [
+    "done",
+    "yes"
+   ],
+   "written": [
+    "done",
+    "yes"
+   ],
+   "tested": [
+    "done",
+    "yes"
+   ],
+   "testedBare": 0,
+   "cleared": 0,
+   "writers": [
+    "set_variable"
+   ],
+   "readers": [
+    "is variable_set",
+    "not variable_set"
+   ],
+   "maps": 1
+  }
+ ]
+}

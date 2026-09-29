@@ -1,0 +1,58 @@
+[    0] START spyder_bedroom @4,4
+[    1] TEXT  Do you want to skip the intro?
+[    4] CHOICE [No | Yes]
+[    7] PICK  Yes
+[   13] MAP   spyder_bedroom -> spyder_paper_scoop @4,8
+[   18] PASS  skip-intro choice transfers to the Paper Town mart
+[   19] TEXT  What a great presentation from our CEO! All Gold / members are being offered a free tuxemon.
+[   22] TEXT  Just fill in this form.
+[   86] TEXT  Just fill in this form.
+[   89] TEXT  What is your name?
+[   93] CHOICE [Budaye | Dollfin | Grintot | Ignibus]
+[   94] PICK  Budaye
+[   95] CHOICE [Yes | No]
+[   96] PICK  Yes
+[   98] PICK  Yes
+[   99] TEXT  Please, now return the form to the Shop Assistant, / so we can give you the tuxemon.
+[  268] TEXT  I'm sorry, you are not a Gold member. This offer is / for Gold members only.
+[  271] TEXT  Please go home now.
+[  309] MAP   spyder_paper_scoop -> spyder_bedroom @3,4
+[  314] PASS  mart intro ends back in the bedroom
+[  351] MAP   spyder_bedroom -> spyder_downstairs @0,2
+[  355] PASS  stairs (touch) lead downstairs
+[  365] PASS  the spawn guard created mom (party empty)
+[  408] TEXT  Good morning sunshine! Rest here any time you like.
+[  412] TEXT  Why am I saying that? You live here!
+[  429] PASS  talking to mom ran her first talk page
+[  442] MAP   spyder_downstairs -> spyder_paper_town @10,7
+[  446] PASS  the front door leads to Paper Town
+[  526] TEXT  I recognize you, you're the kid who hasn't got a / Gold Pass.
+[  529] TEXT  You know, I might be able to help you out.
+[  533] TEXT  When the fancy new tuxemon come through from the / Cathedral, we just threw all our old ones in the / bin!
+[  537] TEXT  It seems like such a waste, especially when kids / like you don't have any!
+[  541] TEXT  *rummages* *rumages*
+[  575] TEXT  Here we go, looks like there's monsters in most of / these bins.
+[  578] TEXT  Sounds like my boss is calling. Good luck!
+[  595] PASS  the first-monster strip (touch area) ran Dante's scene
+[  629] TEXT  There is something here...
+[  633] TEXT  Do you want ROCKITTEN?
+[  637] CHOICE [Yes | No]
+[  638] PICK  Yes
+[  640] TEXT  Rockitten
+[  673] TEXT  Hey, what are you doing rummaging in bins? That's / gross - and it's against the rules!
+[  676] TEXT  ...
+[  680] TEXT  What, they were throwing out perfectly good tuxemon?
+[  684] TEXT  ...
+[  688] TEXT  Well, if they were perfectly good, they wouldn't / throw them out, would they?
+[  692] TEXT  They must be inferior to the new models. Here, I'll / show you!
+[  696] TEXT  [BATTLE] Billie / (P1 placeholder: the player wins)
+[  701] TEXT  Huh, must be a fluke. There's no way the new model / would be worse than the old!
+[  734] TEXT  ...
+[  737] TEXT  I'll heal you up this time, but I'm not a charity. / Rest up at home next time your monsters get worn / out.
+[  754] PASS  choosing Rockitten gave a monster (placeholder party)
+[  754] PASS  the first fight ran the battle placeholder
+[  754] PASS  the win branch closed the fight (firstfightend=no)
+[  818] TEXT  Sweetie, if you're going into the big wide world, / would you bring me back some tuxeballs from the / Cotton Mart?
+[  821] TEXT  There's Ziggurats loose in my workshop and they're / chewing through the cables.
+[  846] PASS  the Route 1 exit opens after the fight (Error: transfer: unknown map spyder_route1)
+[  846] END   frames=846 at 30 Hz (28.2 s virtual)

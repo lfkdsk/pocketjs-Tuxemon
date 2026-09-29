@@ -1,0 +1,2644 @@
+{
+ "source": "/var/tmp/tuxemon-src",
+ "maps": 263,
+ "scenarios": {
+  "(none)": 57,
+  "eclipse": 23,
+  "spyder": 99,
+  "start_tuxemon": 1,
+  "tobedefined": 3,
+  "xero": 80
+ },
+ "files": {
+  "events": 4578,
+  "byKind": {
+   "tmxEvent": 3686,
+   "tmxInit": 6,
+   "yamlEvent": 886,
+   "yamlInit": 0
+  },
+  "actionTypes": 98,
+  "actionUses": 13617,
+  "conditionTypes": 40,
+  "conditionUses": 8663,
+  "behaviourTypes": 1,
+  "behaviourUses": 787,
+  "actions": [
+   {
+    "type": "translated_dialog",
+    "count": 2068,
+    "maps": 176,
+    "argc": {
+     "1": 1813,
+     "3": 145,
+     "4": 8,
+     "5": 102
+    },
+    "examples": [
+     "translated_dialog 37707_computer",
+     "translated_dialog 37707_town01",
+     "translated_dialog 37707_sign_welcome",
+     "translated_dialog 37707_sign_tower"
+    ]
+   },
+   {
+    "type": "char_face",
+    "count": 2027,
+    "maps": 236,
+    "argc": {
+     "1": 5,
+     "2": 2022
+    },
+    "examples": [
+     "char_face 37707_male,down",
+     "char_face 37707_female,down",
+     "char_face 37707_male_missing,down",
+     "char_face 37707_female_missing,down"
+    ]
+   },
+   {
+    "type": "create_npc",
+    "count": 1503,
+    "maps": 177,
+    "argc": {
+     "3": 708,
+     "4": 795
+    },
+    "examples": [
+     "create_npc 37707_male,33,8",
+     "create_npc 37707_female,12,15",
+     "create_npc 37707_male_missing,33,8",
+     "create_npc 37707_female_missing,12,15"
+    ]
+   },
+   {
+    "type": "transition_teleport",
+    "count": 1049,
+    "maps": 253,
+    "argc": {
+     "4": 52,
+     "5": 997
+    },
+    "examples": [
+     "transition_teleport player,37707_town.tmx,24,6,0.5",
+     "transition_teleport player,37707_town_missing.tmx,24,6,0.5",
+     "transition_teleport player,37707_town.tmx,35,1,0.5",
+     "transition_teleport player,37707_tower.tmx,12,21,0.5"
+    ]
+   },
+   {
+    "type": "add_monster",
+    "count": 792,
+    "maps": 84,
+    "argc": {
+     "2": 75,
+     "3": 4,
+     "5": 713
+    },
+    "examples": [
+     "add_monster fruitera,10",
+     "add_monster bamboon,10",
+     "add_monster hydrone,20,classic_gym_leader_astra,5,10",
+     "add_monster nudikill,20,classic_gym_leader_astra,5,10"
+    ]
+   },
+   {
+    "type": "char_talk",
+    "count": 772,
+    "maps": 60,
+    "argc": {
+     "2": 772
+    },
+    "examples": [
+     "char_talk classic_gym_leader_astra,pre_battle",
+     "char_talk classic_gym_leader_astra,post_battle_lose",
+     "char_talk classic_gym_leader_bravion,pre_battle",
+     "char_talk classic_gym_leader_bravion,post_battle_lose"
+    ]
+   },
+   {
+    "type": "set_variable",
+    "count": 715,
+    "maps": 118,
+    "argc": {
+     "1": 715
+    },
+    "examples": [
+     "set_variable 37707_tower:activated",
+     "set_variable 37707_tower:entered",
+     "set_variable 37707_sign:read",
+     "set_variable 37707_female:spoke"
+    ]
+   },
+   {
+    "type": "random_encounter",
+    "count": 476,
+    "maps": 56,
+    "argc": {
+     "1": 133,
+     "2": 343
+    },
+    "examples": [
+     "random_encounter 37707_town",
+     "random_encounter 37707_town_missing",
+     "random_encounter default_encounter",
+     "random_encounter spyder_citypark,11"
+    ]
+   },
+   {
+    "type": "wait",
+    "count": 441,
+    "maps": 54,
+    "argc": {
+     "1": 441
+    },
+    "examples": [
+     "wait 0.4",
+     "wait 0.2",
+     "wait 0.3",
+     "wait 1"
+    ]
+   },
+   {
+    "type": "pathfind",
+    "count": 336,
+    "maps": 61,
+    "argc": {
+     "3": 336
+    },
+    "examples": [
+     "pathfind maple_wren,6,18",
+     "pathfind maple_wren,14,18",
+     "pathfind cfanatic2,8,21",
+     "pathfind cfanatic1,11,21"
+    ]
+   },
+   {
+    "type": "start_battle",
+    "count": 331,
+    "maps": 78,
+    "argc": {
+     "2": 331
+    },
+    "examples": [
+     "start_battle player,2",
+     "start_battle player,classic_gym_leader_astra",
+     "start_battle player,classic_gym_leader_bravion",
+     "start_battle player,classic_gym_leader_ferrum"
+    ]
+   },
+   {
+    "type": "unlock_controls",
+    "count": 330,
+    "maps": 92,
+    "argc": {
+     "0": 330
+    },
+    "examples": [
+     "unlock_controls"
+    ]
+   },
+   {
+    "type": "lock_controls",
+    "count": 323,
+    "maps": 93,
+    "argc": {
+     "0": 323
+    },
+    "examples": [
+     "lock_controls"
+    ]
+   },
+   {
+    "type": "play_map_animation",
+    "count": 276,
+    "maps": 24,
+    "argc": {
+     "4": 276
+    },
+    "examples": [
+     "play_map_animation grass,0.1,noloop,player",
+     "play_map_animation grass_red,0.1,noloop,player",
+     "play_map_animation grass_blue,0.1,noloop,player"
+    ]
+   },
+   {
+    "type": "remove_npc",
+    "count": 224,
+    "maps": 61,
+    "argc": {
+     "1": 224
+    },
+    "examples": [
+     "remove_npc allie",
+     "remove_npc aeble",
+     "remove_npc grace",
+     "remove_npc tallon"
+    ]
+   },
+   {
+    "type": "pathfind_to_char",
+    "count": 201,
+    "maps": 50,
+    "argc": {
+     "2": 181,
+     "3": 20
+    },
+    "examples": [
+     "pathfind_to_char player,spyder_hospital1_aurora",
+     "pathfind_to_char player,spyder_hospital1_eleni",
+     "pathfind_to_char player,spyder_hospital1_felu",
+     "pathfind_to_char player,spyder_hospital1_liane"
+    ]
+   },
+   {
+    "type": "play_music",
+    "count": 200,
+    "maps": 197,
+    "argc": {
+     "1": 200
+    },
+    "examples": [
+     "play_music music_mystic_island",
+     "play_music music_mystic_island_reverse",
+     "play_music music_adventure_begins",
+     "play_music music_town_theme"
+    ]
+   },
+   {
+    "type": "set_environment",
+    "count": 174,
+    "maps": 119,
+    "argc": {
+     "1": 174
+    },
+    "examples": [
+     "set_environment grass",
+     "set_environment 37707",
+     "set_environment night_grass",
+     "set_environment interior"
+    ]
+   },
+   {
+    "type": "translated_dialog_choice",
+    "count": 149,
+    "maps": 60,
+    "argc": {
+     "2": 149
+    },
+    "examples": [
+     "translated_dialog_choice mistaken:thats_me,cityparkchoice",
+     "translated_dialog_choice yes:no,chooses",
+     "translated_dialog_choice yes:no,grampsask",
+     "translated_dialog_choice yes:no,happy"
+    ]
+   },
+   {
+    "type": "add_item",
+    "count": 118,
+    "maps": 37,
+    "argc": {
+     "1": 82,
+     "2": 35,
+     "3": 1
+    },
+    "examples": [
+     "add_item reg_papers",
+     "add_item p_starry_night,-1",
+     "add_item p_trepidation,-1",
+     "add_item p_monsters_eyes,-1"
+    ]
+   },
+   {
+    "type": "char_stop",
+    "count": 88,
+    "maps": 51,
+    "argc": {
+     "1": 88
+    },
+    "examples": [
+     "char_stop player"
+    ]
+   },
+   {
+    "type": "set_monster_health",
+    "count": 83,
+    "maps": 41,
+    "argc": {
+     "0": 78,
+     "1": 4,
+     "2": 1
+    },
+    "examples": [
+     "set_monster_health",
+     "set_monster_health add_monster,0.1",
+     "set_monster_health iid_slot_0"
+    ]
+   },
+   {
+    "type": "set_monster_status",
+    "count": 83,
+    "maps": 41,
+    "argc": {
+     "0": 79,
+     "1": 4
+    },
+    "examples": [
+     "set_monster_status",
+     "set_monster_status iid_slot_0"
+    ]
+   },
+   {
+    "type": "set_layer",
+    "count": 79,
+    "maps": 28,
+    "argc": {
+     "0": 38,
+     "1": 41
+    },
+    "examples": [
+     "set_layer",
+     "set_layer gfx/ui/overlay/torchlight.png",
+     "set_layer 102:51:0:128",
+     "set_layer 0:0:0:255"
+    ]
+   },
+   {
+    "type": "char_move",
+    "count": 77,
+    "maps": 10,
+    "argc": {
+     "2": 64,
+     "3": 6,
+     "4": 6,
+     "5": 1
+    },
+    "examples": [
+     "char_move aeble,down 1,right 8,up 1",
+     "char_move knight2,down 8,left 1",
+     "char_move knight1,right 2,down 8,left 1",
+     "char_move kay_wren,right 1,down 8,left 1"
+    ]
+   },
+   {
+    "type": "play_sound",
+    "count": 67,
+    "maps": 28,
+    "argc": {
+     "1": 67
+    },
+    "examples": [
+     "play_sound sound_confirm",
+     "play_sound coinecho",
+     "play_sound japanese_temple_bell_small"
+    ]
+   },
+   {
+    "type": "random_monster",
+    "count": 39,
+    "maps": 4,
+    "argc": {
+     "1": 15,
+     "2": 15,
+     "4": 9
+    },
+    "examples": [
+     "random_monster 10",
+     "random_monster 10,professor",
+     "random_monster 15",
+     "random_monster 15,professor"
+    ]
+   },
+   {
+    "type": "clear_variable",
+    "count": 36,
+    "maps": 13,
+    "argc": {
+     "1": 30,
+     "2": 6
+    },
+    "examples": [
+     "clear_variable comeinside",
+     "clear_variable scene",
+     "clear_variable aeble_talk",
+     "clear_variable passcode_color,passcode_number"
+    ]
+   },
+   {
+    "type": "char_wander",
+    "count": 33,
+    "maps": 16,
+    "argc": {
+     "2": 24,
+     "4": 4,
+     "6": 5
+    },
+    "examples": [
+     "char_wander 37707_male,3",
+     "char_wander 37707_female,3",
+     "char_wander 37707_male_missing,0.5",
+     "char_wander 37707_female_missing,5"
+    ]
+   },
+   {
+    "type": "set_monster_attribute",
+    "count": 33,
+    "maps": 9,
+    "argc": {
+     "3": 33
+    },
+    "examples": [
+     "set_monster_attribute add_monster,gender,male",
+     "set_monster_attribute add_monster,gender,female",
+     "set_monster_attribute add_monster,name,RUFF",
+     "set_monster_attribute add_monster,acquisition,traded"
+    ]
+   },
+   {
+    "type": "set_teleport_faint",
+    "count": 29,
+    "maps": 24,
+    "argc": {
+     "4": 29
+    },
+    "examples": [
+     "set_teleport_faint player,cotton_cathedral.tmx,6,7",
+     "set_teleport_faint player,healing_center.tmx,6,7",
+     "set_teleport_faint player,sphalian_center.tmx,6,10",
+     "set_teleport_faint player,spyder_candy_cafe.tmx,1,10"
+    ]
+   },
+   {
+    "type": "open_shop",
+    "count": 28,
+    "maps": 10,
+    "argc": {
+     "2": 28
+    },
+    "examples": [
+     "open_shop tuxemart_keeper,both_item",
+     "open_shop spyder_shopassistant,both_item",
+     "open_shop spyder_wayfarer1_norm,both_item",
+     "open_shop spyder_wayfarer1_norm,buy_monster"
+    ]
+   },
+   {
+    "type": "screen_transition",
+    "count": 25,
+    "maps": 16,
+    "argc": {
+     "1": 25
+    },
+    "examples": [
+     "screen_transition 2",
+     "screen_transition 1",
+     "screen_transition 0.5",
+     "screen_transition 2.5"
+    ]
+   },
+   {
+    "type": "add_tracker",
+    "count": 24,
+    "maps": 22,
+    "argc": {
+     "2": 24
+    },
+    "examples": [
+     "add_tracker player,candy_town",
+     "add_tracker player,citypark",
+     "add_tracker player,cotton_town",
+     "add_tracker player,paper_town"
+    ]
+   },
+   {
+    "type": "set_template",
+    "count": 24,
+    "maps": 11,
+    "argc": {
+     "2": 18,
+     "3": 6
+    },
+    "examples": [
+     "set_template player,default",
+     "set_template player,invisible",
+     "set_template player,swimmer",
+     "set_template player,brownheroine_brown,heroineblack"
+    ]
+   },
+   {
+    "type": "wild_encounter",
+    "count": 20,
+    "maps": 7,
+    "argc": {
+     "3": 11,
+     "5": 9
+    },
+    "examples": [
+     "wild_encounter kernel,50,3",
+     "wild_encounter blasdoor,40,3",
+     "wild_encounter drokoro,50,3,,cave",
+     "wild_encounter volcoli,50,3"
+    ]
+   },
+   {
+    "type": "char_speed",
+    "count": 19,
+    "maps": 8,
+    "argc": {
+     "2": 19
+    },
+    "examples": [
+     "char_speed 37707_male,3",
+     "char_speed 37707_female,3",
+     "char_speed 37707_male_missing,1",
+     "char_speed 37707_female_missing,5"
+    ]
+   },
+   {
+    "type": "modify_money",
+    "count": 19,
+    "maps": 7,
+    "argc": {
+     "2": 18,
+     "3": 1
+    },
+    "examples": [
+     "modify_money player,120",
+     "modify_money player,2000",
+     "modify_money player,6000",
+     "modify_money player,-50"
+    ]
+   },
+   {
+    "type": "get_player_monster",
+    "count": 17,
+    "maps": 10,
+    "argc": {
+     "1": 6,
+     "3": 11
+    },
+    "examples": [
+     "get_player_monster rename",
+     "get_player_monster cateye,slug,cateye",
+     "get_player_monster rhincus,slug,rhincus",
+     "get_player_monster shammer,slug,shammer"
+    ]
+   },
+   {
+    "type": "set_bubble",
+    "count": 16,
+    "maps": 4,
+    "argc": {
+     "1": 8,
+     "2": 8
+    },
+    "examples": [
+     "set_bubble spyder_route5_cleo,exclamation",
+     "set_bubble spyder_route5_cleo",
+     "set_bubble player,exclamation",
+     "set_bubble player"
+    ]
+   },
+   {
+    "type": "set_economy",
+    "count": 16,
+    "maps": 10,
+    "argc": {
+     "2": 16
+    },
+    "examples": [
+     "set_economy tuxemart_keeper,cotton_scoop",
+     "set_economy tuxemart_keeper,leather_scoop",
+     "set_economy spyder_shopassistant,spyder_candy_scoop",
+     "set_economy spyder_wayfarer1_norm,spyder_candy_tech"
+    ]
+   },
+   {
+    "type": "change_bg",
+    "count": 15,
+    "maps": 6,
+    "argc": {
+     "0": 6,
+     "1": 6,
+     "3": 3
+    },
+    "examples": [
+     "change_bg",
+     "change_bg gradient_blue,spyder_tumble,image",
+     "change_bg gradient_blue,spyder_monsters,image",
+     "change_bg gradient_blue,spyder_morph,image"
+    ]
+   },
+   {
+    "type": "open_journal",
+    "count": 14,
+    "maps": 4,
+    "argc": {
+     "1": 14
+    },
+    "examples": [
+     "open_journal rockitten",
+     "open_journal cardiling",
+     "open_journal tweesher",
+     "open_journal lambert"
+    ]
+   },
+   {
+    "type": "char_plague",
+    "count": 13,
+    "maps": 4,
+    "argc": {
+     "2": 3,
+     "3": 10
+    },
+    "examples": [
+     "char_plague spyderbite,inoculated",
+     "char_plague spyderbite,infected",
+     "char_plague spyderbite,infected,spyder_wayfarer1_morton",
+     "char_plague spyderbite,infected,spyder_wayfarer1_jessie"
+    ]
+   },
+   {
+    "type": "add_tech",
+    "count": 12,
+    "maps": 1,
+    "argc": {
+     "2": 12
+    },
+    "examples": [
+     "add_tech iid_slot_0,peregrine",
+     "add_tech iid_slot_1,shapechange",
+     "add_tech iid_slot_2,lightning_spheres",
+     "add_tech iid_slot_3,radiance"
+    ]
+   },
+   {
+    "type": "teleport_faint",
+    "count": 11,
+    "maps": 9,
+    "argc": {
+     "2": 8,
+     "3": 3
+    },
+    "examples": [
+     "teleport_faint player,true",
+     "teleport_faint player,true,1.5"
+    ]
+   },
+   {
+    "type": "access_pc",
+    "count": 10,
+    "maps": 10,
+    "argc": {
+     "1": 10
+    },
+    "examples": [
+     "access_pc player"
+    ]
+   },
+   {
+    "type": "format_variable",
+    "count": 10,
+    "maps": 3,
+    "argc": {
+     "2": 10
+    },
+    "examples": [
+     "format_variable cathedral_share,float",
+     "format_variable cathedral_interest,float",
+     "format_variable scoop_price,-int",
+     "format_variable party_lost_hp,-int"
+    ]
+   },
+   {
+    "type": "get_party_monster",
+    "count": 9,
+    "maps": 4,
+    "argc": {
+     "0": 1,
+     "1": 8
+    },
+    "examples": [
+     "get_party_monster spyder_dojo_iroh",
+     "get_party_monster spyder_dojo_kataro",
+     "get_party_monster spyder_dojo_wan",
+     "get_party_monster spyder_nimrod_argon"
+    ]
+   },
+   {
+    "type": "park_experience",
+    "count": 8,
+    "maps": 4,
+    "argc": {
+     "1": 8
+    },
+    "examples": [
+     "park_experience stop",
+     "park_experience start"
+    ]
+   },
+   {
+    "type": "quarantine",
+    "count": 8,
+    "maps": 4,
+    "argc": {
+     "3": 3,
+     "4": 5
+    },
+    "examples": [
+     "quarantine player,spyderbite,out,1",
+     "quarantine player,spyderbite,out",
+     "quarantine player,spyderbite,in"
+    ]
+   },
+   {
+    "type": "start_double_battle",
+    "count": 8,
+    "maps": 2,
+    "argc": {
+     "2": 8
+    },
+    "examples": [
+     "start_double_battle player,spyder_dragonscave_ray",
+     "start_double_battle player,spyder_dragonscave_lucille",
+     "start_double_battle player,spyder_route5_cleo",
+     "start_double_battle player,spyder_route5_tryphaena"
+    ]
+   },
+   {
+    "type": "trading",
+    "count": 8,
+    "maps": 4,
+    "argc": {
+     "2": 8
+    },
+    "examples": [
+     "trading cateye,zunna",
+     "trading rhincus,propellercat",
+     "trading shammer,propellercat",
+     "trading budaye,conileaf"
+    ]
+   },
+   {
+    "type": "change_bg_monster",
+    "count": 7,
+    "maps": 2,
+    "argc": {
+     "2": 7
+    },
+    "examples": [
+     "change_bg_monster gradient_blue,rockitten",
+     "change_bg_monster gradient_blue,dollfin",
+     "change_bg_monster gradient_blue,ignibus",
+     "change_bg_monster gradient_blue,memnomnom"
+    ]
+   },
+   {
+    "type": "load_yaml",
+    "count": 7,
+    "maps": 7,
+    "argc": {
+     "1": 7
+    },
+    "examples": [
+     "load_yaml spyder_cathedral"
+    ]
+   },
+   {
+    "type": "autosave",
+    "count": 6,
+    "maps": 6,
+    "argc": {
+     "0": 6
+    },
+    "examples": [
+     "autosave"
+    ]
+   },
+   {
+    "type": "camera_position",
+    "count": 6,
+    "maps": 3,
+    "argc": {
+     "0": 3,
+     "2": 3
+    },
+    "examples": [
+     "camera_position 9,8",
+     "camera_position",
+     "camera_position 8,4",
+     "camera_position 3,4"
+    ]
+   },
+   {
+    "type": "set_mission",
+    "count": 6,
+    "maps": 3,
+    "argc": {
+     "1": 6
+    },
+    "examples": [
+     "set_mission player"
+    ]
+   },
+   {
+    "type": "set_tuxepedia",
+    "count": 6,
+    "maps": 1,
+    "argc": {
+     "3": 6
+    },
+    "examples": [
+     "set_tuxepedia player,eyesore,seen",
+     "set_tuxepedia player,cardiwing,seen",
+     "set_tuxepedia player,vivipere,seen",
+     "set_tuxepedia player,viviphyta,seen"
+    ]
+   },
+   {
+    "type": "remove_collision",
+    "count": 5,
+    "maps": 5,
+    "argc": {
+     "1": 5
+    },
+    "examples": [
+     "remove_collision screen",
+     "remove_collision drokoro",
+     "remove_collision volcoli"
+    ]
+   },
+   {
+    "type": "remove_monster",
+    "count": 5,
+    "maps": 5,
+    "argc": {
+     "1": 5
+    },
+    "examples": [
+     "remove_monster ruff_back",
+     "remove_monster iid_slot_0",
+     "remove_monster probably_agnite",
+     "remove_monster sold"
+    ]
+   },
+   {
+    "type": "remove_step_tracker",
+    "count": 5,
+    "maps": 4,
+    "argc": {
+     "2": 5
+    },
+    "examples": [
+     "remove_step_tracker player,steps_park",
+     "remove_step_tracker player,steps_bonding"
+    ]
+   },
+   {
+    "type": "rename_player",
+    "count": 5,
+    "maps": 4,
+    "argc": {
+     "2": 5
+    },
+    "examples": [
+     "rename_player player,random"
+    ]
+   },
+   {
+    "type": "variable_math",
+    "count": 5,
+    "maps": 2,
+    "argc": {
+     "3": 4,
+     "4": 1
+    },
+    "examples": [
+     "variable_math cathedral_share_full,*,100",
+     "variable_math cathedral_interest_full,*,100",
+     "variable_math info_level,*,scoop_coeff,scoop_price",
+     "variable_math brad_points,+,1"
+    ]
+   },
+   {
+    "type": "change_bg_char",
+    "count": 4,
+    "maps": 3,
+    "argc": {
+     "2": 4
+    },
+    "examples": [
+     "change_bg_char gradient_blue,spyder_omnichannel_beaverbrook",
+     "change_bg_char gradient_blue,aeble"
+    ]
+   },
+   {
+    "type": "add_step_tracker",
+    "count": 3,
+    "maps": 2,
+    "argc": {
+     "4": 3
+    },
+    "examples": [
+     "add_step_tracker player,steps_park,500,100:0",
+     "add_step_tracker player,steps_bonding,1000,0"
+    ]
+   },
+   {
+    "type": "dojo_method",
+    "count": 3,
+    "maps": 1,
+    "argc": {
+     "2": 3
+    },
+    "examples": [
+     "dojo_method dojo_stage,monster",
+     "dojo_method potion_xiang,technique"
+    ]
+   },
+   {
+    "type": "modify_bill",
+    "count": 3,
+    "maps": 1,
+    "argc": {
+     "4": 3
+    },
+    "examples": [
+     "modify_bill player,bill_cathedral,,scoop_price",
+     "modify_bill player,bill_cathedral,,party_lost_hp",
+     "modify_bill player,bill_cathedral,,cathedral_interest"
+    ]
+   },
+   {
+    "type": "quit_world",
+    "count": 3,
+    "maps": 1,
+    "argc": {
+     "0": 3
+    },
+    "examples": [
+     "quit_world"
+    ]
+   },
+   {
+    "type": "set_char_attribute",
+    "count": 3,
+    "maps": 1,
+    "argc": {
+     "3": 3
+    },
+    "examples": [
+     "set_char_attribute player,gender,male",
+     "set_char_attribute player,gender,female",
+     "set_char_attribute player,gender,nonbinary"
+    ]
+   },
+   {
+    "type": "set_monster_level",
+    "count": 3,
+    "maps": 3,
+    "argc": {
+     "0": 1,
+     "2": 2
+    },
+    "examples": [
+     "set_monster_level",
+     "set_monster_level ,10",
+     "set_monster_level ,15"
+    ]
+   },
+   {
+    "type": "set_step_tracker_milestone_shown",
+    "count": 3,
+    "maps": 3,
+    "argc": {
+     "3": 3
+    },
+    "examples": [
+     "set_step_tracker_milestone_shown player,steps_park,100"
+    ]
+   },
+   {
+    "type": "update_time",
+    "count": 3,
+    "maps": 3,
+    "argc": {
+     "1": 3
+    },
+    "examples": [
+     "update_time player"
+    ]
+   },
+   {
+    "type": "change_taste",
+    "count": 2,
+    "maps": 1,
+    "argc": {
+     "3": 2
+    },
+    "examples": [
+     "change_taste tasteful_zhu,cold,random",
+     "change_taste tasteful_zhu,warm,random"
+    ]
+   },
+   {
+    "type": "char_run",
+    "count": 2,
+    "maps": 2,
+    "argc": {
+     "1": 2
+    },
+    "examples": [
+     "char_run christie",
+     "char_run spyder_route1_bjorn"
+    ]
+   },
+   {
+    "type": "choice_monster",
+    "count": 2,
+    "maps": 2,
+    "argc": {
+     "2": 2
+    },
+    "examples": [
+     "choice_monster hydrone:rockitten:fruitera,tuxchoice",
+     "choice_monster budaye:dollfin:grintot:ignibus:memnomnom,myintrochoice"
+    ]
+   },
+   {
+    "type": "copy_variable",
+    "count": 2,
+    "maps": 1,
+    "argc": {
+     "2": 2
+    },
+    "examples": [
+     "copy_variable cathedral_share_full,cathedral_share",
+     "copy_variable cathedral_interest_full,cathedral_interest"
+    ]
+   },
+   {
+    "type": "daycare",
+    "count": 2,
+    "maps": 2,
+    "argc": {
+     "1": 2
+    },
+    "examples": [
+     "daycare player"
+    ]
+   },
+   {
+    "type": "evolution",
+    "count": 2,
+    "maps": 2,
+    "argc": {
+     "1": 2
+    },
+    "examples": [
+     "evolution player"
+    ]
+   },
+   {
+    "type": "get_pending_moves",
+    "count": 2,
+    "maps": 2,
+    "argc": {
+     "1": 2
+    },
+    "examples": [
+     "get_pending_moves chosen_tech"
+    ]
+   },
+   {
+    "type": "remove_tech",
+    "count": 2,
+    "maps": 2,
+    "argc": {
+     "1": 2
+    },
+    "examples": [
+     "remove_tech chosen_tech"
+    ]
+   },
+   {
+    "type": "rename_monster",
+    "count": 2,
+    "maps": 2,
+    "argc": {
+     "1": 2
+    },
+    "examples": [
+     "rename_monster rename"
+    ]
+   },
+   {
+    "type": "set_bill",
+    "count": 2,
+    "maps": 1,
+    "argc": {
+     "6": 2
+    },
+    "examples": [
+     "set_bill player,bill_cathedral,0,0.1,100,0.5"
+    ]
+   },
+   {
+    "type": "set_facing_mode",
+    "count": 2,
+    "maps": 1,
+    "argc": {
+     "2": 2
+    },
+    "examples": [
+     "set_facing_mode callie_wren,locked",
+     "set_facing_mode callie_wren,follow_movement"
+    ]
+   },
+   {
+    "type": "set_kennel_visible",
+    "count": 2,
+    "maps": 1,
+    "argc": {
+     "3": 2
+    },
+    "examples": [
+     "set_kennel_visible player,quarantine,false",
+     "set_kennel_visible player,quarantine,true"
+    ]
+   },
+   {
+    "type": "set_party_status",
+    "count": 2,
+    "maps": 2,
+    "argc": {
+     "1": 2
+    },
+    "examples": [
+     "set_party_status player"
+    ]
+   },
+   {
+    "type": "tune_radio",
+    "count": 2,
+    "maps": 2,
+    "argc": {
+     "2": 2
+    },
+    "examples": [
+     "tune_radio player,94.7"
+    ]
+   },
+   {
+    "type": "update_tile_properties",
+    "count": 2,
+    "maps": 1,
+    "argc": {
+     "2": 2
+    },
+    "examples": [
+     "update_tile_properties surfable,1",
+     "update_tile_properties surfable,0"
+    ]
+   },
+   {
+    "type": "char_position",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "3": 1
+    },
+    "examples": [
+     "char_position player,6,8"
+    ]
+   },
+   {
+    "type": "choice_npc",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "3": 1
+    },
+    "examples": [
+     "choice_npc white_male:black_male:white_female:black_female:gender_enby:gender_whatever,race_choice,menu_select"
+    ]
+   },
+   {
+    "type": "create_kennel",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "3": 1
+    },
+    "examples": [
+     "create_kennel player,quarantine,true"
+    ]
+   },
+   {
+    "type": "fadeout_music",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "1": 1
+    },
+    "examples": [
+     "fadeout_music 1000"
+    ]
+   },
+   {
+    "type": "info",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "2": 1
+    },
+    "examples": [
+     "info sold,level"
+    ]
+   },
+   {
+    "type": "modify_monster_bond",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "0": 1
+    },
+    "examples": [
+     "modify_monster_bond"
+    ]
+   },
+   {
+    "type": "not",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "1": 1
+    },
+    "examples": [
+     "not music_playing music_come_and_find_me"
+    ]
+   },
+   {
+    "type": "play_tile_animation",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "5": 1
+    },
+    "examples": [
+     "play_tile_animation 10,4,dragonbirth,0.1,noloop"
+    ]
+   },
+   {
+    "type": "random_integer",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "3": 1
+    },
+    "examples": [
+     "random_integer luckgiveegg,1,10"
+    ]
+   },
+   {
+    "type": "set_random_variable",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "2": 1
+    },
+    "examples": [
+     "set_random_variable elianeoutput,cureall:restoration:potion:tea:refreshing_slice:antidote_grapes:cure_festering"
+    ]
+   }
+  ],
+  "conditions": [
+   {
+    "type": "char_at",
+    "count": 1811,
+    "maps": 253,
+    "argc": {
+     "1": 1811
+    },
+    "examples": [
+     "is char_at player"
+    ]
+   },
+   {
+    "type": "char_exists",
+    "count": 1409,
+    "maps": 172,
+    "argc": {
+     "1": 1409
+    },
+    "examples": [
+     "not char_exists 37707_male",
+     "not char_exists 37707_female",
+     "not char_exists 37707_male_missing",
+     "not char_exists 37707_female_missing"
+    ]
+   },
+   {
+    "type": "variable_set",
+    "count": 1401,
+    "maps": 129,
+    "argc": {
+     "1": 1401
+    },
+    "examples": [
+     "not variable_set 37707_tower:activated",
+     "is variable_set 37707_tower:activated",
+     "not variable_set 37707_tower:entered",
+     "not variable_set 37707_female:spoke"
+    ]
+   },
+   {
+    "type": "char_facing",
+    "count": 1008,
+    "maps": 238,
+    "argc": {
+     "2": 1008
+    },
+    "examples": [
+     "is char_facing player,down",
+     "is char_facing player,up",
+     "is char_facing player,left",
+     "is char_facing player,right"
+    ]
+   },
+   {
+    "type": "battle_outcome",
+    "count": 593,
+    "maps": 68,
+    "argc": {
+     "3": 593
+    },
+    "examples": [
+     "not battle_outcome player,won,classic_gym_leader_astra",
+     "not battle_outcome player,won,classic_gym_leader_bravion",
+     "not battle_outcome player,won,classic_gym_leader_ferrum",
+     "not battle_outcome player,won,classic_gym_leader_granite"
+    ]
+   },
+   {
+    "type": "char_moved",
+    "count": 454,
+    "maps": 36,
+    "argc": {
+     "1": 454
+    },
+    "examples": [
+     "is char_moved player"
+    ]
+   },
+   {
+    "type": "button_pressed",
+    "count": 419,
+    "maps": 119,
+    "argc": {
+     "1": 419
+    },
+    "examples": [
+     "is button_pressed INTERACT",
+     "is button_pressed K_RETURN"
+    ]
+   },
+   {
+    "type": "char_facing_tile",
+    "count": 344,
+    "maps": 101,
+    "argc": {
+     "1": 339,
+     "2": 5
+    },
+    "examples": [
+     "is char_facing_tile player",
+     "is char_facing_tile player,surfable"
+    ]
+   },
+   {
+    "type": "environment_is",
+    "count": 200,
+    "maps": 120,
+    "argc": {
+     "1": 200
+    },
+    "examples": [
+     "not environment_is grass",
+     "not environment_is 37707",
+     "not environment_is night_grass",
+     "not environment_is interior"
+    ]
+   },
+   {
+    "type": "music_playing",
+    "count": 197,
+    "maps": 196,
+    "argc": {
+     "1": 197
+    },
+    "examples": [
+     "is music_playing music_mystic_island",
+     "not music_playing music_mystic_island",
+     "not music_playing music_mystic_island_reverse",
+     "not music_playing music_adventure_begins"
+    ]
+   },
+   {
+    "type": "char_defeated",
+    "count": 191,
+    "maps": 53,
+    "argc": {
+     "1": 191
+    },
+    "examples": [
+     "is char_defeated player",
+     "not char_defeated player",
+     "not char_defeated professor"
+    ]
+   },
+   {
+    "type": "time_is",
+    "count": 128,
+    "maps": 56,
+    "argc": {
+     "3": 128
+    },
+    "examples": [
+     "not time_is stage_of_day,equals,night",
+     "is time_is stage_of_day,equals,night",
+     "is time_is daytime,equals,true",
+     "not time_is date,equals,2-12"
+    ]
+   },
+   {
+    "type": "has_item",
+    "count": 111,
+    "maps": 14,
+    "argc": {
+     "2": 110,
+     "4": 1
+    },
+    "examples": [
+     "not has_item player,aardant",
+     "is has_item player,aardant",
+     "not has_item player,p_starry_night",
+     "not has_item player,p_trepidation"
+    ]
+   },
+   {
+    "type": "current_state",
+    "count": 78,
+    "maps": 21,
+    "argc": {
+     "1": 78
+    },
+    "examples": [
+     "is current_state WorldState",
+     "is current_state MainCombatMenuState:WorldState",
+     "is current_state MainCombatMenuState:WorldMenuState",
+     "is current_state TeleporterState"
+    ]
+   },
+   {
+    "type": "char_sprite",
+    "count": 66,
+    "maps": 32,
+    "argc": {
+     "2": 66
+    },
+    "examples": [
+     "not char_sprite player,swimmer",
+     "is char_sprite player,swimmer",
+     "is char_sprite player,invisible"
+    ]
+   },
+   {
+    "type": "party_size",
+    "count": 55,
+    "maps": 18,
+    "argc": {
+     "3": 55
+    },
+    "examples": [
+     "is party_size player,greater_than,1",
+     "is party_size player,greater_than,0",
+     "not party_size player,greater_than,0",
+     "is party_size player,less_than,1"
+    ]
+   },
+   {
+    "type": "check_char_parameter",
+    "count": 41,
+    "maps": 26,
+    "argc": {
+     "3": 41
+    },
+    "examples": [
+     "is check_char_parameter player,moving,1",
+     "not check_char_parameter player,name,ApexPlayer",
+     "is check_char_parameter player,name,ApexPlayer"
+    ]
+   },
+   {
+    "type": "has_monster",
+    "count": 35,
+    "maps": 7,
+    "argc": {
+     "1": 1,
+     "2": 34
+    },
+    "examples": [
+     "not has_monster player,cateye",
+     "is has_monster player,cateye",
+     "not has_monster player,shammer",
+     "not has_monster player,rhincus"
+    ]
+   },
+   {
+    "type": "money_is",
+    "count": 24,
+    "maps": 5,
+    "argc": {
+     "3": 24
+    },
+    "examples": [
+     "is money_is player,greater_or_equal,50",
+     "not money_is player,greater_or_equal,50",
+     "is money_is player,greater_or_equal,3000",
+     "is money_is player,greater_or_equal,1000"
+    ]
+   },
+   {
+    "type": "tracker",
+    "count": 22,
+    "maps": 21,
+    "argc": {
+     "2": 22
+    },
+    "examples": [
+     "not tracker player,candy_town",
+     "not tracker player,citypark",
+     "not tracker player,dragonscave",
+     "not tracker player,dryadsgrove"
+    ]
+   },
+   {
+    "type": "check_party_parameter",
+    "count": 14,
+    "maps": 1,
+    "argc": {
+     "5": 14
+    },
+    "examples": [
+     "not check_party_parameter player,stage,stage1,greater_than,0",
+     "not check_party_parameter player,stage,stage2,greater_than,0",
+     "is check_party_parameter player,stage,stage2,greater_than,0",
+     "is check_party_parameter player,stage,stage1,greater_than,0"
+    ]
+   },
+   {
+    "type": "battle_outcome_count",
+    "count": 11,
+    "maps": 3,
+    "argc": {
+     "4": 11
+    },
+    "examples": [
+     "not battle_outcome_count player,won,spyder_nimrod_tru,1",
+     "is battle_outcome_count player,won,spyder_nimrod_tru,1",
+     "not battle_outcome_count player,won,spyder_omnichannel_beaverbrook,1",
+     "is battle_outcome_count player,won,spyder_omnichannel_beaverbrook,0"
+    ]
+   },
+   {
+    "type": "char_in",
+    "count": 7,
+    "maps": 1,
+    "argc": {
+     "2": 7
+    },
+    "examples": [
+     "not char_in player,surfable",
+     "is char_in player,surfable"
+    ]
+   },
+   {
+    "type": "step_tracker",
+    "count": 7,
+    "maps": 4,
+    "argc": {
+     "3": 7
+    },
+    "examples": [
+     "is step_tracker player,steps_park,100",
+     "is step_tracker player,steps_park,0",
+     "is step_tracker player,steps_bonding,0"
+    ]
+   },
+   {
+    "type": "tile_property_updated",
+    "count": 6,
+    "maps": 1,
+    "argc": {
+     "2": 6
+    },
+    "examples": [
+     "not tile_property_updated surfable,1",
+     "not tile_property_updated surfable,0",
+     "is tile_property_updated surfable,1"
+    ]
+   },
+   {
+    "type": "check_world",
+    "count": 3,
+    "maps": 1,
+    "argc": {
+     "2": 3
+    },
+    "examples": [
+     "is check_world layer,0:0:128:128",
+     "not check_world layer,0:0:128:128"
+    ]
+   },
+   {
+    "type": "kennel",
+    "count": 3,
+    "maps": 1,
+    "argc": {
+     "3": 3
+    },
+    "examples": [
+     "not kennel player,quarantine,exist",
+     "is kennel player,quarantine,visible",
+     "is kennel player,quarantine,hidden"
+    ]
+   },
+   {
+    "type": "location_inside",
+    "count": 3,
+    "maps": 1,
+    "argc": {
+     "0": 3
+    },
+    "examples": [
+     "not location_inside",
+     "is location_inside"
+    ]
+   },
+   {
+    "type": "party_infected",
+    "count": 3,
+    "maps": 1,
+    "argc": {
+     "3": 3
+    },
+    "examples": [
+     "is party_infected player,spyderbite,all",
+     "is party_infected player,spyderbite,none",
+     "is party_infected player,spyderbite,some"
+    ]
+   },
+   {
+    "type": "bill_is",
+    "count": 2,
+    "maps": 1,
+    "argc": {
+     "4": 2
+    },
+    "examples": [
+     "is bill_is player,bill_cathedral,greater_than,0"
+    ]
+   },
+   {
+    "type": "char_gender",
+    "count": 2,
+    "maps": 1,
+    "argc": {
+     "2": 2
+    },
+    "examples": [
+     "is char_gender player,male",
+     "not char_gender player,male"
+    ]
+   },
+   {
+    "type": "char_healed",
+    "count": 2,
+    "maps": 1,
+    "argc": {
+     "1": 2
+    },
+    "examples": [
+     "is char_healed player",
+     "not char_healed player"
+    ]
+   },
+   {
+    "type": "check_evolution",
+    "count": 2,
+    "maps": 2,
+    "argc": {
+     "1": 2
+    },
+    "examples": [
+     "is check_evolution player"
+    ]
+   },
+   {
+    "type": "check_max_tech",
+    "count": 2,
+    "maps": 2,
+    "argc": {
+     "1": 2
+    },
+    "examples": [
+     "is check_max_tech player"
+    ]
+   },
+   {
+    "type": "has_kennel",
+    "count": 2,
+    "maps": 1,
+    "argc": {
+     "4": 2
+    },
+    "examples": [
+     "is has_kennel player,Kennel,less_than,1",
+     "is has_kennel player,Kennel,greater_or_equal,1"
+    ]
+   },
+   {
+    "type": "has_tuxepedia",
+    "count": 2,
+    "maps": 1,
+    "argc": {
+     "3": 2
+    },
+    "examples": [
+     "is has_tuxepedia player,drokoro,caught",
+     "not has_tuxepedia player,drokoro,caught"
+    ]
+   },
+   {
+    "type": "location_type",
+    "count": 2,
+    "maps": 1,
+    "argc": {
+     "1": 2
+    },
+    "examples": [
+     "not location_type clinic",
+     "is location_type clinic"
+    ]
+   },
+   {
+    "type": "bill_exists",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "2": 1
+    },
+    "examples": [
+     "not bill_exists player,bill_cathedral"
+    ]
+   },
+   {
+    "type": "cooldown_days",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "2": 1
+    },
+    "examples": [
+     "is cooldown_days 1,elianeflower"
+    ]
+   },
+   {
+    "type": "player_facing_tile",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "0": 1
+    },
+    "examples": [
+     "is player_facing_tile"
+    ]
+   }
+  ],
+  "conditionsByOperator": [
+   {
+    "type": "is char_at",
+    "count": 1811,
+    "maps": 253,
+    "argc": {
+     "1": 1811
+    },
+    "examples": [
+     "is char_at player"
+    ]
+   },
+   {
+    "type": "not char_exists",
+    "count": 1400,
+    "maps": 172,
+    "argc": {
+     "1": 1400
+    },
+    "examples": [
+     "not char_exists 37707_male",
+     "not char_exists 37707_female",
+     "not char_exists 37707_male_missing",
+     "not char_exists 37707_female_missing"
+    ]
+   },
+   {
+    "type": "is char_facing",
+    "count": 1008,
+    "maps": 238,
+    "argc": {
+     "2": 1008
+    },
+    "examples": [
+     "is char_facing player,down",
+     "is char_facing player,up",
+     "is char_facing player,left",
+     "is char_facing player,right"
+    ]
+   },
+   {
+    "type": "is variable_set",
+    "count": 730,
+    "maps": 109,
+    "argc": {
+     "1": 730
+    },
+    "examples": [
+     "is variable_set 37707_tower:activated",
+     "is variable_set 37707_female:spoke",
+     "is variable_set 37707_male:spoke",
+     "is variable_set 37707_tower:entered"
+    ]
+   },
+   {
+    "type": "not variable_set",
+    "count": 671,
+    "maps": 121,
+    "argc": {
+     "1": 671
+    },
+    "examples": [
+     "not variable_set 37707_tower:activated",
+     "not variable_set 37707_tower:entered",
+     "not variable_set 37707_female:spoke",
+     "not variable_set 37707_male:spoke"
+    ]
+   },
+   {
+    "type": "is char_moved",
+    "count": 454,
+    "maps": 36,
+    "argc": {
+     "1": 454
+    },
+    "examples": [
+     "is char_moved player"
+    ]
+   },
+   {
+    "type": "is button_pressed",
+    "count": 419,
+    "maps": 119,
+    "argc": {
+     "1": 419
+    },
+    "examples": [
+     "is button_pressed INTERACT",
+     "is button_pressed K_RETURN"
+    ]
+   },
+   {
+    "type": "not battle_outcome",
+    "count": 363,
+    "maps": 66,
+    "argc": {
+     "3": 363
+    },
+    "examples": [
+     "not battle_outcome player,won,classic_gym_leader_astra",
+     "not battle_outcome player,won,classic_gym_leader_bravion",
+     "not battle_outcome player,won,classic_gym_leader_ferrum",
+     "not battle_outcome player,won,classic_gym_leader_granite"
+    ]
+   },
+   {
+    "type": "is char_facing_tile",
+    "count": 344,
+    "maps": 101,
+    "argc": {
+     "1": 339,
+     "2": 5
+    },
+    "examples": [
+     "is char_facing_tile player",
+     "is char_facing_tile player,surfable"
+    ]
+   },
+   {
+    "type": "is battle_outcome",
+    "count": 230,
+    "maps": 47,
+    "argc": {
+     "3": 230
+    },
+    "examples": [
+     "is battle_outcome player,won,spyder_hospital1_felu",
+     "is battle_outcome player,won,spyder_hospital1_fring",
+     "is battle_outcome player,won,spyder_hospital1_aurora",
+     "is battle_outcome player,won,spyder_hospital1_eleni"
+    ]
+   },
+   {
+    "type": "not music_playing",
+    "count": 196,
+    "maps": 195,
+    "argc": {
+     "1": 196
+    },
+    "examples": [
+     "not music_playing music_mystic_island",
+     "not music_playing music_mystic_island_reverse",
+     "not music_playing music_adventure_begins",
+     "not music_playing music_town_theme"
+    ]
+   },
+   {
+    "type": "not char_defeated",
+    "count": 181,
+    "maps": 48,
+    "argc": {
+     "1": 181
+    },
+    "examples": [
+     "not char_defeated player",
+     "not char_defeated professor"
+    ]
+   },
+   {
+    "type": "not environment_is",
+    "count": 172,
+    "maps": 118,
+    "argc": {
+     "1": 172
+    },
+    "examples": [
+     "not environment_is grass",
+     "not environment_is 37707",
+     "not environment_is night_grass",
+     "not environment_is interior"
+    ]
+   },
+   {
+    "type": "is current_state",
+    "count": 78,
+    "maps": 21,
+    "argc": {
+     "1": 78
+    },
+    "examples": [
+     "is current_state WorldState",
+     "is current_state MainCombatMenuState:WorldState",
+     "is current_state MainCombatMenuState:WorldMenuState",
+     "is current_state TeleporterState"
+    ]
+   },
+   {
+    "type": "is time_is",
+    "count": 67,
+    "maps": 56,
+    "argc": {
+     "3": 67
+    },
+    "examples": [
+     "is time_is stage_of_day,equals,night",
+     "is time_is daytime,equals,true",
+     "is time_is date,equals,2-12",
+     "is time_is date,equals,9-30"
+    ]
+   },
+   {
+    "type": "not time_is",
+    "count": 61,
+    "maps": 54,
+    "argc": {
+     "3": 61
+    },
+    "examples": [
+     "not time_is stage_of_day,equals,night",
+     "not time_is date,equals,2-12",
+     "not time_is date,equals,9-30",
+     "not time_is date,equals,4-27"
+    ]
+   },
+   {
+    "type": "not has_item",
+    "count": 58,
+    "maps": 13,
+    "argc": {
+     "2": 58
+    },
+    "examples": [
+     "not has_item player,aardant",
+     "not has_item player,p_starry_night",
+     "not has_item player,p_trepidation",
+     "not has_item player,p_monsters_eyes"
+    ]
+   },
+   {
+    "type": "is has_item",
+    "count": 53,
+    "maps": 10,
+    "argc": {
+     "2": 52,
+     "4": 1
+    },
+    "examples": [
+     "is has_item player,aardant",
+     "is has_item player,p_starry_night",
+     "is has_item player,p_trepidation",
+     "is has_item player,p_monsters_eyes"
+    ]
+   },
+   {
+    "type": "is party_size",
+    "count": 50,
+    "maps": 18,
+    "argc": {
+     "3": 50
+    },
+    "examples": [
+     "is party_size player,greater_than,1",
+     "is party_size player,greater_than,0",
+     "is party_size player,less_than,1",
+     "is party_size professor,greater_than,0"
+    ]
+   },
+   {
+    "type": "is check_char_parameter",
+    "count": 40,
+    "maps": 26,
+    "argc": {
+     "3": 40
+    },
+    "examples": [
+     "is check_char_parameter player,moving,1",
+     "is check_char_parameter player,name,ApexPlayer"
+    ]
+   },
+   {
+    "type": "is char_sprite",
+    "count": 37,
+    "maps": 20,
+    "argc": {
+     "2": 37
+    },
+    "examples": [
+     "is char_sprite player,swimmer",
+     "is char_sprite player,invisible"
+    ]
+   },
+   {
+    "type": "not char_sprite",
+    "count": 29,
+    "maps": 15,
+    "argc": {
+     "2": 29
+    },
+    "examples": [
+     "not char_sprite player,swimmer"
+    ]
+   },
+   {
+    "type": "is environment_is",
+    "count": 28,
+    "maps": 14,
+    "argc": {
+     "1": 28
+    },
+    "examples": [
+     "is environment_is ocean",
+     "is environment_is night_ocean"
+    ]
+   },
+   {
+    "type": "is has_monster",
+    "count": 24,
+    "maps": 6,
+    "argc": {
+     "2": 24
+    },
+    "examples": [
+     "is has_monster player,cateye",
+     "is has_monster player,rhincus",
+     "is has_monster player,shammer",
+     "is has_monster player,wolffsky"
+    ]
+   },
+   {
+    "type": "not tracker",
+    "count": 22,
+    "maps": 21,
+    "argc": {
+     "2": 22
+    },
+    "examples": [
+     "not tracker player,candy_town",
+     "not tracker player,citypark",
+     "not tracker player,dragonscave",
+     "not tracker player,dryadsgrove"
+    ]
+   },
+   {
+    "type": "is money_is",
+    "count": 15,
+    "maps": 5,
+    "argc": {
+     "3": 15
+    },
+    "examples": [
+     "is money_is player,greater_or_equal,50",
+     "is money_is player,greater_or_equal,3000",
+     "is money_is player,greater_or_equal,1000",
+     "is money_is player,less_than,3000"
+    ]
+   },
+   {
+    "type": "not has_monster",
+    "count": 11,
+    "maps": 5,
+    "argc": {
+     "1": 1,
+     "2": 10
+    },
+    "examples": [
+     "not has_monster player,cateye",
+     "not has_monster player,shammer",
+     "not has_monster player,rhincus",
+     "not has_monster player,budaye"
+    ]
+   },
+   {
+    "type": "is char_defeated",
+    "count": 10,
+    "maps": 7,
+    "argc": {
+     "1": 10
+    },
+    "examples": [
+     "is char_defeated player"
+    ]
+   },
+   {
+    "type": "is char_exists",
+    "count": 9,
+    "maps": 4,
+    "argc": {
+     "1": 9
+    },
+    "examples": [
+     "is char_exists spyder_cottoncafe_hillary",
+     "is char_exists spyder_papertown_mom",
+     "is char_exists spyder_billie",
+     "is char_exists professor"
+    ]
+   },
+   {
+    "type": "not battle_outcome_count",
+    "count": 9,
+    "maps": 3,
+    "argc": {
+     "4": 9
+    },
+    "examples": [
+     "not battle_outcome_count player,won,spyder_nimrod_tru,1",
+     "not battle_outcome_count player,won,spyder_omnichannel_beaverbrook,1"
+    ]
+   },
+   {
+    "type": "not money_is",
+    "count": 9,
+    "maps": 5,
+    "argc": {
+     "3": 9
+    },
+    "examples": [
+     "not money_is player,greater_or_equal,50",
+     "not money_is player,greater_or_equal,500",
+     "not money_is player,greater_or_equal,party_lost_hp",
+     "not money_is player,greater_or_equal,200"
+    ]
+   },
+   {
+    "type": "is check_party_parameter",
+    "count": 8,
+    "maps": 1,
+    "argc": {
+     "5": 8
+    },
+    "examples": [
+     "is check_party_parameter player,stage,stage2,greater_than,0",
+     "is check_party_parameter player,stage,stage1,greater_than,0"
+    ]
+   },
+   {
+    "type": "is step_tracker",
+    "count": 7,
+    "maps": 4,
+    "argc": {
+     "3": 7
+    },
+    "examples": [
+     "is step_tracker player,steps_park,100",
+     "is step_tracker player,steps_park,0",
+     "is step_tracker player,steps_bonding,0"
+    ]
+   },
+   {
+    "type": "not char_in",
+    "count": 6,
+    "maps": 1,
+    "argc": {
+     "2": 6
+    },
+    "examples": [
+     "not char_in player,surfable"
+    ]
+   },
+   {
+    "type": "not check_party_parameter",
+    "count": 6,
+    "maps": 1,
+    "argc": {
+     "5": 6
+    },
+    "examples": [
+     "not check_party_parameter player,stage,stage1,greater_than,0",
+     "not check_party_parameter player,stage,stage2,greater_than,0"
+    ]
+   },
+   {
+    "type": "not party_size",
+    "count": 5,
+    "maps": 4,
+    "argc": {
+     "3": 5
+    },
+    "examples": [
+     "not party_size player,greater_than,0",
+     "not party_size player,greater_than,1"
+    ]
+   },
+   {
+    "type": "is tile_property_updated",
+    "count": 4,
+    "maps": 1,
+    "argc": {
+     "2": 4
+    },
+    "examples": [
+     "is tile_property_updated surfable,1"
+    ]
+   },
+   {
+    "type": "is party_infected",
+    "count": 3,
+    "maps": 1,
+    "argc": {
+     "3": 3
+    },
+    "examples": [
+     "is party_infected player,spyderbite,all",
+     "is party_infected player,spyderbite,none",
+     "is party_infected player,spyderbite,some"
+    ]
+   },
+   {
+    "type": "is battle_outcome_count",
+    "count": 2,
+    "maps": 2,
+    "argc": {
+     "4": 2
+    },
+    "examples": [
+     "is battle_outcome_count player,won,spyder_nimrod_tru,1",
+     "is battle_outcome_count player,won,spyder_omnichannel_beaverbrook,0"
+    ]
+   },
+   {
+    "type": "is bill_is",
+    "count": 2,
+    "maps": 1,
+    "argc": {
+     "4": 2
+    },
+    "examples": [
+     "is bill_is player,bill_cathedral,greater_than,0"
+    ]
+   },
+   {
+    "type": "is check_evolution",
+    "count": 2,
+    "maps": 2,
+    "argc": {
+     "1": 2
+    },
+    "examples": [
+     "is check_evolution player"
+    ]
+   },
+   {
+    "type": "is check_max_tech",
+    "count": 2,
+    "maps": 2,
+    "argc": {
+     "1": 2
+    },
+    "examples": [
+     "is check_max_tech player"
+    ]
+   },
+   {
+    "type": "is check_world",
+    "count": 2,
+    "maps": 1,
+    "argc": {
+     "2": 2
+    },
+    "examples": [
+     "is check_world layer,0:0:128:128"
+    ]
+   },
+   {
+    "type": "is has_kennel",
+    "count": 2,
+    "maps": 1,
+    "argc": {
+     "4": 2
+    },
+    "examples": [
+     "is has_kennel player,Kennel,less_than,1",
+     "is has_kennel player,Kennel,greater_or_equal,1"
+    ]
+   },
+   {
+    "type": "is kennel",
+    "count": 2,
+    "maps": 1,
+    "argc": {
+     "3": 2
+    },
+    "examples": [
+     "is kennel player,quarantine,visible",
+     "is kennel player,quarantine,hidden"
+    ]
+   },
+   {
+    "type": "not location_inside",
+    "count": 2,
+    "maps": 1,
+    "argc": {
+     "0": 2
+    },
+    "examples": [
+     "not location_inside"
+    ]
+   },
+   {
+    "type": "not tile_property_updated",
+    "count": 2,
+    "maps": 1,
+    "argc": {
+     "2": 2
+    },
+    "examples": [
+     "not tile_property_updated surfable,1",
+     "not tile_property_updated surfable,0"
+    ]
+   },
+   {
+    "type": "is char_gender",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "2": 1
+    },
+    "examples": [
+     "is char_gender player,male"
+    ]
+   },
+   {
+    "type": "is char_healed",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "1": 1
+    },
+    "examples": [
+     "is char_healed player"
+    ]
+   },
+   {
+    "type": "is char_in",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "2": 1
+    },
+    "examples": [
+     "is char_in player,surfable"
+    ]
+   },
+   {
+    "type": "is cooldown_days",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "2": 1
+    },
+    "examples": [
+     "is cooldown_days 1,elianeflower"
+    ]
+   },
+   {
+    "type": "is has_tuxepedia",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "3": 1
+    },
+    "examples": [
+     "is has_tuxepedia player,drokoro,caught"
+    ]
+   },
+   {
+    "type": "is location_inside",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "0": 1
+    },
+    "examples": [
+     "is location_inside"
+    ]
+   },
+   {
+    "type": "is location_type",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "1": 1
+    },
+    "examples": [
+     "is location_type clinic"
+    ]
+   },
+   {
+    "type": "is music_playing",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "1": 1
+    },
+    "examples": [
+     "is music_playing music_mystic_island"
+    ]
+   },
+   {
+    "type": "is player_facing_tile",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "0": 1
+    },
+    "examples": [
+     "is player_facing_tile"
+    ]
+   },
+   {
+    "type": "not bill_exists",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "2": 1
+    },
+    "examples": [
+     "not bill_exists player,bill_cathedral"
+    ]
+   },
+   {
+    "type": "not char_gender",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "2": 1
+    },
+    "examples": [
+     "not char_gender player,male"
+    ]
+   },
+   {
+    "type": "not char_healed",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "1": 1
+    },
+    "examples": [
+     "not char_healed player"
+    ]
+   },
+   {
+    "type": "not check_char_parameter",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "3": 1
+    },
+    "examples": [
+     "not check_char_parameter player,name,ApexPlayer"
+    ]
+   },
+   {
+    "type": "not check_world",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "2": 1
+    },
+    "examples": [
+     "not check_world layer,0:0:128:128"
+    ]
+   },
+   {
+    "type": "not has_tuxepedia",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "3": 1
+    },
+    "examples": [
+     "not has_tuxepedia player,drokoro,caught"
+    ]
+   },
+   {
+    "type": "not kennel",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "3": 1
+    },
+    "examples": [
+     "not kennel player,quarantine,exist"
+    ]
+   },
+   {
+    "type": "not location_type",
+    "count": 1,
+    "maps": 1,
+    "argc": {
+     "1": 1
+    },
+    "examples": [
+     "not location_type clinic"
+    ]
+   }
+  ],
+  "behaviours": [
+   {
+    "type": "talk",
+    "count": 787,
+    "maps": 138,
+    "argc": {
+     "1": 787
+    },
+    "examples": [
+     "talk 37707_female",
+     "talk 37707_male",
+     "talk 37707_female_missing",
+     "talk 37707_male_missing"
+    ]
+   }
+  ]
+ },
+ "loaded": {
+  "events": 7508,
+  "byKind": {
+   "tmxEvent": 3686,
+   "tmxInit": 6,
+   "yamlEvent": 3816,
+   "yamlInit": 0
+  },
+  "actionUses": 18849,
+  "conditionUses": 17577
+ }
+}
