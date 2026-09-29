@@ -2,6 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { decodePng } from "../importer/png.ts";
+import { DEFAULT_TUXEMON_SRC } from "../importer/terrain.ts";
 import { ANIMATED, GAME_ASSETS, NPC_SRC, PLAYER } from "../ui/game-assets.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
@@ -14,6 +15,10 @@ const sprites = JSON.parse(readFileSync(resolve(ROOT, "sprites.json"), "utf8")) 
 
 describe("G6 generated game assets", () => {
   test("cover every imported map, character, animation, and labelled collision body", () => {
+    const appearances = Bun.YAML.parse(readFileSync(
+      resolve(process.env.TUXEMON_SRC ?? DEFAULT_TUXEMON_SRC, "mods/tuxemon/db/npc/appearance_options.yaml"),
+      "utf8",
+    )) as { template: { sprite_name: string } }[];
     expect(report.project).toMatchObject({
       maps: 263,
       collisionBodies: 14,
@@ -35,6 +40,7 @@ describe("G6 generated game assets", () => {
       staticObjects: 22,
       placeholders: 1,
       imageFiles: 1_859,
+      playerSheet: `sprites/${appearances[0]!.template.sprite_name}.png`,
     });
     expect(GAME_ASSETS.order).toHaveLength(263);
     expect(Object.keys(NPC_SRC)).toHaveLength(175);

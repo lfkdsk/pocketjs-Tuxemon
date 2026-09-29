@@ -81,7 +81,21 @@ function portablePng(rgba: Uint8Array, width: number, height: number): Uint8Arra
   return encodePNG(padded, outWidth, outHeight);
 }
 
-/** Cook all page.sprite art plus the fixed Spyder player appearance. */
+interface AppearanceOption {
+  template?: { sprite_name?: unknown };
+}
+
+function firstPlayerSheet(modRoot: string): string {
+  const path = join(modRoot, "db/npc/appearance_options.yaml");
+  const options = Bun.YAML.parse(readFileSync(path, "utf8")) as AppearanceOption[] | null;
+  const spriteName = options?.[0]?.template?.sprite_name;
+  if (typeof spriteName !== "string" || !/^[A-Za-z0-9_-]+$/.test(spriteName)) {
+    throw new Error(`${path}: first appearance option has no safe template.sprite_name`);
+  }
+  return `sprites/${spriteName}.png`;
+}
+
+/** Cook all page.sprite art plus the first authored player appearance. */
 export async function cookCharacters(project: Project, options: CharacterCookOptions): Promise<CharacterBuild> {
   const outputRoot = normalize(options.outputRoot);
   const sourceRoot = normalize(options.sourceRoot ?? process.env.TUXEMON_SRC ?? DEFAULT_TUXEMON_SRC);
@@ -178,7 +192,9 @@ export async function cookCharacters(project: Project, options: CharacterCookOpt
     placeholders++;
   }
 
-  const playerArt = await writeWalker("player-adventurer", join(modRoot, "sprites/adventurer.png"));
+  const playerSheet = firstPlayerSheet(modRoot);
+  const playerStem = playerSheet.slice("sprites/".length, -".png".length);
+  const playerArt = await writeWalker(`player-${safeName(playerStem)}`, join(modRoot, playerSheet));
   const player: PlayerFrames = {
     idle: playerArt.idle,
     walkL: playerArt.walkL,
@@ -197,7 +213,7 @@ export async function cookCharacters(project: Project, options: CharacterCookOpt
       staticObjects,
       tallStaticObjects,
       placeholders,
-      playerSheet: "sprites/adventurer.png",
+      playerSheet,
       imageFiles: Object.keys(imagesJson).length,
       imageBytes,
     },
