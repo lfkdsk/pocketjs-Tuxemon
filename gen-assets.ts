@@ -1,13 +1,14 @@
 // One-command deterministic G6 cook: K1 events + streamed terrain + R2 art.
 // Usage: TUXEMON_SRC=/path/to/Tuxemon bun gen-assets.ts
 
-import { mkdirSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { cookAnimationAtlases, animatedManifestSource } from "./vendor/pocket-rpgkit/tools/lib/animated.ts";
 import type { GameAssets } from "./vendor/pocket-rpgkit/src/ui/game-assets.ts";
 import type { PlayerFrames } from "./vendor/pocket-rpgkit/src/ui/PlayerSprite.tsx";
 import type { Project } from "./vendor/pocket-rpgkit/src/engine/types.ts";
 import { cookCharacters } from "./importer/characters.ts";
+import { appendBattleDbPakEntry, writeBattleArtifacts } from "./importer/battle.ts";
 import { coverageMarkdown, jsonBytes } from "./importer/index.ts";
 import { availableMapIds, buildProject, G6_IMPORT_OPTIONS } from "./importer/project.ts";
 import { applyTerrain, writeTerrain } from "./importer/terrain.ts";
@@ -33,6 +34,8 @@ project = {
 
 const characters = await cookCharacters(project, { outputRoot: ROOT });
 project = characters.project;
+const battleScope = process.env.BATTLE_DB_SCOPE === "full" ? "full" : "spyder";
+const battle = writeBattleArtifacts({ outputRoot: ROOT, scope: battleScope });
 
 // Animated tile atlases are globally shared by equal RGBA sequences.
 const animDir = join(ROOT, "assets/anim");
@@ -57,7 +60,10 @@ const animatedMaps = Object.entries(terrain.animations).map(([id, cells]) => ({
 }));
 
 writeFileSync(join(ROOT, "sprites.json"), jsonBytes(cooked.spritesJson));
-writeFileSync(join(ROOT, "images.json"), jsonBytes(characters.imagesJson));
+const allImages = { ...characters.imagesJson, ...battle.imagesJson };
+writeFileSync(join(ROOT, "images.json"), jsonBytes(allImages));
+const rawPak = JSON.parse(readFileSync(join(ROOT, "pak.json"), "utf8")) as Array<{ key: string; file: string }>;
+writeFileSync(join(ROOT, "pak.json"), JSON.stringify(appendBattleDbPakEntry(rawPak), null, 2) + "\n");
 writeFileSync(join(DIST, "project.json"), jsonBytes(project));
 writeFileSync(join(DIST, "variable-enums.json"), jsonBytes(imported.variables));
 writeFileSync(join(DIST, "import-report.json"), jsonBytes(imported.report));
@@ -117,6 +123,7 @@ const assetReport = {
     atlasBytes: cooked.atlases.reduce((sum, atlas) => sum + atlas.png.byteLength, 0),
   },
   characters: characters.report,
+  battle: battle.report,
 };
 writeFileSync(join(ROOT, "data/g6-assets-report.json"), jsonBytes(assetReport));
 
@@ -126,3 +133,8 @@ console.log(
   `${collisionBodies} removable collision bodies`,
 );
 console.log(`terrain pak: ${terrain.report.pakBytes} bytes (${terrain.report.gzipBytes} gzip)`);
+console.log(
+  `battle ${battle.report.scope}: ${battle.report.counts.monsters} monsters, ` +
+  `${battle.report.counts.techniques} techniques, ${battle.report.art.files} textures, ` +
+  `${battle.report.art.pakBytes} battle-only pak bytes`,
+);

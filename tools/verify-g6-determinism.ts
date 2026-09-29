@@ -9,12 +9,15 @@ import { join, relative, resolve } from "node:path";
 const ROOT = resolve(import.meta.dir, "..");
 const GENERATED = [
   "assets/anim",
+  "assets/battle",
   "assets/characters",
   "assets/stream",
   "data/terrain.json",
   "data/terrain-animations.json",
   "data/terrain-report.json",
   "data/g6-assets-report.json",
+  "data/battle-db.json",
+  "data/battle-assets-report.json",
   "dist/project.json",
   "dist/import-report.json",
   "dist/variable-enums.json",
@@ -23,6 +26,7 @@ const GENERATED = [
   "pak.json",
   "sprites.json",
   "ui/game-assets.ts",
+  "ui/battle-assets.ts",
   "ui/terrain-assets.ts",
 ] as const;
 

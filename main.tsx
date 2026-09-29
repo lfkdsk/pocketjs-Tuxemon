@@ -4,8 +4,12 @@ import rawProject from "./dist/project.json";
 import type { Project } from "./vendor/pocket-rpgkit/src/engine/types.ts";
 import { GameView } from "./vendor/pocket-rpgkit/src/ui/GameView.tsx";
 import { GAME_ASSETS } from "./ui/game-assets.ts";
+import { BATTLE_ASSET_PATHS } from "./ui/battle-assets.ts";
 
 const project = rawProject as unknown as Project;
+// The generated literal list is the build-time asset root. Battle UI resolves
+// these paths dynamically from battle-db at runtime.
+void BATTLE_ASSET_PATHS;
 
 mount(() => (
   <GameView

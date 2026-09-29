@@ -3,6 +3,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { decodePng } from "../importer/png.ts";
 import { DEFAULT_TUXEMON_SRC } from "../importer/terrain.ts";
+import { BATTLE_ASSET_PATHS } from "../ui/battle-assets.ts";
 import { ANIMATED, GAME_ASSETS, NPC_SRC, PLAYER } from "../ui/game-assets.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
@@ -49,8 +50,12 @@ describe("G6 generated game assets", () => {
   });
 
   test("all R2 character images are portable power-of-two RGBAs", () => {
-    expect(Object.keys(images)).toHaveLength(1_859);
-    for (const [relative, meta] of Object.entries(images)) {
+    const battlePaths = new Set<string>(BATTLE_ASSET_PATHS);
+    const characterImages = Object.entries(images).filter(([relative]) => !battlePaths.has(relative));
+    expect(characterImages).toHaveLength(1_859);
+    expect(Object.keys(images)).toHaveLength(1_859 + BATTLE_ASSET_PATHS.length);
+    expect(BATTLE_ASSET_PATHS.every((relative) => images[relative]?.psm === 2)).toBeTrue();
+    for (const [relative, meta] of characterImages) {
       const path = resolve(ROOT, relative);
       expect(existsSync(path), relative).toBeTrue();
       expect(meta.psm, relative).toBe(3);

@@ -1,0 +1,5019 @@
+{
+  "definitions": [
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_hospital1_aurora",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "exclawvate"
+        }
+      ],
+      "where": [
+        "spyder_candy_hospital1::Talk Aurora"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_hospital1_eleni",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "boltnu"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "taupypus"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "snaki"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "galnec"
+        }
+      ],
+      "where": [
+        "spyder_candy_hospital1::Talk Eleni"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_hospital1_felu",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "anu"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "galnec"
+        }
+      ],
+      "where": [
+        "spyder_candy_hospital1::Talk Felu"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_hospital1_liane",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 41,
+          "moneyModifier": 10.0,
+          "slug": "boltnu"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 41,
+          "moneyModifier": 10.0,
+          "slug": "snaki"
+        }
+      ],
+      "where": [
+        "spyder_candy_hospital1::Talk Liane"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_hospital1_fring",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "anu"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "selket"
+        }
+      ],
+      "where": [
+        "spyder_candy_hospital1::Talk Fring"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_hospital1_walt",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 39,
+          "moneyModifier": 10.0,
+          "slug": "anu"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 32,
+          "moneyModifier": 10.0,
+          "slug": "taupypus"
+        }
+      ],
+      "where": [
+        "spyder_candy_hospital1::Talk Walt"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_hospital1_luzia",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 41,
+          "moneyModifier": 10.0,
+          "slug": "galnec"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 41,
+          "moneyModifier": 10.0,
+          "slug": "exclawvate"
+        }
+      ],
+      "where": [
+        "spyder_candy_hospital2::Talk Luzia"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_hospital1_zekar",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 37,
+          "moneyModifier": 10.0,
+          "slug": "selket"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 37,
+          "moneyModifier": 10.0,
+          "slug": "taupypus"
+        }
+      ],
+      "where": [
+        "spyder_candy_hospital2::Talk Zekar"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_hospital1_rakez",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "pipis"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "strella"
+        }
+      ],
+      "where": [
+        "spyder_candy_hospital2::Talk Rakez"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_hospital1_rhizome",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 38,
+          "moneyModifier": 10.0,
+          "slug": "flacono"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 38,
+          "moneyModifier": 10.0,
+          "slug": "fancair"
+        }
+      ],
+      "where": [
+        "spyder_candy_hospital2::Talk Rhizome"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_billie",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "billie_choice"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "cardinale"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "eyesore"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "viviphyta"
+        }
+      ],
+      "where": [
+        "spyder_candy_hospital3::Billie confronts"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_citypark_frances",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 8,
+          "moneyModifier": 10.0,
+          "slug": "shybulb"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 8,
+          "moneyModifier": 10.0,
+          "slug": "shybulb"
+        }
+      ],
+      "where": [
+        "spyder_citypark::Talk Frances"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_citypark_bobette",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 10,
+          "moneyModifier": 10.0,
+          "slug": "aardorn"
+        }
+      ],
+      "where": [
+        "spyder_citypark::Talk Bobette",
+        "spyder_citypark::Talk Bobette"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_citypark_edith",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 8,
+          "moneyModifier": 10.0,
+          "slug": "squabbit"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 8,
+          "moneyModifier": 10.0,
+          "slug": "squabbit"
+        }
+      ],
+      "where": [
+        "spyder_citypark::Talk Edith"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_cottoncafe_cayden",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 4,
+          "moneyModifier": 10.0,
+          "slug": "capiti"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 4,
+          "moneyModifier": 10.0,
+          "slug": "tweesher"
+        }
+      ],
+      "where": [
+        "spyder_cotton_cafe::battle cayden"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_confusedperson",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 2,
+          "moneyModifier": 10.0,
+          "slug": "pairagrin"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 2,
+          "moneyModifier": 10.0,
+          "slug": "capiti"
+        }
+      ],
+      "where": [
+        "spyder_cotton_town::Battle confused"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_cottontunnel_carlos",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "agnidon"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "legko"
+        }
+      ],
+      "where": [
+        "spyder_cotton_tunnel::Talk Carlos"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_datacenter_fermi",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "chromeye"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "angrito"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "sadito"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "happito"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "neutrito"
+        }
+      ],
+      "where": [
+        "spyder_datacenter::Talk Fermi"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_datacenter_onnes",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "ouroboutlet"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "angrito"
+        }
+      ],
+      "where": [
+        "spyder_datacenter::Talk Onnes"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_datacenter_bayliss",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "sockeserp"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "sadito"
+        }
+      ],
+      "where": [
+        "spyder_datacenter::Talk Bayliss"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_datacenter_chomsky",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "fancair"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "happito"
+        }
+      ],
+      "where": [
+        "spyder_datacenter::Talk Chomsky"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_datacenter_lagrange",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "windeye"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "neutrito"
+        }
+      ],
+      "where": [
+        "spyder_datacenter::Talk Lagrange"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_dojo_iroh",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "cardiwing"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "djinnbo"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "flounce"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "volconey"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "prophetoise"
+        }
+      ],
+      "where": [
+        "spyder_dojo2::Talk Iroh"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_dojo_yangchen",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "duggot"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "drashimi"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "coppi"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "vigueur"
+        }
+      ],
+      "where": [
+        "spyder_dojo2::Talk Yangchen"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_dojo_kataro",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "hydrone"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "nudikill"
+        }
+      ],
+      "where": [
+        "spyder_dojo2::Talk Kataro"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_dojo_sokka",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "hydrone"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "pythwire"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "embazook"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "pigabyte"
+        }
+      ],
+      "where": [
+        "spyder_dojo2::Talk Sokka"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_dojo_toph",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "rockat"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "rhincus"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "galnec"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "sludgehog"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "eruptibus"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "vividactil"
+        }
+      ],
+      "where": [
+        "spyder_dojo2::Talk Toph"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_dojo_wan",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "galnec"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "embazook"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "vigueur"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "hydrone"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "djinnbo"
+        }
+      ],
+      "where": [
+        "spyder_dojo2::Talk Wan2"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_dojo_saturn",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "hampotamos"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "baobaraffe"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "shnark"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "sludgehog"
+        }
+      ],
+      "where": [
+        "spyder_dojo3::Talk Saturn"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_dojo_hephastus",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "mystikapi"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "lightmare"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "cocrune"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "embra"
+        }
+      ],
+      "where": [
+        "spyder_dojo3::Talk Hephastus"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_dojo_hermes",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "capiti"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "graffiki"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "volcoli"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "eaglace"
+        }
+      ],
+      "where": [
+        "spyder_dojo3::Talk Hermes"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_dojo_orion",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "skwib"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "miaownolith"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "grimachin"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "drashimi"
+        }
+      ],
+      "where": [
+        "spyder_dojo3::Talk Orion"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_dojo_ares",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "urcine"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "flambear"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "boltnu"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "tourbidi"
+        }
+      ],
+      "where": [
+        "spyder_dojo3::Talk Ares"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_dojo_tu",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "urcine"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "skwib"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "mystikapi"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "graffiki"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "sludgehog"
+        }
+      ],
+      "where": [
+        "spyder_dojo3::Talk Tu2"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_dojo_thri",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "sampsage"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "sampsack"
+        }
+      ],
+      "where": [
+        "spyder_dojo4::Talk Thri"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_billie",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 34,
+          "moneyModifier": 10.0,
+          "slug": "billie_choice"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "eyesore"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "cardiwing"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "viviphyta"
+        }
+      ],
+      "where": [
+        "spyder_dojo4::Billie encounter"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_dragonscave_tomas",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "allagon"
+        }
+      ],
+      "where": [
+        "spyder_dragonscave::Talk Tomas",
+        "spyder_dragonscave::Talk Tomas"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_dragonscave_lessa",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 42,
+          "moneyModifier": 10.0,
+          "slug": "allagon"
+        }
+      ],
+      "where": [
+        "spyder_dragonscave::Talk Lessa",
+        "spyder_dragonscave::Talk Lessa"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_dragonscave_cailin",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 41,
+          "moneyModifier": 10.0,
+          "slug": "dragarbor"
+        }
+      ],
+      "where": [
+        "spyder_dragonscave::Talk Cailin",
+        "spyder_dragonscave::Talk Cailin"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_dragonscave_griffin",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "bigfin"
+        }
+      ],
+      "where": [
+        "spyder_dragonscave::Talk Griffin",
+        "spyder_dragonscave::Talk Griffin"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_dragonscave_daenny",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 42,
+          "moneyModifier": 10.0,
+          "slug": "eaglace"
+        }
+      ],
+      "where": [
+        "spyder_dragonscave::Talk Daenny",
+        "spyder_dragonscave::Talk Daenny"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_dragonscave_benden",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 41,
+          "moneyModifier": 10.0,
+          "slug": "dragarbor"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 43,
+          "moneyModifier": 10.0,
+          "slug": "sapragon"
+        }
+      ],
+      "where": [
+        "spyder_dragonscave::Talk Benden",
+        "spyder_dragonscave::Talk Benden"
+      ]
+    },
+    {
+      "fieldSize": 2,
+      "inside": false,
+      "opponent": "spyder_dragonscave_ray",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "ghosteeth"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "embazook"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "arthrobolt"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "hydrone"
+        }
+      ],
+      "where": [
+        "spyder_dragonscave::Talk Ray and Tru"
+      ]
+    },
+    {
+      "fieldSize": 2,
+      "inside": false,
+      "opponent": "spyder_dragonscave_lucille",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "coleorus"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "djinnbo"
+        }
+      ],
+      "where": [
+        "spyder_dragonscave::Talk Lucille and Mal"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_dryadsgrove_aquemini",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "vivitrans"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "nudimind"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "noctalo"
+        }
+      ],
+      "where": [
+        "spyder_dryadsgrove::Talk Aquemini",
+        "spyder_dryadsgrove::Talk Aquemini"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_dryadsgrove_ignatia",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "vivicinder"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "masknake"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "criniotherme"
+        }
+      ],
+      "where": [
+        "spyder_dryadsgrove::Talk Ignatia",
+        "spyder_dryadsgrove::Talk Ignatia"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_dryadsgrove_petra",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "vivitron"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "sumchon"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "exapode"
+        }
+      ],
+      "where": [
+        "spyder_dryadsgrove::Talk Petra",
+        "spyder_dryadsgrove::Talk Petra"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_dryadsgrove_sylvia",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "viviphyta"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "dandylion"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "narcileaf"
+        }
+      ],
+      "where": [
+        "spyder_dryadsgrove::Talk Sylvia"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_dryadsgrove_ferris",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "viviteel"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "allagon"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "araignee"
+        }
+      ],
+      "where": [
+        "spyder_dryadsgrove::Talk Ferris",
+        "spyder_dryadsgrove::Talk Ferris"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_greenwash_looten",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "bearloch"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "rocktot"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "foxko"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "agnsher"
+        }
+      ],
+      "where": [
+        "spyder_greenwash::Talk Looten"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_greenwash_chip",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 27,
+          "moneyModifier": 10.0,
+          "slug": "av8r"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 27,
+          "moneyModifier": 10.0,
+          "slug": "criniotherme"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 27,
+          "moneyModifier": 10.0,
+          "slug": "tikorch"
+        }
+      ],
+      "where": [
+        "spyder_greenwash::Talk Chip"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_greenwash_clarence",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "pigabyte"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 28,
+          "moneyModifier": 10.0,
+          "slug": "cochini"
+        }
+      ],
+      "where": [
+        "spyder_greenwash::Talk Clarence"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_greenwash_broer",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 31,
+          "moneyModifier": 10.0,
+          "slug": "coleorus"
+        }
+      ],
+      "where": [
+        "spyder_greenwash::Talk Broer"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_greenwash_lewie",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 31,
+          "moneyModifier": 10.0,
+          "slug": "agnite"
+        }
+      ],
+      "where": [
+        "spyder_greenwash::Talk Lewie"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_greenwash_morehouse",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "eyenemy"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "eyesore"
+        }
+      ],
+      "where": [
+        "spyder_greenwash::Talk Morehouse"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_greenwash_gregor",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 22,
+          "moneyModifier": 10.0,
+          "slug": "sclairus"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 22,
+          "moneyModifier": 10.0,
+          "slug": "cateye"
+        }
+      ],
+      "where": [
+        "spyder_greenwash_greenhouse::Talk Gregor"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_greenwash_alex",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "shybulb"
+        }
+      ],
+      "where": [
+        "spyder_greenwash_greenhouse::Talk Alex"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_greenwash_hunt",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "cateye"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "propellercat"
+        }
+      ],
+      "where": [
+        "spyder_greenwash_greenhouse::Talk Hunt"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_greenwash_lewis",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 24,
+          "moneyModifier": 10.0,
+          "slug": "pharfan"
+        }
+      ],
+      "where": [
+        "spyder_greenwash_greenhouse::Talk Lewis",
+        "spyder_greenwash_greenhouse::Talk Lewis"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_greenwash_louis",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 24,
+          "moneyModifier": 10.0,
+          "slug": "cateye"
+        }
+      ],
+      "where": [
+        "spyder_greenwash_greenhouse::Talk Louis"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_greenwash_gluck",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "narcileaf"
+        }
+      ],
+      "where": [
+        "spyder_greenwash_greenhouse::Talk Gluck"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_greenwash_aissa",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 27,
+          "moneyModifier": 10.0,
+          "slug": "cateye"
+        }
+      ],
+      "where": [
+        "spyder_greenwash_level2::Talk Aissa"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_greenwash_dippel",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 27,
+          "moneyModifier": 10.0,
+          "slug": "criniotherme"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 27,
+          "moneyModifier": 10.0,
+          "slug": "tikorch"
+        }
+      ],
+      "where": [
+        "spyder_greenwash_level2::Talk Dippel"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_greenwash_moreau",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 31,
+          "moneyModifier": 10.0,
+          "slug": "sclairus"
+        }
+      ],
+      "where": [
+        "spyder_greenwash_level2::Talk Moreau"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_greenwash_dempsey",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "masknake"
+        }
+      ],
+      "where": [
+        "spyder_greenwash_level2::Talk Dempsey"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_greenwash_heidenstam",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 15,
+          "moneyModifier": 10.0,
+          "slug": "foofle"
+        }
+      ],
+      "where": [
+        "spyder_greenwash_level2::Talk Heidenstam"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_leathergym_chad",
+      "party": [
+        {
+          "experienceModifier": 1.0,
+          "level": 24,
+          "moneyModifier": 0.0,
+          "slug": "boxali"
+        }
+      ],
+      "where": [
+        "spyder_leather_gym::Bradfort",
+        "spyder_leather_gym::Chad"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_leathergym_brad",
+      "party": [
+        {
+          "experienceModifier": 1.0,
+          "level": 24,
+          "moneyModifier": 0.0,
+          "slug": "sumchon"
+        }
+      ],
+      "where": [
+        "spyder_leather_gym::Bradfort",
+        "spyder_leather_gym::Chad"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_mansion_gillette",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 22,
+          "moneyModifier": 10.0,
+          "slug": "djinnbo"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 22,
+          "moneyModifier": 10.0,
+          "slug": "ghosteeth"
+        }
+      ],
+      "where": [
+        "spyder_mansion::Talk Gillette"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_mansion_lucy",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 15,
+          "moneyModifier": 10.0,
+          "slug": "elofly"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 15,
+          "moneyModifier": 10.0,
+          "slug": "budaye"
+        }
+      ],
+      "where": [
+        "spyder_mansion::Talk Lucy"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_mansion_lyle",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 20,
+          "moneyModifier": 10.0,
+          "slug": "foofle"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 20,
+          "moneyModifier": 10.0,
+          "slug": "shybulb"
+        }
+      ],
+      "where": [
+        "spyder_mansion::Talk Lyle"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_basement_coralli",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 22,
+          "moneyModifier": 10.0,
+          "slug": "tumbleworm"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 22,
+          "moneyModifier": 10.0,
+          "slug": "elofly"
+        }
+      ],
+      "where": [
+        "spyder_mansion_basement::Talk Coralli"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_basement_bobby",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 26,
+          "moneyModifier": 10.0,
+          "slug": "capiti"
+        }
+      ],
+      "where": [
+        "spyder_mansion_basement::Talk Bobby"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_basement_roger",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 22,
+          "moneyModifier": 10.0,
+          "slug": "polyrock"
+        }
+      ],
+      "where": [
+        "spyder_mansion_basement::Talk Roger"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_basement_catholi",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 20,
+          "moneyModifier": 10.0,
+          "slug": "foofle"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 24,
+          "moneyModifier": 10.0,
+          "slug": "rosarin"
+        }
+      ],
+      "where": [
+        "spyder_mansion_basement::Talk Catholi"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_top_mickey",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "gectile"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "cardiwing"
+        }
+      ],
+      "where": [
+        "spyder_mansion_top::Talk Mickey"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_top_russell",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 22,
+          "moneyModifier": 10.0,
+          "slug": "av8r"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 22,
+          "moneyModifier": 10.0,
+          "slug": "mrmoswitch"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 22,
+          "moneyModifier": 10.0,
+          "slug": "k9"
+        }
+      ],
+      "where": [
+        "spyder_mansion_top::Talk Russell"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_top_ricardo",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 22,
+          "moneyModifier": 10.0,
+          "slug": "lapinou"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 22,
+          "moneyModifier": 10.0,
+          "slug": "squabbit"
+        }
+      ],
+      "where": [
+        "spyder_mansion_top::Talk Ricardo"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_top_jackson",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 26,
+          "moneyModifier": 10.0,
+          "slug": "viviteel"
+        }
+      ],
+      "where": [
+        "spyder_mansion_top::Talk Jackson"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_nimrod_rebel",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "grimachin"
+        }
+      ],
+      "where": [
+        "spyder_nimrod_bottom::Talk Rebel",
+        "spyder_nimrod_bottom::Talk Rebel"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_nimrod_bowie",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "tigrock"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "embazook"
+        }
+      ],
+      "where": [
+        "spyder_nimrod_bottom::Talk Bowie",
+        "spyder_nimrod_bottom::Talk Bowie"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_nimrod_tru",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "grimachin"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "tigrock"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "komodraw"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "sharpfin"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "embazook"
+        }
+      ],
+      "where": [
+        "spyder_nimrod_bottom::Talk Tru",
+        "spyder_nimrod_bottom::Talk Tru"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_nimrod_thatcher",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "squabbit"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "viviteel"
+        }
+      ],
+      "where": [
+        "spyder_nimrod_middle::Talk Thatcher"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_nimrod_honour",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "embazook"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "sharpfin"
+        }
+      ],
+      "where": [
+        "spyder_nimrod_middle::Talk Honour",
+        "spyder_nimrod_middle::Talk Honour"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_nimrod_antimony",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "komodraw"
+        }
+      ],
+      "where": [
+        "spyder_nimrod_middle::Talk Antimony",
+        "spyder_nimrod_middle::Talk Antimony"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_nimrod_chromerobo",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "chrome_robo"
+        }
+      ],
+      "where": [
+        "spyder_nimrod_middle::Talk Chrome Robo",
+        "spyder_nimrod_middle::Talk Chrome Robo"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_nimrod_xeon",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "xeon"
+        }
+      ],
+      "where": [
+        "spyder_nimrod_middle::Talk Xeon",
+        "spyder_nimrod_middle::Talk Xeon"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_nimrod_argon",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "chrome_robo"
+        }
+      ],
+      "where": [
+        "spyder_nimrod_middle::Talk Argon",
+        "spyder_nimrod_middle::Talk Argon",
+        "spyder_nimrod_middle::Post Flashback"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_nimrod_archer",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "sharpfin"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "av8r"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "grimachin"
+        }
+      ],
+      "where": [
+        "spyder_nimrod_middle::Talk Archer",
+        "spyder_nimrod_middle::Talk Archer"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_nimrod_zircon",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "dark_robo"
+        }
+      ],
+      "where": [
+        "spyder_nimrod_middle::Post Flashback",
+        "spyder_nimrod_top::Talk Zircon",
+        "spyder_nimrod_top::Talk Zircon"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_nimrod_maverick",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "av8r"
+        }
+      ],
+      "where": [
+        "spyder_nimrod_top::Talk Maverick",
+        "spyder_nimrod_top::Talk Maverick"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_nimrod_justice",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 21,
+          "moneyModifier": 10.0,
+          "slug": "ghosteeth"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 21,
+          "moneyModifier": 10.0,
+          "slug": "ghosteeth"
+        }
+      ],
+      "where": [
+        "spyder_nimrod_top::Talk Justice",
+        "spyder_nimrod_top::Talk Justice"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_nimrod_mace",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "embazook"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "av8r"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "komodraw"
+        }
+      ],
+      "where": [
+        "spyder_nimrod_top::Talk Mace",
+        "spyder_nimrod_top::Talk Mace"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_omnichannel_william",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 41,
+          "moneyModifier": 10.0,
+          "slug": "elowind"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 41,
+          "moneyModifier": 10.0,
+          "slug": "cardiwing"
+        }
+      ],
+      "where": [
+        "spyder_omnichannel1::Talk William"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_omnichannel_enforcer",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "rabbitosaur"
+        }
+      ],
+      "where": [
+        "spyder_omnichannel1::Battle Enforcer"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_omnichannel_schwartz",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "grinflare"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "strella"
+        }
+      ],
+      "where": [
+        "spyder_omnichannel2::Talk Schwartz"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_omnichannel_bettger",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "grintrock"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "rabbitosaur"
+        }
+      ],
+      "where": [
+        "spyder_omnichannel2::Talk Bettger"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_omnichannel_tohei",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "sludgehog"
+        }
+      ],
+      "where": [
+        "spyder_omnichannel2::Talk Tohei"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_omnichannel_crane",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "cochini"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "sharpfin"
+        }
+      ],
+      "where": [
+        "spyder_omnichannel2::Talk Crane"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_omnichannel_dempsey",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "squabbit"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "squabbit"
+        }
+      ],
+      "where": [
+        "spyder_omnichannel2::Talk Dempsey"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_omnichannel_strauss",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 41,
+          "moneyModifier": 10.0,
+          "slug": "budaye"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "frondly"
+        }
+      ],
+      "where": [
+        "spyder_omnichannel3::Talk Strauss"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_omnichannel_carnegie",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 43,
+          "moneyModifier": 10.0,
+          "slug": "elofly"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 43,
+          "moneyModifier": 10.0,
+          "slug": "elostorm"
+        }
+      ],
+      "where": [
+        "spyder_omnichannel3::Talk Carnegie"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_omnichannel_byrne",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 41,
+          "moneyModifier": 10.0,
+          "slug": "rockat"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "jemuar"
+        }
+      ],
+      "where": [
+        "spyder_omnichannel3::Talk Byrne"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_billie",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 5,
+          "moneyModifier": 10.0,
+          "slug": "billie_choice"
+        }
+      ],
+      "where": [
+        "spyder_paper_town::First Fight - Start"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_omnichannel_beaverbrook",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 55,
+          "moneyModifier": 10.0,
+          "slug": "mk01_gamma"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 55,
+          "moneyModifier": 10.0,
+          "slug": "mk01_omega"
+        }
+      ],
+      "where": [
+        "spyder_radiotower::Stop!"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_billie",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 6,
+          "moneyModifier": 10.0,
+          "slug": "billie_choice"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 6,
+          "moneyModifier": 10.0,
+          "slug": "eyenemy"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 3,
+          "moneyModifier": 10.0,
+          "slug": "cardiling"
+        }
+      ],
+      "where": [
+        "spyder_route2::Billie encounter"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route2_roddick",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 8,
+          "moneyModifier": 10.0,
+          "slug": "spighter"
+        }
+      ],
+      "where": [
+        "spyder_route2::Talk roddick",
+        "spyder_route2::Talk roddick"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route2_marion",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 7,
+          "moneyModifier": 10.0,
+          "slug": "aardorn"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 7,
+          "moneyModifier": 10.0,
+          "slug": "aardorn"
+        }
+      ],
+      "where": [
+        "spyder_route2::Talk marion",
+        "spyder_route2::Talk marion"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route2_graf",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 7,
+          "moneyModifier": 10.0,
+          "slug": "cardiling"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 5,
+          "moneyModifier": 10.0,
+          "slug": "cataspike"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 5,
+          "moneyModifier": 10.0,
+          "slug": "cataspike"
+        }
+      ],
+      "where": [
+        "spyder_route2::Talk graf",
+        "spyder_route2::Talk graf"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route3_zoolander",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 14,
+          "moneyModifier": 10.0,
+          "slug": "eruptibus"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 14,
+          "moneyModifier": 10.0,
+          "slug": "rockat"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 16,
+          "moneyModifier": 10.0,
+          "slug": "forturtle"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 16,
+          "moneyModifier": 10.0,
+          "slug": "grinflare"
+        }
+      ],
+      "where": [
+        "spyder_route3::Zoolander Talk"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route3_qqq",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 16,
+          "moneyModifier": 10.0,
+          "slug": "cardiling"
+        }
+      ],
+      "where": [
+        "spyder_route3::Rookie Talk",
+        "spyder_route3::Rookie Talk"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route3_weaver",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 12,
+          "moneyModifier": 10.0,
+          "slug": "pythwire"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 12,
+          "moneyModifier": 10.0,
+          "slug": "squabbit"
+        }
+      ],
+      "where": [
+        "spyder_route3::Enforcer Talk",
+        "spyder_route3::Enforcer Talk"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route3_novak",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 13,
+          "moneyModifier": 10.0,
+          "slug": "elofly"
+        }
+      ],
+      "where": [
+        "spyder_route3::Novak Talk",
+        "spyder_route3::Novak Talk"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route3_curie",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 13,
+          "moneyModifier": 10.0,
+          "slug": "propellercat"
+        }
+      ],
+      "where": [
+        "spyder_route3::Curie Talk"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route3_connor",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 12,
+          "moneyModifier": 10.0,
+          "slug": "weavifly"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 8,
+          "moneyModifier": 10.0,
+          "slug": "cataspike"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 8,
+          "moneyModifier": 10.0,
+          "slug": "cataspike"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 8,
+          "moneyModifier": 10.0,
+          "slug": "cataspike"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 8,
+          "moneyModifier": 10.0,
+          "slug": "cataspike"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 8,
+          "moneyModifier": 10.0,
+          "slug": "cataspike"
+        }
+      ],
+      "where": [
+        "spyder_route3::Connor Talk"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route3_wanda",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 8,
+          "moneyModifier": 10.0,
+          "slug": "nudiflot_male"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 8,
+          "moneyModifier": 10.0,
+          "slug": "nudiflot_female"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 8,
+          "moneyModifier": 10.0,
+          "slug": "nudiflot_male"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 8,
+          "moneyModifier": 10.0,
+          "slug": "nudiflot_female"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 8,
+          "moneyModifier": 10.0,
+          "slug": "nudiflot_male"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 8,
+          "moneyModifier": 10.0,
+          "slug": "nudiflot_female"
+        }
+      ],
+      "where": [
+        "spyder_route3::Talk Wanda",
+        "spyder_route3::Talk Wanda"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route3_twig",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 11,
+          "moneyModifier": 10.0,
+          "slug": "aardorn"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 11,
+          "moneyModifier": 10.0,
+          "slug": "tumblequill"
+        }
+      ],
+      "where": [
+        "spyder_route3::Talk Twig",
+        "spyder_route3::Talk Twig"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route3_surat",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 12,
+          "moneyModifier": 10.0,
+          "slug": "rockat"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 12,
+          "moneyModifier": 10.0,
+          "slug": "grintot"
+        }
+      ],
+      "where": [
+        "spyder_route3::Talk Surat"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route3_roxby",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 13,
+          "moneyModifier": 10.0,
+          "slug": "rockitten"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 13,
+          "moneyModifier": 10.0,
+          "slug": "ignibus"
+        }
+      ],
+      "where": [
+        "spyder_route3::Talk Roxby"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route4_marshall",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 16,
+          "moneyModifier": 10.0,
+          "slug": "puparmor"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 16,
+          "moneyModifier": 10.0,
+          "slug": "puparmor"
+        }
+      ],
+      "where": [
+        "spyder_route4::Talk Marshall",
+        "spyder_route4::Talk Marshall"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route4_roger",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 16,
+          "moneyModifier": 10.0,
+          "slug": "rabbitosaur"
+        }
+      ],
+      "where": [
+        "spyder_route4::Talk Roger"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route4_wulf",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 14,
+          "moneyModifier": 10.0,
+          "slug": "cowpignon"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 14,
+          "moneyModifier": 10.0,
+          "slug": "cowpignon"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 14,
+          "moneyModifier": 10.0,
+          "slug": "shybulb"
+        }
+      ],
+      "where": [
+        "spyder_route4::Talk Wulf",
+        "spyder_route4::Talk Wulf"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route4_rincewind",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 16,
+          "moneyModifier": 10.0,
+          "slug": "k9"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 16,
+          "moneyModifier": 10.0,
+          "slug": "k9"
+        }
+      ],
+      "where": [
+        "spyder_route4::Talk Rincewind"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route4_rosamund",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 18,
+          "moneyModifier": 10.0,
+          "slug": "foofle"
+        }
+      ],
+      "where": [
+        "spyder_route4::Talk Rosamund"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route4_beck",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 14,
+          "moneyModifier": 10.0,
+          "slug": "katapill"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 12,
+          "moneyModifier": 10.0,
+          "slug": "tumbleworm"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 12,
+          "moneyModifier": 10.0,
+          "slug": "spighter"
+        }
+      ],
+      "where": [
+        "spyder_route4::Talk Beck",
+        "spyder_route4::Talk Beck"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route4_rosamund",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 18,
+          "moneyModifier": 10.0,
+          "slug": "flummby"
+        }
+      ],
+      "where": [
+        "spyder_route4::Talk Rosamund"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_billie",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 18,
+          "moneyModifier": 10.0,
+          "slug": "billie_choice"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 16,
+          "moneyModifier": 10.0,
+          "slug": "cardiwing"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 16,
+          "moneyModifier": 10.0,
+          "slug": "eyesore"
+        }
+      ],
+      "where": [
+        "spyder_route4::Billie"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route5_sara",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "capiti"
+        }
+      ],
+      "where": [
+        "spyder_route5::Talk Sara",
+        "spyder_route5::Talk Sara"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route5_goliath",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "spighter"
+        }
+      ],
+      "where": [
+        "spyder_route5::Stop! - Goliath"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route5_edith",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "aardart"
+        }
+      ],
+      "where": [
+        "spyder_route5::Talk Edith",
+        "spyder_route5::Talk Edith"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route5_hunter",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 23,
+          "moneyModifier": 10.0,
+          "slug": "elowind"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 21,
+          "moneyModifier": 10.0,
+          "slug": "elofly"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 21,
+          "moneyModifier": 10.0,
+          "slug": "elofly"
+        }
+      ],
+      "where": [
+        "spyder_route5::Talk Hunter"
+      ]
+    },
+    {
+      "fieldSize": 2,
+      "inside": false,
+      "opponent": "spyder_route5_cleo",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "memnomnom"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "memnomnom"
+        }
+      ],
+      "where": [
+        "spyder_route5::Talk Cleo",
+        "spyder_route5::Talk Cleo or Patra",
+        "spyder_route5::Talk Patra (Double Battle w Cleo)"
+      ]
+    },
+    {
+      "fieldSize": 2,
+      "inside": false,
+      "opponent": "spyder_route5_tryphaena",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 29,
+          "moneyModifier": 10.0,
+          "slug": "miaownolith"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 27,
+          "moneyModifier": 10.0,
+          "slug": "criniotherme"
+        }
+      ],
+      "where": [
+        "spyder_route5::Talk Marc (Double Battle with Try)",
+        "spyder_route5::Talk Tryphaena or Marc"
+      ]
+    },
+    {
+      "fieldSize": 2,
+      "inside": false,
+      "opponent": "spyder_route5_tryphaena",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 24,
+          "moneyModifier": 10.0,
+          "slug": "miaownolith"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 22,
+          "moneyModifier": 10.0,
+          "slug": "criniotherme"
+        }
+      ],
+      "where": [
+        "spyder_route5::Talk Tryphaena"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route6_frances",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "narcileaf"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "shybulb"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "shybulb"
+        }
+      ],
+      "where": [
+        "spyder_route6::Talk Frances"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route6_ping",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "tumblequill"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "tumbledillo"
+        }
+      ],
+      "where": [
+        "spyder_route6::Talk Ping"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route6_richard",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "hydrone"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "pigabyte"
+        }
+      ],
+      "where": [
+        "spyder_route6::Talk Richard",
+        "spyder_route6::Talk Richard"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route6_blair",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "grintrock"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "grinflare"
+        }
+      ],
+      "where": [
+        "spyder_route6::Talk Blair",
+        "spyder_route6::Talk Blair"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route6_maxwell",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "propellercat"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "birdling"
+        }
+      ],
+      "where": [
+        "spyder_route6::Talk Maxwell",
+        "spyder_route6::Talk Maxwell"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route6_orion",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "spighter"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "zunna"
+        }
+      ],
+      "where": [
+        "spyder_route6::Talk Orion",
+        "spyder_route6::Talk Orion"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route6_mungo",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "noctula"
+        }
+      ],
+      "where": [
+        "spyder_route6::Talk Mungo",
+        "spyder_route6::Talk Mungo"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route6_rigel",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "ignibus"
+        }
+      ],
+      "where": [
+        "spyder_route6::Talk Rigel"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route6_gunner",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "enduros"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "viviteel"
+        }
+      ],
+      "where": [
+        "spyder_route6::Talk Gunner"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_billie",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "billie_choice"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "eyesore"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "cardiwing"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "viviphyta"
+        }
+      ],
+      "where": [
+        "spyder_route6::Billie1",
+        "spyder_route6::Billie2"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_billie",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 20,
+          "moneyModifier": 10.0,
+          "slug": "billie_choice"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 17,
+          "moneyModifier": 10.0,
+          "slug": "cardiwing"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 17,
+          "moneyModifier": 10.0,
+          "slug": "eyesore"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 17,
+          "moneyModifier": 10.0,
+          "slug": "viviphyta"
+        }
+      ],
+      "where": [
+        "spyder_routea::Billie"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_routea_vince",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 18,
+          "moneyModifier": 10.0,
+          "slug": "sapsnap"
+        }
+      ],
+      "where": [
+        "spyder_routea::Talk Vince3"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_routea_doris",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 12,
+          "moneyModifier": 10.0,
+          "slug": "shybulb"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 14,
+          "moneyModifier": 10.0,
+          "slug": "trapsnap"
+        }
+      ],
+      "where": [
+        "spyder_routea::Talk Doris",
+        "spyder_routea::Talk Doris"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_routea_dagger",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 16,
+          "moneyModifier": 10.0,
+          "slug": "cardiwing"
+        }
+      ],
+      "where": [
+        "spyder_routea::Talk Dagger"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_routea_koan",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 12,
+          "moneyModifier": 10.0,
+          "slug": "shybulb"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 12,
+          "moneyModifier": 10.0,
+          "slug": "budaye"
+        }
+      ],
+      "where": [
+        "spyder_routea::Talk Koan"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_routea_lexi",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 14,
+          "moneyModifier": 10.0,
+          "slug": "vamporm"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 14,
+          "moneyModifier": 10.0,
+          "slug": "katapill"
+        }
+      ],
+      "where": [
+        "spyder_routea::Talk Lexi"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_routea_lotu",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 14,
+          "moneyModifier": 10.0,
+          "slug": "narcileaf"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 14,
+          "moneyModifier": 10.0,
+          "slug": "tarpeur"
+        }
+      ],
+      "where": [
+        "spyder_routea::Talk Lotu"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_routea_connie",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 14,
+          "moneyModifier": 10.0,
+          "slug": "sharpfin"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 14,
+          "moneyModifier": 10.0,
+          "slug": "bigfin"
+        }
+      ],
+      "where": [
+        "spyder_routea::Talk Connie"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_routea_joe",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 16,
+          "moneyModifier": 10.0,
+          "slug": "katapill"
+        }
+      ],
+      "where": [
+        "spyder_routea::Talk Joe1"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_routea_rosy",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 16,
+          "moneyModifier": 10.0,
+          "slug": "shammer"
+        }
+      ],
+      "where": [
+        "spyder_routea::Talk Rosy"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_routeb_electra",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "dracune"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "pantherafira"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "tumbleworm"
+        }
+      ],
+      "where": [
+        "spyder_routeb::Talk Electra"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_routeb_cytherea",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "fluttaflap"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "criniotherme"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "tumblebee"
+        }
+      ],
+      "where": [
+        "spyder_routeb::Talk Cytherea"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_routeb_nephthys",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "conifrost"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "djinnbo"
+        }
+      ],
+      "where": [
+        "spyder_routeb::Talk Nephthys"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_routeb_sedna",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "squabbit"
+        }
+      ],
+      "where": [
+        "spyder_routeb::Talk Sedna"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_routeb_calypso",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "ruption"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "puparmor"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "sumchon"
+        }
+      ],
+      "where": [
+        "spyder_routeb::Talk Calypso"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_searoutec_river",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 29,
+          "moneyModifier": 10.0,
+          "slug": "manosting"
+        }
+      ],
+      "where": [
+        "spyder_routec::Talk River"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_searoutec_wade",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "picc"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "picc"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "picc"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "picc"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "picc"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "picc"
+        }
+      ],
+      "where": [
+        "spyder_routec::Talk Wade"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_searoutec_gil",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 27,
+          "moneyModifier": 10.0,
+          "slug": "nudiflot_female"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 27,
+          "moneyModifier": 10.0,
+          "slug": "nudiflot_female"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 29,
+          "moneyModifier": 10.0,
+          "slug": "nudimind"
+        }
+      ],
+      "where": [
+        "spyder_routec::Talk Gil",
+        "spyder_routec::Talk Gil"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_searoutec_leek",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 32,
+          "moneyModifier": 10.0,
+          "slug": "nudikill"
+        }
+      ],
+      "where": [
+        "spyder_routec::Talk Leek"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_searoutec_beech",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 31,
+          "moneyModifier": 10.0,
+          "slug": "nostray"
+        }
+      ],
+      "where": [
+        "spyder_routec::Talk Beech"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_searoutec_rutherford",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 31,
+          "moneyModifier": 10.0,
+          "slug": "incandesfin"
+        }
+      ],
+      "where": [
+        "spyder_routec::Talk Rutherford",
+        "spyder_routec::Talk Rutherford"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_searoutec_carstair",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 29,
+          "moneyModifier": 10.0,
+          "slug": "axolightl"
+        }
+      ],
+      "where": [
+        "spyder_routec::Talk Carstair"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_searoutec_sandy",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 27,
+          "moneyModifier": 10.0,
+          "slug": "sharpfin"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 27,
+          "moneyModifier": 10.0,
+          "slug": "sharpfin"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 27,
+          "moneyModifier": 10.0,
+          "slug": "bigfin"
+        }
+      ],
+      "where": [
+        "spyder_routec::Talk Sandy",
+        "spyder_routec::Talk Sandy"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_searoutec_more",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 31,
+          "moneyModifier": 10.0,
+          "slug": "picc"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 30,
+          "moneyModifier": 10.0,
+          "slug": "incandesfin"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 29,
+          "moneyModifier": 10.0,
+          "slug": "nudimind"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 28,
+          "moneyModifier": 10.0,
+          "slug": "nudikill"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 24,
+          "moneyModifier": 10.0,
+          "slug": "bigfin"
+        }
+      ],
+      "where": [
+        "spyder_routec::Talk More",
+        "spyder_routec::Talk More"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_searoutec_nigel",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 41,
+          "moneyModifier": 10.0,
+          "slug": "agnigon"
+        }
+      ],
+      "where": [
+        "spyder_routec::Talk Nigel"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_searoutec_stafford",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 27,
+          "moneyModifier": 10.0,
+          "slug": "medushock"
+        }
+      ],
+      "where": [
+        "spyder_routec::Talk Stafford"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_searoutec_maurice",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 27,
+          "moneyModifier": 10.0,
+          "slug": "brewdin"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 27,
+          "moneyModifier": 10.0,
+          "slug": "fancair"
+        }
+      ],
+      "where": [
+        "spyder_routec::Talk Maurice"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_routee_calliope",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "tumblebee"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "windeye"
+        }
+      ],
+      "where": [
+        "spyder_routee::Battle Calliope"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_routee_aiolos",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "dune_pincher"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "dinoflop"
+        }
+      ],
+      "where": [
+        "spyder_routee::Talk Aiolos"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_scoop_lanth",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "mrmoswitch"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "picc"
+        }
+      ],
+      "where": [
+        "spyder_scoop1::Talk Lanth",
+        "spyder_scoop1::Talk Lanth"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_scoop_paine",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "possessun"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "cairfrey"
+        }
+      ],
+      "where": [
+        "spyder_scoop1::Talk Paine",
+        "spyder_scoop1::Talk Paine"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_scoop_rubid",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "birdling"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "hatchling"
+        }
+      ],
+      "where": [
+        "spyder_scoop1::Talk Rubid",
+        "spyder_scoop1::Talk Rubid"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_scoop_berys",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "propellercat"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "embazook"
+        }
+      ],
+      "where": [
+        "spyder_scoop1::Talk Berys",
+        "spyder_scoop1::Talk Berys"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_scoop_turner",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "flacono"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "squabbit"
+        }
+      ],
+      "where": [
+        "spyder_scoop1::Talk Turner",
+        "spyder_scoop1::Talk Turner"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_scoop_alyssa",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "possessun"
+        }
+      ],
+      "where": [
+        "spyder_scoop3::Talk Alyssa"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_scoop_taggart",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "elofly"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "elowind"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "lapinou"
+        }
+      ],
+      "where": [
+        "spyder_scoop3::Talk Taggart"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_scoop_donald",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "birdling"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "pigabyte"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "zunna"
+        }
+      ],
+      "where": [
+        "spyder_scoop3::Talk Donald"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_scoop_reese",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "rockat"
+        }
+      ],
+      "where": [
+        "spyder_scoop3::Watch"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_scoop_arachne",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "cardiwing"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "spighter"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 40,
+          "moneyModifier": 10.0,
+          "slug": "abesnaki"
+        }
+      ],
+      "where": [
+        "spyder_scoop3::Watch",
+        "spyder_scoop4::Talk Arachne 1",
+        "spyder_scoop4::Talk Arachne",
+        "spyder_scoop4::Talk Arachne 2"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_scoop_orba",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "abesnaki"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "spighter"
+        }
+      ],
+      "where": [
+        "spyder_scoop4::Talk Orba"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_scoop_weaver",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "cardiling"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 35,
+          "moneyModifier": 10.0,
+          "slug": "spighter"
+        }
+      ],
+      "where": [
+        "spyder_scoop4::Talk Weaver"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_route5_cleo",
+      "party": [
+        {
+          "experienceModifier": 99.0,
+          "level": 5,
+          "moneyModifier": 99.0,
+          "slug": "memnomnom"
+        },
+        {
+          "experienceModifier": 99.0,
+          "level": 5,
+          "moneyModifier": 99.0,
+          "slug": "memnomnom"
+        }
+      ],
+      "where": [
+        "spyder_test_map::Talk Cleo",
+        "spyder_test_map::Ambush Cleo"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_walled_fugger",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "polyrock"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "sampsage"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "sampsack"
+        }
+      ],
+      "where": [
+        "spyder_timber_walledgarden1::Talk fugger"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_walled_carnegie",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 45,
+          "moneyModifier": 10.0,
+          "slug": "tetrchimp"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 55,
+          "moneyModifier": 10.0,
+          "slug": "apeoro"
+        }
+      ],
+      "where": [
+        "spyder_timber_walledgarden1::Talk carnegie"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_walled_ford",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "drashimi"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "mingdyn"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "firomenis"
+        }
+      ],
+      "where": [
+        "spyder_timber_walledgarden1::Talk ford",
+        "spyder_timber_walledgarden1::Talk ford"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_walled_girard",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "tigrock"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "anu"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "komoduel"
+        }
+      ],
+      "where": [
+        "spyder_timber_walledgarden1::Talk girard"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_walled_vanderbilt",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "angesnow"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "cowpignon"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "narcileaf"
+        }
+      ],
+      "where": [
+        "spyder_timber_walledgarden1::Talk vanderbilt",
+        "spyder_timber_walledgarden1::Talk vanderbilt"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_walled_astor",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "araignee"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "spighter"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "selket"
+        }
+      ],
+      "where": [
+        "spyder_timber_walledgarden1::Talk astor"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_walled_osman",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "miaownolith"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "pyraminx"
+        }
+      ],
+      "where": [
+        "spyder_timber_walledgarden2::Talk osman"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_walled_alexander",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "embazook"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "eruptibus"
+        }
+      ],
+      "where": [
+        "spyder_timber_walledgarden2::Talk Alexander"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_walled_musa",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "grintrock"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "grinflare"
+        }
+      ],
+      "where": [
+        "spyder_timber_walledgarden2::Talk musa"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_walled_augustus",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "statursus"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "spycozeus"
+        }
+      ],
+      "where": [
+        "spyder_timber_walledgarden2::Talk augustus"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_walled_rufus",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "bamboon"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "frondly"
+        }
+      ],
+      "where": [
+        "spyder_timber_walledgarden2::Talk rufus"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_walled_crassus",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "bigfin"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "sharpfin"
+        }
+      ],
+      "where": [
+        "spyder_timber_walledgarden2::Talk crassus"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_walled_midas",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 55,
+          "moneyModifier": 10.0,
+          "slug": "apeoro"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 55,
+          "moneyModifier": 10.0,
+          "slug": "brewdin"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 50,
+          "moneyModifier": 10.0,
+          "slug": "narcileaf"
+        }
+      ],
+      "where": [
+        "spyder_timber_walledgarden2::Talk midas"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_tunnelb_iris",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 23,
+          "moneyModifier": 10.0,
+          "slug": "tourbidi"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 23,
+          "moneyModifier": 10.0,
+          "slug": "tourbidi"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 23,
+          "moneyModifier": 10.0,
+          "slug": "tourbidi"
+        }
+      ],
+      "where": [
+        "spyder_tunnel::Talk Iris"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_tunnelb_greta",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 21,
+          "moneyModifier": 10.0,
+          "slug": "foofle"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 21,
+          "moneyModifier": 10.0,
+          "slug": "foofle"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 21,
+          "moneyModifier": 10.0,
+          "slug": "foofle"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 21,
+          "moneyModifier": 10.0,
+          "slug": "foofle"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 21,
+          "moneyModifier": 10.0,
+          "slug": "foofle"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 21,
+          "moneyModifier": 10.0,
+          "slug": "foofle"
+        }
+      ],
+      "where": [
+        "spyder_tunnel::Talk Greta",
+        "spyder_tunnel::Talk Greta"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_tunnelb_tommy",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 27,
+          "moneyModifier": 10.0,
+          "slug": "zunna"
+        }
+      ],
+      "where": [
+        "spyder_tunnel::Talk Tommy - post Scoop"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_tunnelb_meitner",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 27,
+          "moneyModifier": 10.0,
+          "slug": "masknake"
+        }
+      ],
+      "where": [
+        "spyder_tunnel_below::Talk Meitner"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_tunnelb_lute",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 21,
+          "moneyModifier": 10.0,
+          "slug": "noctula"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 23,
+          "moneyModifier": 10.0,
+          "slug": "noctalo"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 21,
+          "moneyModifier": 10.0,
+          "slug": "pipis"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "strella"
+        }
+      ],
+      "where": [
+        "spyder_tunnel_below::Talk Lute"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": false,
+      "opponent": "spyder_tunnelb_beryll",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "rockat"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "ignibus"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 25,
+          "moneyModifier": 10.0,
+          "slug": "grintot"
+        }
+      ],
+      "where": [
+        "spyder_tunnel_below::Talk Beryll"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_wayfarer1_morton",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 14,
+          "moneyModifier": 10.0,
+          "slug": "mrmoswitch"
+        }
+      ],
+      "where": [
+        "spyder_wayfarer_inn1::Talk Morton"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_wayfarer1_jessie",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 12,
+          "moneyModifier": 10.0,
+          "slug": "lapinou"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 12,
+          "moneyModifier": 10.0,
+          "slug": "cairfrey"
+        }
+      ],
+      "where": [
+        "spyder_wayfarer_inn1::Talk Jessie"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_wayfarer1_nightshade",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 12,
+          "moneyModifier": 10.0,
+          "slug": "lapinou"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 12,
+          "moneyModifier": 10.0,
+          "slug": "elofly"
+        }
+      ],
+      "where": [
+        "spyder_wayfarer_inn1::Talk Nightshade"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_wayfarer1_victor",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 14,
+          "moneyModifier": 10.0,
+          "slug": "squabbit"
+        }
+      ],
+      "where": [
+        "spyder_wayfarer_inn1::Talk Victor",
+        "spyder_wayfarer_inn1::Talk Victor"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_wayfarer1_morningstar",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 12,
+          "moneyModifier": 10.0,
+          "slug": "cairfrey"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 12,
+          "moneyModifier": 10.0,
+          "slug": "cairfrey"
+        }
+      ],
+      "where": [
+        "spyder_wayfarer_inn1::Talk Morningstar",
+        "spyder_wayfarer_inn1::Talk Morningstar"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_wayfarer1_ratcher",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 14,
+          "moneyModifier": 10.0,
+          "slug": "lapinou"
+        }
+      ],
+      "where": [
+        "spyder_wayfarer_inn1::Talk Ratcher"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_wayfarer1_bismuth",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 14,
+          "moneyModifier": 10.0,
+          "slug": "hydrone"
+        }
+      ],
+      "where": [
+        "spyder_wayfarer_inn1::Talk Bismuth"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_wayfarer1_bravo",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 12,
+          "moneyModifier": 10.0,
+          "slug": "elofly"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 12,
+          "moneyModifier": 10.0,
+          "slug": "flacono"
+        }
+      ],
+      "where": [
+        "spyder_wayfarer_inn2::Talk Bravo",
+        "spyder_wayfarer_inn2::Talk Bravo"
+      ]
+    },
+    {
+      "fieldSize": 1,
+      "inside": true,
+      "opponent": "spyder_wayfarer1_james",
+      "party": [
+        {
+          "experienceModifier": 5.0,
+          "level": 12,
+          "moneyModifier": 10.0,
+          "slug": "botbot"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 12,
+          "moneyModifier": 10.0,
+          "slug": "picc"
+        },
+        {
+          "experienceModifier": 5.0,
+          "level": 12,
+          "moneyModifier": 10.0,
+          "slug": "b_ver_1"
+        }
+      ],
+      "where": [
+        "spyder_wayfarer_inn2::Talk James"
+      ]
+    }
+  ],
+  "scenario": "spyder",
+  "version": 1
+}

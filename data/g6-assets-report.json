@@ -35,5 +35,124 @@
   "playerSheet": "sprites/adventurer.png",
   "imageFiles": 1859,
   "imageBytes": 509537
+ },
+ "battle": {
+  "format": "pocket-tuxemon/battle-import-report/v1",
+  "sourceRevision": "9e6258ff726b786040a267e8bdbbf037b560285e",
+  "scope": "spyder",
+  "counts": {
+   "monsters": 214,
+   "techniques": 230,
+   "items": 82,
+   "elements": 13,
+   "tastes": 12,
+   "statuses": 35,
+   "encounters": 21,
+   "npcs": 205,
+   "environments": 8,
+   "trainerParties": 213,
+   "trainerMonsterSlots": 611,
+   "battleSlots": 283,
+   "randomEncounterUses": 261,
+   "wildEncounterUses": 17
+  },
+  "art": {
+   "sourceFiles": 511,
+   "files": 511,
+   "sourceBytes": 1598170,
+   "pngBytes": 1070236,
+   "textureBytes": 23414264,
+   "pakBytes": 24498560,
+   "maxWidth": 512,
+   "maxHeight": 512,
+   "categories": {
+    "backgrounds": {
+     "sourceFiles": 8,
+     "files": 8,
+     "sourceBytes": 157559,
+     "pngBytes": 171095,
+     "textureBytes": 524352
+    },
+    "capture-devices": {
+     "sourceFiles": 7,
+     "files": 7,
+     "sourceBytes": 41717,
+     "pngBytes": 2124,
+     "textureBytes": 14392
+    },
+    "element-icons": {
+     "sourceFiles": 26,
+     "files": 26,
+     "sourceBytes": 68674,
+     "pngBytes": 6203,
+     "textureBytes": 33488
+    },
+    "hud": {
+     "sourceFiles": 10,
+     "files": 10,
+     "sourceBytes": 9031,
+     "pngBytes": 1955,
+     "textureBytes": 45648
+    },
+    "islands": {
+     "sourceFiles": 6,
+     "files": 6,
+     "sourceBytes": 7920,
+     "pngBytes": 6195,
+     "textureBytes": 196656
+    },
+    "item-status-animations": {
+     "sourceFiles": 3,
+     "files": 3,
+     "sourceBytes": 3270,
+     "pngBytes": 2785,
+     "textureBytes": 196632
+    },
+    "monster-sheets": {
+     "sourceFiles": 214,
+     "files": 214,
+     "sourceBytes": 595110,
+     "pngBytes": 364228,
+     "textureBytes": 7014064
+    },
+    "range-speed-icons": {
+     "sourceFiles": 13,
+     "files": 13,
+     "sourceBytes": 40070,
+     "pngBytes": 2318,
+     "textureBytes": 15976
+    },
+    "status-icons": {
+     "sourceFiles": 34,
+     "files": 34,
+     "sourceBytes": 6733,
+     "pngBytes": 4669,
+     "textureBytes": 17680
+    },
+    "technique-animations": {
+     "sourceFiles": 126,
+     "files": 126,
+     "sourceBytes": 529619,
+     "pngBytes": 433943,
+     "textureBytes": 14304240
+    },
+    "trainer-sheets": {
+     "sourceFiles": 61,
+     "files": 61,
+     "sourceBytes": 130999,
+     "pngBytes": 74702,
+     "textureBytes": 1098216
+    },
+    "ui": {
+     "sourceFiles": 4,
+     "files": 4,
+     "sourceBytes": 8452,
+     "pngBytes": 780,
+     "textureBytes": 18464
+    }
+   }
+  },
+  "battleDbBytes": 1037968,
+  "pakKey": "game:battle-db"
  }
 }
