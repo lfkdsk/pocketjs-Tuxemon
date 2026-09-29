@@ -1296,36 +1296,29 @@ function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: 
         continue;
       }
 
-      // pure guards (and init objects)
+      // Tuxemon starts every eligible automatic event in the same update.
+      // Give each source event its own parallel fiber so one event changing a
+      // shared guard cannot prevent its siblings from starting (route1's four
+      // grunt departure routes are the canonical case).
       const blocking = hasBlocking(cmds);
       const body = e.kind === "init" ? [...cmds, { op: "erase" } as Command] : cmds;
       if (!live.length) {
-        events.push({ id: nextId(e.name), name: e.name, x: e.x, y: e.y, pages: [{ trigger: blocking ? "autorun" : "parallel", sprite: null, commands: body }] });
-      } else if (!blocking) {
-        const { cond, rest } = pageCondition(live, options);
-        events.push({ id: nextId(e.name), name: e.name, x: e.x, y: e.y, pages: [{ trigger: "parallel", condition: cond, sprite: null, commands: guard(rest, body) }] });
+        events.push({ id: nextId(e.name), name: e.name, x: e.x, y: e.y, pages: [{ trigger: "parallel", sprite: null, commands: body }] });
+      } else if (blocking) {
+        // Once an automatic action has started, Tuxemon lets it finish even
+        // if a sibling changes the condition that launched it. Keep the page
+        // itself alive and sample the source guard inside the new fiber.
+        events.push({ id: nextId(e.name), name: e.name, x: e.x, y: e.y, pages: [{ trigger: "parallel", sprite: null, commands: guard(live, body) }] });
       } else {
         const { cond, rest } = pageCondition(live, options);
-        const id = nextId(e.name);
-        if (!rest.length) {
-          events.push({ id, name: e.name, x: e.x, y: e.y, pages: [{ trigger: "autorun", condition: cond, sprite: null, commands: body }] });
-        } else {
-          // derived switch: a parallel evaluator keeps c.<id> == AND(clauses)
-          const sw = `c.${m.slug}.${id}`;
-          events.push({
-            id: `${id}_eval`, name: `${e.name} (guard)`, x: e.x, y: e.y,
-            pages: [{ trigger: "parallel", sprite: null, commands: [{ op: "switch", id: sw, value: false }, ...guard(live, [{ op: "switch", id: sw, value: true }])] }],
-          });
-          // The evaluator lags the state by up to two frames (a parallel page
-          // restarts one frame after it ends): the autorun therefore drops the
-          // switch first and re-checks the live guard before its body, so a
-          // stale switch can neither re-run a finished event nor run one whose
-          // guard just failed.
-          events.push({ id, name: e.name, x: e.x, y: e.y, pages: [{ trigger: "autorun", condition: { switch: sw }, sprite: null, commands: [{ op: "switch", id: sw, value: false }, ...guard(live, body)] }] });
-          note("trigger", "guard(compound)", "T1-lowered", "derived switch evaluator (T2 condition.all removes it)");
-        }
+        events.push({ id: nextId(e.name), name: e.name, x: e.x, y: e.y, pages: [{ trigger: "parallel", condition: cond, sprite: null, commands: guard(rest, body) }] });
       }
-      note("trigger", e.kind === "init" ? "init" : k, "T1", blocking ? "autorun" : "parallel");
+      note(
+        "trigger",
+        e.kind === "init" ? "init" : k,
+        "T1",
+        blocking ? "parallel automatic fiber (blocking commands arbitrate their own UI)" : "parallel",
+      );
     } finally {
       conversionCoverage.commit(eventCoverage);
       activeCoverage = undefined;

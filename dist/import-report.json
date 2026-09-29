@@ -284,7 +284,7 @@
   "T1": 25074,
   "T3-placeholder": 2185,
   "T4-dropped": 4852,
-  "T1-lowered": 3670,
+  "T1-lowered": 3656,
   "T2-dropped": 261,
   "structural": 772
  },
@@ -1356,12 +1356,6 @@
    "fate": "T1",
    "count": 75,
    "note": "K1 rectangular event area (overlaps partitioned after guard sampling)"
-  },
-  {
-   "key": "trigger:guard(compound):T1-lowered",
-   "fate": "T1-lowered",
-   "count": 14,
-   "note": "derived switch evaluator (T2 condition.all removes it)"
   },
   {
    "key": "trigger:guard:T1",

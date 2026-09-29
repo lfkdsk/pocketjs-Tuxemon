@@ -11,8 +11,10 @@ import {
   K1_IMPORT_OPTIONS,
 } from "../importer/project.ts";
 import { jsonBytes, writeImport } from "../importer/index.ts";
+import { applyTerrain, importTerrain } from "../importer/terrain.ts";
 import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
 import { canStepFrom, type Dir4 } from "../vendor/pocket-rpgkit/src/engine/passability.ts";
+import { createSwitchState } from "../vendor/pocket-rpgkit/src/engine/interpreter.ts";
 import { createSession, startSession, stepSession } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import type { Command } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 
@@ -236,7 +238,7 @@ test("ImportOptions defaults preserve the v1 output byte-for-byte", () => {
   const maps = ["spyder_downstairs", "spyder_paper_town"];
   const bytes = jsonBytes(buildProject(maps, DEFAULT_IMPORT_OPTIONS));
   expect(createHash("sha256").update(bytes).digest("hex")).toBe(
-    "36fa563fb94d66c720159ef064db23b32669e6dc9a94864a57d44ef1b0745820",
+    "e9cb28f18c7d1390c3b30284ba54238999f7d548b1b1c48e0444a53d981c13fa",
   );
 });
 
@@ -413,6 +415,42 @@ test("open_shop becomes a visible G6 stock-summary placeholder", () => {
   expect(shopLines.filter((line) => line.startsWith("[SHOP]"))).toHaveLength(28);
   expect(shopLines.join("\n")).toContain("Repellent $100");
   expect(shopLines.join("\n")).toContain("P1 placeholder; trading is unavailable.");
+});
+
+test("simultaneously eligible route1 automatic events run concurrently and release input (N1)", () => {
+  const result = buildProject(["route1"], G6_IMPORT_OPTIONS);
+  const projectWithTerrain = applyTerrain(result.project, importTerrain({ mapIds: ["route1"] }).fragment);
+  const route = projectWithTerrain.maps[0]!;
+  for (const name of ["omnigruntmove", "omnigrunt2move", "omnigrunt3move", "omnigrunt4move"]) {
+    expect(route.events?.find((event) => event.name === name)?.pages[0]?.trigger).toBe("parallel");
+  }
+
+  const project = {
+    ...projectWithTerrain,
+    start: { map: "route1", x: 31, y: 25, dir: "down" as const },
+  };
+  const session = createSession(project, 60);
+  let state = startSession(project, session, createSwitchState({
+    variables: { "sys.party_size": 1, "v.whoartthou": 5 },
+  }));
+  let locked = false;
+  for (let frame = 0; frame < 12_000; frame++) {
+    const modal = state.interp.modal;
+    state = stepSession(session, state, {
+      buttons: frame < 4 ? BTN_BITS.DOWN : 0,
+      confirmEdge: modal ? frame % 2 === 0 : frame === 6,
+      cancelEdge: false,
+      upEdge: false,
+      downEdge: false,
+    });
+    locked ||= state.interp.inputLocked;
+    if (locked && !state.interp.inputLocked) break;
+  }
+  expect(locked).toBeTrue();
+  expect(state.interp.inputLocked).toBeFalse();
+  expect(state.sw.variables["v.completethis"]).toBeGreaterThan(0);
+  expect(state.sw.variables["v.left"]).toBeGreaterThan(0);
+  expect(state.interp.error).toBeUndefined();
 });
 
 test("Spyder opening completes identically at 60, 30, 20, and 4 Hz", () => {

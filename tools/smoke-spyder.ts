@@ -67,7 +67,11 @@ function settle(answers: string[] = [], maxFrames = 3000): void {
       while (!st.interp.modal && idle < 12) {
         tick();
         if (st.mapId !== startMap && !st.fade) return;
-        idle = st.interp.main || st.fade ? 0 : idle + 1;
+        // Blocking automatic events are parallel fibers so concurrently
+        // eligible Tuxemon events can all start. Their explicit lock remains
+        // the stable signal that the cutscene is still progressing through
+        // waits and external movement between modal pages.
+        idle = st.interp.main || st.interp.inputLocked || st.fade ? 0 : idle + 1;
         if (frames > 200000) return;
       }
       if (!st.interp.modal) return;
