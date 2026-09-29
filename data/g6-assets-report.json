@@ -4,6 +4,7 @@
  "project": {
   "maps": 263,
   "collisionBodies": 14,
+  "maxActors": 500,
   "options": {
    "areas": true,
    "facing": true,
@@ -13,6 +14,13 @@
    "inputLock": true,
    "routes": true
   }
+ },
+ "mapRepository": {
+  "shellBytes": 61846,
+  "entryBytes": 7374469,
+  "entries": 263,
+  "manifestHash": "b17b7a2b048daa9ff4296ebbc8642ba2938fb4ca2e4207b51b62ba44d2c988c7",
+  "schemaHash": "c8ca2ce77e5bff0af2d15f33863014d51dfb4acf4cef14fb678a17f7dc1ecba3"
  },
  "terrain": {
   "entries": 430,

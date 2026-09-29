@@ -1,12 +1,21 @@
 // @title Pocket Tuxemon — the imported Tuxemon world on Pocket RPG Kit
-import { mount } from "@pocketjs/framework";
-import rawProject from "./dist/project.json";
-import type { Project } from "./vendor/pocket-rpgkit/src/engine/types.ts";
+import { mount, pakGet } from "@pocketjs/framework";
+import { fsHost, readFileSync } from "@pocketjs/framework/fs";
+import rawProject from "./dist/project-shell.json";
+import { createJsonMapRepository } from "./vendor/pocket-rpgkit/src/engine/map-repository.ts";
+import type { ProjectShell } from "./vendor/pocket-rpgkit/src/engine/types.ts";
 import { GameView } from "./vendor/pocket-rpgkit/src/ui/GameView.tsx";
 import { GAME_ASSETS } from "./ui/game-assets.ts";
 import { BATTLE_ASSET_PATHS } from "./ui/battle-assets.ts";
 
-const project = rawProject as unknown as Project;
+const project = rawProject as unknown as ProjectShell;
+const repository = createJsonMapRepository(project.mapIndex, {
+  // splitProjectMaps emits ASCII bytes. Supplying bytes, rather than a
+  // decoded string, selects the repository's bounded QuickJS fast path. The
+  // desktop launcher stages entries in data.fs; web and consoles use the pak
+  // that their host installs before evaluating this bundle.
+  read: (entry) => fsHost() ? readFileSync(entry) : pakGet(entry),
+});
 // The generated literal list is the build-time asset root. Battle UI resolves
 // these paths dynamically from battle-db at runtime.
 void BATTLE_ASSET_PATHS;
@@ -14,6 +23,7 @@ void BATTLE_ASSET_PATHS;
 mount(() => (
   <GameView
     project={project}
+    maps={repository}
     assets={GAME_ASSETS}
     theme={{
       border: "#224f68",

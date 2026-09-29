@@ -1,5 +1,1061 @@
 [
   {
+    "key": "game:battle-db",
+    "file": "data/battle-db.json"
+  },
+  {
+    "key": "maps/37707_tower.json",
+    "file": "dist/maps/37707_tower.json"
+  },
+  {
+    "key": "maps/37707_town.json",
+    "file": "dist/maps/37707_town.json"
+  },
+  {
+    "key": "maps/37707_town_missing.json",
+    "file": "dist/maps/37707_town_missing.json"
+  },
+  {
+    "key": "maps/azure_town.json",
+    "file": "dist/maps/azure_town.json"
+  },
+  {
+    "key": "maps/azure_town_hall.json",
+    "file": "dist/maps/azure_town_hall.json"
+  },
+  {
+    "key": "maps/bedroom_test.json",
+    "file": "dist/maps/bedroom_test.json"
+  },
+  {
+    "key": "maps/buddha_mountain.json",
+    "file": "dist/maps/buddha_mountain.json"
+  },
+  {
+    "key": "maps/candy_town.json",
+    "file": "dist/maps/candy_town.json"
+  },
+  {
+    "key": "maps/city1_mart_junkyard.json",
+    "file": "dist/maps/city1_mart_junkyard.json"
+  },
+  {
+    "key": "maps/citypark.json",
+    "file": "dist/maps/citypark.json"
+  },
+  {
+    "key": "maps/citypark_house1.json",
+    "file": "dist/maps/citypark_house1.json"
+  },
+  {
+    "key": "maps/classic_aerolume_city.json",
+    "file": "dist/maps/classic_aerolume_city.json"
+  },
+  {
+    "key": "maps/classic_gym_astra.json",
+    "file": "dist/maps/classic_gym_astra.json"
+  },
+  {
+    "key": "maps/classic_gym_bravion.json",
+    "file": "dist/maps/classic_gym_bravion.json"
+  },
+  {
+    "key": "maps/classic_gym_ferrum.json",
+    "file": "dist/maps/classic_gym_ferrum.json"
+  },
+  {
+    "key": "maps/classic_gym_granite.json",
+    "file": "dist/maps/classic_gym_granite.json"
+  },
+  {
+    "key": "maps/classic_gym_marin.json",
+    "file": "dist/maps/classic_gym_marin.json"
+  },
+  {
+    "key": "maps/classic_gym_mila.json",
+    "file": "dist/maps/classic_gym_mila.json"
+  },
+  {
+    "key": "maps/classic_gym_orion.json",
+    "file": "dist/maps/classic_gym_orion.json"
+  },
+  {
+    "key": "maps/classic_gym_pyra.json",
+    "file": "dist/maps/classic_gym_pyra.json"
+  },
+  {
+    "key": "maps/classic_gym_shade.json",
+    "file": "dist/maps/classic_gym_shade.json"
+  },
+  {
+    "key": "maps/classic_gym_sylva.json",
+    "file": "dist/maps/classic_gym_sylva.json"
+  },
+  {
+    "key": "maps/classic_gym_voltessa.json",
+    "file": "dist/maps/classic_gym_voltessa.json"
+  },
+  {
+    "key": "maps/classic_gym_vyre.json",
+    "file": "dist/maps/classic_gym_vyre.json"
+  },
+  {
+    "key": "maps/classic_gym_zephra.json",
+    "file": "dist/maps/classic_gym_zephra.json"
+  },
+  {
+    "key": "maps/classic_hearthrock_city.json",
+    "file": "dist/maps/classic_hearthrock_city.json"
+  },
+  {
+    "key": "maps/classic_route_1.json",
+    "file": "dist/maps/classic_route_1.json"
+  },
+  {
+    "key": "maps/classic_route_2.json",
+    "file": "dist/maps/classic_route_2.json"
+  },
+  {
+    "key": "maps/classic_route_3.json",
+    "file": "dist/maps/classic_route_3.json"
+  },
+  {
+    "key": "maps/classic_route_4.json",
+    "file": "dist/maps/classic_route_4.json"
+  },
+  {
+    "key": "maps/classic_route_5.json",
+    "file": "dist/maps/classic_route_5.json"
+  },
+  {
+    "key": "maps/classic_route_6.json",
+    "file": "dist/maps/classic_route_6.json"
+  },
+  {
+    "key": "maps/classic_route_7.json",
+    "file": "dist/maps/classic_route_7.json"
+  },
+  {
+    "key": "maps/classic_route_8.json",
+    "file": "dist/maps/classic_route_8.json"
+  },
+  {
+    "key": "maps/classic_steamshore_city.json",
+    "file": "dist/maps/classic_steamshore_city.json"
+  },
+  {
+    "key": "maps/classic_stormpeak_city.json",
+    "file": "dist/maps/classic_stormpeak_city.json"
+  },
+  {
+    "key": "maps/classic_thornwood_city.json",
+    "file": "dist/maps/classic_thornwood_city.json"
+  },
+  {
+    "key": "maps/classic_umbrastar_city.json",
+    "file": "dist/maps/classic_umbrastar_city.json"
+  },
+  {
+    "key": "maps/classic_valorhold_city.json",
+    "file": "dist/maps/classic_valorhold_city.json"
+  },
+  {
+    "key": "maps/cotton_cafe.json",
+    "file": "dist/maps/cotton_cafe.json"
+  },
+  {
+    "key": "maps/cotton_cafe_basement.json",
+    "file": "dist/maps/cotton_cafe_basement.json"
+  },
+  {
+    "key": "maps/cotton_cathedral.json",
+    "file": "dist/maps/cotton_cathedral.json"
+  },
+  {
+    "key": "maps/cotton_daycare.json",
+    "file": "dist/maps/cotton_daycare.json"
+  },
+  {
+    "key": "maps/cotton_misa_house.json",
+    "file": "dist/maps/cotton_misa_house.json"
+  },
+  {
+    "key": "maps/cotton_misa_house_upstairs.json",
+    "file": "dist/maps/cotton_misa_house_upstairs.json"
+  },
+  {
+    "key": "maps/cotton_scoop.json",
+    "file": "dist/maps/cotton_scoop.json"
+  },
+  {
+    "key": "maps/cotton_town.json",
+    "file": "dist/maps/cotton_town.json"
+  },
+  {
+    "key": "maps/cotton_underground.json",
+    "file": "dist/maps/cotton_underground.json"
+  },
+  {
+    "key": "maps/dojo1.json",
+    "file": "dist/maps/dojo1.json"
+  },
+  {
+    "key": "maps/dojo2.json",
+    "file": "dist/maps/dojo2.json"
+  },
+  {
+    "key": "maps/dojo3.json",
+    "file": "dist/maps/dojo3.json"
+  },
+  {
+    "key": "maps/downstairs_test.json",
+    "file": "dist/maps/downstairs_test.json"
+  },
+  {
+    "key": "maps/dragonscave.json",
+    "file": "dist/maps/dragonscave.json"
+  },
+  {
+    "key": "maps/dryadsgrove.json",
+    "file": "dist/maps/dryadsgrove.json"
+  },
+  {
+    "key": "maps/eclipse_crystal_bank1.json",
+    "file": "dist/maps/eclipse_crystal_bank1.json"
+  },
+  {
+    "key": "maps/eclipse_crystal_bank2.json",
+    "file": "dist/maps/eclipse_crystal_bank2.json"
+  },
+  {
+    "key": "maps/eclipse_crystal_bank3.json",
+    "file": "dist/maps/eclipse_crystal_bank3.json"
+  },
+  {
+    "key": "maps/eclipse_crystal_center.json",
+    "file": "dist/maps/eclipse_crystal_center.json"
+  },
+  {
+    "key": "maps/eclipse_crystal_town.json",
+    "file": "dist/maps/eclipse_crystal_town.json"
+  },
+  {
+    "key": "maps/eclipse_crystal_town_cafe.json",
+    "file": "dist/maps/eclipse_crystal_town_cafe.json"
+  },
+  {
+    "key": "maps/eclipse_crystal_town_house.json",
+    "file": "dist/maps/eclipse_crystal_town_house.json"
+  },
+  {
+    "key": "maps/eclipse_lion_mountain_high.json",
+    "file": "dist/maps/eclipse_lion_mountain_high.json"
+  },
+  {
+    "key": "maps/eclipse_lion_mountain_low.json",
+    "file": "dist/maps/eclipse_lion_mountain_low.json"
+  },
+  {
+    "key": "maps/eclipse_lion_mountain_middle.json",
+    "file": "dist/maps/eclipse_lion_mountain_middle.json"
+  },
+  {
+    "key": "maps/eclipse_obsidian_center.json",
+    "file": "dist/maps/eclipse_obsidian_center.json"
+  },
+  {
+    "key": "maps/eclipse_obsidian_town.json",
+    "file": "dist/maps/eclipse_obsidian_town.json"
+  },
+  {
+    "key": "maps/eclipse_obsidian_town_house.json",
+    "file": "dist/maps/eclipse_obsidian_town_house.json"
+  },
+  {
+    "key": "maps/eclipse_park.json",
+    "file": "dist/maps/eclipse_park.json"
+  },
+  {
+    "key": "maps/eclipse_park_cabin.json",
+    "file": "dist/maps/eclipse_park_cabin.json"
+  },
+  {
+    "key": "maps/eclipse_park_cave.json",
+    "file": "dist/maps/eclipse_park_cave.json"
+  },
+  {
+    "key": "maps/eclipse_park_entrance.json",
+    "file": "dist/maps/eclipse_park_entrance.json"
+  },
+  {
+    "key": "maps/eclipse_park_south.json",
+    "file": "dist/maps/eclipse_park_south.json"
+  },
+  {
+    "key": "maps/eclipse_route7.json",
+    "file": "dist/maps/eclipse_route7.json"
+  },
+  {
+    "key": "maps/eclipse_routef.json",
+    "file": "dist/maps/eclipse_routef.json"
+  },
+  {
+    "key": "maps/eclipse_routeg.json",
+    "file": "dist/maps/eclipse_routeg.json"
+  },
+  {
+    "key": "maps/eclipse_routeh.json",
+    "file": "dist/maps/eclipse_routeh.json"
+  },
+  {
+    "key": "maps/eclipse_routei.json",
+    "file": "dist/maps/eclipse_routei.json"
+  },
+  {
+    "key": "maps/flower_city.json",
+    "file": "dist/maps/flower_city.json"
+  },
+  {
+    "key": "maps/gadget_store1.json",
+    "file": "dist/maps/gadget_store1.json"
+  },
+  {
+    "key": "maps/gaming_hall.json",
+    "file": "dist/maps/gaming_hall.json"
+  },
+  {
+    "key": "maps/healing_center.json",
+    "file": "dist/maps/healing_center.json"
+  },
+  {
+    "key": "maps/leather_scoop.json",
+    "file": "dist/maps/leather_scoop.json"
+  },
+  {
+    "key": "maps/leather_shaft1.json",
+    "file": "dist/maps/leather_shaft1.json"
+  },
+  {
+    "key": "maps/leather_shaft2.json",
+    "file": "dist/maps/leather_shaft2.json"
+  },
+  {
+    "key": "maps/leather_town.json",
+    "file": "dist/maps/leather_town.json"
+  },
+  {
+    "key": "maps/manhattan_beach.json",
+    "file": "dist/maps/manhattan_beach.json"
+  },
+  {
+    "key": "maps/mansion.json",
+    "file": "dist/maps/mansion.json"
+  },
+  {
+    "key": "maps/mansion_basement.json",
+    "file": "dist/maps/mansion_basement.json"
+  },
+  {
+    "key": "maps/mansion_top.json",
+    "file": "dist/maps/mansion_top.json"
+  },
+  {
+    "key": "maps/maple_bedroom.json",
+    "file": "dist/maps/maple_bedroom.json"
+  },
+  {
+    "key": "maps/maple_house.json",
+    "file": "dist/maps/maple_house.json"
+  },
+  {
+    "key": "maps/omnichannel0.json",
+    "file": "dist/maps/omnichannel0.json"
+  },
+  {
+    "key": "maps/omnichannel1.json",
+    "file": "dist/maps/omnichannel1.json"
+  },
+  {
+    "key": "maps/omnichannel2.json",
+    "file": "dist/maps/omnichannel2.json"
+  },
+  {
+    "key": "maps/omnichannel3.json",
+    "file": "dist/maps/omnichannel3.json"
+  },
+  {
+    "key": "maps/omnichannel4.json",
+    "file": "dist/maps/omnichannel4.json"
+  },
+  {
+    "key": "maps/player_house_bedroom.json",
+    "file": "dist/maps/player_house_bedroom.json"
+  },
+  {
+    "key": "maps/player_house_downstairs.json",
+    "file": "dist/maps/player_house_downstairs.json"
+  },
+  {
+    "key": "maps/professor_lab.json",
+    "file": "dist/maps/professor_lab.json"
+  },
+  {
+    "key": "maps/route1.json",
+    "file": "dist/maps/route1.json"
+  },
+  {
+    "key": "maps/route1_sanglorian.json",
+    "file": "dist/maps/route1_sanglorian.json"
+  },
+  {
+    "key": "maps/route2.json",
+    "file": "dist/maps/route2.json"
+  },
+  {
+    "key": "maps/route3.json",
+    "file": "dist/maps/route3.json"
+  },
+  {
+    "key": "maps/route4.json",
+    "file": "dist/maps/route4.json"
+  },
+  {
+    "key": "maps/route5.json",
+    "file": "dist/maps/route5.json"
+  },
+  {
+    "key": "maps/route6.json",
+    "file": "dist/maps/route6.json"
+  },
+  {
+    "key": "maps/routea.json",
+    "file": "dist/maps/routea.json"
+  },
+  {
+    "key": "maps/routec.json",
+    "file": "dist/maps/routec.json"
+  },
+  {
+    "key": "maps/rubberduck_cave_01.json",
+    "file": "dist/maps/rubberduck_cave_01.json"
+  },
+  {
+    "key": "maps/rubberduck_city_01.json",
+    "file": "dist/maps/rubberduck_city_01.json"
+  },
+  {
+    "key": "maps/rubberduck_route_01.json",
+    "file": "dist/maps/rubberduck_route_01.json"
+  },
+  {
+    "key": "maps/russell_practice_1.json",
+    "file": "dist/maps/russell_practice_1.json"
+  },
+  {
+    "key": "maps/scoop1.json",
+    "file": "dist/maps/scoop1.json"
+  },
+  {
+    "key": "maps/scoop2.json",
+    "file": "dist/maps/scoop2.json"
+  },
+  {
+    "key": "maps/scoop3.json",
+    "file": "dist/maps/scoop3.json"
+  },
+  {
+    "key": "maps/scoop4.json",
+    "file": "dist/maps/scoop4.json"
+  },
+  {
+    "key": "maps/sphalian_center.json",
+    "file": "dist/maps/sphalian_center.json"
+  },
+  {
+    "key": "maps/sphalian_town.json",
+    "file": "dist/maps/sphalian_town.json"
+  },
+  {
+    "key": "maps/sphalian_town_house.json",
+    "file": "dist/maps/sphalian_town_house.json"
+  },
+  {
+    "key": "maps/spyder_bedroom.json",
+    "file": "dist/maps/spyder_bedroom.json"
+  },
+  {
+    "key": "maps/spyder_brideswood.json",
+    "file": "dist/maps/spyder_brideswood.json"
+  },
+  {
+    "key": "maps/spyder_candy_cafe.json",
+    "file": "dist/maps/spyder_candy_cafe.json"
+  },
+  {
+    "key": "maps/spyder_candy_center.json",
+    "file": "dist/maps/spyder_candy_center.json"
+  },
+  {
+    "key": "maps/spyder_candy_hospital1.json",
+    "file": "dist/maps/spyder_candy_hospital1.json"
+  },
+  {
+    "key": "maps/spyder_candy_hospital2.json",
+    "file": "dist/maps/spyder_candy_hospital2.json"
+  },
+  {
+    "key": "maps/spyder_candy_hospital3.json",
+    "file": "dist/maps/spyder_candy_hospital3.json"
+  },
+  {
+    "key": "maps/spyder_candy_house1.json",
+    "file": "dist/maps/spyder_candy_house1.json"
+  },
+  {
+    "key": "maps/spyder_candy_house2.json",
+    "file": "dist/maps/spyder_candy_house2.json"
+  },
+  {
+    "key": "maps/spyder_candy_house3.json",
+    "file": "dist/maps/spyder_candy_house3.json"
+  },
+  {
+    "key": "maps/spyder_candy_inn1.json",
+    "file": "dist/maps/spyder_candy_inn1.json"
+  },
+  {
+    "key": "maps/spyder_candy_inn2.json",
+    "file": "dist/maps/spyder_candy_inn2.json"
+  },
+  {
+    "key": "maps/spyder_candy_port.json",
+    "file": "dist/maps/spyder_candy_port.json"
+  },
+  {
+    "key": "maps/spyder_candy_scoop.json",
+    "file": "dist/maps/spyder_candy_scoop.json"
+  },
+  {
+    "key": "maps/spyder_candy_town.json",
+    "file": "dist/maps/spyder_candy_town.json"
+  },
+  {
+    "key": "maps/spyder_citypark.json",
+    "file": "dist/maps/spyder_citypark.json"
+  },
+  {
+    "key": "maps/spyder_citypark_house1.json",
+    "file": "dist/maps/spyder_citypark_house1.json"
+  },
+  {
+    "key": "maps/spyder_cotton_artshop.json",
+    "file": "dist/maps/spyder_cotton_artshop.json"
+  },
+  {
+    "key": "maps/spyder_cotton_cafe.json",
+    "file": "dist/maps/spyder_cotton_cafe.json"
+  },
+  {
+    "key": "maps/spyder_cotton_house1.json",
+    "file": "dist/maps/spyder_cotton_house1.json"
+  },
+  {
+    "key": "maps/spyder_cotton_house2.json",
+    "file": "dist/maps/spyder_cotton_house2.json"
+  },
+  {
+    "key": "maps/spyder_cotton_scoop.json",
+    "file": "dist/maps/spyder_cotton_scoop.json"
+  },
+  {
+    "key": "maps/spyder_cotton_town.json",
+    "file": "dist/maps/spyder_cotton_town.json"
+  },
+  {
+    "key": "maps/spyder_cotton_tunnel.json",
+    "file": "dist/maps/spyder_cotton_tunnel.json"
+  },
+  {
+    "key": "maps/spyder_datacenter.json",
+    "file": "dist/maps/spyder_datacenter.json"
+  },
+  {
+    "key": "maps/spyder_diamond_hill.json",
+    "file": "dist/maps/spyder_diamond_hill.json"
+  },
+  {
+    "key": "maps/spyder_dojo1.json",
+    "file": "dist/maps/spyder_dojo1.json"
+  },
+  {
+    "key": "maps/spyder_dojo2.json",
+    "file": "dist/maps/spyder_dojo2.json"
+  },
+  {
+    "key": "maps/spyder_dojo3.json",
+    "file": "dist/maps/spyder_dojo3.json"
+  },
+  {
+    "key": "maps/spyder_dojo4.json",
+    "file": "dist/maps/spyder_dojo4.json"
+  },
+  {
+    "key": "maps/spyder_downstairs.json",
+    "file": "dist/maps/spyder_downstairs.json"
+  },
+  {
+    "key": "maps/spyder_dragonscave.json",
+    "file": "dist/maps/spyder_dragonscave.json"
+  },
+  {
+    "key": "maps/spyder_dryadsgrove.json",
+    "file": "dist/maps/spyder_dryadsgrove.json"
+  },
+  {
+    "key": "maps/spyder_flower_center.json",
+    "file": "dist/maps/spyder_flower_center.json"
+  },
+  {
+    "key": "maps/spyder_flower_city.json",
+    "file": "dist/maps/spyder_flower_city.json"
+  },
+  {
+    "key": "maps/spyder_flower_house1.json",
+    "file": "dist/maps/spyder_flower_house1.json"
+  },
+  {
+    "key": "maps/spyder_flower_house2.json",
+    "file": "dist/maps/spyder_flower_house2.json"
+  },
+  {
+    "key": "maps/spyder_flower_petshop.json",
+    "file": "dist/maps/spyder_flower_petshop.json"
+  },
+  {
+    "key": "maps/spyder_flower_scoop.json",
+    "file": "dist/maps/spyder_flower_scoop.json"
+  },
+  {
+    "key": "maps/spyder_greenwash.json",
+    "file": "dist/maps/spyder_greenwash.json"
+  },
+  {
+    "key": "maps/spyder_greenwash_greenhouse.json",
+    "file": "dist/maps/spyder_greenwash_greenhouse.json"
+  },
+  {
+    "key": "maps/spyder_greenwash_level2.json",
+    "file": "dist/maps/spyder_greenwash_level2.json"
+  },
+  {
+    "key": "maps/spyder_greenwash_level3.json",
+    "file": "dist/maps/spyder_greenwash_level3.json"
+  },
+  {
+    "key": "maps/spyder_healing_center.json",
+    "file": "dist/maps/spyder_healing_center.json"
+  },
+  {
+    "key": "maps/spyder_leather_center.json",
+    "file": "dist/maps/spyder_leather_center.json"
+  },
+  {
+    "key": "maps/spyder_leather_gym.json",
+    "file": "dist/maps/spyder_leather_gym.json"
+  },
+  {
+    "key": "maps/spyder_leather_house1.json",
+    "file": "dist/maps/spyder_leather_house1.json"
+  },
+  {
+    "key": "maps/spyder_leather_house2.json",
+    "file": "dist/maps/spyder_leather_house2.json"
+  },
+  {
+    "key": "maps/spyder_leather_museum.json",
+    "file": "dist/maps/spyder_leather_museum.json"
+  },
+  {
+    "key": "maps/spyder_leather_scoop.json",
+    "file": "dist/maps/spyder_leather_scoop.json"
+  },
+  {
+    "key": "maps/spyder_leather_shaft1.json",
+    "file": "dist/maps/spyder_leather_shaft1.json"
+  },
+  {
+    "key": "maps/spyder_leather_shaft2.json",
+    "file": "dist/maps/spyder_leather_shaft2.json"
+  },
+  {
+    "key": "maps/spyder_leather_town.json",
+    "file": "dist/maps/spyder_leather_town.json"
+  },
+  {
+    "key": "maps/spyder_mansion.json",
+    "file": "dist/maps/spyder_mansion.json"
+  },
+  {
+    "key": "maps/spyder_mansion_basement.json",
+    "file": "dist/maps/spyder_mansion_basement.json"
+  },
+  {
+    "key": "maps/spyder_mansion_top.json",
+    "file": "dist/maps/spyder_mansion_top.json"
+  },
+  {
+    "key": "maps/spyder_nimrod_bottom.json",
+    "file": "dist/maps/spyder_nimrod_bottom.json"
+  },
+  {
+    "key": "maps/spyder_nimrod_middle.json",
+    "file": "dist/maps/spyder_nimrod_middle.json"
+  },
+  {
+    "key": "maps/spyder_nimrod_room.json",
+    "file": "dist/maps/spyder_nimrod_room.json"
+  },
+  {
+    "key": "maps/spyder_nimrod_top.json",
+    "file": "dist/maps/spyder_nimrod_top.json"
+  },
+  {
+    "key": "maps/spyder_omnichannel1.json",
+    "file": "dist/maps/spyder_omnichannel1.json"
+  },
+  {
+    "key": "maps/spyder_omnichannel2.json",
+    "file": "dist/maps/spyder_omnichannel2.json"
+  },
+  {
+    "key": "maps/spyder_omnichannel3.json",
+    "file": "dist/maps/spyder_omnichannel3.json"
+  },
+  {
+    "key": "maps/spyder_omnichannel4.json",
+    "file": "dist/maps/spyder_omnichannel4.json"
+  },
+  {
+    "key": "maps/spyder_paper_daycare.json",
+    "file": "dist/maps/spyder_paper_daycare.json"
+  },
+  {
+    "key": "maps/spyder_paper_manor.json",
+    "file": "dist/maps/spyder_paper_manor.json"
+  },
+  {
+    "key": "maps/spyder_paper_rival_bedroom.json",
+    "file": "dist/maps/spyder_paper_rival_bedroom.json"
+  },
+  {
+    "key": "maps/spyder_paper_rival_downstairs.json",
+    "file": "dist/maps/spyder_paper_rival_downstairs.json"
+  },
+  {
+    "key": "maps/spyder_paper_rival_office.json",
+    "file": "dist/maps/spyder_paper_rival_office.json"
+  },
+  {
+    "key": "maps/spyder_paper_scoop.json",
+    "file": "dist/maps/spyder_paper_scoop.json"
+  },
+  {
+    "key": "maps/spyder_paper_town.json",
+    "file": "dist/maps/spyder_paper_town.json"
+  },
+  {
+    "key": "maps/spyder_radiotower.json",
+    "file": "dist/maps/spyder_radiotower.json"
+  },
+  {
+    "key": "maps/spyder_route1.json",
+    "file": "dist/maps/spyder_route1.json"
+  },
+  {
+    "key": "maps/spyder_route2.json",
+    "file": "dist/maps/spyder_route2.json"
+  },
+  {
+    "key": "maps/spyder_route3.json",
+    "file": "dist/maps/spyder_route3.json"
+  },
+  {
+    "key": "maps/spyder_route4.json",
+    "file": "dist/maps/spyder_route4.json"
+  },
+  {
+    "key": "maps/spyder_route5.json",
+    "file": "dist/maps/spyder_route5.json"
+  },
+  {
+    "key": "maps/spyder_route6.json",
+    "file": "dist/maps/spyder_route6.json"
+  },
+  {
+    "key": "maps/spyder_routea.json",
+    "file": "dist/maps/spyder_routea.json"
+  },
+  {
+    "key": "maps/spyder_routeb.json",
+    "file": "dist/maps/spyder_routeb.json"
+  },
+  {
+    "key": "maps/spyder_routec.json",
+    "file": "dist/maps/spyder_routec.json"
+  },
+  {
+    "key": "maps/spyder_routed.json",
+    "file": "dist/maps/spyder_routed.json"
+  },
+  {
+    "key": "maps/spyder_routee.json",
+    "file": "dist/maps/spyder_routee.json"
+  },
+  {
+    "key": "maps/spyder_scoop1.json",
+    "file": "dist/maps/spyder_scoop1.json"
+  },
+  {
+    "key": "maps/spyder_scoop2.json",
+    "file": "dist/maps/spyder_scoop2.json"
+  },
+  {
+    "key": "maps/spyder_scoop3.json",
+    "file": "dist/maps/spyder_scoop3.json"
+  },
+  {
+    "key": "maps/spyder_scoop4.json",
+    "file": "dist/maps/spyder_scoop4.json"
+  },
+  {
+    "key": "maps/spyder_test_map.json",
+    "file": "dist/maps/spyder_test_map.json"
+  },
+  {
+    "key": "maps/spyder_timber_cafe.json",
+    "file": "dist/maps/spyder_timber_cafe.json"
+  },
+  {
+    "key": "maps/spyder_timber_center.json",
+    "file": "dist/maps/spyder_timber_center.json"
+  },
+  {
+    "key": "maps/spyder_timber_house.json",
+    "file": "dist/maps/spyder_timber_house.json"
+  },
+  {
+    "key": "maps/spyder_timber_scoop.json",
+    "file": "dist/maps/spyder_timber_scoop.json"
+  },
+  {
+    "key": "maps/spyder_timber_town.json",
+    "file": "dist/maps/spyder_timber_town.json"
+  },
+  {
+    "key": "maps/spyder_timber_walledgarden1.json",
+    "file": "dist/maps/spyder_timber_walledgarden1.json"
+  },
+  {
+    "key": "maps/spyder_timber_walledgarden2.json",
+    "file": "dist/maps/spyder_timber_walledgarden2.json"
+  },
+  {
+    "key": "maps/spyder_tunnel.json",
+    "file": "dist/maps/spyder_tunnel.json"
+  },
+  {
+    "key": "maps/spyder_tunnel_below.json",
+    "file": "dist/maps/spyder_tunnel_below.json"
+  },
+  {
+    "key": "maps/spyder_wayfarer_inn1.json",
+    "file": "dist/maps/spyder_wayfarer_inn1.json"
+  },
+  {
+    "key": "maps/spyder_wayfarer_inn2.json",
+    "file": "dist/maps/spyder_wayfarer_inn2.json"
+  },
+  {
+    "key": "maps/start_tuxemon.json",
+    "file": "dist/maps/start_tuxemon.json"
+  },
+  {
+    "key": "maps/taba_ba_br_1.json",
+    "file": "dist/maps/taba_ba_br_1.json"
+  },
+  {
+    "key": "maps/taba_ba_br_2.json",
+    "file": "dist/maps/taba_ba_br_2.json"
+  },
+  {
+    "key": "maps/taba_ba_br_3.json",
+    "file": "dist/maps/taba_ba_br_3.json"
+  },
+  {
+    "key": "maps/taba_ba_br_4.json",
+    "file": "dist/maps/taba_ba_br_4.json"
+  },
+  {
+    "key": "maps/taba_ba_br_master.json",
+    "file": "dist/maps/taba_ba_br_master.json"
+  },
+  {
+    "key": "maps/taba_ba_br_master_foyer.json",
+    "file": "dist/maps/taba_ba_br_master_foyer.json"
+  },
+  {
+    "key": "maps/taba_ba_foyer.json",
+    "file": "dist/maps/taba_ba_foyer.json"
+  },
+  {
+    "key": "maps/taba_ba_main.json",
+    "file": "dist/maps/taba_ba_main.json"
+  },
+  {
+    "key": "maps/taba_ba_passageway_1.json",
+    "file": "dist/maps/taba_ba_passageway_1.json"
+  },
+  {
+    "key": "maps/taba_ba_passageway_2.json",
+    "file": "dist/maps/taba_ba_passageway_2.json"
+  },
+  {
+    "key": "maps/taba_ba_passageway_3.json",
+    "file": "dist/maps/taba_ba_passageway_3.json"
+  },
+  {
+    "key": "maps/taba_ba_passageway_4.json",
+    "file": "dist/maps/taba_ba_passageway_4.json"
+  },
+  {
+    "key": "maps/taba_ba_stairwell_1.json",
+    "file": "dist/maps/taba_ba_stairwell_1.json"
+  },
+  {
+    "key": "maps/taba_ba_stairwell_2.json",
+    "file": "dist/maps/taba_ba_stairwell_2.json"
+  },
+  {
+    "key": "maps/taba_house1.json",
+    "file": "dist/maps/taba_house1.json"
+  },
+  {
+    "key": "maps/taba_house2.json",
+    "file": "dist/maps/taba_house2.json"
+  },
+  {
+    "key": "maps/taba_house2_upstairs.json",
+    "file": "dist/maps/taba_house2_upstairs.json"
+  },
+  {
+    "key": "maps/taba_house3.json",
+    "file": "dist/maps/taba_house3.json"
+  },
+  {
+    "key": "maps/taba_house3_upstairs.json",
+    "file": "dist/maps/taba_house3_upstairs.json"
+  },
+  {
+    "key": "maps/taba_house4.json",
+    "file": "dist/maps/taba_house4.json"
+  },
+  {
+    "key": "maps/taba_town.json",
+    "file": "dist/maps/taba_town.json"
+  },
+  {
+    "key": "maps/tabathas.json",
+    "file": "dist/maps/tabathas.json"
+  },
+  {
+    "key": "maps/test_npcs.json",
+    "file": "dist/maps/test_npcs.json"
+  },
+  {
+    "key": "maps/timber_town.json",
+    "file": "dist/maps/timber_town.json"
+  },
+  {
+    "key": "maps/tt_forest_route1.json",
+    "file": "dist/maps/tt_forest_route1.json"
+  },
+  {
+    "key": "maps/tt_paper_town.json",
+    "file": "dist/maps/tt_paper_town.json"
+  },
+  {
+    "key": "maps/tt_searoute1.json",
+    "file": "dist/maps/tt_searoute1.json"
+  },
+  {
+    "key": "maps/tunnel.json",
+    "file": "dist/maps/tunnel.json"
+  },
+  {
+    "key": "maps/tunnel_below.json",
+    "file": "dist/maps/tunnel_below.json"
+  },
+  {
+    "key": "maps/tuxe_mart_taba.json",
+    "file": "dist/maps/tuxe_mart_taba.json"
+  },
+  {
+    "key": "maps/water_cathedral.json",
+    "file": "dist/maps/water_cathedral.json"
+  },
+  {
+    "key": "maps/water_end_of_desert.json",
+    "file": "dist/maps/water_end_of_desert.json"
+  },
+  {
+    "key": "maps/water_lower_village.json",
+    "file": "dist/maps/water_lower_village.json"
+  },
+  {
+    "key": "maps/water_outskirts.json",
+    "file": "dist/maps/water_outskirts.json"
+  },
+  {
+    "key": "maps/water_river_village.json",
+    "file": "dist/maps/water_river_village.json"
+  },
+  {
+    "key": "maps/water_route_grass.json",
+    "file": "dist/maps/water_route_grass.json"
+  },
+  {
+    "key": "maps/water_route_ice.json",
+    "file": "dist/maps/water_route_ice.json"
+  },
+  {
+    "key": "maps/water_snow_village.json",
+    "file": "dist/maps/water_snow_village.json"
+  },
+  {
+    "key": "maps/water_underwater.json",
+    "file": "dist/maps/water_underwater.json"
+  },
+  {
+    "key": "maps/water_volcano_path.json",
+    "file": "dist/maps/water_volcano_path.json"
+  },
+  {
+    "key": "maps/water_volcano_village.json",
+    "file": "dist/maps/water_volcano_village.json"
+  },
+  {
+    "key": "maps/wayfarer_inn1.json",
+    "file": "dist/maps/wayfarer_inn1.json"
+  },
+  {
+    "key": "maps/wayfarer_inn2.json",
+    "file": "dist/maps/wayfarer_inn2.json"
+  },
+  {
+    "key": "maps/witcher_route_7.json",
+    "file": "dist/maps/witcher_route_7.json"
+  },
+  {
     "key": "ui:tile.tuxemon-37707_tower-ground-0",
     "file": "assets/stream/tuxemon-37707_tower-ground-0.pkts"
   },
@@ -1718,9 +2774,5 @@
   {
     "key": "ui:tile.tuxemon-witcher_route_7-ground",
     "file": "assets/stream/tuxemon-witcher_route_7-ground.pkts"
-  },
-  {
-    "key": "game:battle-db",
-    "file": "data/battle-db.json"
   }
 ]

@@ -8,6 +8,7 @@ import { createSwitchState, type SwitchState } from "../vendor/pocket-rpgkit/src
 import { canStepFrom, type Dir4 } from "../vendor/pocket-rpgkit/src/engine/passability.ts";
 import { createSession, startSession, stepSession } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import type { Command, Condition, Dir, GameEvent, Page, PageCondition, Project } from "../vendor/pocket-rpgkit/src/engine/types.ts";
+import { materializeShardedProject } from "./generated-project.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
 const DIRS = ["down", "left", "up", "right"] as const satisfies readonly Dir[];
@@ -535,9 +536,11 @@ export function verifyProjectLocks(project: Project): LockCheckReport {
 if (import.meta.main) {
   const projectArg = process.argv.find((arg) => arg.startsWith("--project="));
   const outArg = process.argv.find((arg) => arg.startsWith("--out="));
-  const projectPath = resolve(ROOT, projectArg?.slice("--project=".length) ?? "dist/project.json");
+  const projectPath = projectArg ? resolve(ROOT, projectArg.slice("--project=".length)) : null;
   const outPath = resolve(ROOT, outArg?.slice("--out=".length) ?? "findings/G6-lock-report.json");
-  const project = JSON.parse(readFileSync(projectPath, "utf8")) as Project;
+  const project = projectPath
+    ? JSON.parse(readFileSync(projectPath, "utf8")) as Project
+    : materializeShardedProject(ROOT);
   const report = verifyProjectLocks(project);
   writeFileSync(outPath, JSON.stringify(report, null, 2) + "\n");
   console.log(JSON.stringify({

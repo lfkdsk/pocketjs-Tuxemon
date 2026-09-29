@@ -1,6 +1,6 @@
 // Build and launch Pocket Tuxemon in PocketJS's portable desktop host.
 
-import { mkdirSync } from "node:fs";
+import { cpSync, mkdirSync, rmSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { $ } from "bun";
 import { validateAndResolveBuildPlan } from "../vendor/pocket-rpgkit/vendor/pocketjs/framework/src/manifest/resolve.ts";
@@ -24,6 +24,11 @@ if (!resolution.ok) {
 const plan = resolution.plan;
 const outdir = join(root, "dist", target);
 mkdirSync(outdir, { recursive: true });
+const dataRoot = join(root, "dist", "runtime-data");
+const mapData = join(dataRoot, plan.app.id, "data", "maps");
+rmSync(mapData, { recursive: true, force: true });
+mkdirSync(resolve(mapData, ".."), { recursive: true });
+cpSync(join(root, "dist", "maps"), mapData, { recursive: true });
 const planPath = join(root, ".pocket", target, `${plan.app.output}.plan.json`);
 mkdirSync(resolve(planPath, ".."), { recursive: true });
 await Bun.write(planPath, JSON.stringify(plan, null, 2) + "\n");
@@ -46,5 +51,6 @@ const flags = [
   ...(plan.companions.length > 0 ? ["--companions", plan.companions.join(",")] : []),
   "--js", join(outdir, `${plan.app.output}.js`),
   "--pak", join(outdir, `${plan.app.output}.pak`),
+  "--data-root", dataRoot,
 ];
 await $`${bin} ${flags} ${passthrough}`.env({ ...process.env, RUST_LOG: process.env.RUST_LOG ?? "info" });

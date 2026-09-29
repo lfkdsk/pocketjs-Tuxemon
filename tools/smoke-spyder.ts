@@ -1,20 +1,28 @@
 // Headless acceptance drive for the generated Spyder opening.
 
-import { readFileSync, writeFileSync } from "node:fs";
+import { writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { join, resolve } from "node:path";
 import { createSession, startSession, stepSession, tableWithBodies, type SessionState } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import { canStepFrom, type Dir4 } from "../vendor/pocket-rpgkit/src/engine/passability.ts";
 import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
 import { searchWalk } from "../vendor/pocket-rpgkit/src/engine/journey-search.ts";
-import type { Project } from "../vendor/pocket-rpgkit/src/engine/types.ts";
+import { canonicalJson } from "../vendor/pocket-rpgkit/src/engine/save.ts";
+import { readInlineProject, readShardedProject } from "./generated-project.ts";
 
 const PROJECT_ROOT = resolve(process.env.G6_PROJECT_ROOT ?? new URL("..", import.meta.url).pathname);
 const OUT_DIR = join(PROJECT_ROOT, "dist");
-const project = JSON.parse(readFileSync(join(OUT_DIR, "project.json"), "utf8")) as Project;
+const inlineProject = readInlineProject(PROJECT_ROOT);
+const sharded = readShardedProject(PROJECT_ROOT);
+const project = sharded.project;
 const HZ = Number(process.env.HZ ?? 60); // host rate; the kit folds 60/HZ reference ticks per frame
-const sess = createSession(project, HZ);
+const sess = createSession(project, HZ, sharded.repository);
 let st: SessionState = startSession(project, sess);
+const inlineSession = createSession(inlineProject, HZ);
+let inlineState: SessionState = startSession(inlineProject, inlineSession);
+if (canonicalJson(st) !== canonicalJson(inlineState)) {
+  throw new Error("smoke: initial sharded SessionState differs from inline");
+}
 
 const DX = [0, -1, 0, 1];
 const DY = [1, 0, -1, 0];
@@ -42,7 +50,12 @@ function tick(buttons = 0, edges: { confirm?: boolean; down?: boolean; up?: bool
     (edges.up ? BTN_BITS.UP : 0);
   const downEdge = edges.down ?? !!((mask & BTN_BITS.DOWN) && !(prevButtons & BTN_BITS.DOWN));
   const upEdge = edges.up ?? !!((mask & BTN_BITS.UP) && !(prevButtons & BTN_BITS.UP));
-  st = stepSession(sess, st, { buttons: mask, confirmEdge: !!edges.confirm, downEdge, upEdge, cancelEdge: false });
+  const input = { buttons: mask, confirmEdge: !!edges.confirm, downEdge, upEdge, cancelEdge: false };
+  st = stepSession(sess, st, input);
+  inlineState = stepSession(inlineSession, inlineState, input);
+  if (canonicalJson(st) !== canonicalJson(inlineState)) {
+    throw new Error(`smoke: sharded SessionState differs from inline at frame ${frames}`);
+  }
   prevButtons = mask;
   masks.push(mask >>> 0);
   frames++;
@@ -94,7 +107,7 @@ function settle(answers: string[] = [], maxFrames = 3000): void {
  *  goal. (Found the hard way: v1 drops Tuxemon's `char_facing player,down`
  *  on exit mats, so crossing a mat sideways leaves the map.) */
 function touchCells(): Set<string> {
-  const map = project.maps.find((m) => m.id === st.mapId)!;
+  const map = sess.maps.get(st.mapId)!;
   const out = new Set<string>();
   for (const ev of map.events ?? []) {
     const page = [...ev.pages].reverse().find((p) => !p.condition || (p.condition.variable ? (() => {
@@ -158,7 +171,7 @@ function walkTo(tx: number, ty: number, soft = false): boolean {
     if (soft) return false;
     throw new Error(`walkTo ${tx},${ty}: destination stayed occupied for 10 seconds`);
   }
-  const width = project.maps.find((candidate) => candidate.id === map)!.width;
+  const width = sess.maps.get(map)!.width;
   const avoid = new Set([...touchCells()].map((cell) => {
     const [x, y] = cell.split(",").map(Number);
     return y! * width + x!;
@@ -301,7 +314,9 @@ const result = {
   },
 };
 const digest = createHash("sha256").update(JSON.stringify(result)).digest("hex");
+const stateDigest = createHash("sha256").update(canonicalJson(st)).digest("hex");
 writeFileSync(join(OUT_DIR, `journey-spyder-${HZ}hz.json`), JSON.stringify({ ...result, sha256: digest }, null, 2) + "\n");
+console.log(`STATE sha256=${stateDigest} (inline=sharded every frame)`);
 console.log("RESULT " + JSON.stringify({
   hz: result.hz,
   frames: result.frames,

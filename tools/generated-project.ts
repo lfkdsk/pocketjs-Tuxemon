@@ -1,0 +1,47 @@
+// Node/Bun-side access to the generated inline parity oracle and the
+// production ProjectShell + per-map files. Runtime hosts use the equivalent
+// byte source in main.tsx (data.fs on desktop, pak elsewhere).
+
+import { readFileSync } from "node:fs";
+import { join, resolve } from "node:path";
+import { createJsonMapRepository } from "../vendor/pocket-rpgkit/src/engine/map-repository.ts";
+import type {
+  MapRepository,
+  Project,
+  ProjectShell,
+} from "../vendor/pocket-rpgkit/src/engine/types.ts";
+
+export interface GeneratedShardedProject {
+  project: ProjectShell;
+  repository: MapRepository;
+}
+
+export function readInlineProject(root: string): Project {
+  return JSON.parse(readFileSync(join(resolve(root), "dist/project.json"), "utf8")) as Project;
+}
+
+export function readShardedProject(root: string): GeneratedShardedProject {
+  const absolute = resolve(root);
+  const project = JSON.parse(
+    readFileSync(join(absolute, "dist/project-shell.json"), "utf8"),
+  ) as ProjectShell;
+  const repository = createJsonMapRepository(project.mapIndex, {
+    read: (entry) => new Uint8Array(readFileSync(join(absolute, "dist", entry))),
+  });
+  return { project, repository };
+}
+
+/** Rebuild an inline view by reading the generated shards. Corpus-wide static
+ * verification uses this instead of bypassing the production artifacts. */
+export function materializeShardedProject(root: string): Project {
+  const { project, repository } = readShardedProject(root);
+  const maps = project.mapIndex.map(({ id }) => repository.acquire(id));
+  repository.releaseExcept([]);
+  const {
+    mapIndex: _mapIndex,
+    mapManifestHash: _mapManifestHash,
+    mapSchemaHash: _mapSchemaHash,
+    ...globals
+  } = project;
+  return { ...globals, maps };
+}

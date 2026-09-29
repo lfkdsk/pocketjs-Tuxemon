@@ -1,13 +1,12 @@
 import { expect, test } from "bun:test";
-import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import type { Project } from "../vendor/pocket-rpgkit/src/engine/types.ts";
+import { materializeShardedProject } from "../tools/generated-project.ts";
 import { verifyProjectLocks } from "../tools/verify-g6-locks.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
 
 test("every G6 lockInput page dynamically releases or transfers", () => {
-  const project = JSON.parse(readFileSync(resolve(ROOT, "dist/project.json"), "utf8")) as Project;
+  const project = materializeShardedProject(ROOT);
   const report = verifyProjectLocks(project);
   expect(report.format).toBe("pocket-tuxemon/g6-lock-check/v2");
   expect(report.lockCommands).toBe(323);

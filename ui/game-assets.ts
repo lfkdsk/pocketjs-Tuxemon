@@ -9391,6 +9391,7 @@ export const GAME_ASSETS: GameAssets = {
   upper: {},
   chunkColumns: {},
   maxChunks: 1,
+  maxActors: 500,
   world: TERRAIN_WORLD,
   order: TERRAIN_ORDER,
   npcSrc: NPC_SRC,

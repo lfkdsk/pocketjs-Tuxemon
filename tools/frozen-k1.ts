@@ -13,6 +13,7 @@ import {
   type SessionState,
 } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import type { Command, Project } from "../vendor/pocket-rpgkit/src/engine/types.ts";
+import { materializeShardedProject } from "./generated-project.ts";
 
 function collectLandings(commands: readonly Command[], landing: Map<string, [number, number]>): void {
   for (const command of commands) {
@@ -157,13 +158,16 @@ export function verifyFrozenProject(project: Project, windowFrames = WINDOW): Fr
 
 if (import.meta.main) {
   const args = process.argv.slice(2);
-  const projectPath = resolve(args.find((arg) => !arg.startsWith("--")) ?? "dist/project.json");
+  const projectArg = args.find((arg) => !arg.startsWith("--"));
+  const projectPath = projectArg ? resolve(projectArg) : null;
   const outArg = args.find((arg) => arg.startsWith("--out="));
   const outPath = resolve(outArg?.slice("--out=".length) ?? "dist/frozen-k1.json");
-  const project = JSON.parse(readFileSync(projectPath, "utf8")) as Project;
+  const project = projectPath
+    ? JSON.parse(readFileSync(projectPath, "utf8")) as Project
+    : materializeShardedProject(resolve(import.meta.dir, ".."));
   const report = verifyFrozenProject(project);
   mkdirSync(dirname(outPath), { recursive: true });
-  writeFileSync(outPath, JSON.stringify({ ...report, project: projectPath }, null, 2) + "\n");
+  writeFileSync(outPath, JSON.stringify({ ...report, project: projectPath ?? "dist/project-shell.json" }, null, 2) + "\n");
   console.log(
     `K1 freeze scan: ${report.maps} maps; ${report.permanentLocks} permanent input locks; ` +
     `${report.permanentBlockingFibers} permanent blocking fibers; ${report.errors} errors`,

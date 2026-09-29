@@ -5,11 +5,33 @@
 mod g6_quickjs_bench {
     use super::*;
     use serde::Deserialize;
+    use std::fmt::Write as _;
+    use std::path::Path;
     use std::time::Instant;
+
+    const BENCH_APP_ID: &str = "dev.lfkdsk.pocket-tuxemon-bench";
 
     #[derive(Deserialize)]
     struct Journey {
         masks: Vec<u32>,
+    }
+
+    #[derive(Deserialize)]
+    struct MapMeta {
+        id: String,
+        entry: String,
+        width: usize,
+        height: usize,
+    }
+
+    struct MapSample {
+        meta: MapMeta,
+        bytes: u64,
+        read_parse_ms: f64,
+        validate_ms: f64,
+        compile_ms: f64,
+        commit_ms: f64,
+        total_ms: f64,
     }
 
     struct Sample {
@@ -31,6 +53,18 @@ mod g6_quickjs_bench {
             self.rt
                 .guest
                 .with(|ctx| ctx.eval::<String, _>(source).expect("QuickJS string eval"))
+        }
+
+        fn boolean(&self, source: &str) -> bool {
+            self.rt
+                .guest
+                .with(|ctx| ctx.eval::<bool, _>(source).expect("QuickJS boolean eval"))
+        }
+
+        fn unit(&self, source: &str) {
+            self.rt
+                .guest
+                .with(|ctx| ctx.eval::<(), _>(source).expect("QuickJS unit eval"));
         }
 
         fn state(&self) -> (String, bool, bool) {
@@ -116,14 +150,14 @@ mod g6_quickjs_bench {
         );
     }
 
-    fn args(dist: &PathBuf, data: PathBuf, width: u32, height: u32) -> Args {
+    fn args(dist: &PathBuf, app: &str, data: PathBuf, width: u32, height: u32) -> Args {
         Args {
-            app: "pocket-tuxemon".into(),
-            js: Some(dist.join("pocket-tuxemon.js")),
-            pak: Some(dist.join("pocket-tuxemon.pak")),
+            app: app.into(),
+            js: Some(dist.join(format!("{app}.js"))),
+            pak: Some(dist.join(format!("{app}.pak"))),
             file: None,
             data_root: Some(data),
-            app_id: Some("dev.lfkdsk.pocket-tuxemon-bench".into()),
+            app_id: Some(BENCH_APP_ID.into()),
             title: "G6 QuickJS bench".into(),
             viewport: (width, height),
             fixed: false,
@@ -141,6 +175,23 @@ mod g6_quickjs_bench {
         }
     }
 
+    fn seed_maps(source: &Path, data_root: &Path) {
+        let destination = data_root.join(BENCH_APP_ID).join("data/maps");
+        let _ = std::fs::remove_dir_all(&destination);
+        std::fs::create_dir_all(&destination).expect("create benchmark map data directory");
+        let mut copied = 0usize;
+        for entry in std::fs::read_dir(source).expect("read G6_MAPS") {
+            let entry = entry.expect("read map directory entry");
+            let path = entry.path();
+            if path.extension().and_then(|value| value.to_str()) != Some("json") {
+                continue;
+            }
+            std::fs::copy(&path, destination.join(entry.file_name())).expect("copy map entry");
+            copied += 1;
+        }
+        assert_eq!(copied, 263, "benchmark must stage every imported map");
+    }
+
     #[test]
     #[ignore]
     fn journey() {
@@ -150,13 +201,13 @@ mod g6_quickjs_bench {
         let width: u32 = std::env::var("G6_BENCH_W").unwrap().parse().unwrap();
         let height: u32 = std::env::var("G6_BENCH_H").unwrap().parse().unwrap();
         let viewport = format!("{width}x{height}");
-        let data = PathBuf::from(format!(
-            "/var/tmp/fleet/1833/qjs-data-{}-{width}x{height}",
-            std::process::id()
-        ));
+        let bench_root = PathBuf::from(std::env::var("G6_BENCH_ROOT").expect("G6_BENCH_ROOT"));
+        let data = bench_root.join(format!("qjs-data-{}-{width}x{height}", std::process::id()));
+        let maps = PathBuf::from(std::env::var("G6_MAPS").expect("G6_MAPS"));
+        seed_maps(&maps, &data);
 
         let boot_start = Instant::now();
-        let runtime = Runtime::boot(args(&dist, data.clone(), width, height)).unwrap();
+        let runtime = Runtime::boot(args(&dist, "pocket-tuxemon", data.clone(), width, height)).unwrap();
         let boot_ms = boot_start.elapsed().as_secs_f64() * 1_000.0;
         let mut bench = Bench { rt: runtime };
         let initial_map = bench.state().0;
@@ -192,6 +243,10 @@ mod g6_quickjs_bench {
         }
         let (end_map, _, _) = bench.state();
         assert_eq!(end_map, "spyder_route1");
+        let state_text = bench.string("JSON.stringify(globalThis.__rpgSessionState)");
+        let state: serde_json::Value = serde_json::from_str(&state_text).expect("terminal state JSON");
+        let state_out = PathBuf::from(std::env::var("G6_STATE_OUT").expect("G6_STATE_OUT"));
+        std::fs::write(&state_out, serde_json::to_vec(&state).unwrap()).expect("write canonical state");
         report(&viewport, "walking", &walking);
         report(&viewport, "map-switch", &switches);
         let (used, malloc, objects) = qjs_memory(&bench.rt.guest);
@@ -201,6 +256,143 @@ mod g6_quickjs_bench {
             transfers,
             used as f64 / 1_048_576.0,
             malloc as f64 / 1_048_576.0,
+        );
+        let _ = std::fs::remove_dir_all(data);
+    }
+
+    fn timed_bool(bench: &Bench, source: &str) -> (bool, f64) {
+        let started = Instant::now();
+        let result = bench.boolean(source);
+        (result, started.elapsed().as_secs_f64() * 1_000.0)
+    }
+
+    fn timed_unit(bench: &Bench, source: &str) -> f64 {
+        let started = Instant::now();
+        bench.unit(source);
+        started.elapsed().as_secs_f64() * 1_000.0
+    }
+
+    #[test]
+    #[ignore]
+    fn map_first_visits() {
+        let dist = PathBuf::from(std::env::var("G6_MAP_BENCH_DIST").expect("G6_MAP_BENCH_DIST"));
+        let maps = PathBuf::from(std::env::var("G6_MAPS").expect("G6_MAPS"));
+        let bench_root = PathBuf::from(std::env::var("G6_BENCH_ROOT").expect("G6_BENCH_ROOT"));
+        let report = PathBuf::from(std::env::var("G6_MAP_REPORT").expect("G6_MAP_REPORT"));
+        let data = bench_root.join(format!("qjs-map-data-{}", std::process::id()));
+        seed_maps(&maps, &data);
+        let runtime = Runtime::boot(args(&dist, "map-benchmark-entry", data.clone(), 480, 272)).unwrap();
+        let bench = Bench { rt: runtime };
+        let metadata: Vec<MapMeta> = serde_json::from_str(
+            &bench.string("JSON.stringify(globalThis.__rpgMapBenchmark.maps)"),
+        ).expect("map benchmark metadata");
+        assert_eq!(metadata.len(), 263, "benchmark must see every imported map");
+
+        let mut samples = Vec::with_capacity(metadata.len());
+        for meta in metadata {
+            let id = serde_json::to_string(&meta.id).unwrap();
+            bench.unit(&format!("globalThis.__rpgMapBenchmark.begin({id})"));
+            let total_started = Instant::now();
+            let (parsed, read_parse_ms) = timed_bool(
+                &bench,
+                &format!("globalThis.__rpgMapBenchmark.step({id})"),
+            );
+            let (validated, validate_ms) = timed_bool(
+                &bench,
+                &format!("globalThis.__rpgMapBenchmark.step({id})"),
+            );
+            let (compiled, compile_ms) = timed_bool(
+                &bench,
+                &format!("globalThis.__rpgMapBenchmark.step({id})"),
+            );
+            assert!(!parsed, "{} parse step must remain staged", meta.id);
+            assert!(!validated, "{} validation step must remain staged", meta.id);
+            assert!(compiled, "{} compile step must complete preparation", meta.id);
+            let commit_ms = timed_unit(
+                &bench,
+                &format!("globalThis.__rpgMapBenchmark.commit({id})"),
+            );
+            let total_ms = total_started.elapsed().as_secs_f64() * 1_000.0;
+            let bytes = std::fs::metadata(maps.join(&meta.entry["maps/".len()..]))
+                .expect("map entry metadata")
+                .len();
+            samples.push(MapSample {
+                meta,
+                bytes,
+                read_parse_ms,
+                validate_ms,
+                compile_ms,
+                commit_ms,
+                total_ms,
+            });
+        }
+
+        let mut table = String::from(
+            "map\twidth\theight\tbytes\tread_parse_ms\tvalidate_ms\tcompile_ms\tcommit_ms\tworst_stage_ms\ttotal_ms\tlimit\n",
+        );
+        let mut stages = Vec::with_capacity(samples.len());
+        let mut worst_non_exempt: Option<(&MapSample, f64)> = None;
+        let mut worst_all: Option<(&MapSample, f64)> = None;
+        for sample in &samples {
+            let worst = sample.read_parse_ms
+                .max(sample.validate_ms)
+                .max(sample.compile_ms)
+                .max(sample.commit_ms);
+            stages.push(worst);
+            if worst_all.map_or(true, |(_, value)| worst > value) {
+                worst_all = Some((sample, worst));
+            }
+            if sample.meta.id != "test_npcs"
+                && worst_non_exempt.map_or(true, |(_, value)| worst > value)
+            {
+                worst_non_exempt = Some((sample, worst));
+            }
+            let limit = if sample.meta.id == "test_npcs" {
+                "exempt"
+            } else if worst <= 50.0 {
+                "pass"
+            } else {
+                "FAIL"
+            };
+            writeln!(
+                table,
+                "{}\t{}\t{}\t{}\t{:.3}\t{:.3}\t{:.3}\t{:.3}\t{:.3}\t{:.3}\t{}",
+                sample.meta.id,
+                sample.meta.width,
+                sample.meta.height,
+                sample.bytes,
+                sample.read_parse_ms,
+                sample.validate_ms,
+                sample.compile_ms,
+                sample.commit_ms,
+                worst,
+                sample.total_ms,
+                limit,
+            ).unwrap();
+        }
+        if let Some(parent) = report.parent() {
+            std::fs::create_dir_all(parent).expect("create map report directory");
+        }
+        std::fs::write(&report, table).expect("write map first-visit report");
+
+        stages.sort_by(|a, b| a.partial_cmp(b).unwrap());
+        let (worst_map, worst_ms) = worst_all.unwrap();
+        let (worst_non_exempt_map, worst_non_exempt_ms) = worst_non_exempt.unwrap();
+        println!(
+            "MAPS n={} stage_p95={:.3}ms stage_max={:.3}ms worst={} non_exempt_max={:.3}ms non_exempt_worst={} report={}",
+            samples.len(),
+            percentile(&stages, 0.95),
+            worst_ms,
+            worst_map.meta.id,
+            worst_non_exempt_ms,
+            worst_non_exempt_map.meta.id,
+            report.display(),
+        );
+        assert!(
+            worst_non_exempt_ms <= 50.0,
+            "map {} exceeded the 50 ms staged first-visit limit: {:.3} ms",
+            worst_non_exempt_map.meta.id,
+            worst_non_exempt_ms,
         );
         let _ = std::fs::remove_dir_all(data);
     }
