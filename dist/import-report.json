@@ -281,9 +281,9 @@
  "schemaErrors": [],
  "byFate": {
   "T3-dropped": 5024,
-  "T1": 25071,
-  "T3-placeholder": 2157,
-  "T4-dropped": 4883,
+  "T1": 25074,
+  "T3-placeholder": 2185,
+  "T4-dropped": 4852,
   "T1-lowered": 3670,
   "T2-dropped": 261,
   "structural": 772
@@ -578,10 +578,10 @@
    "note": "monster/combat subsystem (P2)"
   },
   {
-   "key": "act:open_shop:T4-dropped",
-   "fate": "T4-dropped",
+   "key": "act:open_shop:T3-placeholder",
+   "fate": "T3-placeholder",
    "count": 28,
-   "note": "presentation / meta"
+   "note": "visible stock summary until the K4 shop UI lands"
   },
   {
    "key": "act:park_experience:T4-dropped",
@@ -1342,7 +1342,7 @@
   {
    "key": "trigger:action:facingTile(area):T1",
    "fate": "T1",
-   "count": 431,
+   "count": 434,
    "note": "K1 rectangular event area (overlaps partitioned after guard sampling)"
   },
   {
@@ -1390,7 +1390,7 @@
   {
    "key": "trigger:no-op after conversion:T4-dropped",
    "fate": "T4-dropped",
-   "count": 1203,
+   "count": 1200,
    "note": "every action was removed, so no project event was emitted"
   },
   {
@@ -1491,10 +1491,10 @@
     "uses": 13617,
     "native": 9619,
     "degraded": 637,
-    "placeholder": 433,
-    "dropped": 2928,
+    "placeholder": 461,
+    "dropped": 2900,
     "nativePercent": 70.6,
-    "executablePercent": 78.5,
+    "executablePercent": 78.7,
     "tier1": {
      "uses": 6099,
      "percent": 44.79,
@@ -2122,12 +2122,11 @@
      "total": 28,
      "native": 0,
      "degraded": 0,
-     "placeholder": 0,
-     "dropped": 28,
+     "placeholder": 28,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "every action was removed, so no project event was emitted",
-       "presentation / meta"
+      "placeholder": [
+       "visible stock summary until the K4 shop UI lands"
       ]
      }
     },
@@ -2908,15 +2907,15 @@
    "summary": {
     "types": 64,
     "uses": 8663,
-    "native": 5751,
+    "native": 5757,
     "degraded": 12,
     "placeholder": 850,
-    "dropped": 2050,
-    "nativePercent": 66.4,
-    "executablePercent": 76.3,
+    "dropped": 2044,
+    "nativePercent": 66.5,
+    "executablePercent": 76.4,
     "tier1": {
-     "uses": 3531,
-     "percent": 40.76,
+     "uses": 3537,
+     "percent": 40.83,
      "requiredUses": 4591,
      "requiredPercent": 53,
      "meetsBaseline": false
@@ -2969,10 +2968,10 @@
     {
      "type": "is button_pressed",
      "total": 419,
-     "native": 396,
+     "native": 399,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 23,
+     "dropped": 20,
      "reasons": {
       "native": [
        "consumed by trigger selection"
@@ -3051,10 +3050,10 @@
     {
      "type": "is char_facing_tile",
      "total": 344,
-     "native": 317,
+     "native": 320,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 27,
+     "dropped": 24,
      "reasons": {
       "native": [
        "consumed by trigger selection"

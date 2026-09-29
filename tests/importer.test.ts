@@ -7,6 +7,7 @@ import {
   availableMapIds,
   buildProject,
   DEFAULT_IMPORT_OPTIONS,
+  G6_IMPORT_OPTIONS,
   K1_IMPORT_OPTIONS,
 } from "../importer/project.ts";
 import { jsonBytes, writeImport } from "../importer/index.ts";
@@ -43,8 +44,8 @@ test("all maps pass schema and reference valid transfer destinations", () => {
     uses: 13_617,
     native: 6_161,
     degraded: 2_822,
-    placeholder: 433,
-    dropped: 4_201,
+    placeholder: 461,
+    dropped: 4_173,
     nativePercent: 45.2,
     tier1: {
       uses: 6_099,
@@ -56,13 +57,13 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   expect(result.report.coverage.conditions.summary).toMatchObject({
     types: 64,
     uses: 8_663,
-    native: 3_529,
+    native: 3_535,
     degraded: 1_238,
     placeholder: 850,
-    dropped: 3_046,
+    dropped: 3_040,
     tier1: {
-      uses: 3_529,
-      percent: 40.74,
+      uses: 3_535,
+      percent: 40.81,
       requiredUses: 4_591,
       meetsBaseline: false,
     },
@@ -400,6 +401,18 @@ test("ImportOptions.routes emits K2 arbitrary targets and path steps", () => {
   expect(nodes.some((node) => node.approach !== undefined)).toBeTrue();
   expect(nodes.some((node) => node.turnToward !== undefined)).toBeTrue();
   expect(result.report.options?.routes).toBeTrue();
+});
+
+test("open_shop becomes a visible G6 stock-summary placeholder", () => {
+  const result = buildProject(availableMapIds(), G6_IMPORT_OPTIONS);
+  const row = result.report.coverage.actions.rows.find((candidate) => candidate.type === "open_shop");
+  expect(row).toMatchObject({ total: 28, native: 0, degraded: 0, placeholder: 28, dropped: 0 });
+  const shopLines = objectNodes(result.project)
+    .filter((node) => node.op === "text" && Array.isArray(node.lines))
+    .flatMap((node) => node.lines as string[]);
+  expect(shopLines.filter((line) => line.startsWith("[SHOP]"))).toHaveLength(28);
+  expect(shopLines.join("\n")).toContain("Repellent $100");
+  expect(shopLines.join("\n")).toContain("P1 placeholder; trading is unavailable.");
 });
 
 test("Spyder opening completes identically at 60, 30, 20, and 4 Hz", () => {

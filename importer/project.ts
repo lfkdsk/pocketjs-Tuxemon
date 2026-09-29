@@ -134,6 +134,21 @@ for (const f of readdirSync(join(TUXEMON_SRC, "mods/tuxemon/db/npc")).sort()) {
   for (const row of Array.isArray(doc) ? doc : [doc]) npcDb.set(row.slug, row);
 }
 
+interface EconomyEntry {
+  slug: string;
+  price?: number;
+}
+interface EconomyRow {
+  slug: string;
+  items?: EconomyEntry[];
+  monsters?: EconomyEntry[];
+}
+const economyDb = new Map<string, EconomyRow>();
+for (const f of readdirSync(join(TUXEMON_SRC, "mods/tuxemon/db/economy")).sort()) {
+  const doc = Bun.YAML.parse(readFileSync(join(TUXEMON_SRC, "mods/tuxemon/db/economy", f), "utf8")) as EconomyRow | EconomyRow[];
+  for (const row of Array.isArray(doc) ? doc : [doc]) economyDb.set(row.slug, row);
+}
+
 // ---------------------------------------------------------------------------
 // conversion log: every action/condition met, and what happened to it
 
@@ -669,8 +684,41 @@ function nearestWalkableTransferCell(map: TuxMap, startX: number, startY: number
 interface Ctx {
   m: TuxMap;
   options: ImportOptions;
+  economies: ReadonlyMap<string, string>;
   /** the NPC slug whose event runs these commands (talk pages), if any */
   self?: string;
+}
+
+function shopPlaceholder(npc: string, menu: string, economySlug: string | undefined): Command[] {
+  const economy = economySlug ? economyDb.get(economySlug) : undefined;
+  const wantsMonsters = menu.includes("monster");
+  const stock = wantsMonsters ? economy?.monsters : economy?.items;
+  const shown = (stock ?? []).slice(0, 4).map((entry) => {
+    const name = po.get(entry.slug) ?? entry.slug.replaceAll("_", " ");
+    return `${name}${entry.price === undefined ? "" : ` $${entry.price}`}`;
+  });
+  const remainder = Math.max(0, (stock?.length ?? 0) - shown.length);
+  const summary = shown.length
+    ? `Stock: ${shown.join(", ")}${remainder ? `, +${remainder} more` : ""}`
+    : `Stock: ${economy ? "none" : "economy unavailable"}`;
+  const menuLabel: Record<string, string> = {
+    buy_item: "Buy items",
+    sell_item: "Sell items",
+    both_item: "Buy/sell items",
+    buy_monster: "Buy monsters",
+    sell_monster: "Sell monsters",
+    both_monster: "Buy/sell monsters",
+    train_monster: "Train monsters",
+    heal_monster: "Heal monsters",
+  };
+  const lines = [
+    `[SHOP] ${npcName(npc)} — ${menuLabel[menu] ?? menu}`,
+    summary,
+    "(P1 placeholder; trading is unavailable.)",
+  ].flatMap((line) => wrap(line));
+  const commands: Command[] = [];
+  for (let i = 0; i < lines.length; i += 4) commands.push({ op: "text", lines: lines.slice(i, i + 4) });
+  return commands;
 }
 
 function battle(opp: string): Command[] {
@@ -964,6 +1012,10 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
       case "random_encounter":
         noteAction(a, a.type, "T3-placeholder", "intentionally silent in P1");
         break;
+      case "open_shop":
+        noteAction(a, a.type, "T3-placeholder", "visible stock summary until the K4 shop UI lands");
+        out.push(...shopPlaceholder(g[0]!, g[1]!, ctx.economies.get(g[0]!)));
+        break;
       case "pathfind": {
         if (!ctx.options.routes) {
           noteAction(a, a.type, "T2-dropped", "runtime pathfinding / other-event routes / NPC motion props");
@@ -1082,6 +1134,14 @@ function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: 
    *  body" semantics without expanding otherwise-disjoint large areas. */
   const spatialPages: SpatialPage[] = [];
   const collisionRegions = readCollisionRegions(join(MAPS_DIR, `${m.slug}.tmx`));
+  const economies = new Map<string, string>();
+  for (const event of m.events) {
+    for (const action of event.acts) {
+      if (action.type === "set_economy" && action.args[0] && action.args[1]) {
+        economies.set(action.args[0], action.args[1]);
+      }
+    }
+  }
 
   // NPCs first: every create_npc on this map names one NPC event
   for (const e of m.events) for (const a of e.acts) if (a.type === "create_npc") {
@@ -1137,7 +1197,7 @@ function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: 
             }
           }
         }
-        const cmds = convertActions(e.acts.filter((a) => a.type !== "char_face" && a.type !== "char_wander"), { m, options });
+        const cmds = convertActions(e.acts.filter((a) => a.type !== "char_face" && a.type !== "char_wander"), { m, options, economies });
         const blocking = hasBlocking(cmds);
         const page = blocking
           // A blocking spawn usually writes the same local.npc variable its
@@ -1167,12 +1227,12 @@ function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: 
       const talk = e.behavs.find((b) => b.type === "talk");
       if (talk) {
         const agg = npcOf(talk.args[0]!);
-        agg.talks.push({ cls: live, cmds: convertActions(e.acts, { m, options, self: talk.args[0] }) });
+        agg.talks.push({ cls: live, cmds: convertActions(e.acts, { m, options, economies, self: talk.args[0] }) });
         note("trigger", "talk", "T1", "NPC event action page (if-chain over talk guards)");
         continue;
       }
 
-      const cmds = convertActions(e.acts, { m, options });
+      const cmds = convertActions(e.acts, { m, options, economies });
       if (!cmds.length) {
         const reason = "every action was removed, so no project event was emitted";
         eventCoverage.dropAll(reason);
