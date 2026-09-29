@@ -1,11 +1,14 @@
-import {
-  loadAllFileEvents,
-  type Cond,
-  type Rule,
-  type TuxEvent,
-} from "./source.ts";
-
 export type Disposition = "native" | "degraded" | "placeholder" | "dropped";
+
+export interface CoverageEntry {
+  kind: "action" | "condition";
+  /** Display/grouping key: action type, or "is|not condition_type". */
+  type: string;
+  /** The raw Tuxemon type, used only for the S1 T1 membership check. */
+  sourceType: string;
+  disposition: Disposition;
+  reason: string;
+}
 
 export interface CoverageRow {
   type: string;
@@ -14,6 +17,7 @@ export interface CoverageRow {
   degraded: number;
   placeholder: number;
   dropped: number;
+  reasons: Partial<Record<Disposition, string[]>>;
 }
 
 export interface CoverageSummary {
@@ -35,6 +39,8 @@ export interface CoverageSummary {
 }
 
 export interface CoverageReport {
+  view: "source-file";
+  accounting: "conversion-path";
   sourceEvents: number;
   actions: { summary: CoverageSummary; rows: CoverageRow[] };
   conditions: { summary: CoverageSummary; rows: CoverageRow[] };
@@ -75,116 +81,16 @@ const T1_CONDITIONS = new Set([
   "variable_set",
 ]);
 
-const NATIVE_ACTIONS = new Set([
-  "add_item",
-  "add_tracker",
-  "char_talk",
-  "clear_variable",
-  "modify_money",
-  "play_sound",
-  "random_integer",
-  "set_random_variable",
-  "set_variable",
-  "transition_teleport",
-  "translated_dialog",
-  "translated_dialog_choice",
-  "wait",
-]);
-
-const DEGRADED_ACTIONS = new Set([
-  "char_face",
-  "char_move",
-  "char_stop",
-  "char_wander",
-  "create_npc",
-  "load_yaml",
-  "lock_controls",
-  "remove_collision",
-  "remove_npc",
-  "screen_transition",
-  "unlock_controls",
-]);
-
-const PLACEHOLDER_ACTIONS = new Set([
-  "add_monster",
-  "choice_monster",
-  "choice_npc",
-  "random_encounter",
-  "random_monster",
-  "remove_monster",
-  "set_monster_health",
-  "set_monster_status",
-  "start_battle",
-  "start_double_battle",
-  "wild_encounter",
-]);
-
-const NATIVE_CONDITIONS = new Set([
-  "button_pressed",
-  "char_at",
-  "char_facing_tile",
-  "char_moved",
-  "has_item",
-  "location_inside",
-  "location_type",
-  "money_is",
-  "tracker",
-  "variable_set",
-]);
-
-const DEGRADED_CONDITIONS = new Set([
-  "char_exists",
-  "char_facing",
-  "current_state",
-  "time_is",
-]);
-
-const PLACEHOLDER_CONDITIONS = new Set([
-  "battle_outcome",
-  "battle_outcome_count",
-  "char_defeated",
-  "has_monster",
-  "party_infected",
-  "party_size",
-]);
-
-function actionDisposition(action: Rule): Disposition {
-  if (action.type === "add_item" && action.args[2] && action.args[2] !== "player") {
-    return "dropped";
-  }
-  if (action.type === "modify_money" && (action.args[0] !== "player" || !action.args[1])) {
-    return "dropped";
-  }
-  if (action.type === "random_monster" && action.args[1]) return "dropped";
-  if (action.type === "add_monster" && action.args[2] && action.args[2] !== "player") {
-    return "dropped";
-  }
-  if (action.type === "translated_dialog_choice" && action.args[0]!.split(":").length > 4) {
-    return "degraded";
-  }
-  if (NATIVE_ACTIONS.has(action.type)) return "native";
-  if (DEGRADED_ACTIONS.has(action.type)) return "degraded";
-  if (PLACEHOLDER_ACTIONS.has(action.type)) return "placeholder";
-  return "dropped";
-}
-
-function conditionDisposition(condition: Cond): Disposition {
-  if (condition.type === "money_is") {
-    const op = condition.args[1];
-    const value = condition.args[2];
-    if (!value || !/^\d+$/.test(value) ||
-        !["greater_than", "greater_or_equal", "less_than", "less_or_equal"].includes(op ?? "")) {
-      return "dropped";
-    }
-  }
-  if (NATIVE_CONDITIONS.has(condition.type)) return "native";
-  if (DEGRADED_CONDITIONS.has(condition.type)) return "degraded";
-  if (PLACEHOLDER_CONDITIONS.has(condition.type)) return "placeholder";
-  return "dropped";
-}
-
 function blank(type: string): CoverageRow {
-  return { type, total: 0, native: 0, degraded: 0, placeholder: 0, dropped: 0 };
+  return {
+    type,
+    total: 0,
+    native: 0,
+    degraded: 0,
+    placeholder: 0,
+    dropped: 0,
+    reasons: {},
+  };
 }
 
 function percent(count: number, total: number, digits = 1): number {
@@ -193,17 +99,22 @@ function percent(count: number, total: number, digits = 1): number {
 }
 
 function aggregate(
-  entries: { key: string; disposition: Disposition; tier1: boolean }[],
+  entries: CoverageEntry[],
+  tier1Types: ReadonlySet<string>,
   baseline: { uses: number; percent: number },
 ): { summary: CoverageSummary; rows: CoverageRow[] } {
   const grouped = new Map<string, CoverageRow>();
   let tier1Uses = 0;
   for (const entry of entries) {
-    const row = grouped.get(entry.key) ?? blank(entry.key);
+    const row = grouped.get(entry.type) ?? blank(entry.type);
     row.total++;
     row[entry.disposition]++;
-    grouped.set(entry.key, row);
-    if (entry.tier1 && (entry.disposition === "native" || entry.disposition === "degraded")) {
+    const reasons = row.reasons[entry.disposition] ?? [];
+    if (!reasons.includes(entry.reason)) reasons.push(entry.reason);
+    row.reasons[entry.disposition] = reasons;
+    grouped.set(entry.type, row);
+    if (tier1Types.has(entry.sourceType) &&
+        (entry.disposition === "native" || entry.disposition === "degraded")) {
       tier1Uses++;
     }
   }
@@ -239,21 +150,17 @@ function aggregate(
   };
 }
 
-export function buildCoverageReport(): CoverageReport {
-  const events: TuxEvent[] = loadAllFileEvents();
-  const actions = events.flatMap((event) => event.acts.map((action) => ({
-    key: action.type,
-    disposition: actionDisposition(action),
-    tier1: T1_ACTIONS.has(action.type),
-  })));
-  const conditions = events.flatMap((event) => event.conds.map((condition) => ({
-    key: `${condition.op} ${condition.type}`,
-    disposition: conditionDisposition(condition),
-    tier1: T1_CONDITIONS.has(condition.type),
-  })));
+export function buildCoverageReport(
+  sourceEvents: number,
+  entries: readonly CoverageEntry[],
+): CoverageReport {
+  const actions = entries.filter((entry) => entry.kind === "action");
+  const conditions = entries.filter((entry) => entry.kind === "condition");
   return {
-    sourceEvents: events.length,
-    actions: aggregate(actions, { uses: 6_246, percent: 45.9 }),
-    conditions: aggregate(conditions, { uses: 4_591, percent: 53.0 }),
+    view: "source-file",
+    accounting: "conversion-path",
+    sourceEvents,
+    actions: aggregate(actions, T1_ACTIONS, { uses: 6_246, percent: 45.9 }),
+    conditions: aggregate(conditions, T1_CONDITIONS, { uses: 4_591, percent: 53.0 }),
   };
 }

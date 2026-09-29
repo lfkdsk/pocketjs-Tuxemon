@@ -16,7 +16,12 @@ import {
   type TuxMap,
 } from "./source.ts";
 import { triggerClass } from "./shapes.ts";
-import { buildCoverageReport, type CoverageReport } from "./coverage.ts";
+import {
+  buildCoverageReport,
+  type CoverageEntry,
+  type CoverageReport,
+  type Disposition,
+} from "./coverage.ts";
 import { validateSchema } from "../vendor/pocket-rpgkit/src/engine/schema-validate.ts";
 import type {
   Command,
@@ -57,12 +62,129 @@ for (const f of readdirSync(join(TUXEMON_SRC, "mods/tuxemon/db/npc")).sort()) {
 // conversion log: every action/condition met, and what happened to it
 
 export type Fate = "T1" | "T1-lowered" | "T2-dropped" | "T3-placeholder" | "T3-dropped" | "T4-dropped" | "structural";
-const log = new Map<string, { fate: Fate; count: number; note: string }>();
+const log = new Map<string, { key: string; fate: Fate; count: number; note: string }>();
 function note(kind: "act" | "cond" | "behav" | "trigger", type: string, fate: Fate, why: string): void {
   const key = `${kind}:${type}:${fate}`;
   const row = log.get(key);
   if (row) row.count++;
-  else log.set(key, { fate, count: 1, note: why });
+  else log.set(key, { key, fate, count: 1, note: why });
+}
+
+interface RecordedDisposition {
+  disposition: Disposition;
+  reason: string;
+}
+
+function dispositionFor(fate: Fate): Disposition {
+  if (fate === "T1") return "native";
+  if (fate === "T1-lowered") return "degraded";
+  if (fate === "T3-placeholder") return "placeholder";
+  return "dropped";
+}
+
+const sourceEventKey = (event: TuxEvent): string => event.objectId === null
+  ? `${event.source}:${event.kind}:${event.name}`
+  : `${event.source}:object:${event.objectId}`;
+
+class EventCoverage {
+  readonly actions = new Map<Rule, RecordedDisposition>();
+  readonly conditions = new Map<Cond, RecordedDisposition>();
+
+  constructor(readonly event: TuxEvent) {}
+
+  action(rule: Rule, fate: Fate, reason: string): void {
+    if (!rule.synthetic) this.actions.set(rule, { disposition: dispositionFor(fate), reason });
+  }
+
+  condition(rule: Cond, fate: Fate, reason: string): void {
+    if (!rule.synthetic) this.conditions.set(rule, { disposition: dispositionFor(fate), reason });
+  }
+
+  dropAll(reason: string): void {
+    for (const action of this.event.acts) {
+      if (!action.synthetic) this.actions.set(action, { disposition: "dropped", reason });
+    }
+    for (const condition of this.event.conds) {
+      if (!condition.synthetic) this.conditions.set(condition, { disposition: "dropped", reason });
+    }
+  }
+
+  entries(): CoverageEntry[] {
+    const missing = "conversion emitted no supported behavior";
+    return [
+      ...this.event.acts.filter((rule) => !rule.synthetic).map((rule) => ({
+        kind: "action" as const,
+        type: rule.type,
+        sourceType: rule.type,
+        ...(this.actions.get(rule) ?? { disposition: "dropped" as const, reason: missing }),
+      })),
+      ...this.event.conds.filter((rule) => !rule.synthetic).map((rule) => ({
+        kind: "condition" as const,
+        type: `${rule.op} ${rule.type}`,
+        sourceType: rule.type,
+        ...(this.conditions.get(rule) ?? { disposition: "dropped" as const, reason: missing }),
+      })),
+    ];
+  }
+}
+
+class ConversionCoverage {
+  private readonly canonical: TuxEvent[];
+  private readonly canonicalKeys: Set<string>;
+  private selected = new Map<string, EventCoverage>();
+
+  constructor(events: TuxEvent[]) {
+    this.canonical = events;
+    this.canonicalKeys = new Set(events.map(sourceEventKey));
+    if (this.canonicalKeys.size !== events.length) {
+      throw new Error("source-file coverage event keys are not unique");
+    }
+  }
+
+  reset(): void {
+    this.selected.clear();
+  }
+
+  commit(event: EventCoverage): void {
+    const key = sourceEventKey(event.event);
+    if (this.canonicalKeys.has(key) && !this.selected.has(key)) this.selected.set(key, event);
+  }
+
+  report(): CoverageReport {
+    const entries: CoverageEntry[] = [];
+    for (const source of this.canonical) {
+      const selected = this.selected.get(sourceEventKey(source));
+      if (selected) {
+        const sourceActions = source.acts.filter((rule) => !rule.synthetic).map((rule) => rule.type);
+        const selectedActions = selected.event.acts.filter((rule) => !rule.synthetic).map((rule) => rule.type);
+        const sourceConditions = source.conds.filter((rule) => !rule.synthetic).map((rule) => `${rule.op} ${rule.type}`);
+        const selectedConditions = selected.event.conds.filter((rule) => !rule.synthetic).map((rule) => `${rule.op} ${rule.type}`);
+        if (sourceActions.join("\0") !== selectedActions.join("\0") ||
+            sourceConditions.join("\0") !== selectedConditions.join("\0")) {
+          throw new Error(`coverage materialization differs from source event ${sourceEventKey(source)}`);
+        }
+        entries.push(...selected.entries());
+      } else {
+        const absent = new EventCoverage(source);
+        absent.dropAll("source event is not materialized by any map");
+        entries.push(...absent.entries());
+      }
+    }
+    return buildCoverageReport(this.canonical.length, entries);
+  }
+}
+
+const conversionCoverage = new ConversionCoverage(loadAllFileEvents());
+let activeCoverage: EventCoverage | undefined;
+
+function noteAction(rule: Rule, type: string, fate: Fate, why: string): void {
+  note("act", type, fate, why);
+  activeCoverage?.action(rule, fate, why);
+}
+
+function noteCondition(rule: Cond, type: string, fate: Fate, why: string): void {
+  note("cond", type, fate, why);
+  activeCoverage?.condition(rule, fate, why);
 }
 
 // ---------------------------------------------------------------------------
@@ -174,11 +296,21 @@ function clauses(c: Cond, m: TuxMap): Clause[] | null {
   const a = c.args;
   const not = c.op === "not";
   const K = (value: boolean): Clause[] => [{ k: "const", value: not ? !value : value }];
-  if (TRIGGER_CONDS.has(c.type)) return null;
+  if (TRIGGER_CONDS.has(c.type)) {
+    const native = c.type === "button_pressed" || c.type === "char_at" ||
+      c.type === "char_moved" || c.type === "char_facing_tile";
+    noteCondition(
+      c,
+      `${c.op} ${c.type}`,
+      native ? "T1" : "T2-dropped",
+      native ? "consumed by trigger selection" : "trigger predicate unavailable in v1",
+    );
+    return null;
+  }
   switch (c.type) {
     case "variable_set": {
-      if (not && a.length > 1) { note("cond", "not variable_set(multi)", "T2-dropped", "NOT of several vars is an OR"); return K(true); }
-      note("cond", `${c.op} variable_set`, "T1", "page/if variable compare on the enum code");
+      if (not && a.length > 1) { noteCondition(c, "not variable_set(multi)", "T2-dropped", "NOT of several vars is an OR"); return K(true); }
+      noteCondition(c, `${c.op} variable_set`, "T1", "page/if variable compare on the enum code");
       return a.map((p) => {
         const i = p.indexOf(":");
         const k = i < 0 ? p : p.slice(0, i);
@@ -188,35 +320,38 @@ function clauses(c: Cond, m: TuxMap): Clause[] | null {
       });
     }
     case "char_exists":
-      note("cond", `${c.op} char_exists`, "T1-lowered", "local.npc.<slug> presence variable (per-visit reset is T2)");
+      noteCondition(c, `${c.op} char_exists`, "T1-lowered", "local.npc.<slug> presence variable (per-visit reset is T2)");
       return [{ k: "var", id: npcVar(a[0]!), op: not ? "==" : "!=", value: 0 }];
     case "battle_outcome":
-      if (a[1] !== "won") { note("cond", `${c.op} battle_outcome(${a[1]})`, "T3-placeholder", "P1 never loses"); return K(false); }
-      note("cond", `${c.op} battle_outcome`, "T3-placeholder", "switch bo.<opp>.won written by the battle placeholder");
+      if (a[1] !== "won") { noteCondition(c, `${c.op} battle_outcome(${a[1]})`, "T3-placeholder", "P1 never loses"); return K(false); }
+      noteCondition(c, `${c.op} battle_outcome`, "T3-placeholder", "switch bo.<opp>.won written by the battle placeholder");
       return [{ k: "sw", id: `bo.${a[2]}.won`, on: !not }];
     case "battle_outcome_count":
-      note("cond", `${c.op} battle_outcome_count`, "T3-placeholder", "variable boc.<opp>.won counted by the placeholder");
+      noteCondition(c, `${c.op} battle_outcome_count`, "T3-placeholder", "variable boc.<opp>.won counted by the placeholder");
       return [cmpClause(`boc.${a[2]}.won`, "greater_or_equal", Number(a[3]), not)];
     case "char_defeated":
-      note("cond", `${c.op} char_defeated`, "T3-placeholder", "player never defeated in P1; NPC: switch defeated.<slug>");
+      noteCondition(c, `${c.op} char_defeated`, "T3-placeholder", "player never defeated in P1; NPC: switch defeated.<slug>");
       if (a[0] === "player") return K(false);
       return [{ k: "sw", id: `defeated.${a[0]}`, on: !not }];
     case "party_size":
-      if (a[0] !== "player") { note("cond", `${c.op} party_size(npc)`, "T3-placeholder", "NPC parties assumed non-empty"); return K(true); }
-      note("cond", `${c.op} party_size`, "T3-placeholder", "variable sys.party_size kept by add_monster");
+      if (a[0] !== "player") { noteCondition(c, `${c.op} party_size(npc)`, "T3-placeholder", "NPC parties assumed non-empty"); return K(true); }
+      noteCondition(c, `${c.op} party_size`, "T3-placeholder", "variable sys.party_size kept by add_monster");
       return [cmpClause("sys.party_size", a[1]!, Number(a[2]), not)];
     case "has_monster":
-      note("cond", `${c.op} has_monster`, "T3-placeholder", "switch mon.<slug> set by add_monster");
+      noteCondition(c, `${c.op} has_monster`, "T3-placeholder", "switch mon.<slug> set by add_monster");
       return [{ k: "sw", id: `mon.${a[1]}`, on: !not }];
     case "has_item": {
-      if (a[0] !== "player") return K(false);
+      if (a[0] !== "player") {
+        noteCondition(c, `${c.op} has_item(npc)`, "T3-dropped", "NPC inventory is combat-only");
+        return K(false);
+      }
       const count = a[2] && a[3] ? Number(a[3]) + (a[2] === "greater_than" ? 1 : 0) : 1;
-      note("cond", `${c.op} has_item`, a[2] && !["greater_than", "greater_or_equal"].includes(a[2]) ? "T2-dropped" : "T1", "item count >= n");
+      noteCondition(c, `${c.op} has_item`, a[2] && !["greater_than", "greater_or_equal"].includes(a[2]) ? "T2-dropped" : "T1", "item count >= n");
       return [{ k: "item", id: a[1]!, count, has: !not }];
     }
     case "money_is": {
       if (!/^\d+$/.test(a[2]!)) {
-        note("cond", `${c.op} money_is(variable)`, "T2-dropped", "gold comparison uses a variable operand");
+        noteCondition(c, `${c.op} money_is(variable)`, "T2-dropped", "gold comparison uses a variable operand");
         return K(true);
       }
       const n = Number(a[2]);
@@ -227,41 +362,41 @@ function clauses(c: Cond, m: TuxMap): Clause[] | null {
         : op === "less_than" ? n
         : null;
       if (atLeast === null) {
-        note("cond", `${c.op} money_is(${op})`, "T2-dropped", "unsupported gold comparison");
+        noteCondition(c, `${c.op} money_is(${op})`, "T2-dropped", "unsupported gold comparison");
         return K(true);
       }
-      note("cond", `${c.op} money_is`, "T1", "gold >= n");
+      noteCondition(c, `${c.op} money_is`, "T1", "gold >= n");
       const lowerBound = op === "greater_than" || op === "greater_or_equal";
       return [{ k: "gold", amount: atLeast, has: lowerBound ? !not : not }];
     }
     case "tracker":
-      note("cond", `${c.op} tracker`, "T1", "switch tracker.<map> set by add_tracker");
+      noteCondition(c, `${c.op} tracker`, "T1", "switch tracker.<map> set by add_tracker");
       return [{ k: "sw", id: `tracker.${a[1]}`, on: !not }];
     case "current_state":
-      note("cond", `${c.op} current_state`, "T4-dropped", "WorldState is the only overworld state");
+      noteCondition(c, `${c.op} current_state`, "T1-lowered", "folded against the P1 WorldState-only runtime");
       return K(a[0]!.split(":").includes("WorldState"));
     case "location_inside":
-      note("cond", `${c.op} location_inside`, "T1-lowered", "static map property, folded at import");
+      noteCondition(c, `${c.op} location_inside`, "T1", "static map property, folded at import");
       return K(m.props.inside === "true");
     case "location_type":
-      note("cond", `${c.op} location_type`, "T1-lowered", "static map property, folded at import");
+      noteCondition(c, `${c.op} location_type`, "T1", "static map property, folded at import");
       return K(a[0]!.split(":").includes(m.props.map_type ?? "notype"));
     case "time_is":
-      note("cond", `${c.op} time_is`, "T2-dropped", "no clock in P1: fixed daytime");
+      noteCondition(c, `${c.op} time_is`, "T1-lowered", "no clock in P1: folded against fixed daytime");
       if (a[0] === "stage_of_day") return K(a[1] === "equals" ? a[2] === "morning" : a[2] !== "morning");
       if (a[0] === "daytime") return K(a[1] === "equals" ? a[2] === "true" : a[2] !== "true");
       return K(false);
     case "music_playing":
-      note("cond", `${c.op} music_playing`, "T4-dropped", "no music in P1");
+      noteCondition(c, `${c.op} music_playing`, "T4-dropped", "no music in P1");
       return K(false);
     case "environment_is":
-      note("cond", `${c.op} environment_is`, "T3-dropped", "battle backdrop only");
+      noteCondition(c, `${c.op} environment_is`, "T3-dropped", "battle backdrop only");
       return K(false);
     case "party_infected":
-      note("cond", `${c.op} party_infected`, "T3-placeholder", "no plague in P1: none=true");
+      noteCondition(c, `${c.op} party_infected`, "T3-placeholder", "no plague in P1: none=true");
       return K(a[2] === "none");
     default:
-      note("cond", `${c.op} ${c.type}`, "T3-dropped", "monster/party/meta state unknown to P1: fixed answer");
+      noteCondition(c, `${c.op} ${c.type}`, "T3-dropped", "monster/party/meta state unknown to P1: fixed answer");
       return K(["cooldown_days"].includes(c.type));
   }
 }
@@ -403,7 +538,7 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
     const isSelf = (slug?: string) => slug !== undefined && slug === ctx.self;
     switch (a.type) {
       case "translated_dialog":
-        note("act", a.type, "T1", "text boxes from en_US .po (layout args ignored)");
+        noteAction(a, a.type, "T1", "text boxes from en_US .po (layout args ignored)");
         out.push(...dialog(g[0]!, ctx.m));
         break;
       case "translated_dialog_choice": case "choice_monster": case "choice_npc": {
@@ -411,8 +546,8 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         const fate: Fate = a.type === "translated_dialog_choice"
           ? (opts.length > 4 ? "T1-lowered" : "T1")
           : "T3-placeholder";
-        note(
-          "act",
+        noteAction(
+          a,
           a.type + (opts.length > 4 ? "(paginated)" : ""),
           fate,
           opts.length > 4 ? "nested choice pages retain every option" : "choices -> enum code",
@@ -421,7 +556,7 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         break;
       }
       case "set_variable":
-        note("act", a.type, "T1", "variable set enum code");
+        noteAction(a, a.type, "T1", "variable set enum code");
         for (const p of g) {
           const j = p.indexOf(":");
           const k = j < 0 ? p : p.slice(0, j);
@@ -429,11 +564,11 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         }
         break;
       case "clear_variable":
-        note("act", a.type, "T1", "variable set 0");
+        noteAction(a, a.type, "T1", "variable set 0");
         for (const p of g) out.push({ op: "variable", id: varId(p), set: { op: "set", value: 0 } });
         break;
       case "random_integer":
-        note("act", a.type, "T1", "variable random integer");
+        noteAction(a, a.type, "T1", "variable random integer");
         out.push({
           op: "variable",
           id: varId(g[0]!),
@@ -444,7 +579,7 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         const codes = g[1]!.split(":")
           .map((value) => code(g[0]!, value))
           .sort((a, b) => a - b);
-        note("act", a.type, "T1", "variable random enum code");
+        noteAction(a, a.type, "T1", "variable random enum code");
         out.push({
           op: "variable",
           id: varId(g[0]!),
@@ -453,84 +588,87 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         break;
       }
       case "wait":
-        note("act", a.type, "T1", "wait seconds");
+        noteAction(a, a.type, "T1", "wait seconds");
         if (Number(g[0]) > 0) out.push({ op: "wait", seconds: Math.min(30, Number(g[0])) });
         break;
       case "screen_transition":
-        note("act", a.type, "T1-lowered", "fade out+in -> wait 2t (visual fade is T2)");
+        noteAction(a, a.type, "T1-lowered", "fade out+in -> wait 2t (visual fade is T2)");
         out.push({ op: "wait", seconds: Math.min(30, 2 * Number(g[0] ?? 0.3)) });
         break;
       case "play_sound":
-        note("act", a.type, "T1", "se cue");
+        noteAction(a, a.type, "T1", "se cue");
         out.push({ op: "se", name: g[0]!.toLowerCase().replace(/[^a-z0-9_-]/g, "_") });
         break;
       case "add_item": {
-        if (g[2] && g[2] !== "player") { note("act", "add_item(npc)", "T3-dropped", "NPC bags are combat-only"); break; }
+        if (g[2] && g[2] !== "player") { noteAction(a, "add_item(npc)", "T3-dropped", "NPC bags are combat-only"); break; }
         const q = g[1] ? Number(g[1]) : 1;
-        if (!q) break;
-        note("act", a.type, "T1", "item add/sub");
+        if (!q) { noteAction(a, "add_item(zero)", "T4-dropped", "zero quantity is a no-op"); break; }
+        noteAction(a, a.type, "T1", "item add/sub");
         items.set(g[0]!, { id: g[0]!, name: (po.get(g[0]!) ?? g[0]!).slice(0, 24), sprite: "tux.0" });
         out.push({ op: "item", item: g[0]!, set: q > 0 ? "add" : "sub", count: Math.min(99, Math.abs(q)) });
         break;
       }
       case "modify_money":
-        if (g[0] !== "player" || !g[1]) { note("act", "modify_money(var/npc)", "T2-dropped", "amount from a variable"); break; }
-        note("act", a.type, "T1", "gold add/sub");
+        if (g[0] !== "player" || !g[1]) { noteAction(a, "modify_money(var/npc)", "T2-dropped", "amount from a variable"); break; }
+        noteAction(a, a.type, "T1", "gold add/sub");
         out.push({ op: "gold", set: Number(g[1]) >= 0 ? "add" : "sub", amount: Math.abs(Number(g[1])) });
         break;
       case "add_tracker":
-        note("act", a.type, "T1-lowered", "switch tracker.<map>");
+        noteAction(a, a.type, "T1-lowered", "switch tracker.<map>");
         out.push({ op: "switch", id: `tracker.${g[1]}`, value: true });
         break;
       case "create_npc":
-        note("act", a.type, "T1-lowered", "local.npc.<slug> = 1 (spawn position other than the event's is T2 place)");
+        noteAction(a, a.type, "T1-lowered", "local.npc.<slug> = 1 (spawn position other than the event's is T2 place)");
         out.push({ op: "variable", id: npcVar(g[0]!), set: { op: "set", value: 1 } });
         break;
       case "remove_npc":
-        note("act", a.type, "T1-lowered", "local.npc.<slug> = 0");
+        noteAction(a, a.type, "T1-lowered", "local.npc.<slug> = 0");
         out.push({ op: "variable", id: npcVar(g[0]!), set: { op: "set", value: 0 } });
         break;
       case "lock_controls": case "unlock_controls": case "char_stop":
-        note("act", a.type, "T1-lowered", "blocking fibers already freeze the player (cross-event locks are T2)");
+        noteAction(a, a.type, "T1-lowered", "blocking fibers already freeze the player (cross-event locks are T2)");
         break;
       case "char_face": {
         const [who, dir] = [g[0]!, g[1]!];
-        if (!DIRS.has(dir)) { note("act", "char_face(toward char)", "T2-dropped", "needs turnToward step"); break; }
+        if (!DIRS.has(dir)) { noteAction(a, "char_face(toward char)", "T2-dropped", "needs turnToward step"); break; }
         if (who === "player" || isSelf(who)) {
-          note("act", a.type, "T1", `moveRoute ${who === "player" ? "player" : "this"} face`);
+          noteAction(a, a.type, "T1-lowered", `moveRoute ${who === "player" ? "player" : "this"} face`);
           out.push({ op: "moveRoute", target: who === "player" ? "player" : "this", wait: false, route: { steps: [FACE[dir]!], repeat: false, skippable: true } });
-        } else note("act", "char_face(other npc)", "T2-dropped", "moveRoute target must be an event id");
+        } else noteAction(a, "char_face(other npc)", "T2-dropped", "moveRoute target must be an event id");
         break;
       }
       case "char_move": {
         const who = g[0]!;
-        if (who !== "player" && !isSelf(who)) { note("act", "char_move(other npc)", "T2-dropped", "moveRoute target must be an event id"); break; }
+        if (who !== "player" && !isSelf(who)) { noteAction(a, "char_move(other npc)", "T2-dropped", "moveRoute target must be an event id"); break; }
         const steps: MoveStep[] = [];
         for (const mv of g.slice(1)) {
           const [d, n] = mv.trim().split(/\s+/);
           for (let k = 0; k < Number(n ?? 1); k++) steps.push(MOVE[d!]!);
         }
-        note("act", a.type, "T1", "moveRoute steps");
+        noteAction(a, a.type, "T1-lowered", "moveRoute steps");
         out.push({ op: "moveRoute", target: who === "player" ? "player" : "this", wait: true, route: { steps, repeat: false, skippable: false } });
         break;
       }
       case "transition_teleport": {
-        if (g[0] !== "player") { note("act", "transition_teleport(npc)", "T2-dropped", "only the player transfers"); break; }
+        if (g[0] !== "player") { noteAction(a, "transition_teleport(npc)", "T2-dropped", "only the player transfers"); break; }
         // Tuxemon keeps running the actions after a teleport in the same
         // frame; the kit's transfer ends the page. Hoist trailing instants,
         // fold a trailing `char_face player,<dir>` into the transfer's dir.
         let dir: Dir | "keep" = "keep";
         const hoisted: Rule[] = [];
         for (const b of acts.slice(i + 1)) {
-          if (b.type === "char_face" && b.args[0] === "player" && DIRS.has(b.args[1]!)) dir = b.args[1] as Dir;
+          if (b.type === "char_face" && b.args[0] === "player" && DIRS.has(b.args[1]!)) {
+            dir = b.args[1] as Dir;
+            noteAction(b, "char_face(after teleport)", "T1", "folded into transfer direction");
+          }
           else if (INSTANT.has(b.type)) hoisted.push(b);
-          else note("act", `${b.type}(after teleport)`, "T4-dropped", "runs on the old map during the fade");
+          else noteAction(b, `${b.type}(after teleport)`, "T4-dropped", "runs on the old map during the fade");
         }
         out.push(...convertActions(hoisted, ctx));
         const map = g[1]!.replace(/\.tmx$/, "");
         const target = allMaps.get(map);
         if (!target) {
-          note("act", `${a.type}(missing map)`, "T4-dropped", `unknown target ${map}`);
+          noteAction(a, `${a.type}(missing map)`, "T4-dropped", `unknown target ${map}`);
           return out;
         }
         const requested = { x: Number(g[2]), y: Number(g[3]) };
@@ -538,15 +676,15 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         const y = Math.max(0, Math.min(target.height - 1, requested.y));
         if (x !== requested.x || y !== requested.y) {
           transferRepairs.push({ sourceMap: ctx.m.slug, targetMap: map, requested, emitted: { x, y } });
-          note("act", `${a.type}(clamped)`, "T1-lowered", "upstream landing point clamped into target bounds");
+          noteAction(a, `${a.type}(clamped)`, "T1-lowered", "upstream landing point clamped into target bounds");
         } else {
-          note("act", a.type, "T1", "transfer (terminal; dir from trailing char_face)");
+          noteAction(a, a.type, "T1", "transfer (terminal; dir from trailing char_face)");
         }
         out.push({ op: "transfer", map, x, y, dir, fade: Math.min(2, Number(g[4] ?? 0.3)) });
         return out;
       }
       case "load_yaml":
-        note("act", a.type, "T1-lowered", "import-time events gated until this action runs");
+        noteAction(a, a.type, "T1-lowered", "import-time events gated until this action runs");
         out.push({
           op: "variable",
           id: varId(`__loaded_yaml.${ctx.m.slug}.${g[0]}`),
@@ -554,7 +692,7 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         });
         break;
       case "remove_collision":
-        note("act", a.type, "T1-lowered", "keyed collision becomes a variable-gated blocking event");
+        noteAction(a, a.type, "T1-lowered", "keyed collision becomes a variable-gated blocking event");
         out.push({
           op: "variable",
           id: collisionVar(ctx.m.slug, g[0]!),
@@ -563,36 +701,36 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         break;
       case "start_battle": case "start_double_battle": {
         const opp = g[0] === "player" ? g[1]! : g[0]!;
-        note("act", a.type, "T3-placeholder", "inline placeholder: text + outcome writes");
+        noteAction(a, a.type, "T3-placeholder", "inline placeholder: text + outcome writes");
         out.push(...battle(opp));
         break;
       }
       case "char_talk": {
         const line = npcDb.get(g[0]!)?.speech?.profile?.default?.[g[1]!];
         const key = Array.isArray(line) ? line[0] : line;
-        if (!key) { note("act", "char_talk(no line)", "T4-dropped", "profile has no such field"); break; }
-        note("act", a.type, "T1-lowered", "text of the NPC's dialogue-profile msgid");
+        if (!key) { noteAction(a, "char_talk(no line)", "T4-dropped", "profile has no such field"); break; }
+        noteAction(a, a.type, "T1", "text of the NPC's dialogue-profile msgid");
         out.push(...dialog(key, ctx.m));
         break;
       }
       case "add_monster": {
-        if (g[2] && g[2] !== "player") { note("act", "add_monster(npc)", "T3-dropped", "trainer teams are P2"); break; }
-        note("act", a.type, "T3-placeholder", "sys.party_size += 1, switch mon.<slug>");
+        if (g[2] && g[2] !== "player") { noteAction(a, "add_monster(npc)", "T3-dropped", "trainer teams are P2"); break; }
+        noteAction(a, a.type, "T3-placeholder", "sys.party_size += 1, switch mon.<slug>");
         out.push({ op: "variable", id: "sys.party_size", set: { op: "add", value: 1 } });
         out.push({ op: "switch", id: `mon.${g[0]}`, value: true });
         break;
       }
       case "random_monster":
         if (g[1]) {
-          note("act", "random_monster(npc)", "T3-dropped", "trainer teams are P2");
+          noteAction(a, "random_monster(npc)", "T3-dropped", "trainer teams are P2");
         } else {
-          note("act", a.type, "T3-placeholder", "sys.party_size += 1");
+          noteAction(a, a.type, "T3-placeholder", "sys.party_size += 1");
           out.push({ op: "variable", id: "sys.party_size", set: { op: "add", value: 1 } });
           out.push({ op: "switch", id: "mon.random", value: true });
         }
         break;
       case "remove_monster":
-        note("act", a.type, "T3-placeholder", "sys.party_size -= 1 when non-empty");
+        noteAction(a, a.type, "T3-placeholder", "sys.party_size -= 1 when non-empty");
         out.push({
           op: "if",
           if: { kind: "variable", id: "sys.party_size", op: ">=", value: 1 },
@@ -600,29 +738,29 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         });
         break;
       case "wild_encounter":
-        note("act", a.type, "T3-placeholder", "scripted wild battle auto-wins in P1");
+        noteAction(a, a.type, "T3-placeholder", "scripted wild battle auto-wins in P1");
         out.push(...battle(g[0]!));
         break;
       case "random_encounter":
-        note("act", a.type, "T3-placeholder", "intentionally silent in P1");
+        noteAction(a, a.type, "T3-placeholder", "intentionally silent in P1");
         break;
       case "pathfind": case "pathfind_to_char": case "char_wander": case "char_speed": case "char_run":
       case "set_facing_mode": case "char_position":
-        note("act", a.type, "T2-dropped", "runtime pathfinding / other-event routes / NPC motion props");
+        noteAction(a, a.type, "T2-dropped", "runtime pathfinding / other-event routes / NPC motion props");
         break;
       case "play_music": case "fadeout_music":
-        note("act", a.type, "T2-dropped", "bgm hook (P1: silent)");
+        noteAction(a, a.type, "T2-dropped", "bgm hook (P1: silent)");
         break;
       case "rename_player":
-        note("act", a.type, "T2-dropped", "name entry (P1: fixed name)");
+        noteAction(a, a.type, "T2-dropped", "name entry (P1: fixed name)");
         break;
       case "set_environment": case "set_monster_health": case "set_monster_status": case "set_teleport_faint":
       case "set_monster_attribute": case "open_journal": case "access_pc":
       case "get_player_monster": case "set_bill": case "format_variable":
-        note("act", a.type, "T3-dropped", "monster/combat subsystem (P2)");
+        noteAction(a, a.type, "T3-dropped", "monster/combat subsystem (P2)");
         break;
       default:
-        note("act", a.type, "T4-dropped", "presentation / meta");
+        noteAction(a, a.type, "T4-dropped", "presentation / meta");
     }
   }
   return out;
@@ -665,106 +803,143 @@ function convertMap(m: TuxMap): { map: MapDef; sprites: Record<string, SpriteDef
   }
 
   for (const e of m.events) {
-    const cls0 = e.conds.map((c) => clauses(c, m));
-    const cls: Clause[] = cls0.filter((x): x is Clause[] => x !== null).flat();
-    if (cls.some((c) => c.k === "const" && !c.value)) { note("trigger", "never-true guard", "T4-dropped", "a fixed-false clause (music/env/time/...) gates it"); continue; }
-    const live = cls.filter((c) => c.k !== "const");
-    for (const b of e.behavs) note("behav", b.type, "structural", "talk -> NPC action page");
-    const k = triggerClass(e);
-
-    // spawn: guard + create_npc -> a parallel page flipping local.npc.<slug>
-    if (k === "spawn") {
-      for (const a of e.acts) {
-        if (a.type === "char_face" && npcs.has(a.args[0]!) && DIRS.has(a.args[1]!)) npcOf(a.args[0]!).face = a.args[1];
-        if (a.type === "char_wander" && npcs.has(a.args[0]!)) npcOf(a.args[0]!).wander = true;
-      }
-      const cmds = convertActions(e.acts.filter((a) => a.type !== "char_face" && a.type !== "char_wander"), { m });
-      const { cond, rest } = pageCondition(live);
-      events.push({ id: nextId(e.name), name: `${e.name} (spawn guard)`, x: e.x, y: e.y, pages: [{ trigger: "parallel", condition: cond, sprite: null, commands: guard(rest, cmds) }] });
-      note("trigger", "spawn", "T1-lowered", "parallel page: guard -> local.npc.<slug> = 1");
-      continue;
-    }
-
-    // talk: fold into the NPC's action page
-    const talk = e.behavs.find((b) => b.type === "talk");
-    if (talk) {
-      const agg = npcOf(talk.args[0]!);
-      agg.talks.push({ cls: live, cmds: convertActions(e.acts, { m, self: talk.args[0] }) });
-      note("trigger", "talk", "T1", "NPC event action page (if-chain over talk guards)");
-      continue;
-    }
-
-    const cmds = convertActions(e.acts, { m });
-    if (!cmds.length) { note("trigger", "no-op after conversion", "T4-dropped", "every action dropped"); continue; }
-    const cells: [number, number][] = [];
-    for (let dy = 0; dy < Math.max(1, e.h); dy++) {
-      for (let dx = 0; dx < Math.max(1, e.w); dx++) {
-        const x = e.x + dx;
-        const y = e.y + dy;
-        if (x >= 0 && y >= 0 && x < m.width && y < m.height) cells.push([x, y]);
-      }
-    }
-
-    if (k.startsWith("touch") || k.startsWith("action")) {
-      const trigger = k.startsWith("touch") ? "playerTouch" : "action";
-      if (e.conds.some((c) => c.type === "char_facing")) note("cond", "is char_facing(player)", "T2-dropped", "no facing filter on triggers in v1");
-      if (!cells.length) { note("trigger", `${k}(outside map)`, "T4-dropped", "source trigger area is outside map bounds"); continue; }
-      if (cells.length > AREA_CELL_CAP) {
-        if (!hasBlocking(cmds) && e.acts.some((action) => action.type === "add_tracker")) {
-          const { cond, rest } = pageCondition(live);
-          events.push({
-            id: nextId(e.name),
-            name: `${e.name} (whole-map lowering)`,
-            x: cells[0]![0],
-            y: cells[0]![1],
-            pages: [{ trigger: "parallel", condition: cond, sprite: null, commands: guard(rest, cmds) }],
-          });
-          note("trigger", `${k}(whole-map tracker)`, "T1-lowered", "parallel visit tracker avoids expanding the full map");
-        } else {
-          note("trigger", `${k}(area>${AREA_CELL_CAP})`, "T2-dropped", "needs event areas");
-        }
+    const eventCoverage = new EventCoverage(e);
+    activeCoverage = eventCoverage;
+    try {
+      const cls0 = e.conds.map((c) => clauses(c, m));
+      const cls: Clause[] = cls0.filter((x): x is Clause[] => x !== null).flat();
+      if (cls.some((c) => c.k === "const" && !c.value)) {
+        const reason = "fixed-false guard prevents the source event from starting";
+        eventCoverage.dropAll(reason);
+        note("trigger", "never-true guard", "T4-dropped", reason);
         continue;
       }
-      const base = nextId(e.name);
-      cells.forEach(([x, y], i) => {
-        const key = `${trigger}|${x},${y}`;
-        const list = cellPages.get(key) ?? cellPages.set(key, []).get(key)!;
-        list.push({ id: cells.length > 1 ? `${base}_${i}` : base, name: e.name, x, y, trigger, cls: live, cmds });
-      });
-      note("trigger", k, cells.length > 1 ? "T1-lowered" : "T1", cells.length > 1 ? "area expanded to one event per cell" : trigger);
-      continue;
-    }
+      const live = cls.filter((c) => c.k !== "const");
+      for (const b of e.behavs) note("behav", b.type, "structural", "talk -> NPC action page");
+      const k = triggerClass(e);
 
-    // pure guards (and init objects)
-    const blocking = hasBlocking(cmds);
-    const body = e.kind === "init" ? [...cmds, { op: "erase" } as Command] : cmds;
-    if (!live.length) {
-      events.push({ id: nextId(e.name), name: e.name, x: e.x, y: e.y, pages: [{ trigger: blocking ? "autorun" : "parallel", sprite: null, commands: body }] });
-    } else if (!blocking) {
-      const { cond, rest } = pageCondition(live);
-      events.push({ id: nextId(e.name), name: e.name, x: e.x, y: e.y, pages: [{ trigger: "parallel", condition: cond, sprite: null, commands: guard(rest, body) }] });
-    } else {
-      const { cond, rest } = pageCondition(live);
-      const id = nextId(e.name);
-      if (!rest.length) {
-        events.push({ id, name: e.name, x: e.x, y: e.y, pages: [{ trigger: "autorun", condition: cond, sprite: null, commands: body }] });
-      } else {
-        // derived switch: a parallel evaluator keeps c.<id> == AND(clauses)
-        const sw = `c.${m.slug}.${id}`;
-        events.push({
-          id: `${id}_eval`, name: `${e.name} (guard)`, x: e.x, y: e.y,
-          pages: [{ trigger: "parallel", sprite: null, commands: [{ op: "switch", id: sw, value: false }, ...guard(live, [{ op: "switch", id: sw, value: true }])] }],
-        });
-        // The evaluator lags the state by up to two frames (a parallel page
-        // restarts one frame after it ends): the autorun therefore drops the
-        // switch first and re-checks the live guard before its body, so a
-        // stale switch can neither re-run a finished event nor run one whose
-        // guard just failed.
-        events.push({ id, name: e.name, x: e.x, y: e.y, pages: [{ trigger: "autorun", condition: { switch: sw }, sprite: null, commands: [{ op: "switch", id: sw, value: false }, ...guard(live, body)] }] });
-        note("trigger", "guard(compound)", "T1-lowered", "derived switch evaluator (T2 condition.all removes it)");
+      // spawn: guard + create_npc -> a parallel page flipping local.npc.<slug>
+      if (k === "spawn") {
+        for (const a of e.acts) {
+          if (a.type === "char_face") {
+            if (npcs.has(a.args[0]!) && DIRS.has(a.args[1]!)) {
+              npcOf(a.args[0]!).face = a.args[1];
+              noteAction(a, a.type, "T1-lowered", "spawn facing becomes the NPC page route");
+            } else {
+              noteAction(a, "char_face(spawn unsupported)", "T2-dropped", "spawn target or direction is unavailable");
+            }
+          }
+          if (a.type === "char_wander") {
+            if (npcs.has(a.args[0]!)) {
+              npcOf(a.args[0]!).wander = true;
+              noteAction(a, a.type, "T1-lowered", "NPC page uses random movement; frequency/bounds are omitted");
+            } else {
+              noteAction(a, "char_wander(missing npc)", "T2-dropped", "spawn target is unavailable");
+            }
+          }
+        }
+        const cmds = convertActions(e.acts.filter((a) => a.type !== "char_face" && a.type !== "char_wander"), { m });
+        const { cond, rest } = pageCondition(live);
+        events.push({ id: nextId(e.name), name: `${e.name} (spawn guard)`, x: e.x, y: e.y, pages: [{ trigger: "parallel", condition: cond, sprite: null, commands: guard(rest, cmds) }] });
+        note("trigger", "spawn", "T1-lowered", "parallel page: guard -> local.npc.<slug> = 1");
+        continue;
       }
+
+      // talk: fold into the NPC's action page
+      const talk = e.behavs.find((b) => b.type === "talk");
+      if (talk) {
+        const agg = npcOf(talk.args[0]!);
+        agg.talks.push({ cls: live, cmds: convertActions(e.acts, { m, self: talk.args[0] }) });
+        note("trigger", "talk", "T1", "NPC event action page (if-chain over talk guards)");
+        continue;
+      }
+
+      const cmds = convertActions(e.acts, { m });
+      if (!cmds.length) {
+        const reason = "every action was removed, so no project event was emitted";
+        eventCoverage.dropAll(reason);
+        note("trigger", "no-op after conversion", "T4-dropped", reason);
+        continue;
+      }
+      const cells: [number, number][] = [];
+      for (let dy = 0; dy < Math.max(1, e.h); dy++) {
+        for (let dx = 0; dx < Math.max(1, e.w); dx++) {
+          const x = e.x + dx;
+          const y = e.y + dy;
+          if (x >= 0 && y >= 0 && x < m.width && y < m.height) cells.push([x, y]);
+        }
+      }
+
+      if (k.startsWith("touch") || k.startsWith("action")) {
+        const trigger = k.startsWith("touch") ? "playerTouch" : "action";
+        if (!cells.length) {
+          const reason = "source trigger area lies outside the map";
+          eventCoverage.dropAll(reason);
+          note("trigger", `${k}(outside map)`, "T4-dropped", reason);
+          continue;
+        }
+        if (cells.length > AREA_CELL_CAP) {
+          if (!hasBlocking(cmds) && e.acts.some((action) => action.type === "add_tracker")) {
+            const { cond, rest } = pageCondition(live);
+            events.push({
+              id: nextId(e.name),
+              name: `${e.name} (whole-map lowering)`,
+              x: cells[0]![0],
+              y: cells[0]![1],
+              pages: [{ trigger: "parallel", condition: cond, sprite: null, commands: guard(rest, cmds) }],
+            });
+            note("trigger", `${k}(whole-map tracker)`, "T1-lowered", "parallel visit tracker avoids expanding the full map");
+          } else {
+            const reason = `source trigger area exceeds the v1 ${AREA_CELL_CAP}-cell expansion cap`;
+            eventCoverage.dropAll(reason);
+            note("trigger", `${k}(area>${AREA_CELL_CAP})`, "T2-dropped", reason);
+          }
+          continue;
+        }
+        const base = nextId(e.name);
+        cells.forEach(([x, y], i) => {
+          const key = `${trigger}|${x},${y}`;
+          const list = cellPages.get(key) ?? cellPages.set(key, []).get(key)!;
+          list.push({ id: cells.length > 1 ? `${base}_${i}` : base, name: e.name, x, y, trigger, cls: live, cmds });
+        });
+        note("trigger", k, cells.length > 1 ? "T1-lowered" : "T1", cells.length > 1 ? "area expanded to one event per cell" : trigger);
+        continue;
+      }
+
+      // pure guards (and init objects)
+      const blocking = hasBlocking(cmds);
+      const body = e.kind === "init" ? [...cmds, { op: "erase" } as Command] : cmds;
+      if (!live.length) {
+        events.push({ id: nextId(e.name), name: e.name, x: e.x, y: e.y, pages: [{ trigger: blocking ? "autorun" : "parallel", sprite: null, commands: body }] });
+      } else if (!blocking) {
+        const { cond, rest } = pageCondition(live);
+        events.push({ id: nextId(e.name), name: e.name, x: e.x, y: e.y, pages: [{ trigger: "parallel", condition: cond, sprite: null, commands: guard(rest, body) }] });
+      } else {
+        const { cond, rest } = pageCondition(live);
+        const id = nextId(e.name);
+        if (!rest.length) {
+          events.push({ id, name: e.name, x: e.x, y: e.y, pages: [{ trigger: "autorun", condition: cond, sprite: null, commands: body }] });
+        } else {
+          // derived switch: a parallel evaluator keeps c.<id> == AND(clauses)
+          const sw = `c.${m.slug}.${id}`;
+          events.push({
+            id: `${id}_eval`, name: `${e.name} (guard)`, x: e.x, y: e.y,
+            pages: [{ trigger: "parallel", sprite: null, commands: [{ op: "switch", id: sw, value: false }, ...guard(live, [{ op: "switch", id: sw, value: true }])] }],
+          });
+          // The evaluator lags the state by up to two frames (a parallel page
+          // restarts one frame after it ends): the autorun therefore drops the
+          // switch first and re-checks the live guard before its body, so a
+          // stale switch can neither re-run a finished event nor run one whose
+          // guard just failed.
+          events.push({ id, name: e.name, x: e.x, y: e.y, pages: [{ trigger: "autorun", condition: { switch: sw }, sprite: null, commands: [{ op: "switch", id: sw, value: false }, ...guard(live, body)] }] });
+          note("trigger", "guard(compound)", "T1-lowered", "derived switch evaluator (T2 condition.all removes it)");
+        }
+      }
+      note("trigger", e.kind === "init" ? "init" : k, "T1", blocking ? "autorun" : "parallel");
+    } finally {
+      conversionCoverage.commit(eventCoverage);
+      activeCoverage = undefined;
     }
-    note("trigger", e.kind === "init" ? "init" : k, "T1", blocking ? "autorun" : "parallel");
   }
 
   // one kit event per (trigger, cell): a lone Tuxemon event keeps its page
@@ -975,6 +1150,7 @@ export function buildProject(want: readonly string[] = DEFAULT_MAPS): ImportBuil
   log.clear();
   items.clear();
   transferRepairs.length = 0;
+  conversionCoverage.reset();
 
   const mapDefs: MapDef[] = [];
   const sprites: Record<string, SpriteDef> = {};
@@ -1048,8 +1224,8 @@ export function buildProject(want: readonly string[] = DEFAULT_MAPS): ImportBuil
   ));
   const schemaErrors = validateSchema(schema, project);
   const rows = [...log.entries()]
-    .map(([k, v]) => ({
-      key: k.split(":").slice(0, 2).join(":"),
+    .map(([, v]) => ({
+      key: v.key,
       fate: v.fate,
       count: v.count,
       note: v.note,
@@ -1080,7 +1256,7 @@ export function buildProject(want: readonly string[] = DEFAULT_MAPS): ImportBuil
       rows,
       transferRepairs: [...transferRepairs],
       transferErrors: transferErrors(project),
-      coverage: buildCoverageReport(),
+      coverage: conversionCoverage.report(),
     },
   };
 }

@@ -18,6 +18,8 @@ export interface Rule {
   type: string;
   args: string[];
   raw: string;
+  /** Importer-created guard; excluded from the source-file coverage view. */
+  synthetic?: boolean;
 }
 export interface Cond extends Rule {
   op: "is" | "not";
@@ -216,7 +218,10 @@ export function loadAllMaps(): TuxMap[] {
         events.push({
           ...event,
           conds: [
-            parseCondition(`is variable_set __loaded_yaml.${slug}.${file}:yes`),
+            {
+              ...parseCondition(`is variable_set __loaded_yaml.${slug}.${file}:yes`),
+              synthetic: true,
+            },
             ...event.conds,
           ],
         });

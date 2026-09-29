@@ -12,14 +12,22 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   expect(result.project.maps).toHaveLength(263);
   expect(result.report.schemaErrors).toEqual([]);
   expect(result.report.transferErrors).toEqual([]);
+  expect(result.report.coverage).toMatchObject({
+    view: "source-file",
+    accounting: "conversion-path",
+    sourceEvents: 4_578,
+  });
   expect(result.report.coverage.actions.summary).toMatchObject({
     types: 98,
     uses: 13_617,
-    native: 5_448,
-    nativePercent: 40.0,
+    native: 6_167,
+    degraded: 2_822,
+    placeholder: 433,
+    dropped: 4_195,
+    nativePercent: 45.3,
     tier1: {
-      uses: 6_244,
-      percent: 45.85,
+      uses: 6_104,
+      percent: 44.83,
       requiredUses: 6_246,
       meetsBaseline: false,
     },
@@ -27,14 +35,47 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   expect(result.report.coverage.conditions.summary).toMatchObject({
     types: 64,
     uses: 8_663,
-    native: 4_589,
+    native: 3_530,
+    degraded: 1_238,
+    placeholder: 850,
+    dropped: 3_045,
     tier1: {
-      uses: 4_589,
-      percent: 52.97,
+      uses: 3_530,
+      percent: 40.75,
       requiredUses: 4_591,
       meetsBaseline: false,
     },
   });
+  // Mutation guard: these conversion-derived counts fail if the recorder's
+  // disposition mapping is changed to return `dropped` for every branch.
+  const coverageRows = [
+    ...result.report.coverage.actions.rows,
+    ...result.report.coverage.conditions.rows,
+  ];
+  expect(coverageRows.find((row) => row.type === "char_face")).toMatchObject({
+    native: 870,
+    degraded: 440,
+    dropped: 717,
+  });
+  expect(coverageRows.find((row) => row.type === "char_move")).toMatchObject({
+    degraded: 9,
+    dropped: 68,
+  });
+  expect(coverageRows.find((row) => row.type === "is char_facing")).toMatchObject({
+    native: 0,
+    degraded: 0,
+    dropped: 1_008,
+  });
+  expect(coverageRows.find((row) => row.type === "set_monster_health")).toMatchObject({
+    placeholder: 0,
+    dropped: 83,
+  });
+  expect(coverageRows.find((row) => row.type === "set_monster_status")).toMatchObject({
+    placeholder: 0,
+    dropped: 83,
+  });
+  expect(new Set(result.report.rows.map((row) => row.key)).size).toBe(result.report.rows.length);
+  expect(result.report.rows.some((row) => row.key === "trigger:touch:facing:T1-lowered")).toBeTrue();
   expect(Object.keys(result.variables)).toHaveLength(493);
   expect(Object.values(result.variables).filter((values) => values.length === 0)).toHaveLength(19);
   expect(
