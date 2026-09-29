@@ -12,6 +12,28 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   expect(result.project.maps).toHaveLength(263);
   expect(result.report.schemaErrors).toEqual([]);
   expect(result.report.transferErrors).toEqual([]);
+  expect(result.report.coverage.actions.summary).toMatchObject({
+    types: 98,
+    uses: 13_617,
+    tier1: { uses: 6_246, percent: 45.9, meetsBaseline: true },
+  });
+  expect(result.report.coverage.conditions.summary).toMatchObject({
+    types: 64,
+    uses: 8_663,
+    tier1: { uses: 4_591, percent: 53.0, meetsBaseline: true },
+  });
+  expect(
+    result.report.coverage.actions.summary.native +
+    result.report.coverage.actions.summary.degraded +
+    result.report.coverage.actions.summary.placeholder +
+    result.report.coverage.actions.summary.dropped,
+  ).toBe(13_617);
+  expect(
+    result.report.coverage.conditions.summary.native +
+    result.report.coverage.conditions.summary.degraded +
+    result.report.coverage.conditions.summary.placeholder +
+    result.report.coverage.conditions.summary.dropped,
+  ).toBe(8_663);
 
   const maps = new Map(result.project.maps.map((map) => [map.id, map]));
   let transfers = 0;

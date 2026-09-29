@@ -1,0 +1,2008 @@
+{
+ "1stbattle": [
+  "done"
+ ],
+ "2ndbattle": [
+  "done"
+ ],
+ "37707_female": [
+  "spoke"
+ ],
+ "37707_male": [
+  "spoke"
+ ],
+ "37707_sign": [
+  "read"
+ ],
+ "37707_tower": [
+  "activated",
+  "entered",
+  "visited"
+ ],
+ "3rdbattle": [
+  "done"
+ ],
+ "__loaded_yaml.eclipse_crystal_center.spyder_cathedral": [
+  "yes"
+ ],
+ "__loaded_yaml.eclipse_obsidian_center.spyder_cathedral": [
+  "yes"
+ ],
+ "__loaded_yaml.spyder_candy_center.spyder_cathedral": [
+  "yes"
+ ],
+ "__loaded_yaml.spyder_flower_center.spyder_cathedral": [
+  "yes"
+ ],
+ "__loaded_yaml.spyder_healing_center.spyder_cathedral": [
+  "yes"
+ ],
+ "__loaded_yaml.spyder_leather_center.spyder_cathedral": [
+  "yes"
+ ],
+ "__loaded_yaml.spyder_timber_center.spyder_cathedral": [
+  "yes"
+ ],
+ "acolyte1": [
+  "done"
+ ],
+ "acolyte2battledone": [
+  "maybe",
+  "yes"
+ ],
+ "acolyte3": [
+  "gone"
+ ],
+ "aeble_talk": [
+  "1",
+  "2"
+ ],
+ "after_gemuar": [
+  "yes"
+ ],
+ "agnitechosen": [
+  "no",
+  "yes"
+ ],
+ "all_three_choice": [
+  "no",
+  "yes"
+ ],
+ "allergicbee": [
+  "no",
+  "yes"
+ ],
+ "allthree": [
+  "andfour",
+  "done"
+ ],
+ "announce_trials": [
+  "1",
+  "2",
+  "3",
+  "4"
+ ],
+ "announcetwo": [
+  "done"
+ ],
+ "anthem_started": [
+  "yes"
+ ],
+ "areyousure": [
+  "no",
+  "none",
+  "yes"
+ ],
+ "artshop_billie": [
+  "yes"
+ ],
+ "backhome": [
+  "no"
+ ],
+ "badge": [
+  "yes"
+ ],
+ "barmaid_monsters": [
+  "no",
+  "yes"
+ ],
+ "barmaid_sell_bundle": [
+  "no",
+  "yes"
+ ],
+ "barmaid_starry": [
+  "no",
+  "yes"
+ ],
+ "barmaid_trepidation": [
+  "no",
+  "yes"
+ ],
+ "battle_last_result": [
+  "clear",
+  "draw",
+  "lost",
+  "none",
+  "won"
+ ],
+ "battle_last_trainer": [
+  "2",
+  "acolyte",
+  "blasdoor",
+  "cam",
+  "classic_gym_leader_astra",
+  "classic_gym_leader_bravion",
+  "classic_gym_leader_ferrum",
+  "classic_gym_leader_granite",
+  "classic_gym_leader_marin",
+  "classic_gym_leader_mila",
+  "classic_gym_leader_orion",
+  "classic_gym_leader_pyra",
+  "classic_gym_leader_shade",
+  "classic_gym_leader_sylva",
+  "classic_gym_leader_voltessa",
+  "classic_gym_leader_vyre",
+  "classic_gym_leader_zephra",
+  "cochini",
+  "conifrost",
+  "drokoro",
+  "eclipse_bank_ava",
+  "eclipse_bank_brock",
+  "eclipse_bank_daisy",
+  "eclipse_bank_ethan",
+  "eclipse_bank_kai",
+  "eclipse_bank_lile",
+  "eclipse_bank_lucas",
+  "eclipse_bank_may",
+  "eclipse_bank_raj",
+  "eclipse_lionmountain_adam",
+  "eclipse_lionmountain_alexander",
+  "eclipse_lionmountain_arlene",
+  "eclipse_lionmountain_chhurim",
+  "eclipse_lionmountain_conrad",
+  "eclipse_lionmountain_david",
+  "eclipse_lionmountain_emilio",
+  "eclipse_lionmountain_jacques",
+  "eclipse_lionmountain_kurt",
+  "eclipse_lionmountain_tom",
+  "eclipse_route7_arnaut",
+  "eclipse_route7_conrad",
+  "eclipse_route7_hugh",
+  "eclipse_route7_jacopo",
+  "eclipse_route7_manfred",
+  "eclipse_route7_nino",
+  "eclipse_route7_penitent",
+  "eclipse_route7_pia",
+  "eclipse_route7_sordello",
+  "eclipse_route7_statius",
+  "eclipse_zircon",
+  "garth",
+  "jemuar",
+  "kay_wren",
+  "kernel",
+  "lapinou",
+  "liela",
+  "loch",
+  "omnigrunt",
+  "professor",
+  "sludgehog",
+  "snarlon",
+  "spyder_basement_bobby",
+  "spyder_basement_catholi",
+  "spyder_basement_coralli",
+  "spyder_basement_roger",
+  "spyder_billie",
+  "spyder_citypark_bobette",
+  "spyder_citypark_edith",
+  "spyder_citypark_frances",
+  "spyder_confusedperson",
+  "spyder_cottoncafe_cayden",
+  "spyder_cottontunnel_carlos",
+  "spyder_datacenter_bayliss",
+  "spyder_datacenter_chomsky",
+  "spyder_datacenter_fermi",
+  "spyder_datacenter_lagrange",
+  "spyder_datacenter_onnes",
+  "spyder_dojo_ares",
+  "spyder_dojo_hephastus",
+  "spyder_dojo_hermes",
+  "spyder_dojo_iroh",
+  "spyder_dojo_kataro",
+  "spyder_dojo_orion",
+  "spyder_dojo_saturn",
+  "spyder_dojo_sokka",
+  "spyder_dojo_thri",
+  "spyder_dojo_toph",
+  "spyder_dojo_tu",
+  "spyder_dojo_wan",
+  "spyder_dojo_yangchen",
+  "spyder_dragonscave_benden",
+  "spyder_dragonscave_cailin",
+  "spyder_dragonscave_daenny",
+  "spyder_dragonscave_griffin",
+  "spyder_dragonscave_lessa",
+  "spyder_dragonscave_lucille",
+  "spyder_dragonscave_ray",
+  "spyder_dragonscave_tomas",
+  "spyder_dryadsgrove_aquemini",
+  "spyder_dryadsgrove_ferris",
+  "spyder_dryadsgrove_ignatia",
+  "spyder_dryadsgrove_petra",
+  "spyder_dryadsgrove_sylvia",
+  "spyder_greenwash_aissa",
+  "spyder_greenwash_alex",
+  "spyder_greenwash_broer",
+  "spyder_greenwash_chip",
+  "spyder_greenwash_clarence",
+  "spyder_greenwash_dempsey",
+  "spyder_greenwash_dippel",
+  "spyder_greenwash_gluck",
+  "spyder_greenwash_gregor",
+  "spyder_greenwash_heidenstam",
+  "spyder_greenwash_hunt",
+  "spyder_greenwash_lewie",
+  "spyder_greenwash_lewis",
+  "spyder_greenwash_looten",
+  "spyder_greenwash_louis",
+  "spyder_greenwash_moreau",
+  "spyder_greenwash_morehouse",
+  "spyder_hospital1_aurora",
+  "spyder_hospital1_eleni",
+  "spyder_hospital1_felu",
+  "spyder_hospital1_fring",
+  "spyder_hospital1_liane",
+  "spyder_hospital1_luzia",
+  "spyder_hospital1_rakez",
+  "spyder_hospital1_rhizome",
+  "spyder_hospital1_walt",
+  "spyder_hospital1_zekar",
+  "spyder_leathergym_brad",
+  "spyder_leathergym_chad",
+  "spyder_mansion_gillette",
+  "spyder_mansion_lucy",
+  "spyder_mansion_lyle",
+  "spyder_nimrod_antimony",
+  "spyder_nimrod_archer",
+  "spyder_nimrod_argon",
+  "spyder_nimrod_bowie",
+  "spyder_nimrod_chromerobo",
+  "spyder_nimrod_honour",
+  "spyder_nimrod_justice",
+  "spyder_nimrod_mace",
+  "spyder_nimrod_maverick",
+  "spyder_nimrod_rebel",
+  "spyder_nimrod_thatcher",
+  "spyder_nimrod_tru",
+  "spyder_nimrod_xeon",
+  "spyder_nimrod_zircon",
+  "spyder_omnichannel_beaverbrook",
+  "spyder_omnichannel_bettger",
+  "spyder_omnichannel_byrne",
+  "spyder_omnichannel_carnegie",
+  "spyder_omnichannel_crane",
+  "spyder_omnichannel_dempsey",
+  "spyder_omnichannel_enforcer",
+  "spyder_omnichannel_schwartz",
+  "spyder_omnichannel_strauss",
+  "spyder_omnichannel_tohei",
+  "spyder_omnichannel_william",
+  "spyder_route2_graf",
+  "spyder_route2_marion",
+  "spyder_route2_roddick",
+  "spyder_route3_connor",
+  "spyder_route3_curie",
+  "spyder_route3_novak",
+  "spyder_route3_qqq",
+  "spyder_route3_roxby",
+  "spyder_route3_surat",
+  "spyder_route3_twig",
+  "spyder_route3_wanda",
+  "spyder_route3_weaver",
+  "spyder_route3_zoolander",
+  "spyder_route4_beck",
+  "spyder_route4_marshall",
+  "spyder_route4_rincewind",
+  "spyder_route4_roger",
+  "spyder_route4_rosamund",
+  "spyder_route4_wulf",
+  "spyder_route5_cleo",
+  "spyder_route5_edith",
+  "spyder_route5_goliath",
+  "spyder_route5_hunter",
+  "spyder_route5_sara",
+  "spyder_route5_tryphaena",
+  "spyder_route6_blair",
+  "spyder_route6_frances",
+  "spyder_route6_gunner",
+  "spyder_route6_maxwell",
+  "spyder_route6_mungo",
+  "spyder_route6_orion",
+  "spyder_route6_ping",
+  "spyder_route6_richard",
+  "spyder_route6_rigel",
+  "spyder_routea_connie",
+  "spyder_routea_dagger",
+  "spyder_routea_doris",
+  "spyder_routea_joe",
+  "spyder_routea_koan",
+  "spyder_routea_lexi",
+  "spyder_routea_lotu",
+  "spyder_routea_rosy",
+  "spyder_routea_vince",
+  "spyder_routeb_calypso",
+  "spyder_routeb_cytherea",
+  "spyder_routeb_electra",
+  "spyder_routeb_nephthys",
+  "spyder_routeb_sedna",
+  "spyder_routee_aiolos",
+  "spyder_routee_calliope",
+  "spyder_scoop_alyssa",
+  "spyder_scoop_arachne",
+  "spyder_scoop_berys",
+  "spyder_scoop_donald",
+  "spyder_scoop_lanth",
+  "spyder_scoop_orba",
+  "spyder_scoop_paine",
+  "spyder_scoop_reese",
+  "spyder_scoop_rubid",
+  "spyder_scoop_taggart",
+  "spyder_scoop_turner",
+  "spyder_scoop_weaver",
+  "spyder_searoutec_beech",
+  "spyder_searoutec_carstair",
+  "spyder_searoutec_gil",
+  "spyder_searoutec_leek",
+  "spyder_searoutec_maurice",
+  "spyder_searoutec_more",
+  "spyder_searoutec_nigel",
+  "spyder_searoutec_river",
+  "spyder_searoutec_rutherford",
+  "spyder_searoutec_sandy",
+  "spyder_searoutec_stafford",
+  "spyder_searoutec_wade",
+  "spyder_top_jackson",
+  "spyder_top_mickey",
+  "spyder_top_ricardo",
+  "spyder_top_russell",
+  "spyder_tunnelb_beryll",
+  "spyder_tunnelb_greta",
+  "spyder_tunnelb_iris",
+  "spyder_tunnelb_lute",
+  "spyder_tunnelb_meitner",
+  "spyder_tunnelb_tommy",
+  "spyder_walled_alexander",
+  "spyder_walled_astor",
+  "spyder_walled_augustus",
+  "spyder_walled_carnegie",
+  "spyder_walled_crassus",
+  "spyder_walled_ford",
+  "spyder_walled_fugger",
+  "spyder_walled_girard",
+  "spyder_walled_midas",
+  "spyder_walled_musa",
+  "spyder_walled_osman",
+  "spyder_walled_rufus",
+  "spyder_walled_vanderbilt",
+  "spyder_wayfarer1_bismuth",
+  "spyder_wayfarer1_bravo",
+  "spyder_wayfarer1_james",
+  "spyder_wayfarer1_jessie",
+  "spyder_wayfarer1_morningstar",
+  "spyder_wayfarer1_morton",
+  "spyder_wayfarer1_nightshade",
+  "spyder_wayfarer1_ratcher",
+  "spyder_wayfarer1_victor",
+  "volcoli",
+  "water_outskirts_dude"
+ ],
+ "battle_last_winner": [
+  "player",
+  "spyder_leathergym_brad",
+  "spyder_leathergym_chad",
+  "spyder_nimrod_argon",
+  "spyder_nimrod_zircon"
+ ],
+ "battledone": [
+  "redo",
+  "start",
+  "yes"
+ ],
+ "beeevent": [
+  "done",
+  "end",
+  "start",
+  "stung"
+ ],
+ "beereaction": [
+  "spyder_allergic_mild",
+  "spyder_allergic_severe"
+ ],
+ "beesissue": [
+  "taba_house3_choice1",
+  "taba_house3_choice2"
+ ],
+ "begone": [
+  "gone",
+  "now"
+ ],
+ "billcathedral": [
+  "no",
+  "null",
+  "proceed",
+  "yes"
+ ],
+ "billie_choice": [
+  "bamboon",
+  "bigfin",
+  "budaye",
+  "dollfin",
+  "eruptibus",
+  "grintot",
+  "grintrock",
+  "ignibus",
+  "memnomnom",
+  "miaownolith"
+ ],
+ "billie_grandma": [
+  "done",
+  "no",
+  "yes"
+ ],
+ "billie_tv": [
+  "no",
+  "yes"
+ ],
+ "binary144": [
+  "drokoro",
+  "rhincus",
+  "shammer"
+ ],
+ "binary193": [
+  "baobaraffe",
+  "exclawvate",
+  "statursus"
+ ],
+ "binary77": [
+  "narcileaf",
+  "ruption",
+  "shybulb"
+ ],
+ "blackout_no_monsters": [
+  "false",
+  "true"
+ ],
+ "both_fossils": [
+  "no",
+  "yes"
+ ],
+ "bought_bundle": [
+  "yes"
+ ],
+ "bought_monsters_eyes": [
+  "yes"
+ ],
+ "bought_starry": [
+  "yes"
+ ],
+ "bought_trepidation": [
+  "yes"
+ ],
+ "brad_points": [
+  "0"
+ ],
+ "bumpintomom": [
+  "yes"
+ ],
+ "cady_hastraded": [
+  "yes"
+ ],
+ "cady_willtrade": [
+  "no",
+  "yes"
+ ],
+ "cafe_done": [
+  "yes"
+ ],
+ "cafebattle": [
+  "no",
+  "yes"
+ ],
+ "cammove": [
+  "gone",
+  "now"
+ ],
+ "can_exit_town": [
+  "yes"
+ ],
+ "candy_dante_commiserates": [
+  "yes"
+ ],
+ "candy_tmleafbarrage": [
+  "yes"
+ ],
+ "captainreturns": [
+  "yes"
+ ],
+ "cardilingball": [
+  "yes"
+ ],
+ "cardilingchoice": [
+  "empty",
+  "finished",
+  "no",
+  "yes"
+ ],
+ "catgirl_candy_hastraded": [
+  "yes"
+ ],
+ "catgirl_candy_willtrade": [
+  "no",
+  "yes"
+ ],
+ "cathedral_fee": [
+  "100"
+ ],
+ "cathedral_interest": [
+  "0.1"
+ ],
+ "cathedral_share": [
+  "0.5"
+ ],
+ "cctv_scoop": [
+  "no",
+  "null",
+  "yes"
+ ],
+ "chad_points": [
+  "0"
+ ],
+ "chadvsbrad": [
+  "done",
+  "null"
+ ],
+ "cheat_apex": [
+  "enabled"
+ ],
+ "check_vividactil_morph": [
+  "yes"
+ ],
+ "check_vivipere_morph": [
+  "no",
+  "yes"
+ ],
+ "check_viviphyta_morph": [
+  "yes"
+ ],
+ "check_vivisource_morph": [
+  "yes"
+ ],
+ "check_viviteel_morph": [
+  "yes"
+ ],
+ "check_vivitrans_morph": [
+  "yes"
+ ],
+ "check_vivitron_morph": [
+  "yes"
+ ],
+ "choice_floor": [
+  "0floor",
+  "1floor",
+  "2floor",
+  "no",
+  "null"
+ ],
+ "choice_phase": [
+  "next",
+  "progress",
+  "yes"
+ ],
+ "choicechosen": [
+  "no",
+  "yes"
+ ],
+ "choose": [
+  "chose",
+  "no",
+  "yes"
+ ],
+ "chooses": [
+  "no",
+  "none",
+  "yes"
+ ],
+ "christieknows": [
+  "gone",
+  "nobody",
+  "somebody",
+  "stop"
+ ],
+ "citypark_cd1": [
+  "yes"
+ ],
+ "citypark_cd2": [
+  "yes"
+ ],
+ "citypark_potion1": [
+  "yes"
+ ],
+ "citypark_potion2": [
+  "yes"
+ ],
+ "citypark_restoration": [
+  "yes"
+ ],
+ "cityparkchoice": [
+  "mistaken",
+  "thats_me"
+ ],
+ "close1": [
+  "yes"
+ ],
+ "comeinside": [
+  "done",
+  "dope",
+  "stahp",
+  "yes"
+ ],
+ "completethis": [
+  "now"
+ ],
+ "confiscation_candy": [
+  "yes"
+ ],
+ "confiscation_done": [
+  "yes"
+ ],
+ "confusedchoice": [
+  "no",
+  "yes"
+ ],
+ "conifrost_joined": [
+  "yes"
+ ],
+ "consoleme": [
+  "now"
+ ],
+ "coproblight_choice": [
+  "no",
+  "yes"
+ ],
+ "cottontunnel_candy": [
+  "yes"
+ ],
+ "cottontunnel_cureall": [
+  "yes"
+ ],
+ "cottontunnel_dung": [
+  "yes"
+ ],
+ "cottontunnel_melee": [
+  "yes"
+ ],
+ "cottontunnel_potion": [
+  "yes"
+ ],
+ "cottontunnel_tea": [
+  "yes"
+ ],
+ "cottontunnelbenden": [
+  "yes"
+ ],
+ "curfewz": [
+  "yes"
+ ],
+ "cut_scenes1": [
+  "no",
+  "null",
+  "yes"
+ ],
+ "cut_scenes2": [
+  "no",
+  "null",
+  "yes"
+ ],
+ "dantebin": [
+  "yes"
+ ],
+ "dantefirst": [
+  "yes"
+ ],
+ "datacenterbillie": [
+  "yes"
+ ],
+ "datascreen1": [
+  "yes"
+ ],
+ "datascreen2": [
+  "yes"
+ ],
+ "datascreen3": [
+  "yes"
+ ],
+ "datascreen4": [
+  "yes"
+ ],
+ "datascreen5": [
+  "yes"
+ ],
+ "datascreen6": [
+  "yes"
+ ],
+ "datascreen7": [
+  "yes"
+ ],
+ "dempsey_flashback": [
+  "done",
+  "no",
+  "yes"
+ ],
+ "difficulty": [
+  "beginner",
+  "easy",
+  "expert",
+  "hard",
+  "normal"
+ ],
+ "dojo_stage": [
+  "no_choice"
+ ],
+ "dojobillie": [
+  "yes"
+ ],
+ "dojomagician": [
+  "yes"
+ ],
+ "dojothrichoice": [
+  "yes"
+ ],
+ "dojothrimonster": [
+  "yes"
+ ],
+ "done_with_jeff_opening": [
+  "yes"
+ ],
+ "donewithyou": [
+  "yes"
+ ],
+ "dragonscavebenden2": [
+  "yes"
+ ],
+ "dragonscavedrokoro": [
+  "yes"
+ ],
+ "dragonscavemal": [
+  "yes"
+ ],
+ "dryadsgrovevolcoli": [
+  "yes"
+ ],
+ "eclipse_bank_zircon": [
+  "yes"
+ ],
+ "eclipse_difficulty": [
+  "level_beginner",
+  "level_easy",
+  "level_expert",
+  "level_hard",
+  "level_normal"
+ ],
+ "eclipse_event1": [
+  "yes"
+ ],
+ "eclipse_event10": [
+  "yes"
+ ],
+ "eclipse_event11": [
+  "yes"
+ ],
+ "eclipse_event12": [
+  "yes"
+ ],
+ "eclipse_event13": [
+  "yes"
+ ],
+ "eclipse_event14": [
+  "yes"
+ ],
+ "eclipse_event15": [
+  "yes"
+ ],
+ "eclipse_event2": [
+  "yes"
+ ],
+ "eclipse_event3": [
+  "yes"
+ ],
+ "eclipse_event3_question": [
+  "no",
+  "yes"
+ ],
+ "eclipse_event4": [
+  "yes"
+ ],
+ "eclipse_event4_question": [
+  "no",
+  "yes"
+ ],
+ "eclipse_event5": [
+  "yes"
+ ],
+ "eclipse_event6": [
+  "yes"
+ ],
+ "eclipse_event7": [
+  "yes"
+ ],
+ "eclipse_event8": [
+  "yes"
+ ],
+ "eclipse_event9": [
+  "yes"
+ ],
+ "eclipse_first": [
+  "first_mon"
+ ],
+ "eclipse_rubbish": [
+  "yes"
+ ],
+ "eclipse_waking_up": [
+  "yes"
+ ],
+ "eighthdialog": [
+  "end"
+ ],
+ "elianeoutput": [
+  "antidote_grapes",
+  "cure_festering",
+  "cureall",
+  "none",
+  "potion",
+  "refreshing_slice",
+  "restoration",
+  "tea"
+ ],
+ "elianetalkedtoday": [
+  "no",
+  "yes"
+ ],
+ "endbattleprof": [
+  "yes"
+ ],
+ "enforcers_response": [
+  "done",
+  "no",
+  "yes"
+ ],
+ "faint_set": [
+  "null",
+  "pending"
+ ],
+ "fanatics_in_junkyard": [
+  "true"
+ ],
+ "fanatics_in_junkyard2": [
+  "true"
+ ],
+ "fanatics_in_junkyard3": [
+  "true"
+ ],
+ "fanatics_in_junkyard4": [
+  "true"
+ ],
+ "fanatics_in_junkyard5": [
+  "true"
+ ],
+ "fez_hastraded": [
+  "yes"
+ ],
+ "fez_willtrade": [
+  "no",
+  "yes"
+ ],
+ "fifthdialog": [
+  "end"
+ ],
+ "finishedbattle": [
+  "yes"
+ ],
+ "fire_timber_hastraded": [
+  "yes"
+ ],
+ "fire_timber_willtrade": [
+  "no",
+  "yes"
+ ],
+ "firstbattledone": [
+  "yes"
+ ],
+ "firstfightdue": [
+  "no",
+  "yes"
+ ],
+ "firstfightend": [
+  "no",
+  "yes"
+ ],
+ "firstgo": [
+  "gone",
+  "no",
+  "yes"
+ ],
+ "flashback": [
+  "off",
+  "on"
+ ],
+ "flashback27apr": [
+  "done"
+ ],
+ "florists_cafe": [
+  "done",
+  "no",
+  "yes"
+ ],
+ "flower_talkedpetshop": [
+  "yes"
+ ],
+ "foome": [
+  "ye"
+ ],
+ "fought_fanatics_in_junkyard": [
+  "true"
+ ],
+ "foundcaptain": [
+  "yes"
+ ],
+ "fourthacolyte": [
+  "finished"
+ ],
+ "fourthdialog": [
+  "end"
+ ],
+ "foyer_move": [
+  "done"
+ ],
+ "foyer_talk": [
+  "start"
+ ],
+ "friends": [
+  "maybe"
+ ],
+ "fufirsttime": [
+  "yes"
+ ],
+ "game_over": [
+  "yes"
+ ],
+ "gatherback": [
+  "done",
+  "yes"
+ ],
+ "gender_choice": [
+  "gender_female",
+  "gender_male",
+  "gender_nonbinary"
+ ],
+ "getaway": [
+  "pls",
+  "weregone"
+ ],
+ "gettuxemon": [
+  "now"
+ ],
+ "giveegg": [
+  "yes"
+ ],
+ "go_get_tuxemon": [
+  "yes"
+ ],
+ "goodbyeoldknight": [
+  "finallydone",
+  "heback",
+  "hedead",
+  "helpme",
+  "herewegoagain",
+  "howcaniresistyou",
+  "mama",
+  "mamamia",
+  "ohwell",
+  "yes"
+ ],
+ "got_Bamboon": [
+  "true"
+ ],
+ "got_Fruitera": [
+  "true"
+ ],
+ "got_all_three": [
+  "yes"
+ ],
+ "got_both_fossils": [
+  "yes"
+ ],
+ "got_coproblight": [
+  "yes"
+ ],
+ "got_first_tuxemon": [
+  "true"
+ ],
+ "got_pd_rhincus": [
+  "yes"
+ ],
+ "got_pd_shammer": [
+  "yes"
+ ],
+ "got_rhincus": [
+  "yes"
+ ],
+ "got_shammer": [
+  "yes"
+ ],
+ "gotbotbot": [
+  "yes"
+ ],
+ "grampsask": [
+  "no",
+  "yes"
+ ],
+ "greeter_greets": [
+  "yes"
+ ],
+ "grinflaretype": [
+  "earth",
+  "fire"
+ ],
+ "happy": [
+  "no",
+  "yes"
+ ],
+ "has_sold_painting": [
+  "yes"
+ ],
+ "has_sold_paintings": [
+  "yes"
+ ],
+ "havetuxemon": [
+  "yes"
+ ],
+ "healed_josephine": [
+  "yes"
+ ],
+ "heardcapture": [
+  "no",
+  "null",
+  "yes"
+ ],
+ "heaviest": [
+  "apeoro",
+  "jemuar",
+  "mauai"
+ ],
+ "henrik_react": [
+  "start",
+  "yes"
+ ],
+ "hospitalbillie": [
+  "yes"
+ ],
+ "hospitalcure": [
+  "yes"
+ ],
+ "iamsecret": [
+  "ohno",
+  "yes"
+ ],
+ "incident_greenwash": [
+  "done",
+  "no",
+  "yes"
+ ],
+ "intro_fossilisator": [
+  "yes"
+ ],
+ "intro_scoop": [
+  "done"
+ ],
+ "introdcottoncafe2": [
+  "yes"
+ ],
+ "introducedaycare": [
+  "yes"
+ ],
+ "invention_choice": [
+  "xp_feeder",
+  "xp_transmitter"
+ ],
+ "invention_given": [
+  "xp_feeder",
+  "xp_transmitter"
+ ],
+ "invention_swap_feeder": [
+  "no",
+  "none",
+  "yes"
+ ],
+ "invention_swap_transmitter": [
+  "no",
+  "none",
+  "yes"
+ ],
+ "isitok": [
+  "no",
+  "null",
+  "yes"
+ ],
+ "jason": [
+  "gone"
+ ],
+ "kernelquest": [
+  "done",
+  "yes"
+ ],
+ "kernelquestbegin": [
+  "yes"
+ ],
+ "killgrace": [
+  "yes"
+ ],
+ "kyletalkafter4th": [
+  "done"
+ ],
+ "lambertchosen": [
+  "no",
+  "yes"
+ ],
+ "leavemealone": [
+  "yes"
+ ],
+ "leavescoophq": [
+  "no",
+  "yes"
+ ],
+ "left": [
+  "true"
+ ],
+ "letmechoose": [
+  "pls"
+ ],
+ "letusthrough": [
+  "almost",
+  "maybe",
+  "no"
+ ],
+ "level_65": [
+  "yes"
+ ],
+ "level_boost10": [
+  "yes"
+ ],
+ "lightest": [
+  "furnursus",
+  "snokari",
+  "woodoor"
+ ],
+ "likehoney": [
+  "no",
+  "yes"
+ ],
+ "lionmountainenforcer": [
+  "yes"
+ ],
+ "lossbattle": [
+  "no",
+  "yes"
+ ],
+ "luckgiveegg": [
+  "9"
+ ],
+ "maniac_achievements": [
+  "no",
+  "yes"
+ ],
+ "maniac_help": [
+  "yes"
+ ],
+ "mansion_berry": [
+  "yes"
+ ],
+ "mansion_grandtux": [
+  "yes"
+ ],
+ "mansion_potion": [
+  "yes"
+ ],
+ "mansion_tea": [
+  "yes"
+ ],
+ "mansion_tmiceshield": [
+  "yes"
+ ],
+ "mansion_tmubuntu": [
+  "yes"
+ ],
+ "maple_bedroom1": [
+  "true"
+ ],
+ "maple_got_tuxemon1": [
+  "true"
+ ],
+ "maplecotton": [
+  "no",
+  "yes"
+ ],
+ "method_money": [
+  "conserved"
+ ],
+ "mieke_hastraded": [
+  "yes"
+ ],
+ "mieke_willtrade": [
+  "no",
+  "yes"
+ ],
+ "misaisgone": [
+  "true"
+ ],
+ "momquest": [
+  "yes"
+ ],
+ "momthanked": [
+  "yes"
+ ],
+ "monsters": [
+  "full"
+ ],
+ "movealong": [
+  "now"
+ ],
+ "moveit2": [
+  "now"
+ ],
+ "moveit3": [
+  "now"
+ ],
+ "moveon": [
+  "bye",
+  "yes"
+ ],
+ "moveonnow": [
+  "yes"
+ ],
+ "moveplayer": [
+  "false",
+  "true"
+ ],
+ "movingon": [
+  "now"
+ ],
+ "muse_bought": [
+  "yes"
+ ],
+ "muse_bundle": [
+  "no",
+  "yes"
+ ],
+ "muse_monsters": [
+  "no",
+  "yes"
+ ],
+ "muse_starry": [
+  "no",
+  "yes"
+ ],
+ "muse_trepidation": [
+  "no",
+  "yes"
+ ],
+ "myintrochoice": [
+  "budaye",
+  "dollfin",
+  "grintot",
+  "ignibus",
+  "memnomnom"
+ ],
+ "mymonchoice": [
+  "agnite",
+  "lambert",
+  "nut",
+  "rockitten",
+  "tweesher"
+ ],
+ "notpaidmuseum": [
+  "yes"
+ ],
+ "npcs_are_created": [
+  "yes"
+ ],
+ "nurse_spyder": [
+  "yes"
+ ],
+ "nutchosen": [
+  "no",
+  "yes"
+ ],
+ "ocaptain": [
+  "done",
+  "no",
+  "yes"
+ ],
+ "offer_josephine": [
+  "no",
+  "yes"
+ ],
+ "ohnotyou": [
+  "gasp",
+  "gone",
+  "itsme",
+  "removed"
+ ],
+ "omnichannel-ready-wall": [
+  "yes"
+ ],
+ "omnichannel1wall": [
+  "yes"
+ ],
+ "omnichannel2wall": [
+  "yes"
+ ],
+ "omnichannelhere": [
+  "here"
+ ],
+ "omnichannelradioannounce": [
+  "yes"
+ ],
+ "openthree": [
+  "no",
+  "yes"
+ ],
+ "opentwo": [
+  "no",
+  "yes"
+ ],
+ "park_out": [
+  "no",
+  "null",
+  "yes"
+ ],
+ "party_sick": [
+  "yes"
+ ],
+ "passcode_color": [
+  "black",
+  "blue",
+  "green",
+  "indigo",
+  "orange",
+  "red",
+  "violet",
+  "yellow"
+ ],
+ "passcode_number": [
+  "..---",
+  "02",
+  "05",
+  "10",
+  "2!",
+  "2F",
+  "B",
+  "II"
+ ],
+ "paygallery": [
+  "no",
+  "null",
+  "yes"
+ ],
+ "paymuseum": [
+  "no",
+  "null",
+  "yes"
+ ],
+ "paypark": [
+  "no",
+  "null",
+  "yes"
+ ],
+ "pd_rhincus_choice": [
+  "no",
+  "yes"
+ ],
+ "pd_shammer_choice": [
+  "no",
+  "yes"
+ ],
+ "potion_xiang": [
+  "no_choice"
+ ],
+ "prof_candy_hastraded": [
+  "yes"
+ ],
+ "prof_choice": [
+  "cardiling",
+  "rockitten",
+  "tweesher"
+ ],
+ "prof_willtrade": [
+  "no",
+  "yes"
+ ],
+ "proftalk": [
+  "true"
+ ],
+ "proftalk1": [
+  "false",
+  "true"
+ ],
+ "proftalk2": [
+  "yes"
+ ],
+ "pronoun_choice": [
+  "pronoun_he",
+  "pronoun_she",
+  "pronoun_they"
+ ],
+ "quarantine_darling": [
+  "yes"
+ ],
+ "quarantine_garvan": [
+  "yes"
+ ],
+ "quarantine_lesley": [
+  "yes"
+ ],
+ "quarantine_melanie": [
+  "yes"
+ ],
+ "quarantine_qua2": [
+  "yes"
+ ],
+ "quebotbot": [
+  "yes"
+ ],
+ "question_intro": [
+  "no",
+  "yes"
+ ],
+ "question_xero": [
+  "no",
+  "yes"
+ ],
+ "race_choice": [
+  "black_female",
+  "black_male",
+  "gender_enby",
+  "gender_whatever",
+  "white_female",
+  "white_male"
+ ],
+ "redo": [
+  "finished",
+  "please"
+ ],
+ "replaceomnigrunt4": [
+  "yes"
+ ],
+ "return_monster": [
+  "no",
+  "null"
+ ],
+ "returnruff": [
+  "no",
+  "null",
+  "yes"
+ ],
+ "rhincus_choice": [
+  "no",
+  "yes"
+ ],
+ "rivals": [
+  "maybe"
+ ],
+ "rivergoto": [
+  "candy_port",
+  "flower_city",
+  "leather_town",
+  "nothing",
+  "paper_town",
+  "timber_town"
+ ],
+ "rockittenball": [
+  "yes"
+ ],
+ "rockittenchoice": [
+  "empty",
+  "finished",
+  "no",
+  "yes"
+ ],
+ "rockittenchosen": [
+  "no",
+  "yes"
+ ],
+ "route2billie": [
+  "yes"
+ ],
+ "route2billiefought": [
+  "no",
+  "yes"
+ ],
+ "route2choice": [
+  "again",
+  "not_really",
+  "sure_i_do"
+ ],
+ "route4_boost": [
+  "yes"
+ ],
+ "route4_super": [
+  "yes"
+ ],
+ "route4_tea": [
+  "yes"
+ ],
+ "route4billie": [
+  "yes"
+ ],
+ "route6billie": [
+  "yes"
+ ],
+ "route6mom": [
+  "yes"
+ ],
+ "route6rigel": [
+  "yes"
+ ],
+ "routea_cureall": [
+  "yes"
+ ],
+ "routea_super": [
+  "yes"
+ ],
+ "routea_tea": [
+  "yes"
+ ],
+ "routeabillie": [
+  "yes"
+ ],
+ "routebbillie": [
+  "yes"
+ ],
+ "routebelectra": [
+  "yes"
+ ],
+ "routec_tm_altitude": [
+  "yes"
+ ],
+ "ruff": [
+  "no",
+  "null",
+  "proceed",
+  "yes"
+ ],
+ "sadsong": [
+  "no",
+  "yes"
+ ],
+ "sandy_hastraded": [
+  "yes"
+ ],
+ "sandy_willtrade": [
+  "no",
+  "yes"
+ ],
+ "sarah_flashback": [
+  "",
+  "done",
+  "no",
+  "yes"
+ ],
+ "save1": [
+  "yes"
+ ],
+ "save2": [
+  "yes"
+ ],
+ "save3": [
+  "yes"
+ ],
+ "scenario_choice": [
+  "spyder_campaign",
+  "water_campaign",
+  "xero_campaign"
+ ],
+ "scene": [
+  "yes"
+ ],
+ "scoop_coeff": [
+  "50"
+ ],
+ "scoopcochinia": [
+  "yes"
+ ],
+ "scoopcochinib": [
+  "yes"
+ ],
+ "scoopcochinic": [
+  "yes"
+ ],
+ "scooplandrace": [
+  "yes"
+ ],
+ "scooplapinoua": [
+  "yes"
+ ],
+ "scooplapinoub": [
+  "yes"
+ ],
+ "scooplapinouc": [
+  "yes"
+ ],
+ "screendown": [
+  "yes"
+ ],
+ "seconddialog": [
+  "end",
+  "start"
+ ],
+ "secondgo": [
+  "gone",
+  "yes"
+ ],
+ "secret_ball": [
+  "found"
+ ],
+ "seencandy": [
+  "yes"
+ ],
+ "seentimber": [
+  "yes"
+ ],
+ "seizedtimber": [
+  "thats_crazy",
+  "thats_wild"
+ ],
+ "selltuxemon": [
+  "no",
+  "null",
+  "proceed",
+  "yes"
+ ],
+ "seventhdialog": [
+  "end"
+ ],
+ "shady": [
+  "no",
+  "yes"
+ ],
+ "shaftscheme": [
+  "yes"
+ ],
+ "shammer_choice": [
+  "no",
+  "yes"
+ ],
+ "shown_hints": [
+  "yes"
+ ],
+ "shows_vivicinder": [
+  "yes"
+ ],
+ "shows_vividactil": [
+  "yes"
+ ],
+ "shows_viviphyta": [
+  "yes"
+ ],
+ "shows_vivisource": [
+  "yes"
+ ],
+ "shows_viviteel": [
+  "yes"
+ ],
+ "shows_vivitrans": [
+  "yes"
+ ],
+ "shows_vivitron": [
+  "yes"
+ ],
+ "sixthdialog": [
+  "end"
+ ],
+ "skadoosh": [
+  "no",
+  "yes"
+ ],
+ "smallest": [
+  "ignibus",
+  "possessun",
+  "squink"
+ ],
+ "snark": [
+  "now"
+ ],
+ "snarlonmountain": [
+  "yes"
+ ],
+ "soldier_on_mission": [
+  "on"
+ ],
+ "sowhat": [
+  "spyder_candyinn_james2",
+  "spyder_candyinn_james3"
+ ],
+ "spokencottonhacker": [
+  "yes"
+ ],
+ "spokendante": [
+  "yes"
+ ],
+ "spokengrannypiper": [
+  "yes"
+ ],
+ "spokenmom": [
+  "yes"
+ ],
+ "spokenmomcotton": [
+  "yes"
+ ],
+ "spyder_boulder": [
+  "remove_entity"
+ ],
+ "spyder_intro": [
+  "yes"
+ ],
+ "stahp": [
+  "stop"
+ ],
+ "start_bonding": [
+  "yes"
+ ],
+ "startchoice": [
+  "continue",
+  "maybe",
+  "no",
+  "yes"
+ ],
+ "startfirstbattle": [
+  "yes"
+ ],
+ "stoptalking": [
+  "now"
+ ],
+ "student1_yn": [
+  "no",
+  "yes"
+ ],
+ "student2_yn": [
+  "no",
+  "yes"
+ ],
+ "swimming": [
+  "no",
+  "yes"
+ ],
+ "tabaacolyte4battle": [
+  "finished"
+ ],
+ "talked_to_maple_junkyard": [
+  "true"
+ ],
+ "talkedonce": [
+  "yes"
+ ],
+ "talkpls": [
+  "gone",
+  "yes"
+ ],
+ "tallest": [
+  "pigabyte",
+  "pythock",
+  "snarlon"
+ ],
+ "tealucy": [
+  "yes"
+ ],
+ "techchoice": [
+  "menu_item",
+  "menu_monster"
+ ],
+ "testcleo": [
+  "no",
+  "yes"
+ ],
+ "testmap_potion1": [
+  "yes"
+ ],
+ "testmap_potion2": [
+  "yes"
+ ],
+ "thewifedidspeak": [
+  "yes"
+ ],
+ "theyrehere": [
+  "yes"
+ ],
+ "thirddialog": [
+  "end"
+ ],
+ "threemusketeers": [
+  "done",
+  "yay"
+ ],
+ "thriquestion": [
+  "strategy",
+  "strength"
+ ],
+ "timberdantewarn": [
+  "yes"
+ ],
+ "timbermom": [
+  "yes"
+ ],
+ "timetomove": [
+  "done",
+  "finite",
+  "yes"
+ ],
+ "treestumps": [
+  "no",
+  "yes"
+ ],
+ "trigger_fossilator": [
+  "no"
+ ],
+ "trigger_fossilisator": [
+  "yes"
+ ],
+ "tuintro": [
+  "yes"
+ ],
+ "tunnelb_rhincus": [
+  "yes"
+ ],
+ "tunnelb_shammer": [
+  "yes"
+ ],
+ "tuxchoice": [
+  "end",
+  "fruitera",
+  "hydrone",
+  "rockitten",
+  "welcome"
+ ],
+ "tweesherball": [
+  "yes"
+ ],
+ "tweesherchoice": [
+  "empty",
+  "finished",
+  "no",
+  "yes"
+ ],
+ "tweesherchosen": [
+  "no",
+  "yes"
+ ],
+ "unhinged": [
+  "consequences",
+  "escaped",
+  "second",
+  "start"
+ ],
+ "unveildefossilator": [
+  "done",
+  "no",
+  "yes"
+ ],
+ "vincefirst": [
+  "yes"
+ ],
+ "vincesecond": [
+  "yes"
+ ],
+ "visitcottonmart": [
+  "yes"
+ ],
+ "visitedcottoncafe": [
+  "yes"
+ ],
+ "walledbillie": [
+  "yes"
+ ],
+ "walledmidas": [
+  "yes"
+ ],
+ "wanintro": [
+  "yes"
+ ],
+ "water_dude_steals": [
+  "yes"
+ ],
+ "water_intro": [
+  "yes"
+ ],
+ "waterdefeatedguy1": [
+  "yes"
+ ],
+ "watermayortalked1": [
+  "yes"
+ ],
+ "watermayortalked2": [
+  "yes"
+ ],
+ "wayfarer1_botbot": [
+  "no",
+  "yes"
+ ],
+ "wemoving": [
+  "completenow",
+  "done",
+  "finished",
+  "now"
+ ],
+ "which_taste": [
+  "null",
+  "taste_cold",
+  "taste_warm"
+ ],
+ "whoartthou": [
+  "done",
+  "finished",
+  "florist",
+  "person",
+  "tuxemon"
+ ],
+ "x1": [
+  "yes"
+ ],
+ "xeon_creation": [
+  "done",
+  "no",
+  "yes"
+ ],
+ "xero_intro": [
+  "done"
+ ],
+ "xiang_potion_choice": [
+  "null",
+  "yes"
+ ],
+ "xiang_yn": [
+  "no",
+  "null",
+  "yes"
+ ],
+ "xiangfirsttime": [
+  "yes"
+ ],
+ "yahoo": [
+  "maybe"
+ ],
+ "yinfirsttime": [
+  "yes"
+ ],
+ "zhu_taste_choice": [
+  "null",
+  "yes"
+ ],
+ "zhu_taste_done": [
+  "null",
+  "yes"
+ ],
+ "zhu_yn": [
+  "no",
+  "null",
+  "yes"
+ ],
+ "zhufirsttime": [
+  "yes"
+ ],
+ "zircon_argon": [
+  "done",
+  "no",
+  "yes"
+ ],
+ "zircon_vs_argon": [
+  "done",
+  "yes"
+ ]
+}

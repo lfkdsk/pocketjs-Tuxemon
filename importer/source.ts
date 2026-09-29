@@ -46,6 +46,11 @@ export interface TuxMap {
   events: TuxEvent[];
 }
 
+export interface CollisionRegion {
+  key?: string;
+  cells: [number, number][];
+}
+
 export function splitEscaped(s: string): string[] {
   if (!s.trim()) return [];
   return s.split(/(?<!\\),/).map((p) => p.replace(/\\,/g, ",").trim());
@@ -260,14 +265,30 @@ export function parsePo(path: string): Map<string, string> {
  *  colliders, collision lines and enter/exit edge props are NOT read here —
  *  that is the terrain importer's job; this is enough for a smoke walk. */
 export function readCollisionCells(path: string): Set<string> {
+  return new Set(readCollisionRegions(path).flatMap((region) =>
+    region.cells.map(([x, y]) => `${x},${y}`)
+  ));
+}
+
+/** Closed collision rectangles, retaining their optional `key`. Keyed
+ * rectangles can be lowered to blocking events for remove_collision. */
+export function readCollisionRegions(path: string): CollisionRegion[] {
   const xml = readFileSync(path, "utf8");
-  const cells = new Set<string>();
-  for (const m of xml.matchAll(/<object ([^>]*?)(\/>|>)/g)) {
+  const regions: CollisionRegion[] = [];
+  for (const m of xml.matchAll(/<object ([^>]*?)(\/>|>([\s\S]*?)<\/object>)/g)) {
     const a = attrs(m[1]!);
     if (!a.type?.toLowerCase().startsWith("collision") || a.width === undefined) continue;
     const x0 = Math.round(Number(a.x) / 16), y0 = Math.round(Number(a.y) / 16);
     const x1 = Math.round((Number(a.x) + Number(a.width)) / 16), y1 = Math.round((Number(a.y) + Number(a.height)) / 16);
-    for (let y = y0; y < y1; y++) for (let x = x0; x < x1; x++) cells.add(`${x},${y}`);
+    const cells: [number, number][] = [];
+    for (let y = y0; y < y1; y++) for (let x = x0; x < x1; x++) cells.push([x, y]);
+    const body = m[3] ?? "";
+    let key: string | undefined;
+    for (const property of body.matchAll(/<property [^>]*\/>/g)) {
+      const p = attrs(property[0]);
+      if (p.name === "key" && p.value) key = p.value;
+    }
+    regions.push({ key, cells });
   }
-  return cells;
+  return regions;
 }

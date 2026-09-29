@@ -8,6 +8,7 @@ import {
   MAPS_DIR,
   parsePo,
   readCollisionCells,
+  readCollisionRegions,
   TUXEMON_SRC,
   type Cond,
   type Rule,
@@ -15,6 +16,7 @@ import {
   type TuxMap,
 } from "./source.ts";
 import { triggerClass } from "./shapes.ts";
+import { buildCoverageReport, type CoverageReport } from "./coverage.ts";
 import { validateSchema } from "../vendor/pocket-rpgkit/src/engine/schema-validate.ts";
 import type {
   Command,
@@ -73,6 +75,7 @@ for (const ev of loadAllFileEvents()) {
     if (a.type === "set_variable") for (const p of a.args) { const i = p.indexOf(":"); addValue(i < 0 ? p : p.slice(0, i), i < 0 ? "" : p.slice(i + 1)); }
     if (a.type === "translated_dialog_choice" || a.type === "choice_monster" || a.type === "choice_npc") for (const o of a.args[0]!.split(":")) addValue(a.args[1]!, o);
     if (a.type === "start_battle" || a.type === "start_double_battle") addValue("battle_last_trainer", a.args[0] === "player" ? a.args[1]! : a.args[0]!);
+    if (a.type === "wild_encounter" && a.args[0]) addValue("battle_last_trainer", a.args[0]);
   }
   for (const c of ev.conds) if (c.type === "variable_set") for (const p of c.args) { const i = p.indexOf(":"); if (i >= 0 && p.slice(i + 1) !== "") addValue(p.slice(0, i), p.slice(i + 1)); }
 }
@@ -107,6 +110,8 @@ type Clause =
   | { k: "const"; value: boolean };
 
 const npcVar = (slug: string) => `local.npc.${slug.replace(/[^A-Za-z0-9_.-]/g, "_")}`;
+const collisionVar = (map: string, key: string) =>
+  `local.collision.${map.replace(/[^A-Za-z0-9_.-]/g, "_")}.${key.replace(/[^A-Za-z0-9_.-]/g, "_")}`;
 const TRIGGER_CONDS = new Set(["char_at", "char_facing", "char_moved", "button_pressed", "char_facing_tile", "char_facing_char", "player_facing_tile"]);
 
 function cmpClause(id: string, op: string, n: number, negate: boolean): Clause {
@@ -175,10 +180,24 @@ function clauses(c: Cond, m: TuxMap): Clause[] | null {
       return [{ k: "item", id: a[1]!, count, has: !not }];
     }
     case "money_is": {
-      const ge = a[1] === "greater_or_equal" || a[1] === "greater_than";
-      if (!ge || !/^\d+$/.test(a[2]!)) { note("cond", `${c.op} money_is(${a[1]})`, "T2-dropped", "only gold >= n exists"); return K(true); }
+      if (!/^\d+$/.test(a[2]!)) {
+        note("cond", `${c.op} money_is(variable)`, "T2-dropped", "gold comparison uses a variable operand");
+        return K(true);
+      }
+      const n = Number(a[2]);
+      const op = a[1];
+      const atLeast = op === "greater_than" ? n + 1
+        : op === "greater_or_equal" ? n
+        : op === "less_or_equal" ? n + 1
+        : op === "less_than" ? n
+        : null;
+      if (atLeast === null) {
+        note("cond", `${c.op} money_is(${op})`, "T2-dropped", "unsupported gold comparison");
+        return K(true);
+      }
       note("cond", `${c.op} money_is`, "T1", "gold >= n");
-      return [{ k: "gold", amount: Number(a[2]) + (a[1] === "greater_than" ? 1 : 0), has: !not }];
+      const lowerBound = op === "greater_than" || op === "greater_or_equal";
+      return [{ k: "gold", amount: atLeast, has: lowerBound ? !not : not }];
     }
     case "tracker":
       note("cond", `${c.op} tracker`, "T1", "switch tracker.<map> set by add_tracker");
@@ -378,6 +397,26 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         note("act", a.type, "T1", "variable set 0");
         for (const p of g) out.push({ op: "variable", id: varId(p), set: { op: "set", value: 0 } });
         break;
+      case "random_integer":
+        note("act", a.type, "T1", "variable random integer");
+        out.push({
+          op: "variable",
+          id: varId(g[0]!),
+          set: { op: "random", min: Number(g[1]), max: Number(g[2]) },
+        });
+        break;
+      case "set_random_variable": {
+        const codes = g[1]!.split(":")
+          .map((value) => code(g[0]!, value))
+          .sort((a, b) => a - b);
+        note("act", a.type, "T1", "variable random enum code");
+        out.push({
+          op: "variable",
+          id: varId(g[0]!),
+          set: { op: "random", min: codes[0]!, max: codes.at(-1)! },
+        });
+        break;
+      }
       case "wait":
         note("act", a.type, "T1", "wait seconds");
         if (Number(g[0]) > 0) out.push({ op: "wait", seconds: Math.min(30, Number(g[0])) });
@@ -479,6 +518,14 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
           set: { op: "set", value: code(`__loaded_yaml.${ctx.m.slug}.${g[0]}`, "yes") },
         });
         break;
+      case "remove_collision":
+        note("act", a.type, "T1-lowered", "keyed collision becomes a variable-gated blocking event");
+        out.push({
+          op: "variable",
+          id: collisionVar(ctx.m.slug, g[0]!),
+          set: { op: "set", value: 1 },
+        });
+        break;
       case "start_battle": case "start_double_battle": {
         const opp = g[0] === "player" ? g[1]! : g[0]!;
         note("act", a.type, "T3-placeholder", "inline placeholder: text + outcome writes");
@@ -500,6 +547,30 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         out.push({ op: "switch", id: `mon.${g[0]}`, value: true });
         break;
       }
+      case "random_monster":
+        if (g[1]) {
+          note("act", "random_monster(npc)", "T3-dropped", "trainer teams are P2");
+        } else {
+          note("act", a.type, "T3-placeholder", "sys.party_size += 1");
+          out.push({ op: "variable", id: "sys.party_size", set: { op: "add", value: 1 } });
+          out.push({ op: "switch", id: "mon.random", value: true });
+        }
+        break;
+      case "remove_monster":
+        note("act", a.type, "T3-placeholder", "sys.party_size -= 1 when non-empty");
+        out.push({
+          op: "if",
+          if: { kind: "variable", id: "sys.party_size", op: ">=", value: 1 },
+          then: [{ op: "variable", id: "sys.party_size", set: { op: "sub", value: 1 } }],
+        });
+        break;
+      case "wild_encounter":
+        note("act", a.type, "T3-placeholder", "scripted wild battle auto-wins in P1");
+        out.push(...battle(g[0]!));
+        break;
+      case "random_encounter":
+        note("act", a.type, "T3-placeholder", "intentionally silent in P1");
+        break;
       case "pathfind": case "pathfind_to_char": case "char_wander": case "char_speed": case "char_run":
       case "set_facing_mode": case "char_position":
         note("act", a.type, "T2-dropped", "runtime pathfinding / other-event routes / NPC motion props");
@@ -511,9 +582,9 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         note("act", a.type, "T2-dropped", "name entry (P1: fixed name)");
         break;
       case "set_environment": case "set_monster_health": case "set_monster_status": case "set_teleport_faint":
-      case "random_encounter": case "wild_encounter": case "set_monster_attribute": case "open_journal": case "access_pc":
-      case "get_player_monster": case "random_monster": case "set_bill": case "format_variable":
-        note("act", a.type, a.type === "random_encounter" ? "T3-dropped" : "T3-dropped", "monster/combat subsystem (P2)");
+      case "set_monster_attribute": case "open_journal": case "access_pc":
+      case "get_player_monster": case "set_bill": case "format_variable":
+        note("act", a.type, "T3-dropped", "monster/combat subsystem (P2)");
         break;
       default:
         note("act", a.type, "T4-dropped", "presentation / meta");
@@ -550,6 +621,7 @@ function convertMap(m: TuxMap): { map: MapDef; sprites: Record<string, SpriteDef
    *  on one cell (e.g. "My First Mon" / "... - Not Met"); the kit starts
    *  only the first eligible event per trigger, so they merge below. */
   const cellPages = new Map<string, { id: string; name: string; x: number; y: number; trigger: "playerTouch" | "action"; cls: Clause[]; cmds: Command[] }[]>();
+  const collisionRegions = readCollisionRegions(join(MAPS_DIR, `${m.slug}.tmx`));
 
   // NPCs first: every create_npc on this map names one NPC event
   for (const e of m.events) for (const a of e.acts) if (a.type === "create_npc") {
@@ -717,6 +789,34 @@ function convertMap(m: TuxMap): { map: MapDef; sprites: Record<string, SpriteDef
     });
   }
 
+  // Keyed collision rectangles become removable event bodies instead of
+  // permanent terrain blocks.
+  let collisionEvent = 0;
+  for (const region of collisionRegions) {
+    if (!region.key) continue;
+    for (const [x, y] of region.cells) {
+      if (x < 0 || y < 0 || x >= m.width || y >= m.height) continue;
+      events.push({
+        id: `collision_${slug(region.key)}_${++collisionEvent}`,
+        name: `collision:${region.key}`,
+        x,
+        y,
+        pages: [
+          { trigger: "action", sprite: null, blocks: true, commands: [] },
+          {
+            trigger: "action",
+            condition: {
+              variable: { id: collisionVar(m.slug, region.key), op: "==", value: 1 },
+            },
+            sprite: null,
+            blocks: false,
+            commands: [],
+          },
+        ],
+      });
+    }
+  }
+
   // Pure guard events do not use their coordinates, but the kit data model
   // still requires every event to live on its map.
   for (const event of events) {
@@ -726,6 +826,11 @@ function convertMap(m: TuxMap): { map: MapDef; sprites: Record<string, SpriteDef
 
   // terrain placeholder: one pass tile, Tuxemon collision rects blocked
   const blocked = readCollisionCells(join(MAPS_DIR, `${m.slug}.tmx`));
+  for (const region of collisionRegions) {
+    if (region.key) {
+      for (const [x, y] of region.cells) blocked.delete(`${x},${y}`);
+    }
+  }
   const passage: [number, "pass" | "block"][] = [];
   for (let y = 0; y < m.height; y++) for (let x = 0; x < m.width; x++) if (blocked.has(`${x},${y}`)) passage.push([y * m.width + x, "block"]);
   return {
@@ -754,12 +859,18 @@ export interface ImportLogRow {
 }
 
 export interface ImportReport {
+  format: "pocket-tuxemon/import-report/v1";
+  source: {
+    maps: "mods/tuxemon/maps";
+    locale: "en_US";
+  };
   maps: string[];
   schemaErrors: { path: string; msg: string }[];
   byFate: Record<string, number>;
   rows: ImportLogRow[];
   transferRepairs: TransferRepair[];
   transferErrors: TransferError[];
+  coverage: CoverageReport;
 }
 
 export interface TransferRepair {
@@ -889,7 +1000,7 @@ export function buildProject(want: readonly string[] = DEFAULT_MAPS): ImportBuil
       rows: 1,
       defaultPassage: "pass",
     }],
-    items: [...items.values()].sort((a, b) => a.id.localeCompare(b.id)),
+    items: [...items.values()].sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0),
     sprites,
     maps: mapDefs,
   };
@@ -909,7 +1020,8 @@ export function buildProject(want: readonly string[] = DEFAULT_MAPS): ImportBuil
       note: v.note,
     }))
     .sort((a, b) =>
-      a.key.localeCompare(b.key) || a.fate.localeCompare(b.fate)
+      (a.key < b.key ? -1 : a.key > b.key ? 1 : 0) ||
+      (a.fate < b.fate ? -1 : a.fate > b.fate ? 1 : 0)
     );
   const byFate: Record<string, number> = {};
   for (const row of rows) {
@@ -917,7 +1029,7 @@ export function buildProject(want: readonly string[] = DEFAULT_MAPS): ImportBuil
   }
   const variables = Object.fromEntries(
     [...enumTable.entries()]
-      .sort(([a], [b]) => a.localeCompare(b))
+      .sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0)
       .map(([name, values]) => [name, [...values]]),
   );
 
@@ -925,12 +1037,15 @@ export function buildProject(want: readonly string[] = DEFAULT_MAPS): ImportBuil
     project,
     variables,
     report: {
+      format: "pocket-tuxemon/import-report/v1",
+      source: { maps: "mods/tuxemon/maps", locale: "en_US" },
       maps: [...want],
       schemaErrors,
       byFate,
       rows,
       transferRepairs: [...transferRepairs],
       transferErrors: transferErrors(project),
+      coverage: buildCoverageReport(),
     },
   };
 }

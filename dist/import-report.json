@@ -1,0 +1,2760 @@
+{
+ "format": "pocket-tuxemon/import-report/v1",
+ "source": {
+  "maps": "mods/tuxemon/maps",
+  "locale": "en_US"
+ },
+ "maps": [
+  "37707_tower",
+  "37707_town",
+  "37707_town_missing",
+  "azure_town",
+  "azure_town_hall",
+  "bedroom_test",
+  "buddha_mountain",
+  "candy_town",
+  "city1_mart_junkyard",
+  "citypark",
+  "citypark_house1",
+  "classic_aerolume_city",
+  "classic_gym_astra",
+  "classic_gym_bravion",
+  "classic_gym_ferrum",
+  "classic_gym_granite",
+  "classic_gym_marin",
+  "classic_gym_mila",
+  "classic_gym_orion",
+  "classic_gym_pyra",
+  "classic_gym_shade",
+  "classic_gym_sylva",
+  "classic_gym_voltessa",
+  "classic_gym_vyre",
+  "classic_gym_zephra",
+  "classic_hearthrock_city",
+  "classic_route_1",
+  "classic_route_2",
+  "classic_route_3",
+  "classic_route_4",
+  "classic_route_5",
+  "classic_route_6",
+  "classic_route_7",
+  "classic_route_8",
+  "classic_steamshore_city",
+  "classic_stormpeak_city",
+  "classic_thornwood_city",
+  "classic_umbrastar_city",
+  "classic_valorhold_city",
+  "cotton_cafe",
+  "cotton_cafe_basement",
+  "cotton_cathedral",
+  "cotton_daycare",
+  "cotton_misa_house",
+  "cotton_misa_house_upstairs",
+  "cotton_scoop",
+  "cotton_town",
+  "cotton_underground",
+  "dojo1",
+  "dojo2",
+  "dojo3",
+  "downstairs_test",
+  "dragonscave",
+  "dryadsgrove",
+  "eclipse_crystal_bank1",
+  "eclipse_crystal_bank2",
+  "eclipse_crystal_bank3",
+  "eclipse_crystal_center",
+  "eclipse_crystal_town",
+  "eclipse_crystal_town_cafe",
+  "eclipse_crystal_town_house",
+  "eclipse_lion_mountain_high",
+  "eclipse_lion_mountain_low",
+  "eclipse_lion_mountain_middle",
+  "eclipse_obsidian_center",
+  "eclipse_obsidian_town",
+  "eclipse_obsidian_town_house",
+  "eclipse_park",
+  "eclipse_park_cabin",
+  "eclipse_park_cave",
+  "eclipse_park_entrance",
+  "eclipse_park_south",
+  "eclipse_route7",
+  "eclipse_routef",
+  "eclipse_routeg",
+  "eclipse_routeh",
+  "eclipse_routei",
+  "flower_city",
+  "gadget_store1",
+  "gaming_hall",
+  "healing_center",
+  "leather_scoop",
+  "leather_shaft1",
+  "leather_shaft2",
+  "leather_town",
+  "manhattan_beach",
+  "mansion",
+  "mansion_basement",
+  "mansion_top",
+  "maple_bedroom",
+  "maple_house",
+  "omnichannel0",
+  "omnichannel1",
+  "omnichannel2",
+  "omnichannel3",
+  "omnichannel4",
+  "player_house_bedroom",
+  "player_house_downstairs",
+  "professor_lab",
+  "route1",
+  "route1_sanglorian",
+  "route2",
+  "route3",
+  "route4",
+  "route5",
+  "route6",
+  "routea",
+  "routec",
+  "rubberduck_cave_01",
+  "rubberduck_city_01",
+  "rubberduck_route_01",
+  "russell_practice_1",
+  "scoop1",
+  "scoop2",
+  "scoop3",
+  "scoop4",
+  "sphalian_center",
+  "sphalian_town",
+  "sphalian_town_house",
+  "spyder_bedroom",
+  "spyder_brideswood",
+  "spyder_candy_cafe",
+  "spyder_candy_center",
+  "spyder_candy_hospital1",
+  "spyder_candy_hospital2",
+  "spyder_candy_hospital3",
+  "spyder_candy_house1",
+  "spyder_candy_house2",
+  "spyder_candy_house3",
+  "spyder_candy_inn1",
+  "spyder_candy_inn2",
+  "spyder_candy_port",
+  "spyder_candy_scoop",
+  "spyder_candy_town",
+  "spyder_citypark",
+  "spyder_citypark_house1",
+  "spyder_cotton_artshop",
+  "spyder_cotton_cafe",
+  "spyder_cotton_house1",
+  "spyder_cotton_house2",
+  "spyder_cotton_scoop",
+  "spyder_cotton_town",
+  "spyder_cotton_tunnel",
+  "spyder_datacenter",
+  "spyder_diamond_hill",
+  "spyder_dojo1",
+  "spyder_dojo2",
+  "spyder_dojo3",
+  "spyder_dojo4",
+  "spyder_downstairs",
+  "spyder_dragonscave",
+  "spyder_dryadsgrove",
+  "spyder_flower_center",
+  "spyder_flower_city",
+  "spyder_flower_house1",
+  "spyder_flower_house2",
+  "spyder_flower_petshop",
+  "spyder_flower_scoop",
+  "spyder_greenwash",
+  "spyder_greenwash_greenhouse",
+  "spyder_greenwash_level2",
+  "spyder_greenwash_level3",
+  "spyder_healing_center",
+  "spyder_leather_center",
+  "spyder_leather_gym",
+  "spyder_leather_house1",
+  "spyder_leather_house2",
+  "spyder_leather_museum",
+  "spyder_leather_scoop",
+  "spyder_leather_shaft1",
+  "spyder_leather_shaft2",
+  "spyder_leather_town",
+  "spyder_mansion",
+  "spyder_mansion_basement",
+  "spyder_mansion_top",
+  "spyder_nimrod_bottom",
+  "spyder_nimrod_middle",
+  "spyder_nimrod_room",
+  "spyder_nimrod_top",
+  "spyder_omnichannel1",
+  "spyder_omnichannel2",
+  "spyder_omnichannel3",
+  "spyder_omnichannel4",
+  "spyder_paper_daycare",
+  "spyder_paper_manor",
+  "spyder_paper_rival_bedroom",
+  "spyder_paper_rival_downstairs",
+  "spyder_paper_rival_office",
+  "spyder_paper_scoop",
+  "spyder_paper_town",
+  "spyder_radiotower",
+  "spyder_route1",
+  "spyder_route2",
+  "spyder_route3",
+  "spyder_route4",
+  "spyder_route5",
+  "spyder_route6",
+  "spyder_routea",
+  "spyder_routeb",
+  "spyder_routec",
+  "spyder_routed",
+  "spyder_routee",
+  "spyder_scoop1",
+  "spyder_scoop2",
+  "spyder_scoop3",
+  "spyder_scoop4",
+  "spyder_test_map",
+  "spyder_timber_cafe",
+  "spyder_timber_center",
+  "spyder_timber_house",
+  "spyder_timber_scoop",
+  "spyder_timber_town",
+  "spyder_timber_walledgarden1",
+  "spyder_timber_walledgarden2",
+  "spyder_tunnel",
+  "spyder_tunnel_below",
+  "spyder_wayfarer_inn1",
+  "spyder_wayfarer_inn2",
+  "start_tuxemon",
+  "taba_ba_br_1",
+  "taba_ba_br_2",
+  "taba_ba_br_3",
+  "taba_ba_br_4",
+  "taba_ba_br_master",
+  "taba_ba_br_master_foyer",
+  "taba_ba_foyer",
+  "taba_ba_main",
+  "taba_ba_passageway_1",
+  "taba_ba_passageway_2",
+  "taba_ba_passageway_3",
+  "taba_ba_passageway_4",
+  "taba_ba_stairwell_1",
+  "taba_ba_stairwell_2",
+  "taba_house1",
+  "taba_house2",
+  "taba_house2_upstairs",
+  "taba_house3",
+  "taba_house3_upstairs",
+  "taba_house4",
+  "taba_town",
+  "tabathas",
+  "test_npcs",
+  "timber_town",
+  "tt_forest_route1",
+  "tt_paper_town",
+  "tt_searoute1",
+  "tunnel",
+  "tunnel_below",
+  "tuxe_mart_taba",
+  "water_cathedral",
+  "water_end_of_desert",
+  "water_lower_village",
+  "water_outskirts",
+  "water_river_village",
+  "water_route_grass",
+  "water_route_ice",
+  "water_snow_village",
+  "water_underwater",
+  "water_volcano_path",
+  "water_volcano_village",
+  "wayfarer_inn1",
+  "wayfarer_inn2",
+  "witcher_route_7"
+ ],
+ "schemaErrors": [],
+ "byFate": {
+  "T3-dropped": 5024,
+  "T1": 12184,
+  "T3-placeholder": 2157,
+  "T4-dropped": 6371,
+  "T1-lowered": 6158,
+  "T2-dropped": 3714,
+  "structural": 772
+ },
+ "rows": [
+  {
+   "key": "act:access_pc",
+   "fate": "T3-dropped",
+   "count": 16,
+   "note": "monster/combat subsystem (P2)"
+  },
+  {
+   "key": "act:add_item",
+   "fate": "T1",
+   "count": 114,
+   "note": "item add/sub"
+  },
+  {
+   "key": "act:add_item(npc)",
+   "fate": "T3-dropped",
+   "count": 1,
+   "note": "NPC bags are combat-only"
+  },
+  {
+   "key": "act:add_monster",
+   "fate": "T3-placeholder",
+   "count": 68,
+   "note": "sys.party_size += 1, switch mon.<slug>"
+  },
+  {
+   "key": "act:add_monster(npc)",
+   "fate": "T3-dropped",
+   "count": 717,
+   "note": "trainer teams are P2"
+  },
+  {
+   "key": "act:add_step_tracker",
+   "fate": "T4-dropped",
+   "count": 100,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:add_tech",
+   "fate": "T4-dropped",
+   "count": 12,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:add_tracker",
+   "fate": "T1-lowered",
+   "count": 24,
+   "note": "switch tracker.<map>"
+  },
+  {
+   "key": "act:autosave",
+   "fate": "T4-dropped",
+   "count": 6,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:camera_position",
+   "fate": "T4-dropped",
+   "count": 6,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:change_bg",
+   "fate": "T4-dropped",
+   "count": 21,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:change_bg_char",
+   "fate": "T4-dropped",
+   "count": 4,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:change_bg_monster",
+   "fate": "T4-dropped",
+   "count": 7,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:change_taste",
+   "fate": "T4-dropped",
+   "count": 2,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:char_face",
+   "fate": "T1",
+   "count": 117,
+   "note": "moveRoute player face"
+  },
+  {
+   "key": "act:char_face(after teleport)",
+   "fate": "T4-dropped",
+   "count": 11,
+   "note": "runs on the old map during the fade"
+  },
+  {
+   "key": "act:char_face(other npc)",
+   "fate": "T2-dropped",
+   "count": 532,
+   "note": "moveRoute target must be an event id"
+  },
+  {
+   "key": "act:char_face(toward char)",
+   "fate": "T2-dropped",
+   "count": 167,
+   "note": "needs turnToward step"
+  },
+  {
+   "key": "act:char_move",
+   "fate": "T1",
+   "count": 9,
+   "note": "moveRoute steps"
+  },
+  {
+   "key": "act:char_move(other npc)",
+   "fate": "T2-dropped",
+   "count": 64,
+   "note": "moveRoute target must be an event id"
+  },
+  {
+   "key": "act:char_plague",
+   "fate": "T4-dropped",
+   "count": 12,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:char_position",
+   "fate": "T2-dropped",
+   "count": 1,
+   "note": "runtime pathfinding / other-event routes / NPC motion props"
+  },
+  {
+   "key": "act:char_run",
+   "fate": "T2-dropped",
+   "count": 2,
+   "note": "runtime pathfinding / other-event routes / NPC motion props"
+  },
+  {
+   "key": "act:char_speed",
+   "fate": "T2-dropped",
+   "count": 19,
+   "note": "runtime pathfinding / other-event routes / NPC motion props"
+  },
+  {
+   "key": "act:char_stop",
+   "fate": "T1-lowered",
+   "count": 87,
+   "note": "blocking fibers already freeze the player (cross-event locks are T2)"
+  },
+  {
+   "key": "act:char_talk",
+   "fate": "T1-lowered",
+   "count": 772,
+   "note": "text of the NPC's dialogue-profile msgid"
+  },
+  {
+   "key": "act:choice_monster",
+   "fate": "T3-placeholder",
+   "count": 1,
+   "note": "choices -> enum code"
+  },
+  {
+   "key": "act:choice_monster(paginated)",
+   "fate": "T3-placeholder",
+   "count": 1,
+   "note": "nested choice pages retain every option"
+  },
+  {
+   "key": "act:choice_npc(paginated)",
+   "fate": "T3-placeholder",
+   "count": 2,
+   "note": "nested choice pages retain every option"
+  },
+  {
+   "key": "act:clear_variable",
+   "fate": "T1",
+   "count": 32,
+   "note": "variable set 0"
+  },
+  {
+   "key": "act:create_kennel",
+   "fate": "T4-dropped",
+   "count": 99,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:create_npc",
+   "fate": "T1-lowered",
+   "count": 1324,
+   "note": "local.npc.<slug> = 1 (spawn position other than the event's is T2 place)"
+  },
+  {
+   "key": "act:daycare",
+   "fate": "T4-dropped",
+   "count": 2,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:dojo_method",
+   "fate": "T4-dropped",
+   "count": 3,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:format_variable",
+   "fate": "T3-dropped",
+   "count": 221,
+   "note": "monster/combat subsystem (P2)"
+  },
+  {
+   "key": "act:get_party_monster",
+   "fate": "T4-dropped",
+   "count": 8,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:get_player_monster",
+   "fate": "T3-dropped",
+   "count": 23,
+   "note": "monster/combat subsystem (P2)"
+  },
+  {
+   "key": "act:info",
+   "fate": "T4-dropped",
+   "count": 7,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:load_yaml",
+   "fate": "T1-lowered",
+   "count": 7,
+   "note": "import-time events gated until this action runs"
+  },
+  {
+   "key": "act:lock_controls",
+   "fate": "T1-lowered",
+   "count": 323,
+   "note": "blocking fibers already freeze the player (cross-event locks are T2)"
+  },
+  {
+   "key": "act:modify_bill",
+   "fate": "T4-dropped",
+   "count": 7,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:modify_money",
+   "fate": "T1",
+   "count": 18,
+   "note": "gold add/sub"
+  },
+  {
+   "key": "act:modify_money(var/npc)",
+   "fate": "T2-dropped",
+   "count": 7,
+   "note": "amount from a variable"
+  },
+  {
+   "key": "act:not",
+   "fate": "T4-dropped",
+   "count": 1,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:open_journal",
+   "fate": "T3-dropped",
+   "count": 14,
+   "note": "monster/combat subsystem (P2)"
+  },
+  {
+   "key": "act:open_shop",
+   "fate": "T4-dropped",
+   "count": 28,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:park_experience",
+   "fate": "T4-dropped",
+   "count": 5,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:pathfind",
+   "fate": "T2-dropped",
+   "count": 325,
+   "note": "runtime pathfinding / other-event routes / NPC motion props"
+  },
+  {
+   "key": "act:pathfind_to_char",
+   "fate": "T2-dropped",
+   "count": 201,
+   "note": "runtime pathfinding / other-event routes / NPC motion props"
+  },
+  {
+   "key": "act:play_map_animation",
+   "fate": "T4-dropped",
+   "count": 276,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:play_music",
+   "fate": "T2-dropped",
+   "count": 200,
+   "note": "bgm hook (P1: silent)"
+  },
+  {
+   "key": "act:play_sound",
+   "fate": "T1",
+   "count": 68,
+   "note": "se cue"
+  },
+  {
+   "key": "act:play_tile_animation",
+   "fate": "T4-dropped",
+   "count": 1,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:quarantine",
+   "fate": "T4-dropped",
+   "count": 6,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:random_encounter",
+   "fate": "T3-placeholder",
+   "count": 438,
+   "note": "intentionally silent in P1"
+  },
+  {
+   "key": "act:random_integer",
+   "fate": "T1",
+   "count": 1,
+   "note": "variable random integer"
+  },
+  {
+   "key": "act:random_monster(npc)",
+   "fate": "T3-dropped",
+   "count": 9,
+   "note": "trainer teams are P2"
+  },
+  {
+   "key": "act:remove_collision",
+   "fate": "T1-lowered",
+   "count": 5,
+   "note": "keyed collision becomes a variable-gated blocking event"
+  },
+  {
+   "key": "act:remove_monster",
+   "fate": "T3-placeholder",
+   "count": 10,
+   "note": "sys.party_size -= 1 when non-empty"
+  },
+  {
+   "key": "act:remove_npc",
+   "fate": "T1-lowered",
+   "count": 217,
+   "note": "local.npc.<slug> = 0"
+  },
+  {
+   "key": "act:remove_step_tracker",
+   "fate": "T4-dropped",
+   "count": 1,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:rename_monster",
+   "fate": "T4-dropped",
+   "count": 2,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:rename_player",
+   "fate": "T2-dropped",
+   "count": 5,
+   "note": "name entry (P1: fixed name)"
+  },
+  {
+   "key": "act:screen_transition",
+   "fate": "T1-lowered",
+   "count": 25,
+   "note": "fade out+in -> wait 2t (visual fade is T2)"
+  },
+  {
+   "key": "act:set_bill",
+   "fate": "T3-dropped",
+   "count": 198,
+   "note": "monster/combat subsystem (P2)"
+  },
+  {
+   "key": "act:set_bubble",
+   "fate": "T4-dropped",
+   "count": 16,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:set_char_attribute",
+   "fate": "T4-dropped",
+   "count": 6,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:set_economy",
+   "fate": "T4-dropped",
+   "count": 16,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:set_environment",
+   "fate": "T3-dropped",
+   "count": 118,
+   "note": "monster/combat subsystem (P2)"
+  },
+  {
+   "key": "act:set_facing_mode",
+   "fate": "T2-dropped",
+   "count": 2,
+   "note": "runtime pathfinding / other-event routes / NPC motion props"
+  },
+  {
+   "key": "act:set_layer",
+   "fate": "T4-dropped",
+   "count": 65,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:set_mission",
+   "fate": "T4-dropped",
+   "count": 6,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:set_monster_attribute",
+   "fate": "T3-dropped",
+   "count": 32,
+   "note": "monster/combat subsystem (P2)"
+  },
+  {
+   "key": "act:set_monster_health",
+   "fate": "T3-dropped",
+   "count": 88,
+   "note": "monster/combat subsystem (P2)"
+  },
+  {
+   "key": "act:set_monster_level",
+   "fate": "T4-dropped",
+   "count": 3,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:set_monster_status",
+   "fate": "T3-dropped",
+   "count": 88,
+   "note": "monster/combat subsystem (P2)"
+  },
+  {
+   "key": "act:set_party_status",
+   "fate": "T4-dropped",
+   "count": 7,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:set_random_variable",
+   "fate": "T1",
+   "count": 1,
+   "note": "variable random enum code"
+  },
+  {
+   "key": "act:set_teleport_faint",
+   "fate": "T3-dropped",
+   "count": 27,
+   "note": "monster/combat subsystem (P2)"
+  },
+  {
+   "key": "act:set_template",
+   "fate": "T4-dropped",
+   "count": 22,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:set_tuxepedia",
+   "fate": "T4-dropped",
+   "count": 6,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:set_variable",
+   "fate": "T1",
+   "count": 1246,
+   "note": "variable set enum code"
+  },
+  {
+   "key": "act:start_battle",
+   "fate": "T3-placeholder",
+   "count": 330,
+   "note": "inline placeholder: text + outcome writes"
+  },
+  {
+   "key": "act:start_double_battle",
+   "fate": "T3-placeholder",
+   "count": 8,
+   "note": "inline placeholder: text + outcome writes"
+  },
+  {
+   "key": "act:teleport_faint",
+   "fate": "T4-dropped",
+   "count": 2,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:trading",
+   "fate": "T4-dropped",
+   "count": 8,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:transition_teleport",
+   "fate": "T1",
+   "count": 1045,
+   "note": "transfer (terminal; dir from trailing char_face)"
+  },
+  {
+   "key": "act:transition_teleport(clamped)",
+   "fate": "T1-lowered",
+   "count": 3,
+   "note": "upstream landing point clamped into target bounds"
+  },
+  {
+   "key": "act:translated_dialog",
+   "fate": "T1",
+   "count": 2164,
+   "note": "text boxes from en_US .po (layout args ignored)"
+  },
+  {
+   "key": "act:translated_dialog(missing key)",
+   "fate": "T4-dropped",
+   "count": 5,
+   "note": "msgid absent from en_US"
+  },
+  {
+   "key": "act:translated_dialog_choice",
+   "fate": "T1",
+   "count": 246,
+   "note": "choices -> enum code"
+  },
+  {
+   "key": "act:translated_dialog_choice(paginated)",
+   "fate": "T1-lowered",
+   "count": 10,
+   "note": "nested choice pages retain every option"
+  },
+  {
+   "key": "act:tune_radio",
+   "fate": "T4-dropped",
+   "count": 2,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:unlock_controls",
+   "fate": "T1-lowered",
+   "count": 328,
+   "note": "blocking fibers already freeze the player (cross-event locks are T2)"
+  },
+  {
+   "key": "act:update_tile_properties",
+   "fate": "T4-dropped",
+   "count": 198,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:variable_math",
+   "fate": "T4-dropped",
+   "count": 9,
+   "note": "presentation / meta"
+  },
+  {
+   "key": "act:wait",
+   "fate": "T1",
+   "count": 429,
+   "note": "wait seconds"
+  },
+  {
+   "key": "act:wait(after teleport)",
+   "fate": "T4-dropped",
+   "count": 1,
+   "note": "runs on the old map during the fade"
+  },
+  {
+   "key": "act:wild_encounter",
+   "fate": "T3-placeholder",
+   "count": 20,
+   "note": "scripted wild battle auto-wins in P1"
+  },
+  {
+   "key": "behav:talk",
+   "fate": "structural",
+   "count": 772,
+   "note": "talk -> NPC action page"
+  },
+  {
+   "key": "behav:talk(char_face npc,player)",
+   "fate": "T2-dropped",
+   "count": 554,
+   "note": "turn toward the player needs a turnTowardPlayer move step"
+  },
+  {
+   "key": "cond:is battle_outcome",
+   "fate": "T3-placeholder",
+   "count": 225,
+   "note": "switch bo.<opp>.won written by the battle placeholder"
+  },
+  {
+   "key": "cond:is battle_outcome(draw)",
+   "fate": "T3-placeholder",
+   "count": 1,
+   "note": "P1 never loses"
+  },
+  {
+   "key": "cond:is battle_outcome(lost)",
+   "fate": "T3-placeholder",
+   "count": 1,
+   "note": "P1 never loses"
+  },
+  {
+   "key": "cond:is battle_outcome_count",
+   "fate": "T3-placeholder",
+   "count": 2,
+   "note": "variable boc.<opp>.won counted by the placeholder"
+  },
+  {
+   "key": "cond:is bill_is",
+   "fate": "T3-dropped",
+   "count": 14,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is char_defeated",
+   "fate": "T3-placeholder",
+   "count": 206,
+   "note": "player never defeated in P1; NPC: switch defeated.<slug>"
+  },
+  {
+   "key": "cond:is char_exists",
+   "fate": "T1-lowered",
+   "count": 3,
+   "note": "local.npc.<slug> presence variable (per-visit reset is T2)"
+  },
+  {
+   "key": "cond:is char_facing(player)",
+   "fate": "T2-dropped",
+   "count": 1003,
+   "note": "no facing filter on triggers in v1"
+  },
+  {
+   "key": "cond:is char_gender",
+   "fate": "T3-dropped",
+   "count": 1,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is char_healed",
+   "fate": "T3-dropped",
+   "count": 1,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is char_in",
+   "fate": "T3-dropped",
+   "count": 99,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is char_sprite",
+   "fate": "T3-dropped",
+   "count": 331,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is check_char_parameter",
+   "fate": "T3-dropped",
+   "count": 138,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is check_evolution",
+   "fate": "T3-dropped",
+   "count": 179,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is check_max_tech",
+   "fate": "T3-dropped",
+   "count": 179,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is check_party_parameter",
+   "fate": "T3-dropped",
+   "count": 8,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is check_world",
+   "fate": "T3-dropped",
+   "count": 198,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is cooldown_days",
+   "fate": "T3-dropped",
+   "count": 1,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is current_state",
+   "fate": "T4-dropped",
+   "count": 1487,
+   "note": "WorldState is the only overworld state"
+  },
+  {
+   "key": "cond:is environment_is",
+   "fate": "T3-dropped",
+   "count": 28,
+   "note": "battle backdrop only"
+  },
+  {
+   "key": "cond:is has_item",
+   "fate": "T1",
+   "count": 347,
+   "note": "item count >= n"
+  },
+  {
+   "key": "cond:is has_kennel",
+   "fate": "T3-dropped",
+   "count": 2,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is has_monster",
+   "fate": "T3-placeholder",
+   "count": 24,
+   "note": "switch mon.<slug> set by add_monster"
+  },
+  {
+   "key": "cond:is has_tuxepedia",
+   "fate": "T3-dropped",
+   "count": 1,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is kennel",
+   "fate": "T3-dropped",
+   "count": 198,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is location_inside",
+   "fate": "T1-lowered",
+   "count": 99,
+   "note": "static map property, folded at import"
+  },
+  {
+   "key": "cond:is location_type",
+   "fate": "T1-lowered",
+   "count": 99,
+   "note": "static map property, folded at import"
+  },
+  {
+   "key": "cond:is money_is",
+   "fate": "T1",
+   "count": 14,
+   "note": "gold >= n"
+  },
+  {
+   "key": "cond:is money_is(variable)",
+   "fate": "T2-dropped",
+   "count": 7,
+   "note": "gold comparison uses a variable operand"
+  },
+  {
+   "key": "cond:is music_playing",
+   "fate": "T4-dropped",
+   "count": 1,
+   "note": "no music in P1"
+  },
+  {
+   "key": "cond:is party_infected",
+   "fate": "T3-placeholder",
+   "count": 3,
+   "note": "no plague in P1: none=true"
+  },
+  {
+   "key": "cond:is party_size",
+   "fate": "T3-placeholder",
+   "count": 250,
+   "note": "variable sys.party_size kept by add_monster"
+  },
+  {
+   "key": "cond:is step_tracker",
+   "fate": "T3-dropped",
+   "count": 105,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is tile_property_updated",
+   "fate": "T3-dropped",
+   "count": 396,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:is time_is",
+   "fate": "T2-dropped",
+   "count": 361,
+   "note": "no clock in P1: fixed daytime"
+  },
+  {
+   "key": "cond:is variable_set",
+   "fate": "T1",
+   "count": 1694,
+   "note": "page/if variable compare on the enum code"
+  },
+  {
+   "key": "cond:not battle_outcome",
+   "fate": "T3-placeholder",
+   "count": 361,
+   "note": "switch bo.<opp>.won written by the battle placeholder"
+  },
+  {
+   "key": "cond:not battle_outcome(draw)",
+   "fate": "T3-placeholder",
+   "count": 1,
+   "note": "P1 never loses"
+  },
+  {
+   "key": "cond:not battle_outcome(lost)",
+   "fate": "T3-placeholder",
+   "count": 1,
+   "note": "P1 never loses"
+  },
+  {
+   "key": "cond:not battle_outcome_count",
+   "fate": "T3-placeholder",
+   "count": 9,
+   "note": "variable boc.<opp>.won counted by the placeholder"
+  },
+  {
+   "key": "cond:not bill_exists",
+   "fate": "T3-dropped",
+   "count": 99,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:not char_defeated",
+   "fate": "T3-placeholder",
+   "count": 179,
+   "note": "player never defeated in P1; NPC: switch defeated.<slug>"
+  },
+  {
+   "key": "cond:not char_exists",
+   "fate": "T1-lowered",
+   "count": 1231,
+   "note": "local.npc.<slug> presence variable (per-visit reset is T2)"
+  },
+  {
+   "key": "cond:not char_gender",
+   "fate": "T3-dropped",
+   "count": 1,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:not char_healed",
+   "fate": "T3-dropped",
+   "count": 1,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:not char_in",
+   "fate": "T3-dropped",
+   "count": 594,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:not char_sprite",
+   "fate": "T3-dropped",
+   "count": 127,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:not check_char_parameter",
+   "fate": "T3-dropped",
+   "count": 1,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:not check_party_parameter",
+   "fate": "T3-dropped",
+   "count": 6,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:not check_world",
+   "fate": "T3-dropped",
+   "count": 99,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:not environment_is",
+   "fate": "T3-dropped",
+   "count": 367,
+   "note": "battle backdrop only"
+  },
+  {
+   "key": "cond:not has_item",
+   "fate": "T1",
+   "count": 58,
+   "note": "item count >= n"
+  },
+  {
+   "key": "cond:not has_monster",
+   "fate": "T3-placeholder",
+   "count": 11,
+   "note": "switch mon.<slug> set by add_monster"
+  },
+  {
+   "key": "cond:not has_tuxepedia",
+   "fate": "T3-dropped",
+   "count": 1,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:not kennel",
+   "fate": "T3-dropped",
+   "count": 99,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:not location_inside",
+   "fate": "T1-lowered",
+   "count": 198,
+   "note": "static map property, folded at import"
+  },
+  {
+   "key": "cond:not location_type",
+   "fate": "T1-lowered",
+   "count": 99,
+   "note": "static map property, folded at import"
+  },
+  {
+   "key": "cond:not money_is",
+   "fate": "T1",
+   "count": 8,
+   "note": "gold >= n"
+  },
+  {
+   "key": "cond:not money_is(variable)",
+   "fate": "T2-dropped",
+   "count": 7,
+   "note": "gold comparison uses a variable operand"
+  },
+  {
+   "key": "cond:not music_playing",
+   "fate": "T4-dropped",
+   "count": 196,
+   "note": "no music in P1"
+  },
+  {
+   "key": "cond:not party_size",
+   "fate": "T3-placeholder",
+   "count": 5,
+   "note": "variable sys.party_size kept by add_monster"
+  },
+  {
+   "key": "cond:not tile_property_updated",
+   "fate": "T3-dropped",
+   "count": 198,
+   "note": "monster/party/meta state unknown to P1: fixed answer"
+  },
+  {
+   "key": "cond:not time_is",
+   "fate": "T2-dropped",
+   "count": 257,
+   "note": "no clock in P1: fixed daytime"
+  },
+  {
+   "key": "cond:not tracker",
+   "fate": "T1",
+   "count": 22,
+   "note": "switch tracker.<map> set by add_tracker"
+  },
+  {
+   "key": "cond:not variable_set",
+   "fate": "T1",
+   "count": 1678,
+   "note": "page/if variable compare on the enum code"
+  },
+  {
+   "key": "trigger:action",
+   "fate": "T1",
+   "count": 380,
+   "note": "action"
+  },
+  {
+   "key": "trigger:action",
+   "fate": "T1",
+   "count": 64,
+   "note": "action"
+  },
+  {
+   "key": "trigger:action",
+   "fate": "T1",
+   "count": 1,
+   "note": "action"
+  },
+  {
+   "key": "trigger:action",
+   "fate": "T1-lowered",
+   "count": 51,
+   "note": "area expanded to one event per cell"
+  },
+  {
+   "key": "trigger:action",
+   "fate": "T1-lowered",
+   "count": 11,
+   "note": "area expanded to one event per cell"
+  },
+  {
+   "key": "trigger:guard",
+   "fate": "T1",
+   "count": 678,
+   "note": "parallel"
+  },
+  {
+   "key": "trigger:guard(compound)",
+   "fate": "T1-lowered",
+   "count": 206,
+   "note": "derived switch evaluator (T2 condition.all removes it)"
+  },
+  {
+   "key": "trigger:never-true guard",
+   "fate": "T4-dropped",
+   "count": 2478,
+   "note": "a fixed-false clause (music/env/time/...) gates it"
+  },
+  {
+   "key": "trigger:no-op after conversion",
+   "fate": "T4-dropped",
+   "count": 1210,
+   "note": "every action dropped"
+  },
+  {
+   "key": "trigger:spawn",
+   "fate": "T1-lowered",
+   "count": 690,
+   "note": "parallel page: guard -> local.npc.<slug> = 1"
+  },
+  {
+   "key": "trigger:stacked events on one cell",
+   "fate": "T1-lowered",
+   "count": 46,
+   "note": "merged: match flags then bodies"
+  },
+  {
+   "key": "trigger:talk",
+   "fate": "T1",
+   "count": 772,
+   "note": "NPC event action page (if-chain over talk guards)"
+  },
+  {
+   "key": "trigger:touch",
+   "fate": "T1",
+   "count": 813,
+   "note": "playerTouch"
+  },
+  {
+   "key": "trigger:touch",
+   "fate": "T1",
+   "count": 165,
+   "note": "playerTouch"
+  },
+  {
+   "key": "trigger:touch",
+   "fate": "T1-lowered",
+   "count": 119,
+   "note": "area expanded to one event per cell"
+  },
+  {
+   "key": "trigger:touch",
+   "fate": "T1-lowered",
+   "count": 164,
+   "note": "area expanded to one event per cell"
+  },
+  {
+   "key": "trigger:touch",
+   "fate": "T1-lowered",
+   "count": 17,
+   "note": "parallel visit tracker avoids expanding the full map"
+  }
+ ],
+ "transferRepairs": [
+  {
+   "sourceMap": "leather_town",
+   "targetMap": "flower_city",
+   "requested": {
+    "x": 59,
+    "y": 0
+   },
+   "emitted": {
+    "x": 39,
+    "y": 0
+   }
+  },
+  {
+   "sourceMap": "leather_town",
+   "targetMap": "flower_city",
+   "requested": {
+    "x": 59,
+    "y": 0
+   },
+   "emitted": {
+    "x": 39,
+    "y": 0
+   }
+  },
+  {
+   "sourceMap": "water_volcano_path",
+   "targetMap": "water_volcano_village",
+   "requested": {
+    "x": 20,
+    "y": 0
+   },
+   "emitted": {
+    "x": 19,
+    "y": 0
+   }
+  }
+ ],
+ "transferErrors": [],
+ "coverage": {
+  "sourceEvents": 4578,
+  "actions": {
+   "summary": {
+    "types": 98,
+    "uses": 13617,
+    "native": 5448,
+    "degraded": 4652,
+    "placeholder": 1099,
+    "dropped": 2418,
+    "nativePercent": 40,
+    "executablePercent": 82.2,
+    "tier1": {
+     "uses": 6246,
+     "percent": 45.9,
+     "requiredPercent": 45.9,
+     "meetsBaseline": true
+    }
+   },
+   "rows": [
+    {
+     "type": "access_pc",
+     "total": 10,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 10
+    },
+    {
+     "type": "add_item",
+     "total": 118,
+     "native": 117,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "add_monster",
+     "total": 792,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 75,
+     "dropped": 717
+    },
+    {
+     "type": "add_step_tracker",
+     "total": 3,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 3
+    },
+    {
+     "type": "add_tech",
+     "total": 12,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 12
+    },
+    {
+     "type": "add_tracker",
+     "total": 24,
+     "native": 24,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "autosave",
+     "total": 6,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 6
+    },
+    {
+     "type": "camera_position",
+     "total": 6,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 6
+    },
+    {
+     "type": "change_bg",
+     "total": 15,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 15
+    },
+    {
+     "type": "change_bg_char",
+     "total": 4,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 4
+    },
+    {
+     "type": "change_bg_monster",
+     "total": 7,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 7
+    },
+    {
+     "type": "change_taste",
+     "total": 2,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 2
+    },
+    {
+     "type": "char_face",
+     "total": 2027,
+     "native": 0,
+     "degraded": 2027,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "char_move",
+     "total": 77,
+     "native": 0,
+     "degraded": 77,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "char_plague",
+     "total": 13,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 13
+    },
+    {
+     "type": "char_position",
+     "total": 1,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "char_run",
+     "total": 2,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 2
+    },
+    {
+     "type": "char_speed",
+     "total": 19,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 19
+    },
+    {
+     "type": "char_stop",
+     "total": 88,
+     "native": 0,
+     "degraded": 88,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "char_talk",
+     "total": 772,
+     "native": 772,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "char_wander",
+     "total": 33,
+     "native": 0,
+     "degraded": 33,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "choice_monster",
+     "total": 2,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 2,
+     "dropped": 0
+    },
+    {
+     "type": "choice_npc",
+     "total": 1,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 1,
+     "dropped": 0
+    },
+    {
+     "type": "clear_variable",
+     "total": 36,
+     "native": 36,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "copy_variable",
+     "total": 2,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 2
+    },
+    {
+     "type": "create_kennel",
+     "total": 1,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "create_npc",
+     "total": 1503,
+     "native": 0,
+     "degraded": 1503,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "daycare",
+     "total": 2,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 2
+    },
+    {
+     "type": "dojo_method",
+     "total": 3,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 3
+    },
+    {
+     "type": "evolution",
+     "total": 2,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 2
+    },
+    {
+     "type": "fadeout_music",
+     "total": 1,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "format_variable",
+     "total": 10,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 10
+    },
+    {
+     "type": "get_party_monster",
+     "total": 9,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 9
+    },
+    {
+     "type": "get_pending_moves",
+     "total": 2,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 2
+    },
+    {
+     "type": "get_player_monster",
+     "total": 17,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 17
+    },
+    {
+     "type": "info",
+     "total": 1,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "load_yaml",
+     "total": 7,
+     "native": 0,
+     "degraded": 7,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "lock_controls",
+     "total": 323,
+     "native": 0,
+     "degraded": 323,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "modify_bill",
+     "total": 3,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 3
+    },
+    {
+     "type": "modify_money",
+     "total": 19,
+     "native": 18,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "modify_monster_bond",
+     "total": 1,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "not",
+     "total": 1,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "open_journal",
+     "total": 14,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 14
+    },
+    {
+     "type": "open_shop",
+     "total": 28,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 28
+    },
+    {
+     "type": "park_experience",
+     "total": 8,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 8
+    },
+    {
+     "type": "pathfind",
+     "total": 336,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 336
+    },
+    {
+     "type": "pathfind_to_char",
+     "total": 201,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 201
+    },
+    {
+     "type": "play_map_animation",
+     "total": 276,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 276
+    },
+    {
+     "type": "play_music",
+     "total": 200,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 200
+    },
+    {
+     "type": "play_sound",
+     "total": 67,
+     "native": 67,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "play_tile_animation",
+     "total": 1,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "quarantine",
+     "total": 8,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 8
+    },
+    {
+     "type": "quit_world",
+     "total": 3,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 3
+    },
+    {
+     "type": "random_encounter",
+     "total": 476,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 476,
+     "dropped": 0
+    },
+    {
+     "type": "random_integer",
+     "total": 1,
+     "native": 1,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "random_monster",
+     "total": 39,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 15,
+     "dropped": 24
+    },
+    {
+     "type": "remove_collision",
+     "total": 5,
+     "native": 0,
+     "degraded": 5,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "remove_monster",
+     "total": 5,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 5,
+     "dropped": 0
+    },
+    {
+     "type": "remove_npc",
+     "total": 224,
+     "native": 0,
+     "degraded": 224,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "remove_step_tracker",
+     "total": 5,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 5
+    },
+    {
+     "type": "remove_tech",
+     "total": 2,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 2
+    },
+    {
+     "type": "rename_monster",
+     "total": 2,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 2
+    },
+    {
+     "type": "rename_player",
+     "total": 5,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 5
+    },
+    {
+     "type": "screen_transition",
+     "total": 25,
+     "native": 0,
+     "degraded": 25,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "set_bill",
+     "total": 2,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 2
+    },
+    {
+     "type": "set_bubble",
+     "total": 16,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 16
+    },
+    {
+     "type": "set_char_attribute",
+     "total": 3,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 3
+    },
+    {
+     "type": "set_economy",
+     "total": 16,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 16
+    },
+    {
+     "type": "set_environment",
+     "total": 174,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 174
+    },
+    {
+     "type": "set_facing_mode",
+     "total": 2,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 2
+    },
+    {
+     "type": "set_kennel_visible",
+     "total": 2,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 2
+    },
+    {
+     "type": "set_layer",
+     "total": 79,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 79
+    },
+    {
+     "type": "set_mission",
+     "total": 6,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 6
+    },
+    {
+     "type": "set_monster_attribute",
+     "total": 33,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 33
+    },
+    {
+     "type": "set_monster_health",
+     "total": 83,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 83,
+     "dropped": 0
+    },
+    {
+     "type": "set_monster_level",
+     "total": 3,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 3
+    },
+    {
+     "type": "set_monster_status",
+     "total": 83,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 83,
+     "dropped": 0
+    },
+    {
+     "type": "set_party_status",
+     "total": 2,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 2
+    },
+    {
+     "type": "set_random_variable",
+     "total": 1,
+     "native": 1,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "set_step_tracker_milestone_shown",
+     "total": 3,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 3
+    },
+    {
+     "type": "set_teleport_faint",
+     "total": 29,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 29
+    },
+    {
+     "type": "set_template",
+     "total": 24,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 24
+    },
+    {
+     "type": "set_tuxepedia",
+     "total": 6,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 6
+    },
+    {
+     "type": "set_variable",
+     "total": 715,
+     "native": 715,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "start_battle",
+     "total": 331,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 331,
+     "dropped": 0
+    },
+    {
+     "type": "start_double_battle",
+     "total": 8,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 8,
+     "dropped": 0
+    },
+    {
+     "type": "teleport_faint",
+     "total": 11,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 11
+    },
+    {
+     "type": "trading",
+     "total": 8,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 8
+    },
+    {
+     "type": "transition_teleport",
+     "total": 1049,
+     "native": 1049,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "translated_dialog",
+     "total": 2068,
+     "native": 2068,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "translated_dialog_choice",
+     "total": 149,
+     "native": 139,
+     "degraded": 10,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "tune_radio",
+     "total": 2,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 2
+    },
+    {
+     "type": "unlock_controls",
+     "total": 330,
+     "native": 0,
+     "degraded": 330,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "update_tile_properties",
+     "total": 2,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 2
+    },
+    {
+     "type": "update_time",
+     "total": 3,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 3
+    },
+    {
+     "type": "variable_math",
+     "total": 5,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 5
+    },
+    {
+     "type": "wait",
+     "total": 441,
+     "native": 441,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "wild_encounter",
+     "total": 20,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 20,
+     "dropped": 0
+    }
+   ]
+  },
+  "conditions": {
+   "summary": {
+    "types": 64,
+    "uses": 8663,
+    "native": 4589,
+    "degraded": 2623,
+    "placeholder": 888,
+    "dropped": 563,
+    "nativePercent": 53,
+    "executablePercent": 93.5,
+    "tier1": {
+     "uses": 4591,
+     "percent": 53,
+     "requiredPercent": 53,
+     "meetsBaseline": true
+    }
+   },
+   "rows": [
+    {
+     "type": "is battle_outcome",
+     "total": 230,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 230,
+     "dropped": 0
+    },
+    {
+     "type": "is battle_outcome_count",
+     "total": 2,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 2,
+     "dropped": 0
+    },
+    {
+     "type": "is bill_is",
+     "total": 2,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 2
+    },
+    {
+     "type": "is button_pressed",
+     "total": 419,
+     "native": 419,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "is char_at",
+     "total": 1811,
+     "native": 1811,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "is char_defeated",
+     "total": 10,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 10,
+     "dropped": 0
+    },
+    {
+     "type": "is char_exists",
+     "total": 9,
+     "native": 0,
+     "degraded": 9,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "is char_facing",
+     "total": 1008,
+     "native": 0,
+     "degraded": 1008,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "is char_facing_tile",
+     "total": 344,
+     "native": 344,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "is char_gender",
+     "total": 1,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "is char_healed",
+     "total": 1,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "is char_in",
+     "total": 1,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "is char_moved",
+     "total": 454,
+     "native": 454,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "is char_sprite",
+     "total": 37,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 37
+    },
+    {
+     "type": "is check_char_parameter",
+     "total": 40,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 40
+    },
+    {
+     "type": "is check_evolution",
+     "total": 2,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 2
+    },
+    {
+     "type": "is check_max_tech",
+     "total": 2,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 2
+    },
+    {
+     "type": "is check_party_parameter",
+     "total": 8,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 8
+    },
+    {
+     "type": "is check_world",
+     "total": 2,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 2
+    },
+    {
+     "type": "is cooldown_days",
+     "total": 1,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "is current_state",
+     "total": 78,
+     "native": 0,
+     "degraded": 78,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "is environment_is",
+     "total": 28,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 28
+    },
+    {
+     "type": "is has_item",
+     "total": 53,
+     "native": 53,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "is has_kennel",
+     "total": 2,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 2
+    },
+    {
+     "type": "is has_monster",
+     "total": 24,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 24,
+     "dropped": 0
+    },
+    {
+     "type": "is has_tuxepedia",
+     "total": 1,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "is kennel",
+     "total": 2,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 2
+    },
+    {
+     "type": "is location_inside",
+     "total": 1,
+     "native": 1,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "is location_type",
+     "total": 1,
+     "native": 1,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "is money_is",
+     "total": 15,
+     "native": 14,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "is music_playing",
+     "total": 1,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "is party_infected",
+     "total": 3,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 3,
+     "dropped": 0
+    },
+    {
+     "type": "is party_size",
+     "total": 50,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 50,
+     "dropped": 0
+    },
+    {
+     "type": "is player_facing_tile",
+     "total": 1,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "is step_tracker",
+     "total": 7,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 7
+    },
+    {
+     "type": "is tile_property_updated",
+     "total": 4,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 4
+    },
+    {
+     "type": "is time_is",
+     "total": 67,
+     "native": 0,
+     "degraded": 67,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "is variable_set",
+     "total": 730,
+     "native": 730,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "not battle_outcome",
+     "total": 363,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 363,
+     "dropped": 0
+    },
+    {
+     "type": "not battle_outcome_count",
+     "total": 9,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 9,
+     "dropped": 0
+    },
+    {
+     "type": "not bill_exists",
+     "total": 1,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "not char_defeated",
+     "total": 181,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 181,
+     "dropped": 0
+    },
+    {
+     "type": "not char_exists",
+     "total": 1400,
+     "native": 0,
+     "degraded": 1400,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "not char_gender",
+     "total": 1,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "not char_healed",
+     "total": 1,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "not char_in",
+     "total": 6,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 6
+    },
+    {
+     "type": "not char_sprite",
+     "total": 29,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 29
+    },
+    {
+     "type": "not check_char_parameter",
+     "total": 1,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "not check_party_parameter",
+     "total": 6,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 6
+    },
+    {
+     "type": "not check_world",
+     "total": 1,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "not environment_is",
+     "total": 172,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 172
+    },
+    {
+     "type": "not has_item",
+     "total": 58,
+     "native": 58,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "not has_monster",
+     "total": 11,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 11,
+     "dropped": 0
+    },
+    {
+     "type": "not has_tuxepedia",
+     "total": 1,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "not kennel",
+     "total": 1,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "not location_inside",
+     "total": 2,
+     "native": 2,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "not location_type",
+     "total": 1,
+     "native": 1,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "not money_is",
+     "total": 9,
+     "native": 8,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 1
+    },
+    {
+     "type": "not music_playing",
+     "total": 196,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 196
+    },
+    {
+     "type": "not party_size",
+     "total": 5,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 5,
+     "dropped": 0
+    },
+    {
+     "type": "not tile_property_updated",
+     "total": 2,
+     "native": 0,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 2
+    },
+    {
+     "type": "not time_is",
+     "total": 61,
+     "native": 0,
+     "degraded": 61,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "not tracker",
+     "total": 22,
+     "native": 22,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 0
+    },
+    {
+     "type": "not variable_set",
+     "total": 671,
+     "native": 671,
+     "degraded": 0,
+     "placeholder": 0,
+     "dropped": 0
+    }
+   ]
+  }
+ }
+}
