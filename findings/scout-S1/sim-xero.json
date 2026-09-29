@@ -1,0 +1,2780 @@
+{
+ "campaign": "xero",
+ "storyEventsNeverFired": 347,
+ "neverFiredFailingConditionTally": {
+  "is variable_set": 32,
+  "not variable_set": 7,
+  "not has_item": 1,
+  "is time_is": 1
+ },
+ "neverFired": [
+  {
+   "event": "player_house_bedroom:Auto Healing Teleported",
+   "failing": [
+    "is variable_set battle_last_result:lost"
+   ]
+  },
+  {
+   "event": "player_house_bedroom:Go Downstairs",
+   "failing": []
+  },
+  {
+   "event": "player_house_bedroom:Intro No",
+   "failing": [
+    "is variable_set question_xero:yes",
+    "not variable_set xero_intro:done"
+   ]
+  },
+  {
+   "event": "player_house_downstairs:Go Upstairs",
+   "failing": []
+  },
+  {
+   "event": "player_house_downstairs:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "taba_town:Go to Player's house",
+   "failing": []
+  },
+  {
+   "event": "taba_town:Go to Test house",
+   "failing": []
+  },
+  {
+   "event": "taba_town:Teleport to Route 1",
+   "failing": []
+  },
+  {
+   "event": "taba_town:Teleport to Route 1",
+   "failing": []
+  },
+  {
+   "event": "taba_town:Go to Professor's Lab",
+   "failing": []
+  },
+  {
+   "event": "taba_town:Teleport to healing center",
+   "failing": []
+  },
+  {
+   "event": "taba_town:Enter mart",
+   "failing": []
+  },
+  {
+   "event": "taba_town:cavalrysamewalk",
+   "failing": [
+    "is variable_set goodbyeoldknight:hedead"
+   ]
+  },
+  {
+   "event": "taba_town:timetogroove2",
+   "failing": [
+    "is variable_set comeinside:dope"
+   ]
+  },
+  {
+   "event": "taba_town:greeter_greets",
+   "failing": [
+    "not has_item player,tuxeball",
+    "not variable_set greeter_greets:yes"
+   ]
+  },
+  {
+   "event": "taba_town:Teleport to house1",
+   "failing": []
+  },
+  {
+   "event": "taba_town:Teleport to house2",
+   "failing": []
+  },
+  {
+   "event": "taba_town:Teleport to house3",
+   "failing": []
+  },
+  {
+   "event": "taba_town:Teleport to house4",
+   "failing": []
+  },
+  {
+   "event": "taba_town:Teleport to Dryadsgrove",
+   "failing": []
+  },
+  {
+   "event": "taba_town:Teleport to Dryadsgrove",
+   "failing": []
+  },
+  {
+   "event": "taba_town:Teleport to Dryadsgrove",
+   "failing": []
+  },
+  {
+   "event": "maple_house:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "maple_house:Go Upstairs",
+   "failing": []
+  },
+  {
+   "event": "route1:Teleport to map1 (upper)",
+   "failing": []
+  },
+  {
+   "event": "route1:Teleport to map1 (lower)",
+   "failing": []
+  },
+  {
+   "event": "route1:Teleport to route1a",
+   "failing": []
+  },
+  {
+   "event": "route1:Teleport to route1a",
+   "failing": []
+  },
+  {
+   "event": "route1:Teleport to route1a",
+   "failing": []
+  },
+  {
+   "event": "route1:omnigrunt3move",
+   "failing": [
+    "is variable_set threemusketeers:yay"
+   ]
+  },
+  {
+   "event": "route1:omnigrunt4move",
+   "failing": [
+    "is variable_set threemusketeers:yay"
+   ]
+  },
+  {
+   "event": "route1:kyle sucks",
+   "failing": [
+    "is variable_set completethis:now"
+   ]
+  },
+  {
+   "event": "route1:backhomenow",
+   "failing": [
+    "is variable_set begone:now"
+   ]
+  },
+  {
+   "event": "route1:backhomenow2",
+   "failing": [
+    "is variable_set begone:now"
+   ]
+  },
+  {
+   "event": "route1:backhomenow3",
+   "failing": [
+    "is variable_set begone:now"
+   ]
+  },
+  {
+   "event": "route1:backhomenow4",
+   "failing": [
+    "is variable_set begone:now"
+   ]
+  },
+  {
+   "event": "route1:nowmisaleaves",
+   "failing": [
+    "is variable_set begone:gone"
+   ]
+  },
+  {
+   "event": "route1:gym time",
+   "failing": [
+    "is variable_set misaisgone:true"
+   ]
+  },
+  {
+   "event": "route1:have to head in",
+   "failing": [
+    "is variable_set consoleme:now"
+   ]
+  },
+  {
+   "event": "route1:friends or rivals",
+   "failing": [
+    "is variable_set friends:maybe"
+   ]
+  },
+  {
+   "event": "route1:nobody talk",
+   "failing": [
+    "is variable_set christieknows:nobody"
+   ]
+  },
+  {
+   "event": "route1:somebody talk",
+   "failing": [
+    "is variable_set christieknows:somebody"
+   ]
+  },
+  {
+   "event": "route1:stop",
+   "failing": [
+    "is variable_set christieknows:stop"
+   ]
+  },
+  {
+   "event": "route1:enter the battle area",
+   "failing": []
+  },
+  {
+   "event": "route1_sanglorian:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "route1_sanglorian:Teleport to Route1",
+   "failing": []
+  },
+  {
+   "event": "route1_sanglorian:Teleport to Route1",
+   "failing": []
+  },
+  {
+   "event": "route1_sanglorian:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "route1_sanglorian:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "route1_sanglorian:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "route1_sanglorian:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "route1_sanglorian:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "route1_sanglorian:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "route1_sanglorian:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "route1_sanglorian:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "route1_sanglorian:Teleport to Route1",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_foyer:back to route1",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_foyer:enter the battle area",
+   "failing": []
+  },
+  {
+   "event": "professor_lab:Teleport to map1",
+   "failing": []
+  },
+  {
+   "event": "professor_lab:startchoice1",
+   "failing": [
+    "is variable_set startchoice:no"
+   ]
+  },
+  {
+   "event": "professor_lab:rockittenNO",
+   "failing": [
+    "is variable_set rockittenchoice:no"
+   ]
+  },
+  {
+   "event": "professor_lab:cardilingNO",
+   "failing": [
+    "is variable_set cardilingchoice:no"
+   ]
+  },
+  {
+   "event": "professor_lab:cardilingYES",
+   "failing": [
+    "is variable_set cardilingchoice:yes"
+   ]
+  },
+  {
+   "event": "professor_lab:tweesherYES",
+   "failing": [
+    "is variable_set tweesherchoice:yes"
+   ]
+  },
+  {
+   "event": "professor_lab:tweesherNO",
+   "failing": [
+    "is variable_set tweesherchoice:no"
+   ]
+  },
+  {
+   "event": "professor_lab:first battle lost or draw",
+   "failing": [
+    "not variable_set battle_last_result:won",
+    "not variable_set endbattleprof:yes"
+   ]
+  },
+  {
+   "event": "healing_center:Go outside",
+   "failing": []
+  },
+  {
+   "event": "tuxe_mart_taba:Go outside",
+   "failing": []
+  },
+  {
+   "event": "taba_house1:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "taba_house2:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "taba_house2:Go Upstairs",
+   "failing": []
+  },
+  {
+   "event": "taba_house3:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "taba_house3:Go Up",
+   "failing": []
+  },
+  {
+   "event": "taba_house4:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "dryadsgrove:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "dryadsgrove:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "dryadsgrove:Teleport to Taba",
+   "failing": []
+  },
+  {
+   "event": "dryadsgrove:Teleport to Taba",
+   "failing": []
+  },
+  {
+   "event": "dryadsgrove:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "dryadsgrove:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "maple_bedroom:Go Downstairs",
+   "failing": []
+  },
+  {
+   "event": "maple_bedroom:Stop 27Apr",
+   "failing": [
+    "is time_is date,equals,4-27"
+   ]
+  },
+  {
+   "event": "taba_house2_upstairs:Go Downstairs",
+   "failing": []
+  },
+  {
+   "event": "taba_house3_upstairs:Go Down",
+   "failing": []
+  },
+  {
+   "event": "cotton_town:Teleport to Route 2",
+   "failing": []
+  },
+  {
+   "event": "cotton_town:Teleport to Route 1",
+   "failing": []
+  },
+  {
+   "event": "cotton_town:Teleport to Cotton Cathedral",
+   "failing": []
+  },
+  {
+   "event": "cotton_town:Teleport to Cotton Mart",
+   "failing": []
+  },
+  {
+   "event": "cotton_town:Teleport to Dryad's Grove",
+   "failing": []
+  },
+  {
+   "event": "cotton_town:Teleport to Route 1",
+   "failing": []
+  },
+  {
+   "event": "cotton_town:Teleport to Route 1",
+   "failing": []
+  },
+  {
+   "event": "cotton_town:Teleport to Route 1",
+   "failing": []
+  },
+  {
+   "event": "cotton_town:Teleport to Route 1",
+   "failing": []
+  },
+  {
+   "event": "cotton_town:Teleport to Route 1",
+   "failing": []
+  },
+  {
+   "event": "cotton_town:Teleport to Route 1",
+   "failing": []
+  },
+  {
+   "event": "cotton_town:Teleport to Route 1",
+   "failing": []
+  },
+  {
+   "event": "cotton_town:Teleport to Route 1",
+   "failing": []
+  },
+  {
+   "event": "cotton_town:Teleport to Route 2",
+   "failing": []
+  },
+  {
+   "event": "cotton_town:Teleport to Dryad's Grove",
+   "failing": []
+  },
+  {
+   "event": "cotton_town:Teleport to Cafe",
+   "failing": []
+  },
+  {
+   "event": "cotton_town:learn from me",
+   "failing": []
+  },
+  {
+   "event": "cotton_town:enter_daycare",
+   "failing": []
+  },
+  {
+   "event": "cotton_town:Teleport to Misa House",
+   "failing": []
+  },
+  {
+   "event": "cotton_town:reenter_daycare",
+   "failing": []
+  },
+  {
+   "event": "route2:Teleport to City Park",
+   "failing": []
+  },
+  {
+   "event": "route2:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "route2:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "route2:Teleport to City Park",
+   "failing": []
+  },
+  {
+   "event": "route2:no to talk",
+   "failing": [
+    "is variable_set route2choice:not_really"
+   ]
+  },
+  {
+   "event": "citypark:Teleport to Route 2",
+   "failing": []
+  },
+  {
+   "event": "citypark:Teleport to Route 2",
+   "failing": []
+  },
+  {
+   "event": "citypark:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "citypark:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "citypark:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "citypark:hurrytalkyes",
+   "failing": [
+    "is variable_set firstgo:yes",
+    "is variable_set cityparkchoice:thats_me"
+   ]
+  },
+  {
+   "event": "citypark:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "citypark:Teleport to Maniac House",
+   "failing": []
+  },
+  {
+   "event": "leather_town:Teleport to City Park",
+   "failing": []
+  },
+  {
+   "event": "leather_town:Teleport to City Park",
+   "failing": []
+  },
+  {
+   "event": "leather_town:Teleport to City Park",
+   "failing": []
+  },
+  {
+   "event": "leather_town:Teleport to Route 3",
+   "failing": []
+  },
+  {
+   "event": "leather_town:Teleport to Route 3",
+   "failing": []
+  },
+  {
+   "event": "leather_town:Teleport to Route 3",
+   "failing": []
+  },
+  {
+   "event": "leather_town:Teleport to Route 3",
+   "failing": []
+  },
+  {
+   "event": "leather_town:Teleport to Route 3",
+   "failing": []
+  },
+  {
+   "event": "leather_town:Teleport to Leather Mart",
+   "failing": []
+  },
+  {
+   "event": "leather_town:Teleport to City Park",
+   "failing": []
+  },
+  {
+   "event": "leather_town:Teleport to Shaft1",
+   "failing": []
+  },
+  {
+   "event": "leather_town:Teleport to Shaft2",
+   "failing": []
+  },
+  {
+   "event": "leather_town:Teleport to Dryad's Grove",
+   "failing": []
+  },
+  {
+   "event": "leather_town:Teleport to Dryad's Grove",
+   "failing": []
+  },
+  {
+   "event": "leather_town:Teleport to Flower City",
+   "failing": []
+  },
+  {
+   "event": "leather_town:Teleport to Flower City",
+   "failing": []
+  },
+  {
+   "event": "citypark_house1:Go outside",
+   "failing": []
+  },
+  {
+   "event": "cotton_cathedral:Go outside",
+   "failing": []
+  },
+  {
+   "event": "cotton_scoop:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "cotton_cafe:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "cotton_cafe:Go Basement",
+   "failing": []
+  },
+  {
+   "event": "cotton_daycare:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "cotton_daycare:Teleport Backyard",
+   "failing": []
+  },
+  {
+   "event": "cotton_misa_house:Outside",
+   "failing": []
+  },
+  {
+   "event": "cotton_misa_house:Go Upstairs",
+   "failing": []
+  },
+  {
+   "event": "cotton_misa_house_upstairs:Go Downstairs",
+   "failing": []
+  },
+  {
+   "event": "cotton_cafe_basement:Go Cafe",
+   "failing": []
+  },
+  {
+   "event": "cotton_cafe_basement:Teleport to Cafe Basement",
+   "failing": []
+  },
+  {
+   "event": "route3:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "route3:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "route3:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "route3:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "route3:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "route3:Teleport to Wayfarer Inn",
+   "failing": []
+  },
+  {
+   "event": "route3:Teleport to Wayfarer Inn",
+   "failing": []
+  },
+  {
+   "event": "route3:Teleport to Wayfarer Inn",
+   "failing": []
+  },
+  {
+   "event": "route3:Teleport to Wayfarer Inn",
+   "failing": []
+  },
+  {
+   "event": "route3:Teleport to Route 4",
+   "failing": []
+  },
+  {
+   "event": "route3:Teleport to Route 4",
+   "failing": []
+  },
+  {
+   "event": "leather_scoop:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "leather_shaft1:Outside",
+   "failing": []
+  },
+  {
+   "event": "leather_shaft2:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "flower_city:Teleport to Route 4",
+   "failing": []
+  },
+  {
+   "event": "flower_city:Teleport to Route 4",
+   "failing": []
+  },
+  {
+   "event": "flower_city:Teleport to Side Route A",
+   "failing": []
+  },
+  {
+   "event": "flower_city:Teleport to Side Route A",
+   "failing": []
+  },
+  {
+   "event": "flower_city:Teleport to Route 5",
+   "failing": []
+  },
+  {
+   "event": "flower_city:Teleport to Route 5",
+   "failing": []
+  },
+  {
+   "event": "flower_city:Teleport to Dojo",
+   "failing": []
+  },
+  {
+   "event": "flower_city:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "flower_city:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "flower_city:Teleport to Timber Town",
+   "failing": []
+  },
+  {
+   "event": "flower_city:Teleport to Timber Town",
+   "failing": []
+  },
+  {
+   "event": "flower_city:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "flower_city:Teleport to Timber Town",
+   "failing": []
+  },
+  {
+   "event": "cotton_underground:Teleport to Cotton Cathedral",
+   "failing": []
+  },
+  {
+   "event": "cotton_underground:Teleport to Cotton Mart",
+   "failing": []
+  },
+  {
+   "event": "cotton_underground:Teleport to Omnichannel HQ",
+   "failing": []
+  },
+  {
+   "event": "cotton_underground:Teleport to Cafe Basement",
+   "failing": []
+  },
+  {
+   "event": "cotton_underground:enter_daycare",
+   "failing": []
+  },
+  {
+   "event": "cotton_underground:Teleport to Misa House",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_main:leave",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_main:to passageway 1",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_main:to passageway1-2",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_main:to passageway 2",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_main:to passageway2-2",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_main:to passageway 3",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_main:to passageway3-2",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_main:to passageway 4",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_main:to passageway 4-2",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_main:movin on up",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_passageway_1:back to main",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_passageway_1:back to main2",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_passageway_1:to battle room",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_passageway_1:to battle room",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_passageway_2:back to main1",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_passageway_2:back to main2",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_passageway_2:to battle room",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_passageway_2:to battle room",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_passageway_3:back to main",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_passageway_3:back to main2",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_passageway_3:to battle room",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_passageway_3:to battle room",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_passageway_4:teleport to main",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_passageway_4:teleport to main",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_passageway_4:to battle room",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_passageway_4:to battle room-2",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_br_1:back to passageway",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_br_1:back to passageway2",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_br_1:choice-no",
+   "failing": [
+    "is variable_set choicechosen:no"
+   ]
+  },
+  {
+   "event": "taba_ba_br_1:lost battle",
+   "failing": [
+    "not variable_set battle_last_result:won",
+    "is variable_set battle_last_trainer:acolyte"
+   ]
+  },
+  {
+   "event": "taba_ba_br_1:redo",
+   "failing": [
+    "is variable_set redo:please"
+   ]
+  },
+  {
+   "event": "taba_ba_br_1:move to middle redo",
+   "failing": [
+    "is variable_set battledone:redo"
+   ]
+  },
+  {
+   "event": "taba_ba_br_1:teleport to main",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_br_2:back to passageway",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_br_2:back to passageway-2",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_br_2:acolyte2battle-loss",
+   "failing": [
+    "not variable_set battle_last_result:won",
+    "not variable_set acolyte2battledone:yes"
+   ]
+  },
+  {
+   "event": "taba_ba_br_2:battle redo",
+   "failing": [
+    "is variable_set lossbattle:yes"
+   ]
+  },
+  {
+   "event": "taba_ba_br_2:teleport to main room",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_br_3:back to passageway",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_br_3:back to passageway",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_br_3:teleport to main room",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_br_4:back to passageway",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_br_4:back to passageway-2",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_stairwell_1:teleport to main",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_stairwell_1:teleport to stairwell 2",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_stairwell_2:teleport to stairwell 1",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_stairwell_2:teleport to foyer",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_stairwell_2:teleport to foyer 2",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_br_master_foyer:teleport to stairwell 2",
+   "failing": []
+  },
+  {
+   "event": "taba_ba_br_master_foyer:teleport to stairwell 2-2",
+   "failing": []
+  },
+  {
+   "event": "wayfarer_inn1:Go upstairs",
+   "failing": []
+  },
+  {
+   "event": "wayfarer_inn1:Go to the other upstairs",
+   "failing": []
+  },
+  {
+   "event": "wayfarer_inn1:Teleport to Route 3",
+   "failing": []
+  },
+  {
+   "event": "wayfarer_inn1:Teleport to Route 3",
+   "failing": []
+  },
+  {
+   "event": "route4:Teleport to Route 3",
+   "failing": []
+  },
+  {
+   "event": "route4:Teleport to Route 3",
+   "failing": []
+  },
+  {
+   "event": "route4:Teleport to Flower City",
+   "failing": []
+  },
+  {
+   "event": "route4:Teleport to Flower City",
+   "failing": []
+  },
+  {
+   "event": "routea:Teleport to Flower City",
+   "failing": []
+  },
+  {
+   "event": "routea:Teleport to Flower City",
+   "failing": []
+  },
+  {
+   "event": "routea:Teleport to Mansion",
+   "failing": []
+  },
+  {
+   "event": "routea:Teleport to Mansion",
+   "failing": []
+  },
+  {
+   "event": "routea:Teleport to Flower City",
+   "failing": []
+  },
+  {
+   "event": "route5:Teleport to Flower City",
+   "failing": []
+  },
+  {
+   "event": "route5:Teleport to Timber Town",
+   "failing": []
+  },
+  {
+   "event": "dojo1:Teleport to Flower City",
+   "failing": []
+  },
+  {
+   "event": "dojo1:Teleport to Dojo 2",
+   "failing": []
+  },
+  {
+   "event": "timber_town:Teleport to Route 5",
+   "failing": []
+  },
+  {
+   "event": "timber_town:Teleport to Tunnel",
+   "failing": []
+  },
+  {
+   "event": "timber_town:Teleport to Tunnel",
+   "failing": []
+  },
+  {
+   "event": "timber_town:Teleport to Tunnel",
+   "failing": []
+  },
+  {
+   "event": "timber_town:Teleport to Tunnel",
+   "failing": []
+  },
+  {
+   "event": "timber_town:Teleport to Scoop",
+   "failing": []
+  },
+  {
+   "event": "timber_town:Teleport to Flower City",
+   "failing": []
+  },
+  {
+   "event": "timber_town:Teleport to Flower City",
+   "failing": []
+  },
+  {
+   "event": "timber_town:Teleport to Tunnel",
+   "failing": []
+  },
+  {
+   "event": "timber_town:Teleport to Tunnel",
+   "failing": []
+  },
+  {
+   "event": "wayfarer_inn2:Go downstairs",
+   "failing": []
+  },
+  {
+   "event": "wayfarer_inn2:Go to the other downstairs",
+   "failing": []
+  },
+  {
+   "event": "mansion:Teleport to Top",
+   "failing": []
+  },
+  {
+   "event": "mansion:Teleport to Basement",
+   "failing": []
+  },
+  {
+   "event": "mansion:Teleport to Basement",
+   "failing": []
+  },
+  {
+   "event": "mansion:Teleport to Top",
+   "failing": []
+  },
+  {
+   "event": "mansion:Teleport to Side Route",
+   "failing": []
+  },
+  {
+   "event": "mansion:Teleport to Side Route",
+   "failing": []
+  },
+  {
+   "event": "mansion:Teleport to Basement",
+   "failing": []
+  },
+  {
+   "event": "mansion:Teleport to Side Route",
+   "failing": []
+  },
+  {
+   "event": "mansion:Teleport to Basement",
+   "failing": []
+  },
+  {
+   "event": "dojo2:Teleport to Lower Floor",
+   "failing": []
+  },
+  {
+   "event": "dojo2:Teleport to Upper Floor",
+   "failing": []
+  },
+  {
+   "event": "tunnel:Teleport to Below",
+   "failing": []
+  },
+  {
+   "event": "tunnel:Teleport to Below",
+   "failing": []
+  },
+  {
+   "event": "tunnel:Teleport to Below",
+   "failing": []
+  },
+  {
+   "event": "tunnel:Teleport to Timber Town",
+   "failing": []
+  },
+  {
+   "event": "tunnel:Teleport to Timber Town",
+   "failing": []
+  },
+  {
+   "event": "tunnel:Teleport to Timber Town",
+   "failing": []
+  },
+  {
+   "event": "tunnel:Teleport to Timber Town",
+   "failing": []
+  },
+  {
+   "event": "tunnel:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "tunnel:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "tunnel:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "tunnel:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "tunnel:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "tunnel:Teleport to Timber Town",
+   "failing": []
+  },
+  {
+   "event": "tunnel:Teleport to Timber Town",
+   "failing": []
+  },
+  {
+   "event": "tunnel:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "tunnel:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "scoop1:Teleport to Timber Town",
+   "failing": []
+  },
+  {
+   "event": "scoop1:Teleport to Scoop 2",
+   "failing": []
+  },
+  {
+   "event": "omnichannel0:Teleport to Omnichannel 1",
+   "failing": []
+  },
+  {
+   "event": "omnichannel0:Teleport to Omnichannel 1",
+   "failing": []
+  },
+  {
+   "event": "mansion_top:Teleport to Middle",
+   "failing": []
+  },
+  {
+   "event": "mansion_top:Teleport to Middle",
+   "failing": []
+  },
+  {
+   "event": "mansion_basement:Teleport to Middle",
+   "failing": []
+  },
+  {
+   "event": "mansion_basement:Teleport to Middle",
+   "failing": []
+  },
+  {
+   "event": "dojo3:Teleport to Lower Floor",
+   "failing": []
+  },
+  {
+   "event": "tunnel_below:Teleport to Aboveground",
+   "failing": []
+  },
+  {
+   "event": "tunnel_below:Teleport to Aboveground",
+   "failing": []
+  },
+  {
+   "event": "tunnel_below:Teleport to Aboveground",
+   "failing": []
+  },
+  {
+   "event": "route6:Teleport to Tunnel",
+   "failing": []
+  },
+  {
+   "event": "route6:Teleport to Tunnel",
+   "failing": []
+  },
+  {
+   "event": "route6:Teleport to Tunnel",
+   "failing": []
+  },
+  {
+   "event": "route6:Teleport to Tunnel",
+   "failing": []
+  },
+  {
+   "event": "route6:Teleport to Tunnel",
+   "failing": []
+  },
+  {
+   "event": "route6:Teleport to Candy Town",
+   "failing": []
+  },
+  {
+   "event": "route6:Teleport to Candy Town",
+   "failing": []
+  },
+  {
+   "event": "route6:Teleport to Candy Town",
+   "failing": []
+  },
+  {
+   "event": "route6:Teleport to Candy Town",
+   "failing": []
+  },
+  {
+   "event": "route6:Teleport to Candy Town",
+   "failing": []
+  },
+  {
+   "event": "route6:Teleport to Candy Town",
+   "failing": []
+  },
+  {
+   "event": "route6:Teleport to Candy Town",
+   "failing": []
+  },
+  {
+   "event": "route6:Teleport to Tunnel",
+   "failing": []
+  },
+  {
+   "event": "route6:Teleport to Tunnel",
+   "failing": []
+  },
+  {
+   "event": "route6:Teleport to Candy Town",
+   "failing": []
+  },
+  {
+   "event": "route6:Teleport to Candy Town",
+   "failing": []
+  },
+  {
+   "event": "scoop2:Teleport to Scoop 1",
+   "failing": []
+  },
+  {
+   "event": "scoop2:Teleport to Scoop 3",
+   "failing": []
+  },
+  {
+   "event": "scoop2:Teleport to Timber Town",
+   "failing": []
+  },
+  {
+   "event": "omnichannel1:Teleport to Omnichannel 2",
+   "failing": []
+  },
+  {
+   "event": "omnichannel1:Teleport to Omnichannel 2",
+   "failing": []
+  },
+  {
+   "event": "omnichannel1:Teleport to Omnichannel 1",
+   "failing": []
+  },
+  {
+   "event": "omnichannel1:Teleport to Omnichannel 0",
+   "failing": []
+  },
+  {
+   "event": "omnichannel1:Teleport to Omnichannel 0",
+   "failing": []
+  },
+  {
+   "event": "candy_town:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "candy_town:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "candy_town:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "candy_town:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "candy_town:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "candy_town:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "candy_town:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "candy_town:Teleport to Sea Route",
+   "failing": []
+  },
+  {
+   "event": "candy_town:Teleport to Route6",
+   "failing": []
+  },
+  {
+   "event": "candy_town:Teleport to Route6",
+   "failing": []
+  },
+  {
+   "event": "scoop3:Teleport to Scoop 2",
+   "failing": []
+  },
+  {
+   "event": "scoop3:Teleport to Scoop 4",
+   "failing": []
+  },
+  {
+   "event": "omnichannel2:Teleport to Omnichannel 3",
+   "failing": []
+  },
+  {
+   "event": "omnichannel2:Teleport to Omnichannel 3",
+   "failing": []
+  },
+  {
+   "event": "omnichannel2:Teleport to Omnichannel 1",
+   "failing": []
+  },
+  {
+   "event": "omnichannel2:Teleport to Omnichannel 1",
+   "failing": []
+  },
+  {
+   "event": "routec:Teleport to Dragon's Cave",
+   "failing": []
+  },
+  {
+   "event": "scoop4:Teleport to Scoop 3",
+   "failing": []
+  },
+  {
+   "event": "scoop4:Teleport to Timber Town",
+   "failing": []
+  },
+  {
+   "event": "omnichannel3:Teleport to Omnichannel 2",
+   "failing": []
+  },
+  {
+   "event": "omnichannel3:Teleport to Omnichannel 2",
+   "failing": []
+  },
+  {
+   "event": "omnichannel3:Teleport to Omnichannel 4",
+   "failing": []
+  },
+  {
+   "event": "omnichannel3:Teleport to Omnichannel 4",
+   "failing": []
+  },
+  {
+   "event": "dragonscave:Teleport to Sea Route",
+   "failing": []
+  },
+  {
+   "event": "dragonscave:Teleport to Sea Route",
+   "failing": []
+  },
+  {
+   "event": "omnichannel4:Teleport to Omnichannel 3",
+   "failing": []
+  },
+  {
+   "event": "omnichannel4:Teleport to Omnichannel 3",
+   "failing": []
+  }
+ ],
+ "steps": 68,
+ "stopReason": "no reachable map offers a state-changing event (searched 75 maps)",
+ "mapsVisited": 75,
+ "visitOrder": [
+  "player_house_bedroom",
+  "player_house_downstairs",
+  "taba_town",
+  "maple_house",
+  "route1",
+  "route1_sanglorian",
+  "taba_ba_foyer",
+  "professor_lab",
+  "healing_center",
+  "tuxe_mart_taba",
+  "taba_house1",
+  "taba_house2",
+  "taba_house3",
+  "taba_house4",
+  "dryadsgrove",
+  "maple_bedroom",
+  "taba_house2_upstairs",
+  "taba_house3_upstairs",
+  "cotton_town",
+  "route2",
+  "citypark",
+  "leather_town",
+  "citypark_house1",
+  "cotton_cathedral",
+  "cotton_scoop",
+  "cotton_cafe",
+  "cotton_daycare",
+  "cotton_misa_house",
+  "cotton_misa_house_upstairs",
+  "cotton_cafe_basement",
+  "route3",
+  "leather_scoop",
+  "leather_shaft1",
+  "leather_shaft2",
+  "flower_city",
+  "cotton_underground",
+  "taba_ba_main",
+  "taba_ba_passageway_1",
+  "taba_ba_passageway_2",
+  "taba_ba_passageway_3",
+  "taba_ba_passageway_4",
+  "taba_ba_br_1",
+  "taba_ba_br_2",
+  "taba_ba_br_3",
+  "taba_ba_br_4",
+  "taba_ba_stairwell_1",
+  "taba_ba_stairwell_2",
+  "taba_ba_br_master_foyer",
+  "wayfarer_inn1",
+  "route4",
+  "routea",
+  "route5",
+  "dojo1",
+  "timber_town",
+  "wayfarer_inn2",
+  "mansion",
+  "dojo2",
+  "tunnel",
+  "scoop1",
+  "omnichannel0",
+  "mansion_top",
+  "mansion_basement",
+  "dojo3",
+  "tunnel_below",
+  "route6",
+  "scoop2",
+  "omnichannel1",
+  "candy_town",
+  "scoop3",
+  "omnichannel2",
+  "routec",
+  "scoop4",
+  "omnichannel3",
+  "dragonscave",
+  "omnichannel4"
+ ],
+ "battlesWon": 6,
+ "party": [
+  "rockitten"
+ ],
+ "items": {
+  "tuxeball": 5,
+  "allies_address": 1,
+  "potion": 2,
+  "reg_papers": 1
+ },
+ "finalVars": 96,
+ "conditionsUnknowableInP1": {},
+ "unfiredEventsBlockedBy": {
+  "is char_gender": 1
+ },
+ "trace": [
+  {
+   "map": "player_house_bedroom",
+   "event": "Intro",
+   "changed": [
+    "question_xero=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "player_house_bedroom",
+   "event": "Intro Yes",
+   "changed": [
+    "xero_intro=done"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "(walk player_house_downstairs > taba_town)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "plsletmepass",
+   "changed": [
+    "curfewz=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "secret_tuxeball",
+   "changed": [
+    "secret_ball=found",
+    "item tuxeball=5"
+   ],
+   "battles": []
+  },
+  {
+   "map": "maple_house",
+   "event": "(walk maple_house)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "maple_house",
+   "event": "talkHouse1",
+   "changed": [
+    "thewifedidspeak=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "maple_house",
+   "event": "create knight",
+   "changed": [
+    "goodbyeoldknight=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "maple_house",
+   "event": "talkHouse2",
+   "changed": [
+    "maplecotton=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "(walk taba_town)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "bring the cavalry",
+   "changed": [
+    "goodbyeoldknight=hedead"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "bringthecavalry2",
+   "changed": [
+    "goodbyeoldknight=heback"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "timetowalk",
+   "changed": [
+    "goodbyeoldknight=helpme",
+    "talkpls=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "timetowalk2",
+   "changed": [
+    "talkpls=gone"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "listentime",
+   "changed": [
+    "goodbyeoldknight=ohwell"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "listentime2",
+   "changed": [
+    "goodbyeoldknight=mamamia"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "listentime3",
+   "changed": [
+    "goodbyeoldknight=herewegoagain"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "listentime4",
+   "changed": [
+    "goodbyeoldknight=mama",
+    "item allies_address=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "listentime5",
+   "changed": [
+    "goodbyeoldknight=howcaniresistyou"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "listentime6",
+   "changed": [
+    "goodbyeoldknight=finallydone"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "waitdontleave",
+   "changed": [
+    "comeinside=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "timetogroove",
+   "changed": [
+    "comeinside=done"
+   ],
+   "battles": [],
+   "teleport": "player_house_downstairs"
+  },
+  {
+   "map": "player_house_downstairs",
+   "event": "create mom2",
+   "changed": [
+    "comeinside=(cleared)",
+    "aeble_talk=1",
+    "scene=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "player_house_downstairs",
+   "event": "announcement",
+   "changed": [
+    "aeble_talk=2"
+   ],
+   "battles": []
+  },
+  {
+   "map": "player_house_downstairs",
+   "event": "postannouncement",
+   "changed": [
+    "aeble_talk=(cleared)",
+    "scene=(cleared)",
+    "can_exit_town=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "route1",
+   "event": "(walk taba_town > route1)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "route1",
+   "event": "they're angry",
+   "changed": [
+    "letusthrough=maybe"
+   ],
+   "battles": []
+  },
+  {
+   "map": "route1",
+   "event": "hello misa",
+   "changed": [
+    "letusthrough=almost",
+    "theyrehere=yes",
+    "whoartthou=florist"
+   ],
+   "battles": []
+  },
+  {
+   "map": "route1",
+   "event": "more misa",
+   "changed": [
+    "whoartthou=person",
+    "getaway=pls"
+   ],
+   "battles": []
+  },
+  {
+   "map": "route1",
+   "event": "move husband",
+   "changed": [
+    "getaway=weregone"
+   ],
+   "battles": []
+  },
+  {
+   "map": "route1",
+   "event": "even more misa",
+   "changed": [
+    "whoartthou=tuxemon"
+   ],
+   "battles": []
+  },
+  {
+   "map": "route1",
+   "event": "battle!",
+   "changed": [
+    "whoartthou=done"
+   ],
+   "battles": []
+  },
+  {
+   "map": "route1",
+   "event": "beatomni",
+   "changed": [
+    "whoartthou=finished",
+    "threemusketeers=yay"
+   ],
+   "battles": []
+  },
+  {
+   "map": "route1",
+   "event": "omnigruntmove",
+   "changed": [
+    "threemusketeers=done"
+   ],
+   "battles": []
+  },
+  {
+   "map": "healing_center",
+   "event": "(walk taba_town > healing_center)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "healing_center",
+   "event": "whats up",
+   "changed": [
+    "shady=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "healing_center",
+   "event": "Rename Player",
+   "changed": [
+    "shady=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "tuxe_mart_taba",
+   "event": "(walk taba_town > tuxe_mart_taba)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "tuxe_mart_taba",
+   "event": "professor pls",
+   "changed": [
+    "proftalk1=true"
+   ],
+   "battles": []
+  },
+  {
+   "map": "tuxe_mart_taba",
+   "event": "professor pls2",
+   "changed": [
+    "proftalk1=false",
+    "proftalk2=yes",
+    "item potion=2"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "(walk taba_town)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "announcement2",
+   "changed": [
+    "moveon=yes",
+    "stahp=stop"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "anouncement2part2",
+   "changed": [
+    "moveon=bye",
+    "moveplayer=true",
+    "backhome=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "move player",
+   "changed": [
+    "moveplayer=false"
+   ],
+   "battles": [],
+   "teleport": "player_house_downstairs"
+  },
+  {
+   "map": "player_house_downstairs",
+   "event": "Start the anthem",
+   "changed": [
+    "scene=yes",
+    "announce_trials=1",
+    "anthem_started=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "player_house_downstairs",
+   "event": "timetochat",
+   "changed": [
+    "announce_trials=2"
+   ],
+   "battles": []
+  },
+  {
+   "map": "player_house_downstairs",
+   "event": "new possibilities",
+   "changed": [
+    "announce_trials=3"
+   ],
+   "battles": []
+  },
+  {
+   "map": "player_house_downstairs",
+   "event": "new possibilities2",
+   "changed": [
+    "announce_trials=4"
+   ],
+   "battles": []
+  },
+  {
+   "map": "player_house_downstairs",
+   "event": "new possibilities3",
+   "changed": [
+    "scene=(cleared)",
+    "go_get_tuxemon=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "(walk taba_town)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "announcement2",
+   "changed": [
+    "moveon=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "professor_lab",
+   "event": "(walk professor_lab)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "professor_lab",
+   "event": "whyhellothere",
+   "changed": [
+    "startchoice=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "professor_lab",
+   "event": "startchoice2",
+   "changed": [
+    "startchoice=continue"
+   ],
+   "battles": []
+  },
+  {
+   "map": "professor_lab",
+   "event": "continue",
+   "changed": [
+    "stoptalking=now",
+    "wemoving=now"
+   ],
+   "battles": []
+  },
+  {
+   "map": "professor_lab",
+   "event": "wemoving2",
+   "changed": [
+    "wemoving=done"
+   ],
+   "battles": []
+  },
+  {
+   "map": "professor_lab",
+   "event": "wemoving3",
+   "changed": [
+    "wemoving=finished",
+    "movingon=now",
+    "item reg_papers=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "professor_lab",
+   "event": "wemoving4",
+   "changed": [
+    "wemoving=completenow",
+    "gettuxemon=now"
+   ],
+   "battles": []
+  },
+  {
+   "map": "professor_lab",
+   "event": "chooseyertux",
+   "changed": [
+    "letmechoose=pls"
+   ],
+   "battles": []
+  },
+  {
+   "map": "professor_lab",
+   "event": "Choose Rockitten",
+   "changed": [
+    "rockittenchoice=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "professor_lab",
+   "event": "rockittenYES",
+   "changed": [
+    "rockittenchoice=finished",
+    "rockittenball=yes",
+    "cardilingball=yes",
+    "prof_choice=cardiling",
+    "havetuxemon=yes",
+    "startfirstbattle=yes",
+    "party=rockitten"
+   ],
+   "battles": []
+  },
+  {
+   "map": "professor_lab",
+   "event": "start first battle",
+   "changed": [
+    "battle_last_result=won",
+    "battle_last_winner=player",
+    "battle_last_trainer=kay_wren",
+    "finishedbattle=yes",
+    "won kay_wren:won"
+   ],
+   "battles": [
+    "kay_wren"
+   ]
+  },
+  {
+   "map": "professor_lab",
+   "event": "first battle won",
+   "changed": [
+    "firstbattledone=yes",
+    "ohnotyou=itsme",
+    "endbattleprof=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "professor_lab",
+   "event": "shesarrived",
+   "changed": [
+    "ohnotyou=gasp"
+   ],
+   "battles": []
+  },
+  {
+   "map": "professor_lab",
+   "event": "shesarrived2",
+   "changed": [
+    "ohnotyou=gone"
+   ],
+   "battles": []
+  },
+  {
+   "map": "professor_lab",
+   "event": "shesarrived3",
+   "changed": [
+    "ohnotyou=removed",
+    "timetomove=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "professor_lab",
+   "event": "movin",
+   "changed": [
+    "timetomove=done"
+   ],
+   "battles": []
+  },
+  {
+   "map": "professor_lab",
+   "event": "leavin",
+   "changed": [
+    "timetomove=finite",
+    "announcetwo=done"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "(walk taba_town)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "taba_town",
+   "event": "greeter_greets2",
+   "changed": [
+    "greeter_greets=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "healing_center",
+   "event": "(walk healing_center)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "healing_center",
+   "event": "hello there",
+   "changed": [
+    "chooses=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "healing_center",
+   "event": "Heal Tuxemon",
+   "changed": [
+    "chooses=none"
+   ],
+   "battles": []
+  },
+  {
+   "map": "healing_center",
+   "event": "hello there",
+   "changed": [
+    "chooses=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "healing_center",
+   "event": "hello there",
+   "changed": [
+    "chooses=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "healing_center",
+   "event": "howdy",
+   "changed": [
+    "happy=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "healing_center",
+   "event": "Heal Tuxemon",
+   "changed": [
+    "chooses=none"
+   ],
+   "battles": []
+  },
+  {
+   "map": "healing_center",
+   "event": "Rename Monster",
+   "changed": [
+    "happy=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_house3_upstairs",
+   "event": "(walk taba_town > taba_house3 > taba_house3_upstairs)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "taba_house3_upstairs",
+   "event": "Talk Client Question",
+   "changed": [
+    "beesissue=taba_house3_choice1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "cotton_town",
+   "event": "(walk taba_house3 > taba_town > dryadsgrove > cotton_town)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "cotton_town",
+   "event": "Hiya",
+   "changed": [
+    "npcs_are_created=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "cotton_town",
+   "event": "talk to liela",
+   "changed": [
+    "battle_last_trainer=liela",
+    "won liela:won"
+   ],
+   "battles": [
+    "liela"
+   ]
+  },
+  {
+   "map": "cotton_town",
+   "event": "talk to liela",
+   "changed": [
+    "won liela:won"
+   ],
+   "battles": [
+    "liela"
+   ]
+  },
+  {
+   "map": "cotton_town",
+   "event": "talk to liela",
+   "changed": [
+    "won liela:won"
+   ],
+   "battles": [
+    "liela"
+   ]
+  },
+  {
+   "map": "route2",
+   "event": "(walk route2)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "route2",
+   "event": "Play Music",
+   "changed": [
+    "sadsong=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "route2",
+   "event": "create npc",
+   "changed": [
+    "skadoosh=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "route2",
+   "event": "talk to misa",
+   "changed": [
+    "sadsong=yes",
+    "skadoosh=no",
+    "route2choice=sure_i_do"
+   ],
+   "battles": []
+  },
+  {
+   "map": "route2",
+   "event": "yes to talk",
+   "changed": [
+    "route2choice=again"
+   ],
+   "battles": []
+  },
+  {
+   "map": "route2",
+   "event": "spill the beans",
+   "changed": [
+    "sadsong=no",
+    "yahoo=maybe",
+    "leavemealone=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "citypark",
+   "event": "(walk citypark)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "citypark",
+   "event": "make npcs",
+   "changed": [
+    "firstgo=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "citypark",
+   "event": "hurrytalk",
+   "changed": [
+    "firstgo=yes",
+    "cityparkchoice=mistaken"
+   ],
+   "battles": []
+  },
+  {
+   "map": "citypark",
+   "event": "hurrytalkmistaken",
+   "changed": [
+    "firstgo=gone",
+    "secondgo=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "citypark",
+   "event": "hurrytalknow",
+   "changed": [
+    "secondgo=gone",
+    "iamsecret=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "citypark",
+   "event": "hurrytalksecret",
+   "changed": [
+    "iamsecret=ohno"
+   ],
+   "battles": []
+  },
+  {
+   "map": "citypark",
+   "event": "hurrytalkohno",
+   "changed": [
+    "omnichannelhere=here"
+   ],
+   "battles": []
+  },
+  {
+   "map": "route2",
+   "event": "(walk route2)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "route2",
+   "event": "create npc",
+   "changed": [
+    "skadoosh=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "cotton_cathedral",
+   "event": "(walk cotton_town > cotton_cathedral)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "cotton_cathedral",
+   "event": "hello there",
+   "changed": [
+    "chooses=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "cotton_cathedral",
+   "event": "Heal Tuxemon",
+   "changed": [
+    "chooses=none"
+   ],
+   "battles": []
+  },
+  {
+   "map": "cotton_misa_house",
+   "event": "(walk cotton_town > cotton_misa_house)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "cotton_misa_house",
+   "event": "Talk Granny Female",
+   "changed": [
+    "grampsask=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "cotton_cathedral",
+   "event": "(walk cotton_town > cotton_cathedral)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "cotton_cathedral",
+   "event": "hello there",
+   "changed": [
+    "chooses=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "cotton_cathedral",
+   "event": "hello there",
+   "changed": [
+    "chooses=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "cotton_cathedral",
+   "event": "Heal Tuxemon",
+   "changed": [
+    "chooses=none"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_main",
+   "event": "(walk cotton_town > route1_sanglorian > route1 > taba_ba_foyer > taba_ba_main)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_main",
+   "event": "create most people",
+   "changed": [
+    "moveonnow=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_main",
+   "event": "im here",
+   "changed": [
+    "seconddialog=start"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_main",
+   "event": "im here 2",
+   "changed": [
+    "seconddialog=end"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_main",
+   "event": "We need help",
+   "changed": [
+    "thirddialog=end"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_main",
+   "event": "confront your past",
+   "changed": [
+    "fourthdialog=end"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_main",
+   "event": "or don't confront it",
+   "changed": [
+    "fifthdialog=end"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_main",
+   "event": "oh look it's kyle",
+   "changed": [
+    "gatherback=yes",
+    "sixthdialog=end"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_main",
+   "event": "gather back",
+   "changed": [
+    "gatherback=done"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_main",
+   "event": "yeah kyle still kinda sucks",
+   "changed": [
+    "seventhdialog=end"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_main",
+   "event": "time to head in",
+   "changed": [
+    "moveit3=now",
+    "moveit2=now",
+    "eighthdialog=end"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_br_1",
+   "event": "(walk taba_ba_passageway_1 > taba_ba_br_1)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_br_1",
+   "event": "start battle?",
+   "changed": [
+    "choicechosen=yes",
+    "choose=chose"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_br_1",
+   "event": "choice-yes",
+   "changed": [
+    "choose=yes",
+    "movealong=now"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_br_1",
+   "event": "get acolyte",
+   "changed": [
+    "jason=gone"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_br_1",
+   "event": "move to middle",
+   "changed": [
+    "battledone=start"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_br_1",
+   "event": "start fight",
+   "changed": [
+    "battle_last_trainer=acolyte",
+    "battledone=yes",
+    "won acolyte:won"
+   ],
+   "battles": [
+    "acolyte"
+   ]
+  },
+  {
+   "map": "taba_ba_br_1",
+   "event": "won battle",
+   "changed": [
+    "opentwo=yes",
+    "close1=yes",
+    "acolyte1=done"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_br_2",
+   "event": "(walk taba_ba_main > taba_ba_passageway_2 > taba_ba_br_2)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_br_2",
+   "event": "acolyte2",
+   "changed": [
+    "battle_last_trainer=garth",
+    "talkedonce=yes",
+    "won garth:won"
+   ],
+   "battles": [
+    "garth"
+   ]
+  },
+  {
+   "map": "taba_ba_br_2",
+   "event": "acolyte2battle-won",
+   "changed": [
+    "opentwo=no",
+    "lossbattle=no",
+    "openthree=yes",
+    "acolyte2battledone=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_br_3",
+   "event": "(walk taba_ba_main > taba_ba_passageway_3 > taba_ba_br_3)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_br_3",
+   "event": "there he is",
+   "changed": [
+    "unhinged=start",
+    "acolyte3=gone"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_br_3",
+   "event": "unhinged",
+   "changed": [
+    "unhinged=second"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_br_3",
+   "event": "unhinged 2",
+   "changed": [
+    "unhinged=consequences"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_br_3",
+   "event": "unhinged 3",
+   "changed": [
+    "battle_last_trainer=cam",
+    "openthree=no",
+    "unhinged=escaped",
+    "cammove=now",
+    "allthree=done",
+    "won cam:won"
+   ],
+   "battles": [
+    "cam"
+   ]
+  },
+  {
+   "map": "taba_ba_br_3",
+   "event": "movin out",
+   "changed": [
+    "cammove=gone"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_br_4",
+   "event": "(walk taba_ba_main > taba_ba_passageway_4 > taba_ba_br_4)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_br_4",
+   "event": "start talking",
+   "changed": [
+    "battle_last_trainer=loch",
+    "1stbattle=done",
+    "won loch:won"
+   ],
+   "battles": [
+    "loch"
+   ]
+  },
+  {
+   "map": "taba_ba_br_4",
+   "event": "check first battle-won",
+   "changed": [
+    "1stbattle=(cleared)",
+    "2ndbattle=done",
+    "won loch:won"
+   ],
+   "battles": [
+    "loch"
+   ]
+  },
+  {
+   "map": "taba_ba_br_4",
+   "event": "check second battle-won",
+   "changed": [
+    "2ndbattle=(cleared)",
+    "3rdbattle=done",
+    "won loch:won"
+   ],
+   "battles": [
+    "loch"
+   ]
+  },
+  {
+   "map": "taba_ba_br_4",
+   "event": "check third battle-won",
+   "changed": [
+    "3rdbattle=(cleared)",
+    "tabaacolyte4battle=finished",
+    "fourthacolyte=finished"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_br_4",
+   "event": "teleport to main room",
+   "changed": [
+    "allthree=andfour"
+   ],
+   "battles": [],
+   "teleport": "taba_ba_main"
+  },
+  {
+   "map": "taba_ba_main",
+   "event": "time to face the master",
+   "changed": [
+    "kyletalkafter4th=done"
+   ],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_br_master_foyer",
+   "event": "(walk taba_ba_stairwell_1 > taba_ba_stairwell_2 > taba_ba_br_master_foyer)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "taba_ba_br_master_foyer",
+   "event": "Stop and talk",
+   "changed": [
+    "foyer_move=done",
+    "foyer_talk=start"
+   ],
+   "battles": []
+  }
+ ]
+}

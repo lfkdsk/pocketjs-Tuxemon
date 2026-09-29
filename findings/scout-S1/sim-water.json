@@ -1,0 +1,707 @@
+{
+ "campaign": "water",
+ "storyEventsNeverFired": 130,
+ "neverFiredFailingConditionTally": {
+  "is variable_set": 8,
+  "is player_facing_tile": 1
+ },
+ "neverFired": [
+  {
+   "event": "water_end_of_desert:Teleport to Lower Village",
+   "failing": []
+  },
+  {
+   "event": "water_end_of_desert:Teleport to Water Cathedral",
+   "failing": []
+  },
+  {
+   "event": "water_end_of_desert:Teleport to Water Cathedral",
+   "failing": []
+  },
+  {
+   "event": "water_end_of_desert:Teleport to Water Cathedral",
+   "failing": []
+  },
+  {
+   "event": "water_end_of_desert:Teleport to Water Cathedral",
+   "failing": []
+  },
+  {
+   "event": "water_end_of_desert:Teleport to Water Cathedral",
+   "failing": []
+  },
+  {
+   "event": "water_end_of_desert:Teleport to Water Cathedral",
+   "failing": []
+  },
+  {
+   "event": "water_end_of_desert:Teleport to Lower Village",
+   "failing": []
+  },
+  {
+   "event": "water_end_of_desert:Teleport to Lower Village",
+   "failing": []
+  },
+  {
+   "event": "water_end_of_desert:Teleport to Lower Village",
+   "failing": []
+  },
+  {
+   "event": "water_end_of_desert:Teleport to Lower Village",
+   "failing": []
+  },
+  {
+   "event": "water_end_of_desert:Teleport to Lower Village",
+   "failing": []
+  },
+  {
+   "event": "water_end_of_desert:Teleport to Lower Village",
+   "failing": []
+  },
+  {
+   "event": "water_lower_village:Teleport to End of Desert",
+   "failing": []
+  },
+  {
+   "event": "water_lower_village:Teleport to End of Desert",
+   "failing": []
+  },
+  {
+   "event": "water_lower_village:Teleport to End of Desert",
+   "failing": []
+  },
+  {
+   "event": "water_lower_village:Teleport to End of Desert",
+   "failing": []
+  },
+  {
+   "event": "water_lower_village:Teleport to End of Desert",
+   "failing": []
+  },
+  {
+   "event": "water_lower_village:Teleport to End of Desert",
+   "failing": []
+  },
+  {
+   "event": "water_lower_village:Teleport to Outskirts",
+   "failing": []
+  },
+  {
+   "event": "water_lower_village:Teleport to Outskirts",
+   "failing": []
+  },
+  {
+   "event": "water_lower_village:Teleport to Grass Route",
+   "failing": []
+  },
+  {
+   "event": "water_lower_village:Teleport to Grass Route",
+   "failing": []
+  },
+  {
+   "event": "water_lower_village:Teleport to Grass Route",
+   "failing": []
+  },
+  {
+   "event": "water_lower_village:Teleport to Grass Route",
+   "failing": []
+  },
+  {
+   "event": "water_lower_village:Teleport to Grass Route",
+   "failing": []
+  },
+  {
+   "event": "water_lower_village:Teleport to Grass Route",
+   "failing": []
+  },
+  {
+   "event": "water_lower_village:Teleport to Ice Route",
+   "failing": []
+  },
+  {
+   "event": "water_lower_village:Teleport to Ice Route",
+   "failing": []
+  },
+  {
+   "event": "water_outskirts:Teleport to Lower Village",
+   "failing": []
+  },
+  {
+   "event": "water_outskirts:Teleport to Lower Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_grass:Teleport to Lower Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_grass:Teleport to Lower Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_grass:Teleport to Lower Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_grass:Teleport to Lower Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_grass:Teleport to River Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_grass:Teleport to River Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_grass:Teleport to River Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_ice:Teleport to River Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_ice:Teleport to River Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_ice:Teleport to River Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_ice:Teleport to River Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_ice:Teleport to River Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_ice:Teleport to River Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_ice:Teleport to River Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_ice:Teleport to Ice Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_ice:Teleport to Ice Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_ice:Teleport to Ice Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_ice:Teleport to Ice Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_ice:Teleport to Ice Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_ice:Teleport to Volcano Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_ice:Teleport to Volcano Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_ice:Teleport to Volcano Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_ice:Teleport to Volcano Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_ice:Teleport to Volcano Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_ice:Teleport to Volcano Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_ice:Teleport to Volcano Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_ice:Teleport to Volcano Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_ice:Teleport to Lower Village",
+   "failing": []
+  },
+  {
+   "event": "water_route_ice:Teleport to Lower Village",
+   "failing": []
+  },
+  {
+   "event": "water_cathedral:Teleport to End of Desert",
+   "failing": []
+  },
+  {
+   "event": "water_cathedral:Teleport to End of Desert",
+   "failing": []
+  },
+  {
+   "event": "water_cathedral:Teleport to End of Desert",
+   "failing": []
+  },
+  {
+   "event": "water_cathedral:Teleport to End of Desert",
+   "failing": []
+  },
+  {
+   "event": "water_river_village:Teleport to Grass Route",
+   "failing": []
+  },
+  {
+   "event": "water_river_village:Teleport to Grass Route",
+   "failing": []
+  },
+  {
+   "event": "water_river_village:Teleport to Grass Route",
+   "failing": []
+  },
+  {
+   "event": "water_river_village:Teleport to Ice Route",
+   "failing": []
+  },
+  {
+   "event": "water_river_village:Teleport to Ice Route",
+   "failing": []
+  },
+  {
+   "event": "water_river_village:Teleport to Ice Route",
+   "failing": []
+  },
+  {
+   "event": "water_river_village:Teleport to Ice Route",
+   "failing": []
+  },
+  {
+   "event": "water_river_village:Teleport to Ice Route",
+   "failing": []
+  },
+  {
+   "event": "water_snow_village:Teleport to Ice Route",
+   "failing": []
+  },
+  {
+   "event": "water_snow_village:Teleport to Ice Route",
+   "failing": []
+  },
+  {
+   "event": "water_snow_village:Teleport to Ice Route",
+   "failing": []
+  },
+  {
+   "event": "water_snow_village:Teleport to Ice Route",
+   "failing": []
+  },
+  {
+   "event": "water_snow_village:Teleport to Ice Route",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_village:Teleport to Ice Route",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_village:Teleport to Volcano Path",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_village:Teleport to Volcano Path",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_village:Teleport to Volcano Path",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_village:Teleport to Volcano Path",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_village:Teleport to Volcano Path",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_village:Teleport to Volcano Path",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_village:Teleport to Volcano Path",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_village:Teleport to Volcano Path",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_village:Teleport to Volcano Path",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_village:Teleport to Volcano Path",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_village:Teleport to Volcano Path",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_village:Teleport to Ice Route",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_village:Teleport to Ice Route",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_village:Teleport to Ice Route",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Volcano Village",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Volcano Village",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Volcano Village",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Volcano Village",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Volcano Village",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Volcano Village",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Volcano Village",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Volcano Village",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Volcano Village",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Volcano Village",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Volcano Village",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Volcano Village",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Underwater Cave",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Underwater Cave",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Underwater Cave",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Underwater Cave",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Underwater Cave",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Underwater Cave",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Underwater Cave",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Underwater Cave",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Underwater Cave",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Underwater Cave",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Underwater Cave",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Underwater Cave",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Underwater Cave",
+   "failing": []
+  },
+  {
+   "event": "water_volcano_path:Teleport to Underwater Cave",
+   "failing": []
+  },
+  {
+   "event": "water_underwater:Teleport to Volcano Path",
+   "failing": []
+  },
+  {
+   "event": "water_underwater:Teleport to Volcano Path",
+   "failing": []
+  },
+  {
+   "event": "water_underwater:Teleport to Volcano Path",
+   "failing": []
+  },
+  {
+   "event": "water_underwater:Water Gemuar Battle",
+   "failing": [
+    "is player_facing_tile"
+   ]
+  },
+  {
+   "event": "water_underwater:The End",
+   "failing": [
+    "is variable_set after_gemuar:yes"
+   ]
+  },
+  {
+   "event": "water_underwater:The End",
+   "failing": [
+    "is variable_set after_gemuar:yes"
+   ]
+  },
+  {
+   "event": "water_underwater:The End",
+   "failing": [
+    "is variable_set after_gemuar:yes"
+   ]
+  },
+  {
+   "event": "water_underwater:The End",
+   "failing": [
+    "is variable_set after_gemuar:yes"
+   ]
+  },
+  {
+   "event": "water_underwater:The End",
+   "failing": [
+    "is variable_set after_gemuar:yes"
+   ]
+  },
+  {
+   "event": "water_underwater:The End",
+   "failing": [
+    "is variable_set after_gemuar:yes"
+   ]
+  },
+  {
+   "event": "water_underwater:The End",
+   "failing": [
+    "is variable_set after_gemuar:yes"
+   ]
+  },
+  {
+   "event": "water_underwater:The End",
+   "failing": [
+    "is variable_set after_gemuar:yes"
+   ]
+  }
+ ],
+ "steps": 10,
+ "stopReason": "no reachable map offers a state-changing event (searched 11 maps)",
+ "mapsVisited": 11,
+ "visitOrder": [
+  "water_end_of_desert",
+  "water_lower_village",
+  "water_outskirts",
+  "water_route_grass",
+  "water_route_ice",
+  "water_cathedral",
+  "water_river_village",
+  "water_snow_village",
+  "water_volcano_village",
+  "water_volcano_path",
+  "water_underwater"
+ ],
+ "battlesWon": 2,
+ "party": [
+  "propellercat",
+  "bugnin",
+  "agnite",
+  "conifrost",
+  "agnite"
+ ],
+ "items": {},
+ "finalVars": 16,
+ "conditionsUnknowableInP1": {},
+ "unfiredEventsBlockedBy": {
+  "is player_facing_tile": 1
+ },
+ "trace": [
+  {
+   "map": "water_end_of_desert",
+   "event": "Add First Mon",
+   "changed": [
+    "party=agnite"
+   ],
+   "battles": []
+  },
+  {
+   "map": "water_end_of_desert",
+   "event": "Water Intro",
+   "changed": [
+    "water_intro=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "water_lower_village",
+   "event": "(walk water_lower_village)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "water_lower_village",
+   "event": "Talk Nice Mayor1",
+   "changed": [
+    "water_dude_steals=yes",
+    "party=propellercat+bugnin"
+   ],
+   "battles": []
+  },
+  {
+   "map": "water_outskirts",
+   "event": "(walk water_outskirts)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "water_outskirts",
+   "event": "Talk Outskirts Dude",
+   "changed": [
+    "battle_last_result=won",
+    "battle_last_winner=player",
+    "battle_last_trainer=water_outskirts_dude",
+    "waterdefeatedguy1=yes",
+    "party=propellercat+bugnin+agnite",
+    "won water_outskirts_dude:won"
+   ],
+   "battles": [
+    "water_outskirts_dude"
+   ],
+   "teleport": "water_lower_village"
+  },
+  {
+   "map": "water_snow_village",
+   "event": "(walk water_route_ice > water_snow_village)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "water_snow_village",
+   "event": "Level Boost 10",
+   "changed": [
+    "level_boost10=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "water_snow_village",
+   "event": "Talk Mayor 1",
+   "changed": [
+    "watermayortalked1=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "water_snow_village",
+   "event": "Talk Mayor 2",
+   "changed": [
+    "battle_last_trainer=wild:conifrost",
+    "watermayortalked2=yes",
+    "won wild:conifrost:won"
+   ],
+   "battles": [
+    "wild:conifrost"
+   ]
+  },
+  {
+   "map": "water_snow_village",
+   "event": "Conifrost Joins",
+   "changed": [
+    "conifrost_joined=yes",
+    "party=propellercat+bugnin+agnite+conifrost"
+   ],
+   "battles": []
+  },
+  {
+   "map": "water_underwater",
+   "event": "(walk water_route_ice > water_volcano_village > water_volcano_path > water_underwater)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "water_underwater",
+   "event": "TEMP TEST THINGY",
+   "changed": [
+    "x1=yes",
+    "party=propellercat+bugnin+agnite+conifrost+agnite"
+   ],
+   "battles": []
+  },
+  {
+   "map": "water_underwater",
+   "event": "Show Hints",
+   "changed": [
+    "shown_hints=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "water_underwater",
+   "event": "LEVEL UP TUXEMON",
+   "changed": [
+    "level_65=yes"
+   ],
+   "battles": []
+  }
+ ]
+}

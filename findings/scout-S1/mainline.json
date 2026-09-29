@@ -1,0 +1,5175 @@
+{
+ "teleportEdges": 1049,
+ "campaigns": [
+  {
+   "campaign": "spyder",
+   "start": "spyder_bedroom",
+   "reachableMaps": 99,
+   "order": [
+    {
+     "map": "spyder_bedroom",
+     "depth": 0
+    },
+    {
+     "map": "spyder_downstairs",
+     "depth": 1
+    },
+    {
+     "map": "spyder_paper_scoop",
+     "depth": 1
+    },
+    {
+     "map": "spyder_paper_town",
+     "depth": 2
+    },
+    {
+     "map": "spyder_brideswood",
+     "depth": 3
+    },
+    {
+     "map": "spyder_candy_port",
+     "depth": 3
+    },
+    {
+     "map": "spyder_flower_city",
+     "depth": 3
+    },
+    {
+     "map": "spyder_leather_town",
+     "depth": 3
+    },
+    {
+     "map": "spyder_paper_daycare",
+     "depth": 3
+    },
+    {
+     "map": "spyder_paper_manor",
+     "depth": 3
+    },
+    {
+     "map": "spyder_paper_rival_downstairs",
+     "depth": 3
+    },
+    {
+     "map": "spyder_route1",
+     "depth": 3
+    },
+    {
+     "map": "spyder_routec",
+     "depth": 3
+    },
+    {
+     "map": "spyder_timber_town",
+     "depth": 3
+    },
+    {
+     "map": "spyder_candy_inn1",
+     "depth": 4
+    },
+    {
+     "map": "spyder_candy_town",
+     "depth": 4
+    },
+    {
+     "map": "spyder_citypark",
+     "depth": 4
+    },
+    {
+     "map": "spyder_cotton_town",
+     "depth": 4
+    },
+    {
+     "map": "spyder_diamond_hill",
+     "depth": 4
+    },
+    {
+     "map": "spyder_dojo1",
+     "depth": 4
+    },
+    {
+     "map": "spyder_dragonscave",
+     "depth": 4
+    },
+    {
+     "map": "spyder_dryadsgrove",
+     "depth": 4
+    },
+    {
+     "map": "spyder_flower_center",
+     "depth": 4
+    },
+    {
+     "map": "spyder_flower_house1",
+     "depth": 4
+    },
+    {
+     "map": "spyder_flower_house2",
+     "depth": 4
+    },
+    {
+     "map": "spyder_flower_petshop",
+     "depth": 4
+    },
+    {
+     "map": "spyder_flower_scoop",
+     "depth": 4
+    },
+    {
+     "map": "spyder_leather_center",
+     "depth": 4
+    },
+    {
+     "map": "spyder_leather_gym",
+     "depth": 4
+    },
+    {
+     "map": "spyder_leather_house1",
+     "depth": 4
+    },
+    {
+     "map": "spyder_leather_house2",
+     "depth": 4
+    },
+    {
+     "map": "spyder_leather_museum",
+     "depth": 4
+    },
+    {
+     "map": "spyder_leather_scoop",
+     "depth": 4
+    },
+    {
+     "map": "spyder_leather_shaft1",
+     "depth": 4
+    },
+    {
+     "map": "spyder_leather_shaft2",
+     "depth": 4
+    },
+    {
+     "map": "spyder_nimrod_bottom",
+     "depth": 4
+    },
+    {
+     "map": "spyder_paper_rival_bedroom",
+     "depth": 4
+    },
+    {
+     "map": "spyder_paper_rival_office",
+     "depth": 4
+    },
+    {
+     "map": "spyder_route2",
+     "depth": 4
+    },
+    {
+     "map": "spyder_route3",
+     "depth": 4
+    },
+    {
+     "map": "spyder_route4",
+     "depth": 4
+    },
+    {
+     "map": "spyder_route5",
+     "depth": 4
+    },
+    {
+     "map": "spyder_routea",
+     "depth": 4
+    },
+    {
+     "map": "spyder_routed",
+     "depth": 4
+    },
+    {
+     "map": "spyder_routee",
+     "depth": 4
+    },
+    {
+     "map": "spyder_scoop1",
+     "depth": 4
+    },
+    {
+     "map": "spyder_timber_cafe",
+     "depth": 4
+    },
+    {
+     "map": "spyder_timber_center",
+     "depth": 4
+    },
+    {
+     "map": "spyder_timber_house",
+     "depth": 4
+    },
+    {
+     "map": "spyder_timber_scoop",
+     "depth": 4
+    },
+    {
+     "map": "spyder_timber_walledgarden1",
+     "depth": 4
+    },
+    {
+     "map": "spyder_tunnel",
+     "depth": 4
+    },
+    {
+     "map": "spyder_candy_cafe",
+     "depth": 5
+    },
+    {
+     "map": "spyder_candy_center",
+     "depth": 5
+    },
+    {
+     "map": "spyder_candy_house1",
+     "depth": 5
+    },
+    {
+     "map": "spyder_candy_house2",
+     "depth": 5
+    },
+    {
+     "map": "spyder_candy_house3",
+     "depth": 5
+    },
+    {
+     "map": "spyder_candy_inn2",
+     "depth": 5
+    },
+    {
+     "map": "spyder_candy_scoop",
+     "depth": 5
+    },
+    {
+     "map": "spyder_citypark_house1",
+     "depth": 5
+    },
+    {
+     "map": "spyder_cotton_artshop",
+     "depth": 5
+    },
+    {
+     "map": "spyder_cotton_cafe",
+     "depth": 5
+    },
+    {
+     "map": "spyder_cotton_house1",
+     "depth": 5
+    },
+    {
+     "map": "spyder_cotton_house2",
+     "depth": 5
+    },
+    {
+     "map": "spyder_cotton_scoop",
+     "depth": 5
+    },
+    {
+     "map": "spyder_cotton_tunnel",
+     "depth": 5
+    },
+    {
+     "map": "spyder_dojo2",
+     "depth": 5
+    },
+    {
+     "map": "spyder_greenwash",
+     "depth": 5
+    },
+    {
+     "map": "spyder_greenwash_greenhouse",
+     "depth": 5
+    },
+    {
+     "map": "spyder_healing_center",
+     "depth": 5
+    },
+    {
+     "map": "spyder_mansion",
+     "depth": 5
+    },
+    {
+     "map": "spyder_mansion_top",
+     "depth": 5
+    },
+    {
+     "map": "spyder_nimrod_middle",
+     "depth": 5
+    },
+    {
+     "map": "spyder_nimrod_room",
+     "depth": 5
+    },
+    {
+     "map": "spyder_omnichannel1",
+     "depth": 5
+    },
+    {
+     "map": "spyder_route6",
+     "depth": 5
+    },
+    {
+     "map": "spyder_routeb",
+     "depth": 5
+    },
+    {
+     "map": "spyder_scoop2",
+     "depth": 5
+    },
+    {
+     "map": "spyder_test_map",
+     "depth": 5
+    },
+    {
+     "map": "spyder_timber_walledgarden2",
+     "depth": 5
+    },
+    {
+     "map": "spyder_tunnel_below",
+     "depth": 5
+    },
+    {
+     "map": "spyder_wayfarer_inn1",
+     "depth": 5
+    },
+    {
+     "map": "spyder_candy_hospital1",
+     "depth": 6
+    },
+    {
+     "map": "spyder_candy_hospital2",
+     "depth": 6
+    },
+    {
+     "map": "spyder_datacenter",
+     "depth": 6
+    },
+    {
+     "map": "spyder_dojo3",
+     "depth": 6
+    },
+    {
+     "map": "spyder_greenwash_level2",
+     "depth": 6
+    },
+    {
+     "map": "spyder_greenwash_level3",
+     "depth": 6
+    },
+    {
+     "map": "spyder_mansion_basement",
+     "depth": 6
+    },
+    {
+     "map": "spyder_nimrod_top",
+     "depth": 6
+    },
+    {
+     "map": "spyder_omnichannel2",
+     "depth": 6
+    },
+    {
+     "map": "spyder_scoop3",
+     "depth": 6
+    },
+    {
+     "map": "spyder_wayfarer_inn2",
+     "depth": 6
+    },
+    {
+     "map": "spyder_candy_hospital3",
+     "depth": 7
+    },
+    {
+     "map": "spyder_dojo4",
+     "depth": 7
+    },
+    {
+     "map": "spyder_omnichannel3",
+     "depth": 7
+    },
+    {
+     "map": "spyder_scoop4",
+     "depth": 7
+    },
+    {
+     "map": "spyder_omnichannel4",
+     "depth": 8
+    },
+    {
+     "map": "spyder_radiotower",
+     "depth": 9
+    }
+   ],
+   "conditionedExits": 60,
+   "gates": [
+    {
+     "from": "spyder_bedroom",
+     "to": "spyder_paper_scoop",
+     "event": "No Intro",
+     "gate": [
+      "is variable_set question_intro:yes",
+      "not variable_set spyder_intro:yes"
+     ]
+    },
+    {
+     "from": "spyder_bedroom",
+     "to": "spyder_paper_scoop",
+     "event": "Spyder Intro",
+     "gate": [
+      "is variable_set question_intro:no",
+      "not variable_set spyder_intro:yes"
+     ]
+    },
+    {
+     "from": "spyder_candy_cafe",
+     "to": "spyder_greenwash_level3",
+     "event": "Flashback Yes",
+     "gate": [
+      "is variable_set incident_greenwash:yes"
+     ]
+    },
+    {
+     "from": "spyder_candy_cafe",
+     "to": "spyder_candy_town",
+     "event": "Go Outside",
+     "gate": [
+      "is party_size player,greater_than,0"
+     ]
+    },
+    {
+     "from": "spyder_candy_center",
+     "to": "spyder_candy_hospital1",
+     "event": "Choice Floor 1st",
+     "gate": [
+      "is variable_set choice_floor:1floor"
+     ]
+    },
+    {
+     "from": "spyder_candy_center",
+     "to": "spyder_candy_hospital2",
+     "event": "Passcode Correct",
+     "gate": [
+      "is variable_set passcode_color:blue",
+      "is variable_set passcode_number:10"
+     ]
+    },
+    {
+     "from": "spyder_candy_center",
+     "to": "spyder_candy_town",
+     "event": "Go Outside",
+     "gate": [
+      "not char_defeated player"
+     ]
+    },
+    {
+     "from": "spyder_candy_hospital1",
+     "to": "spyder_candy_center",
+     "event": "Choice Floor Ground",
+     "gate": [
+      "is variable_set choice_floor:0floor"
+     ]
+    },
+    {
+     "from": "spyder_candy_hospital1",
+     "to": "spyder_candy_hospital2",
+     "event": "Passcode Correct",
+     "gate": [
+      "is variable_set passcode_color:blue",
+      "is variable_set passcode_number:10"
+     ]
+    },
+    {
+     "from": "spyder_candy_hospital2",
+     "to": "spyder_candy_center",
+     "event": "Choice Floor Ground",
+     "gate": [
+      "is variable_set choice_floor:0floor"
+     ]
+    },
+    {
+     "from": "spyder_candy_hospital2",
+     "to": "spyder_candy_hospital1",
+     "event": "Choice Floor 1st",
+     "gate": [
+      "is variable_set choice_floor:1floor"
+     ]
+    },
+    {
+     "from": "spyder_candy_inn2",
+     "to": "spyder_candy_inn2",
+     "event": "Bee Event Buzzing",
+     "gate": [
+      "is variable_set beeevent:start"
+     ]
+    },
+    {
+     "from": "spyder_candy_port",
+     "to": "spyder_candy_port",
+     "event": "Destination - Candy",
+     "gate": [
+      "is variable_set rivergoto:candy_port"
+     ]
+    },
+    {
+     "from": "spyder_candy_port",
+     "to": "spyder_flower_city",
+     "event": "Destination - Flower",
+     "gate": [
+      "is variable_set rivergoto:flower_city"
+     ]
+    },
+    {
+     "from": "spyder_candy_port",
+     "to": "spyder_leather_town",
+     "event": "Destination - Leather",
+     "gate": [
+      "is variable_set rivergoto:leather_town"
+     ]
+    },
+    {
+     "from": "spyder_candy_port",
+     "to": "spyder_paper_town",
+     "event": "Destination - Paper",
+     "gate": [
+      "is variable_set rivergoto:paper_town"
+     ]
+    },
+    {
+     "from": "spyder_candy_port",
+     "to": "spyder_timber_town",
+     "event": "Destination - Timber",
+     "gate": [
+      "is variable_set rivergoto:timber_town"
+     ]
+    },
+    {
+     "from": "spyder_cotton_tunnel",
+     "to": "spyder_dragonscave",
+     "event": "Teleport to Dragon's Cave",
+     "gate": [
+      "is variable_set dragonscavedrokoro:yes"
+     ]
+    },
+    {
+     "from": "spyder_dragonscave",
+     "to": "spyder_cotton_tunnel",
+     "event": "Teleport to Cotton Tunnel",
+     "gate": [
+      "is variable_set dragonscavedrokoro:yes"
+     ]
+    },
+    {
+     "from": "spyder_flower_center",
+     "to": "spyder_flower_city",
+     "event": "Go Outside",
+     "gate": [
+      "not char_defeated player"
+     ]
+    },
+    {
+     "from": "spyder_flower_city",
+     "to": "spyder_flower_city",
+     "event": "Destination - Flower",
+     "gate": [
+      "is variable_set rivergoto:flower_city"
+     ]
+    },
+    {
+     "from": "spyder_flower_city",
+     "to": "spyder_leather_town",
+     "event": "Destination - Leather",
+     "gate": [
+      "is variable_set rivergoto:leather_town"
+     ]
+    },
+    {
+     "from": "spyder_flower_city",
+     "to": "spyder_paper_town",
+     "event": "Destination - Paper",
+     "gate": [
+      "is variable_set rivergoto:paper_town"
+     ]
+    },
+    {
+     "from": "spyder_flower_city",
+     "to": "spyder_timber_town",
+     "event": "Destination - Timber",
+     "gate": [
+      "is variable_set rivergoto:timber_town"
+     ]
+    },
+    {
+     "from": "spyder_flower_city",
+     "to": "spyder_candy_port",
+     "event": "Destination - Candy",
+     "gate": [
+      "is variable_set rivergoto:candy_port"
+     ]
+    },
+    {
+     "from": "spyder_greenwash_level2",
+     "to": "spyder_greenwash_level3",
+     "event": "Trigger Fossilator",
+     "gate": [
+      "is variable_set unveildefossilator:yes"
+     ]
+    },
+    {
+     "from": "spyder_greenwash_level2",
+     "to": "spyder_greenwash_level3",
+     "event": "Trigger Dempsey",
+     "gate": [
+      "is variable_set dempsey_flashback:yes"
+     ]
+    },
+    {
+     "from": "spyder_greenwash_level3",
+     "to": "spyder_candy_cafe",
+     "event": "FlashBack Incident",
+     "gate": [
+      "is variable_set incident_greenwash:yes"
+     ]
+    },
+    {
+     "from": "spyder_greenwash_level3",
+     "to": "spyder_greenwash_level2",
+     "event": "Flashback Dempsey",
+     "gate": [
+      "is variable_set dempsey_flashback:yes"
+     ]
+    },
+    {
+     "from": "spyder_greenwash_level3",
+     "to": "spyder_greenwash_level2",
+     "event": "Flashback Fossilator",
+     "gate": [
+      "is variable_set unveildefossilator:yes"
+     ]
+    },
+    {
+     "from": "spyder_healing_center",
+     "to": "spyder_cotton_town",
+     "event": "Go Outside",
+     "gate": [
+      "not char_defeated player"
+     ]
+    },
+    {
+     "from": "spyder_leather_center",
+     "to": "spyder_leather_town",
+     "event": "Go Outside",
+     "gate": [
+      "not char_defeated player"
+     ]
+    },
+    {
+     "from": "spyder_leather_town",
+     "to": "spyder_flower_city",
+     "event": "Destination - Flower",
+     "gate": [
+      "is variable_set rivergoto:flower_city"
+     ]
+    },
+    {
+     "from": "spyder_leather_town",
+     "to": "spyder_leather_town",
+     "event": "Destination - Leather",
+     "gate": [
+      "is variable_set rivergoto:leather_town"
+     ]
+    },
+    {
+     "from": "spyder_leather_town",
+     "to": "spyder_paper_town",
+     "event": "Destination - Paper",
+     "gate": [
+      "is variable_set rivergoto:paper_town"
+     ]
+    },
+    {
+     "from": "spyder_leather_town",
+     "to": "spyder_timber_town",
+     "event": "Destination - Timber",
+     "gate": [
+      "is variable_set rivergoto:timber_town"
+     ]
+    },
+    {
+     "from": "spyder_leather_town",
+     "to": "spyder_candy_port",
+     "event": "Destination - Candy",
+     "gate": [
+      "is variable_set rivergoto:candy_port"
+     ]
+    },
+    {
+     "from": "spyder_nimrod_middle",
+     "to": "spyder_nimrod_room",
+     "event": "Flashback Trigger Yes",
+     "gate": [
+      "is variable_set zircon_argon:yes"
+     ]
+    },
+    {
+     "from": "spyder_nimrod_room",
+     "to": "spyder_wayfarer_inn1",
+     "event": "Enforcers Rapid Response",
+     "gate": [
+      "is variable_set enforcers_response:yes"
+     ]
+    },
+    {
+     "from": "spyder_nimrod_room",
+     "to": "spyder_nimrod_middle",
+     "event": "FlashBack Zircon and Argon",
+     "gate": [
+      "is variable_set zircon_argon:yes"
+     ]
+    },
+    {
+     "from": "spyder_omnichannel4",
+     "to": "spyder_radiotower",
+     "event": "Teleport to Radio Tower",
+     "gate": [
+      "is has_item player,spyder_pass"
+     ]
+    },
+    {
+     "from": "spyder_omnichannel4",
+     "to": "spyder_radiotower",
+     "event": "Teleport to Radio Tower",
+     "gate": [
+      "is has_item player,spyder_pass"
+     ]
+    },
+    {
+     "from": "spyder_paper_daycare",
+     "to": "spyder_paper_rival_downstairs",
+     "event": "FlashBack Billie Grandma",
+     "gate": [
+      "is variable_set billie_grandma:yes"
+     ]
+    },
+    {
+     "from": "spyder_paper_rival_downstairs",
+     "to": "spyder_paper_daycare",
+     "event": "Flashback Yes",
+     "gate": [
+      "is variable_set billie_grandma:yes"
+     ]
+    },
+    {
+     "from": "spyder_paper_scoop",
+     "to": "spyder_bedroom",
+     "event": "Continue Storekeeper",
+     "gate": [
+      "not variable_set intro_scoop:done",
+      "is variable_set choice_phase:progress"
+     ]
+    },
+    {
+     "from": "spyder_paper_scoop",
+     "to": "spyder_paper_town",
+     "event": "Go Outside",
+     "gate": [
+      "is variable_set intro_scoop:done"
+     ]
+    },
+    {
+     "from": "spyder_paper_town",
+     "to": "spyder_route1",
+     "event": "Teleport to Route 1",
+     "gate": [
+      "is variable_set firstfightdue:no"
+     ]
+    },
+    {
+     "from": "spyder_paper_town",
+     "to": "spyder_route1",
+     "event": "Teleport to Route 1",
+     "gate": [
+      "is variable_set firstfightdue:no"
+     ]
+    },
+    {
+     "from": "spyder_paper_town",
+     "to": "spyder_flower_city",
+     "event": "Destination - Flower",
+     "gate": [
+      "is variable_set rivergoto:flower_city"
+     ]
+    },
+    {
+     "from": "spyder_paper_town",
+     "to": "spyder_leather_town",
+     "event": "Destination - Leather",
+     "gate": [
+      "is variable_set rivergoto:leather_town"
+     ]
+    },
+    {
+     "from": "spyder_paper_town",
+     "to": "spyder_paper_town",
+     "event": "Destination - Paper",
+     "gate": [
+      "is variable_set rivergoto:paper_town"
+     ]
+    },
+    {
+     "from": "spyder_paper_town",
+     "to": "spyder_candy_port",
+     "event": "Destination - Candy",
+     "gate": [
+      "is variable_set rivergoto:candy_port"
+     ]
+    },
+    {
+     "from": "spyder_paper_town",
+     "to": "spyder_timber_town",
+     "event": "Destination - Timber",
+     "gate": [
+      "is variable_set rivergoto:timber_town"
+     ]
+    },
+    {
+     "from": "spyder_timber_center",
+     "to": "spyder_timber_town",
+     "event": "Go Outside",
+     "gate": [
+      "not char_defeated player"
+     ]
+    },
+    {
+     "from": "spyder_timber_town",
+     "to": "spyder_flower_city",
+     "event": "Destination - Flower",
+     "gate": [
+      "is variable_set rivergoto:flower_city"
+     ]
+    },
+    {
+     "from": "spyder_timber_town",
+     "to": "spyder_leather_town",
+     "event": "Destination - Leather",
+     "gate": [
+      "is variable_set rivergoto:leather_town"
+     ]
+    },
+    {
+     "from": "spyder_timber_town",
+     "to": "spyder_paper_town",
+     "event": "Destination - Paper",
+     "gate": [
+      "is variable_set rivergoto:paper_town"
+     ]
+    },
+    {
+     "from": "spyder_timber_town",
+     "to": "spyder_candy_port",
+     "event": "Destination - Candy",
+     "gate": [
+      "is variable_set rivergoto:candy_port"
+     ]
+    },
+    {
+     "from": "spyder_timber_town",
+     "to": "spyder_timber_town",
+     "event": "Destination - Timber",
+     "gate": [
+      "is variable_set rivergoto:timber_town"
+     ]
+    },
+    {
+     "from": "spyder_wayfarer_inn1",
+     "to": "spyder_nimrod_room",
+     "event": "Trigger Flashback",
+     "gate": [
+      "is variable_set enforcers_response:yes"
+     ]
+    }
+   ],
+   "battles": 281,
+   "battlesWithProgressReaders": 269,
+   "storyBattles": [
+    {
+     "map": "spyder_candy_hospital1",
+     "event": "Talk Aurora",
+     "opponent": "spyder_hospital1_aurora",
+     "guard": [
+      "not battle_outcome player,won,spyder_hospital1_aurora",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_candy_hospital1:Talk Aurora [not battle_outcome player,won,spyder_hospital1_aurora] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_candy_hospital1",
+     "event": "Talk Eleni",
+     "opponent": "spyder_hospital1_eleni",
+     "guard": [
+      "not battle_outcome player,won,spyder_hospital1_eleni",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_candy_hospital1:Talk Eleni [not battle_outcome player,won,spyder_hospital1_eleni] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_candy_hospital1",
+     "event": "Talk Felu",
+     "opponent": "spyder_hospital1_felu",
+     "guard": [
+      "not battle_outcome player,won,spyder_hospital1_felu",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_candy_hospital1:Talk Felu [not battle_outcome player,won,spyder_hospital1_felu] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_candy_hospital1",
+     "event": "Talk Liane",
+     "opponent": "spyder_hospital1_liane",
+     "guard": [
+      "not battle_outcome player,won,spyder_hospital1_liane",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_candy_hospital1:Talk Liane [not battle_outcome player,won,spyder_hospital1_liane] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_candy_hospital1",
+     "event": "Talk Fring",
+     "opponent": "spyder_hospital1_fring",
+     "guard": [
+      "not battle_outcome player,won,spyder_hospital1_fring",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_candy_hospital1:Talk Fring [not battle_outcome player,won,spyder_hospital1_fring] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_candy_hospital1",
+     "event": "Talk Walt",
+     "opponent": "spyder_hospital1_walt",
+     "guard": [
+      "not battle_outcome player,won,spyder_hospital1_walt",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_candy_hospital1:Talk Walt [not battle_outcome player,won,spyder_hospital1_walt] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_candy_hospital2",
+     "event": "Talk Luzia",
+     "opponent": "spyder_hospital1_luzia",
+     "guard": [
+      "not battle_outcome player,won,spyder_hospital1_luzia",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_candy_hospital2:Talk Luzia [not battle_outcome player,won,spyder_hospital1_luzia] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_candy_hospital2",
+     "event": "Talk Zekar",
+     "opponent": "spyder_hospital1_zekar",
+     "guard": [
+      "not battle_outcome player,won,spyder_hospital1_zekar",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_candy_hospital2:Talk Zekar [not battle_outcome player,won,spyder_hospital1_zekar] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_candy_hospital2",
+     "event": "Talk Rakez",
+     "opponent": "spyder_hospital1_rakez",
+     "guard": [
+      "not battle_outcome player,won,spyder_hospital1_rakez",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_candy_hospital2:Talk Rakez [not battle_outcome player,won,spyder_hospital1_rakez] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_candy_hospital2",
+     "event": "Talk Rhizome",
+     "opponent": "spyder_hospital1_rhizome",
+     "guard": [
+      "not battle_outcome player,won,spyder_hospital1_rhizome",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_candy_hospital2:Talk Rhizome [not battle_outcome player,won,spyder_hospital1_rhizome] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_citypark",
+     "event": "Talk Frances",
+     "opponent": "spyder_citypark_frances",
+     "guard": [
+      "not battle_outcome player,won,spyder_citypark_frances"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_citypark:Talk Frances [not battle_outcome player,won,spyder_citypark_frances] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_citypark",
+     "event": "Talk Bobette",
+     "opponent": "spyder_citypark_bobette",
+     "guard": [
+      "not battle_outcome player,won,spyder_citypark_bobette"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_citypark:Talk Bobette [not battle_outcome player,won,spyder_citypark_bobette] -> char_talk,add_monster,start_battle",
+      "spyder_citypark:Talk Bobette [not battle_outcome player,won,spyder_citypark_bobette] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_citypark",
+     "event": "Talk Edith",
+     "opponent": "spyder_citypark_edith",
+     "guard": [
+      "not battle_outcome player,won,spyder_citypark_edith"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_citypark:Talk Edith [not battle_outcome player,won,spyder_citypark_edith] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_citypark",
+     "event": "Talk Bobette",
+     "opponent": "spyder_citypark_bobette",
+     "guard": [
+      "not battle_outcome player,won,spyder_citypark_bobette",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_citypark:Talk Bobette [not battle_outcome player,won,spyder_citypark_bobette] -> char_talk,add_monster,start_battle",
+      "spyder_citypark:Talk Bobette [not battle_outcome player,won,spyder_citypark_bobette] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_cotton_cafe",
+     "event": "battle cayden",
+     "opponent": "spyder_cottoncafe_cayden",
+     "guard": [
+      "not battle_outcome player,won,spyder_cottoncafe_cayden",
+      "is variable_set cafebattle:yes"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_cotton_cafe:battle cayden [not battle_outcome player,won,spyder_cottoncafe_cayden] -> add_monster,set_variable,start_battle,translated_dialog"
+     ]
+    },
+    {
+     "map": "spyder_cotton_town",
+     "event": "Battle confused",
+     "opponent": "spyder_confusedperson",
+     "guard": [
+      "not battle_outcome player,won,spyder_confusedperson",
+      "is variable_set confusedchoice:yes"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_cotton_town:Battle confused [not battle_outcome player,won,spyder_confusedperson] -> add_monster,start_battle,translated_dialog"
+     ]
+    },
+    {
+     "map": "spyder_cotton_tunnel",
+     "event": "Talk Carlos",
+     "opponent": "spyder_cottontunnel_carlos",
+     "guard": [
+      "not battle_outcome player,won,spyder_cottontunnel_carlos",
+      "is char_at player",
+      "not char_defeated player",
+      "is variable_set dragonscavedrokoro:yes"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_cotton_tunnel:Talk Carlos [not battle_outcome player,won,spyder_cottontunnel_carlos] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_datacenter",
+     "event": "Talk Fermi",
+     "opponent": "spyder_datacenter_fermi",
+     "guard": [
+      "not battle_outcome player,won,spyder_datacenter_fermi",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_datacenter:Talk Fermi [not battle_outcome player,won,spyder_datacenter_fermi] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_datacenter",
+     "event": "Talk Onnes",
+     "opponent": "spyder_datacenter_onnes",
+     "guard": [
+      "not battle_outcome player,won,spyder_datacenter_onnes",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_datacenter:Talk Onnes [not battle_outcome player,won,spyder_datacenter_onnes] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_datacenter",
+     "event": "Talk Bayliss",
+     "opponent": "spyder_datacenter_bayliss",
+     "guard": [
+      "not battle_outcome player,won,spyder_datacenter_bayliss",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_datacenter:Talk Bayliss [not battle_outcome player,won,spyder_datacenter_bayliss] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_datacenter",
+     "event": "Talk Chomsky",
+     "opponent": "spyder_datacenter_chomsky",
+     "guard": [
+      "not battle_outcome player,won,spyder_datacenter_chomsky",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_datacenter:Talk Chomsky [not battle_outcome player,won,spyder_datacenter_chomsky] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_datacenter",
+     "event": "Talk Lagrange",
+     "opponent": "spyder_datacenter_lagrange",
+     "guard": [
+      "not battle_outcome player,won,spyder_datacenter_lagrange",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_datacenter:Talk Lagrange [not battle_outcome player,won,spyder_datacenter_lagrange] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_dojo2",
+     "event": "Talk Iroh",
+     "opponent": "spyder_dojo_iroh",
+     "guard": [
+      "not battle_outcome player,won,spyder_dojo_iroh"
+     ],
+     "outcomeReaders": 4,
+     "progressReaders": [
+      "spyder_dojo2:Talk Iroh [not battle_outcome player,won,spyder_dojo_iroh] -> char_talk,add_monster,get_party_monster,add_tech,start_battle,char_stop,screen_transition,set_monster_health,set_monster_status",
+      "spyder_dojo2:Talk Wan2 [is battle_outcome player,won,spyder_dojo_iroh] -> translated_dialog,add_monster,get_party_monster,add_tech,start_battle,char_stop,screen_transition,set_monster_health,set_monster_status,pathfind,remove_npc"
+     ]
+    },
+    {
+     "map": "spyder_dojo2",
+     "event": "Talk Yangchen",
+     "opponent": "spyder_dojo_yangchen",
+     "guard": [
+      "not battle_outcome player,won,spyder_dojo_yangchen"
+     ],
+     "outcomeReaders": 4,
+     "progressReaders": [
+      "spyder_dojo2:Talk Yangchen [not battle_outcome player,won,spyder_dojo_yangchen] -> char_talk,add_monster,add_tech,start_battle,char_stop,screen_transition,set_monster_health,set_monster_status",
+      "spyder_dojo2:Talk Wan2 [is battle_outcome player,won,spyder_dojo_yangchen] -> translated_dialog,add_monster,get_party_monster,add_tech,start_battle,char_stop,screen_transition,set_monster_health,set_monster_status,pathfind,remove_npc"
+     ]
+    },
+    {
+     "map": "spyder_dojo2",
+     "event": "Talk Kataro",
+     "opponent": "spyder_dojo_kataro",
+     "guard": [
+      "not battle_outcome player,won,spyder_dojo_kataro"
+     ],
+     "outcomeReaders": 4,
+     "progressReaders": [
+      "spyder_dojo2:Talk Kataro [not battle_outcome player,won,spyder_dojo_kataro] -> char_talk,add_monster,get_party_monster,add_tech,add_item,start_battle,char_stop,screen_transition,set_monster_health,set_monster_status",
+      "spyder_dojo2:Talk Wan2 [is battle_outcome player,won,spyder_dojo_kataro] -> translated_dialog,add_monster,get_party_monster,add_tech,start_battle,char_stop,screen_transition,set_monster_health,set_monster_status,pathfind,remove_npc"
+     ]
+    },
+    {
+     "map": "spyder_dojo2",
+     "event": "Talk Sokka",
+     "opponent": "spyder_dojo_sokka",
+     "guard": [
+      "not battle_outcome player,won,spyder_dojo_sokka"
+     ],
+     "outcomeReaders": 4,
+     "progressReaders": [
+      "spyder_dojo2:Talk Sokka [not battle_outcome player,won,spyder_dojo_sokka] -> char_talk,add_monster,start_battle,char_stop,screen_transition,set_monster_health,set_monster_status",
+      "spyder_dojo2:Talk Wan2 [is battle_outcome player,won,spyder_dojo_sokka] -> translated_dialog,add_monster,get_party_monster,add_tech,start_battle,char_stop,screen_transition,set_monster_health,set_monster_status,pathfind,remove_npc"
+     ]
+    },
+    {
+     "map": "spyder_dojo2",
+     "event": "Talk Toph",
+     "opponent": "spyder_dojo_toph",
+     "guard": [
+      "not battle_outcome player,won,spyder_dojo_toph"
+     ],
+     "outcomeReaders": 4,
+     "progressReaders": [
+      "spyder_dojo2:Talk Toph [not battle_outcome player,won,spyder_dojo_toph] -> char_talk,add_monster,start_battle,char_stop,screen_transition,set_monster_health,set_monster_status",
+      "spyder_dojo2:Talk Wan2 [is battle_outcome player,won,spyder_dojo_toph] -> translated_dialog,add_monster,get_party_monster,add_tech,start_battle,char_stop,screen_transition,set_monster_health,set_monster_status,pathfind,remove_npc"
+     ]
+    },
+    {
+     "map": "spyder_dojo2",
+     "event": "Talk Wan2",
+     "opponent": "spyder_dojo_wan",
+     "guard": [
+      "is variable_set wanintro:yes",
+      "is battle_outcome player,won,spyder_dojo_iroh",
+      "is battle_outcome player,won,spyder_dojo_yangchen",
+      "is battle_outcome player,won,spyder_dojo_kataro",
+      "is battle_outcome player,won,spyder_dojo_sokka",
+      "is battle_outcome player,won,spyder_dojo_toph",
+      "not battle_outcome player,won,spyder_dojo_wan"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_dojo2:Create Wan [not battle_outcome player,won,spyder_dojo_wan] -> create_npc",
+      "spyder_dojo2:Talk Wan2 [not battle_outcome player,won,spyder_dojo_wan] -> translated_dialog,add_monster,get_party_monster,add_tech,start_battle,char_stop,screen_transition,set_monster_health,set_monster_status,pathfind,remove_npc"
+     ]
+    },
+    {
+     "map": "spyder_dojo3",
+     "event": "Talk Saturn",
+     "opponent": "spyder_dojo_saturn",
+     "guard": [
+      "not battle_outcome player,won,spyder_dojo_saturn"
+     ],
+     "outcomeReaders": 4,
+     "progressReaders": [
+      "spyder_dojo3:Talk Saturn [not battle_outcome player,won,spyder_dojo_saturn] -> char_talk,add_monster,start_battle,set_monster_health,set_monster_status,add_item,translated_dialog",
+      "spyder_dojo3:Talk Tu2 [is battle_outcome player,won,spyder_dojo_saturn] -> translated_dialog,add_monster,start_battle,set_monster_health,set_monster_status,pathfind,remove_npc"
+     ]
+    },
+    {
+     "map": "spyder_dojo3",
+     "event": "Talk Hephastus",
+     "opponent": "spyder_dojo_hephastus",
+     "guard": [
+      "not battle_outcome player,won,spyder_dojo_hephastus"
+     ],
+     "outcomeReaders": 4,
+     "progressReaders": [
+      "spyder_dojo3:Talk Hephastus [not battle_outcome player,won,spyder_dojo_hephastus] -> char_talk,add_monster,start_battle,set_monster_health,set_monster_status,add_item,translated_dialog",
+      "spyder_dojo3:Talk Tu2 [is battle_outcome player,won,spyder_dojo_hephastus] -> translated_dialog,add_monster,start_battle,set_monster_health,set_monster_status,pathfind,remove_npc"
+     ]
+    },
+    {
+     "map": "spyder_dojo3",
+     "event": "Talk Hermes",
+     "opponent": "spyder_dojo_hermes",
+     "guard": [
+      "not battle_outcome player,won,spyder_dojo_hermes"
+     ],
+     "outcomeReaders": 4,
+     "progressReaders": [
+      "spyder_dojo3:Talk Hermes [not battle_outcome player,won,spyder_dojo_hermes] -> char_talk,add_monster,start_battle,set_monster_health,set_monster_status,add_item,translated_dialog",
+      "spyder_dojo3:Talk Tu2 [is battle_outcome player,won,spyder_dojo_hermes] -> translated_dialog,add_monster,start_battle,set_monster_health,set_monster_status,pathfind,remove_npc"
+     ]
+    },
+    {
+     "map": "spyder_dojo3",
+     "event": "Talk Orion",
+     "opponent": "spyder_dojo_orion",
+     "guard": [
+      "not battle_outcome player,won,spyder_dojo_orion"
+     ],
+     "outcomeReaders": 4,
+     "progressReaders": [
+      "spyder_dojo3:Talk Orion [not battle_outcome player,won,spyder_dojo_orion] -> char_talk,add_monster,start_battle,set_monster_health,set_monster_status,add_item,translated_dialog",
+      "spyder_dojo3:Talk Tu2 [is battle_outcome player,won,spyder_dojo_orion] -> translated_dialog,add_monster,start_battle,set_monster_health,set_monster_status,pathfind,remove_npc"
+     ]
+    },
+    {
+     "map": "spyder_dojo3",
+     "event": "Talk Ares",
+     "opponent": "spyder_dojo_ares",
+     "guard": [
+      "not battle_outcome player,won,spyder_dojo_ares"
+     ],
+     "outcomeReaders": 4,
+     "progressReaders": [
+      "spyder_dojo3:Talk Ares [not battle_outcome player,won,spyder_dojo_ares] -> char_talk,add_monster,start_battle,set_monster_health,set_monster_status,add_item,translated_dialog",
+      "spyder_dojo3:Talk Tu2 [is battle_outcome player,won,spyder_dojo_ares] -> translated_dialog,add_monster,start_battle,set_monster_health,set_monster_status,pathfind,remove_npc"
+     ]
+    },
+    {
+     "map": "spyder_dojo3",
+     "event": "Talk Tu2",
+     "opponent": "spyder_dojo_tu",
+     "guard": [
+      "is variable_set tuintro:yes",
+      "is battle_outcome player,won,spyder_dojo_saturn",
+      "is battle_outcome player,won,spyder_dojo_hephastus",
+      "is battle_outcome player,won,spyder_dojo_hermes",
+      "is battle_outcome player,won,spyder_dojo_orion",
+      "is battle_outcome player,won,spyder_dojo_ares",
+      "not battle_outcome player,won,spyder_dojo_tu"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_dojo3:Create Tu [not battle_outcome player,won,spyder_dojo_tu] -> create_npc",
+      "spyder_dojo3:Talk Tu2 [not battle_outcome player,won,spyder_dojo_tu] -> translated_dialog,add_monster,start_battle,set_monster_health,set_monster_status,pathfind,remove_npc"
+     ]
+    },
+    {
+     "map": "spyder_dojo4",
+     "event": "Talk Thri",
+     "opponent": "spyder_dojo_thri",
+     "guard": [
+      "not battle_outcome player,won,spyder_dojo_thri"
+     ],
+     "outcomeReaders": 1,
+     "progressReaders": [
+      "spyder_dojo4:Talk Thri [not battle_outcome player,won,spyder_dojo_thri] -> translated_dialog,add_monster,start_battle,translated_dialog_choice,set_variable"
+     ]
+    },
+    {
+     "map": "spyder_dragonscave",
+     "event": "Talk Tomas",
+     "opponent": "spyder_dragonscave_tomas",
+     "guard": [
+      "not battle_outcome player,won,spyder_dragonscave_tomas"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_dragonscave:Talk Tomas [not battle_outcome player,won,spyder_dragonscave_tomas] -> char_talk,add_monster,start_battle",
+      "spyder_dragonscave:Talk Tomas [not battle_outcome player,won,spyder_dragonscave_tomas] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_dragonscave",
+     "event": "Talk Lessa",
+     "opponent": "spyder_dragonscave_lessa",
+     "guard": [
+      "not battle_outcome player,won,spyder_dragonscave_lessa"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_dragonscave:Talk Lessa [not battle_outcome player,won,spyder_dragonscave_lessa] -> char_talk,add_monster,start_battle",
+      "spyder_dragonscave:Talk Lessa [not battle_outcome player,won,spyder_dragonscave_lessa] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_dragonscave",
+     "event": "Talk Cailin",
+     "opponent": "spyder_dragonscave_cailin",
+     "guard": [
+      "not battle_outcome player,won,spyder_dragonscave_cailin"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_dragonscave:Talk Cailin [not battle_outcome player,won,spyder_dragonscave_cailin] -> char_talk,add_monster,start_battle",
+      "spyder_dragonscave:Talk Cailin [not battle_outcome player,won,spyder_dragonscave_cailin] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_dragonscave",
+     "event": "Talk Griffin",
+     "opponent": "spyder_dragonscave_griffin",
+     "guard": [
+      "not battle_outcome player,won,spyder_dragonscave_griffin"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_dragonscave:Talk Griffin [not battle_outcome player,won,spyder_dragonscave_griffin] -> char_talk,add_monster,start_battle",
+      "spyder_dragonscave:Talk Griffin [not battle_outcome player,won,spyder_dragonscave_griffin] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_dragonscave",
+     "event": "Talk Daenny",
+     "opponent": "spyder_dragonscave_daenny",
+     "guard": [
+      "not battle_outcome player,won,spyder_dragonscave_daenny"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_dragonscave:Talk Daenny [not battle_outcome player,won,spyder_dragonscave_daenny] -> char_talk,add_monster,start_battle",
+      "spyder_dragonscave:Talk Daenny [not battle_outcome player,won,spyder_dragonscave_daenny] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_dragonscave",
+     "event": "Talk Benden",
+     "opponent": "spyder_dragonscave_benden",
+     "guard": [
+      "not battle_outcome player,won,spyder_dragonscave_benden"
+     ],
+     "outcomeReaders": 13,
+     "progressReaders": [
+      "spyder_cotton_town:Create Monk [not battle_outcome player,won,spyder_dragonscave_benden] -> create_npc",
+      "spyder_cotton_town:Create Statue Orange [not battle_outcome player,won,spyder_dragonscave_benden] -> create_npc",
+      "spyder_cotton_town:Create Statue Blue [not battle_outcome player,won,spyder_dragonscave_benden] -> create_npc",
+      "spyder_cotton_town:Create Statue Red [not battle_outcome player,won,spyder_dragonscave_benden] -> create_npc",
+      "spyder_cotton_town:Create Statue Grey [not battle_outcome player,won,spyder_dragonscave_benden] -> create_npc",
+      "spyder_cotton_town:Create Statue Green [not battle_outcome player,won,spyder_dragonscave_benden] -> create_npc"
+     ]
+    },
+    {
+     "map": "spyder_dragonscave",
+     "event": "Talk Tomas",
+     "opponent": "spyder_dragonscave_tomas",
+     "guard": [
+      "not battle_outcome player,won,spyder_dragonscave_tomas",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_dragonscave:Talk Tomas [not battle_outcome player,won,spyder_dragonscave_tomas] -> char_talk,add_monster,start_battle",
+      "spyder_dragonscave:Talk Tomas [not battle_outcome player,won,spyder_dragonscave_tomas] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_dragonscave",
+     "event": "Talk Daenny",
+     "opponent": "spyder_dragonscave_daenny",
+     "guard": [
+      "not battle_outcome player,won,spyder_dragonscave_daenny",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_dragonscave:Talk Daenny [not battle_outcome player,won,spyder_dragonscave_daenny] -> char_talk,add_monster,start_battle",
+      "spyder_dragonscave:Talk Daenny [not battle_outcome player,won,spyder_dragonscave_daenny] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_dragonscave",
+     "event": "Talk Cailin",
+     "opponent": "spyder_dragonscave_cailin",
+     "guard": [
+      "not battle_outcome player,won,spyder_dragonscave_cailin",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_dragonscave:Talk Cailin [not battle_outcome player,won,spyder_dragonscave_cailin] -> char_talk,add_monster,start_battle",
+      "spyder_dragonscave:Talk Cailin [not battle_outcome player,won,spyder_dragonscave_cailin] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_dragonscave",
+     "event": "Talk Lessa",
+     "opponent": "spyder_dragonscave_lessa",
+     "guard": [
+      "not battle_outcome player,won,spyder_dragonscave_lessa",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_dragonscave:Talk Lessa [not battle_outcome player,won,spyder_dragonscave_lessa] -> char_talk,add_monster,start_battle",
+      "spyder_dragonscave:Talk Lessa [not battle_outcome player,won,spyder_dragonscave_lessa] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_dragonscave",
+     "event": "Talk Griffin",
+     "opponent": "spyder_dragonscave_griffin",
+     "guard": [
+      "not battle_outcome player,won,spyder_dragonscave_griffin",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_dragonscave:Talk Griffin [not battle_outcome player,won,spyder_dragonscave_griffin] -> char_talk,add_monster,start_battle",
+      "spyder_dragonscave:Talk Griffin [not battle_outcome player,won,spyder_dragonscave_griffin] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_dragonscave",
+     "event": "Talk Benden",
+     "opponent": "spyder_dragonscave_benden",
+     "guard": [
+      "not battle_outcome player,won,spyder_dragonscave_benden",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 13,
+     "progressReaders": [
+      "spyder_cotton_town:Create Monk [not battle_outcome player,won,spyder_dragonscave_benden] -> create_npc",
+      "spyder_cotton_town:Create Statue Orange [not battle_outcome player,won,spyder_dragonscave_benden] -> create_npc",
+      "spyder_cotton_town:Create Statue Blue [not battle_outcome player,won,spyder_dragonscave_benden] -> create_npc",
+      "spyder_cotton_town:Create Statue Red [not battle_outcome player,won,spyder_dragonscave_benden] -> create_npc",
+      "spyder_cotton_town:Create Statue Grey [not battle_outcome player,won,spyder_dragonscave_benden] -> create_npc",
+      "spyder_cotton_town:Create Statue Green [not battle_outcome player,won,spyder_dragonscave_benden] -> create_npc"
+     ]
+    },
+    {
+     "map": "spyder_dragonscave",
+     "event": "Talk Ray and Tru",
+     "opponent": "spyder_dragonscave_ray",
+     "guard": [
+      "not battle_outcome player,won,spyder_dragonscave_ray",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_dragonscave:Create Ray [not battle_outcome player,won,spyder_dragonscave_ray] -> create_npc",
+      "spyder_dragonscave:Create Tru [not battle_outcome player,won,spyder_dragonscave_ray] -> create_npc",
+      "spyder_dragonscave:Talk Ray and Tru [not battle_outcome player,won,spyder_dragonscave_ray] -> pathfind_to_char,char_talk,translated_dialog,add_monster,start_double_battle,pathfind"
+     ]
+    },
+    {
+     "map": "spyder_dragonscave",
+     "event": "Talk Lucille and Mal",
+     "opponent": "spyder_dragonscave_lucille",
+     "guard": [
+      "not battle_outcome player,won,spyder_dragonscave_lucille",
+      "is char_at player",
+      "not char_defeated player",
+      "is variable_set dragonscavebenden2:yes"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_dragonscave:Create Lucille [not battle_outcome player,won,spyder_dragonscave_lucille] -> create_npc",
+      "spyder_dragonscave:Talk Lucille and Mal [not battle_outcome player,won,spyder_dragonscave_lucille] -> pathfind_to_char,char_talk,add_monster,start_double_battle,set_variable"
+     ]
+    },
+    {
+     "map": "spyder_dryadsgrove",
+     "event": "Talk Aquemini",
+     "opponent": "spyder_dryadsgrove_aquemini",
+     "guard": [
+      "not battle_outcome player,won,spyder_dryadsgrove_aquemini"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_dryadsgrove:Create Aquemini [not battle_outcome player,won,spyder_dryadsgrove_aquemini] -> create_npc",
+      "spyder_dryadsgrove:Talk Aquemini [not battle_outcome player,won,spyder_dryadsgrove_aquemini] -> char_talk,add_monster,start_battle",
+      "spyder_dryadsgrove:Talk Aquemini [not battle_outcome player,won,spyder_dryadsgrove_aquemini] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_dryadsgrove",
+     "event": "Talk Ignatia",
+     "opponent": "spyder_dryadsgrove_ignatia",
+     "guard": [
+      "not battle_outcome player,won,spyder_dryadsgrove_ignatia"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_dryadsgrove:Create Ignatia [not battle_outcome player,won,spyder_dryadsgrove_ignatia] -> create_npc",
+      "spyder_dryadsgrove:Talk Ignatia [not battle_outcome player,won,spyder_dryadsgrove_ignatia] -> char_talk,add_monster,start_battle",
+      "spyder_dryadsgrove:Talk Ignatia [not battle_outcome player,won,spyder_dryadsgrove_ignatia] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_dryadsgrove",
+     "event": "Talk Petra",
+     "opponent": "spyder_dryadsgrove_petra",
+     "guard": [
+      "not battle_outcome player,won,spyder_dryadsgrove_petra"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_dryadsgrove:Create Petra [not battle_outcome player,won,spyder_dryadsgrove_petra] -> create_npc",
+      "spyder_dryadsgrove:Talk Petra [not battle_outcome player,won,spyder_dryadsgrove_petra] -> char_talk,add_monster,start_battle",
+      "spyder_dryadsgrove:Talk Petra [not battle_outcome player,won,spyder_dryadsgrove_petra] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_dryadsgrove",
+     "event": "Talk Sylvia",
+     "opponent": "spyder_dryadsgrove_sylvia",
+     "guard": [
+      "not battle_outcome player,won,spyder_dryadsgrove_sylvia"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_dryadsgrove:Create Sylvia [not battle_outcome player,won,spyder_dryadsgrove_sylvia] -> create_npc",
+      "spyder_dryadsgrove:Talk Sylvia [not battle_outcome player,won,spyder_dryadsgrove_sylvia] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_dryadsgrove",
+     "event": "Talk Aquemini",
+     "opponent": "spyder_dryadsgrove_aquemini",
+     "guard": [
+      "not battle_outcome player,won,spyder_dryadsgrove_aquemini",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_dryadsgrove:Create Aquemini [not battle_outcome player,won,spyder_dryadsgrove_aquemini] -> create_npc",
+      "spyder_dryadsgrove:Talk Aquemini [not battle_outcome player,won,spyder_dryadsgrove_aquemini] -> char_talk,add_monster,start_battle",
+      "spyder_dryadsgrove:Talk Aquemini [not battle_outcome player,won,spyder_dryadsgrove_aquemini] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_dryadsgrove",
+     "event": "Talk Ignatia",
+     "opponent": "spyder_dryadsgrove_ignatia",
+     "guard": [
+      "not battle_outcome player,won,spyder_dryadsgrove_ignatia",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_dryadsgrove:Create Ignatia [not battle_outcome player,won,spyder_dryadsgrove_ignatia] -> create_npc",
+      "spyder_dryadsgrove:Talk Ignatia [not battle_outcome player,won,spyder_dryadsgrove_ignatia] -> char_talk,add_monster,start_battle",
+      "spyder_dryadsgrove:Talk Ignatia [not battle_outcome player,won,spyder_dryadsgrove_ignatia] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_dryadsgrove",
+     "event": "Talk Petra",
+     "opponent": "spyder_dryadsgrove_petra",
+     "guard": [
+      "not battle_outcome player,won,spyder_dryadsgrove_petra",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_dryadsgrove:Create Petra [not battle_outcome player,won,spyder_dryadsgrove_petra] -> create_npc",
+      "spyder_dryadsgrove:Talk Petra [not battle_outcome player,won,spyder_dryadsgrove_petra] -> char_talk,add_monster,start_battle",
+      "spyder_dryadsgrove:Talk Petra [not battle_outcome player,won,spyder_dryadsgrove_petra] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_dryadsgrove",
+     "event": "Talk Ferris",
+     "opponent": "spyder_dryadsgrove_ferris",
+     "guard": [
+      "not battle_outcome player,won,spyder_dryadsgrove_ferris"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_dryadsgrove:Create Ferris [not battle_outcome player,won,spyder_dryadsgrove_ferris] -> create_npc",
+      "spyder_dryadsgrove:Talk Ferris [not battle_outcome player,won,spyder_dryadsgrove_ferris] -> char_talk,add_monster,start_battle",
+      "spyder_dryadsgrove:Talk Ferris [not battle_outcome player,won,spyder_dryadsgrove_ferris] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_dryadsgrove",
+     "event": "Talk Ferris",
+     "opponent": "spyder_dryadsgrove_ferris",
+     "guard": [
+      "not battle_outcome player,won,spyder_dryadsgrove_ferris",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_dryadsgrove:Create Ferris [not battle_outcome player,won,spyder_dryadsgrove_ferris] -> create_npc",
+      "spyder_dryadsgrove:Talk Ferris [not battle_outcome player,won,spyder_dryadsgrove_ferris] -> char_talk,add_monster,start_battle",
+      "spyder_dryadsgrove:Talk Ferris [not battle_outcome player,won,spyder_dryadsgrove_ferris] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_greenwash",
+     "event": "Talk Looten",
+     "opponent": "spyder_greenwash_looten",
+     "guard": [
+      "not battle_outcome player,won,spyder_greenwash_looten"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_candy_town:Create Guard [not battle_outcome player,won,spyder_greenwash_looten] -> create_npc",
+      "spyder_greenwash:Talk Looten [not battle_outcome player,won,spyder_greenwash_looten] -> char_talk,add_monster,start_battle,translated_dialog,add_item"
+     ]
+    },
+    {
+     "map": "spyder_greenwash",
+     "event": "Talk Chip",
+     "opponent": "spyder_greenwash_chip",
+     "guard": [
+      "not battle_outcome player,won,spyder_greenwash_chip",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_greenwash:Talk Chip [not battle_outcome player,won,spyder_greenwash_chip] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_greenwash",
+     "event": "Talk Clarence",
+     "opponent": "spyder_greenwash_clarence",
+     "guard": [
+      "not battle_outcome player,won,spyder_greenwash_clarence",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_greenwash:Talk Clarence [not battle_outcome player,won,spyder_greenwash_clarence] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_greenwash",
+     "event": "Talk Broer",
+     "opponent": "spyder_greenwash_broer",
+     "guard": [
+      "not battle_outcome player,won,spyder_greenwash_broer",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_greenwash:Talk Broer [not battle_outcome player,won,spyder_greenwash_broer] -> pathfind_to_char,char_talk,add_monster,start_battle,add_item,translated_dialog"
+     ]
+    },
+    {
+     "map": "spyder_greenwash",
+     "event": "Talk Lewie",
+     "opponent": "spyder_greenwash_lewie",
+     "guard": [
+      "not battle_outcome player,won,spyder_greenwash_lewie",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_greenwash:Talk Lewie [not battle_outcome player,won,spyder_greenwash_lewie] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_greenwash",
+     "event": "Talk Morehouse",
+     "opponent": "spyder_greenwash_morehouse",
+     "guard": [
+      "not battle_outcome player,won,spyder_greenwash_morehouse",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_greenwash:Talk Morehouse [not battle_outcome player,won,spyder_greenwash_morehouse] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_greenwash_greenhouse",
+     "event": "Talk Gregor",
+     "opponent": "spyder_greenwash_gregor",
+     "guard": [
+      "not battle_outcome player,won,spyder_greenwash_gregor",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_greenwash_greenhouse:Talk Gregor [not battle_outcome player,won,spyder_greenwash_gregor] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_greenwash_greenhouse",
+     "event": "Talk Alex",
+     "opponent": "spyder_greenwash_alex",
+     "guard": [
+      "not battle_outcome player,won,spyder_greenwash_alex",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_greenwash_greenhouse:Talk Alex [not battle_outcome player,won,spyder_greenwash_alex] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_greenwash_greenhouse",
+     "event": "Talk Hunt",
+     "opponent": "spyder_greenwash_hunt",
+     "guard": [
+      "not battle_outcome player,won,spyder_greenwash_hunt",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_greenwash_greenhouse:Talk Hunt [not battle_outcome player,won,spyder_greenwash_hunt] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_greenwash_greenhouse",
+     "event": "Talk Lewis",
+     "opponent": "spyder_greenwash_lewis",
+     "guard": [
+      "not battle_outcome player,won,spyder_greenwash_lewis",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_greenwash_greenhouse:Talk Lewis [not battle_outcome player,won,spyder_greenwash_lewis] -> pathfind_to_char,char_talk,add_monster,start_battle",
+      "spyder_greenwash_greenhouse:Talk Lewis [not battle_outcome player,won,spyder_greenwash_lewis] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_greenwash_greenhouse",
+     "event": "Talk Lewis",
+     "opponent": "spyder_greenwash_lewis",
+     "guard": [
+      "not battle_outcome player,won,spyder_greenwash_lewis",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_greenwash_greenhouse:Talk Lewis [not battle_outcome player,won,spyder_greenwash_lewis] -> pathfind_to_char,char_talk,add_monster,start_battle",
+      "spyder_greenwash_greenhouse:Talk Lewis [not battle_outcome player,won,spyder_greenwash_lewis] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_greenwash_greenhouse",
+     "event": "Talk Louis",
+     "opponent": "spyder_greenwash_louis",
+     "guard": [
+      "not battle_outcome player,won,spyder_greenwash_louis",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_greenwash_greenhouse:Talk Louis [not battle_outcome player,won,spyder_greenwash_louis] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_greenwash_greenhouse",
+     "event": "Talk Gluck",
+     "opponent": "spyder_greenwash_gluck",
+     "guard": [
+      "not battle_outcome player,won,spyder_greenwash_gluck",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_greenwash_greenhouse:Talk Gluck [not battle_outcome player,won,spyder_greenwash_gluck] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_greenwash_level2",
+     "event": "Talk Aissa",
+     "opponent": "spyder_greenwash_aissa",
+     "guard": [
+      "not battle_outcome player,won,spyder_greenwash_aissa",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_greenwash_level2:Talk Aissa [not battle_outcome player,won,spyder_greenwash_aissa] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_greenwash_level2",
+     "event": "Talk Dippel",
+     "opponent": "spyder_greenwash_dippel",
+     "guard": [
+      "not battle_outcome player,won,spyder_greenwash_dippel",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_greenwash_level2:Talk Dippel [not battle_outcome player,won,spyder_greenwash_dippel] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_greenwash_level2",
+     "event": "Talk Moreau",
+     "opponent": "spyder_greenwash_moreau",
+     "guard": [
+      "not battle_outcome player,won,spyder_greenwash_moreau",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_greenwash_level2:Talk Moreau [not battle_outcome player,won,spyder_greenwash_moreau] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_greenwash_level2",
+     "event": "Talk Dempsey",
+     "opponent": "spyder_greenwash_dempsey",
+     "guard": [
+      "not battle_outcome player,won,spyder_greenwash_dempsey",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_greenwash_level2:Talk Dempsey [not battle_outcome player,won,spyder_greenwash_dempsey] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_greenwash_level2",
+     "event": "Talk Heidenstam",
+     "opponent": "spyder_greenwash_heidenstam",
+     "guard": [
+      "not battle_outcome player,won,spyder_greenwash_heidenstam",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_greenwash_level2:Talk Heidenstam [not battle_outcome player,won,spyder_greenwash_heidenstam] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_mansion",
+     "event": "Talk Gillette",
+     "opponent": "spyder_mansion_gillette",
+     "guard": [
+      "not battle_outcome player,won,spyder_mansion_gillette",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_mansion:Talk Gillette [not battle_outcome player,won,spyder_mansion_gillette] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_mansion",
+     "event": "Talk Lucy",
+     "opponent": "spyder_mansion_lucy",
+     "guard": [
+      "not battle_outcome player,won,spyder_mansion_lucy",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_mansion:Talk Lucy [not battle_outcome player,won,spyder_mansion_lucy] -> pathfind_to_char,char_talk,add_monster,start_battle",
+      "spyder_mansion:Talk Lucy Tea [is battle_outcome player,won,spyder_mansion_lucy] -> translated_dialog,add_item,set_variable"
+     ]
+    },
+    {
+     "map": "spyder_mansion",
+     "event": "Talk Lyle",
+     "opponent": "spyder_mansion_lyle",
+     "guard": [
+      "not battle_outcome player,won,spyder_mansion_lyle",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_mansion:Talk Lyle [not battle_outcome player,won,spyder_mansion_lyle] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_mansion_basement",
+     "event": "Talk Coralli",
+     "opponent": "spyder_basement_coralli",
+     "guard": [
+      "not battle_outcome player,won,spyder_basement_coralli",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_mansion_basement:Talk Coralli [not battle_outcome player,won,spyder_basement_coralli] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_mansion_basement",
+     "event": "Talk Bobby",
+     "opponent": "spyder_basement_bobby",
+     "guard": [
+      "not battle_outcome player,won,spyder_basement_bobby",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_mansion_basement:Talk Bobby [not battle_outcome player,won,spyder_basement_bobby] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_mansion_basement",
+     "event": "Talk Roger",
+     "opponent": "spyder_basement_roger",
+     "guard": [
+      "not battle_outcome player,won,spyder_basement_roger",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_mansion_basement:Talk Roger [not battle_outcome player,won,spyder_basement_roger] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_mansion_basement",
+     "event": "Talk Catholi",
+     "opponent": "spyder_basement_catholi",
+     "guard": [
+      "not battle_outcome player,won,spyder_basement_catholi",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_mansion_basement:Talk Catholi [not battle_outcome player,won,spyder_basement_catholi] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_mansion_top",
+     "event": "Talk Mickey",
+     "opponent": "spyder_top_mickey",
+     "guard": [
+      "not battle_outcome player,won,spyder_top_mickey",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_mansion_top:Talk Mickey [not battle_outcome player,won,spyder_top_mickey] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_mansion_top",
+     "event": "Talk Russell",
+     "opponent": "spyder_top_russell",
+     "guard": [
+      "not battle_outcome player,won,spyder_top_russell",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_mansion_top:Talk Russell [not battle_outcome player,won,spyder_top_russell] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_mansion_top",
+     "event": "Talk Ricardo",
+     "opponent": "spyder_top_ricardo",
+     "guard": [
+      "not battle_outcome player,won,spyder_top_ricardo",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_mansion_top:Talk Ricardo [not battle_outcome player,won,spyder_top_ricardo] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_mansion_top",
+     "event": "Talk Jackson",
+     "opponent": "spyder_top_jackson",
+     "guard": [
+      "not battle_outcome player,won,spyder_top_jackson",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_mansion_top:Talk Jackson [not battle_outcome player,won,spyder_top_jackson] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_bottom",
+     "event": "Talk Rebel",
+     "opponent": "spyder_nimrod_rebel",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_rebel"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_nimrod_bottom:Talk Rebel [not battle_outcome player,won,spyder_nimrod_rebel] -> char_talk,add_monster,start_battle",
+      "spyder_nimrod_bottom:Talk Rebel [not battle_outcome player,won,spyder_nimrod_rebel] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_bottom",
+     "event": "Talk Bowie",
+     "opponent": "spyder_nimrod_bowie",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_bowie"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_nimrod_bottom:Talk Bowie [not battle_outcome player,won,spyder_nimrod_bowie] -> char_talk,add_monster,start_battle",
+      "spyder_nimrod_bottom:Talk Bowie [not battle_outcome player,won,spyder_nimrod_bowie] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_bottom",
+     "event": "Talk Tru",
+     "opponent": "spyder_nimrod_tru",
+     "guard": [
+      "not battle_outcome_count player,won,spyder_nimrod_tru,1"
+     ],
+     "outcomeReaders": 6,
+     "progressReaders": [
+      "spyder_flower_city:Sign 1 [not battle_outcome_count player,won,spyder_nimrod_tru,1] -> create_npc",
+      "spyder_flower_city:Sign 2 [not battle_outcome_count player,won,spyder_nimrod_tru,1] -> create_npc",
+      "spyder_nimrod_bottom:Create Guard [not battle_outcome_count player,won,spyder_nimrod_tru,1] -> create_npc",
+      "spyder_nimrod_bottom:Talk Tru [not battle_outcome_count player,won,spyder_nimrod_tru,1] -> char_talk,add_monster,start_battle,translated_dialog,pathfind,remove_npc",
+      "spyder_nimrod_bottom:Talk Tru [not battle_outcome_count player,won,spyder_nimrod_tru,1] -> pathfind_to_char,char_talk,add_monster,start_battle,translated_dialog,pathfind,remove_npc"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_bottom",
+     "event": "Talk Rebel",
+     "opponent": "spyder_nimrod_rebel",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_rebel",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_nimrod_bottom:Talk Rebel [not battle_outcome player,won,spyder_nimrod_rebel] -> char_talk,add_monster,start_battle",
+      "spyder_nimrod_bottom:Talk Rebel [not battle_outcome player,won,spyder_nimrod_rebel] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_bottom",
+     "event": "Talk Tru",
+     "opponent": "spyder_nimrod_tru",
+     "guard": [
+      "not battle_outcome_count player,won,spyder_nimrod_tru,1",
+      "is char_at player"
+     ],
+     "outcomeReaders": 6,
+     "progressReaders": [
+      "spyder_flower_city:Sign 1 [not battle_outcome_count player,won,spyder_nimrod_tru,1] -> create_npc",
+      "spyder_flower_city:Sign 2 [not battle_outcome_count player,won,spyder_nimrod_tru,1] -> create_npc",
+      "spyder_nimrod_bottom:Create Guard [not battle_outcome_count player,won,spyder_nimrod_tru,1] -> create_npc",
+      "spyder_nimrod_bottom:Talk Tru [not battle_outcome_count player,won,spyder_nimrod_tru,1] -> char_talk,add_monster,start_battle,translated_dialog,pathfind,remove_npc",
+      "spyder_nimrod_bottom:Talk Tru [not battle_outcome_count player,won,spyder_nimrod_tru,1] -> pathfind_to_char,char_talk,add_monster,start_battle,translated_dialog,pathfind,remove_npc"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_bottom",
+     "event": "Talk Bowie",
+     "opponent": "spyder_nimrod_bowie",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_bowie",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_nimrod_bottom:Talk Bowie [not battle_outcome player,won,spyder_nimrod_bowie] -> char_talk,add_monster,start_battle",
+      "spyder_nimrod_bottom:Talk Bowie [not battle_outcome player,won,spyder_nimrod_bowie] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_middle",
+     "event": "Talk Thatcher",
+     "opponent": "spyder_nimrod_thatcher",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_thatcher"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_nimrod_middle:Talk Thatcher [not battle_outcome player,won,spyder_nimrod_thatcher] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_middle",
+     "event": "Talk Honour",
+     "opponent": "spyder_nimrod_honour",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_honour"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_nimrod_middle:Talk Honour [not battle_outcome player,won,spyder_nimrod_honour] -> char_talk,add_monster,start_battle",
+      "spyder_nimrod_middle:Talk Honour [not battle_outcome player,won,spyder_nimrod_honour] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_middle",
+     "event": "Talk Antimony",
+     "opponent": "spyder_nimrod_antimony",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_antimony"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_nimrod_middle:Talk Antimony [not battle_outcome player,won,spyder_nimrod_antimony] -> char_talk,add_monster,start_battle",
+      "spyder_nimrod_middle:Talk Antimony [not battle_outcome player,won,spyder_nimrod_antimony] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_middle",
+     "event": "Talk Chrome Robo",
+     "opponent": "spyder_nimrod_chromerobo",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_chromerobo"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_nimrod_middle:Create Chrome Robo [not battle_outcome player,won,spyder_nimrod_chromerobo] -> create_npc",
+      "spyder_nimrod_middle:Talk Chrome Robo [not battle_outcome player,won,spyder_nimrod_chromerobo] -> char_talk,add_monster,start_battle,remove_npc",
+      "spyder_nimrod_middle:Talk Chrome Robo [not battle_outcome player,won,spyder_nimrod_chromerobo] -> pathfind_to_char,char_talk,add_monster,start_battle,remove_npc"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_middle",
+     "event": "Talk Xeon",
+     "opponent": "spyder_nimrod_xeon",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_xeon"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_nimrod_middle:Create Xeon [not battle_outcome player,won,spyder_nimrod_xeon] -> create_npc",
+      "spyder_nimrod_middle:Talk Xeon [not battle_outcome player,won,spyder_nimrod_xeon] -> start_battle,char_talk,remove_npc",
+      "spyder_nimrod_middle:Talk Xeon [not battle_outcome player,won,spyder_nimrod_xeon] -> pathfind_to_char,char_talk,add_monster,start_battle,remove_npc"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_middle",
+     "event": "Talk Argon",
+     "opponent": "spyder_nimrod_argon",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_argon"
+     ],
+     "outcomeReaders": 4,
+     "progressReaders": [
+      "spyder_nimrod_middle:Talk Argon [not battle_outcome player,won,spyder_nimrod_argon] -> char_talk,add_monster,start_battle",
+      "spyder_nimrod_middle:Talk Argon [not battle_outcome player,won,spyder_nimrod_argon] -> pathfind_to_char,char_talk,add_monster,start_battle",
+      "spyder_nimrod_middle:Zircon Back [is battle_outcome player,won,spyder_nimrod_argon] -> create_npc,pathfind,translated_dialog,translated_dialog_choice,get_party_monster,remove_monster"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_middle",
+     "event": "Talk Archer",
+     "opponent": "spyder_nimrod_archer",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_archer"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_nimrod_middle:Talk Archer [not battle_outcome player,won,spyder_nimrod_archer] -> char_talk,add_monster,start_battle",
+      "spyder_nimrod_middle:Talk Archer [not battle_outcome player,won,spyder_nimrod_archer] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_middle",
+     "event": "Talk Argon",
+     "opponent": "spyder_nimrod_argon",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_argon",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 4,
+     "progressReaders": [
+      "spyder_nimrod_middle:Talk Argon [not battle_outcome player,won,spyder_nimrod_argon] -> char_talk,add_monster,start_battle",
+      "spyder_nimrod_middle:Talk Argon [not battle_outcome player,won,spyder_nimrod_argon] -> pathfind_to_char,char_talk,add_monster,start_battle",
+      "spyder_nimrod_middle:Zircon Back [is battle_outcome player,won,spyder_nimrod_argon] -> create_npc,pathfind,translated_dialog,translated_dialog_choice,get_party_monster,remove_monster"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_middle",
+     "event": "Talk Honour",
+     "opponent": "spyder_nimrod_honour",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_honour",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_nimrod_middle:Talk Honour [not battle_outcome player,won,spyder_nimrod_honour] -> char_talk,add_monster,start_battle",
+      "spyder_nimrod_middle:Talk Honour [not battle_outcome player,won,spyder_nimrod_honour] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_middle",
+     "event": "Talk Xeon",
+     "opponent": "spyder_nimrod_xeon",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_xeon",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_nimrod_middle:Create Xeon [not battle_outcome player,won,spyder_nimrod_xeon] -> create_npc",
+      "spyder_nimrod_middle:Talk Xeon [not battle_outcome player,won,spyder_nimrod_xeon] -> start_battle,char_talk,remove_npc",
+      "spyder_nimrod_middle:Talk Xeon [not battle_outcome player,won,spyder_nimrod_xeon] -> pathfind_to_char,char_talk,add_monster,start_battle,remove_npc"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_middle",
+     "event": "Talk Chrome Robo",
+     "opponent": "spyder_nimrod_chromerobo",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_chromerobo",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_nimrod_middle:Create Chrome Robo [not battle_outcome player,won,spyder_nimrod_chromerobo] -> create_npc",
+      "spyder_nimrod_middle:Talk Chrome Robo [not battle_outcome player,won,spyder_nimrod_chromerobo] -> char_talk,add_monster,start_battle,remove_npc",
+      "spyder_nimrod_middle:Talk Chrome Robo [not battle_outcome player,won,spyder_nimrod_chromerobo] -> pathfind_to_char,char_talk,add_monster,start_battle,remove_npc"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_middle",
+     "event": "Talk Archer",
+     "opponent": "spyder_nimrod_archer",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_archer",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_nimrod_middle:Talk Archer [not battle_outcome player,won,spyder_nimrod_archer] -> char_talk,add_monster,start_battle",
+      "spyder_nimrod_middle:Talk Archer [not battle_outcome player,won,spyder_nimrod_archer] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_middle",
+     "event": "Talk Antimony",
+     "opponent": "spyder_nimrod_antimony",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_antimony",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_nimrod_middle:Talk Antimony [not battle_outcome player,won,spyder_nimrod_antimony] -> char_talk,add_monster,start_battle",
+      "spyder_nimrod_middle:Talk Antimony [not battle_outcome player,won,spyder_nimrod_antimony] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_middle",
+     "event": "Post Flashback",
+     "opponent": "spyder_nimrod_zircon",
+     "guard": [
+      "is variable_set zircon_argon:done",
+      "not variable_set zircon_vs_argon:yes",
+      "not variable_set zircon_vs_argon:done"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_nimrod_top:Talk Zircon [not battle_outcome player,won,spyder_nimrod_zircon] -> char_talk,add_monster,start_battle",
+      "spyder_nimrod_top:Talk Zircon [not battle_outcome player,won,spyder_nimrod_zircon] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_top",
+     "event": "Talk Maverick",
+     "opponent": "spyder_nimrod_maverick",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_maverick"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_nimrod_top:Talk Maverick [not battle_outcome player,won,spyder_nimrod_maverick] -> char_talk,add_monster,start_battle",
+      "spyder_nimrod_top:Talk Maverick [not battle_outcome player,won,spyder_nimrod_maverick] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_top",
+     "event": "Talk Justice",
+     "opponent": "spyder_nimrod_justice",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_justice"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_nimrod_top:Talk Justice [not battle_outcome player,won,spyder_nimrod_justice] -> char_talk,add_monster,start_battle",
+      "spyder_nimrod_top:Talk Justice [not battle_outcome player,won,spyder_nimrod_justice] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_top",
+     "event": "Talk Zircon",
+     "opponent": "spyder_nimrod_zircon",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_zircon"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_nimrod_top:Talk Zircon [not battle_outcome player,won,spyder_nimrod_zircon] -> char_talk,add_monster,start_battle",
+      "spyder_nimrod_top:Talk Zircon [not battle_outcome player,won,spyder_nimrod_zircon] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_top",
+     "event": "Talk Justice",
+     "opponent": "spyder_nimrod_justice",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_justice",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_nimrod_top:Talk Justice [not battle_outcome player,won,spyder_nimrod_justice] -> char_talk,add_monster,start_battle",
+      "spyder_nimrod_top:Talk Justice [not battle_outcome player,won,spyder_nimrod_justice] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_top",
+     "event": "Talk Zircon",
+     "opponent": "spyder_nimrod_zircon",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_zircon",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_nimrod_top:Talk Zircon [not battle_outcome player,won,spyder_nimrod_zircon] -> char_talk,add_monster,start_battle",
+      "spyder_nimrod_top:Talk Zircon [not battle_outcome player,won,spyder_nimrod_zircon] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_top",
+     "event": "Talk Maverick",
+     "opponent": "spyder_nimrod_maverick",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_maverick",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_nimrod_top:Talk Maverick [not battle_outcome player,won,spyder_nimrod_maverick] -> char_talk,add_monster,start_battle",
+      "spyder_nimrod_top:Talk Maverick [not battle_outcome player,won,spyder_nimrod_maverick] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_top",
+     "event": "Talk Mace",
+     "opponent": "spyder_nimrod_mace",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_mace",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_nimrod_top:Talk Mace [not battle_outcome player,won,spyder_nimrod_mace] -> pathfind_to_char,char_talk,add_monster,start_battle",
+      "spyder_nimrod_top:Talk Mace [not battle_outcome player,won,spyder_nimrod_mace] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_nimrod_top",
+     "event": "Talk Mace",
+     "opponent": "spyder_nimrod_mace",
+     "guard": [
+      "not battle_outcome player,won,spyder_nimrod_mace"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_nimrod_top:Talk Mace [not battle_outcome player,won,spyder_nimrod_mace] -> pathfind_to_char,char_talk,add_monster,start_battle",
+      "spyder_nimrod_top:Talk Mace [not battle_outcome player,won,spyder_nimrod_mace] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_omnichannel1",
+     "event": "Talk William",
+     "opponent": "spyder_omnichannel_william",
+     "guard": [
+      "not battle_outcome player,won,spyder_omnichannel_william"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_omnichannel1:Create William [not battle_outcome player,won,spyder_omnichannel_william] -> create_npc",
+      "spyder_omnichannel1:Talk William [not battle_outcome player,won,spyder_omnichannel_william] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_omnichannel1",
+     "event": "Battle Enforcer",
+     "opponent": "spyder_omnichannel_enforcer",
+     "guard": [
+      "not battle_outcome player,won,spyder_omnichannel_enforcer",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 1,
+     "progressReaders": [
+      "spyder_omnichannel1:Battle Enforcer [not battle_outcome player,won,spyder_omnichannel_enforcer] -> char_stop,create_npc,pathfind,translated_dialog,add_monster,start_battle,remove_npc"
+     ]
+    },
+    {
+     "map": "spyder_omnichannel2",
+     "event": "Talk Schwartz",
+     "opponent": "spyder_omnichannel_schwartz",
+     "guard": [
+      "not battle_outcome player,won,spyder_omnichannel_schwartz",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_omnichannel2:Talk Schwartz [not battle_outcome player,won,spyder_omnichannel_schwartz] -> pathfind_to_char,char_talk,add_monster,start_battle",
+      "spyder_omnichannel2:Create Schwartz [not battle_outcome player,won,spyder_omnichannel_schwartz] -> create_npc"
+     ]
+    },
+    {
+     "map": "spyder_omnichannel2",
+     "event": "Talk Bettger",
+     "opponent": "spyder_omnichannel_bettger",
+     "guard": [
+      "not battle_outcome player,won,spyder_omnichannel_bettger",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_omnichannel2:Create Bettger [not battle_outcome player,won,spyder_omnichannel_bettger] -> create_npc",
+      "spyder_omnichannel2:Talk Bettger [not battle_outcome player,won,spyder_omnichannel_bettger] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_omnichannel2",
+     "event": "Talk Tohei",
+     "opponent": "spyder_omnichannel_tohei",
+     "guard": [
+      "not battle_outcome player,won,spyder_omnichannel_tohei",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_omnichannel2:Create Tohei [not battle_outcome player,won,spyder_omnichannel_tohei] -> create_npc",
+      "spyder_omnichannel2:Talk Tohei [not battle_outcome player,won,spyder_omnichannel_tohei] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_omnichannel2",
+     "event": "Talk Crane",
+     "opponent": "spyder_omnichannel_crane",
+     "guard": [
+      "not battle_outcome player,won,spyder_omnichannel_crane",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_omnichannel2:Create Crane [not battle_outcome player,won,spyder_omnichannel_crane] -> create_npc",
+      "spyder_omnichannel2:Talk Crane [not battle_outcome player,won,spyder_omnichannel_crane] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_omnichannel2",
+     "event": "Talk Dempsey",
+     "opponent": "spyder_omnichannel_dempsey",
+     "guard": [
+      "not battle_outcome player,won,spyder_omnichannel_dempsey",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_omnichannel2:Create Dempsey [not battle_outcome player,won,spyder_omnichannel_dempsey] -> create_npc",
+      "spyder_omnichannel2:Talk Dempsey [not battle_outcome player,won,spyder_omnichannel_dempsey] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_omnichannel3",
+     "event": "Talk Strauss",
+     "opponent": "spyder_omnichannel_strauss",
+     "guard": [
+      "not battle_outcome player,won,spyder_omnichannel_strauss",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_omnichannel3:Create Strauss [not battle_outcome player,won,spyder_omnichannel_strauss] -> create_npc",
+      "spyder_omnichannel3:Talk Strauss [not battle_outcome player,won,spyder_omnichannel_strauss] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_omnichannel3",
+     "event": "Talk Carnegie",
+     "opponent": "spyder_omnichannel_carnegie",
+     "guard": [
+      "not battle_outcome player,won,spyder_omnichannel_carnegie",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_omnichannel3:Create Carnegie [not battle_outcome player,won,spyder_omnichannel_carnegie] -> create_npc",
+      "spyder_omnichannel3:Talk Carnegie [not battle_outcome player,won,spyder_omnichannel_carnegie] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_omnichannel3",
+     "event": "Talk Byrne",
+     "opponent": "spyder_omnichannel_byrne",
+     "guard": [
+      "not battle_outcome player,won,spyder_omnichannel_byrne",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_omnichannel3:Create Byrne [not battle_outcome player,won,spyder_omnichannel_byrne] -> create_npc",
+      "spyder_omnichannel3:Talk Byrne [not battle_outcome player,won,spyder_omnichannel_byrne] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_radiotower",
+     "event": "Stop!",
+     "opponent": "spyder_omnichannel_beaverbrook",
+     "guard": [
+      "is battle_outcome_count player,won,spyder_omnichannel_beaverbrook,0",
+      "not battle_outcome_count player,won,spyder_omnichannel_beaverbrook,1",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 9,
+     "progressReaders": [
+      "spyder_radiotower:Create Zoolander [not battle_outcome_count player,won,spyder_omnichannel_beaverbrook,1] -> create_npc",
+      "spyder_radiotower:Create Donald [not battle_outcome_count player,won,spyder_omnichannel_beaverbrook,1] -> create_npc",
+      "spyder_radiotower:Create Beaverbrook [not battle_outcome_count player,won,spyder_omnichannel_beaverbrook,1] -> create_npc",
+      "spyder_radiotower:Stop! [is battle_outcome_count player,won,spyder_omnichannel_beaverbrook,0] -> char_stop,create_npc,pathfind_to_char,translated_dialog,pathfind,add_monster,start_battle,remove_npc,set_variable",
+      "spyder_radiotower:Stop! [not battle_outcome_count player,won,spyder_omnichannel_beaverbrook,1] -> char_stop,create_npc,pathfind_to_char,translated_dialog,pathfind,add_monster,start_battle,remove_npc,set_variable"
+     ]
+    },
+    {
+     "map": "spyder_route2",
+     "event": "Talk roddick",
+     "opponent": "spyder_route2_roddick",
+     "guard": [
+      "not battle_outcome player,won,spyder_route2_roddick"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route2:Talk roddick [not battle_outcome player,won,spyder_route2_roddick] -> char_talk,add_monster,start_battle",
+      "spyder_route2:Talk roddick [not battle_outcome player,won,spyder_route2_roddick] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route2",
+     "event": "Talk marion",
+     "opponent": "spyder_route2_marion",
+     "guard": [
+      "not battle_outcome player,won,spyder_route2_marion"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route2:Talk marion [not battle_outcome player,won,spyder_route2_marion] -> char_talk,add_monster,start_battle",
+      "spyder_route2:Talk marion [not battle_outcome player,won,spyder_route2_marion] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route2",
+     "event": "Talk graf",
+     "opponent": "spyder_route2_graf",
+     "guard": [
+      "not battle_outcome player,won,spyder_route2_graf"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route2:Talk graf [not battle_outcome player,won,spyder_route2_graf] -> char_talk,add_monster,start_battle",
+      "spyder_route2:Talk graf [not battle_outcome player,won,spyder_route2_graf] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route2",
+     "event": "Talk roddick",
+     "opponent": "spyder_route2_roddick",
+     "guard": [
+      "not battle_outcome player,won,spyder_route2_roddick",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route2:Talk roddick [not battle_outcome player,won,spyder_route2_roddick] -> char_talk,add_monster,start_battle",
+      "spyder_route2:Talk roddick [not battle_outcome player,won,spyder_route2_roddick] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route2",
+     "event": "Talk marion",
+     "opponent": "spyder_route2_marion",
+     "guard": [
+      "not battle_outcome player,won,spyder_route2_marion",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route2:Talk marion [not battle_outcome player,won,spyder_route2_marion] -> char_talk,add_monster,start_battle",
+      "spyder_route2:Talk marion [not battle_outcome player,won,spyder_route2_marion] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route2",
+     "event": "Talk graf",
+     "opponent": "spyder_route2_graf",
+     "guard": [
+      "not battle_outcome player,won,spyder_route2_graf",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route2:Talk graf [not battle_outcome player,won,spyder_route2_graf] -> char_talk,add_monster,start_battle",
+      "spyder_route2:Talk graf [not battle_outcome player,won,spyder_route2_graf] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route3",
+     "event": "Zoolander Talk",
+     "opponent": "spyder_route3_zoolander",
+     "guard": [
+      "not battle_outcome player,won,spyder_route3_zoolander"
+     ],
+     "outcomeReaders": 8,
+     "progressReaders": [
+      "spyder_downstairs:Talk mom thanks [not battle_outcome player,won,spyder_route3_zoolander] -> translated_dialog,set_variable,add_item,add_tracker",
+      "spyder_paper_scoop:Talk Dante Player Returns [is battle_outcome player,won,spyder_route3_zoolander] -> translated_dialog,set_variable",
+      "spyder_route3:Zoolander Talk [not battle_outcome player,won,spyder_route3_zoolander] -> char_talk,add_monster,start_battle,add_item,translated_dialog,autosave"
+     ]
+    },
+    {
+     "map": "spyder_route3",
+     "event": "Rookie Talk",
+     "opponent": "spyder_route3_qqq",
+     "guard": [
+      "not battle_outcome player,won,spyder_route3_qqq"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route3:Make Rookie [not battle_outcome player,won,spyder_route3_qqq] -> create_npc",
+      "spyder_route3:Rookie Talk [not battle_outcome player,won,spyder_route3_qqq] -> char_talk,add_monster,start_battle,pathfind,remove_npc",
+      "spyder_route3:Rookie Talk [not battle_outcome player,won,spyder_route3_qqq] -> char_talk,add_monster,start_battle,pathfind,remove_npc"
+     ]
+    },
+    {
+     "map": "spyder_route3",
+     "event": "Enforcer Talk",
+     "opponent": "spyder_route3_weaver",
+     "guard": [
+      "not battle_outcome player,won,spyder_route3_weaver"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route3:Enforcer Talk [not battle_outcome player,won,spyder_route3_weaver] -> char_talk,add_monster,start_battle",
+      "spyder_route3:Enforcer Talk [not battle_outcome player,won,spyder_route3_weaver] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route3",
+     "event": "Novak Talk",
+     "opponent": "spyder_route3_novak",
+     "guard": [
+      "not battle_outcome player,won,spyder_route3_novak"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route3:Novak Talk [not battle_outcome player,won,spyder_route3_novak] -> char_talk,add_monster,start_battle",
+      "spyder_route3:Novak Talk [not battle_outcome player,won,spyder_route3_novak] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route3",
+     "event": "Curie Talk",
+     "opponent": "spyder_route3_curie",
+     "guard": [
+      "not battle_outcome player,won,spyder_route3_curie"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_route3:Curie Talk [not battle_outcome player,won,spyder_route3_curie] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route3",
+     "event": "Connor Talk",
+     "opponent": "spyder_route3_connor",
+     "guard": [
+      "not battle_outcome player,won,spyder_route3_connor"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_route3:Connor Talk [not battle_outcome player,won,spyder_route3_connor] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route3",
+     "event": "Talk Wanda",
+     "opponent": "spyder_route3_wanda",
+     "guard": [
+      "not battle_outcome player,won,spyder_route3_wanda"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route3:Talk Wanda [not battle_outcome player,won,spyder_route3_wanda] -> char_talk,add_monster,start_battle,add_item,translated_dialog",
+      "spyder_route3:Talk Wanda [not battle_outcome player,won,spyder_route3_wanda] -> pathfind_to_char,char_talk,add_monster,start_battle,add_item,translated_dialog"
+     ]
+    },
+    {
+     "map": "spyder_route3",
+     "event": "Talk Twig",
+     "opponent": "spyder_route3_twig",
+     "guard": [
+      "not battle_outcome player,won,spyder_route3_twig"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route3:Talk Twig [not battle_outcome player,won,spyder_route3_twig] -> char_talk,add_monster,start_battle",
+      "spyder_route3:Talk Twig [not battle_outcome player,won,spyder_route3_twig] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route3",
+     "event": "Talk Surat",
+     "opponent": "spyder_route3_surat",
+     "guard": [
+      "not battle_outcome player,won,spyder_route3_surat"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_route3:Talk Surat [not battle_outcome player,won,spyder_route3_surat] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route3",
+     "event": "Talk Roxby",
+     "opponent": "spyder_route3_roxby",
+     "guard": [
+      "not battle_outcome player,won,spyder_route3_roxby"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_route3:Talk Roxby [not battle_outcome player,won,spyder_route3_roxby] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route3",
+     "event": "Enforcer Talk",
+     "opponent": "spyder_route3_weaver",
+     "guard": [
+      "not battle_outcome player,won,spyder_route3_weaver",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route3:Enforcer Talk [not battle_outcome player,won,spyder_route3_weaver] -> char_talk,add_monster,start_battle",
+      "spyder_route3:Enforcer Talk [not battle_outcome player,won,spyder_route3_weaver] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route3",
+     "event": "Talk Twig",
+     "opponent": "spyder_route3_twig",
+     "guard": [
+      "not battle_outcome player,won,spyder_route3_twig",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route3:Talk Twig [not battle_outcome player,won,spyder_route3_twig] -> char_talk,add_monster,start_battle",
+      "spyder_route3:Talk Twig [not battle_outcome player,won,spyder_route3_twig] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route3",
+     "event": "Talk Wanda",
+     "opponent": "spyder_route3_wanda",
+     "guard": [
+      "not battle_outcome player,won,spyder_route3_wanda",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route3:Talk Wanda [not battle_outcome player,won,spyder_route3_wanda] -> char_talk,add_monster,start_battle,add_item,translated_dialog",
+      "spyder_route3:Talk Wanda [not battle_outcome player,won,spyder_route3_wanda] -> pathfind_to_char,char_talk,add_monster,start_battle,add_item,translated_dialog"
+     ]
+    },
+    {
+     "map": "spyder_route3",
+     "event": "Novak Talk",
+     "opponent": "spyder_route3_novak",
+     "guard": [
+      "not battle_outcome player,won,spyder_route3_novak",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route3:Novak Talk [not battle_outcome player,won,spyder_route3_novak] -> char_talk,add_monster,start_battle",
+      "spyder_route3:Novak Talk [not battle_outcome player,won,spyder_route3_novak] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route3",
+     "event": "Rookie Talk",
+     "opponent": "spyder_route3_qqq",
+     "guard": [
+      "not battle_outcome player,won,spyder_route3_qqq",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route3:Make Rookie [not battle_outcome player,won,spyder_route3_qqq] -> create_npc",
+      "spyder_route3:Rookie Talk [not battle_outcome player,won,spyder_route3_qqq] -> char_talk,add_monster,start_battle,pathfind,remove_npc",
+      "spyder_route3:Rookie Talk [not battle_outcome player,won,spyder_route3_qqq] -> char_talk,add_monster,start_battle,pathfind,remove_npc"
+     ]
+    },
+    {
+     "map": "spyder_route4",
+     "event": "Talk Marshall",
+     "opponent": "spyder_route4_marshall",
+     "guard": [
+      "not battle_outcome player,won,spyder_route4_marshall"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route4:Talk Marshall [not battle_outcome player,won,spyder_route4_marshall] -> char_talk,add_monster,start_battle",
+      "spyder_route4:Talk Marshall [not battle_outcome player,won,spyder_route4_marshall] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route4",
+     "event": "Talk Roger",
+     "opponent": "spyder_route4_roger",
+     "guard": [
+      "not battle_outcome player,won,spyder_route4_roger"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_route4:Talk Roger [not battle_outcome player,won,spyder_route4_roger] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route4",
+     "event": "Talk Wulf",
+     "opponent": "spyder_route4_wulf",
+     "guard": [
+      "not battle_outcome player,won,spyder_route4_wulf"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route4:Talk Wulf [not battle_outcome player,won,spyder_route4_wulf] -> char_talk,add_monster,start_battle",
+      "spyder_route4:Talk Wulf [not battle_outcome player,won,spyder_route4_wulf] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route4",
+     "event": "Talk Rincewind",
+     "opponent": "spyder_route4_rincewind",
+     "guard": [
+      "not battle_outcome player,won,spyder_route4_rincewind"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_route4:Talk Rincewind [not battle_outcome player,won,spyder_route4_rincewind] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route4",
+     "event": "Talk Rosamund",
+     "opponent": "spyder_route4_rosamund",
+     "guard": [
+      "not battle_outcome player,won,spyder_route4_rosamund"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route4:Talk Rosamund [not battle_outcome player,won,spyder_route4_rosamund] -> char_talk,add_monster,start_battle",
+      "spyder_route4:Talk Rosamund [not battle_outcome player,won,spyder_route4_rosamund] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route4",
+     "event": "Talk Beck",
+     "opponent": "spyder_route4_beck",
+     "guard": [
+      "not battle_outcome player,won,spyder_route4_beck"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route4:Talk Beck [not battle_outcome player,won,spyder_route4_beck] -> char_talk,add_monster,start_battle",
+      "spyder_route4:Talk Beck [not battle_outcome player,won,spyder_route4_beck] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route4",
+     "event": "Talk Marshall",
+     "opponent": "spyder_route4_marshall",
+     "guard": [
+      "not battle_outcome player,won,spyder_route4_marshall",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route4:Talk Marshall [not battle_outcome player,won,spyder_route4_marshall] -> char_talk,add_monster,start_battle",
+      "spyder_route4:Talk Marshall [not battle_outcome player,won,spyder_route4_marshall] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route4",
+     "event": "Talk Beck",
+     "opponent": "spyder_route4_beck",
+     "guard": [
+      "not battle_outcome player,won,spyder_route4_beck",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route4:Talk Beck [not battle_outcome player,won,spyder_route4_beck] -> char_talk,add_monster,start_battle",
+      "spyder_route4:Talk Beck [not battle_outcome player,won,spyder_route4_beck] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route4",
+     "event": "Talk Wulf",
+     "opponent": "spyder_route4_wulf",
+     "guard": [
+      "not battle_outcome player,won,spyder_route4_wulf",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route4:Talk Wulf [not battle_outcome player,won,spyder_route4_wulf] -> char_talk,add_monster,start_battle",
+      "spyder_route4:Talk Wulf [not battle_outcome player,won,spyder_route4_wulf] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route4",
+     "event": "Talk Rosamund",
+     "opponent": "spyder_route4_rosamund",
+     "guard": [
+      "not battle_outcome player,won,spyder_route4_rosamund",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route4:Talk Rosamund [not battle_outcome player,won,spyder_route4_rosamund] -> char_talk,add_monster,start_battle",
+      "spyder_route4:Talk Rosamund [not battle_outcome player,won,spyder_route4_rosamund] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route5",
+     "event": "Talk Sara",
+     "opponent": "spyder_route5_sara",
+     "guard": [
+      "not battle_outcome player,won,spyder_route5_sara"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route5:Talk Sara [not battle_outcome player,won,spyder_route5_sara] -> char_talk,add_monster,start_battle",
+      "spyder_route5:Talk Sara [not battle_outcome player,won,spyder_route5_sara] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route5",
+     "event": "Stop! - Goliath",
+     "opponent": "spyder_route5_goliath",
+     "guard": [
+      "not battle_outcome player,won,spyder_route5_goliath",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_route5:Stop! - Goliath [not battle_outcome player,won,spyder_route5_goliath] -> char_stop,pathfind,char_talk,add_monster,start_battle,remove_npc",
+      "spyder_route5:Create Goliath [not battle_outcome player,won,spyder_route5_goliath] -> create_npc"
+     ]
+    },
+    {
+     "map": "spyder_route5",
+     "event": "Talk Edith",
+     "opponent": "spyder_route5_edith",
+     "guard": [
+      "not battle_outcome player,won,spyder_route5_edith"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route5:Talk Edith [not battle_outcome player,won,spyder_route5_edith] -> char_talk,add_monster,start_battle",
+      "spyder_route5:Talk Edith [not battle_outcome player,won,spyder_route5_edith] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route5",
+     "event": "Talk Hunter",
+     "opponent": "spyder_route5_hunter",
+     "guard": [
+      "not battle_outcome player,won,spyder_route5_hunter"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_route5:Talk Hunter [not battle_outcome player,won,spyder_route5_hunter] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route5",
+     "event": "Talk Cleo",
+     "opponent": "spyder_route5_cleo",
+     "guard": [
+      "not battle_outcome player,won,spyder_route5_cleo"
+     ],
+     "outcomeReaders": 5,
+     "progressReaders": [
+      "spyder_route5:Talk Cleo [not battle_outcome player,won,spyder_route5_cleo] -> char_talk,add_monster,start_double_battle",
+      "spyder_route5:Talk Cleo or Patra [not battle_outcome player,won,spyder_route5_cleo] -> pathfind_to_char,char_talk,add_monster,start_double_battle",
+      "spyder_route5:Talk Patra (Double Battle w Cleo) [not battle_outcome player,won,spyder_route5_cleo] -> char_talk,add_monster,start_double_battle"
+     ]
+    },
+    {
+     "map": "spyder_route5",
+     "event": "Talk Marc (Double Battle with Try)",
+     "opponent": "spyder_route5_tryphaena",
+     "guard": [
+      "not battle_outcome player,won,spyder_route5_tryphaena"
+     ],
+     "outcomeReaders": 5,
+     "progressReaders": [
+      "spyder_route5:Talk Marc (Double Battle with Try) [not battle_outcome player,won,spyder_route5_tryphaena] -> char_talk,add_monster,start_double_battle",
+      "spyder_route5:Talk Tryphaena or Marc [not battle_outcome player,won,spyder_route5_tryphaena] -> pathfind_to_char,char_talk,add_monster,start_double_battle",
+      "spyder_route5:Talk Tryphaena [not battle_outcome player,won,spyder_route5_tryphaena] -> char_talk,add_monster,start_double_battle"
+     ]
+    },
+    {
+     "map": "spyder_route5",
+     "event": "Talk Sara",
+     "opponent": "spyder_route5_sara",
+     "guard": [
+      "not battle_outcome player,won,spyder_route5_sara",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route5:Talk Sara [not battle_outcome player,won,spyder_route5_sara] -> char_talk,add_monster,start_battle",
+      "spyder_route5:Talk Sara [not battle_outcome player,won,spyder_route5_sara] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route5",
+     "event": "Talk Cleo or Patra",
+     "opponent": "spyder_route5_cleo",
+     "guard": [
+      "not battle_outcome player,won,spyder_route5_cleo",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 5,
+     "progressReaders": [
+      "spyder_route5:Talk Cleo [not battle_outcome player,won,spyder_route5_cleo] -> char_talk,add_monster,start_double_battle",
+      "spyder_route5:Talk Cleo or Patra [not battle_outcome player,won,spyder_route5_cleo] -> pathfind_to_char,char_talk,add_monster,start_double_battle",
+      "spyder_route5:Talk Patra (Double Battle w Cleo) [not battle_outcome player,won,spyder_route5_cleo] -> char_talk,add_monster,start_double_battle"
+     ]
+    },
+    {
+     "map": "spyder_route5",
+     "event": "Talk Tryphaena or Marc",
+     "opponent": "spyder_route5_tryphaena",
+     "guard": [
+      "not battle_outcome player,won,spyder_route5_tryphaena",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 5,
+     "progressReaders": [
+      "spyder_route5:Talk Marc (Double Battle with Try) [not battle_outcome player,won,spyder_route5_tryphaena] -> char_talk,add_monster,start_double_battle",
+      "spyder_route5:Talk Tryphaena or Marc [not battle_outcome player,won,spyder_route5_tryphaena] -> pathfind_to_char,char_talk,add_monster,start_double_battle",
+      "spyder_route5:Talk Tryphaena [not battle_outcome player,won,spyder_route5_tryphaena] -> char_talk,add_monster,start_double_battle"
+     ]
+    },
+    {
+     "map": "spyder_route5",
+     "event": "Talk Edith",
+     "opponent": "spyder_route5_edith",
+     "guard": [
+      "not battle_outcome player,won,spyder_route5_edith",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route5:Talk Edith [not battle_outcome player,won,spyder_route5_edith] -> char_talk,add_monster,start_battle",
+      "spyder_route5:Talk Edith [not battle_outcome player,won,spyder_route5_edith] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route5",
+     "event": "Talk Patra (Double Battle w Cleo)",
+     "opponent": "spyder_route5_cleo",
+     "guard": [
+      "not battle_outcome player,won,spyder_route5_cleo"
+     ],
+     "outcomeReaders": 5,
+     "progressReaders": [
+      "spyder_route5:Talk Cleo [not battle_outcome player,won,spyder_route5_cleo] -> char_talk,add_monster,start_double_battle",
+      "spyder_route5:Talk Cleo or Patra [not battle_outcome player,won,spyder_route5_cleo] -> pathfind_to_char,char_talk,add_monster,start_double_battle",
+      "spyder_route5:Talk Patra (Double Battle w Cleo) [not battle_outcome player,won,spyder_route5_cleo] -> char_talk,add_monster,start_double_battle"
+     ]
+    },
+    {
+     "map": "spyder_route5",
+     "event": "Talk Tryphaena",
+     "opponent": "spyder_route5_tryphaena",
+     "guard": [
+      "not battle_outcome player,won,spyder_route5_tryphaena"
+     ],
+     "outcomeReaders": 5,
+     "progressReaders": [
+      "spyder_route5:Talk Marc (Double Battle with Try) [not battle_outcome player,won,spyder_route5_tryphaena] -> char_talk,add_monster,start_double_battle",
+      "spyder_route5:Talk Tryphaena or Marc [not battle_outcome player,won,spyder_route5_tryphaena] -> pathfind_to_char,char_talk,add_monster,start_double_battle",
+      "spyder_route5:Talk Tryphaena [not battle_outcome player,won,spyder_route5_tryphaena] -> char_talk,add_monster,start_double_battle"
+     ]
+    },
+    {
+     "map": "spyder_route6",
+     "event": "Talk Frances",
+     "opponent": "spyder_route6_frances",
+     "guard": [
+      "not battle_outcome player,won,spyder_route6_frances"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_route6:Talk Frances [not battle_outcome player,won,spyder_route6_frances] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route6",
+     "event": "Talk Ping",
+     "opponent": "spyder_route6_ping",
+     "guard": [
+      "not battle_outcome player,won,spyder_route6_ping"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_route6:Talk Ping [not battle_outcome player,won,spyder_route6_ping] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route6",
+     "event": "Talk Richard",
+     "opponent": "spyder_route6_richard",
+     "guard": [
+      "not battle_outcome player,won,spyder_route6_richard"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route6:Talk Richard [not battle_outcome player,won,spyder_route6_richard] -> char_talk,add_monster,start_battle",
+      "spyder_route6:Talk Richard [not battle_outcome player,won,spyder_route6_richard] -> pathfind_to_char,char_talk,add_monster,start_battle,autosave"
+     ]
+    },
+    {
+     "map": "spyder_route6",
+     "event": "Talk Blair",
+     "opponent": "spyder_route6_blair",
+     "guard": [
+      "not battle_outcome player,won,spyder_route6_blair"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route6:Talk Blair [not battle_outcome player,won,spyder_route6_blair] -> char_talk,add_monster,start_battle",
+      "spyder_route6:Talk Blair [not battle_outcome player,won,spyder_route6_blair] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route6",
+     "event": "Talk Maxwell",
+     "opponent": "spyder_route6_maxwell",
+     "guard": [
+      "not battle_outcome player,won,spyder_route6_maxwell"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route6:Talk Maxwell [not battle_outcome player,won,spyder_route6_maxwell] -> char_talk,add_monster,start_battle",
+      "spyder_route6:Talk Maxwell [not battle_outcome player,won,spyder_route6_maxwell] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route6",
+     "event": "Talk Orion",
+     "opponent": "spyder_route6_orion",
+     "guard": [
+      "not battle_outcome player,won,spyder_route6_orion"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route6:Talk Orion [not battle_outcome player,won,spyder_route6_orion] -> char_talk,add_monster,start_battle",
+      "spyder_route6:Talk Orion [not battle_outcome player,won,spyder_route6_orion] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route6",
+     "event": "Talk Mungo",
+     "opponent": "spyder_route6_mungo",
+     "guard": [
+      "not battle_outcome player,won,spyder_route6_mungo"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route6:Talk Mungo [not battle_outcome player,won,spyder_route6_mungo] -> char_talk,add_monster,start_battle",
+      "spyder_route6:Talk Mungo [not battle_outcome player,won,spyder_route6_mungo] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route6",
+     "event": "Talk Rigel",
+     "opponent": "spyder_route6_rigel",
+     "guard": [
+      "not battle_outcome player,won,spyder_route6_rigel"
+     ],
+     "outcomeReaders": 1,
+     "progressReaders": [
+      "spyder_route6:Talk Rigel [not battle_outcome player,won,spyder_route6_rigel] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route6",
+     "event": "Talk Gunner",
+     "opponent": "spyder_route6_gunner",
+     "guard": [
+      "not battle_outcome player,won,spyder_route6_gunner"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_route6:Create Gunner [not battle_outcome player,won,spyder_route6_gunner] -> create_npc",
+      "spyder_route6:Talk Gunner [not battle_outcome player,won,spyder_route6_gunner] -> char_talk,add_monster,start_battle,pathfind"
+     ]
+    },
+    {
+     "map": "spyder_route6",
+     "event": "Talk Maxwell",
+     "opponent": "spyder_route6_maxwell",
+     "guard": [
+      "not battle_outcome player,won,spyder_route6_maxwell",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route6:Talk Maxwell [not battle_outcome player,won,spyder_route6_maxwell] -> char_talk,add_monster,start_battle",
+      "spyder_route6:Talk Maxwell [not battle_outcome player,won,spyder_route6_maxwell] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route6",
+     "event": "Talk Orion",
+     "opponent": "spyder_route6_orion",
+     "guard": [
+      "not battle_outcome player,won,spyder_route6_orion",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route6:Talk Orion [not battle_outcome player,won,spyder_route6_orion] -> char_talk,add_monster,start_battle",
+      "spyder_route6:Talk Orion [not battle_outcome player,won,spyder_route6_orion] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route6",
+     "event": "Talk Richard",
+     "opponent": "spyder_route6_richard",
+     "guard": [
+      "not battle_outcome player,won,spyder_route6_richard",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route6:Talk Richard [not battle_outcome player,won,spyder_route6_richard] -> char_talk,add_monster,start_battle",
+      "spyder_route6:Talk Richard [not battle_outcome player,won,spyder_route6_richard] -> pathfind_to_char,char_talk,add_monster,start_battle,autosave"
+     ]
+    },
+    {
+     "map": "spyder_route6",
+     "event": "Talk Blair",
+     "opponent": "spyder_route6_blair",
+     "guard": [
+      "not battle_outcome player,won,spyder_route6_blair",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route6:Talk Blair [not battle_outcome player,won,spyder_route6_blair] -> char_talk,add_monster,start_battle",
+      "spyder_route6:Talk Blair [not battle_outcome player,won,spyder_route6_blair] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_route6",
+     "event": "Talk Mungo",
+     "opponent": "spyder_route6_mungo",
+     "guard": [
+      "not battle_outcome player,won,spyder_route6_mungo",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_route6:Talk Mungo [not battle_outcome player,won,spyder_route6_mungo] -> char_talk,add_monster,start_battle",
+      "spyder_route6:Talk Mungo [not battle_outcome player,won,spyder_route6_mungo] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routea",
+     "event": "Talk Vince3",
+     "opponent": "spyder_routea_vince",
+     "guard": [
+      "is variable_set vincefirst:yes",
+      "is variable_set vincesecond:yes",
+      "not battle_outcome player,won,spyder_routea_vince"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_routea:Talk Vince3 [not battle_outcome player,won,spyder_routea_vince] -> translated_dialog,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routea",
+     "event": "Talk Doris",
+     "opponent": "spyder_routea_doris",
+     "guard": [
+      "not battle_outcome player,won,spyder_routea_doris",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_routea:Talk Doris [not battle_outcome player,won,spyder_routea_doris] -> pathfind_to_char,char_talk,add_monster,start_battle",
+      "spyder_routea:Talk Doris [not battle_outcome player,won,spyder_routea_doris] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routea",
+     "event": "Talk Dagger",
+     "opponent": "spyder_routea_dagger",
+     "guard": [
+      "not battle_outcome player,won,spyder_routea_dagger",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_routea:Talk Dagger [not battle_outcome player,won,spyder_routea_dagger] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routea",
+     "event": "Talk Doris",
+     "opponent": "spyder_routea_doris",
+     "guard": [
+      "not battle_outcome player,won,spyder_routea_doris",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_routea:Talk Doris [not battle_outcome player,won,spyder_routea_doris] -> pathfind_to_char,char_talk,add_monster,start_battle",
+      "spyder_routea:Talk Doris [not battle_outcome player,won,spyder_routea_doris] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routea",
+     "event": "Talk Koan",
+     "opponent": "spyder_routea_koan",
+     "guard": [
+      "not battle_outcome player,won,spyder_routea_koan",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_routea:Talk Koan [not battle_outcome player,won,spyder_routea_koan] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routea",
+     "event": "Talk Lexi",
+     "opponent": "spyder_routea_lexi",
+     "guard": [
+      "not battle_outcome player,won,spyder_routea_lexi",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_routea:Talk Lexi [not battle_outcome player,won,spyder_routea_lexi] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routea",
+     "event": "Talk Lotu",
+     "opponent": "spyder_routea_lotu",
+     "guard": [
+      "not battle_outcome player,won,spyder_routea_lotu",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_routea:Talk Lotu [not battle_outcome player,won,spyder_routea_lotu] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routea",
+     "event": "Talk Connie",
+     "opponent": "spyder_routea_connie",
+     "guard": [
+      "not battle_outcome player,won,spyder_routea_connie",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_routea:Talk Connie [not battle_outcome player,won,spyder_routea_connie] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routea",
+     "event": "Talk Joe1",
+     "opponent": "spyder_routea_joe",
+     "guard": [
+      "not battle_outcome player,won,spyder_routea_joe",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_routea:Talk Joe1 [not battle_outcome player,won,spyder_routea_joe] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routea",
+     "event": "Talk Rosy",
+     "opponent": "spyder_routea_rosy",
+     "guard": [
+      "not battle_outcome player,won,spyder_routea_rosy",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_routea:Talk Rosy [not battle_outcome player,won,spyder_routea_rosy] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routeb",
+     "event": "Talk Cytherea",
+     "opponent": "spyder_routeb_cytherea",
+     "guard": [
+      "not battle_outcome player,won,spyder_routeb_cytherea",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_routeb:Talk Cytherea [not battle_outcome player,won,spyder_routeb_cytherea] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routeb",
+     "event": "Talk Nephthys",
+     "opponent": "spyder_routeb_nephthys",
+     "guard": [
+      "not battle_outcome player,won,spyder_routeb_nephthys",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_routeb:Talk Nephthys [not battle_outcome player,won,spyder_routeb_nephthys] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routeb",
+     "event": "Talk Sedna",
+     "opponent": "spyder_routeb_sedna",
+     "guard": [
+      "not battle_outcome player,won,spyder_routeb_sedna",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_routeb:Talk Sedna [not battle_outcome player,won,spyder_routeb_sedna] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routeb",
+     "event": "Talk Calypso",
+     "opponent": "spyder_routeb_calypso",
+     "guard": [
+      "not battle_outcome player,won,spyder_routeb_calypso",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_routeb:Talk Calypso [not battle_outcome player,won,spyder_routeb_calypso] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routec",
+     "event": "Talk River",
+     "opponent": "spyder_searoutec_river",
+     "guard": [
+      "not battle_outcome player,won,spyder_searoutec_river"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_routec:Talk River [not battle_outcome player,won,spyder_searoutec_river] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routec",
+     "event": "Talk Wade",
+     "opponent": "spyder_searoutec_wade",
+     "guard": [
+      "not battle_outcome player,won,spyder_searoutec_wade"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_routec:Talk Wade [not battle_outcome player,won,spyder_searoutec_wade] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routec",
+     "event": "Talk Gil",
+     "opponent": "spyder_searoutec_gil",
+     "guard": [
+      "not battle_outcome player,won,spyder_searoutec_gil"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_routec:Talk Gil [not battle_outcome player,won,spyder_searoutec_gil] -> char_talk,add_monster,start_battle",
+      "spyder_routec:Talk Gil [not battle_outcome player,won,spyder_searoutec_gil] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routec",
+     "event": "Talk Leek",
+     "opponent": "spyder_searoutec_leek",
+     "guard": [
+      "not battle_outcome player,won,spyder_searoutec_leek"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_routec:Talk Leek [not battle_outcome player,won,spyder_searoutec_leek] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routec",
+     "event": "Talk Beech",
+     "opponent": "spyder_searoutec_beech",
+     "guard": [
+      "not battle_outcome player,won,spyder_searoutec_beech"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_routec:Talk Beech [not battle_outcome player,won,spyder_searoutec_beech] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routec",
+     "event": "Talk Rutherford",
+     "opponent": "spyder_searoutec_rutherford",
+     "guard": [
+      "not battle_outcome player,won,spyder_searoutec_rutherford"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_routec:Talk Rutherford [not battle_outcome player,won,spyder_searoutec_rutherford] -> char_talk,add_monster,start_battle",
+      "spyder_routec:Talk Rutherford [not battle_outcome player,won,spyder_searoutec_rutherford] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routec",
+     "event": "Talk Carstair",
+     "opponent": "spyder_searoutec_carstair",
+     "guard": [
+      "not battle_outcome player,won,spyder_searoutec_carstair"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_routec:Talk Carstair [not battle_outcome player,won,spyder_searoutec_carstair] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routec",
+     "event": "Talk Sandy",
+     "opponent": "spyder_searoutec_sandy",
+     "guard": [
+      "not battle_outcome player,won,spyder_searoutec_sandy"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_routec:Talk Sandy [not battle_outcome player,won,spyder_searoutec_sandy] -> char_talk,add_monster,start_battle",
+      "spyder_routec:Talk Sandy [not battle_outcome player,won,spyder_searoutec_sandy] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routec",
+     "event": "Talk Rutherford",
+     "opponent": "spyder_searoutec_rutherford",
+     "guard": [
+      "not battle_outcome player,won,spyder_searoutec_rutherford",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_routec:Talk Rutherford [not battle_outcome player,won,spyder_searoutec_rutherford] -> char_talk,add_monster,start_battle",
+      "spyder_routec:Talk Rutherford [not battle_outcome player,won,spyder_searoutec_rutherford] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routec",
+     "event": "Talk Gil",
+     "opponent": "spyder_searoutec_gil",
+     "guard": [
+      "not battle_outcome player,won,spyder_searoutec_gil",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_routec:Talk Gil [not battle_outcome player,won,spyder_searoutec_gil] -> char_talk,add_monster,start_battle",
+      "spyder_routec:Talk Gil [not battle_outcome player,won,spyder_searoutec_gil] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routec",
+     "event": "Talk Sandy",
+     "opponent": "spyder_searoutec_sandy",
+     "guard": [
+      "not battle_outcome player,won,spyder_searoutec_sandy",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_routec:Talk Sandy [not battle_outcome player,won,spyder_searoutec_sandy] -> char_talk,add_monster,start_battle",
+      "spyder_routec:Talk Sandy [not battle_outcome player,won,spyder_searoutec_sandy] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routec",
+     "event": "Talk More",
+     "opponent": "spyder_searoutec_more",
+     "guard": [
+      "not battle_outcome player,won,spyder_searoutec_more"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_routec:Talk More [not battle_outcome player,won,spyder_searoutec_more] -> char_talk,add_monster,start_battle",
+      "spyder_routec:Talk More [not battle_outcome player,won,spyder_searoutec_more] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routec",
+     "event": "Talk More",
+     "opponent": "spyder_searoutec_more",
+     "guard": [
+      "not battle_outcome player,won,spyder_searoutec_more",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_routec:Talk More [not battle_outcome player,won,spyder_searoutec_more] -> char_talk,add_monster,start_battle",
+      "spyder_routec:Talk More [not battle_outcome player,won,spyder_searoutec_more] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routec",
+     "event": "Talk Nigel",
+     "opponent": "spyder_searoutec_nigel",
+     "guard": [
+      "not battle_outcome player,won,spyder_searoutec_nigel",
+      "is variable_set hospitalcure:yes"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_routec:Talk Nigel [not battle_outcome player,won,spyder_searoutec_nigel] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routec",
+     "event": "Talk Stafford",
+     "opponent": "spyder_searoutec_stafford",
+     "guard": [
+      "not battle_outcome player,won,spyder_searoutec_stafford"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_routec:Talk Stafford [not battle_outcome player,won,spyder_searoutec_stafford] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routec",
+     "event": "Talk Maurice",
+     "opponent": "spyder_searoutec_maurice",
+     "guard": [
+      "not battle_outcome player,won,spyder_searoutec_maurice"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_routec:Talk Maurice [not battle_outcome player,won,spyder_searoutec_maurice] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routee",
+     "event": "Battle Calliope",
+     "opponent": "spyder_routee_calliope",
+     "guard": [
+      "not battle_outcome player,won,spyder_routee_calliope",
+      "is char_at player",
+      "not char_defeated player",
+      "is variable_set kernelquestbegin:yes"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_routee:Battle Calliope [not battle_outcome player,won,spyder_routee_calliope] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_routee",
+     "event": "Talk Aiolos",
+     "opponent": "spyder_routee_aiolos",
+     "guard": [
+      "not battle_outcome player,won,spyder_routee_aiolos",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_routee:Talk Aiolos [not battle_outcome player,won,spyder_routee_aiolos] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_scoop1",
+     "event": "Talk Lanth",
+     "opponent": "spyder_scoop_lanth",
+     "guard": [
+      "not battle_outcome player,won,spyder_scoop_lanth"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_scoop1:Talk Lanth [not battle_outcome player,won,spyder_scoop_lanth] -> char_talk,add_monster,start_battle,translated_dialog",
+      "spyder_scoop1:Talk Lanth [not battle_outcome player,won,spyder_scoop_lanth] -> pathfind_to_char,char_talk,add_monster,start_battle,translated_dialog"
+     ]
+    },
+    {
+     "map": "spyder_scoop1",
+     "event": "Talk Paine",
+     "opponent": "spyder_scoop_paine",
+     "guard": [
+      "not battle_outcome player,won,spyder_scoop_paine"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_scoop1:Talk Paine [not battle_outcome player,won,spyder_scoop_paine] -> char_talk,add_monster,start_battle,translated_dialog",
+      "spyder_scoop1:Talk Paine [not battle_outcome player,won,spyder_scoop_paine] -> pathfind_to_char,char_talk,add_monster,start_battle,translated_dialog"
+     ]
+    },
+    {
+     "map": "spyder_scoop1",
+     "event": "Talk Rubid",
+     "opponent": "spyder_scoop_rubid",
+     "guard": [
+      "not battle_outcome player,won,spyder_scoop_rubid"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_scoop1:Talk Rubid [not battle_outcome player,won,spyder_scoop_rubid] -> char_talk,add_monster,start_battle,translated_dialog",
+      "spyder_scoop1:Talk Rubid [not battle_outcome player,won,spyder_scoop_rubid] -> pathfind_to_char,char_talk,add_monster,start_battle,translated_dialog"
+     ]
+    },
+    {
+     "map": "spyder_scoop1",
+     "event": "Talk Berys",
+     "opponent": "spyder_scoop_berys",
+     "guard": [
+      "not battle_outcome player,won,spyder_scoop_berys"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_scoop1:Talk Berys [not battle_outcome player,won,spyder_scoop_berys] -> char_talk,add_monster,start_battle,translated_dialog",
+      "spyder_scoop1:Talk Berys [not battle_outcome player,won,spyder_scoop_berys] -> pathfind_to_char,char_talk,add_monster,start_battle,translated_dialog"
+     ]
+    },
+    {
+     "map": "spyder_scoop1",
+     "event": "Talk Turner",
+     "opponent": "spyder_scoop_turner",
+     "guard": [
+      "not battle_outcome player,won,spyder_scoop_turner"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_scoop1:Talk Turner [not battle_outcome player,won,spyder_scoop_turner] -> char_talk,add_monster,start_battle,translated_dialog",
+      "spyder_scoop1:Talk Turner [not battle_outcome player,won,spyder_scoop_turner] -> pathfind_to_char,char_talk,add_monster,start_battle,translated_dialog"
+     ]
+    },
+    {
+     "map": "spyder_scoop1",
+     "event": "Talk Lanth",
+     "opponent": "spyder_scoop_lanth",
+     "guard": [
+      "not battle_outcome player,won,spyder_scoop_lanth",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_scoop1:Talk Lanth [not battle_outcome player,won,spyder_scoop_lanth] -> char_talk,add_monster,start_battle,translated_dialog",
+      "spyder_scoop1:Talk Lanth [not battle_outcome player,won,spyder_scoop_lanth] -> pathfind_to_char,char_talk,add_monster,start_battle,translated_dialog"
+     ]
+    },
+    {
+     "map": "spyder_scoop1",
+     "event": "Talk Berys",
+     "opponent": "spyder_scoop_berys",
+     "guard": [
+      "not battle_outcome player,won,spyder_scoop_berys",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_scoop1:Talk Berys [not battle_outcome player,won,spyder_scoop_berys] -> char_talk,add_monster,start_battle,translated_dialog",
+      "spyder_scoop1:Talk Berys [not battle_outcome player,won,spyder_scoop_berys] -> pathfind_to_char,char_talk,add_monster,start_battle,translated_dialog"
+     ]
+    },
+    {
+     "map": "spyder_scoop1",
+     "event": "Talk Turner",
+     "opponent": "spyder_scoop_turner",
+     "guard": [
+      "not battle_outcome player,won,spyder_scoop_turner",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_scoop1:Talk Turner [not battle_outcome player,won,spyder_scoop_turner] -> char_talk,add_monster,start_battle,translated_dialog",
+      "spyder_scoop1:Talk Turner [not battle_outcome player,won,spyder_scoop_turner] -> pathfind_to_char,char_talk,add_monster,start_battle,translated_dialog"
+     ]
+    },
+    {
+     "map": "spyder_scoop1",
+     "event": "Talk Paine",
+     "opponent": "spyder_scoop_paine",
+     "guard": [
+      "not battle_outcome player,won,spyder_scoop_paine",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_scoop1:Talk Paine [not battle_outcome player,won,spyder_scoop_paine] -> char_talk,add_monster,start_battle,translated_dialog",
+      "spyder_scoop1:Talk Paine [not battle_outcome player,won,spyder_scoop_paine] -> pathfind_to_char,char_talk,add_monster,start_battle,translated_dialog"
+     ]
+    },
+    {
+     "map": "spyder_scoop1",
+     "event": "Talk Rubid",
+     "opponent": "spyder_scoop_rubid",
+     "guard": [
+      "not battle_outcome player,won,spyder_scoop_rubid",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_scoop1:Talk Rubid [not battle_outcome player,won,spyder_scoop_rubid] -> char_talk,add_monster,start_battle,translated_dialog",
+      "spyder_scoop1:Talk Rubid [not battle_outcome player,won,spyder_scoop_rubid] -> pathfind_to_char,char_talk,add_monster,start_battle,translated_dialog"
+     ]
+    },
+    {
+     "map": "spyder_scoop3",
+     "event": "Talk Alyssa",
+     "opponent": "spyder_scoop_alyssa",
+     "guard": [
+      "not battle_outcome player,won,spyder_scoop_alyssa",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_scoop3:Talk Alyssa [not battle_outcome player,won,spyder_scoop_alyssa] -> pathfind_to_char,char_talk,add_monster,start_battle,translated_dialog"
+     ]
+    },
+    {
+     "map": "spyder_scoop3",
+     "event": "Talk Taggart",
+     "opponent": "spyder_scoop_taggart",
+     "guard": [
+      "not battle_outcome player,won,spyder_scoop_taggart",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_scoop3:Talk Taggart [not battle_outcome player,won,spyder_scoop_taggart] -> pathfind_to_char,char_talk,add_monster,start_battle,translated_dialog"
+     ]
+    },
+    {
+     "map": "spyder_scoop3",
+     "event": "Talk Donald",
+     "opponent": "spyder_scoop_donald",
+     "guard": [
+      "not battle_outcome player,won,spyder_scoop_donald",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_scoop3:Talk Donald [not battle_outcome player,won,spyder_scoop_donald] -> pathfind_to_char,char_talk,add_monster,start_battle,translated_dialog"
+     ]
+    },
+    {
+     "map": "spyder_scoop4",
+     "event": "Talk Orba",
+     "opponent": "spyder_scoop_orba",
+     "guard": [
+      "not battle_outcome player,won,spyder_scoop_orba"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_scoop4:Create Orba [not battle_outcome player,won,spyder_scoop_orba] -> create_npc",
+      "spyder_scoop4:Talk Orba [not battle_outcome player,won,spyder_scoop_orba] -> char_talk,add_monster,start_battle,translated_dialog"
+     ]
+    },
+    {
+     "map": "spyder_scoop4",
+     "event": "Talk Arachne 1",
+     "opponent": "spyder_scoop_arachne",
+     "guard": [
+      "not battle_outcome player,won,spyder_scoop_arachne",
+      "is char_at player",
+      "not char_defeated player",
+      "not variable_set scooplandrace:yes"
+     ],
+     "outcomeReaders": 4,
+     "progressReaders": [
+      "spyder_scoop4:Talk Arachne 1 [not battle_outcome player,won,spyder_scoop_arachne] -> pathfind_to_char,translated_dialog,add_monster,start_battle",
+      "spyder_scoop4:Talk Arachne [not battle_outcome player,won,spyder_scoop_arachne] -> translated_dialog,add_monster,start_battle",
+      "spyder_scoop4:Talk Arachne 2 [not battle_outcome player,won,spyder_scoop_arachne] -> pathfind_to_char,translated_dialog,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_scoop4",
+     "event": "Talk Weaver",
+     "opponent": "spyder_scoop_weaver",
+     "guard": [
+      "not battle_outcome player,won,spyder_scoop_weaver",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_scoop4:Talk Weaver [not battle_outcome player,won,spyder_scoop_weaver] -> pathfind_to_char,char_talk,add_monster,start_battle,translated_dialog"
+     ]
+    },
+    {
+     "map": "spyder_scoop4",
+     "event": "Talk Arachne",
+     "opponent": "spyder_scoop_arachne",
+     "guard": [
+      "not battle_outcome player,won,spyder_scoop_arachne"
+     ],
+     "outcomeReaders": 4,
+     "progressReaders": [
+      "spyder_scoop4:Talk Arachne 1 [not battle_outcome player,won,spyder_scoop_arachne] -> pathfind_to_char,translated_dialog,add_monster,start_battle",
+      "spyder_scoop4:Talk Arachne [not battle_outcome player,won,spyder_scoop_arachne] -> translated_dialog,add_monster,start_battle",
+      "spyder_scoop4:Talk Arachne 2 [not battle_outcome player,won,spyder_scoop_arachne] -> pathfind_to_char,translated_dialog,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_scoop4",
+     "event": "Talk Arachne 2",
+     "opponent": "spyder_scoop_arachne",
+     "guard": [
+      "not battle_outcome player,won,spyder_scoop_arachne",
+      "is char_at player",
+      "not char_defeated player",
+      "not variable_set scooplandrace:yes"
+     ],
+     "outcomeReaders": 4,
+     "progressReaders": [
+      "spyder_scoop4:Talk Arachne 1 [not battle_outcome player,won,spyder_scoop_arachne] -> pathfind_to_char,translated_dialog,add_monster,start_battle",
+      "spyder_scoop4:Talk Arachne [not battle_outcome player,won,spyder_scoop_arachne] -> translated_dialog,add_monster,start_battle",
+      "spyder_scoop4:Talk Arachne 2 [not battle_outcome player,won,spyder_scoop_arachne] -> pathfind_to_char,translated_dialog,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_test_map",
+     "event": "Talk Cleo",
+     "opponent": "spyder_route5_cleo",
+     "guard": [
+      "not variable_set testcleo:yes"
+     ],
+     "outcomeReaders": 5,
+     "progressReaders": [
+      "spyder_route5:Talk Cleo [not battle_outcome player,won,spyder_route5_cleo] -> char_talk,add_monster,start_double_battle",
+      "spyder_route5:Talk Cleo or Patra [not battle_outcome player,won,spyder_route5_cleo] -> pathfind_to_char,char_talk,add_monster,start_double_battle",
+      "spyder_route5:Talk Patra (Double Battle w Cleo) [not battle_outcome player,won,spyder_route5_cleo] -> char_talk,add_monster,start_double_battle"
+     ]
+    },
+    {
+     "map": "spyder_test_map",
+     "event": "Ambush Cleo",
+     "opponent": "spyder_route5_cleo",
+     "guard": [
+      "not variable_set testcleo:yes",
+      "is char_at player"
+     ],
+     "outcomeReaders": 5,
+     "progressReaders": [
+      "spyder_route5:Talk Cleo [not battle_outcome player,won,spyder_route5_cleo] -> char_talk,add_monster,start_double_battle",
+      "spyder_route5:Talk Cleo or Patra [not battle_outcome player,won,spyder_route5_cleo] -> pathfind_to_char,char_talk,add_monster,start_double_battle",
+      "spyder_route5:Talk Patra (Double Battle w Cleo) [not battle_outcome player,won,spyder_route5_cleo] -> char_talk,add_monster,start_double_battle"
+     ]
+    },
+    {
+     "map": "spyder_timber_walledgarden1",
+     "event": "Talk fugger",
+     "opponent": "spyder_walled_fugger",
+     "guard": [
+      "not battle_outcome player,won,spyder_walled_fugger",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_timber_walledgarden1:Talk fugger [not battle_outcome player,won,spyder_walled_fugger] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_timber_walledgarden1",
+     "event": "Talk carnegie",
+     "opponent": "spyder_walled_carnegie",
+     "guard": [
+      "not battle_outcome player,won,spyder_walled_carnegie",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_timber_walledgarden1:Talk carnegie [not battle_outcome player,won,spyder_walled_carnegie] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_timber_walledgarden1",
+     "event": "Talk ford",
+     "opponent": "spyder_walled_ford",
+     "guard": [
+      "not battle_outcome player,won,spyder_walled_ford",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_timber_walledgarden1:Talk ford [not battle_outcome player,won,spyder_walled_ford] -> pathfind_to_char,char_talk,add_monster,start_battle",
+      "spyder_timber_walledgarden1:Talk ford [not battle_outcome player,won,spyder_walled_ford] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_timber_walledgarden1",
+     "event": "Talk girard",
+     "opponent": "spyder_walled_girard",
+     "guard": [
+      "not battle_outcome player,won,spyder_walled_girard",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_timber_walledgarden1:Talk girard [not battle_outcome player,won,spyder_walled_girard] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_timber_walledgarden1",
+     "event": "Talk vanderbilt",
+     "opponent": "spyder_walled_vanderbilt",
+     "guard": [
+      "not battle_outcome player,won,spyder_walled_vanderbilt",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_timber_walledgarden1:Talk vanderbilt [not battle_outcome player,won,spyder_walled_vanderbilt] -> pathfind_to_char,char_talk,add_monster,start_battle",
+      "spyder_timber_walledgarden1:Talk vanderbilt [not battle_outcome player,won,spyder_walled_vanderbilt] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_timber_walledgarden1",
+     "event": "Talk ford",
+     "opponent": "spyder_walled_ford",
+     "guard": [
+      "not battle_outcome player,won,spyder_walled_ford",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_timber_walledgarden1:Talk ford [not battle_outcome player,won,spyder_walled_ford] -> pathfind_to_char,char_talk,add_monster,start_battle",
+      "spyder_timber_walledgarden1:Talk ford [not battle_outcome player,won,spyder_walled_ford] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_timber_walledgarden1",
+     "event": "Talk vanderbilt",
+     "opponent": "spyder_walled_vanderbilt",
+     "guard": [
+      "not battle_outcome player,won,spyder_walled_vanderbilt",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_timber_walledgarden1:Talk vanderbilt [not battle_outcome player,won,spyder_walled_vanderbilt] -> pathfind_to_char,char_talk,add_monster,start_battle",
+      "spyder_timber_walledgarden1:Talk vanderbilt [not battle_outcome player,won,spyder_walled_vanderbilt] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_timber_walledgarden1",
+     "event": "Talk astor",
+     "opponent": "spyder_walled_astor",
+     "guard": [
+      "not battle_outcome player,won,spyder_walled_astor",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_timber_walledgarden1:Talk astor [not battle_outcome player,won,spyder_walled_astor] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_timber_walledgarden2",
+     "event": "Talk osman",
+     "opponent": "spyder_walled_osman",
+     "guard": [
+      "not battle_outcome player,won,spyder_walled_osman",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_timber_walledgarden2:Talk osman [not battle_outcome player,won,spyder_walled_osman] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_timber_walledgarden2",
+     "event": "Talk Alexander",
+     "opponent": "spyder_walled_alexander",
+     "guard": [
+      "not battle_outcome player,won,spyder_walled_alexander",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_timber_walledgarden2:Talk Alexander [not battle_outcome player,won,spyder_walled_alexander] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_timber_walledgarden2",
+     "event": "Talk musa",
+     "opponent": "spyder_walled_musa",
+     "guard": [
+      "not battle_outcome player,won,spyder_walled_musa",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_timber_walledgarden2:Talk musa [not battle_outcome player,won,spyder_walled_musa] -> pathfind_to_char,char_talk,add_monster,start_battle",
+      "spyder_timber_walledgarden2:Talk midas [is battle_outcome player,won,spyder_walled_musa] -> char_stop,create_npc,pathfind_to_char,char_talk,add_monster,start_battle,pathfind,remove_npc"
+     ]
+    },
+    {
+     "map": "spyder_timber_walledgarden2",
+     "event": "Talk augustus",
+     "opponent": "spyder_walled_augustus",
+     "guard": [
+      "not battle_outcome player,won,spyder_walled_augustus",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_timber_walledgarden2:Talk augustus [not battle_outcome player,won,spyder_walled_augustus] -> pathfind_to_char,char_talk,add_monster,start_battle",
+      "spyder_timber_walledgarden2:Talk midas [is battle_outcome player,won,spyder_walled_augustus] -> char_stop,create_npc,pathfind_to_char,char_talk,add_monster,start_battle,pathfind,remove_npc"
+     ]
+    },
+    {
+     "map": "spyder_timber_walledgarden2",
+     "event": "Talk rufus",
+     "opponent": "spyder_walled_rufus",
+     "guard": [
+      "not battle_outcome player,won,spyder_walled_rufus",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_timber_walledgarden2:Talk rufus [not battle_outcome player,won,spyder_walled_rufus] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_timber_walledgarden2",
+     "event": "Talk crassus",
+     "opponent": "spyder_walled_crassus",
+     "guard": [
+      "not battle_outcome player,won,spyder_walled_crassus",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_timber_walledgarden2:Talk crassus [not battle_outcome player,won,spyder_walled_crassus] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_timber_walledgarden2",
+     "event": "Talk midas",
+     "opponent": "spyder_walled_midas",
+     "guard": [
+      "not battle_outcome player,won,spyder_walled_midas",
+      "is battle_outcome player,won,spyder_walled_musa",
+      "is battle_outcome player,won,spyder_walled_augustus"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_timber_walledgarden2:Talk midas [not battle_outcome player,won,spyder_walled_midas] -> char_stop,create_npc,pathfind_to_char,char_talk,add_monster,start_battle,pathfind,remove_npc",
+      "spyder_timber_walledgarden2:Talk Billie [is battle_outcome player,won,spyder_walled_midas] -> char_stop,create_npc,pathfind_to_char,translated_dialog,pathfind,remove_npc,set_variable"
+     ]
+    },
+    {
+     "map": "spyder_tunnel",
+     "event": "Talk Iris",
+     "opponent": "spyder_tunnelb_iris",
+     "guard": [
+      "not battle_outcome player,won,spyder_tunnelb_iris"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_tunnel:Talk Iris [not battle_outcome player,won,spyder_tunnelb_iris] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_tunnel",
+     "event": "Talk Greta",
+     "opponent": "spyder_tunnelb_greta",
+     "guard": [
+      "not battle_outcome player,won,spyder_tunnelb_greta"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_tunnel:Talk Greta [not battle_outcome player,won,spyder_tunnelb_greta] -> char_talk,add_monster,start_battle",
+      "spyder_tunnel:Talk Greta [not battle_outcome player,won,spyder_tunnelb_greta] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_tunnel",
+     "event": "Talk Tommy - post Scoop",
+     "opponent": "spyder_tunnelb_tommy",
+     "guard": [
+      "not battle_outcome player,won,spyder_tunnelb_tommy",
+      "is variable_set scooplandrace:yes"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_tunnel:Talk Tommy - post Scoop [not battle_outcome player,won,spyder_tunnelb_tommy] -> char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_tunnel",
+     "event": "Talk Greta",
+     "opponent": "spyder_tunnelb_greta",
+     "guard": [
+      "not battle_outcome player,won,spyder_tunnelb_greta",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_tunnel:Talk Greta [not battle_outcome player,won,spyder_tunnelb_greta] -> char_talk,add_monster,start_battle",
+      "spyder_tunnel:Talk Greta [not battle_outcome player,won,spyder_tunnelb_greta] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_tunnel_below",
+     "event": "Talk Meitner",
+     "opponent": "spyder_tunnelb_meitner",
+     "guard": [
+      "not battle_outcome player,won,spyder_tunnelb_meitner",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_tunnel_below:Talk Meitner [not battle_outcome player,won,spyder_tunnelb_meitner] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_tunnel_below",
+     "event": "Talk Lute",
+     "opponent": "spyder_tunnelb_lute",
+     "guard": [
+      "not battle_outcome player,won,spyder_tunnelb_lute",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_tunnel_below:Talk Lute [not battle_outcome player,won,spyder_tunnelb_lute] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_tunnel_below",
+     "event": "Talk Beryll",
+     "opponent": "spyder_tunnelb_beryll",
+     "guard": [
+      "not battle_outcome player,won,spyder_tunnelb_beryll",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_tunnel_below:Talk Beryll [not battle_outcome player,won,spyder_tunnelb_beryll] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_wayfarer_inn1",
+     "event": "Talk Morton",
+     "opponent": "spyder_wayfarer1_morton",
+     "guard": [
+      "not battle_outcome player,won,spyder_wayfarer1_morton"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_wayfarer_inn1:Talk Morton [not battle_outcome player,won,spyder_wayfarer1_morton] -> char_talk,add_monster,char_plague,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_wayfarer_inn1",
+     "event": "Talk Jessie",
+     "opponent": "spyder_wayfarer1_jessie",
+     "guard": [
+      "not battle_outcome player,won,spyder_wayfarer1_jessie"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_wayfarer_inn1:Talk Jessie [not battle_outcome player,won,spyder_wayfarer1_jessie] -> char_talk,add_monster,char_plague,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_wayfarer_inn1",
+     "event": "Talk Nightshade",
+     "opponent": "spyder_wayfarer1_nightshade",
+     "guard": [
+      "not battle_outcome player,won,spyder_wayfarer1_nightshade"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_wayfarer_inn1:Talk Nightshade [not battle_outcome player,won,spyder_wayfarer1_nightshade] -> char_talk,add_monster,char_plague,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_wayfarer_inn1",
+     "event": "Talk Victor",
+     "opponent": "spyder_wayfarer1_victor",
+     "guard": [
+      "not battle_outcome player,won,spyder_wayfarer1_victor"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_wayfarer_inn1:Talk Victor [not battle_outcome player,won,spyder_wayfarer1_victor] -> char_talk,add_monster,start_battle",
+      "spyder_wayfarer_inn1:Talk Victor [not battle_outcome player,won,spyder_wayfarer1_victor] -> pathfind_to_char,char_talk,add_monster,char_plague,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_wayfarer_inn1",
+     "event": "Talk Morningstar",
+     "opponent": "spyder_wayfarer1_morningstar",
+     "guard": [
+      "not battle_outcome player,won,spyder_wayfarer1_morningstar"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_wayfarer_inn1:Talk Morningstar [not battle_outcome player,won,spyder_wayfarer1_morningstar] -> char_talk,add_monster,char_plague,start_battle",
+      "spyder_wayfarer_inn1:Talk Morningstar [not battle_outcome player,won,spyder_wayfarer1_morningstar] -> pathfind_to_char,char_talk,add_monster,char_plague,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_wayfarer_inn1",
+     "event": "Talk Morningstar",
+     "opponent": "spyder_wayfarer1_morningstar",
+     "guard": [
+      "not battle_outcome player,won,spyder_wayfarer1_morningstar",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_wayfarer_inn1:Talk Morningstar [not battle_outcome player,won,spyder_wayfarer1_morningstar] -> char_talk,add_monster,char_plague,start_battle",
+      "spyder_wayfarer_inn1:Talk Morningstar [not battle_outcome player,won,spyder_wayfarer1_morningstar] -> pathfind_to_char,char_talk,add_monster,char_plague,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_wayfarer_inn1",
+     "event": "Talk Victor",
+     "opponent": "spyder_wayfarer1_victor",
+     "guard": [
+      "not battle_outcome player,won,spyder_wayfarer1_victor",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_wayfarer_inn1:Talk Victor [not battle_outcome player,won,spyder_wayfarer1_victor] -> char_talk,add_monster,start_battle",
+      "spyder_wayfarer_inn1:Talk Victor [not battle_outcome player,won,spyder_wayfarer1_victor] -> pathfind_to_char,char_talk,add_monster,char_plague,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_wayfarer_inn1",
+     "event": "Talk Ratcher",
+     "opponent": "spyder_wayfarer1_ratcher",
+     "guard": [
+      "not battle_outcome player,won,spyder_wayfarer1_ratcher"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_wayfarer_inn1:Talk Ratcher [not battle_outcome player,won,spyder_wayfarer1_ratcher] -> char_talk,add_monster,char_plague,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_wayfarer_inn1",
+     "event": "Talk Bismuth",
+     "opponent": "spyder_wayfarer1_bismuth",
+     "guard": [
+      "not battle_outcome player,won,spyder_wayfarer1_bismuth"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_wayfarer_inn1:Talk Bismuth [not battle_outcome player,won,spyder_wayfarer1_bismuth] -> char_talk,add_monster,char_plague,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_wayfarer_inn2",
+     "event": "Talk Bravo",
+     "opponent": "spyder_wayfarer1_bravo",
+     "guard": [
+      "not battle_outcome player,won,spyder_wayfarer1_bravo"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_wayfarer_inn2:Talk Bravo [not battle_outcome player,won,spyder_wayfarer1_bravo] -> char_talk,add_monster,char_plague,start_battle",
+      "spyder_wayfarer_inn2:Talk Bravo [not battle_outcome player,won,spyder_wayfarer1_bravo] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_wayfarer_inn2",
+     "event": "Talk James",
+     "opponent": "spyder_wayfarer1_james",
+     "guard": [
+      "not battle_outcome player,won,spyder_wayfarer1_james"
+     ],
+     "outcomeReaders": 2,
+     "progressReaders": [
+      "spyder_wayfarer_inn2:Talk James [not battle_outcome player,won,spyder_wayfarer1_james] -> char_talk,add_monster,char_plague,start_battle"
+     ]
+    },
+    {
+     "map": "spyder_wayfarer_inn2",
+     "event": "Talk Bravo",
+     "opponent": "spyder_wayfarer1_bravo",
+     "guard": [
+      "not battle_outcome player,won,spyder_wayfarer1_bravo",
+      "is char_at player",
+      "not char_defeated player"
+     ],
+     "outcomeReaders": 3,
+     "progressReaders": [
+      "spyder_wayfarer_inn2:Talk Bravo [not battle_outcome player,won,spyder_wayfarer1_bravo] -> char_talk,add_monster,char_plague,start_battle",
+      "spyder_wayfarer_inn2:Talk Bravo [not battle_outcome player,won,spyder_wayfarer1_bravo] -> pathfind_to_char,char_talk,add_monster,start_battle"
+     ]
+    }
+   ],
+   "randomEncounterEvents": 262
+  },
+  {
+   "campaign": "xero",
+   "start": "player_house_bedroom",
+   "reachableMaps": 75,
+   "order": [
+    {
+     "map": "player_house_bedroom",
+     "depth": 0
+    },
+    {
+     "map": "player_house_downstairs",
+     "depth": 1
+    },
+    {
+     "map": "taba_town",
+     "depth": 2
+    },
+    {
+     "map": "dryadsgrove",
+     "depth": 3
+    },
+    {
+     "map": "healing_center",
+     "depth": 3
+    },
+    {
+     "map": "maple_house",
+     "depth": 3
+    },
+    {
+     "map": "professor_lab",
+     "depth": 3
+    },
+    {
+     "map": "route1",
+     "depth": 3
+    },
+    {
+     "map": "taba_house1",
+     "depth": 3
+    },
+    {
+     "map": "taba_house2",
+     "depth": 3
+    },
+    {
+     "map": "taba_house3",
+     "depth": 3
+    },
+    {
+     "map": "taba_house4",
+     "depth": 3
+    },
+    {
+     "map": "tuxe_mart_taba",
+     "depth": 3
+    },
+    {
+     "map": "cotton_town",
+     "depth": 4
+    },
+    {
+     "map": "leather_town",
+     "depth": 4
+    },
+    {
+     "map": "maple_bedroom",
+     "depth": 4
+    },
+    {
+     "map": "route1_sanglorian",
+     "depth": 4
+    },
+    {
+     "map": "taba_ba_foyer",
+     "depth": 4
+    },
+    {
+     "map": "taba_house2_upstairs",
+     "depth": 4
+    },
+    {
+     "map": "taba_house3_upstairs",
+     "depth": 4
+    },
+    {
+     "map": "citypark",
+     "depth": 5
+    },
+    {
+     "map": "cotton_cafe",
+     "depth": 5
+    },
+    {
+     "map": "cotton_cathedral",
+     "depth": 5
+    },
+    {
+     "map": "cotton_daycare",
+     "depth": 5
+    },
+    {
+     "map": "cotton_misa_house",
+     "depth": 5
+    },
+    {
+     "map": "cotton_scoop",
+     "depth": 5
+    },
+    {
+     "map": "flower_city",
+     "depth": 5
+    },
+    {
+     "map": "leather_scoop",
+     "depth": 5
+    },
+    {
+     "map": "leather_shaft1",
+     "depth": 5
+    },
+    {
+     "map": "leather_shaft2",
+     "depth": 5
+    },
+    {
+     "map": "route2",
+     "depth": 5
+    },
+    {
+     "map": "route3",
+     "depth": 5
+    },
+    {
+     "map": "taba_ba_main",
+     "depth": 5
+    },
+    {
+     "map": "citypark_house1",
+     "depth": 6
+    },
+    {
+     "map": "cotton_cafe_basement",
+     "depth": 6
+    },
+    {
+     "map": "cotton_misa_house_upstairs",
+     "depth": 6
+    },
+    {
+     "map": "dojo1",
+     "depth": 6
+    },
+    {
+     "map": "route4",
+     "depth": 6
+    },
+    {
+     "map": "route5",
+     "depth": 6
+    },
+    {
+     "map": "routea",
+     "depth": 6
+    },
+    {
+     "map": "taba_ba_passageway_1",
+     "depth": 6
+    },
+    {
+     "map": "taba_ba_passageway_2",
+     "depth": 6
+    },
+    {
+     "map": "taba_ba_passageway_3",
+     "depth": 6
+    },
+    {
+     "map": "taba_ba_passageway_4",
+     "depth": 6
+    },
+    {
+     "map": "taba_ba_stairwell_1",
+     "depth": 6
+    },
+    {
+     "map": "timber_town",
+     "depth": 6
+    },
+    {
+     "map": "wayfarer_inn1",
+     "depth": 6
+    },
+    {
+     "map": "cotton_underground",
+     "depth": 7
+    },
+    {
+     "map": "dojo2",
+     "depth": 7
+    },
+    {
+     "map": "mansion",
+     "depth": 7
+    },
+    {
+     "map": "scoop1",
+     "depth": 7
+    },
+    {
+     "map": "taba_ba_br_1",
+     "depth": 7
+    },
+    {
+     "map": "taba_ba_br_2",
+     "depth": 7
+    },
+    {
+     "map": "taba_ba_br_3",
+     "depth": 7
+    },
+    {
+     "map": "taba_ba_br_4",
+     "depth": 7
+    },
+    {
+     "map": "taba_ba_stairwell_2",
+     "depth": 7
+    },
+    {
+     "map": "tunnel",
+     "depth": 7
+    },
+    {
+     "map": "wayfarer_inn2",
+     "depth": 7
+    },
+    {
+     "map": "dojo3",
+     "depth": 8
+    },
+    {
+     "map": "mansion_basement",
+     "depth": 8
+    },
+    {
+     "map": "mansion_top",
+     "depth": 8
+    },
+    {
+     "map": "omnichannel0",
+     "depth": 8
+    },
+    {
+     "map": "route6",
+     "depth": 8
+    },
+    {
+     "map": "scoop2",
+     "depth": 8
+    },
+    {
+     "map": "taba_ba_br_master_foyer",
+     "depth": 8
+    },
+    {
+     "map": "tunnel_below",
+     "depth": 8
+    },
+    {
+     "map": "candy_town",
+     "depth": 9
+    },
+    {
+     "map": "omnichannel1",
+     "depth": 9
+    },
+    {
+     "map": "scoop3",
+     "depth": 9
+    },
+    {
+     "map": "omnichannel2",
+     "depth": 10
+    },
+    {
+     "map": "routec",
+     "depth": 10
+    },
+    {
+     "map": "scoop4",
+     "depth": 10
+    },
+    {
+     "map": "dragonscave",
+     "depth": 11
+    },
+    {
+     "map": "omnichannel3",
+     "depth": 11
+    },
+    {
+     "map": "omnichannel4",
+     "depth": 12
+    }
+   ],
+   "conditionedExits": 5,
+   "gates": [
+    {
+     "from": "player_house_downstairs",
+     "to": "player_house_bedroom",
+     "event": "Go Upstairs",
+     "gate": [
+      "not variable_set scene:yes"
+     ]
+    },
+    {
+     "from": "player_house_downstairs",
+     "to": "taba_town",
+     "event": "Go Outside",
+     "gate": [
+      "not variable_set scene:yes"
+     ]
+    },
+    {
+     "from": "taba_ba_main",
+     "to": "taba_ba_stairwell_1",
+     "event": "movin on up",
+     "gate": [
+      "is variable_set fourthacolyte:finished"
+     ]
+    },
+    {
+     "from": "taba_town",
+     "to": "player_house_downstairs",
+     "event": "timetogroove",
+     "gate": [
+      "is variable_set comeinside:yes"
+     ]
+    },
+    {
+     "from": "taba_town",
+     "to": "player_house_downstairs",
+     "event": "move player",
+     "gate": [
+      "is variable_set moveplayer:true"
+     ]
+    }
+   ],
+   "battles": 11,
+   "battlesWithProgressReaders": 0,
+   "storyBattles": [],
+   "randomEncounterEvents": 91
+  },
+  {
+   "campaign": "water",
+   "start": "water_end_of_desert",
+   "reachableMaps": 11,
+   "order": [
+    {
+     "map": "water_end_of_desert",
+     "depth": 0
+    },
+    {
+     "map": "water_cathedral",
+     "depth": 1
+    },
+    {
+     "map": "water_lower_village",
+     "depth": 1
+    },
+    {
+     "map": "water_outskirts",
+     "depth": 2
+    },
+    {
+     "map": "water_route_grass",
+     "depth": 2
+    },
+    {
+     "map": "water_route_ice",
+     "depth": 2
+    },
+    {
+     "map": "water_river_village",
+     "depth": 3
+    },
+    {
+     "map": "water_snow_village",
+     "depth": 3
+    },
+    {
+     "map": "water_volcano_village",
+     "depth": 3
+    },
+    {
+     "map": "water_volcano_path",
+     "depth": 4
+    },
+    {
+     "map": "water_underwater",
+     "depth": 5
+    }
+   ],
+   "conditionedExits": 1,
+   "gates": [
+    {
+     "from": "water_outskirts",
+     "to": "water_lower_village",
+     "event": "Talk Outskirts Dude",
+     "gate": [
+      "not variable_set waterdefeatedguy1:yes"
+     ]
+    }
+   ],
+   "battles": 1,
+   "battlesWithProgressReaders": 0,
+   "storyBattles": [],
+   "randomEncounterEvents": 78
+  }
+ ],
+ "mapsUnreachableFromAnyCampaignStart": 77,
+ "unreachedMaps": [
+  "37707_tower",
+  "37707_town",
+  "37707_town_missing",
+  "azure_town",
+  "azure_town_hall",
+  "bedroom_test",
+  "buddha_mountain",
+  "city1_mart_junkyard",
+  "classic_aerolume_city",
+  "classic_gym_astra",
+  "classic_gym_bravion",
+  "classic_gym_ferrum",
+  "classic_gym_granite",
+  "classic_gym_marin",
+  "classic_gym_mila",
+  "classic_gym_orion",
+  "classic_gym_pyra",
+  "classic_gym_shade",
+  "classic_gym_sylva",
+  "classic_gym_voltessa",
+  "classic_gym_vyre",
+  "classic_gym_zephra",
+  "classic_hearthrock_city",
+  "classic_route_1",
+  "classic_route_2",
+  "classic_route_3",
+  "classic_route_4",
+  "classic_route_5",
+  "classic_route_6",
+  "classic_route_7",
+  "classic_route_8",
+  "classic_steamshore_city",
+  "classic_stormpeak_city",
+  "classic_thornwood_city",
+  "classic_umbrastar_city",
+  "classic_valorhold_city",
+  "downstairs_test",
+  "eclipse_crystal_bank1",
+  "eclipse_crystal_bank2",
+  "eclipse_crystal_bank3",
+  "eclipse_crystal_center",
+  "eclipse_crystal_town",
+  "eclipse_crystal_town_cafe",
+  "eclipse_crystal_town_house",
+  "eclipse_lion_mountain_high",
+  "eclipse_lion_mountain_low",
+  "eclipse_lion_mountain_middle",
+  "eclipse_obsidian_center",
+  "eclipse_obsidian_town",
+  "eclipse_obsidian_town_house",
+  "eclipse_park",
+  "eclipse_park_cabin",
+  "eclipse_park_cave",
+  "eclipse_park_entrance",
+  "eclipse_park_south",
+  "eclipse_route7",
+  "eclipse_routef",
+  "eclipse_routeg",
+  "eclipse_routeh",
+  "eclipse_routei",
+  "gadget_store1",
+  "gaming_hall",
+  "manhattan_beach",
+  "rubberduck_cave_01",
+  "rubberduck_city_01",
+  "rubberduck_route_01",
+  "russell_practice_1",
+  "sphalian_center",
+  "sphalian_town",
+  "sphalian_town_house",
+  "taba_ba_br_master",
+  "tabathas",
+  "test_npcs",
+  "tt_forest_route1",
+  "tt_paper_town",
+  "tt_searoute1",
+  "witcher_route_7"
+ ]
+}

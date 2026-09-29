@@ -1,0 +1,8823 @@
+{
+ "campaign": "spyder",
+ "storyEventsNeverFired": 542,
+ "neverFiredFailingConditionTally": {
+  "is variable_set": 110,
+  "not variable_set": 33,
+  "is has_item": 15,
+  "is has_monster": 13,
+  "not battle_outcome": 7,
+  "is party_size": 6,
+  "not money_is": 3,
+  "not party_size": 2,
+  "is party_infected": 2,
+  "not has_monster": 2,
+  "is battle_outcome": 1,
+  "is check_char_parameter": 1,
+  "not tracker": 1,
+  "is has_tuxepedia": 1,
+  "is has_kennel": 1
+ },
+ "neverFired": [
+  {
+   "event": "spyder_bedroom:Go Downstairs",
+   "failing": []
+  },
+  {
+   "event": "spyder_bedroom:No Intro",
+   "failing": [
+    "is variable_set question_intro:yes",
+    "not variable_set spyder_intro:yes"
+   ]
+  },
+  {
+   "event": "spyder_paper_scoop:Billie Dollfin",
+   "failing": [
+    "is variable_set myintrochoice:dollfin",
+    "not variable_set billie_choice"
+   ]
+  },
+  {
+   "event": "spyder_paper_scoop:Billie Grintot",
+   "failing": [
+    "is variable_set myintrochoice:grintot",
+    "not variable_set billie_choice"
+   ]
+  },
+  {
+   "event": "spyder_paper_scoop:Billie Ignibus",
+   "failing": [
+    "is variable_set myintrochoice:ignibus",
+    "not variable_set billie_choice"
+   ]
+  },
+  {
+   "event": "spyder_paper_scoop:Billie Memnomnom",
+   "failing": [
+    "is variable_set myintrochoice:memnomnom",
+    "not variable_set billie_choice"
+   ]
+  },
+  {
+   "event": "spyder_paper_scoop:Confirm Monster No",
+   "failing": [
+    "is variable_set areyousure:no"
+   ]
+  },
+  {
+   "event": "spyder_paper_scoop:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_paper_scoop:Talk Dante No Party",
+   "failing": [
+    "not party_size player,greater_than,0"
+   ]
+  },
+  {
+   "event": "spyder_paper_scoop:Talk Dante Player Returns",
+   "failing": [
+    "is battle_outcome player,won,spyder_route3_zoolander"
+   ]
+  },
+  {
+   "event": "spyder_downstairs:Go Upstairs",
+   "failing": []
+  },
+  {
+   "event": "spyder_downstairs:Talk mom2",
+   "failing": [
+    "is party_size player,less_than,1"
+   ]
+  },
+  {
+   "event": "spyder_downstairs:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_paper_town:Teleport to Protagonist House",
+   "failing": []
+  },
+  {
+   "event": "spyder_paper_town:Teleport to Route 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_paper_town:Teleport to Route 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_paper_town:Teleport to Daycare",
+   "failing": []
+  },
+  {
+   "event": "spyder_paper_town:Teleport to Mart",
+   "failing": []
+  },
+  {
+   "event": "spyder_paper_town:Teleport to Sea Route",
+   "failing": []
+  },
+  {
+   "event": "spyder_paper_town:My First Mon",
+   "failing": [
+    "is party_size player,less_than,1",
+    "not variable_set dantebin:yes"
+   ]
+  },
+  {
+   "event": "spyder_paper_town:Chosen - Lambert",
+   "failing": [
+    "is variable_set lambertchosen:yes",
+    "is party_size player,less_than,1"
+   ]
+  },
+  {
+   "event": "spyder_paper_town:Chosen - Nut",
+   "failing": [
+    "is variable_set nutchosen:yes",
+    "is party_size player,less_than,1"
+   ]
+  },
+  {
+   "event": "spyder_paper_town:Chosen - Tweesher",
+   "failing": [
+    "is variable_set tweesherchosen:yes",
+    "is party_size player,less_than,1"
+   ]
+  },
+  {
+   "event": "spyder_paper_town:Chosen - Agnite",
+   "failing": [
+    "is variable_set agnitechosen:yes",
+    "is party_size player,less_than,1"
+   ]
+  },
+  {
+   "event": "spyder_paper_town:First Fight - Lose",
+   "failing": [
+    "not variable_set battle_last_result:won",
+    "is variable_set firstfightend:yes"
+   ]
+  },
+  {
+   "event": "spyder_paper_town:Destination - Flower",
+   "failing": [
+    "is variable_set rivergoto:flower_city"
+   ]
+  },
+  {
+   "event": "spyder_paper_town:Destination - Candy",
+   "failing": [
+    "is variable_set rivergoto:candy_port"
+   ]
+  },
+  {
+   "event": "spyder_paper_town:Destination - Timber",
+   "failing": [
+    "is variable_set rivergoto:timber_town"
+   ]
+  },
+  {
+   "event": "spyder_paper_town:Teleport to Manor",
+   "failing": []
+  },
+  {
+   "event": "spyder_paper_town:Teleport to Daycare Back",
+   "failing": []
+  },
+  {
+   "event": "spyder_paper_town:Teleport to Rival",
+   "failing": []
+  },
+  {
+   "event": "spyder_paper_town:Teleport to Brideswood B",
+   "failing": []
+  },
+  {
+   "event": "spyder_paper_town:Teleport to Brideswood A",
+   "failing": []
+  },
+  {
+   "event": "spyder_paper_town:Talk Mom Outside",
+   "failing": [
+    "not variable_set visitcottonmart:yes"
+   ]
+  },
+  {
+   "event": "spyder_route1:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route1:Teleport to Route1",
+   "failing": []
+  },
+  {
+   "event": "spyder_route1:Teleport to Route1",
+   "failing": []
+  },
+  {
+   "event": "spyder_route1:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route1:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route1:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route1:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route1:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route1:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route1:Teleport to Brideswood B",
+   "failing": []
+  },
+  {
+   "event": "spyder_route1:Teleport to Brideswood A",
+   "failing": []
+  },
+  {
+   "event": "spyder_route1:Teleport to Sea 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_route1:Teleport to Sea 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_town:Teleport to Route 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_town:Teleport to Cotton Mart",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_town:Teleport to Cotton Cathedral",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_town:Teleport to Cafe",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_town:Teleport to Dryad's Grove",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_town:Teleport to Dryad's Grove",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_town:Teleport to Route 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_town:Teleport to Route 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_town:Teleport to Art Shop",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_town:Teleport to Route 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_town:Teleport to Route 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_town:Teleport to Route 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_town:Teleport to Route 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_town:Teleport to Route 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_town:Teleport to Route 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_town:Teleport to Cotton House 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_town:Teleport to Cotton House 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_town:Teleport to Cotton Tunnel",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_town:Teleport to Omnichannel HQ",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_town:Teleport to House Back",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_town:Teleport to Test Map",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_scoop:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_scoop:Devices, explain",
+   "failing": [
+    "is variable_set heardcapture:no"
+   ]
+  },
+  {
+   "event": "spyder_healing_center:Set Faint Target",
+   "failing": [
+    "is variable_set faint_set:pending"
+   ]
+  },
+  {
+   "event": "spyder_healing_center:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_healing_center:Talk NPC1",
+   "failing": []
+  },
+  {
+   "event": "spyder_healing_center:Talk NPC2",
+   "failing": []
+  },
+  {
+   "event": "spyder_healing_center:Talk NPC3",
+   "failing": []
+  },
+  {
+   "event": "spyder_healing_center:Talk NPC4",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_cafe:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_dryadsgrove:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_dryadsgrove:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_dryadsgrove:Teleport to Routed 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_dryadsgrove:Teleport to Routed 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_dryadsgrove:Teleport to Cotton Tunnel",
+   "failing": []
+  },
+  {
+   "event": "spyder_dryadsgrove:Ruff Yes",
+   "failing": [
+    "is variable_set ruff:yes"
+   ]
+  },
+  {
+   "event": "spyder_dryadsgrove:Ruff No",
+   "failing": [
+    "is variable_set ruff:no"
+   ]
+  },
+  {
+   "event": "spyder_dryadsgrove:Return Ruff No",
+   "failing": [
+    "is variable_set returnruff:no"
+   ]
+  },
+  {
+   "event": "spyder_dryadsgrove:Teleport to Sea",
+   "failing": []
+  },
+  {
+   "event": "spyder_dryadsgrove:Teleport to Sea",
+   "failing": []
+  },
+  {
+   "event": "spyder_dryadsgrove:Teleport to Sea",
+   "failing": []
+  },
+  {
+   "event": "spyder_dryadsgrove:Teleport to Sea",
+   "failing": []
+  },
+  {
+   "event": "spyder_routed:Teleport to Dryad 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_routed:Teleport to Dryad 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_routed:Teleport to Flower City 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_routed:Teleport to Flower City 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_routed:Teleport to Flower City 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_routed:Teleport to Leather Town 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_routed:Teleport to Leather Town 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_routed:Teleport to Leather Town 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_routed:Teleport to Leather Town 4",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_city:Teleport to Route 4",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_city:Teleport to Route 4",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_city:Teleport to Side Route A",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_city:Teleport to Side Route A",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_city:Teleport to Route 5",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_city:Teleport to Dojo",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_city:Teleport to Nimrod",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_city:Talk Mieke - Will Trade Budaye",
+   "failing": [
+    "is has_monster player,budaye",
+    "is variable_set mieke_willtrade:yes"
+   ]
+  },
+  {
+   "event": "spyder_flower_city:Teleport to Pet Shop",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_city:Teleport to Flower House 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_city:Teleport to Flower House 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_city:Talk Fez - Will Trade Ignibus",
+   "failing": [
+    "is has_monster player,ignibus",
+    "is variable_set fez_willtrade:yes"
+   ]
+  },
+  {
+   "event": "spyder_flower_city:Talk Cady - Will Trade Grintot",
+   "failing": [
+    "is has_monster player,grintot",
+    "is variable_set cady_willtrade:yes"
+   ]
+  },
+  {
+   "event": "spyder_flower_city:Talk Sandy - Will Trade Tweesher",
+   "failing": [
+    "is has_monster player,tweesher",
+    "is variable_set sandy_willtrade:yes"
+   ]
+  },
+  {
+   "event": "spyder_flower_city:Teleport to Nimrod",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_city:Teleport to Centre",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_city:Teleport to Scoop",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_city:Destination - Flower",
+   "failing": [
+    "is variable_set rivergoto:flower_city"
+   ]
+  },
+  {
+   "event": "spyder_flower_city:Destination - Timber",
+   "failing": [
+    "is variable_set rivergoto:timber_town"
+   ]
+  },
+  {
+   "event": "spyder_flower_city:Destination - Candy",
+   "failing": [
+    "is variable_set rivergoto:candy_port"
+   ]
+  },
+  {
+   "event": "spyder_flower_city:Teleport to Routed 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_city:Teleport to Routed 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_city:Teleport to Routed 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_city:Teleport to Timber Town 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_city:Teleport to Timber Town 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_city:Teleport to Timber Town 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_city:Teleport to Pet Shop 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_route4:Teleport to Route 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_route4:Teleport to Flower City",
+   "failing": []
+  },
+  {
+   "event": "spyder_route4:Teleport to Flower City",
+   "failing": []
+  },
+  {
+   "event": "spyder_route4:Teleport to Route 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_route3:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route3:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route3:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route3:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route3:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route3:Teleport to Wayfarer Inn",
+   "failing": []
+  },
+  {
+   "event": "spyder_route3:Teleport to Wayfarer Inn",
+   "failing": []
+  },
+  {
+   "event": "spyder_route3:Teleport to Wayfarer Inn",
+   "failing": []
+  },
+  {
+   "event": "spyder_route3:Teleport to Route 4",
+   "failing": []
+  },
+  {
+   "event": "spyder_route3:Teleport to Route 4",
+   "failing": []
+  },
+  {
+   "event": "spyder_route3:Zoolander Talk",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_town:Teleport to City Park",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_town:Teleport to City Park",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_town:Teleport to Route 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_town:Teleport to Route 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_town:Teleport to Route 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_town:Teleport to Route 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_town:Teleport to Route 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_town:Teleport to Leather Mart",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_town:Teleport to Leather Museum",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_town:Teleport to Leather House 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_town:Teleport to Leather House 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_town:Destination - Flower",
+   "failing": [
+    "is variable_set rivergoto:flower_city"
+   ]
+  },
+  {
+   "event": "spyder_leather_town:Destination - Timber",
+   "failing": [
+    "is variable_set rivergoto:timber_town"
+   ]
+  },
+  {
+   "event": "spyder_leather_town:Destination - Candy",
+   "failing": [
+    "is variable_set rivergoto:candy_port"
+   ]
+  },
+  {
+   "event": "spyder_leather_town:Teleport to Leather Centre",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_town:Teleport to Shaft2",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_town:Teleport to Shaft1",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_town:Teleport to Gym",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_town:Teleport to Routed 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_town:Teleport to Routed 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_town:Teleport to Routed 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_town:Teleport to Routed 4",
+   "failing": []
+  },
+  {
+   "event": "spyder_citypark:Teleport to Route 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_citypark:Teleport to Route 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_citypark:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_citypark:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_citypark:Teleport to Maniac House",
+   "failing": []
+  },
+  {
+   "event": "spyder_route2:Teleport to City Park",
+   "failing": []
+  },
+  {
+   "event": "spyder_route2:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route2:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route2:Teleport to City Park",
+   "failing": []
+  },
+  {
+   "event": "spyder_route2:Teleport to Brideswood B",
+   "failing": []
+  },
+  {
+   "event": "spyder_route2:Teleport to Brideswood A",
+   "failing": []
+  },
+  {
+   "event": "spyder_brideswood:Teleport to Paper Town B",
+   "failing": []
+  },
+  {
+   "event": "spyder_brideswood:Teleport to Paper Town A",
+   "failing": []
+  },
+  {
+   "event": "spyder_brideswood:Teleport to Route 2A",
+   "failing": []
+  },
+  {
+   "event": "spyder_brideswood:Teleport to Route 2B",
+   "failing": []
+  },
+  {
+   "event": "spyder_brideswood:Teleport to Route 1B",
+   "failing": []
+  },
+  {
+   "event": "spyder_brideswood:Teleport to Route 1A",
+   "failing": []
+  },
+  {
+   "event": "spyder_citypark_house1:Go outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_scoop:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_museum:Cannot Afford 100",
+   "failing": [
+    "is variable_set paymuseum:yes",
+    "not money_is player,greater_or_equal,100"
+   ]
+  },
+  {
+   "event": "spyder_leather_museum:Cannot Afford 50",
+   "failing": [
+    "is variable_set paymuseum:yes",
+    "not variable_set notpaidmuseum:yes",
+    "not money_is player,greater_or_equal,50"
+   ]
+  },
+  {
+   "event": "spyder_leather_museum:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_house1:Go outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_house2:Go outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_center:Set Faint Target",
+   "failing": [
+    "is variable_set faint_set:pending"
+   ]
+  },
+  {
+   "event": "spyder_leather_center:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_shaft2:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_shaft1:Outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_leather_gym:Points Brad",
+   "failing": [
+    "is variable_set battle_last_winner:spyder_leathergym_brad"
+   ]
+  },
+  {
+   "event": "spyder_leather_gym:Points Chad",
+   "failing": [
+    "is variable_set battle_last_winner:spyder_leathergym_chad"
+   ]
+  },
+  {
+   "event": "spyder_leather_gym:Teleport to Leather Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_wayfarer_inn1:Go upstairs",
+   "failing": []
+  },
+  {
+   "event": "spyder_wayfarer_inn1:Go to the other upstairs",
+   "failing": []
+  },
+  {
+   "event": "spyder_wayfarer_inn1:Teleport to Route 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_wayfarer_inn1:Teleport to Route 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_wayfarer_inn1:Talk Maniac - Got Botbot - Cheat",
+   "failing": [
+    "not variable_set gotbotbot:yes",
+    "is check_char_parameter player,name,ApexPlayer"
+   ]
+  },
+  {
+   "event": "spyder_nimrod_room:FlashBack Zircon and Argon",
+   "failing": [
+    "is variable_set zircon_argon:yes"
+   ]
+  },
+  {
+   "event": "spyder_nimrod_room:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_wayfarer_inn2:Go downstairs",
+   "failing": []
+  },
+  {
+   "event": "spyder_wayfarer_inn2:Go to the other downstairs",
+   "failing": []
+  },
+  {
+   "event": "spyder_routea:Teleport to Flower City",
+   "failing": []
+  },
+  {
+   "event": "spyder_routea:Teleport to Flower City",
+   "failing": []
+  },
+  {
+   "event": "spyder_routea:Teleport to Mansion",
+   "failing": []
+  },
+  {
+   "event": "spyder_routea:Teleport to Mansion",
+   "failing": []
+  },
+  {
+   "event": "spyder_routea:Teleport to Top",
+   "failing": []
+  },
+  {
+   "event": "spyder_routea:Teleport to Top",
+   "failing": []
+  },
+  {
+   "event": "spyder_mansion:Teleport to Top",
+   "failing": []
+  },
+  {
+   "event": "spyder_mansion:Teleport to Basement",
+   "failing": []
+  },
+  {
+   "event": "spyder_mansion:Teleport to Basement",
+   "failing": []
+  },
+  {
+   "event": "spyder_mansion:Teleport to Top",
+   "failing": []
+  },
+  {
+   "event": "spyder_mansion:Teleport to Side Route",
+   "failing": []
+  },
+  {
+   "event": "spyder_mansion:Teleport to Side Route",
+   "failing": []
+  },
+  {
+   "event": "spyder_mansion:Teleport to Basement",
+   "failing": []
+  },
+  {
+   "event": "spyder_mansion:Teleport to Side Route",
+   "failing": []
+  },
+  {
+   "event": "spyder_mansion:Teleport to Basement",
+   "failing": []
+  },
+  {
+   "event": "spyder_mansion_top:Teleport to Middle",
+   "failing": []
+  },
+  {
+   "event": "spyder_mansion_top:Teleport to Middle",
+   "failing": []
+  },
+  {
+   "event": "spyder_mansion_top:Teleport to Middle",
+   "failing": []
+  },
+  {
+   "event": "spyder_mansion_top:Teleport to Middle",
+   "failing": []
+  },
+  {
+   "event": "spyder_mansion_basement:Teleport to Middle",
+   "failing": []
+  },
+  {
+   "event": "spyder_mansion_basement:Teleport to Middle",
+   "failing": []
+  },
+  {
+   "event": "spyder_paper_daycare:FlashBack Billie Grandma",
+   "failing": [
+    "is variable_set billie_grandma:yes"
+   ]
+  },
+  {
+   "event": "spyder_paper_daycare:Return Monster No",
+   "failing": [
+    "is variable_set return_monster:no"
+   ]
+  },
+  {
+   "event": "spyder_paper_daycare:Teleport to Back",
+   "failing": []
+  },
+  {
+   "event": "spyder_paper_daycare:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_routec:Teleport to Candy Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_routec:Teleport to Paper Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_routec:Teleport to Dragon's Cave",
+   "failing": []
+  },
+  {
+   "event": "spyder_routec:Talk Nigel",
+   "failing": [
+    "is variable_set hospitalcure:yes"
+   ]
+  },
+  {
+   "event": "spyder_routec:Teleport to Candy Port",
+   "failing": []
+  },
+  {
+   "event": "spyder_routec:Teleport to Route1a",
+   "failing": []
+  },
+  {
+   "event": "spyder_routec:Teleport to Route1b",
+   "failing": []
+  },
+  {
+   "event": "spyder_routec:Teleport to Dryad",
+   "failing": []
+  },
+  {
+   "event": "spyder_routec:Teleport to Dryad",
+   "failing": []
+  },
+  {
+   "event": "spyder_routec:Teleport to Dryad",
+   "failing": []
+  },
+  {
+   "event": "spyder_routec:Teleport to Dryad",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_town:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_town:Teleport to Sea Route",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_town:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_town:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_town:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_town:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_town:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_town:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_town:Teleport to Candy House 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_town:Teleport to Hospital",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_town:Teleport to Greenwash",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_town:After infected",
+   "failing": [
+    "is party_infected player,spyderbite,all",
+    "not variable_set confiscation_done:yes"
+   ]
+  },
+  {
+   "event": "spyder_candy_town:Teleport to Candy Scoop",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_town:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_town:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_town:Teleport to Greenwash",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_town:Teleport to Candy House 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_town:Teleport to Candy House 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_town:Teleport to Candy House Back",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_town:Teleport to Candy Cafe",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_town:Get restoration",
+   "failing": [
+    "is variable_set elianeoutput:restoration"
+   ]
+  },
+  {
+   "event": "spyder_candy_town:Get potion",
+   "failing": [
+    "is variable_set elianeoutput:potion"
+   ]
+  },
+  {
+   "event": "spyder_candy_town:Get tea",
+   "failing": [
+    "is variable_set elianeoutput:tea"
+   ]
+  },
+  {
+   "event": "spyder_candy_town:Get refreshing_slice",
+   "failing": [
+    "is variable_set elianeoutput:refreshing_slice"
+   ]
+  },
+  {
+   "event": "spyder_candy_town:Get antidote_grapes",
+   "failing": [
+    "is variable_set elianeoutput:antidote_grapes"
+   ]
+  },
+  {
+   "event": "spyder_candy_town:Get cure_festering",
+   "failing": [
+    "is variable_set elianeoutput:cure_festering"
+   ]
+  },
+  {
+   "event": "spyder_candy_town:Teleport to Candy Port",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_town:Teleport to Candy Port",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_town:Seen Candy + Infected",
+   "failing": [
+    "is party_infected player,spyderbite,some",
+    "not variable_set confiscation_done:yes"
+   ]
+  },
+  {
+   "event": "spyder_candy_town:Talk Mom - After Quarantine",
+   "failing": [
+    "is variable_set hospitalcure:yes"
+   ]
+  },
+  {
+   "event": "spyder_candy_town:Henrik react - no mons",
+   "failing": [
+    "is variable_set henrik_react:start",
+    "not party_size player,greater_than,0"
+   ]
+  },
+  {
+   "event": "spyder_route6:Teleport to Tunnel",
+   "failing": []
+  },
+  {
+   "event": "spyder_route6:Teleport to Tunnel",
+   "failing": []
+  },
+  {
+   "event": "spyder_route6:Teleport to Tunnel",
+   "failing": []
+  },
+  {
+   "event": "spyder_route6:Teleport to Candy Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route6:Teleport to Candy Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route6:Teleport to Candy Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route6:Teleport to Candy Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route6:Teleport to Candy Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route6:Teleport to Candy Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route6:Teleport to Candy Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route6:Teleport to Candy Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route6:Teleport to Candy Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route6:Teleport to Tunnel 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_route6:Teleport to Tunnel 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_route6:Billie2",
+   "failing": [
+    "not variable_set route6billie:yes"
+   ]
+  },
+  {
+   "event": "spyder_tunnel:Teleport to Below",
+   "failing": []
+  },
+  {
+   "event": "spyder_tunnel:Teleport to Below",
+   "failing": []
+  },
+  {
+   "event": "spyder_tunnel:Teleport to Below",
+   "failing": []
+  },
+  {
+   "event": "spyder_tunnel:Teleport to Timber Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_tunnel:Teleport to Timber Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_tunnel:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "spyder_tunnel:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "spyder_tunnel:Teleport to Route 6",
+   "failing": []
+  },
+  {
+   "event": "spyder_tunnel:Teleport to Routee 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_tunnel:Teleport to Routee 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_tunnel:Teleport to Route6 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_tunnel:Teleport to Route6 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_tunnel_below:Teleport to Aboveground",
+   "failing": []
+  },
+  {
+   "event": "spyder_tunnel_below:Teleport to Aboveground",
+   "failing": []
+  },
+  {
+   "event": "spyder_tunnel_below:Teleport to Aboveground",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_town:Teleport to Route 5",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_town:Teleport to Tunnel",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_town:Teleport to Tunnel",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_town:Teleport to Scoop",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_town:Seen Timber 2",
+   "failing": [
+    "not tracker player,timber_town"
+   ]
+  },
+  {
+   "event": "spyder_timber_town:Teleport to Timber Centre",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_town:Teleport to Timber Scoop",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_town:Destination - Candy",
+   "failing": [
+    "is variable_set rivergoto:candy_port"
+   ]
+  },
+  {
+   "event": "spyder_timber_town:Destination - Timber",
+   "failing": [
+    "is variable_set rivergoto:timber_town"
+   ]
+  },
+  {
+   "event": "spyder_timber_town:Teleport to Flower City 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_town:Teleport to Flower City 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_town:Teleport to Flower City 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_town:Teleport to Routee 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_town:Teleport to Routee 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_town:Teleport to Timber Cafe",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_town:Teleport to Timber House",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_town:Teleport to Walled Garden",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_town:Teleport to Walled Garden",
+   "failing": []
+  },
+  {
+   "event": "spyder_paper_manor:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_paper_rival_downstairs:Flashback Yes",
+   "failing": [
+    "is variable_set billie_grandma:yes"
+   ]
+  },
+  {
+   "event": "spyder_paper_rival_downstairs:Go Bedroom",
+   "failing": []
+  },
+  {
+   "event": "spyder_paper_rival_downstairs:Go Office",
+   "failing": []
+  },
+  {
+   "event": "spyder_paper_rival_downstairs:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_paper_rival_bedroom:Go Downstairs",
+   "failing": []
+  },
+  {
+   "event": "spyder_paper_rival_office:Go Downstairs",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_artshop:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_artshop:Cannot Affort",
+   "failing": [
+    "is variable_set paygallery:yes",
+    "not money_is player,greater_or_equal,50"
+   ]
+  },
+  {
+   "event": "spyder_cotton_artshop:Barmaid Sell Monsters Op",
+   "failing": [
+    "is variable_set barmaid_monsters:yes"
+   ]
+  },
+  {
+   "event": "spyder_cotton_artshop:Barmaid Sell Starry Op",
+   "failing": [
+    "is variable_set barmaid_starry:yes"
+   ]
+  },
+  {
+   "event": "spyder_cotton_artshop:Barmaid Sell Trepidation Op",
+   "failing": [
+    "is variable_set barmaid_trepidation:yes"
+   ]
+  },
+  {
+   "event": "spyder_cotton_artshop:Barmaid Sell Bundle",
+   "failing": [
+    "is variable_set barmaid_sell_bundle:yes"
+   ]
+  },
+  {
+   "event": "spyder_cotton_house1:Go outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_house2:Go outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_house2:Go outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_tunnel:Talk Benden Captured",
+   "failing": [
+    "is has_tuxepedia player,drokoro,caught"
+   ]
+  },
+  {
+   "event": "spyder_cotton_tunnel:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_tunnel:Teleport to Dragon's Cave",
+   "failing": []
+  },
+  {
+   "event": "spyder_cotton_tunnel:Teleport to Dryad's Grove",
+   "failing": []
+  },
+  {
+   "event": "spyder_omnichannel1:Teleport to Omnichannel 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_omnichannel1:Teleport to Omnichannel 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_omnichannel1:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_omnichannel2:Teleport to Omnichannel 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_omnichannel2:Teleport to Omnichannel 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_omnichannel2:Teleport to Omnichannel 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_omnichannel2:Teleport to Omnichannel 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_omnichannel3:Teleport to Omnichannel 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_omnichannel3:Teleport to Omnichannel 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_omnichannel3:Teleport to Omnichannel 4",
+   "failing": []
+  },
+  {
+   "event": "spyder_omnichannel3:Teleport to Omnichannel 4",
+   "failing": []
+  },
+  {
+   "event": "spyder_omnichannel4:Teleport to Omnichannel 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_omnichannel4:Teleport to Omnichannel 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_omnichannel4:Teleport to Radio Tower",
+   "failing": []
+  },
+  {
+   "event": "spyder_omnichannel4:Teleport to Radio Tower",
+   "failing": []
+  },
+  {
+   "event": "spyder_radiotower:Teleport to Omnichannel 4",
+   "failing": []
+  },
+  {
+   "event": "spyder_radiotower:Teleport to Omnichannel 4",
+   "failing": []
+  },
+  {
+   "event": "spyder_test_map:Teleport to Cotton Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_test_map:Talk Barmaid (1st)",
+   "failing": [
+    "not variable_set introdcottoncafe2:yes"
+   ]
+  },
+  {
+   "event": "spyder_test_map:Teleport to Cotton Cathedral",
+   "failing": []
+  },
+  {
+   "event": "spyder_test_map:Box2",
+   "failing": []
+  },
+  {
+   "event": "spyder_dragonscave:Teleport to Sea Route",
+   "failing": []
+  },
+  {
+   "event": "spyder_dragonscave:Teleport to Cotton Tunnel",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_port:Destination - Candy",
+   "failing": [
+    "is variable_set rivergoto:candy_port"
+   ]
+  },
+  {
+   "event": "spyder_candy_port:Destination - Timber",
+   "failing": [
+    "is variable_set rivergoto:timber_town"
+   ]
+  },
+  {
+   "event": "spyder_candy_port:Teleport to Candy Inn",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_port:Teleport to Candy Town1",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_port:Teleport to Candy Town2",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_port:Teleport to Hill1",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_port:Teleport to Hill2",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_port:Teleport to Hill3",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_port:Teleport to Sea",
+   "failing": []
+  },
+  {
+   "event": "spyder_route5:Teleport to Timber Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_route5:Teleport to Flower City",
+   "failing": []
+  },
+  {
+   "event": "spyder_route5:Talk Cleo",
+   "failing": [
+    "not battle_outcome player,won,spyder_route5_cleo"
+   ]
+  },
+  {
+   "event": "spyder_route5:Talk Cleo or Patra",
+   "failing": [
+    "not battle_outcome player,won,spyder_route5_cleo"
+   ]
+  },
+  {
+   "event": "spyder_route5:Talk Tryphaena or Marc",
+   "failing": [
+    "not battle_outcome player,won,spyder_route5_tryphaena"
+   ]
+  },
+  {
+   "event": "spyder_route5:Talk Patra (Double Battle w Cleo)",
+   "failing": [
+    "not battle_outcome player,won,spyder_route5_cleo"
+   ]
+  },
+  {
+   "event": "spyder_route5:Talk Tryphaena",
+   "failing": [
+    "not battle_outcome player,won,spyder_route5_tryphaena"
+   ]
+  },
+  {
+   "event": "spyder_dojo1:Talk Xiang Potion",
+   "failing": [
+    "is variable_set xiang_yn:yes"
+   ]
+  },
+  {
+   "event": "spyder_dojo1:Talk Xiang Reset",
+   "failing": [
+    "is variable_set xiang_potion_choice:yes"
+   ]
+  },
+  {
+   "event": "spyder_dojo1:Talk Xiang Wait",
+   "failing": [
+    "is variable_set dojo_notech",
+    "is variable_set xiang_potion_choice:yes"
+   ]
+  },
+  {
+   "event": "spyder_dojo1:Talk Zhu Warm",
+   "failing": [
+    "is variable_set which_taste:taste_warm"
+   ]
+  },
+  {
+   "event": "spyder_dojo1:Teleport to Dojo 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_dojo1:Teleport to Flower City",
+   "failing": []
+  },
+  {
+   "event": "spyder_dojo2:Teleport to Lower Floor",
+   "failing": []
+  },
+  {
+   "event": "spyder_dojo2:Teleport to Upper Floor",
+   "failing": []
+  },
+  {
+   "event": "spyder_dojo3:Teleport to Lower Floor",
+   "failing": []
+  },
+  {
+   "event": "spyder_dojo3:Teleport to Upper Floor",
+   "failing": []
+  },
+  {
+   "event": "spyder_dojo4:Teleport to Lower Floor",
+   "failing": []
+  },
+  {
+   "event": "spyder_dojo4:Talk Thri Sampsage",
+   "failing": [
+    "is variable_set thriquestion:strategy",
+    "not variable_set dojothrimonster:yes",
+    "not variable_set thriquestion:strength"
+   ]
+  },
+  {
+   "event": "spyder_dojo4:Billie Dollfin",
+   "failing": [
+    "is variable_set billie_choice:dollfin"
+   ]
+  },
+  {
+   "event": "spyder_dojo4:Billie Grintot",
+   "failing": [
+    "is variable_set billie_choice:grintot"
+   ]
+  },
+  {
+   "event": "spyder_dojo4:Billie Ignibus",
+   "failing": [
+    "is variable_set billie_choice:ignibus"
+   ]
+  },
+  {
+   "event": "spyder_dojo4:Billie Memnomnom",
+   "failing": [
+    "is variable_set billie_choice:memnomnom"
+   ]
+  },
+  {
+   "event": "spyder_nimrod_bottom:Teleport to Flower City",
+   "failing": []
+  },
+  {
+   "event": "spyder_nimrod_bottom:Teleport to Nimrod Middle",
+   "failing": []
+  },
+  {
+   "event": "spyder_nimrod_bottom:Teleport to  Flower City",
+   "failing": []
+  },
+  {
+   "event": "spyder_nimrod_bottom:Flashback Xeon",
+   "failing": [
+    "is variable_set xeon_creation:yes"
+   ]
+  },
+  {
+   "event": "spyder_nimrod_bottom:Teleport to Nimrod Room",
+   "failing": []
+  },
+  {
+   "event": "spyder_nimrod_middle:Teleport to Nimrod Bottom",
+   "failing": []
+  },
+  {
+   "event": "spyder_nimrod_middle:Teleport to Nimrod Top",
+   "failing": []
+  },
+  {
+   "event": "spyder_nimrod_middle:Teleport to Nimrod Bottom",
+   "failing": []
+  },
+  {
+   "event": "spyder_nimrod_middle:Flashback Trigger Yes",
+   "failing": [
+    "is variable_set zircon_argon:yes"
+   ]
+  },
+  {
+   "event": "spyder_nimrod_middle:Draw",
+   "failing": [
+    "is variable_set battle_last_result:draw"
+   ]
+  },
+  {
+   "event": "spyder_nimrod_middle:Argon Win",
+   "failing": [
+    "is variable_set battle_last_winner:spyder_nimrod_argon"
+   ]
+  },
+  {
+   "event": "spyder_nimrod_middle:Zircon Win",
+   "failing": [
+    "is variable_set battle_last_winner:spyder_nimrod_zircon"
+   ]
+  },
+  {
+   "event": "spyder_nimrod_top:Teleport to Nimrod Middle",
+   "failing": []
+  },
+  {
+   "event": "spyder_nimrod_top:Teleport to Nimrod Middle",
+   "failing": []
+  },
+  {
+   "event": "spyder_nimrod_top:Talk Zircon",
+   "failing": [
+    "not battle_outcome player,won,spyder_nimrod_zircon"
+   ]
+  },
+  {
+   "event": "spyder_nimrod_top:Talk Zircon",
+   "failing": [
+    "not battle_outcome player,won,spyder_nimrod_zircon"
+   ]
+  },
+  {
+   "event": "spyder_flower_petshop:Talk Shop Keeper - Check Vivicinder",
+   "failing": [
+    "is variable_set check_vivipere_morph:yes",
+    "is has_monster player,vivicinder"
+   ]
+  },
+  {
+   "event": "spyder_flower_petshop:Talk Shop Keeper - Check Vividactil",
+   "failing": [
+    "is variable_set check_vividactil_morph:yes",
+    "is has_monster player,vividactil"
+   ]
+  },
+  {
+   "event": "spyder_flower_petshop:Talk Shop Keeper - Check Viviphyta",
+   "failing": [
+    "is variable_set check_viviphyta_morph:yes",
+    "is has_monster player,viviphyta"
+   ]
+  },
+  {
+   "event": "spyder_flower_petshop:Talk Shop Keeper - Check Vivisource",
+   "failing": [
+    "is variable_set check_vivisource_morph:yes",
+    "is has_monster player,vivisource"
+   ]
+  },
+  {
+   "event": "spyder_flower_petshop:Talk Shop Keeper - Check Viviteel",
+   "failing": [
+    "is variable_set check_viviteel_morph:yes",
+    "is has_monster player,viviteel"
+   ]
+  },
+  {
+   "event": "spyder_flower_petshop:Talk Shop Keeper - Check Vivitrans",
+   "failing": [
+    "is variable_set check_vivitrans_morph:yes",
+    "is has_monster player,vivitrans"
+   ]
+  },
+  {
+   "event": "spyder_flower_petshop:Talk Shop Keeper - Check Vivitron",
+   "failing": [
+    "is variable_set check_vivitron_morph:yes",
+    "is has_monster player,vivitron"
+   ]
+  },
+  {
+   "event": "spyder_flower_petshop:Teleport Outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_house2:Talk Soldier 2",
+   "failing": [
+    "is variable_set xeon_creation:done"
+   ]
+  },
+  {
+   "event": "spyder_flower_house2:Teleport to Flower City",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_house1:Teleport to Flower City",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_center:Set Faint Target",
+   "failing": [
+    "is variable_set faint_set:pending"
+   ]
+  },
+  {
+   "event": "spyder_flower_center:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_flower_scoop:Flashback",
+   "failing": [
+    "is variable_set ocaptain:yes"
+   ]
+  },
+  {
+   "event": "spyder_flower_scoop:Teleport to Flower City",
+   "failing": []
+  },
+  {
+   "event": "spyder_scoop1:Teleport to Timber Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_scoop1:Teleport to Scoop 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_scoop2:Teleport to Scoop 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_scoop2:Teleport to Scoop 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_scoop2:Teleport to Timber Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_scoop3:Teleport to Scoop 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_scoop3:Teleport to Scoop 4",
+   "failing": []
+  },
+  {
+   "event": "spyder_scoop4:Teleport to Scoop 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_scoop4:Teleport to Timber Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_scoop4:Talk Arachne 1",
+   "failing": [
+    "not variable_set scooplandrace:yes"
+   ]
+  },
+  {
+   "event": "spyder_scoop4:Talk Arachne",
+   "failing": []
+  },
+  {
+   "event": "spyder_scoop4:Talk Arachne 2",
+   "failing": [
+    "not variable_set scooplandrace:yes"
+   ]
+  },
+  {
+   "event": "spyder_routee:Teleport to Timber Town 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_routee:Teleport to Timber Town 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_routee:Teleport to Tunnel 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_routee:Teleport to Tunnel 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_routee:Teleport to Side Route B 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_routee:Teleport to Side Route B 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_routeb:Teleport to Side Route E 1",
+   "failing": []
+  },
+  {
+   "event": "spyder_routeb:Teleport to Side Route E 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_routeb:Teleport to Datacenter",
+   "failing": []
+  },
+  {
+   "event": "spyder_datacenter:Teleport to Route B",
+   "failing": []
+  },
+  {
+   "event": "spyder_datacenter:PC7 Yes",
+   "failing": [
+    "not variable_set datascreen3:yes"
+   ]
+  },
+  {
+   "event": "spyder_datacenter:PC8 No",
+   "failing": [
+    "not variable_set smallest:ignibus",
+    "not variable_set datascreen4:yes"
+   ]
+  },
+  {
+   "event": "spyder_datacenter:PC10 No",
+   "failing": [
+    "not variable_set binary193:baobaraffe",
+    "not variable_set datascreen2:yes"
+   ]
+  },
+  {
+   "event": "spyder_datacenter:PC9 Yes",
+   "failing": [
+    "not variable_set datascreen1:yes"
+   ]
+  },
+  {
+   "event": "spyder_datacenter:PC5 No",
+   "failing": [
+    "not variable_set binary144:shammer",
+    "not variable_set datascreen6:yes"
+   ]
+  },
+  {
+   "event": "spyder_datacenter:PC6 No",
+   "failing": [
+    "not variable_set binary77:shybulb",
+    "not variable_set datascreen7:yes"
+   ]
+  },
+  {
+   "event": "spyder_datacenter:PC4 No",
+   "failing": [
+    "not variable_set lightest:snokari",
+    "not variable_set datascreen5:yes"
+   ]
+  },
+  {
+   "event": "spyder_timber_center:Set Faint Target",
+   "failing": [
+    "is variable_set faint_set:pending"
+   ]
+  },
+  {
+   "event": "spyder_timber_center:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_scoop:Teleport to Timber City",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_cafe:Flashback",
+   "failing": [
+    "is variable_set florists_cafe:yes"
+   ]
+  },
+  {
+   "event": "spyder_timber_cafe:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_house:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_house:Talk Firefighter - Will Trade Chillimp",
+   "failing": [
+    "is has_monster player,chillimp",
+    "is variable_set fire_timber_willtrade:yes"
+   ]
+  },
+  {
+   "event": "spyder_timber_walledgarden1:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_walledgarden1:Room2",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_walledgarden1:Room1",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_walledgarden1:Room3",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_walledgarden1:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_walledgarden1:Room2",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_walledgarden2:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_walledgarden2:Room3",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_walledgarden2:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_timber_walledgarden2:Room2",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_house1:Go outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_house1:Talk Starry",
+   "failing": [
+    "is has_item player,p_starry_night",
+    "is variable_set muse_starry:yes"
+   ]
+  },
+  {
+   "event": "spyder_candy_house1:Talk Trepidation",
+   "failing": [
+    "is has_item player,p_trepidation",
+    "is variable_set muse_trepidation:yes"
+   ]
+  },
+  {
+   "event": "spyder_candy_house1:Talk Monsters",
+   "failing": [
+    "is has_item player,p_monsters_eyes",
+    "is variable_set muse_monsters:yes"
+   ]
+  },
+  {
+   "event": "spyder_candy_house1:Talk Monsters",
+   "failing": [
+    "is variable_set muse_bundle:yes",
+    "is has_item player,p_starry_night",
+    "is has_item player,p_trepidation",
+    "is has_item player,p_monsters_eyes"
+   ]
+  },
+  {
+   "event": "spyder_candy_center:Passcode Correct",
+   "failing": [
+    "is variable_set passcode_color:blue",
+    "is variable_set passcode_number:10"
+   ]
+  },
+  {
+   "event": "spyder_candy_center:Set Faint Target",
+   "failing": [
+    "is variable_set faint_set:pending"
+   ]
+  },
+  {
+   "event": "spyder_candy_center:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_hospital1:Choice Floor 2nd",
+   "failing": [
+    "is variable_set choice_floor:2floor"
+   ]
+  },
+  {
+   "event": "spyder_candy_hospital1:Talk Aurora",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_hospital1:Talk Eleni",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_hospital1:Talk Felu",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_hospital1:Talk Liane",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_hospital1:Talk Fring",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_hospital1:Talk Walt",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_hospital1:Talk Garvan",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_hospital1:Passcode Correct",
+   "failing": [
+    "is variable_set passcode_color:blue",
+    "is variable_set passcode_number:10"
+   ]
+  },
+  {
+   "event": "spyder_candy_hospital1:Talk Darling",
+   "failing": []
+  },
+  {
+   "event": "spyder_greenwash:Teleport to Greenhouse",
+   "failing": []
+  },
+  {
+   "event": "spyder_greenwash:Teleport to Greenhouse",
+   "failing": []
+  },
+  {
+   "event": "spyder_greenwash:Teleport to Candy Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_greenwash:Teleport to Level 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_greenwash:Teleport to Level 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_greenwash_greenhouse:Teleport to Candy Town",
+   "failing": []
+  },
+  {
+   "event": "spyder_greenwash_greenhouse:Teleport to Next Level",
+   "failing": []
+  },
+  {
+   "event": "spyder_greenwash_greenhouse:Teleport to Next Level",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_scoop:Teleport to Candy City",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_house3:Go outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_house3:Talk Catgirl - Will Trade Rhincus",
+   "failing": [
+    "not has_monster player,shammer"
+   ]
+  },
+  {
+   "event": "spyder_candy_house3:Talk Catgirl - Will Trade Shammer",
+   "failing": [
+    "not has_monster player,rhincus"
+   ]
+  },
+  {
+   "event": "spyder_candy_house3:Go outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_house3:Egg",
+   "failing": [
+    "is variable_set luckgiveegg:9"
+   ]
+  },
+  {
+   "event": "spyder_candy_house2:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_house2:Talk Prof - Will Trade Cateye",
+   "failing": [
+    "is has_monster player,cateye",
+    "is variable_set prof_willtrade:yes"
+   ]
+  },
+  {
+   "event": "spyder_candy_cafe:Box Not Empty",
+   "failing": [
+    "is has_kennel player,Kennel,greater_or_equal,1",
+    "not variable_set cafe_done:yes"
+   ]
+  },
+  {
+   "event": "spyder_candy_cafe:Flashback Yes",
+   "failing": [
+    "is variable_set incident_greenwash:yes"
+   ]
+  },
+  {
+   "event": "spyder_candy_cafe:Go Outside",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_cafe:Lovelace Gives Feeder",
+   "failing": [
+    "is variable_set invention_choice:xp_feeder",
+    "not variable_set invention_given"
+   ]
+  },
+  {
+   "event": "spyder_greenwash_level2:Fall to Lower Floor",
+   "failing": []
+  },
+  {
+   "event": "spyder_greenwash_level2:Teleport to Level 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_greenwash_level2:Fall to Lower Floor",
+   "failing": []
+  },
+  {
+   "event": "spyder_greenwash_level2:Fall to Lower Floor",
+   "failing": []
+  },
+  {
+   "event": "spyder_greenwash_level2:Fall to Lower Floor",
+   "failing": []
+  },
+  {
+   "event": "spyder_greenwash_level2:Fall to Lower Floor",
+   "failing": []
+  },
+  {
+   "event": "spyder_greenwash_level2:Talk Fossilisator Second",
+   "failing": []
+  },
+  {
+   "event": "spyder_greenwash_level2:Talk Fossilisator Rhincus",
+   "failing": [
+    "is has_item player,rhincus_fossil"
+   ]
+  },
+  {
+   "event": "spyder_greenwash_level2:Talk Fossilisator Shammer",
+   "failing": [
+    "is has_item player,shammer_fossil"
+   ]
+  },
+  {
+   "event": "spyder_greenwash_level2:Talk Fossilisator Nothing",
+   "failing": []
+  },
+  {
+   "event": "spyder_greenwash_level2:Talk Fossilisator Petrified Dung",
+   "failing": [
+    "is has_item player,petrified_dung"
+   ]
+  },
+  {
+   "event": "spyder_greenwash_level2:Talk Got Coproblight",
+   "failing": [
+    "is variable_set coproblight_choice:yes"
+   ]
+  },
+  {
+   "event": "spyder_greenwash_level2:Talk Fossilisator PD+Rhincus",
+   "failing": [
+    "is has_item player,petrified_dung",
+    "is has_item player,rhincus_fossil"
+   ]
+  },
+  {
+   "event": "spyder_greenwash_level2:Talk Got PD+Rhincus",
+   "failing": [
+    "is variable_set pd_rhincus_choice:yes"
+   ]
+  },
+  {
+   "event": "spyder_greenwash_level2:Talk Fossilisator PD+Shammer",
+   "failing": [
+    "is has_item player,petrified_dung",
+    "is has_item player,shammer_fossil"
+   ]
+  },
+  {
+   "event": "spyder_greenwash_level2:Talk Got PD+Shammer",
+   "failing": [
+    "is variable_set pd_shammer_choice:yes"
+   ]
+  },
+  {
+   "event": "spyder_greenwash_level2:Talk Got Rhincus",
+   "failing": [
+    "is variable_set rhincus_choice:yes"
+   ]
+  },
+  {
+   "event": "spyder_greenwash_level2:Talk Got Shammer",
+   "failing": [
+    "is variable_set shammer_choice:yes"
+   ]
+  },
+  {
+   "event": "spyder_greenwash_level2:Talk Fossilisator Both",
+   "failing": [
+    "is has_item player,shammer_fossil",
+    "is has_item player,rhincus_fossil"
+   ]
+  },
+  {
+   "event": "spyder_greenwash_level2:Talk Got Both",
+   "failing": [
+    "is variable_set both_fossils:yes"
+   ]
+  },
+  {
+   "event": "spyder_greenwash_level2:Teleport to Level 2",
+   "failing": []
+  },
+  {
+   "event": "spyder_greenwash_level2:Teleport to Level 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_greenwash_level2:Teleport to Level 3",
+   "failing": []
+  },
+  {
+   "event": "spyder_greenwash_level3:FlashBack Incident",
+   "failing": [
+    "is variable_set incident_greenwash:yes"
+   ]
+  },
+  {
+   "event": "spyder_greenwash_level3:Teleport to Level 2a",
+   "failing": []
+  },
+  {
+   "event": "spyder_greenwash_level3:Teleport to Level 2b",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_inn1:Go upstairs",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_inn1:Teleport to Port",
+   "failing": []
+  },
+  {
+   "event": "spyder_diamond_hill:Teleport to Candy Port1",
+   "failing": []
+  },
+  {
+   "event": "spyder_diamond_hill:Teleport to Candy Port2",
+   "failing": []
+  },
+  {
+   "event": "spyder_diamond_hill:Teleport to Candy Port3",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_inn2:Bee Event Stung Item",
+   "failing": [
+    "is variable_set beeevent:done",
+    "is variable_set allergicbee:no"
+   ]
+  },
+  {
+   "event": "spyder_candy_inn2:Bee Event Stung Monster Severe",
+   "failing": [
+    "is variable_set beeevent:done",
+    "is variable_set beereaction:spyder_allergic_severe"
+   ]
+  },
+  {
+   "event": "spyder_candy_inn2:Go downstairs",
+   "failing": []
+  },
+  {
+   "event": "spyder_candy_inn2:Talk Monk Allergic No",
+   "failing": [
+    "is variable_set allergicbee:no",
+    "not variable_set beeevent"
+   ]
+  }
+ ],
+ "steps": 558,
+ "stopReason": "no reachable map offers a state-changing event (searched 96 maps)",
+ "mapsVisited": 97,
+ "visitOrder": [
+  "spyder_bedroom",
+  "spyder_paper_scoop",
+  "spyder_downstairs",
+  "spyder_paper_town",
+  "spyder_route1",
+  "spyder_cotton_town",
+  "spyder_cotton_scoop",
+  "spyder_healing_center",
+  "spyder_cotton_cafe",
+  "spyder_dryadsgrove",
+  "spyder_routed",
+  "spyder_flower_city",
+  "spyder_route4",
+  "spyder_route3",
+  "spyder_leather_town",
+  "spyder_citypark",
+  "spyder_route2",
+  "spyder_brideswood",
+  "spyder_citypark_house1",
+  "spyder_leather_scoop",
+  "spyder_leather_museum",
+  "spyder_leather_house1",
+  "spyder_leather_house2",
+  "spyder_leather_center",
+  "spyder_leather_shaft2",
+  "spyder_leather_shaft1",
+  "spyder_leather_gym",
+  "spyder_wayfarer_inn1",
+  "spyder_nimrod_room",
+  "spyder_wayfarer_inn2",
+  "spyder_routea",
+  "spyder_mansion",
+  "spyder_mansion_top",
+  "spyder_mansion_basement",
+  "spyder_paper_daycare",
+  "spyder_routec",
+  "spyder_candy_town",
+  "spyder_route6",
+  "spyder_tunnel",
+  "spyder_tunnel_below",
+  "spyder_timber_town",
+  "spyder_paper_manor",
+  "spyder_paper_rival_downstairs",
+  "spyder_paper_rival_bedroom",
+  "spyder_paper_rival_office",
+  "spyder_cotton_artshop",
+  "spyder_cotton_house1",
+  "spyder_cotton_house2",
+  "spyder_cotton_tunnel",
+  "spyder_omnichannel1",
+  "spyder_omnichannel2",
+  "spyder_omnichannel3",
+  "spyder_omnichannel4",
+  "spyder_radiotower",
+  "spyder_test_map",
+  "spyder_dragonscave",
+  "spyder_candy_port",
+  "spyder_route5",
+  "spyder_dojo1",
+  "spyder_dojo2",
+  "spyder_dojo3",
+  "spyder_dojo4",
+  "spyder_nimrod_bottom",
+  "spyder_nimrod_middle",
+  "spyder_nimrod_top",
+  "spyder_flower_petshop",
+  "spyder_flower_house2",
+  "spyder_flower_house1",
+  "spyder_flower_center",
+  "spyder_flower_scoop",
+  "spyder_scoop1",
+  "spyder_scoop2",
+  "spyder_scoop3",
+  "spyder_scoop4",
+  "spyder_routee",
+  "spyder_routeb",
+  "spyder_datacenter",
+  "spyder_timber_center",
+  "spyder_timber_scoop",
+  "spyder_timber_cafe",
+  "spyder_timber_house",
+  "spyder_timber_walledgarden1",
+  "spyder_timber_walledgarden2",
+  "spyder_candy_house1",
+  "spyder_candy_center",
+  "spyder_candy_hospital1",
+  "spyder_greenwash",
+  "spyder_greenwash_greenhouse",
+  "spyder_candy_scoop",
+  "spyder_candy_house3",
+  "spyder_candy_house2",
+  "spyder_candy_cafe",
+  "spyder_greenwash_level2",
+  "spyder_greenwash_level3",
+  "spyder_candy_inn1",
+  "spyder_diamond_hill",
+  "spyder_candy_inn2"
+ ],
+ "battlesWon": 199,
+ "party": [
+  "rockitten",
+  "botbot",
+  "aardorn",
+  "aardorn",
+  "aardorn",
+  "vivipere",
+  "nudiflot_male",
+  "coproblight",
+  "rhincus",
+  "shammer",
+  "tumbleworm"
+ ],
+ "items": {
+  "friendship_scroll": 1,
+  "tuxeball": 7,
+  "app_tuxepedia": 1,
+  "super_potion": 2,
+  "boost_ranged": 1,
+  "mystery_tea": 2,
+  "fishing_rod": 1,
+  "potion": 4,
+  "restoration": 1,
+  "book_wishes": 1,
+  "tea": 2,
+  "cureall": 5,
+  "dojo_pass": 1,
+  "tm_ubuntu": 1,
+  "metal_berry": 1,
+  "tm_ice_shield": 1,
+  "tuxeball_grand": 1,
+  "nu_phone": 1,
+  "app_map": 1,
+  "tm_altitude": 1,
+  "tm_leaf_barrage": 1,
+  "xp_feeder": 1,
+  "tuxeball_candy": 1,
+  "imperial_potion": 1,
+  "imperial_tea": 1,
+  "raise_melee": 1,
+  "spyder_pass": 1,
+  "tuxeball_ancient": 10,
+  "tm_all_in": 1,
+  "tm_blade": 1,
+  "tm_panjandrum": 1,
+  "tm_shadow_boxing": 1,
+  "tm_scope": 1,
+  "gold_pass": 1,
+  "aardant": 1,
+  "xp_transmitter": 2
+ },
+ "finalVars": 202,
+ "conditionsUnknowableInP1": {},
+ "unfiredEventsBlockedBy": {
+  "is check_party_parameter": 8
+ },
+ "trace": [
+  {
+   "map": "spyder_bedroom",
+   "event": "Intro Question",
+   "changed": [
+    "question_intro=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_bedroom",
+   "event": "Spyder Intro",
+   "changed": [
+    "spyder_intro=yes"
+   ],
+   "battles": [],
+   "teleport": "spyder_paper_scoop"
+  },
+  {
+   "map": "spyder_paper_scoop",
+   "event": "Intro Storekeeper",
+   "changed": [
+    "choice_phase=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_scoop",
+   "event": "Cathedral",
+   "changed": [
+    "cathedral_share=0.5",
+    "cathedral_interest=0.1",
+    "cathedral_fee=100",
+    "scoop_coeff=50"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_scoop",
+   "event": "Choice",
+   "changed": [
+    "choice_phase=next",
+    "myintrochoice=budaye"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_scoop",
+   "event": "Confirm Monster",
+   "changed": [
+    "areyousure=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_scoop",
+   "event": "Confirm Monster Yes",
+   "changed": [
+    "choice_phase=progress"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_scoop",
+   "event": "Continue Storekeeper",
+   "changed": [
+    "intro_scoop=done"
+   ],
+   "battles": [],
+   "teleport": "spyder_bedroom"
+  },
+  {
+   "map": "spyder_downstairs",
+   "event": "(walk spyder_downstairs)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_downstairs",
+   "event": "Talk mom1",
+   "changed": [
+    "spokenmom=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_town",
+   "event": "(walk spyder_paper_town)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_town",
+   "event": "My First Mon - Not Met",
+   "changed": [
+    "dantefirst=yes",
+    "dantebin=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_town",
+   "event": "Rockitten",
+   "changed": [
+    "rockittenchosen=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_town",
+   "event": "Chosen - Rockitten",
+   "changed": [
+    "firstfightdue=yes",
+    "mymonchoice=rockitten",
+    "party=rockitten"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_town",
+   "event": "First Fight - Start",
+   "changed": [
+    "firstfightdue=no",
+    "battle_last_result=won",
+    "battle_last_winner=player",
+    "battle_last_trainer=spyder_billie",
+    "firstfightend=yes",
+    "item friendship_scroll=1",
+    "won spyder_billie:won"
+   ],
+   "battles": [
+    "spyder_billie"
+   ]
+  },
+  {
+   "map": "spyder_paper_town",
+   "event": "First Fight - Win",
+   "changed": [
+    "firstfightend=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_town",
+   "event": "Set Bonding Variable",
+   "changed": [
+    "start_bonding=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_town",
+   "event": "Autosave Cotton",
+   "changed": [
+    "save1=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_town",
+   "event": "Mom Quest Intercept",
+   "changed": [
+    "momquest=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_route1",
+   "event": "(walk spyder_route1)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_route1",
+   "event": "Track route1",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_town",
+   "event": "(walk spyder_cotton_town)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_town",
+   "event": "Talk to confused",
+   "changed": [
+    "confusedchoice=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_town",
+   "event": "Battle confused",
+   "changed": [
+    "battle_last_trainer=spyder_confusedperson",
+    "won spyder_confusedperson:won"
+   ],
+   "battles": [
+    "spyder_confusedperson"
+   ]
+  },
+  {
+   "map": "spyder_cotton_scoop",
+   "event": "(walk spyder_cotton_scoop)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_scoop",
+   "event": "Receive capture device",
+   "changed": [
+    "heardcapture=yes",
+    "visitcottonmart=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_scoop",
+   "event": "Devices, no explain",
+   "changed": [
+    "heardcapture=null",
+    "item tuxeball=5"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_scoop",
+   "event": "Open Tech",
+   "changed": [
+    "techchoice=menu_item"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_scoop",
+   "event": "Tech Buy Items",
+   "changed": [
+    "techchoice=(cleared)"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_cafe",
+   "event": "(walk spyder_cotton_town > spyder_cotton_cafe)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_cafe",
+   "event": "First Visit to Cotton Cafe",
+   "changed": [
+    "visitedcottoncafe=yes",
+    "item app_tuxepedia=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_cafe",
+   "event": "Talk Barmaid (1st)",
+   "changed": [
+    "chooses=yes",
+    "introdcottoncafe2=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_cafe",
+   "event": "Heal Tuxemon",
+   "changed": [
+    "chooses=none"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_cafe",
+   "event": "Talk Barmaid",
+   "changed": [
+    "chooses=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_cafe",
+   "event": "ask battle cayden",
+   "changed": [
+    "cafebattle=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_cafe",
+   "event": "Heal Tuxemon",
+   "changed": [
+    "chooses=none"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_cafe",
+   "event": "battle cayden",
+   "changed": [
+    "battle_last_trainer=spyder_cottoncafe_cayden",
+    "cafebattle=no",
+    "won spyder_cottoncafe_cayden:won"
+   ],
+   "battles": [
+    "spyder_cottoncafe_cayden"
+   ]
+  },
+  {
+   "map": "spyder_cotton_cafe",
+   "event": "Talk Barmaid",
+   "changed": [
+    "chooses=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_cafe",
+   "event": "Talk Barmaid",
+   "changed": [
+    "chooses=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_cafe",
+   "event": "Heal Tuxemon",
+   "changed": [
+    "chooses=none"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_scoop",
+   "event": "(walk spyder_cotton_town > spyder_cotton_scoop)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_scoop",
+   "event": "Open Tech",
+   "changed": [
+    "techchoice=menu_monster"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_scoop",
+   "event": "Tech Buy Monsters",
+   "changed": [
+    "techchoice=(cleared)"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_dryadsgrove",
+   "event": "(walk spyder_cotton_town > spyder_dryadsgrove)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_dryadsgrove",
+   "event": "Talk Aquemini",
+   "changed": [
+    "battle_last_trainer=spyder_dryadsgrove_aquemini",
+    "won spyder_dryadsgrove_aquemini:won"
+   ],
+   "battles": [
+    "spyder_dryadsgrove_aquemini"
+   ]
+  },
+  {
+   "map": "spyder_dryadsgrove",
+   "event": "Get Volcoli",
+   "changed": [
+    "battle_last_trainer=wild:volcoli",
+    "dryadsgrovevolcoli=yes",
+    "won wild:volcoli:won"
+   ],
+   "battles": [
+    "wild:volcoli"
+   ]
+  },
+  {
+   "map": "spyder_dryadsgrove",
+   "event": "Talk Ignatia",
+   "changed": [
+    "battle_last_trainer=spyder_dryadsgrove_ignatia",
+    "won spyder_dryadsgrove_ignatia:won"
+   ],
+   "battles": [
+    "spyder_dryadsgrove_ignatia"
+   ]
+  },
+  {
+   "map": "spyder_dryadsgrove",
+   "event": "Talk Petra",
+   "changed": [
+    "battle_last_trainer=spyder_dryadsgrove_petra",
+    "won spyder_dryadsgrove_petra:won"
+   ],
+   "battles": [
+    "spyder_dryadsgrove_petra"
+   ]
+  },
+  {
+   "map": "spyder_dryadsgrove",
+   "event": "Talk Sylvia",
+   "changed": [
+    "battle_last_trainer=spyder_dryadsgrove_sylvia",
+    "won spyder_dryadsgrove_sylvia:won"
+   ],
+   "battles": [
+    "spyder_dryadsgrove_sylvia"
+   ]
+  },
+  {
+   "map": "spyder_dryadsgrove",
+   "event": "Talk Ferris",
+   "changed": [
+    "battle_last_trainer=spyder_dryadsgrove_ferris",
+    "won spyder_dryadsgrove_ferris:won"
+   ],
+   "battles": [
+    "spyder_dryadsgrove_ferris"
+   ]
+  },
+  {
+   "map": "spyder_dryadsgrove",
+   "event": "Track dryadsgrove",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_routed",
+   "event": "(walk spyder_routed)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_routed",
+   "event": "Track routed",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_flower_city",
+   "event": "(walk spyder_flower_city)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_flower_city",
+   "event": "Seen Flower",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_route4",
+   "event": "(walk spyder_route4)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_route4",
+   "event": "Talk Marshall",
+   "changed": [
+    "battle_last_trainer=spyder_route4_marshall",
+    "won spyder_route4_marshall:won"
+   ],
+   "battles": [
+    "spyder_route4_marshall"
+   ]
+  },
+  {
+   "map": "spyder_route4",
+   "event": "Talk Roger",
+   "changed": [
+    "battle_last_trainer=spyder_route4_roger",
+    "won spyder_route4_roger:won"
+   ],
+   "battles": [
+    "spyder_route4_roger"
+   ]
+  },
+  {
+   "map": "spyder_route4",
+   "event": "Talk Wulf",
+   "changed": [
+    "battle_last_trainer=spyder_route4_wulf",
+    "won spyder_route4_wulf:won"
+   ],
+   "battles": [
+    "spyder_route4_wulf"
+   ]
+  },
+  {
+   "map": "spyder_route4",
+   "event": "Talk Rincewind",
+   "changed": [
+    "battle_last_trainer=spyder_route4_rincewind",
+    "won spyder_route4_rincewind:won"
+   ],
+   "battles": [
+    "spyder_route4_rincewind"
+   ]
+  },
+  {
+   "map": "spyder_route4",
+   "event": "Talk Rosamund",
+   "changed": [
+    "battle_last_trainer=spyder_route4_rosamund",
+    "won spyder_route4_rosamund:won"
+   ],
+   "battles": [
+    "spyder_route4_rosamund"
+   ]
+  },
+  {
+   "map": "spyder_route4",
+   "event": "Talk Beck",
+   "changed": [
+    "battle_last_trainer=spyder_route4_beck",
+    "won spyder_route4_beck:won"
+   ],
+   "battles": [
+    "spyder_route4_beck"
+   ]
+  },
+  {
+   "map": "spyder_route4",
+   "event": "Billie",
+   "changed": [
+    "battle_last_trainer=spyder_billie",
+    "route4billie=yes",
+    "won spyder_billie:won"
+   ],
+   "battles": [
+    "spyder_billie"
+   ]
+  },
+  {
+   "map": "spyder_route4",
+   "event": "Super Potion",
+   "changed": [
+    "route4_super=yes",
+    "item super_potion=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_route4",
+   "event": "Boost Ranged",
+   "changed": [
+    "route4_boost=yes",
+    "item boost_ranged=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_route4",
+   "event": "Box",
+   "changed": [
+    "route4_tea=yes",
+    "item mystery_tea=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_route4",
+   "event": "Track route4",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_route3",
+   "event": "(walk spyder_route3)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_route3",
+   "event": "Shaft Plot Revealed",
+   "changed": [
+    "shaftscheme=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_route3",
+   "event": "Rookie Talk",
+   "changed": [
+    "battle_last_trainer=spyder_route3_qqq",
+    "won spyder_route3_qqq:won"
+   ],
+   "battles": [
+    "spyder_route3_qqq"
+   ]
+  },
+  {
+   "map": "spyder_route3",
+   "event": "Enforcer Talk",
+   "changed": [
+    "battle_last_trainer=spyder_route3_weaver",
+    "won spyder_route3_weaver:won"
+   ],
+   "battles": [
+    "spyder_route3_weaver"
+   ]
+  },
+  {
+   "map": "spyder_route3",
+   "event": "Novak Talk",
+   "changed": [
+    "battle_last_trainer=spyder_route3_novak",
+    "won spyder_route3_novak:won"
+   ],
+   "battles": [
+    "spyder_route3_novak"
+   ]
+  },
+  {
+   "map": "spyder_route3",
+   "event": "Curie Talk",
+   "changed": [
+    "battle_last_trainer=spyder_route3_curie",
+    "won spyder_route3_curie:won"
+   ],
+   "battles": [
+    "spyder_route3_curie"
+   ]
+  },
+  {
+   "map": "spyder_route3",
+   "event": "Connor Talk",
+   "changed": [
+    "battle_last_trainer=spyder_route3_connor",
+    "won spyder_route3_connor:won"
+   ],
+   "battles": [
+    "spyder_route3_connor"
+   ]
+  },
+  {
+   "map": "spyder_route3",
+   "event": "Talk Wanda",
+   "changed": [
+    "battle_last_trainer=spyder_route3_wanda",
+    "item fishing_rod=1",
+    "won spyder_route3_wanda:won"
+   ],
+   "battles": [
+    "spyder_route3_wanda"
+   ]
+  },
+  {
+   "map": "spyder_route3",
+   "event": "Talk Twig",
+   "changed": [
+    "battle_last_trainer=spyder_route3_twig",
+    "won spyder_route3_twig:won"
+   ],
+   "battles": [
+    "spyder_route3_twig"
+   ]
+  },
+  {
+   "map": "spyder_route3",
+   "event": "Talk Surat",
+   "changed": [
+    "battle_last_trainer=spyder_route3_surat",
+    "won spyder_route3_surat:won"
+   ],
+   "battles": [
+    "spyder_route3_surat"
+   ]
+  },
+  {
+   "map": "spyder_route3",
+   "event": "Talk Roxby",
+   "changed": [
+    "battle_last_trainer=spyder_route3_roxby",
+    "won spyder_route3_roxby:won"
+   ],
+   "battles": [
+    "spyder_route3_roxby"
+   ]
+  },
+  {
+   "map": "spyder_route3",
+   "event": "Track route3",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_town",
+   "event": "(walk spyder_leather_town)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_town",
+   "event": "Talk Barmaid (1st)",
+   "changed": [
+    "chooses=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_town",
+   "event": "Heal Tuxemon",
+   "changed": [
+    "chooses=none"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_town",
+   "event": "Seen Leather",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_town",
+   "event": "Talk Barmaid (1st)",
+   "changed": [
+    "chooses=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_town",
+   "event": "Talk Barmaid (1st)",
+   "changed": [
+    "chooses=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_town",
+   "event": "Heal Tuxemon",
+   "changed": [
+    "chooses=none"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_town",
+   "event": "Talk Sarah",
+   "changed": [
+    "sarah_flashback=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_town",
+   "event": "Talk Sarah No",
+   "changed": [
+    "sarah_flashback="
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_town",
+   "event": "Talk Sarah",
+   "changed": [
+    "sarah_flashback=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_town",
+   "event": "Flashback",
+   "changed": [
+    "sarah_flashback=done",
+    "flashback=off"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_citypark",
+   "event": "(walk spyder_citypark)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_citypark",
+   "event": "Talk Frances",
+   "changed": [
+    "battle_last_trainer=spyder_citypark_frances",
+    "won spyder_citypark_frances:won"
+   ],
+   "battles": [
+    "spyder_citypark_frances"
+   ]
+  },
+  {
+   "map": "spyder_citypark",
+   "event": "Talk Bobette",
+   "changed": [
+    "battle_last_trainer=spyder_citypark_bobette",
+    "won spyder_citypark_bobette:won"
+   ],
+   "battles": [
+    "spyder_citypark_bobette"
+   ]
+  },
+  {
+   "map": "spyder_citypark",
+   "event": "Talk Edith",
+   "changed": [
+    "battle_last_trainer=spyder_citypark_edith",
+    "won spyder_citypark_edith:won"
+   ],
+   "battles": [
+    "spyder_citypark_edith"
+   ]
+  },
+  {
+   "map": "spyder_citypark",
+   "event": "Box1",
+   "changed": [
+    "citypark_potion1=yes",
+    "item potion=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_citypark",
+   "event": "Box2",
+   "changed": [
+    "citypark_potion2=yes",
+    "item potion=2"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_citypark",
+   "event": "Box3",
+   "changed": [
+    "citypark_restoration=yes",
+    "item restoration=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_citypark",
+   "event": "Box4",
+   "changed": [
+    "citypark_cd1=yes",
+    "item tuxeball=6"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_citypark",
+   "event": "Box5",
+   "changed": [
+    "citypark_cd2=yes",
+    "item tuxeball=7"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_citypark",
+   "event": "Track citypark",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_route2",
+   "event": "(walk spyder_route2)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_route2",
+   "event": "Billie encounter",
+   "changed": [
+    "battle_last_trainer=spyder_billie",
+    "route2billiefought=yes",
+    "won spyder_billie:won"
+   ],
+   "battles": [
+    "spyder_billie"
+   ]
+  },
+  {
+   "map": "spyder_route2",
+   "event": "Billie encounter - Win",
+   "changed": [
+    "route2billiefought=no",
+    "route2billie=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_route2",
+   "event": "Talk roddick",
+   "changed": [
+    "battle_last_trainer=spyder_route2_roddick",
+    "won spyder_route2_roddick:won"
+   ],
+   "battles": [
+    "spyder_route2_roddick"
+   ]
+  },
+  {
+   "map": "spyder_route2",
+   "event": "Talk marion",
+   "changed": [
+    "battle_last_trainer=spyder_route2_marion",
+    "won spyder_route2_marion:won"
+   ],
+   "battles": [
+    "spyder_route2_marion"
+   ]
+  },
+  {
+   "map": "spyder_route2",
+   "event": "Talk graf",
+   "changed": [
+    "battle_last_trainer=spyder_route2_graf",
+    "won spyder_route2_graf:won"
+   ],
+   "battles": [
+    "spyder_route2_graf"
+   ]
+  },
+  {
+   "map": "spyder_route2",
+   "event": "Track route2",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_citypark_house1",
+   "event": "(walk spyder_citypark > spyder_citypark_house1)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_citypark_house1",
+   "event": "Talk Maniac1",
+   "changed": [
+    "maniac_achievements=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_citypark_house1",
+   "event": "Transfer Missions",
+   "changed": [
+    "maniac_help=yes",
+    "item book_wishes=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_scoop",
+   "event": "(walk spyder_citypark > spyder_leather_town > spyder_leather_scoop)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_scoop",
+   "event": "Open Tech",
+   "changed": [
+    "techchoice=menu_item"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_scoop",
+   "event": "Tech Buy Items",
+   "changed": [
+    "techchoice=(cleared)"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_museum",
+   "event": "(walk spyder_leather_town > spyder_leather_museum)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_museum",
+   "event": "Pay Option",
+   "changed": [
+    "paymuseum=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_museum",
+   "event": "Pay",
+   "changed": [
+    "paymuseum=null",
+    "money=450"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_museum",
+   "event": "Pay Option",
+   "changed": [
+    "paymuseum=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_museum",
+   "event": "No Pay (Not Required)",
+   "changed": [
+    "paymuseum=null",
+    "notpaidmuseum=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_museum",
+   "event": "Pay Requirement",
+   "changed": [
+    "paymuseum=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_museum",
+   "event": "Pay (Required)",
+   "changed": [
+    "paymuseum=null",
+    "money=350"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_museum",
+   "event": "Pay Requirement",
+   "changed": [
+    "paymuseum=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_museum",
+   "event": "No Pay (Required)",
+   "changed": [
+    "paymuseum=null"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_scoop",
+   "event": "(walk spyder_leather_town > spyder_leather_scoop)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_scoop",
+   "event": "Open Tech",
+   "changed": [
+    "techchoice=menu_monster"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_scoop",
+   "event": "Tech Buy Monsters",
+   "changed": [
+    "techchoice=(cleared)"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_house1",
+   "event": "(walk spyder_leather_town > spyder_leather_house1)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_house1",
+   "event": "Talk Tennis Player",
+   "changed": [
+    "grinflaretype=earth"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_house1",
+   "event": "Talk Tennis Player",
+   "changed": [
+    "grinflaretype=fire"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_house1",
+   "event": "Talk Tennis Player",
+   "changed": [
+    "grinflaretype=earth"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_scoop",
+   "event": "(walk spyder_leather_town > spyder_leather_scoop)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_scoop",
+   "event": "Open Tech",
+   "changed": [
+    "techchoice=menu_item"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_scoop",
+   "event": "Tech Buy Items",
+   "changed": [
+    "techchoice=(cleared)"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_museum",
+   "event": "(walk spyder_leather_town > spyder_leather_museum)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_museum",
+   "event": "Pay Requirement",
+   "changed": [
+    "paymuseum=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_museum",
+   "event": "Pay (Required)",
+   "changed": [
+    "paymuseum=null",
+    "money=250"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_gym",
+   "event": "(walk spyder_leather_town > spyder_leather_gym)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_gym",
+   "event": "Variables",
+   "changed": [
+    "chad_points=0",
+    "brad_points=0"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_gym",
+   "event": "Bradfort",
+   "changed": [
+    "battle_last_trainer=spyder_leathergym_chad",
+    "chadvsbrad=done",
+    "won spyder_leathergym_chad:won"
+   ],
+   "battles": [
+    "spyder_leathergym_chad"
+   ]
+  },
+  {
+   "map": "spyder_leather_gym",
+   "event": "Bradfort",
+   "changed": [
+    "won spyder_leathergym_chad:won"
+   ],
+   "battles": [
+    "spyder_leathergym_chad"
+   ]
+  },
+  {
+   "map": "spyder_leather_gym",
+   "event": "Bradfort",
+   "changed": [
+    "won spyder_leathergym_chad:won"
+   ],
+   "battles": [
+    "spyder_leathergym_chad"
+   ]
+  },
+  {
+   "map": "spyder_leather_gym",
+   "event": "Chad",
+   "changed": [
+    "battle_last_trainer=spyder_leathergym_brad",
+    "won spyder_leathergym_brad:won"
+   ],
+   "battles": [
+    "spyder_leathergym_brad"
+   ]
+  },
+  {
+   "map": "spyder_leather_gym",
+   "event": "Chad",
+   "changed": [
+    "won spyder_leathergym_brad:won"
+   ],
+   "battles": [
+    "spyder_leathergym_brad"
+   ]
+  },
+  {
+   "map": "spyder_leather_gym",
+   "event": "Chad",
+   "changed": [
+    "won spyder_leathergym_brad:won"
+   ],
+   "battles": [
+    "spyder_leathergym_brad"
+   ]
+  },
+  {
+   "map": "spyder_wayfarer_inn1",
+   "event": "(walk spyder_leather_town > spyder_route3 > spyder_wayfarer_inn1)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_wayfarer_inn1",
+   "event": "Talk Shopkeeper",
+   "changed": [
+    "chooses=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_wayfarer_inn1",
+   "event": "Heal Tuxemon",
+   "changed": [
+    "chooses=none"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_wayfarer_inn1",
+   "event": "Talk Maniac - Botbot",
+   "changed": [
+    "wayfarer1_botbot=yes",
+    "quebotbot=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_wayfarer_inn1",
+   "event": "Talk Maniac - Got Botbot",
+   "changed": [
+    "gotbotbot=yes",
+    "party=rockitten+botbot"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_wayfarer_inn1",
+   "event": "Talk Shopkeeper",
+   "changed": [
+    "chooses=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_wayfarer_inn1",
+   "event": "Talk Shopkeeper",
+   "changed": [
+    "chooses=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_wayfarer_inn1",
+   "event": "Heal Tuxemon",
+   "changed": [
+    "chooses=none"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_wayfarer_inn1",
+   "event": "Talk Morton",
+   "changed": [
+    "battle_last_trainer=spyder_wayfarer1_morton",
+    "won spyder_wayfarer1_morton:won"
+   ],
+   "battles": [
+    "spyder_wayfarer1_morton"
+   ]
+  },
+  {
+   "map": "spyder_wayfarer_inn1",
+   "event": "Talk Jessie",
+   "changed": [
+    "battle_last_trainer=spyder_wayfarer1_jessie",
+    "won spyder_wayfarer1_jessie:won"
+   ],
+   "battles": [
+    "spyder_wayfarer1_jessie"
+   ]
+  },
+  {
+   "map": "spyder_wayfarer_inn1",
+   "event": "Talk Nightshade",
+   "changed": [
+    "battle_last_trainer=spyder_wayfarer1_nightshade",
+    "won spyder_wayfarer1_nightshade:won"
+   ],
+   "battles": [
+    "spyder_wayfarer1_nightshade"
+   ]
+  },
+  {
+   "map": "spyder_wayfarer_inn1",
+   "event": "Talk Victor",
+   "changed": [
+    "battle_last_trainer=spyder_wayfarer1_victor",
+    "won spyder_wayfarer1_victor:won"
+   ],
+   "battles": [
+    "spyder_wayfarer1_victor"
+   ]
+  },
+  {
+   "map": "spyder_wayfarer_inn1",
+   "event": "Talk Morningstar",
+   "changed": [
+    "battle_last_trainer=spyder_wayfarer1_morningstar",
+    "won spyder_wayfarer1_morningstar:won"
+   ],
+   "battles": [
+    "spyder_wayfarer1_morningstar"
+   ]
+  },
+  {
+   "map": "spyder_wayfarer_inn1",
+   "event": "Talk Ratcher",
+   "changed": [
+    "battle_last_trainer=spyder_wayfarer1_ratcher",
+    "won spyder_wayfarer1_ratcher:won"
+   ],
+   "battles": [
+    "spyder_wayfarer1_ratcher"
+   ]
+  },
+  {
+   "map": "spyder_wayfarer_inn1",
+   "event": "Talk Bismuth",
+   "changed": [
+    "battle_last_trainer=spyder_wayfarer1_bismuth",
+    "won spyder_wayfarer1_bismuth:won"
+   ],
+   "battles": [
+    "spyder_wayfarer1_bismuth"
+   ]
+  },
+  {
+   "map": "spyder_wayfarer_inn1",
+   "event": "Guestbook",
+   "changed": [
+    "enforcers_response=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_wayfarer_inn1",
+   "event": "Guestbook",
+   "changed": [
+    "enforcers_response=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_wayfarer_inn1",
+   "event": "Trigger Flashback",
+   "changed": [],
+   "battles": [],
+   "teleport": "spyder_nimrod_room"
+  },
+  {
+   "map": "spyder_nimrod_room",
+   "event": "Enforcers Rapid Response",
+   "changed": [
+    "enforcers_response=done"
+   ],
+   "battles": [],
+   "teleport": "spyder_wayfarer_inn1"
+  },
+  {
+   "map": "spyder_wayfarer_inn1",
+   "event": "Guestbook",
+   "changed": [
+    "enforcers_response=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_wayfarer_inn2",
+   "event": "(walk spyder_wayfarer_inn2)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_wayfarer_inn2",
+   "event": "Talk Bravo",
+   "changed": [
+    "battle_last_trainer=spyder_wayfarer1_bravo",
+    "won spyder_wayfarer1_bravo:won"
+   ],
+   "battles": [
+    "spyder_wayfarer1_bravo"
+   ]
+  },
+  {
+   "map": "spyder_wayfarer_inn2",
+   "event": "Talk James",
+   "changed": [
+    "battle_last_trainer=spyder_wayfarer1_james",
+    "won spyder_wayfarer1_james:won"
+   ],
+   "battles": [
+    "spyder_wayfarer1_james"
+   ]
+  },
+  {
+   "map": "spyder_routea",
+   "event": "(walk spyder_wayfarer_inn1 > spyder_route3 > spyder_route4 > spyder_flower_city > spyder_routea)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_routea",
+   "event": "Billie",
+   "changed": [
+    "battle_last_trainer=spyder_billie",
+    "routeabillie=yes"
+   ],
+   "battles": [
+    "spyder_billie"
+   ]
+  },
+  {
+   "map": "spyder_routea",
+   "event": "Talk Doris",
+   "changed": [
+    "battle_last_trainer=spyder_routea_doris",
+    "won spyder_routea_doris:won"
+   ],
+   "battles": [
+    "spyder_routea_doris"
+   ]
+  },
+  {
+   "map": "spyder_routea",
+   "event": "Talk Dagger",
+   "changed": [
+    "battle_last_trainer=spyder_routea_dagger",
+    "won spyder_routea_dagger:won"
+   ],
+   "battles": [
+    "spyder_routea_dagger"
+   ]
+  },
+  {
+   "map": "spyder_routea",
+   "event": "Talk Koan",
+   "changed": [
+    "battle_last_trainer=spyder_routea_koan",
+    "won spyder_routea_koan:won"
+   ],
+   "battles": [
+    "spyder_routea_koan"
+   ]
+  },
+  {
+   "map": "spyder_routea",
+   "event": "Talk Lexi",
+   "changed": [
+    "battle_last_trainer=spyder_routea_lexi",
+    "won spyder_routea_lexi:won"
+   ],
+   "battles": [
+    "spyder_routea_lexi"
+   ]
+  },
+  {
+   "map": "spyder_routea",
+   "event": "Talk Lotu",
+   "changed": [
+    "battle_last_trainer=spyder_routea_lotu",
+    "won spyder_routea_lotu:won"
+   ],
+   "battles": [
+    "spyder_routea_lotu"
+   ]
+  },
+  {
+   "map": "spyder_routea",
+   "event": "Talk Connie",
+   "changed": [
+    "battle_last_trainer=spyder_routea_connie",
+    "won spyder_routea_connie:won"
+   ],
+   "battles": [
+    "spyder_routea_connie"
+   ]
+  },
+  {
+   "map": "spyder_routea",
+   "event": "Talk Joe1",
+   "changed": [
+    "battle_last_trainer=spyder_routea_joe",
+    "won spyder_routea_joe:won"
+   ],
+   "battles": [
+    "spyder_routea_joe"
+   ]
+  },
+  {
+   "map": "spyder_routea",
+   "event": "Talk Rosy",
+   "changed": [
+    "battle_last_trainer=spyder_routea_rosy",
+    "won spyder_routea_rosy:won"
+   ],
+   "battles": [
+    "spyder_routea_rosy"
+   ]
+  },
+  {
+   "map": "spyder_routea",
+   "event": "Talk Vince1",
+   "changed": [
+    "vincefirst=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_routea",
+   "event": "Talk Vince2",
+   "changed": [
+    "vincesecond=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_routea",
+   "event": "Talk Vince3",
+   "changed": [
+    "battle_last_trainer=spyder_routea_vince",
+    "won spyder_routea_vince:won"
+   ],
+   "battles": [
+    "spyder_routea_vince"
+   ]
+  },
+  {
+   "map": "spyder_routea",
+   "event": "Super Potion",
+   "changed": [
+    "routea_super=yes",
+    "item super_potion=2"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_routea",
+   "event": "Tea",
+   "changed": [
+    "routea_tea=yes",
+    "item tea=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_routea",
+   "event": "Cureall",
+   "changed": [
+    "routea_cureall=yes",
+    "item cureall=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_routea",
+   "event": "Track routea",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_mansion",
+   "event": "(walk spyder_mansion)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_mansion",
+   "event": "Talk Gillette",
+   "changed": [
+    "battle_last_trainer=spyder_mansion_gillette",
+    "won spyder_mansion_gillette:won"
+   ],
+   "battles": [
+    "spyder_mansion_gillette"
+   ]
+  },
+  {
+   "map": "spyder_mansion",
+   "event": "Talk Lucy",
+   "changed": [
+    "battle_last_trainer=spyder_mansion_lucy",
+    "won spyder_mansion_lucy:won"
+   ],
+   "battles": [
+    "spyder_mansion_lucy"
+   ]
+  },
+  {
+   "map": "spyder_mansion",
+   "event": "Talk Lyle",
+   "changed": [
+    "battle_last_trainer=spyder_mansion_lyle",
+    "won spyder_mansion_lyle:won"
+   ],
+   "battles": [
+    "spyder_mansion_lyle"
+   ]
+  },
+  {
+   "map": "spyder_mansion",
+   "event": "Talk Lucy Tea",
+   "changed": [
+    "tealucy=yes",
+    "item mystery_tea=2"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_mansion",
+   "event": "Track mansion",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_mansion_top",
+   "event": "(walk spyder_mansion_top)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_mansion_top",
+   "event": "Talk Mickey",
+   "changed": [
+    "battle_last_trainer=spyder_top_mickey",
+    "won spyder_top_mickey:won"
+   ],
+   "battles": [
+    "spyder_top_mickey"
+   ]
+  },
+  {
+   "map": "spyder_mansion_top",
+   "event": "Talk Russell",
+   "changed": [
+    "battle_last_trainer=spyder_top_russell",
+    "won spyder_top_russell:won"
+   ],
+   "battles": [
+    "spyder_top_russell"
+   ]
+  },
+  {
+   "map": "spyder_mansion_top",
+   "event": "Talk Ricardo",
+   "changed": [
+    "battle_last_trainer=spyder_top_ricardo",
+    "won spyder_top_ricardo:won"
+   ],
+   "battles": [
+    "spyder_top_ricardo"
+   ]
+  },
+  {
+   "map": "spyder_mansion_top",
+   "event": "Talk Jackson",
+   "changed": [
+    "battle_last_trainer=spyder_top_jackson",
+    "won spyder_top_jackson:won"
+   ],
+   "battles": [
+    "spyder_top_jackson"
+   ]
+  },
+  {
+   "map": "spyder_mansion_top",
+   "event": "Talk Magician1",
+   "changed": [
+    "dojomagician=yes",
+    "item dojo_pass=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_mansion_top",
+   "event": "TM Ubuntu",
+   "changed": [
+    "mansion_tmubuntu=yes",
+    "item tm_ubuntu=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_mansion_top",
+   "event": "Metal Berry",
+   "changed": [
+    "mansion_berry=yes",
+    "item metal_berry=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_mansion_top",
+   "event": "Potion",
+   "changed": [
+    "mansion_potion=yes",
+    "item potion=3"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_mansion_basement",
+   "event": "(walk spyder_mansion > spyder_mansion_basement)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_mansion_basement",
+   "event": "Talk Captain",
+   "changed": [
+    "foundcaptain=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_mansion_basement",
+   "event": "Talk Coralli",
+   "changed": [
+    "battle_last_trainer=spyder_basement_coralli",
+    "won spyder_basement_coralli:won"
+   ],
+   "battles": [
+    "spyder_basement_coralli"
+   ]
+  },
+  {
+   "map": "spyder_mansion_basement",
+   "event": "Talk Bobby",
+   "changed": [
+    "battle_last_trainer=spyder_basement_bobby",
+    "won spyder_basement_bobby:won"
+   ],
+   "battles": [
+    "spyder_basement_bobby"
+   ]
+  },
+  {
+   "map": "spyder_mansion_basement",
+   "event": "Talk Roger",
+   "changed": [
+    "battle_last_trainer=spyder_basement_roger",
+    "won spyder_basement_roger:won"
+   ],
+   "battles": [
+    "spyder_basement_roger"
+   ]
+  },
+  {
+   "map": "spyder_mansion_basement",
+   "event": "Talk Catholi",
+   "changed": [
+    "battle_last_trainer=spyder_basement_catholi",
+    "won spyder_basement_catholi:won"
+   ],
+   "battles": [
+    "spyder_basement_catholi"
+   ]
+  },
+  {
+   "map": "spyder_mansion_basement",
+   "event": "Talk Josephine before",
+   "changed": [
+    "offer_josephine=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_mansion_basement",
+   "event": "Healed",
+   "changed": [
+    "healed_josephine=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_mansion_basement",
+   "event": "TM Ice Shield",
+   "changed": [
+    "mansion_tmiceshield=yes",
+    "item tm_ice_shield=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_mansion_basement",
+   "event": "Grand Tuxeball",
+   "changed": [
+    "mansion_grandtux=yes",
+    "item tuxeball_grand=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_mansion_basement",
+   "event": "Tea",
+   "changed": [
+    "mansion_tea=yes",
+    "item tea=2"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_mansion",
+   "event": "(walk spyder_mansion)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_mansion",
+   "event": "Captain Returns",
+   "changed": [
+    "captainreturns=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_flower_city",
+   "event": "(walk spyder_routea > spyder_flower_city)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_flower_city",
+   "event": "Talk Captain - Flower",
+   "changed": [
+    "rivergoto=paper_town"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_flower_city",
+   "event": "Destination - Paper",
+   "changed": [
+    "rivergoto=nothing"
+   ],
+   "battles": [],
+   "teleport": "spyder_paper_town"
+  },
+  {
+   "map": "spyder_paper_town",
+   "event": "Talk Captain - Flower",
+   "changed": [
+    "rivergoto=paper_town"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_town",
+   "event": "Destination - Paper",
+   "changed": [
+    "rivergoto=nothing"
+   ],
+   "battles": [],
+   "teleport": "spyder_paper_town"
+  },
+  {
+   "map": "spyder_downstairs",
+   "event": "(walk spyder_downstairs)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_downstairs",
+   "event": "Talk mom thanks",
+   "changed": [
+    "momthanked=yes",
+    "spokenmomcotton=yes",
+    "item nu_phone=1",
+    "item app_map=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_town",
+   "event": "(walk spyder_paper_town)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_town",
+   "event": "Talk Captain - Flower",
+   "changed": [
+    "rivergoto=leather_town"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_town",
+   "event": "Destination - Leather",
+   "changed": [
+    "rivergoto=nothing"
+   ],
+   "battles": [],
+   "teleport": "spyder_leather_town"
+  },
+  {
+   "map": "spyder_leather_town",
+   "event": "Talk Captain - Flower",
+   "changed": [
+    "rivergoto=paper_town"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_town",
+   "event": "Destination - Paper",
+   "changed": [
+    "rivergoto=nothing"
+   ],
+   "battles": [],
+   "teleport": "spyder_paper_town"
+  },
+  {
+   "map": "spyder_paper_daycare",
+   "event": "(walk spyder_paper_daycare)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_daycare",
+   "event": "Talk Granny Piper1",
+   "changed": [
+    "spokengrannypiper=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_scoop",
+   "event": "(walk spyder_paper_town > spyder_paper_scoop)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_scoop",
+   "event": "Billie Budaye",
+   "changed": [
+    "billie_choice=budaye"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_routec",
+   "event": "(walk spyder_paper_town > spyder_routec)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_routec",
+   "event": "Talk River",
+   "changed": [
+    "battle_last_trainer=spyder_searoutec_river",
+    "won spyder_searoutec_river:won"
+   ],
+   "battles": [
+    "spyder_searoutec_river"
+   ]
+  },
+  {
+   "map": "spyder_routec",
+   "event": "Talk Wade",
+   "changed": [
+    "battle_last_trainer=spyder_searoutec_wade",
+    "won spyder_searoutec_wade:won"
+   ],
+   "battles": [
+    "spyder_searoutec_wade"
+   ]
+  },
+  {
+   "map": "spyder_routec",
+   "event": "Talk Gil",
+   "changed": [
+    "battle_last_trainer=spyder_searoutec_gil",
+    "won spyder_searoutec_gil:won"
+   ],
+   "battles": [
+    "spyder_searoutec_gil"
+   ]
+  },
+  {
+   "map": "spyder_routec",
+   "event": "Talk Leek",
+   "changed": [
+    "battle_last_trainer=spyder_searoutec_leek",
+    "won spyder_searoutec_leek:won"
+   ],
+   "battles": [
+    "spyder_searoutec_leek"
+   ]
+  },
+  {
+   "map": "spyder_routec",
+   "event": "Talk Beech",
+   "changed": [
+    "battle_last_trainer=spyder_searoutec_beech",
+    "won spyder_searoutec_beech:won"
+   ],
+   "battles": [
+    "spyder_searoutec_beech"
+   ]
+  },
+  {
+   "map": "spyder_routec",
+   "event": "Talk Rutherford",
+   "changed": [
+    "battle_last_trainer=spyder_searoutec_rutherford",
+    "won spyder_searoutec_rutherford:won"
+   ],
+   "battles": [
+    "spyder_searoutec_rutherford"
+   ]
+  },
+  {
+   "map": "spyder_routec",
+   "event": "Talk Carstair",
+   "changed": [
+    "battle_last_trainer=spyder_searoutec_carstair",
+    "won spyder_searoutec_carstair:won"
+   ],
+   "battles": [
+    "spyder_searoutec_carstair"
+   ]
+  },
+  {
+   "map": "spyder_routec",
+   "event": "Talk Sandy",
+   "changed": [
+    "battle_last_trainer=spyder_searoutec_sandy",
+    "won spyder_searoutec_sandy:won"
+   ],
+   "battles": [
+    "spyder_searoutec_sandy"
+   ]
+  },
+  {
+   "map": "spyder_routec",
+   "event": "Talk More",
+   "changed": [
+    "battle_last_trainer=spyder_searoutec_more",
+    "won spyder_searoutec_more:won"
+   ],
+   "battles": [
+    "spyder_searoutec_more"
+   ]
+  },
+  {
+   "map": "spyder_routec",
+   "event": "Talk Stafford",
+   "changed": [
+    "battle_last_trainer=spyder_searoutec_stafford",
+    "won spyder_searoutec_stafford:won"
+   ],
+   "battles": [
+    "spyder_searoutec_stafford"
+   ]
+  },
+  {
+   "map": "spyder_routec",
+   "event": "Talk Maurice",
+   "changed": [
+    "battle_last_trainer=spyder_searoutec_maurice",
+    "won spyder_searoutec_maurice:won"
+   ],
+   "battles": [
+    "spyder_searoutec_maurice"
+   ]
+  },
+  {
+   "map": "spyder_routec",
+   "event": "Autosave Dragon",
+   "changed": [
+    "save2=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_routec",
+   "event": "Box",
+   "changed": [
+    "routec_tm_altitude=yes",
+    "item tm_altitude=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_routec",
+   "event": "Track routec",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_town",
+   "event": "(walk spyder_candy_town)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_town",
+   "event": "Seen Candy",
+   "changed": [
+    "seencandy=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_town",
+   "event": "Entry Candy",
+   "changed": [
+    "confiscation_candy=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_town",
+   "event": "Seen Candy + Not Infected",
+   "changed": [
+    "confiscation_done=yes",
+    "henrik_react=start"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_town",
+   "event": "Henrik react - mons",
+   "changed": [
+    "henrik_react=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_town",
+   "event": "Talk Eliane 1",
+   "changed": [
+    "elianeoutput=cureall",
+    "luckgiveegg=1",
+    "elianetalkedtoday=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_town",
+   "event": "Get cureall",
+   "changed": [
+    "elianeoutput=none",
+    "elianetalkedtoday=no",
+    "item cureall=2"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_town",
+   "event": "Talk Eliane 1",
+   "changed": [
+    "elianeoutput=cureall",
+    "elianetalkedtoday=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_town",
+   "event": "Get cureall",
+   "changed": [
+    "elianeoutput=none",
+    "elianetalkedtoday=no",
+    "item cureall=3"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_town",
+   "event": "Talk Eliane 1",
+   "changed": [
+    "elianeoutput=cureall",
+    "elianetalkedtoday=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_town",
+   "event": "Get cureall",
+   "changed": [
+    "elianeoutput=none",
+    "elianetalkedtoday=no",
+    "item cureall=4"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_town",
+   "event": "TM Leaf Barrage",
+   "changed": [
+    "candy_tmleafbarrage=yes",
+    "item tm_leaf_barrage=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_town",
+   "event": "Dante commiserates",
+   "changed": [
+    "candy_dante_commiserates=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_route6",
+   "event": "(walk spyder_route6)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_route6",
+   "event": "Talk Frances",
+   "changed": [
+    "battle_last_trainer=spyder_route6_frances",
+    "won spyder_route6_frances:won"
+   ],
+   "battles": [
+    "spyder_route6_frances"
+   ]
+  },
+  {
+   "map": "spyder_route6",
+   "event": "Talk Ping",
+   "changed": [
+    "battle_last_trainer=spyder_route6_ping",
+    "won spyder_route6_ping:won"
+   ],
+   "battles": [
+    "spyder_route6_ping"
+   ]
+  },
+  {
+   "map": "spyder_route6",
+   "event": "Talk Richard",
+   "changed": [
+    "battle_last_trainer=spyder_route6_richard",
+    "won spyder_route6_richard:won"
+   ],
+   "battles": [
+    "spyder_route6_richard"
+   ]
+  },
+  {
+   "map": "spyder_route6",
+   "event": "Talk Blair",
+   "changed": [
+    "battle_last_trainer=spyder_route6_blair",
+    "won spyder_route6_blair:won"
+   ],
+   "battles": [
+    "spyder_route6_blair"
+   ]
+  },
+  {
+   "map": "spyder_route6",
+   "event": "Talk Maxwell",
+   "changed": [
+    "battle_last_trainer=spyder_route6_maxwell",
+    "won spyder_route6_maxwell:won"
+   ],
+   "battles": [
+    "spyder_route6_maxwell"
+   ]
+  },
+  {
+   "map": "spyder_route6",
+   "event": "Talk Orion",
+   "changed": [
+    "battle_last_trainer=spyder_route6_orion",
+    "won spyder_route6_orion:won"
+   ],
+   "battles": [
+    "spyder_route6_orion"
+   ]
+  },
+  {
+   "map": "spyder_route6",
+   "event": "Talk Mungo",
+   "changed": [
+    "battle_last_trainer=spyder_route6_mungo",
+    "won spyder_route6_mungo:won"
+   ],
+   "battles": [
+    "spyder_route6_mungo"
+   ]
+  },
+  {
+   "map": "spyder_route6",
+   "event": "Talk Rigel",
+   "changed": [
+    "battle_last_trainer=spyder_route6_rigel",
+    "won spyder_route6_rigel:won"
+   ],
+   "battles": [
+    "spyder_route6_rigel"
+   ]
+  },
+  {
+   "map": "spyder_route6",
+   "event": "Talk Gunner",
+   "changed": [
+    "battle_last_trainer=spyder_route6_gunner",
+    "won spyder_route6_gunner:won"
+   ],
+   "battles": [
+    "spyder_route6_gunner"
+   ]
+  },
+  {
+   "map": "spyder_route6",
+   "event": "Billie1",
+   "changed": [
+    "battle_last_trainer=spyder_billie",
+    "route6billie=yes"
+   ],
+   "battles": [
+    "spyder_billie"
+   ]
+  },
+  {
+   "map": "spyder_route6",
+   "event": "Talk Mom",
+   "changed": [
+    "route6mom=yes",
+    "item xp_feeder=1",
+    "item xp_transmitter=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_route6",
+   "event": "Track route6",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_tunnel",
+   "event": "(walk spyder_tunnel)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_tunnel",
+   "event": "Talk Iris",
+   "changed": [
+    "battle_last_trainer=spyder_tunnelb_iris",
+    "won spyder_tunnelb_iris:won"
+   ],
+   "battles": [
+    "spyder_tunnelb_iris"
+   ]
+  },
+  {
+   "map": "spyder_tunnel",
+   "event": "Talk Greta",
+   "changed": [
+    "battle_last_trainer=spyder_tunnelb_greta",
+    "won spyder_tunnelb_greta:won"
+   ],
+   "battles": [
+    "spyder_tunnelb_greta"
+   ]
+  },
+  {
+   "map": "spyder_tunnel",
+   "event": "Track tunnel",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_tunnel_below",
+   "event": "(walk spyder_tunnel_below)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_tunnel_below",
+   "event": "Talk Meitner",
+   "changed": [
+    "battle_last_trainer=spyder_tunnelb_meitner",
+    "won spyder_tunnelb_meitner:won"
+   ],
+   "battles": [
+    "spyder_tunnelb_meitner"
+   ]
+  },
+  {
+   "map": "spyder_tunnel_below",
+   "event": "Talk Lute",
+   "changed": [
+    "battle_last_trainer=spyder_tunnelb_lute",
+    "won spyder_tunnelb_lute:won"
+   ],
+   "battles": [
+    "spyder_tunnelb_lute"
+   ]
+  },
+  {
+   "map": "spyder_tunnel_below",
+   "event": "Talk Beryll",
+   "changed": [
+    "battle_last_trainer=spyder_tunnelb_beryll",
+    "won spyder_tunnelb_beryll:won"
+   ],
+   "battles": [
+    "spyder_tunnelb_beryll"
+   ]
+  },
+  {
+   "map": "spyder_tunnel_below",
+   "event": "Shammer",
+   "changed": [
+    "tunnelb_shammer=yes",
+    "item shammer_fossil=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_tunnel_below",
+   "event": "Rhincus",
+   "changed": [
+    "tunnelb_rhincus=yes",
+    "item rhincus_fossil=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_tunnel_below",
+   "event": "Track tunnel_below",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_town",
+   "event": "(walk spyder_tunnel > spyder_timber_town)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_town",
+   "event": "Stop! - Scoop",
+   "changed": [
+    "timberdantewarn=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_town",
+   "event": "Seen Timber 1",
+   "changed": [
+    "seentimber=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_town",
+   "event": "Talk Captain - Candy",
+   "changed": [
+    "rivergoto=paper_town"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_town",
+   "event": "Destination - Paper",
+   "changed": [
+    "rivergoto=nothing"
+   ],
+   "battles": [],
+   "teleport": "spyder_paper_town"
+  },
+  {
+   "map": "spyder_paper_daycare",
+   "event": "(walk spyder_paper_daycare)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_daycare",
+   "event": "Talk Granny Piper Open 1",
+   "changed": [
+    "introducedaycare=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_rival_downstairs",
+   "event": "(walk spyder_paper_town > spyder_paper_rival_downstairs)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_rival_downstairs",
+   "event": "Flashback",
+   "changed": [
+    "billie_grandma=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_rival_downstairs",
+   "event": "TV",
+   "changed": [
+    "flashback=on",
+    "billie_tv=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_rival_downstairs",
+   "event": "TV",
+   "changed": [
+    "billie_tv=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_rival_downstairs",
+   "event": "TV Yes",
+   "changed": [
+    "flashback=off",
+    "billie_tv=(cleared)"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_town",
+   "event": "(walk spyder_paper_town > spyder_route1 > spyder_cotton_town)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_town",
+   "event": "Talk hackerintro",
+   "changed": [
+    "spokencottonhacker=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_scoop",
+   "event": "(walk spyder_cotton_scoop)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_scoop",
+   "event": "Open Tech",
+   "changed": [
+    "techchoice=menu_item"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_scoop",
+   "event": "Tech Buy Items",
+   "changed": [
+    "techchoice=(cleared)"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_artshop",
+   "event": "(walk spyder_cotton_town > spyder_cotton_artshop)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_artshop",
+   "event": "Pay Up",
+   "changed": [
+    "paygallery=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_artshop",
+   "event": "Afford Pay",
+   "changed": [
+    "paygallery=null",
+    "money=200"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_artshop",
+   "event": "Pay Up",
+   "changed": [
+    "paygallery=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_artshop",
+   "event": "No Pay",
+   "changed": [
+    "paygallery=null"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_artshop",
+   "event": "Billie Visit",
+   "changed": [
+    "artshop_billie=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_artshop",
+   "event": "Pay Up",
+   "changed": [
+    "paygallery=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_artshop",
+   "event": "Afford Pay",
+   "changed": [
+    "paygallery=null",
+    "money=150"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_tunnel",
+   "event": "(walk spyder_cotton_town > spyder_cotton_tunnel)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_tunnel",
+   "event": "Candy Tuxeball",
+   "changed": [
+    "cottontunnel_candy=yes",
+    "item tuxeball_candy=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_tunnel",
+   "event": "Cureall",
+   "changed": [
+    "cottontunnel_cureall=yes",
+    "item cureall=5"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_tunnel",
+   "event": "Imperial Potion",
+   "changed": [
+    "cottontunnel_potion=yes",
+    "item imperial_potion=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_tunnel",
+   "event": "Imperial Tea",
+   "changed": [
+    "cottontunnel_tea=yes",
+    "item imperial_tea=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_tunnel",
+   "event": "Petrified Dung",
+   "changed": [
+    "cottontunnel_dung=yes",
+    "item petrified_dung=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_tunnel",
+   "event": "Raise Melee",
+   "changed": [
+    "cottontunnel_melee=yes",
+    "item raise_melee=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_omnichannel1",
+   "event": "(walk spyder_cotton_town > spyder_omnichannel1)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_omnichannel1",
+   "event": "Talk William",
+   "changed": [
+    "battle_last_trainer=spyder_omnichannel_william",
+    "won spyder_omnichannel_william:won"
+   ],
+   "battles": [
+    "spyder_omnichannel_william"
+   ]
+  },
+  {
+   "map": "spyder_omnichannel1",
+   "event": "Battle Enforcer",
+   "changed": [
+    "battle_last_trainer=spyder_omnichannel_enforcer",
+    "won spyder_omnichannel_enforcer:won"
+   ],
+   "battles": [
+    "spyder_omnichannel_enforcer"
+   ]
+  },
+  {
+   "map": "spyder_omnichannel1",
+   "event": "Talk Nurse",
+   "changed": [
+    "nurse_spyder=yes",
+    "item spyder_pass=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_omnichannel1",
+   "event": "Autosave Lvl 2",
+   "changed": [
+    "save3=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_omnichannel2",
+   "event": "(walk spyder_omnichannel2)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_omnichannel2",
+   "event": "Talk Schwartz",
+   "changed": [
+    "battle_last_trainer=spyder_omnichannel_schwartz",
+    "won spyder_omnichannel_schwartz:won"
+   ],
+   "battles": [
+    "spyder_omnichannel_schwartz"
+   ]
+  },
+  {
+   "map": "spyder_omnichannel2",
+   "event": "Talk Bettger",
+   "changed": [
+    "battle_last_trainer=spyder_omnichannel_bettger",
+    "won spyder_omnichannel_bettger:won"
+   ],
+   "battles": [
+    "spyder_omnichannel_bettger"
+   ]
+  },
+  {
+   "map": "spyder_omnichannel2",
+   "event": "Talk Tohei",
+   "changed": [
+    "battle_last_trainer=spyder_omnichannel_tohei",
+    "won spyder_omnichannel_tohei:won"
+   ],
+   "battles": [
+    "spyder_omnichannel_tohei"
+   ]
+  },
+  {
+   "map": "spyder_omnichannel2",
+   "event": "Talk Crane",
+   "changed": [
+    "battle_last_trainer=spyder_omnichannel_crane",
+    "won spyder_omnichannel_crane:won"
+   ],
+   "battles": [
+    "spyder_omnichannel_crane"
+   ]
+  },
+  {
+   "map": "spyder_omnichannel2",
+   "event": "Talk Dempsey",
+   "changed": [
+    "battle_last_trainer=spyder_omnichannel_dempsey",
+    "won spyder_omnichannel_dempsey:won"
+   ],
+   "battles": [
+    "spyder_omnichannel_dempsey"
+   ]
+  },
+  {
+   "map": "spyder_omnichannel2",
+   "event": "PC",
+   "changed": [
+    "omnichannel-ready-wall=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_omnichannel2",
+   "event": "Pass2",
+   "changed": [
+    "omnichannel2wall=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_omnichannel3",
+   "event": "(walk spyder_omnichannel3)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_omnichannel3",
+   "event": "Talk Strauss",
+   "changed": [
+    "battle_last_trainer=spyder_omnichannel_strauss",
+    "won spyder_omnichannel_strauss:won"
+   ],
+   "battles": [
+    "spyder_omnichannel_strauss"
+   ]
+  },
+  {
+   "map": "spyder_omnichannel3",
+   "event": "Talk Carnegie",
+   "changed": [
+    "battle_last_trainer=spyder_omnichannel_carnegie",
+    "won spyder_omnichannel_carnegie:won"
+   ],
+   "battles": [
+    "spyder_omnichannel_carnegie"
+   ]
+  },
+  {
+   "map": "spyder_omnichannel3",
+   "event": "Talk Byrne",
+   "changed": [
+    "battle_last_trainer=spyder_omnichannel_byrne",
+    "won spyder_omnichannel_byrne:won"
+   ],
+   "battles": [
+    "spyder_omnichannel_byrne"
+   ]
+  },
+  {
+   "map": "spyder_omnichannel4",
+   "event": "(walk spyder_omnichannel4)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_omnichannel4",
+   "event": "Intro 2",
+   "changed": [
+    "cut_scenes2=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_omnichannel4",
+   "event": "Watch 2",
+   "changed": [
+    "cut_scenes2=null"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_omnichannel4",
+   "event": "Intro 2",
+   "changed": [
+    "cut_scenes2=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_omnichannel4",
+   "event": "Intro 2",
+   "changed": [
+    "cut_scenes2=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_omnichannel4",
+   "event": "Intro 1",
+   "changed": [
+    "cut_scenes1=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_omnichannel4",
+   "event": "Watch 2",
+   "changed": [
+    "cut_scenes2=null"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_omnichannel4",
+   "event": "Watch 1",
+   "changed": [
+    "cut_scenes1=null"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_omnichannel4",
+   "event": "Intro 1",
+   "changed": [
+    "cut_scenes1=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_omnichannel4",
+   "event": "Intro 1",
+   "changed": [
+    "cut_scenes1=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_radiotower",
+   "event": "(walk spyder_radiotower)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_radiotower",
+   "event": "Stop!",
+   "changed": [
+    "battle_last_trainer=spyder_omnichannel_beaverbrook",
+    "kernelquest=yes",
+    "won spyder_omnichannel_beaverbrook:won"
+   ],
+   "battles": [
+    "spyder_omnichannel_beaverbrook"
+   ]
+  },
+  {
+   "map": "spyder_radiotower",
+   "event": "Stop!",
+   "changed": [
+    "omnichannelradioannounce=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_omnichannel4",
+   "event": "(walk spyder_omnichannel4)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_omnichannel4",
+   "event": "Watch 1",
+   "changed": [
+    "cut_scenes1=null"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_omnichannel1",
+   "event": "(walk spyder_omnichannel3 > spyder_omnichannel2 > spyder_omnichannel1)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_omnichannel1",
+   "event": "Pass2",
+   "changed": [
+    "omnichannel1wall=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_healing_center",
+   "event": "(walk spyder_cotton_town > spyder_healing_center)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_healing_center",
+   "event": "Talk Ada",
+   "changed": [
+    "bumpintomom=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_town",
+   "event": "(walk spyder_cotton_town)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_town",
+   "event": "Kernel Quest",
+   "changed": [
+    "kernelquestbegin=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_test_map",
+   "event": "(walk spyder_test_map)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_test_map",
+   "event": "Sign: Get Rockitten",
+   "changed": [
+    "party=rockitten+botbot+aardorn"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_test_map",
+   "event": "Sign: Get Rockitten",
+   "changed": [
+    "party=rockitten+botbot+aardorn+aardorn"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_test_map",
+   "event": "Sign: Get Rockitten",
+   "changed": [
+    "party=rockitten+botbot+aardorn+aardorn+aardorn"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_test_map",
+   "event": "Talk Cleo",
+   "changed": [
+    "battle_last_trainer=spyder_route5_cleo",
+    "testcleo=yes",
+    "won spyder_route5_cleo:won"
+   ],
+   "battles": [
+    "spyder_route5_cleo"
+   ]
+  },
+  {
+   "map": "spyder_test_map",
+   "event": "Sign: Reset Cleo",
+   "changed": [
+    "testcleo=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_test_map",
+   "event": "Talk Cleo",
+   "changed": [
+    "testcleo=yes",
+    "won spyder_route5_cleo:won"
+   ],
+   "battles": [
+    "spyder_route5_cleo"
+   ]
+  },
+  {
+   "map": "spyder_test_map",
+   "event": "Sign: Reset Cleo",
+   "changed": [
+    "testcleo=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_test_map",
+   "event": "Talk Cleo",
+   "changed": [
+    "testcleo=yes",
+    "won spyder_route5_cleo:won"
+   ],
+   "battles": [
+    "spyder_route5_cleo"
+   ]
+  },
+  {
+   "map": "spyder_test_map",
+   "event": "Sign: Reset Cleo",
+   "changed": [
+    "testcleo=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_test_map",
+   "event": "Ambush Cleo",
+   "changed": [
+    "testcleo=yes"
+   ],
+   "battles": [
+    "spyder_route5_cleo"
+   ]
+  },
+  {
+   "map": "spyder_test_map",
+   "event": "Talk Barmaid",
+   "changed": [
+    "chooses=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_test_map",
+   "event": "Box1",
+   "changed": [
+    "testmap_potion1=yes",
+    "item tuxeball_ancient=10"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_rival_downstairs",
+   "event": "(walk spyder_cotton_town > spyder_route1 > spyder_paper_town > spyder_paper_rival_downstairs)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_paper_rival_downstairs",
+   "event": "TV",
+   "changed": [
+    "flashback=on",
+    "billie_tv=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_dragonscave",
+   "event": "(walk spyder_paper_town > spyder_routec > spyder_dragonscave)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_dragonscave",
+   "event": "Talk Tomas",
+   "changed": [
+    "battle_last_trainer=spyder_dragonscave_tomas",
+    "won spyder_dragonscave_tomas:won"
+   ],
+   "battles": [
+    "spyder_dragonscave_tomas"
+   ]
+  },
+  {
+   "map": "spyder_dragonscave",
+   "event": "Talk Lessa",
+   "changed": [
+    "battle_last_trainer=spyder_dragonscave_lessa",
+    "won spyder_dragonscave_lessa:won"
+   ],
+   "battles": [
+    "spyder_dragonscave_lessa"
+   ]
+  },
+  {
+   "map": "spyder_dragonscave",
+   "event": "Talk Cailin",
+   "changed": [
+    "battle_last_trainer=spyder_dragonscave_cailin",
+    "won spyder_dragonscave_cailin:won"
+   ],
+   "battles": [
+    "spyder_dragonscave_cailin"
+   ]
+  },
+  {
+   "map": "spyder_dragonscave",
+   "event": "Talk Griffin",
+   "changed": [
+    "battle_last_trainer=spyder_dragonscave_griffin",
+    "won spyder_dragonscave_griffin:won"
+   ],
+   "battles": [
+    "spyder_dragonscave_griffin"
+   ]
+  },
+  {
+   "map": "spyder_dragonscave",
+   "event": "Talk Daenny",
+   "changed": [
+    "battle_last_trainer=spyder_dragonscave_daenny",
+    "won spyder_dragonscave_daenny:won"
+   ],
+   "battles": [
+    "spyder_dragonscave_daenny"
+   ]
+  },
+  {
+   "map": "spyder_dragonscave",
+   "event": "Talk Benden",
+   "changed": [
+    "battle_last_trainer=spyder_dragonscave_benden",
+    "won spyder_dragonscave_benden:won"
+   ],
+   "battles": [
+    "spyder_dragonscave_benden"
+   ]
+  },
+  {
+   "map": "spyder_dragonscave",
+   "event": "Get Drokoro",
+   "changed": [
+    "battle_last_trainer=wild:drokoro",
+    "dragonscavedrokoro=yes",
+    "won wild:drokoro:won"
+   ],
+   "battles": [
+    "wild:drokoro"
+   ]
+  },
+  {
+   "map": "spyder_dragonscave",
+   "event": "Benden Defeated",
+   "changed": [
+    "dragonscavebenden2=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_dragonscave",
+   "event": "Talk Ray and Tru",
+   "changed": [
+    "battle_last_trainer=spyder_dragonscave_ray",
+    "won spyder_dragonscave_ray:won"
+   ],
+   "battles": [
+    "spyder_dragonscave_ray"
+   ]
+  },
+  {
+   "map": "spyder_dragonscave",
+   "event": "Talk Lucille and Mal",
+   "changed": [
+    "battle_last_trainer=spyder_dragonscave_lucille",
+    "dragonscavemal=yes",
+    "won spyder_dragonscave_lucille:won"
+   ],
+   "battles": [
+    "spyder_dragonscave_lucille"
+   ]
+  },
+  {
+   "map": "spyder_dragonscave",
+   "event": "Track dragonscave",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_tunnel",
+   "event": "(walk spyder_cotton_tunnel)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_tunnel",
+   "event": "Talk Benden Not Captured",
+   "changed": [
+    "cottontunnelbenden=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_cotton_tunnel",
+   "event": "Talk Carlos",
+   "changed": [
+    "battle_last_trainer=spyder_cottontunnel_carlos",
+    "won spyder_cottontunnel_carlos:won"
+   ],
+   "battles": [
+    "spyder_cottontunnel_carlos"
+   ]
+  },
+  {
+   "map": "spyder_candy_port",
+   "event": "(walk spyder_dragonscave > spyder_routec > spyder_candy_port)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_port",
+   "event": "Talk Captain - Candy",
+   "changed": [
+    "rivergoto=paper_town"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_port",
+   "event": "Destination - Paper",
+   "changed": [
+    "rivergoto=nothing"
+   ],
+   "battles": [],
+   "teleport": "spyder_paper_town"
+  },
+  {
+   "map": "spyder_candy_port",
+   "event": "(walk spyder_routec > spyder_candy_port)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_port",
+   "event": "Talk Monk Question",
+   "changed": [
+    "seizedtimber=thats_crazy"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_port",
+   "event": "Talk Captain - Candy",
+   "changed": [
+    "rivergoto=leather_town"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_port",
+   "event": "Destination - Leather",
+   "changed": [
+    "rivergoto=nothing"
+   ],
+   "battles": [],
+   "teleport": "spyder_leather_town"
+  },
+  {
+   "map": "spyder_leather_town",
+   "event": "Heal Tuxemon",
+   "changed": [
+    "chooses=none"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_town",
+   "event": "Talk Captain - Candy",
+   "changed": [
+    "rivergoto=paper_town"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_town",
+   "event": "Destination - Paper",
+   "changed": [
+    "rivergoto=nothing"
+   ],
+   "battles": [],
+   "teleport": "spyder_paper_town"
+  },
+  {
+   "map": "spyder_candy_port",
+   "event": "(walk spyder_routec > spyder_candy_port)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_port",
+   "event": "Talk Captain - Candy",
+   "changed": [
+    "rivergoto=flower_city"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_port",
+   "event": "Destination - Flower",
+   "changed": [
+    "rivergoto=nothing"
+   ],
+   "battles": [],
+   "teleport": "spyder_flower_city"
+  },
+  {
+   "map": "spyder_flower_city",
+   "event": "Talk Captain - Candy",
+   "changed": [
+    "rivergoto=paper_town"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_flower_city",
+   "event": "Destination - Paper",
+   "changed": [
+    "rivergoto=nothing"
+   ],
+   "battles": [],
+   "teleport": "spyder_paper_town"
+  },
+  {
+   "map": "spyder_test_map",
+   "event": "(walk spyder_route1 > spyder_cotton_town > spyder_test_map)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_test_map",
+   "event": "Talk Barmaid",
+   "changed": [
+    "chooses=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_test_map",
+   "event": "Talk Barmaid",
+   "changed": [
+    "chooses=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_flower_city",
+   "event": "(walk spyder_cotton_town > spyder_dryadsgrove > spyder_routed > spyder_flower_city)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_flower_city",
+   "event": "Talk Captain - Candy",
+   "changed": [
+    "rivergoto=leather_town"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_flower_city",
+   "event": "Destination - Leather",
+   "changed": [
+    "rivergoto=nothing"
+   ],
+   "battles": [],
+   "teleport": "spyder_leather_town"
+  },
+  {
+   "map": "spyder_leather_town",
+   "event": "Talk Captain - Candy",
+   "changed": [
+    "rivergoto=leather_town"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_leather_town",
+   "event": "Destination - Leather",
+   "changed": [
+    "rivergoto=nothing"
+   ],
+   "battles": [],
+   "teleport": "spyder_leather_town"
+  },
+  {
+   "map": "spyder_wayfarer_inn1",
+   "event": "(walk spyder_route3 > spyder_wayfarer_inn1)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_wayfarer_inn1",
+   "event": "Heal Tuxemon",
+   "changed": [
+    "chooses=none"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_route5",
+   "event": "(walk spyder_route3 > spyder_route4 > spyder_flower_city > spyder_route5)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_route5",
+   "event": "Talk Sara",
+   "changed": [
+    "battle_last_trainer=spyder_route5_sara",
+    "won spyder_route5_sara:won"
+   ],
+   "battles": [
+    "spyder_route5_sara"
+   ]
+  },
+  {
+   "map": "spyder_route5",
+   "event": "Stop! - Goliath",
+   "changed": [
+    "battle_last_trainer=spyder_route5_goliath",
+    "won spyder_route5_goliath:won"
+   ],
+   "battles": [
+    "spyder_route5_goliath"
+   ]
+  },
+  {
+   "map": "spyder_route5",
+   "event": "Talk Edith",
+   "changed": [
+    "battle_last_trainer=spyder_route5_edith",
+    "won spyder_route5_edith:won"
+   ],
+   "battles": [
+    "spyder_route5_edith"
+   ]
+  },
+  {
+   "map": "spyder_route5",
+   "event": "Talk Hunter",
+   "changed": [
+    "battle_last_trainer=spyder_route5_hunter",
+    "won spyder_route5_hunter:won"
+   ],
+   "battles": [
+    "spyder_route5_hunter"
+   ]
+  },
+  {
+   "map": "spyder_route5",
+   "event": "Talk Marc (Double Battle with Try)",
+   "changed": [
+    "battle_last_trainer=spyder_route5_tryphaena",
+    "won spyder_route5_tryphaena:won"
+   ],
+   "battles": [
+    "spyder_route5_tryphaena"
+   ]
+  },
+  {
+   "map": "spyder_route5",
+   "event": "Track route5",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_town",
+   "event": "(walk spyder_timber_town)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_town",
+   "event": "Talk Captain - Candy",
+   "changed": [
+    "rivergoto=leather_town"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_town",
+   "event": "Destination - Leather",
+   "changed": [
+    "rivergoto=nothing"
+   ],
+   "battles": [],
+   "teleport": "spyder_leather_town"
+  },
+  {
+   "map": "spyder_dojo1",
+   "event": "(walk spyder_routed > spyder_flower_city > spyder_dojo1)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_dojo1",
+   "event": "Talk Fu1",
+   "changed": [
+    "fufirsttime=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_dojo1",
+   "event": "Talk Xiang1",
+   "changed": [
+    "xiangfirsttime=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_dojo1",
+   "event": "Talk Yin1",
+   "changed": [
+    "yinfirsttime=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_dojo1",
+   "event": "Talk Zhu1",
+   "changed": [
+    "zhufirsttime=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_dojo1",
+   "event": "Talk Zhu YN",
+   "changed": [
+    "zhu_yn=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_dojo1",
+   "event": "Talk Zhu Taste",
+   "changed": [
+    "which_taste=taste_cold",
+    "zhu_taste_choice=yes",
+    "money=100"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_dojo1",
+   "event": "Talk Zhu Cold",
+   "changed": [
+    "zhu_taste_done=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_dojo1",
+   "event": "Talk Zhu End",
+   "changed": [
+    "zhu_taste_done=null"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_dojo1",
+   "event": "Talk Zhu Reset",
+   "changed": [
+    "zhu_yn=null",
+    "which_taste=null",
+    "zhu_taste_choice=null"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_dojo1",
+   "event": "Talk Zhu YN",
+   "changed": [
+    "zhu_yn=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_dojo1",
+   "event": "Talk Zhu Reset",
+   "changed": [
+    "zhu_yn=null"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_dojo2",
+   "event": "(walk spyder_dojo2)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_dojo2",
+   "event": "Talk Iroh",
+   "changed": [
+    "battle_last_trainer=spyder_dojo_iroh",
+    "won spyder_dojo_iroh:won"
+   ],
+   "battles": [
+    "spyder_dojo_iroh"
+   ]
+  },
+  {
+   "map": "spyder_dojo2",
+   "event": "Talk Yangchen",
+   "changed": [
+    "battle_last_trainer=spyder_dojo_yangchen",
+    "won spyder_dojo_yangchen:won"
+   ],
+   "battles": [
+    "spyder_dojo_yangchen"
+   ]
+  },
+  {
+   "map": "spyder_dojo2",
+   "event": "Talk Kataro",
+   "changed": [
+    "battle_last_trainer=spyder_dojo_kataro",
+    "won spyder_dojo_kataro:won"
+   ],
+   "battles": [
+    "spyder_dojo_kataro"
+   ]
+  },
+  {
+   "map": "spyder_dojo2",
+   "event": "Talk Sokka",
+   "changed": [
+    "battle_last_trainer=spyder_dojo_sokka",
+    "won spyder_dojo_sokka:won"
+   ],
+   "battles": [
+    "spyder_dojo_sokka"
+   ]
+  },
+  {
+   "map": "spyder_dojo2",
+   "event": "Talk Toph",
+   "changed": [
+    "battle_last_trainer=spyder_dojo_toph",
+    "won spyder_dojo_toph:won"
+   ],
+   "battles": [
+    "spyder_dojo_toph"
+   ]
+  },
+  {
+   "map": "spyder_dojo2",
+   "event": "Encounter",
+   "changed": [
+    "wanintro=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_dojo2",
+   "event": "Talk Wan2",
+   "changed": [
+    "battle_last_trainer=spyder_dojo_wan",
+    "won spyder_dojo_wan:won"
+   ],
+   "battles": [
+    "spyder_dojo_wan"
+   ]
+  },
+  {
+   "map": "spyder_dojo1",
+   "event": "(walk spyder_dojo1)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_dojo1",
+   "event": "Talk Zhu YN",
+   "changed": [
+    "zhu_yn=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_dojo1",
+   "event": "Talk Zhu Reset",
+   "changed": [
+    "zhu_yn=null"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_dojo3",
+   "event": "(walk spyder_dojo2 > spyder_dojo3)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_dojo3",
+   "event": "Talk Saturn",
+   "changed": [
+    "battle_last_trainer=spyder_dojo_saturn",
+    "item tm_all_in=1",
+    "won spyder_dojo_saturn:won"
+   ],
+   "battles": [
+    "spyder_dojo_saturn"
+   ]
+  },
+  {
+   "map": "spyder_dojo3",
+   "event": "Talk Hephastus",
+   "changed": [
+    "battle_last_trainer=spyder_dojo_hephastus",
+    "item tm_blade=1",
+    "won spyder_dojo_hephastus:won"
+   ],
+   "battles": [
+    "spyder_dojo_hephastus"
+   ]
+  },
+  {
+   "map": "spyder_dojo3",
+   "event": "Talk Hermes",
+   "changed": [
+    "battle_last_trainer=spyder_dojo_hermes",
+    "item tm_panjandrum=1",
+    "won spyder_dojo_hermes:won"
+   ],
+   "battles": [
+    "spyder_dojo_hermes"
+   ]
+  },
+  {
+   "map": "spyder_dojo3",
+   "event": "Talk Orion",
+   "changed": [
+    "battle_last_trainer=spyder_dojo_orion",
+    "item tm_shadow_boxing=1",
+    "won spyder_dojo_orion:won"
+   ],
+   "battles": [
+    "spyder_dojo_orion"
+   ]
+  },
+  {
+   "map": "spyder_dojo3",
+   "event": "Talk Ares",
+   "changed": [
+    "battle_last_trainer=spyder_dojo_ares",
+    "item tm_scope=1",
+    "won spyder_dojo_ares:won"
+   ],
+   "battles": [
+    "spyder_dojo_ares"
+   ]
+  },
+  {
+   "map": "spyder_dojo3",
+   "event": "Encounter",
+   "changed": [
+    "tuintro=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_dojo3",
+   "event": "Talk Tu2",
+   "changed": [
+    "battle_last_trainer=spyder_dojo_tu",
+    "won spyder_dojo_tu:won"
+   ],
+   "battles": [
+    "spyder_dojo_tu"
+   ]
+  },
+  {
+   "map": "spyder_dojo4",
+   "event": "(walk spyder_dojo4)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_dojo4",
+   "event": "Billie Budaye",
+   "changed": [
+    "billie_choice=bamboon"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_dojo4",
+   "event": "Talk Thri",
+   "changed": [
+    "battle_last_trainer=spyder_dojo_thri",
+    "thriquestion=strength",
+    "dojothrichoice=yes",
+    "won spyder_dojo_thri:won"
+   ],
+   "battles": [
+    "spyder_dojo_thri"
+   ]
+  },
+  {
+   "map": "spyder_dojo4",
+   "event": "Talk Thri Sampsack",
+   "changed": [
+    "dojothrimonster=yes",
+    "party=rockitten+botbot+aardorn+aardorn+aardorn+sampsack"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_dojo4",
+   "event": "Billie encounter",
+   "changed": [
+    "battle_last_trainer=spyder_billie",
+    "dojobillie=yes"
+   ],
+   "battles": [
+    "spyder_billie"
+   ]
+  },
+  {
+   "map": "spyder_nimrod_bottom",
+   "event": "(walk spyder_dojo3 > spyder_dojo2 > spyder_dojo1 > spyder_flower_city > spyder_nimrod_bottom)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_nimrod_bottom",
+   "event": "Talk Rebel",
+   "changed": [
+    "battle_last_trainer=spyder_nimrod_rebel",
+    "won spyder_nimrod_rebel:won"
+   ],
+   "battles": [
+    "spyder_nimrod_rebel"
+   ]
+  },
+  {
+   "map": "spyder_nimrod_bottom",
+   "event": "Talk Bowie",
+   "changed": [
+    "battle_last_trainer=spyder_nimrod_bowie",
+    "won spyder_nimrod_bowie:won"
+   ],
+   "battles": [
+    "spyder_nimrod_bowie"
+   ]
+  },
+  {
+   "map": "spyder_nimrod_bottom",
+   "event": "Talk Tru",
+   "changed": [
+    "battle_last_trainer=spyder_nimrod_tru",
+    "won spyder_nimrod_tru:won"
+   ],
+   "battles": [
+    "spyder_nimrod_tru"
+   ]
+  },
+  {
+   "map": "spyder_nimrod_bottom",
+   "event": "Talk Elara",
+   "changed": [
+    "xeon_creation=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_nimrod_middle",
+   "event": "(walk spyder_nimrod_middle)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_nimrod_middle",
+   "event": "Talk Thatcher",
+   "changed": [
+    "battle_last_trainer=spyder_nimrod_thatcher",
+    "won spyder_nimrod_thatcher:won"
+   ],
+   "battles": [
+    "spyder_nimrod_thatcher"
+   ]
+  },
+  {
+   "map": "spyder_nimrod_middle",
+   "event": "Talk Honour",
+   "changed": [
+    "battle_last_trainer=spyder_nimrod_honour",
+    "won spyder_nimrod_honour:won"
+   ],
+   "battles": [
+    "spyder_nimrod_honour"
+   ]
+  },
+  {
+   "map": "spyder_nimrod_middle",
+   "event": "Talk Antimony",
+   "changed": [
+    "battle_last_trainer=spyder_nimrod_antimony",
+    "won spyder_nimrod_antimony:won"
+   ],
+   "battles": [
+    "spyder_nimrod_antimony"
+   ]
+  },
+  {
+   "map": "spyder_nimrod_middle",
+   "event": "Talk Chrome Robo",
+   "changed": [
+    "battle_last_trainer=spyder_nimrod_chromerobo",
+    "won spyder_nimrod_chromerobo:won"
+   ],
+   "battles": [
+    "spyder_nimrod_chromerobo"
+   ]
+  },
+  {
+   "map": "spyder_nimrod_middle",
+   "event": "Talk Xeon",
+   "changed": [
+    "battle_last_trainer=spyder_nimrod_xeon",
+    "won spyder_nimrod_xeon:won"
+   ],
+   "battles": [
+    "spyder_nimrod_xeon"
+   ]
+  },
+  {
+   "map": "spyder_nimrod_middle",
+   "event": "Talk Argon",
+   "changed": [
+    "battle_last_trainer=spyder_nimrod_argon",
+    "won spyder_nimrod_argon:won"
+   ],
+   "battles": [
+    "spyder_nimrod_argon"
+   ]
+  },
+  {
+   "map": "spyder_nimrod_middle",
+   "event": "Talk Archer",
+   "changed": [
+    "battle_last_trainer=spyder_nimrod_archer",
+    "won spyder_nimrod_archer:won"
+   ],
+   "battles": [
+    "spyder_nimrod_archer"
+   ]
+  },
+  {
+   "map": "spyder_nimrod_middle",
+   "event": "Zircon Back",
+   "changed": [
+    "zircon_argon=no",
+    "party=rockitten+botbot+aardorn+aardorn+aardorn"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_nimrod_middle",
+   "event": "Flashback Trigger No",
+   "changed": [
+    "zircon_argon=done"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_nimrod_middle",
+   "event": "Post Flashback",
+   "changed": [
+    "battle_last_trainer=spyder_nimrod_zircon",
+    "zircon_vs_argon=yes",
+    "won spyder_nimrod_zircon:won"
+   ],
+   "battles": [
+    "spyder_nimrod_zircon"
+   ]
+  },
+  {
+   "map": "spyder_nimrod_top",
+   "event": "(walk spyder_nimrod_top)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_nimrod_top",
+   "event": "Talk Maverick",
+   "changed": [
+    "battle_last_trainer=spyder_nimrod_maverick",
+    "won spyder_nimrod_maverick:won"
+   ],
+   "battles": [
+    "spyder_nimrod_maverick"
+   ]
+  },
+  {
+   "map": "spyder_nimrod_top",
+   "event": "Talk Justice",
+   "changed": [
+    "battle_last_trainer=spyder_nimrod_justice",
+    "won spyder_nimrod_justice:won"
+   ],
+   "battles": [
+    "spyder_nimrod_justice"
+   ]
+  },
+  {
+   "map": "spyder_nimrod_top",
+   "event": "Talk Mace",
+   "changed": [
+    "battle_last_trainer=spyder_nimrod_mace",
+    "won spyder_nimrod_mace:won"
+   ],
+   "battles": [
+    "spyder_nimrod_mace"
+   ]
+  },
+  {
+   "map": "spyder_flower_petshop",
+   "event": "(walk spyder_nimrod_middle > spyder_nimrod_bottom > spyder_flower_city > spyder_flower_petshop)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_flower_petshop",
+   "event": "Talk Shop Keeper - First Time",
+   "changed": [
+    "flower_talkedpetshop=yes",
+    "party=rockitten+botbot+aardorn+aardorn+aardorn+vivipere"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_flower_petshop",
+   "event": "Talk Shop Keeper - Later Times",
+   "changed": [
+    "check_vivipere_morph=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_flower_petshop",
+   "event": "Teleport to Flower City",
+   "changed": [
+    "check_vivipere_morph=no"
+   ],
+   "battles": [],
+   "teleport": "spyder_flower_city"
+  },
+  {
+   "map": "spyder_flower_petshop",
+   "event": "(walk spyder_flower_petshop)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_flower_petshop",
+   "event": "Talk Shop Keeper - Later Times",
+   "changed": [
+    "check_vivipere_morph=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_flower_scoop",
+   "event": "(walk spyder_flower_city > spyder_flower_scoop)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_flower_scoop",
+   "event": "Open Tech",
+   "changed": [
+    "techchoice=menu_item"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_flower_scoop",
+   "event": "Tech Buy Items",
+   "changed": [
+    "techchoice=(cleared)"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_flower_scoop",
+   "event": "Trigger Flashback",
+   "changed": [
+    "ocaptain=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_flower_scoop",
+   "event": "Open Tech",
+   "changed": [
+    "techchoice=menu_monster"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_flower_scoop",
+   "event": "Tech Buy Monsters",
+   "changed": [
+    "techchoice=(cleared)"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_flower_petshop",
+   "event": "(walk spyder_flower_city > spyder_flower_petshop)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_flower_petshop",
+   "event": "Teleport to Flower City",
+   "changed": [
+    "check_vivipere_morph=no"
+   ],
+   "battles": [],
+   "teleport": "spyder_flower_city"
+  },
+  {
+   "map": "spyder_flower_scoop",
+   "event": "(walk spyder_flower_scoop)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_flower_scoop",
+   "event": "Open Tech",
+   "changed": [
+    "techchoice=menu_item"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_flower_scoop",
+   "event": "Tech Buy Items",
+   "changed": [
+    "techchoice=(cleared)"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_town",
+   "event": "(walk spyder_flower_city > spyder_timber_town)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_town",
+   "event": "Talk Captain - Candy",
+   "changed": [
+    "rivergoto=flower_city"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_town",
+   "event": "Destination - Flower",
+   "changed": [
+    "rivergoto=nothing"
+   ],
+   "battles": [],
+   "teleport": "spyder_flower_city"
+  },
+  {
+   "map": "spyder_scoop1",
+   "event": "(walk spyder_timber_town > spyder_scoop1)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_scoop1",
+   "event": "Talk Lanth",
+   "changed": [
+    "battle_last_trainer=spyder_scoop_lanth",
+    "won spyder_scoop_lanth:won"
+   ],
+   "battles": [
+    "spyder_scoop_lanth"
+   ]
+  },
+  {
+   "map": "spyder_scoop1",
+   "event": "Talk Paine",
+   "changed": [
+    "battle_last_trainer=spyder_scoop_paine",
+    "won spyder_scoop_paine:won"
+   ],
+   "battles": [
+    "spyder_scoop_paine"
+   ]
+  },
+  {
+   "map": "spyder_scoop1",
+   "event": "Talk Rubid",
+   "changed": [
+    "battle_last_trainer=spyder_scoop_rubid",
+    "won spyder_scoop_rubid:won"
+   ],
+   "battles": [
+    "spyder_scoop_rubid"
+   ]
+  },
+  {
+   "map": "spyder_scoop1",
+   "event": "Talk Berys",
+   "changed": [
+    "battle_last_trainer=spyder_scoop_berys",
+    "won spyder_scoop_berys:won"
+   ],
+   "battles": [
+    "spyder_scoop_berys"
+   ]
+  },
+  {
+   "map": "spyder_scoop1",
+   "event": "Talk Turner",
+   "changed": [
+    "battle_last_trainer=spyder_scoop_turner",
+    "won spyder_scoop_turner:won"
+   ],
+   "battles": [
+    "spyder_scoop_turner"
+   ]
+  },
+  {
+   "map": "spyder_scoop2",
+   "event": "(walk spyder_scoop2)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_scoop2",
+   "event": "Leaving Scoop HQ",
+   "changed": [
+    "leavescoophq=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_scoop2",
+   "event": "Leaving Yes",
+   "changed": [
+    "leavescoophq=(cleared)"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_scoop3",
+   "event": "(walk spyder_scoop3)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_scoop3",
+   "event": "Talk Alyssa",
+   "changed": [
+    "battle_last_trainer=spyder_scoop_alyssa",
+    "won spyder_scoop_alyssa:won"
+   ],
+   "battles": [
+    "spyder_scoop_alyssa"
+   ]
+  },
+  {
+   "map": "spyder_scoop3",
+   "event": "Talk Taggart",
+   "changed": [
+    "battle_last_trainer=spyder_scoop_taggart",
+    "won spyder_scoop_taggart:won"
+   ],
+   "battles": [
+    "spyder_scoop_taggart"
+   ]
+  },
+  {
+   "map": "spyder_scoop3",
+   "event": "Talk Donald",
+   "changed": [
+    "battle_last_trainer=spyder_scoop_donald",
+    "won spyder_scoop_donald:won"
+   ],
+   "battles": [
+    "spyder_scoop_donald"
+   ]
+  },
+  {
+   "map": "spyder_scoop3",
+   "event": "Intro",
+   "changed": [
+    "cctv_scoop=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_scoop3",
+   "event": "Watch",
+   "changed": [
+    "battle_last_trainer=spyder_scoop_reese",
+    "cctv_scoop=null",
+    "won spyder_scoop_reese:won"
+   ],
+   "battles": [
+    "spyder_scoop_reese"
+   ]
+  },
+  {
+   "map": "spyder_scoop3",
+   "event": "Intro",
+   "changed": [
+    "cctv_scoop=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_scoop3",
+   "event": "Intro",
+   "changed": [
+    "cctv_scoop=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_scoop3",
+   "event": "Watch",
+   "changed": [
+    "cctv_scoop=null",
+    "won spyder_scoop_reese:won"
+   ],
+   "battles": [
+    "spyder_scoop_reese"
+   ]
+  },
+  {
+   "map": "spyder_scoop2",
+   "event": "(walk spyder_scoop2)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_scoop2",
+   "event": "Leaving Scoop HQ",
+   "changed": [
+    "leavescoophq=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_scoop2",
+   "event": "Leaving no",
+   "changed": [
+    "leavescoophq=(cleared)"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_scoop4",
+   "event": "(walk spyder_scoop3 > spyder_scoop4)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_scoop4",
+   "event": "Talk Orba",
+   "changed": [
+    "battle_last_trainer=spyder_scoop_orba",
+    "won spyder_scoop_orba:won"
+   ],
+   "battles": [
+    "spyder_scoop_orba"
+   ]
+  },
+  {
+   "map": "spyder_scoop4",
+   "event": "Talk Landrace",
+   "changed": [
+    "battle_last_trainer=wild:sludgehog",
+    "scooplandrace=yes",
+    "won wild:sludgehog:won"
+   ],
+   "battles": [
+    "wild:sludgehog"
+   ]
+  },
+  {
+   "map": "spyder_scoop4",
+   "event": "Talk LapinouA",
+   "changed": [
+    "battle_last_trainer=wild:lapinou",
+    "scooplapinoua=yes",
+    "won wild:lapinou:won"
+   ],
+   "battles": [
+    "wild:lapinou"
+   ]
+  },
+  {
+   "map": "spyder_scoop4",
+   "event": "Talk LapinouB",
+   "changed": [
+    "scooplapinoub=yes",
+    "won wild:lapinou:won"
+   ],
+   "battles": [
+    "wild:lapinou"
+   ]
+  },
+  {
+   "map": "spyder_scoop4",
+   "event": "Talk LapinouC",
+   "changed": [
+    "scooplapinouc=yes",
+    "won wild:lapinou:won"
+   ],
+   "battles": [
+    "wild:lapinou"
+   ]
+  },
+  {
+   "map": "spyder_scoop4",
+   "event": "Talk CochiniA",
+   "changed": [
+    "battle_last_trainer=wild:cochini",
+    "scoopcochinia=yes",
+    "won wild:cochini:won"
+   ],
+   "battles": [
+    "wild:cochini"
+   ]
+  },
+  {
+   "map": "spyder_scoop4",
+   "event": "Talk CochiniB",
+   "changed": [
+    "scoopcochinib=yes",
+    "won wild:cochini:won"
+   ],
+   "battles": [
+    "wild:cochini"
+   ]
+  },
+  {
+   "map": "spyder_scoop4",
+   "event": "Talk CochiniC",
+   "changed": [
+    "scoopcochinic=yes",
+    "won wild:cochini:won"
+   ],
+   "battles": [
+    "wild:cochini"
+   ]
+  },
+  {
+   "map": "spyder_scoop4",
+   "event": "Talk Weaver",
+   "changed": [
+    "battle_last_trainer=spyder_scoop_weaver",
+    "won spyder_scoop_weaver:won"
+   ],
+   "battles": [
+    "spyder_scoop_weaver"
+   ]
+  },
+  {
+   "map": "spyder_scoop2",
+   "event": "(walk spyder_scoop3 > spyder_scoop2)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_scoop2",
+   "event": "Leaving Scoop HQ",
+   "changed": [
+    "leavescoophq=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_scoop2",
+   "event": "Leaving Yes",
+   "changed": [
+    "leavescoophq=(cleared)"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_tunnel",
+   "event": "(walk spyder_timber_town > spyder_tunnel)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_tunnel",
+   "event": "Talk Tommy - post Scoop",
+   "changed": [
+    "battle_last_trainer=spyder_tunnelb_tommy",
+    "won spyder_tunnelb_tommy:won"
+   ],
+   "battles": [
+    "spyder_tunnelb_tommy"
+   ]
+  },
+  {
+   "map": "spyder_routee",
+   "event": "(walk spyder_routee)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_routee",
+   "event": "Battle Calliope",
+   "changed": [
+    "battle_last_trainer=spyder_routee_calliope",
+    "won spyder_routee_calliope:won"
+   ],
+   "battles": [
+    "spyder_routee_calliope"
+   ]
+  },
+  {
+   "map": "spyder_routee",
+   "event": "Talk Aiolos",
+   "changed": [
+    "battle_last_trainer=spyder_routee_aiolos",
+    "won spyder_routee_aiolos:won"
+   ],
+   "battles": [
+    "spyder_routee_aiolos"
+   ]
+  },
+  {
+   "map": "spyder_routee",
+   "event": "Track routee",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_routeb",
+   "event": "(walk spyder_routeb)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_routeb",
+   "event": "Talk Electra",
+   "changed": [
+    "battle_last_trainer=spyder_routeb_electra",
+    "routebelectra=yes",
+    "won spyder_routeb_electra:won"
+   ],
+   "battles": [
+    "spyder_routeb_electra"
+   ]
+  },
+  {
+   "map": "spyder_routeb",
+   "event": "Talk Cytherea",
+   "changed": [
+    "battle_last_trainer=spyder_routeb_cytherea",
+    "won spyder_routeb_cytherea:won"
+   ],
+   "battles": [
+    "spyder_routeb_cytherea"
+   ]
+  },
+  {
+   "map": "spyder_routeb",
+   "event": "Talk Nephthys",
+   "changed": [
+    "battle_last_trainer=spyder_routeb_nephthys",
+    "won spyder_routeb_nephthys:won"
+   ],
+   "battles": [
+    "spyder_routeb_nephthys"
+   ]
+  },
+  {
+   "map": "spyder_routeb",
+   "event": "Talk Sedna",
+   "changed": [
+    "battle_last_trainer=spyder_routeb_sedna",
+    "won spyder_routeb_sedna:won"
+   ],
+   "battles": [
+    "spyder_routeb_sedna"
+   ]
+  },
+  {
+   "map": "spyder_routeb",
+   "event": "Talk Calypso",
+   "changed": [
+    "battle_last_trainer=spyder_routeb_calypso",
+    "won spyder_routeb_calypso:won"
+   ],
+   "battles": [
+    "spyder_routeb_calypso"
+   ]
+  },
+  {
+   "map": "spyder_routeb",
+   "event": "Billie",
+   "changed": [
+    "routebbillie=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_routeb",
+   "event": "Track routeb",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "(walk spyder_datacenter)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "PC2",
+   "changed": [
+    "battle_last_trainer=wild:kernel",
+    "kernelquest=done",
+    "won wild:kernel:won"
+   ],
+   "battles": [
+    "wild:kernel"
+   ]
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "Billie",
+   "changed": [
+    "datacenterbillie=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "PC2",
+   "changed": [
+    "won wild:kernel:won"
+   ],
+   "battles": [
+    "wild:kernel"
+   ]
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "PC2",
+   "changed": [
+    "won wild:kernel:won"
+   ],
+   "battles": [
+    "wild:kernel"
+   ]
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "PC4",
+   "changed": [
+    "lightest=snokari"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "PC4 Yes",
+   "changed": [
+    "datascreen5=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "PC6",
+   "changed": [
+    "binary77=shybulb"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "PC6 Yes",
+   "changed": [
+    "datascreen7=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "PC8",
+   "changed": [
+    "smallest=ignibus"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "PC8 Yes",
+   "changed": [
+    "datascreen4=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "PC7",
+   "changed": [
+    "tallest=pythock"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "PC7 No",
+   "changed": [
+    "battle_last_trainer=wild:blasdoor",
+    "datascreen3=yes",
+    "won wild:blasdoor:won"
+   ],
+   "battles": [
+    "wild:blasdoor"
+   ]
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "PC7",
+   "changed": [
+    "tallest=snarlon"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "PC9",
+   "changed": [
+    "heaviest=apeoro"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "PC9 No",
+   "changed": [
+    "datascreen1=yes",
+    "won wild:blasdoor:won"
+   ],
+   "battles": [
+    "wild:blasdoor"
+   ]
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "PC9",
+   "changed": [
+    "heaviest=jemuar"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "PC10",
+   "changed": [
+    "binary193=baobaraffe"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "PC10 Yes",
+   "changed": [
+    "datascreen2=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "PC5",
+   "changed": [
+    "binary144=shammer"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "PC5 Yes",
+   "changed": [
+    "datascreen6=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "Talk Fermi",
+   "changed": [
+    "battle_last_trainer=spyder_datacenter_fermi",
+    "won spyder_datacenter_fermi:won"
+   ],
+   "battles": [
+    "spyder_datacenter_fermi"
+   ]
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "Talk Onnes",
+   "changed": [
+    "battle_last_trainer=spyder_datacenter_onnes",
+    "won spyder_datacenter_onnes:won"
+   ],
+   "battles": [
+    "spyder_datacenter_onnes"
+   ]
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "Talk Bayliss",
+   "changed": [
+    "battle_last_trainer=spyder_datacenter_bayliss",
+    "won spyder_datacenter_bayliss:won"
+   ],
+   "battles": [
+    "spyder_datacenter_bayliss"
+   ]
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "Talk Chomsky",
+   "changed": [
+    "battle_last_trainer=spyder_datacenter_chomsky",
+    "won spyder_datacenter_chomsky:won"
+   ],
+   "battles": [
+    "spyder_datacenter_chomsky"
+   ]
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "Talk Lagrange",
+   "changed": [
+    "battle_last_trainer=spyder_datacenter_lagrange",
+    "won spyder_datacenter_lagrange:won"
+   ],
+   "battles": [
+    "spyder_datacenter_lagrange"
+   ]
+  },
+  {
+   "map": "spyder_datacenter",
+   "event": "Open Box",
+   "changed": [
+    "item gold_pass=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_scoop",
+   "event": "(walk spyder_routeb > spyder_routee > spyder_timber_town > spyder_timber_scoop)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_scoop",
+   "event": "Open Tech",
+   "changed": [
+    "techchoice=menu_item"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_scoop",
+   "event": "Tech Buy Items",
+   "changed": [
+    "techchoice=(cleared)"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_cafe",
+   "event": "(walk spyder_timber_town > spyder_timber_cafe)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_cafe",
+   "event": "Talk Barmaid",
+   "changed": [
+    "chooses=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_cafe",
+   "event": "Heal Tuxemon",
+   "changed": [
+    "chooses=none"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_cafe",
+   "event": "Talk Florist 1",
+   "changed": [
+    "florists_cafe=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_cafe",
+   "event": "Talk Barmaid",
+   "changed": [
+    "chooses=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_cafe",
+   "event": "Talk Barmaid",
+   "changed": [
+    "chooses=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_cafe",
+   "event": "Heal Tuxemon",
+   "changed": [
+    "chooses=none"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_scoop",
+   "event": "(walk spyder_timber_town > spyder_timber_scoop)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_scoop",
+   "event": "Open Tech",
+   "changed": [
+    "techchoice=menu_monster"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_scoop",
+   "event": "Tech Buy Monsters",
+   "changed": [
+    "techchoice=(cleared)"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_walledgarden1",
+   "event": "(walk spyder_timber_town > spyder_timber_walledgarden1)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_walledgarden1",
+   "event": "Talk fugger",
+   "changed": [
+    "battle_last_trainer=spyder_walled_fugger",
+    "won spyder_walled_fugger:won"
+   ],
+   "battles": [
+    "spyder_walled_fugger"
+   ]
+  },
+  {
+   "map": "spyder_timber_walledgarden1",
+   "event": "Talk carnegie",
+   "changed": [
+    "battle_last_trainer=spyder_walled_carnegie",
+    "won spyder_walled_carnegie:won"
+   ],
+   "battles": [
+    "spyder_walled_carnegie"
+   ]
+  },
+  {
+   "map": "spyder_timber_walledgarden1",
+   "event": "Talk ford",
+   "changed": [
+    "battle_last_trainer=spyder_walled_ford",
+    "won spyder_walled_ford:won"
+   ],
+   "battles": [
+    "spyder_walled_ford"
+   ]
+  },
+  {
+   "map": "spyder_timber_walledgarden1",
+   "event": "Talk girard",
+   "changed": [
+    "battle_last_trainer=spyder_walled_girard",
+    "won spyder_walled_girard:won"
+   ],
+   "battles": [
+    "spyder_walled_girard"
+   ]
+  },
+  {
+   "map": "spyder_timber_walledgarden1",
+   "event": "Talk vanderbilt",
+   "changed": [
+    "battle_last_trainer=spyder_walled_vanderbilt",
+    "won spyder_walled_vanderbilt:won"
+   ],
+   "battles": [
+    "spyder_walled_vanderbilt"
+   ]
+  },
+  {
+   "map": "spyder_timber_walledgarden1",
+   "event": "Talk astor",
+   "changed": [
+    "battle_last_trainer=spyder_walled_astor",
+    "won spyder_walled_astor:won"
+   ],
+   "battles": [
+    "spyder_walled_astor"
+   ]
+  },
+  {
+   "map": "spyder_timber_walledgarden2",
+   "event": "(walk spyder_timber_walledgarden2)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_walledgarden2",
+   "event": "Talk osman",
+   "changed": [
+    "battle_last_trainer=spyder_walled_osman",
+    "won spyder_walled_osman:won"
+   ],
+   "battles": [
+    "spyder_walled_osman"
+   ]
+  },
+  {
+   "map": "spyder_timber_walledgarden2",
+   "event": "Talk Alexander",
+   "changed": [
+    "battle_last_trainer=spyder_walled_alexander",
+    "won spyder_walled_alexander:won"
+   ],
+   "battles": [
+    "spyder_walled_alexander"
+   ]
+  },
+  {
+   "map": "spyder_timber_walledgarden2",
+   "event": "Talk musa",
+   "changed": [
+    "battle_last_trainer=spyder_walled_musa",
+    "won spyder_walled_musa:won"
+   ],
+   "battles": [
+    "spyder_walled_musa"
+   ]
+  },
+  {
+   "map": "spyder_timber_walledgarden2",
+   "event": "Talk augustus",
+   "changed": [
+    "battle_last_trainer=spyder_walled_augustus",
+    "won spyder_walled_augustus:won"
+   ],
+   "battles": [
+    "spyder_walled_augustus"
+   ]
+  },
+  {
+   "map": "spyder_timber_walledgarden2",
+   "event": "Talk midas",
+   "changed": [
+    "battle_last_trainer=spyder_walled_midas",
+    "won spyder_walled_midas:won"
+   ],
+   "battles": [
+    "spyder_walled_midas"
+   ]
+  },
+  {
+   "map": "spyder_timber_walledgarden2",
+   "event": "Talk Billie",
+   "changed": [
+    "walledbillie=yes",
+    "walledmidas=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_walledgarden2",
+   "event": "Talk rufus",
+   "changed": [
+    "battle_last_trainer=spyder_walled_rufus",
+    "won spyder_walled_rufus:won"
+   ],
+   "battles": [
+    "spyder_walled_rufus"
+   ]
+  },
+  {
+   "map": "spyder_timber_walledgarden2",
+   "event": "Talk crassus",
+   "changed": [
+    "battle_last_trainer=spyder_walled_crassus",
+    "won spyder_walled_crassus:won"
+   ],
+   "battles": [
+    "spyder_walled_crassus"
+   ]
+  },
+  {
+   "map": "spyder_timber_scoop",
+   "event": "(walk spyder_timber_walledgarden1 > spyder_timber_town > spyder_timber_scoop)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_scoop",
+   "event": "Open Tech",
+   "changed": [
+    "techchoice=menu_item"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_timber_scoop",
+   "event": "Tech Buy Items",
+   "changed": [
+    "techchoice=(cleared)"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_center",
+   "event": "(walk spyder_timber_town > spyder_tunnel > spyder_route6 > spyder_candy_town > spyder_candy_center)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_center",
+   "event": "Elevator1",
+   "changed": [
+    "choice_floor=1floor"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_center",
+   "event": "Choice Floor 1st",
+   "changed": [
+    "choice_floor=null"
+   ],
+   "battles": [],
+   "teleport": "spyder_candy_hospital1"
+  },
+  {
+   "map": "spyder_candy_hospital1",
+   "event": "Enable No-Monster Blackout",
+   "changed": [
+    "blackout_no_monsters=true"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_hospital1",
+   "event": "Elevator1a",
+   "changed": [
+    "choice_floor=0floor"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_hospital1",
+   "event": "Choice Floor Ground",
+   "changed": [
+    "choice_floor=null",
+    "blackout_no_monsters=false"
+   ],
+   "battles": [],
+   "teleport": "spyder_candy_center"
+  },
+  {
+   "map": "spyder_candy_center",
+   "event": "Elevator1",
+   "changed": [
+    "choice_floor=2floor"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_center",
+   "event": "Choice Floor 2nd",
+   "changed": [
+    "choice_floor=null",
+    "passcode_color=red"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_center",
+   "event": "Passcode Number",
+   "changed": [
+    "passcode_number=2!"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_center",
+   "event": "Passcode Rejected Color",
+   "changed": [
+    "passcode_color=(cleared)",
+    "passcode_number=(cleared)"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_center",
+   "event": "Elevator2",
+   "changed": [
+    "choice_floor=1floor"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_center",
+   "event": "Choice Floor 1st",
+   "changed": [
+    "choice_floor=null"
+   ],
+   "battles": [],
+   "teleport": "spyder_candy_hospital1"
+  },
+  {
+   "map": "spyder_candy_hospital1",
+   "event": "Enable No-Monster Blackout",
+   "changed": [
+    "blackout_no_monsters=true"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_hospital1",
+   "event": "Elevator2a",
+   "changed": [
+    "choice_floor=0floor"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_hospital1",
+   "event": "Choice Floor Ground",
+   "changed": [
+    "choice_floor=null",
+    "blackout_no_monsters=false"
+   ],
+   "battles": [],
+   "teleport": "spyder_candy_center"
+  },
+  {
+   "map": "spyder_greenwash",
+   "event": "(walk spyder_candy_town > spyder_greenwash)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_greenwash",
+   "event": "Talk Looten",
+   "changed": [
+    "battle_last_trainer=spyder_greenwash_looten",
+    "item aardant=1",
+    "won spyder_greenwash_looten:won"
+   ],
+   "battles": [
+    "spyder_greenwash_looten"
+   ]
+  },
+  {
+   "map": "spyder_greenwash",
+   "event": "Talk Chip",
+   "changed": [
+    "battle_last_trainer=spyder_greenwash_chip",
+    "won spyder_greenwash_chip:won"
+   ],
+   "battles": [
+    "spyder_greenwash_chip"
+   ]
+  },
+  {
+   "map": "spyder_greenwash",
+   "event": "Talk Clarence",
+   "changed": [
+    "battle_last_trainer=spyder_greenwash_clarence",
+    "won spyder_greenwash_clarence:won"
+   ],
+   "battles": [
+    "spyder_greenwash_clarence"
+   ]
+  },
+  {
+   "map": "spyder_greenwash",
+   "event": "Talk Broer",
+   "changed": [
+    "battle_last_trainer=spyder_greenwash_broer",
+    "item potion=4",
+    "won spyder_greenwash_broer:won"
+   ],
+   "battles": [
+    "spyder_greenwash_broer"
+   ]
+  },
+  {
+   "map": "spyder_greenwash",
+   "event": "Talk Lewie",
+   "changed": [
+    "battle_last_trainer=spyder_greenwash_lewie",
+    "won spyder_greenwash_lewie:won"
+   ],
+   "battles": [
+    "spyder_greenwash_lewie"
+   ]
+  },
+  {
+   "map": "spyder_greenwash",
+   "event": "Talk Morehouse",
+   "changed": [
+    "battle_last_trainer=spyder_greenwash_morehouse",
+    "won spyder_greenwash_morehouse:won"
+   ],
+   "battles": [
+    "spyder_greenwash_morehouse"
+   ]
+  },
+  {
+   "map": "spyder_greenwash_greenhouse",
+   "event": "(walk spyder_greenwash_greenhouse)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_greenwash_greenhouse",
+   "event": "Talk Gregor",
+   "changed": [
+    "battle_last_trainer=spyder_greenwash_gregor",
+    "won spyder_greenwash_gregor:won"
+   ],
+   "battles": [
+    "spyder_greenwash_gregor"
+   ]
+  },
+  {
+   "map": "spyder_greenwash_greenhouse",
+   "event": "Talk Alex",
+   "changed": [
+    "battle_last_trainer=spyder_greenwash_alex",
+    "won spyder_greenwash_alex:won"
+   ],
+   "battles": [
+    "spyder_greenwash_alex"
+   ]
+  },
+  {
+   "map": "spyder_greenwash_greenhouse",
+   "event": "Talk Hunt",
+   "changed": [
+    "battle_last_trainer=spyder_greenwash_hunt",
+    "won spyder_greenwash_hunt:won"
+   ],
+   "battles": [
+    "spyder_greenwash_hunt"
+   ]
+  },
+  {
+   "map": "spyder_greenwash_greenhouse",
+   "event": "Talk Lewis",
+   "changed": [
+    "battle_last_trainer=spyder_greenwash_lewis",
+    "won spyder_greenwash_lewis:won"
+   ],
+   "battles": [
+    "spyder_greenwash_lewis"
+   ]
+  },
+  {
+   "map": "spyder_greenwash_greenhouse",
+   "event": "Talk Louis",
+   "changed": [
+    "battle_last_trainer=spyder_greenwash_louis",
+    "won spyder_greenwash_louis:won"
+   ],
+   "battles": [
+    "spyder_greenwash_louis"
+   ]
+  },
+  {
+   "map": "spyder_greenwash_greenhouse",
+   "event": "Talk Gluck",
+   "changed": [
+    "battle_last_trainer=spyder_greenwash_gluck",
+    "won spyder_greenwash_gluck:won"
+   ],
+   "battles": [
+    "spyder_greenwash_gluck"
+   ]
+  },
+  {
+   "map": "spyder_candy_center",
+   "event": "(walk spyder_candy_town > spyder_candy_center)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_center",
+   "event": "Elevator1",
+   "changed": [
+    "choice_floor=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_center",
+   "event": "Elevator2",
+   "changed": [
+    "choice_floor=2floor"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_center",
+   "event": "Choice Floor 2nd",
+   "changed": [
+    "choice_floor=null",
+    "passcode_color=orange"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_center",
+   "event": "Passcode Number",
+   "changed": [
+    "passcode_number=02"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_center",
+   "event": "Passcode Rejected Color",
+   "changed": [
+    "passcode_color=(cleared)",
+    "passcode_number=(cleared)"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_center",
+   "event": "Elevator2",
+   "changed": [
+    "choice_floor=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_scoop",
+   "event": "(walk spyder_candy_town > spyder_candy_scoop)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_scoop",
+   "event": "Open Tech",
+   "changed": [
+    "techchoice=menu_item"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_scoop",
+   "event": "Tech Buy Items",
+   "changed": [
+    "techchoice=(cleared)"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "(walk spyder_candy_town > spyder_candy_cafe)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "Box Empty",
+   "changed": [
+    "cafe_done=yes",
+    "party=rockitten+botbot+aardorn+aardorn+aardorn+vivipere+nudiflot_male"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "Whats Up",
+   "changed": [
+    "shady=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "Rename Player",
+   "changed": [
+    "shady=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "Howdy",
+   "changed": [
+    "happy=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "Rename Monster",
+   "changed": [
+    "happy=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "Lovelace Offers Invention",
+   "changed": [
+    "invention_choice=xp_transmitter"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "Lovelace Gives Transmitter",
+   "changed": [
+    "invention_given=xp_transmitter",
+    "item xp_transmitter=2"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "Lovelace Offers Feeder Swap",
+   "changed": [
+    "invention_swap_feeder=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "Lovelace Swaps To Feeder",
+   "changed": [
+    "invention_swap_feeder=none",
+    "item xp_feeder=2",
+    "item xp_transmitter=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "Lovelace Offers Feeder Swap",
+   "changed": [
+    "invention_swap_feeder=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "Lovelace Offers Feeder Swap",
+   "changed": [
+    "invention_swap_feeder=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "Lovelace Swaps To Feeder",
+   "changed": [
+    "invention_swap_feeder=none",
+    "item xp_feeder=3",
+    "item xp_transmitter=0"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "Lovelace Offers Transmitter Swap",
+   "changed": [
+    "invention_swap_transmitter=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "Lovelace Swaps To Transmitter",
+   "changed": [
+    "invention_swap_transmitter=none",
+    "item xp_feeder=2",
+    "item xp_transmitter=1"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "Lovelace Offers Transmitter Swap",
+   "changed": [
+    "invention_swap_transmitter=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "Lovelace Offers Transmitter Swap",
+   "changed": [
+    "invention_swap_transmitter=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "Lovelace Swaps To Transmitter",
+   "changed": [
+    "invention_swap_transmitter=none",
+    "item xp_feeder=1",
+    "item xp_transmitter=2"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "Talk Barmaid",
+   "changed": [
+    "chooses=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "Heal Tuxemon",
+   "changed": [
+    "chooses=none"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "Talk Soldier 1",
+   "changed": [
+    "incident_greenwash=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "Talk Barmaid",
+   "changed": [
+    "chooses=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "Talk Barmaid",
+   "changed": [
+    "chooses=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_cafe",
+   "event": "Heal Tuxemon",
+   "changed": [
+    "chooses=none"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_scoop",
+   "event": "(walk spyder_candy_town > spyder_candy_scoop)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_scoop",
+   "event": "Open Tech",
+   "changed": [
+    "techchoice=menu_monster"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_scoop",
+   "event": "Tech Buy Monsters",
+   "changed": [
+    "techchoice=(cleared)"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_greenwash_level2",
+   "event": "(walk spyder_candy_town > spyder_greenwash > spyder_greenwash_level2)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_greenwash_level2",
+   "event": "Talk Aissa",
+   "changed": [
+    "battle_last_trainer=spyder_greenwash_aissa",
+    "won spyder_greenwash_aissa:won"
+   ],
+   "battles": [
+    "spyder_greenwash_aissa"
+   ]
+  },
+  {
+   "map": "spyder_greenwash_level2",
+   "event": "Talk Dippel",
+   "changed": [
+    "battle_last_trainer=spyder_greenwash_dippel",
+    "won spyder_greenwash_dippel:won"
+   ],
+   "battles": [
+    "spyder_greenwash_dippel"
+   ]
+  },
+  {
+   "map": "spyder_greenwash_level2",
+   "event": "Talk Moreau",
+   "changed": [
+    "battle_last_trainer=spyder_greenwash_moreau",
+    "won spyder_greenwash_moreau:won"
+   ],
+   "battles": [
+    "spyder_greenwash_moreau"
+   ]
+  },
+  {
+   "map": "spyder_greenwash_level2",
+   "event": "Talk Dempsey",
+   "changed": [
+    "battle_last_trainer=spyder_greenwash_dempsey",
+    "won spyder_greenwash_dempsey:won"
+   ],
+   "battles": [
+    "spyder_greenwash_dempsey"
+   ]
+  },
+  {
+   "map": "spyder_greenwash_level2",
+   "event": "Talk Heidenstam",
+   "changed": [
+    "battle_last_trainer=spyder_greenwash_heidenstam",
+    "won spyder_greenwash_heidenstam:won"
+   ],
+   "battles": [
+    "spyder_greenwash_heidenstam"
+   ]
+  },
+  {
+   "map": "spyder_greenwash_level2",
+   "event": "Talk Fossilisator First",
+   "changed": [
+    "trigger_fossilisator=yes",
+    "intro_fossilisator=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_greenwash_level2",
+   "event": "Talk Fossilisator All Three",
+   "changed": [
+    "all_three_choice=yes",
+    "trigger_fossilator=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_greenwash_level2",
+   "event": "Talk Got All Three",
+   "changed": [
+    "got_all_three=yes",
+    "item shammer_fossil=0",
+    "item rhincus_fossil=0",
+    "item petrified_dung=0",
+    "party=rockitten+botbot+aardorn+aardorn+aardorn+vivipere+nudiflot_male+coproblight+rhincus+shammer"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_greenwash_level2",
+   "event": "Flashback Fossilator",
+   "changed": [
+    "unveildefossilator=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_greenwash_level2",
+   "event": "Flashback Fossilator",
+   "changed": [
+    "unveildefossilator=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_greenwash_level2",
+   "event": "Trigger Fossilator",
+   "changed": [],
+   "battles": [],
+   "teleport": "spyder_greenwash_level3"
+  },
+  {
+   "map": "spyder_greenwash_level3",
+   "event": "Flashback Fossilator",
+   "changed": [
+    "flashback=off",
+    "unveildefossilator=done"
+   ],
+   "battles": [],
+   "teleport": "spyder_greenwash_level2"
+  },
+  {
+   "map": "spyder_greenwash_level2",
+   "event": "Flashback Fossilator",
+   "changed": [
+    "unveildefossilator=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_greenwash_level2",
+   "event": "Flashback Dempsey",
+   "changed": [
+    "dempsey_flashback=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_greenwash_level2",
+   "event": "Flashback Dempsey",
+   "changed": [
+    "dempsey_flashback=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_greenwash_level2",
+   "event": "Trigger Dempsey",
+   "changed": [],
+   "battles": [],
+   "teleport": "spyder_greenwash_level3"
+  },
+  {
+   "map": "spyder_greenwash_level3",
+   "event": "Flashback Dempsey",
+   "changed": [
+    "dempsey_flashback=done"
+   ],
+   "battles": [],
+   "teleport": "spyder_greenwash_level2"
+  },
+  {
+   "map": "spyder_greenwash_level2",
+   "event": "Flashback Dempsey",
+   "changed": [
+    "dempsey_flashback=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_scoop",
+   "event": "(walk spyder_greenwash > spyder_candy_town > spyder_candy_scoop)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_scoop",
+   "event": "Open Tech",
+   "changed": [
+    "techchoice=menu_item"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_scoop",
+   "event": "Tech Buy Items",
+   "changed": [
+    "techchoice=(cleared)"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_house3",
+   "event": "(walk spyder_candy_town > spyder_candy_house3)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_house3",
+   "event": "Talk Catgirl - Has Rhincus",
+   "changed": [
+    "catgirl_candy_willtrade=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_house3",
+   "event": "Talk Catgirl - Has Rhincus",
+   "changed": [
+    "catgirl_candy_willtrade=no"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_house3",
+   "event": "Talk Catgirl - Has Rhincus",
+   "changed": [
+    "catgirl_candy_willtrade=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_inn2",
+   "event": "(walk spyder_candy_town > spyder_candy_port > spyder_candy_inn1 > spyder_candy_inn2)",
+   "changed": [],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_inn2",
+   "event": "Talk James Question",
+   "changed": [
+    "sowhat=spyder_candyinn_james2"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_inn2",
+   "event": "Talk Jess Question",
+   "changed": [
+    "likehoney=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_inn2",
+   "event": "Talk Monk Question",
+   "changed": [
+    "allergicbee=yes"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_inn2",
+   "event": "Talk Monk Allergic Yes",
+   "changed": [
+    "beereaction=spyder_allergic_mild",
+    "beeevent=start"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_inn2",
+   "event": "Bee Event Buzzing",
+   "changed": [
+    "beeevent=stung"
+   ],
+   "battles": [],
+   "teleport": "spyder_candy_inn2"
+  },
+  {
+   "map": "spyder_candy_inn2",
+   "event": "Bee Event Stung",
+   "changed": [
+    "beeevent=done"
+   ],
+   "battles": []
+  },
+  {
+   "map": "spyder_candy_inn2",
+   "event": "Bee Event Stung Monster Mild",
+   "changed": [
+    "beeevent=end",
+    "party=rockitten+botbot+aardorn+aardorn+aardorn+vivipere+nudiflot_male+coproblight+rhincus+shammer+tumbleworm"
+   ],
+   "battles": []
+  }
+ ]
+}

@@ -1,0 +1,1663 @@
+{
+ "format": "pocket-tuxemon/scout-S1-mapping/v1",
+ "source": {
+  "tuxemon": "9e6258ff",
+  "kit": "5dd48ef",
+  "census": "findings/scout-S1/census.json (per-file view)"
+ },
+ "totals": {
+  "events": 4578,
+  "actionTypes": 98,
+  "actionUses": 13617,
+  "conditionTypes": 40,
+  "conditionOperatorPairs": 64,
+  "conditionUses": 8663,
+  "behaviourUses": 787
+ },
+ "tiers": {
+  "T1": "maps onto the kit's current vocabulary (17 op names: 15 commands + variable set/random), possibly lowered by the importer",
+  "T2": "needs a new generic kit capability (see t2Capabilities)",
+  "T3": "monster/combat subsystem: P2; P1 placeholder given",
+  "T4": "not needed: presentation, debug, meta or dead data"
+ },
+ "tierTally": {
+  "actions": {
+   "T1": {
+    "types": 19,
+    "uses": 6246
+   },
+   "T2": {
+    "types": 19,
+    "uses": 4775
+   },
+   "T3": {
+    "types": 44,
+    "uses": 2249
+   },
+   "T4": {
+    "types": 16,
+    "uses": 347
+   }
+  },
+  "conditions": {
+   "T1": {
+    "types": 10,
+    "uses": 4591
+   },
+   "T2": {
+    "types": 5,
+    "uses": 2612
+   },
+   "T3": {
+    "types": 19,
+    "uses": 1138
+   },
+   "T4": {
+    "types": 6,
+    "uses": 322
+   }
+  }
+ },
+ "actions": [
+  {
+   "name": "translated_dialog",
+   "tier": "T1",
+   "count": 2068,
+   "maps": 176,
+   "target": "text",
+   "p1": "msgstr from l18n/en_US base.po; pages split at \\n (Tuxemon paginator), word-wrapped to 52 cols, <=4 lines per text command",
+   "notes": "args 2-5 (avatar/position/alignment/style) are layout -> ignored; ${{name}} -> player name (T2-14), ${{currency}}/${{map_name}}/${{north..}} folded at import; 5 keys missing from en_US",
+   "example": "translated_dialog 37707_computer"
+  },
+  {
+   "name": "char_face",
+   "tier": "T2",
+   "count": 2027,
+   "maps": 236,
+   "target": "moveRoute {target, steps:[faceX]} ; T2-4 target any event ; T2-5 turnToward",
+   "p1": "player/self: moveRoute face (T1); other NPCs need T2-4; toward a character needs T2-5",
+   "split": {
+    "player": 1153,
+    "npc": 874,
+    "towardCharacterOrPlayer": 180
+   },
+   "t2": [
+    "T2-4",
+    "T2-5"
+   ],
+   "example": "char_face 37707_male,down"
+  },
+  {
+   "name": "create_npc",
+   "tier": "T2",
+   "count": 1503,
+   "maps": 177,
+   "target": "NPC event (one per map x slug) + variable local.npc.<slug>=1",
+   "p1": "importer fuses spawn guard + talk events into one kit event per NPC; presence is a per-visit variable",
+   "t2": [
+    "T2-6",
+    "T2-7",
+    "T2-11"
+   ],
+   "notes": "4th arg wander(707)/stand(88) -> page moveType; 29 map x slug pairs spawn at several positions (T2-7 place); 4 slugs missing from db/npc; drawing the NPC (16x32 walker, facing, walk pose) is T2-11",
+   "example": "create_npc 37707_male,33,8"
+  },
+  {
+   "name": "transition_teleport",
+   "tier": "T1",
+   "count": 1049,
+   "maps": 253,
+   "target": "transfer {map, x, y, dir, fade}",
+   "p1": "always the player; trailing char_face player,<dir> (884) becomes dir; trailing instants are hoisted before the terminal transfer; rgb ignored",
+   "notes": "0 of 1049 name a missing map; 14 same-map",
+   "example": "transition_teleport player,37707_town.tmx,24,6,0.5"
+  },
+  {
+   "name": "add_monster",
+   "tier": "T3",
+   "count": 792,
+   "maps": 84,
+   "target": "party (P2)",
+   "p1": "player gift: variable sys.party_size += 1 and switch mon.<slug>; NPC team setup (3rd arg = npc slug) dropped",
+   "split": {
+    "toPlayer": 75,
+    "toNpc": 717
+   },
+   "example": "add_monster fruitera,10"
+  },
+  {
+   "name": "char_talk",
+   "tier": "T1",
+   "count": 772,
+   "maps": 60,
+   "target": "text",
+   "p1": "text of the NPC's db/npc speech.profile.default.<field> msgid (pre_battle 301, post_battle_lose 471)",
+   "notes": "no profile field is a list, so Tuxemon's random line pick never matters",
+   "example": "char_talk classic_gym_leader_astra,pre_battle"
+  },
+  {
+   "name": "set_variable",
+   "tier": "T1",
+   "count": 715,
+   "maps": 118,
+   "target": "variable {id: v.<name>, set: {op:set, value: enumCode}}",
+   "p1": "string value -> enum code (1-based index in the variable's sorted value table; 0 = unset)",
+   "example": "set_variable 37707_tower:activated"
+  },
+  {
+   "name": "random_encounter",
+   "tier": "T3",
+   "count": 476,
+   "maps": 56,
+   "target": "wild encounter (P2)",
+   "p1": "no-op (a placeholder on every grass step would be noise)",
+   "example": "random_encounter 37707_town"
+  },
+  {
+   "name": "wait",
+   "tier": "T1",
+   "count": 441,
+   "maps": 54,
+   "target": "wait {seconds}",
+   "p1": "direct",
+   "example": "wait 0.4"
+  },
+  {
+   "name": "pathfind",
+   "tier": "T2",
+   "count": 336,
+   "maps": 61,
+   "target": "moveRoute {target, steps:[{pathTo:{x,y}}]} (T2-5)",
+   "p1": "dropped in the v1 prototype; needs runtime BFS",
+   "split": {
+    "npc": 278,
+    "player": 58
+   },
+   "t2": [
+    "T2-4",
+    "T2-5"
+   ],
+   "example": "pathfind maple_wren,6,18"
+  },
+  {
+   "name": "start_battle",
+   "tier": "T3",
+   "count": 331,
+   "maps": 78,
+   "target": "battle (P2)",
+   "p1": "inline placeholder: text '[BATTLE] <name>' then writes bo.<opp>.won, defeated.<opp>, boc.<opp>.won+1, v.battle_last_result/winner/trainer; skipped when sys.party_size < 1 (Tuxemon skips illegal battles)",
+   "example": "start_battle player,2"
+  },
+  {
+   "name": "unlock_controls",
+   "tier": "T1",
+   "count": 330,
+   "maps": 92,
+   "target": "(none)",
+   "p1": "no-op: a blocking page already freezes the player",
+   "t2": [
+    "T2-8"
+   ],
+   "notes": "27 events unlock a lock taken by another event -> T2-8 input lock for exactness",
+   "example": "unlock_controls"
+  },
+  {
+   "name": "lock_controls",
+   "tier": "T1",
+   "count": 323,
+   "maps": 93,
+   "target": "(none)",
+   "p1": "no-op inside blocking pages",
+   "t2": [
+    "T2-8"
+   ],
+   "notes": "21 events lock without unlocking",
+   "example": "lock_controls"
+  },
+  {
+   "name": "play_map_animation",
+   "tier": "T4",
+   "count": 276,
+   "maps": 24,
+   "target": "-",
+   "p1": "dropped (grass rustle / door puffs)",
+   "example": "play_map_animation grass,0.1,noloop,player"
+  },
+  {
+   "name": "remove_npc",
+   "tier": "T2",
+   "count": 224,
+   "maps": 61,
+   "target": "variable local.npc.<slug> = 0",
+   "p1": "presence variable; the spawn guard re-spawns it if it still holds (Tuxemon semantics)",
+   "t2": [
+    "T2-6"
+   ],
+   "example": "remove_npc allie"
+  },
+  {
+   "name": "pathfind_to_char",
+   "tier": "T2",
+   "count": 201,
+   "maps": 50,
+   "target": "moveRoute {target, steps:[{approach:{target:'player', side?, distance?}}]} (T2-5)",
+   "p1": "dropped in v1; all 201 move an NPC to the player",
+   "t2": [
+    "T2-4",
+    "T2-5"
+   ],
+   "example": "pathfind_to_char player,spyder_hospital1_aurora"
+  },
+  {
+   "name": "play_music",
+   "tier": "T2",
+   "count": 200,
+   "maps": 197,
+   "target": "bgm hook (T2-12); map.bgm for the `not music_playing X -> play_music X` idiom",
+   "p1": "silent",
+   "t2": [
+    "T2-12"
+   ],
+   "example": "play_music music_mystic_island"
+  },
+  {
+   "name": "set_environment",
+   "tier": "T3",
+   "count": 174,
+   "maps": 119,
+   "target": "battle backdrop (P2)",
+   "p1": "dropped; the `not environment_is X` guard idiom goes with it",
+   "example": "set_environment grass"
+  },
+  {
+   "name": "translated_dialog_choice",
+   "tier": "T1",
+   "count": 149,
+   "maps": 60,
+   "target": "choices {prompt:'', options:[{text, commands:[variable v.<var> = code]}]}",
+   "p1": "labels from .po; escape leaves the variable unset (Tuxemon re-asks)",
+   "split": {
+    "upTo4Options": 139,
+    "moreThan4": 10
+   },
+   "t2": [
+    "T2-9"
+   ],
+   "notes": "10 uses have 5 or 8 options, 2 labels exceed 24 chars -> T2-9",
+   "example": "translated_dialog_choice mistaken:thats_me,cityparkchoice"
+  },
+  {
+   "name": "add_item",
+   "tier": "T1",
+   "count": 118,
+   "maps": 37,
+   "target": "item {item, set: add|sub, count}",
+   "p1": "negative quantity -> sub; NPC bag (1 use) dropped (T3); item slug read from a variable (elianeoutput, 7 uses) needs a lookup table (T2-16)",
+   "notes": "51 distinct slugs; p_monsters_eyes (4 uses) is in no item db file (broken upstream data); kit items need name (<=24 chars) + sprite",
+   "example": "add_item reg_papers"
+  },
+  {
+   "name": "char_stop",
+   "tier": "T1",
+   "count": 88,
+   "maps": 51,
+   "target": "(none)",
+   "p1": "no-op (always the player; the mover is frozen during the page)",
+   "example": "char_stop player"
+  },
+  {
+   "name": "set_monster_health",
+   "tier": "T3",
+   "count": 83,
+   "maps": 41,
+   "target": "heal (P2)",
+   "p1": "no-op",
+   "example": "set_monster_health"
+  },
+  {
+   "name": "set_monster_status",
+   "tier": "T3",
+   "count": 83,
+   "maps": 41,
+   "target": "heal (P2)",
+   "p1": "no-op",
+   "example": "set_monster_status"
+  },
+  {
+   "name": "set_layer",
+   "tier": "T2",
+   "count": 79,
+   "maps": 28,
+   "target": "screen tint / overlay image (T2-13)",
+   "p1": "dropped (night tint, torchlight)",
+   "t2": [
+    "T2-13"
+   ],
+   "example": "set_layer"
+  },
+  {
+   "name": "char_move",
+   "tier": "T2",
+   "count": 77,
+   "maps": 10,
+   "target": "moveRoute {steps: moveX...}",
+   "p1": "player/self: T1 moveRoute; other NPCs need T2-4",
+   "split": {
+    "player": 12,
+    "npc": 65
+   },
+   "t2": [
+    "T2-4"
+   ],
+   "example": "char_move aeble,down 1,right 8,up 1"
+  },
+  {
+   "name": "play_sound",
+   "tier": "T1",
+   "count": 67,
+   "maps": 28,
+   "target": "se {name}",
+   "p1": "cue (host may ignore in P1)",
+   "example": "play_sound sound_confirm"
+  },
+  {
+   "name": "random_monster",
+   "tier": "T3",
+   "count": 39,
+   "maps": 4,
+   "target": "party (P2)",
+   "p1": "to the player (15 of 39): sys.party_size += 1; NPC teams dropped",
+   "example": "random_monster 10"
+  },
+  {
+   "name": "clear_variable",
+   "tier": "T1",
+   "count": 36,
+   "maps": 13,
+   "target": "variable set 0",
+   "p1": "direct",
+   "example": "clear_variable comeinside"
+  },
+  {
+   "name": "char_wander",
+   "tier": "T1",
+   "count": 33,
+   "maps": 16,
+   "target": "page moveType: random",
+   "p1": "bounds (5 uses) need a T2 wander region; frequency ignored",
+   "example": "char_wander 37707_male,3"
+  },
+  {
+   "name": "set_monster_attribute",
+   "tier": "T3",
+   "count": 33,
+   "maps": 9,
+   "target": "-",
+   "p1": "dropped",
+   "example": "set_monster_attribute add_monster,gender,male"
+  },
+  {
+   "name": "set_teleport_faint",
+   "tier": "T3",
+   "count": 29,
+   "maps": 24,
+   "target": "faint respawn point (P2)",
+   "p1": "dropped (the player cannot faint in P1)",
+   "example": "set_teleport_faint player,cotton_cathedral.tmx,6,7"
+  },
+  {
+   "name": "open_shop",
+   "tier": "T2",
+   "count": 28,
+   "maps": 10,
+   "target": "shop {goods:[{item, price}]} (T2-10)",
+   "p1": "items/prices from db/economy; monster/training/heal menus are T3",
+   "t2": [
+    "T2-10"
+   ],
+   "example": "open_shop tuxemart_keeper,both_item"
+  },
+  {
+   "name": "screen_transition",
+   "tier": "T2",
+   "count": 25,
+   "maps": 16,
+   "target": "fade out/in (T2-13)",
+   "p1": "lowered to wait 2*t (same timing, no visual)",
+   "t2": [
+    "T2-13"
+   ],
+   "example": "screen_transition 2"
+  },
+  {
+   "name": "add_tracker",
+   "tier": "T1",
+   "count": 24,
+   "maps": 22,
+   "target": "switch tracker.<map> = on",
+   "p1": "direct",
+   "example": "add_tracker player,candy_town"
+  },
+  {
+   "name": "set_template",
+   "tier": "T2",
+   "count": 24,
+   "maps": 11,
+   "target": "change sprite (T2-15)",
+   "p1": "dropped (swimmer/invisible player sprites)",
+   "t2": [
+    "T2-15"
+   ],
+   "example": "set_template player,default"
+  },
+  {
+   "name": "wild_encounter",
+   "tier": "T3",
+   "count": 20,
+   "maps": 7,
+   "target": "scripted wild battle (P2)",
+   "p1": "same placeholder as start_battle, opponent 'wild:<slug>'",
+   "example": "wild_encounter kernel,50,3"
+  },
+  {
+   "name": "char_speed",
+   "tier": "T2",
+   "count": 19,
+   "maps": 8,
+   "target": "move speed",
+   "p1": "ignored",
+   "notes": "MV Change Speed; cosmetic in P1",
+   "example": "char_speed 37707_male,3"
+  },
+  {
+   "name": "modify_money",
+   "tier": "T1",
+   "count": 19,
+   "maps": 7,
+   "target": "gold {set: add|sub, amount}",
+   "p1": "literal amount (18); from a variable (1) is T2-16",
+   "t2": [
+    "T2-16"
+   ],
+   "example": "modify_money player,120"
+  },
+  {
+   "name": "get_player_monster",
+   "tier": "T3",
+   "count": 17,
+   "maps": 10,
+   "target": "-",
+   "p1": "dropped",
+   "example": "get_player_monster rename"
+  },
+  {
+   "name": "set_bubble",
+   "tier": "T4",
+   "count": 16,
+   "maps": 4,
+   "target": "(balloon icon)",
+   "p1": "dropped",
+   "notes": "MV Show Balloon; could become T2 later",
+   "example": "set_bubble spyder_route5_cleo,exclamation"
+  },
+  {
+   "name": "set_economy",
+   "tier": "T2",
+   "count": 16,
+   "maps": 10,
+   "target": "shop goods binding (T2-10)",
+   "p1": "importer resolves economy slug -> goods list for the NPC's shop command",
+   "t2": [
+    "T2-10"
+   ],
+   "example": "set_economy tuxemart_keeper,cotton_scoop"
+  },
+  {
+   "name": "change_bg",
+   "tier": "T4",
+   "count": 15,
+   "maps": 6,
+   "target": "-",
+   "p1": "dropped (full-screen narration backdrop)",
+   "example": "change_bg"
+  },
+  {
+   "name": "open_journal",
+   "tier": "T3",
+   "count": 14,
+   "maps": 4,
+   "target": "-",
+   "p1": "dropped (monster journal page)",
+   "example": "open_journal rockitten"
+  },
+  {
+   "name": "char_plague",
+   "tier": "T3",
+   "count": 13,
+   "maps": 4,
+   "target": "-",
+   "p1": "dropped",
+   "example": "char_plague spyderbite,inoculated"
+  },
+  {
+   "name": "add_tech",
+   "tier": "T3",
+   "count": 12,
+   "maps": 1,
+   "target": "-",
+   "p1": "dropped",
+   "example": "add_tech iid_slot_0,peregrine"
+  },
+  {
+   "name": "teleport_faint",
+   "tier": "T3",
+   "count": 11,
+   "maps": 9,
+   "target": "-",
+   "p1": "dropped",
+   "example": "teleport_faint player,true"
+  },
+  {
+   "name": "access_pc",
+   "tier": "T3",
+   "count": 10,
+   "maps": 10,
+   "target": "-",
+   "p1": "dropped (PC storage); a text stub is fine",
+   "example": "access_pc player"
+  },
+  {
+   "name": "format_variable",
+   "tier": "T3",
+   "count": 10,
+   "maps": 3,
+   "target": "-",
+   "p1": "dropped (cathedral bill floats)",
+   "example": "format_variable cathedral_share,float"
+  },
+  {
+   "name": "get_party_monster",
+   "tier": "T3",
+   "count": 9,
+   "maps": 4,
+   "target": "-",
+   "p1": "dropped",
+   "example": "get_party_monster spyder_dojo_iroh"
+  },
+  {
+   "name": "park_experience",
+   "tier": "T3",
+   "count": 8,
+   "maps": 4,
+   "target": "-",
+   "p1": "dropped",
+   "example": "park_experience stop"
+  },
+  {
+   "name": "quarantine",
+   "tier": "T3",
+   "count": 8,
+   "maps": 4,
+   "target": "-",
+   "p1": "dropped",
+   "example": "quarantine player,spyderbite,out,1"
+  },
+  {
+   "name": "start_double_battle",
+   "tier": "T3",
+   "count": 8,
+   "maps": 2,
+   "target": "battle (P2)",
+   "p1": "battle placeholder",
+   "example": "start_double_battle player,spyder_dragonscave_ray"
+  },
+  {
+   "name": "trading",
+   "tier": "T3",
+   "count": 8,
+   "maps": 4,
+   "target": "-",
+   "p1": "dropped",
+   "example": "trading cateye,zunna"
+  },
+  {
+   "name": "change_bg_monster",
+   "tier": "T4",
+   "count": 7,
+   "maps": 2,
+   "target": "-",
+   "p1": "dropped",
+   "example": "change_bg_monster gradient_blue,rockitten"
+  },
+  {
+   "name": "load_yaml",
+   "tier": "T1",
+   "count": 7,
+   "maps": 7,
+   "target": "(import-time merge)",
+   "p1": "importer appends spyder_cathedral.yaml's events to the 7 maps, gated by a local flag the action sets",
+   "example": "load_yaml spyder_cathedral"
+  },
+  {
+   "name": "autosave",
+   "tier": "T4",
+   "count": 6,
+   "maps": 6,
+   "target": "-",
+   "p1": "dropped (the kit has its own save menu)",
+   "example": "autosave"
+  },
+  {
+   "name": "camera_position",
+   "tier": "T4",
+   "count": 6,
+   "maps": 3,
+   "target": "-",
+   "p1": "dropped (cutscene camera; MV Scroll Map later)",
+   "example": "camera_position 9,8"
+  },
+  {
+   "name": "set_mission",
+   "tier": "T3",
+   "count": 6,
+   "maps": 3,
+   "target": "-",
+   "p1": "dropped",
+   "example": "set_mission player"
+  },
+  {
+   "name": "set_tuxepedia",
+   "tier": "T3",
+   "count": 6,
+   "maps": 1,
+   "target": "-",
+   "p1": "dropped",
+   "example": "set_tuxepedia player,eyesore,seen"
+  },
+  {
+   "name": "remove_collision",
+   "tier": "T1",
+   "count": 5,
+   "maps": 5,
+   "target": "blocking events",
+   "p1": "importer turns a labelled collision zone into invisible blocks:true events whose page ends when the action's switch is set",
+   "example": "remove_collision screen"
+  },
+  {
+   "name": "remove_monster",
+   "tier": "T3",
+   "count": 5,
+   "maps": 5,
+   "target": "-",
+   "p1": "player: sys.party_size -= 1",
+   "example": "remove_monster ruff_back"
+  },
+  {
+   "name": "remove_step_tracker",
+   "tier": "T3",
+   "count": 5,
+   "maps": 4,
+   "target": "-",
+   "p1": "dropped",
+   "example": "remove_step_tracker player,steps_park"
+  },
+  {
+   "name": "rename_player",
+   "tier": "T2",
+   "count": 5,
+   "maps": 4,
+   "target": "name input (T2-14)",
+   "p1": "fixed name 'Red'",
+   "t2": [
+    "T2-14"
+   ],
+   "example": "rename_player player,random"
+  },
+  {
+   "name": "variable_math",
+   "tier": "T2",
+   "count": 5,
+   "maps": 2,
+   "target": "variable arithmetic with a variable operand (T2-16)",
+   "p1": "dropped (cathedral bill, dojo points)",
+   "t2": [
+    "T2-16"
+   ],
+   "example": "variable_math cathedral_share_full,*,100"
+  },
+  {
+   "name": "change_bg_char",
+   "tier": "T4",
+   "count": 4,
+   "maps": 3,
+   "target": "-",
+   "p1": "dropped",
+   "example": "change_bg_char gradient_blue,spyder_omnichannel_beaverbrook"
+  },
+  {
+   "name": "add_step_tracker",
+   "tier": "T3",
+   "count": 3,
+   "maps": 2,
+   "target": "-",
+   "p1": "dropped",
+   "example": "add_step_tracker player,steps_park,500,100:0"
+  },
+  {
+   "name": "dojo_method",
+   "tier": "T3",
+   "count": 3,
+   "maps": 1,
+   "target": "-",
+   "p1": "dropped",
+   "example": "dojo_method dojo_stage,monster"
+  },
+  {
+   "name": "modify_bill",
+   "tier": "T3",
+   "count": 3,
+   "maps": 1,
+   "target": "-",
+   "p1": "dropped",
+   "example": "modify_bill player,bill_cathedral,,scoop_price"
+  },
+  {
+   "name": "quit_world",
+   "tier": "T4",
+   "count": 3,
+   "maps": 1,
+   "target": "-",
+   "p1": "dropped (battle_menu test yaml)",
+   "example": "quit_world"
+  },
+  {
+   "name": "set_char_attribute",
+   "tier": "T4",
+   "count": 3,
+   "maps": 1,
+   "target": "variable",
+   "p1": "player gender from the start menu -> a variable if text ever needs it",
+   "example": "set_char_attribute player,gender,male"
+  },
+  {
+   "name": "set_monster_level",
+   "tier": "T3",
+   "count": 3,
+   "maps": 3,
+   "target": "-",
+   "p1": "dropped",
+   "example": "set_monster_level"
+  },
+  {
+   "name": "set_step_tracker_milestone_shown",
+   "tier": "T3",
+   "count": 3,
+   "maps": 3,
+   "target": "-",
+   "p1": "dropped",
+   "example": "set_step_tracker_milestone_shown player,steps_park,100"
+  },
+  {
+   "name": "update_time",
+   "tier": "T4",
+   "count": 3,
+   "maps": 3,
+   "target": "-",
+   "p1": "dropped",
+   "example": "update_time player"
+  },
+  {
+   "name": "change_taste",
+   "tier": "T3",
+   "count": 2,
+   "maps": 1,
+   "target": "-",
+   "p1": "dropped",
+   "example": "change_taste tasteful_zhu,cold,random"
+  },
+  {
+   "name": "char_run",
+   "tier": "T2",
+   "count": 2,
+   "maps": 2,
+   "target": "move speed",
+   "p1": "ignored",
+   "example": "char_run christie"
+  },
+  {
+   "name": "choice_monster",
+   "tier": "T3",
+   "count": 2,
+   "maps": 2,
+   "target": "choices",
+   "p1": "lowered to a plain choices box (5 options -> T2-9)",
+   "t2": [
+    "T2-9"
+   ],
+   "example": "choice_monster hydrone:rockitten:fruitera,tuxchoice"
+  },
+  {
+   "name": "copy_variable",
+   "tier": "T2",
+   "count": 2,
+   "maps": 1,
+   "target": "variable copy (T2-16)",
+   "p1": "dropped",
+   "t2": [
+    "T2-16"
+   ],
+   "example": "copy_variable cathedral_share_full,cathedral_share"
+  },
+  {
+   "name": "daycare",
+   "tier": "T3",
+   "count": 2,
+   "maps": 2,
+   "target": "-",
+   "p1": "dropped",
+   "example": "daycare player"
+  },
+  {
+   "name": "evolution",
+   "tier": "T3",
+   "count": 2,
+   "maps": 2,
+   "target": "-",
+   "p1": "dropped",
+   "example": "evolution player"
+  },
+  {
+   "name": "get_pending_moves",
+   "tier": "T3",
+   "count": 2,
+   "maps": 2,
+   "target": "-",
+   "p1": "dropped",
+   "example": "get_pending_moves chosen_tech"
+  },
+  {
+   "name": "remove_tech",
+   "tier": "T3",
+   "count": 2,
+   "maps": 2,
+   "target": "-",
+   "p1": "dropped",
+   "example": "remove_tech chosen_tech"
+  },
+  {
+   "name": "rename_monster",
+   "tier": "T3",
+   "count": 2,
+   "maps": 2,
+   "target": "-",
+   "p1": "dropped",
+   "example": "rename_monster rename"
+  },
+  {
+   "name": "set_bill",
+   "tier": "T3",
+   "count": 2,
+   "maps": 1,
+   "target": "-",
+   "p1": "dropped",
+   "example": "set_bill player,bill_cathedral,0,0.1,100,0.5"
+  },
+  {
+   "name": "set_facing_mode",
+   "tier": "T4",
+   "count": 2,
+   "maps": 1,
+   "target": "-",
+   "p1": "dropped (MV Direction Fix)",
+   "example": "set_facing_mode callie_wren,locked"
+  },
+  {
+   "name": "set_kennel_visible",
+   "tier": "T3",
+   "count": 2,
+   "maps": 1,
+   "target": "-",
+   "p1": "dropped",
+   "example": "set_kennel_visible player,quarantine,false"
+  },
+  {
+   "name": "set_party_status",
+   "tier": "T3",
+   "count": 2,
+   "maps": 2,
+   "target": "-",
+   "p1": "dropped",
+   "example": "set_party_status player"
+  },
+  {
+   "name": "tune_radio",
+   "tier": "T4",
+   "count": 2,
+   "maps": 2,
+   "target": "-",
+   "p1": "dropped",
+   "example": "tune_radio player,94.7"
+  },
+  {
+   "name": "update_tile_properties",
+   "tier": "T3",
+   "count": 2,
+   "maps": 1,
+   "target": "-",
+   "p1": "dropped (surfing)",
+   "example": "update_tile_properties surfable,1"
+  },
+  {
+   "name": "char_position",
+   "tier": "T2",
+   "count": 1,
+   "maps": 1,
+   "target": "place {target, x, y} (T2-7)",
+   "p1": "dropped",
+   "t2": [
+    "T2-7"
+   ],
+   "example": "char_position player,6,8"
+  },
+  {
+   "name": "choice_npc",
+   "tier": "T4",
+   "count": 1,
+   "maps": 1,
+   "target": "choices",
+   "p1": "start-menu appearance pick (6 options): fixed default",
+   "example": "choice_npc white_male:black_male:white_female:black_female:gender_enby:gender_whatever,race_choice,menu_select"
+  },
+  {
+   "name": "create_kennel",
+   "tier": "T3",
+   "count": 1,
+   "maps": 1,
+   "target": "-",
+   "p1": "dropped",
+   "example": "create_kennel player,quarantine,true"
+  },
+  {
+   "name": "fadeout_music",
+   "tier": "T2",
+   "count": 1,
+   "maps": 1,
+   "target": "bgm hook (T2-12)",
+   "p1": "silent",
+   "t2": [
+    "T2-12"
+   ],
+   "example": "fadeout_music 1000"
+  },
+  {
+   "name": "info",
+   "tier": "T4",
+   "count": 1,
+   "maps": 1,
+   "target": "-",
+   "p1": "dropped",
+   "example": "info sold,level"
+  },
+  {
+   "name": "modify_monster_bond",
+   "tier": "T3",
+   "count": 1,
+   "maps": 1,
+   "target": "-",
+   "p1": "dropped",
+   "example": "modify_monster_bond"
+  },
+  {
+   "name": "not",
+   "tier": "T4",
+   "count": 1,
+   "maps": 1,
+   "target": "-",
+   "p1": "dropped: authoring bug (a condition string in an act slot, one event)",
+   "example": "not music_playing music_come_and_find_me"
+  },
+  {
+   "name": "play_tile_animation",
+   "tier": "T4",
+   "count": 1,
+   "maps": 1,
+   "target": "-",
+   "p1": "dropped",
+   "example": "play_tile_animation 10,4,dragonbirth,0.1,noloop"
+  },
+  {
+   "name": "random_integer",
+   "tier": "T1",
+   "count": 1,
+   "maps": 1,
+   "target": "variable {set: {op: random, min, max}}",
+   "p1": "numeric variable (read by variable_is)",
+   "example": "random_integer luckgiveegg,1,10"
+  },
+  {
+   "name": "set_random_variable",
+   "tier": "T1",
+   "count": 1,
+   "maps": 1,
+   "target": "variable random -> enum code",
+   "p1": "uniform pick; weights (a=3:b) would need T2",
+   "notes": "1 use",
+   "example": "set_random_variable elianeoutput,cureall:restoration:potion:tea:refreshing_slice:antidote_grapes:cure_festering"
+  }
+ ],
+ "conditions": [
+  {
+   "name": "char_at",
+   "tier": "T1",
+   "count": 1811,
+   "maps": 253,
+   "is": 1811,
+   "not": 0,
+   "target": "trigger playerTouch (with char_moved: every step) / action (with button_pressed) on the event cell; multi-cell -> T2-1 area",
+   "p1": "704 events are multi-cell (24,528 cells) -> T2-1",
+   "t2": [
+    "T2-1"
+   ],
+   "example": "is char_at player"
+  },
+  {
+   "name": "char_exists",
+   "tier": "T2",
+   "count": 1409,
+   "maps": 172,
+   "is": 9,
+   "not": 1400,
+   "target": "variable local.npc.<slug> (0/1)",
+   "p1": "per-visit bank T2-6",
+   "t2": [
+    "T2-6"
+   ],
+   "example": "not char_exists 37707_male"
+  },
+  {
+   "name": "variable_set",
+   "tier": "T1",
+   "count": 1401,
+   "maps": 129,
+   "is": 730,
+   "not": 671,
+   "target": "page condition / if: variable v.<name> ==|!= enumCode (bare name: != 0)",
+   "p1": "`not` over several name:value pairs is an OR (rare) -> split pages",
+   "t2": [
+    "T2-2"
+   ],
+   "example": "not variable_set 37707_tower:activated"
+  },
+  {
+   "name": "char_facing",
+   "tier": "T2",
+   "count": 1008,
+   "maps": 238,
+   "is": 1008,
+   "not": 0,
+   "target": "Condition {kind:'facing', dir} + touch re-fires on a turn (T2-3)",
+   "p1": "v1 cannot test facing: exit mats fire when crossed sideways (seen in the smoke run)",
+   "t2": [
+    "T2-3"
+   ],
+   "example": "is char_facing player,down"
+  },
+  {
+   "name": "battle_outcome",
+   "tier": "T3",
+   "count": 593,
+   "maps": 68,
+   "is": 230,
+   "not": 363,
+   "target": "switch bo.<opp>.won",
+   "p1": "written by the battle placeholder; lost/draw never true in P1",
+   "example": "not battle_outcome player,won,classic_gym_leader_astra"
+  },
+  {
+   "name": "char_moved",
+   "tier": "T1",
+   "count": 454,
+   "maps": 36,
+   "is": 454,
+   "not": 0,
+   "target": "trigger playerTouch (fires on entering each cell)",
+   "p1": "with areas (T2-1) every step inside the area fires, as in Tuxemon",
+   "example": "is char_moved player"
+  },
+  {
+   "name": "button_pressed",
+   "tier": "T1",
+   "count": 419,
+   "maps": 119,
+   "is": 419,
+   "not": 0,
+   "target": "trigger action",
+   "p1": "INTERACT 418, K_RETURN 1",
+   "example": "is button_pressed INTERACT"
+  },
+  {
+   "name": "char_facing_tile",
+   "tier": "T1",
+   "count": 344,
+   "maps": 101,
+   "is": 344,
+   "not": 0,
+   "target": "trigger action on the event cell(s) (front tile in the area)",
+   "p1": "the `value` form (surfable, 5) is T3",
+   "example": "is char_facing_tile player"
+  },
+  {
+   "name": "environment_is",
+   "tier": "T3",
+   "count": 200,
+   "maps": 120,
+   "is": 28,
+   "not": 172,
+   "target": "-",
+   "p1": "constant false (env setters dropped)",
+   "example": "not environment_is grass"
+  },
+  {
+   "name": "music_playing",
+   "tier": "T4",
+   "count": 197,
+   "maps": 196,
+   "is": 1,
+   "not": 196,
+   "target": "-",
+   "p1": "constant false; the guarded play_music becomes map.bgm (T2-12)",
+   "example": "is music_playing music_mystic_island"
+  },
+  {
+   "name": "char_defeated",
+   "tier": "T3",
+   "count": 191,
+   "maps": 53,
+   "is": 10,
+   "not": 181,
+   "target": "switch defeated.<npc>; player never defeated in P1",
+   "p1": "constant false for the player",
+   "example": "is char_defeated player"
+  },
+  {
+   "name": "time_is",
+   "tier": "T2",
+   "count": 128,
+   "maps": 56,
+   "is": 67,
+   "not": 61,
+   "target": "virtual clock (T2-17) or fixed daytime",
+   "p1": "fixed daytime (stage_of_day=morning, daytime=true, dates false)",
+   "t2": [
+    "T2-17"
+   ],
+   "example": "not time_is stage_of_day,equals,night"
+  },
+  {
+   "name": "has_item",
+   "tier": "T1",
+   "count": 111,
+   "maps": 14,
+   "is": 53,
+   "not": 58,
+   "target": "page condition item / if item count>=n (NOT via else)",
+   "p1": "direct; less_than/equals quantity forms need if-chains",
+   "example": "not has_item player,aardant"
+  },
+  {
+   "name": "current_state",
+   "tier": "T4",
+   "count": 78,
+   "maps": 21,
+   "is": 78,
+   "not": 0,
+   "target": "-",
+   "p1": "WorldState -> true, any other engine state -> false",
+   "example": "is current_state WorldState"
+  },
+  {
+   "name": "char_sprite",
+   "tier": "T2",
+   "count": 66,
+   "maps": 32,
+   "is": 37,
+   "not": 29,
+   "target": "sprite state (T2-15)",
+   "p1": "constant: default sprite",
+   "t2": [
+    "T2-15"
+   ],
+   "example": "not char_sprite player,swimmer"
+  },
+  {
+   "name": "party_size",
+   "tier": "T3",
+   "count": 55,
+   "maps": 18,
+   "is": 50,
+   "not": 5,
+   "target": "variable sys.party_size",
+   "p1": "kept by add_monster/remove_monster placeholders; NPC party -> true",
+   "example": "is party_size player,greater_than,1"
+  },
+  {
+   "name": "check_char_parameter",
+   "tier": "T4",
+   "count": 41,
+   "maps": 26,
+   "is": 40,
+   "not": 1,
+   "target": "-",
+   "p1": "constant false (moving flag / cheat names)",
+   "example": "is check_char_parameter player,moving,1"
+  },
+  {
+   "name": "has_monster",
+   "tier": "T3",
+   "count": 35,
+   "maps": 7,
+   "is": 24,
+   "not": 11,
+   "target": "switch mon.<slug>",
+   "p1": "set by add_monster placeholder",
+   "example": "not has_monster player,cateye"
+  },
+  {
+   "name": "money_is",
+   "tier": "T1",
+   "count": 24,
+   "maps": 5,
+   "is": 15,
+   "not": 9,
+   "target": "Condition gold >= n",
+   "p1": "greater_or_equal (and greater_than n+1) direct; other ops/variable amounts T2-16",
+   "example": "is money_is player,greater_or_equal,50"
+  },
+  {
+   "name": "tracker",
+   "tier": "T1",
+   "count": 22,
+   "maps": 21,
+   "is": 0,
+   "not": 22,
+   "target": "switch tracker.<map>",
+   "p1": "direct",
+   "example": "not tracker player,candy_town"
+  },
+  {
+   "name": "check_party_parameter",
+   "tier": "T3",
+   "count": 14,
+   "maps": 1,
+   "is": 8,
+   "not": 6,
+   "target": "-",
+   "p1": "constant false",
+   "example": "not check_party_parameter player,stage,stage1,greater_than,0"
+  },
+  {
+   "name": "battle_outcome_count",
+   "tier": "T3",
+   "count": 11,
+   "maps": 3,
+   "is": 2,
+   "not": 9,
+   "target": "variable boc.<opp>.won",
+   "p1": "counted by the placeholder",
+   "example": "not battle_outcome_count player,won,spyder_nimrod_tru,1"
+  },
+  {
+   "name": "char_in",
+   "tier": "T3",
+   "count": 7,
+   "maps": 1,
+   "is": 1,
+   "not": 6,
+   "target": "-",
+   "p1": "constant false (surf zones)",
+   "example": "not char_in player,surfable"
+  },
+  {
+   "name": "step_tracker",
+   "tier": "T3",
+   "count": 7,
+   "maps": 4,
+   "is": 7,
+   "not": 0,
+   "target": "-",
+   "p1": "constant false",
+   "example": "is step_tracker player,steps_park,100"
+  },
+  {
+   "name": "tile_property_updated",
+   "tier": "T3",
+   "count": 6,
+   "maps": 1,
+   "is": 4,
+   "not": 2,
+   "target": "-",
+   "p1": "constant false (surfing)",
+   "example": "not tile_property_updated surfable,1"
+  },
+  {
+   "name": "check_world",
+   "tier": "T4",
+   "count": 3,
+   "maps": 1,
+   "is": 2,
+   "not": 1,
+   "target": "-",
+   "p1": "constant false (overlay state)",
+   "example": "is check_world layer,0:0:128:128"
+  },
+  {
+   "name": "kennel",
+   "tier": "T3",
+   "count": 3,
+   "maps": 1,
+   "is": 2,
+   "not": 1,
+   "target": "-",
+   "p1": "constant false",
+   "example": "not kennel player,quarantine,exist"
+  },
+  {
+   "name": "location_inside",
+   "tier": "T1",
+   "count": 3,
+   "maps": 1,
+   "is": 1,
+   "not": 2,
+   "target": "(import-time constant)",
+   "p1": "map property `inside` folded at import",
+   "example": "not location_inside"
+  },
+  {
+   "name": "party_infected",
+   "tier": "T3",
+   "count": 3,
+   "maps": 1,
+   "is": 3,
+   "not": 0,
+   "target": "-",
+   "p1": "none -> true, some/all -> false (no plague in P1); keeps Candy Town's story moving",
+   "example": "is party_infected player,spyderbite,all"
+  },
+  {
+   "name": "bill_is",
+   "tier": "T3",
+   "count": 2,
+   "maps": 1,
+   "is": 2,
+   "not": 0,
+   "target": "-",
+   "p1": "constant false",
+   "example": "is bill_is player,bill_cathedral,greater_than,0"
+  },
+  {
+   "name": "char_gender",
+   "tier": "T4",
+   "count": 2,
+   "maps": 1,
+   "is": 1,
+   "not": 1,
+   "target": "-",
+   "p1": "constant (fixed start-menu pick)",
+   "example": "is char_gender player,male"
+  },
+  {
+   "name": "char_healed",
+   "tier": "T3",
+   "count": 2,
+   "maps": 1,
+   "is": 1,
+   "not": 1,
+   "target": "-",
+   "p1": "constant false",
+   "example": "is char_healed player"
+  },
+  {
+   "name": "check_evolution",
+   "tier": "T3",
+   "count": 2,
+   "maps": 2,
+   "is": 2,
+   "not": 0,
+   "target": "-",
+   "p1": "constant false",
+   "example": "is check_evolution player"
+  },
+  {
+   "name": "check_max_tech",
+   "tier": "T3",
+   "count": 2,
+   "maps": 2,
+   "is": 2,
+   "not": 0,
+   "target": "-",
+   "p1": "constant false",
+   "example": "is check_max_tech player"
+  },
+  {
+   "name": "has_kennel",
+   "tier": "T3",
+   "count": 2,
+   "maps": 1,
+   "is": 2,
+   "not": 0,
+   "target": "-",
+   "p1": "kennel count 0",
+   "example": "is has_kennel player,Kennel,less_than,1"
+  },
+  {
+   "name": "has_tuxepedia",
+   "tier": "T3",
+   "count": 2,
+   "maps": 1,
+   "is": 1,
+   "not": 1,
+   "target": "-",
+   "p1": "constant false",
+   "example": "is has_tuxepedia player,drokoro,caught"
+  },
+  {
+   "name": "location_type",
+   "tier": "T1",
+   "count": 2,
+   "maps": 1,
+   "is": 1,
+   "not": 1,
+   "target": "(import-time constant)",
+   "p1": "map property `map_type` folded at import",
+   "example": "not location_type clinic"
+  },
+  {
+   "name": "bill_exists",
+   "tier": "T3",
+   "count": 1,
+   "maps": 1,
+   "is": 0,
+   "not": 1,
+   "target": "-",
+   "p1": "constant false",
+   "example": "not bill_exists player,bill_cathedral"
+  },
+  {
+   "name": "cooldown_days",
+   "tier": "T2",
+   "count": 1,
+   "maps": 1,
+   "is": 1,
+   "not": 0,
+   "target": "clock (T2-17)",
+   "p1": "constant true",
+   "t2": [
+    "T2-17"
+   ],
+   "example": "is cooldown_days 1,elianeflower"
+  },
+  {
+   "name": "player_facing_tile",
+   "tier": "T4",
+   "count": 1,
+   "maps": 1,
+   "is": 1,
+   "not": 0,
+   "target": "-",
+   "p1": "dead: no such condition in tuxemon/event/conditions (the one event never fires upstream either)",
+   "example": "is player_facing_tile"
+  }
+ ],
+ "behaviours": [
+  {
+   "name": "talk",
+   "tier": "T1",
+   "count": 787,
+   "maps": 138,
+   "target": "the NPC event's action page (match flags per talk event, then bodies)",
+   "p1": "expands upstream to `is char_facing_char player,<npc>` + `is button_pressed INTERACT` + prepended `char_face <npc>,player` (turn toward player needs T2-5)",
+   "t2": [
+    "T2-5"
+   ],
+   "example": "talk 37707_female"
+  }
+ ],
+ "t2Capabilities": [
+  {
+   "id": "T2-1",
+   "name": "event areas",
+   "schema": "event.w?, event.h? (default 1)",
+   "semantics": "action fires when the faced tile or the player's own tile is inside the rect; playerTouch fires on every entry into a cell of the rect",
+   "generic": true,
+   "uses": "704 multi-cell events, 24,528 cells"
+  },
+  {
+   "id": "T2-2",
+   "name": "compound page conditions",
+   "schema": "condition.all?: Condition[] (AND; the `if` Condition union incl. switch value:false)",
+   "semantics": "page active only when every clause holds; lets the kit's trigger arbitration skip pages whose guard fails",
+   "generic": true,
+   "uses": "965 events carry >= 2 non-trigger clauses"
+  },
+  {
+   "id": "T2-3",
+   "name": "facing condition",
+   "schema": "Condition {kind:'facing', dir}",
+   "semantics": "player facing test in `all`/`if`; a playerTouch page whose condition reads facing re-fires when the player turns while standing in it",
+   "generic": true,
+   "uses": "1008 `is char_facing player,<dir>`"
+  },
+  {
+   "id": "T2-4",
+   "name": "move routes on any event",
+   "schema": "moveRoute.target: 'player' | 'this' | {event: id}",
+   "semantics": "MV Set Movement Route on another event; wait:true parks the caller until that route lands",
+   "generic": true,
+   "uses": "874 char_face on NPCs, 65 char_move, 278 pathfind, 201 pathfind_to_char"
+  },
+  {
+   "id": "T2-5",
+   "name": "turn-toward and pathfinding steps",
+   "schema": "MoveStep += 'turnTowardPlayer' | {turnToward: id} | {pathTo:{x,y}} | {approach:{target, side?, distance?}}",
+   "semantics": "expanded when the step starts: deterministic 4-way BFS over the passage table + bodies (fixed neighbour order), re-planned when blocked",
+   "generic": true,
+   "uses": "336 pathfind, 201 pathfind_to_char, 180 face-toward, 787 talk auto-turn"
+  },
+  {
+   "id": "T2-6",
+   "name": "per-visit (local) variables",
+   "schema": "ids with prefix `local.` are cleared on every map entry",
+   "semantics": "Tuxemon NPCs and running events live for one map visit",
+   "generic": true,
+   "uses": "1503 create_npc, 224 remove_npc, 1409 char_exists"
+  },
+  {
+   "id": "T2-7",
+   "name": "place event / initial facing",
+   "schema": "{op:'place', target, x, y, dir?}; page.dir?",
+   "semantics": "MV Set Event Location; the facing an NPC shows on spawn",
+   "generic": true,
+   "uses": "29 map x slug spawn positions, char_position 1, char_face right after create_npc"
+  },
+  {
+   "id": "T2-8",
+   "name": "input lock across events",
+   "schema": "{op:'lock', value}",
+   "semantics": "while set the mover ignores the d-pad even between blocking pages",
+   "generic": true,
+   "uses": "21 lock-only + 27 unlock-only events"
+  },
+  {
+   "id": "T2-9",
+   "name": "longer choices",
+   "schema": "choices.options up to 8 (scrolling), labels up to 32 chars",
+   "semantics": "same command, bigger box",
+   "generic": true,
+   "uses": "10 choices with 5 or 8 options; choice_monster/choice_npc"
+  },
+  {
+   "id": "T2-10",
+   "name": "shop",
+   "schema": "{op:'shop', goods:[{item, price}], sell?}; item.price?",
+   "semantics": "MV Shop Processing over gold + items",
+   "generic": true,
+   "uses": "28 open_shop, 16 set_economy (4 economies)"
+  },
+  {
+   "id": "T2-11",
+   "name": "walker NPC sprites",
+   "schema": "spriteDef walker with 16x32 frames (anchor = bottom tile), NPC facing + walk pose in the UI",
+   "semantics": "Tuxemon sheet 48x128: rows down,left,right,up; cols walk1,idle,walk2",
+   "generic": true,
+   "uses": "1145 NPC rows, 184 sheets (+ static props)"
+  },
+  {
+   "id": "T2-12",
+   "name": "bgm hook",
+   "schema": "{op:'bgm', name, fadeMs?}; map.bgm?",
+   "semantics": "cue for the host; silent in P1",
+   "generic": true,
+   "uses": "200 play_music (196 guarded by `not music_playing`), 1 fadeout_music"
+  },
+  {
+   "id": "T2-13",
+   "name": "screen fade / tint",
+   "schema": "{op:'fade', dir:'out'|'in', seconds}; {op:'tint', rgba|image}",
+   "semantics": "MV Fadeout/Fadein/Tint Screen",
+   "generic": true,
+   "uses": "25 screen_transition, 79 set_layer"
+  },
+  {
+   "id": "T2-14",
+   "name": "player name",
+   "schema": "text placeholder {name}; optional {op:'nameInput'}",
+   "semantics": "display-time substitution",
+   "generic": true,
+   "uses": "53 msgstr carrying ${{name}}, 5 rename_player"
+  },
+  {
+   "id": "T2-15",
+   "name": "change sprite",
+   "schema": "{op:'sprite', target, sprite}",
+   "semantics": "MV Change Actor Graphic / event image",
+   "generic": true,
+   "uses": "24 set_template, 66 char_sprite"
+  },
+  {
+   "id": "T2-16",
+   "name": "variable operands",
+   "schema": "variable set {op:'copy'|'add'|'sub'|'mul', from: id}",
+   "semantics": "arithmetic with another variable",
+   "generic": true,
+   "uses": "5 variable_math, 2 copy_variable, 1 modify_money from var"
+  },
+  {
+   "id": "T2-17",
+   "name": "virtual clock (optional)",
+   "schema": "sys.time variables advanced by the session",
+   "semantics": "day/night stage for time_is; P1 can pin daytime instead",
+   "generic": true,
+   "uses": "128 time_is, 1 cooldown_days"
+  }
+ ]
+}
