@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "types": ["bun"],
+    "strict": true,
+    "target": "ESNext",
+    "lib": ["ESNext"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "jsx": "preserve",
+    "verbatimModuleSyntax": true
+  },
+  "include": [
+    "*.ts",
+    "*.tsx",
+    "game",
+    "importer",
+    "ui",
+    "tools",
+    "tests",
+    "vendor/pocket-rpgkit/src",
+    "vendor/pocket-rpgkit/vendor/pocketjs/framework/src",
+    "vendor/pocket-rpgkit/vendor/pocketjs/contracts/spec"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "vendor/pocket-rpgkit/vendor/pocketjs/framework/compiler",
+    "vendor/pocket-rpgkit/vendor/pocketjs/framework/src/service-client.ts",
+    "vendor/pocket-rpgkit/vendor/pocketjs/framework/src/media-service.ts"
+  ]
+}

@@ -1,0 +1,10 @@
+node_modules/
+dist/
+
+# Bun / editor noise
+.DS_Store
+*.swp
+.pocket/
+
+# The Tuxemon source the importer reads (tools/fetch-tuxemon.sh)
+.tuxemon-src/

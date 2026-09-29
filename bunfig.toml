@@ -1,0 +1,4 @@
+[test]
+# Only this repo's tests: without a root, `bun test` substring-matches paths
+# and walks into the vendored kit and PocketJS suites.
+root = "tests"

@@ -1,0 +1,27 @@
+{
+  "name": "pocket-tuxemon",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "license": "GPL-3.0-or-later",
+  "description": "Tuxemon's world, imported into Pocket RPG Kit and played on PocketJS (desktop, web, PSP)",
+  "workspaces": [
+    "vendor/pocket-rpgkit/vendor/pocketjs"
+  ],
+  "scripts": {
+    "setup": "git submodule update --init --recursive && bun install",
+    "fetch:tuxemon": "sh tools/fetch-tuxemon.sh",
+    "build:wasm": "bun vendor/pocket-rpgkit/vendor/pocketjs/tools/wasm.ts",
+    "test": "bun test tests/",
+    "tsc": "bunx tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.0",
+    "@vue-jsx-vapor/runtime": "3.2.19",
+    "typescript": "^5.7.0"
+  },
+  "dependencies": {
+    "@pocketjs/framework": "workspace:*",
+    "solid-js": "^1.9"
+  }
+}
