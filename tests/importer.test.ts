@@ -1,8 +1,8 @@
 import { expect, test } from "bun:test";
 import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { mkdirSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { join, resolve } from "node:path";
 import {
   availableMapIds,
   buildProject,
@@ -10,7 +10,7 @@ import {
   G6_IMPORT_OPTIONS,
   K1_IMPORT_OPTIONS,
 } from "../importer/project.ts";
-import { jsonBytes, writeImport } from "../importer/index.ts";
+import { jsonBytes } from "../importer/index.ts";
 import { applyTerrain, importTerrain } from "../importer/terrain.ts";
 import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
 import { canStepFrom, type Dir4 } from "../vendor/pocket-rpgkit/src/engine/passability.ts";
@@ -454,49 +454,70 @@ test("simultaneously eligible route1 automatic events run concurrently and relea
 });
 
 test("Spyder opening completes identically at 60, 30, 20, and 4 Hz", () => {
-  writeImport(availableMapIds(), undefined, K1_IMPORT_OPTIONS);
+  const maintainedProject = resolve(ROOT, "dist/project.json");
+  const before = readFileSync(maintainedProject);
+  const scratchParent = "/var/tmp/fleet/1862";
+  mkdirSync(scratchParent, { recursive: true });
+  const isolatedRoot = mkdtempSync(join(scratchParent, "g6-hz-"));
   const transcripts: string[] = [];
   const results: Record<string, unknown>[] = [];
   const runAt = (hz: number) => {
     const run = spawnSync(process.execPath, ["tools/smoke-spyder.ts"], {
       cwd: ROOT,
       encoding: "utf8",
-      env: { ...process.env, HZ: String(hz) },
+      env: { ...process.env, G6_PROJECT_ROOT: isolatedRoot, HZ: String(hz) },
       timeout: 30_000,
     });
     if (run.status !== 0) {
       throw new Error(`smoke ${hz} Hz failed\n${run.stdout}\n${run.stderr}`);
     }
-    const result = JSON.parse(readFileSync(resolve(ROOT, `dist/journey-spyder-${hz}hz.json`), "utf8")) as Record<string, unknown>;
+    const result = JSON.parse(readFileSync(resolve(isolatedRoot, `dist/journey-spyder-${hz}hz.json`), "utf8")) as Record<string, unknown>;
     return { run, result };
   };
-  for (const hz of [60, 30, 20, 4]) {
-    const { run, result } = runAt(hz);
-    expect(run.stdout.match(/PASS  /g)).toHaveLength(12);
-    expect(run.stdout).toContain('"map":"spyder_route1"');
-    transcripts.push(run.stdout.replace(/\[\s*\d+\]/g, "[frame]"));
-    results.push(result);
+  try {
+    const generated = spawnSync(process.execPath, ["gen-assets.ts"], {
+      cwd: ROOT,
+      encoding: "utf8",
+      env: { ...process.env, G6_OUTPUT_ROOT: isolatedRoot },
+      timeout: 30_000,
+    });
+    if (generated.status !== 0) {
+      throw new Error(`isolated G6 cook failed\n${generated.stdout}\n${generated.stderr}`);
+    }
+    const assetReport = JSON.parse(readFileSync(resolve(isolatedRoot, "data/g6-assets-report.json"), "utf8"));
+    expect(assetReport.project).toMatchObject({ maps: 263, options: G6_IMPORT_OPTIONS });
+
+    for (const hz of [60, 30, 20, 4]) {
+      const { run, result } = runAt(hz);
+      expect(run.stdout.match(/PASS  /g)).toHaveLength(12);
+      expect(run.stdout).toContain('"map":"spyder_route1"');
+      transcripts.push(run.stdout.replace(/\[\s*\d+\]/g, "[frame]"));
+      results.push(result);
+    }
+    const beats = (transcript: string) => transcript
+      .split("\n")
+      // PASS lines can straddle a new map's first autorun text at low host
+      // rates because one folded host frame advances both. The observable
+      // story sequence and final state must still be identical.
+      .filter((line) => /(?:TEXT|PICK|MAP)/.test(line));
+    expect(beats(transcripts[1]!)).toEqual(beats(transcripts[0]!));
+    expect(beats(transcripts[2]!)).toEqual(beats(transcripts[0]!));
+    expect(beats(transcripts[3]!)).toEqual(beats(transcripts[0]!));
+
+    const outcome = (result: Record<string, unknown>) => ({
+      map: result.map,
+      position: result.position,
+      story: result.story,
+      checkpoints: (result.checkpoints as { name: string; map: string; position: [number, number] }[])
+        .map(({ name, map, position }) => ({ name, map, position })),
+    });
+    for (const result of results.slice(1)) expect(outcome(result)).toEqual(outcome(results[0]!));
+
+    const repeated = runAt(60).result;
+    expect(repeated.sha256).toBe(results[0]!.sha256);
+    expect(repeated.masks).toEqual(results[0]!.masks);
+  } finally {
+    rmSync(isolatedRoot, { recursive: true, force: true });
   }
-  const beats = (transcript: string) => transcript
-    .split("\n")
-    // PASS lines can straddle a new map's first autorun text at low host
-    // rates because one folded host frame advances both. The observable
-    // story sequence and final state must still be identical.
-    .filter((line) => /(?:TEXT|PICK|MAP)/.test(line));
-  expect(beats(transcripts[1]!)).toEqual(beats(transcripts[0]!));
-  expect(beats(transcripts[2]!)).toEqual(beats(transcripts[0]!));
-  expect(beats(transcripts[3]!)).toEqual(beats(transcripts[0]!));
-
-  const outcome = (result: Record<string, unknown>) => ({
-    map: result.map,
-    position: result.position,
-    story: result.story,
-    checkpoints: (result.checkpoints as { name: string; map: string; position: [number, number] }[])
-      .map(({ name, map, position }) => ({ name, map, position })),
-  });
-  for (const result of results.slice(1)) expect(outcome(result)).toEqual(outcome(results[0]!));
-
-  const repeated = runAt(60).result;
-  expect(repeated.sha256).toBe(results[0]!.sha256);
-  expect(repeated.masks).toEqual(results[0]!.masks);
+  expect(readFileSync(maintainedProject)).toEqual(before);
 }, 120_000);

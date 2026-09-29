@@ -2,14 +2,16 @@
 
 import { readFileSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
+import { join, resolve } from "node:path";
 import { createSession, startSession, stepSession, tableWithBodies, type SessionState } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import { canStepFrom, type Dir4 } from "../vendor/pocket-rpgkit/src/engine/passability.ts";
 import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
 import { searchWalk } from "../vendor/pocket-rpgkit/src/engine/journey-search.ts";
 import type { Project } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 
-const OUT_DIR = new URL("../dist/", import.meta.url).pathname;
-const project = JSON.parse(readFileSync(`${OUT_DIR}project.json`, "utf8")) as Project;
+const PROJECT_ROOT = resolve(process.env.G6_PROJECT_ROOT ?? new URL("..", import.meta.url).pathname);
+const OUT_DIR = join(PROJECT_ROOT, "dist");
+const project = JSON.parse(readFileSync(join(OUT_DIR, "project.json"), "utf8")) as Project;
 const HZ = Number(process.env.HZ ?? 60); // host rate; the kit folds 60/HZ reference ticks per frame
 const sess = createSession(project, HZ);
 let st: SessionState = startSession(project, sess);
@@ -186,7 +188,7 @@ function checkpoint(name: string): void {
 }
 
 function writeOut(): void {
-  writeFileSync(`${OUT_DIR}smoke-spyder-${HZ}hz.log`, journal.join("\n") + "\n");
+  writeFileSync(join(OUT_DIR, `smoke-spyder-${HZ}hz.log`), journal.join("\n") + "\n");
 }
 
 // --- the story beats --------------------------------------------------------
@@ -269,7 +271,7 @@ const result = {
   },
 };
 const digest = createHash("sha256").update(JSON.stringify(result)).digest("hex");
-writeFileSync(`${OUT_DIR}journey-spyder-${HZ}hz.json`, JSON.stringify({ ...result, sha256: digest }, null, 2) + "\n");
+writeFileSync(join(OUT_DIR, `journey-spyder-${HZ}hz.json`), JSON.stringify({ ...result, sha256: digest }, null, 2) + "\n");
 console.log("RESULT " + JSON.stringify({
   hz: result.hz,
   frames: result.frames,

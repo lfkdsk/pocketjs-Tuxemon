@@ -2,7 +2,7 @@
 // Usage: TUXEMON_SRC=/path/to/Tuxemon bun gen-assets.ts
 
 import { mkdirSync, rmSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { cookAnimationAtlases, animatedManifestSource } from "./vendor/pocket-rpgkit/tools/lib/animated.ts";
 import type { GameAssets } from "./vendor/pocket-rpgkit/src/ui/game-assets.ts";
 import type { PlayerFrames } from "./vendor/pocket-rpgkit/src/ui/PlayerSprite.tsx";
@@ -12,9 +12,13 @@ import { coverageMarkdown, jsonBytes } from "./importer/index.ts";
 import { availableMapIds, buildProject, G6_IMPORT_OPTIONS } from "./importer/project.ts";
 import { applyTerrain, writeTerrain } from "./importer/terrain.ts";
 
-const ROOT = import.meta.dir;
+// Tests and determinism checks can cook into a disposable root without
+// touching the maintained project tree. Source modules still come from this
+// checkout; only generated outputs are redirected.
+const ROOT = resolve(process.env.G6_OUTPUT_ROOT ?? import.meta.dir);
 const DIST = join(ROOT, "dist");
 mkdirSync(DIST, { recursive: true });
+mkdirSync(join(ROOT, "findings"), { recursive: true });
 
 const terrain = writeTerrain({ outputRoot: ROOT });
 const imported = buildProject(availableMapIds(), G6_IMPORT_OPTIONS);
