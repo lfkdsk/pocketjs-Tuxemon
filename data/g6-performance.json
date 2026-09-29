@@ -1,0 +1,58 @@
+{
+  "format": "pocket-tuxemon/g6-quickjs-performance/v1",
+  "host": {
+    "os": "Linux 6.8.0-64-generic x86_64",
+    "cpu": "Intel(R) Xeon(R) w5-3435X",
+    "bun": "1.3.14",
+    "rustc": "1.98.1"
+  },
+  "method": "PocketJS desktop host Runtime with the real rquickjs Guest and UiSurface; maintained 1684-frame journey; total includes QuickJS, core tick, and UI draw/hash CPU submission",
+  "journeyFrames": 1684,
+  "transfers": 5,
+  "viewports": {
+    "480x272": {
+      "startupToFirstMs": 913.577,
+      "bootMs": 899.316,
+      "firstQuickjsMs": 13.643,
+      "firstTotalMs": 14.166,
+      "walking": {
+        "samples": 600,
+        "quickjsP95Ms": 18.011,
+        "quickjsMaxMs": 22.763,
+        "totalP95Ms": 18.093,
+        "totalMaxMs": 22.797
+      },
+      "mapSwitch": {
+        "samples": 119,
+        "quickjsP95Ms": 22.160,
+        "quickjsMaxMs": 227.541,
+        "totalP95Ms": 22.621,
+        "totalMaxMs": 230.813
+      },
+      "endQuickjsUsedMiB": 54.15,
+      "endQuickjsMallocMiB": 76.54
+    },
+    "960x544": {
+      "startupToFirstMs": 914.049,
+      "bootMs": 899.825,
+      "firstQuickjsMs": 13.589,
+      "firstTotalMs": 14.122,
+      "walking": {
+        "samples": 600,
+        "quickjsP95Ms": 18.200,
+        "quickjsMaxMs": 22.897,
+        "totalP95Ms": 18.402,
+        "totalMaxMs": 22.931
+      },
+      "mapSwitch": {
+        "samples": 119,
+        "quickjsP95Ms": 19.357,
+        "quickjsMaxMs": 230.736,
+        "totalP95Ms": 19.963,
+        "totalMaxMs": 234.099
+      },
+      "endQuickjsUsedMiB": 54.16,
+      "endQuickjsMallocMiB": 76.56
+    }
+  }
+}

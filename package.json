@@ -17,6 +17,7 @@
     "verify:terrain:collision": "python3 tools/verify-terrain-collision.py",
     "verify:g6:determinism": "bun tools/verify-g6-determinism.ts",
     "goldens:g6": "HZ=60 bun tools/smoke-spyder.ts && bun tools/update-g6-goldens.ts",
+    "bench:g6:quickjs": "bash tools/bench-g6-quickjs.sh",
     "build:wasm": "bun vendor/pocket-rpgkit/vendor/pocketjs/tools/wasm.ts",
     "build": "bun tools/build.ts",
     "desktop": "bun tools/desktop.ts",
