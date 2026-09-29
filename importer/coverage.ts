@@ -28,6 +28,7 @@ export interface CoverageSummary {
   tier1: {
     uses: number;
     percent: number;
+    requiredUses: number;
     requiredPercent: number;
     meetsBaseline: boolean;
   };
@@ -186,13 +187,14 @@ function blank(type: string): CoverageRow {
   return { type, total: 0, native: 0, degraded: 0, placeholder: 0, dropped: 0 };
 }
 
-function percent(count: number, total: number): number {
-  return Math.round(count * 1_000 / total) / 10;
+function percent(count: number, total: number, digits = 1): number {
+  const scale = 10 ** digits;
+  return Math.round(count * 100 * scale / total) / scale;
 }
 
 function aggregate(
   entries: { key: string; disposition: Disposition; tier1: boolean }[],
-  requiredPercent: number,
+  baseline: { uses: number; percent: number },
 ): { summary: CoverageSummary; rows: CoverageRow[] } {
   const grouped = new Map<string, CoverageRow>();
   let tier1Uses = 0;
@@ -201,7 +203,9 @@ function aggregate(
     row.total++;
     row[entry.disposition]++;
     grouped.set(entry.key, row);
-    if (entry.tier1) tier1Uses++;
+    if (entry.tier1 && (entry.disposition === "native" || entry.disposition === "degraded")) {
+      tier1Uses++;
+    }
   }
   const rows = [...grouped.values()].sort((a, b) =>
     a.type < b.type ? -1 : a.type > b.type ? 1 : 0
@@ -212,7 +216,7 @@ function aggregate(
   const degraded = total("degraded");
   const placeholder = total("placeholder");
   const dropped = total("dropped");
-  const tier1Percent = percent(tier1Uses, uses);
+  const tier1Percent = percent(tier1Uses, uses, 2);
   return {
     summary: {
       types: rows.length,
@@ -226,8 +230,9 @@ function aggregate(
       tier1: {
         uses: tier1Uses,
         percent: tier1Percent,
-        requiredPercent,
-        meetsBaseline: tier1Percent >= requiredPercent,
+        requiredUses: baseline.uses,
+        requiredPercent: baseline.percent,
+        meetsBaseline: tier1Uses >= baseline.uses,
       },
     },
     rows,
@@ -248,7 +253,7 @@ export function buildCoverageReport(): CoverageReport {
   })));
   return {
     sourceEvents: events.length,
-    actions: aggregate(actions, 45.9),
-    conditions: aggregate(conditions, 53.0),
+    actions: aggregate(actions, { uses: 6_246, percent: 45.9 }),
+    conditions: aggregate(conditions, { uses: 4_591, percent: 53.0 }),
   };
 }

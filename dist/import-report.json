@@ -1431,10 +1431,11 @@
     "nativePercent": 40,
     "executablePercent": 82.2,
     "tier1": {
-     "uses": 6246,
-     "percent": 45.9,
+     "uses": 6244,
+     "percent": 45.85,
+     "requiredUses": 6246,
      "requiredPercent": 45.9,
-     "meetsBaseline": true
+     "meetsBaseline": false
     }
    },
    "rows": [
@@ -2235,10 +2236,11 @@
     "nativePercent": 53,
     "executablePercent": 93.5,
     "tier1": {
-     "uses": 4591,
-     "percent": 53,
+     "uses": 4589,
+     "percent": 52.97,
+     "requiredUses": 4591,
      "requiredPercent": 53,
-     "meetsBaseline": true
+     "meetsBaseline": false
     }
    },
    "rows": [

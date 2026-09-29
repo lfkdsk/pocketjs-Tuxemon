@@ -8,12 +8,16 @@ project correctly materializes it in every map that loads it.
 
 | Kind | Kinds | Uses | Native | Degraded | Placeholder | Dropped | S1 T1 baseline |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Actions | 98 | 13617 | 5448 | 4652 | 1099 | 2418 | 6246 (45.9%) |
-| Conditions | 64 | 8663 | 4589 | 2623 | 888 | 563 | 4591 (53.0%) |
+| Actions | 98 | 13617 | 5448 | 4652 | 1099 | 2418 | 6244 / 6246 (45.85% / 45.9%) |
+| Conditions | 64 | 8663 | 4589 | 2623 | 888 | 563 | 4589 / 4591 (52.97% / 53.0%) |
 
-The S1 acceptance floor is 45.9% for actions and 53.0% for conditions.
-This import records 45.9% and
-53.0%, respectively. “Executable”
+The S1 acceptance baselines are 6,246 action uses (45.9%) and 4,591
+condition uses (53.0%). Only T1 source types whose disposition is Native or
+Degraded count toward them. This import records 6244
+(45.85%) and 4589
+(52.97%), respectively; each is two
+uses below its S1 baseline. Action Native coverage is
+40.0%. “Executable”
 (native + degraded + deliberate P1 placeholder) is
 82.2% for actions and
 93.5% for conditions.

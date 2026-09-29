@@ -21,7 +21,7 @@ export function jsonBytes(value: unknown): string {
 export function coverageMarkdown(report: ImportReport): string {
   const { actions, conditions } = report.coverage;
   const summary = (kind: string, value: typeof actions.summary) =>
-    `| ${kind} | ${value.types} | ${value.uses} | ${value.native} | ${value.degraded} | ${value.placeholder} | ${value.dropped} | ${value.tier1.uses} (${value.tier1.percent.toFixed(1)}%) |`;
+    `| ${kind} | ${value.types} | ${value.uses} | ${value.native} | ${value.degraded} | ${value.placeholder} | ${value.dropped} | ${value.tier1.uses} / ${value.tier1.requiredUses} (${value.tier1.percent.toFixed(2)}% / ${value.tier1.requiredPercent.toFixed(1)}%) |`;
   const rows = (kind: string, values: typeof actions.rows) => values
     .map((row) =>
       `| ${kind} | \`${row.type}\` | ${row.native} | ${row.degraded} | ${row.placeholder} | ${row.dropped} | ${row.total} |`
@@ -45,9 +45,13 @@ project correctly materializes it in every map that loads it.
 ${summary("Actions", actions.summary)}
 ${summary("Conditions", conditions.summary)}
 
-The S1 acceptance floor is 45.9% for actions and 53.0% for conditions.
-This import records ${actions.summary.tier1.percent.toFixed(1)}% and
-${conditions.summary.tier1.percent.toFixed(1)}%, respectively. “Executable”
+The S1 acceptance baselines are 6,246 action uses (45.9%) and 4,591
+condition uses (53.0%). Only T1 source types whose disposition is Native or
+Degraded count toward them. This import records ${actions.summary.tier1.uses}
+(${actions.summary.tier1.percent.toFixed(2)}%) and ${conditions.summary.tier1.uses}
+(${conditions.summary.tier1.percent.toFixed(2)}%), respectively; each is two
+uses below its S1 baseline. Action Native coverage is
+${actions.summary.nativePercent.toFixed(1)}%. “Executable”
 (native + degraded + deliberate P1 placeholder) is
 ${actions.summary.executablePercent.toFixed(1)}% for actions and
 ${conditions.summary.executablePercent.toFixed(1)}% for conditions.

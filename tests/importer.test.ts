@@ -15,12 +15,25 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   expect(result.report.coverage.actions.summary).toMatchObject({
     types: 98,
     uses: 13_617,
-    tier1: { uses: 6_246, percent: 45.9, meetsBaseline: true },
+    native: 5_448,
+    nativePercent: 40.0,
+    tier1: {
+      uses: 6_244,
+      percent: 45.85,
+      requiredUses: 6_246,
+      meetsBaseline: false,
+    },
   });
   expect(result.report.coverage.conditions.summary).toMatchObject({
     types: 64,
     uses: 8_663,
-    tier1: { uses: 4_591, percent: 53.0, meetsBaseline: true },
+    native: 4_589,
+    tier1: {
+      uses: 4_589,
+      percent: 52.97,
+      requiredUses: 4_591,
+      meetsBaseline: false,
+    },
   });
   expect(Object.keys(result.variables)).toHaveLength(493);
   expect(Object.values(result.variables).filter((values) => values.length === 0)).toHaveLength(19);
