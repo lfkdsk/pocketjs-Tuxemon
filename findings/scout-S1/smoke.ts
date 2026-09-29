@@ -6,17 +6,20 @@
 //
 // The driver only presses buttons: confirm/down edges for text and choice
 // boxes, held d-pad for walking (BFS over the kit's passage table with
-// character bodies). Terrain is the prototype's placeholder (Tuxemon
-// collision rects only), so paths are approximate but real.
+// character bodies). G5 replaces the prototype's collision-only placeholder
+// with the generated TMX terrain fragment before the session starts.
 
 import { readFileSync, writeFileSync } from "node:fs";
 import { createSession, startSession, stepSession, tableWithBodies, type SessionState } from "../../vendor/pocket-rpgkit/src/engine/session.ts";
 import { canStepFrom, type Dir4 } from "../../vendor/pocket-rpgkit/src/engine/passability.ts";
 import { BTN_BITS } from "../../vendor/pocket-rpgkit/src/engine/camera.ts";
 import type { Project } from "../../vendor/pocket-rpgkit/src/engine/types.ts";
+import { applyTerrain, importTerrain } from "../../importer/terrain.ts";
 
 const DIR = new URL(".", import.meta.url).pathname;
-const project = JSON.parse(readFileSync(`${DIR}proto-v1.json`, "utf8")) as Project;
+const baseProject = JSON.parse(readFileSync(`${DIR}proto-v1.json`, "utf8")) as Project;
+const terrain = importTerrain({ mapIds: baseProject.maps.map((map) => map.id) });
+const project = applyTerrain(baseProject, terrain.fragment);
 const HZ = Number(process.env.HZ ?? 60); // host rate; the kit folds 60/HZ reference ticks per frame
 const sess = createSession(project, HZ);
 let st: SessionState = startSession(project, sess);
@@ -215,11 +218,19 @@ expect("the first fight ran the battle placeholder", st.sw.switches["bo.spyder_b
 expect("the win branch closed the fight (firstfightend=no)", v("v.firstfightend") > 0 && v("v.firstfightdue") > 0);
 let requested = "";
 try {
+  // The real town terrain has one narrow street across the already-consumed
+  // first-monster touch strip. Make that inert strip an explicit waypoint;
+  // the generic walker otherwise avoids all touch cells to prevent crossing
+  // transfer mats sideways.
+  goTo(23, 13);
   goTo(14, 1);
   goTo(14, 0);
   settle();
 } catch (e) {
   requested = String(e);
+  if (!/spyder_route1/.test(requested)) {
+    note(`BLOCKERS ${Object.entries(st.chars.chars).filter(([, char]) => char.blocks).map(([id, char]) => `${id}@${char.tx},${char.ty}`).join(" ")}`);
+  }
 }
 expect(`the Route 1 exit opens after the fight (${requested || st.mapId})`, /spyder_route1/.test(requested) || st.mapId === "spyder_route1");
 note(`END   frames=${frames} at ${HZ} Hz (${(frames / HZ).toFixed(1)} s virtual)`);

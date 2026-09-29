@@ -1,0 +1,576 @@
+{
+  "format": "g5-pixel-verification/v1",
+  "reference": "Python ElementTree + Pillow/numpy direct TMX composite; animations at first frame",
+  "runtime": "PocketJS wasm host + RPG Kit StreamedChunkLayer + loadTileTexture",
+  "cases": [
+    {
+      "map": "taba_house1",
+      "width": 480,
+      "height": 272,
+      "frames": 2,
+      "out": "/var/tmp/fleet/task-1806/runtime-shots/taba_house1-480x272.png",
+      "state": {
+        "frame": 2,
+        "map": "taba_house1",
+        "px": 64,
+        "py": 48,
+        "camX": -168,
+        "camY": -80,
+        "viewport": {
+          "w": 480,
+          "h": 272
+        },
+        "ground": {
+          "mapId": "taba_house1",
+          "resident": 1,
+          "textures": 1,
+          "textureBytes": 66560,
+          "pooled": 0,
+          "created": 1,
+          "uploads": 1,
+          "frees": 0,
+          "pending": 0
+        },
+        "upper": {
+          "mapId": "taba_house1",
+          "resident": 1,
+          "textures": 1,
+          "textureBytes": 66560,
+          "pooled": 0,
+          "created": 1,
+          "uploads": 1,
+          "frees": 0,
+          "pending": 0
+        }
+      },
+      "differentPixels": 256,
+      "outsideMask": 0,
+      "markerSame": 0,
+      "markerDifferent": 256,
+      "maxChannelDelta": 154,
+      "compare": "/home/tangollvm/.fleet/worktrees/task-1806/findings/G5-shots/compare-taba_house1-480x272.png"
+    },
+    {
+      "map": "taba_house1",
+      "width": 960,
+      "height": 544,
+      "frames": 2,
+      "out": "/var/tmp/fleet/task-1806/runtime-shots/taba_house1-960x544.png",
+      "state": {
+        "frame": 2,
+        "map": "taba_house1",
+        "px": 64,
+        "py": 48,
+        "camX": -408,
+        "camY": -216,
+        "viewport": {
+          "w": 960,
+          "h": 544
+        },
+        "ground": {
+          "mapId": "taba_house1",
+          "resident": 1,
+          "textures": 1,
+          "textureBytes": 66560,
+          "pooled": 0,
+          "created": 1,
+          "uploads": 1,
+          "frees": 0,
+          "pending": 0
+        },
+        "upper": {
+          "mapId": "taba_house1",
+          "resident": 1,
+          "textures": 1,
+          "textureBytes": 66560,
+          "pooled": 0,
+          "created": 1,
+          "uploads": 1,
+          "frees": 0,
+          "pending": 0
+        }
+      },
+      "differentPixels": 256,
+      "outsideMask": 0,
+      "markerSame": 0,
+      "markerDifferent": 256,
+      "maxChannelDelta": 154,
+      "compare": "/home/tangollvm/.fleet/worktrees/task-1806/findings/G5-shots/compare-taba_house1-960x544.png"
+    },
+    {
+      "map": "taba_town",
+      "width": 480,
+      "height": 272,
+      "frames": 2,
+      "out": "/var/tmp/fleet/task-1806/runtime-shots/taba_town-480x272.png",
+      "state": {
+        "frame": 2,
+        "map": "taba_town",
+        "px": 496,
+        "py": 128,
+        "camX": 264,
+        "camY": 0,
+        "viewport": {
+          "w": 480,
+          "h": 272
+        },
+        "ground": {
+          "mapId": "taba_town",
+          "resident": 6,
+          "textures": 6,
+          "textureBytes": 399360,
+          "pooled": 0,
+          "created": 6,
+          "uploads": 6,
+          "frees": 0,
+          "pending": 0
+        },
+        "upper": {
+          "mapId": "taba_town",
+          "resident": 5,
+          "textures": 5,
+          "textureBytes": 332800,
+          "pooled": 0,
+          "created": 5,
+          "uploads": 5,
+          "frees": 0,
+          "pending": 0
+        }
+      },
+      "differentPixels": 0,
+      "outsideMask": 0,
+      "markerSame": 256,
+      "markerDifferent": 0,
+      "maxChannelDelta": 0,
+      "compare": "/home/tangollvm/.fleet/worktrees/task-1806/findings/G5-shots/compare-taba_town-480x272.png"
+    },
+    {
+      "map": "taba_town",
+      "width": 960,
+      "height": 544,
+      "frames": 2,
+      "out": "/var/tmp/fleet/task-1806/runtime-shots/taba_town-960x544.png",
+      "state": {
+        "frame": 2,
+        "map": "taba_town",
+        "px": 496,
+        "py": 128,
+        "camX": 24,
+        "camY": 0,
+        "viewport": {
+          "w": 960,
+          "h": 544
+        },
+        "ground": {
+          "mapId": "taba_town",
+          "resident": 12,
+          "textures": 12,
+          "textureBytes": 798720,
+          "pooled": 0,
+          "created": 12,
+          "uploads": 12,
+          "frees": 0,
+          "pending": 0
+        },
+        "upper": {
+          "mapId": "taba_town",
+          "resident": 11,
+          "textures": 11,
+          "textureBytes": 732160,
+          "pooled": 0,
+          "created": 11,
+          "uploads": 11,
+          "frees": 0,
+          "pending": 0
+        }
+      },
+      "differentPixels": 0,
+      "outsideMask": 0,
+      "markerSame": 256,
+      "markerDifferent": 0,
+      "maxChannelDelta": 0,
+      "compare": "/home/tangollvm/.fleet/worktrees/task-1806/findings/G5-shots/compare-taba_town-960x544.png"
+    },
+    {
+      "map": "buddha_mountain",
+      "width": 480,
+      "height": 272,
+      "frames": 2,
+      "out": "/var/tmp/fleet/task-1806/runtime-shots/buddha_mountain-480x272.png",
+      "state": {
+        "frame": 2,
+        "map": "buddha_mountain",
+        "px": 800,
+        "py": 800,
+        "camX": 568,
+        "camY": 672,
+        "viewport": {
+          "w": 480,
+          "h": 272
+        },
+        "ground": {
+          "mapId": "buddha_mountain",
+          "resident": 6,
+          "textures": 6,
+          "textureBytes": 399360,
+          "pooled": 0,
+          "created": 6,
+          "uploads": 6,
+          "frees": 0,
+          "pending": 0
+        },
+        "upper": {
+          "mapId": "buddha_mountain",
+          "resident": 0,
+          "textures": 0,
+          "textureBytes": 0,
+          "pooled": 0,
+          "created": 0,
+          "uploads": 0,
+          "frees": 0,
+          "pending": 0
+        }
+      },
+      "differentPixels": 256,
+      "outsideMask": 0,
+      "markerSame": 0,
+      "markerDifferent": 256,
+      "maxChannelDelta": 231,
+      "compare": "/home/tangollvm/.fleet/worktrees/task-1806/findings/G5-shots/compare-buddha_mountain-480x272.png"
+    },
+    {
+      "map": "buddha_mountain",
+      "width": 960,
+      "height": 544,
+      "frames": 2,
+      "out": "/var/tmp/fleet/task-1806/runtime-shots/buddha_mountain-960x544.png",
+      "state": {
+        "frame": 2,
+        "map": "buddha_mountain",
+        "px": 800,
+        "py": 800,
+        "camX": 328,
+        "camY": 536,
+        "viewport": {
+          "w": 960,
+          "h": 544
+        },
+        "ground": {
+          "mapId": "buddha_mountain",
+          "resident": 15,
+          "textures": 15,
+          "textureBytes": 998400,
+          "pooled": 0,
+          "created": 15,
+          "uploads": 15,
+          "frees": 0,
+          "pending": 0
+        },
+        "upper": {
+          "mapId": "buddha_mountain",
+          "resident": 0,
+          "textures": 0,
+          "textureBytes": 0,
+          "pooled": 0,
+          "created": 0,
+          "uploads": 0,
+          "frees": 0,
+          "pending": 0
+        }
+      },
+      "differentPixels": 256,
+      "outsideMask": 0,
+      "markerSame": 0,
+      "markerDifferent": 256,
+      "maxChannelDelta": 231,
+      "compare": "/home/tangollvm/.fleet/worktrees/task-1806/findings/G5-shots/compare-buddha_mountain-960x544.png"
+    },
+    {
+      "map": "tt_searoute1",
+      "width": 480,
+      "height": 272,
+      "frames": 2,
+      "out": "/var/tmp/fleet/task-1806/runtime-shots/tt_searoute1-480x272.png",
+      "state": {
+        "frame": 2,
+        "map": "tt_searoute1",
+        "px": 320,
+        "py": 320,
+        "camX": 88,
+        "camY": 192,
+        "viewport": {
+          "w": 480,
+          "h": 272
+        },
+        "ground": {
+          "mapId": "tt_searoute1",
+          "resident": 6,
+          "textures": 6,
+          "textureBytes": 399360,
+          "pooled": 0,
+          "created": 6,
+          "uploads": 6,
+          "frees": 0,
+          "pending": 0
+        },
+        "upper": {
+          "mapId": "tt_searoute1",
+          "resident": 5,
+          "textures": 5,
+          "textureBytes": 332800,
+          "pooled": 0,
+          "created": 5,
+          "uploads": 5,
+          "frees": 0,
+          "pending": 0
+        }
+      },
+      "differentPixels": 256,
+      "outsideMask": 0,
+      "markerSame": 0,
+      "markerDifferent": 256,
+      "maxChannelDelta": 231,
+      "compare": "/home/tangollvm/.fleet/worktrees/task-1806/findings/G5-shots/compare-tt_searoute1-480x272.png"
+    },
+    {
+      "map": "tt_searoute1",
+      "width": 960,
+      "height": 544,
+      "frames": 2,
+      "out": "/var/tmp/fleet/task-1806/runtime-shots/tt_searoute1-960x544.png",
+      "state": {
+        "frame": 2,
+        "map": "tt_searoute1",
+        "px": 320,
+        "py": 320,
+        "camX": -160,
+        "camY": 56,
+        "viewport": {
+          "w": 960,
+          "h": 544
+        },
+        "ground": {
+          "mapId": "tt_searoute1",
+          "resident": 9,
+          "textures": 9,
+          "textureBytes": 599040,
+          "pooled": 0,
+          "created": 9,
+          "uploads": 9,
+          "frees": 0,
+          "pending": 0
+        },
+        "upper": {
+          "mapId": "tt_searoute1",
+          "resident": 7,
+          "textures": 7,
+          "textureBytes": 465920,
+          "pooled": 0,
+          "created": 7,
+          "uploads": 7,
+          "frees": 0,
+          "pending": 0
+        }
+      },
+      "differentPixels": 256,
+      "outsideMask": 0,
+      "markerSame": 0,
+      "markerDifferent": 256,
+      "maxChannelDelta": 231,
+      "compare": "/home/tangollvm/.fleet/worktrees/task-1806/findings/G5-shots/compare-tt_searoute1-960x544.png"
+    },
+    {
+      "map": "spyder_timber_town",
+      "width": 480,
+      "height": 272,
+      "frames": 2,
+      "out": "/var/tmp/fleet/task-1806/runtime-shots/spyder_timber_town-480x272.png",
+      "state": {
+        "frame": 2,
+        "map": "spyder_timber_town",
+        "px": 320,
+        "py": 320,
+        "camX": 88,
+        "camY": 192,
+        "viewport": {
+          "w": 480,
+          "h": 272
+        },
+        "ground": {
+          "mapId": "spyder_timber_town",
+          "resident": 6,
+          "textures": 6,
+          "textureBytes": 399360,
+          "pooled": 0,
+          "created": 6,
+          "uploads": 6,
+          "frees": 0,
+          "pending": 0
+        },
+        "upper": {
+          "mapId": "spyder_timber_town",
+          "resident": 3,
+          "textures": 3,
+          "textureBytes": 199680,
+          "pooled": 0,
+          "created": 3,
+          "uploads": 3,
+          "frees": 0,
+          "pending": 0
+        }
+      },
+      "differentPixels": 256,
+      "outsideMask": 0,
+      "markerSame": 0,
+      "markerDifferent": 256,
+      "maxChannelDelta": 226,
+      "compare": "/home/tangollvm/.fleet/worktrees/task-1806/findings/G5-shots/compare-spyder_timber_town-480x272.png"
+    },
+    {
+      "map": "spyder_timber_town",
+      "width": 960,
+      "height": 544,
+      "frames": 2,
+      "out": "/var/tmp/fleet/task-1806/runtime-shots/spyder_timber_town-960x544.png",
+      "state": {
+        "frame": 2,
+        "map": "spyder_timber_town",
+        "px": 320,
+        "py": 320,
+        "camX": -160,
+        "camY": 56,
+        "viewport": {
+          "w": 960,
+          "h": 544
+        },
+        "ground": {
+          "mapId": "spyder_timber_town",
+          "resident": 9,
+          "textures": 9,
+          "textureBytes": 599040,
+          "pooled": 0,
+          "created": 9,
+          "uploads": 9,
+          "frees": 0,
+          "pending": 0
+        },
+        "upper": {
+          "mapId": "spyder_timber_town",
+          "resident": 5,
+          "textures": 5,
+          "textureBytes": 332800,
+          "pooled": 0,
+          "created": 5,
+          "uploads": 5,
+          "frees": 0,
+          "pending": 0
+        }
+      },
+      "differentPixels": 256,
+      "outsideMask": 0,
+      "markerSame": 0,
+      "markerDifferent": 256,
+      "maxChannelDelta": 226,
+      "compare": "/home/tangollvm/.fleet/worktrees/task-1806/findings/G5-shots/compare-spyder_timber_town-960x544.png"
+    },
+    {
+      "map": "route3",
+      "width": 480,
+      "height": 272,
+      "frames": 2,
+      "out": "/var/tmp/fleet/task-1806/runtime-shots/route3-480x272.png",
+      "state": {
+        "frame": 2,
+        "map": "route3",
+        "px": 320,
+        "py": 320,
+        "camX": 88,
+        "camY": 192,
+        "viewport": {
+          "w": 480,
+          "h": 272
+        },
+        "ground": {
+          "mapId": "route3",
+          "resident": 6,
+          "textures": 6,
+          "textureBytes": 399360,
+          "pooled": 0,
+          "created": 6,
+          "uploads": 6,
+          "frees": 0,
+          "pending": 0
+        },
+        "upper": {
+          "mapId": "route3",
+          "resident": 3,
+          "textures": 3,
+          "textureBytes": 199680,
+          "pooled": 0,
+          "created": 3,
+          "uploads": 3,
+          "frees": 0,
+          "pending": 0
+        }
+      },
+      "differentPixels": 256,
+      "outsideMask": 0,
+      "markerSame": 0,
+      "markerDifferent": 256,
+      "maxChannelDelta": 160,
+      "compare": "/home/tangollvm/.fleet/worktrees/task-1806/findings/G5-shots/compare-route3-480x272.png"
+    },
+    {
+      "map": "route3",
+      "width": 960,
+      "height": 544,
+      "frames": 2,
+      "out": "/var/tmp/fleet/task-1806/runtime-shots/route3-960x544.png",
+      "state": {
+        "frame": 2,
+        "map": "route3",
+        "px": 320,
+        "py": 320,
+        "camX": -160,
+        "camY": 56,
+        "viewport": {
+          "w": 960,
+          "h": 544
+        },
+        "ground": {
+          "mapId": "route3",
+          "resident": 9,
+          "textures": 9,
+          "textureBytes": 599040,
+          "pooled": 0,
+          "created": 9,
+          "uploads": 9,
+          "frees": 0,
+          "pending": 0
+        },
+        "upper": {
+          "mapId": "route3",
+          "resident": 4,
+          "textures": 4,
+          "textureBytes": 266240,
+          "pooled": 0,
+          "created": 4,
+          "uploads": 4,
+          "frees": 0,
+          "pending": 0
+        }
+      },
+      "differentPixels": 256,
+      "outsideMask": 0,
+      "markerSame": 0,
+      "markerDifferent": 256,
+      "maxChannelDelta": 160,
+      "compare": "/home/tangollvm/.fleet/worktrees/task-1806/findings/G5-shots/compare-route3-960x544.png"
+    }
+  ],
+  "totals": {
+    "comparisons": 12,
+    "comparedPixels": 3916800,
+    "outsideMaskDifferences": 0
+  }
+}

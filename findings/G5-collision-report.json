@@ -1,0 +1,121 @@
+{
+  "format": "g5-collision-verification/v1",
+  "maps": {
+    "buddha_mountain": {
+      "blockedCells": 789,
+      "collisionLineEdges": 384,
+      "comparedDirectedSteps": 36844,
+      "dynamicLabelCells": 0,
+      "height": 100,
+      "mismatches": 0,
+      "width": 100,
+      "yamlCollisionCells": 0
+    },
+    "candy_town": {
+      "blockedCells": 856,
+      "collisionLineEdges": 12,
+      "comparedDirectedSteps": 2976,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "classic_hearthrock_city": {
+      "blockedCells": 128,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2688,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "cotton_cafe": {
+      "blockedCells": 53,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 364,
+      "dynamicLabelCells": 0,
+      "height": 12,
+      "mismatches": 0,
+      "width": 12,
+      "yamlCollisionCells": 0
+    },
+    "gaming_hall": {
+      "blockedCells": 252,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 208,
+      "dynamicLabelCells": 0,
+      "height": 16,
+      "mismatches": 0,
+      "width": 19,
+      "yamlCollisionCells": 0
+    },
+    "mansion": {
+      "blockedCells": 144,
+      "collisionLineEdges": 8,
+      "comparedDirectedSteps": 720,
+      "dynamicLabelCells": 0,
+      "height": 18,
+      "mismatches": 0,
+      "width": 18,
+      "yamlCollisionCells": 0
+    },
+    "spyder_candy_hospital3": {
+      "blockedCells": 24,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 856,
+      "dynamicLabelCells": 2,
+      "height": 20,
+      "mismatches": 0,
+      "width": 12,
+      "yamlCollisionCells": 0
+    },
+    "spyder_dryadsgrove": {
+      "blockedCells": 734,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 3448,
+      "dynamicLabelCells": 4,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "spyder_paper_manor": {
+      "blockedCells": 21,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 236,
+      "dynamicLabelCells": 0,
+      "height": 8,
+      "mismatches": 0,
+      "width": 10,
+      "yamlCollisionCells": 21
+    },
+    "taba_house1": {
+      "blockedCells": 17,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 184,
+      "dynamicLabelCells": 0,
+      "height": 7,
+      "mismatches": 0,
+      "width": 9,
+      "yamlCollisionCells": 0
+    },
+    "water_end_of_desert": {
+      "blockedCells": 87,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 7652,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 50,
+      "yamlCollisionCells": 0
+    }
+  },
+  "oracle": "raw TMX/TSX port of Tuxemon loader.py + movement.py semantics",
+  "totals": {
+    "comparedDirectedSteps": 56176,
+    "maps": 11,
+    "mismatches": 0
+  }
+}

@@ -27,33 +27,33 @@
 [  786] PASS  talking to mom ran her first talk page
 [  811] MAP   spyder_downstairs -> spyder_paper_town @10,7
 [  820] PASS  the front door leads to Paper Town
-[  980] TEXT  I recognize you, you're the kid who hasn't got a / Gold Pass.
-[  983] TEXT  You know, I might be able to help you out.
-[  987] TEXT  When the fancy new tuxemon come through from the / Cathedral, we just threw all our old ones in the / bin!
-[  991] TEXT  It seems like such a waste, especially when kids / like you don't have any!
-[  995] TEXT  *rummages* *rumages*
-[ 1059] TEXT  Here we go, looks like there's monsters in most of / these bins.
-[ 1062] TEXT  Sounds like my boss is calling. Good luck!
-[ 1079] PASS  the first-monster strip (touch area) ran Dante's scene
-[ 1145] TEXT  There is something here...
-[ 1149] TEXT  Do you want ROCKITTEN?
-[ 1153] CHOICE [Yes | No]
-[ 1154] PICK  Yes
-[ 1157] TEXT  Rockitten
-[ 1221] TEXT  Hey, what are you doing rummaging in bins? That's / gross - and it's against the rules!
-[ 1224] TEXT  ...
-[ 1228] TEXT  What, they were throwing out perfectly good tuxemon?
-[ 1232] TEXT  ...
-[ 1236] TEXT  Well, if they were perfectly good, they wouldn't / throw them out, would they?
-[ 1240] TEXT  They must be inferior to the new models. Here, I'll / show you!
-[ 1244] TEXT  [BATTLE] Billie / (P1 placeholder: the player wins)
-[ 1250] TEXT  Huh, must be a fluke. There's no way the new model / would be worse than the old!
-[ 1313] TEXT  ...
-[ 1316] TEXT  I'll heal you up this time, but I'm not a charity. / Rest up at home next time your monsters get worn / out.
-[ 1333] PASS  choosing Rockitten gave a monster (placeholder party)
-[ 1333] PASS  the first fight ran the battle placeholder
-[ 1333] PASS  the win branch closed the fight (firstfightend=no)
-[ 1461] TEXT  Sweetie, if you're going into the big wide world, / would you bring me back some tuxeballs from the / Cotton Mart?
-[ 1464] TEXT  There's Ziggurats loose in my workshop and they're / chewing through the cables.
-[ 1497] PASS  the Route 1 exit opens after the fight (Error: transfer: unknown map spyder_route1)
-[ 1497] END   frames=1497 at 60 Hz (24.9 s virtual)
+[  996] TEXT  I recognize you, you're the kid who hasn't got a / Gold Pass.
+[  999] TEXT  You know, I might be able to help you out.
+[ 1003] TEXT  When the fancy new tuxemon come through from the / Cathedral, we just threw all our old ones in the / bin!
+[ 1007] TEXT  It seems like such a waste, especially when kids / like you don't have any!
+[ 1011] TEXT  *rummages* *rumages*
+[ 1075] TEXT  Here we go, looks like there's monsters in most of / these bins.
+[ 1078] TEXT  Sounds like my boss is calling. Good luck!
+[ 1095] PASS  the first-monster strip (touch area) ran Dante's scene
+[ 1170] TEXT  There is something here...
+[ 1174] TEXT  Do you want ROCKITTEN?
+[ 1178] CHOICE [Yes | No]
+[ 1179] PICK  Yes
+[ 1182] TEXT  Rockitten
+[ 1246] TEXT  Hey, what are you doing rummaging in bins? That's / gross - and it's against the rules!
+[ 1249] TEXT  ...
+[ 1253] TEXT  What, they were throwing out perfectly good tuxemon?
+[ 1257] TEXT  ...
+[ 1261] TEXT  Well, if they were perfectly good, they wouldn't / throw them out, would they?
+[ 1265] TEXT  They must be inferior to the new models. Here, I'll / show you!
+[ 1269] TEXT  [BATTLE] Billie / (P1 placeholder: the player wins)
+[ 1275] TEXT  Huh, must be a fluke. There's no way the new model / would be worse than the old!
+[ 1338] TEXT  ...
+[ 1341] TEXT  I'll heal you up this time, but I'm not a charity. / Rest up at home next time your monsters get worn / out.
+[ 1358] PASS  choosing Rockitten gave a monster (placeholder party)
+[ 1358] PASS  the first fight ran the battle placeholder
+[ 1358] PASS  the win branch closed the fight (firstfightend=no)
+[ 1590] TEXT  Sweetie, if you're going into the big wide world, / would you bring me back some tuxeballs from the / Cotton Mart?
+[ 1593] TEXT  There's Ziggurats loose in my workshop and they're / chewing through the cables.
+[ 1626] PASS  the Route 1 exit opens after the fight (Error: transfer: unknown map spyder_route1)
+[ 1626] END   frames=1626 at 60 Hz (27.1 s virtual)

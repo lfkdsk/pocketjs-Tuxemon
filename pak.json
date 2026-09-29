@@ -1,0 +1,1722 @@
+[
+  {
+    "key": "ui:tile.tuxemon-37707_tower-ground-0",
+    "file": "assets/stream/tuxemon-37707_tower-ground-0.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-37707_tower-ground-1",
+    "file": "assets/stream/tuxemon-37707_tower-ground-1.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-37707_tower-ground-2",
+    "file": "assets/stream/tuxemon-37707_tower-ground-2.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-37707_tower-ground-3",
+    "file": "assets/stream/tuxemon-37707_tower-ground-3.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-37707_tower-upper",
+    "file": "assets/stream/tuxemon-37707_tower-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-37707_town-ground",
+    "file": "assets/stream/tuxemon-37707_town-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-37707_town-upper",
+    "file": "assets/stream/tuxemon-37707_town-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-37707_town_missing-ground",
+    "file": "assets/stream/tuxemon-37707_town_missing-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-37707_town_missing-upper",
+    "file": "assets/stream/tuxemon-37707_town_missing-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-azure_town-ground",
+    "file": "assets/stream/tuxemon-azure_town-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-azure_town_hall-ground",
+    "file": "assets/stream/tuxemon-azure_town_hall-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-bedroom_test-ground-0",
+    "file": "assets/stream/tuxemon-bedroom_test-ground-0.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-bedroom_test-upper",
+    "file": "assets/stream/tuxemon-bedroom_test-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-buddha_mountain-ground",
+    "file": "assets/stream/tuxemon-buddha_mountain-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-candy_town-ground",
+    "file": "assets/stream/tuxemon-candy_town-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-candy_town-upper",
+    "file": "assets/stream/tuxemon-candy_town-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-city1_mart_junkyard-ground",
+    "file": "assets/stream/tuxemon-city1_mart_junkyard-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-city1_mart_junkyard-upper",
+    "file": "assets/stream/tuxemon-city1_mart_junkyard-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-citypark-ground",
+    "file": "assets/stream/tuxemon-citypark-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-citypark-upper",
+    "file": "assets/stream/tuxemon-citypark-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-citypark_house1-ground",
+    "file": "assets/stream/tuxemon-citypark_house1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_aerolume_city-ground",
+    "file": "assets/stream/tuxemon-classic_aerolume_city-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_gym_astra-ground",
+    "file": "assets/stream/tuxemon-classic_gym_astra-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_gym_bravion-ground",
+    "file": "assets/stream/tuxemon-classic_gym_bravion-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_gym_ferrum-ground",
+    "file": "assets/stream/tuxemon-classic_gym_ferrum-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_gym_granite-ground",
+    "file": "assets/stream/tuxemon-classic_gym_granite-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_gym_marin-ground",
+    "file": "assets/stream/tuxemon-classic_gym_marin-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_gym_mila-ground",
+    "file": "assets/stream/tuxemon-classic_gym_mila-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_gym_orion-ground",
+    "file": "assets/stream/tuxemon-classic_gym_orion-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_gym_pyra-ground",
+    "file": "assets/stream/tuxemon-classic_gym_pyra-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_gym_shade-ground",
+    "file": "assets/stream/tuxemon-classic_gym_shade-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_gym_sylva-ground",
+    "file": "assets/stream/tuxemon-classic_gym_sylva-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_gym_voltessa-ground",
+    "file": "assets/stream/tuxemon-classic_gym_voltessa-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_gym_vyre-ground",
+    "file": "assets/stream/tuxemon-classic_gym_vyre-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_gym_zephra-ground",
+    "file": "assets/stream/tuxemon-classic_gym_zephra-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_hearthrock_city-ground",
+    "file": "assets/stream/tuxemon-classic_hearthrock_city-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_hearthrock_city-upper",
+    "file": "assets/stream/tuxemon-classic_hearthrock_city-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_route_1-ground",
+    "file": "assets/stream/tuxemon-classic_route_1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_route_1-upper",
+    "file": "assets/stream/tuxemon-classic_route_1-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_route_2-ground",
+    "file": "assets/stream/tuxemon-classic_route_2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_route_3-ground",
+    "file": "assets/stream/tuxemon-classic_route_3-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_route_4-ground",
+    "file": "assets/stream/tuxemon-classic_route_4-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_route_5-ground",
+    "file": "assets/stream/tuxemon-classic_route_5-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_route_6-ground",
+    "file": "assets/stream/tuxemon-classic_route_6-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_route_7-ground",
+    "file": "assets/stream/tuxemon-classic_route_7-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_route_8-ground",
+    "file": "assets/stream/tuxemon-classic_route_8-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_steamshore_city-ground",
+    "file": "assets/stream/tuxemon-classic_steamshore_city-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_steamshore_city-upper",
+    "file": "assets/stream/tuxemon-classic_steamshore_city-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_stormpeak_city-ground",
+    "file": "assets/stream/tuxemon-classic_stormpeak_city-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_thornwood_city-ground",
+    "file": "assets/stream/tuxemon-classic_thornwood_city-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_umbrastar_city-ground",
+    "file": "assets/stream/tuxemon-classic_umbrastar_city-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_valorhold_city-ground",
+    "file": "assets/stream/tuxemon-classic_valorhold_city-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-classic_valorhold_city-upper",
+    "file": "assets/stream/tuxemon-classic_valorhold_city-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-cotton_cafe-ground",
+    "file": "assets/stream/tuxemon-cotton_cafe-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-cotton_cafe-upper",
+    "file": "assets/stream/tuxemon-cotton_cafe-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-cotton_cafe_basement-ground",
+    "file": "assets/stream/tuxemon-cotton_cafe_basement-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-cotton_cafe_basement-upper",
+    "file": "assets/stream/tuxemon-cotton_cafe_basement-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-cotton_cathedral-ground",
+    "file": "assets/stream/tuxemon-cotton_cathedral-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-cotton_cathedral-upper",
+    "file": "assets/stream/tuxemon-cotton_cathedral-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-cotton_daycare-ground",
+    "file": "assets/stream/tuxemon-cotton_daycare-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-cotton_daycare-upper",
+    "file": "assets/stream/tuxemon-cotton_daycare-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-cotton_misa_house-ground-0",
+    "file": "assets/stream/tuxemon-cotton_misa_house-ground-0.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-cotton_misa_house-upper",
+    "file": "assets/stream/tuxemon-cotton_misa_house-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-cotton_misa_house_upstairs-ground",
+    "file": "assets/stream/tuxemon-cotton_misa_house_upstairs-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-cotton_scoop-ground",
+    "file": "assets/stream/tuxemon-cotton_scoop-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-cotton_scoop-upper",
+    "file": "assets/stream/tuxemon-cotton_scoop-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-cotton_town-ground",
+    "file": "assets/stream/tuxemon-cotton_town-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-cotton_town-upper",
+    "file": "assets/stream/tuxemon-cotton_town-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-cotton_underground-ground",
+    "file": "assets/stream/tuxemon-cotton_underground-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-dojo1-ground",
+    "file": "assets/stream/tuxemon-dojo1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-dojo1-upper",
+    "file": "assets/stream/tuxemon-dojo1-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-dojo2-ground",
+    "file": "assets/stream/tuxemon-dojo2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-dojo2-upper",
+    "file": "assets/stream/tuxemon-dojo2-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-dojo3-ground",
+    "file": "assets/stream/tuxemon-dojo3-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-downstairs_test-ground-0",
+    "file": "assets/stream/tuxemon-downstairs_test-ground-0.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-downstairs_test-upper",
+    "file": "assets/stream/tuxemon-downstairs_test-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-dragonscave-ground",
+    "file": "assets/stream/tuxemon-dragonscave-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-dragonscave-upper",
+    "file": "assets/stream/tuxemon-dragonscave-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-dryadsgrove-ground",
+    "file": "assets/stream/tuxemon-dryadsgrove-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-dryadsgrove-upper",
+    "file": "assets/stream/tuxemon-dryadsgrove-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_crystal_bank1-ground",
+    "file": "assets/stream/tuxemon-eclipse_crystal_bank1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_crystal_bank1-upper",
+    "file": "assets/stream/tuxemon-eclipse_crystal_bank1-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_crystal_bank2-ground",
+    "file": "assets/stream/tuxemon-eclipse_crystal_bank2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_crystal_bank3-ground",
+    "file": "assets/stream/tuxemon-eclipse_crystal_bank3-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_crystal_bank3-upper",
+    "file": "assets/stream/tuxemon-eclipse_crystal_bank3-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_crystal_center-ground",
+    "file": "assets/stream/tuxemon-eclipse_crystal_center-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_crystal_center-upper",
+    "file": "assets/stream/tuxemon-eclipse_crystal_center-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_crystal_town-ground",
+    "file": "assets/stream/tuxemon-eclipse_crystal_town-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_crystal_town-upper",
+    "file": "assets/stream/tuxemon-eclipse_crystal_town-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_crystal_town_cafe-ground",
+    "file": "assets/stream/tuxemon-eclipse_crystal_town_cafe-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_crystal_town_cafe-upper",
+    "file": "assets/stream/tuxemon-eclipse_crystal_town_cafe-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_crystal_town_house-ground",
+    "file": "assets/stream/tuxemon-eclipse_crystal_town_house-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_crystal_town_house-upper",
+    "file": "assets/stream/tuxemon-eclipse_crystal_town_house-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_lion_mountain_high-ground",
+    "file": "assets/stream/tuxemon-eclipse_lion_mountain_high-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_lion_mountain_low-ground",
+    "file": "assets/stream/tuxemon-eclipse_lion_mountain_low-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_lion_mountain_middle-ground",
+    "file": "assets/stream/tuxemon-eclipse_lion_mountain_middle-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_obsidian_center-ground",
+    "file": "assets/stream/tuxemon-eclipse_obsidian_center-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_obsidian_center-upper",
+    "file": "assets/stream/tuxemon-eclipse_obsidian_center-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_obsidian_town-ground",
+    "file": "assets/stream/tuxemon-eclipse_obsidian_town-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_obsidian_town_house-ground",
+    "file": "assets/stream/tuxemon-eclipse_obsidian_town_house-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_park-ground",
+    "file": "assets/stream/tuxemon-eclipse_park-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_park_cabin-ground",
+    "file": "assets/stream/tuxemon-eclipse_park_cabin-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_park_cave-ground",
+    "file": "assets/stream/tuxemon-eclipse_park_cave-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_park_entrance-ground",
+    "file": "assets/stream/tuxemon-eclipse_park_entrance-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_park_south-ground",
+    "file": "assets/stream/tuxemon-eclipse_park_south-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_park_south-upper",
+    "file": "assets/stream/tuxemon-eclipse_park_south-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_route7-ground",
+    "file": "assets/stream/tuxemon-eclipse_route7-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_route7-upper",
+    "file": "assets/stream/tuxemon-eclipse_route7-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_routef-ground",
+    "file": "assets/stream/tuxemon-eclipse_routef-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_routeg-ground",
+    "file": "assets/stream/tuxemon-eclipse_routeg-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_routeg-upper",
+    "file": "assets/stream/tuxemon-eclipse_routeg-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_routeh-ground",
+    "file": "assets/stream/tuxemon-eclipse_routeh-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-eclipse_routei-ground",
+    "file": "assets/stream/tuxemon-eclipse_routei-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-flower_city-ground",
+    "file": "assets/stream/tuxemon-flower_city-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-flower_city-upper",
+    "file": "assets/stream/tuxemon-flower_city-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-gadget_store1-ground",
+    "file": "assets/stream/tuxemon-gadget_store1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-gadget_store1-upper",
+    "file": "assets/stream/tuxemon-gadget_store1-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-gaming_hall-ground",
+    "file": "assets/stream/tuxemon-gaming_hall-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-gaming_hall-upper",
+    "file": "assets/stream/tuxemon-gaming_hall-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-healing_center-ground",
+    "file": "assets/stream/tuxemon-healing_center-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-healing_center-upper",
+    "file": "assets/stream/tuxemon-healing_center-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-leather_scoop-ground",
+    "file": "assets/stream/tuxemon-leather_scoop-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-leather_scoop-upper",
+    "file": "assets/stream/tuxemon-leather_scoop-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-leather_shaft1-ground",
+    "file": "assets/stream/tuxemon-leather_shaft1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-leather_shaft1-upper",
+    "file": "assets/stream/tuxemon-leather_shaft1-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-leather_shaft2-ground",
+    "file": "assets/stream/tuxemon-leather_shaft2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-leather_shaft2-upper",
+    "file": "assets/stream/tuxemon-leather_shaft2-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-leather_town-ground",
+    "file": "assets/stream/tuxemon-leather_town-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-leather_town-upper",
+    "file": "assets/stream/tuxemon-leather_town-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-manhattan_beach-ground",
+    "file": "assets/stream/tuxemon-manhattan_beach-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-mansion-ground",
+    "file": "assets/stream/tuxemon-mansion-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-mansion-upper",
+    "file": "assets/stream/tuxemon-mansion-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-mansion_basement-ground",
+    "file": "assets/stream/tuxemon-mansion_basement-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-mansion_basement-upper",
+    "file": "assets/stream/tuxemon-mansion_basement-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-mansion_top-ground",
+    "file": "assets/stream/tuxemon-mansion_top-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-mansion_top-upper",
+    "file": "assets/stream/tuxemon-mansion_top-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-maple_bedroom-ground",
+    "file": "assets/stream/tuxemon-maple_bedroom-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-maple_bedroom-upper",
+    "file": "assets/stream/tuxemon-maple_bedroom-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-maple_house-ground-0",
+    "file": "assets/stream/tuxemon-maple_house-ground-0.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-maple_house-upper",
+    "file": "assets/stream/tuxemon-maple_house-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-omnichannel0-ground",
+    "file": "assets/stream/tuxemon-omnichannel0-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-omnichannel1-ground",
+    "file": "assets/stream/tuxemon-omnichannel1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-omnichannel2-ground",
+    "file": "assets/stream/tuxemon-omnichannel2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-omnichannel3-ground",
+    "file": "assets/stream/tuxemon-omnichannel3-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-omnichannel4-ground",
+    "file": "assets/stream/tuxemon-omnichannel4-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-player_house_bedroom-ground-0",
+    "file": "assets/stream/tuxemon-player_house_bedroom-ground-0.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-player_house_bedroom-upper",
+    "file": "assets/stream/tuxemon-player_house_bedroom-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-player_house_downstairs-ground-0",
+    "file": "assets/stream/tuxemon-player_house_downstairs-ground-0.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-player_house_downstairs-upper",
+    "file": "assets/stream/tuxemon-player_house_downstairs-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-professor_lab-ground",
+    "file": "assets/stream/tuxemon-professor_lab-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-professor_lab-upper",
+    "file": "assets/stream/tuxemon-professor_lab-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-route1-ground",
+    "file": "assets/stream/tuxemon-route1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-route1-upper",
+    "file": "assets/stream/tuxemon-route1-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-route1_sanglorian-ground",
+    "file": "assets/stream/tuxemon-route1_sanglorian-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-route1_sanglorian-upper",
+    "file": "assets/stream/tuxemon-route1_sanglorian-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-route2-ground",
+    "file": "assets/stream/tuxemon-route2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-route2-upper",
+    "file": "assets/stream/tuxemon-route2-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-route3-ground",
+    "file": "assets/stream/tuxemon-route3-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-route3-upper",
+    "file": "assets/stream/tuxemon-route3-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-route4-ground",
+    "file": "assets/stream/tuxemon-route4-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-route5-ground",
+    "file": "assets/stream/tuxemon-route5-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-route5-upper",
+    "file": "assets/stream/tuxemon-route5-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-route6-ground",
+    "file": "assets/stream/tuxemon-route6-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-routea-ground",
+    "file": "assets/stream/tuxemon-routea-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-routea-upper",
+    "file": "assets/stream/tuxemon-routea-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-routec-ground",
+    "file": "assets/stream/tuxemon-routec-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-rubberduck_cave_01-ground",
+    "file": "assets/stream/tuxemon-rubberduck_cave_01-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-rubberduck_cave_01-upper",
+    "file": "assets/stream/tuxemon-rubberduck_cave_01-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-rubberduck_city_01-ground",
+    "file": "assets/stream/tuxemon-rubberduck_city_01-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-rubberduck_city_01-upper",
+    "file": "assets/stream/tuxemon-rubberduck_city_01-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-rubberduck_route_01-ground",
+    "file": "assets/stream/tuxemon-rubberduck_route_01-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-rubberduck_route_01-upper",
+    "file": "assets/stream/tuxemon-rubberduck_route_01-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-russell_practice_1-ground",
+    "file": "assets/stream/tuxemon-russell_practice_1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-russell_practice_1-upper",
+    "file": "assets/stream/tuxemon-russell_practice_1-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-scoop1-ground",
+    "file": "assets/stream/tuxemon-scoop1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-scoop1-upper",
+    "file": "assets/stream/tuxemon-scoop1-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-scoop2-ground",
+    "file": "assets/stream/tuxemon-scoop2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-scoop3-ground",
+    "file": "assets/stream/tuxemon-scoop3-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-scoop3-upper",
+    "file": "assets/stream/tuxemon-scoop3-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-scoop4-ground",
+    "file": "assets/stream/tuxemon-scoop4-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-sphalian_center-ground",
+    "file": "assets/stream/tuxemon-sphalian_center-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-sphalian_center-upper",
+    "file": "assets/stream/tuxemon-sphalian_center-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-sphalian_town-ground",
+    "file": "assets/stream/tuxemon-sphalian_town-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-sphalian_town-upper",
+    "file": "assets/stream/tuxemon-sphalian_town-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-sphalian_town_house-ground-0",
+    "file": "assets/stream/tuxemon-sphalian_town_house-ground-0.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-sphalian_town_house-upper",
+    "file": "assets/stream/tuxemon-sphalian_town_house-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_bedroom-ground-0",
+    "file": "assets/stream/tuxemon-spyder_bedroom-ground-0.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_bedroom-upper",
+    "file": "assets/stream/tuxemon-spyder_bedroom-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_brideswood-ground",
+    "file": "assets/stream/tuxemon-spyder_brideswood-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_brideswood-upper",
+    "file": "assets/stream/tuxemon-spyder_brideswood-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_cafe-ground",
+    "file": "assets/stream/tuxemon-spyder_candy_cafe-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_cafe-upper",
+    "file": "assets/stream/tuxemon-spyder_candy_cafe-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_center-ground",
+    "file": "assets/stream/tuxemon-spyder_candy_center-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_center-upper",
+    "file": "assets/stream/tuxemon-spyder_candy_center-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_hospital1-ground",
+    "file": "assets/stream/tuxemon-spyder_candy_hospital1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_hospital1-upper",
+    "file": "assets/stream/tuxemon-spyder_candy_hospital1-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_hospital2-ground",
+    "file": "assets/stream/tuxemon-spyder_candy_hospital2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_hospital2-upper",
+    "file": "assets/stream/tuxemon-spyder_candy_hospital2-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_hospital3-ground",
+    "file": "assets/stream/tuxemon-spyder_candy_hospital3-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_hospital3-upper",
+    "file": "assets/stream/tuxemon-spyder_candy_hospital3-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_house1-ground",
+    "file": "assets/stream/tuxemon-spyder_candy_house1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_house1-upper",
+    "file": "assets/stream/tuxemon-spyder_candy_house1-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_house2-ground",
+    "file": "assets/stream/tuxemon-spyder_candy_house2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_house3-ground",
+    "file": "assets/stream/tuxemon-spyder_candy_house3-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_house3-upper",
+    "file": "assets/stream/tuxemon-spyder_candy_house3-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_inn1-ground",
+    "file": "assets/stream/tuxemon-spyder_candy_inn1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_inn1-upper",
+    "file": "assets/stream/tuxemon-spyder_candy_inn1-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_inn2-ground",
+    "file": "assets/stream/tuxemon-spyder_candy_inn2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_port-ground",
+    "file": "assets/stream/tuxemon-spyder_candy_port-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_port-upper",
+    "file": "assets/stream/tuxemon-spyder_candy_port-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_scoop-ground",
+    "file": "assets/stream/tuxemon-spyder_candy_scoop-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_scoop-upper",
+    "file": "assets/stream/tuxemon-spyder_candy_scoop-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_town-ground",
+    "file": "assets/stream/tuxemon-spyder_candy_town-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_candy_town-upper",
+    "file": "assets/stream/tuxemon-spyder_candy_town-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_citypark-ground",
+    "file": "assets/stream/tuxemon-spyder_citypark-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_citypark-upper",
+    "file": "assets/stream/tuxemon-spyder_citypark-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_citypark_house1-ground",
+    "file": "assets/stream/tuxemon-spyder_citypark_house1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_cotton_artshop-ground-0",
+    "file": "assets/stream/tuxemon-spyder_cotton_artshop-ground-0.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_cotton_artshop-ground-1",
+    "file": "assets/stream/tuxemon-spyder_cotton_artshop-ground-1.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_cotton_artshop-upper",
+    "file": "assets/stream/tuxemon-spyder_cotton_artshop-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_cotton_cafe-ground",
+    "file": "assets/stream/tuxemon-spyder_cotton_cafe-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_cotton_cafe-upper",
+    "file": "assets/stream/tuxemon-spyder_cotton_cafe-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_cotton_house1-ground",
+    "file": "assets/stream/tuxemon-spyder_cotton_house1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_cotton_house2-ground",
+    "file": "assets/stream/tuxemon-spyder_cotton_house2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_cotton_scoop-ground",
+    "file": "assets/stream/tuxemon-spyder_cotton_scoop-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_cotton_scoop-upper",
+    "file": "assets/stream/tuxemon-spyder_cotton_scoop-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_cotton_town-ground",
+    "file": "assets/stream/tuxemon-spyder_cotton_town-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_cotton_town-upper",
+    "file": "assets/stream/tuxemon-spyder_cotton_town-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_cotton_tunnel-ground",
+    "file": "assets/stream/tuxemon-spyder_cotton_tunnel-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_datacenter-ground",
+    "file": "assets/stream/tuxemon-spyder_datacenter-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_diamond_hill-ground",
+    "file": "assets/stream/tuxemon-spyder_diamond_hill-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_dojo1-ground",
+    "file": "assets/stream/tuxemon-spyder_dojo1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_dojo1-upper",
+    "file": "assets/stream/tuxemon-spyder_dojo1-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_dojo2-ground",
+    "file": "assets/stream/tuxemon-spyder_dojo2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_dojo2-upper",
+    "file": "assets/stream/tuxemon-spyder_dojo2-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_dojo3-ground",
+    "file": "assets/stream/tuxemon-spyder_dojo3-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_dojo3-upper",
+    "file": "assets/stream/tuxemon-spyder_dojo3-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_dojo4-ground",
+    "file": "assets/stream/tuxemon-spyder_dojo4-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_downstairs-ground-0",
+    "file": "assets/stream/tuxemon-spyder_downstairs-ground-0.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_downstairs-upper",
+    "file": "assets/stream/tuxemon-spyder_downstairs-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_dragonscave-ground",
+    "file": "assets/stream/tuxemon-spyder_dragonscave-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_dragonscave-upper",
+    "file": "assets/stream/tuxemon-spyder_dragonscave-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_dryadsgrove-ground",
+    "file": "assets/stream/tuxemon-spyder_dryadsgrove-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_dryadsgrove-upper",
+    "file": "assets/stream/tuxemon-spyder_dryadsgrove-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_flower_center-ground",
+    "file": "assets/stream/tuxemon-spyder_flower_center-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_flower_center-upper",
+    "file": "assets/stream/tuxemon-spyder_flower_center-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_flower_city-ground",
+    "file": "assets/stream/tuxemon-spyder_flower_city-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_flower_city-upper",
+    "file": "assets/stream/tuxemon-spyder_flower_city-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_flower_house1-ground",
+    "file": "assets/stream/tuxemon-spyder_flower_house1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_flower_house2-ground",
+    "file": "assets/stream/tuxemon-spyder_flower_house2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_flower_house2-upper",
+    "file": "assets/stream/tuxemon-spyder_flower_house2-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_flower_petshop-ground",
+    "file": "assets/stream/tuxemon-spyder_flower_petshop-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_flower_petshop-upper",
+    "file": "assets/stream/tuxemon-spyder_flower_petshop-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_flower_scoop-ground",
+    "file": "assets/stream/tuxemon-spyder_flower_scoop-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_flower_scoop-upper",
+    "file": "assets/stream/tuxemon-spyder_flower_scoop-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_greenwash-ground",
+    "file": "assets/stream/tuxemon-spyder_greenwash-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_greenwash-upper",
+    "file": "assets/stream/tuxemon-spyder_greenwash-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_greenwash_greenhouse-ground",
+    "file": "assets/stream/tuxemon-spyder_greenwash_greenhouse-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_greenwash_greenhouse-upper",
+    "file": "assets/stream/tuxemon-spyder_greenwash_greenhouse-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_greenwash_level2-ground",
+    "file": "assets/stream/tuxemon-spyder_greenwash_level2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_greenwash_level2-upper",
+    "file": "assets/stream/tuxemon-spyder_greenwash_level2-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_greenwash_level3-ground",
+    "file": "assets/stream/tuxemon-spyder_greenwash_level3-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_greenwash_level3-upper",
+    "file": "assets/stream/tuxemon-spyder_greenwash_level3-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_healing_center-ground",
+    "file": "assets/stream/tuxemon-spyder_healing_center-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_healing_center-upper",
+    "file": "assets/stream/tuxemon-spyder_healing_center-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_leather_center-ground",
+    "file": "assets/stream/tuxemon-spyder_leather_center-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_leather_center-upper",
+    "file": "assets/stream/tuxemon-spyder_leather_center-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_leather_gym-ground",
+    "file": "assets/stream/tuxemon-spyder_leather_gym-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_leather_gym-upper",
+    "file": "assets/stream/tuxemon-spyder_leather_gym-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_leather_house1-ground",
+    "file": "assets/stream/tuxemon-spyder_leather_house1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_leather_house1-upper",
+    "file": "assets/stream/tuxemon-spyder_leather_house1-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_leather_house2-ground",
+    "file": "assets/stream/tuxemon-spyder_leather_house2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_leather_museum-ground",
+    "file": "assets/stream/tuxemon-spyder_leather_museum-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_leather_museum-upper",
+    "file": "assets/stream/tuxemon-spyder_leather_museum-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_leather_scoop-ground",
+    "file": "assets/stream/tuxemon-spyder_leather_scoop-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_leather_scoop-upper",
+    "file": "assets/stream/tuxemon-spyder_leather_scoop-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_leather_shaft1-ground",
+    "file": "assets/stream/tuxemon-spyder_leather_shaft1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_leather_shaft1-upper",
+    "file": "assets/stream/tuxemon-spyder_leather_shaft1-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_leather_shaft2-ground",
+    "file": "assets/stream/tuxemon-spyder_leather_shaft2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_leather_shaft2-upper",
+    "file": "assets/stream/tuxemon-spyder_leather_shaft2-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_leather_town-ground",
+    "file": "assets/stream/tuxemon-spyder_leather_town-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_leather_town-upper",
+    "file": "assets/stream/tuxemon-spyder_leather_town-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_mansion-ground",
+    "file": "assets/stream/tuxemon-spyder_mansion-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_mansion-upper",
+    "file": "assets/stream/tuxemon-spyder_mansion-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_mansion_basement-ground",
+    "file": "assets/stream/tuxemon-spyder_mansion_basement-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_mansion_basement-upper",
+    "file": "assets/stream/tuxemon-spyder_mansion_basement-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_mansion_top-ground",
+    "file": "assets/stream/tuxemon-spyder_mansion_top-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_mansion_top-upper",
+    "file": "assets/stream/tuxemon-spyder_mansion_top-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_nimrod_bottom-ground",
+    "file": "assets/stream/tuxemon-spyder_nimrod_bottom-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_nimrod_bottom-upper",
+    "file": "assets/stream/tuxemon-spyder_nimrod_bottom-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_nimrod_middle-ground",
+    "file": "assets/stream/tuxemon-spyder_nimrod_middle-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_nimrod_middle-upper",
+    "file": "assets/stream/tuxemon-spyder_nimrod_middle-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_nimrod_room-ground",
+    "file": "assets/stream/tuxemon-spyder_nimrod_room-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_nimrod_top-ground",
+    "file": "assets/stream/tuxemon-spyder_nimrod_top-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_nimrod_top-upper",
+    "file": "assets/stream/tuxemon-spyder_nimrod_top-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_omnichannel1-ground",
+    "file": "assets/stream/tuxemon-spyder_omnichannel1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_omnichannel2-ground",
+    "file": "assets/stream/tuxemon-spyder_omnichannel2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_omnichannel3-ground",
+    "file": "assets/stream/tuxemon-spyder_omnichannel3-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_omnichannel4-ground",
+    "file": "assets/stream/tuxemon-spyder_omnichannel4-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_omnichannel4-upper",
+    "file": "assets/stream/tuxemon-spyder_omnichannel4-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_paper_daycare-ground",
+    "file": "assets/stream/tuxemon-spyder_paper_daycare-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_paper_daycare-upper",
+    "file": "assets/stream/tuxemon-spyder_paper_daycare-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_paper_manor-ground",
+    "file": "assets/stream/tuxemon-spyder_paper_manor-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_paper_manor-upper",
+    "file": "assets/stream/tuxemon-spyder_paper_manor-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_paper_rival_bedroom-ground",
+    "file": "assets/stream/tuxemon-spyder_paper_rival_bedroom-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_paper_rival_downstairs-ground",
+    "file": "assets/stream/tuxemon-spyder_paper_rival_downstairs-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_paper_rival_office-ground",
+    "file": "assets/stream/tuxemon-spyder_paper_rival_office-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_paper_rival_office-upper",
+    "file": "assets/stream/tuxemon-spyder_paper_rival_office-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_paper_scoop-ground",
+    "file": "assets/stream/tuxemon-spyder_paper_scoop-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_paper_scoop-upper",
+    "file": "assets/stream/tuxemon-spyder_paper_scoop-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_paper_town-ground",
+    "file": "assets/stream/tuxemon-spyder_paper_town-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_paper_town-upper",
+    "file": "assets/stream/tuxemon-spyder_paper_town-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_radiotower-ground",
+    "file": "assets/stream/tuxemon-spyder_radiotower-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_radiotower-upper",
+    "file": "assets/stream/tuxemon-spyder_radiotower-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_route1-ground",
+    "file": "assets/stream/tuxemon-spyder_route1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_route1-upper",
+    "file": "assets/stream/tuxemon-spyder_route1-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_route2-ground",
+    "file": "assets/stream/tuxemon-spyder_route2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_route2-upper",
+    "file": "assets/stream/tuxemon-spyder_route2-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_route3-ground",
+    "file": "assets/stream/tuxemon-spyder_route3-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_route3-upper",
+    "file": "assets/stream/tuxemon-spyder_route3-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_route4-ground",
+    "file": "assets/stream/tuxemon-spyder_route4-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_route5-ground",
+    "file": "assets/stream/tuxemon-spyder_route5-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_route5-upper",
+    "file": "assets/stream/tuxemon-spyder_route5-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_route6-ground",
+    "file": "assets/stream/tuxemon-spyder_route6-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_routea-ground",
+    "file": "assets/stream/tuxemon-spyder_routea-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_routea-upper",
+    "file": "assets/stream/tuxemon-spyder_routea-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_routeb-ground",
+    "file": "assets/stream/tuxemon-spyder_routeb-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_routeb-upper",
+    "file": "assets/stream/tuxemon-spyder_routeb-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_routec-ground",
+    "file": "assets/stream/tuxemon-spyder_routec-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_routec-upper",
+    "file": "assets/stream/tuxemon-spyder_routec-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_routed-ground",
+    "file": "assets/stream/tuxemon-spyder_routed-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_routee-ground",
+    "file": "assets/stream/tuxemon-spyder_routee-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_routee-upper",
+    "file": "assets/stream/tuxemon-spyder_routee-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_scoop1-ground",
+    "file": "assets/stream/tuxemon-spyder_scoop1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_scoop1-upper",
+    "file": "assets/stream/tuxemon-spyder_scoop1-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_scoop2-ground",
+    "file": "assets/stream/tuxemon-spyder_scoop2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_scoop3-ground",
+    "file": "assets/stream/tuxemon-spyder_scoop3-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_scoop3-upper",
+    "file": "assets/stream/tuxemon-spyder_scoop3-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_scoop4-ground",
+    "file": "assets/stream/tuxemon-spyder_scoop4-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_scoop4-upper",
+    "file": "assets/stream/tuxemon-spyder_scoop4-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_test_map-ground",
+    "file": "assets/stream/tuxemon-spyder_test_map-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_timber_cafe-ground",
+    "file": "assets/stream/tuxemon-spyder_timber_cafe-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_timber_cafe-upper",
+    "file": "assets/stream/tuxemon-spyder_timber_cafe-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_timber_center-ground",
+    "file": "assets/stream/tuxemon-spyder_timber_center-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_timber_center-upper",
+    "file": "assets/stream/tuxemon-spyder_timber_center-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_timber_house-ground",
+    "file": "assets/stream/tuxemon-spyder_timber_house-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_timber_house-upper",
+    "file": "assets/stream/tuxemon-spyder_timber_house-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_timber_scoop-ground",
+    "file": "assets/stream/tuxemon-spyder_timber_scoop-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_timber_scoop-upper",
+    "file": "assets/stream/tuxemon-spyder_timber_scoop-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_timber_town-ground",
+    "file": "assets/stream/tuxemon-spyder_timber_town-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_timber_town-upper",
+    "file": "assets/stream/tuxemon-spyder_timber_town-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_timber_walledgarden1-ground",
+    "file": "assets/stream/tuxemon-spyder_timber_walledgarden1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_timber_walledgarden2-ground",
+    "file": "assets/stream/tuxemon-spyder_timber_walledgarden2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_timber_walledgarden2-upper",
+    "file": "assets/stream/tuxemon-spyder_timber_walledgarden2-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_tunnel-ground",
+    "file": "assets/stream/tuxemon-spyder_tunnel-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_tunnel-upper",
+    "file": "assets/stream/tuxemon-spyder_tunnel-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_tunnel_below-ground",
+    "file": "assets/stream/tuxemon-spyder_tunnel_below-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_tunnel_below-upper",
+    "file": "assets/stream/tuxemon-spyder_tunnel_below-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_wayfarer_inn1-ground",
+    "file": "assets/stream/tuxemon-spyder_wayfarer_inn1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_wayfarer_inn2-ground",
+    "file": "assets/stream/tuxemon-spyder_wayfarer_inn2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-spyder_wayfarer_inn2-upper",
+    "file": "assets/stream/tuxemon-spyder_wayfarer_inn2-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_ba_br_1-ground",
+    "file": "assets/stream/tuxemon-taba_ba_br_1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_ba_br_1-upper",
+    "file": "assets/stream/tuxemon-taba_ba_br_1-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_ba_br_2-ground",
+    "file": "assets/stream/tuxemon-taba_ba_br_2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_ba_br_3-ground",
+    "file": "assets/stream/tuxemon-taba_ba_br_3-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_ba_br_3-upper",
+    "file": "assets/stream/tuxemon-taba_ba_br_3-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_ba_br_4-ground",
+    "file": "assets/stream/tuxemon-taba_ba_br_4-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_ba_br_4-upper",
+    "file": "assets/stream/tuxemon-taba_ba_br_4-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_ba_br_master-ground",
+    "file": "assets/stream/tuxemon-taba_ba_br_master-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_ba_br_master_foyer-ground",
+    "file": "assets/stream/tuxemon-taba_ba_br_master_foyer-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_ba_foyer-ground",
+    "file": "assets/stream/tuxemon-taba_ba_foyer-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_ba_main-ground",
+    "file": "assets/stream/tuxemon-taba_ba_main-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_ba_main-upper",
+    "file": "assets/stream/tuxemon-taba_ba_main-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_ba_passageway_1-ground",
+    "file": "assets/stream/tuxemon-taba_ba_passageway_1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_ba_passageway_1-upper",
+    "file": "assets/stream/tuxemon-taba_ba_passageway_1-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_ba_passageway_2-ground",
+    "file": "assets/stream/tuxemon-taba_ba_passageway_2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_ba_passageway_2-upper",
+    "file": "assets/stream/tuxemon-taba_ba_passageway_2-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_ba_passageway_3-ground",
+    "file": "assets/stream/tuxemon-taba_ba_passageway_3-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_ba_passageway_3-upper",
+    "file": "assets/stream/tuxemon-taba_ba_passageway_3-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_ba_passageway_4-ground",
+    "file": "assets/stream/tuxemon-taba_ba_passageway_4-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_ba_passageway_4-upper",
+    "file": "assets/stream/tuxemon-taba_ba_passageway_4-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_ba_stairwell_1-ground",
+    "file": "assets/stream/tuxemon-taba_ba_stairwell_1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_ba_stairwell_2-ground",
+    "file": "assets/stream/tuxemon-taba_ba_stairwell_2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_ba_stairwell_2-upper",
+    "file": "assets/stream/tuxemon-taba_ba_stairwell_2-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_house1-ground",
+    "file": "assets/stream/tuxemon-taba_house1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_house1-upper",
+    "file": "assets/stream/tuxemon-taba_house1-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_house2-ground",
+    "file": "assets/stream/tuxemon-taba_house2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_house2_upstairs-ground",
+    "file": "assets/stream/tuxemon-taba_house2_upstairs-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_house2_upstairs-upper",
+    "file": "assets/stream/tuxemon-taba_house2_upstairs-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_house3-ground",
+    "file": "assets/stream/tuxemon-taba_house3-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_house3-upper",
+    "file": "assets/stream/tuxemon-taba_house3-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_house3_upstairs-ground",
+    "file": "assets/stream/tuxemon-taba_house3_upstairs-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_house3_upstairs-upper",
+    "file": "assets/stream/tuxemon-taba_house3_upstairs-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_house4-ground",
+    "file": "assets/stream/tuxemon-taba_house4-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_town-ground",
+    "file": "assets/stream/tuxemon-taba_town-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-taba_town-upper",
+    "file": "assets/stream/tuxemon-taba_town-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-tabathas-ground",
+    "file": "assets/stream/tuxemon-tabathas-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-test_npcs-ground",
+    "file": "assets/stream/tuxemon-test_npcs-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-timber_town-ground",
+    "file": "assets/stream/tuxemon-timber_town-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-timber_town-upper",
+    "file": "assets/stream/tuxemon-timber_town-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-tt_forest_route1-ground",
+    "file": "assets/stream/tuxemon-tt_forest_route1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-tt_forest_route1-upper",
+    "file": "assets/stream/tuxemon-tt_forest_route1-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-tt_paper_town-ground",
+    "file": "assets/stream/tuxemon-tt_paper_town-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-tt_searoute1-ground",
+    "file": "assets/stream/tuxemon-tt_searoute1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-tt_searoute1-upper",
+    "file": "assets/stream/tuxemon-tt_searoute1-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-tunnel-ground",
+    "file": "assets/stream/tuxemon-tunnel-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-tunnel_below-ground",
+    "file": "assets/stream/tuxemon-tunnel_below-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-tunnel_below-upper",
+    "file": "assets/stream/tuxemon-tunnel_below-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-tuxe_mart_taba-ground",
+    "file": "assets/stream/tuxemon-tuxe_mart_taba-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-tuxe_mart_taba-upper",
+    "file": "assets/stream/tuxemon-tuxe_mart_taba-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-water_cathedral-ground",
+    "file": "assets/stream/tuxemon-water_cathedral-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-water_end_of_desert-ground",
+    "file": "assets/stream/tuxemon-water_end_of_desert-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-water_lower_village-ground",
+    "file": "assets/stream/tuxemon-water_lower_village-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-water_lower_village-upper",
+    "file": "assets/stream/tuxemon-water_lower_village-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-water_outskirts-ground",
+    "file": "assets/stream/tuxemon-water_outskirts-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-water_outskirts-upper",
+    "file": "assets/stream/tuxemon-water_outskirts-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-water_river_village-ground",
+    "file": "assets/stream/tuxemon-water_river_village-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-water_river_village-upper",
+    "file": "assets/stream/tuxemon-water_river_village-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-water_route_grass-ground",
+    "file": "assets/stream/tuxemon-water_route_grass-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-water_route_ice-ground",
+    "file": "assets/stream/tuxemon-water_route_ice-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-water_snow_village-ground",
+    "file": "assets/stream/tuxemon-water_snow_village-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-water_snow_village-upper",
+    "file": "assets/stream/tuxemon-water_snow_village-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-water_underwater-ground",
+    "file": "assets/stream/tuxemon-water_underwater-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-water_volcano_path-ground",
+    "file": "assets/stream/tuxemon-water_volcano_path-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-water_volcano_village-ground",
+    "file": "assets/stream/tuxemon-water_volcano_village-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-wayfarer_inn1-ground",
+    "file": "assets/stream/tuxemon-wayfarer_inn1-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-wayfarer_inn1-upper",
+    "file": "assets/stream/tuxemon-wayfarer_inn1-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-wayfarer_inn2-ground",
+    "file": "assets/stream/tuxemon-wayfarer_inn2-ground.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-wayfarer_inn2-upper",
+    "file": "assets/stream/tuxemon-wayfarer_inn2-upper.pkts"
+  },
+  {
+    "key": "ui:tile.tuxemon-witcher_route_7-ground",
+    "file": "assets/stream/tuxemon-witcher_route_7-ground.pkts"
+  }
+]

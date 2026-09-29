@@ -1,0 +1,24 @@
+{
+  "format": "g5-quickjs-benchmark/v1",
+  "runtime": "PocketJS desktop Runtime (QuickJS Guest + UiSurface)",
+  "density": 1,
+  "maps": 263,
+  "stableFramesPerViewport": 600,
+  "mapSwitchesPerViewport": 789,
+  "viewports": {
+    "480x272": {
+      "bootMs": 35.5,
+      "firstFrame": { "jsMs": 0.770, "coreMs": 0.041 },
+      "stable": { "jsMeanMs": 0.020, "jsP95Ms": 0.024, "jsMaxMs": 0.034, "totalMaxMs": 0.034 },
+      "switch": { "jsMeanMs": 0.203, "jsP95Ms": 0.431, "jsMaxMs": 0.852, "totalMaxMs": 0.852, "worstMap": "citypark", "framesOver16_7Ms": 0 },
+      "end": { "quickJsUsedMiB": 1.23, "quickJsMallocMiB": 1.76, "objects": 4840 }
+    },
+    "960x544": {
+      "bootMs": 35.8,
+      "firstFrame": { "jsMs": 0.505, "coreMs": 0.029 },
+      "stable": { "jsMeanMs": 0.019, "jsP95Ms": 0.022, "jsMaxMs": 0.033, "totalMaxMs": 0.033 },
+      "switch": { "jsMeanMs": 0.234, "jsP95Ms": 0.573, "jsMaxMs": 1.615, "totalMaxMs": 1.637, "worstMap": "rubberduck_cave_01", "framesOver16_7Ms": 0 },
+      "end": { "quickJsUsedMiB": 1.30, "quickJsMallocMiB": 1.87, "objects": 5446 }
+    }
+  }
+}
