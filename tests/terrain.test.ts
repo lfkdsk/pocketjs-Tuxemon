@@ -40,7 +40,9 @@ describe("Tuxemon terrain import", () => {
     expect(build.report.collisionLineEdges).toBe(619);
     expect(build.report.yamlCollisionCells).toBe(21);
     expect(build.report.labelledCollisionCells).toBe(14);
-    expect(build.report.directedEdgeMismatches).toBe(1_161);
+    expect(build.report.oneWayEdgesEncoded).toBe(1_161);
+    expect(build.report.directedEdgeMismatches).toBe(0);
+    expect(Object.keys(build.fragment.sheet.dirEdges ?? {})).not.toHaveLength(0);
     expect(build.animationSequences).toHaveLength(86);
     expect(build.animationSequences.every((sequence) =>
       sequence.frames.length >= 2 && sequence.frames.every((frame) => frame.rgba.byteLength === 16 * 16 * 4)

@@ -10,20 +10,20 @@ When conversion discards a whole event, every source rule in it is Dropped.
 
 | Kind | Kinds | Uses | Native | Degraded | Placeholder | Dropped | S1 T1 baseline |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Actions | 98 | 13617 | 8346 | 637 | 433 | 4201 | 6099 / 6246 (44.79% / 45.9%) |
-| Conditions | 64 | 8663 | 5749 | 12 | 850 | 2052 | 3529 / 4591 (40.74% / 53.0%) |
+| Actions | 98 | 13617 | 9619 | 637 | 433 | 2928 | 6099 / 6246 (44.79% / 45.9%) |
+| Conditions | 64 | 8663 | 5751 | 12 | 850 | 2050 | 3531 / 4591 (40.76% / 53.0%) |
 
 The S1 acceptance baselines are 6,246 action uses (45.9%) and 4,591
 condition uses (53.0%). Only T1 source types whose disposition is Native or
 Degraded count toward them. This import records 6099
-(44.79%) and 3529
-(40.74%), respectively: 147
-action uses and 1062 condition uses below the S1 baselines. The old
+(44.79%) and 3531
+(40.76%), respectively: 147
+action uses and 1060 condition uses below the S1 baselines. The old
 type-table Native figure was 5,448 / 13,617 (40.0%); conversion-path accounting
-supersedes it with 8346 / 13617
-(61.3%). “Executable”
+supersedes it with 9619 / 13617
+(70.6%). “Executable”
 (native + degraded + deliberate P1 placeholder) is
-69.1% for actions and
+78.5% for actions and
 76.3% for conditions.
 
 Definitions:
@@ -62,8 +62,8 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `change_bg_char` | 0 | 0 | 0 | 4 | 4 |
 | Action | `change_bg_monster` | 0 | 0 | 0 | 7 | 7 |
 | Action | `change_taste` | 0 | 0 | 0 | 2 | 2 |
-| Action | `char_face` | 869 | 440 | 0 | 718 | 2027 |
-| Action | `char_move` | 0 | 9 | 0 | 68 | 77 |
+| Action | `char_face` | 1552 | 440 | 0 | 35 | 2027 |
+| Action | `char_move` | 64 | 9 | 0 | 4 | 77 |
 | Action | `char_plague` | 0 | 0 | 0 | 13 | 13 |
 | Action | `char_position` | 0 | 0 | 0 | 1 | 1 |
 | Action | `char_run` | 0 | 0 | 0 | 2 | 2 |
@@ -95,8 +95,8 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `open_journal` | 0 | 0 | 0 | 14 | 14 |
 | Action | `open_shop` | 0 | 0 | 0 | 28 | 28 |
 | Action | `park_experience` | 0 | 0 | 0 | 8 | 8 |
-| Action | `pathfind` | 0 | 0 | 0 | 336 | 336 |
-| Action | `pathfind_to_char` | 0 | 0 | 0 | 201 | 201 |
+| Action | `pathfind` | 325 | 0 | 0 | 11 | 336 |
+| Action | `pathfind_to_char` | 201 | 0 | 0 | 0 | 201 |
 | Action | `play_map_animation` | 0 | 0 | 0 | 276 | 276 |
 | Action | `play_music` | 0 | 0 | 0 | 200 | 200 |
 | Action | `play_sound` | 62 | 0 | 0 | 5 | 67 |
@@ -193,7 +193,7 @@ census.
 | Condition | `is step_tracker` | 0 | 0 | 0 | 7 | 7 |
 | Condition | `is tile_property_updated` | 0 | 0 | 0 | 4 | 4 |
 | Condition | `is time_is` | 0 | 0 | 0 | 67 | 67 |
-| Condition | `is variable_set` | 676 | 0 | 0 | 54 | 730 |
+| Condition | `is variable_set` | 678 | 0 | 0 | 52 | 730 |
 | Condition | `not battle_outcome` | 0 | 0 | 358 | 5 | 363 |
 | Condition | `not battle_outcome_count` | 0 | 0 | 9 | 0 | 9 |
 | Condition | `not bill_exists` | 0 | 0 | 0 | 1 | 1 |

@@ -17,14 +17,14 @@ describe("G6 generated game assets", () => {
     expect(report.project).toMatchObject({
       maps: 263,
       collisionBodies: 14,
-      k1: {
+      options: {
         areas: true,
         facing: true,
         condAll: true,
         localReset: true,
         place: true,
         inputLock: true,
-        routes: false,
+        routes: true,
       },
     });
     expect(report.terrain).toMatchObject({ entries: 430, animatedPlacements: 5_785 });

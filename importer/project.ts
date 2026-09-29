@@ -78,8 +78,7 @@ export const KIT_V2_IMPORT_OPTIONS: Readonly<ImportOptions> = Object.freeze({
   routes: true,
 });
 
-/** The first playable milestone: every merged K1 construct is enabled while
- * K2's arbitrary-target routing remains off until that runtime lands. */
+/** The K1-only profile remains useful for focused importer regression tests. */
 export const K1_IMPORT_OPTIONS: Readonly<ImportOptions> = Object.freeze({
   areas: true,
   facing: true,
@@ -88,6 +87,12 @@ export const K1_IMPORT_OPTIONS: Readonly<ImportOptions> = Object.freeze({
   place: true,
   inputLock: true,
   routes: false,
+});
+
+/** The playable G6 profile: all merged K1 constructs plus K2 routes. */
+export const G6_IMPORT_OPTIONS: Readonly<ImportOptions> = Object.freeze({
+  ...K1_IMPORT_OPTIONS,
+  routes: true,
 });
 
 const resolveOptions = (options: Partial<ImportOptions> = {}): ImportOptions => ({
@@ -99,9 +104,9 @@ type FutureCondition = Condition | { kind: "facing"; dir: Dir };
 type FuturePageCondition = PageCondition & { all?: FutureCondition[] };
 type FutureMoveStep = MoveStep
   | "turnTowardPlayer"
-  | { turnToward: string }
+  | { turnToward: "player" | { event: string } }
   | { pathTo: { x: number; y: number } }
-  | { approach: { target: string; side?: string; distance?: number } };
+  | { approach: { target: "player" | { event: string }; side?: Dir; distance?: number } };
 type FutureCommand = Command
   | { op: "lockInput" }
   | { op: "unlockInput" }
@@ -813,7 +818,7 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
             noteAction(a, "char_face(toward char)", "T1", "K2 arbitrary-target turn-toward route");
             const step: FutureMoveStep = dir === "player"
               ? "turnTowardPlayer"
-              : { turnToward: `npc_${slug(dir)}` };
+              : { turnToward: { event: `npc_${slug(dir)}` } };
             out.push(command({ op: "moveRoute", target, wait: false, route: { steps: [step], repeat: false, skippable: true } }));
           } else {
             noteAction(a, "char_face(toward char)", "T2-dropped", "needs turnToward step");
@@ -988,11 +993,11 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         const [toward, who, side, distance] = g;
         const target = who === "player" ? "player" as const
           : isSelf(who) ? "this" as const : { event: `npc_${slug(who!)}` };
-        const approach: { target: string; side?: string; distance?: number } = {
-          target: toward === "player" ? "player" : `npc_${slug(toward!)}`,
+        const approach: { target: "player" | { event: string }; side?: Dir; distance?: number } = {
+          target: toward === "player" ? "player" : { event: `npc_${slug(toward!)}` },
         };
-        if (side) approach.side = side;
-        if (distance !== undefined && distance !== "") approach.distance = Number(distance);
+        if (DIRS.has(side)) approach.side = side as Dir;
+        if (distance !== undefined && distance !== "") approach.distance = Math.max(1, Math.trunc(Number(distance)));
         noteAction(a, a.type, "T1", "K2 deterministic approach route");
         out.push(command({
           op: "moveRoute",

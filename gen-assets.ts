@@ -9,7 +9,7 @@ import type { PlayerFrames } from "./vendor/pocket-rpgkit/src/ui/PlayerSprite.ts
 import type { Project } from "./vendor/pocket-rpgkit/src/engine/types.ts";
 import { cookCharacters } from "./importer/characters.ts";
 import { coverageMarkdown, jsonBytes } from "./importer/index.ts";
-import { availableMapIds, buildProject, K1_IMPORT_OPTIONS } from "./importer/project.ts";
+import { availableMapIds, buildProject, G6_IMPORT_OPTIONS } from "./importer/project.ts";
 import { applyTerrain, writeTerrain } from "./importer/terrain.ts";
 
 const ROOT = import.meta.dir;
@@ -17,7 +17,7 @@ const DIST = join(ROOT, "dist");
 mkdirSync(DIST, { recursive: true });
 
 const terrain = writeTerrain({ outputRoot: ROOT });
-const imported = buildProject(availableMapIds(), K1_IMPORT_OPTIONS);
+const imported = buildProject(availableMapIds(), G6_IMPORT_OPTIONS);
 let project = applyTerrain(imported.project, terrain.fragment);
 // The G1 one-tile sheet is now unused: every ground id and passage mask is
 // owned by the generated terrain sheet.
@@ -99,7 +99,7 @@ const assetReport = {
   project: {
     maps: project.maps.length,
     collisionBodies,
-    k1: K1_IMPORT_OPTIONS,
+    options: G6_IMPORT_OPTIONS,
   },
   terrain: {
     entries: terrain.report.entries,

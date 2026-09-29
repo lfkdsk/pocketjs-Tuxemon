@@ -16,8 +16,8 @@
   "collisionLineEdges": 619,
   "yamlCollisionCells": 21,
   "labelledCollisionCells": 14,
-  "oneWayEdgesApproximatedOpen": 1161,
-  "directedEdgeMismatches": 1161,
+  "oneWayEdgesEncoded": 1161,
+  "directedEdgeMismatches": 0,
   "byMap": {
     "37707_tower": {
       "width": 24,
@@ -69,7 +69,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 42,
-      "directedEdgeMismatches": 42,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 100,
         "split": false,
@@ -103,7 +103,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 42,
-      "directedEdgeMismatches": 42,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 73,
         "split": false,
@@ -341,7 +341,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 86,
-      "directedEdgeMismatches": 86,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 106,
         "split": false,
@@ -2177,7 +2177,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 114,
-      "directedEdgeMismatches": 114,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 58,
         "split": false,
@@ -2313,7 +2313,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 6,
-      "directedEdgeMismatches": 6,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 133,
         "split": false,
@@ -3401,7 +3401,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 19,
-      "directedEdgeMismatches": 19,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 90,
         "split": false,
@@ -3435,7 +3435,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 84,
-      "directedEdgeMismatches": 84,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 37,
         "split": false,
@@ -3469,7 +3469,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 14,
-      "directedEdgeMismatches": 14,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 37,
         "split": false,
@@ -3503,7 +3503,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 93,
-      "directedEdgeMismatches": 93,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 135,
         "split": false,
@@ -3537,7 +3537,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 30,
-      "directedEdgeMismatches": 30,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 35,
         "split": false,
@@ -3707,7 +3707,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 22,
-      "directedEdgeMismatches": 22,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 55,
         "split": false,
@@ -3741,7 +3741,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 28,
-      "directedEdgeMismatches": 28,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 181,
         "split": false,
@@ -3775,7 +3775,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 49,
-      "directedEdgeMismatches": 49,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 82,
         "split": false,
@@ -4557,7 +4557,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 12,
-      "directedEdgeMismatches": 12,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 155,
         "split": false,
@@ -4591,7 +4591,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 86,
-      "directedEdgeMismatches": 86,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 99,
         "split": false,
@@ -5135,7 +5135,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 12,
-      "directedEdgeMismatches": 12,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 17,
         "split": false,
@@ -5407,7 +5407,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 2,
-      "directedEdgeMismatches": 2,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 142,
         "split": false,
@@ -6529,7 +6529,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 84,
-      "directedEdgeMismatches": 84,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 54,
         "split": false,
@@ -6563,7 +6563,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 6,
-      "directedEdgeMismatches": 6,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 55,
         "split": false,
@@ -6597,7 +6597,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 70,
-      "directedEdgeMismatches": 70,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 137,
         "split": false,
@@ -6733,7 +6733,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 8,
-      "directedEdgeMismatches": 8,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 59,
         "split": false,
@@ -6903,7 +6903,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 130,
-      "directedEdgeMismatches": 130,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 166,
         "split": false,
@@ -6971,7 +6971,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 7,
-      "directedEdgeMismatches": 7,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 152,
         "split": false,
@@ -8161,7 +8161,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 83,
-      "directedEdgeMismatches": 83,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 128,
         "split": false,
@@ -8297,7 +8297,7 @@
       "yamlCollisionCells": 0,
       "labelledCollisionCells": 0,
       "oneWayEdges": 32,
-      "directedEdgeMismatches": 32,
+      "directedEdgeMismatches": 0,
       "ground": {
         "colours": 61,
         "split": false,

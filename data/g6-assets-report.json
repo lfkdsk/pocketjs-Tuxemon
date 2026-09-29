@@ -4,14 +4,14 @@
  "project": {
   "maps": 263,
   "collisionBodies": 14,
-  "k1": {
+  "options": {
    "areas": true,
    "facing": true,
    "condAll": true,
    "localReset": true,
    "place": true,
    "inputLock": true,
-   "routes": false
+   "routes": true
   }
  },
  "terrain": {

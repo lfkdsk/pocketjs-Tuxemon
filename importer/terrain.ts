@@ -166,7 +166,7 @@ export interface TerrainReport {
   collisionLineEdges: number;
   yamlCollisionCells: number;
   labelledCollisionCells: number;
-  oneWayEdgesApproximatedOpen: number;
+  oneWayEdgesEncoded: number;
   directedEdgeMismatches: number;
   byMap: Record<string, TerrainMapReport>;
 }
@@ -663,7 +663,32 @@ function compilePassage(
     }
   }
 
-  const masks = new Uint8Array(width * height);
+  // Collision polylines are true two-sided walls and remain dirBlock masks.
+  // Region entry/exit restrictions are one-sided and therefore use K2's
+  // dirEdges. Encode all three 4-bit masks in the otherwise-artless terrain
+  // cell id: bits 0..3 dirBlock, 4..7 entry, 8..11 exit.
+  const masks = lineMasks.slice();
+  const entryMasks = new Uint8Array(width * height);
+  const exitMasks = new Uint8Array(width * height);
+  for (let i = 0; i < cells.length; i++) {
+    const region = cells[i];
+    if (!region || dynamicBodyCells.has(i)) continue;
+    if (region.enterFrom.size > 0) {
+      for (const direction of ALL_DIRS) {
+        if (!region.enterFrom.has(direction)) entryMasks[i] |= DIR_BIT[direction];
+      }
+    }
+    const exits = new Set(region.exitFrom);
+    if (region.endure.length === 1) exits.add(region.endure[0]!);
+    // Multiple endure directions make the currently faced direction an
+    // explicit exit, so they impose no static source-side restriction.
+    if (exits.size && region.endure.length <= 1) {
+      for (const direction of ALL_DIRS) {
+        if (!exits.has(direction)) exitMasks[i] |= DIR_BIT[direction];
+      }
+    }
+  }
+
   let oneWayEdges = 0;
   const pairs: readonly [number, number, Dir, Dir][] = [
     [1, 0, "right", "left"],
@@ -681,13 +706,10 @@ function compilePassage(
         const wantReverse = tuxCanStep(cells, lineMasks, width, height, nx, ny, reverse);
         const baseForward = blocked[b] === 0 && !dynamicBodyCells.has(b);
         const baseReverse = blocked[a] === 0 && !dynamicBodyCells.has(a);
-        if (!wantForward && !wantReverse && (baseForward || baseReverse)) {
-          masks[a] |= DIR_BIT[forward];
-          masks[b] |= DIR_BIT[reverse];
-        } else if (wantForward !== baseForward || wantReverse !== baseReverse) {
-          // The current kit passage contract is an undirected physical edge.
-          // Keep a genuinely allowed direction open and account for the one
-          // over-permissive reverse direction in the generated report.
+        // Count exactly the directed steps G5 had to leave permissive because
+        // dirBlock could not represent them. K2 now encodes each of them.
+        if (!(!wantForward && !wantReverse && (baseForward || baseReverse)) &&
+            (wantForward !== baseForward || wantReverse !== baseReverse)) {
           oneWayEdges++;
         }
       }
@@ -700,10 +722,10 @@ function compilePassage(
     if (nx < 0 || ny < 0 || nx >= width || ny >= height) return false;
     const source = y * width + x;
     const target = ny * width + nx;
-    if (masks[source]! & DIR_BIT[direction]) return false;
+    if ((masks[source]! | exitMasks[source]!) & DIR_BIT[direction]) return false;
     if (dynamicBodyCells.has(target)) return false;
     if (blocked[target]) return false;
-    return (masks[target]! & DIR_BIT[OPPOSITE[direction]]) === 0;
+    return ((masks[target]! | entryMasks[target]!) & DIR_BIT[OPPOSITE[direction]]) === 0;
   };
   let mismatches = 0;
   for (let y = 0; y < height; y++) {
@@ -715,7 +737,9 @@ function compilePassage(
     }
   }
   return {
-    ground: Array.from(masks, (mask) => `${TERRAIN_SHEET_ID}.${mask}`),
+    ground: Array.from(masks, (mask, index) =>
+      `${TERRAIN_SHEET_ID}.${mask | (entryMasks[index]! << 4) | (exitMasks[index]! << 8)}`
+    ),
     passage,
     masks,
     oneWayEdges,
@@ -723,12 +747,36 @@ function compilePassage(
   };
 }
 
-function passageSheet(): Sheet {
+function passageSheet(maps: readonly TerrainMapPatch[]): Sheet {
   const dirBlock: Record<string, Dir[]> = {};
-  for (let mask = 1; mask < 16; mask++) {
-    dirBlock[String(mask)] = ALL_DIRS.filter((direction) => (mask & DIR_BIT[direction]) !== 0);
+  const dirEdges: NonNullable<Sheet["dirEdges"]> = {};
+  const codes = new Set<number>();
+  for (const map of maps) {
+    for (const tile of map.ground) {
+      if (tile !== null) codes.add(Number(tile.slice(tile.lastIndexOf(".") + 1)));
+    }
   }
-  return { id: TERRAIN_SHEET_ID, cols: 4, rows: 4, pak: "chunks", defaultPassage: "pass", dirBlock };
+  for (const code of [...codes].sort((a, b) => a - b)) {
+    const block = code & 0xf;
+    const enter = (code >> 4) & 0xf;
+    const exit = (code >> 8) & 0xf;
+    if (block) dirBlock[String(code)] = ALL_DIRS.filter((direction) => (block & DIR_BIT[direction]) !== 0);
+    if (enter || exit) {
+      dirEdges[String(code)] = {
+        ...(enter ? { enter: ALL_DIRS.filter((direction) => (enter & DIR_BIT[direction]) !== 0) } : {}),
+        ...(exit ? { exit: ALL_DIRS.filter((direction) => (exit & DIR_BIT[direction]) !== 0) } : {}),
+      };
+    }
+  }
+  return {
+    id: TERRAIN_SHEET_ID,
+    cols: 64,
+    rows: 64,
+    pak: "chunks",
+    defaultPassage: "pass",
+    dirBlock,
+    dirEdges,
+  };
 }
 
 function sourceRevision(sourceRoot: string, explicit?: string): string {
@@ -873,7 +921,7 @@ export function importTerrain(options: GenerateTerrainOptions = {}): TerrainBuil
     format: TERRAIN_FORMAT,
     sourceRevision: revision,
     tileSize: TILE_PX,
-    sheet: passageSheet(),
+    sheet: passageSheet(patches),
     maps: patches,
   };
   const pak = pack(entries.map((entry) => ({ key: entry.key, dtype: PAK_DTYPE.u8, data: entry.blob })));
@@ -895,7 +943,7 @@ export function importTerrain(options: GenerateTerrainOptions = {}): TerrainBuil
     collisionLineEdges: Object.values(byMap).reduce((sum, map) => sum + map.collisionLineEdges, 0),
     yamlCollisionCells: Object.values(byMap).reduce((sum, map) => sum + map.yamlCollisionCells, 0),
     labelledCollisionCells: Object.values(byMap).reduce((sum, map) => sum + map.labelledCollisionCells, 0),
-    oneWayEdgesApproximatedOpen: Object.values(byMap).reduce((sum, map) => sum + map.oneWayEdges, 0),
+    oneWayEdgesEncoded: Object.values(byMap).reduce((sum, map) => sum + map.oneWayEdges, 0),
     directedEdgeMismatches: Object.values(byMap).reduce((sum, map) => sum + map.directedEdgeMismatches, 0),
     byMap,
   };

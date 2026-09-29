@@ -11,7 +11,7 @@
   "localReset": true,
   "place": true,
   "inputLock": true,
-  "routes": false
+  "routes": true
  },
  "maps": [
   "37707_tower",
@@ -281,11 +281,11 @@
  "schemaErrors": [],
  "byFate": {
   "T3-dropped": 5024,
-  "T1": 23230,
+  "T1": 25071,
   "T3-placeholder": 2157,
-  "T4-dropped": 4885,
-  "T1-lowered": 3667,
-  "T2-dropped": 2100,
+  "T4-dropped": 4883,
+  "T1-lowered": 3670,
+  "T2-dropped": 261,
   "structural": 772
  },
  "rows": [
@@ -386,22 +386,22 @@
    "note": "runs on the old map during the fade"
   },
   {
-   "key": "act:char_face(other npc):T2-dropped",
-   "fate": "T2-dropped",
-   "count": 528,
-   "note": "moveRoute target must be an event id"
-  },
-  {
    "key": "act:char_face(spawn unsupported):T2-dropped",
    "fate": "T2-dropped",
    "count": 2,
    "note": "spawn target or direction is unavailable"
   },
   {
-   "key": "act:char_face(toward char):T2-dropped",
-   "fate": "T2-dropped",
+   "key": "act:char_face(toward char):T1",
+   "fate": "T1",
    "count": 167,
-   "note": "needs turnToward step"
+   "note": "K2 arbitrary-target turn-toward route"
+  },
+  {
+   "key": "act:char_face:T1",
+   "fate": "T1",
+   "count": 528,
+   "note": "K2 moveRoute targets an arbitrary event"
   },
   {
    "key": "act:char_face:T1-lowered",
@@ -410,10 +410,10 @@
    "note": "spawn facing becomes the NPC page route"
   },
   {
-   "key": "act:char_move(other npc):T2-dropped",
-   "fate": "T2-dropped",
+   "key": "act:char_move:T1",
+   "fate": "T1",
    "count": 64,
-   "note": "moveRoute target must be an event id"
+   "note": "moveRoute steps"
   },
   {
    "key": "act:char_move:T1-lowered",
@@ -590,16 +590,16 @@
    "note": "presentation / meta"
   },
   {
-   "key": "act:pathfind:T2-dropped",
-   "fate": "T2-dropped",
+   "key": "act:pathfind:T1",
+   "fate": "T1",
    "count": 325,
-   "note": "runtime pathfinding / other-event routes / NPC motion props"
+   "note": "K2 deterministic pathTo route"
   },
   {
-   "key": "act:pathfind_to_char:T2-dropped",
-   "fate": "T2-dropped",
+   "key": "act:pathfind_to_char:T1",
+   "fate": "T1",
    "count": 201,
-   "note": "runtime pathfinding / other-event routes / NPC motion props"
+   "note": "K2 deterministic approach route"
   },
   {
    "key": "act:play_map_animation:T4-dropped",
@@ -902,10 +902,10 @@
    "note": "scripted wild battle auto-wins in P1"
   },
   {
-   "key": "behav:talk(char_face npc,player):T2-dropped",
-   "fate": "T2-dropped",
+   "key": "behav:talk(char_face npc,player):T1",
+   "fate": "T1",
    "count": 554,
-   "note": "turn toward the player needs a turnTowardPlayer move step"
+   "note": "K2 turnTowardPlayer route step"
   },
   {
    "key": "behav:talk:structural",
@@ -1360,13 +1360,13 @@
   {
    "key": "trigger:guard(compound):T1-lowered",
    "fate": "T1-lowered",
-   "count": 11,
+   "count": 14,
    "note": "derived switch evaluator (T2 condition.all removes it)"
   },
   {
    "key": "trigger:guard:T1",
    "fate": "T1",
-   "count": 677,
+   "count": 679,
    "note": "parallel"
   },
   {
@@ -1390,7 +1390,7 @@
   {
    "key": "trigger:no-op after conversion:T4-dropped",
    "fate": "T4-dropped",
-   "count": 1205,
+   "count": 1203,
    "note": "every action was removed, so no project event was emitted"
   },
   {
@@ -1489,12 +1489,12 @@
    "summary": {
     "types": 98,
     "uses": 13617,
-    "native": 8346,
+    "native": 9619,
     "degraded": 637,
     "placeholder": 433,
-    "dropped": 4201,
-    "nativePercent": 61.3,
-    "executablePercent": 69.1,
+    "dropped": 2928,
+    "nativePercent": 70.6,
+    "executablePercent": 78.5,
     "tier1": {
      "uses": 6099,
      "percent": 44.79,
@@ -1672,10 +1672,10 @@
     {
      "type": "char_face",
      "total": 2027,
-     "native": 869,
+     "native": 1552,
      "degraded": 440,
      "placeholder": 0,
-     "dropped": 718,
+     "dropped": 35,
      "reasons": {
       "degraded": [
        "spawn facing becomes the NPC page route",
@@ -1684,32 +1684,33 @@
       ],
       "dropped": [
        "runs on the old map during the fade",
-       "moveRoute target must be an event id",
-       "needs turnToward step",
-       "every action was removed, so no project event was emitted",
        "fixed-false guard prevents the source event from starting",
        "Tuxemon never starts an event without source conditions or behavior",
        "spawn target or direction is unavailable",
        "Tuxemon's integer tile boundary never contains a point for a zero-size TMX event"
       ],
       "native": [
-       "folded into transfer direction"
+       "folded into transfer direction",
+       "K2 moveRoute targets an arbitrary event",
+       "K2 arbitrary-target turn-toward route"
       ]
      }
     },
     {
      "type": "char_move",
      "total": 77,
-     "native": 0,
+     "native": 64,
      "degraded": 9,
      "placeholder": 0,
-     "dropped": 68,
+     "dropped": 4,
      "reasons": {
       "degraded": [
        "moveRoute steps"
       ],
+      "native": [
+       "moveRoute steps"
+      ],
       "dropped": [
-       "moveRoute target must be an event id",
        "fixed-false guard prevents the source event from starting"
       ]
      }
@@ -2147,14 +2148,15 @@
     {
      "type": "pathfind",
      "total": 336,
-     "native": 0,
+     "native": 325,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 336,
+     "dropped": 11,
      "reasons": {
+      "native": [
+       "K2 deterministic pathTo route"
+      ],
       "dropped": [
-       "runtime pathfinding / other-event routes / NPC motion props",
-       "every action was removed, so no project event was emitted",
        "fixed-false guard prevents the source event from starting"
       ]
      }
@@ -2162,13 +2164,13 @@
     {
      "type": "pathfind_to_char",
      "total": 201,
-     "native": 0,
+     "native": 201,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 201,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "runtime pathfinding / other-event routes / NPC motion props"
+      "native": [
+       "K2 deterministic approach route"
       ]
      }
     },
@@ -2906,15 +2908,15 @@
    "summary": {
     "types": 64,
     "uses": 8663,
-    "native": 5749,
+    "native": 5751,
     "degraded": 12,
     "placeholder": 850,
-    "dropped": 2052,
+    "dropped": 2050,
     "nativePercent": 66.4,
     "executablePercent": 76.3,
     "tier1": {
-     "uses": 3529,
-     "percent": 40.74,
+     "uses": 3531,
+     "percent": 40.76,
      "requiredUses": 4591,
      "requiredPercent": 53,
      "meetsBaseline": false
@@ -3451,10 +3453,10 @@
     {
      "type": "is variable_set",
      "total": 730,
-     "native": 676,
+     "native": 678,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 54,
+     "dropped": 52,
      "reasons": {
       "native": [
        "page/if variable compare on the enum code"
