@@ -1,0 +1,98 @@
+[
+ {
+  "name": "pt-open",
+  "cell": [
+   7,
+   9
+  ],
+  "spritePx": 212,
+  "visibleReal": 106,
+  "visibleG6Model": 106,
+  "visibleTuxemonModel": 106,
+  "g6ModelMatchesReal": true
+ },
+ {
+  "name": "pt-housedoor",
+  "cell": [
+   10,
+   7
+  ],
+  "spritePx": 222,
+  "visibleReal": 222,
+  "visibleG6Model": 222,
+  "visibleTuxemonModel": 222,
+  "g6ModelMatchesReal": true
+ },
+ {
+  "name": "pt-martdoor",
+  "cell": [
+   19,
+   13
+  ],
+  "spritePx": 222,
+  "visibleReal": 222,
+  "visibleG6Model": 222,
+  "visibleTuxemonModel": 222,
+  "g6ModelMatchesReal": true
+ },
+ {
+  "name": "pt-trees-both",
+  "cell": [
+   8,
+   3
+  ],
+  "spritePx": 212,
+  "visibleReal": 0,
+  "visibleG6Model": 0,
+  "visibleTuxemonModel": 46,
+  "g6ModelMatchesReal": true
+ },
+ {
+  "name": "pt-headonly-16",
+  "cell": [
+   20,
+   16
+  ],
+  "spritePx": 212,
+  "visibleReal": 206,
+  "visibleG6Model": 206,
+  "visibleTuxemonModel": 212,
+  "g6ModelMatchesReal": true
+ },
+ {
+  "name": "pt-headonly-5",
+  "cell": [
+   24,
+   5
+  ],
+  "spritePx": 212,
+  "visibleReal": 180,
+  "visibleG6Model": 180,
+  "visibleTuxemonModel": 212,
+  "g6ModelMatchesReal": true
+ },
+ {
+  "name": "pt-golden",
+  "cell": [
+   21,
+   9
+  ],
+  "spritePx": 177,
+  "visibleReal": 52,
+  "visibleG6Model": 52,
+  "visibleTuxemonModel": 52,
+  "g6ModelMatchesReal": true
+ },
+ {
+  "name": "pt-headonly-15-12",
+  "cell": [
+   15,
+   12
+  ],
+  "spritePx": 212,
+  "visibleReal": 212,
+  "visibleG6Model": 212,
+  "visibleTuxemonModel": 212,
+  "g6ModelMatchesReal": true
+ }
+]

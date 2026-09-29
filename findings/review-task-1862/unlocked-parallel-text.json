@@ -1,0 +1,65 @@
+[
+ {
+  "map": "spyder_bedroom",
+  "event": "e002_intro_question",
+  "name": "Intro Question",
+  "unlocked": 1,
+  "total": 1
+ },
+ {
+  "map": "spyder_bedroom",
+  "event": "e005_spyder_intro",
+  "name": "Spyder Intro",
+  "unlocked": 18,
+  "total": 18
+ },
+ {
+  "map": "spyder_paper_town",
+  "event": "e019_chosen_rockitten",
+  "name": "Chosen - Rockitten",
+  "unlocked": 1,
+  "total": 1
+ },
+ {
+  "map": "spyder_paper_town",
+  "event": "e020_chosen_lambert",
+  "name": "Chosen - Lambert",
+  "unlocked": 1,
+  "total": 1
+ },
+ {
+  "map": "spyder_paper_town",
+  "event": "e021_chosen_nut",
+  "name": "Chosen - Nut",
+  "unlocked": 1,
+  "total": 1
+ },
+ {
+  "map": "spyder_paper_town",
+  "event": "e022_chosen_tweesher",
+  "name": "Chosen - Tweesher",
+  "unlocked": 1,
+  "total": 1
+ },
+ {
+  "map": "spyder_paper_town",
+  "event": "e023_chosen_agnite",
+  "name": "Chosen - Agnite",
+  "unlocked": 1,
+  "total": 1
+ },
+ {
+  "map": "spyder_paper_town",
+  "event": "e025_first_fight_win",
+  "name": "First Fight - Win",
+  "unlocked": 3,
+  "total": 3
+ },
+ {
+  "map": "spyder_paper_town",
+  "event": "e026_first_fight_lose",
+  "name": "First Fight - Lose",
+  "unlocked": 2,
+  "total": 2
+ }
+]

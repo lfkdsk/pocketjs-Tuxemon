@@ -78,6 +78,23 @@ export const KIT_V2_IMPORT_OPTIONS: Readonly<ImportOptions> = Object.freeze({
   routes: true,
 });
 
+/** The K1-only profile remains useful for focused importer regression tests. */
+export const K1_IMPORT_OPTIONS: Readonly<ImportOptions> = Object.freeze({
+  areas: true,
+  facing: true,
+  condAll: true,
+  localReset: true,
+  place: true,
+  inputLock: true,
+  routes: false,
+});
+
+/** The playable G6 profile: all merged K1 constructs plus K2 routes. */
+export const G6_IMPORT_OPTIONS: Readonly<ImportOptions> = Object.freeze({
+  ...K1_IMPORT_OPTIONS,
+  routes: true,
+});
+
 const resolveOptions = (options: Partial<ImportOptions> = {}): ImportOptions => ({
   ...DEFAULT_IMPORT_OPTIONS,
   ...options,
@@ -87,9 +104,9 @@ type FutureCondition = Condition | { kind: "facing"; dir: Dir };
 type FuturePageCondition = PageCondition & { all?: FutureCondition[] };
 type FutureMoveStep = MoveStep
   | "turnTowardPlayer"
-  | { turnToward: string }
+  | { turnToward: "player" | { event: string } }
   | { pathTo: { x: number; y: number } }
-  | { approach: { target: string; side?: string; distance?: number } };
+  | { approach: { target: "player" | { event: string }; side?: Dir; distance?: number } };
 type FutureCommand = Command
   | { op: "lockInput" }
   | { op: "unlockInput" }
@@ -115,6 +132,21 @@ const npcDb = new Map<string, NpcRow>();
 for (const f of readdirSync(join(TUXEMON_SRC, "mods/tuxemon/db/npc")).sort()) {
   const doc = Bun.YAML.parse(readFileSync(join(TUXEMON_SRC, "mods/tuxemon/db/npc", f), "utf8")) as NpcRow | NpcRow[];
   for (const row of Array.isArray(doc) ? doc : [doc]) npcDb.set(row.slug, row);
+}
+
+interface EconomyEntry {
+  slug: string;
+  price?: number;
+}
+interface EconomyRow {
+  slug: string;
+  items?: EconomyEntry[];
+  monsters?: EconomyEntry[];
+}
+const economyDb = new Map<string, EconomyRow>();
+for (const f of readdirSync(join(TUXEMON_SRC, "mods/tuxemon/db/economy")).sort()) {
+  const doc = Bun.YAML.parse(readFileSync(join(TUXEMON_SRC, "mods/tuxemon/db/economy", f), "utf8")) as EconomyRow | EconomyRow[];
+  for (const row of Array.isArray(doc) ? doc : [doc]) economyDb.set(row.slug, row);
 }
 
 // ---------------------------------------------------------------------------
@@ -652,8 +684,41 @@ function nearestWalkableTransferCell(map: TuxMap, startX: number, startY: number
 interface Ctx {
   m: TuxMap;
   options: ImportOptions;
+  economies: ReadonlyMap<string, string>;
   /** the NPC slug whose event runs these commands (talk pages), if any */
   self?: string;
+}
+
+function shopPlaceholder(npc: string, menu: string, economySlug: string | undefined): Command[] {
+  const economy = economySlug ? economyDb.get(economySlug) : undefined;
+  const wantsMonsters = menu.includes("monster");
+  const stock = wantsMonsters ? economy?.monsters : economy?.items;
+  const shown = (stock ?? []).slice(0, 4).map((entry) => {
+    const name = po.get(entry.slug) ?? entry.slug.replaceAll("_", " ");
+    return `${name}${entry.price === undefined ? "" : ` $${entry.price}`}`;
+  });
+  const remainder = Math.max(0, (stock?.length ?? 0) - shown.length);
+  const summary = shown.length
+    ? `Stock: ${shown.join(", ")}${remainder ? `, +${remainder} more` : ""}`
+    : `Stock: ${economy ? "none" : "economy unavailable"}`;
+  const menuLabel: Record<string, string> = {
+    buy_item: "Buy items",
+    sell_item: "Sell items",
+    both_item: "Buy/sell items",
+    buy_monster: "Buy monsters",
+    sell_monster: "Sell monsters",
+    both_monster: "Buy/sell monsters",
+    train_monster: "Train monsters",
+    heal_monster: "Heal monsters",
+  };
+  const lines = [
+    `[SHOP] ${npcName(npc)} — ${menuLabel[menu] ?? menu}`,
+    summary,
+    "(P1 placeholder; trading is unavailable.)",
+  ].flatMap((line) => wrap(line));
+  const commands: Command[] = [];
+  for (let i = 0; i < lines.length; i += 4) commands.push({ op: "text", lines: lines.slice(i, i + 4) });
+  return commands;
 }
 
 function battle(opp: string): Command[] {
@@ -801,7 +866,7 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
             noteAction(a, "char_face(toward char)", "T1", "K2 arbitrary-target turn-toward route");
             const step: FutureMoveStep = dir === "player"
               ? "turnTowardPlayer"
-              : { turnToward: `npc_${slug(dir)}` };
+              : { turnToward: { event: `npc_${slug(dir)}` } };
             out.push(command({ op: "moveRoute", target, wait: false, route: { steps: [step], repeat: false, skippable: true } }));
           } else {
             noteAction(a, "char_face(toward char)", "T2-dropped", "needs turnToward step");
@@ -831,7 +896,10 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         noteAction(a, a.type, ctx.options.routes && who !== "player" && !isSelf(who) ? "T1" : "T1-lowered", "moveRoute steps");
         const target = who === "player" ? "player" as const
           : isSelf(who) ? "this" as const : { event: `npc_${slug(who)}` };
-        out.push(command({ op: "moveRoute", target, wait: true, route: { steps, repeat: false, skippable: false } }));
+        // Tuxemon's char_move stops the route when a step is obstructed, then
+        // lets the event continue. A skippable kit route has that same
+        // contract; a non-skippable waiter would hold the cutscene forever.
+        out.push(command({ op: "moveRoute", target, wait: true, route: { steps, repeat: false, skippable: true } }));
         break;
       }
       case "transition_teleport": {
@@ -947,6 +1015,10 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
       case "random_encounter":
         noteAction(a, a.type, "T3-placeholder", "intentionally silent in P1");
         break;
+      case "open_shop":
+        noteAction(a, a.type, "T3-placeholder", "visible stock summary until the K4 shop UI lands");
+        out.push(...shopPlaceholder(g[0]!, g[1]!, ctx.economies.get(g[0]!)));
+        break;
       case "pathfind": {
         if (!ctx.options.routes) {
           noteAction(a, a.type, "T2-dropped", "runtime pathfinding / other-event routes / NPC motion props");
@@ -976,11 +1048,11 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         const [toward, who, side, distance] = g;
         const target = who === "player" ? "player" as const
           : isSelf(who) ? "this" as const : { event: `npc_${slug(who!)}` };
-        const approach: { target: string; side?: string; distance?: number } = {
-          target: toward === "player" ? "player" : `npc_${slug(toward!)}`,
+        const approach: { target: "player" | { event: string }; side?: Dir; distance?: number } = {
+          target: toward === "player" ? "player" : { event: `npc_${slug(toward!)}` },
         };
-        if (side) approach.side = side;
-        if (distance !== undefined && distance !== "") approach.distance = Number(distance);
+        if (DIRS.has(side)) approach.side = side as Dir;
+        if (distance !== undefined && distance !== "") approach.distance = Math.max(1, Math.trunc(Number(distance)));
         noteAction(a, a.type, "T1", "K2 deterministic approach route");
         out.push(command({
           op: "moveRoute",
@@ -1019,6 +1091,16 @@ const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(
 const BLOCKING = new Set<Command["op"]>(["text", "choices", "wait", "transfer", "moveRoute"]);
 const hasBlocking = (cmds: Command[]): boolean =>
   cmds.some((c) => BLOCKING.has(c.op) || (c.op === "if" && (hasBlocking(c.then) || hasBlocking(c.else ?? []))) || (c.op === "choices"));
+const hasCommand = (cmds: readonly Command[], wanted: FutureCommand["op"]): boolean =>
+  cmds.some((c) => {
+    if ((c as FutureCommand).op === wanted) return true;
+    if (c.op === "if") return hasCommand(c.then, wanted) || hasCommand(c.else ?? [], wanted);
+    if (c.op === "choices") {
+      return c.options.some((option) => hasCommand(option.commands, wanted)) ||
+        hasCommand(c.cancel?.commands ?? [], wanted);
+    }
+    return false;
+  });
 
 interface NpcAgg {
   slug: string;
@@ -1027,6 +1109,15 @@ interface NpcAgg {
   wander: boolean;
   face?: string;
   talks: { cls: Clause[]; cmds: Command[] }[];
+}
+
+interface SpatialPage {
+  id: string;
+  name: string;
+  trigger: "playerTouch" | "action";
+  cls: Clause[];
+  cmds: Command[];
+  cells: readonly [number, number][];
 }
 
 function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: Record<string, SpriteDef> } {
@@ -1040,7 +1131,20 @@ function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: 
    *  on one cell (e.g. "My First Mon" / "... - Not Met"); the kit starts
    *  only the first eligible event per trigger, so they merge below. */
   const cellPages = new Map<string, { id: string; name: string; x: number; y: number; trigger: "playerTouch" | "action"; cls: Clause[]; cmds: Command[] }[]>();
+  /** K1 areas are partitioned after every source event is known. A partition
+   *  has one exact ordered set of source events, which lets overlapping
+   *  rectangles keep Tuxemon's "sample every guard, then run every matching
+   *  body" semantics without expanding otherwise-disjoint large areas. */
+  const spatialPages: SpatialPage[] = [];
   const collisionRegions = readCollisionRegions(join(MAPS_DIR, `${m.slug}.tmx`));
+  const economies = new Map<string, string>();
+  for (const event of m.events) {
+    for (const action of event.acts) {
+      if (action.type === "set_economy" && action.args[0] && action.args[1]) {
+        economies.set(action.args[0], action.args[1]);
+      }
+    }
+  }
 
   // NPCs first: every create_npc on this map names one NPC event
   for (const e of m.events) for (const a of e.acts) if (a.type === "create_npc") {
@@ -1096,10 +1200,29 @@ function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: 
             }
           }
         }
-        const cmds = convertActions(e.acts.filter((a) => a.type !== "char_face" && a.type !== "char_wander"), { m, options });
-        const { cond, rest } = pageCondition(live, options);
-        events.push({ id: nextId(e.name), name: `${e.name} (spawn guard)`, x: e.x, y: e.y, pages: [{ trigger: "parallel", condition: cond, sprite: null, commands: guard(rest, cmds) }] });
-        note("trigger", "spawn", "T1-lowered", "parallel page: guard -> local.npc.<slug> = 1");
+        const cmds = convertActions(e.acts.filter((a) => a.type !== "char_face" && a.type !== "char_wander"), { m, options, economies });
+        const blocking = hasBlocking(cmds);
+        const page = blocking
+          // A blocking spawn usually writes the same local.npc variable its
+          // `not char_exists` guard reads. Keeping that guard on the page
+          // would make K1 cancel the parallel fiber on the following frame,
+          // halfway through its cutscene. Keep the page alive and evaluate
+          // the complete guard inside the fiber instead; on the next restart
+          // it is false and the body becomes a no-op.
+          ? { trigger: "parallel" as const, sprite: null, commands: guard(live, cmds) }
+          : (() => {
+              const { cond, rest } = pageCondition(live, options);
+              return { trigger: "parallel" as const, condition: cond, sprite: null, commands: guard(rest, cmds) };
+            })();
+        events.push({ id: nextId(e.name), name: `${e.name} (spawn guard)`, x: e.x, y: e.y, pages: [page] });
+        note(
+          "trigger",
+          "spawn",
+          "T1-lowered",
+          blocking
+            ? "parallel page keeps its fiber alive while an internal guard runs the cutscene once"
+            : "parallel page: guard -> local.npc.<slug> = 1",
+        );
         continue;
       }
 
@@ -1107,12 +1230,12 @@ function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: 
       const talk = e.behavs.find((b) => b.type === "talk");
       if (talk) {
         const agg = npcOf(talk.args[0]!);
-        agg.talks.push({ cls: live, cmds: convertActions(e.acts, { m, options, self: talk.args[0] }) });
+        agg.talks.push({ cls: live, cmds: convertActions(e.acts, { m, options, economies, self: talk.args[0] }) });
         note("trigger", "talk", "T1", "NPC event action page (if-chain over talk guards)");
         continue;
       }
 
-      const cmds = convertActions(e.acts, { m, options });
+      const cmds = convertActions(e.acts, { m, options, economies });
       if (!cmds.length) {
         const reason = "every action was removed, so no project event was emitted";
         eventCoverage.dropAll(reason);
@@ -1136,22 +1259,16 @@ function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: 
           note("trigger", `${k}(outside map)`, "T4-dropped", reason);
           continue;
         }
-        if (options.areas && cells.length > 1) {
-          const x = Math.max(0, e.x);
-          const y = Math.max(0, e.y);
-          const right = Math.min(m.width, e.x + e.w);
-          const bottom = Math.min(m.height, e.y + e.h);
-          const { cond, rest } = pageCondition(live, options);
-          events.push(gameEvent({
+        if (options.areas) {
+          spatialPages.push({
             id: nextId(e.name),
             name: e.name,
-            x,
-            y,
-            w: right - x,
-            h: bottom - y,
-            pages: [{ trigger, condition: cond, sprite: null, commands: guard(rest, cmds) }],
-          }));
-          note("trigger", `${k}(area)`, "T1", "K1 rectangular event area");
+            trigger,
+            cls: live,
+            cmds,
+            cells,
+          });
+          note("trigger", `${k}(area)`, "T1", "K1 rectangular event area (overlaps partitioned after guard sampling)");
           continue;
         }
         if (cells.length > AREA_CELL_CAP) {
@@ -1182,39 +1299,112 @@ function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: 
         continue;
       }
 
-      // pure guards (and init objects)
+      // Tuxemon starts every eligible automatic event in the same update.
+      // Give each source event its own parallel fiber so one event changing a
+      // shared guard cannot prevent its siblings from starting (route1's four
+      // grunt departure routes are the canonical case).
       const blocking = hasBlocking(cmds);
       const body = e.kind === "init" ? [...cmds, { op: "erase" } as Command] : cmds;
       if (!live.length) {
-        events.push({ id: nextId(e.name), name: e.name, x: e.x, y: e.y, pages: [{ trigger: blocking ? "autorun" : "parallel", sprite: null, commands: body }] });
-      } else if (!blocking) {
-        const { cond, rest } = pageCondition(live, options);
-        events.push({ id: nextId(e.name), name: e.name, x: e.x, y: e.y, pages: [{ trigger: "parallel", condition: cond, sprite: null, commands: guard(rest, body) }] });
+        events.push({ id: nextId(e.name), name: e.name, x: e.x, y: e.y, pages: [{ trigger: "parallel", sprite: null, commands: body }] });
+      } else if (blocking) {
+        // Once an automatic action has started, Tuxemon lets it finish even
+        // if a sibling changes the condition that launched it. Keep the page
+        // itself alive and sample the source guard inside the new fiber.
+        events.push({ id: nextId(e.name), name: e.name, x: e.x, y: e.y, pages: [{ trigger: "parallel", sprite: null, commands: guard(live, body) }] });
       } else {
         const { cond, rest } = pageCondition(live, options);
-        const id = nextId(e.name);
-        if (!rest.length) {
-          events.push({ id, name: e.name, x: e.x, y: e.y, pages: [{ trigger: "autorun", condition: cond, sprite: null, commands: body }] });
-        } else {
-          // derived switch: a parallel evaluator keeps c.<id> == AND(clauses)
-          const sw = `c.${m.slug}.${id}`;
-          events.push({
-            id: `${id}_eval`, name: `${e.name} (guard)`, x: e.x, y: e.y,
-            pages: [{ trigger: "parallel", sprite: null, commands: [{ op: "switch", id: sw, value: false }, ...guard(live, [{ op: "switch", id: sw, value: true }])] }],
-          });
-          // The evaluator lags the state by up to two frames (a parallel page
-          // restarts one frame after it ends): the autorun therefore drops the
-          // switch first and re-checks the live guard before its body, so a
-          // stale switch can neither re-run a finished event nor run one whose
-          // guard just failed.
-          events.push({ id, name: e.name, x: e.x, y: e.y, pages: [{ trigger: "autorun", condition: { switch: sw }, sprite: null, commands: [{ op: "switch", id: sw, value: false }, ...guard(live, body)] }] });
-          note("trigger", "guard(compound)", "T1-lowered", "derived switch evaluator (T2 condition.all removes it)");
-        }
+        events.push({ id: nextId(e.name), name: e.name, x: e.x, y: e.y, pages: [{ trigger: "parallel", condition: cond, sprite: null, commands: guard(rest, body) }] });
       }
-      note("trigger", e.kind === "init" ? "init" : k, "T1", blocking ? "autorun" : "parallel");
+      note(
+        "trigger",
+        e.kind === "init" ? "init" : k,
+        "T1",
+        blocking ? "parallel automatic fiber (blocking commands arbitrate their own UI)" : "parallel",
+      );
     } finally {
       conversionCoverage.commit(eventCoverage);
       activeCoverage = undefined;
+    }
+  }
+
+  if (options.areas) {
+    // Make a cell membership grid for each trigger. Greedily coalesce equal
+    // membership signatures into rectangles. At an overlap, one event owns
+    // the rectangle and snapshots every member's guard before any body runs;
+    // this is the same latch used by the v1 per-cell lowering below.
+    const membership = new Map<string, number[]>();
+    spatialPages.forEach((page, index) => {
+      for (const [x, y] of page.cells) {
+        const key = `${page.trigger}|${x},${y}`;
+        const members = membership.get(key) ?? [];
+        members.push(index);
+        membership.set(key, members);
+      }
+    });
+    const sameMembers = (trigger: "playerTouch" | "action", x: number, y: number, signature: string): boolean =>
+      (membership.get(`${trigger}|${x},${y}`) ?? []).join(",") === signature;
+    const visited = new Set<string>();
+    let region = 0;
+    for (const trigger of ["playerTouch", "action"] as const) {
+      for (let y = 0; y < m.height; y++) {
+        for (let x = 0; x < m.width; x++) {
+          const cellKey = `${trigger}|${x},${y}`;
+          const members = membership.get(cellKey);
+          if (!members?.length || visited.has(cellKey)) continue;
+          const signature = members.join(",");
+          let w = 1;
+          while (x + w < m.width && !visited.has(`${trigger}|${x + w},${y}`) &&
+                 sameMembers(trigger, x + w, y, signature)) w++;
+          let h = 1;
+          rows: while (y + h < m.height) {
+            for (let dx = 0; dx < w; dx++) {
+              const next = `${trigger}|${x + dx},${y + h}`;
+              if (visited.has(next) || !sameMembers(trigger, x + dx, y + h, signature)) break rows;
+            }
+            h++;
+          }
+          for (let dy = 0; dy < h; dy++) {
+            for (let dx = 0; dx < w; dx++) visited.add(`${trigger}|${x + dx},${y + dy}`);
+          }
+
+          const pages = members.map((index) => spatialPages[index]!);
+          const first = pages[0]!;
+          let condition: FuturePageCondition | undefined;
+          let commands: Command[];
+          if (pages.length === 1) {
+            const page = pageCondition(first.cls, options);
+            condition = page.cond;
+            commands = guard(page.rest, first.cmds);
+          } else {
+            const flag = (i: number) => `local.area.${m.slug}.${region}.${i}`;
+            commands = [];
+            pages.forEach((page, i) => {
+              if (page.cls.length) {
+                commands.push(
+                  { op: "switch", id: flag(i), value: false },
+                  ...guard(page.cls, [{ op: "switch", id: flag(i), value: true }]),
+                );
+              }
+            });
+            pages.forEach((page, i) => commands.push(...(
+              page.cls.length
+                ? [{ op: "if", if: { kind: "switch", id: flag(i), value: true }, then: page.cmds } as Command]
+                : page.cmds
+            )));
+            note("trigger", "stacked event areas", "T1-lowered", "partitioned: match flags then bodies");
+          }
+          events.push(gameEvent({
+            id: `${first.id}_r${String(++region).padStart(3, "0")}`,
+            name: pages.map((page) => page.name).join(" + "),
+            x,
+            y,
+            w,
+            h,
+            pages: [{ trigger, condition, sprite: null, commands }],
+          }));
+        }
+      }
     }
   }
 
@@ -1315,6 +1505,24 @@ function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: 
           },
         ],
       });
+    }
+  }
+
+  // A handful of source cutscenes intentionally pass a control lock to a
+  // second event, but one source map has no unlock action anywhere. Such a
+  // lock cannot have a continuation in this map (and K1 resets locks only on
+  // transfer), so close each affected page with a deterministic safety
+  // unlock. This is corpus-derived rather than a per-map patch.
+  if (options.inputLock) {
+    const pages = events.flatMap((event) => event.pages.map((page) => ({ event, page })));
+    const mapHasLock = pages.some(({ page }) => hasCommand(page.commands, "lockInput"));
+    const mapHasUnlock = pages.some(({ page }) => hasCommand(page.commands, "unlockInput"));
+    if (mapHasLock && !mapHasUnlock) {
+      for (const { event, page } of pages) {
+        if (!hasCommand(page.commands, "lockInput")) continue;
+        page.commands.push(command({ op: "unlockInput" }));
+        note("trigger", "orphan input lock repair", "T1-lowered", `safety unlock appended to ${m.slug}:${event.id}`);
+      }
     }
   }
 
@@ -1494,6 +1702,9 @@ export function buildProject(
     format: "rpgkit-project/v1",
     title: "Pocket Tuxemon",
     tileSize: 16,
+    // Tuxemon's dialog state consumes movement and interaction input no
+    // matter which event fiber opened the box.
+    system: { messageBlocksPlayer: true },
     start: {
       map: startId,
       x: Math.min(4, startMap.width - 1),

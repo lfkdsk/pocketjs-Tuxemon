@@ -1,0 +1,3183 @@
+[
+ {
+  "map": "eclipse_crystal_bank1",
+  "event": "e001_event_9",
+  "name": "Event 9",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 36,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_crystal_bank3",
+  "event": "e005_event_zircon_r001",
+  "name": "Event Zircon",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 490,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_crystal_bank3",
+  "event": "e006_event_zircon_win",
+  "name": "Event Zircon Win",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 76,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_crystal_center",
+  "event": "e001_event_6",
+  "name": "Event 6",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 8,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_crystal_center",
+  "event": "e002_event_waking_up_nurse_jada",
+  "name": "Event Waking Up - Nurse Jada",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 8,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_crystal_center",
+  "event": "e003_event_internal_echoes_and_the_vo",
+  "name": "Event Internal Echoes and The Voice of Revelation",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 8,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_crystal_center",
+  "event": "e009_heal_afford",
+  "name": "Heal Afford",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 8,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_crystal_town",
+  "event": "e001_event_5",
+  "name": "Event 5",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 8,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_crystal_town_cafe",
+  "event": "e001_event_7",
+  "name": "Event 7",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 8,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_crystal_town_house",
+  "event": "e001_event_8",
+  "name": "Event 8",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 8,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_lion_mountain_high",
+  "event": "e001_event_14",
+  "name": "Event 14",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 24,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_lion_mountain_high",
+  "event": "e007_talk_alexander_r004",
+  "name": "Talk Alexander",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_lion_mountain_high",
+  "event": "e008_talk_arlene_r003",
+  "name": "Talk Arlene",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_lion_mountain_high",
+  "event": "e009_talk_conrad_r005",
+  "name": "Talk Conrad",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_lion_mountain_high",
+  "event": "e010_talk_david_r001",
+  "name": "Talk David",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_lion_mountain_high",
+  "event": "e011_talk_kurt_r006",
+  "name": "Talk Kurt",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_lion_mountain_low",
+  "event": "e001_event_11",
+  "name": "Event 11",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 8,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_lion_mountain_low",
+  "event": "e002_event_12",
+  "name": "Event 12",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 24,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_lion_mountain_low",
+  "event": "e005_talk_emilio_r006",
+  "name": "Talk Emilio",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_lion_mountain_middle",
+  "event": "e001_event_13",
+  "name": "Event 13",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 24,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_lion_mountain_middle",
+  "event": "e008_talk_adam_r007",
+  "name": "Talk Adam",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_lion_mountain_middle",
+  "event": "e009_talk_chhurim_r006",
+  "name": "Talk Chhurim",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_lion_mountain_middle",
+  "event": "e010_talk_jacques_r009",
+  "name": "Talk Jacques",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 14,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_lion_mountain_middle",
+  "event": "e011_talk_tom_r008",
+  "name": "Talk Tom",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_obsidian_center",
+  "event": "e005_heal_afford",
+  "name": "Heal Afford",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 60,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_obsidian_town",
+  "event": "e001_event_15",
+  "name": "Event 15",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 32,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_park_cabin",
+  "event": "e003_vase_r002",
+  "name": "Vase",
+  "trigger": "action",
+  "outcome": "locked->unlocked",
+  "lockedAt": 6,
+  "unlockedAt": 194,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_park_entrance",
+  "event": "e001_clear",
+  "name": "Clear",
+  "trigger": "autorun",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_park_entrance",
+  "event": "e004_no_money",
+  "name": "No Money",
+  "trigger": "autorun",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_park_entrance",
+  "event": "e005_no_pay",
+  "name": "No Pay",
+  "trigger": "autorun",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_park_entrance",
+  "event": "e006_pay",
+  "name": "Pay",
+  "trigger": "autorun",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_park_entrance",
+  "event": "e007_payment_r002",
+  "name": "Payment",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 187,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e002_event_1",
+  "name": "Event 1",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 52,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e003_event_2_r015",
+  "name": "Event 2",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 58,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e004_event_3_r010",
+  "name": "Event 3",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 58,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e007_event_4_r012",
+  "name": "Event 4",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 58,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e030_talk_arnaut_r009",
+  "name": "Talk Arnaut",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 58,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e031_talk_conrad_r004",
+  "name": "Talk Conrad",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 58,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e032_talk_hugh_r003",
+  "name": "Talk Hugh",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 58,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e033_talk_jacopo_r007",
+  "name": "Talk Jacopo",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 58,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e034_talk_manfred_r005",
+  "name": "Talk Manfred",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 58,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e035_talk_nino_r011",
+  "name": "Talk Nino",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 58,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e036_talk_penitent_r006",
+  "name": "Talk Penitent",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 58,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e037_talk_pia_r008",
+  "name": "Talk Pia",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 58,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e038_talk_sordello_r013",
+  "name": "Talk Sordello",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 58,
+  "transferAt": -1
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e039_talk_statius_r014",
+  "name": "Talk Statius",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 58,
+  "transferAt": -1
+ },
+ {
+  "map": "maple_bedroom",
+  "event": "e004_stop_r002",
+  "name": "Stop",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 190,
+  "transferAt": -1
+ },
+ {
+  "map": "maple_house",
+  "event": "e004_create_knight",
+  "name": "create knight",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 220,
+  "transferAt": -1
+ },
+ {
+  "map": "player_house_downstairs",
+  "event": "e001_watch_tv_r005",
+  "name": "Watch TV + announcement + timetochat",
+  "trigger": "action",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "player_house_downstairs",
+  "event": "e013_new_possibilities",
+  "name": "new possibilities",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 172,
+  "transferAt": -1
+ },
+ {
+  "map": "professor_lab",
+  "event": "e001_teleport_to_map1_r001",
+  "name": "Teleport to map1 + whyhellothere",
+  "trigger": "playerTouch",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "professor_lab",
+  "event": "e015_rockittenyes",
+  "name": "rockittenYES",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 4,
+  "unlockedAt": 68,
+  "transferAt": -1
+ },
+ {
+  "map": "professor_lab",
+  "event": "e018_cardilingyes",
+  "name": "cardilingYES",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 4,
+  "unlockedAt": 68,
+  "transferAt": -1
+ },
+ {
+  "map": "professor_lab",
+  "event": "e019_tweesheryes",
+  "name": "tweesherYES",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 4,
+  "unlockedAt": 68,
+  "transferAt": -1
+ },
+ {
+  "map": "professor_lab",
+  "event": "e024_shesarrived",
+  "name": "shesarrived",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 16,
+  "unlockedAt": 440,
+  "transferAt": -1
+ },
+ {
+  "map": "route1",
+  "event": "e012_they_re_angry_r006",
+  "name": "they're angry",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 1074,
+  "transferAt": -1
+ },
+ {
+  "map": "route1",
+  "event": "e020_battle_r013",
+  "name": "battle!",
+  "trigger": "action",
+  "outcome": "STUCK-LOCKED",
+  "lockedAt": 6,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "route1",
+  "event": "e039_hey_r008",
+  "name": "hey!",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 18,
+  "transferAt": -1
+ },
+ {
+  "map": "route1",
+  "event": "e040_gym_time_r007",
+  "name": "gym time",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 1046,
+  "transferAt": -1
+ },
+ {
+  "map": "route2",
+  "event": "e011_talk_to_misa_r007",
+  "name": "talk to misa + spilledthebeans",
+  "trigger": "action",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_bedroom",
+  "event": "e004_resting_in_bed_r004",
+  "name": "Resting in Bed",
+  "trigger": "action",
+  "outcome": "transfer-before-lock",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": 87
+ },
+ {
+  "map": "spyder_candy_cafe",
+  "event": "e009_heal_tuxemon",
+  "name": "Heal Tuxemon",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 4,
+  "unlockedAt": 64,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_candy_center",
+  "event": "e018_heal_afford",
+  "name": "Heal Afford",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 60,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_candy_hospital1",
+  "event": "e008_talk_aurora_r003",
+  "name": "Talk Aurora",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 14,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_candy_hospital1",
+  "event": "e010_talk_eleni_r004",
+  "name": "Talk Eleni",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_candy_hospital1",
+  "event": "e012_talk_felu_r006",
+  "name": "Talk Felu",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_candy_hospital1",
+  "event": "e016_talk_liane_r005",
+  "name": "Talk Liane",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_candy_hospital1",
+  "event": "e019_talk_fring_r002",
+  "name": "Talk Fring",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_candy_hospital1",
+  "event": "e020_talk_walt_r001",
+  "name": "Talk Walt",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_candy_hospital2",
+  "event": "e011_talk_luzia_r003",
+  "name": "Talk Luzia",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_candy_hospital2",
+  "event": "e013_talk_zekar_r005",
+  "name": "Talk Zekar",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_candy_hospital2",
+  "event": "e016_talk_rakez_r004",
+  "name": "Talk Rakez",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 14,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_candy_hospital2",
+  "event": "e018_talk_rhizome_r006",
+  "name": "Talk Rhizome",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 14,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_candy_hospital3",
+  "event": "e008_the_cure_r007",
+  "name": "The cure!",
+  "trigger": "action",
+  "outcome": "locked->unlocked",
+  "lockedAt": 18,
+  "unlockedAt": 168,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_candy_hospital3",
+  "event": "e012_billie_confronts_r001",
+  "name": "Billie confronts",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_candy_house3",
+  "event": "e006_egg_r002",
+  "name": "Egg",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 104,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_candy_inn2",
+  "event": "e001_bee_event_buzzing",
+  "name": "Bee Event Buzzing",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 136,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_candy_town",
+  "event": "e012_entry_candy_r011",
+  "name": "Entry Candy",
+  "trigger": "playerTouch",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_candy_town",
+  "event": "e038_dante_commiserates_r014",
+  "name": "Dante commiserates",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 22,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_candy_town",
+  "event": "e039_henrik_react_mons",
+  "name": "Henrik react - mons",
+  "trigger": "parallel",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_candy_town",
+  "event": "e040_henrik_react_no_mons",
+  "name": "Henrik react - no mons",
+  "trigger": "parallel",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_citypark",
+  "event": "e014_talk_bobette_r011",
+  "name": "Talk Bobette + Track citypark",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_citypark",
+  "event": "npc_spyder_citypark_nurse",
+  "name": "spyder_citypark_nurse",
+  "trigger": "action",
+  "outcome": "locked->unlocked",
+  "lockedAt": 10,
+  "unlockedAt": 160,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_cotton_artshop",
+  "event": "e019_billie_visit_r001",
+  "name": "Billie Visit",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_cotton_cafe",
+  "event": "e010_heal_tuxemon",
+  "name": "Heal Tuxemon",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 4,
+  "unlockedAt": 64,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_cotton_cafe",
+  "event": "npc_spyder_cottontown_hacker",
+  "name": "spyder_cottontown_hacker",
+  "trigger": "action",
+  "outcome": "locked->unlocked",
+  "lockedAt": 16,
+  "unlockedAt": 142,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_cotton_scoop",
+  "event": "e006_receive_capture_device_r001",
+  "name": "Receive capture device",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_cotton_town",
+  "event": "e004_talk_hackerintro_r017",
+  "name": "Talk hackerintro",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 34,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_cotton_town",
+  "event": "e015_stop_cotton_r012",
+  "name": "Stop! Cotton",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 104,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_cotton_town",
+  "event": "e034_kernel_quest_r011",
+  "name": "Kernel Quest",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 282,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_cotton_tunnel",
+  "event": "e015_talk_carlos_r003",
+  "name": "Talk Carlos",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 14,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_cotton_tunnel",
+  "event": "npc_spyder_dragonscave_benden",
+  "name": "spyder_dragonscave_benden",
+  "trigger": "action",
+  "outcome": "locked->unlocked",
+  "lockedAt": 6,
+  "unlockedAt": 22,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_datacenter",
+  "event": "e013_talk_fermi_r004",
+  "name": "Talk Fermi",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_datacenter",
+  "event": "e015_talk_onnes_r005",
+  "name": "Talk Onnes",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_datacenter",
+  "event": "e017_talk_bayliss_r003",
+  "name": "Talk Bayliss",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_datacenter",
+  "event": "e019_talk_chomsky_r002",
+  "name": "Talk Chomsky",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_datacenter",
+  "event": "e021_talk_lagrange_r001",
+  "name": "Talk Lagrange",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_datacenter",
+  "event": "e044_billie",
+  "name": "Billie",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 24,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_dojo2",
+  "event": "e009_encounter_r002",
+  "name": "Encounter",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 142,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_dojo2",
+  "event": "npc_spyder_dojo_toph",
+  "name": "spyder_dojo_toph",
+  "trigger": "action",
+  "outcome": "locked->unlocked",
+  "lockedAt": 26,
+  "unlockedAt": 176,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_dojo2",
+  "event": "npc_spyder_dojo_sokka",
+  "name": "spyder_dojo_sokka",
+  "trigger": "action",
+  "outcome": "locked->unlocked",
+  "lockedAt": 26,
+  "unlockedAt": 176,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_dojo2",
+  "event": "npc_spyder_dojo_kataro",
+  "name": "spyder_dojo_kataro",
+  "trigger": "action",
+  "outcome": "locked->unlocked",
+  "lockedAt": 30,
+  "unlockedAt": 180,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_dojo2",
+  "event": "npc_spyder_dojo_yangchen",
+  "name": "spyder_dojo_yangchen",
+  "trigger": "action",
+  "outcome": "locked->unlocked",
+  "lockedAt": 30,
+  "unlockedAt": 180,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_dojo2",
+  "event": "npc_spyder_dojo_iroh",
+  "name": "spyder_dojo_iroh",
+  "trigger": "action",
+  "outcome": "locked->unlocked",
+  "lockedAt": 30,
+  "unlockedAt": 180,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_dojo2",
+  "event": "npc_spyder_dojo_wan",
+  "name": "spyder_dojo_wan",
+  "trigger": "action",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_dojo3",
+  "event": "e009_encounter_r002",
+  "name": "Encounter",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 146,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_dojo3",
+  "event": "npc_spyder_dojo_tu",
+  "name": "spyder_dojo_tu",
+  "trigger": "action",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_dojo4",
+  "event": "e005_billie_encounter_r001",
+  "name": "Billie encounter",
+  "trigger": "playerTouch",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_dragonscave",
+  "event": "e015_talk_tomas_r028",
+  "name": "Talk Tomas + Track dragonscave",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_dragonscave",
+  "event": "e016_talk_daenny_r022",
+  "name": "Talk Daenny + Track dragonscave",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_dragonscave",
+  "event": "e017_talk_cailin_r020",
+  "name": "Talk Cailin + Track dragonscave",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_dragonscave",
+  "event": "e018_talk_lessa_r017",
+  "name": "Talk Lessa + Track dragonscave",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_dragonscave",
+  "event": "e019_talk_griffin_r026",
+  "name": "Talk Griffin + Track dragonscave",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_dragonscave",
+  "event": "e020_talk_benden_r014",
+  "name": "Talk Benden + Track dragonscave",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_dragonscave",
+  "event": "e021_talk_ray_and_tru_r010",
+  "name": "Talk Ray and Tru + Track dragonscave",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 14,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_dragonscave",
+  "event": "e022_talk_lucille_and_mal_r008",
+  "name": "Talk Lucille and Mal + Track dragonscave",
+  "trigger": "playerTouch",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_dryadsgrove",
+  "event": "e008_talk_aquemini_r021",
+  "name": "Talk Aquemini + Track dryadsgrove",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_dryadsgrove",
+  "event": "e009_talk_ignatia_r014",
+  "name": "Talk Ignatia + Track dryadsgrove",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_dryadsgrove",
+  "event": "e010_talk_petra_r007",
+  "name": "Talk Petra + Track dryadsgrove",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_dryadsgrove",
+  "event": "e012_talk_ferris_r010",
+  "name": "Talk Ferris + Track dryadsgrove",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_flower_center",
+  "event": "e009_heal_afford",
+  "name": "Heal Afford",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 60,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_flower_scoop",
+  "event": "e003_flashback",
+  "name": "Flashback",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 328,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_flower_scoop",
+  "event": "e010_trigger_flashback_r001",
+  "name": "Trigger Flashback",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 16,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_greenwash",
+  "event": "e008_talk_chip_r006",
+  "name": "Talk Chip",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_greenwash",
+  "event": "e009_talk_clarence_r004",
+  "name": "Talk Clarence",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_greenwash",
+  "event": "e012_talk_broer_r003",
+  "name": "Talk Broer",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 14,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_greenwash",
+  "event": "e014_talk_lewie_r005",
+  "name": "Talk Lewie",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 14,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_greenwash",
+  "event": "e016_talk_morehouse_r008",
+  "name": "Talk Morehouse",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 14,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_greenwash_greenhouse",
+  "event": "e005_talk_gregor_r003",
+  "name": "Talk Gregor",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_greenwash_greenhouse",
+  "event": "e007_talk_alex_r009",
+  "name": "Talk Alex",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 14,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_greenwash_greenhouse",
+  "event": "e009_talk_hunt_r007",
+  "name": "Talk Hunt",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 18,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_greenwash_greenhouse",
+  "event": "e011_talk_lewis_r006",
+  "name": "Talk Lewis",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 14,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_greenwash_greenhouse",
+  "event": "e012_talk_lewis_r002",
+  "name": "Talk Lewis",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 14,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_greenwash_greenhouse",
+  "event": "e014_talk_louis_r001",
+  "name": "Talk Louis",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_greenwash_greenhouse",
+  "event": "e017_talk_gluck_r008",
+  "name": "Talk Gluck",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 14,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_greenwash_level2",
+  "event": "e010_talk_aissa_r005",
+  "name": "Talk Aissa",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_greenwash_level2",
+  "event": "e011_talk_dippel_r006",
+  "name": "Talk Dippel",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_greenwash_level2",
+  "event": "e012_talk_moreau_r009",
+  "name": "Talk Moreau",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_greenwash_level2",
+  "event": "e014_talk_dempsey_r007",
+  "name": "Talk Dempsey",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_greenwash_level2",
+  "event": "e016_talk_heidenstam_r008",
+  "name": "Talk Heidenstam",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_greenwash_level3",
+  "event": "e001_flashback_incident",
+  "name": "FlashBack Incident",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 56,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_greenwash_level3",
+  "event": "e002_flashback_dempsey",
+  "name": "Flashback Dempsey",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 48,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_greenwash_level3",
+  "event": "e003_flashback_fossilator",
+  "name": "Flashback Fossilator",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 48,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_healing_center",
+  "event": "e014_heal_afford",
+  "name": "Heal Afford",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 60,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_leather_center",
+  "event": "e009_heal_afford",
+  "name": "Heal Afford",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 60,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_leather_museum",
+  "event": "e001_cannot_afford_100",
+  "name": "Cannot Afford 100",
+  "trigger": "parallel",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_leather_museum",
+  "event": "e002_cannot_afford_50",
+  "name": "Cannot Afford 50",
+  "trigger": "parallel",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_leather_museum",
+  "event": "e009_no_pay_not_required",
+  "name": "No Pay (Not Required)",
+  "trigger": "parallel",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_leather_museum",
+  "event": "e010_no_pay_required",
+  "name": "No Pay (Required)",
+  "trigger": "parallel",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_leather_museum",
+  "event": "e011_pay",
+  "name": "Pay",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 4,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_leather_museum",
+  "event": "e012_pay_required",
+  "name": "Pay (Required)",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 4,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_leather_museum",
+  "event": "e013_pay_option_r001",
+  "name": "Pay Option + Pay Requirement",
+  "trigger": "playerTouch",
+  "outcome": "transfer-before-lock",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": 24
+ },
+ {
+  "map": "spyder_leather_town",
+  "event": "e017_heal_tuxemon",
+  "name": "Heal Tuxemon",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 4,
+  "unlockedAt": 64,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_leather_town",
+  "event": "e046_flashback",
+  "name": "Flashback",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 104,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_mansion",
+  "event": "e012_captain_returns_r020",
+  "name": "Captain Returns + Track mansion",
+  "trigger": "playerTouch",
+  "outcome": "transfer-before-lock",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": 40
+ },
+ {
+  "map": "spyder_mansion",
+  "event": "e019_talk_gillette_r017",
+  "name": "Talk Gillette + Track mansion",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_mansion",
+  "event": "e020_talk_lucy_r015",
+  "name": "Talk Lucy + Track mansion",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_mansion",
+  "event": "e021_talk_lyle_r011",
+  "name": "Talk Lyle + Track mansion",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_mansion",
+  "event": "npc_spyder_mansion_nurse",
+  "name": "spyder_mansion_nurse",
+  "trigger": "action",
+  "outcome": "locked->unlocked",
+  "lockedAt": 10,
+  "unlockedAt": 160,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_mansion_basement",
+  "event": "e009_talk_coralli_r001",
+  "name": "Talk Coralli",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_mansion_basement",
+  "event": "e010_talk_bobby_r002",
+  "name": "Talk Bobby",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 14,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_mansion_basement",
+  "event": "e011_talk_roger_r003",
+  "name": "Talk Roger",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_mansion_basement",
+  "event": "e012_talk_catholi_r006",
+  "name": "Talk Catholi",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_mansion_basement",
+  "event": "e015_healed",
+  "name": "Healed",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 150,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_mansion_top",
+  "event": "e003_talk_mickey_r002",
+  "name": "Talk Mickey",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 14,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_mansion_top",
+  "event": "e010_talk_russell_r004",
+  "name": "Talk Russell",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_mansion_top",
+  "event": "e011_talk_ricardo_r001",
+  "name": "Talk Ricardo",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_mansion_top",
+  "event": "e012_talk_jackson_r003",
+  "name": "Talk Jackson",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_nimrod_bottom",
+  "event": "e009_talk_rebel_r002",
+  "name": "Talk Rebel",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 18,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_nimrod_bottom",
+  "event": "e010_talk_tru_r006",
+  "name": "Talk Tru",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_nimrod_bottom",
+  "event": "e011_talk_bowie_r004",
+  "name": "Talk Bowie",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_nimrod_bottom",
+  "event": "e012_flashback_xeon",
+  "name": "Flashback Xeon",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 80,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_nimrod_middle",
+  "event": "e011_talk_argon_r002",
+  "name": "Talk Argon",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 14,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_nimrod_middle",
+  "event": "e012_talk_honour_r001",
+  "name": "Talk Honour",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_nimrod_middle",
+  "event": "e013_talk_xeon_r004",
+  "name": "Talk Xeon",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_nimrod_middle",
+  "event": "e014_talk_chrome_robo_r006",
+  "name": "Talk Chrome Robo",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_nimrod_middle",
+  "event": "e015_talk_archer_r007",
+  "name": "Talk Archer",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_nimrod_middle",
+  "event": "e016_talk_antimony_r005",
+  "name": "Talk Antimony",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_nimrod_middle",
+  "event": "e017_zircon_back_r003",
+  "name": "Zircon Back",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 20,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_nimrod_middle",
+  "event": "e019_post_flashback",
+  "name": "Post Flashback",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 20,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_nimrod_room",
+  "event": "e001_enforcers_rapid_response",
+  "name": "Enforcers Rapid Response",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 44,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_nimrod_room",
+  "event": "e002_flashback_zircon_and_argon",
+  "name": "FlashBack Zircon and Argon",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 92,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_nimrod_top",
+  "event": "e007_talk_justice_r006",
+  "name": "Talk Justice",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_nimrod_top",
+  "event": "e008_talk_zircon_r003",
+  "name": "Talk Zircon",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_nimrod_top",
+  "event": "e009_talk_maverick_r002",
+  "name": "Talk Maverick",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_nimrod_top",
+  "event": "e011_talk_mace_r004",
+  "name": "Talk Mace",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_omnichannel1",
+  "event": "e005_spot_enforcer_r004",
+  "name": "Spot Enforcer",
+  "trigger": "playerTouch",
+  "outcome": "transfer-before-lock",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": 28
+ },
+ {
+  "map": "spyder_omnichannel1",
+  "event": "e006_battle_enforcer_r003",
+  "name": "Battle Enforcer + Autosave Lvl 2",
+  "trigger": "playerTouch",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_omnichannel2",
+  "event": "e006_talk_schwartz_r006",
+  "name": "Talk Schwartz",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_omnichannel2",
+  "event": "e008_talk_bettger_r005",
+  "name": "Talk Bettger",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_omnichannel2",
+  "event": "e010_talk_tohei_r009",
+  "name": "Talk Tohei",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_omnichannel2",
+  "event": "e012_talk_crane_r002",
+  "name": "Talk Crane",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_omnichannel2",
+  "event": "e014_talk_dempsey_r001",
+  "name": "Talk Dempsey",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 14,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_omnichannel3",
+  "event": "e008_talk_strauss_r001",
+  "name": "Talk Strauss",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_omnichannel3",
+  "event": "e009_talk_carnegie_r004",
+  "name": "Talk Carnegie",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_omnichannel3",
+  "event": "e010_talk_byrne_r007",
+  "name": "Talk Byrne",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_paper_daycare",
+  "event": "e002_flashback_billie_grandma",
+  "name": "FlashBack Billie Grandma",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 68,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_paper_rival_downstairs",
+  "event": "e008_tv_yes",
+  "name": "TV Yes",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 156,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_paper_scoop",
+  "event": "e010_continue_storekeeper",
+  "name": "Continue Storekeeper",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 402,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_paper_scoop",
+  "event": "e015_intro_storekeeper",
+  "name": "Intro Storekeeper",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 136,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_paper_town",
+  "event": "e012_stop_r003",
+  "name": "Stop! + Autosave Cotton + Mom Quest Intercept",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 14,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_paper_town",
+  "event": "e018_my_first_mon_r012",
+  "name": "My First Mon + My First Mon - Not Met",
+  "trigger": "playerTouch",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_paper_town",
+  "event": "e024_first_fight_start",
+  "name": "First Fight - Start",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 160,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_paper_town",
+  "event": "e035_stop_2_r014",
+  "name": "Stop 2!",
+  "trigger": "playerTouch",
+  "outcome": "no-start-cell"
+ },
+ {
+  "map": "spyder_radiotower",
+  "event": "e006_stop_r002",
+  "name": "Stop!",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 98,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_radiotower",
+  "event": "e009_stop_r001",
+  "name": "Stop!",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 90,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route2",
+  "event": "e008_billie_encounter_r013",
+  "name": "Billie encounter + Track route2",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 15,
+  "unlockedAt": 18,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route2",
+  "event": "e009_billie_encounter_win",
+  "name": "Billie encounter - Win",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 4,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route2",
+  "event": "e014_talk_roddick_r007",
+  "name": "Talk roddick + Track route2",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route2",
+  "event": "e015_talk_marion_r020",
+  "name": "Talk marion + Track route2",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route2",
+  "event": "e016_talk_graf_r010",
+  "name": "Talk graf + Track route2",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route3",
+  "event": "e011_shaft_plot_revealed_r013",
+  "name": "Shaft Plot Revealed + Track route3",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 394,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route3",
+  "event": "e024_enforcer_talk_r017",
+  "name": "Enforcer Talk + Track route3",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route3",
+  "event": "e025_talk_twig_r021",
+  "name": "Talk Twig + Track route3",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 14,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route3",
+  "event": "e026_talk_wanda_r025",
+  "name": "Talk Wanda + Track route3",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route3",
+  "event": "e027_novak_talk_r029",
+  "name": "Novak Talk + Track route3",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route4",
+  "event": "e011_talk_marshall_r018",
+  "name": "Talk Marshall + Track route4",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route4",
+  "event": "e012_talk_beck_r016",
+  "name": "Talk Beck + Track route4",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route4",
+  "event": "e013_talk_wulf_r012",
+  "name": "Talk Wulf + Track route4",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route4",
+  "event": "e014_talk_rosamund_r021",
+  "name": "Talk Rosamund + Track route4",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route4",
+  "event": "e015_billie_r009",
+  "name": "Billie + Track route4",
+  "trigger": "playerTouch",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route4",
+  "event": "npc_spyder_route4_nurse",
+  "name": "spyder_route4_nurse",
+  "trigger": "action",
+  "outcome": "locked->unlocked",
+  "lockedAt": 10,
+  "unlockedAt": 160,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route5",
+  "event": "e011_talk_sara_r010",
+  "name": "Talk Sara + Track route5",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route5",
+  "event": "e012_talk_cleo_or_patra_r005",
+  "name": "Talk Cleo or Patra + Track route5",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route5",
+  "event": "e013_talk_tryphaena_or_marc_r003",
+  "name": "Talk Tryphaena or Marc + Track route5",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route5",
+  "event": "e014_talk_edith_r016",
+  "name": "Talk Edith + Track route5",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route5",
+  "event": "npc_spyder_route5_nurse",
+  "name": "spyder_route5_nurse",
+  "trigger": "action",
+  "outcome": "locked->unlocked",
+  "lockedAt": 10,
+  "unlockedAt": 160,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route6",
+  "event": "e022_talk_maxwell_r010",
+  "name": "Talk Maxwell + Track route6",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 14,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route6",
+  "event": "e023_talk_orion_r003",
+  "name": "Talk Orion + Track route6",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route6",
+  "event": "e024_talk_richard_r023",
+  "name": "Talk Richard + Track route6",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route6",
+  "event": "e025_talk_blair_r017",
+  "name": "Talk Blair + Track route6",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route6",
+  "event": "e026_talk_mungo_r006",
+  "name": "Talk Mungo + Track route6",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_route6",
+  "event": "e027_billie1_r026",
+  "name": "Billie1 + Track route6",
+  "trigger": "playerTouch",
+  "outcome": "transfer-before-lock",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": 51
+ },
+ {
+  "map": "spyder_route6",
+  "event": "e030_billie2_r015",
+  "name": "Billie2 + Track route6",
+  "trigger": "playerTouch",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_routea",
+  "event": "e005_billie_r015",
+  "name": "Billie + Track routea",
+  "trigger": "playerTouch",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_routea",
+  "event": "e008_talk_doris_r022",
+  "name": "Talk Doris + Track routea",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_routea",
+  "event": "e010_talk_dagger_r025",
+  "name": "Talk Dagger + Track routea",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_routea",
+  "event": "e011_talk_doris_r020",
+  "name": "Talk Doris + Track routea",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_routea",
+  "event": "e013_talk_koan_r039",
+  "name": "Talk Koan + Track routea",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_routea",
+  "event": "e015_talk_lexi_r034",
+  "name": "Talk Lexi + Track routea",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_routea",
+  "event": "e017_talk_lotu_r032",
+  "name": "Talk Lotu + Track routea",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_routea",
+  "event": "e018_talk_connie_r028",
+  "name": "Talk Connie + Track routea",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_routea",
+  "event": "e021_talk_joe1_r037",
+  "name": "Talk Joe1 + Track routea",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_routea",
+  "event": "e023_talk_rosy_r013",
+  "name": "Talk Rosy + Track routea",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_routea",
+  "event": "npc_spyder_routea_nurse",
+  "name": "spyder_routea_nurse",
+  "trigger": "action",
+  "outcome": "locked->unlocked",
+  "lockedAt": 10,
+  "unlockedAt": 160,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_routeb",
+  "event": "e006_talk_electra_r022",
+  "name": "Talk Electra + Track routeb",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_routeb",
+  "event": "e008_talk_cytherea_r014",
+  "name": "Talk Cytherea + Track routeb",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_routeb",
+  "event": "e010_talk_nephthys_r013",
+  "name": "Talk Nephthys + Track routeb",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_routeb",
+  "event": "e012_talk_sedna_r009",
+  "name": "Talk Sedna + Track routeb",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_routeb",
+  "event": "e014_talk_calypso_r006",
+  "name": "Talk Calypso + Track routeb",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_routeb",
+  "event": "e015_billie_r020",
+  "name": "Billie + Track routeb",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 18,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_routec",
+  "event": "e011_talk_rutherford_r021",
+  "name": "Talk Rutherford + Track routec",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_routec",
+  "event": "e012_talk_gil_r030",
+  "name": "Talk Gil + Track routec",
+  "trigger": "playerTouch",
+  "outcome": "no-start-cell"
+ },
+ {
+  "map": "spyder_routec",
+  "event": "e013_talk_sandy_r025",
+  "name": "Talk Sandy + Track routec",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_routec",
+  "event": "e014_talk_more_r038",
+  "name": "Talk More + Track routec",
+  "trigger": "playerTouch",
+  "outcome": "no-start-cell"
+ },
+ {
+  "map": "spyder_routee",
+  "event": "e008_battle_calliope_r013",
+  "name": "Battle Calliope + Track routee",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 15,
+  "unlockedAt": 78,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_routee",
+  "event": "e009_talk_calliope_r011",
+  "name": "Talk Calliope + Track routee",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 70,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_routee",
+  "event": "e011_talk_aiolos_r015",
+  "name": "Talk Aiolos + Track routee",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_scoop1",
+  "event": "e011_talk_lanth_r005",
+  "name": "Talk Lanth",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_scoop1",
+  "event": "e012_talk_berys_r004",
+  "name": "Talk Berys",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_scoop1",
+  "event": "e013_talk_turner_r006",
+  "name": "Talk Turner",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_scoop1",
+  "event": "e014_talk_paine_r003",
+  "name": "Talk Paine",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_scoop1",
+  "event": "e015_talk_rubid_r007",
+  "name": "Talk Rubid",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_scoop2",
+  "event": "e005_leaving_scoop_hq_r001",
+  "name": "Leaving Scoop HQ",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_scoop3",
+  "event": "e006_talk_alyssa_r003",
+  "name": "Talk Alyssa",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_scoop3",
+  "event": "e007_talk_taggart_r002",
+  "name": "Talk Taggart",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_scoop3",
+  "event": "e008_talk_donald_r004",
+  "name": "Talk Donald",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_scoop3",
+  "event": "e010_watch",
+  "name": "Watch",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 64,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_scoop4",
+  "event": "e014_talk_arachne_1_r002",
+  "name": "Talk Arachne 1",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_scoop4",
+  "event": "e015_talk_weaver_r004",
+  "name": "Talk Weaver",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_scoop4",
+  "event": "e016_talk_arachne_2_r003",
+  "name": "Talk Arachne 2",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_test_map",
+  "event": "e005_ambush_cleo_r002",
+  "name": "Ambush Cleo",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_timber_cafe",
+  "event": "e004_flashback",
+  "name": "Flashback",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 80,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_timber_cafe",
+  "event": "e006_heal_tuxemon",
+  "name": "Heal Tuxemon",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 4,
+  "unlockedAt": 64,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_timber_center",
+  "event": "e009_heal_afford",
+  "name": "Heal Afford",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 60,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_timber_walledgarden1",
+  "event": "e008_talk_fugger_r006",
+  "name": "Talk fugger",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_timber_walledgarden1",
+  "event": "e010_talk_carnegie_r005",
+  "name": "Talk carnegie",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_timber_walledgarden1",
+  "event": "e012_talk_ford_r009",
+  "name": "Talk ford",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_timber_walledgarden1",
+  "event": "e014_talk_girard_r011",
+  "name": "Talk girard",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_timber_walledgarden1",
+  "event": "e016_talk_vanderbilt_r010",
+  "name": "Talk vanderbilt",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_timber_walledgarden1",
+  "event": "e017_talk_ford_r007",
+  "name": "Talk ford",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_timber_walledgarden1",
+  "event": "e018_talk_vanderbilt_r008",
+  "name": "Talk vanderbilt",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_timber_walledgarden1",
+  "event": "e020_talk_astor_r012",
+  "name": "Talk astor",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_timber_walledgarden2",
+  "event": "e006_talk_osman_r004",
+  "name": "Talk osman",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_timber_walledgarden2",
+  "event": "e008_talk_alexander_r003",
+  "name": "Talk Alexander",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_timber_walledgarden2",
+  "event": "e011_talk_musa_r002",
+  "name": "Talk musa",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_timber_walledgarden2",
+  "event": "e012_talk_augustus_r001",
+  "name": "Talk augustus",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_timber_walledgarden2",
+  "event": "e014_talk_rufus_r006",
+  "name": "Talk rufus",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_timber_walledgarden2",
+  "event": "e016_talk_crassus_r005",
+  "name": "Talk crassus",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_timber_walledgarden2",
+  "event": "e017_talk_midas",
+  "name": "Talk midas",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 45,
+  "unlockedAt": 60,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_timber_walledgarden2",
+  "event": "e018_talk_billie",
+  "name": "Talk Billie",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 16,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_tunnel",
+  "event": "e012_talk_greta_r030",
+  "name": "Talk Greta + Track tunnel",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_tunnel",
+  "event": "e018_landrace_blocks_r010",
+  "name": "Landrace blocks + Track tunnel",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_tunnel",
+  "event": "e020_landrace_blocks_r011",
+  "name": "Landrace blocks + Track tunnel",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_tunnel_below",
+  "event": "e007_talk_meitner_r010",
+  "name": "Talk Meitner + Track tunnel_below",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_tunnel_below",
+  "event": "e008_talk_lute_r021",
+  "name": "Talk Lute + Track tunnel_below",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_tunnel_below",
+  "event": "e009_talk_beryll_r017",
+  "name": "Talk Beryll + Track tunnel_below",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_wayfarer_inn1",
+  "event": "e006_heal_tuxemon",
+  "name": "Heal Tuxemon",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 4,
+  "unlockedAt": 64,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_wayfarer_inn1",
+  "event": "e016_talk_morningstar_r004",
+  "name": "Talk Morningstar",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_wayfarer_inn1",
+  "event": "e017_talk_victor_r003",
+  "name": "Talk Victor",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "spyder_wayfarer_inn2",
+  "event": "e008_talk_bravo_r003",
+  "name": "Talk Bravo",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1
+ },
+ {
+  "map": "taba_ba_br_1",
+  "event": "e007_get_acolyte",
+  "name": "get acolyte",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 522,
+  "transferAt": -1
+ },
+ {
+  "map": "taba_ba_br_1",
+  "event": "e008_move_to_middle_r001",
+  "name": "move to middle + move to middle redo",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 460,
+  "transferAt": -1
+ },
+ {
+  "map": "taba_ba_br_2",
+  "event": "e004_acolyte2_r003",
+  "name": "acolyte2",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 721,
+  "transferAt": -1
+ },
+ {
+  "map": "taba_ba_br_2",
+  "event": "e008_battle_redo_r005",
+  "name": "battle redo",
+  "trigger": "action",
+  "outcome": "STUCK-LOCKED",
+  "lockedAt": 6,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "taba_ba_br_3",
+  "event": "e003_there_he_is_r002",
+  "name": "there he is",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 1510,
+  "transferAt": -1
+ },
+ {
+  "map": "taba_ba_br_4",
+  "event": "e002_start_talking_r003",
+  "name": "start talking",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 136,
+  "transferAt": -1
+ },
+ {
+  "map": "taba_ba_br_master_foyer",
+  "event": "e003_stop_and_talk_r001",
+  "name": "Stop and talk",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 29,
+  "transferAt": -1
+ },
+ {
+  "map": "taba_ba_foyer",
+  "event": "e003_talk_to_timmy_r004",
+  "name": "talk to timmy",
+  "trigger": "action",
+  "outcome": "locked->unlocked",
+  "lockedAt": 6,
+  "unlockedAt": 84,
+  "transferAt": -1
+ },
+ {
+  "map": "taba_ba_foyer",
+  "event": "e004_talk_to_timmy2_r003",
+  "name": "talk to timmy2",
+  "trigger": "action",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "taba_ba_main",
+  "event": "e003_im_here_r003",
+  "name": "im here",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 40,
+  "unlockedAt": 3392,
+  "transferAt": -1
+ },
+ {
+  "map": "taba_ba_main",
+  "event": "e028_time_to_face_the_master_r002",
+  "name": "time to face the master",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 144,
+  "transferAt": -1
+ },
+ {
+  "map": "taba_town",
+  "event": "e017_bring_the_cavalry",
+  "name": "bring the cavalry",
+  "trigger": "autorun",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 204,
+  "transferAt": -1
+ },
+ {
+  "map": "taba_town",
+  "event": "e020_timetowalk",
+  "name": "timetowalk",
+  "trigger": "autorun",
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1
+ },
+ {
+  "map": "taba_town",
+  "event": "e030_waitdontleave_r015",
+  "name": "waitdontleave",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 19,
+  "transferAt": -1
+ },
+ {
+  "map": "taba_town",
+  "event": "e038_announcement2_r014",
+  "name": "announcement2",
+  "trigger": "playerTouch",
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 57,
+  "transferAt": -1
+ },
+ {
+  "map": "taba_town",
+  "event": "e043_myrock_r029",
+  "name": "myrock",
+  "trigger": "action",
+  "outcome": "locked->unlocked",
+  "lockedAt": 34,
+  "unlockedAt": 158,
+  "transferAt": -1
+ },
+ {
+  "map": "tuxe_mart_taba",
+  "event": "e006_professor_pls",
+  "name": "professor pls (spawn guard)",
+  "trigger": "parallel",
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 242,
+  "transferAt": -1
+ },
+ {
+  "map": "water_lower_village",
+  "event": "npc_water_nice_mayor",
+  "name": "water_nice_mayor",
+  "trigger": "action",
+  "outcome": "locked->unlocked",
+  "lockedAt": 18,
+  "unlockedAt": 90,
+  "transferAt": -1
+ }
+]

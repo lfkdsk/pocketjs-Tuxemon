@@ -1,0 +1,7644 @@
+[
+ {
+  "map": "eclipse_crystal_bank1",
+  "event": "e001_event_9",
+  "name": "Event 9",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 36,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": [
+   "Voice of Temptation: Forget redemption. Forget / reckoning. Just walk ",
+   "If truth is all that's left, then I'll face it—no / matter how dark it",
+   "If this place remembers everything… then it / remembers who I used to "
+  ]
+ },
+ {
+  "map": "eclipse_crystal_bank3",
+  "event": "e005_event_zircon_r001",
+  "name": "Event Zircon",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   10,
+   7,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 696,
+  "transferAt": -1,
+  "pos": [
+   6,
+   2
+  ],
+  "main": "eclipse_crystal_bank3/e005_event_zircon_r001",
+  "texts": [
+   "So, you finally show your face, Argon. I've been / waiting for this mo",
+   "[BATTLE] Zircon / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "eclipse_crystal_bank3",
+  "event": "e006_event_zircon_win",
+  "name": "Event Zircon Win",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "eclipse_crystal_center",
+  "event": "e001_event_6",
+  "name": "Event 6",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 8,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": [
+   "Whispered Voice: This is where power lies, disguised / as virtue. Do y",
+   "Echo of the Past: You stood in labs just like these / once. Healing, c"
+  ]
+ },
+ {
+  "map": "eclipse_crystal_center",
+  "event": "e002_event_waking_up_nurse_jada",
+  "name": "Event Waking Up - Nurse Jada",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 8,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": [
+   "Whispered Voice: This is where power lies, disguised / as virtue. Do y",
+   "Echo of the Past: You stood in labs just like these / once. Healing, c"
+  ]
+ },
+ {
+  "map": "eclipse_crystal_center",
+  "event": "e003_event_internal_echoes_and_the_vo",
+  "name": "Event Internal Echoes and The Voice of Revelation",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 8,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": [
+   "Whispered Voice: This is where power lies, disguised / as virtue. Do y",
+   "Echo of the Past: You stood in labs just like these / once. Healing, c"
+  ]
+ },
+ {
+  "map": "eclipse_crystal_center",
+  "event": "e009_heal_afford",
+  "name": "Heal Afford",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 8,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": [
+   "Whispered Voice: This is where power lies, disguised / as virtue. Do y",
+   "Echo of the Past: You stood in labs just like these / once. Healing, c"
+  ]
+ },
+ {
+  "map": "eclipse_crystal_town",
+  "event": "e001_event_5",
+  "name": "Event 5",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 8,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": [
+   "TuxeVault... the institution that funded my / dreams—and my nightmares",
+   "Voice of Judgment: Redemption and reckoning are / illusions, Argon. Wh"
+  ]
+ },
+ {
+  "map": "eclipse_crystal_town_cafe",
+  "event": "e001_event_7",
+  "name": "Event 7",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 8,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": [
+   "Voice of Temptation: Drown your regrets here, Argon. / It's easier tha",
+   "Fragment of Memory: We laughed once, in a place like / this. Before it"
+  ]
+ },
+ {
+  "map": "eclipse_crystal_town_house",
+  "event": "e001_event_8",
+  "name": "Event 8",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 8,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": [
+   "Voice of Wisdom: You carry heavy burdens, child. But / storms pass, an",
+   "Voice of Warning: The Cathedral casts long shadows. / Be wary of what "
+  ]
+ },
+ {
+  "map": "eclipse_lion_mountain_high",
+  "event": "e001_event_14",
+  "name": "Event 14",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "eclipse_lion_mountain_high",
+  "event": "e007_talk_alexander_r004",
+  "name": "Talk Alexander",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   3,
+   28,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 18,
+  "transferAt": -1,
+  "pos": [
+   3,
+   29
+  ],
+  "main": "eclipse_lion_mountain_high/e007_talk_alexander_r004",
+  "texts": [
+   "Already the clouds are coming in from the east. Big / clouds.",
+   "[BATTLE] Alexander / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "eclipse_lion_mountain_high",
+  "event": "e008_talk_arlene_r003",
+  "name": "Talk Arlene",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   11,
+   15,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 50,
+  "transferAt": -1,
+  "pos": [
+   11,
+   16
+  ],
+  "main": "eclipse_lion_mountain_high/e008_talk_arlene_r003",
+  "texts": [
+   "No anchors at any point.",
+   "[BATTLE] Arlene / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "eclipse_lion_mountain_high",
+  "event": "e009_talk_conrad_r005",
+  "name": "Talk Conrad",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   26,
+   30,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 42,
+  "transferAt": -1,
+  "pos": [
+   26,
+   31
+  ],
+  "main": "eclipse_lion_mountain_high/e009_talk_conrad_r005",
+  "texts": [
+   "I remember smelling something.",
+   "[BATTLE] Conrad / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "eclipse_lion_mountain_high",
+  "event": "e010_talk_david_r001",
+  "name": "Talk David",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   4,
+   9,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   4,
+   10
+  ],
+  "main": "eclipse_lion_mountain_high/e010_talk_david_r001",
+  "texts": [
+   "It took me the best part of five or six hours to / climb about the las",
+   "[BATTLE] David / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "eclipse_lion_mountain_high",
+  "event": "e011_talk_kurt_r006",
+  "name": "Talk Kurt",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   26,
+   36,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   26,
+   37
+  ],
+  "main": "eclipse_lion_mountain_high/e011_talk_kurt_r006",
+  "texts": [
+   "I'm not capable of going any further.",
+   "[BATTLE] Kurt / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "eclipse_lion_mountain_low",
+  "event": "e001_event_11",
+  "name": "Event 11",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "eclipse_lion_mountain_low",
+  "event": "e002_event_12",
+  "name": "Event 12",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "eclipse_lion_mountain_low",
+  "event": "e005_talk_emilio_r006",
+  "name": "Talk Emilio",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   27,
+   16,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 42,
+  "transferAt": -1,
+  "pos": [
+   27,
+   17
+  ],
+  "main": "eclipse_lion_mountain_low/e005_talk_emilio_r006",
+  "texts": [
+   "Half an hour to an hour after leaving the summit, I / was lost.",
+   "[BATTLE] Emilio / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "eclipse_lion_mountain_middle",
+  "event": "e001_event_13",
+  "name": "Event 13",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "eclipse_lion_mountain_middle",
+  "event": "e008_talk_adam_r007",
+  "name": "Talk Adam",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   2,
+   21,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 42,
+  "transferAt": -1,
+  "pos": [
+   2,
+   22
+  ],
+  "main": "eclipse_lion_mountain_middle/e008_talk_adam_r007",
+  "texts": [
+   "I was up, it was windy.",
+   "[BATTLE] Adam / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "eclipse_lion_mountain_middle",
+  "event": "e009_talk_chhurim_r006",
+  "name": "Talk Chhurim",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   33,
+   12,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   33,
+   13
+  ],
+  "main": "eclipse_lion_mountain_middle/e009_talk_chhurim_r006",
+  "texts": [
+   "I'm going to make the summit, I can actually make / the summit.",
+   "[BATTLE] Chhurim / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "eclipse_lion_mountain_middle",
+  "event": "e010_talk_jacques_r009",
+  "name": "Talk Jacques",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   3,
+   31,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 46,
+  "transferAt": -1,
+  "pos": [
+   3,
+   32
+  ],
+  "main": "eclipse_lion_mountain_middle/e010_talk_jacques_r009",
+  "texts": [
+   "I've never been that high before",
+   "and it's very very strenuous to climb ice like that.",
+   "[BATTLE] Jacques / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "eclipse_lion_mountain_middle",
+  "event": "e011_talk_tom_r008",
+  "name": "Talk Tom",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   32,
+   28,
+   "left"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 42,
+  "transferAt": -1,
+  "pos": [
+   31,
+   28
+  ],
+  "main": "eclipse_lion_mountain_middle/e011_talk_tom_r008",
+  "texts": [
+   "I don't know entirely what happened for the rest of / that night.",
+   "[BATTLE] Tom / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "eclipse_obsidian_center",
+  "event": "e005_heal_afford",
+  "name": "Heal Afford",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "eclipse_obsidian_town",
+  "event": "e001_event_15",
+  "name": "Event 15",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "eclipse_park_cabin",
+  "event": "e003_vase_r002",
+  "name": "Vase",
+  "page": 0,
+  "trigger": "action",
+  "start": [
+   1,
+   1,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 6,
+  "unlockedAt": 210,
+  "transferAt": -1,
+  "pos": [
+   1,
+   1
+  ],
+  "texts": [
+   "It's revolting!",
+   "Do you think we got sewer systems and centralized / treatment plants i"
+  ]
+ },
+ {
+  "map": "eclipse_park_entrance",
+  "event": "e001_clear",
+  "name": "Clear",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "eclipse_park_entrance",
+  "event": "e004_no_money",
+  "name": "No Money",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "eclipse_park_entrance",
+  "event": "e005_no_pay",
+  "name": "No Pay",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "eclipse_park_entrance",
+  "event": "e006_pay",
+  "name": "Pay",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "eclipse_park_entrance",
+  "event": "e007_payment_r002",
+  "name": "Payment",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   3,
+   6,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 188,
+  "transferAt": -1,
+  "pos": [
+   3,
+   7
+  ],
+  "main": "eclipse_park_entrance/e007_payment_r002",
+  "texts": [
+   "Welcome to Pepper Park. Entry is $500. You'll get 25 / Park Tuxeball. "
+  ]
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e002_event_1",
+  "name": "Event 1",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 6,
+  "unlockedAt": 58,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": [
+   "Compassionate Voice: Argon, the road is yours to / walk, no matter how",
+   "You still carry the light of compassion—it will / guide you, even if y",
+   "Can I still hold onto compassion... without losing / myself?"
+  ]
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e003_event_2_r015",
+  "name": "Event 2",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   34,
+   31,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 6,
+  "unlockedAt": 58,
+  "transferAt": -1,
+  "pos": [
+   34,
+   31
+  ],
+  "texts": [
+   "Compassionate Voice: Argon, the road is yours to / walk, no matter how",
+   "You still carry the light of compassion—it will / guide you, even if y",
+   "Can I still hold onto compassion... without losing / myself?"
+  ]
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e004_event_3_r010",
+  "name": "Event 3",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   5,
+   22,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 6,
+  "unlockedAt": 58,
+  "transferAt": -1,
+  "pos": [
+   5,
+   22
+  ],
+  "texts": [
+   "Compassionate Voice: Argon, the road is yours to / walk, no matter how",
+   "You still carry the light of compassion—it will / guide you, even if y",
+   "Can I still hold onto compassion... without losing / myself?"
+  ]
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e007_event_4_r012",
+  "name": "Event 4",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   14,
+   27,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 6,
+  "unlockedAt": 58,
+  "transferAt": -1,
+  "pos": [
+   14,
+   27
+  ],
+  "texts": [
+   "Compassionate Voice: Argon, the road is yours to / walk, no matter how",
+   "You still carry the light of compassion—it will / guide you, even if y",
+   "Can I still hold onto compassion... without losing / myself?"
+  ]
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e030_talk_arnaut_r009",
+  "name": "Talk Arnaut",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   5,
+   18,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 6,
+  "unlockedAt": 58,
+  "transferAt": -1,
+  "pos": [
+   5,
+   18
+  ],
+  "texts": [
+   "Compassionate Voice: Argon, the road is yours to / walk, no matter how",
+   "You still carry the light of compassion—it will / guide you, even if y",
+   "Can I still hold onto compassion... without losing / myself?"
+  ]
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e031_talk_conrad_r004",
+  "name": "Talk Conrad",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   23,
+   3,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 6,
+  "unlockedAt": 58,
+  "transferAt": -1,
+  "pos": [
+   23,
+   3
+  ],
+  "texts": [
+   "Compassionate Voice: Argon, the road is yours to / walk, no matter how",
+   "You still carry the light of compassion—it will / guide you, even if y",
+   "Can I still hold onto compassion... without losing / myself?"
+  ]
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e032_talk_hugh_r003",
+  "name": "Talk Hugh",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   2,
+   3,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 6,
+  "unlockedAt": 58,
+  "transferAt": -1,
+  "pos": [
+   2,
+   3
+  ],
+  "texts": [
+   "Compassionate Voice: Argon, the road is yours to / walk, no matter how",
+   "You still carry the light of compassion—it will / guide you, even if y",
+   "Can I still hold onto compassion... without losing / myself?"
+  ]
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e033_talk_jacopo_r007",
+  "name": "Talk Jacopo",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   30,
+   12,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 6,
+  "unlockedAt": 58,
+  "transferAt": -1,
+  "pos": [
+   30,
+   12
+  ],
+  "texts": [
+   "Compassionate Voice: Argon, the road is yours to / walk, no matter how",
+   "You still carry the light of compassion—it will / guide you, even if y",
+   "Can I still hold onto compassion... without losing / myself?"
+  ]
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e034_talk_manfred_r005",
+  "name": "Talk Manfred",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   34,
+   3,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 6,
+  "unlockedAt": 58,
+  "transferAt": -1,
+  "pos": [
+   34,
+   3
+  ],
+  "texts": [
+   "Compassionate Voice: Argon, the road is yours to / walk, no matter how",
+   "You still carry the light of compassion—it will / guide you, even if y",
+   "Can I still hold onto compassion... without losing / myself?"
+  ]
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e035_talk_nino_r011",
+  "name": "Talk Nino",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   14,
+   24,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 6,
+  "unlockedAt": 58,
+  "transferAt": -1,
+  "pos": [
+   14,
+   24
+  ],
+  "texts": [
+   "Compassionate Voice: Argon, the road is yours to / walk, no matter how",
+   "You still carry the light of compassion—it will / guide you, even if y",
+   "Can I still hold onto compassion... without losing / myself?"
+  ]
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e036_talk_penitent_r006",
+  "name": "Talk Penitent",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   11,
+   7,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 6,
+  "unlockedAt": 58,
+  "transferAt": -1,
+  "pos": [
+   11,
+   7
+  ],
+  "texts": [
+   "Compassionate Voice: Argon, the road is yours to / walk, no matter how",
+   "You still carry the light of compassion—it will / guide you, even if y",
+   "Can I still hold onto compassion... without losing / myself?"
+  ]
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e037_talk_pia_r008",
+  "name": "Talk Pia",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   19,
+   13,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 6,
+  "unlockedAt": 58,
+  "transferAt": -1,
+  "pos": [
+   19,
+   13
+  ],
+  "texts": [
+   "Compassionate Voice: Argon, the road is yours to / walk, no matter how",
+   "You still carry the light of compassion—it will / guide you, even if y",
+   "Can I still hold onto compassion... without losing / myself?"
+  ]
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e038_talk_sordello_r013",
+  "name": "Talk Sordello",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   25,
+   27,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 6,
+  "unlockedAt": 58,
+  "transferAt": -1,
+  "pos": [
+   25,
+   27
+  ],
+  "texts": [
+   "Compassionate Voice: Argon, the road is yours to / walk, no matter how",
+   "You still carry the light of compassion—it will / guide you, even if y",
+   "Can I still hold onto compassion... without losing / myself?"
+  ]
+ },
+ {
+  "map": "eclipse_route7",
+  "event": "e039_talk_statius_r014",
+  "name": "Talk Statius",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   34,
+   29,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 6,
+  "unlockedAt": 58,
+  "transferAt": -1,
+  "pos": [
+   34,
+   29
+  ],
+  "texts": [
+   "Compassionate Voice: Argon, the road is yours to / walk, no matter how",
+   "You still carry the light of compassion—it will / guide you, even if y",
+   "Can I still hold onto compassion... without losing / myself?"
+  ]
+ },
+ {
+  "map": "maple_bedroom",
+  "event": "e004_stop_r002",
+  "name": "Stop",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   6,
+   3,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 299,
+  "transferAt": -1,
+  "pos": [
+   6,
+   4
+  ],
+  "texts": [
+   "Hey! Don't just walk into someone's room without / permission."
+  ]
+ },
+ {
+  "map": "maple_house",
+  "event": "e004_create_knight",
+  "name": "create knight",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   11,
+   5,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   11,
+   5
+  ],
+  "texts": []
+ },
+ {
+  "map": "player_house_downstairs",
+  "event": "e001_watch_tv_r005",
+  "name": "Watch TV + announcement + timetochat",
+  "page": 0,
+  "trigger": "action",
+  "start": [
+   1,
+   6,
+   "up"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   1,
+   5
+  ],
+  "texts": [
+   "What's on TV? A prom queen is breaking her tiara / into pieces and han"
+  ]
+ },
+ {
+  "map": "player_house_downstairs",
+  "event": "e013_new_possibilities",
+  "name": "new possibilities",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   3,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   3,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "professor_lab",
+  "event": "e001_teleport_to_map1_r001",
+  "name": "Teleport to map1 + whyhellothere",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   5,
+   17,
+   "right"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   8,
+   17
+  ],
+  "texts": []
+ },
+ {
+  "map": "professor_lab",
+  "event": "e016_rockittenyes",
+  "name": "rockittenYES",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   2,
+   1,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   2,
+   1
+  ],
+  "texts": []
+ },
+ {
+  "map": "professor_lab",
+  "event": "e019_cardilingyes",
+  "name": "cardilingYES",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   4,
+   1,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   4,
+   1
+  ],
+  "texts": []
+ },
+ {
+  "map": "professor_lab",
+  "event": "e020_tweesheryes",
+  "name": "tweesherYES",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   3,
+   1,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   3,
+   1
+  ],
+  "texts": []
+ },
+ {
+  "map": "professor_lab",
+  "event": "e025_shesarrived",
+  "name": "shesarrived",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   12,
+   12,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   12,
+   12
+  ],
+  "texts": []
+ },
+ {
+  "map": "route1",
+  "event": "e012_they_re_angry_r006",
+  "name": "they're angry",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   38,
+   21,
+   "left"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 1226,
+  "transferAt": -1,
+  "pos": [
+   31,
+   25
+  ],
+  "texts": [
+   "... ... .... ...",
+   "Trial eh? Well, hopefully you're good in a fight! / I'll heal your Tux",
+   "You take the one on the left and I'll take the other / three."
+  ]
+ },
+ {
+  "map": "route1",
+  "event": "e021_battle_r013",
+  "name": "battle!",
+  "page": 0,
+  "trigger": "action",
+  "start": [
+   31,
+   25,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 6,
+  "unlockedAt": 1842,
+  "transferAt": -1,
+  "pos": [
+   31,
+   25
+  ],
+  "texts": [
+   "Yes Ma'am.",
+   "Matt, Julius, let's head out.",
+   "Good Luck Red. I'm sure we'll see each other again."
+  ]
+ },
+ {
+  "map": "route1",
+  "event": "e040_hey_r008",
+  "name": "hey!",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   24,
+   29,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 18,
+  "transferAt": -1,
+  "pos": [
+   25,
+   30
+  ],
+  "texts": [
+   "Hey! This is a restricted area! No one without a / badge is allowed in"
+  ]
+ },
+ {
+  "map": "route1",
+  "event": "e041_gym_time_r007",
+  "name": "gym time",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   45,
+   26,
+   "down"
+  ],
+  "outcome": "STUCK-LOCKED",
+  "lockedAt": 7,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   53,
+   37
+  ],
+  "main": "route1/e041_gym_time_r007",
+  "texts": [
+   "My name is Speck, sir.",
+   "Well, Speck, if it's any consolation, I was the one / that gave the or",
+   "Good Luck everyone! I fully expect none of you to / make it!"
+  ]
+ },
+ {
+  "map": "route2",
+  "event": "e011_talk_to_misa_r007",
+  "name": "talk to misa + spilledthebeans",
+  "page": 0,
+  "trigger": "action",
+  "start": [
+   3,
+   4,
+   "up"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   3,
+   3
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_bedroom",
+  "event": "e004_resting_in_bed_r004",
+  "name": "Resting in Bed",
+  "page": 0,
+  "trigger": "action",
+  "start": [
+   0,
+   1,
+   "down"
+  ],
+  "outcome": "locked->transfer",
+  "lockedAt": 2,
+  "unlockedAt": -1,
+  "transferAt": 87,
+  "pos": [
+   4,
+   8
+  ],
+  "texts": [
+   "Tokens are available for a modest fee from all / Pillars!",
+   "Ahem, what was I talking about?",
+   "Oh yes, each Pillar offers one of these exclusive / Tuxemon."
+  ]
+ },
+ {
+  "map": "spyder_candy_cafe",
+  "event": "e009_heal_tuxemon",
+  "name": "Heal Tuxemon",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_candy_center",
+  "event": "e018_heal_afford",
+  "name": "Heal Afford",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_candy_hospital1",
+  "event": "e008_talk_aurora_r003",
+  "name": "Talk Aurora",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   5,
+   8,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 16,
+  "transferAt": -1,
+  "pos": [
+   5,
+   9
+  ],
+  "main": "spyder_candy_hospital1/e008_talk_aurora_r003",
+  "texts": [
+   "You will quickly learn that you have chosen for your / sparring partne",
+   "the most skilled trainer in the building.",
+   "[BATTLE] Aurora / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_candy_hospital1",
+  "event": "e010_talk_eleni_r004",
+  "name": "Talk Eleni",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   10,
+   8,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   10,
+   9
+  ],
+  "main": "spyder_candy_hospital1/e010_talk_eleni_r004",
+  "texts": [
+   "Salutations. Test your puissance against my / menagerie.",
+   "[BATTLE] Eleni / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_candy_hospital1",
+  "event": "e012_talk_felu_r006",
+  "name": "Talk Felu",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   1,
+   16,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 18,
+  "transferAt": -1,
+  "pos": [
+   1,
+   17
+  ],
+  "main": "spyder_candy_hospital1/e012_talk_felu_r006",
+  "texts": [
+   "You look like you could use a challenge.",
+   "[BATTLE] Felu / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_candy_hospital1",
+  "event": "e016_talk_liane_r005",
+  "name": "Talk Liane",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   17,
+   10,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   17,
+   11
+  ],
+  "main": "spyder_candy_hospital1/e016_talk_liane_r005",
+  "texts": [
+   "You wouldn't believe the powerful mons these suckers / have handed ove",
+   "[BATTLE] Liane / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_candy_hospital1",
+  "event": "e019_talk_fring_r002",
+  "name": "Talk Fring",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   1,
+   3,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   1,
+   4
+  ],
+  "main": "spyder_candy_hospital1/e019_talk_fring_r002",
+  "texts": [
+   "Boss says we can't help ourselves to the stashed / tuxemon ... yet.",
+   "[BATTLE] Fring / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_candy_hospital1",
+  "event": "e020_talk_walt_r001",
+  "name": "Talk Walt",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   15,
+   2,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   15,
+   3
+  ],
+  "main": "spyder_candy_hospital1/e020_talk_walt_r001",
+  "texts": [
+   "What happened to your uniform? Wait, imposter! Stop / right there!",
+   "[BATTLE] Walt / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_candy_hospital2",
+  "event": "e011_talk_luzia_r003",
+  "name": "Talk Luzia",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   11,
+   1,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   11,
+   2
+  ],
+  "main": "spyder_candy_hospital2/e011_talk_luzia_r003",
+  "texts": [
+   "Like taking candy from a baby.",
+   "[BATTLE] Luzia / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_candy_hospital2",
+  "event": "e013_talk_zekar_r005",
+  "name": "Talk Zekar",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   2,
+   8,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   2,
+   9
+  ],
+  "main": "spyder_candy_hospital2/e013_talk_zekar_r005",
+  "texts": [
+   "Oi! Stop right there!",
+   "[BATTLE] Zekar / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_candy_hospital2",
+  "event": "e016_talk_rakez_r004",
+  "name": "Talk Rakez",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   4,
+   4,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 30,
+  "transferAt": -1,
+  "pos": [
+   4,
+   5
+  ],
+  "main": "spyder_candy_hospital2/e016_talk_rakez_r004",
+  "texts": [
+   "I just got involved for the paycheck.",
+   "Is that so wrong?",
+   "[BATTLE] Rakez / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_candy_hospital2",
+  "event": "e018_talk_rhizome_r006",
+  "name": "Talk Rhizome",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   5,
+   8,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 16,
+  "transferAt": -1,
+  "pos": [
+   5,
+   9
+  ],
+  "main": "spyder_candy_hospital2/e018_talk_rhizome_r006",
+  "texts": [
+   "Stop right there!",
+   "What you are looking at is the intellectual property / of Omnichannel!",
+   "[BATTLE] Rhizome / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_candy_hospital3",
+  "event": "e008_the_cure_r007",
+  "name": "The cure!",
+  "page": 0,
+  "trigger": "action",
+  "start": [
+   5,
+   5,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 18,
+  "unlockedAt": 168,
+  "transferAt": -1,
+  "pos": [
+   5,
+   5
+  ],
+  "texts": [
+   "It's the cure to the Spyder Bite infection!",
+   "With this, you can cure your own and others' / tuxemon.",
+   "Your monsters are returned to you."
+  ]
+ },
+ {
+  "map": "spyder_candy_hospital3",
+  "event": "e012_billie_confronts_r001",
+  "name": "Billie confronts",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   0,
+   10,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   0,
+   11
+  ],
+  "main": "spyder_candy_hospital3/e012_billie_confronts_r001",
+  "texts": [
+   "Red, your meddling has become too much! Just let the / authorities do ",
+   "[BATTLE] Billie / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_candy_house3",
+  "event": "e006_egg_r002",
+  "name": "Egg",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   4,
+   4,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 114,
+  "transferAt": -1,
+  "pos": [
+   4,
+   5
+  ],
+  "texts": [
+   "It may be important.",
+   "Ancient Egg"
+  ]
+ },
+ {
+  "map": "spyder_candy_inn2",
+  "event": "e001_bee_event_buzzing",
+  "name": "Bee Event Buzzing",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_candy_town",
+  "event": "e012_entry_candy_r011",
+  "name": "Entry Candy",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   14,
+   2,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 8,
+  "transferAt": -1,
+  "pos": [
+   14,
+   3
+  ],
+  "main": "spyder_candy_town/e012_entry_candy_r011",
+  "texts": [
+   "Stop right there!"
+  ]
+ },
+ {
+  "map": "spyder_candy_town",
+  "event": "e038_dante_commiserates_r014",
+  "name": "Dante commiserates",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   6,
+   15,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 25,
+  "transferAt": -1,
+  "pos": [
+   6,
+   16
+  ],
+  "texts": [
+   "I've been thinking about that.",
+   "They don't exactly keep the fusebox under lock and / key.",
+   "Meet me in the hospital lobby and I'll tell you what / I've got planne"
+  ]
+ },
+ {
+  "map": "spyder_candy_town",
+  "event": "e039_henrik_react_mons",
+  "name": "Henrik react - mons",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   26,
+   1,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   26,
+   1
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_candy_town",
+  "event": "e040_henrik_react_no_mons",
+  "name": "Henrik react - no mons",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   26,
+   2,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   26,
+   2
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_citypark",
+  "event": "e014_talk_bobette_r011",
+  "name": "Talk Bobette + Track citypark",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   13,
+   16,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   13,
+   17
+  ],
+  "main": "spyder_citypark/e014_talk_bobette_r011",
+  "texts": [
+   "I love cats. An Aardorn is basically a cat, right?",
+   "[BATTLE] Bobette / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_citypark",
+  "event": "npc_spyder_citypark_nurse",
+  "name": "spyder_citypark_nurse",
+  "page": 1,
+  "trigger": "action",
+  "start": [
+   8,
+   30,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 10,
+  "unlockedAt": 160,
+  "transferAt": -1,
+  "pos": [
+   8,
+   30
+  ],
+  "main": "spyder_citypark/npc_spyder_citypark_nurse",
+  "texts": [
+   "Hey, you look tired. Let me help you feel better!",
+   "You should be good as new now! Just take it easy for / a bit and you'l"
+  ]
+ },
+ {
+  "map": "spyder_cotton_artshop",
+  "event": "e019_billie_visit_r001",
+  "name": "Billie Visit",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   3,
+   3,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 180,
+  "transferAt": -1,
+  "pos": [
+   3,
+   4
+  ],
+  "texts": [
+   "I see you're trying to broaden your horizons. That's / cute. Just try "
+  ]
+ },
+ {
+  "map": "spyder_cotton_cafe",
+  "event": "e010_heal_tuxemon",
+  "name": "Heal Tuxemon",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   3,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   3
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_cotton_cafe",
+  "event": "npc_spyder_cottontown_hacker",
+  "name": "spyder_cottontown_hacker",
+  "page": 1,
+  "trigger": "action",
+  "start": [
+   10,
+   3,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 16,
+  "unlockedAt": 234,
+  "transferAt": -1,
+  "pos": [
+   7,
+   5
+  ],
+  "main": "spyder_cotton_cafe/npc_spyder_cottontown_hacker",
+  "texts": [
+   "Tuxepedia App",
+   "It's so cool that you came. There's still so many / tuxemon to be adde",
+   "You could really get into it, and make a difference / to the world."
+  ]
+ },
+ {
+  "map": "spyder_cotton_scoop",
+  "event": "e006_receive_capture_device_r001",
+  "name": "Receive capture device",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   0,
+   7,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   0,
+   8
+  ],
+  "texts": [
+   "Welcome customer. Today, we're promoting Tuxeballs. / Do you know what",
+   "CHOICE Yes|No"
+  ]
+ },
+ {
+  "map": "spyder_cotton_town",
+  "event": "e004_talk_hackerintro_r017",
+  "name": "Talk hackerintro",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   25,
+   36,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 44,
+  "transferAt": -1,
+  "pos": [
+   25,
+   37
+  ],
+  "texts": [
+   "Do you think it'd be cool to poke them in the eye?",
+   "...",
+   "Good! I have a project for you. Meet me in the Cafe!"
+  ]
+ },
+ {
+  "map": "spyder_cotton_town",
+  "event": "e015_stop_cotton_r012",
+  "name": "Stop! Cotton",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   38,
+   27,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 264,
+  "transferAt": -1,
+  "pos": [
+   36,
+   28
+  ],
+  "texts": [
+   "Hey, that's not cool! You have to come to my talk at / the cafe before",
+   "The Cafe is located on the other side of these / houses."
+  ]
+ },
+ {
+  "map": "spyder_cotton_town",
+  "event": "e034_kernel_quest_r011",
+  "name": "Kernel Quest",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   20,
+   26,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 429,
+  "transferAt": -1,
+  "pos": [
+   20,
+   27
+  ],
+  "texts": [
+   "Right, right!",
+   "There's a data center along the river to the / south-east of Timber To",
+   "If Omnichannel's done anything to the computer / network, they would h"
+  ]
+ },
+ {
+  "map": "spyder_cotton_tunnel",
+  "event": "e015_talk_carlos_r003",
+  "name": "Talk Carlos",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   37,
+   13,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 46,
+  "transferAt": -1,
+  "pos": [
+   37,
+   14
+  ],
+  "main": "spyder_cotton_tunnel/e015_talk_carlos_r003",
+  "texts": [
+   "I fell down a crack in the Dragon's Cave and wound / up here somehow.",
+   "Show me out of here, peasant!",
+   "[BATTLE] Carlos / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_cotton_tunnel",
+  "event": "npc_spyder_dragonscave_benden",
+  "name": "spyder_dragonscave_benden",
+  "page": 1,
+  "trigger": "action",
+  "start": [
+   3,
+   11,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 6,
+  "unlockedAt": 62,
+  "transferAt": -1,
+  "pos": [
+   3,
+   11
+  ],
+  "texts": [
+   "Perhaps it'll find a place where it can grow strong, / where it can tr",
+   "We, the Dragonriders, will retreat to Lion Mountain.",
+   "There, we'll watch over this land from afar, hoping / that the balance"
+  ]
+ },
+ {
+  "map": "spyder_datacenter",
+  "event": "e013_talk_fermi_r004",
+  "name": "Talk Fermi",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   8,
+   13,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   8,
+   14
+  ],
+  "main": "spyder_datacenter/e013_talk_fermi_r004",
+  "texts": [
+   "The vulnerabilities were discovered by me.",
+   "[BATTLE] Fermi / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_datacenter",
+  "event": "e015_talk_onnes_r005",
+  "name": "Talk Onnes",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   14,
+   13,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   14,
+   14
+  ],
+  "main": "spyder_datacenter/e015_talk_onnes_r005",
+  "texts": [
+   "Omnichannel claimed that encryption keys purportedly / belonging to th",
+   "[BATTLE] Onnes / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_datacenter",
+  "event": "e017_talk_bayliss_r003",
+  "name": "Talk Bayliss",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   14,
+   3,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   14,
+   4
+  ],
+  "main": "spyder_datacenter/e017_talk_bayliss_r003",
+  "texts": [
+   "You could do a lot of work in the kernel.",
+   "[BATTLE] Bayliss / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_datacenter",
+  "event": "e019_talk_chomsky_r002",
+  "name": "Talk Chomsky",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   8,
+   3,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   8,
+   4
+  ],
+  "main": "spyder_datacenter/e019_talk_chomsky_r002",
+  "texts": [
+   "The kernel will be rebased.",
+   "[BATTLE] Chomsky / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_datacenter",
+  "event": "e021_talk_lagrange_r001",
+  "name": "Talk Lagrange",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   2,
+   3,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   2,
+   4
+  ],
+  "main": "spyder_datacenter/e021_talk_lagrange_r001",
+  "texts": [
+   "Kernel vulnerability?",
+   "[BATTLE] Lagrange / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_datacenter",
+  "event": "e044_billie",
+  "name": "Billie",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   9,
+   2,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   9,
+   2
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_dojo2",
+  "event": "e009_encounter_r002",
+  "name": "Encounter",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   10,
+   8,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 158,
+  "transferAt": -1,
+  "pos": [
+   10,
+   9
+  ],
+  "main": "spyder_dojo2/e009_encounter_r002",
+  "texts": [
+   "Each monk in this room specializes in monsters of a / particular eleme",
+   "but each has found a way to develop their strengths / and to mitigate ",
+   "Talk to me once you have defeated them all."
+  ]
+ },
+ {
+  "map": "spyder_dojo2",
+  "event": "npc_spyder_dojo_toph",
+  "name": "spyder_dojo_toph",
+  "page": 1,
+  "trigger": "action",
+  "start": [
+   4,
+   7,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 26,
+  "unlockedAt": 176,
+  "transferAt": -1,
+  "pos": [
+   4,
+   7
+  ],
+  "texts": [
+   "[BATTLE] Monk Toph / (P1 placeholder: the player wins)",
+   "Of course, this strategy depends on your opponents / having low Armor ",
+   "Good job. Let me heal you."
+  ]
+ },
+ {
+  "map": "spyder_dojo2",
+  "event": "npc_spyder_dojo_sokka",
+  "name": "spyder_dojo_sokka",
+  "page": 1,
+  "trigger": "action",
+  "start": [
+   6,
+   3,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 26,
+  "unlockedAt": 176,
+  "transferAt": -1,
+  "pos": [
+   6,
+   3
+  ],
+  "texts": [
+   "[BATTLE] Monk Sokka / (P1 placeholder: the player wins)",
+   "Of course, dual types still have some weaknesses - / sometimes twice a",
+   "Good job. Let me heal you."
+  ]
+ },
+ {
+  "map": "spyder_dojo2",
+  "event": "npc_spyder_dojo_kataro",
+  "name": "spyder_dojo_kataro",
+  "page": 1,
+  "trigger": "action",
+  "start": [
+   17,
+   3,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 30,
+  "unlockedAt": 180,
+  "transferAt": -1,
+  "pos": [
+   17,
+   3
+  ],
+  "texts": [
+   "[BATTLE] Monk Kataro / (P1 placeholder: the player wins)",
+   "Of course, these mitigating strategies carry an / opportunity cost.",
+   "Good job. Let me heal you."
+  ]
+ },
+ {
+  "map": "spyder_dojo2",
+  "event": "npc_spyder_dojo_yangchen",
+  "name": "spyder_dojo_yangchen",
+  "page": 1,
+  "trigger": "action",
+  "start": [
+   12,
+   3,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 30,
+  "unlockedAt": 180,
+  "transferAt": -1,
+  "pos": [
+   12,
+   3
+  ],
+  "texts": [
+   "[BATTLE] Monk Yangchen / (P1 placeholder: the player wins)",
+   "Of course that strategy doesn't work if non-Metal / types are using Me",
+   "Good job. Let me heal you."
+  ]
+ },
+ {
+  "map": "spyder_dojo2",
+  "event": "npc_spyder_dojo_iroh",
+  "name": "spyder_dojo_iroh",
+  "page": 1,
+  "trigger": "action",
+  "start": [
+   19,
+   7,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 30,
+  "unlockedAt": 180,
+  "transferAt": -1,
+  "pos": [
+   19,
+   7
+  ],
+  "texts": [
+   "[BATTLE] Monk Iroh / (P1 placeholder: the player wins)",
+   "Of course, they do still have their Fire weaknesses.",
+   "Good job. Let me heal you."
+  ]
+ },
+ {
+  "map": "spyder_dojo2",
+  "event": "npc_spyder_dojo_wan",
+  "name": "spyder_dojo_wan",
+  "page": 1,
+  "trigger": "action",
+  "start": [
+   13,
+   10,
+   "up"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   13,
+   10
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_dojo3",
+  "event": "e009_encounter_r002",
+  "name": "Encounter",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   10,
+   8,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 162,
+  "transferAt": -1,
+  "pos": [
+   10,
+   9
+  ],
+  "main": "spyder_dojo3/e009_encounter_r002",
+  "texts": [
+   "Each monk in this room specializes in monsters with / one very high st",
+   "To overcome this, you will have to make clever use / of your own creat",
+   "Talk to me once you have defeated them all."
+  ]
+ },
+ {
+  "map": "spyder_dojo3",
+  "event": "npc_spyder_dojo_tu",
+  "name": "spyder_dojo_tu",
+  "page": 1,
+  "trigger": "action",
+  "start": [
+   13,
+   10,
+   "up"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   13,
+   10
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_dojo4",
+  "event": "e005_billie_encounter_r001",
+  "name": "Billie encounter",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   5,
+   5,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 8,
+  "transferAt": -1,
+  "pos": [
+   5,
+   6
+  ],
+  "main": "spyder_dojo4/e005_billie_encounter_r001",
+  "texts": [
+   "Hey cheapskate! I'm training here too. You know, / this Tuxepedia thin"
+  ]
+ },
+ {
+  "map": "spyder_dragonscave",
+  "event": "e015_talk_tomas_r028",
+  "name": "Talk Tomas + Track dragonscave",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   15,
+   32,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   15,
+   33
+  ],
+  "main": "spyder_dragonscave/e015_talk_tomas_r028",
+  "texts": [
+   "Once we each rode a dragon. That was long ago. But / just recently a n",
+   "[BATTLE] Tomas / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_dragonscave",
+  "event": "e016_talk_daenny_r022",
+  "name": "Talk Daenny + Track dragonscave",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   12,
+   26,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 34,
+  "transferAt": -1,
+  "pos": [
+   12,
+   27
+  ],
+  "main": "spyder_dragonscave/e016_talk_daenny_r022",
+  "texts": [
+   "Prepare to be defeated!",
+   "[BATTLE] Daenny / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_dragonscave",
+  "event": "e017_talk_cailin_r020",
+  "name": "Talk Cailin + Track dragonscave",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   8,
+   25,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   8,
+   26
+  ],
+  "main": "spyder_dragonscave/e017_talk_cailin_r020",
+  "texts": [
+   "This is our last duty. Dragarbor is so very tired.",
+   "[BATTLE] Cailin / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_dragonscave",
+  "event": "e018_talk_lessa_r017",
+  "name": "Talk Lessa + Track dragonscave",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   16,
+   20,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 18,
+  "transferAt": -1,
+  "pos": [
+   16,
+   21
+  ],
+  "main": "spyder_dragonscave/e018_talk_lessa_r017",
+  "texts": [
+   "We stand guard over this, the last dragon. We don't / know where it ca",
+   "[BATTLE] Lessa / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_dragonscave",
+  "event": "e019_talk_griffin_r026",
+  "name": "Talk Griffin + Track dragonscave",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   7,
+   32,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 42,
+  "transferAt": -1,
+  "pos": [
+   7,
+   33
+  ],
+  "main": "spyder_dragonscave/e019_talk_griffin_r026",
+  "texts": [
+   "I wonder what it would be like to be swallowed by a / dragon ...",
+   "[BATTLE] Griffin / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_dragonscave",
+  "event": "e020_talk_benden_r014",
+  "name": "Talk Benden + Track dragonscave",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   5,
+   14,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   5,
+   15
+  ],
+  "main": "spyder_dragonscave/e020_talk_benden_r014",
+  "texts": [
+   "I am the last and most powerful of the dragonriders.",
+   "[BATTLE] Benden / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_dragonscave",
+  "event": "e021_talk_ray_and_tru_r010",
+  "name": "Talk Ray and Tru + Track dragonscave",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   16,
+   4,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 54,
+  "transferAt": -1,
+  "pos": [
+   16,
+   5
+  ],
+  "main": "spyder_dragonscave/e021_talk_ray_and_tru_r010",
+  "texts": [
+   "All we want to do is create a mega-corporation that / takes over the g",
+   "This is for your own good, okay?",
+   "[BATTLE] Ray / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_dragonscave",
+  "event": "e022_talk_lucille_and_mal_r008",
+  "name": "Talk Lucille and Mal + Track dragonscave",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   12,
+   5,
+   "left"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   9,
+   5
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_dryadsgrove",
+  "event": "e008_talk_aquemini_r021",
+  "name": "Talk Aquemini + Track dryadsgrove",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   34,
+   11,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   34,
+   12
+  ],
+  "main": "spyder_dryadsgrove/e008_talk_aquemini_r021",
+  "texts": [
+   "Welcome to our grove, mortal.",
+   "[BATTLE] Aquemini / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_dryadsgrove",
+  "event": "e009_talk_ignatia_r014",
+  "name": "Talk Ignatia + Track dryadsgrove",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   25,
+   7,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   25,
+   8
+  ],
+  "main": "spyder_dryadsgrove/e009_talk_ignatia_r014",
+  "texts": [
+   "We are more than we appear.",
+   "[BATTLE] Ignatia / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_dryadsgrove",
+  "event": "e010_talk_petra_r007",
+  "name": "Talk Petra + Track dryadsgrove",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   15,
+   5,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   15,
+   6
+  ],
+  "main": "spyder_dryadsgrove/e010_talk_petra_r007",
+  "texts": [
+   "Crack nature's molds!",
+   "[BATTLE] Petra / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_dryadsgrove",
+  "event": "e012_talk_ferris_r010",
+  "name": "Talk Ferris + Track dryadsgrove",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   37,
+   6,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   37,
+   7
+  ],
+  "main": "spyder_dryadsgrove/e012_talk_ferris_r010",
+  "texts": [
+   "Do you realize you disturb the slumber of centuries?",
+   "[BATTLE] Ferris / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_flower_center",
+  "event": "e009_heal_afford",
+  "name": "Heal Afford",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_flower_scoop",
+  "event": "e003_flashback",
+  "name": "Flashback",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_flower_scoop",
+  "event": "e010_trigger_flashback_r001",
+  "name": "Trigger Flashback",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   4,
+   6,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 94,
+  "transferAt": -1,
+  "pos": [
+   4,
+   7
+  ],
+  "texts": [
+   "Yesterday night, something incredible happened.",
+   "I'm still trying to process it all. Would you like / to hear about it?",
+   "CHOICE No|Yes"
+  ]
+ },
+ {
+  "map": "spyder_greenwash",
+  "event": "e008_talk_chip_r006",
+  "name": "Talk Chip",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   4,
+   16,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 42,
+  "transferAt": -1,
+  "pos": [
+   4,
+   17
+  ],
+  "main": "spyder_greenwash/e008_talk_chip_r006",
+  "texts": [
+   "I have developed unmatched computing power!",
+   "[BATTLE] Chip / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_greenwash",
+  "event": "e009_talk_clarence_r004",
+  "name": "Talk Clarence",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   12,
+   6,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 50,
+  "transferAt": -1,
+  "pos": [
+   12,
+   7
+  ],
+  "main": "spyder_greenwash/e009_talk_clarence_r004",
+  "texts": [
+   "My tuxemon are unstoppable in the sunlight!",
+   "[BATTLE] Clarence / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_greenwash",
+  "event": "e012_talk_broer_r003",
+  "name": "Talk Broer",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   7,
+   5,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 54,
+  "transferAt": -1,
+  "pos": [
+   7,
+   6
+  ],
+  "main": "spyder_greenwash/e012_talk_broer_r003",
+  "texts": [
+   "Every day, I sedate all the monsters so they can be / observed safely.",
+   "I forget ONE TIME, and everyone makes a huge fuss.",
+   "[BATTLE] Broer / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_greenwash",
+  "event": "e014_talk_lewie_r005",
+  "name": "Talk Lewie",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   10,
+   12,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 22,
+  "transferAt": -1,
+  "pos": [
+   10,
+   13
+  ],
+  "main": "spyder_greenwash/e014_talk_lewie_r005",
+  "texts": [
+   "Just some broken glass and escaped monsters.",
+   "I was hoping for a fire.",
+   "[BATTLE] Lewie / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_greenwash",
+  "event": "e016_talk_morehouse_r008",
+  "name": "Talk Morehouse",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   9,
+   19,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 22,
+  "transferAt": -1,
+  "pos": [
+   9,
+   20
+  ],
+  "main": "spyder_greenwash/e016_talk_morehouse_r008",
+  "texts": [
+   "They said to get out,",
+   "but I'm not leaving without my notebook of / scientific observations.",
+   "[BATTLE] Morehouse / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_greenwash_greenhouse",
+  "event": "e005_talk_gregor_r003",
+  "name": "Talk Gregor",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   23,
+   2,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   23,
+   3
+  ],
+  "main": "spyder_greenwash_greenhouse/e005_talk_gregor_r003",
+  "texts": [
+   "I spend all day watching my CATEYE - I'm going to / catch it blinking!",
+   "[BATTLE] Gregor / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_greenwash_greenhouse",
+  "event": "e007_talk_alex_r009",
+  "name": "Talk Alex",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   9,
+   13,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 38,
+  "transferAt": -1,
+  "pos": [
+   9,
+   14
+  ],
+  "main": "spyder_greenwash_greenhouse/e007_talk_alex_r009",
+  "texts": [
+   "I order all my flowers from Greenwash.",
+   "They have varieties that I've never seen before!",
+   "[BATTLE] Alex / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_greenwash_greenhouse",
+  "event": "e009_talk_hunt_r007",
+  "name": "Talk Hunt",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   21,
+   12,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 20,
+  "transferAt": -1,
+  "pos": [
+   21,
+   13
+  ],
+  "main": "spyder_greenwash_greenhouse/e009_talk_hunt_r007",
+  "texts": [
+   "Perform experiments that blur the line between / science and madness, ",
+   "Look where that got me!",
+   "[BATTLE] Hunt / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_greenwash_greenhouse",
+  "event": "e011_talk_lewis_r006",
+  "name": "Talk Lewis",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   21,
+   7,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 16,
+  "transferAt": -1,
+  "pos": [
+   21,
+   8
+  ],
+  "main": "spyder_greenwash_greenhouse/e011_talk_lewis_r006",
+  "texts": [
+   "Hey, this is an active emergency.",
+   "Get out of here!",
+   "[BATTLE] Lewis / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_greenwash_greenhouse",
+  "event": "e012_talk_lewis_r002",
+  "name": "Talk Lewis",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   16,
+   2,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 78,
+  "transferAt": -1,
+  "pos": [
+   16,
+   3
+  ],
+  "main": "spyder_greenwash_greenhouse/e012_talk_lewis_r002",
+  "texts": [
+   "Hey, this is an active emergency.",
+   "Get out of here!",
+   "[BATTLE] Lewis / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_greenwash_greenhouse",
+  "event": "e014_talk_louis_r001",
+  "name": "Talk Louis",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   9,
+   2,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 42,
+  "transferAt": -1,
+  "pos": [
+   9,
+   3
+  ],
+  "main": "spyder_greenwash_greenhouse/e014_talk_louis_r001",
+  "texts": [
+   "The rules of this battle are the simple laws of / natural selection: o",
+   "[BATTLE] Louis / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_greenwash_greenhouse",
+  "event": "e017_talk_gluck_r008",
+  "name": "Talk Gluck",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   28,
+   12,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 16,
+  "transferAt": -1,
+  "pos": [
+   28,
+   13
+  ],
+  "main": "spyder_greenwash_greenhouse/e017_talk_gluck_r008",
+  "texts": [
+   "Say what you will about genetic engineering, / hydroponics and chemica",
+   "but you can't argue with the results.",
+   "[BATTLE] Gluck / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_greenwash_level2",
+  "event": "e010_talk_aissa_r005",
+  "name": "Talk Aissa",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   8,
+   5,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   8,
+   6
+  ],
+  "main": "spyder_greenwash_level2/e010_talk_aissa_r005",
+  "texts": [
+   "Stay out - Greenwash has this all under control.",
+   "[BATTLE] Aissa / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_greenwash_level2",
+  "event": "e011_talk_dippel_r006",
+  "name": "Talk Dippel",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   5,
+   6,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 34,
+  "transferAt": -1,
+  "pos": [
+   5,
+   7
+  ],
+  "main": "spyder_greenwash_level2/e011_talk_dippel_r006",
+  "texts": [
+   "Maybe we went too far …",
+   "[BATTLE] Dippel / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_greenwash_level2",
+  "event": "e012_talk_moreau_r009",
+  "name": "Talk Moreau",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   13,
+   24,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 82,
+  "transferAt": -1,
+  "pos": [
+   13,
+   25
+  ],
+  "main": "spyder_greenwash_level2/e012_talk_moreau_r009",
+  "texts": [
+   "You shouldn't be here!",
+   "[BATTLE] Moreau / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_greenwash_level2",
+  "event": "e014_talk_dempsey_r007",
+  "name": "Talk Dempsey",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   2,
+   11,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 34,
+  "transferAt": -1,
+  "pos": [
+   2,
+   12
+  ],
+  "main": "spyder_greenwash_level2/e014_talk_dempsey_r007",
+  "texts": [
+   "This is fine.",
+   "[BATTLE] Dempsey / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_greenwash_level2",
+  "event": "e016_talk_heidenstam_r008",
+  "name": "Talk Heidenstam",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   1,
+   21,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 34,
+  "transferAt": -1,
+  "pos": [
+   1,
+   22
+  ],
+  "main": "spyder_greenwash_level2/e016_talk_heidenstam_r008",
+  "texts": [
+   "This has been one heck of a work experience / placement.",
+   "[BATTLE] Heidenstam / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_greenwash_level3",
+  "event": "e001_flashback_incident",
+  "name": "FlashBack Incident",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_greenwash_level3",
+  "event": "e002_flashback_dempsey",
+  "name": "Flashback Dempsey",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_greenwash_level3",
+  "event": "e003_flashback_fossilator",
+  "name": "Flashback Fossilator",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_healing_center",
+  "event": "e014_heal_afford",
+  "name": "Heal Afford",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_leather_center",
+  "event": "e009_heal_afford",
+  "name": "Heal Afford",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_leather_museum",
+  "event": "e001_cannot_afford_100",
+  "name": "Cannot Afford 100",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_leather_museum",
+  "event": "e002_cannot_afford_50",
+  "name": "Cannot Afford 50",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_leather_museum",
+  "event": "e009_no_pay_not_required",
+  "name": "No Pay (Not Required)",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_leather_museum",
+  "event": "e010_no_pay_required",
+  "name": "No Pay (Required)",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_leather_museum",
+  "event": "e011_pay",
+  "name": "Pay",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_leather_museum",
+  "event": "e012_pay_required",
+  "name": "Pay (Required)",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_leather_museum",
+  "event": "e013_pay_option_r001",
+  "name": "Pay Option + Pay Requirement",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   0,
+   10,
+   "up"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 17,
+  "unlockedAt": 32,
+  "transferAt": -1,
+  "pos": [
+   1,
+   10
+  ],
+  "texts": [
+   "Welcome to the museum of natural history! It's free, / but depends on ",
+   "Red's wallet: ???",
+   "CHOICE Yes|No"
+  ]
+ },
+ {
+  "map": "spyder_leather_town",
+  "event": "e017_heal_tuxemon",
+  "name": "Heal Tuxemon",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   7,
+   10,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   7,
+   10
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_leather_town",
+  "event": "e046_flashback",
+  "name": "Flashback",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   11,
+   1,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   11,
+   1
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_mansion",
+  "event": "e012_captain_returns_r020",
+  "name": "Captain Returns + Track mansion",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   2,
+   12,
+   "down"
+  ],
+  "outcome": "transfer-before-lock",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": 40,
+  "pos": [
+   7,
+   20
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_mansion",
+  "event": "e019_talk_gillette_r017",
+  "name": "Talk Gillette + Track mansion",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   8,
+   7,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 18,
+  "transferAt": -1,
+  "pos": [
+   8,
+   8
+  ],
+  "main": "spyder_mansion/e019_talk_gillette_r017",
+  "texts": [
+   "Ah-ha, finally - a worthy adversary.",
+   "[BATTLE] Gillette / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_mansion",
+  "event": "e020_talk_lucy_r015",
+  "name": "Talk Lucy + Track mansion",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   15,
+   6,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   15,
+   7
+  ],
+  "main": "spyder_mansion/e020_talk_lucy_r015",
+  "texts": [
+   "Have you ever tried drinking Imperial Tea? Well, I / did - and I learn",
+   "[BATTLE] Lucy / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_mansion",
+  "event": "e021_talk_lyle_r011",
+  "name": "Talk Lyle + Track mansion",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   1,
+   3,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   1,
+   4
+  ],
+  "main": "spyder_mansion/e021_talk_lyle_r011",
+  "texts": [
+   "Arrr, hand over ye money and ye tuxeballs.",
+   "[BATTLE] Lyle / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_mansion",
+  "event": "npc_spyder_mansion_nurse",
+  "name": "spyder_mansion_nurse",
+  "page": 1,
+  "trigger": "action",
+  "start": [
+   9,
+   11,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 10,
+  "unlockedAt": 160,
+  "transferAt": -1,
+  "pos": [
+   9,
+   11
+  ],
+  "main": "spyder_mansion/npc_spyder_mansion_nurse",
+  "texts": [
+   "Hey, you look tired. Let me help you feel better!",
+   "Feeling better already? I'm glad I could lend a / hand."
+  ]
+ },
+ {
+  "map": "spyder_mansion_basement",
+  "event": "e009_talk_coralli_r001",
+  "name": "Talk Coralli",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   21,
+   2,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   21,
+   3
+  ],
+  "main": "spyder_mansion_basement/e009_talk_coralli_r001",
+  "texts": [
+   "I've always loved the thrill of a tuxemon battle.",
+   "[BATTLE] Coralli / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_mansion_basement",
+  "event": "e010_talk_bobby_r002",
+  "name": "Talk Bobby",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   7,
+   5,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 16,
+  "transferAt": -1,
+  "pos": [
+   7,
+   6
+  ],
+  "main": "spyder_mansion_basement/e010_talk_bobby_r002",
+  "texts": [
+   "Do you like tuxemon?",
+   "I've been obsessed since I was just eight years old.",
+   "[BATTLE] Bobby / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_mansion_basement",
+  "event": "e011_talk_roger_r003",
+  "name": "Talk Roger",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   20,
+   15,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   20,
+   16
+  ],
+  "main": "spyder_mansion_basement/e011_talk_roger_r003",
+  "texts": [
+   "Hello. I am a human child.",
+   "[BATTLE] Roger / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_mansion_basement",
+  "event": "e012_talk_catholi_r006",
+  "name": "Talk Catholi",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   13,
+   18,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   13,
+   19
+  ],
+  "main": "spyder_mansion_basement/e012_talk_catholi_r006",
+  "texts": [
+   "The scalpel can cut to save a life or to end it.",
+   "[BATTLE] Catholi / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_mansion_basement",
+  "event": "e015_healed",
+  "name": "Healed",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   15,
+   18,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   15,
+   18
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_mansion_top",
+  "event": "e003_talk_mickey_r002",
+  "name": "Talk Mickey",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   4,
+   9,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 16,
+  "transferAt": -1,
+  "pos": [
+   4,
+   10
+  ],
+  "main": "spyder_mansion_top/e003_talk_mickey_r002",
+  "texts": [
+   "Do you ever wonder if life is one big illusion,",
+   "playing on a screen for someone in another universe?",
+   "[BATTLE] Mickey / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_mansion_top",
+  "event": "e010_talk_russell_r004",
+  "name": "Talk Russell",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   3,
+   12,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 34,
+  "transferAt": -1,
+  "pos": [
+   3,
+   13
+  ],
+  "main": "spyder_mansion_top/e010_talk_russell_r004",
+  "texts": [
+   "Have you heard of Botbot? It's the most versatile / tuxemon.",
+   "[BATTLE] Russell / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_mansion_top",
+  "event": "e011_talk_ricardo_r001",
+  "name": "Talk Ricardo",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   15,
+   5,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   15,
+   6
+  ],
+  "main": "spyder_mansion_top/e011_talk_ricardo_r001",
+  "texts": [
+   "I used to be just like you, full of enthusiasm but / light on talent.",
+   "[BATTLE] Ricardo / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_mansion_top",
+  "event": "e012_talk_jackson_r003",
+  "name": "Talk Jackson",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   15,
+   9,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   15,
+   10
+  ],
+  "main": "spyder_mansion_top/e012_talk_jackson_r003",
+  "texts": [
+   "Tuxemon are what you make of them. Weak trainers / raise weak tuxemon.",
+   "[BATTLE] Jackson / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_nimrod_bottom",
+  "event": "e009_talk_rebel_r002",
+  "name": "Talk Rebel",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   13,
+   14,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 20,
+  "transferAt": -1,
+  "pos": [
+   13,
+   15
+  ],
+  "main": "spyder_nimrod_bottom/e009_talk_rebel_r002",
+  "texts": [
+   "No?",
+   "Oh.",
+   "[BATTLE] Rebel / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_nimrod_bottom",
+  "event": "e010_talk_tru_r006",
+  "name": "Talk Tru",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   2,
+   17,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   2,
+   18
+  ],
+  "main": "spyder_nimrod_bottom/e010_talk_tru_r006",
+  "texts": [
+   "My weapons have won wars and subdued revolts in / every corner of the ",
+   "[BATTLE] Tru / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_nimrod_bottom",
+  "event": "e011_talk_bowie_r004",
+  "name": "Talk Bowie",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   1,
+   15,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   1,
+   16
+  ],
+  "main": "spyder_nimrod_bottom/e011_talk_bowie_r004",
+  "texts": [
+   "Our law enforcement would be a lot easier with some / military hardwar",
+   "[BATTLE] Bowie / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_nimrod_bottom",
+  "event": "e012_flashback_xeon",
+  "name": "Flashback Xeon",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   7,
+   7,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   7,
+   7
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_nimrod_middle",
+  "event": "e011_talk_argon_r002",
+  "name": "Talk Argon",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   14,
+   8,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 16,
+  "transferAt": -1,
+  "pos": [
+   14,
+   9
+  ],
+  "main": "spyder_nimrod_middle/e011_talk_argon_r002",
+  "texts": [
+   "We fight wars with humans and tuxemon. Many dead, / many more injured.",
+   "Using robos instead is the only moral course of / action.",
+   "[BATTLE] Argon / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_nimrod_middle",
+  "event": "e012_talk_honour_r001",
+  "name": "Talk Honour",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   12,
+   3,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   12,
+   4
+  ],
+  "main": "spyder_nimrod_middle/e012_talk_honour_r001",
+  "texts": [
+   "Don't you dare touch those prototypes!",
+   "[BATTLE] Honor / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_nimrod_middle",
+  "event": "e013_talk_xeon_r004",
+  "name": "Talk Xeon",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   10,
+   10,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 34,
+  "transferAt": -1,
+  "pos": [
+   10,
+   11
+  ],
+  "main": "spyder_nimrod_middle/e013_talk_xeon_r004",
+  "texts": [
+   "Whoo ... burr ... target acquired",
+   "[BATTLE] Xeon / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_nimrod_middle",
+  "event": "e014_talk_chrome_robo_r006",
+  "name": "Talk Chrome Robo",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   9,
+   11,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   9,
+   12
+  ],
+  "main": "spyder_nimrod_middle/e014_talk_chrome_robo_r006",
+  "texts": [
+   "Boop beep",
+   "[BATTLE] Chrome Robo / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_nimrod_middle",
+  "event": "e015_talk_archer_r007",
+  "name": "Talk Archer",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   4,
+   12,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   4,
+   13
+  ],
+  "main": "spyder_nimrod_middle/e015_talk_archer_r007",
+  "texts": [
+   "How's the fusion technology coming along? We ... / Wait, you're not fr",
+   "[BATTLE] Archer / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_nimrod_middle",
+  "event": "e016_talk_antimony_r005",
+  "name": "Talk Antimony",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   4,
+   11,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   4,
+   12
+  ],
+  "main": "spyder_nimrod_middle/e016_talk_antimony_r005",
+  "texts": [
+   "Oh god, you destroyed the prototypes. We were just / about to start ma",
+   "[BATTLE] Antimony / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_nimrod_middle",
+  "event": "e017_zircon_back_r003",
+  "name": "Zircon Back",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   14,
+   9,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 86,
+  "transferAt": -1,
+  "pos": [
+   14,
+   10
+  ],
+  "texts": [
+   "Zircon, I.. I didn't think you'd show up here. What / do you want?",
+   "Oh, I just wanted to see how you're doing, Argon. / And to remind you ",
+   "CHOICE No|Yes"
+  ]
+ },
+ {
+  "map": "spyder_nimrod_middle",
+  "event": "e019_post_flashback",
+  "name": "Post Flashback",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   17,
+   1,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   17,
+   1
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_nimrod_room",
+  "event": "e001_enforcers_rapid_response",
+  "name": "Enforcers Rapid Response",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_nimrod_room",
+  "event": "e002_flashback_zircon_and_argon",
+  "name": "FlashBack Zircon and Argon",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_nimrod_top",
+  "event": "e007_talk_justice_r006",
+  "name": "Talk Justice",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   15,
+   15,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   15,
+   16
+  ],
+  "main": "spyder_nimrod_top/e007_talk_justice_r006",
+  "texts": [
+   "Ask not for whom Ghosteeth tolls!",
+   "[BATTLE] Justice / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_nimrod_top",
+  "event": "e008_talk_zircon_r003",
+  "name": "Talk Zircon",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   11,
+   10,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   11,
+   11
+  ],
+  "main": "spyder_nimrod_top/e008_talk_zircon_r003",
+  "texts": [
+   "If you truly loved tuxemon, you would support us / replacing them in w",
+   "[BATTLE] Zircon / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_nimrod_top",
+  "event": "e009_talk_maverick_r002",
+  "name": "Talk Maverick",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   9,
+   7,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   9,
+   8
+  ],
+  "main": "spyder_nimrod_top/e009_talk_maverick_r002",
+  "texts": [
+   "At night I play guitar by myself.",
+   "[BATTLE] Maverick / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_nimrod_top",
+  "event": "e011_talk_mace_r004",
+  "name": "Talk Mace",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   16,
+   10,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   16,
+   11
+  ],
+  "main": "spyder_nimrod_top/e011_talk_mace_r004",
+  "texts": [
+   "I want to quit and become a musician.",
+   "[BATTLE] Mace / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_omnichannel1",
+  "event": "e005_spot_enforcer_r004",
+  "name": "Spot Enforcer",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   1,
+   11,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 8,
+  "transferAt": -1,
+  "pos": [
+   1,
+   12
+  ],
+  "main": "spyder_omnichannel1/e005_spot_enforcer_r004",
+  "texts": [
+   "Butt out of it, kid, this is private property!"
+  ]
+ },
+ {
+  "map": "spyder_omnichannel1",
+  "event": "e006_battle_enforcer_r003",
+  "name": "Battle Enforcer + Autosave Lvl 2",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   1,
+   9,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 8,
+  "transferAt": -1,
+  "pos": [
+   1,
+   10
+  ],
+  "main": "spyder_omnichannel1/e006_battle_enforcer_r003",
+  "texts": [
+   "I told you before - scram!"
+  ]
+ },
+ {
+  "map": "spyder_omnichannel2",
+  "event": "e006_talk_schwartz_r006",
+  "name": "Talk Schwartz",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   8,
+   11,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 42,
+  "transferAt": -1,
+  "pos": [
+   8,
+   12
+  ],
+  "main": "spyder_omnichannel2/e006_talk_schwartz_r006",
+  "texts": [
+   "This is a little hands-on for me. I was hired to / consult on strategy",
+   "[BATTLE] Schwartz / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_omnichannel2",
+  "event": "e008_talk_bettger_r005",
+  "name": "Talk Bettger",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   7,
+   10,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 50,
+  "transferAt": -1,
+  "pos": [
+   7,
+   11
+  ],
+  "main": "spyder_omnichannel2/e008_talk_bettger_r005",
+  "texts": [
+   "This is going to play havoc on Omnichannel's stock / price.",
+   "[BATTLE] Bettger / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_omnichannel2",
+  "event": "e010_talk_tohei_r009",
+  "name": "Talk Tohei",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   5,
+   15,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 34,
+  "transferAt": -1,
+  "pos": [
+   5,
+   16
+  ],
+  "main": "spyder_omnichannel2/e010_talk_tohei_r009",
+  "texts": [
+   "This computer controls the emergency screens. You / think I'm going to",
+   "[BATTLE] Tohei / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_omnichannel2",
+  "event": "e012_talk_crane_r002",
+  "name": "Talk Crane",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   8,
+   5,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 50,
+  "transferAt": -1,
+  "pos": [
+   8,
+   6
+  ],
+  "main": "spyder_omnichannel2/e012_talk_crane_r002",
+  "texts": [
+   "Mercy, mercy! I'm just an innocent sound engineer.",
+   "[BATTLE] Crane / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_omnichannel2",
+  "event": "e014_talk_dempsey_r001",
+  "name": "Talk Dempsey",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   6,
+   1,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 38,
+  "transferAt": -1,
+  "pos": [
+   6,
+   2
+  ],
+  "main": "spyder_omnichannel2/e014_talk_dempsey_r001",
+  "texts": [
+   "It's every man, woman and child for themselves!",
+   "Especially the children, they'll make a tasty snack / for the dragons.",
+   "[BATTLE] Dempsey / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_omnichannel3",
+  "event": "e008_talk_strauss_r001",
+  "name": "Talk Strauss",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   6,
+   4,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 50,
+  "transferAt": -1,
+  "pos": [
+   6,
+   5
+  ],
+  "main": "spyder_omnichannel3/e008_talk_strauss_r001",
+  "texts": [
+   "I have to shake a lot of hands in my line of work.",
+   "[BATTLE] Strauss / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_omnichannel3",
+  "event": "e009_talk_carnegie_r004",
+  "name": "Talk Carnegie",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   10,
+   11,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 34,
+  "transferAt": -1,
+  "pos": [
+   10,
+   12
+  ],
+  "main": "spyder_omnichannel3/e009_talk_carnegie_r004",
+  "texts": [
+   "I run three-week online self-improvement course: / Lead Like Elostorm!",
+   "[BATTLE] Carnegie / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_omnichannel3",
+  "event": "e010_talk_byrne_r007",
+  "name": "Talk Byrne",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   9,
+   19,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 42,
+  "transferAt": -1,
+  "pos": [
+   9,
+   20
+  ],
+  "main": "spyder_omnichannel3/e010_talk_byrne_r007",
+  "texts": [
+   "My Jemuar comes from a town where there is nothing / but quartz.",
+   "[BATTLE] Byrne / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_paper_daycare",
+  "event": "e002_flashback_billie_grandma",
+  "name": "FlashBack Billie Grandma",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_paper_rival_downstairs",
+  "event": "e008_tv_yes",
+  "name": "TV Yes",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_paper_scoop",
+  "event": "e010_continue_storekeeper",
+  "name": "Continue Storekeeper",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 256,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": [
+   "What a great presentation from our CEO! All Gold / members are being o",
+   "Just fill in this form.",
+   "What is your name?"
+  ]
+ },
+ {
+  "map": "spyder_paper_scoop",
+  "event": "e015_intro_storekeeper",
+  "name": "Intro Storekeeper",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 256,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": [
+   "What a great presentation from our CEO! All Gold / members are being o",
+   "Just fill in this form.",
+   "What is your name?"
+  ]
+ },
+ {
+  "map": "spyder_paper_town",
+  "event": "e012_stop_r003",
+  "name": "Stop! + Autosave Cotton + Mom Quest Intercept",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   13,
+   0,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 22,
+  "transferAt": -1,
+  "pos": [
+   13,
+   1
+  ],
+  "texts": [
+   "Sweetie, if you're going into the big wide world, / would you bring me",
+   "There's Ziggurats loose in my workshop and they're / chewing through t"
+  ]
+ },
+ {
+  "map": "spyder_paper_town",
+  "event": "e018_my_first_mon_r012",
+  "name": "My First Mon + My First Mon - Not Met",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   31,
+   12,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   31,
+   15
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_paper_town",
+  "event": "e024_first_fight_start",
+  "name": "First Fight - Start",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   25,
+   8,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   25,
+   8
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_paper_town",
+  "event": "e035_stop_2_r014",
+  "name": "Stop 2!",
+  "page": 0,
+  "trigger": "playerTouch",
+  "outcome": "no-start-cell"
+ },
+ {
+  "map": "spyder_radiotower",
+  "event": "e006_stop_r002",
+  "name": "Stop!",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   1,
+   15,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 664,
+  "transferAt": -1,
+  "pos": [
+   9,
+   13
+  ],
+  "texts": [
+   "No. It's not possible.",
+   "Two upstarts, one with off-brand tuxemon, defeating / my perfect creat",
+   "If I can just make it to my live radio interview, / I'll command my en"
+  ]
+ },
+ {
+  "map": "spyder_radiotower",
+  "event": "e009_stop_r001",
+  "name": "Stop!",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   1,
+   4,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 91,
+  "transferAt": -1,
+  "pos": [
+   1,
+   5
+  ],
+  "texts": [
+   "...",
+   "Ouch! Man I really wish Radio FUD didn't go out / live.",
+   "I don't think people are going to be very happy with / us."
+  ]
+ },
+ {
+  "map": "spyder_route2",
+  "event": "e008_billie_encounter_r013",
+  "name": "Billie encounter + Track route2",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   1,
+   7,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 8,
+  "transferAt": -1,
+  "pos": [
+   1,
+   8
+  ],
+  "main": "spyder_route2/e008_billie_encounter_r013",
+  "texts": [
+   "Hey cheapskate! Still got your stolen tuxemon?"
+  ]
+ },
+ {
+  "map": "spyder_route2",
+  "event": "e009_billie_encounter_win",
+  "name": "Billie encounter - Win",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   1,
+   8,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   1,
+   8
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_route2",
+  "event": "e014_talk_roddick_r007",
+  "name": "Talk roddick + Track route2",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   5,
+   3,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   5,
+   4
+  ],
+  "main": "spyder_route2/e014_talk_roddick_r007",
+  "texts": [
+   "When I was ambushed on the dunny by SPIGHTER I was / pretty creeped ou",
+   "[BATTLE] Roddick / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_route2",
+  "event": "e015_talk_marion_r020",
+  "name": "Talk marion + Track route2",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   22,
+   9,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   22,
+   10
+  ],
+  "main": "spyder_route2/e015_talk_marion_r020",
+  "texts": [
+   "So many tasty ants around! ... For my Aardorn, I / mean.",
+   "[BATTLE] Marion / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_route2",
+  "event": "e016_talk_graf_r010",
+  "name": "Talk graf + Track route2",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   29,
+   3,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   29,
+   4
+  ],
+  "main": "spyder_route2/e016_talk_graf_r010",
+  "texts": [
+   "I'm an ace - in battling and tennis!",
+   "[BATTLE] Graf / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_route3",
+  "event": "e011_shaft_plot_revealed_r013",
+  "name": "Shaft Plot Revealed + Track route3",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   4,
+   5,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 398,
+  "transferAt": -1,
+  "pos": [
+   4,
+   6
+  ],
+  "texts": [
+   "AGENT: Hush! You know that's top secret. Alright, / hand it over and s",
+   "ZOOLANDER: Okay, here ... uh!",
+   "AGENT: What the?! Come with me, you can explain this / to HQ!"
+  ]
+ },
+ {
+  "map": "spyder_route3",
+  "event": "e024_enforcer_talk_r017",
+  "name": "Enforcer Talk + Track route3",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   17,
+   8,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   17,
+   9
+  ],
+  "main": "spyder_route3/e024_enforcer_talk_r017",
+  "texts": [
+   "Hey, butt out of it! This mine site belongs to / Shaft!",
+   "[BATTLE] Weaver / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_route3",
+  "event": "e025_talk_twig_r021",
+  "name": "Talk Twig + Track route3",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   24,
+   14,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 22,
+  "transferAt": -1,
+  "pos": [
+   24,
+   15
+  ],
+  "main": "spyder_route3/e025_talk_twig_r021",
+  "texts": [
+   "Some of the stuff we're digging up belongs in a / museum!",
+   "Wait, you don't work here.",
+   "[BATTLE] Twig / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_route3",
+  "event": "e026_talk_wanda_r025",
+  "name": "Talk Wanda + Track route3",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   32,
+   17,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   32,
+   18
+  ],
+  "main": "spyder_route3/e026_talk_wanda_r025",
+  "texts": [
+   "All I ever seem to catch is boring Nudiflot!",
+   "[BATTLE] Wanda / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_route3",
+  "event": "e027_novak_talk_r029",
+  "name": "Novak Talk + Track route3",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   12,
+   29,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   12,
+   30
+  ],
+  "main": "spyder_route3/e027_novak_talk_r029",
+  "texts": [
+   "My Elofly is a genius! I'm going to collect as many / as I can.",
+   "[BATTLE] Novak / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_route4",
+  "event": "e011_talk_marshall_r018",
+  "name": "Talk Marshall + Track route4",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   3,
+   28,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   3,
+   29
+  ],
+  "main": "spyder_route4/e011_talk_marshall_r018",
+  "texts": [
+   "I'm working on a gigantic cannon!",
+   "[BATTLE] Marshall / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_route4",
+  "event": "e012_talk_beck_r016",
+  "name": "Talk Beck + Track route4",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   4,
+   19,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   4,
+   20
+  ],
+  "main": "spyder_route4/e012_talk_beck_r016",
+  "texts": [
+   "Your serve!",
+   "[BATTLE] Beck / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_route4",
+  "event": "e013_talk_wulf_r012",
+  "name": "Talk Wulf + Track route4",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   2,
+   12,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   2,
+   13
+  ],
+  "main": "spyder_route4/e013_talk_wulf_r012",
+  "texts": [
+   "Ah, just collecting some medicinal supplements",
+   "[BATTLE] Wulf / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_route4",
+  "event": "e014_talk_rosamund_r021",
+  "name": "Talk Rosamund + Track route4",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   12,
+   30,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   12,
+   31
+  ],
+  "main": "spyder_route4/e014_talk_rosamund_r021",
+  "texts": [
+   "Try to fight me and you'll get your just desserts!",
+   "[BATTLE] Rosamund / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_route4",
+  "event": "e015_billie_r009",
+  "name": "Billie + Track route4",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   2,
+   5,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 8,
+  "transferAt": -1,
+  "pos": [
+   2,
+   6
+  ],
+  "main": "spyder_route4/e015_billie_r009",
+  "texts": [
+   "I've got all the latest gear and the best tuxemon. / What have you got"
+  ]
+ },
+ {
+  "map": "spyder_route4",
+  "event": "npc_spyder_route4_nurse",
+  "name": "spyder_route4_nurse",
+  "page": 1,
+  "trigger": "action",
+  "start": [
+   14,
+   1,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 10,
+  "unlockedAt": 160,
+  "transferAt": -1,
+  "pos": [
+   14,
+   1
+  ],
+  "main": "spyder_route4/npc_spyder_route4_nurse",
+  "texts": [
+   "Hey, you look tired. Let me help you feel better!",
+   "All better! I'm glad I could help. You were looking / a bit rough ther"
+  ]
+ },
+ {
+  "map": "spyder_route5",
+  "event": "e011_talk_sara_r010",
+  "name": "Talk Sara + Track route5",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   24,
+   7,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   24,
+   8
+  ],
+  "main": "spyder_route5/e011_talk_sara_r010",
+  "texts": [
+   "My Capiti looks cute and all, but I can't wait until / it grows into a",
+   "[BATTLE] Sara / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_route5",
+  "event": "e012_talk_cleo_or_patra_r005",
+  "name": "Talk Cleo or Patra + Track route5",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   20,
+   5,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   20,
+   6
+  ],
+  "main": "spyder_route5/e012_talk_cleo_or_patra_r005",
+  "texts": [
+   "Mother says you can trace our bloodline back to the / kings who once r",
+   "[BATTLE] Cleo and Patra / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_route5",
+  "event": "e013_talk_tryphaena_or_marc_r003",
+  "name": "Talk Tryphaena or Marc + Track route5",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   17,
+   5,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 110,
+  "transferAt": -1,
+  "pos": [
+   17,
+   6
+  ],
+  "main": "spyder_route5/e013_talk_tryphaena_or_marc_r003",
+  "texts": [
+   "You know, we're descended from ... You've already / heard it? Oh.",
+   "[BATTLE] Tryphaena and Marc / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_route5",
+  "event": "e014_talk_edith_r016",
+  "name": "Talk Edith + Track route5",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   19,
+   14,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   19,
+   15
+  ],
+  "main": "spyder_route5/e014_talk_edith_r016",
+  "texts": [
+   "Woohoo! Our millionth ant! ... Uhm, I didn't think / anyone would hear",
+   "[BATTLE] Edith / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_route5",
+  "event": "npc_spyder_route5_nurse",
+  "name": "spyder_route5_nurse",
+  "page": 1,
+  "trigger": "action",
+  "start": [
+   31,
+   1,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 10,
+  "unlockedAt": 160,
+  "transferAt": -1,
+  "pos": [
+   31,
+   1
+  ],
+  "main": "spyder_route5/npc_spyder_route5_nurse",
+  "texts": [
+   "Hey, you look tired. Let me help you feel better!",
+   "You're all patched up now, just take a load off and / rest for a bit."
+  ]
+ },
+ {
+  "map": "spyder_route6",
+  "event": "e022_talk_maxwell_r010",
+  "name": "Talk Maxwell + Track route6",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   4,
+   4,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 54,
+  "transferAt": -1,
+  "pos": [
+   4,
+   5
+  ],
+  "main": "spyder_route6/e022_talk_maxwell_r010",
+  "texts": [
+   "I don't understand! Last month, they were so excited / about Fusion te",
+   "And now they say they have to shut it down, destroy / it ...",
+   "[BATTLE] Maxwell / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_route6",
+  "event": "e023_talk_orion_r003",
+  "name": "Talk Orion + Track route6",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   21,
+   1,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 34,
+  "transferAt": -1,
+  "pos": [
+   21,
+   2
+  ],
+  "main": "spyder_route6/e023_talk_orion_r003",
+  "texts": [
+   "I was in the middle of a very important experiment.",
+   "[BATTLE] Orion / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_route6",
+  "event": "e024_talk_richard_r023",
+  "name": "Talk Richard + Track route6",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   27,
+   9,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   27,
+   10
+  ],
+  "main": "spyder_route6/e024_talk_richard_r023",
+  "texts": [
+   "Man, the one day I leave the computer and go for a / walk, this happen",
+   "[BATTLE] Richard / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_route6",
+  "event": "e025_talk_blair_r017",
+  "name": "Talk Blair + Track route6",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   27,
+   7,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 90,
+  "transferAt": -1,
+  "pos": [
+   27,
+   8
+  ],
+  "main": "spyder_route6/e025_talk_blair_r017",
+  "texts": [
+   "Something's fishy.",
+   "[BATTLE] Blair / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_route6",
+  "event": "e026_talk_mungo_r006",
+  "name": "Talk Mungo + Track route6",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   29,
+   2,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   29,
+   3
+  ],
+  "main": "spyder_route6/e026_talk_mungo_r006",
+  "texts": [
+   "I can't believe they locked us out of Greenwash HQ. / I was getting so",
+   "[BATTLE] Mungo / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_route6",
+  "event": "e027_billie1_r026",
+  "name": "Billie1 + Track route6",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   3,
+   10,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 8,
+  "transferAt": -1,
+  "pos": [
+   3,
+   11
+  ],
+  "main": "spyder_route6/e027_billie1_r026",
+  "texts": [
+   "Let's make it quick. I have a spa appointment in an / hour."
+  ]
+ },
+ {
+  "map": "spyder_route6",
+  "event": "e030_billie2_r015",
+  "name": "Billie2 + Track route6",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   3,
+   7,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 8,
+  "transferAt": -1,
+  "pos": [
+   3,
+   8
+  ],
+  "main": "spyder_route6/e030_billie2_r015",
+  "texts": [
+   "Let's make it quick. I have a spa appointment in an / hour."
+  ]
+ },
+ {
+  "map": "spyder_routea",
+  "event": "e005_billie_r015",
+  "name": "Billie + Track routea",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   16,
+   17,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 8,
+  "transferAt": -1,
+  "pos": [
+   16,
+   18
+  ],
+  "main": "spyder_routea/e005_billie_r015",
+  "texts": [
+   "Hey cheapskate! We bought a little surprise for you / from the store."
+  ]
+ },
+ {
+  "map": "spyder_routea",
+  "event": "e008_talk_doris_r022",
+  "name": "Talk Doris + Track routea",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   4,
+   21,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 50,
+  "transferAt": -1,
+  "pos": [
+   4,
+   22
+  ],
+  "main": "spyder_routea/e008_talk_doris_r022",
+  "texts": [
+   "I love the color of the leaves this time of year.",
+   "[BATTLE] Doris / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_routea",
+  "event": "e010_talk_dagger_r025",
+  "name": "Talk Dagger + Track routea",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   2,
+   22,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   2,
+   23
+  ],
+  "main": "spyder_routea/e010_talk_dagger_r025",
+  "texts": [
+   "Someone said you were asking after me.",
+   "[BATTLE] Dagger / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_routea",
+  "event": "e011_talk_doris_r020",
+  "name": "Talk Doris + Track routea",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   10,
+   20,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   10,
+   21
+  ],
+  "main": "spyder_routea/e011_talk_doris_r020",
+  "texts": [
+   "I love the color of the leaves this time of year.",
+   "[BATTLE] Doris / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_routea",
+  "event": "e013_talk_koan_r039",
+  "name": "Talk Koan + Track routea",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   3,
+   36,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   3,
+   37
+  ],
+  "main": "spyder_routea/e013_talk_koan_r039",
+  "texts": [
+   "Flower City is cold but I like where I'm living.",
+   "[BATTLE] Koan / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_routea",
+  "event": "e015_talk_lexi_r034",
+  "name": "Talk Lexi + Track routea",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   2,
+   30,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   2,
+   31
+  ],
+  "main": "spyder_routea/e015_talk_lexi_r034",
+  "texts": [
+   "There's some great tuxemon on this route!",
+   "[BATTLE] Lexi / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_routea",
+  "event": "e017_talk_lotu_r032",
+  "name": "Talk Lotu + Track routea",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   14,
+   29,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   14,
+   30
+  ],
+  "main": "spyder_routea/e017_talk_lotu_r032",
+  "texts": [
+   "You younglings, always in such a rush to experience / the world.",
+   "[BATTLE] Lotu / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_routea",
+  "event": "e018_talk_connie_r028",
+  "name": "Talk Connie + Track routea",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   12,
+   26,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   12,
+   27
+  ],
+  "main": "spyder_routea/e018_talk_connie_r028",
+  "texts": [
+   "A morning run's just the thing to clear the head.",
+   "[BATTLE] Connie / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_routea",
+  "event": "e021_talk_joe1_r037",
+  "name": "Talk Joe1 + Track routea",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   9,
+   33,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   9,
+   34
+  ],
+  "main": "spyder_routea/e021_talk_joe1_r037",
+  "texts": [
+   "I got my report card from school yesterday.",
+   "[BATTLE] Joe / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_routea",
+  "event": "e023_talk_rosy_r013",
+  "name": "Talk Rosy + Track routea",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   11,
+   17,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   11,
+   18
+  ],
+  "main": "spyder_routea/e023_talk_rosy_r013",
+  "texts": [
+   "I came here to play with my Shammer, but he's just / lazing around in ",
+   "[BATTLE] Rosy / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_routea",
+  "event": "npc_spyder_routea_nurse",
+  "name": "spyder_routea_nurse",
+  "page": 1,
+  "trigger": "action",
+  "start": [
+   5,
+   26,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 10,
+  "unlockedAt": 160,
+  "transferAt": -1,
+  "pos": [
+   5,
+   26
+  ],
+  "main": "spyder_routea/npc_spyder_routea_nurse",
+  "texts": [
+   "Hey, you look tired. Let me help you feel better!",
+   "All healed up! Now, let's get you back on your feet / and get you movi"
+  ]
+ },
+ {
+  "map": "spyder_routeb",
+  "event": "e006_talk_electra_r022",
+  "name": "Talk Electra + Track routeb",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   16,
+   35,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   16,
+   36
+  ],
+  "main": "spyder_routeb/e006_talk_electra_r022",
+  "texts": [
+   "I'm much stronger.",
+   "[BATTLE] Electra / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_routeb",
+  "event": "e008_talk_cytherea_r014",
+  "name": "Talk Cytherea + Track routeb",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   16,
+   24,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   16,
+   25
+  ],
+  "main": "spyder_routeb/e008_talk_cytherea_r014",
+  "texts": [
+   "It's a glitch. A bug. A snafu. It's practically a / feature.",
+   "[BATTLE] Cytherea / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_routeb",
+  "event": "e010_talk_nephthys_r013",
+  "name": "Talk Nephthys + Track routeb",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   5,
+   23,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   5,
+   24
+  ],
+  "main": "spyder_routeb/e010_talk_nephthys_r013",
+  "texts": [
+   "Nothing to see here. Scram!",
+   "[BATTLE] Nephthys / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_routeb",
+  "event": "e012_talk_sedna_r009",
+  "name": "Talk Sedna + Track routeb",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   16,
+   17,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   16,
+   18
+  ],
+  "main": "spyder_routeb/e012_talk_sedna_r009",
+  "texts": [
+   "Get out of here!",
+   "[BATTLE] Sedna / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_routeb",
+  "event": "e014_talk_calypso_r006",
+  "name": "Talk Calypso + Track routeb",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   6,
+   6,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   6,
+   7
+  ],
+  "main": "spyder_routeb/e014_talk_calypso_r006",
+  "texts": [
+   "Why you?",
+   "[BATTLE] Calypso / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_routeb",
+  "event": "e015_billie_r020",
+  "name": "Billie + Track routeb",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   3,
+   35,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 97,
+  "transferAt": -1,
+  "pos": [
+   3,
+   36
+  ],
+  "texts": [
+   "So you noticed the computer system is down too?",
+   "Fancy a battle to pass the time? ...",
+   "I guess there are more important things."
+  ]
+ },
+ {
+  "map": "spyder_routec",
+  "event": "e011_talk_rutherford_r021",
+  "name": "Talk Rutherford + Track routec",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   34,
+   8,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   34,
+   9
+  ],
+  "main": "spyder_routec/e011_talk_rutherford_r021",
+  "texts": [
+   "Water water everywhere, it really makes you think!",
+   "[BATTLE] Rutherford / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_routec",
+  "event": "e012_talk_gil_r030",
+  "name": "Talk Gil + Track routec",
+  "page": 0,
+  "trigger": "playerTouch",
+  "outcome": "no-start-cell"
+ },
+ {
+  "map": "spyder_routec",
+  "event": "e013_talk_sandy_r025",
+  "name": "Talk Sandy + Track routec",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   5,
+   13,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   5,
+   14
+  ],
+  "main": "spyder_routec/e013_talk_sandy_r025",
+  "texts": [
+   "Sharpfin are great! But don't give one a bath ...",
+   "[BATTLE] Sandy / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_routec",
+  "event": "e014_talk_more_r038",
+  "name": "Talk More + Track routec",
+  "page": 0,
+  "trigger": "playerTouch",
+  "outcome": "no-start-cell"
+ },
+ {
+  "map": "spyder_routee",
+  "event": "e008_battle_calliope_r013",
+  "name": "Battle Calliope + Track routee",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   6,
+   14,
+   "up"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 15,
+  "unlockedAt": 93,
+  "transferAt": -1,
+  "pos": [
+   6,
+   10
+  ],
+  "texts": [
+   "Stop right there! This place is off limits."
+  ]
+ },
+ {
+  "map": "spyder_routee",
+  "event": "e009_talk_calliope_r011",
+  "name": "Talk Calliope + Track routee",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   6,
+   11,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 85,
+  "transferAt": -1,
+  "pos": [
+   6,
+   10
+  ],
+  "texts": [
+   "Stop right there! This place is off limits."
+  ]
+ },
+ {
+  "map": "spyder_routee",
+  "event": "e011_talk_aiolos_r015",
+  "name": "Talk Aiolos + Track routee",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   6,
+   15,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 18,
+  "transferAt": -1,
+  "pos": [
+   6,
+   16
+  ],
+  "main": "spyder_routee/e011_talk_aiolos_r015",
+  "texts": [
+   "I was just about to start eating.",
+   "[BATTLE] Aiolos / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_scoop1",
+  "event": "e011_talk_lanth_r005",
+  "name": "Talk Lanth",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   0,
+   4,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   0,
+   5
+  ],
+  "main": "spyder_scoop1/e011_talk_lanth_r005",
+  "texts": [
+   "Look how happy the tuxemon are, living so close to / one another!",
+   "[BATTLE] Lanth / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_scoop1",
+  "event": "e012_talk_berys_r004",
+  "name": "Talk Berys",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   17,
+   3,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 18,
+  "transferAt": -1,
+  "pos": [
+   17,
+   4
+  ],
+  "main": "spyder_scoop1/e012_talk_berys_r004",
+  "texts": [
+   "You will notice that none of the tuxemon out here / are sick - they we",
+   "[BATTLE] Berys / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_scoop1",
+  "event": "e013_talk_turner_r006",
+  "name": "Talk Turner",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   1,
+   9,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   1,
+   10
+  ],
+  "main": "spyder_scoop1/e013_talk_turner_r006",
+  "texts": [
+   "Some of these people will tell you that Enforcers / let the disease ge",
+   "[BATTLE] Turner / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_scoop1",
+  "event": "e014_talk_paine_r003",
+  "name": "Talk Paine",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   6,
+   3,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   6,
+   4
+  ],
+  "main": "spyder_scoop1/e014_talk_paine_r003",
+  "texts": [
+   "I feel so terrible that the disease got out.",
+   "[BATTLE] Paine / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_scoop1",
+  "event": "e015_talk_rubid_r007",
+  "name": "Talk Rubid",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   12,
+   9,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   12,
+   10
+  ],
+  "main": "spyder_scoop1/e015_talk_rubid_r007",
+  "texts": [
+   "This is actually the most humane way to keep / tuxemon.",
+   "[BATTLE] Rubid / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_scoop2",
+  "event": "e005_leaving_scoop_hq_r001",
+  "name": "Leaving Scoop HQ",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   3,
+   2,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 10,
+  "transferAt": -1,
+  "pos": [
+   3,
+   3
+  ],
+  "main": "spyder_scoop2/e005_leaving_scoop_hq_r001",
+  "texts": [
+   "Are you sure you want to leave Scoop HQ?",
+   "CHOICE Yes|No"
+  ]
+ },
+ {
+  "map": "spyder_scoop3",
+  "event": "e006_talk_alyssa_r003",
+  "name": "Talk Alyssa",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   4,
+   9,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   4,
+   10
+  ],
+  "main": "spyder_scoop3/e006_talk_alyssa_r003",
+  "texts": [
+   "As soon as disease was detected, we moved the / infected tuxemon to th",
+   "[BATTLE] Alyssa / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_scoop3",
+  "event": "e007_talk_taggart_r002",
+  "name": "Talk Taggart",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   6,
+   8,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 18,
+  "transferAt": -1,
+  "pos": [
+   6,
+   9
+  ],
+  "main": "spyder_scoop3/e007_talk_taggart_r002",
+  "texts": [
+   "Someone stole the Extreme Restraints we invented to / keep tuxemon in ",
+   "[BATTLE] Taggart / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_scoop3",
+  "event": "e008_talk_donald_r004",
+  "name": "Talk Donald",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   11,
+   10,
+   "left"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   10,
+   10
+  ],
+  "main": "spyder_scoop3/e008_talk_donald_r004",
+  "texts": [
+   "The sick tuxemon we were keeping here in quarantine / got out and brok",
+   "[BATTLE] Donald / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_scoop3",
+  "event": "e010_watch",
+  "name": "Watch",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   10,
+   2,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   10,
+   2
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_scoop4",
+  "event": "e014_talk_arachne_1_r002",
+  "name": "Talk Arachne 1",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   8,
+   4,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   8,
+   5
+  ],
+  "main": "spyder_scoop4/e014_talk_arachne_1_r002",
+  "texts": [
+   "Oi! Can't you see we're in the middle of a / villainous scheme?",
+   "[BATTLE] Arachne / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_scoop4",
+  "event": "e015_talk_weaver_r004",
+  "name": "Talk Weaver",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   7,
+   6,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   7,
+   7
+  ],
+  "main": "spyder_scoop4/e015_talk_weaver_r004",
+  "texts": [
+   "I would never have taken the Restraints off those / coughing tuxemon i",
+   "[BATTLE] Weaver / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_scoop4",
+  "event": "e016_talk_arachne_2_r003",
+  "name": "Talk Arachne 2",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   11,
+   5,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   11,
+   6
+  ],
+  "main": "spyder_scoop4/e016_talk_arachne_2_r003",
+  "texts": [
+   "Oi! Can't you see we're in the middle of a / villainous scheme?",
+   "[BATTLE] Arachne / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_test_map",
+  "event": "e005_ambush_cleo_r002",
+  "name": "Ambush Cleo",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   17,
+   3,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   17,
+   4
+  ],
+  "main": "spyder_test_map/e005_ambush_cleo_r002",
+  "texts": [
+   "Mother says you can trace our bloodline back to the / kings who once r",
+   "[BATTLE] Cleo and Patra / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_timber_cafe",
+  "event": "e004_flashback",
+  "name": "Flashback",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_timber_cafe",
+  "event": "e006_heal_tuxemon",
+  "name": "Heal Tuxemon",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_timber_center",
+  "event": "e009_heal_afford",
+  "name": "Heal Afford",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   0,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   0,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_timber_walledgarden1",
+  "event": "e008_talk_fugger_r006",
+  "name": "Talk fugger",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   11,
+   2,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   11,
+   3
+  ],
+  "main": "spyder_timber_walledgarden1/e008_talk_fugger_r006",
+  "texts": [
+   "My new movie was not as good as I thought it would / be.",
+   "[BATTLE] Fugger / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_timber_walledgarden1",
+  "event": "e010_talk_carnegie_r005",
+  "name": "Talk carnegie",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   4,
+   2,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   4,
+   3
+  ],
+  "main": "spyder_timber_walledgarden1/e010_talk_carnegie_r005",
+  "texts": [
+   "I often wish I was born in a time before social / media.",
+   "[BATTLE] Carnegie / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_timber_walledgarden1",
+  "event": "e012_talk_ford_r009",
+  "name": "Talk ford",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   5,
+   7,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 18,
+  "transferAt": -1,
+  "pos": [
+   5,
+   8
+  ],
+  "main": "spyder_timber_walledgarden1/e012_talk_ford_r009",
+  "texts": [
+   "Did you hear about the big earthquake in the ocean?",
+   "[BATTLE] Ford / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_timber_walledgarden1",
+  "event": "e014_talk_girard_r011",
+  "name": "Talk girard",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   4,
+   8,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 18,
+  "transferAt": -1,
+  "pos": [
+   4,
+   9
+  ],
+  "main": "spyder_timber_walledgarden1/e014_talk_girard_r011",
+  "texts": [
+   "Why not go back to them and tell them you changed / your mind?",
+   "[BATTLE] Girard / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_timber_walledgarden1",
+  "event": "e016_talk_vanderbilt_r010",
+  "name": "Talk vanderbilt",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   9,
+   7,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   9,
+   8
+  ],
+  "main": "spyder_timber_walledgarden1/e016_talk_vanderbilt_r010",
+  "texts": [
+   "People have justifications for hurting others, but / they are rarely g",
+   "[BATTLE] Vanderbilt / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_timber_walledgarden1",
+  "event": "e017_talk_ford_r007",
+  "name": "Talk ford",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   5,
+   3,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 18,
+  "transferAt": -1,
+  "pos": [
+   5,
+   4
+  ],
+  "main": "spyder_timber_walledgarden1/e017_talk_ford_r007",
+  "texts": [
+   "Did you hear about the big earthquake in the ocean?",
+   "[BATTLE] Ford / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_timber_walledgarden1",
+  "event": "e018_talk_vanderbilt_r008",
+  "name": "Talk vanderbilt",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   9,
+   3,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   9,
+   4
+  ],
+  "main": "spyder_timber_walledgarden1/e018_talk_vanderbilt_r008",
+  "texts": [
+   "People have justifications for hurting others, but / they are rarely g",
+   "[BATTLE] Vanderbilt / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_timber_walledgarden1",
+  "event": "e020_talk_astor_r012",
+  "name": "Talk astor",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   11,
+   8,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 18,
+  "transferAt": -1,
+  "pos": [
+   11,
+   9
+  ],
+  "main": "spyder_timber_walledgarden1/e020_talk_astor_r012",
+  "texts": [
+   "What should you do if you find a spider on your bed?",
+   "[BATTLE] Astor / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_timber_walledgarden2",
+  "event": "e006_talk_osman_r004",
+  "name": "Talk osman",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   9,
+   10,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   9,
+   11
+  ],
+  "main": "spyder_timber_walledgarden2/e006_talk_osman_r004",
+  "texts": [
+   "Do you want to buy Tuxcoin?",
+   "[BATTLE] Osman / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_timber_walledgarden2",
+  "event": "e008_talk_alexander_r003",
+  "name": "Talk Alexander",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   6,
+   10,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   6,
+   11
+  ],
+  "main": "spyder_timber_walledgarden2/e008_talk_alexander_r003",
+  "texts": [
+   "Do you mind waiting an extra hour so I can read more / of my book?",
+   "[BATTLE] Alexander / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_timber_walledgarden2",
+  "event": "e011_talk_musa_r002",
+  "name": "Talk musa",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   11,
+   7,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   11,
+   8
+  ],
+  "main": "spyder_timber_walledgarden2/e011_talk_musa_r002",
+  "texts": [
+   "Why do you keep asking such obvious questions?",
+   "[BATTLE] Musa / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_timber_walledgarden2",
+  "event": "e012_talk_augustus_r001",
+  "name": "Talk augustus",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   4,
+   7,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   4,
+   8
+  ],
+  "main": "spyder_timber_walledgarden2/e012_talk_augustus_r001",
+  "texts": [
+   "I wrote nine academic papers!",
+   "[BATTLE] Augustus / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_timber_walledgarden2",
+  "event": "e014_talk_rufus_r006",
+  "name": "Talk rufus",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   7,
+   16,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 26,
+  "transferAt": -1,
+  "pos": [
+   7,
+   17
+  ],
+  "main": "spyder_timber_walledgarden2/e014_talk_rufus_r006",
+  "texts": [
+   "Do you really want to play this game with me?",
+   "[BATTLE] Rufus / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_timber_walledgarden2",
+  "event": "e016_talk_crassus_r005",
+  "name": "Talk crassus",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   7,
+   12,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 18,
+  "transferAt": -1,
+  "pos": [
+   7,
+   13
+  ],
+  "main": "spyder_timber_walledgarden2/e016_talk_crassus_r005",
+  "texts": [
+   "I'm going to buy an island.",
+   "[BATTLE] Crassus / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_timber_walledgarden2",
+  "event": "e017_talk_midas",
+  "name": "Talk midas",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   11,
+   12,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   11,
+   12
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_timber_walledgarden2",
+  "event": "e018_talk_billie",
+  "name": "Talk Billie",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   12,
+   12,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   12,
+   12
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_tunnel",
+  "event": "e012_talk_greta_r030",
+  "name": "Talk Greta + Track tunnel",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   13,
+   35,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   13,
+   36
+  ],
+  "main": "spyder_tunnel/e012_talk_greta_r030",
+  "texts": [
+   "When an Agnidon cornered my precious Foofle, all / these friends turne",
+   "[BATTLE] Greta / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_tunnel",
+  "event": "e018_landrace_blocks_r010",
+  "name": "Landrace blocks + Track tunnel",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   14,
+   2,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 166,
+  "transferAt": -1,
+  "pos": [
+   14,
+   3
+  ],
+  "texts": [
+   "Harrumph!"
+  ]
+ },
+ {
+  "map": "spyder_tunnel",
+  "event": "e020_landrace_blocks_r011",
+  "name": "Landrace blocks + Track tunnel",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   15,
+   2,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 57,
+  "transferAt": -1,
+  "pos": [
+   15,
+   1
+  ],
+  "texts": [
+   "Harrumph!"
+  ]
+ },
+ {
+  "map": "spyder_tunnel_below",
+  "event": "e007_talk_meitner_r010",
+  "name": "Talk Meitner + Track tunnel_below",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   15,
+   14,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 34,
+  "transferAt": -1,
+  "pos": [
+   15,
+   15
+  ],
+  "main": "spyder_tunnel_below/e007_talk_meitner_r010",
+  "texts": [
+   "Masknake is great fun. Just give it a poke and its / tail puts on a li",
+   "[BATTLE] Meitner / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_tunnel_below",
+  "event": "e008_talk_lute_r021",
+  "name": "Talk Lute + Track tunnel_below",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   2,
+   34,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   2,
+   35
+  ],
+  "main": "spyder_tunnel_below/e008_talk_lute_r021",
+  "texts": [
+   "Bats make the best pets!",
+   "[BATTLE] Lute / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_tunnel_below",
+  "event": "e009_talk_beryll_r017",
+  "name": "Talk Beryll + Track tunnel_below",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   9,
+   31,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   9,
+   32
+  ],
+  "main": "spyder_tunnel_below/e009_talk_beryll_r017",
+  "texts": [
+   "I love collecting rocks and stones.",
+   "[BATTLE] Beryll / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_wayfarer_inn1",
+  "event": "e006_heal_tuxemon",
+  "name": "Heal Tuxemon",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   12,
+   6,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   12,
+   6
+  ],
+  "texts": []
+ },
+ {
+  "map": "spyder_wayfarer_inn1",
+  "event": "e016_talk_morningstar_r004",
+  "name": "Talk Morningstar",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   2,
+   2,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   2,
+   3
+  ],
+  "main": "spyder_wayfarer_inn1/e016_talk_morningstar_r004",
+  "texts": [
+   "I'm not surprised to see you here.",
+   "[BATTLE] Morningstar / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_wayfarer_inn1",
+  "event": "e017_talk_victor_r003",
+  "name": "Talk Victor",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   11,
+   1,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 18,
+  "transferAt": -1,
+  "pos": [
+   11,
+   2
+  ],
+  "main": "spyder_wayfarer_inn1/e017_talk_victor_r003",
+  "texts": [
+   "Hey, you're not leaving with potentially infected / tuxemon!",
+   "[BATTLE] Victor / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "spyder_wayfarer_inn2",
+  "event": "e008_talk_bravo_r003",
+  "name": "Talk Bravo",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   13,
+   2,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 12,
+  "transferAt": -1,
+  "pos": [
+   13,
+   3
+  ],
+  "main": "spyder_wayfarer_inn2/e008_talk_bravo_r003",
+  "texts": [
+   "This enforcement action is sponsored by Omnichannel: / The Only News Y",
+   "[BATTLE] Bravo / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "taba_ba_br_1",
+  "event": "e007_get_acolyte",
+  "name": "get acolyte",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   7,
+   0,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   7,
+   0
+  ],
+  "texts": []
+ },
+ {
+  "map": "taba_ba_br_1",
+  "event": "e008_move_to_middle_r001",
+  "name": "move to middle + move to middle redo",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   11,
+   2,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 560,
+  "transferAt": -1,
+  "pos": [
+   9,
+   7
+  ],
+  "texts": [
+   "The other three acolytes are more powerful than me, / so you may want ",
+   "Other than that, Good Luck!",
+   "If you walk through the entrance behind me, you'll / be teleported bac"
+  ]
+ },
+ {
+  "map": "taba_ba_br_2",
+  "event": "e004_acolyte2_r003",
+  "name": "acolyte2",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   6,
+   2,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 757,
+  "transferAt": -1,
+  "pos": [
+   7,
+   7
+  ],
+  "texts": [
+   "AND.... LET'S FIGHT!",
+   "[BATTLE] garth / (P1 placeholder: the player wins)",
+   "... Well done. I put the blame of this loss entirely / on Chris though"
+  ]
+ },
+ {
+  "map": "taba_ba_br_2",
+  "event": "e008_battle_redo_r005",
+  "name": "battle redo",
+  "page": 0,
+  "trigger": "action",
+  "start": [
+   7,
+   7,
+   "down"
+  ],
+  "outcome": "STUCK-LOCKED",
+  "lockedAt": 6,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   7,
+   7
+  ],
+  "texts": [
+   "Oh ho, back so quick? Well, let's get to it then!",
+   "[BATTLE] garth / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "taba_ba_br_3",
+  "event": "e003_there_he_is_r002",
+  "name": "there he is",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   2,
+   2,
+   "down"
+  ],
+  "outcome": "STUCK-LOCKED",
+  "lockedAt": 7,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   6,
+   9
+  ],
+  "texts": [
+   "Okay, Mack? Take him out of here.",
+   "Mark my words, this isn't the last you'll see of / me!!",
+   "Yeah, sure bud. Just start moving."
+  ]
+ },
+ {
+  "map": "taba_ba_br_4",
+  "event": "e002_start_talking_r003",
+  "name": "start talking",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   4,
+   2,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 186,
+  "transferAt": -1,
+  "pos": [
+   6,
+   9
+  ],
+  "main": "taba_ba_br_4/e002_start_talking_r003",
+  "texts": [
+   "I'm the last one before you reach the Battle Area / Master, and believ",
+   "FOR THE GLORY OF OMNICHANNEL... YOU SHALL NOT PASS!!",
+   "[BATTLE] loch / (P1 placeholder: the player wins)"
+  ]
+ },
+ {
+  "map": "taba_ba_br_master_foyer",
+  "event": "e003_stop_and_talk_r001",
+  "name": "Stop and talk",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   1,
+   10,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 86,
+  "transferAt": -1,
+  "pos": [
+   9,
+   8
+  ],
+  "texts": []
+ },
+ {
+  "map": "taba_ba_foyer",
+  "event": "e003_talk_to_timmy_r004",
+  "name": "talk to timmy",
+  "page": 0,
+  "trigger": "action",
+  "start": [
+   3,
+   5,
+   "up"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 6,
+  "unlockedAt": 84,
+  "transferAt": -1,
+  "pos": [
+   3,
+   5
+  ],
+  "texts": [
+   "My dad works in the Battle Area! He's pretty cool / right?",
+   "I have to wait out here while he works though / because Tuxemon are da",
+   "But... But that doesn't make him any less cool! He's / brave and I'll "
+  ]
+ },
+ {
+  "map": "taba_ba_foyer",
+  "event": "e004_talk_to_timmy2_r003",
+  "name": "talk to timmy2",
+  "page": 0,
+  "trigger": "action",
+  "start": [
+   2,
+   4,
+   "up"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   2,
+   3
+  ],
+  "texts": []
+ },
+ {
+  "map": "taba_ba_main",
+  "event": "e003_im_here_r003",
+  "name": "im here",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   10,
+   9,
+   "left"
+  ],
+  "outcome": "STUCK-LOCKED",
+  "lockedAt": 40,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   9,
+   7
+  ],
+  "texts": [
+   "Were you not listening? The acolytes of course. All / 4 and then you c",
+   "Honestly, I expected more from you two. I'm sure / this is par for the",
+   "Hey! Why are you so mean to Red? What did they do to / you?"
+  ]
+ },
+ {
+  "map": "taba_ba_main",
+  "event": "e028_time_to_face_the_master_r002",
+  "name": "time to face the master",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   1,
+   5,
+   "down"
+  ],
+  "outcome": "STUCK-LOCKED",
+  "lockedAt": 7,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   1,
+   6
+  ],
+  "main": "taba_ba_main/e028_time_to_face_the_master_r002",
+  "texts": [
+   "Huh. Well I definitely didn't expect you'd be the / first to defeat al",
+   "Let me take one more look at your papers."
+  ]
+ },
+ {
+  "map": "taba_town",
+  "event": "e017_bring_the_cavalry",
+  "name": "bring the cavalry",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   42,
+   47,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   42,
+   47
+  ],
+  "texts": []
+ },
+ {
+  "map": "taba_town",
+  "event": "e020_timetowalk",
+  "name": "timetowalk",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   46,
+   47,
+   "down"
+  ],
+  "outcome": "lock-not-reached",
+  "lockedAt": -1,
+  "unlockedAt": -1,
+  "transferAt": -1,
+  "pos": [
+   46,
+   47
+  ],
+  "texts": []
+ },
+ {
+  "map": "taba_town",
+  "event": "e030_waitdontleave_r015",
+  "name": "waitdontleave",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   37,
+   38,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 96,
+  "transferAt": -1,
+  "pos": [
+   37,
+   39
+  ],
+  "texts": [
+   "Red! Wait! Don't Leave Yet!",
+   "Honey, wait. I turned on the TV and an Omnichannel / press conference ",
+   "We should watch it."
+  ]
+ },
+ {
+  "map": "taba_town",
+  "event": "e038_announcement2_r014",
+  "name": "announcement2",
+  "page": 0,
+  "trigger": "playerTouch",
+  "start": [
+   36,
+   35,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 7,
+  "unlockedAt": 233,
+  "transferAt": -1,
+  "pos": [
+   38,
+   37
+  ],
+  "texts": [
+   "Red! Finally! You're back! I was afraid you would / miss the announcem",
+   "Oh! You did get the potions! Good! Now we really / need to get back."
+  ]
+ },
+ {
+  "map": "taba_town",
+  "event": "e043_myrock_r029",
+  "name": "myrock",
+  "page": 0,
+  "trigger": "action",
+  "start": [
+   37,
+   40,
+   "up"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 34,
+  "unlockedAt": 158,
+  "transferAt": -1,
+  "pos": [
+   37,
+   39
+  ],
+  "texts": [
+   "Sorry, someone got injured on the route. It's closed / right now.",
+   "C'mon Rocky! You can move! I believe!",
+   "Well, you move when you're ready, I'll be here / waiting."
+  ]
+ },
+ {
+  "map": "tuxe_mart_taba",
+  "event": "e007_professor_pls",
+  "name": "professor pls (spawn guard)",
+  "page": 0,
+  "trigger": "parallel",
+  "start": [
+   9,
+   10,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 0,
+  "unlockedAt": 364,
+  "transferAt": -1,
+  "pos": [
+   6,
+   7
+  ],
+  "texts": [
+   "However, Omnichannel should be making a new / announcement soon and I ",
+   "We'd better get you back home and watch the second / announcement, Com",
+   "The energy of that man is boundless..."
+  ]
+ },
+ {
+  "map": "water_lower_village",
+  "event": "npc_water_nice_mayor",
+  "name": "water_nice_mayor",
+  "page": 1,
+  "trigger": "action",
+  "start": [
+   20,
+   10,
+   "down"
+  ],
+  "outcome": "locked->unlocked",
+  "lockedAt": 18,
+  "unlockedAt": 178,
+  "transferAt": -1,
+  "pos": [
+   20,
+   10
+  ],
+  "texts": [
+   "You received Propellercat and Bugnin. They seem / confused but willing",
+   "I'm so sorry my son has stolen your Tuxemon. He / thinks strength is s",
+   "Please defeat him and help him understand that this / is not how life "
+  ]
+ }
+]

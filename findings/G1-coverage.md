@@ -10,21 +10,21 @@ When conversion discards a whole event, every source rule in it is Dropped.
 
 | Kind | Kinds | Uses | Native | Degraded | Placeholder | Dropped | S1 T1 baseline |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Actions | 98 | 13617 | 6161 | 2822 | 433 | 4201 | 6099 / 6246 (44.79% / 45.9%) |
-| Conditions | 64 | 8663 | 3529 | 1238 | 850 | 3046 | 3529 / 4591 (40.74% / 53.0%) |
+| Actions | 98 | 13617 | 9619 | 637 | 461 | 2900 | 6099 / 6246 (44.79% / 45.9%) |
+| Conditions | 64 | 8663 | 5757 | 12 | 850 | 2044 | 3537 / 4591 (40.83% / 53.0%) |
 
 The S1 acceptance baselines are 6,246 action uses (45.9%) and 4,591
 condition uses (53.0%). Only T1 source types whose disposition is Native or
 Degraded count toward them. This import records 6099
-(44.79%) and 3529
-(40.74%), respectively: 147
-action uses and 1062 condition uses below the S1 baselines. The old
+(44.79%) and 3537
+(40.83%), respectively: 147
+action uses and 1054 condition uses below the S1 baselines. The old
 type-table Native figure was 5,448 / 13,617 (40.0%); conversion-path accounting
-supersedes it with 6161 / 13617
-(45.2%). “Executable”
+supersedes it with 9619 / 13617
+(70.6%). “Executable”
 (native + degraded + deliberate P1 placeholder) is
-69.1% for actions and
-64.8% for conditions.
+78.7% for actions and
+76.4% for conditions.
 
 Definitions:
 
@@ -62,8 +62,8 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `change_bg_char` | 0 | 0 | 0 | 4 | 4 |
 | Action | `change_bg_monster` | 0 | 0 | 0 | 7 | 7 |
 | Action | `change_taste` | 0 | 0 | 0 | 2 | 2 |
-| Action | `char_face` | 869 | 440 | 0 | 718 | 2027 |
-| Action | `char_move` | 0 | 9 | 0 | 68 | 77 |
+| Action | `char_face` | 1552 | 440 | 0 | 35 | 2027 |
+| Action | `char_move` | 64 | 9 | 0 | 4 | 77 |
 | Action | `char_plague` | 0 | 0 | 0 | 13 | 13 |
 | Action | `char_position` | 0 | 0 | 0 | 1 | 1 |
 | Action | `char_run` | 0 | 0 | 0 | 2 | 2 |
@@ -76,7 +76,7 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `clear_variable` | 32 | 0 | 0 | 4 | 36 |
 | Action | `copy_variable` | 0 | 0 | 0 | 2 | 2 |
 | Action | `create_kennel` | 0 | 0 | 0 | 1 | 1 |
-| Action | `create_npc` | 0 | 1324 | 0 | 179 | 1503 |
+| Action | `create_npc` | 1324 | 0 | 0 | 179 | 1503 |
 | Action | `daycare` | 0 | 0 | 0 | 2 | 2 |
 | Action | `dojo_method` | 0 | 0 | 0 | 3 | 3 |
 | Action | `evolution` | 0 | 0 | 0 | 2 | 2 |
@@ -87,16 +87,16 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `get_player_monster` | 0 | 0 | 0 | 17 | 17 |
 | Action | `info` | 0 | 0 | 0 | 1 | 1 |
 | Action | `load_yaml` | 0 | 7 | 0 | 0 | 7 |
-| Action | `lock_controls` | 0 | 317 | 0 | 6 | 323 |
+| Action | `lock_controls` | 317 | 0 | 0 | 6 | 323 |
 | Action | `modify_bill` | 0 | 0 | 0 | 3 | 3 |
 | Action | `modify_money` | 18 | 0 | 0 | 1 | 19 |
 | Action | `modify_monster_bond` | 0 | 0 | 0 | 1 | 1 |
 | Action | `not` | 0 | 0 | 0 | 1 | 1 |
 | Action | `open_journal` | 0 | 0 | 0 | 14 | 14 |
-| Action | `open_shop` | 0 | 0 | 0 | 28 | 28 |
+| Action | `open_shop` | 0 | 0 | 28 | 0 | 28 |
 | Action | `park_experience` | 0 | 0 | 0 | 8 | 8 |
-| Action | `pathfind` | 0 | 0 | 0 | 336 | 336 |
-| Action | `pathfind_to_char` | 0 | 0 | 0 | 201 | 201 |
+| Action | `pathfind` | 325 | 0 | 0 | 11 | 336 |
+| Action | `pathfind_to_char` | 201 | 0 | 0 | 0 | 201 |
 | Action | `play_map_animation` | 0 | 0 | 0 | 276 | 276 |
 | Action | `play_music` | 0 | 0 | 0 | 200 | 200 |
 | Action | `play_sound` | 62 | 0 | 0 | 5 | 67 |
@@ -106,9 +106,9 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `random_encounter` | 0 | 0 | 0 | 476 | 476 |
 | Action | `random_integer` | 1 | 0 | 0 | 0 | 1 |
 | Action | `random_monster` | 0 | 0 | 0 | 39 | 39 |
-| Action | `remove_collision` | 0 | 5 | 0 | 0 | 5 |
+| Action | `remove_collision` | 5 | 0 | 0 | 0 | 5 |
 | Action | `remove_monster` | 0 | 0 | 4 | 1 | 5 |
-| Action | `remove_npc` | 0 | 217 | 0 | 7 | 224 |
+| Action | `remove_npc` | 217 | 0 | 0 | 7 | 224 |
 | Action | `remove_step_tracker` | 0 | 0 | 0 | 5 | 5 |
 | Action | `remove_tech` | 0 | 0 | 0 | 2 | 2 |
 | Action | `rename_monster` | 0 | 0 | 0 | 2 | 2 |
@@ -142,7 +142,7 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `translated_dialog` | 2006 | 0 | 0 | 62 | 2068 |
 | Action | `translated_dialog_choice` | 134 | 10 | 0 | 5 | 149 |
 | Action | `tune_radio` | 0 | 0 | 0 | 2 | 2 |
-| Action | `unlock_controls` | 0 | 322 | 0 | 8 | 330 |
+| Action | `unlock_controls` | 322 | 0 | 0 | 8 | 330 |
 | Action | `update_tile_properties` | 0 | 0 | 0 | 2 | 2 |
 | Action | `update_time` | 0 | 0 | 0 | 3 | 3 |
 | Action | `variable_math` | 0 | 0 | 0 | 5 | 5 |
@@ -159,12 +159,12 @@ census.
 | Condition | `is battle_outcome` | 0 | 0 | 225 | 5 | 230 |
 | Condition | `is battle_outcome_count` | 0 | 0 | 2 | 0 | 2 |
 | Condition | `is bill_is` | 0 | 0 | 0 | 2 | 2 |
-| Condition | `is button_pressed` | 396 | 0 | 0 | 23 | 419 |
+| Condition | `is button_pressed` | 399 | 0 | 0 | 20 | 419 |
 | Condition | `is char_at` | 1352 | 0 | 0 | 459 | 1811 |
 | Condition | `is char_defeated` | 0 | 0 | 0 | 10 | 10 |
-| Condition | `is char_exists` | 0 | 3 | 0 | 6 | 9 |
-| Condition | `is char_facing` | 0 | 0 | 0 | 1008 | 1008 |
-| Condition | `is char_facing_tile` | 317 | 0 | 0 | 27 | 344 |
+| Condition | `is char_exists` | 3 | 0 | 0 | 6 | 9 |
+| Condition | `is char_facing` | 994 | 0 | 0 | 14 | 1008 |
+| Condition | `is char_facing_tile` | 320 | 0 | 0 | 24 | 344 |
 | Condition | `is char_gender` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `is char_healed` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `is char_in` | 0 | 0 | 0 | 1 | 1 |
@@ -193,12 +193,12 @@ census.
 | Condition | `is step_tracker` | 0 | 0 | 0 | 7 | 7 |
 | Condition | `is tile_property_updated` | 0 | 0 | 0 | 4 | 4 |
 | Condition | `is time_is` | 0 | 0 | 0 | 67 | 67 |
-| Condition | `is variable_set` | 676 | 0 | 0 | 54 | 730 |
+| Condition | `is variable_set` | 678 | 0 | 0 | 52 | 730 |
 | Condition | `not battle_outcome` | 0 | 0 | 358 | 5 | 363 |
 | Condition | `not battle_outcome_count` | 0 | 0 | 9 | 0 | 9 |
 | Condition | `not bill_exists` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `not char_defeated` | 0 | 0 | 179 | 2 | 181 |
-| Condition | `not char_exists` | 0 | 1223 | 0 | 177 | 1400 |
+| Condition | `not char_exists` | 1223 | 0 | 0 | 177 | 1400 |
 | Condition | `not char_gender` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `not char_healed` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `not char_in` | 0 | 0 | 0 | 6 | 6 |

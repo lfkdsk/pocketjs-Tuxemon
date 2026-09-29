@@ -14,6 +14,13 @@ function buildDigest(build: ReturnType<typeof importTerrain>): string {
   hash.update(JSON.stringify(build.streamMaps));
   hash.update(JSON.stringify(build.fragment));
   hash.update(JSON.stringify(build.animations));
+  for (const sequence of build.animationSequences) {
+    hash.update(sequence.id);
+    for (const frame of sequence.frames) {
+      hash.update(String(frame.durationMs));
+      hash.update(frame.rgba);
+    }
+  }
   hash.update(JSON.stringify(build.report));
   return hash.digest("hex");
 }
@@ -33,7 +40,13 @@ describe("Tuxemon terrain import", () => {
     expect(build.report.collisionLineEdges).toBe(619);
     expect(build.report.yamlCollisionCells).toBe(21);
     expect(build.report.labelledCollisionCells).toBe(14);
-    expect(build.report.directedEdgeMismatches).toBe(1_161);
+    expect(build.report.oneWayEdgesEncoded).toBe(1_161);
+    expect(build.report.directedEdgeMismatches).toBe(0);
+    expect(Object.keys(build.fragment.sheet.dirEdges ?? {})).not.toHaveLength(0);
+    expect(build.animationSequences).toHaveLength(86);
+    expect(build.animationSequences.every((sequence) =>
+      sequence.frames.length >= 2 && sequence.frames.every((frame) => frame.rgba.byteLength === 16 * 16 * 4)
+    )).toBeTrue();
     expect(build.fragment.maps[0]!.id).toBe("37707_tower");
     expect(build.fragment.maps.at(-1)!.id).toBe("witcher_route_7");
   }, 20_000);
@@ -100,6 +113,8 @@ describe("Tuxemon terrain import", () => {
     expect(merged.maps[0]!.name).toBe("kept name");
     expect(merged.maps[0]!.events?.[0]?.id).toBe("kept");
     expect(merged.maps[0]!.ground).toEqual(build.fragment.maps[0]!.ground);
+    expect(merged.maps[0]!.passage).toEqual(build.fragment.maps[0]!.passage);
+    expect(merged.maps[0]!.passage).not.toContainEqual([0, "pass"]);
     expect(merged.maps[0]!.sheets).toContain(TERRAIN_SHEET_ID);
     expect(merged.sheets.at(-1)?.id).toBe(TERRAIN_SHEET_ID);
   });

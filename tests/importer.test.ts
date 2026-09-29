@@ -1,14 +1,20 @@
 import { expect, test } from "bun:test";
 import { spawnSync } from "node:child_process";
-import { resolve } from "node:path";
+import { createHash } from "node:crypto";
+import { mkdirSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { join, resolve } from "node:path";
 import {
   availableMapIds,
   buildProject,
   DEFAULT_IMPORT_OPTIONS,
+  G6_IMPORT_OPTIONS,
+  K1_IMPORT_OPTIONS,
 } from "../importer/project.ts";
-import { jsonBytes, writeImport } from "../importer/index.ts";
+import { jsonBytes } from "../importer/index.ts";
+import { applyTerrain, importTerrain } from "../importer/terrain.ts";
 import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
 import { canStepFrom, type Dir4 } from "../vendor/pocket-rpgkit/src/engine/passability.ts";
+import { createSwitchState } from "../vendor/pocket-rpgkit/src/engine/interpreter.ts";
 import { createSession, startSession, stepSession } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import type { Command } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 
@@ -27,6 +33,7 @@ function objectNodes(value: unknown, out: Record<string, unknown>[] = []): Recor
 
 test("all maps pass schema and reference valid transfer destinations", () => {
   const result = buildProject(availableMapIds());
+  expect(result.project.system).toEqual({ messageBlocksPlayer: true });
   expect(result.project.maps).toHaveLength(263);
   expect(result.report.schemaErrors).toEqual([]);
   expect(result.report.transferErrors).toEqual([]);
@@ -40,8 +47,8 @@ test("all maps pass schema and reference valid transfer destinations", () => {
     uses: 13_617,
     native: 6_161,
     degraded: 2_822,
-    placeholder: 433,
-    dropped: 4_201,
+    placeholder: 461,
+    dropped: 4_173,
     nativePercent: 45.2,
     tier1: {
       uses: 6_099,
@@ -53,13 +60,13 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   expect(result.report.coverage.conditions.summary).toMatchObject({
     types: 64,
     uses: 8_663,
-    native: 3_529,
+    native: 3_535,
     degraded: 1_238,
     placeholder: 850,
-    dropped: 3_046,
+    dropped: 3_040,
     tier1: {
-      uses: 3_529,
-      percent: 40.74,
+      uses: 3_535,
+      percent: 40.81,
       requiredUses: 4_591,
       meetsBaseline: false,
     },
@@ -228,10 +235,11 @@ test("clamped transfers use the nearest deterministic walkable landing", () => {
   expect(exits.length).toBeGreaterThan(0);
 });
 
-test("ImportOptions defaults preserve the v1 output byte-for-byte", () => {
+test("default import output remains byte-pinned", () => {
   const maps = ["spyder_downstairs", "spyder_paper_town"];
-  expect(jsonBytes(buildProject(maps, DEFAULT_IMPORT_OPTIONS))).toBe(
-    jsonBytes(buildProject(maps)),
+  const bytes = jsonBytes(buildProject(maps, DEFAULT_IMPORT_OPTIONS));
+  expect(createHash("sha256").update(bytes).digest("hex")).toBe(
+    "1f4aa5b232b560d9de776188ea4787d08fc8a68e8a12df503767c0d0948d428c",
   );
 });
 
@@ -242,6 +250,28 @@ test("ImportOptions.areas emits a K1 rectangular event", () => {
   ) as (Record<string, unknown> | undefined);
   expect(event).toMatchObject({ x: 14, y: 3, w: 22, h: 1 });
   expect(result.report.options?.areas).toBeTrue();
+});
+
+test("ImportOptions.areas partitions overlaps and latches every guard before bodies", () => {
+  const result = buildProject(["spyder_paper_town"], {
+    areas: true,
+    facing: true,
+    condAll: true,
+    localReset: true,
+    place: true,
+    inputLock: true,
+  });
+  const overlap = result.project.maps[0]!.events?.find((event) =>
+    event.name === "Stop! + Autosave Cotton + Mom Quest Intercept"
+  ) as (Record<string, unknown> | undefined);
+  expect(overlap).toMatchObject({ x: 13, y: 1, w: 2, h: 1 });
+  const commands = ((overlap?.pages as { commands: Command[] }[])[0]!.commands);
+  const firstBody = commands.findIndex((entry) => entry.op === "if" &&
+    JSON.stringify(entry).includes("Hey! What do you think you're doing?"));
+  const lastLatch = commands.findLastIndex((entry) => entry.op === "switch" && entry.value === false);
+  expect(lastLatch).toBeGreaterThanOrEqual(0);
+  expect(firstBody).toBeGreaterThan(lastLatch);
+  expect(commands.filter((entry) => entry.op === "switch" && entry.value === false)).toHaveLength(3);
 });
 
 test("ImportOptions.facing emits a K1 facing condition", () => {
@@ -291,6 +321,79 @@ test("ImportOptions.inputLock emits K1 cross-event lock commands", () => {
   expect(result.report.options?.inputLock).toBeTrue();
 });
 
+test("K1 appends a safety unlock when a source map has no unlock path", () => {
+  const result = buildProject(["taba_ba_br_master_foyer"], K1_IMPORT_OPTIONS);
+  const stop = result.project.maps[0]!.events!.find((event) => event.name === "Stop and talk")!;
+  expect(stop.pages[0]!.commands.at(-1)).toEqual({ op: "unlockInput" });
+  expect(result.report.rows).toContainEqual(expect.objectContaining({
+    key: "trigger:orphan input lock repair:T1-lowered",
+    count: 1,
+  }));
+});
+
+test("all 14 labelled collision cells are removable K1 event bodies", () => {
+  const result = buildProject([
+    "spyder_candy_hospital3",
+    "spyder_dragonscave",
+    "spyder_dryadsgrove",
+    "spyder_omnichannel1",
+    "spyder_omnichannel2",
+  ], K1_IMPORT_OPTIONS);
+  const bodies = result.project.maps.flatMap((map) =>
+    (map.events ?? []).filter((event) => event.name?.startsWith("collision:"))
+      .map((event) => ({ map: map.id, event })),
+  );
+  expect(bodies).toHaveLength(14);
+  for (const { map, event } of bodies) {
+    const key = event.name!.slice("collision:".length);
+    expect(event.pages[0]).toMatchObject({ blocks: true });
+    expect(event.pages[1]).toMatchObject({
+      blocks: false,
+      condition: { variable: { id: `local.collision.${map}.${key}`, op: "==", value: 1 } },
+    });
+  }
+  const writes = objectNodes(result.project).filter((node) =>
+    node.op === "variable" && typeof node.id === "string" && node.id.startsWith("local.collision.")
+  );
+  expect(writes).toHaveLength(5);
+  expect(result.report.coverage.actions.rows.find((row) => row.type === "remove_collision")).toMatchObject({
+    native: 5,
+    degraded: 0,
+    dropped: 0,
+  });
+});
+
+test("a blocking spawn cutscene survives its own presence write and unlocks input", () => {
+  const options = {
+    areas: true,
+    facing: true,
+    condAll: true,
+    localReset: true,
+    place: true,
+    inputLock: true,
+  };
+  const result = buildProject(["tuxe_mart_taba"], options);
+  const session = createSession(result.project, 60);
+  let state = startSession(result.project, session);
+  const seen = new Set<string>();
+  for (let frame = 0; frame < 1_000; frame++) {
+    if (state.interp.modal?.kind === "text") seen.add(state.interp.modal.lines.join(" "));
+    state = stepSession(session, state, {
+      buttons: 0,
+      confirmEdge: state.interp.modal?.kind === "text" && frame % 2 === 0,
+      cancelEdge: false,
+      upEdge: false,
+      downEdge: false,
+    });
+    if ((state.sw.variables["v.proftalk2"] ?? 0) > 0 && !state.interp.modal) break;
+  }
+  expect([...seen].some((line) => line.includes("I'll take 12 potions please."))).toBeTrue();
+  expect([...seen].some((line) => line.includes("My name is Kay Wren"))).toBeTrue();
+  expect(state.sw.variables["v.proftalk2"]).toBeGreaterThan(0);
+  expect(state.interp.inputLocked).toBeFalse();
+  expect(state.interp.error).toBeUndefined();
+});
+
 test("ImportOptions.routes emits K2 arbitrary targets and path steps", () => {
   const result = buildProject(["spyder_paper_town"], { routes: true });
   const nodes = objectNodes(result.project);
@@ -300,28 +403,135 @@ test("ImportOptions.routes emits K2 arbitrary targets and path steps", () => {
   expect(nodes.some((node) => node.pathTo !== undefined)).toBeTrue();
   expect(nodes.some((node) => node.approach !== undefined)).toBeTrue();
   expect(nodes.some((node) => node.turnToward !== undefined)).toBeTrue();
+  const routeNodes = objectNodes(buildProject(["route1"], { routes: true }).project);
+  const charMoves = routeNodes.filter((node) =>
+    node.op === "moveRoute" && node.wait === true &&
+    typeof node.route === "object" && node.route !== null &&
+    Array.isArray((node.route as { steps?: unknown }).steps) &&
+    (node.route as { steps: unknown[] }).steps.every((step) =>
+      typeof step === "string" && step.startsWith("move")
+    )
+  );
+  expect(charMoves.length).toBeGreaterThan(0);
+  expect(charMoves.every((node) =>
+    (node.route as { skippable?: boolean }).skippable === true
+  )).toBeTrue();
   expect(result.report.options?.routes).toBeTrue();
 });
 
-test("Spyder opening completes identically at 60, 30, and 20 Hz", () => {
-  writeImport(availableMapIds());
+test("open_shop becomes a visible G6 stock-summary placeholder", () => {
+  const result = buildProject(availableMapIds(), G6_IMPORT_OPTIONS);
+  const row = result.report.coverage.actions.rows.find((candidate) => candidate.type === "open_shop");
+  expect(row).toMatchObject({ total: 28, native: 0, degraded: 0, placeholder: 28, dropped: 0 });
+  const shopLines = objectNodes(result.project)
+    .filter((node) => node.op === "text" && Array.isArray(node.lines))
+    .flatMap((node) => node.lines as string[]);
+  expect(shopLines.filter((line) => line.startsWith("[SHOP]"))).toHaveLength(28);
+  expect(shopLines.join("\n")).toContain("Repellent $100");
+  expect(shopLines.join("\n")).toContain("P1 placeholder; trading is unavailable.");
+});
+
+test("simultaneously eligible route1 automatic events run concurrently and release input (N1)", () => {
+  const result = buildProject(["route1"], G6_IMPORT_OPTIONS);
+  const projectWithTerrain = applyTerrain(result.project, importTerrain({ mapIds: ["route1"] }).fragment);
+  const route = projectWithTerrain.maps[0]!;
+  for (const name of ["omnigruntmove", "omnigrunt2move", "omnigrunt3move", "omnigrunt4move"]) {
+    expect(route.events?.find((event) => event.name === name)?.pages[0]?.trigger).toBe("parallel");
+  }
+
+  const project = {
+    ...projectWithTerrain,
+    start: { map: "route1", x: 31, y: 25, dir: "down" as const },
+  };
+  const session = createSession(project, 60);
+  let state = startSession(project, session, createSwitchState({
+    variables: { "sys.party_size": 1, "v.whoartthou": 5 },
+  }));
+  let locked = false;
+  for (let frame = 0; frame < 12_000; frame++) {
+    const modal = state.interp.modal;
+    state = stepSession(session, state, {
+      buttons: frame < 4 ? BTN_BITS.DOWN : 0,
+      confirmEdge: modal ? frame % 2 === 0 : frame === 6,
+      cancelEdge: false,
+      upEdge: false,
+      downEdge: false,
+    });
+    locked ||= state.interp.inputLocked;
+    if (locked && !state.interp.inputLocked) break;
+  }
+  expect(locked).toBeTrue();
+  expect(state.interp.inputLocked).toBeFalse();
+  expect(state.sw.variables["v.completethis"]).toBeGreaterThan(0);
+  expect(state.sw.variables["v.left"]).toBeGreaterThan(0);
+  expect(state.interp.error).toBeUndefined();
+});
+
+test("Spyder opening completes identically at 60, 30, 20, and 4 Hz", () => {
+  const maintainedProject = resolve(ROOT, "dist/project.json");
+  const before = readFileSync(maintainedProject);
+  const scratchParent = resolve(process.env.G6_SCRATCH_ROOT ?? "/var/tmp/fleet/pocket-tuxemon");
+  mkdirSync(scratchParent, { recursive: true });
+  const isolatedRoot = mkdtempSync(join(scratchParent, "g6-hz-"));
   const transcripts: string[] = [];
-  for (const hz of [60, 30, 20]) {
+  const results: Record<string, unknown>[] = [];
+  const runAt = (hz: number) => {
     const run = spawnSync(process.execPath, ["tools/smoke-spyder.ts"], {
       cwd: ROOT,
       encoding: "utf8",
-      env: { ...process.env, HZ: String(hz) },
+      env: { ...process.env, G6_PROJECT_ROOT: isolatedRoot, HZ: String(hz) },
       timeout: 30_000,
     });
     if (run.status !== 0) {
       throw new Error(`smoke ${hz} Hz failed\n${run.stdout}\n${run.stderr}`);
     }
-    expect(run.stdout.match(/PASS  /g)).toHaveLength(11);
-    transcripts.push(run.stdout.replace(/\[\s*\d+\]/g, "[frame]"));
+    const result = JSON.parse(readFileSync(resolve(isolatedRoot, `dist/journey-spyder-${hz}hz.json`), "utf8")) as Record<string, unknown>;
+    return { run, result };
+  };
+  try {
+    const generated = spawnSync(process.execPath, ["gen-assets.ts"], {
+      cwd: ROOT,
+      encoding: "utf8",
+      env: { ...process.env, G6_OUTPUT_ROOT: isolatedRoot },
+      timeout: 30_000,
+    });
+    if (generated.status !== 0) {
+      throw new Error(`isolated G6 cook failed\n${generated.stdout}\n${generated.stderr}`);
+    }
+    const assetReport = JSON.parse(readFileSync(resolve(isolatedRoot, "data/g6-assets-report.json"), "utf8"));
+    expect(assetReport.project).toMatchObject({ maps: 263, options: G6_IMPORT_OPTIONS });
+
+    for (const hz of [60, 30, 20, 4]) {
+      const { run, result } = runAt(hz);
+      expect(run.stdout.match(/PASS  /g)).toHaveLength(12);
+      expect(run.stdout).toContain('"map":"spyder_route1"');
+      transcripts.push(run.stdout.replace(/\[\s*\d+\]/g, "[frame]"));
+      results.push(result);
+    }
+    const beats = (transcript: string) => transcript
+      .split("\n")
+      // PASS lines can straddle a new map's first autorun text at low host
+      // rates because one folded host frame advances both. The observable
+      // story sequence and final state must still be identical.
+      .filter((line) => /(?:TEXT|PICK|MAP)/.test(line));
+    expect(beats(transcripts[1]!)).toEqual(beats(transcripts[0]!));
+    expect(beats(transcripts[2]!)).toEqual(beats(transcripts[0]!));
+    expect(beats(transcripts[3]!)).toEqual(beats(transcripts[0]!));
+
+    const outcome = (result: Record<string, unknown>) => ({
+      map: result.map,
+      position: result.position,
+      story: result.story,
+      checkpoints: (result.checkpoints as { name: string; map: string; position: [number, number] }[])
+        .map(({ name, map, position }) => ({ name, map, position })),
+    });
+    for (const result of results.slice(1)) expect(outcome(result)).toEqual(outcome(results[0]!));
+
+    const repeated = runAt(60).result;
+    expect(repeated.sha256).toBe(results[0]!.sha256);
+    expect(repeated.masks).toEqual(results[0]!.masks);
+  } finally {
+    rmSync(isolatedRoot, { recursive: true, force: true });
   }
-  const beats = (transcript: string) => transcript
-    .split("\n")
-    .filter((line) => /(?:TEXT|PICK|MAP|PASS|RESULT)/.test(line));
-  expect(beats(transcripts[1]!)).toEqual(beats(transcripts[0]!));
-  expect(beats(transcripts[2]!)).toEqual(beats(transcripts[0]!));
+  expect(readFileSync(maintainedProject)).toEqual(before);
 }, 120_000);

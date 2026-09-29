@@ -1,0 +1,62 @@
+[
+ {
+  "name": "pt-open-road",
+  "cell": [
+   5,
+   7
+  ],
+  "spritePx": 212,
+  "visibleReal": 212,
+  "visibleG6Model": 212,
+  "visibleTuxemonModel": 212,
+  "g6ModelMatchesReal": true
+ },
+ {
+  "name": "r1-behind-tree",
+  "cell": [
+   12,
+   15
+  ],
+  "spritePx": 222,
+  "visibleReal": 216,
+  "visibleG6Model": 216,
+  "visibleTuxemonModel": 216,
+  "g6ModelMatchesReal": true
+ },
+ {
+  "name": "r1-behind-tree-2",
+  "cell": [
+   34,
+   9
+  ],
+  "spritePx": 177,
+  "visibleReal": 177,
+  "visibleG6Model": 177,
+  "visibleTuxemonModel": 177,
+  "g6ModelMatchesReal": true
+ },
+ {
+  "name": "r1-open",
+  "cell": [
+   14,
+   12
+  ],
+  "spritePx": 212,
+  "visibleReal": 212,
+  "visibleG6Model": 212,
+  "visibleTuxemonModel": 212,
+  "g6ModelMatchesReal": true
+ },
+ {
+  "name": "pt-behind-roof",
+  "cell": [
+   9,
+   2
+  ],
+  "spritePx": 177,
+  "visibleReal": 0,
+  "visibleG6Model": 0,
+  "visibleTuxemonModel": 49,
+  "g6ModelMatchesReal": true
+ }
+]

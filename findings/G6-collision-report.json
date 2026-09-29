@@ -1,0 +1,2641 @@
+{
+  "format": "g5-collision-verification/v1",
+  "maps": {
+    "37707_tower": {
+      "blockedCells": 223,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1412,
+      "dynamicLabelCells": 0,
+      "height": 24,
+      "mismatches": 0,
+      "width": 24,
+      "yamlCollisionCells": 0
+    },
+    "37707_town": {
+      "blockedCells": 1015,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2084,
+      "dynamicLabelCells": 0,
+      "height": 32,
+      "mismatches": 0,
+      "width": 48,
+      "yamlCollisionCells": 0
+    },
+    "37707_town_missing": {
+      "blockedCells": 1000,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2144,
+      "dynamicLabelCells": 0,
+      "height": 32,
+      "mismatches": 0,
+      "width": 48,
+      "yamlCollisionCells": 0
+    },
+    "azure_town": {
+      "blockedCells": 0,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 10000,
+      "dynamicLabelCells": 0,
+      "height": 50,
+      "mismatches": 0,
+      "width": 50,
+      "yamlCollisionCells": 0
+    },
+    "azure_town_hall": {
+      "blockedCells": 0,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2400,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 30,
+      "yamlCollisionCells": 0
+    },
+    "bedroom_test": {
+      "blockedCells": 15,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 192,
+      "dynamicLabelCells": 0,
+      "height": 7,
+      "mismatches": 0,
+      "width": 9,
+      "yamlCollisionCells": 0
+    },
+    "buddha_mountain": {
+      "blockedCells": 789,
+      "collisionLineEdges": 384,
+      "comparedDirectedSteps": 36844,
+      "dynamicLabelCells": 0,
+      "height": 100,
+      "mismatches": 0,
+      "width": 100,
+      "yamlCollisionCells": 0
+    },
+    "candy_town": {
+      "blockedCells": 856,
+      "collisionLineEdges": 12,
+      "comparedDirectedSteps": 2976,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "city1_mart_junkyard": {
+      "blockedCells": 88,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2588,
+      "dynamicLabelCells": 0,
+      "height": 35,
+      "mismatches": 0,
+      "width": 21,
+      "yamlCollisionCells": 0
+    },
+    "citypark": {
+      "blockedCells": 567,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 4132,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "citypark_house1": {
+      "blockedCells": 30,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 200,
+      "dynamicLabelCells": 0,
+      "height": 8,
+      "mismatches": 0,
+      "width": 10,
+      "yamlCollisionCells": 0
+    },
+    "classic_aerolume_city": {
+      "blockedCells": 1,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 3196,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "classic_gym_astra": {
+      "blockedCells": 20,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1520,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "classic_gym_bravion": {
+      "blockedCells": 20,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1520,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "classic_gym_ferrum": {
+      "blockedCells": 20,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1520,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "classic_gym_granite": {
+      "blockedCells": 20,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1520,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "classic_gym_marin": {
+      "blockedCells": 20,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1520,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "classic_gym_mila": {
+      "blockedCells": 20,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1520,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "classic_gym_orion": {
+      "blockedCells": 20,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1520,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "classic_gym_pyra": {
+      "blockedCells": 20,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1520,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "classic_gym_shade": {
+      "blockedCells": 20,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1520,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "classic_gym_sylva": {
+      "blockedCells": 20,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1520,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "classic_gym_voltessa": {
+      "blockedCells": 20,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1520,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "classic_gym_vyre": {
+      "blockedCells": 20,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1520,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "classic_gym_zephra": {
+      "blockedCells": 20,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1520,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "classic_hearthrock_city": {
+      "blockedCells": 128,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2688,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "classic_route_1": {
+      "blockedCells": 217,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2332,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "classic_route_2": {
+      "blockedCells": 1,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 3196,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "classic_route_3": {
+      "blockedCells": 379,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1684,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "classic_route_4": {
+      "blockedCells": 800,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 0,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "classic_route_5": {
+      "blockedCells": 1,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 3196,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "classic_route_6": {
+      "blockedCells": 1,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 3196,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "classic_route_7": {
+      "blockedCells": 5,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 3180,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "classic_route_8": {
+      "blockedCells": 44,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 3024,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "classic_steamshore_city": {
+      "blockedCells": 378,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1688,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "classic_stormpeak_city": {
+      "blockedCells": 329,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1884,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "classic_thornwood_city": {
+      "blockedCells": 8,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 3168,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "classic_umbrastar_city": {
+      "blockedCells": 1,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 3196,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "classic_valorhold_city": {
+      "blockedCells": 241,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2236,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "cotton_cafe": {
+      "blockedCells": 53,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 364,
+      "dynamicLabelCells": 0,
+      "height": 12,
+      "mismatches": 0,
+      "width": 12,
+      "yamlCollisionCells": 0
+    },
+    "cotton_cafe_basement": {
+      "blockedCells": 38,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 424,
+      "dynamicLabelCells": 0,
+      "height": 12,
+      "mismatches": 0,
+      "width": 12,
+      "yamlCollisionCells": 0
+    },
+    "cotton_cathedral": {
+      "blockedCells": 30,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 452,
+      "dynamicLabelCells": 0,
+      "height": 11,
+      "mismatches": 0,
+      "width": 13,
+      "yamlCollisionCells": 0
+    },
+    "cotton_daycare": {
+      "blockedCells": 26,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 328,
+      "dynamicLabelCells": 0,
+      "height": 9,
+      "mismatches": 0,
+      "width": 12,
+      "yamlCollisionCells": 0
+    },
+    "cotton_misa_house": {
+      "blockedCells": 17,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 184,
+      "dynamicLabelCells": 0,
+      "height": 7,
+      "mismatches": 0,
+      "width": 9,
+      "yamlCollisionCells": 0
+    },
+    "cotton_misa_house_upstairs": {
+      "blockedCells": 19,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 176,
+      "dynamicLabelCells": 0,
+      "height": 7,
+      "mismatches": 0,
+      "width": 9,
+      "yamlCollisionCells": 0
+    },
+    "cotton_scoop": {
+      "blockedCells": 29,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 456,
+      "dynamicLabelCells": 0,
+      "height": 11,
+      "mismatches": 0,
+      "width": 13,
+      "yamlCollisionCells": 0
+    },
+    "cotton_town": {
+      "blockedCells": 676,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 3696,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "cotton_underground": {
+      "blockedCells": 489,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 4444,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "dojo1": {
+      "blockedCells": 124,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 656,
+      "dynamicLabelCells": 0,
+      "height": 12,
+      "mismatches": 0,
+      "width": 24,
+      "yamlCollisionCells": 0
+    },
+    "dojo2": {
+      "blockedCells": 58,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 920,
+      "dynamicLabelCells": 0,
+      "height": 12,
+      "mismatches": 0,
+      "width": 24,
+      "yamlCollisionCells": 0
+    },
+    "dojo3": {
+      "blockedCells": 58,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 920,
+      "dynamicLabelCells": 0,
+      "height": 12,
+      "mismatches": 0,
+      "width": 24,
+      "yamlCollisionCells": 0
+    },
+    "downstairs_test": {
+      "blockedCells": 15,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 192,
+      "dynamicLabelCells": 0,
+      "height": 7,
+      "mismatches": 0,
+      "width": 9,
+      "yamlCollisionCells": 0
+    },
+    "dragonscave": {
+      "blockedCells": 478,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1288,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "dryadsgrove": {
+      "blockedCells": 368,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1728,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "eclipse_crystal_bank1": {
+      "blockedCells": 153,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 564,
+      "dynamicLabelCells": 0,
+      "height": 21,
+      "mismatches": 0,
+      "width": 14,
+      "yamlCollisionCells": 0
+    },
+    "eclipse_crystal_bank2": {
+      "blockedCells": 145,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 596,
+      "dynamicLabelCells": 0,
+      "height": 21,
+      "mismatches": 0,
+      "width": 14,
+      "yamlCollisionCells": 0
+    },
+    "eclipse_crystal_bank3": {
+      "blockedCells": 135,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 636,
+      "dynamicLabelCells": 0,
+      "height": 21,
+      "mismatches": 0,
+      "width": 14,
+      "yamlCollisionCells": 0
+    },
+    "eclipse_crystal_center": {
+      "blockedCells": 41,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 408,
+      "dynamicLabelCells": 0,
+      "height": 11,
+      "mismatches": 0,
+      "width": 13,
+      "yamlCollisionCells": 0
+    },
+    "eclipse_crystal_town": {
+      "blockedCells": 253,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2188,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "eclipse_crystal_town_cafe": {
+      "blockedCells": 28,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 464,
+      "dynamicLabelCells": 0,
+      "height": 12,
+      "mismatches": 0,
+      "width": 12,
+      "yamlCollisionCells": 0
+    },
+    "eclipse_crystal_town_house": {
+      "blockedCells": 18,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 216,
+      "dynamicLabelCells": 0,
+      "height": 8,
+      "mismatches": 0,
+      "width": 9,
+      "yamlCollisionCells": 0
+    },
+    "eclipse_lion_mountain_high": {
+      "blockedCells": 722,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 3512,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "eclipse_lion_mountain_low": {
+      "blockedCells": 227,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2292,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "eclipse_lion_mountain_middle": {
+      "blockedCells": 489,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 4444,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "eclipse_obsidian_center": {
+      "blockedCells": 41,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 408,
+      "dynamicLabelCells": 0,
+      "height": 11,
+      "mismatches": 0,
+      "width": 13,
+      "yamlCollisionCells": 0
+    },
+    "eclipse_obsidian_town": {
+      "blockedCells": 166,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2536,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "eclipse_obsidian_town_house": {
+      "blockedCells": 17,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 220,
+      "dynamicLabelCells": 0,
+      "height": 8,
+      "mismatches": 0,
+      "width": 9,
+      "yamlCollisionCells": 0
+    },
+    "eclipse_park": {
+      "blockedCells": 851,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2996,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "eclipse_park_cabin": {
+      "blockedCells": 18,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 168,
+      "dynamicLabelCells": 0,
+      "height": 6,
+      "mismatches": 0,
+      "width": 10,
+      "yamlCollisionCells": 0
+    },
+    "eclipse_park_cave": {
+      "blockedCells": 288,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 668,
+      "dynamicLabelCells": 0,
+      "height": 13,
+      "mismatches": 0,
+      "width": 35,
+      "yamlCollisionCells": 0
+    },
+    "eclipse_park_entrance": {
+      "blockedCells": 24,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 304,
+      "dynamicLabelCells": 0,
+      "height": 10,
+      "mismatches": 0,
+      "width": 10,
+      "yamlCollisionCells": 0
+    },
+    "eclipse_park_south": {
+      "blockedCells": 1588,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 3248,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 60,
+      "yamlCollisionCells": 0
+    },
+    "eclipse_route7": {
+      "blockedCells": 893,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2828,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "eclipse_routef": {
+      "blockedCells": 390,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1640,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "eclipse_routeg": {
+      "blockedCells": 461,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 4556,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "eclipse_routeh": {
+      "blockedCells": 720,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 3520,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "eclipse_routei": {
+      "blockedCells": 738,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 3448,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "flower_city": {
+      "blockedCells": 766,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 3336,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "gadget_store1": {
+      "blockedCells": 79,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 724,
+      "dynamicLabelCells": 0,
+      "height": 13,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "gaming_hall": {
+      "blockedCells": 252,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 208,
+      "dynamicLabelCells": 0,
+      "height": 16,
+      "mismatches": 0,
+      "width": 19,
+      "yamlCollisionCells": 0
+    },
+    "healing_center": {
+      "blockedCells": 28,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 460,
+      "dynamicLabelCells": 0,
+      "height": 11,
+      "mismatches": 0,
+      "width": 13,
+      "yamlCollisionCells": 0
+    },
+    "leather_scoop": {
+      "blockedCells": 79,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 256,
+      "dynamicLabelCells": 0,
+      "height": 11,
+      "mismatches": 0,
+      "width": 13,
+      "yamlCollisionCells": 0
+    },
+    "leather_shaft1": {
+      "blockedCells": 65,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 640,
+      "dynamicLabelCells": 0,
+      "height": 15,
+      "mismatches": 0,
+      "width": 15,
+      "yamlCollisionCells": 0
+    },
+    "leather_shaft2": {
+      "blockedCells": 29,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 284,
+      "dynamicLabelCells": 0,
+      "height": 10,
+      "mismatches": 0,
+      "width": 10,
+      "yamlCollisionCells": 0
+    },
+    "leather_town": {
+      "blockedCells": 599,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 4004,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "manhattan_beach": {
+      "blockedCells": 723,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1908,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 30,
+      "yamlCollisionCells": 0
+    },
+    "mansion": {
+      "blockedCells": 144,
+      "collisionLineEdges": 8,
+      "comparedDirectedSteps": 720,
+      "dynamicLabelCells": 0,
+      "height": 18,
+      "mismatches": 0,
+      "width": 18,
+      "yamlCollisionCells": 0
+    },
+    "mansion_basement": {
+      "blockedCells": 230,
+      "collisionLineEdges": 20,
+      "comparedDirectedSteps": 1192,
+      "dynamicLabelCells": 0,
+      "height": 22,
+      "mismatches": 0,
+      "width": 24,
+      "yamlCollisionCells": 0
+    },
+    "mansion_top": {
+      "blockedCells": 210,
+      "collisionLineEdges": 18,
+      "comparedDirectedSteps": 908,
+      "dynamicLabelCells": 0,
+      "height": 19,
+      "mismatches": 0,
+      "width": 23,
+      "yamlCollisionCells": 0
+    },
+    "maple_bedroom": {
+      "blockedCells": 20,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 172,
+      "dynamicLabelCells": 0,
+      "height": 7,
+      "mismatches": 0,
+      "width": 9,
+      "yamlCollisionCells": 0
+    },
+    "maple_house": {
+      "blockedCells": 47,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 384,
+      "dynamicLabelCells": 0,
+      "height": 11,
+      "mismatches": 0,
+      "width": 13,
+      "yamlCollisionCells": 0
+    },
+    "omnichannel0": {
+      "blockedCells": 155,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 556,
+      "dynamicLabelCells": 0,
+      "height": 21,
+      "mismatches": 0,
+      "width": 14,
+      "yamlCollisionCells": 0
+    },
+    "omnichannel1": {
+      "blockedCells": 126,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 672,
+      "dynamicLabelCells": 0,
+      "height": 21,
+      "mismatches": 0,
+      "width": 14,
+      "yamlCollisionCells": 0
+    },
+    "omnichannel2": {
+      "blockedCells": 128,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 664,
+      "dynamicLabelCells": 0,
+      "height": 21,
+      "mismatches": 0,
+      "width": 14,
+      "yamlCollisionCells": 0
+    },
+    "omnichannel3": {
+      "blockedCells": 127,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 668,
+      "dynamicLabelCells": 0,
+      "height": 21,
+      "mismatches": 0,
+      "width": 14,
+      "yamlCollisionCells": 0
+    },
+    "omnichannel4": {
+      "blockedCells": 125,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 676,
+      "dynamicLabelCells": 0,
+      "height": 21,
+      "mismatches": 0,
+      "width": 14,
+      "yamlCollisionCells": 0
+    },
+    "player_house_bedroom": {
+      "blockedCells": 18,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 180,
+      "dynamicLabelCells": 0,
+      "height": 7,
+      "mismatches": 0,
+      "width": 9,
+      "yamlCollisionCells": 0
+    },
+    "player_house_downstairs": {
+      "blockedCells": 17,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 184,
+      "dynamicLabelCells": 0,
+      "height": 7,
+      "mismatches": 0,
+      "width": 9,
+      "yamlCollisionCells": 0
+    },
+    "professor_lab": {
+      "blockedCells": 48,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 744,
+      "dynamicLabelCells": 0,
+      "height": 18,
+      "mismatches": 0,
+      "width": 13,
+      "yamlCollisionCells": 0
+    },
+    "route1": {
+      "blockedCells": 1212,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 5064,
+      "dynamicLabelCells": 0,
+      "height": 42,
+      "mismatches": 0,
+      "width": 59,
+      "yamlCollisionCells": 0
+    },
+    "route1_sanglorian": {
+      "blockedCells": 122,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2712,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "route2": {
+      "blockedCells": 206,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2376,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "route3": {
+      "blockedCells": 324,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 5104,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "route4": {
+      "blockedCells": 391,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1636,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "route5": {
+      "blockedCells": 207,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2372,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "route6": {
+      "blockedCells": 356,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1776,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "routea": {
+      "blockedCells": 409,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1564,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "routec": {
+      "blockedCells": 175,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2500,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "rubberduck_cave_01": {
+      "blockedCells": 1705,
+      "collisionLineEdges": 6,
+      "comparedDirectedSteps": 15900,
+      "dynamicLabelCells": 0,
+      "height": 71,
+      "mismatches": 0,
+      "width": 80,
+      "yamlCollisionCells": 0
+    },
+    "rubberduck_city_01": {
+      "blockedCells": 1967,
+      "collisionLineEdges": 2,
+      "comparedDirectedSteps": 8652,
+      "dynamicLabelCells": 0,
+      "height": 59,
+      "mismatches": 0,
+      "width": 70,
+      "yamlCollisionCells": 0
+    },
+    "rubberduck_route_01": {
+      "blockedCells": 1398,
+      "collisionLineEdges": 27,
+      "comparedDirectedSteps": 4160,
+      "dynamicLabelCells": 0,
+      "height": 53,
+      "mismatches": 0,
+      "width": 46,
+      "yamlCollisionCells": 0
+    },
+    "russell_practice_1": {
+      "blockedCells": 151,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1076,
+      "dynamicLabelCells": 0,
+      "height": 21,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "scoop1": {
+      "blockedCells": 153,
+      "collisionLineEdges": 43,
+      "comparedDirectedSteps": 648,
+      "dynamicLabelCells": 0,
+      "height": 15,
+      "mismatches": 0,
+      "width": 21,
+      "yamlCollisionCells": 0
+    },
+    "scoop2": {
+      "blockedCells": 23,
+      "collisionLineEdges": 1,
+      "comparedDirectedSteps": 68,
+      "dynamicLabelCells": 0,
+      "height": 5,
+      "mismatches": 0,
+      "width": 8,
+      "yamlCollisionCells": 0
+    },
+    "scoop3": {
+      "blockedCells": 58,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 344,
+      "dynamicLabelCells": 0,
+      "height": 12,
+      "mismatches": 0,
+      "width": 12,
+      "yamlCollisionCells": 0
+    },
+    "scoop4": {
+      "blockedCells": 94,
+      "collisionLineEdges": 51,
+      "comparedDirectedSteps": 680,
+      "dynamicLabelCells": 0,
+      "height": 22,
+      "mismatches": 0,
+      "width": 12,
+      "yamlCollisionCells": 0
+    },
+    "sphalian_center": {
+      "blockedCells": 42,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 404,
+      "dynamicLabelCells": 0,
+      "height": 11,
+      "mismatches": 0,
+      "width": 13,
+      "yamlCollisionCells": 0
+    },
+    "sphalian_town": {
+      "blockedCells": 299,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1104,
+      "dynamicLabelCells": 0,
+      "height": 25,
+      "mismatches": 0,
+      "width": 23,
+      "yamlCollisionCells": 0
+    },
+    "sphalian_town_house": {
+      "blockedCells": 37,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 248,
+      "dynamicLabelCells": 0,
+      "height": 9,
+      "mismatches": 0,
+      "width": 11,
+      "yamlCollisionCells": 0
+    },
+    "spyder_bedroom": {
+      "blockedCells": 15,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 192,
+      "dynamicLabelCells": 0,
+      "height": 7,
+      "mismatches": 0,
+      "width": 9,
+      "yamlCollisionCells": 0
+    },
+    "spyder_brideswood": {
+      "blockedCells": 1152,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1792,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "spyder_candy_cafe": {
+      "blockedCells": 35,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 436,
+      "dynamicLabelCells": 0,
+      "height": 12,
+      "mismatches": 0,
+      "width": 12,
+      "yamlCollisionCells": 0
+    },
+    "spyder_candy_center": {
+      "blockedCells": 55,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 660,
+      "dynamicLabelCells": 0,
+      "height": 11,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "spyder_candy_hospital1": {
+      "blockedCells": 164,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 944,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "spyder_candy_hospital2": {
+      "blockedCells": 179,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 884,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "spyder_candy_hospital3": {
+      "blockedCells": 24,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 856,
+      "dynamicLabelCells": 2,
+      "height": 20,
+      "mismatches": 0,
+      "width": 12,
+      "yamlCollisionCells": 0
+    },
+    "spyder_candy_house1": {
+      "blockedCells": 25,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 220,
+      "dynamicLabelCells": 0,
+      "height": 8,
+      "mismatches": 0,
+      "width": 10,
+      "yamlCollisionCells": 0
+    },
+    "spyder_candy_house2": {
+      "blockedCells": 27,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 212,
+      "dynamicLabelCells": 0,
+      "height": 8,
+      "mismatches": 0,
+      "width": 10,
+      "yamlCollisionCells": 0
+    },
+    "spyder_candy_house3": {
+      "blockedCells": 29,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 204,
+      "dynamicLabelCells": 0,
+      "height": 8,
+      "mismatches": 0,
+      "width": 10,
+      "yamlCollisionCells": 0
+    },
+    "spyder_candy_inn1": {
+      "blockedCells": 113,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 508,
+      "dynamicLabelCells": 0,
+      "height": 16,
+      "mismatches": 0,
+      "width": 15,
+      "yamlCollisionCells": 0
+    },
+    "spyder_candy_inn2": {
+      "blockedCells": 134,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 424,
+      "dynamicLabelCells": 0,
+      "height": 16,
+      "mismatches": 0,
+      "width": 15,
+      "yamlCollisionCells": 0
+    },
+    "spyder_candy_port": {
+      "blockedCells": 437,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1452,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "spyder_candy_scoop": {
+      "blockedCells": 29,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 456,
+      "dynamicLabelCells": 0,
+      "height": 11,
+      "mismatches": 0,
+      "width": 13,
+      "yamlCollisionCells": 0
+    },
+    "spyder_candy_town": {
+      "blockedCells": 776,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 3296,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "spyder_citypark": {
+      "blockedCells": 504,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 4384,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "spyder_citypark_house1": {
+      "blockedCells": 30,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 200,
+      "dynamicLabelCells": 0,
+      "height": 8,
+      "mismatches": 0,
+      "width": 10,
+      "yamlCollisionCells": 0
+    },
+    "spyder_cotton_artshop": {
+      "blockedCells": 111,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 524,
+      "dynamicLabelCells": 0,
+      "height": 11,
+      "mismatches": 0,
+      "width": 22,
+      "yamlCollisionCells": 0
+    },
+    "spyder_cotton_cafe": {
+      "blockedCells": 53,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 364,
+      "dynamicLabelCells": 0,
+      "height": 12,
+      "mismatches": 0,
+      "width": 12,
+      "yamlCollisionCells": 0
+    },
+    "spyder_cotton_house1": {
+      "blockedCells": 29,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 204,
+      "dynamicLabelCells": 0,
+      "height": 8,
+      "mismatches": 0,
+      "width": 10,
+      "yamlCollisionCells": 0
+    },
+    "spyder_cotton_house2": {
+      "blockedCells": 27,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 212,
+      "dynamicLabelCells": 0,
+      "height": 8,
+      "mismatches": 0,
+      "width": 10,
+      "yamlCollisionCells": 0
+    },
+    "spyder_cotton_scoop": {
+      "blockedCells": 29,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 456,
+      "dynamicLabelCells": 0,
+      "height": 11,
+      "mismatches": 0,
+      "width": 13,
+      "yamlCollisionCells": 0
+    },
+    "spyder_cotton_town": {
+      "blockedCells": 675,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 3700,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "spyder_cotton_tunnel": {
+      "blockedCells": 466,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1336,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "spyder_datacenter": {
+      "blockedCells": 244,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 624,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "spyder_diamond_hill": {
+      "blockedCells": 311,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 3556,
+      "dynamicLabelCells": 0,
+      "height": 60,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "spyder_dojo1": {
+      "blockedCells": 90,
+      "collisionLineEdges": 1,
+      "comparedDirectedSteps": 792,
+      "dynamicLabelCells": 0,
+      "height": 12,
+      "mismatches": 0,
+      "width": 24,
+      "yamlCollisionCells": 0
+    },
+    "spyder_dojo2": {
+      "blockedCells": 58,
+      "collisionLineEdges": 6,
+      "comparedDirectedSteps": 920,
+      "dynamicLabelCells": 0,
+      "height": 12,
+      "mismatches": 0,
+      "width": 24,
+      "yamlCollisionCells": 0
+    },
+    "spyder_dojo3": {
+      "blockedCells": 58,
+      "collisionLineEdges": 6,
+      "comparedDirectedSteps": 920,
+      "dynamicLabelCells": 0,
+      "height": 12,
+      "mismatches": 0,
+      "width": 24,
+      "yamlCollisionCells": 0
+    },
+    "spyder_dojo4": {
+      "blockedCells": 58,
+      "collisionLineEdges": 3,
+      "comparedDirectedSteps": 920,
+      "dynamicLabelCells": 0,
+      "height": 12,
+      "mismatches": 0,
+      "width": 24,
+      "yamlCollisionCells": 0
+    },
+    "spyder_downstairs": {
+      "blockedCells": 15,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 192,
+      "dynamicLabelCells": 0,
+      "height": 7,
+      "mismatches": 0,
+      "width": 9,
+      "yamlCollisionCells": 0
+    },
+    "spyder_dragonscave": {
+      "blockedCells": 367,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1732,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "spyder_dryadsgrove": {
+      "blockedCells": 734,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 3448,
+      "dynamicLabelCells": 4,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "spyder_flower_center": {
+      "blockedCells": 41,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 408,
+      "dynamicLabelCells": 0,
+      "height": 11,
+      "mismatches": 0,
+      "width": 13,
+      "yamlCollisionCells": 0
+    },
+    "spyder_flower_city": {
+      "blockedCells": 631,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 3876,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "spyder_flower_house1": {
+      "blockedCells": 37,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 172,
+      "dynamicLabelCells": 0,
+      "height": 8,
+      "mismatches": 0,
+      "width": 10,
+      "yamlCollisionCells": 0
+    },
+    "spyder_flower_house2": {
+      "blockedCells": 32,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 192,
+      "dynamicLabelCells": 0,
+      "height": 8,
+      "mismatches": 0,
+      "width": 10,
+      "yamlCollisionCells": 0
+    },
+    "spyder_flower_petshop": {
+      "blockedCells": 33,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 372,
+      "dynamicLabelCells": 0,
+      "height": 9,
+      "mismatches": 0,
+      "width": 14,
+      "yamlCollisionCells": 0
+    },
+    "spyder_flower_scoop": {
+      "blockedCells": 29,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 456,
+      "dynamicLabelCells": 0,
+      "height": 11,
+      "mismatches": 0,
+      "width": 13,
+      "yamlCollisionCells": 0
+    },
+    "spyder_greenwash": {
+      "blockedCells": 209,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1212,
+      "dynamicLabelCells": 0,
+      "height": 32,
+      "mismatches": 0,
+      "width": 16,
+      "yamlCollisionCells": 0
+    },
+    "spyder_greenwash_greenhouse": {
+      "blockedCells": 148,
+      "collisionLineEdges": 9,
+      "comparedDirectedSteps": 1456,
+      "dynamicLabelCells": 0,
+      "height": 16,
+      "mismatches": 0,
+      "width": 32,
+      "yamlCollisionCells": 0
+    },
+    "spyder_greenwash_level2": {
+      "blockedCells": 224,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1152,
+      "dynamicLabelCells": 0,
+      "height": 32,
+      "mismatches": 0,
+      "width": 16,
+      "yamlCollisionCells": 0
+    },
+    "spyder_greenwash_level3": {
+      "blockedCells": 96,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 512,
+      "dynamicLabelCells": 0,
+      "height": 14,
+      "mismatches": 0,
+      "width": 16,
+      "yamlCollisionCells": 0
+    },
+    "spyder_healing_center": {
+      "blockedCells": 41,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 408,
+      "dynamicLabelCells": 0,
+      "height": 11,
+      "mismatches": 0,
+      "width": 13,
+      "yamlCollisionCells": 0
+    },
+    "spyder_leather_center": {
+      "blockedCells": 41,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 408,
+      "dynamicLabelCells": 0,
+      "height": 11,
+      "mismatches": 0,
+      "width": 13,
+      "yamlCollisionCells": 0
+    },
+    "spyder_leather_gym": {
+      "blockedCells": 84,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 764,
+      "dynamicLabelCells": 0,
+      "height": 11,
+      "mismatches": 0,
+      "width": 25,
+      "yamlCollisionCells": 0
+    },
+    "spyder_leather_house1": {
+      "blockedCells": 28,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 208,
+      "dynamicLabelCells": 0,
+      "height": 8,
+      "mismatches": 0,
+      "width": 10,
+      "yamlCollisionCells": 0
+    },
+    "spyder_leather_house2": {
+      "blockedCells": 25,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 220,
+      "dynamicLabelCells": 0,
+      "height": 8,
+      "mismatches": 0,
+      "width": 10,
+      "yamlCollisionCells": 0
+    },
+    "spyder_leather_museum": {
+      "blockedCells": 69,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1044,
+      "dynamicLabelCells": 0,
+      "height": 11,
+      "mismatches": 0,
+      "width": 30,
+      "yamlCollisionCells": 0
+    },
+    "spyder_leather_scoop": {
+      "blockedCells": 33,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 440,
+      "dynamicLabelCells": 0,
+      "height": 11,
+      "mismatches": 0,
+      "width": 13,
+      "yamlCollisionCells": 0
+    },
+    "spyder_leather_shaft1": {
+      "blockedCells": 65,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 640,
+      "dynamicLabelCells": 0,
+      "height": 15,
+      "mismatches": 0,
+      "width": 15,
+      "yamlCollisionCells": 0
+    },
+    "spyder_leather_shaft2": {
+      "blockedCells": 29,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 284,
+      "dynamicLabelCells": 0,
+      "height": 10,
+      "mismatches": 0,
+      "width": 10,
+      "yamlCollisionCells": 0
+    },
+    "spyder_leather_town": {
+      "blockedCells": 561,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 4156,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "spyder_mansion": {
+      "blockedCells": 142,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 728,
+      "dynamicLabelCells": 0,
+      "height": 18,
+      "mismatches": 0,
+      "width": 18,
+      "yamlCollisionCells": 0
+    },
+    "spyder_mansion_basement": {
+      "blockedCells": 230,
+      "collisionLineEdges": 2,
+      "comparedDirectedSteps": 1192,
+      "dynamicLabelCells": 0,
+      "height": 22,
+      "mismatches": 0,
+      "width": 24,
+      "yamlCollisionCells": 0
+    },
+    "spyder_mansion_top": {
+      "blockedCells": 210,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 908,
+      "dynamicLabelCells": 0,
+      "height": 19,
+      "mismatches": 0,
+      "width": 23,
+      "yamlCollisionCells": 0
+    },
+    "spyder_nimrod_bottom": {
+      "blockedCells": 141,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 876,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 18,
+      "yamlCollisionCells": 0
+    },
+    "spyder_nimrod_middle": {
+      "blockedCells": 90,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1080,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 18,
+      "yamlCollisionCells": 0
+    },
+    "spyder_nimrod_room": {
+      "blockedCells": 19,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 176,
+      "dynamicLabelCells": 0,
+      "height": 7,
+      "mismatches": 0,
+      "width": 9,
+      "yamlCollisionCells": 0
+    },
+    "spyder_nimrod_top": {
+      "blockedCells": 135,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 900,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 18,
+      "yamlCollisionCells": 0
+    },
+    "spyder_omnichannel1": {
+      "blockedCells": 136,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 616,
+      "dynamicLabelCells": 4,
+      "height": 21,
+      "mismatches": 0,
+      "width": 14,
+      "yamlCollisionCells": 0
+    },
+    "spyder_omnichannel2": {
+      "blockedCells": 189,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 992,
+      "dynamicLabelCells": 4,
+      "height": 21,
+      "mismatches": 0,
+      "width": 21,
+      "yamlCollisionCells": 0
+    },
+    "spyder_omnichannel3": {
+      "blockedCells": 142,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 608,
+      "dynamicLabelCells": 0,
+      "height": 21,
+      "mismatches": 0,
+      "width": 14,
+      "yamlCollisionCells": 0
+    },
+    "spyder_omnichannel4": {
+      "blockedCells": 140,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 616,
+      "dynamicLabelCells": 0,
+      "height": 21,
+      "mismatches": 0,
+      "width": 14,
+      "yamlCollisionCells": 0
+    },
+    "spyder_paper_daycare": {
+      "blockedCells": 28,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 392,
+      "dynamicLabelCells": 0,
+      "height": 9,
+      "mismatches": 0,
+      "width": 14,
+      "yamlCollisionCells": 0
+    },
+    "spyder_paper_manor": {
+      "blockedCells": 21,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 236,
+      "dynamicLabelCells": 0,
+      "height": 8,
+      "mismatches": 0,
+      "width": 10,
+      "yamlCollisionCells": 21
+    },
+    "spyder_paper_rival_bedroom": {
+      "blockedCells": 31,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 72,
+      "dynamicLabelCells": 0,
+      "height": 7,
+      "mismatches": 0,
+      "width": 7,
+      "yamlCollisionCells": 0
+    },
+    "spyder_paper_rival_downstairs": {
+      "blockedCells": 75,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 228,
+      "dynamicLabelCells": 0,
+      "height": 12,
+      "mismatches": 0,
+      "width": 11,
+      "yamlCollisionCells": 0
+    },
+    "spyder_paper_rival_office": {
+      "blockedCells": 29,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 80,
+      "dynamicLabelCells": 0,
+      "height": 7,
+      "mismatches": 0,
+      "width": 7,
+      "yamlCollisionCells": 0
+    },
+    "spyder_paper_scoop": {
+      "blockedCells": 30,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 452,
+      "dynamicLabelCells": 0,
+      "height": 11,
+      "mismatches": 0,
+      "width": 13,
+      "yamlCollisionCells": 0
+    },
+    "spyder_paper_town": {
+      "blockedCells": 286,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2056,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "spyder_radiotower": {
+      "blockedCells": 77,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 868,
+      "dynamicLabelCells": 0,
+      "height": 21,
+      "mismatches": 0,
+      "width": 14,
+      "yamlCollisionCells": 0
+    },
+    "spyder_route1": {
+      "blockedCells": 390,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1640,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "spyder_route2": {
+      "blockedCells": 234,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2264,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "spyder_route3": {
+      "blockedCells": 351,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 4996,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "spyder_route4": {
+      "blockedCells": 365,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1740,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "spyder_route5": {
+      "blockedCells": 170,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2520,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "spyder_route6": {
+      "blockedCells": 435,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1460,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "spyder_routea": {
+      "blockedCells": 340,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1840,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "spyder_routeb": {
+      "blockedCells": 460,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1360,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "spyder_routec": {
+      "blockedCells": 1417,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 732,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "spyder_routed": {
+      "blockedCells": 299,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 5204,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "spyder_routee": {
+      "blockedCells": 337,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 252,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "spyder_scoop1": {
+      "blockedCells": 155,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 640,
+      "dynamicLabelCells": 0,
+      "height": 15,
+      "mismatches": 0,
+      "width": 21,
+      "yamlCollisionCells": 0
+    },
+    "spyder_scoop2": {
+      "blockedCells": 23,
+      "collisionLineEdges": 1,
+      "comparedDirectedSteps": 68,
+      "dynamicLabelCells": 0,
+      "height": 5,
+      "mismatches": 0,
+      "width": 8,
+      "yamlCollisionCells": 0
+    },
+    "spyder_scoop3": {
+      "blockedCells": 60,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 336,
+      "dynamicLabelCells": 0,
+      "height": 12,
+      "mismatches": 0,
+      "width": 12,
+      "yamlCollisionCells": 0
+    },
+    "spyder_scoop4": {
+      "blockedCells": 96,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 672,
+      "dynamicLabelCells": 0,
+      "height": 22,
+      "mismatches": 0,
+      "width": 12,
+      "yamlCollisionCells": 0
+    },
+    "spyder_test_map": {
+      "blockedCells": 82,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 6072,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "spyder_timber_cafe": {
+      "blockedCells": 31,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 452,
+      "dynamicLabelCells": 0,
+      "height": 12,
+      "mismatches": 0,
+      "width": 12,
+      "yamlCollisionCells": 0
+    },
+    "spyder_timber_center": {
+      "blockedCells": 41,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 408,
+      "dynamicLabelCells": 0,
+      "height": 11,
+      "mismatches": 0,
+      "width": 13,
+      "yamlCollisionCells": 0
+    },
+    "spyder_timber_house": {
+      "blockedCells": 18,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 248,
+      "dynamicLabelCells": 0,
+      "height": 8,
+      "mismatches": 0,
+      "width": 10,
+      "yamlCollisionCells": 0
+    },
+    "spyder_timber_scoop": {
+      "blockedCells": 29,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 456,
+      "dynamicLabelCells": 0,
+      "height": 11,
+      "mismatches": 0,
+      "width": 13,
+      "yamlCollisionCells": 0
+    },
+    "spyder_timber_town": {
+      "blockedCells": 705,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 3580,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "spyder_timber_walledgarden1": {
+      "blockedCells": 82,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 440,
+      "dynamicLabelCells": 0,
+      "height": 12,
+      "mismatches": 0,
+      "width": 16,
+      "yamlCollisionCells": 0
+    },
+    "spyder_timber_walledgarden2": {
+      "blockedCells": 210,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 440,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 16,
+      "yamlCollisionCells": 0
+    },
+    "spyder_tunnel": {
+      "blockedCells": 273,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2108,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "spyder_tunnel_below": {
+      "blockedCells": 447,
+      "collisionLineEdges": 7,
+      "comparedDirectedSteps": 1412,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "spyder_wayfarer_inn1": {
+      "blockedCells": 125,
+      "collisionLineEdges": 2,
+      "comparedDirectedSteps": 460,
+      "dynamicLabelCells": 0,
+      "height": 16,
+      "mismatches": 0,
+      "width": 15,
+      "yamlCollisionCells": 0
+    },
+    "spyder_wayfarer_inn2": {
+      "blockedCells": 129,
+      "collisionLineEdges": 1,
+      "comparedDirectedSteps": 444,
+      "dynamicLabelCells": 0,
+      "height": 16,
+      "mismatches": 0,
+      "width": 15,
+      "yamlCollisionCells": 0
+    },
+    "start_tuxemon": {
+      "blockedCells": 0,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 256,
+      "dynamicLabelCells": 0,
+      "height": 8,
+      "mismatches": 0,
+      "width": 8,
+      "yamlCollisionCells": 0
+    },
+    "taba_ba_br_1": {
+      "blockedCells": 112,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 576,
+      "dynamicLabelCells": 0,
+      "height": 16,
+      "mismatches": 0,
+      "width": 16,
+      "yamlCollisionCells": 0
+    },
+    "taba_ba_br_2": {
+      "blockedCells": 72,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 736,
+      "dynamicLabelCells": 0,
+      "height": 16,
+      "mismatches": 0,
+      "width": 16,
+      "yamlCollisionCells": 0
+    },
+    "taba_ba_br_3": {
+      "blockedCells": 109,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 588,
+      "dynamicLabelCells": 0,
+      "height": 16,
+      "mismatches": 0,
+      "width": 16,
+      "yamlCollisionCells": 0
+    },
+    "taba_ba_br_4": {
+      "blockedCells": 92,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 656,
+      "dynamicLabelCells": 0,
+      "height": 16,
+      "mismatches": 0,
+      "width": 16,
+      "yamlCollisionCells": 0
+    },
+    "taba_ba_br_master": {
+      "blockedCells": 127,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1092,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "taba_ba_br_master_foyer": {
+      "blockedCells": 91,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 588,
+      "dynamicLabelCells": 0,
+      "height": 17,
+      "mismatches": 0,
+      "width": 14,
+      "yamlCollisionCells": 0
+    },
+    "taba_ba_foyer": {
+      "blockedCells": 25,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 100,
+      "dynamicLabelCells": 0,
+      "height": 10,
+      "mismatches": 0,
+      "width": 5,
+      "yamlCollisionCells": 0
+    },
+    "taba_ba_main": {
+      "blockedCells": 119,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 664,
+      "dynamicLabelCells": 0,
+      "height": 15,
+      "mismatches": 0,
+      "width": 19,
+      "yamlCollisionCells": 0
+    },
+    "taba_ba_passageway_1": {
+      "blockedCells": 148,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1008,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "taba_ba_passageway_2": {
+      "blockedCells": 100,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1200,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "taba_ba_passageway_3": {
+      "blockedCells": 161,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 956,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "taba_ba_passageway_4": {
+      "blockedCells": 60,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 400,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 8,
+      "yamlCollisionCells": 0
+    },
+    "taba_ba_stairwell_1": {
+      "blockedCells": 89,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 220,
+      "dynamicLabelCells": 0,
+      "height": 12,
+      "mismatches": 0,
+      "width": 12,
+      "yamlCollisionCells": 0
+    },
+    "taba_ba_stairwell_2": {
+      "blockedCells": 154,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 408,
+      "dynamicLabelCells": 0,
+      "height": 16,
+      "mismatches": 0,
+      "width": 16,
+      "yamlCollisionCells": 0
+    },
+    "taba_house1": {
+      "blockedCells": 17,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 184,
+      "dynamicLabelCells": 0,
+      "height": 7,
+      "mismatches": 0,
+      "width": 9,
+      "yamlCollisionCells": 0
+    },
+    "taba_house2": {
+      "blockedCells": 21,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 168,
+      "dynamicLabelCells": 0,
+      "height": 7,
+      "mismatches": 0,
+      "width": 9,
+      "yamlCollisionCells": 0
+    },
+    "taba_house2_upstairs": {
+      "blockedCells": 23,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 160,
+      "dynamicLabelCells": 0,
+      "height": 7,
+      "mismatches": 0,
+      "width": 9,
+      "yamlCollisionCells": 0
+    },
+    "taba_house3": {
+      "blockedCells": 29,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 220,
+      "dynamicLabelCells": 0,
+      "height": 7,
+      "mismatches": 0,
+      "width": 12,
+      "yamlCollisionCells": 0
+    },
+    "taba_house3_upstairs": {
+      "blockedCells": 27,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 228,
+      "dynamicLabelCells": 0,
+      "height": 7,
+      "mismatches": 0,
+      "width": 12,
+      "yamlCollisionCells": 0
+    },
+    "taba_house4": {
+      "blockedCells": 33,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 204,
+      "dynamicLabelCells": 0,
+      "height": 7,
+      "mismatches": 0,
+      "width": 12,
+      "yamlCollisionCells": 0
+    },
+    "taba_town": {
+      "blockedCells": 1631,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 8836,
+      "dynamicLabelCells": 0,
+      "height": 60,
+      "mismatches": 0,
+      "width": 64,
+      "yamlCollisionCells": 0
+    },
+    "tabathas": {
+      "blockedCells": 0,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 576,
+      "dynamicLabelCells": 0,
+      "height": 12,
+      "mismatches": 0,
+      "width": 12,
+      "yamlCollisionCells": 0
+    },
+    "test_npcs": {
+      "blockedCells": 271,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 5316,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "timber_town": {
+      "blockedCells": 823,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 3108,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "tt_forest_route1": {
+      "blockedCells": 683,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1748,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 28,
+      "yamlCollisionCells": 0
+    },
+    "tt_paper_town": {
+      "blockedCells": 508,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1488,
+      "dynamicLabelCells": 0,
+      "height": 22,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "tt_searoute1": {
+      "blockedCells": 1164,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1744,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 40,
+      "yamlCollisionCells": 0
+    },
+    "tunnel": {
+      "blockedCells": 263,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2148,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "tunnel_below": {
+      "blockedCells": 552,
+      "collisionLineEdges": 7,
+      "comparedDirectedSteps": 992,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "tuxe_mart_taba": {
+      "blockedCells": 43,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 400,
+      "dynamicLabelCells": 0,
+      "height": 11,
+      "mismatches": 0,
+      "width": 13,
+      "yamlCollisionCells": 0
+    },
+    "water_cathedral": {
+      "blockedCells": 0,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 12000,
+      "dynamicLabelCells": 0,
+      "height": 60,
+      "mismatches": 0,
+      "width": 50,
+      "yamlCollisionCells": 0
+    },
+    "water_end_of_desert": {
+      "blockedCells": 87,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 7652,
+      "dynamicLabelCells": 0,
+      "height": 40,
+      "mismatches": 0,
+      "width": 50,
+      "yamlCollisionCells": 0
+    },
+    "water_lower_village": {
+      "blockedCells": 289,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2876,
+      "dynamicLabelCells": 0,
+      "height": 24,
+      "mismatches": 0,
+      "width": 42,
+      "yamlCollisionCells": 0
+    },
+    "water_outskirts": {
+      "blockedCells": 96,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 3216,
+      "dynamicLabelCells": 0,
+      "height": 30,
+      "mismatches": 0,
+      "width": 30,
+      "yamlCollisionCells": 0
+    },
+    "water_river_village": {
+      "blockedCells": 311,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1156,
+      "dynamicLabelCells": 0,
+      "height": 30,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "water_route_grass": {
+      "blockedCells": 284,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 4864,
+      "dynamicLabelCells": 0,
+      "height": 50,
+      "mismatches": 0,
+      "width": 30,
+      "yamlCollisionCells": 0
+    },
+    "water_route_ice": {
+      "blockedCells": 391,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2036,
+      "dynamicLabelCells": 0,
+      "height": 30,
+      "mismatches": 0,
+      "width": 30,
+      "yamlCollisionCells": 0
+    },
+    "water_snow_village": {
+      "blockedCells": 379,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 2084,
+      "dynamicLabelCells": 0,
+      "height": 30,
+      "mismatches": 0,
+      "width": 30,
+      "yamlCollisionCells": 0
+    },
+    "water_underwater": {
+      "blockedCells": 909,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 6364,
+      "dynamicLabelCells": 0,
+      "height": 50,
+      "mismatches": 0,
+      "width": 50,
+      "yamlCollisionCells": 0
+    },
+    "water_volcano_path": {
+      "blockedCells": 201,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 796,
+      "dynamicLabelCells": 0,
+      "height": 20,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "water_volcano_village": {
+      "blockedCells": 202,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1592,
+      "dynamicLabelCells": 0,
+      "height": 30,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    },
+    "wayfarer_inn1": {
+      "blockedCells": 129,
+      "collisionLineEdges": 1,
+      "comparedDirectedSteps": 444,
+      "dynamicLabelCells": 0,
+      "height": 16,
+      "mismatches": 0,
+      "width": 15,
+      "yamlCollisionCells": 0
+    },
+    "wayfarer_inn2": {
+      "blockedCells": 125,
+      "collisionLineEdges": 1,
+      "comparedDirectedSteps": 460,
+      "dynamicLabelCells": 0,
+      "height": 16,
+      "mismatches": 0,
+      "width": 15,
+      "yamlCollisionCells": 0
+    },
+    "witcher_route_7": {
+      "blockedCells": 149,
+      "collisionLineEdges": 0,
+      "comparedDirectedSteps": 1804,
+      "dynamicLabelCells": 0,
+      "height": 30,
+      "mismatches": 0,
+      "width": 20,
+      "yamlCollisionCells": 0
+    }
+  },
+  "oracle": "raw TMX/TSX port of Tuxemon loader.py + movement.py semantics",
+  "totals": {
+    "comparedDirectedSteps": 453644,
+    "maps": 263,
+    "mismatches": 0
+  }
+}

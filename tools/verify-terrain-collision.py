@@ -256,14 +256,23 @@ def tux_step(cells, masks, width: int, height: int, x: int, y: int, direction: s
     return OPPOSITE[direction] in target.enter
 
 
-def verify_map(source_root: str, patch: dict) -> dict[str, int]:
+def verify_map(source_root: str, patch: dict, sheet: dict) -> dict[str, int]:
     map_id = patch["id"]
     width, height, cells, source_masks, line_edges, yaml_cells = load_oracle(source_root, map_id)
     if (width, height) != (patch["width"], patch["height"]):
         raise ValueError(f"{map_id}: dimensions differ")
     blocked = {index for index, flag in patch["passage"] if flag == "block"}
     dynamic = {index for values in patch["collisionLabels"].values() for index in values}
-    imported_masks = [int(tile.rsplit(".", 1)[1]) for tile in patch["ground"]]
+    cells_by_index = [tile.rsplit(".", 1)[1] for tile in patch["ground"]]
+    dir_blocks = sheet.get("dirBlock", {})
+    dir_edges = sheet.get("dirEdges", {})
+
+    def mask(directions: list[str] | None) -> int:
+        return sum(BITS[direction] for direction in directions or [])
+
+    imported_blocks = [mask(dir_blocks.get(cell)) for cell in cells_by_index]
+    imported_entries = [mask(dir_edges.get(cell, {}).get("enter")) for cell in cells_by_index]
+    imported_exits = [mask(dir_edges.get(cell, {}).get("exit")) for cell in cells_by_index]
 
     def kit_step(x: int, y: int, direction: str) -> bool:
         nx, ny = x + DX[direction], y + DY[direction]
@@ -271,10 +280,10 @@ def verify_map(source_root: str, patch: dict) -> dict[str, int]:
             return False
         source, target = y * width + x, ny * width + nx
         return not (
-            imported_masks[source] & BITS[direction]
+            (imported_blocks[source] | imported_exits[source]) & BITS[direction]
             or target in blocked
             or target in dynamic
-            or imported_masks[target] & BITS[OPPOSITE[direction]]
+            or (imported_blocks[target] | imported_entries[target]) & BITS[OPPOSITE[direction]]
         )
 
     compared = 0
@@ -306,10 +315,12 @@ def main() -> None:
     parser.add_argument("--src", default=os.environ.get("TUXEMON_SRC", "/var/tmp/tuxemon-src"))
     parser.add_argument("--terrain", default="data/terrain.json")
     parser.add_argument("--out", default="findings/G5-collision-report.json")
+    parser.add_argument("--all", action="store_true", help="verify every map in the terrain fragment")
     args = parser.parse_args()
     terrain = json.load(open(args.terrain, encoding="utf-8"))
     patches = {entry["id"]: entry for entry in terrain["maps"]}
-    report = {map_id: verify_map(args.src, patches[map_id]) for map_id in args.map_ids}
+    map_ids = sorted(patches) if args.all else args.map_ids
+    report = {map_id: verify_map(args.src, patches[map_id], terrain["sheet"]) for map_id in map_ids}
     totals = {
         "maps": len(report),
         "comparedDirectedSteps": sum(item["comparedDirectedSteps"] for item in report.values()),
