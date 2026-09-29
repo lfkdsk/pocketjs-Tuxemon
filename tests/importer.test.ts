@@ -22,6 +22,8 @@ test("all maps pass schema and reference valid transfer destinations", () => {
     uses: 8_663,
     tier1: { uses: 4_591, percent: 53.0, meetsBaseline: true },
   });
+  expect(Object.keys(result.variables)).toHaveLength(493);
+  expect(Object.values(result.variables).filter((values) => values.length === 0)).toHaveLength(19);
   expect(
     result.report.coverage.actions.summary.native +
     result.report.coverage.actions.summary.degraded +

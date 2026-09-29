@@ -69,18 +69,50 @@ function note(kind: "act" | "cond" | "behav" | "trigger", type: string, fate: Fa
 // variables: string values -> enum codes (global, over every map, stable)
 
 const enumValues = new Map<string, Set<string>>();
-const addValue = (k: string, v: string) => (enumValues.get(k) ?? enumValues.set(k, new Set()).get(k)!).add(v);
+const valuesFor = (name: string): Set<string> =>
+  enumValues.get(name) ?? enumValues.set(name, new Set()).get(name)!;
+const addValue = (name: string, value: string) => valuesFor(name).add(value);
+const DYNAMIC_VARIABLE_WRITERS: Record<string, number> = {
+  translated_dialog_choice: 1,
+  choice_monster: 1,
+  choice_npc: 1,
+  random_integer: 0,
+  set_random_variable: 0,
+  copy_variable: 0,
+  format_variable: 0,
+  get_player_monster: 0,
+  get_pending_moves: 0,
+};
 for (const ev of loadAllFileEvents()) {
   for (const a of ev.acts) {
     if (a.type === "set_variable") for (const p of a.args) { const i = p.indexOf(":"); addValue(i < 0 ? p : p.slice(0, i), i < 0 ? "" : p.slice(i + 1)); }
     if (a.type === "set_random_variable" && a.args[0] && a.args[1]) {
       for (const value of a.args[1].split(":")) addValue(a.args[0], value);
     }
+    if (a.type === "clear_variable") for (const name of a.args) valuesFor(name);
+    if (a.type === "variable_math") valuesFor(a.args[3] ?? a.args[0]!);
+    if (a.type in DYNAMIC_VARIABLE_WRITERS) {
+      const index = DYNAMIC_VARIABLE_WRITERS[a.type]!;
+      const name = a.args[index];
+      if (name) valuesFor(name);
+    }
     if (a.type === "translated_dialog_choice" || a.type === "choice_monster" || a.type === "choice_npc") for (const o of a.args[0]!.split(":")) addValue(a.args[1]!, o);
     if (a.type === "start_battle" || a.type === "start_double_battle") addValue("battle_last_trainer", a.args[0] === "player" ? a.args[1]! : a.args[0]!);
     if (a.type === "wild_encounter" && a.args[0]) addValue("battle_last_trainer", a.args[0]);
   }
-  for (const c of ev.conds) if (c.type === "variable_set") for (const p of c.args) { const i = p.indexOf(":"); if (i >= 0 && p.slice(i + 1) !== "") addValue(p.slice(0, i), p.slice(i + 1)); }
+  for (const c of ev.conds) {
+    if (c.type === "variable_set") for (const p of c.args) {
+      const i = p.indexOf(":");
+      const name = i < 0 ? p : p.slice(0, i);
+      valuesFor(name);
+      if (i >= 0 && p.slice(i + 1) !== "") addValue(name, p.slice(i + 1));
+    }
+    if (c.type === "variable_is") {
+      for (const value of [c.args[0], c.args[2]]) {
+        if (value && !/^-?\d+(?:\.\d+)?$/.test(value)) valuesFor(value);
+      }
+    }
+  }
 }
 for (const map of allMaps.values()) {
   for (const event of map.events) {

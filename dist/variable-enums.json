@@ -490,6 +490,7 @@
  "brad_points": [
   "0"
  ],
+ "budaye": [],
  "bumpintomom": [
   "yes"
  ],
@@ -532,6 +533,7 @@
   "no",
   "yes"
  ],
+ "cateye": [],
  "catgirl_candy_hastraded": [
   "yes"
  ],
@@ -545,9 +547,11 @@
  "cathedral_interest": [
   "0.1"
  ],
+ "cathedral_interest_full": [],
  "cathedral_share": [
   "0.5"
  ],
+ "cathedral_share_full": [],
  "cctv_scoop": [
   "no",
   "null",
@@ -585,6 +589,7 @@
  "check_vivitron_morph": [
   "yes"
  ],
+ "chillimp": [],
  "choice_floor": [
   "0floor",
   "1floor",
@@ -611,6 +616,7 @@
   "none",
   "yes"
  ],
+ "chosen_tech": [],
  "christieknows": [
   "gone",
   "nobody",
@@ -744,6 +750,7 @@
   "hard",
   "normal"
  ],
+ "dojo_notech": [],
  "dojo_stage": [
   "no_choice"
  ],
@@ -1052,6 +1059,7 @@
   "earth",
   "fire"
  ],
+ "grintot": [],
  "happy": [
   "no",
   "yes"
@@ -1092,6 +1100,7 @@
   "ohno",
   "yes"
  ],
+ "ignibus": [],
  "incident_greenwash": [
   "done",
   "no",
@@ -1364,6 +1373,7 @@
   "null",
   "yes"
  ],
+ "party_lost_hp": [],
  "party_sick": [
   "yes"
  ],
@@ -1413,6 +1423,7 @@
  "potion_xiang": [
   "no_choice"
  ],
+ "probably_agnite": [],
  "prof_candy_hastraded": [
   "yes"
  ],
@@ -1478,6 +1489,7 @@
   "finished",
   "please"
  ],
+ "rename": [],
  "replaceomnigrunt4": [
   "yes"
  ],
@@ -1490,6 +1502,7 @@
   "null",
   "yes"
  ],
+ "rhincus": [],
  "rhincus_choice": [
   "no",
   "yes"
@@ -1578,6 +1591,7 @@
   "proceed",
   "yes"
  ],
+ "ruff_back": [],
  "sadsong": [
   "no",
   "yes"
@@ -1615,6 +1629,7 @@
  "scoop_coeff": [
   "50"
  ],
+ "scoop_price": [],
  "scoopcochinia": [
   "yes"
  ],
@@ -1676,6 +1691,7 @@
  "shaftscheme": [
   "yes"
  ],
+ "shammer": [],
  "shammer_choice": [
   "no",
   "yes"
@@ -1722,6 +1738,7 @@
  "snarlonmountain": [
   "yes"
  ],
+ "sold": [],
  "soldier_on_mission": [
   "on"
  ],
@@ -1798,6 +1815,7 @@
   "pythock",
   "snarlon"
  ],
+ "tasteful_zhu": [],
  "tealucy": [
   "yes"
  ],
@@ -1869,6 +1887,7 @@
   "rockitten",
   "welcome"
  ],
+ "tweesher": [],
  "tweesherball": [
   "yes"
  ],
