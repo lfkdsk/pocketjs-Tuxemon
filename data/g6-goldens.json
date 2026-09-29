@@ -1,0 +1,43 @@
+{
+  "format": "pocket-tuxemon/g6-goldens/v1",
+  "width": 480,
+  "height": 272,
+  "frames": [
+    {
+      "name": "bedroom",
+      "frame": 587,
+      "map": "spyder_bedroom",
+      "position": [
+        3,
+        4
+      ],
+      "file": "g6-bedroom.587.png",
+      "rgbaFnv1a": "437c8a18",
+      "pngSha256": "02eb105c229ffa49a687a6a34edba229202de35164484ac67d2db156d28df875"
+    },
+    {
+      "name": "paper-town",
+      "frame": 1373,
+      "map": "spyder_paper_town",
+      "position": [
+        21,
+        9
+      ],
+      "file": "g6-paper-town.1373.png",
+      "rgbaFnv1a": "f8b80b35",
+      "pngSha256": "824d35825a912e9a9f05c221614f8a01f677dce4b89d321e770e92e5aa6db1ea"
+    },
+    {
+      "name": "route-1",
+      "frame": 1683,
+      "map": "spyder_route1",
+      "position": [
+        14,
+        19
+      ],
+      "file": "g6-route-1.1683.png",
+      "rgbaFnv1a": "aa358549",
+      "pngSha256": "a089d5b5ba2fadd051766f308308cd573cc011f9a6466619b1add230d5042da6"
+    }
+  ]
+}

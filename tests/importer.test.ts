@@ -1,6 +1,7 @@
 import { expect, test } from "bun:test";
 import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import {
   availableMapIds,
@@ -326,6 +327,38 @@ test("K1 appends a safety unlock when a source map has no unlock path", () => {
   }));
 });
 
+test("all 14 labelled collision cells are removable K1 event bodies", () => {
+  const result = buildProject([
+    "spyder_candy_hospital3",
+    "spyder_dragonscave",
+    "spyder_dryadsgrove",
+    "spyder_omnichannel1",
+    "spyder_omnichannel2",
+  ], K1_IMPORT_OPTIONS);
+  const bodies = result.project.maps.flatMap((map) =>
+    (map.events ?? []).filter((event) => event.name?.startsWith("collision:"))
+      .map((event) => ({ map: map.id, event })),
+  );
+  expect(bodies).toHaveLength(14);
+  for (const { map, event } of bodies) {
+    const key = event.name!.slice("collision:".length);
+    expect(event.pages[0]).toMatchObject({ blocks: true });
+    expect(event.pages[1]).toMatchObject({
+      blocks: false,
+      condition: { variable: { id: `local.collision.${map}.${key}`, op: "==", value: 1 } },
+    });
+  }
+  const writes = objectNodes(result.project).filter((node) =>
+    node.op === "variable" && typeof node.id === "string" && node.id.startsWith("local.collision.")
+  );
+  expect(writes).toHaveLength(5);
+  expect(result.report.coverage.actions.rows.find((row) => row.type === "remove_collision")).toMatchObject({
+    native: 5,
+    degraded: 0,
+    dropped: 0,
+  });
+});
+
 test("a blocking spawn cutscene survives its own presence write and unlocks input", () => {
   const options = {
     areas: true,
@@ -372,7 +405,8 @@ test("ImportOptions.routes emits K2 arbitrary targets and path steps", () => {
 test("Spyder opening completes identically at 60, 30, 20, and 4 Hz", () => {
   writeImport(availableMapIds(), undefined, K1_IMPORT_OPTIONS);
   const transcripts: string[] = [];
-  for (const hz of [60, 30, 20, 4]) {
+  const results: Record<string, unknown>[] = [];
+  const runAt = (hz: number) => {
     const run = spawnSync(process.execPath, ["tools/smoke-spyder.ts"], {
       cwd: ROOT,
       encoding: "utf8",
@@ -382,17 +416,36 @@ test("Spyder opening completes identically at 60, 30, 20, and 4 Hz", () => {
     if (run.status !== 0) {
       throw new Error(`smoke ${hz} Hz failed\n${run.stdout}\n${run.stderr}`);
     }
+    const result = JSON.parse(readFileSync(resolve(ROOT, `dist/journey-spyder-${hz}hz.json`), "utf8")) as Record<string, unknown>;
+    return { run, result };
+  };
+  for (const hz of [60, 30, 20, 4]) {
+    const { run, result } = runAt(hz);
     expect(run.stdout.match(/PASS  /g)).toHaveLength(12);
     expect(run.stdout).toContain('"map":"spyder_route1"');
     transcripts.push(run.stdout.replace(/\[\s*\d+\]/g, "[frame]"));
+    results.push(result);
   }
   const beats = (transcript: string) => transcript
     .split("\n")
     // PASS lines can straddle a new map's first autorun text at low host
     // rates because one folded host frame advances both. The observable
     // story sequence and final state must still be identical.
-    .filter((line) => /(?:TEXT|PICK|MAP|RESULT)/.test(line));
+    .filter((line) => /(?:TEXT|PICK|MAP)/.test(line));
   expect(beats(transcripts[1]!)).toEqual(beats(transcripts[0]!));
   expect(beats(transcripts[2]!)).toEqual(beats(transcripts[0]!));
   expect(beats(transcripts[3]!)).toEqual(beats(transcripts[0]!));
+
+  const outcome = (result: Record<string, unknown>) => ({
+    map: result.map,
+    position: result.position,
+    story: result.story,
+    checkpoints: (result.checkpoints as { name: string; map: string; position: [number, number] }[])
+      .map(({ name, map, position }) => ({ name, map, position })),
+  });
+  for (const result of results.slice(1)) expect(outcome(result)).toEqual(outcome(results[0]!));
+
+  const repeated = runAt(60).result;
+  expect(repeated.sha256).toBe(results[0]!.sha256);
+  expect(repeated.masks).toEqual(results[0]!.masks);
 }, 120_000);

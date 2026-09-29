@@ -1,6 +1,7 @@
 // Headless acceptance drive for the generated Spyder opening.
 
 import { readFileSync, writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { createSession, startSession, stepSession, tableWithBodies, type SessionState } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import { canStepFrom, type Dir4 } from "../vendor/pocket-rpgkit/src/engine/passability.ts";
 import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
@@ -16,7 +17,10 @@ let st: SessionState = startSession(project, sess);
 const DX = [0, -1, 0, 1];
 const DY = [1, 0, -1, 0];
 const BTN_OF: Record<Dir4, number> = { 0: BTN_BITS.DOWN, 1: BTN_BITS.LEFT, 2: BTN_BITS.UP, 3: BTN_BITS.RIGHT };
+const BTN_CONFIRM = 0x2000;
 const journal: string[] = [];
+const masks: number[] = [];
+const checkpoints: { name: string; frame: number; map: string; position: [number, number] }[] = [];
 let frames = 0;
 let lastModalKey = "";
 let lastMap = st.mapId;
@@ -27,10 +31,18 @@ function note(s: string): void {
 }
 
 function tick(buttons = 0, edges: { confirm?: boolean; down?: boolean; up?: boolean } = {}): void {
-  const downEdge = edges.down ?? !!((buttons & BTN_BITS.DOWN) && !(prevButtons & BTN_BITS.DOWN));
-  const upEdge = edges.up ?? !!((buttons & BTN_BITS.UP) && !(prevButtons & BTN_BITS.UP));
-  st = stepSession(sess, st, { buttons, confirmEdge: !!edges.confirm, downEdge, upEdge, cancelEdge: false });
-  prevButtons = buttons;
+  // Record the exact PocketJS button mask that corresponds to the explicit
+  // reducer edges used by this adaptive driver. Replaying these masks through
+  // GameView exercises the built bundle without a second hand-authored tape.
+  const mask = buttons |
+    (edges.confirm ? BTN_CONFIRM : 0) |
+    (edges.down ? BTN_BITS.DOWN : 0) |
+    (edges.up ? BTN_BITS.UP : 0);
+  const downEdge = edges.down ?? !!((mask & BTN_BITS.DOWN) && !(prevButtons & BTN_BITS.DOWN));
+  const upEdge = edges.up ?? !!((mask & BTN_BITS.UP) && !(prevButtons & BTN_BITS.UP));
+  st = stepSession(sess, st, { buttons: mask, confirmEdge: !!edges.confirm, downEdge, upEdge, cancelEdge: false });
+  prevButtons = mask;
+  masks.push(mask >>> 0);
   frames++;
   const m = st.interp.modal;
   const key = m ? `${m.kind}|${m.kind === "text" ? m.lines.join("/") : m.prompt + "|" + m.options.join("/")}` : "";
@@ -164,6 +176,11 @@ function expect(what: string, ok: boolean): void {
   if (!ok) { writeOut(); throw new Error(`smoke: ${what}`); }
 }
 
+function checkpoint(name: string): void {
+  checkpoints.push({ name, frame: frames - 1, map: st.mapId, position: [st.move.tx, st.move.ty] });
+  note(`MARK  ${name} ${st.mapId} @${st.move.tx},${st.move.ty}`);
+}
+
 function writeOut(): void {
   writeFileSync(`${OUT_DIR}smoke-spyder-${HZ}hz.log`, journal.join("\n") + "\n");
 }
@@ -175,6 +192,7 @@ settle(["Yes"]); // "Do you want to skip the intro?" -> Yes
 expect("skip-intro choice transfers to the Paper Town mart", st.mapId === "spyder_paper_scoop");
 settle(["Budaye", "Yes"]); // storekeeper intro; rival's monster; "are you sure?"
 expect("mart intro ends back in the bedroom", st.mapId === "spyder_bedroom" && v("v.intro_scoop") > 0);
+checkpoint("bedroom");
 walkTo(7, 2);
 settle();
 expect("stairs (touch) lead downstairs", st.mapId === "spyder_downstairs");
@@ -209,6 +227,7 @@ settle(["Yes"]);
 expect("choosing Rockitten gave a monster (placeholder party)", v("sys.party_size") === 1);
 expect("the first fight ran the battle placeholder", st.sw.switches["bo.spyder_billie.won"] === true);
 expect("the win branch closed the fight (firstfightend=no)", v("v.firstfightend") > 0 && v("v.firstfightdue") > 0);
+checkpoint("paper-town");
 let requested = "";
 try {
   goTo(14, 1);
@@ -224,12 +243,17 @@ try {
   requested = String(e);
 }
 expect(`the Route 1 exit opens after the fight (${requested || st.mapId})`, st.mapId === "spyder_route1");
+checkpoint("route-1");
 note(`END   frames=${frames} at ${HZ} Hz (${(frames / HZ).toFixed(1)} s virtual)`);
 writeOut();
 console.log(journal.join("\n"));
-console.log("RESULT " + JSON.stringify({
+const result = {
+  hz: HZ,
+  frames,
   map: st.mapId,
   position: [st.move.tx, st.move.ty],
+  checkpoints,
+  masks,
   story: {
     intro_scoop: v("v.intro_scoop"),
     spokenmom: v("v.spokenmom"),
@@ -239,4 +263,15 @@ console.log("RESULT " + JSON.stringify({
     party_size: v("sys.party_size"),
     billie_won: st.sw.switches["bo.spyder_billie.won"] === true,
   },
+};
+const digest = createHash("sha256").update(JSON.stringify(result)).digest("hex");
+writeFileSync(`${OUT_DIR}journey-spyder-${HZ}hz.json`, JSON.stringify({ ...result, sha256: digest }, null, 2) + "\n");
+console.log("RESULT " + JSON.stringify({
+  hz: result.hz,
+  frames: result.frames,
+  map: result.map,
+  position: result.position,
+  checkpoints: result.checkpoints,
+  story: result.story,
+  sha256: digest,
 }));
