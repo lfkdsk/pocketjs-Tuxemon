@@ -1029,6 +1029,15 @@ interface NpcAgg {
   talks: { cls: Clause[]; cmds: Command[] }[];
 }
 
+interface SpatialPage {
+  id: string;
+  name: string;
+  trigger: "playerTouch" | "action";
+  cls: Clause[];
+  cmds: Command[];
+  cells: readonly [number, number][];
+}
+
 function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: Record<string, SpriteDef> } {
   const events: GameEvent[] = [];
   const sprites: Record<string, SpriteDef> = {};
@@ -1040,6 +1049,11 @@ function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: 
    *  on one cell (e.g. "My First Mon" / "... - Not Met"); the kit starts
    *  only the first eligible event per trigger, so they merge below. */
   const cellPages = new Map<string, { id: string; name: string; x: number; y: number; trigger: "playerTouch" | "action"; cls: Clause[]; cmds: Command[] }[]>();
+  /** K1 areas are partitioned after every source event is known. A partition
+   *  has one exact ordered set of source events, which lets overlapping
+   *  rectangles keep Tuxemon's "sample every guard, then run every matching
+   *  body" semantics without expanding otherwise-disjoint large areas. */
+  const spatialPages: SpatialPage[] = [];
   const collisionRegions = readCollisionRegions(join(MAPS_DIR, `${m.slug}.tmx`));
 
   // NPCs first: every create_npc on this map names one NPC event
@@ -1097,9 +1111,28 @@ function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: 
           }
         }
         const cmds = convertActions(e.acts.filter((a) => a.type !== "char_face" && a.type !== "char_wander"), { m, options });
-        const { cond, rest } = pageCondition(live, options);
-        events.push({ id: nextId(e.name), name: `${e.name} (spawn guard)`, x: e.x, y: e.y, pages: [{ trigger: "parallel", condition: cond, sprite: null, commands: guard(rest, cmds) }] });
-        note("trigger", "spawn", "T1-lowered", "parallel page: guard -> local.npc.<slug> = 1");
+        const blocking = hasBlocking(cmds);
+        const page = blocking
+          // A blocking spawn usually writes the same local.npc variable its
+          // `not char_exists` guard reads. Keeping that guard on the page
+          // would make K1 cancel the parallel fiber on the following frame,
+          // halfway through its cutscene. Keep the page alive and evaluate
+          // the complete guard inside the fiber instead; on the next restart
+          // it is false and the body becomes a no-op.
+          ? { trigger: "parallel" as const, sprite: null, commands: guard(live, cmds) }
+          : (() => {
+              const { cond, rest } = pageCondition(live, options);
+              return { trigger: "parallel" as const, condition: cond, sprite: null, commands: guard(rest, cmds) };
+            })();
+        events.push({ id: nextId(e.name), name: `${e.name} (spawn guard)`, x: e.x, y: e.y, pages: [page] });
+        note(
+          "trigger",
+          "spawn",
+          "T1-lowered",
+          blocking
+            ? "parallel page keeps its fiber alive while an internal guard runs the cutscene once"
+            : "parallel page: guard -> local.npc.<slug> = 1",
+        );
         continue;
       }
 
@@ -1136,22 +1169,16 @@ function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: 
           note("trigger", `${k}(outside map)`, "T4-dropped", reason);
           continue;
         }
-        if (options.areas && cells.length > 1) {
-          const x = Math.max(0, e.x);
-          const y = Math.max(0, e.y);
-          const right = Math.min(m.width, e.x + e.w);
-          const bottom = Math.min(m.height, e.y + e.h);
-          const { cond, rest } = pageCondition(live, options);
-          events.push(gameEvent({
+        if (options.areas) {
+          spatialPages.push({
             id: nextId(e.name),
             name: e.name,
-            x,
-            y,
-            w: right - x,
-            h: bottom - y,
-            pages: [{ trigger, condition: cond, sprite: null, commands: guard(rest, cmds) }],
-          }));
-          note("trigger", `${k}(area)`, "T1", "K1 rectangular event area");
+            trigger,
+            cls: live,
+            cmds,
+            cells,
+          });
+          note("trigger", `${k}(area)`, "T1", "K1 rectangular event area (overlaps partitioned after guard sampling)");
           continue;
         }
         if (cells.length > AREA_CELL_CAP) {
@@ -1215,6 +1242,86 @@ function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: 
     } finally {
       conversionCoverage.commit(eventCoverage);
       activeCoverage = undefined;
+    }
+  }
+
+  if (options.areas) {
+    // Make a cell membership grid for each trigger. Greedily coalesce equal
+    // membership signatures into rectangles. At an overlap, one event owns
+    // the rectangle and snapshots every member's guard before any body runs;
+    // this is the same latch used by the v1 per-cell lowering below.
+    const membership = new Map<string, number[]>();
+    spatialPages.forEach((page, index) => {
+      for (const [x, y] of page.cells) {
+        const key = `${page.trigger}|${x},${y}`;
+        const members = membership.get(key) ?? [];
+        members.push(index);
+        membership.set(key, members);
+      }
+    });
+    const sameMembers = (trigger: "playerTouch" | "action", x: number, y: number, signature: string): boolean =>
+      (membership.get(`${trigger}|${x},${y}`) ?? []).join(",") === signature;
+    const visited = new Set<string>();
+    let region = 0;
+    for (const trigger of ["playerTouch", "action"] as const) {
+      for (let y = 0; y < m.height; y++) {
+        for (let x = 0; x < m.width; x++) {
+          const cellKey = `${trigger}|${x},${y}`;
+          const members = membership.get(cellKey);
+          if (!members?.length || visited.has(cellKey)) continue;
+          const signature = members.join(",");
+          let w = 1;
+          while (x + w < m.width && !visited.has(`${trigger}|${x + w},${y}`) &&
+                 sameMembers(trigger, x + w, y, signature)) w++;
+          let h = 1;
+          rows: while (y + h < m.height) {
+            for (let dx = 0; dx < w; dx++) {
+              const next = `${trigger}|${x + dx},${y + h}`;
+              if (visited.has(next) || !sameMembers(trigger, x + dx, y + h, signature)) break rows;
+            }
+            h++;
+          }
+          for (let dy = 0; dy < h; dy++) {
+            for (let dx = 0; dx < w; dx++) visited.add(`${trigger}|${x + dx},${y + dy}`);
+          }
+
+          const pages = members.map((index) => spatialPages[index]!);
+          const first = pages[0]!;
+          let condition: FuturePageCondition | undefined;
+          let commands: Command[];
+          if (pages.length === 1) {
+            const page = pageCondition(first.cls, options);
+            condition = page.cond;
+            commands = guard(page.rest, first.cmds);
+          } else {
+            const flag = (i: number) => `local.area.${m.slug}.${region}.${i}`;
+            commands = [];
+            pages.forEach((page, i) => {
+              if (page.cls.length) {
+                commands.push(
+                  { op: "switch", id: flag(i), value: false },
+                  ...guard(page.cls, [{ op: "switch", id: flag(i), value: true }]),
+                );
+              }
+            });
+            pages.forEach((page, i) => commands.push(...(
+              page.cls.length
+                ? [{ op: "if", if: { kind: "switch", id: flag(i), value: true }, then: page.cmds } as Command]
+                : page.cmds
+            )));
+            note("trigger", "stacked event areas", "T1-lowered", "partitioned: match flags then bodies");
+          }
+          events.push(gameEvent({
+            id: `${first.id}_r${String(++region).padStart(3, "0")}`,
+            name: pages.map((page) => page.name).join(" + "),
+            x,
+            y,
+            w,
+            h,
+            pages: [{ trigger, condition, sprite: null, commands }],
+          }));
+        }
+      }
     }
   }
 

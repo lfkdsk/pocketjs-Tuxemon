@@ -1,5 +1,6 @@
 import { expect, test } from "bun:test";
 import { spawnSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import { resolve } from "node:path";
 import {
   availableMapIds,
@@ -230,8 +231,9 @@ test("clamped transfers use the nearest deterministic walkable landing", () => {
 
 test("ImportOptions defaults preserve the v1 output byte-for-byte", () => {
   const maps = ["spyder_downstairs", "spyder_paper_town"];
-  expect(jsonBytes(buildProject(maps, DEFAULT_IMPORT_OPTIONS))).toBe(
-    jsonBytes(buildProject(maps)),
+  const bytes = jsonBytes(buildProject(maps, DEFAULT_IMPORT_OPTIONS));
+  expect(createHash("sha256").update(bytes).digest("hex")).toBe(
+    "36fa563fb94d66c720159ef064db23b32669e6dc9a94864a57d44ef1b0745820",
   );
 });
 
@@ -242,6 +244,28 @@ test("ImportOptions.areas emits a K1 rectangular event", () => {
   ) as (Record<string, unknown> | undefined);
   expect(event).toMatchObject({ x: 14, y: 3, w: 22, h: 1 });
   expect(result.report.options?.areas).toBeTrue();
+});
+
+test("ImportOptions.areas partitions overlaps and latches every guard before bodies", () => {
+  const result = buildProject(["spyder_paper_town"], {
+    areas: true,
+    facing: true,
+    condAll: true,
+    localReset: true,
+    place: true,
+    inputLock: true,
+  });
+  const overlap = result.project.maps[0]!.events?.find((event) =>
+    event.name === "Stop! + Autosave Cotton + Mom Quest Intercept"
+  ) as (Record<string, unknown> | undefined);
+  expect(overlap).toMatchObject({ x: 13, y: 1, w: 2, h: 1 });
+  const commands = ((overlap?.pages as { commands: Command[] }[])[0]!.commands);
+  const firstBody = commands.findIndex((entry) => entry.op === "if" &&
+    JSON.stringify(entry).includes("Hey! What do you think you're doing?"));
+  const lastLatch = commands.findLastIndex((entry) => entry.op === "switch" && entry.value === false);
+  expect(lastLatch).toBeGreaterThanOrEqual(0);
+  expect(firstBody).toBeGreaterThan(lastLatch);
+  expect(commands.filter((entry) => entry.op === "switch" && entry.value === false)).toHaveLength(3);
 });
 
 test("ImportOptions.facing emits a K1 facing condition", () => {
@@ -289,6 +313,37 @@ test("ImportOptions.inputLock emits K1 cross-event lock commands", () => {
   expect(ops).toContain("lockInput");
   expect(ops).toContain("unlockInput");
   expect(result.report.options?.inputLock).toBeTrue();
+});
+
+test("a blocking spawn cutscene survives its own presence write and unlocks input", () => {
+  const options = {
+    areas: true,
+    facing: true,
+    condAll: true,
+    localReset: true,
+    place: true,
+    inputLock: true,
+  };
+  const result = buildProject(["tuxe_mart_taba"], options);
+  const session = createSession(result.project, 60);
+  let state = startSession(result.project, session);
+  const seen = new Set<string>();
+  for (let frame = 0; frame < 1_000; frame++) {
+    if (state.interp.modal?.kind === "text") seen.add(state.interp.modal.lines.join(" "));
+    state = stepSession(session, state, {
+      buttons: 0,
+      confirmEdge: state.interp.modal?.kind === "text" && frame % 2 === 0,
+      cancelEdge: false,
+      upEdge: false,
+      downEdge: false,
+    });
+    if ((state.sw.variables["v.proftalk2"] ?? 0) > 0 && !state.interp.modal) break;
+  }
+  expect([...seen].some((line) => line.includes("I'll take 12 potions please."))).toBeTrue();
+  expect([...seen].some((line) => line.includes("My name is Kay Wren"))).toBeTrue();
+  expect(state.sw.variables["v.proftalk2"]).toBeGreaterThan(0);
+  expect(state.interp.inputLocked).toBeFalse();
+  expect(state.interp.error).toBeUndefined();
 });
 
 test("ImportOptions.routes emits K2 arbitrary targets and path steps", () => {
