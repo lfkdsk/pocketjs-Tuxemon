@@ -73,6 +73,9 @@ const addValue = (k: string, v: string) => (enumValues.get(k) ?? enumValues.set(
 for (const ev of loadAllFileEvents()) {
   for (const a of ev.acts) {
     if (a.type === "set_variable") for (const p of a.args) { const i = p.indexOf(":"); addValue(i < 0 ? p : p.slice(0, i), i < 0 ? "" : p.slice(i + 1)); }
+    if (a.type === "set_random_variable" && a.args[0] && a.args[1]) {
+      for (const value of a.args[1].split(":")) addValue(a.args[0], value);
+    }
     if (a.type === "translated_dialog_choice" || a.type === "choice_monster" || a.type === "choice_npc") for (const o of a.args[0]!.split(":")) addValue(a.args[1]!, o);
     if (a.type === "start_battle" || a.type === "start_double_battle") addValue("battle_last_trainer", a.args[0] === "player" ? a.args[1]! : a.args[0]!);
     if (a.type === "wild_encounter" && a.args[0]) addValue("battle_last_trainer", a.args[0]);
