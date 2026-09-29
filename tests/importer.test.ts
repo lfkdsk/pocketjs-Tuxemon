@@ -3,6 +3,8 @@ import { spawnSync } from "node:child_process";
 import { resolve } from "node:path";
 import { availableMapIds, buildProject } from "../importer/project.ts";
 import { jsonBytes, writeImport } from "../importer/index.ts";
+import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
+import { createSession, startSession, stepSession } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import type { Command } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
@@ -20,14 +22,14 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   expect(result.report.coverage.actions.summary).toMatchObject({
     types: 98,
     uses: 13_617,
-    native: 6_167,
+    native: 6_161,
     degraded: 2_822,
     placeholder: 433,
-    dropped: 4_195,
-    nativePercent: 45.3,
+    dropped: 4_201,
+    nativePercent: 45.2,
     tier1: {
-      uses: 6_104,
-      percent: 44.83,
+      uses: 6_099,
+      percent: 44.79,
       requiredUses: 6_246,
       meetsBaseline: false,
     },
@@ -35,13 +37,13 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   expect(result.report.coverage.conditions.summary).toMatchObject({
     types: 64,
     uses: 8_663,
-    native: 3_530,
+    native: 3_529,
     degraded: 1_238,
     placeholder: 850,
-    dropped: 3_045,
+    dropped: 3_046,
     tier1: {
-      uses: 3_530,
-      percent: 40.75,
+      uses: 3_529,
+      percent: 40.74,
       requiredUses: 4_591,
       meetsBaseline: false,
     },
@@ -53,9 +55,9 @@ test("all maps pass schema and reference valid transfer destinations", () => {
     ...result.report.coverage.conditions.rows,
   ];
   expect(coverageRows.find((row) => row.type === "char_face")).toMatchObject({
-    native: 870,
+    native: 869,
     degraded: 440,
-    dropped: 717,
+    dropped: 718,
   });
   expect(coverageRows.find((row) => row.type === "char_move")).toMatchObject({
     degraded: 9,
@@ -130,6 +132,45 @@ test("the complete import is byte-stable", () => {
   const second = buildProject(ids);
   expect(jsonBytes(first)).toBe(jsonBytes(second));
 }, 30_000);
+
+test("inert source events cannot freeze the Cotton Cafe", () => {
+  const result = buildProject(["spyder_cotton_cafe"]);
+  const cafe = result.project.maps[0]!;
+  expect(cafe.events?.some((event) => event.name === "Rand facing")).toBeFalse();
+
+  result.project.start = {
+    map: "spyder_cotton_cafe",
+    x: 8,
+    y: 10,
+    dir: "down",
+  };
+  const session = createSession(result.project, 60);
+  let state = startSession(result.project, session);
+  for (let frame = 0; frame < 20; frame++) {
+    state = stepSession(session, state, { buttons: 0 });
+  }
+  const start = [state.move.tx, state.move.ty];
+  for (let frame = 0; frame < 300; frame++) {
+    state = stepSession(session, state, { buttons: BTN_BITS.LEFT });
+  }
+  expect([state.move.tx, state.move.ty]).not.toEqual(start);
+  expect(state.interp.error).toBeUndefined();
+
+  const wait = result.report.coverage.actions.rows.find((row) => row.type === "wait")!;
+  expect(wait.reasons.dropped).toContain(
+    "Tuxemon never starts an event without source conditions or behavior",
+  );
+
+  const zeroSize = buildProject(["tt_paper_town"]);
+  const paperTown = zeroSize.project.maps[0]!;
+  expect(paperTown.events?.some((event) => event.name === "Teleport to Sea Route")).toBeFalse();
+  const transfers = zeroSize.report.coverage.actions.rows.find(
+    (row) => row.type === "transition_teleport",
+  )!;
+  expect(transfers.reasons.dropped).toContain(
+    "Tuxemon's integer tile boundary never contains a point for a zero-size TMX event",
+  );
+});
 
 test("Spyder opening completes identically at 60, 30, and 20 Hz", () => {
   writeImport(availableMapIds());

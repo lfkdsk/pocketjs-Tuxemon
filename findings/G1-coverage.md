@@ -10,21 +10,21 @@ When conversion discards a whole event, every source rule in it is Dropped.
 
 | Kind | Kinds | Uses | Native | Degraded | Placeholder | Dropped | S1 T1 baseline |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Actions | 98 | 13617 | 6167 | 2822 | 433 | 4195 | 6104 / 6246 (44.83% / 45.9%) |
-| Conditions | 64 | 8663 | 3530 | 1238 | 850 | 3045 | 3530 / 4591 (40.75% / 53.0%) |
+| Actions | 98 | 13617 | 6161 | 2822 | 433 | 4201 | 6099 / 6246 (44.79% / 45.9%) |
+| Conditions | 64 | 8663 | 3529 | 1238 | 850 | 3046 | 3529 / 4591 (40.74% / 53.0%) |
 
 The S1 acceptance baselines are 6,246 action uses (45.9%) and 4,591
 condition uses (53.0%). Only T1 source types whose disposition is Native or
-Degraded count toward them. This import records 6104
-(44.83%) and 3530
-(40.75%), respectively: 142
-action uses and 1061 condition uses below the S1 baselines. The old
+Degraded count toward them. This import records 6099
+(44.79%) and 3529
+(40.74%), respectively: 147
+action uses and 1062 condition uses below the S1 baselines. The old
 type-table Native figure was 5,448 / 13,617 (40.0%); conversion-path accounting
-supersedes it with 6167 / 13617
-(45.3%). “Executable”
+supersedes it with 6161 / 13617
+(45.2%). “Executable”
 (native + degraded + deliberate P1 placeholder) is
-69.2% for actions and
-64.9% for conditions.
+69.1% for actions and
+64.8% for conditions.
 
 Definitions:
 
@@ -61,7 +61,7 @@ are clamped deterministically:
 | Action | `change_bg_char` | 0 | 0 | 0 | 4 | 4 |
 | Action | `change_bg_monster` | 0 | 0 | 0 | 7 | 7 |
 | Action | `change_taste` | 0 | 0 | 0 | 2 | 2 |
-| Action | `char_face` | 870 | 440 | 0 | 717 | 2027 |
+| Action | `char_face` | 869 | 440 | 0 | 718 | 2027 |
 | Action | `char_move` | 0 | 9 | 0 | 68 | 77 |
 | Action | `char_plague` | 0 | 0 | 0 | 13 | 13 |
 | Action | `char_position` | 0 | 0 | 0 | 1 | 1 |
@@ -137,7 +137,7 @@ are clamped deterministically:
 | Action | `start_double_battle` | 0 | 0 | 8 | 0 | 8 |
 | Action | `teleport_faint` | 0 | 0 | 0 | 11 | 11 |
 | Action | `trading` | 0 | 0 | 0 | 8 | 8 |
-| Action | `transition_teleport` | 1042 | 3 | 0 | 4 | 1049 |
+| Action | `transition_teleport` | 1041 | 3 | 0 | 5 | 1049 |
 | Action | `translated_dialog` | 2006 | 0 | 0 | 62 | 2068 |
 | Action | `translated_dialog_choice` | 134 | 10 | 0 | 5 | 149 |
 | Action | `tune_radio` | 0 | 0 | 0 | 2 | 2 |
@@ -145,7 +145,7 @@ are clamped deterministically:
 | Action | `update_tile_properties` | 0 | 0 | 0 | 2 | 2 |
 | Action | `update_time` | 0 | 0 | 0 | 3 | 3 |
 | Action | `variable_math` | 0 | 0 | 0 | 5 | 5 |
-| Action | `wait` | 423 | 0 | 0 | 18 | 441 |
+| Action | `wait` | 419 | 0 | 0 | 22 | 441 |
 | Action | `wild_encounter` | 0 | 0 | 20 | 0 | 20 |
 
 ## Conditions
@@ -159,7 +159,7 @@ census.
 | Condition | `is battle_outcome_count` | 0 | 0 | 2 | 0 | 2 |
 | Condition | `is bill_is` | 0 | 0 | 0 | 2 | 2 |
 | Condition | `is button_pressed` | 396 | 0 | 0 | 23 | 419 |
-| Condition | `is char_at` | 1353 | 0 | 0 | 458 | 1811 |
+| Condition | `is char_at` | 1352 | 0 | 0 | 459 | 1811 |
 | Condition | `is char_defeated` | 0 | 0 | 0 | 10 | 10 |
 | Condition | `is char_exists` | 0 | 3 | 0 | 6 | 9 |
 | Condition | `is char_facing` | 0 | 0 | 0 | 1008 | 1008 |

@@ -1,8 +1,5 @@
-// findings/scout-S1/shapes.ts — group Tuxemon events by the SHAPE of their
-// guard (Scout S1; not product code): which conditions gate an event decides
-// which Pocket RPG Kit trigger it maps to.
-//
-//   bun findings/scout-S1/shapes.ts > findings/scout-S1/shapes.json
+// Classify a Tuxemon event by guard shape so the importer can select the
+// corresponding Pocket RPG Kit trigger.
 
 import { loadAllFileEvents, type TuxEvent } from "./source.ts";
 

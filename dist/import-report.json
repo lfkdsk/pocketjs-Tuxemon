@@ -272,11 +272,11 @@
  "schemaErrors": [],
  "byFate": {
   "T3-dropped": 5024,
-  "T1": 17957,
+  "T1": 17948,
   "T3-placeholder": 2157,
-  "T4-dropped": 4884,
+  "T4-dropped": 4885,
   "T1-lowered": 7477,
-  "T2-dropped": 3595,
+  "T2-dropped": 3589,
   "structural": 772
  },
  "rows": [
@@ -367,7 +367,7 @@
   {
    "key": "act:char_face(after teleport):T1",
    "fate": "T1",
-   "count": 870,
+   "count": 869,
    "note": "folded into transfer direction"
   },
   {
@@ -379,7 +379,7 @@
   {
    "key": "act:char_face(other npc):T2-dropped",
    "fate": "T2-dropped",
-   "count": 532,
+   "count": 528,
    "note": "moveRoute target must be an event id"
   },
   {
@@ -563,12 +563,6 @@
    "note": "gold add/sub"
   },
   {
-   "key": "act:not:T4-dropped",
-   "fate": "T4-dropped",
-   "count": 1,
-   "note": "presentation / meta"
-  },
-  {
    "key": "act:open_journal:T3-dropped",
    "fate": "T3-dropped",
    "count": 14,
@@ -607,7 +601,7 @@
   {
    "key": "act:play_music:T2-dropped",
    "fate": "T2-dropped",
-   "count": 200,
+   "count": 199,
    "note": "bgm hook (P1: silent)"
   },
   {
@@ -829,7 +823,7 @@
   {
    "key": "act:transition_teleport:T1",
    "fate": "T1",
-   "count": 1045,
+   "count": 1044,
    "note": "transfer (terminal; dir from trailing char_face)"
   },
   {
@@ -889,7 +883,7 @@
   {
    "key": "act:wait:T1",
    "fate": "T1",
-   "count": 429,
+   "count": 425,
    "note": "wait seconds"
   },
   {
@@ -949,7 +943,7 @@
   {
    "key": "cond:is char_at:T1",
    "fate": "T1",
-   "count": 1909,
+   "count": 1908,
    "note": "consumed by trigger selection"
   },
   {
@@ -967,7 +961,7 @@
   {
    "key": "cond:is char_facing:T2-dropped",
    "fate": "T2-dropped",
-   "count": 1498,
+   "count": 1497,
    "note": "trigger predicate unavailable in v1"
   },
   {
@@ -1369,8 +1363,20 @@
   {
    "key": "trigger:guard:T1",
    "fate": "T1",
-   "count": 678,
+   "count": 677,
    "note": "parallel"
+  },
+  {
+   "key": "trigger:inert(no conditions or behavior):T4-dropped",
+   "fate": "T4-dropped",
+   "count": 6,
+   "note": "Tuxemon never starts an event without source conditions or behavior"
+  },
+  {
+   "key": "trigger:inert(zero-size TMX area):T4-dropped",
+   "fate": "T4-dropped",
+   "count": 1,
+   "note": "Tuxemon's integer tile boundary never contains a point for a zero-size TMX event"
   },
   {
    "key": "trigger:never-true guard:T4-dropped",
@@ -1381,7 +1387,7 @@
   {
    "key": "trigger:no-op after conversion:T4-dropped",
    "fate": "T4-dropped",
-   "count": 1210,
+   "count": 1205,
    "note": "every action was removed, so no project event was emitted"
   },
   {
@@ -1405,7 +1411,7 @@
   {
    "key": "trigger:touch:facing:T1",
    "fate": "T1",
-   "count": 813,
+   "count": 812,
    "note": "playerTouch"
   },
   {
@@ -1480,15 +1486,15 @@
    "summary": {
     "types": 98,
     "uses": 13617,
-    "native": 6167,
+    "native": 6161,
     "degraded": 2822,
     "placeholder": 433,
-    "dropped": 4195,
-    "nativePercent": 45.3,
-    "executablePercent": 69.2,
+    "dropped": 4201,
+    "nativePercent": 45.2,
+    "executablePercent": 69.1,
     "tier1": {
-     "uses": 6104,
-     "percent": 44.83,
+     "uses": 6099,
+     "percent": 44.79,
      "requiredUses": 6246,
      "requiredPercent": 45.9,
      "meetsBaseline": false
@@ -1663,10 +1669,10 @@
     {
      "type": "char_face",
      "total": 2027,
-     "native": 870,
+     "native": 869,
      "degraded": 440,
      "placeholder": 0,
-     "dropped": 717,
+     "dropped": 718,
      "reasons": {
       "degraded": [
        "spawn facing becomes the NPC page route",
@@ -1679,7 +1685,9 @@
        "needs turnToward step",
        "every action was removed, so no project event was emitted",
        "fixed-false guard prevents the source event from starting",
-       "spawn target or direction is unavailable"
+       "Tuxemon never starts an event without source conditions or behavior",
+       "spawn target or direction is unavailable",
+       "Tuxemon's integer tile boundary never contains a point for a zero-size TMX event"
       ],
       "native": [
        "folded into transfer direction"
@@ -2087,7 +2095,7 @@
      "dropped": 1,
      "reasons": {
       "dropped": [
-       "every action was removed, so no project event was emitted"
+       "Tuxemon never starts an event without source conditions or behavior"
       ]
      }
     },
@@ -2184,7 +2192,8 @@
      "reasons": {
       "dropped": [
        "every action was removed, so no project event was emitted",
-       "bgm hook (P1: silent)"
+       "bgm hook (P1: silent)",
+       "Tuxemon never starts an event without source conditions or behavior"
       ]
      }
     },
@@ -2734,10 +2743,10 @@
     {
      "type": "transition_teleport",
      "total": 1049,
-     "native": 1042,
+     "native": 1041,
      "degraded": 3,
      "placeholder": 0,
-     "dropped": 4,
+     "dropped": 5,
      "reasons": {
       "native": [
        "transfer (terminal; dir from trailing char_face)"
@@ -2746,6 +2755,7 @@
        "upstream landing point clamped into target bounds"
       ],
       "dropped": [
+       "Tuxemon's integer tile boundary never contains a point for a zero-size TMX event",
        "fixed-false guard prevents the source event from starting"
       ]
      }
@@ -2858,16 +2868,17 @@
     {
      "type": "wait",
      "total": 441,
-     "native": 423,
+     "native": 419,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 18,
+     "dropped": 22,
      "reasons": {
       "native": [
        "wait seconds"
       ],
       "dropped": [
        "fixed-false guard prevents the source event from starting",
+       "Tuxemon never starts an event without source conditions or behavior",
        "runs on the old map during the fade"
       ]
      }
@@ -2891,15 +2902,15 @@
    "summary": {
     "types": 64,
     "uses": 8663,
-    "native": 3530,
+    "native": 3529,
     "degraded": 1238,
     "placeholder": 850,
-    "dropped": 3045,
+    "dropped": 3046,
     "nativePercent": 40.7,
-    "executablePercent": 64.9,
+    "executablePercent": 64.8,
     "tier1": {
-     "uses": 3530,
-     "percent": 40.75,
+     "uses": 3529,
+     "percent": 40.74,
      "requiredUses": 4591,
      "requiredPercent": 53,
      "meetsBaseline": false
@@ -2969,16 +2980,17 @@
     {
      "type": "is char_at",
      "total": 1811,
-     "native": 1353,
+     "native": 1352,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 458,
+     "dropped": 459,
      "reasons": {
       "native": [
        "consumed by trigger selection"
       ],
       "dropped": [
        "every action was removed, so no project event was emitted",
+       "Tuxemon's integer tile boundary never contains a point for a zero-size TMX event",
        "fixed-false guard prevents the source event from starting"
       ]
      }
@@ -3022,6 +3034,7 @@
      "reasons": {
       "dropped": [
        "trigger predicate unavailable in v1",
+       "Tuxemon's integer tile boundary never contains a point for a zero-size TMX event",
        "fixed-false guard prevents the source event from starting"
       ]
      }

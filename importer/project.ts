@@ -806,6 +806,18 @@ function convertMap(m: TuxMap): { map: MapDef; sprites: Record<string, SpriteDef
     const eventCoverage = new EventCoverage(e);
     activeCoverage = eventCoverage;
     try {
+      if (!e.conds.some((condition) => !condition.synthetic) && !e.behavs.length) {
+        const reason = "Tuxemon never starts an event without source conditions or behavior";
+        eventCoverage.dropAll(reason);
+        note("trigger", "inert(no conditions or behavior)", "T4-dropped", reason);
+        continue;
+      }
+      if (e.origin === "tmx" && (e.w === 0 || e.h === 0)) {
+        const reason = "Tuxemon's integer tile boundary never contains a point for a zero-size TMX event";
+        eventCoverage.dropAll(reason);
+        note("trigger", "inert(zero-size TMX area)", "T4-dropped", reason);
+        continue;
+      }
       const cls0 = e.conds.map((c) => clauses(c, m));
       const cls: Clause[] = cls0.filter((x): x is Clause[] => x !== null).flat();
       if (cls.some((c) => c.k === "const" && !c.value)) {
