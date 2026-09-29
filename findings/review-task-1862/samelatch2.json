@@ -1,0 +1,752 @@
+[
+ {
+  "map": "citypark",
+  "A": "e009_make_npcs (make npcs (spawn guard))",
+  "B": "e011_hurrytalkmistaken (hurrytalkmistaken)",
+  "witness": {
+   "local.npc.knight1": 0,
+   "v.firstgo": 3,
+   "v.cityparkchoice": 1
+  },
+  "writes": {
+   "local.npc.knight1": {
+    "set": 1
+   },
+   "v.firstgo": {
+    "set": 2
+   }
+  }
+ },
+ {
+  "map": "citypark",
+  "A": "e009_make_npcs (make npcs (spawn guard))",
+  "B": "e012_hurrytalkyes (hurrytalkyes)",
+  "witness": {
+   "local.npc.knight1": 0,
+   "v.firstgo": 3,
+   "v.cityparkchoice": 2
+  },
+  "writes": {
+   "local.npc.knight1": {
+    "set": 1
+   },
+   "v.firstgo": {
+    "set": 2
+   }
+  }
+ },
+ {
+  "map": "eclipse_crystal_center",
+  "A": "e007_agree_no (Agree No)",
+  "B": "e014_selling_no (Selling No)",
+  "witness": {
+   "v.__loaded_yaml.eclipse_crystal_center.spyder_cathedral": 1,
+   "v.isitok": 1,
+   "v.selltuxemon": 1
+  },
+  "writes": {
+   "v.selltuxemon": {
+    "set": 2
+   },
+   "v.isitok": {
+    "set": 2
+   }
+  }
+ },
+ {
+  "map": "eclipse_crystal_center",
+  "A": "e007_agree_no (Agree No)",
+  "B": "e015_selling_yes (Selling Yes)",
+  "witness": {
+   "v.__loaded_yaml.eclipse_crystal_center.spyder_cathedral": 1,
+   "v.isitok": 1,
+   "v.selltuxemon": 4
+  },
+  "writes": {
+   "v.selltuxemon": {
+    "set": 2
+   },
+   "v.isitok": {
+    "set": 2
+   }
+  }
+ },
+ {
+  "map": "eclipse_obsidian_center",
+  "A": "e003_agree_no (Agree No)",
+  "B": "e010_selling_no (Selling No)",
+  "witness": {
+   "v.__loaded_yaml.eclipse_obsidian_center.spyder_cathedral": 1,
+   "v.isitok": 1,
+   "v.selltuxemon": 1
+  },
+  "writes": {
+   "v.selltuxemon": {
+    "set": 2
+   },
+   "v.isitok": {
+    "set": 2
+   }
+  }
+ },
+ {
+  "map": "eclipse_obsidian_center",
+  "A": "e003_agree_no (Agree No)",
+  "B": "e011_selling_yes (Selling Yes)",
+  "witness": {
+   "v.__loaded_yaml.eclipse_obsidian_center.spyder_cathedral": 1,
+   "v.isitok": 1,
+   "v.selltuxemon": 4
+  },
+  "writes": {
+   "v.selltuxemon": {
+    "set": 2
+   },
+   "v.isitok": {
+    "set": 2
+   }
+  }
+ },
+ {
+  "map": "eclipse_park_entrance",
+  "A": "e001_clear (Clear)",
+  "B": "e005_no_pay (No Pay)",
+  "witness": {
+   "v.paypark": 1
+  },
+  "writes": {
+   "v.paypark": {
+    "set": 2
+   }
+  }
+ },
+ {
+  "map": "player_house_downstairs",
+  "A": "e006_create_mom2 (create mom2 (spawn guard))",
+  "B": "e010_create_mom3 (create mom3 (spawn guard))",
+  "witness": {
+   "v.comeinside": 1,
+   "local.npc.callie_wren": 0,
+   "v.can_exit_town": 0,
+   "v.backhome": 1
+  },
+  "writes": {
+   "local.npc.callie_wren": {
+    "set": 1
+   }
+  }
+ },
+ {
+  "map": "professor_lab",
+  "A": "e023_first_battle_won (first battle won)",
+  "B": "e026_shesarrived2 (shesarrived2)",
+  "witness": {
+   "v.finishedbattle": 1,
+   "v.battle_last_result": 5,
+   "v.endbattleprof": 0,
+   "v.ohnotyou": 1
+  },
+  "writes": {
+   "v.firstbattledone": {
+    "set": 1
+   },
+   "v.ohnotyou": {
+    "set": 3
+   },
+   "v.endbattleprof": {
+    "set": 1
+   }
+  }
+ },
+ {
+  "map": "professor_lab",
+  "A": "e023_first_battle_won (first battle won)",
+  "B": "e027_shesarrived3 (shesarrived3)",
+  "witness": {
+   "v.finishedbattle": 1,
+   "v.battle_last_result": 5,
+   "v.endbattleprof": 0,
+   "v.ohnotyou": 2
+  },
+  "writes": {
+   "v.firstbattledone": {
+    "set": 1
+   },
+   "v.ohnotyou": {
+    "set": 3
+   },
+   "v.endbattleprof": {
+    "set": 1
+   }
+  }
+ },
+ {
+  "map": "professor_lab",
+  "A": "e024_first_battle_lost_or_draw (first battle lost or draw)",
+  "B": "e026_shesarrived2 (shesarrived2)",
+  "witness": {
+   "v.finishedbattle": 1,
+   "v.battle_last_result": 0,
+   "v.endbattleprof": 0,
+   "v.ohnotyou": 1
+  },
+  "writes": {
+   "v.firstbattledone": {
+    "set": 1
+   },
+   "v.ohnotyou": {
+    "set": 3
+   },
+   "v.endbattleprof": {
+    "set": 1
+   }
+  }
+ },
+ {
+  "map": "professor_lab",
+  "A": "e024_first_battle_lost_or_draw (first battle lost or draw)",
+  "B": "e027_shesarrived3 (shesarrived3)",
+  "witness": {
+   "v.finishedbattle": 1,
+   "v.battle_last_result": 0,
+   "v.endbattleprof": 0,
+   "v.ohnotyou": 2
+  },
+  "writes": {
+   "v.firstbattledone": {
+    "set": 1
+   },
+   "v.ohnotyou": {
+    "set": 3
+   },
+   "v.endbattleprof": {
+    "set": 1
+   }
+  }
+ },
+ {
+  "map": "spyder_candy_center",
+  "A": "e016_agree_no (Agree No)",
+  "B": "e023_selling_no (Selling No)",
+  "witness": {
+   "v.__loaded_yaml.spyder_candy_center.spyder_cathedral": 1,
+   "v.isitok": 1,
+   "v.selltuxemon": 1
+  },
+  "writes": {
+   "v.selltuxemon": {
+    "set": 2
+   },
+   "v.isitok": {
+    "set": 2
+   }
+  }
+ },
+ {
+  "map": "spyder_candy_center",
+  "A": "e016_agree_no (Agree No)",
+  "B": "e024_selling_yes (Selling Yes)",
+  "witness": {
+   "v.__loaded_yaml.spyder_candy_center.spyder_cathedral": 1,
+   "v.isitok": 1,
+   "v.selltuxemon": 4
+  },
+  "writes": {
+   "v.selltuxemon": {
+    "set": 2
+   },
+   "v.isitok": {
+    "set": 2
+   }
+  }
+ },
+ {
+  "map": "spyder_dojo1",
+  "A": "e022_talk_zhu_reset (Talk Zhu Reset)",
+  "B": "e023_talk_zhu_taste (Talk Zhu Taste)",
+  "witness": {
+   "v.zhu_taste_done": 1,
+   "v.zhu_yn": 3,
+   "v.zhu_taste_choice": 0
+  },
+  "writes": {
+   "v.zhu_yn": {
+    "set": 2
+   },
+   "v.zhu_taste_choice": {
+    "set": 1
+   },
+   "v.which_taste": {
+    "set": 1
+   }
+  }
+ },
+ {
+  "map": "spyder_flower_center",
+  "A": "e007_agree_no (Agree No)",
+  "B": "e014_selling_no (Selling No)",
+  "witness": {
+   "v.__loaded_yaml.spyder_flower_center.spyder_cathedral": 1,
+   "v.isitok": 1,
+   "v.selltuxemon": 1
+  },
+  "writes": {
+   "v.selltuxemon": {
+    "set": 2
+   },
+   "v.isitok": {
+    "set": 2
+   }
+  }
+ },
+ {
+  "map": "spyder_flower_center",
+  "A": "e007_agree_no (Agree No)",
+  "B": "e015_selling_yes (Selling Yes)",
+  "witness": {
+   "v.__loaded_yaml.spyder_flower_center.spyder_cathedral": 1,
+   "v.isitok": 1,
+   "v.selltuxemon": 4
+  },
+  "writes": {
+   "v.selltuxemon": {
+    "set": 2
+   },
+   "v.isitok": {
+    "set": 2
+   }
+  }
+ },
+ {
+  "map": "spyder_healing_center",
+  "A": "e012_agree_no (Agree No)",
+  "B": "e019_selling_no (Selling No)",
+  "witness": {
+   "v.__loaded_yaml.spyder_healing_center.spyder_cathedral": 1,
+   "v.isitok": 1,
+   "v.selltuxemon": 1
+  },
+  "writes": {
+   "v.selltuxemon": {
+    "set": 2
+   },
+   "v.isitok": {
+    "set": 2
+   }
+  }
+ },
+ {
+  "map": "spyder_healing_center",
+  "A": "e012_agree_no (Agree No)",
+  "B": "e020_selling_yes (Selling Yes)",
+  "witness": {
+   "v.__loaded_yaml.spyder_healing_center.spyder_cathedral": 1,
+   "v.isitok": 1,
+   "v.selltuxemon": 4
+  },
+  "writes": {
+   "v.selltuxemon": {
+    "set": 2
+   },
+   "v.isitok": {
+    "set": 2
+   }
+  }
+ },
+ {
+  "map": "spyder_leather_center",
+  "A": "e007_agree_no (Agree No)",
+  "B": "e014_selling_no (Selling No)",
+  "witness": {
+   "v.__loaded_yaml.spyder_leather_center.spyder_cathedral": 1,
+   "v.isitok": 1,
+   "v.selltuxemon": 1
+  },
+  "writes": {
+   "v.selltuxemon": {
+    "set": 2
+   },
+   "v.isitok": {
+    "set": 2
+   }
+  }
+ },
+ {
+  "map": "spyder_leather_center",
+  "A": "e007_agree_no (Agree No)",
+  "B": "e015_selling_yes (Selling Yes)",
+  "witness": {
+   "v.__loaded_yaml.spyder_leather_center.spyder_cathedral": 1,
+   "v.isitok": 1,
+   "v.selltuxemon": 4
+  },
+  "writes": {
+   "v.selltuxemon": {
+    "set": 2
+   },
+   "v.isitok": {
+    "set": 2
+   }
+  }
+ },
+ {
+  "map": "spyder_paper_scoop",
+  "A": "e008_confirm_monster_no (Confirm Monster No)",
+  "B": "e010_continue_storekeeper (Continue Storekeeper)",
+  "witness": {
+   "v.areyousure": 1,
+   "v.intro_scoop": 0,
+   "v.choice_phase": 2
+  },
+  "writes": {
+   "v.choice_phase": {
+    "set": 3
+   },
+   "v.areyousure": {
+    "set": 2
+   }
+  }
+ },
+ {
+  "map": "spyder_paper_scoop",
+  "A": "e008_confirm_monster_no (Confirm Monster No)",
+  "B": "e015_intro_storekeeper (Intro Storekeeper)",
+  "witness": {
+   "v.areyousure": 1,
+   "v.intro_scoop": 0,
+   "v.choice_phase": 0
+  },
+  "writes": {
+   "v.choice_phase": {
+    "set": 3
+   },
+   "v.areyousure": {
+    "set": 2
+   }
+  }
+ },
+ {
+  "map": "spyder_paper_scoop",
+  "A": "e009_confirm_monster_yes (Confirm Monster Yes)",
+  "B": "e015_intro_storekeeper (Intro Storekeeper)",
+  "witness": {
+   "v.areyousure": 3,
+   "v.intro_scoop": 0,
+   "v.choice_phase": 0
+  },
+  "writes": {
+   "v.choice_phase": {
+    "set": 2
+   }
+  }
+ },
+ {
+  "map": "spyder_paper_town",
+  "A": "e019_chosen_rockitten (Chosen - Rockitten)",
+  "B": "e020_chosen_lambert (Chosen - Lambert)",
+  "witness": {
+   "v.rockittenchosen": 2,
+   "sys.party_size": 0,
+   "v.lambertchosen": 2
+  },
+  "writes": {
+   "sys.party_size": {
+    "add": 1
+   },
+   "sw:mon.rockitten": {
+    "set": 1
+   }
+  }
+ },
+ {
+  "map": "spyder_paper_town",
+  "A": "e019_chosen_rockitten (Chosen - Rockitten)",
+  "B": "e021_chosen_nut (Chosen - Nut)",
+  "witness": {
+   "v.rockittenchosen": 2,
+   "sys.party_size": 0,
+   "v.nutchosen": 2
+  },
+  "writes": {
+   "sys.party_size": {
+    "add": 1
+   },
+   "sw:mon.rockitten": {
+    "set": 1
+   }
+  }
+ },
+ {
+  "map": "spyder_paper_town",
+  "A": "e019_chosen_rockitten (Chosen - Rockitten)",
+  "B": "e022_chosen_tweesher (Chosen - Tweesher)",
+  "witness": {
+   "v.rockittenchosen": 2,
+   "sys.party_size": 0,
+   "v.tweesherchosen": 2
+  },
+  "writes": {
+   "sys.party_size": {
+    "add": 1
+   },
+   "sw:mon.rockitten": {
+    "set": 1
+   }
+  }
+ },
+ {
+  "map": "spyder_paper_town",
+  "A": "e019_chosen_rockitten (Chosen - Rockitten)",
+  "B": "e023_chosen_agnite (Chosen - Agnite)",
+  "witness": {
+   "v.rockittenchosen": 2,
+   "sys.party_size": 0,
+   "v.agnitechosen": 2
+  },
+  "writes": {
+   "sys.party_size": {
+    "add": 1
+   },
+   "sw:mon.rockitten": {
+    "set": 1
+   }
+  }
+ },
+ {
+  "map": "spyder_paper_town",
+  "A": "e020_chosen_lambert (Chosen - Lambert)",
+  "B": "e021_chosen_nut (Chosen - Nut)",
+  "witness": {
+   "v.lambertchosen": 2,
+   "sys.party_size": 0,
+   "v.nutchosen": 2
+  },
+  "writes": {
+   "sys.party_size": {
+    "add": 1
+   },
+   "sw:mon.lambert": {
+    "set": 1
+   }
+  }
+ },
+ {
+  "map": "spyder_paper_town",
+  "A": "e020_chosen_lambert (Chosen - Lambert)",
+  "B": "e022_chosen_tweesher (Chosen - Tweesher)",
+  "witness": {
+   "v.lambertchosen": 2,
+   "sys.party_size": 0,
+   "v.tweesherchosen": 2
+  },
+  "writes": {
+   "sys.party_size": {
+    "add": 1
+   },
+   "sw:mon.lambert": {
+    "set": 1
+   }
+  }
+ },
+ {
+  "map": "spyder_paper_town",
+  "A": "e020_chosen_lambert (Chosen - Lambert)",
+  "B": "e023_chosen_agnite (Chosen - Agnite)",
+  "witness": {
+   "v.lambertchosen": 2,
+   "sys.party_size": 0,
+   "v.agnitechosen": 2
+  },
+  "writes": {
+   "sys.party_size": {
+    "add": 1
+   },
+   "sw:mon.lambert": {
+    "set": 1
+   }
+  }
+ },
+ {
+  "map": "spyder_paper_town",
+  "A": "e021_chosen_nut (Chosen - Nut)",
+  "B": "e022_chosen_tweesher (Chosen - Tweesher)",
+  "witness": {
+   "v.nutchosen": 2,
+   "sys.party_size": 0,
+   "v.tweesherchosen": 2
+  },
+  "writes": {
+   "sys.party_size": {
+    "add": 1
+   },
+   "sw:mon.nut": {
+    "set": 1
+   }
+  }
+ },
+ {
+  "map": "spyder_paper_town",
+  "A": "e021_chosen_nut (Chosen - Nut)",
+  "B": "e023_chosen_agnite (Chosen - Agnite)",
+  "witness": {
+   "v.nutchosen": 2,
+   "sys.party_size": 0,
+   "v.agnitechosen": 2
+  },
+  "writes": {
+   "sys.party_size": {
+    "add": 1
+   },
+   "sw:mon.nut": {
+    "set": 1
+   }
+  }
+ },
+ {
+  "map": "spyder_paper_town",
+  "A": "e022_chosen_tweesher (Chosen - Tweesher)",
+  "B": "e023_chosen_agnite (Chosen - Agnite)",
+  "witness": {
+   "v.tweesherchosen": 2,
+   "sys.party_size": 0,
+   "v.agnitechosen": 2
+  },
+  "writes": {
+   "sys.party_size": {
+    "add": 1
+   },
+   "sw:mon.tweesher": {
+    "set": 1
+   }
+  }
+ },
+ {
+  "map": "spyder_timber_center",
+  "A": "e007_agree_no (Agree No)",
+  "B": "e014_selling_no (Selling No)",
+  "witness": {
+   "v.__loaded_yaml.spyder_timber_center.spyder_cathedral": 1,
+   "v.isitok": 1,
+   "v.selltuxemon": 1
+  },
+  "writes": {
+   "v.selltuxemon": {
+    "set": 2
+   },
+   "v.isitok": {
+    "set": 2
+   }
+  }
+ },
+ {
+  "map": "spyder_timber_center",
+  "A": "e007_agree_no (Agree No)",
+  "B": "e015_selling_yes (Selling Yes)",
+  "witness": {
+   "v.__loaded_yaml.spyder_timber_center.spyder_cathedral": 1,
+   "v.isitok": 1,
+   "v.selltuxemon": 4
+  },
+  "writes": {
+   "v.selltuxemon": {
+    "set": 2
+   },
+   "v.isitok": {
+    "set": 2
+   }
+  }
+ },
+ {
+  "map": "start_tuxemon",
+  "A": "e004_pronoun_he (Pronoun He)",
+  "B": "e010_scenario (Scenario)",
+  "witness": {
+   "v.pronoun_choice": 1,
+   "v.gender_choice": 0,
+   "v.scenario_choice": 0,
+   "v.race_choice": 0
+  },
+  "writes": {
+   "v.gender_choice": {
+    "set": 2
+   }
+  }
+ },
+ {
+  "map": "start_tuxemon",
+  "A": "e004_pronoun_he (Pronoun He)",
+  "B": "e012_pronouns (Pronouns)",
+  "witness": {
+   "v.pronoun_choice": 1,
+   "v.gender_choice": 0,
+   "v.race_choice": 1
+  },
+  "writes": {
+   "v.gender_choice": {
+    "set": 2
+   }
+  }
+ },
+ {
+  "map": "start_tuxemon",
+  "A": "e005_pronoun_she (Pronoun She)",
+  "B": "e010_scenario (Scenario)",
+  "witness": {
+   "v.pronoun_choice": 2,
+   "v.gender_choice": 0,
+   "v.scenario_choice": 0,
+   "v.race_choice": 0
+  },
+  "writes": {
+   "v.gender_choice": {
+    "set": 1
+   }
+  }
+ },
+ {
+  "map": "start_tuxemon",
+  "A": "e005_pronoun_she (Pronoun She)",
+  "B": "e012_pronouns (Pronouns)",
+  "witness": {
+   "v.pronoun_choice": 2,
+   "v.gender_choice": 0,
+   "v.race_choice": 1
+  },
+  "writes": {
+   "v.gender_choice": {
+    "set": 1
+   }
+  }
+ },
+ {
+  "map": "start_tuxemon",
+  "A": "e006_pronoun_they (Pronoun They)",
+  "B": "e010_scenario (Scenario)",
+  "witness": {
+   "v.pronoun_choice": 3,
+   "v.gender_choice": 0,
+   "v.scenario_choice": 0,
+   "v.race_choice": 0
+  },
+  "writes": {
+   "v.gender_choice": {
+    "set": 3
+   }
+  }
+ },
+ {
+  "map": "start_tuxemon",
+  "A": "e006_pronoun_they (Pronoun They)",
+  "B": "e012_pronouns (Pronouns)",
+  "witness": {
+   "v.pronoun_choice": 3,
+   "v.gender_choice": 0,
+   "v.race_choice": 1
+  },
+  "writes": {
+   "v.gender_choice": {
+    "set": 3
+   }
+  }
+ }
+]

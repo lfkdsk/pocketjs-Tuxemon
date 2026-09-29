@@ -1,0 +1,10 @@
+
+running 1 test
+BOOT viewport=960x544 boot=892.325ms first_qjs=1.484ms first_total=2.067ms startup_to_first=894.550ms qjs_used=36.82MiB qjs_malloc=52.35MiB objects=256301
+CASE viewport=960x544 kind=walking n=614 qjs_p95=0.903ms qjs_max=1.621ms total_p95=0.993ms total_max=1.960ms worst=f2563:spyder_paper_town
+CASE viewport=960x544 kind=map-switch n=119 qjs_p95=1.408ms qjs_max=3.810ms total_p95=1.727ms total_max=4.150ms worst=f3400:spyder_route1
+END viewport=960x544 frames=3410 transfers=5 map=spyder_route1 qjs_used=39.91MiB qjs_malloc=57.71MiB objects=284314
+test g6_quickjs_bench::journey ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 16 filtered out; finished in 3.08s
+
