@@ -1,6 +1,6 @@
 {
   "title": "Pocket Tuxemon",
-  "intro": "Tuxemon's world, automatically imported into Pocket RPG Kit.",
+  "intro": "Tuxemon's world, automatically imported into Pocket RPG Kit. Maps, art, characters and story are from Tuxemon (github.com/Tuxemon/Tuxemon), GPL-3.0 and CC BY-SA; per-asset credits are in this repository's licenses/TUXEMON-ATTRIBUTIONS.md.",
   "games": {
     "pocket-tuxemon": {
       "title": "Pocket Tuxemon",

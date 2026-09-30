@@ -16,6 +16,9 @@ on:
 permissions:
   contents: read
 
+# The web site is published to GitHub Pages from main after every check
+# passes (Settings -> Pages -> Source: GitHub Actions).
+
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
@@ -105,6 +108,14 @@ jobs:
           path: dist/web
           retention-days: 14
 
+      - uses: actions/configure-pages@v6
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+      - uses: actions/upload-pages-artifact@v5
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        with:
+          path: dist/web
+
       - name: Keep the journey screenshot
         if: always()
         uses: actions/upload-artifact@v7
@@ -113,3 +124,21 @@ jobs:
           path: dist/web-journey/*.png
           retention-days: 14
           if-no-files-found: ignore
+
+  deploy:
+    needs: check
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
