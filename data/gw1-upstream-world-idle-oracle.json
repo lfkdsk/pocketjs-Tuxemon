@@ -1,0 +1,1616 @@
+{
+  "adapters": {
+    "audio": "silent",
+    "fontFallback": "/usr/share/fonts/opentype/urw-base35/NimbusSans-Regular.otf"
+  },
+  "evolutionGates": [
+    {
+      "blockedTicks": 5,
+      "evolutionActionTick": 5,
+      "evolutionEventStartTick": 5,
+      "map": "spyder_route1",
+      "releaseTick": 5,
+      "sourceCondition": [
+        {
+          "operator": "is",
+          "parameters": [
+            "WorldState"
+          ],
+          "type": "current_state"
+        }
+      ],
+      "startsBeforeRelease": 0,
+      "stateAtEvolution": [
+        "WorldState",
+        "BackgroundState"
+      ],
+      "storyGate": "battle return (no authored story lock)",
+      "trace": [
+        {
+          "action": "lock_controls",
+          "kind": "action",
+          "map": "spyder_route1",
+          "parameters": {},
+          "seq": 0,
+          "stateStack": [
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 0
+        },
+        {
+          "kind": "milestone",
+          "map": "spyder_route1",
+          "name": "battleOrStoryBlockerPresent",
+          "seq": 1,
+          "stateStack": [
+            "SinkState",
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 0
+        },
+        {
+          "action": "unlock_controls",
+          "kind": "action",
+          "map": "spyder_route1",
+          "parameters": {},
+          "seq": 2,
+          "stateStack": [
+            "SinkState",
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 5
+        },
+        {
+          "kind": "milestone",
+          "map": "spyder_route1",
+          "name": "worldStateRestored",
+          "seq": 3,
+          "stateStack": [
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 5
+        },
+        {
+          "box": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "event": "Evolution all",
+          "instance": 1,
+          "kind": "eventStart",
+          "map": "spyder_route1",
+          "seq": 4,
+          "stateStack": [
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 5
+        },
+        {
+          "action": "evolution",
+          "box": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "event": "Evolution all",
+          "instance": 1,
+          "kind": "action",
+          "map": "spyder_route1",
+          "parameters": {
+            "evolution": null,
+            "npc_slug": "player",
+            "variable": null
+          },
+          "seq": 5,
+          "stateStack": [
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 5
+        }
+      ]
+    },
+    {
+      "blockedTicks": 5,
+      "evolutionActionTick": 5,
+      "evolutionEventStartTick": 5,
+      "map": "spyder_paper_town",
+      "releaseTick": 5,
+      "sourceCondition": [
+        {
+          "operator": "is",
+          "parameters": [
+            "WorldState"
+          ],
+          "type": "current_state"
+        }
+      ],
+      "startsBeforeRelease": 0,
+      "stateAtEvolution": [
+        "WorldState",
+        "BackgroundState"
+      ],
+      "storyGate": "First Fight - Start / result event",
+      "trace": [
+        {
+          "action": "lock_controls",
+          "kind": "action",
+          "map": "spyder_paper_town",
+          "parameters": {},
+          "seq": 0,
+          "stateStack": [
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 0
+        },
+        {
+          "kind": "milestone",
+          "map": "spyder_paper_town",
+          "name": "battleOrStoryBlockerPresent",
+          "seq": 1,
+          "stateStack": [
+            "SinkState",
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 0
+        },
+        {
+          "action": "unlock_controls",
+          "kind": "action",
+          "map": "spyder_paper_town",
+          "parameters": {},
+          "seq": 2,
+          "stateStack": [
+            "SinkState",
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 5
+        },
+        {
+          "kind": "milestone",
+          "map": "spyder_paper_town",
+          "name": "worldStateRestored",
+          "seq": 3,
+          "stateStack": [
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 5
+        },
+        {
+          "box": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "event": "Evolution all",
+          "instance": 1,
+          "kind": "eventStart",
+          "map": "spyder_paper_town",
+          "seq": 4,
+          "stateStack": [
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 5
+        },
+        {
+          "action": "evolution",
+          "box": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "event": "Evolution all",
+          "instance": 1,
+          "kind": "action",
+          "map": "spyder_paper_town",
+          "parameters": {
+            "evolution": null,
+            "npc_slug": "player",
+            "variable": null
+          },
+          "seq": 5,
+          "stateStack": [
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 5
+        }
+      ]
+    },
+    {
+      "blockedTicks": 5,
+      "evolutionActionTick": 5,
+      "evolutionEventStartTick": 5,
+      "map": "spyder_radiotower",
+      "releaseTick": 5,
+      "sourceCondition": [
+        {
+          "operator": "is",
+          "parameters": [
+            "WorldState"
+          ],
+          "type": "current_state"
+        }
+      ],
+      "startsBeforeRelease": 0,
+      "stateAtEvolution": [
+        "WorldState",
+        "BackgroundState"
+      ],
+      "storyGate": "Stop!",
+      "trace": [
+        {
+          "action": "lock_controls",
+          "kind": "action",
+          "map": "spyder_radiotower",
+          "parameters": {},
+          "seq": 0,
+          "stateStack": [
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 0
+        },
+        {
+          "kind": "milestone",
+          "map": "spyder_radiotower",
+          "name": "battleOrStoryBlockerPresent",
+          "seq": 1,
+          "stateStack": [
+            "SinkState",
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 0
+        },
+        {
+          "action": "unlock_controls",
+          "kind": "action",
+          "map": "spyder_radiotower",
+          "parameters": {},
+          "seq": 2,
+          "stateStack": [
+            "SinkState",
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 5
+        },
+        {
+          "kind": "milestone",
+          "map": "spyder_radiotower",
+          "name": "worldStateRestored",
+          "seq": 3,
+          "stateStack": [
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 5
+        },
+        {
+          "box": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "event": "Evolution all",
+          "instance": 1,
+          "kind": "eventStart",
+          "map": "spyder_radiotower",
+          "seq": 4,
+          "stateStack": [
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 5
+        },
+        {
+          "action": "evolution",
+          "box": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "event": "Evolution all",
+          "instance": 1,
+          "kind": "action",
+          "map": "spyder_radiotower",
+          "parameters": {
+            "evolution": null,
+            "npc_slug": "player",
+            "variable": null
+          },
+          "seq": 5,
+          "stateStack": [
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 5
+        }
+      ]
+    },
+    {
+      "blockedTicks": 5,
+      "evolutionActionTick": 5,
+      "evolutionEventStartTick": 5,
+      "map": "taba_ba_br_1",
+      "releaseTick": 5,
+      "sourceCondition": [
+        {
+          "operator": "is",
+          "parameters": [
+            "WorldState"
+          ],
+          "type": "current_state"
+        }
+      ],
+      "startsBeforeRelease": 0,
+      "stateAtEvolution": [
+        "WorldState",
+        "BackgroundState"
+      ],
+      "storyGate": "move to middle redo / result event",
+      "trace": [
+        {
+          "action": "lock_controls",
+          "kind": "action",
+          "map": "taba_ba_br_1",
+          "parameters": {},
+          "seq": 0,
+          "stateStack": [
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 0
+        },
+        {
+          "kind": "milestone",
+          "map": "taba_ba_br_1",
+          "name": "battleOrStoryBlockerPresent",
+          "seq": 1,
+          "stateStack": [
+            "SinkState",
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 0
+        },
+        {
+          "action": "unlock_controls",
+          "kind": "action",
+          "map": "taba_ba_br_1",
+          "parameters": {},
+          "seq": 2,
+          "stateStack": [
+            "SinkState",
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 5
+        },
+        {
+          "kind": "milestone",
+          "map": "taba_ba_br_1",
+          "name": "worldStateRestored",
+          "seq": 3,
+          "stateStack": [
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 5
+        },
+        {
+          "box": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "event": "Evolution all",
+          "instance": 1,
+          "kind": "eventStart",
+          "map": "taba_ba_br_1",
+          "seq": 4,
+          "stateStack": [
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 5
+        },
+        {
+          "action": "evolution",
+          "box": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "event": "Evolution all",
+          "instance": 1,
+          "kind": "action",
+          "map": "taba_ba_br_1",
+          "parameters": {
+            "evolution": null,
+            "npc_slug": "player",
+            "variable": null
+          },
+          "seq": 5,
+          "stateStack": [
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 5
+        }
+      ]
+    },
+    {
+      "blockedTicks": 5,
+      "evolutionActionTick": 5,
+      "evolutionEventStartTick": 5,
+      "map": "taba_ba_br_2",
+      "releaseTick": 5,
+      "sourceCondition": [
+        {
+          "operator": "is",
+          "parameters": [
+            "WorldState"
+          ],
+          "type": "current_state"
+        }
+      ],
+      "startsBeforeRelease": 0,
+      "stateAtEvolution": [
+        "WorldState",
+        "BackgroundState"
+      ],
+      "storyGate": "acolyte2 or battle redo / result event",
+      "trace": [
+        {
+          "action": "lock_controls",
+          "kind": "action",
+          "map": "taba_ba_br_2",
+          "parameters": {},
+          "seq": 0,
+          "stateStack": [
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 0
+        },
+        {
+          "kind": "milestone",
+          "map": "taba_ba_br_2",
+          "name": "battleOrStoryBlockerPresent",
+          "seq": 1,
+          "stateStack": [
+            "SinkState",
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 0
+        },
+        {
+          "action": "unlock_controls",
+          "kind": "action",
+          "map": "taba_ba_br_2",
+          "parameters": {},
+          "seq": 2,
+          "stateStack": [
+            "SinkState",
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 5
+        },
+        {
+          "kind": "milestone",
+          "map": "taba_ba_br_2",
+          "name": "worldStateRestored",
+          "seq": 3,
+          "stateStack": [
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 5
+        },
+        {
+          "box": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "event": "Evolution all",
+          "instance": 1,
+          "kind": "eventStart",
+          "map": "taba_ba_br_2",
+          "seq": 4,
+          "stateStack": [
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 5
+        },
+        {
+          "action": "evolution",
+          "box": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "event": "Evolution all",
+          "instance": 1,
+          "kind": "action",
+          "map": "taba_ba_br_2",
+          "parameters": {
+            "evolution": null,
+            "npc_slug": "player",
+            "variable": null
+          },
+          "seq": 5,
+          "stateStack": [
+            "WorldState",
+            "BackgroundState"
+          ],
+          "tick": 5
+        }
+      ]
+    }
+  ],
+  "format": "tuxemon-upstream-world-idle-oracle/v1",
+  "hz": 60,
+  "radiotowerLoss": {
+    "battleResultTick": 1321,
+    "final": {
+      "battleLastResult": "lost",
+      "kernelquest": "yes",
+      "map": "spyder_leather_center",
+      "party": [
+        {
+          "hp": 0,
+          "level": 5,
+          "maxHp": 75,
+          "slug": "rockitten",
+          "waitingToEvolve": false
+        }
+      ],
+      "playerTile": [
+        6,
+        7
+      ],
+      "stateStack": [
+        "WorldState",
+        "BackgroundState"
+      ]
+    },
+    "stopBattleTick": 596,
+    "stopUnlockTick": 2156,
+    "teleportFaintActions": 2,
+    "teleportFaintStarts": 2,
+    "ticks": 2179,
+    "trace": [
+      {
+        "box": [
+          1,
+          16,
+          12,
+          1
+        ],
+        "event": "Stop!",
+        "instance": 1,
+        "kind": "eventStart",
+        "map": "spyder_radiotower",
+        "seq": 0,
+        "stateStack": [
+          "TeleporterState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 0
+      },
+      {
+        "action": "lock_controls",
+        "box": [
+          1,
+          16,
+          12,
+          1
+        ],
+        "event": "Stop!",
+        "instance": 1,
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {},
+        "seq": 1,
+        "stateStack": [
+          "TeleporterState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 0
+      },
+      {
+        "action": "translated_dialog",
+        "box": [
+          1,
+          16,
+          12,
+          1
+        ],
+        "event": "Stop!",
+        "instance": 1,
+        "key": "spyder_omnichannel_billie1",
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "avatar": null,
+          "h_alignment": null,
+          "position": null,
+          "raw_parameters": "spyder_omnichannel_billie1",
+          "style": null,
+          "v_alignment": null
+        },
+        "seq": 2,
+        "stateStack": [
+          "SinkState",
+          "TeleporterState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "text": "Hey ${{name}}, hold up!\n I've been thinking a lot about what you did for my tuxemon, and I have to admit, it got me thinking about my own priorities.\n I realized I've been too focused on my own goals, and I haven't been doing enough to help others.\n That's why I'm coming with you to take down those tuxemon thieves.\n We owe it to ourselves, our tuxemon, and the entire community to put a stop to their nefarious plans.",
+        "tick": 0
+      },
+      {
+        "action": "translated_dialog",
+        "box": [
+          1,
+          16,
+          12,
+          1
+        ],
+        "event": "Stop!",
+        "instance": 1,
+        "key": "spyder_omnichannel_dante1",
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "avatar": null,
+          "h_alignment": null,
+          "position": null,
+          "raw_parameters": "spyder_omnichannel_dante1",
+          "style": null,
+          "v_alignment": null
+        },
+        "seq": 3,
+        "stateStack": [
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "text": "I've been watching you from the shop, and I have to say, I'm impressed.\n You've come a long way since you first got your tuxemon.\n I've been feeling a bit guilty, I'm the one who helped you get that tuxemon, and I feel like I've got a responsibility to help you see this through.\n Plus, I've got to admit, I'm a bit curious to see how this all plays out. So, I'm coming with you to take down those tuxemon thieves.\n Let's do this!",
+        "tick": 206
+      },
+      {
+        "action": "translated_dialog",
+        "box": [
+          1,
+          16,
+          12,
+          1
+        ],
+        "event": "Stop!",
+        "instance": 1,
+        "key": "spyder_omnichannel_beaverbrook1",
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "avatar": null,
+          "h_alignment": null,
+          "position": null,
+          "raw_parameters": "spyder_omnichannel_beaverbrook1",
+          "style": null,
+          "v_alignment": null
+        },
+        "seq": 4,
+        "stateStack": [
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "text": "Aha, it's too late for you! \n Just out of the birthing pit ... the perfect monsters! \n The genes of Drokoro incubated in dragon eggs dug up by Shaft \n ... and fused with three killer robos designed by Nimrod. \n The power of teamwork ... and it's in my hands. ",
+        "tick": 394
+      },
+      {
+        "action": "start_battle",
+        "box": [
+          1,
+          16,
+          12,
+          1
+        ],
+        "event": "Stop!",
+        "instance": 1,
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "character1": "player",
+          "character2": "spyder_omnichannel_beaverbrook",
+          "music": null
+        },
+        "seq": 5,
+        "stateStack": [
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 596
+      },
+      {
+        "action": "set_variable",
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "raw_parameters": [
+            "battle_last_monster_name:Mk01 Gamma"
+          ]
+        },
+        "seq": 6,
+        "stateStack": [
+          "CombatState",
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 776
+      },
+      {
+        "action": "set_variable",
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "raw_parameters": [
+            "battle_last_monster_level:55"
+          ]
+        },
+        "seq": 7,
+        "stateStack": [
+          "CombatState",
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 776
+      },
+      {
+        "action": "set_variable",
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "raw_parameters": [
+            "battle_last_monster_type:metal"
+          ]
+        },
+        "seq": 8,
+        "stateStack": [
+          "CombatState",
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 776
+      },
+      {
+        "action": "set_variable",
+        "box": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "event": "Set Party Status",
+        "instance": 2,
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "raw_parameters": [
+            "party_lost_hp:0"
+          ]
+        },
+        "seq": 9,
+        "stateStack": [
+          "MainCombatMenuState",
+          "CombatState",
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 994
+      },
+      {
+        "action": "set_variable",
+        "box": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "event": "Set Party Status",
+        "instance": 2,
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "raw_parameters": [
+            "party_lost_hp:0"
+          ]
+        },
+        "seq": 10,
+        "stateStack": [
+          "MainCombatMenuState",
+          "CombatState",
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 995
+      },
+      {
+        "action": "set_variable",
+        "box": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "event": "Set Party Status",
+        "instance": 2,
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "raw_parameters": [
+            "party_lost_hp:0"
+          ]
+        },
+        "seq": 11,
+        "stateStack": [
+          "MainCombatMenuState",
+          "CombatState",
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 996
+      },
+      {
+        "action": "set_variable",
+        "box": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "event": "Set Party Status",
+        "instance": 2,
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "raw_parameters": [
+            "party_lost_hp:0"
+          ]
+        },
+        "seq": 12,
+        "stateStack": [
+          "MainCombatMenuState",
+          "CombatState",
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 997
+      },
+      {
+        "action": "set_variable",
+        "box": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "event": "Set Party Status",
+        "instance": 2,
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "raw_parameters": [
+            "party_lost_hp:0"
+          ]
+        },
+        "seq": 13,
+        "stateStack": [
+          "MainCombatMenuState",
+          "CombatState",
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 998
+      },
+      {
+        "action": "set_variable",
+        "box": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "event": "Set Party Status",
+        "instance": 2,
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "raw_parameters": [
+            "party_lost_hp:0"
+          ]
+        },
+        "seq": 14,
+        "stateStack": [
+          "MainCombatMenuState",
+          "CombatState",
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 999
+      },
+      {
+        "action": "set_variable",
+        "box": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "event": "Set Party Status",
+        "instance": 2,
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "raw_parameters": [
+            "party_lost_hp:0"
+          ]
+        },
+        "seq": 15,
+        "stateStack": [
+          "MainCombatMenuState",
+          "CombatState",
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 1000
+      },
+      {
+        "action": "set_variable",
+        "box": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "event": "Set Party Status",
+        "instance": 2,
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "raw_parameters": [
+            "party_lost_hp:0"
+          ]
+        },
+        "seq": 16,
+        "stateStack": [
+          "MainCombatMenuState",
+          "CombatState",
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 1001
+      },
+      {
+        "action": "set_variable",
+        "box": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "event": "Set Party Status",
+        "instance": 2,
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "raw_parameters": [
+            "party_lost_hp:0"
+          ]
+        },
+        "seq": 17,
+        "stateStack": [
+          "MainCombatMenuState",
+          "CombatState",
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 1002
+      },
+      {
+        "action": "set_variable",
+        "box": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "event": "Set Party Status",
+        "instance": 2,
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "raw_parameters": [
+            "party_lost_hp:0"
+          ]
+        },
+        "seq": 18,
+        "stateStack": [
+          "MainCombatMenuState",
+          "CombatState",
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 1003
+      },
+      {
+        "action": "set_variable",
+        "box": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "event": "Set Party Status",
+        "instance": 2,
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "raw_parameters": [
+            "party_lost_hp:0"
+          ]
+        },
+        "seq": 19,
+        "stateStack": [
+          "MainCombatMenuState",
+          "CombatState",
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 1004
+      },
+      {
+        "action": "set_variable",
+        "box": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "event": "Set Party Status",
+        "instance": 2,
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "raw_parameters": [
+            "party_lost_hp:0"
+          ]
+        },
+        "seq": 20,
+        "stateStack": [
+          "MainCombatMenuState",
+          "CombatState",
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 1005
+      },
+      {
+        "action": "set_variable",
+        "box": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "event": "Set Party Status",
+        "instance": 2,
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "raw_parameters": [
+            "party_lost_hp:0"
+          ]
+        },
+        "seq": 21,
+        "stateStack": [
+          "MainCombatMenuState",
+          "CombatState",
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 1006
+      },
+      {
+        "action": "set_variable",
+        "box": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "event": "Set Party Status",
+        "instance": 2,
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "raw_parameters": [
+            "party_lost_hp:0"
+          ]
+        },
+        "seq": 22,
+        "stateStack": [
+          "MainCombatMenuState",
+          "CombatState",
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 1007
+      },
+      {
+        "action": "set_variable",
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "raw_parameters": [
+            "battle_last_winner:spyder_omnichannel_beaverbrook"
+          ]
+        },
+        "seq": 23,
+        "stateStack": [
+          "CombatState",
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 1321
+      },
+      {
+        "action": "set_variable",
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "raw_parameters": [
+            "battle_last_trainer:spyder_omnichannel_beaverbrook"
+          ]
+        },
+        "seq": 24,
+        "stateStack": [
+          "CombatState",
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 1321
+      },
+      {
+        "action": "set_variable",
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "raw_parameters": [
+            "battle_last_result:lost"
+          ]
+        },
+        "seq": 25,
+        "stateStack": [
+          "CombatState",
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 1321
+      },
+      {
+        "action": "set_variable",
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "raw_parameters": [
+            "battle_last_loser:player"
+          ]
+        },
+        "seq": 26,
+        "stateStack": [
+          "CombatState",
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 1321
+      },
+      {
+        "kind": "milestone",
+        "map": "spyder_radiotower",
+        "name": "battleResultLost",
+        "seq": 27,
+        "stateStack": [
+          "CombatState",
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 1321
+      },
+      {
+        "action": "translated_dialog",
+        "box": [
+          1,
+          16,
+          12,
+          1
+        ],
+        "event": "Stop!",
+        "instance": 1,
+        "key": "spyder_omnichannel_dante2",
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "avatar": null,
+          "h_alignment": null,
+          "position": null,
+          "raw_parameters": "spyder_omnichannel_dante2",
+          "style": null,
+          "v_alignment": null
+        },
+        "seq": 28,
+        "stateStack": [
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "text": "That was a close one! I'm just glad we were able to take down those thieves.\n You've got a bright future ahead of you, ${{name}}. Don't forget about me when you're a famous tuxemon master, okay?",
+        "tick": 1603
+      },
+      {
+        "action": "translated_dialog",
+        "box": [
+          1,
+          16,
+          12,
+          1
+        ],
+        "event": "Stop!",
+        "instance": 1,
+        "key": "spyder_omnichannel_billie2",
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "avatar": null,
+          "h_alignment": null,
+          "position": null,
+          "raw_parameters": "spyder_omnichannel_billie2",
+          "style": null,
+          "v_alignment": null
+        },
+        "seq": 29,
+        "stateStack": [
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "text": "I'm proud of you, ${{name}}. You've come a long way since we first met.\n I think it's time for me to head back to Paper Town, but I'll never forget this adventure we shared.",
+        "tick": 1824
+      },
+      {
+        "action": "translated_dialog",
+        "box": [
+          1,
+          16,
+          12,
+          1
+        ],
+        "event": "Stop!",
+        "instance": 1,
+        "key": "spyder_omnichannel_beaverbrook2",
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "avatar": null,
+          "h_alignment": null,
+          "position": null,
+          "raw_parameters": "spyder_omnichannel_beaverbrook2",
+          "style": null,
+          "v_alignment": null
+        },
+        "seq": 30,
+        "stateStack": [
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "text": "No. It's not possible. \n Two upstarts, one with off-brand tuxemon, defeating my perfect creations. \n If I can just make it to my live radio interview, I'll command my enforcers to complete the takeover.",
+        "tick": 2013
+      },
+      {
+        "action": "set_variable",
+        "box": [
+          1,
+          16,
+          12,
+          1
+        ],
+        "event": "Stop!",
+        "instance": 1,
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "raw_parameters": [
+            "kernelquest:yes"
+          ]
+        },
+        "seq": 31,
+        "stateStack": [
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 2156
+      },
+      {
+        "action": "unlock_controls",
+        "box": [
+          1,
+          16,
+          12,
+          1
+        ],
+        "event": "Stop!",
+        "instance": 1,
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {},
+        "seq": 32,
+        "stateStack": [
+          "SinkState",
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 2156
+      },
+      {
+        "box": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "event": "Teleport Faint",
+        "instance": 3,
+        "kind": "eventStart",
+        "map": "spyder_radiotower",
+        "seq": 33,
+        "stateStack": [
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 2157
+      },
+      {
+        "action": "teleport_faint",
+        "box": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "event": "Teleport Faint",
+        "instance": 3,
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "character": "player",
+          "healing": "true",
+          "rgb": null,
+          "trans_time": null
+        },
+        "seq": 34,
+        "stateStack": [
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 2157
+      },
+      {
+        "action": "translated_dialog",
+        "box": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "event": "Teleport Faint",
+        "instance": 3,
+        "key": "heal_before_leave",
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "avatar": null,
+          "h_alignment": null,
+          "position": null,
+          "raw_parameters": "heal_before_leave",
+          "style": null,
+          "v_alignment": null
+        },
+        "seq": 35,
+        "stateStack": [
+          "WorldState",
+          "BackgroundState"
+        ],
+        "text": "You should heal your monsters before heading off.",
+        "tick": 2157
+      },
+      {
+        "box": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "event": "Teleport Faint",
+        "instance": 3,
+        "kind": "eventStart",
+        "map": "spyder_radiotower",
+        "seq": 36,
+        "stateStack": [
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 2167
+      },
+      {
+        "action": "teleport_faint",
+        "box": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "event": "Teleport Faint",
+        "instance": 3,
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "character": "player",
+          "healing": "true",
+          "rgb": null,
+          "trans_time": null
+        },
+        "seq": 37,
+        "stateStack": [
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 2167
+      },
+      {
+        "action": "translated_dialog",
+        "box": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "event": "Teleport Faint",
+        "instance": 3,
+        "key": "heal_before_leave",
+        "kind": "action",
+        "map": "spyder_radiotower",
+        "parameters": {
+          "avatar": null,
+          "h_alignment": null,
+          "position": null,
+          "raw_parameters": "heal_before_leave",
+          "style": null,
+          "v_alignment": null
+        },
+        "seq": 38,
+        "stateStack": [
+          "WorldState",
+          "BackgroundState"
+        ],
+        "text": "You should heal your monsters before heading off.",
+        "tick": 2167
+      },
+      {
+        "kind": "milestone",
+        "map": "spyder_leather_center",
+        "name": "settledAtFaintPoint",
+        "seq": 39,
+        "stateStack": [
+          "WorldState",
+          "BackgroundState"
+        ],
+        "tick": 2178
+      }
+    ],
+    "visibleDialogs": [
+      {
+        "count": 1,
+        "key": "spyder_omnichannel_billie1",
+        "text": "Hey ${{name}}, hold up!\n I've been thinking a lot about what you did for my tuxemon, and I have to admit, it got me thinking about my own priorities.\n I realized I've been too focused on my own goals, and I haven't been doing enough to help others.\n That's why I'm coming with you to take down those tuxemon thieves.\n We owe it to ourselves, our tuxemon, and the entire community to put a stop to their nefarious plans."
+      },
+      {
+        "count": 1,
+        "key": "spyder_omnichannel_dante1",
+        "text": "I've been watching you from the shop, and I have to say, I'm impressed.\n You've come a long way since you first got your tuxemon.\n I've been feeling a bit guilty, I'm the one who helped you get that tuxemon, and I feel like I've got a responsibility to help you see this through.\n Plus, I've got to admit, I'm a bit curious to see how this all plays out. So, I'm coming with you to take down those tuxemon thieves.\n Let's do this!"
+      },
+      {
+        "count": 1,
+        "key": "spyder_omnichannel_beaverbrook1",
+        "text": "Aha, it's too late for you! \n Just out of the birthing pit ... the perfect monsters! \n The genes of Drokoro incubated in dragon eggs dug up by Shaft \n ... and fused with three killer robos designed by Nimrod. \n The power of teamwork ... and it's in my hands. "
+      },
+      {
+        "count": 1,
+        "key": "spyder_omnichannel_dante2",
+        "text": "That was a close one! I'm just glad we were able to take down those thieves.\n You've got a bright future ahead of you, ${{name}}. Don't forget about me when you're a famous tuxemon master, okay?"
+      },
+      {
+        "count": 1,
+        "key": "spyder_omnichannel_billie2",
+        "text": "I'm proud of you, ${{name}}. You've come a long way since we first met.\n I think it's time for me to head back to Paper Town, but I'll never forget this adventure we shared."
+      },
+      {
+        "count": 1,
+        "key": "spyder_omnichannel_beaverbrook2",
+        "text": "No. It's not possible. \n Two upstarts, one with off-brand tuxemon, defeating my perfect creations. \n If I can just make it to my live radio interview, I'll command my enforcers to complete the takeover."
+      },
+      {
+        "count": 2,
+        "key": "heal_before_leave",
+        "text": "You should heal your monsters before heading off."
+      }
+    ]
+  },
+  "seed": 1,
+  "source": "/var/tmp/tuxemon-src",
+  "sourceRevision": "9e6258ff726b786040a267e8bdbbf037b560285e"
+}

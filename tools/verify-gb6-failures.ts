@@ -201,21 +201,32 @@ expect("Wanda loss did not write history and battle_outcome",
   laterReplay.state.sw.switches["bo.spyder_route3_wanda.lost"] === true &&
   laterExt.history.some((row) => row.opponent === "spyder_route3_wanda" && row.outcome === "lost"));
 expect("faint transfer did not preserve the all-fainted party at the clinic", laterReplay.sawFaintedClinic);
+expect("Wanda's post-battle gift did not finish before the faint transfer",
+  laterReplay.state.sw.items.fishing_rod === 1 &&
+  laterReplay.texts.some((row) => row.lines.includes("Here, you can have my Fishing Rod.")) &&
+  laterReplay.texts.some((row) => row.lines.includes("Fishing Rod")));
 expect("clinic exit was not visibly blocked twice",
   laterReplay.texts.filter((row) => row.lines.includes(HEAL_BEFORE_LEAVE)).length === 2);
 expect("nurse did not restore the party after the blocked exit", laterReplay.sawHealedAfterFaint &&
   laterExt.party.every((monster) => monster.currentHp === monster.base.hp));
 expect("healed player did not leave for Leather Town", laterReplay.state.mapId === later.end.map &&
   laterReplay.state.move.tx === later.end.position[0] && laterReplay.state.move.ty === later.end.position[1]);
-// Driver.tick records its post-step `masks.length`; the generic replay loop
-// above uses the zero-based mask index. The generator also deliberately
-// starts its SeenText list after Wanda exits, so normalize both conventions
-// before comparing the frozen visible sequence.
-const laterTailTexts = laterReplay.texts
-  .filter((row) => row.frame >= later.battle.endFrame)
-  .map((row) => ({ ...row, frame: row.frame + 1 }));
-expect("later-loss visible recovery text sequence changed",
-  canonicalJson(laterTailTexts.slice(0, later.texts.length)) === canonicalJson(later.texts));
+// Driver records the already-visible modal before its next pulse, whereas
+// replay observes the frame that first published it. A pulse occupies two
+// tape frames, so adjacent text commands differ by one or two in those two
+// conventions. Compare every visible row exactly and keep that bounded frame
+// relationship explicit rather than assuming one offset for the whole list.
+const laterTailTexts = laterReplay.texts.filter((row) => row.frame >= later.battle.endFrame);
+// Later replay rows also include the nurse conversation, which the failure
+// generator intentionally does not record; compare its captured prefix.
+const recordedTail = laterTailTexts.slice(0, later.texts.length);
+expect("later-loss visible recovery text sequence changed", canonicalJson(
+  recordedTail.map(({ map, lines }) => ({ map, lines })),
+) === canonicalJson(later.texts.map(({ map, lines }) => ({ map, lines }))));
+expect("later-loss visible recovery text frames changed", recordedTail.every((row, index) => {
+  const delta = later.texts[index]!.frame - row.frame;
+  return delta === 1 || delta === 2;
+}));
 expect("later-loss terminal state hash changed",
   sha256(canonicalJson(laterReplay.state)) === later.terminalStateSha256);
 

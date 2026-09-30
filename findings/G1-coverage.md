@@ -11,7 +11,7 @@ When conversion discards a whole event, every source rule in it is Dropped.
 | Kind | Kinds | Uses | Native | Degraded | Placeholder | Dropped | S1 T1 baseline |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Actions | 98 | 13617 | 11583 | 639 | 19 | 1376 | 6123 / 6246 (44.97% / 45.9%) |
-| Conditions | 64 | 8663 | 7666 | 95 | 1 | 901 | 4459 / 4591 (51.47% / 53.0%) |
+| Conditions | 64 | 8663 | 7700 | 61 | 1 | 901 | 4459 / 4591 (51.47% / 53.0%) |
 
 The S1 acceptance baselines are 6,246 action uses (45.9%) and 4,591
 condition uses (53.0%). Only T1 source types whose disposition is Native or
@@ -222,7 +222,7 @@ census.
 | Condition | `is check_party_parameter` | 0 | 0 | 0 | 8 | 8 |
 | Condition | `is check_world` | 0 | 0 | 0 | 2 | 2 |
 | Condition | `is cooldown_days` | 0 | 0 | 0 | 1 | 1 |
-| Condition | `is current_state` | 0 | 34 | 0 | 44 | 78 |
+| Condition | `is current_state` | 34 | 0 | 0 | 44 | 78 |
 | Condition | `is environment_is` | 0 | 0 | 0 | 28 | 28 |
 | Condition | `is has_item` | 52 | 0 | 0 | 1 | 53 |
 | Condition | `is has_kennel` | 0 | 0 | 0 | 2 | 2 |

@@ -9,6 +9,7 @@ import {
   DEFAULT_IMPORT_OPTIONS,
   G6_IMPORT_OPTIONS,
   K1_IMPORT_OPTIONS,
+  lowerCurrentStateCondition,
 } from "../importer/project.ts";
 import { jsonBytes } from "../importer/index.ts";
 import { applyTerrain, importTerrain } from "../importer/terrain.ts";
@@ -87,8 +88,8 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   expect(result.report.coverage.conditions.summary).toMatchObject({
     types: 64,
     uses: 8_663,
-    native: 3_535,
-    degraded: 1_238,
+    native: 3_539,
+    degraded: 1_234,
     placeholder: 850,
     dropped: 3_040,
     tier1: {
@@ -267,10 +268,9 @@ test("clamped transfers use the nearest deterministic walkable landing", () => {
 test("default import output remains byte-pinned", () => {
   const maps = ["spyder_downstairs", "spyder_paper_town"];
   const bytes = jsonBytes(buildProject(maps, DEFAULT_IMPORT_OPTIONS));
-  // Shared economy removes the former tux.change_item/tux.has_item mirror
-  // nodes, so the importer output changes while its source inputs do not.
+  // The hash pins condition lowering as well as the stable source inputs.
   expect(createHash("sha256").update(bytes).digest("hex")).toBe(
-    "b2c82d95edce9ab3065a711d54d2a850d99e9741962c4c8769230c6034107566",
+    "c56c84e332081de5e29ab91822f1d98d0721489896c768e7c9f132a1d6f57dde",
   );
 });
 
@@ -615,11 +615,31 @@ test("faint recovery preserves its notice and yields to the first-loss cutscene"
 
   const paperTransfer = paper.events?.find((event) => event.name === "Teleport Faint");
   const paperTransferNodes = objectNodes(paperTransfer);
-  expect(paperTransferNodes).toContainEqual({ kind: "variable", id: "v.firstfightdue", op: "==", value: 1 });
-  expect(paperTransferNodes).toContainEqual({ kind: "variable", id: "v.firstfightend", op: "==", value: 1 });
+  expect(paperTransferNodes).toContainEqual({ kind: "worldIdle" });
+  expect(paperTransferNodes.some((node) =>
+    node.kind === "variable" && ["v.firstfightdue", "v.firstfightend"].includes(String(node.id))))
+    .toBeFalse();
 
   const firstLoss = paper.events?.find((event) => event.name === "First Fight - Lose");
   expect(objectNodes(firstLoss).some((node) => node.kind === "ext" && node.call === "tux.char_defeated")).toBeFalse();
+});
+
+test("current_state maps WorldState is/not to worldIdle and documents unreachable source states", () => {
+  expect(lowerCurrentStateCondition("is", "WorldState")).toEqual({ kind: "worldIdle" });
+  expect(lowerCurrentStateCondition("not", "WorldState")).toEqual({ kind: "worldIdle", negate: true });
+  expect(lowerCurrentStateCondition("is", "MainCombatMenuState:WorldState")).toEqual({ kind: "worldIdle" });
+  expect(lowerCurrentStateCondition("is", "MainCombatMenuState")).toBe(false);
+  expect(lowerCurrentStateCondition("is", "MainCombatMenuState:WorldMenuState")).toBe(false);
+  expect(lowerCurrentStateCondition("is", "TeleporterState")).toBe(false);
+  expect(lowerCurrentStateCondition("not", "TeleporterState")).toBe(true);
+
+  const result = buildProject(["spyder_route1"], G6_IMPORT_OPTIONS);
+  const evolution = result.project.maps[0]!.events?.find((event) => event.name === "Evolution all");
+  expect(objectNodes(evolution)).toContainEqual({ kind: "worldIdle" });
+  expect(result.report.rows).toContainEqual(expect.objectContaining({
+    key: "cond:is current_state:T1",
+    note: "WorldState arm -> derived worldIdle condition; scene/menu alternatives freeze map fibers",
+  }));
 });
 
 test("G6 imports item mutations and conditions through the shared session backpack", () => {

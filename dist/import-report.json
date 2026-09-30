@@ -282,10 +282,10 @@
  "schemaErrors": [],
  "byFate": {
   "T3-dropped": 3412,
-  "T1": 30033,
+  "T1": 31162,
   "T4-dropped": 3979,
-  "T1-lowered": 3995,
-  "T2-dropped": 261,
+  "T1-lowered": 2508,
+  "T2-dropped": 619,
   "T3-placeholder": 29,
   "structural": 772
  },
@@ -1071,10 +1071,16 @@
    "note": "monster/party/meta state unknown to P1: fixed answer"
   },
   {
-   "key": "cond:is current_state:T1-lowered",
-   "fate": "T1-lowered",
-   "count": 1487,
-   "note": "folded against the P1 WorldState-only runtime"
+   "key": "cond:is current_state:T1",
+   "fate": "T1",
+   "count": 1129,
+   "note": "WorldState arm -> derived worldIdle condition; scene/menu alternatives freeze map fibers"
+  },
+  {
+   "key": "cond:is current_state:T2-dropped",
+   "fate": "T2-dropped",
+   "count": 358,
+   "note": "combat/menu/teleporter states do not run map fibers in the kit; folded to their unreachable result"
   },
   {
    "key": "cond:is environment_is:T1",
@@ -3185,11 +3191,11 @@
    "summary": {
     "types": 64,
     "uses": 8663,
-    "native": 7666,
-    "degraded": 95,
+    "native": 7700,
+    "degraded": 61,
     "placeholder": 1,
     "dropped": 901,
-    "nativePercent": 88.5,
+    "nativePercent": 88.9,
     "executablePercent": 89.6,
     "tier1": {
      "uses": 4459,
@@ -3493,8 +3499,8 @@
     {
      "type": "is current_state",
      "total": 78,
-     "native": 0,
-     "degraded": 34,
+     "native": 34,
+     "degraded": 0,
      "placeholder": 0,
      "dropped": 44,
      "reasons": {
@@ -3503,8 +3509,8 @@
        "source event is not materialized by any map",
        "every action was removed, so no project event was emitted"
       ],
-      "degraded": [
-       "folded against the P1 WorldState-only runtime"
+      "native": [
+       "WorldState arm -> derived worldIdle condition; scene/menu alternatives freeze map fibers"
       ]
      }
     },

@@ -1,8 +1,8 @@
 {
   "format": "pocket-tuxemon/gb6-later-loss/v1",
   "hz": 60,
-  "frames": 65500,
-  "prefixFrames": 61896,
+  "frames": 65515,
+  "prefixFrames": 61898,
   "masks": [
     0,
     8192,
@@ -13021,6 +13021,7 @@
     8192,
     0,
     0,
+    0,
     8192,
     0,
     8192,
@@ -34124,6 +34125,7 @@
     8192,
     0,
     0,
+    0,
     8192,
     0,
     0,
@@ -65236,6 +65238,19 @@
     8192,
     0,
     8192,
+    0,
+    8192,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
     0,
     0,
     0,
@@ -65507,8 +65522,8 @@
   ],
   "battle": {
     "opponent": "spyder_route3_wanda",
-    "startFrame": 61895,
-    "endFrame": 65222,
+    "startFrame": 61897,
+    "endFrame": 65224,
     "turns": 27,
     "outcome": "lost",
     "swaps": 26,
@@ -65532,7 +65547,7 @@
   },
   "texts": [
     {
-      "frame": 65223,
+      "frame": 65225,
       "map": "spyder_route3",
       "lines": [
         "The fishing's good in Flower City - but who wants to",
@@ -65540,20 +65555,34 @@
       ]
     },
     {
-      "frame": 65242,
+      "frame": 65229,
+      "map": "spyder_route3",
+      "lines": [
+        "Here, you can have my Fishing Rod."
+      ]
+    },
+    {
+      "frame": 65233,
+      "map": "spyder_route3",
+      "lines": [
+        "Fishing Rod"
+      ]
+    },
+    {
+      "frame": 65257,
       "map": "spyder_leather_center",
       "lines": [
         "You should heal your monsters before heading off."
       ]
     },
     {
-      "frame": 65282,
+      "frame": 65297,
       "map": "spyder_leather_center",
       "lines": [
         "You should heal your monsters before heading off."
       ]
     }
   ],
-  "terminalStateSha256": "d87ba6c0b379d6f198abed2b033376455132b6aac0725c35223fd430cd1d4c99",
-  "tapeSha256": "2310ba6b0fab4f05c41344a02b214bdc9d503dcee1bb9ea57a3acbe44d2f5afd"
+  "terminalStateSha256": "2e76caf07b19e4b01baac2e3d52deaafc73b3bd915ceb9e6c79826dac3371d51",
+  "tapeSha256": "135c4a1e7759cdf38ddaea7dab5d975be61567c0dd9f82044baec1988d6e54d3"
 }

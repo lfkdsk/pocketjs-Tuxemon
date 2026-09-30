@@ -450,8 +450,25 @@ type Clause =
   | { k: "item"; id: string; count: number; has: boolean }
   | { k: "gold"; amount: number; has: boolean }
   | { k: "facing"; dir: Dir }
+  | { k: "worldIdle"; negate: boolean }
   | { k: "ext"; call: string; args: JsonValue }
   | { k: "const"; value: boolean };
+
+export function lowerCurrentStateCondition(
+  op: Cond["op"],
+  stateList: string,
+): Extract<Condition, { kind: "worldIdle" }> | boolean {
+  // Tuxemon tests the top state against an OR-list. WorldState is the only
+  // listed state in which our map interpreter is runnable: battles, host
+  // menus, and transfers own/freeze the world instead. The supported arm is
+  // therefore exactly the kit's derived freely-controllable-world predicate.
+  if (stateList.split(":").includes("WorldState")) {
+    return { kind: "worldIdle", ...(op === "not" ? { negate: true } : {}) };
+  }
+  // There is no independently runnable map analogue for the remaining source
+  // states. Preserve the old constant fold (including `not`) explicitly.
+  return op === "not";
+}
 
 const npcVar = (slug: string) => `local.npc.${slug.replace(/[^A-Za-z0-9_.-]/g, "_")}`;
 const collisionVar = (map: string, key: string) =>
@@ -608,9 +625,25 @@ function clauses(c: Cond, m: TuxMap, options: ImportOptions): Clause[] | null {
     case "tracker":
       noteCondition(c, `${c.op} tracker`, "T1", "switch tracker.<map> set by add_tracker");
       return [{ k: "sw", id: `tracker.${a[1]}`, on: !not }];
-    case "current_state":
-      noteCondition(c, `${c.op} current_state`, "T1-lowered", "folded against the P1 WorldState-only runtime");
-      return K(a[0]!.split(":").includes("WorldState"));
+    case "current_state": {
+      const lowered = lowerCurrentStateCondition(c.op, a[0]!);
+      if (typeof lowered === "boolean") {
+        noteCondition(
+          c,
+          `${c.op} current_state`,
+          "T2-dropped",
+          "combat/menu/teleporter states do not run map fibers in the kit; folded to their unreachable result",
+        );
+        return [{ k: "const", value: lowered }];
+      }
+      noteCondition(
+        c,
+        `${c.op} current_state`,
+        "T1",
+        "WorldState arm -> derived worldIdle condition; scene/menu alternatives freeze map fibers",
+      );
+      return [{ k: "worldIdle", negate: lowered.negate === true }];
+    }
     case "location_inside":
       noteCondition(c, `${c.op} location_inside`, "T1", "static map property, folded at import");
       return K(m.props.inside === "true");
@@ -649,6 +682,10 @@ function toIf(cl: Clause): { cond: Condition; negate: boolean } {
     case "gold": return { cond: { kind: "gold", amount: cl.amount }, negate: !cl.has };
     case "facing": return {
       cond: { kind: "facing", dir: cl.dir } as unknown as Condition,
+      negate: false,
+    };
+    case "worldIdle": return {
+      cond: { kind: "worldIdle", ...(cl.negate ? { negate: true } : {}) },
       negate: false,
     };
     case "ext": return { cond: { kind: "ext", call: cl.call, args: cl.args }, negate: false };
@@ -1614,18 +1651,6 @@ function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: 
         continue;
       }
       const live = cls.filter((c) => c.k !== "const");
-      // Upstream's first-fight cutscene keeps a SinkState above WorldState, so
-      // the shared Teleport Faint event's `current_state WorldState` guard is
-      // false until First Fight - Lose has healed the party and closed both
-      // gates. K1 folds current_state for P1 and does not suspend automatic
-      // fibers while input is locked, so preserve that mutual exclusion with
-      // the two source story gates on the one affected map.
-      if (options.battle && m.slug === "spyder_paper_town" && e.name === "Teleport Faint") {
-        live.push(
-          { k: "var", id: varId("firstfightdue"), op: "==", value: code("firstfightdue", "no") },
-          { k: "var", id: varId("firstfightend"), op: "==", value: code("firstfightend", "no") },
-        );
-      }
       for (const b of e.behavs) note("behav", b.type, "structural", "talk -> NPC action page");
       const k = triggerClass(e);
 

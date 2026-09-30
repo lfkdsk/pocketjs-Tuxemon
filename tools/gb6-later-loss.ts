@@ -161,6 +161,10 @@ expect(`faint transfer ended at ${driver.where()}`, driver.state.mapId === "spyd
   driver.state.move.tx === 6 && driver.state.move.ty === 7);
 expect("Teleport Faint did not show heal_before_leave exactly once",
   texts.filter((entry) => entry.lines.includes(HEAL_BEFORE_LEAVE)).length === 1);
+expect("worldIdle did not let Wanda's post-battle gift finish before faint transfer",
+  texts.some((entry) => entry.lines.includes("Here, you can have my Fishing Rod.")) &&
+  texts.some((entry) => entry.lines.includes("Fishing Rod")) &&
+  driver.state.sw.items.fishing_rod === 1);
 expect("party was unexpectedly healed by the faint transfer",
   tuxemonExtensionState(driver.state.ext, TUXEMON_BATTLE_DB).party.every((monster) => (monster.currentHp ?? 0) === 0));
 
