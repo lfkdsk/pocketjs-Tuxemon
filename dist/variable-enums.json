@@ -1247,6 +1247,10 @@
  "datascreen7": [
   "yes"
  ],
+ "daytime": [
+  "false",
+  "true"
+ ],
  "dempsey_flashback": [
   "done",
   "no",

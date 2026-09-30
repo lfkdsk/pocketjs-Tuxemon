@@ -59,7 +59,7 @@ function objectNodes(value: unknown, out: Record<string, unknown>[] = []): Recor
 
 test("all maps pass schema and reference valid transfer destinations", () => {
   const result = buildProject(availableMapIds());
-  expect(result.project.system).toEqual({ messageBlocksPlayer: true });
+  expect(result.project.system).toEqual({ messageBlocksPlayer: true, inventory: { maxKinds: 99 } });
   expect(result.project.maps).toHaveLength(263);
   expect(result.report.schemaErrors).toEqual([]);
   expect(result.report.transferErrors).toEqual([]);
@@ -71,11 +71,11 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   expect(result.report.coverage.actions.summary).toMatchObject({
     types: 98,
     uses: 13_617,
-    native: 6_161,
+    native: 6_198,
     degraded: 2_822,
-    placeholder: 461,
-    dropped: 4_173,
-    nativePercent: 45.2,
+    placeholder: 440,
+    dropped: 4_157,
+    nativePercent: 45.5,
     tier1: {
       uses: 6_099,
       percent: 44.79,
@@ -127,7 +127,7 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   });
   expect(new Set(result.report.rows.map((row) => row.key)).size).toBe(result.report.rows.length);
   expect(result.report.rows.some((row) => row.key === "trigger:touch:facing:T1-lowered")).toBeTrue();
-  expect(Object.keys(result.variables)).toHaveLength(494);
+  expect(Object.keys(result.variables)).toHaveLength(495);
   expect(Object.values(result.variables).filter((values) => values.length === 0)).toHaveLength(19);
   expect(
     result.report.coverage.actions.summary.native +
@@ -267,7 +267,7 @@ test("default import output remains byte-pinned", () => {
   const maps = ["spyder_downstairs", "spyder_paper_town"];
   const bytes = jsonBytes(buildProject(maps, DEFAULT_IMPORT_OPTIONS));
   expect(createHash("sha256").update(bytes).digest("hex")).toBe(
-    "31c70a9cb23ed6817379144403c1530a39f13999aceca66a796bcd2d7a2d48c0",
+    "688635be500606b78a257d567482f55a5d820fcba12e9fbff6c75dd3e6bfd8e8",
   );
 });
 
@@ -447,15 +447,57 @@ test("ImportOptions.routes emits K2 arbitrary targets and path steps", () => {
   expect(result.report.options?.routes).toBeTrue();
 });
 
-test("open_shop becomes a visible G6 stock-summary placeholder", () => {
+test("open_shop imports item economies and keeps monster buying visible", () => {
   const result = buildProject(availableMapIds(), G6_IMPORT_OPTIONS);
   const row = result.report.coverage.actions.rows.find((candidate) => candidate.type === "open_shop");
-  expect(row).toMatchObject({ total: 28, native: 0, degraded: 0, placeholder: 28, dropped: 0 });
+  expect(row).toMatchObject({ total: 28, native: 21, degraded: 0, placeholder: 7, dropped: 0 });
+  expect(result.report.coverage.actions.rows.find((candidate) => candidate.type === "set_economy"))
+    .toMatchObject({ total: 16, native: 16, degraded: 0, placeholder: 0, dropped: 0 });
+  expect(result.report.economy).toMatchObject({
+    sourceEconomies: 14,
+    itemGoods: 75,
+    monsterGoods: 10,
+    finiteStockGoods: 6,
+    conditionedGoods: 4,
+    itemCatalog: { sourceRows: 230, uniqueItems: 224 },
+    limitations: { lockerOverflow: { disposition: "degraded" } },
+  });
+  expect(result.report.economy.itemCatalog.descriptions.potion).toBe("Heals a monster by 50 HP.");
+  expect(result.project.system?.inventory).toEqual({ maxKinds: 99 });
+  expect(result.project.items.find((item) => item.id === "potion")).toEqual({
+    id: "potion",
+    name: "Potion",
+    sprite: "tux.0",
+    usable: true,
+    price: 100,
+    sellable: true,
+  });
+
+  const shopNodes = objectNodes(result.project).filter((node) => node.op === "shop");
+  expect(shopNodes).toHaveLength(21);
+  const uniqueShops = new Map(shopNodes.map((node) => [node.id, node]));
+  expect(uniqueShops.size).toBe(13);
+  const goods = [...uniqueShops.values()].flatMap((node) => node.goods as Record<string, unknown>[]);
+  expect(goods).toHaveLength(75);
+  expect(goods.filter((good) => good.stock !== undefined)).toHaveLength(6);
+  expect(goods.filter((good) => good.condition !== undefined)).toHaveLength(4);
+  expect(uniqueShops.get("spyder_cotton_tech")?.goods).toContainEqual({
+    item: "tm_avalanche",
+    price: 2_000,
+    sellPrice: 400,
+    stock: 1,
+  });
+  expect(uniqueShops.get("spyder_flower_scoop")?.goods).toContainEqual({
+    item: "tuxeball_diurnal",
+    price: 300,
+    sellPrice: 150,
+    condition: { all: [{ kind: "variable", id: "v.daytime", op: "==", value: 2 }] },
+  });
   const shopLines = objectNodes(result.project)
     .filter((node) => node.op === "text" && Array.isArray(node.lines))
     .flatMap((node) => node.lines as string[]);
-  expect(shopLines.filter((line) => line.startsWith("[SHOP]"))).toHaveLength(28);
-  expect(shopLines.join("\n")).toContain("Repellent $100");
+  expect(shopLines.filter((line) => line.startsWith("[SHOP]"))).toHaveLength(7);
+  expect(shopLines.join("\n")).toContain("Buy monsters");
   expect(shopLines.join("\n")).toContain("P1 placeholder; trading is unavailable.");
 });
 

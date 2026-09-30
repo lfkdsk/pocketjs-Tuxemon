@@ -10,7 +10,7 @@ When conversion discards a whole event, every source rule in it is Dropped.
 
 | Kind | Kinds | Uses | Native | Degraded | Placeholder | Dropped | S1 T1 baseline |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Actions | 98 | 13617 | 11537 | 638 | 48 | 1394 | 6123 / 6246 (44.97% / 45.9%) |
+| Actions | 98 | 13617 | 11574 | 638 | 27 | 1378 | 6123 / 6246 (44.97% / 45.9%) |
 | Conditions | 64 | 8663 | 7664 | 93 | 1 | 905 | 4459 / 4591 (51.47% / 53.0%) |
 
 The S1 acceptance baselines are 6,246 action uses (45.9%) and 4,591
@@ -20,10 +20,10 @@ Degraded count toward them. This import records 6123
 (51.47%), respectively: 123
 action uses and 132 condition uses below the S1 baselines. The old
 type-table Native figure was 5,448 / 13,617 (40.0%); conversion-path accounting
-supersedes it with 11537 / 13617
-(84.7%). “Executable”
+supersedes it with 11574 / 13617
+(85.0%). “Executable”
 (native + degraded + deliberate P1 placeholder) is
-89.8% for actions and
+89.9% for actions and
 89.6% for conditions.
 
 Definitions:
@@ -34,6 +34,26 @@ Definitions:
 - **Dropped**: no equivalent output, including rules inside an event that the
   converter proves cannot start or otherwise omits. Per-disposition reasons are
   retained in `dist/import-report.json`.
+
+## Economy and item catalog
+
+The importer read 14 economies with
+75 item rows and 10 monster
+rows. Item shops changed from the prior 0 Native / 28 Placeholder baseline to
+21 Native / 7 Placeholder:
+the remaining placeholders are visible monster-purchase menus. The imported
+item rows include 6 finite-stock goods and
+4 variable-conditioned goods.
+
+The project item catalog contains 224
+unique slugs from 230 source rows, with
+translated names, intrinsic prices, and `behaviors.resellable` mapped to
+`Item.sellable`. All translated descriptions are retained in the machine
+report; the v1 project Item schema has no description field, so displaying them
+is currently degraded.
+
+- **Degraded — full bag:** A purchase that would introduce item kind 100 is refused; Tuxemon routes it to the locker, which is not implemented.
+- **Degraded — item descriptions:** Descriptions are retained in this import report because rpgkit-project/v1 Item has no description field.
 
 ## Transfer repairs
 
@@ -93,7 +113,7 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `modify_monster_bond` | 0 | 0 | 0 | 1 | 1 |
 | Action | `not` | 0 | 0 | 0 | 1 | 1 |
 | Action | `open_journal` | 0 | 0 | 0 | 14 | 14 |
-| Action | `open_shop` | 0 | 0 | 28 | 0 | 28 |
+| Action | `open_shop` | 21 | 0 | 7 | 0 | 28 |
 | Action | `park_experience` | 0 | 0 | 0 | 8 | 8 |
 | Action | `pathfind` | 326 | 0 | 0 | 10 | 336 |
 | Action | `pathfind_to_char` | 201 | 0 | 0 | 0 | 201 |
@@ -117,7 +137,7 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `set_bill` | 0 | 0 | 0 | 2 | 2 |
 | Action | `set_bubble` | 0 | 0 | 0 | 16 | 16 |
 | Action | `set_char_attribute` | 0 | 0 | 0 | 3 | 3 |
-| Action | `set_economy` | 0 | 0 | 0 | 16 | 16 |
+| Action | `set_economy` | 16 | 0 | 0 | 0 | 16 |
 | Action | `set_environment` | 118 | 0 | 0 | 56 | 174 |
 | Action | `set_facing_mode` | 0 | 0 | 0 | 2 | 2 |
 | Action | `set_kennel_visible` | 0 | 0 | 0 | 2 | 2 |

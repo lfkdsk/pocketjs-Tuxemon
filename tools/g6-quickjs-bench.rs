@@ -153,6 +153,27 @@ mod g6_quickjs_bench {
         );
     }
 
+    fn assert_single_frame_budget(label: &str, samples: &[Sample], limit_ms: f64) {
+        assert_eq!(
+            samples.len(),
+            1,
+            "journey must contain exactly one {label} frame"
+        );
+        let sample = &samples[0];
+        let total_ms = sample.js_ms + sample.core_ms + sample.draw_ms;
+        assert!(
+            total_ms <= limit_ms,
+            "{label} frame f{}:{} exceeded the {:.0} ms limit: {:.3} ms (qjs {:.3} + core {:.3} + draw {:.3})",
+            sample.frame,
+            sample.map,
+            limit_ms,
+            total_ms,
+            sample.js_ms,
+            sample.core_ms,
+            sample.draw_ms,
+        );
+    }
+
     fn args(dist: &PathBuf, app: &str, data: PathBuf, width: u32, height: u32) -> Args {
         Args {
             app: app.into(),
@@ -232,7 +253,8 @@ mod g6_quickjs_bench {
         let mut walking_after_battle = Vec::new();
         let mut switches = Vec::new();
         let mut battle = Vec::new();
-        let mut battle_transitions = Vec::new();
+        let mut battle_entry = Vec::new();
+        let mut battle_exit = Vec::new();
         let mut last_map = initial_map;
         let mut last_battle = first.battle;
         let mut battle_completed = false;
@@ -245,8 +267,10 @@ mod g6_quickjs_bench {
                 battle.push(sample.clone());
             }
             if sample.battle != last_battle {
-                battle_transitions.push(sample.clone());
-                if last_battle && !sample.battle {
+                if sample.battle {
+                    battle_entry.push(sample.clone());
+                } else {
+                    battle_exit.push(sample.clone());
                     battle_completed = true;
                 }
                 last_battle = sample.battle;
@@ -279,7 +303,10 @@ mod g6_quickjs_bench {
         report(&viewport, "walking-after-battle", &walking_after_battle);
         report(&viewport, "map-switch", &switches);
         report(&viewport, "battle", &battle);
-        report(&viewport, "battle-entry-exit", &battle_transitions);
+        report(&viewport, "battle-entry", &battle_entry);
+        report(&viewport, "battle-exit", &battle_exit);
+        assert_single_frame_budget("battle-entry", &battle_entry, 50.0);
+        assert_single_frame_budget("battle-exit", &battle_exit, 50.0);
         report(&viewport, "all", &all_frames);
         let (used, malloc, objects) = qjs_memory(&bench.rt.guest);
         println!(

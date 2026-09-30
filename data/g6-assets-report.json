@@ -17,11 +17,11 @@
   }
  },
  "mapRepository": {
-  "shellBytes": 61846,
-  "entryBytes": 7774651,
+  "shellBytes": 81950,
+  "entryBytes": 7780800,
   "entries": 263,
-  "manifestHash": "fb378823e940775f93e6393ac843579189d26bea40ca8984c1d34e9a44183332",
-  "schemaHash": "462299c3e20212f9a5a092a88fc563164a87bd4e473214c1e909389baa12cc90"
+  "manifestHash": "57de3fbd5739c5c5bd193c9de7240c703058c0bcd0cde84463739146fa9cad71",
+  "schemaHash": "c27e2e51e0256f25fc7c6850b83273dab8bab9664e249a72c0a38d8940939157"
  },
  "terrain": {
   "entries": 430,

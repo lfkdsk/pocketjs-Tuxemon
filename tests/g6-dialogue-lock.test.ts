@@ -47,7 +47,10 @@ function chooseNo(
 }
 
 test("Tuxemon dialog boxes hold movement and consume action input", () => {
-  expect(project.system).toEqual({ messageBlocksPlayer: true });
+  expect(project.system).toEqual({
+    inventory: { maxKinds: 99 },
+    messageBlocksPlayer: true,
+  });
 
   // The opening parallel question freezes the first attempted step at its
   // documented 2 px offset, then holds that exact position while LEFT stays

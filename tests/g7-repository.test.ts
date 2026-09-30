@@ -34,8 +34,8 @@ const journey = JSON.parse(readFileSync(join(ROOT, "data/g6-journey.json"), "utf
 };
 const GAME_OPTIONS = { extensions: TUXEMON_EXTENSIONS, battle: TUXEMON_BATTLE_RULES } as const;
 // Pin the complete post-Billie state, including the spawned Nut, battle
-// history, rewards, extension RNG cursor, and the core's scene/queue slots.
-const EXPECTED_TERMINAL_STATE_SHA256 = "fa06b6c6d379c889c5e51ba9356199e3e55845b20ef830f51c50d7c67a0d7993";
+// history, rewards, extension RNG cursor, shop stock, and scene/queue slots.
+const EXPECTED_TERMINAL_STATE_SHA256 = "449c38b52331133ab10cea7293bff56a60f993a2d088d5bc6ccf072b8b09088c";
 
 function input(mask: number, previous: number): SessionInput {
   const pressed = mask & ~previous;

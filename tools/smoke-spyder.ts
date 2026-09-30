@@ -41,6 +41,7 @@ const DX = [0, -1, 0, 1];
 const DY = [1, 0, -1, 0];
 const BTN_OF: Record<Dir4, number> = { 0: BTN_BITS.DOWN, 1: BTN_BITS.LEFT, 2: BTN_BITS.UP, 3: BTN_BITS.RIGHT };
 const BTN_CONFIRM = 0x2000;
+const BTN_CANCEL = 0x4000;
 const BTN_LTRIGGER = 0x0100;
 const journal: string[] = [];
 const masks: number[] = [];
@@ -56,17 +57,18 @@ function note(s: string): void {
   journal.push(`[${String(frames).padStart(5)}] ${s}`);
 }
 
-function tick(buttons = 0, edges: { confirm?: boolean; down?: boolean; up?: boolean } = {}): void {
+function tick(buttons = 0, edges: { confirm?: boolean; cancel?: boolean; down?: boolean; up?: boolean } = {}): void {
   // Record the exact PocketJS button mask that corresponds to the explicit
   // reducer edges used by this adaptive driver. Replaying these masks through
   // GameView exercises the built bundle without a second hand-authored tape.
   const mask = buttons |
     (edges.confirm ? BTN_CONFIRM : 0) |
+    (edges.cancel ? BTN_CANCEL : 0) |
     (edges.down ? BTN_BITS.DOWN : 0) |
     (edges.up ? BTN_BITS.UP : 0);
   const downEdge = edges.down ?? !!((mask & BTN_BITS.DOWN) && !(prevButtons & BTN_BITS.DOWN));
   const upEdge = edges.up ?? !!((mask & BTN_BITS.UP) && !(prevButtons & BTN_BITS.UP));
-  const input = { buttons: mask, confirmEdge: !!edges.confirm, downEdge, upEdge, cancelEdge: false };
+  const input = { buttons: mask, confirmEdge: !!edges.confirm, downEdge, upEdge, cancelEdge: !!edges.cancel };
   const sceneBefore = st.scene;
   st = stepSession(sess, st, input);
   inlineState = stepSession(inlineSession, inlineState, input);
@@ -79,8 +81,18 @@ function tick(buttons = 0, edges: { confirm?: boolean; down?: boolean; up?: bool
   if (!sceneBefore && st.scene) battleStartFrame = frames;
   if (sceneBefore && !st.scene) battleEndFrame = frames;
   const m = st.interp.modal;
-  const key = m ? `${m.kind}|${m.kind === "text" ? m.lines.join("/") : m.prompt + "|" + m.options.join("/")}` : "";
-  if (key && key !== lastModalKey) note(m!.kind === "text" ? `TEXT  ${m!.lines.join(" / ")}` : `CHOICE [${(m as { options: string[] }).options.join(" | ")}]`);
+  const key = m?.kind === "text"
+    ? `text|${m.lines.join("/")}`
+    : m?.kind === "choices"
+      ? `choices|${m.prompt}|${m.options.join("/")}`
+      : m?.kind === "shop"
+        ? `shop|${m.fiber}|${m.stage}|${m.index}|${m.rows.length}`
+        : "";
+  if (key && key !== lastModalKey) {
+    if (m?.kind === "text") note(`TEXT  ${m.lines.join(" / ")}`);
+    else if (m?.kind === "choices") note(`CHOICE [${m.options.join(" | ")}]`);
+    else if (m?.kind === "shop") note(`SHOP  ${m.fiber} (${m.stage})`);
+  }
   lastModalKey = key;
   if (st.mapId !== lastMap) { note(`MAP   ${lastMap} -> ${st.mapId} @${st.move.tx},${st.move.ty}`); lastMap = st.mapId; }
   if (st.interp.error) throw new Error(st.interp.error.message);
@@ -123,6 +135,7 @@ function settle(answers: string[] = [], maxFrames = 3000): void {
       continue;
     }
     if (m.kind === "text") { tick(0, { confirm: true }); tick(); continue; }
+    if (m.kind === "shop") { tick(0, { cancel: true }); tick(); continue; }
     const want = answers.shift();
     const idx = want === undefined ? 0 : m.options.findIndex((o) => o === want);
     if (idx < 0) throw new Error(`choice ${want} not in [${m.options.join(", ")}]`);

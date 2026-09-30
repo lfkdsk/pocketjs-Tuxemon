@@ -35,6 +35,7 @@ import type {
   Page,
   PageCondition,
   Project,
+  ShopGood,
   SpriteDef,
 } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 
@@ -149,6 +150,9 @@ for (const f of readdirSync(join(TUXEMON_SRC, "mods/tuxemon/db/npc")).sort()) {
 interface EconomyEntry {
   slug: string;
   price?: number;
+  cost?: number;
+  inventory?: number;
+  variables?: { key: string; value: string }[];
 }
 interface EconomyRow {
   slug: string;
@@ -159,6 +163,26 @@ const economyDb = new Map<string, EconomyRow>();
 for (const f of readdirSync(join(TUXEMON_SRC, "mods/tuxemon/db/economy")).sort()) {
   const doc = Bun.YAML.parse(readFileSync(join(TUXEMON_SRC, "mods/tuxemon/db/economy", f), "utf8")) as EconomyRow | EconomyRow[];
   for (const row of Array.isArray(doc) ? doc : [doc]) economyDb.set(row.slug, row);
+}
+
+interface ItemRow {
+  slug: string;
+  cost?: number | null;
+  usable_in?: string[];
+  behaviors?: { resellable?: boolean };
+}
+const itemDb = new Map<string, ItemRow>();
+let itemSourceRows = 0;
+for (const f of readdirSync(join(TUXEMON_SRC, "mods/tuxemon/db/item")).sort()) {
+  if (!f.endsWith(".yaml")) continue;
+  const doc = Bun.YAML.parse(readFileSync(join(TUXEMON_SRC, "mods/tuxemon/db/item", f), "utf8")) as ItemRow | ItemRow[];
+  for (const row of Array.isArray(doc) ? doc : [doc]) {
+    itemSourceRows++;
+    // A handful of upstream files accidentally repeat the cream_puffs slug.
+    // Tuxemon addresses items by slug, so retain the first deterministic
+    // definition instead of emitting duplicate project ids.
+    if (!itemDb.has(row.slug)) itemDb.set(row.slug, row);
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -347,6 +371,11 @@ for (const ev of loadAllFileEvents()) {
         if (value && !/^-?\d+(?:\.\d+)?$/.test(value)) valuesFor(value);
       }
     }
+  }
+}
+for (const economy of economyDb.values()) {
+  for (const entry of economy.items ?? []) {
+    for (const condition of entry.variables ?? []) addValue(condition.key, condition.value);
   }
 }
 for (const map of allMaps.values()) {
@@ -693,6 +722,25 @@ const transferRepairs: TransferRepair[] = [];
 const transferCollision = new Map<string, Set<string>>();
 const INSTANT = new Set(["set_variable", "clear_variable", "add_item", "add_tracker", "create_npc", "remove_npc", "modify_money", "set_teleport_faint", "set_monster_health", "set_monster_status", "unlock_controls", "lock_controls", "park_experience", "remove_step_tracker", "set_layer"]);
 
+function importedItem(id: string): Item {
+  const row = itemDb.get(id);
+  const price = typeof row?.cost === "number" && Number.isSafeInteger(row.cost) && row.cost >= 0
+    ? row.cost
+    : 0;
+  return {
+    id,
+    name: (po.get(id) ?? id).slice(0, 24),
+    sprite: "tux.0",
+    usable: row?.usable_in?.includes("WorldState") ?? false,
+    price,
+    sellable: row?.behaviors?.resellable === true,
+  };
+}
+
+function ensureItem(id: string): void {
+  if (!items.has(id)) items.set(id, importedItem(id));
+}
+
 const TRANSFER_NEIGHBORS = [
   [0, 1],
   [-1, 0],
@@ -776,6 +824,33 @@ function shopPlaceholder(npc: string, menu: string, economySlug: string | undefi
   const commands: Command[] = [];
   for (let i = 0; i < lines.length; i += 4) commands.push({ op: "text", lines: lines.slice(i, i + 4) });
   return commands;
+}
+
+function economyGoodCondition(entry: EconomyEntry): PageCondition | undefined {
+  const conditions: Condition[] = (entry.variables ?? []).map((condition) => ({
+    kind: "variable",
+    id: varId(condition.key),
+    op: "==",
+    value: code(condition.key, condition.value),
+  }));
+  return conditions.length ? { all: conditions } : undefined;
+}
+
+function itemShop(economy: EconomyRow): Command {
+  const goods: ShopGood[] = (economy.items ?? []).map((entry) => {
+    ensureItem(entry.slug);
+    const condition = economyGoodCondition(entry);
+    const finiteStock = typeof entry.inventory === "number" &&
+      Number.isSafeInteger(entry.inventory) && entry.inventory >= 0;
+    return {
+      item: entry.slug,
+      ...(typeof entry.price === "number" ? { price: entry.price } : {}),
+      ...(typeof entry.cost === "number" ? { sellPrice: entry.cost } : {}),
+      ...(finiteStock ? { stock: entry.inventory } : {}),
+      ...(condition ? { condition } : {}),
+    };
+  });
+  return { op: "shop", id: economy.slug, goods, sell: true, sellList: "hide" };
 }
 
 function battlePlaceholder(opp: string, reason = "P1 placeholder: the player wins"): Command[] {
@@ -936,7 +1011,7 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         const q = g[1] ? Number(g[1]) : 1;
         if (!q) { noteAction(a, "add_item(zero)", "T4-dropped", "zero quantity is a no-op"); break; }
         noteAction(a, a.type, "T1", "item add/sub");
-        items.set(g[0]!, { id: g[0]!, name: (po.get(g[0]!) ?? g[0]!).slice(0, 24), sprite: "tux.0" });
+        ensureItem(g[0]!);
         out.push({ op: "item", item: g[0]!, set: q > 0 ? "add" : "sub", count: Math.min(99, Math.abs(q)) });
         break;
       }
@@ -1214,9 +1289,26 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
           noteAction(a, a.type, "T3-placeholder", "intentionally silent in P1");
         }
         break;
-      case "open_shop":
-        noteAction(a, a.type, "T3-placeholder", "visible stock summary until the K4 shop UI lands");
-        out.push(...shopPlaceholder(g[0]!, g[1]!, ctx.economies.get(g[0]!)));
+      case "open_shop": {
+        const economySlug = ctx.economies.get(g[0]!);
+        const economy = economySlug ? economyDb.get(economySlug) : undefined;
+        if (g[1] === "both_item" && economy && (economy.items?.length ?? 0) > 0) {
+          noteAction(a, a.type, "T1", "K4 shop with imported prices, buy-back prices, stock and variable conditions");
+          out.push(itemShop(economy));
+        } else {
+          noteAction(a, a.type, "T3-placeholder", g[1] === "buy_monster"
+            ? "monster trading remains a visible placeholder"
+            : "unsupported or missing economy remains a visible placeholder");
+          out.push(...shopPlaceholder(g[0]!, g[1]!, economySlug));
+        }
+        break;
+      }
+      case "set_economy":
+        if (g[0] && g[1] && ctx.economies.get(g[0]) === g[1] && economyDb.has(g[1])) {
+          noteAction(a, a.type, "T1", "statically binds this map's NPC to an imported economy");
+        } else {
+          noteAction(a, a.type, "T4-dropped", "economy or NPC binding is missing");
+        }
         break;
       case "pathfind": {
         if (!ctx.options.routes) {
@@ -1343,7 +1435,7 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
 // events
 
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "").slice(0, 32) || "event";
-const BLOCKING = new Set<Command["op"]>(["text", "choices", "wait", "transfer", "moveRoute", "battle"]);
+const BLOCKING = new Set<Command["op"]>(["text", "choices", "shop", "wait", "transfer", "moveRoute", "battle"]);
 const hasBlocking = (cmds: Command[]): boolean =>
   cmds.some((c) => BLOCKING.has(c.op) || (c.op === "if" && (hasBlocking(c.then) || hasBlocking(c.else ?? []))) || (c.op === "choices"));
 const hasCommand = (cmds: readonly Command[], wanted: FutureCommand["op"]): boolean =>
@@ -1835,6 +1927,22 @@ export interface ImportReport {
   rows: ImportLogRow[];
   transferRepairs: TransferRepair[];
   transferErrors: TransferError[];
+  economy: {
+    sourceEconomies: number;
+    itemGoods: number;
+    monsterGoods: number;
+    finiteStockGoods: number;
+    conditionedGoods: number;
+    itemCatalog: {
+      sourceRows: number;
+      uniqueItems: number;
+      descriptions: Record<string, string>;
+    };
+    limitations: {
+      lockerOverflow: { disposition: "degraded"; reason: string };
+      itemDescription: { disposition: "degraded"; reason: string };
+    };
+  };
   coverage: CoverageReport;
 }
 
@@ -1912,6 +2020,7 @@ export function buildProject(
   const options = resolveOptions(requestedOptions);
   log.clear();
   items.clear();
+  for (const id of [...itemDb.keys()].sort()) ensureItem(id);
   transferRepairs.length = 0;
   conversionCoverage.reset();
 
@@ -1962,7 +2071,7 @@ export function buildProject(
     tileSize: 16,
     // Tuxemon's dialog state consumes movement and interaction input no
     // matter which event fiber opened the box.
-    system: { messageBlocksPlayer: true },
+    system: { messageBlocksPlayer: true, inventory: { maxKinds: 99 } },
     start: {
       map: startId,
       x: Math.min(4, startMap.width - 1),
@@ -2023,6 +2132,33 @@ export function buildProject(
       rows,
       transferRepairs: [...transferRepairs],
       transferErrors: transferErrors(project),
+      economy: {
+        sourceEconomies: economyDb.size,
+        itemGoods: [...economyDb.values()].reduce((sum, economy) => sum + (economy.items?.length ?? 0), 0),
+        monsterGoods: [...economyDb.values()].reduce((sum, economy) => sum + (economy.monsters?.length ?? 0), 0),
+        finiteStockGoods: [...economyDb.values()].flatMap((economy) => economy.items ?? [])
+          .filter((entry) => typeof entry.inventory === "number" && entry.inventory >= 0).length,
+        conditionedGoods: [...economyDb.values()].flatMap((economy) => economy.items ?? [])
+          .filter((entry) => (entry.variables?.length ?? 0) > 0).length,
+        itemCatalog: {
+          sourceRows: itemSourceRows,
+          uniqueItems: itemDb.size,
+          descriptions: Object.fromEntries([...itemDb.keys()].sort().map((id) => [
+            id,
+            po.get(`${id}_description`) ?? "",
+          ])),
+        },
+        limitations: {
+          lockerOverflow: {
+            disposition: "degraded",
+            reason: "A purchase that would introduce item kind 100 is refused; Tuxemon routes it to the locker, which is not implemented.",
+          },
+          itemDescription: {
+            disposition: "degraded",
+            reason: "Descriptions are retained in this import report because rpgkit-project/v1 Item has no description field.",
+          },
+        },
+      },
       coverage: conversionCoverage.report(),
     },
   };

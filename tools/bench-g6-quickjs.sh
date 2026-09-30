@@ -33,9 +33,9 @@ for viewport in "480 272" "960 544"; do
     G6_BENCH_W="$width" G6_BENCH_H="$height" \
     "$binary" g6_quickjs_bench::journey --ignored --exact --nocapture
   actual=$(sha256sum "$state" | cut -d' ' -f1)
-  # Complete post-Billie state, including persistent party/history and the
-  # extension RNG cursor produced by the real battle.
-  expected=fa06b6c6d379c889c5e51ba9356199e3e55845b20ef830f51c50d7c67a0d7993
+  # Complete post-Billie state, including persistent party/history, the
+  # extension RNG cursor, and K4's persistent shop-stock banks.
+  expected=449c38b52331133ab10cea7293bff56a60f993a2d088d5bc6ccf072b8b09088c
   test "$actual" = "$expected"
   echo "STATE viewport=${width}x${height} canonical_sha256=$actual"
 done
