@@ -51,7 +51,9 @@ minimal one; Tuxemon's full skin and animations come next.)
 
 ## Play it
 
-- **In a browser, from CI:** every push builds the web version. Open the
+- **In a browser:** <https://lfkdsk.github.io/pocketjs-Tuxemon/pocket-tuxemon/>
+  (deployed from `main` after CI has played the whole journey on it).
+- **From a CI run:** every push builds the web version. Open the
   latest [CI run](../../actions/workflows/ci.yml), download the `web-site`
   artifact, unzip it and serve the folder, e.g.
   `python3 -m http.server -d web-site 8000`, then open
