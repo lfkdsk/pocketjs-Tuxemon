@@ -74,13 +74,12 @@ jobs:
       - name: Typecheck
         run: bunx tsc --noEmit
 
-      # On a clean checkout PocketJS writes framework/src/styles.generated.ts
-      # during the first build pass, after Bun has already cached it as
-      # missing, so the very first build fails to resolve it; the second run
-      # finds it. (Tracked upstream in the PocketJS build.)
+      # The first clean build writes PocketJS's ignored
+      # framework/src/styles.generated.ts mid-run; the build serves it
+      # virtually (jsxPlugin onResolve/onLoad), so a single run resolves it.
       - name: Build the game bundle and the wasm core
         run: |
-          bun run build || bun run build
+          bun run build
           bun run build:wasm
 
       - name: Test
