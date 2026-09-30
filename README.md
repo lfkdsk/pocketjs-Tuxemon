@@ -19,22 +19,32 @@ Work in progress. The importer reads a pinned Tuxemon checkout
 - **World (P1, playable):** all 263 Tuxemon maps and their 4,572 events are
   imported automatically — terrain with one-way ledges, animated tiles, tall
   NPC walkers, dialogue, cutscene routes and map transfers. The Spyder
-  campaign plays from the bedroom through Paper Town to Route 1, and every
-  imported input lock is executed to its unlock.
-- **Battles (P2, in progress):** the battle database and 578 battle
+  campaign plays from the bedroom through Paper Town, Cotton Town and City
+  Park to the north end of Route 3 (final position `spyder_route3 @4,6`),
+  driven by a deterministic autoplay tape, and every imported input lock is
+  executed to its unlock.
+- **Battles (P2, complete):** the battle database and 578 battle
   textures are imported from Tuxemon's YAML, and `battle/` is a pure
   reducer whose results match Tuxemon's own Python engine on 8,560 recorded
-  battles; monsters spawn draw-for-draw like Tuxemon's. Trainer battles,
-  wild and random encounters, parties and the faint point run in game, and
-  the opening fight is played for real (win and lose lines). Double battles,
-  capture, items, swapping and levelling are live. The battle scene uses the
-  imported Tuxemon backgrounds, islands, trainers, monsters, HUD frames,
-  status/party icons and technique strips; every slide, hit, HP/XP tween,
-  faint and capture shake is driven by the reducer's rewindable reference
-  tick rather than a wall clock.
+  battles; monsters spawn draw-for-draw like Tuxemon's. The mainline is
+  played for real end to end: the autoplay tape fights 100 real battles
+  along the way (22 trainer battles + 78 wild), and every trainer battle
+  enters Battle Processing and ends `won` with its `battle_outcome` written
+  back. The frozen 30-minute 60 Hz tape (109,983 frames / 30 min 33 s)
+  replays byte-identical at 60, 30 and 20 Hz, and both failure paths are
+  verified — the first loss against Billie, and a later loss on Route 3
+  with the faint-point teleport, the heal-before-leaving block and the
+  nurse recovery. Double battles, capture, items, swapping and levelling
+  are live. The battle scene uses the imported Tuxemon backgrounds,
+  islands, trainers, monsters, HUD frames, status/party icons and
+  technique strips; every slide, hit, HP/XP tween, faint and capture shake
+  is driven by the reducer's rewindable reference tick rather than a wall
+  clock.
 - **Performance:** maps load one at a time from the pak — the game JS is
-  1.1 MB and reaches its first frame in about 175 ms on the desktop QuickJS
-  host; walking stays near 1 ms per frame and map transfers under 15 ms.
+  1.1 MB and reaches its first frame in about 150 ms on the desktop QuickJS
+  host (measured medians: 151.897 ms at 480×272 and 155.168 ms at 960×544,
+  10-run samples); walking stays near 1 ms per frame and map transfers
+  under 16 ms.
 
 ## Screenshots
 
@@ -52,6 +62,15 @@ Kit's state-driven command/list UI; the screenshot is a nearest-neighbour
 
 <p align="center">
   <img src="docs/screenshots/battle.png" width="480" alt="The first trainer battle">
+</p>
+
+The mainline journey, played by the deterministic autoplay tape: Cotton Town
+(left) and the north end of Route 3 (right), the northernmost point of the
+current journey.
+
+<p align="center">
+  <img src="docs/screenshots/cotton-town.png" width="480" alt="Cotton Town, a frame from the autoplay journey">
+  <img src="docs/screenshots/route-3-end.png" width="480" alt="The north end of Route 3, a frame from the autoplay journey">
 </p>
 
 ## Play it

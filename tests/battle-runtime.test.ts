@@ -169,6 +169,38 @@ describe("Tuxemon BattleRules adapter", () => {
     expect(tuxemonRuntimeBattleState(value).menuIndex).toBe(4);
   });
 
+  test("ignores confirm on a disabled root-menu entry reached by deserialized state", () => {
+    const rules = createTuxemonBattleRules(DB, ENUMS);
+    const active = monster("nut", 20, "txmn-player-a", 31);
+    active.currentHp = active.currentHp! - 1;
+    const trainerExt = extensionWith(active);
+    trainerExt.party.push(monster("rockitten", 20, "txmn-player-b", 32));
+
+    // The in-game cursor can never rest on a disabled entry, but a stale or
+    // tampered serialized state can still point its menuIndex at one.
+    const trainer = tuxemonRuntimeBattleState(revealCurrentMenu(rules, startBattle(rules, trainerExt, json({
+      kind: "trainer",
+      opponent: OPPONENT,
+      party: [{ species: "budaye", level: 5 }],
+      environment: "grass",
+    }), 616, { potion: 1 })!.state));
+    expect(trainer.menu[3]).toEqual({ kind: "forfeit", slug: "forfeit", cooldown: 0, available: false });
+    trainer.menuIndex = 3;
+    const staleTrainer = json(trainer);
+    expect(rules.step(staleTrainer, { buttons: 0, confirmEdge: true }, 0)).toEqual(staleTrainer);
+
+    const wild = tuxemonRuntimeBattleState(revealCurrentMenu(rules, startBattle(
+      rules,
+      extensionWith(monster("nut", 20, "txmn-player", 33)),
+      json({ kind: "wild", species: "budaye", level: 5, environment: "grass" }),
+      717,
+    )!.state));
+    expect(wild.menu[1]).toEqual({ kind: "replacement", slug: "swap", cooldown: 0, available: false });
+    wild.menuIndex = 1;
+    const staleWild = json(wild);
+    expect(rules.step(staleWild, { buttons: 0, confirmEdge: true }, 0)).toEqual(staleWild);
+  });
+
   test("wins a trainer battle, consumes its staged party, and writes persistent rewards", () => {
     const ext = extensionWith(monster("nut", 50, "txmn-player", 91));
     ext.npcParties[OPPONENT] = [{
