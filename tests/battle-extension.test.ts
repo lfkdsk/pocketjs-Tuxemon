@@ -65,6 +65,21 @@ function run(commands: Command[], ext?: JsonValue, variables: Record<string, num
 }
 
 describe("Tuxemon party extension", () => {
+  test("uses the built-in item bank without a mirrored extension inventory", () => {
+    const { state } = run([
+      { op: "item", item: "potion", set: "add", count: 3 },
+      { op: "item", item: "potion", set: "sub", count: 1 },
+      {
+        op: "if",
+        if: { kind: "item", id: "potion", count: 2 },
+        then: [{ op: "switch", id: "has-two-potions", value: true }],
+      },
+    ]);
+    expect(state.sw.items.potion).toBe(2);
+    expect(tuxemonExtensionState(state.ext, DB)).not.toHaveProperty("inventory");
+    expect(state.sw.switches["has-two-potions"]).toBeTrue();
+  });
+
   test("adds variable-backed player monsters and defers NPC spawning without hidden RNG", () => {
     const commands: Command[] = [
       {
@@ -170,6 +185,63 @@ describe("Tuxemon party extension", () => {
     expect(healthy.status).toBeNull();
   });
 
+  test("checks, confirms, and denies pending evolutions in party order", () => {
+    const added = run([{
+      op: "ext",
+      call: "tux.add_monster",
+      args: { species: "cataspike", level: 9 },
+    }]);
+    const pending = tuxemonExtensionState(added.state.ext, DB);
+    pending.party[0] = {
+      ...pending.party[0]!,
+      waitingToEvolve: true,
+      captureDevice: "tuxeball_ancient",
+      status: "poison",
+    };
+    const evolved = run([
+      {
+        op: "if",
+        if: { kind: "ext", call: "tux.check_evolution", args: { character: "player" } },
+        then: [{ op: "switch", id: "waiting", value: true }],
+      },
+      { op: "ext", call: "tux.evolution", args: { character: "player", inside: false } },
+    ], pending as unknown as JsonValue);
+    const after = tuxemonExtensionState(evolved.state.ext, DB);
+    expect(evolved.state.sw.switches.waiting).toBeTrue();
+    expect(after.party[0]).toMatchObject({
+      iid: pending.party[0]!.iid,
+      slug: "puparmor",
+      stage: "stage1",
+      captureDevice: "tuxeball_ancient",
+      status: "poison",
+      waitingToEvolve: false,
+      acquisition: "unknown",
+      experienceModifier: 1,
+      moneyModifier: 0,
+      bond: 25,
+    });
+    expect(after.party[0]!.moves).toEqual([...pending.party[0]!.moves, "chameleon"]);
+    expect(after.caught).toContain("puparmor");
+    let expectedCursor = evolved.initial.sw.rng;
+    for (let draw = 0; draw < 13; draw++) expectedCursor = rngNext(expectedCursor).next;
+    expect(evolved.state.sw.rng).toBe(expectedCursor);
+
+    const declined = tuxemonExtensionState(added.state.ext, DB);
+    declined.party[0] = { ...declined.party[0]!, waitingToEvolve: true };
+    const denied = run([
+      { op: "ext", call: "tux.cancel_evolution", args: { character: "player" } },
+      {
+        op: "if",
+        if: { kind: "ext", call: "tux.check_evolution", args: { character: "player" } },
+        then: [{ op: "switch", id: "still-waiting", value: true }],
+      },
+    ], declined as unknown as JsonValue);
+    expect(tuxemonExtensionState(denied.state.ext, DB).party[0]!.slug).toBe("cataspike");
+    expect(tuxemonExtensionState(denied.state.ext, DB).party[0]!.waitingToEvolve).toBeFalse();
+    expect(denied.state.sw.switches["still-waiting"]).not.toBeTrue();
+    expect(denied.state.sw.rng).toBe(denied.initial.sw.rng);
+  });
+
   test("party defeat and battle-history conditions read extension state", () => {
     const base = initialTuxemonExtensionState();
     const spawned = run([{
@@ -262,9 +334,27 @@ describe("Tuxemon party extension", () => {
     const restored = restoreSessionEnvelope(played.session, encodeEnvelope(snapshot));
     expect(restored.ext).toEqual(played.state.ext);
 
+    const legacy = {
+      ...tuxemonExtensionState(played.state.ext, DB),
+      inventory: { potion: 2 },
+      money: 300,
+    } as Record<string, unknown>;
+    delete legacy.runAttempts;
+    const migrated = createTuxemonExtensions(DB).codec!.decode({
+      format: TUXEMON_EXT_SAVE_FORMAT,
+      state: legacy as JsonValue,
+    });
+    const migratedState = tuxemonExtensionState(migrated, DB);
+    expect(migratedState).toMatchObject({ runAttempts: 0 });
+    expect(migratedState).not.toHaveProperty("inventory");
+    expect(migratedState).not.toHaveProperty("money");
+
     const invalid = { ...initialTuxemonExtensionState(), nextMonsterId: Number.MAX_SAFE_INTEGER + 1 };
     expect(() => startSession(project([]), played.session, undefined, invalid as unknown as JsonValue))
       .toThrow(/nextMonsterId must be a positive safe integer/);
+    const invalidAttempts = { ...initialTuxemonExtensionState(), runAttempts: -1 };
+    expect(() => startSession(project([]), played.session, undefined, invalidAttempts as unknown as JsonValue))
+      .toThrow(/runAttempts must be a non-negative safe integer/);
   });
 
   test("rewind refolds monster identity, attributes, and RNG byte-for-byte", () => {

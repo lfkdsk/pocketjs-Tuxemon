@@ -1,7 +1,7 @@
 {
   "format": "pocket-tuxemon/g6-journey/v1",
   "hz": 60,
-  "frames": 2774,
+  "frames": 2788,
   "map": "spyder_route1",
   "position": [
     14,
@@ -37,7 +37,7 @@
     },
     {
       "name": "route-1",
-      "frame": 2773,
+      "frame": 2787,
       "map": "spyder_route1",
       "position": [
         14,
@@ -2257,6 +2257,20 @@
     0,
     8192,
     0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
     0,
     0,
     0,
@@ -2822,8 +2836,8 @@
     0
   ],
   "rewind": {
-    "target": 2149,
-    "from": 2218,
+    "target": 2156,
+    "from": 2232,
     "restored": true
   },
   "story": {
@@ -2837,5 +2851,5 @@
     "billie_won": true,
     "billie_lost": false
   },
-  "sha256": "aedba1e269f930a53e0108574b13d448a6c327a10917a266dd74ec6dcffb8941"
+  "sha256": "a3db38dad11f137e0c69922801a10cbfe44b3844af382f7b30ff7b4ed1ebe9d0"
 }

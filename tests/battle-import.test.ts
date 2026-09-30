@@ -26,9 +26,9 @@ describe("GB1 battle database", () => {
     expect(report.scope).toBe("spyder");
     expect(report.sourceRevision).toBe("9e6258ff726b786040a267e8bdbbf037b560285e");
     expect(report.counts).toEqual({
-      monsters: 214,
-      techniques: 230,
-      items: 82,
+      monsters: 257,
+      techniques: 245,
+      items: 113,
       elements: 13,
       tastes: 12,
       statuses: 35,
@@ -41,12 +41,13 @@ describe("GB1 battle database", () => {
       randomEncounterUses: 261,
       wildEncounterUses: 17,
     });
-    expect(report.art.categories["monster-sheets"].sourceFiles).toBe(214);
-    expect(report.art.categories["technique-animations"].sourceFiles).toBe(126);
+    expect(report.art.categories["monster-sheets"].sourceFiles).toBe(257);
+    expect(report.art.categories["technique-animations"].sourceFiles).toBe(130);
+    expect(report.art.categories["capture-devices"].sourceFiles).toBe(27);
     expect(report.art.categories.backgrounds.sourceFiles).toBe(8);
     expect(report.art.categories.islands.sourceFiles).toBe(6);
     expect(report.art.categories["trainer-sheets"].sourceFiles).toBe(61);
-    expect(report.art.sourceBytes).toBe(1_598_170);
+    expect(report.art.sourceBytes).toBe(1_889_960);
   });
 
   test("retains the stat, move, capture, status, and encounter rule inputs", () => {
@@ -57,6 +58,7 @@ describe("GB1 battle database", () => {
       ivRange: [0, 15],
       sizeVariation: { height: [-0.1, 0.1], weight: [-0.1, 0.1] },
       maxMoves: 4,
+      bondStageFloors: { basic: 0, standalone: 0, stage1: 20, stage2: 40 },
       catchRateRange: [0, 100],
       catchResistanceRange: [0, 2],
       experience: {
@@ -88,6 +90,14 @@ describe("GB1 battle database", () => {
       catchResistance: [0.95, 1.25],
     });
     expect(validated.monsters.rockitten.moveset.map((move) => move.technique)).toContain("mudslide");
+    expect(validated.monsters.nut.evolutions).toContainEqual(expect.objectContaining({ monster_slug: "bolt" }));
+    expect(validated.monsters.bolt.evolutions).toContainEqual(expect.objectContaining({ monster_slug: "arthrobolt" }));
+    expect(validated.monsters.nut.moveset.map((move) => move.technique)).toContain("thunderclap");
+    for (const [slug, monster] of Object.entries(validated.monsters)) {
+      for (const evolution of monster.evolutions) {
+        expect(validated.monsters[String(evolution.monster_slug)], `${slug} evolution target`).toBeDefined();
+      }
+    }
     expect(validated.techniques.ram).toMatchObject({
       accuracy: 1,
       power: 1.5,

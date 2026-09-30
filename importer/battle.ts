@@ -462,6 +462,14 @@ function buildSelection(scope: BattleScope, tables: Tables, allMaps: TuxMap[], s
     for (const row of list<Raw>(npc.items)) if (string(row.slug) in tables.item) items.add(string(row.slug));
   }
 
+  // A player can carry any battle-menu item into any campaign encounter,
+  // even when no Spyder event happens to grant or sell it. Keep the complete
+  // combat rule surface in the scoped database instead of silently making
+  // capture devices and medicines unusable at runtime.
+  for (const [slug, item] of Object.entries(tables.item)) {
+    if (list<unknown>(item.usable_in).map(String).includes("MainCombatMenuState")) items.add(slug);
+  }
+
   if (scope === "full") {
     for (const slug of sortedKeys(tables.monster)) monsters.add(slug);
     for (const slug of sortedKeys(tables.technique)) techniques.add(slug);
@@ -470,13 +478,30 @@ function buildSelection(scope: BattleScope, tables: Tables, allMaps: TuxMap[], s
     for (const slug of sortedKeys(tables.npc)) npcs.add(slug);
     for (const slug of sortedKeys(tables.environment)) environments.add(slug);
   } else {
-    for (const slug of monsters) {
-      const max = maxLevel.get(slug) ?? 1;
-      for (const move of list<Raw>(tables.monster[slug]?.moveset)) {
-        if (move.learning_method === "fallback" || number(move.level_learned) <= max + 1) {
-          const technique = string(move.technique);
-          if (technique in tables.technique) techniques.add(technique);
+    // A campaign-visible monster can evolve into a form that never appears in
+    // a map event or encounter table. Keep the complete reachable evolution
+    // graph: progression must never point at a species omitted by scoping.
+    for (let added = true; added;) {
+      added = false;
+      for (const slug of [...monsters].sort()) {
+        for (const evolution of list<Raw>(tables.monster[slug]?.evolutions)) {
+          const target = string(evolution.monster_slug);
+          if (target in tables.monster && !monsters.has(target)) {
+            monsters.add(target);
+            added = true;
+          }
         }
+      }
+    }
+
+    // Selected monsters remain able to level all the way to the configured
+    // cap, so importing only moves near their map-spawn level truncates the
+    // future level-up schedule. Include every technique in each reachable
+    // form's moveset; spawn-time selection still filters by level below.
+    for (const slug of monsters) {
+      for (const move of list<Raw>(tables.monster[slug]?.moveset)) {
+        const technique = string(move.technique);
+        if (technique in tables.technique) techniques.add(technique);
       }
     }
     for (const slug of items) {
@@ -800,13 +825,19 @@ function jsonBytes(value: unknown): Uint8Array {
  * avoids retaining unrelated item/NPC/animation metadata in QuickJS. */
 export function runtimeBattleDb(db: BattleDb): BattleDb {
   const monsters = Object.fromEntries(Object.entries(db.monsters).map(([slug, monster]) => [slug, {
+    species: monster.species,
     shape: monster.shape,
     stage: monster.stage,
     types: monster.types,
+    tags: monster.tags,
+    terrains: monster.terrains,
     height: monster.height,
     weight: monster.weight,
     genderWeights: monster.genderWeights,
+    catchRate: monster.catchRate,
+    catchResistance: monster.catchResistance,
     moveset: monster.moveset,
+    evolutions: monster.evolutions,
     art: monster.art,
   }]));
   const techniques = Object.fromEntries(Object.entries(db.techniques).map(([slug, technique]) => [slug, {
@@ -839,6 +870,17 @@ export function runtimeBattleDb(db: BattleDb): BattleDb {
     statModifiers: status.statModifiers,
     modifiers: status.modifiers,
   }]));
+  const items = Object.fromEntries(Object.entries(db.items).map(([slug, item]) => [slug, {
+    sort: item.sort,
+    category: item.category,
+    usableIn: item.usableIn,
+    consumable: item.consumable,
+    effects: item.effects,
+    conditions: item.conditions,
+    behaviors: item.behaviors,
+    statModifiers: item.statModifiers,
+    immunityToStatus: item.immunityToStatus,
+  }]));
   return {
     format: db.format,
     sourceRevision: db.sourceRevision,
@@ -853,6 +895,7 @@ export function runtimeBattleDb(db: BattleDb): BattleDb {
     tasteOrder: db.tasteOrder,
     monsters,
     techniques,
+    items,
     statuses,
     encounters: db.encounters,
     environments: Object.fromEntries(Object.entries(db.environments).map(([slug, environment]) => [slug, {
@@ -938,8 +981,7 @@ export function writeBattleArtifacts(options: BattleImportOptions): BattleBuild 
           method: string(move.learning_method, "level_up"),
           ...(optionalString(move.evolution_stage_learned) ? { evolutionStage: string(move.evolution_stage_learned) } : {}),
         })),
-      evolutions: list<Raw>(raw.evolutions)
-        .filter((evolution) => !evolution.monster_slug || selection.monsters.has(string(evolution.monster_slug))),
+      evolutions: list<Raw>(raw.evolutions),
       art: {
         sheet,
         front: [0, 0, 64, 64],
@@ -1098,10 +1140,15 @@ export function writeBattleArtifacts(options: BattleImportOptions): BattleBuild 
   const captureDevices = {
     statusModifier: number(rawCaptureDevices.status_modifier, 1),
     deviceModifier: number(rawCaptureDevices.capdev_modifier, 1),
-    items: Object.fromEntries([...selectedCapture].sort().map((slug) => [slug, {
-      ...CAPTURE_DEVICE_DEFAULTS,
-      ...object(rawCaptureDevices.items?.[slug]),
-    }])),
+    // `config_capdev.items.get(slug)` returns None for combined omni/xero
+    // devices. Do not synthesize a default entry for those two: the absence
+    // is observable because their status modifier remains the global base.
+    items: Object.fromEntries([...selectedCapture].sort()
+      .filter((slug) => rawCaptureDevices.items?.[slug] !== undefined)
+      .map((slug) => [slug, {
+        ...CAPTURE_DEVICE_DEFAULTS,
+        ...object(rawCaptureDevices.items?.[slug]),
+      }])),
   };
   const stages: Record<string, number> = {};
   for (let stage = -6; stage <= 6; stage++) stages[String(stage)] = stage < 0 ? 2 / (2 - stage) : (2 + stage) / 2;
@@ -1156,6 +1203,8 @@ export function writeBattleArtifacts(options: BattleImportOptions): BattleBuild 
         weight: [number(list(monsterConfig.weight_range)[0]), number(list(monsterConfig.weight_range)[1])],
       },
       maxMoves: Math.trunc(number(monsterConfig.max_moves, 4)),
+      bondStageFloors: Object.fromEntries(sortedKeys(object(monsterConfig.bond_stage_floors))
+        .map((stage) => [stage, Math.trunc(number(monsterConfig.bond_stage_floors[stage]))])),
       catchRateRange: [number(list(monsterConfig.catch_rate_range)[0]), number(list(monsterConfig.catch_rate_range)[1], 100)],
       catchResistanceRange: [number(list(monsterConfig.catch_resistance_range)[0]), number(list(monsterConfig.catch_resistance_range)[1], 2)],
       experience: {

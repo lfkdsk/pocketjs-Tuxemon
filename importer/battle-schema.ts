@@ -78,6 +78,7 @@ export interface BattleDb {
       weight: [number, number];
     };
     maxMoves: number;
+    bondStageFloors: Record<string, number>;
     catchRateRange: [number, number];
     catchResistanceRange: [number, number];
     experience: {
@@ -330,6 +331,10 @@ export function validateBattleDb(value: unknown, pakKeys?: ReadonlySet<string>):
   assert(Number.isInteger(db.rules.trainingPoints.maxTotal) && db.rules.trainingPoints.maxTotal >= db.rules.trainingPoints.maxPerStat, "trainingPoints.maxTotal must cover one stat");
   assert(Number.isInteger(db.rules.trainingPoints.defaultGain) && db.rules.trainingPoints.defaultGain > 0, "trainingPoints.defaultGain must be a positive integer");
   assert(db.rules.maxMoves > 0 && Number.isInteger(db.rules.maxMoves), "maxMoves must be a positive integer");
+  assert(isRecord(db.rules.bondStageFloors), "bondStageFloors must be an object");
+  for (const [stage, floor] of Object.entries(db.rules.bondStageFloors)) {
+    assert(stage.length > 0 && Number.isInteger(floor) && floor >= 0 && floor <= 100, `bondStageFloors.${stage} must be an integer in 0..100`);
+  }
   assert(db.rules.statCoefficient >= 0, "statCoefficient must be non-negative");
   assert(isRecord(db.rules.sizeVariation), "sizeVariation must be an object");
   assert(isFiniteRange(db.rules.sizeVariation.height) && isFiniteRange(db.rules.sizeVariation.weight), "size variation must contain ordered numeric pairs");
@@ -370,6 +375,12 @@ export function validateBattleDb(value: unknown, pakKeys?: ReadonlySet<string>):
     for (const move of monster.moveset) {
       assert(move.technique in db.techniques, `monster ${slug} references missing technique ${move.technique}`);
       assert(Number.isInteger(move.level) && move.level >= 0, `monster ${slug} has invalid move level`);
+    }
+    assert(Array.isArray(monster.evolutions), `monster ${slug} evolutions must be an array`);
+    for (const evolution of monster.evolutions) {
+      assert(isRecord(evolution), `monster ${slug} has an invalid evolution row`);
+      assert(typeof evolution.monster_slug === "string" && evolution.monster_slug.length > 0, `monster ${slug} evolution has no target`);
+      assert(evolution.monster_slug in db.monsters, `monster ${slug} references missing evolution target ${evolution.monster_slug}`);
     }
     assert(monster.catchRate >= db.rules.catchRateRange[0] && monster.catchRate <= db.rules.catchRateRange[1], `monster ${slug} has invalid catch rate`);
     assert(monster.catchResistance[0] >= db.rules.catchResistanceRange[0] && monster.catchResistance[0] <= monster.catchResistance[1] && monster.catchResistance[1] <= db.rules.catchResistanceRange[1], `monster ${slug} has invalid catch resistance`);

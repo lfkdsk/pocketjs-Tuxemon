@@ -18,9 +18,9 @@
  },
  "mapRepository": {
   "shellBytes": 81950,
-  "entryBytes": 7780800,
+  "entryBytes": 7869652,
   "entries": 263,
-  "manifestHash": "57de3fbd5739c5c5bd193c9de7240c703058c0bcd0cde84463739146fa9cad71",
+  "manifestHash": "5c37136940b27ce8c4015aad10bd99a1cc8212d5c81226bb9f78eb10eb91515b",
   "schemaHash": "c27e2e51e0256f25fc7c6850b83273dab8bab9664e249a72c0a38d8940939157"
  },
  "terrain": {
@@ -50,9 +50,9 @@
   "sourceRevision": "9e6258ff726b786040a267e8bdbbf037b560285e",
   "scope": "spyder",
   "counts": {
-   "monsters": 214,
-   "techniques": 230,
-   "items": 82,
+   "monsters": 257,
+   "techniques": 245,
+   "items": 113,
    "elements": 13,
    "tastes": 12,
    "statuses": 35,
@@ -66,12 +66,12 @@
    "wildEncounterUses": 17
   },
   "art": {
-   "sourceFiles": 511,
-   "files": 511,
-   "sourceBytes": 1598170,
-   "pngBytes": 1070236,
-   "textureBytes": 23414264,
-   "pakBytes": 24498720,
+   "sourceFiles": 578,
+   "files": 578,
+   "sourceBytes": 1889960,
+   "pngBytes": 1187501,
+   "textureBytes": 25192464,
+   "pakBytes": 26440560,
    "maxWidth": 512,
    "maxHeight": 512,
    "categories": {
@@ -83,11 +83,11 @@
      "textureBytes": 524352
     },
     "capture-devices": {
-     "sourceFiles": 7,
-     "files": 7,
-     "sourceBytes": 41717,
-     "pngBytes": 2124,
-     "textureBytes": 14392
+     "sourceFiles": 27,
+     "files": 27,
+     "sourceBytes": 151592,
+     "pngBytes": 8039,
+     "textureBytes": 55512
     },
     "element-icons": {
      "sourceFiles": 26,
@@ -118,11 +118,11 @@
      "textureBytes": 196632
     },
     "monster-sheets": {
-     "sourceFiles": 214,
-     "files": 214,
-     "sourceBytes": 595110,
-     "pngBytes": 364228,
-     "textureBytes": 7014064
+     "sourceFiles": 257,
+     "files": 257,
+     "sourceBytes": 765467,
+     "pngBytes": 466086,
+     "textureBytes": 8423432
     },
     "range-speed-icons": {
      "sourceFiles": 13,
@@ -139,11 +139,11 @@
      "textureBytes": 17680
     },
     "technique-animations": {
-     "sourceFiles": 126,
-     "files": 126,
-     "sourceBytes": 529619,
-     "pngBytes": 433943,
-     "textureBytes": 14304240
+     "sourceFiles": 130,
+     "files": 130,
+     "sourceBytes": 541177,
+     "pngBytes": 443435,
+     "textureBytes": 14631952
     },
     "trainer-sheets": {
      "sourceFiles": 61,
@@ -161,8 +161,8 @@
     }
    }
   },
-  "battleDbBytes": 1038121,
-  "runtimeDbBytes": 552088,
+  "battleDbBytes": 1195862,
+  "runtimeDbBytes": 801152,
   "pakKey": "game:battle-db"
  }
 }

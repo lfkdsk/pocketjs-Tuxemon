@@ -50,16 +50,100 @@ export interface DbTechnique {
 
 export interface DbMonster {
   slug: string;
+  species: string;
   shape: string;
   /** Evolution stage gates some level-up moves. */
   stage?: string;
   types: string[];
+  tags: string[];
+  terrains: string[];
+  catch_rate: number;
+  catch_resistance: [number, number];
+  evolutions: DbEvolution[];
   moveset: Array<{
     technique: string;
     learning_method: string;
     level_learned: number;
     evolution_stage_learned?: string;
   }>;
+}
+
+export interface DbEvolution extends Record<string, unknown> {
+  monster_slug: string;
+  at_level?: number;
+  gender?: string;
+  element?: string;
+  acquisition?: string;
+  inside?: boolean;
+  tech?: string;
+  moves?: string[];
+  variables?: Array<{ key: string; value: string | number | boolean }>;
+  tastes?: Record<string, string>;
+  bond?: { comparison: string; value: number };
+  stats?: {
+    comparison: string;
+    stat_type: StatName;
+    target_stat?: StatName;
+    target_value?: number;
+  };
+  party_conditions?: {
+    monster_slugs?: Record<string, number>;
+    monster_types?: Record<string, number>;
+    genders?: Record<string, number>;
+    alignment?: string;
+    party_size?: number;
+    party_level?: number;
+    party_stages?: Record<string, number>;
+  };
+  item?: Record<string, number>;
+}
+
+export interface DbItem {
+  slug: string;
+  sort: string;
+  category: string;
+  usable_in: string[];
+  consumable: boolean;
+  effects: DbRule[];
+  conditions: DbRule[];
+  behaviors: Record<string, unknown>;
+  stat_modifiers: Partial<Record<StatName | "current_hp", DbStatModifier>>;
+  immunity_to_status: string[];
+}
+
+export interface DbCaptureEffect {
+  target_attribute: string;
+  operation: string;
+  value: string | number;
+}
+
+export interface DbCaptureDevice {
+  specific_capdev_modifier: number | null;
+  positive_modifier: number;
+  negative_modifier: number;
+  specific_status_modifiers: Record<string, number> | null;
+  fallback_element_malus: number;
+  specific_element_modifiers: Record<string, number> | null;
+  fallback_gender_malus: number;
+  specific_gender_modifiers: Record<string, number> | null;
+  fallback_variables_malus: number;
+  fallback_variables_bonus: number;
+  specific_variables_modifiers: Array<{ key: string; value: string | number | boolean }> | null;
+  random_bounds: [number, number] | null;
+  capdev_persistent_on_success: boolean;
+  capdev_persistent_on_failure: boolean;
+  capdev_effects: DbCaptureEffect[] | null;
+}
+
+export interface DbCaptureRules {
+  max_catch_rate: number;
+  total_shakes: number;
+  shake_constant: number;
+  shake_denominator: number;
+  shake_divisor: number;
+  shake_hp_multiplier: number;
+  shake_current_hp_multiplier: number;
+  shake_hp_divisor: number;
 }
 
 export interface DbStatus {
@@ -86,6 +170,7 @@ export interface DbStatus {
 export interface TuxemonBattleDb {
   monster: Record<string, DbMonster>;
   technique: Record<string, DbTechnique>;
+  item: Record<string, DbItem>;
   technique_speed: Record<string, number>;
   element: Record<string, { types: Array<{ against: string; multiplier: number }> }>;
   /** Source database insertion order, which random element-switch moves use. */
@@ -99,6 +184,22 @@ export interface TuxemonBattleDb {
   taste_order?: string[];
   shape: Record<string, { attributes: Stats }>;
   status: Record<string, DbStatus>;
+  capture: DbCaptureRules;
+  capture_devices: {
+    status_modifier: number;
+    capdev_modifier: number;
+    items: Record<string, DbCaptureDevice>;
+  };
+  /** Optional only for the legacy GB2 development fixture. */
+  progression?: {
+    level_range: [number, number];
+    max_moves: number;
+    acquisition_multipliers: Record<string, number>;
+    experience_groups: Record<string, {
+      multiplier: number;
+      experience_coefficient: number;
+    }>;
+  };
 }
 
 export interface BattleMove {
@@ -126,6 +227,17 @@ export interface BattleMonster {
   iid?: string;
   slug: string;
   level: number;
+  stage: string;
+  gender: string;
+  tasteCold: string;
+  tasteWarm: string;
+  height: number;
+  weight: number;
+  individualValues: Stats;
+  birthdate: [number, number];
+  acquisition: string;
+  captureDevice: string;
+  waitingToEvolve: boolean;
   originalTypes: string[];
   types: string[];
   base: Stats;
@@ -170,6 +282,9 @@ export interface MonsterSnapshot {
   bond?: number;
   trainingPoints?: Partial<Stats>;
   status?: string | null;
+  acquisition?: string;
+  captureDevice?: string;
+  waitingToEvolve?: boolean;
 }
 
 /** Complete persistent snapshot produced by the Tuxemon spawn pipeline. */
@@ -188,7 +303,16 @@ export type PlayerPolicy = "first" | "cycle";
 
 export interface RewardEvent {
   loser: number;
-  winners: Array<{ uid: number; experience: number; trainingPoints: StatName[] }>;
+  winners: Array<{
+    uid: number;
+    experience: number;
+    effectiveExperience: number;
+    levelsGained: number;
+    learnedMoves: string[];
+    forgottenMoves: string[];
+    evolutionTarget: string | null;
+    trainingPoints: StatName[];
+  }>;
   prize: number;
 }
 
@@ -216,6 +340,11 @@ export interface TuxemonBattleState extends BattleCoreState<BattleMonster> {
   result: BattleResult | null;
   /** Reserved now; GB3's escape command keeps this across battles. */
   runAttempts: number;
+  /** Battle-owned snapshot of the session backpack, written back on completion. */
+  inventory: Record<string, number>;
+  /** World variables consulted by day/night and other capture devices. */
+  variables: Record<string, string | number | boolean>;
+  capturedUid: number | null;
 }
 
 export interface BattleStart {
@@ -230,6 +359,8 @@ export interface BattleStart {
   fieldSize?: 1 | 2;
   moneyMethod?: "participant_scaled" | "conserved";
   runAttempts?: number;
+  inventory?: Record<string, number>;
+  variables?: Record<string, string | number | boolean>;
 }
 
 export interface TechniqueDecision {
@@ -238,7 +369,6 @@ export interface TechniqueDecision {
   choice: number;
 }
 
-/** Reserved reducer inputs for GB3 without committing their mechanics here. */
 export type FutureBattleDecision =
   | { type: "item"; item: string; target: number }
   | { type: "capture"; item: string; target: number }

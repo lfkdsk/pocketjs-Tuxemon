@@ -1588,7 +1588,7 @@
     },
     {
       "map": "spyder_candy_center",
-      "event": "e019_heal_afford",
+      "event": "e020_heal_afford",
       "name": "Heal Afford",
       "page": 0,
       "trigger": "parallel",
@@ -2937,7 +2937,7 @@
     },
     {
       "map": "spyder_flower_center",
-      "event": "e010_heal_afford",
+      "event": "e011_heal_afford",
       "name": "Heal Afford",
       "page": 0,
       "trigger": "parallel",
@@ -3443,7 +3443,7 @@
     },
     {
       "map": "spyder_healing_center",
-      "event": "e015_heal_afford",
+      "event": "e016_heal_afford",
       "name": "Heal Afford",
       "page": 0,
       "trigger": "parallel",
@@ -3465,7 +3465,7 @@
     },
     {
       "map": "spyder_leather_center",
-      "event": "e010_heal_afford",
+      "event": "e011_heal_afford",
       "name": "Heal Afford",
       "page": 0,
       "trigger": "parallel",
@@ -6365,7 +6365,7 @@
     },
     {
       "map": "spyder_timber_center",
-      "event": "e010_heal_afford",
+      "event": "e011_heal_afford",
       "name": "Heal Afford",
       "page": 0,
       "trigger": "parallel",

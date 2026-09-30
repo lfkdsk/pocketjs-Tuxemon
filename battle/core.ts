@@ -46,7 +46,7 @@ export type BattlePhase =
 
 export type BattleOutcome = "won" | "lost" | "draw" | "ran" | "captured";
 
-export type ActionKind = "technique" | "status" | "item";
+export type ActionKind = "technique" | "status" | "item" | "capture" | "run" | "swap";
 
 export interface BattleAction {
   kind: ActionKind;
@@ -156,17 +156,31 @@ function remainingSides<Monster, State extends BattleCoreState<Monster>>(
   );
 }
 
+export function endBattle<Monster, State extends BattleCoreState<Monster>>(
+  state: State,
+  rules: BattleCoreRules<Monster, State>,
+  outcome: BattleOutcome,
+): State {
+  if (state.phase === "ended") return state;
+  state.outcome = outcome;
+  state.phase = "ended";
+  state.awaiting = null;
+  state.decisionQueue = [];
+  state.queue = [];
+  state.pending = [];
+  state.events.push({ type: "end", turn: state.turn, outcome });
+  rules.finish(state);
+  return state;
+}
+
 function finishIfDecided<Monster, State extends BattleCoreState<Monster>>(
   state: State,
   rules: BattleCoreRules<Monster, State>,
 ): boolean {
   const remaining = remainingSides(state, rules);
   if (remaining.length > 1) return false;
-  if (remaining.length === 0) state.outcome = "draw";
-  else state.outcome = remaining[0] === 0 ? "won" : "lost";
-  state.phase = "ended";
-  state.events.push({ type: "end", turn: state.turn, outcome: state.outcome });
-  rules.finish(state);
+  const outcome = remaining.length === 0 ? "draw" : remaining[0] === 0 ? "won" : "lost";
+  endBattle(state, rules, outcome);
   return true;
 }
 
@@ -188,12 +202,15 @@ function drain<Monster, State extends BattleCoreState<Monster>>(
   state: State,
   rules: BattleCoreRules<Monster, State>,
 ): void {
+  const ended = (): boolean => state.phase === "ended";
   sortQueue(state, rules);
   while (state.queue.length > 0) {
     const action = state.queue.pop()!;
     rules.perform(state, action);
+    if (ended()) return;
     sortQueue(state, rules);
     rules.checkParty(state);
+    if (ended()) return;
   }
 }
 
@@ -237,11 +254,13 @@ export function advanceBattle<Monster, State extends BattleCoreState<Monster>>(
         // pre-checks can faint their user while decisions are being gathered.
         if (finishIfDecided(state, rules)) return state;
         drain(state, rules);
+        if (state.outcome !== null) return state;
         state.phase = "postAction";
         break;
       case "postAction":
         if (remainingSides(state, rules).length > 1) rules.queuePostActions(state);
         drain(state, rules);
+        if (state.outcome !== null) return state;
         state.phase = "resolve";
         break;
       case "resolve":
@@ -256,16 +275,19 @@ export function advanceBattle<Monster, State extends BattleCoreState<Monster>>(
 }
 
 /** Submit one menu choice to a mutable draft and run to the next boundary. */
-export function submitDecision<Monster, State extends BattleCoreState<Monster>>(
+export function submitAction<Monster, State extends BattleCoreState<Monster>>(
   state: State,
   rules: BattleCoreRules<Monster, State>,
-  choice: number,
+  action: Omit<BattleAction, "subPriority">,
 ): State {
   const awaiting = state.awaiting;
   if (!awaiting || awaiting.kind !== "technique") {
-    throw new Error("battle: no technique decision is pending");
+    throw new Error("battle: no action decision is pending");
   }
-  enqueueAction(state, rules.playerAction(state, awaiting.uid, choice));
+  if (action.user !== awaiting.uid) {
+    throw new Error(`battle: action belongs to ${String(action.user)}, awaiting ${awaiting.uid}`);
+  }
+  enqueueAction(state, action);
   state.decisionQueue.shift();
   state.awaiting = null;
   const uid = state.decisionQueue[0];
@@ -275,4 +297,17 @@ export function submitDecision<Monster, State extends BattleCoreState<Monster>>(
   }
   state.phase = "action";
   return advanceBattle(state, rules);
+}
+
+/** Submit one technique-menu choice to a mutable draft. */
+export function submitDecision<Monster, State extends BattleCoreState<Monster>>(
+  state: State,
+  rules: BattleCoreRules<Monster, State>,
+  choice: number,
+): State {
+  const awaiting = state.awaiting;
+  if (!awaiting || awaiting.kind !== "technique") {
+    throw new Error("battle: no technique decision is pending");
+  }
+  return submitAction(state, rules, rules.playerAction(state, awaiting.uid, choice));
 }

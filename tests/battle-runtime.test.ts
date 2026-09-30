@@ -4,6 +4,7 @@ import battleDbJson from "../data/battle-db.json";
 import { nextRandom, type RngState } from "../battle/core.ts";
 import {
   initialTuxemonExtensionState,
+  PARTY_LIMIT,
   tuxemonExtensionState,
   type TuxemonExtensionState,
 } from "../battle/extension.ts";
@@ -16,7 +17,7 @@ import {
   type VariableEnums,
 } from "../battle/runtime.ts";
 import { spawnMonster } from "../battle/spawn.ts";
-import { createBattle } from "../battle/tuxemon.ts";
+import { createBattle, getSide, reduceBattle } from "../battle/tuxemon.ts";
 import type { SpawnedMonsterSnapshot } from "../battle/types.ts";
 import { validateBattleDb } from "../importer/battle-schema.ts";
 import type { BattleCompletion, BattleRules } from "../vendor/pocket-rpgkit/src/engine/battle.ts";
@@ -26,7 +27,7 @@ const DB = validateBattleDb(battleDbJson);
 const RULE_DB = battleDbToTuxemonBattleDb(DB);
 const OPPONENT = "test_trainer";
 const ENUMS: VariableEnums = {
-  battle_last_result: ["draw", "lost", "won"],
+  battle_last_result: ["draw", "lost", "won", "run", "captured"],
   battle_last_trainer: [OPPONENT],
   battle_last_winner: ["player", OPPONENT],
   battle_last_loser: ["player", OPPONENT],
@@ -49,8 +50,35 @@ function extensionWith(player: SpawnedMonsterSnapshot): TuxemonExtensionState {
   return { ...initialTuxemonExtensionState(), party: [player], environment: "grass", nextMonsterId: 2 };
 }
 
+function revealCurrentMenu(rules: BattleRules, value: JsonValue): JsonValue {
+  for (let guard = 0; guard < 1_000; guard++) {
+    const state = tuxemonRuntimeBattleState(value);
+    if (state.eventCursor >= state.battle.events.length) return value;
+    value = rules.step(value, { buttons: 0, confirmEdge: true }, 0);
+  }
+  throw new Error("battle presentation did not reach its menu");
+}
+
 function json(value: unknown): JsonValue {
   return value as JsonValue;
+}
+
+function startBattle(
+  rules: BattleRules,
+  ext: TuxemonExtensionState,
+  setup: JsonValue,
+  seed: number,
+  items: Readonly<Record<string, number>> = {},
+  gold = 0,
+): ReturnType<BattleRules["start"]> {
+  const extValue = json(ext);
+  return rules.start(extValue, setup, seed, {
+    ext: extValue,
+    switches: {},
+    variables: {},
+    items,
+    gold,
+  });
 }
 
 function finish(
@@ -88,11 +116,11 @@ describe("Tuxemon BattleRules adapter", () => {
       moneyModifier: 10,
     }];
     const rules = createTuxemonBattleRules(DB, ENUMS);
-    const started = rules.start(json(ext), json({
+    const started = startBattle(rules, ext, json({
       kind: "trainer",
       opponent: OPPONENT,
       environment: "grass",
-    }), 101);
+    }), 101, {}, 100);
     expect(started).not.toBeNull();
     expect(tuxemonExtensionState(started!.ext, DB).npcParties[OPPONENT]).toBeUndefined();
 
@@ -107,13 +135,20 @@ describe("Tuxemon BattleRules adapter", () => {
     expect(after.totalExperience!).toBeGreaterThan(before.totalExperience!);
     expect(after.trainingPoints).toEqual(finishedMonster.trainingPoints);
     expect(after.bond).toBe(finishedMonster.bond);
-    expect(persisted).toMatchObject({
-      history: [
-        { fighter: "player", opponent: OPPONENT, outcome: "won" },
-        { fighter: OPPONENT, opponent: "player", outcome: "lost" },
-      ],
-      money: 20,
-    });
+    expect(after.level).toBe(finishedMonster.level);
+    expect(after.base).toEqual(finishedMonster.base);
+    expect(after.stage).toBe(finishedMonster.stage);
+    expect(after.acquisition).toBe(finishedMonster.acquisition);
+    expect(after.captureDevice).toBe(finishedMonster.captureDevice);
+    expect(after.waitingToEvolve).toBe(finishedMonster.waitingToEvolve);
+    expect(persisted.history).toEqual([
+      { fighter: "player", opponent: OPPONENT, outcome: "won" },
+      { fighter: OPPONENT, opponent: "player", outcome: "lost" },
+    ]);
+    expect(persisted).not.toHaveProperty("money");
+    expect(persisted).not.toHaveProperty("inventory");
+    expect(completion.items).toEqual({});
+    expect(completion.gold).toBe(120);
     expect(completion.writes).toEqual({
       "v.battle_last_result": 3,
       "v.battle_last_trainer": 1,
@@ -127,10 +162,120 @@ describe("Tuxemon BattleRules adapter", () => {
     });
   });
 
+  test("persists battle inventory, escape attempts, and a captured wild monster", () => {
+    const ext = extensionWith(monster("nut", 20, "txmn-player", 71));
+    const items = { tuxeball_ancient: 2, potion: 4 };
+    ext.runAttempts = 3;
+    const rules = createTuxemonBattleRules(DB, ENUMS);
+    const started = startBattle(rules, ext, json({
+      kind: "wild",
+      species: "budaye",
+      level: 5,
+      environment: "grass",
+    }), 717, items, 45)!;
+    let value = revealCurrentMenu(rules, started.state);
+    let runtime = tuxemonRuntimeBattleState(value);
+    expect(runtime.battle.inventory).toEqual(items);
+    expect(runtime.battle.runAttempts).toBe(3);
+    expect(runtime.menu.map(({ kind }) => kind)).toEqual(["fight", "capture", "run"]);
+    value = rules.step(value, { buttons: 0, downEdge: true }, 0);
+    value = rules.step(value, { buttons: 0, confirmEdge: true }, 0);
+    value = rules.step(value, { buttons: 0, confirmEdge: true }, 0);
+    runtime = tuxemonRuntimeBattleState(value);
+    expect(runtime.battle.result?.battleLastResult).toBe("captured");
+    runtime.eventCursor = runtime.battle.events.length;
+    const completion = rules.done(json(runtime))!;
+    const persisted = tuxemonExtensionState(completion.ext, DB);
+    expect(completion.result).toBe("escape");
+    expect(completion.writes).toEqual({ "v.battle_last_result": 5 });
+    expect(completion.items).toEqual({ tuxeball_ancient: 1, potion: 4 });
+    expect(completion.gold).toBe(45);
+    expect(persisted.runAttempts).toBe(3);
+    expect(persisted.party).toHaveLength(2);
+    expect(persisted.party[1]).toMatchObject({
+      iid: "txmn-000002",
+      slug: "budaye",
+      acquisition: "captured",
+      captureDevice: "tuxeball_ancient",
+      waitingToEvolve: false,
+    });
+    expect(persisted.caught).toContain("budaye");
+    expect(persisted.nextMonsterId).toBe(3);
+  });
+
+  test("sends a capture to the kennel when the active party is full", () => {
+    const ext = extensionWith(monster("nut", 20, "txmn-player", 72));
+    for (let index = 0; index < 5; index++) {
+      ext.party.push(monster("rockitten", 10, `txmn-reserve-${index}`, 80 + index));
+    }
+    const rules = createTuxemonBattleRules(DB, ENUMS);
+    const started = startBattle(rules, ext, json({
+      kind: "wild",
+      species: "budaye",
+      level: 5,
+      environment: "grass",
+    }), 727, { tuxeball_ancient: 1 })!;
+    const runtime = tuxemonRuntimeBattleState(revealCurrentMenu(rules, started.state));
+    const target = runtime.battle.field.find((uid) => getSide(runtime.battle, uid) === 1)!;
+    runtime.battle = reduceBattle(RULE_DB, runtime.battle, {
+      type: "capture",
+      item: "tuxeball_ancient",
+      target,
+    });
+    runtime.eventCursor = runtime.battle.events.length;
+    const persisted = tuxemonExtensionState(rules.done(json(runtime))!.ext, DB);
+    expect(persisted.party).toHaveLength(PARTY_LIMIT);
+    expect(persisted.kennel).toHaveLength(1);
+    expect(persisted.kennel[0]).toMatchObject({ slug: "budaye", acquisition: "captured" });
+  });
+
+  test("writes all evolved monster fields and a successful run back to extension state", () => {
+    const ext = extensionWith(monster("nut", 5, "txmn-player", 81));
+    ext.runAttempts = 7;
+    const rules = createTuxemonBattleRules(DB, ENUMS);
+    const started = startBattle(rules, ext, json({
+      kind: "wild",
+      species: "budaye",
+      level: 5,
+      environment: "grass",
+    }), 818, { potion: 2 })!;
+    let value = revealCurrentMenu(rules, started.state);
+    value = rules.step(value, { buttons: 0, downEdge: true }, 0);
+    value = rules.step(value, { buttons: 0, confirmEdge: true }, 0);
+    const runtime = tuxemonRuntimeBattleState(value);
+    expect(runtime.battle.result?.battleLastResult).toBe("run");
+    const evolved = runtime.battle.parties[0][0]!;
+    evolved.slug = "bolt";
+    evolved.level = 18;
+    evolved.stage = "stage1";
+    evolved.base = { hp: 71, armour: 72, dodge: 73, melee: 74, ranged: 75, speed: 76 };
+    evolved.currentHp = 70;
+    evolved.acquisition = "gift";
+    evolved.captureDevice = "tuxeball_grand";
+    evolved.waitingToEvolve = true;
+    runtime.battle.inventory = { potion: 1 };
+    runtime.eventCursor = runtime.battle.events.length;
+    const completion = rules.done(json(runtime))!;
+    const persisted = tuxemonExtensionState(completion.ext, DB);
+    expect(completion.writes).toEqual({ "v.battle_last_result": 4 });
+    expect(completion.items).toEqual({ potion: 1 });
+    expect(persisted.runAttempts).toBe(0);
+    expect(persisted.party[0]).toMatchObject({
+      slug: "bolt",
+      level: 18,
+      stage: "stage1",
+      base: evolved.base,
+      currentHp: 70,
+      acquisition: "gift",
+      captureDevice: "tuxeball_grand",
+      waitingToEvolve: true,
+    });
+  });
+
   test("records a real player defeat without healing or teleporting", () => {
     const ext = extensionWith(monster("budaye", 2, "txmn-player", 17));
     const rules = createTuxemonBattleRules(DB, ENUMS);
-    const started = rules.start(json(ext), json({
+    const started = startBattle(rules, ext, json({
       kind: "trainer",
       opponent: OPPONENT,
       party: [{ species: "nut", level: 50, experienceModifier: 5, moneyModifier: 10 }],
@@ -162,32 +307,32 @@ describe("Tuxemon BattleRules adapter", () => {
       opponent: OPPONENT,
       party: [{ species: "budaye", level: 5 }],
     });
-    expect(rules.start(json(initialTuxemonExtensionState()), setup, 1)).toBeNull();
+    expect(startBattle(rules, initialTuxemonExtensionState(), setup, 1)).toBeNull();
 
     const noEnvironment = extensionWith(monster("nut", 5, "txmn-player-env"));
     noEnvironment.environment = null;
-    expect(rules.start(json(noEnvironment), setup, 1)).toBeNull();
+    expect(startBattle(rules, noEnvironment, setup, 1)).toBeNull();
 
     const fainted = monster("nut", 5, "txmn-player");
     fainted.currentHp = 0;
-    expect(rules.start(json(extensionWith(fainted)), setup, 1)).toBeNull();
+    expect(startBattle(rules, extensionWith(fainted), setup, 1)).toBeNull();
 
     const moveLess = monster("nut", 5, "txmn-player");
     moveLess.moves = [];
-    expect(rules.start(json(extensionWith(moveLess)), setup, 1)).toBeNull();
+    expect(startBattle(rules, extensionWith(moveLess), setup, 1)).toBeNull();
   });
 
   test("random encounter miss is null; hit preserves probability, row, level, and spawn draw order", () => {
     const rules = createTuxemonBattleRules(DB, ENUMS);
     const ext = extensionWith(monster("nut", 20, "txmn-player"));
-    expect(rules.start(json(ext), json({
+    expect(startBattle(rules, ext, json({
       kind: "random",
       table: "spyder_route1",
       probability: 0,
     }), 303)).toBeNull();
 
     const seed = 404;
-    const started = rules.start(json(ext), json({
+    const started = startBattle(rules, ext, json({
       kind: "random",
       table: "spyder_route1",
       probability: 100,
@@ -221,6 +366,129 @@ describe("Tuxemon BattleRules adapter", () => {
     expect(actual.battle).toEqual(expected);
   });
 
+  test("starts legal doubles and exposes every move/target pair in stable order", () => {
+    const ext = extensionWith(monster("nut", 25, "txmn-player-a", 11));
+    ext.party.push(monster("rockitten", 25, "txmn-player-b", 12));
+    ext.nextMonsterId = 3;
+    const rules = createTuxemonBattleRules(DB, ENUMS);
+    const setup = json({
+      kind: "trainer",
+      opponent: OPPONENT,
+      fieldSize: 2,
+      environment: "grass",
+      party: [
+        { species: "memnomnom", level: 25 },
+        { species: "memnomnom", level: 25 },
+      ],
+    });
+    const started = startBattle(rules, ext, setup, 515)!;
+    let value = revealCurrentMenu(rules, started.state);
+    let state = tuxemonRuntimeBattleState(value);
+    expect(state.battle.fieldSize).toBe(2);
+    expect(state.battle.field.map((uid) => getSide(state.battle, uid))).toEqual([1, 1, 0, 0]);
+    expect(state.menuMode).toBe("root");
+    expect(state.menu[0]?.kind).toBe("fight");
+    value = rules.step(value, { buttons: 0, confirmEdge: true }, 0);
+    state = tuxemonRuntimeBattleState(value);
+    expect(state.menuMode).toBe("technique");
+    expect(new Set(state.menu.map(({ target }) => target))).toEqual(new Set(state.battle.field.slice(0, 2)));
+    expect(state.menu.every(({ targetSlug, targetSlot }) => targetSlug === "memnomnom" && (targetSlot === 1 || targetSlot === 2))).toBeTrue();
+
+    const secondTargetIndex = state.menu.findIndex(({ targetSlot }) => targetSlot === 2);
+    expect(secondTargetIndex).toBeGreaterThanOrEqual(0);
+    for (let index = 0; index < secondTargetIndex; index++) {
+      value = rules.step(value, { buttons: 0, downEdge: true }, 0);
+    }
+    value = rules.step(value, { buttons: 0, confirmEdge: true }, 0);
+    state = tuxemonRuntimeBattleState(value);
+    const decision = [...state.battle.events].reverse().find((event) =>
+      event.type === "decision" && event.side === 0
+    );
+    expect(decision?.target).toBe(state.battle.field[1]);
+  });
+
+  test("exposes item, capture, run, and swap choices with cancelable target menus", () => {
+    const active = monster("nut", 20, "txmn-player-a", 31);
+    active.currentHp = active.currentHp! - 1;
+    const ext = extensionWith(active);
+    ext.party.push(monster("rockitten", 20, "txmn-player-b", 32));
+    ext.runAttempts = 9;
+    const rules = createTuxemonBattleRules(DB, ENUMS);
+    let value = revealCurrentMenu(rules, startBattle(rules, ext, json({
+      kind: "wild",
+      species: "budaye",
+      level: 5,
+      environment: "grass",
+    }), 919, { potion: 2, tuxeball_ancient: 1 })!.state);
+    let state = tuxemonRuntimeBattleState(value);
+    expect(state.menu.map(({ kind }) => kind)).toEqual([
+      "fight", "item", "capture", "run", "replacement",
+    ]);
+
+    value = rules.step(value, { buttons: 0, downEdge: true }, 0);
+    value = rules.step(value, { buttons: 0, confirmEdge: true }, 0);
+    state = tuxemonRuntimeBattleState(value);
+    expect(state.menuMode).toBe("item");
+    expect(state.menu).toContainEqual(expect.objectContaining({
+      kind: "item",
+      slug: "potion",
+      quantity: 2,
+      target: state.battle.parties[0][0]!.uid,
+    }));
+
+    value = rules.step(value, { buttons: 0, cancelEdge: true }, 0);
+    state = tuxemonRuntimeBattleState(value);
+    expect(state.menuMode).toBe("root");
+    value = rules.step(value, { buttons: 0, downEdge: true }, 0);
+    value = rules.step(value, { buttons: 0, downEdge: true }, 0);
+    value = rules.step(value, { buttons: 0, confirmEdge: true }, 0);
+    state = tuxemonRuntimeBattleState(value);
+    expect(state.menuMode).toBe("capture");
+    expect(state.menu).toContainEqual(expect.objectContaining({
+      kind: "capture",
+      slug: "tuxeball_ancient",
+      quantity: 1,
+      target: state.battle.parties[1][0]!.uid,
+    }));
+
+    value = rules.step(value, { buttons: 0, cancelEdge: true }, 0);
+    for (let index = 0; index < 4; index++) {
+      value = rules.step(value, { buttons: 0, downEdge: true }, 0);
+    }
+    value = rules.step(value, { buttons: 0, confirmEdge: true }, 0);
+    state = tuxemonRuntimeBattleState(value);
+    expect(state.menuMode).toBe("swap");
+    expect(state.menu).toEqual([expect.objectContaining({
+      kind: "replacement",
+      slug: "rockitten",
+      target: state.battle.parties[0][1]!.uid,
+    })]);
+
+    value = rules.step(value, { buttons: 0, cancelEdge: true }, 0);
+    value = rules.step(value, { buttons: 0, downEdge: true }, 0);
+    value = rules.step(value, { buttons: 0, confirmEdge: true }, 0);
+    value = rules.step(value, { buttons: 0, confirmEdge: true }, 0);
+    state = tuxemonRuntimeBattleState(value);
+    expect(state.battle.events).toContainEqual(expect.objectContaining({
+      type: "item",
+      item: "potion",
+      target: state.battle.parties[0][0]!.uid,
+    }));
+    expect(state.battle.inventory.potion).toBe(1);
+  });
+
+  test("declines a double battle when both parties have fewer than three monsters", () => {
+    const ext = extensionWith(monster("nut", 25, "txmn-player", 21));
+    const rules = createTuxemonBattleRules(DB, ENUMS);
+    expect(startBattle(rules, ext, json({
+      kind: "trainer",
+      opponent: OPPONENT,
+      fieldSize: 2,
+      environment: "grass",
+      party: [{ species: "memnomnom", level: 25 }],
+    }), 616)).toBeNull();
+  });
+
   test("presentation uses reference ticks and delays completion until the terminal event is shown", () => {
     const rules = createTuxemonBattleRules(DB, ENUMS);
     const ext = extensionWith(monster("nut", 50, "txmn-player", 91));
@@ -229,7 +497,7 @@ describe("Tuxemon BattleRules adapter", () => {
       opponent: OPPONENT,
       party: [{ species: "budaye", level: 2, experienceModifier: 5, moneyModifier: 10 }],
     });
-    const starts = [60, 30, 20, 4].map(() => rules.start(json(ext), setup, 808)!.state);
+    const starts = [60, 30, 20, 4].map(() => startBattle(rules, ext, setup, 808)!.state);
     const rates = [1, 2, 3, 15];
     const advanced = starts.map((start, index) => {
       let value = start;
@@ -242,7 +510,7 @@ describe("Tuxemon BattleRules adapter", () => {
 
     const outcomes = [1, 2, 3, 15].map((ticks) => finish(
       rules,
-      rules.start(json(ext), setup, 909)!,
+      startBattle(rules, ext, setup, 909)!,
       ticks,
     ));
     const normalized = outcomes.map(({ state, completion }) => ({

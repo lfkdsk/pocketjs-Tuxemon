@@ -10,8 +10,8 @@ When conversion discards a whole event, every source rule in it is Dropped.
 
 | Kind | Kinds | Uses | Native | Degraded | Placeholder | Dropped | S1 T1 baseline |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Actions | 98 | 13617 | 11574 | 638 | 27 | 1378 | 6123 / 6246 (44.97% / 45.9%) |
-| Conditions | 64 | 8663 | 7664 | 93 | 1 | 905 | 4459 / 4591 (51.47% / 53.0%) |
+| Actions | 98 | 13617 | 11584 | 638 | 19 | 1376 | 6123 / 6246 (44.97% / 45.9%) |
+| Conditions | 64 | 8663 | 7666 | 95 | 1 | 901 | 4459 / 4591 (51.47% / 53.0%) |
 
 The S1 acceptance baselines are 6,246 action uses (45.9%) and 4,591
 condition uses (53.0%). Only T1 source types whose disposition is Native or
@@ -20,8 +20,8 @@ Degraded count toward them. This import records 6123
 (51.47%), respectively: 123
 action uses and 132 condition uses below the S1 baselines. The old
 type-table Native figure was 5,448 / 13,617 (40.0%); conversion-path accounting
-supersedes it with 11574 / 13617
-(85.0%). “Executable”
+supersedes it with 11584 / 13617
+(85.1%). “Executable”
 (native + degraded + deliberate P1 placeholder) is
 89.9% for actions and
 89.6% for conditions.
@@ -99,7 +99,7 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `create_npc` | 1324 | 0 | 0 | 179 | 1503 |
 | Action | `daycare` | 0 | 0 | 0 | 2 | 2 |
 | Action | `dojo_method` | 0 | 0 | 0 | 3 | 3 |
-| Action | `evolution` | 0 | 0 | 0 | 2 | 2 |
+| Action | `evolution` | 2 | 0 | 0 | 0 | 2 |
 | Action | `fadeout_music` | 0 | 0 | 0 | 1 | 1 |
 | Action | `format_variable` | 0 | 0 | 0 | 10 | 10 |
 | Action | `get_party_monster` | 0 | 0 | 0 | 9 | 9 |
@@ -155,7 +155,7 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `set_tuxepedia` | 0 | 0 | 0 | 6 | 6 |
 | Action | `set_variable` | 694 | 0 | 0 | 21 | 715 |
 | Action | `start_battle` | 325 | 0 | 5 | 1 | 331 |
-| Action | `start_double_battle` | 0 | 0 | 8 | 0 | 8 |
+| Action | `start_double_battle` | 8 | 0 | 0 | 0 | 8 |
 | Action | `teleport_faint` | 11 | 0 | 0 | 0 | 11 |
 | Action | `trading` | 0 | 0 | 0 | 8 | 8 |
 | Action | `transition_teleport` | 1042 | 3 | 0 | 4 | 1049 |
@@ -191,12 +191,12 @@ census.
 | Condition | `is char_moved` | 452 | 0 | 0 | 2 | 454 |
 | Condition | `is char_sprite` | 0 | 0 | 0 | 37 | 37 |
 | Condition | `is check_char_parameter` | 0 | 0 | 0 | 40 | 40 |
-| Condition | `is check_evolution` | 0 | 0 | 0 | 2 | 2 |
+| Condition | `is check_evolution` | 2 | 0 | 0 | 0 | 2 |
 | Condition | `is check_max_tech` | 0 | 0 | 0 | 2 | 2 |
 | Condition | `is check_party_parameter` | 0 | 0 | 0 | 8 | 8 |
 | Condition | `is check_world` | 0 | 0 | 0 | 2 | 2 |
 | Condition | `is cooldown_days` | 0 | 0 | 0 | 1 | 1 |
-| Condition | `is current_state` | 0 | 32 | 0 | 46 | 78 |
+| Condition | `is current_state` | 0 | 34 | 0 | 44 | 78 |
 | Condition | `is environment_is` | 0 | 0 | 0 | 28 | 28 |
 | Condition | `is has_item` | 52 | 0 | 0 | 1 | 53 |
 | Condition | `is has_kennel` | 0 | 0 | 0 | 2 | 2 |

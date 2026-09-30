@@ -380,7 +380,9 @@
   "draw",
   "lost",
   "none",
-  "won"
+  "won",
+  "run",
+  "captured"
  ],
  "battle_last_trainer": [
   "2",

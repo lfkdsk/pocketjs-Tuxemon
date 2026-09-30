@@ -39,8 +39,9 @@ function monster(
   };
 }
 
-// A real 11-turn, two-versus-three Spyder oracle case. It includes damage,
-// poison, grab/lifeleech, delayed disappear/appear, replacements, and cleanup.
+// A real two-versus-three Spyder oracle case. With GB3's in-battle experience
+// rewards it settles in 12 turns. It includes damage, poison, grab/lifeleech,
+// delayed disappear/appear, replacements, progression, and cleanup.
 const START: BattleStart = {
   seed: 3,
   kind: "trainer",
@@ -120,7 +121,7 @@ function runBattle(measure: boolean): RunTimings {
       rounds.push(duration);
     }
   }
-  if (state.outcome !== "lost" || state.turn !== 11 || state.rngDraws !== 88) {
+  if (state.outcome !== "lost" || state.turn !== 12 || state.rngDraws !== 96) {
     throw new Error(`benchmark fixture diverged: ${state.outcome}/${state.turn}/${state.rngDraws}`);
   }
   return { frames, rounds, total: now() - totalStart };
@@ -151,7 +152,7 @@ const output = JSON.stringify({
   engine: "PocketJS QuickJS",
   fixture: "spyder_dryadsgrove_petra seed=3 policy=cycle",
   battles: totals.length,
-  turnsPerBattle: 11,
+  turnsPerBattle: 12,
   activeFramesPerBattle: frames.length / totals.length,
   roundSettlementMs: stats(rounds),
   activeFrameMs: stats(frames),

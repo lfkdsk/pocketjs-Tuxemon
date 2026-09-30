@@ -28,6 +28,12 @@
    ]
   },
   "maxMoves": 4,
+  "bondStageFloors": {
+   "basic": 0,
+   "stage1": 20,
+   "stage2": 40,
+   "standalone": 0
+  },
   "catchRateRange": [
    0,
    100
@@ -187,6 +193,23 @@
      "capdev_persistent_on_failure": false,
      "capdev_effects": null
     },
+    "tuxeball_ancient": {
+     "specific_capdev_modifier": 99,
+     "positive_modifier": 1,
+     "negative_modifier": 1.2,
+     "specific_status_modifiers": null,
+     "fallback_element_malus": 0.2,
+     "specific_element_modifiers": null,
+     "fallback_gender_malus": 0.2,
+     "specific_gender_modifiers": null,
+     "fallback_variables_malus": 0.2,
+     "fallback_variables_bonus": 1.5,
+     "specific_variables_modifiers": null,
+     "random_bounds": null,
+     "capdev_persistent_on_success": false,
+     "capdev_persistent_on_failure": false,
+     "capdev_effects": null
+    },
     "tuxeball_candy": {
      "specific_capdev_modifier": null,
      "positive_modifier": 1,
@@ -210,6 +233,23 @@
       }
      ]
     },
+    "tuxeball_crusher": {
+     "specific_capdev_modifier": null,
+     "positive_modifier": 1,
+     "negative_modifier": 1.2,
+     "specific_status_modifiers": null,
+     "fallback_element_malus": 0.2,
+     "specific_element_modifiers": null,
+     "fallback_gender_malus": 0.2,
+     "specific_gender_modifiers": null,
+     "fallback_variables_malus": 0.2,
+     "fallback_variables_bonus": 1.5,
+     "specific_variables_modifiers": null,
+     "random_bounds": null,
+     "capdev_persistent_on_success": false,
+     "capdev_persistent_on_failure": false,
+     "capdev_effects": null
+    },
     "tuxeball_diurnal": {
      "specific_capdev_modifier": null,
      "positive_modifier": 1,
@@ -232,6 +272,83 @@
      "capdev_persistent_on_failure": false,
      "capdev_effects": null
     },
+    "tuxeball_earth": {
+     "specific_capdev_modifier": null,
+     "positive_modifier": 1,
+     "negative_modifier": 1.2,
+     "specific_status_modifiers": null,
+     "fallback_element_malus": 0.2,
+     "specific_element_modifiers": {
+      "earth": 1.5
+     },
+     "fallback_gender_malus": 0.2,
+     "specific_gender_modifiers": null,
+     "fallback_variables_malus": 0.2,
+     "fallback_variables_bonus": 1.5,
+     "specific_variables_modifiers": null,
+     "random_bounds": null,
+     "capdev_persistent_on_success": false,
+     "capdev_persistent_on_failure": false,
+     "capdev_effects": null
+    },
+    "tuxeball_female": {
+     "specific_capdev_modifier": null,
+     "positive_modifier": 1,
+     "negative_modifier": 1.2,
+     "specific_status_modifiers": null,
+     "fallback_element_malus": 0.2,
+     "specific_element_modifiers": null,
+     "fallback_gender_malus": 0.2,
+     "specific_gender_modifiers": {
+      "female": 1.5
+     },
+     "fallback_variables_malus": 0.2,
+     "fallback_variables_bonus": 1.5,
+     "specific_variables_modifiers": null,
+     "random_bounds": null,
+     "capdev_persistent_on_success": false,
+     "capdev_persistent_on_failure": false,
+     "capdev_effects": null
+    },
+    "tuxeball_fire": {
+     "specific_capdev_modifier": null,
+     "positive_modifier": 1,
+     "negative_modifier": 1.2,
+     "specific_status_modifiers": null,
+     "fallback_element_malus": 0.2,
+     "specific_element_modifiers": {
+      "fire": 1.5
+     },
+     "fallback_gender_malus": 0.2,
+     "specific_gender_modifiers": null,
+     "fallback_variables_malus": 0.2,
+     "fallback_variables_bonus": 1.5,
+     "specific_variables_modifiers": null,
+     "random_bounds": null,
+     "capdev_persistent_on_success": false,
+     "capdev_persistent_on_failure": false,
+     "capdev_effects": null
+    },
+    "tuxeball_gambler": {
+     "specific_capdev_modifier": null,
+     "positive_modifier": 1,
+     "negative_modifier": 1.2,
+     "specific_status_modifiers": null,
+     "fallback_element_malus": 0.2,
+     "specific_element_modifiers": null,
+     "fallback_gender_malus": 0.2,
+     "specific_gender_modifiers": null,
+     "fallback_variables_malus": 0.2,
+     "fallback_variables_bonus": 1.5,
+     "specific_variables_modifiers": null,
+     "random_bounds": [
+      0,
+      2
+     ],
+     "capdev_persistent_on_success": false,
+     "capdev_persistent_on_failure": false,
+     "capdev_effects": null
+    },
     "tuxeball_grand": {
      "specific_capdev_modifier": 1.75,
      "positive_modifier": 1,
@@ -248,6 +365,46 @@
      "capdev_persistent_on_success": false,
      "capdev_persistent_on_failure": false,
      "capdev_effects": null
+    },
+    "tuxeball_hardened": {
+     "specific_capdev_modifier": null,
+     "positive_modifier": 1,
+     "negative_modifier": 1.2,
+     "specific_status_modifiers": null,
+     "fallback_element_malus": 0.2,
+     "specific_element_modifiers": null,
+     "fallback_gender_malus": 0.2,
+     "specific_gender_modifiers": null,
+     "fallback_variables_malus": 0.2,
+     "fallback_variables_bonus": 1.5,
+     "specific_variables_modifiers": null,
+     "random_bounds": null,
+     "capdev_persistent_on_success": false,
+     "capdev_persistent_on_failure": true,
+     "capdev_effects": null
+    },
+    "tuxeball_hearty": {
+     "specific_capdev_modifier": null,
+     "positive_modifier": 1,
+     "negative_modifier": 1.2,
+     "specific_status_modifiers": null,
+     "fallback_element_malus": 0.2,
+     "specific_element_modifiers": null,
+     "fallback_gender_malus": 0.2,
+     "specific_gender_modifiers": null,
+     "fallback_variables_malus": 0.2,
+     "fallback_variables_bonus": 1.5,
+     "specific_variables_modifiers": null,
+     "random_bounds": null,
+     "capdev_persistent_on_success": false,
+     "capdev_persistent_on_failure": false,
+     "capdev_effects": [
+      {
+       "target_attribute": "taste_warm",
+       "operation": "set",
+       "value": "hearty"
+      }
+     ]
     },
     "tuxeball_lavish": {
      "specific_capdev_modifier": 1.5,
@@ -268,6 +425,80 @@
     },
     "tuxeball_majestic": {
      "specific_capdev_modifier": 2,
+     "positive_modifier": 1,
+     "negative_modifier": 1.2,
+     "specific_status_modifiers": null,
+     "fallback_element_malus": 0.2,
+     "specific_element_modifiers": null,
+     "fallback_gender_malus": 0.2,
+     "specific_gender_modifiers": null,
+     "fallback_variables_malus": 0.2,
+     "fallback_variables_bonus": 1.5,
+     "specific_variables_modifiers": null,
+     "random_bounds": null,
+     "capdev_persistent_on_success": false,
+     "capdev_persistent_on_failure": false,
+     "capdev_effects": null
+    },
+    "tuxeball_male": {
+     "specific_capdev_modifier": null,
+     "positive_modifier": 1,
+     "negative_modifier": 1.2,
+     "specific_status_modifiers": null,
+     "fallback_element_malus": 0.2,
+     "specific_element_modifiers": null,
+     "fallback_gender_malus": 0.2,
+     "specific_gender_modifiers": {
+      "male": 1.5
+     },
+     "fallback_variables_malus": 0.2,
+     "fallback_variables_bonus": 1.5,
+     "specific_variables_modifiers": null,
+     "random_bounds": null,
+     "capdev_persistent_on_success": false,
+     "capdev_persistent_on_failure": false,
+     "capdev_effects": null
+    },
+    "tuxeball_metal": {
+     "specific_capdev_modifier": null,
+     "positive_modifier": 1,
+     "negative_modifier": 1.2,
+     "specific_status_modifiers": null,
+     "fallback_element_malus": 0.2,
+     "specific_element_modifiers": {
+      "metal": 1.5
+     },
+     "fallback_gender_malus": 0.2,
+     "specific_gender_modifiers": null,
+     "fallback_variables_malus": 0.2,
+     "fallback_variables_bonus": 1.5,
+     "specific_variables_modifiers": null,
+     "random_bounds": null,
+     "capdev_persistent_on_success": false,
+     "capdev_persistent_on_failure": false,
+     "capdev_effects": null
+    },
+    "tuxeball_neuter": {
+     "specific_capdev_modifier": null,
+     "positive_modifier": 1,
+     "negative_modifier": 1.2,
+     "specific_status_modifiers": null,
+     "fallback_element_malus": 0.2,
+     "specific_element_modifiers": null,
+     "fallback_gender_malus": 0.2,
+     "specific_gender_modifiers": {
+      "neuter": 1.5
+     },
+     "fallback_variables_malus": 0.2,
+     "fallback_variables_bonus": 1.5,
+     "specific_variables_modifiers": null,
+     "random_bounds": null,
+     "capdev_persistent_on_success": false,
+     "capdev_persistent_on_failure": false,
+     "capdev_effects": null
+    },
+    "tuxeball_noble": {
+     "specific_capdev_modifier": 1.25,
      "positive_modifier": 1,
      "negative_modifier": 1.2,
      "specific_status_modifiers": null,
@@ -304,6 +535,136 @@
      "capdev_persistent_on_success": false,
      "capdev_persistent_on_failure": false,
      "capdev_effects": null
+    },
+    "tuxeball_peppy": {
+     "specific_capdev_modifier": null,
+     "positive_modifier": 1,
+     "negative_modifier": 1.2,
+     "specific_status_modifiers": null,
+     "fallback_element_malus": 0.2,
+     "specific_element_modifiers": null,
+     "fallback_gender_malus": 0.2,
+     "specific_gender_modifiers": null,
+     "fallback_variables_malus": 0.2,
+     "fallback_variables_bonus": 1.5,
+     "specific_variables_modifiers": null,
+     "random_bounds": null,
+     "capdev_persistent_on_success": false,
+     "capdev_persistent_on_failure": false,
+     "capdev_effects": [
+      {
+       "target_attribute": "taste_warm",
+       "operation": "set",
+       "value": "peppy"
+      }
+     ]
+    },
+    "tuxeball_refined": {
+     "specific_capdev_modifier": null,
+     "positive_modifier": 1,
+     "negative_modifier": 1.2,
+     "specific_status_modifiers": null,
+     "fallback_element_malus": 0.2,
+     "specific_element_modifiers": null,
+     "fallback_gender_malus": 0.2,
+     "specific_gender_modifiers": null,
+     "fallback_variables_malus": 0.2,
+     "fallback_variables_bonus": 1.5,
+     "specific_variables_modifiers": null,
+     "random_bounds": null,
+     "capdev_persistent_on_success": false,
+     "capdev_persistent_on_failure": false,
+     "capdev_effects": [
+      {
+       "target_attribute": "taste_warm",
+       "operation": "set",
+       "value": "refined"
+      }
+     ]
+    },
+    "tuxeball_salty": {
+     "specific_capdev_modifier": null,
+     "positive_modifier": 1,
+     "negative_modifier": 1.2,
+     "specific_status_modifiers": null,
+     "fallback_element_malus": 0.2,
+     "specific_element_modifiers": null,
+     "fallback_gender_malus": 0.2,
+     "specific_gender_modifiers": null,
+     "fallback_variables_malus": 0.2,
+     "fallback_variables_bonus": 1.5,
+     "specific_variables_modifiers": null,
+     "random_bounds": null,
+     "capdev_persistent_on_success": false,
+     "capdev_persistent_on_failure": false,
+     "capdev_effects": [
+      {
+       "target_attribute": "taste_warm",
+       "operation": "set",
+       "value": "salty"
+      }
+     ]
+    },
+    "tuxeball_water": {
+     "specific_capdev_modifier": null,
+     "positive_modifier": 1,
+     "negative_modifier": 1.2,
+     "specific_status_modifiers": null,
+     "fallback_element_malus": 0.2,
+     "specific_element_modifiers": {
+      "water": 1.5
+     },
+     "fallback_gender_malus": 0.2,
+     "specific_gender_modifiers": null,
+     "fallback_variables_malus": 0.2,
+     "fallback_variables_bonus": 1.5,
+     "specific_variables_modifiers": null,
+     "random_bounds": null,
+     "capdev_persistent_on_success": false,
+     "capdev_persistent_on_failure": false,
+     "capdev_effects": null
+    },
+    "tuxeball_wood": {
+     "specific_capdev_modifier": null,
+     "positive_modifier": 1,
+     "negative_modifier": 1.2,
+     "specific_status_modifiers": null,
+     "fallback_element_malus": 0.2,
+     "specific_element_modifiers": {
+      "wood": 1.5
+     },
+     "fallback_gender_malus": 0.2,
+     "specific_gender_modifiers": null,
+     "fallback_variables_malus": 0.2,
+     "fallback_variables_bonus": 1.5,
+     "specific_variables_modifiers": null,
+     "random_bounds": null,
+     "capdev_persistent_on_success": false,
+     "capdev_persistent_on_failure": false,
+     "capdev_effects": null
+    },
+    "tuxeball_zesty": {
+     "specific_capdev_modifier": null,
+     "positive_modifier": 1,
+     "negative_modifier": 1.2,
+     "specific_status_modifiers": null,
+     "fallback_element_malus": 0.2,
+     "specific_element_modifiers": null,
+     "fallback_gender_malus": 0.2,
+     "specific_gender_modifiers": null,
+     "fallback_variables_malus": 0.2,
+     "fallback_variables_bonus": 1.5,
+     "specific_variables_modifiers": null,
+     "random_bounds": null,
+     "capdev_persistent_on_success": false,
+     "capdev_persistent_on_failure": false,
+     "capdev_effects": [
+      {
+       "target_attribute": "taste_warm",
+       "operation": "set",
+       "value": "zesty"
+      }
+     ]
     }
    }
   }
@@ -2060,10 +2421,159 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 54,
+     "monster_slug": "ferricran"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/allagon-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "ampystoma": {
+   "species": "lightning_salamander",
+   "txmnId": 280,
+   "shape": "brute",
+   "stage": "stage1",
+   "types": [
+    "lightning",
+    "water"
+   ],
+   "tags": [
+    "light",
+    "weather",
+    "water",
+    "electricity",
+    "amphibian"
+   ],
+   "terrains": [
+    "freshwater",
+    "swamp"
+   ],
+   "height": 180,
+   "weight": 80,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.95,
+    1.05
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "starfall",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "midnight_mantle",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "spit_poison",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "frostbite",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "snowstorm",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "torch",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "flood",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "ice_shield",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "goad",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "grinding",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "proboscis",
+     "level": 37,
+     "method": "level_up"
+    },
+    {
+     "technique": "geyser",
+     "level": 40,
+     "method": "level_up"
+    },
+    {
+     "technique": "energy_beam",
+     "level": 55,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/ampystoma-sheet.png",
      "width": 128,
      "height": 128,
      "rect": [
@@ -2187,7 +2697,12 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 32,
+     "monster_slug": "seraphice"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/angesnow-sheet.png",
@@ -3218,7 +3733,12 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 32,
+     "monster_slug": "ampystoma"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/axolightl-sheet.png",
@@ -4132,6 +4652,132 @@
     ]
    }
   },
+  "bishosand": {
+   "species": "sand_bishop",
+   "txmnId": 373,
+   "shape": "humanoid",
+   "stage": "stage1",
+   "types": [
+    "earth",
+    "cosmic"
+   ],
+   "tags": [
+    "ground",
+    "water",
+    "sharp"
+   ],
+   "terrains": [
+    "coastal",
+    "desert"
+   ],
+   "height": 180,
+   "weight": 100,
+   "genderWeights": {
+    "neuter": 1
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "boulder",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "sand_spray",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "mudslide",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "stonehenge",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "avalanche",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "muck",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "slice",
+     "level": 22,
+     "method": "level_up"
+    },
+    {
+     "technique": "lineage",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "all_in",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "divinity_beam",
+     "level": 55,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/bishosand-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "blasdoor": {
    "species": "trapdoor",
    "txmnId": 251,
@@ -4225,6 +4871,129 @@
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/blasdoor-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "bolt": {
+   "species": "hardware",
+   "txmnId": 5,
+   "shape": "blob",
+   "stage": "stage1",
+   "types": [
+    "metal"
+   ],
+   "tags": [
+    "machine",
+    "bomber",
+    "gadgets",
+    "light"
+   ],
+   "terrains": [],
+   "height": 90,
+   "weight": 15.6,
+   "genderWeights": {
+    "neuter": 1
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "bullet",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "static_field",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "shuriken",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "clamp_on",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "muddle",
+     "level": 10,
+     "method": "level_up"
+    },
+    {
+     "technique": "bubble_trap",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "beam",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "surge",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "thunderclap",
+     "level": 25,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [
+    {
+     "at_level": 12,
+     "monster_slug": "arthrobolt"
+    }
+   ],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/bolt-sheet.png",
      "width": 128,
      "height": 128,
      "rect": [
@@ -4648,6 +5417,130 @@
     ]
    }
   },
+  "breem": {
+   "species": "parasitized",
+   "txmnId": 344,
+   "shape": "flier",
+   "stage": "stage1",
+   "types": [
+    "venom"
+   ],
+   "tags": [
+    "plant",
+    "toxic",
+    "bug",
+    "sharp"
+   ],
+   "terrains": [],
+   "height": 100,
+   "weight": 25,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.95,
+    1.05
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "sting",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "solar_synthesis",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "spit_poison",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "poison_courtship",
+     "level": 10,
+     "method": "level_up"
+    },
+    {
+     "technique": "buzz",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "needle",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "viper",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "combat_clone",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "thorn_burst",
+     "level": 34,
+     "method": "level_up"
+    },
+    {
+     "technique": "damage_division",
+     "level": 40,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/breem-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "brewdin": {
    "species": "genie",
    "txmnId": 215,
@@ -4790,6 +5683,277 @@
     ]
    }
   },
+  "bricgard": {
+   "species": "brick_wall",
+   "txmnId": 260,
+   "shape": "blob",
+   "stage": "stage1",
+   "types": [
+    "earth",
+    "heroic"
+   ],
+   "tags": [
+    "fists",
+    "rock",
+    "fury",
+    "shielded"
+   ],
+   "terrains": [
+    "ruins",
+    "urban"
+   ],
+   "height": 50,
+   "weight": 35,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "ram",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "boulder",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "riposte",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "assault",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "thunderball",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "glower",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "wall_of_steel",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "surge",
+     "level": 34,
+     "method": "level_up"
+    },
+    {
+     "technique": "stampede",
+     "level": 43,
+     "method": "level_up"
+    },
+    {
+     "technique": "earthquake",
+     "level": 46,
+     "method": "level_up"
+    },
+    {
+     "technique": "rocky_barrage",
+     "level": 52,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [
+    {
+     "at_level": 36,
+     "monster_slug": "brickhemoth"
+    }
+   ],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/bricgard-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "brickhemoth": {
+   "species": "brick_wall",
+   "txmnId": 261,
+   "shape": "brute",
+   "stage": "stage2",
+   "types": [
+    "earth",
+    "heroic"
+   ],
+   "tags": [
+    "fists",
+    "rock",
+    "fury",
+    "shielded"
+   ],
+   "terrains": [
+    "ruins",
+    "urban"
+   ],
+   "height": 180,
+   "weight": 120,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 35,
+   "catchResistance": [
+    0.85,
+    1.1
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "ram",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "boulder",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "riposte",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "assault",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "thunderball",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "glower",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "wall_of_steel",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "surge",
+     "level": 34,
+     "method": "level_up"
+    },
+    {
+     "technique": "stampede",
+     "level": 43,
+     "method": "level_up"
+    },
+    {
+     "technique": "earthquake",
+     "level": 46,
+     "method": "level_up"
+    },
+    {
+     "technique": "rocky_barrage",
+     "level": 52,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/brickhemoth-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "budaye": {
    "species": "mutual",
    "txmnId": 27,
@@ -4889,6 +6053,137 @@
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/budaye-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "bugnin": {
+   "species": "honour",
+   "txmnId": 58,
+   "shape": "brute",
+   "stage": "stage2",
+   "types": [
+    "metal",
+    "venom"
+   ],
+   "tags": [
+    "fists",
+    "bug",
+    "sharp"
+   ],
+   "terrains": [
+    "woodland"
+   ],
+   "height": 150,
+   "weight": 52,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 35,
+   "catchResistance": [
+    0.8,
+    1.05
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "clamp_on",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "buzz",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "splinter",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "font",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "evasion",
+     "level": 10,
+     "method": "level_up"
+    },
+    {
+     "technique": "sting",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "undertaker",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "perfect_cut",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "blade",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "sleep_bomb",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "vorpal",
+     "level": 46,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/bugnin-sheet.png",
      "width": 128,
      "height": 128,
      "rect": [
@@ -5254,6 +6549,11 @@
      "method": "level_up"
     },
     {
+     "technique": "horn",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
      "technique": "starfall",
      "level": 25,
      "method": "level_up"
@@ -5269,10 +6569,162 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 32,
+     "monster_slug": "crankus"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/caper-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "capinyah": {
+   "species": "woodwose",
+   "txmnId": 103,
+   "shape": "humanoid",
+   "stage": "stage1",
+   "types": [
+    "heroic"
+   ],
+   "tags": [
+    "fists",
+    "rock"
+   ],
+   "terrains": [],
+   "height": 160,
+   "weight": 55,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "punch",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "fluff_up",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "sting",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "overgrowth",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "walls",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "orbs",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "changeling",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "phantasmal_force",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "clairaudience",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "splinter",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "one_two",
+     "level": 37,
+     "method": "level_up"
+    },
+    {
+     "technique": "blossom",
+     "level": 40,
+     "method": "level_up"
+    },
+    {
+     "technique": "pseudopod",
+     "level": 43,
+     "method": "level_up"
+    },
+    {
+     "technique": "sylvan",
+     "level": 49,
+     "method": "level_up"
+    },
+    {
+     "technique": "shadow_boxing",
+     "level": 52,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/capinyah-sheet.png",
      "width": 128,
      "height": 128,
      "rect": [
@@ -5416,7 +6868,12 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 32,
+     "monster_slug": "capinyah"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/capiti-sheet.png",
@@ -6409,6 +7866,121 @@
     ]
    }
   },
+  "coaldiak": {
+   "species": "ursus",
+   "txmnId": 359,
+   "shape": "humanoid",
+   "stage": "stage2",
+   "types": [
+    "fire",
+    "normal"
+   ],
+   "tags": [
+    "flame",
+    "mental"
+   ],
+   "terrains": [
+    "mountains"
+   ],
+   "height": 260,
+   "weight": 300,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 35,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "rock",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "fire_ball",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "fire_claw",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "one_two",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "flamethrower",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "give_all",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "supernova",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "electrical_storm",
+     "level": 31,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/coaldiak-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "cochini": {
    "species": "tasty",
    "txmnId": 104,
@@ -6619,7 +8191,12 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 16,
+     "monster_slug": "runesquito"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/cocrune-sheet.png",
@@ -7019,7 +8596,12 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 30,
+     "monster_slug": "parappi"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/coppi-sheet.png",
@@ -7194,6 +8776,144 @@
     ]
    }
   },
+  "corvix": {
+   "species": "horned_raptor",
+   "txmnId": 157,
+   "shape": "flier",
+   "stage": "stage1",
+   "types": [
+    "sky"
+   ],
+   "tags": [
+    "bird",
+    "sharp",
+    "shielded"
+   ],
+   "terrains": [
+    "desert",
+    "grassland",
+    "mountains",
+    "woodland"
+   ],
+   "height": 55,
+   "weight": 4,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.85,
+    1.1
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "wing_tip",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "peck",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "lineage",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "slice",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "one_two",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "amnesia",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "rust_bomb",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "all_in",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "one_million_talons",
+     "level": 40,
+     "method": "level_up"
+    },
+    {
+     "technique": "perfect_cut",
+     "level": 43,
+     "method": "level_up"
+    },
+    {
+     "technique": "tornado",
+     "level": 46,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [
+    {
+     "at_level": 36,
+     "monster_slug": "gryfix"
+    }
+   ],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/corvix-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "cowpignon": {
    "species": "enhancement",
    "txmnId": 107,
@@ -7295,6 +9015,134 @@
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/cowpignon-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "crankus": {
+   "species": "cranky",
+   "txmnId": 276,
+   "shape": "landrace",
+   "stage": "stage1",
+   "types": [
+    "frost",
+    "normal"
+   ],
+   "tags": [
+    "ice",
+    "fury",
+    "megafauna"
+   ],
+   "terrains": [
+    "boreal_snow",
+    "grassland",
+    "mountains"
+   ],
+   "height": 180,
+   "weight": 102,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.95,
+    1.05
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "goad",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "snowball",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "geyser",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "lock_horns",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "flow",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "icicle_spear",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "horn",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "starfall",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "tsunami",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "ice_storm",
+     "level": 37,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/crankus-sheet.png",
      "width": 128,
      "height": 128,
      "rect": [
@@ -7805,6 +9653,144 @@
     ]
    }
   },
+  "delfeco": {
+   "species": "joyful_dolphin",
+   "txmnId": 24,
+   "shape": "piscine",
+   "stage": "stage1",
+   "types": [
+    "water",
+    "wood"
+   ],
+   "tags": [
+    "water",
+    "plant",
+    "weather"
+   ],
+   "terrains": [
+    "coastal",
+    "freshwater",
+    "sea"
+   ],
+   "height": 200,
+   "weight": 150,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.85,
+    1.1
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "goad",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "flood",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "geyser",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "grinding",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "flow",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "splinter",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "overgrowth",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "water_blast",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "chill_mist",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "tsunami",
+     "level": 40,
+     "method": "level_up"
+    },
+    {
+     "technique": "snowstorm",
+     "level": 46,
+     "method": "level_up"
+    },
+    {
+     "technique": "blossom",
+     "level": 55,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/delfeco-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "dinoflop": {
    "species": "volte-face",
    "txmnId": 166,
@@ -8150,6 +10136,13 @@
      "item": {
       "metal_booster": 0.5,
       "sea_girdle": 0.5
+     }
+    },
+    {
+     "monster_slug": "delfeco",
+     "bond": {
+      "comparison": "equals",
+      "value": 100
      }
     }
    ],
@@ -8558,7 +10551,12 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 18,
+     "monster_slug": "tsushimi"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/drashimi-sheet.png",
@@ -8790,7 +10788,16 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "monster_slug": "breem",
+     "party_conditions": {
+      "monster_slugs": {
+       "tumbleworm": 1
+      }
+     }
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/duggot-sheet.png",
@@ -8963,6 +10970,138 @@
     ]
    }
   },
+  "dynastor": {
+   "species": "bustuarius",
+   "txmnId": 60,
+   "shape": "humanoid",
+   "stage": "stage2",
+   "types": [
+    "metal",
+    "heroic"
+   ],
+   "tags": [
+    "fists",
+    "bug",
+    "shielded"
+   ],
+   "terrains": [
+    "urban",
+    "woodland"
+   ],
+   "height": 178,
+   "weight": 78,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.85,
+    1.1
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "clamp_on",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "buzz",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "splinter",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "font",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "evasion",
+     "level": 10,
+     "method": "level_up"
+    },
+    {
+     "technique": "sting",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "shuriken",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "steel_jaws",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "riposte",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "give_all",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "magnetic_body",
+     "level": 37,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/dynastor-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "eaglace": {
    "species": "cirrus",
    "txmnId": 9,
@@ -9053,6 +11192,11 @@
     {
      "technique": "snowstorm",
      "level": 52,
+     "method": "level_up"
+    },
+    {
+     "technique": "tornado",
+     "level": 61,
      "method": "level_up"
     }
    ],
@@ -9179,6 +11323,11 @@
     {
      "technique": "thunderclap",
      "level": 46,
+     "method": "level_up"
+    },
+    {
+     "technique": "one_million_talons",
+     "level": 52,
      "method": "level_up"
     }
    ],
@@ -9312,6 +11461,11 @@
      "technique": "thunderclap",
      "level": 46,
      "method": "level_up"
+    },
+    {
+     "technique": "one_million_talons",
+     "level": 52,
+     "method": "level_up"
     }
    ],
    "evolutions": [],
@@ -9438,6 +11592,11 @@
     {
      "technique": "thunderclap",
      "level": 46,
+     "method": "level_up"
+    },
+    {
+     "technique": "one_million_talons",
+     "level": 52,
      "method": "level_up"
     }
    ],
@@ -10586,6 +12745,143 @@
     ]
    }
   },
+  "ferricran": {
+   "species": "dragon",
+   "txmnId": 161,
+   "shape": "dragon",
+   "stage": "stage2",
+   "types": [
+    "metal"
+   ],
+   "tags": [
+    "steel",
+    "soldier",
+    "sharp",
+    "tail"
+   ],
+   "terrains": [
+    "ruins",
+    "underground"
+   ],
+   "height": 230,
+   "weight": 214,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 35,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "tail_lash",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "bullet",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "viper",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "insanity",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "muddle",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "strike",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "rust_bomb",
+     "level": 40,
+     "method": "level_up"
+    },
+    {
+     "technique": "shuriken",
+     "level": 43,
+     "method": "level_up"
+    },
+    {
+     "technique": "wall_of_steel",
+     "level": 46,
+     "method": "level_up"
+    },
+    {
+     "technique": "amnesia",
+     "level": 61,
+     "method": "level_up"
+    },
+    {
+     "technique": "undertaker",
+     "level": 64,
+     "method": "level_up"
+    },
+    {
+     "technique": "shadow_blast",
+     "level": 70,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/ferricran-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "firomenis": {
    "species": "dragon_moth",
    "txmnId": 210,
@@ -10791,12 +13087,27 @@
      "method": "level_up"
     },
     {
+     "technique": "one_million_talons",
+     "level": 40,
+     "method": "level_up"
+    },
+    {
      "technique": "perfect_cut",
      "level": 43,
      "method": "level_up"
+    },
+    {
+     "technique": "tornado",
+     "level": 46,
+     "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 18,
+     "monster_slug": "corvix"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/flacono-sheet.png",
@@ -10910,6 +13221,11 @@
     {
      "technique": "give_all",
      "level": 37,
+     "method": "level_up"
+    },
+    {
+     "technique": "pyrokinesis",
+     "level": 40,
      "method": "level_up"
     }
    ],
@@ -11157,6 +13473,11 @@
      "method": "level_up"
     },
     {
+     "technique": "strangulation",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
      "technique": "oven",
      "level": 31,
      "method": "level_up"
@@ -11167,10 +13488,149 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 30,
+     "monster_slug": "knindling"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/flounce-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "flummack": {
+   "species": "cannibal_cake",
+   "txmnId": 308,
+   "shape": "sprite",
+   "stage": "stage1",
+   "types": [
+    "cosmic"
+   ],
+   "tags": [
+    "food",
+    "soldier"
+   ],
+   "terrains": [
+    "urban",
+    "other"
+   ],
+   "height": 90,
+   "weight": 50,
+   "genderWeights": {
+    "neuter": 1
+   },
+   "catchRate": 100,
+   "catchResistance": [
+    0.95,
+    1.05
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "overfeed",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "slice",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "food_fight",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "lick_lash",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "piece_of_cake",
+     "level": 10,
+     "method": "level_up"
+    },
+    {
+     "technique": "egg_smash",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "potluck",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "diet",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "just_desserts",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "gourmet",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "oven",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "heavenly_desserts",
+     "level": 37,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/flummack-sheet.png",
      "width": 128,
      "height": 128,
      "rect": [
@@ -11281,12 +13741,35 @@
      "method": "level_up"
     },
     {
+     "technique": "just_desserts",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "gourmet",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
      "technique": "oven",
      "level": 31,
      "method": "level_up"
+    },
+    {
+     "technique": "heavenly_desserts",
+     "level": 37,
+     "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "monster_slug": "flummack",
+     "at_level": 32,
+     "item": {
+      "lima_pie": 1
+     }
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/flummby-sheet.png",
@@ -11664,6 +14147,11 @@
     {
      "technique": "avalanche",
      "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "mystic_blending",
+     "level": 31,
      "method": "level_up"
     },
     {
@@ -12447,7 +14935,12 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 36,
+     "monster_slug": "velocitile"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/gectile-sheet.png",
@@ -13230,6 +15723,140 @@
     ]
    }
   },
+  "gryfix": {
+   "species": "horned_raptor",
+   "txmnId": 158,
+   "shape": "flier",
+   "stage": "stage2",
+   "types": [
+    "sky"
+   ],
+   "tags": [
+    "bird",
+    "sharp",
+    "shielded",
+    "steel"
+   ],
+   "terrains": [
+    "desert",
+    "grassland",
+    "mountains",
+    "woodland"
+   ],
+   "height": 180,
+   "weight": 31,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 35,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "wing_tip",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "peck",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "lineage",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "slice",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "one_two",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "amnesia",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "rust_bomb",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "all_in",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "one_million_talons",
+     "level": 40,
+     "method": "level_up"
+    },
+    {
+     "technique": "perfect_cut",
+     "level": 43,
+     "method": "level_up"
+    },
+    {
+     "technique": "tornado",
+     "level": 46,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/gryfix-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "hampotamos": {
    "species": "hungry",
    "txmnId": 358,
@@ -13309,6 +15936,16 @@
     {
      "technique": "sands_of_time",
      "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "entomb",
+     "level": 37,
+     "method": "level_up"
+    },
+    {
+     "technique": "strangulation",
+     "level": 40,
      "method": "level_up"
     }
    ],
@@ -13558,6 +16195,144 @@
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/hatchling-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "heronquak": {
+   "species": "crested",
+   "txmnId": 8,
+   "shape": "flier",
+   "stage": "stage1",
+   "types": [
+    "frost",
+    "sky"
+   ],
+   "tags": [
+    "gemstone",
+    "ice",
+    "bird"
+   ],
+   "terrains": [
+    "boreal_snow",
+    "grassland",
+    "mountains"
+   ],
+   "height": 150,
+   "weight": 12,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "ice_claw",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "peck",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "orbs",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "flow",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "energy_field",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "icicle_spear",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "biting_winds",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "flood",
+     "level": 34,
+     "method": "level_up"
+    },
+    {
+     "technique": "font",
+     "level": 43,
+     "method": "level_up"
+    },
+    {
+     "technique": "chill_mist",
+     "level": 46,
+     "method": "level_up"
+    },
+    {
+     "technique": "snowstorm",
+     "level": 52,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [
+    {
+     "at_level": 36,
+     "monster_slug": "eaglace"
+    }
+   ],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/heronquak-sheet.png",
      "width": 128,
      "height": 128,
      "rect": [
@@ -13939,7 +16714,12 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 18,
+     "monster_slug": "bricgard"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/imbrickcile-sheet.png",
@@ -14369,6 +17149,139 @@
     ]
    }
   },
+  "katacoon": {
+   "species": "stance",
+   "txmnId": 57,
+   "shape": "grub",
+   "stage": "stage1",
+   "types": [
+    "metal",
+    "venom"
+   ],
+   "tags": [
+    "fists",
+    "bug"
+   ],
+   "terrains": [
+    "woodland"
+   ],
+   "height": 58,
+   "weight": 12,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "clamp_on",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "buzz",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "splinter",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "font",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "evasion",
+     "level": 10,
+     "method": "level_up"
+    },
+    {
+     "technique": "sting",
+     "level": 13,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [
+    {
+     "at_level": 12,
+     "monster_slug": "bugnin",
+     "stats": {
+      "stat_type": "dodge",
+      "comparison": "greater_than",
+      "target_stat": "speed"
+     }
+    },
+    {
+     "at_level": 12,
+     "monster_slug": "sumchon",
+     "stats": {
+      "stat_type": "speed",
+      "comparison": "greater_than",
+      "target_stat": "dodge"
+     }
+    },
+    {
+     "at_level": 12,
+     "monster_slug": "dynastor",
+     "stats": {
+      "stat_type": "speed",
+      "comparison": "equals",
+      "target_stat": "dodge"
+     }
+    }
+   ],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/katacoon-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "katapill": {
    "species": "beat",
    "txmnId": 56,
@@ -14433,7 +17346,12 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 9,
+     "monster_slug": "katacoon"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/katapill-sheet.png",
@@ -14573,6 +17491,255 @@
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/kernel-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "knightsand": {
+   "species": "sand_knight",
+   "txmnId": 374,
+   "shape": "humanoid",
+   "stage": "stage1",
+   "types": [
+    "earth",
+    "heroic"
+   ],
+   "tags": [
+    "ground",
+    "water",
+    "sharp"
+   ],
+   "terrains": [
+    "coastal",
+    "desert"
+   ],
+   "height": 180,
+   "weight": 140,
+   "genderWeights": {
+    "neuter": 1
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "boulder",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "sand_spray",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "mudslide",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "blade",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "avalanche",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "muck",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "saber",
+     "level": 22,
+     "method": "level_up"
+    },
+    {
+     "technique": "lineage",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "all_in",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "earthquake",
+     "level": 55,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/knightsand-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "knindling": {
+   "species": "firestarter",
+   "txmnId": 330,
+   "shape": "hunter",
+   "stage": "stage1",
+   "types": [
+    "fire"
+   ],
+   "tags": [
+    "flame",
+    "bite",
+    "electricity"
+   ],
+   "terrains": [],
+   "height": 50,
+   "weight": 22,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.95,
+    1.05
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "fire_claw",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "wall_fire",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "canine",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "fiery",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "flamethrower",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "diet",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "kindling_flame",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "strangulation",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "oven",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "magnetic_body",
+     "level": 37,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/knindling-sheet.png",
      "width": 128,
      "height": 128,
      "rect": [
@@ -15249,7 +18416,12 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 36,
+     "monster_slug": "moloch"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/legko-sheet.png",
@@ -15384,6 +18556,126 @@
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/lightmare-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "loliferno": {
+   "species": "spirit_fire",
+   "txmnId": 163,
+   "shape": "humanoid",
+   "stage": "stage1",
+   "types": [
+    "fire",
+    "shadow"
+   ],
+   "tags": [
+    "flame",
+    "light",
+    "ghost"
+   ],
+   "terrains": [
+    "swamp"
+   ],
+   "height": 60,
+   "weight": 0.1,
+   "genderWeights": {
+    "neuter": 1
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "fire_ball",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "chill_mist",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "muddle",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "invictus",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "midnight_mantle",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "flamethrower",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "water_blast",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "breathe_fire",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "shadow_blast",
+     "level": 40,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/loliferno-sheet.png",
      "width": 128,
      "height": 128,
      "rect": [
@@ -15686,6 +18978,128 @@
     ]
    }
   },
+  "mauai": {
+   "species": "anubis",
+   "txmnId": 22,
+   "shape": "humanoid",
+   "stage": "stage1",
+   "types": [
+    "metal",
+    "shadow"
+   ],
+   "tags": [
+    "ground",
+    "claws",
+    "summoner",
+    "ghost",
+    "darkness",
+    "staff"
+   ],
+   "terrains": [],
+   "height": 203,
+   "weight": 139,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "riposte",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "feint",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "shuriken",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "slice",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "sand_spray",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "insanity",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "lineage",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "staff_smash",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "shadow_blast",
+     "level": 40,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/mauai-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "medushock": {
    "species": "jellyfish",
    "txmnId": 345,
@@ -15894,6 +19308,13 @@
       "metal_booster": 0.5,
       "pyramidion": 0.5
      }
+    },
+    {
+     "monster_slug": "mauai",
+     "item": {
+      "fire_booster": 0.5,
+      "pyramidion": 0.5
+     }
     }
    ],
    "art": {
@@ -16020,9 +19441,19 @@
      "technique": "flamethrower",
      "level": 52,
      "method": "level_up"
+    },
+    {
+     "technique": "tornado",
+     "level": 55,
+     "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 40,
+     "monster_slug": "qetzlrokilus"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/metesaur-sheet.png",
@@ -16278,6 +19709,11 @@
      "technique": "supernova",
      "level": 40,
      "method": "level_up"
+    },
+    {
+     "technique": "tornado",
+     "level": 55,
+     "method": "level_up"
     }
    ],
    "evolutions": [],
@@ -16394,6 +19830,10 @@
     }
    ],
    "evolutions": [
+    {
+     "at_level": 32,
+     "monster_slug": "mk01_delta"
+    },
     {
      "at_level": 32,
      "monster_slug": "mk01_gamma"
@@ -16514,12 +19954,144 @@
    "evolutions": [
     {
      "at_level": 32,
+     "monster_slug": "mk01_delta"
+    },
+    {
+     "at_level": 32,
      "monster_slug": "mk01_omega"
     }
    ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/mk01_beta-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "mk01_delta": {
+   "species": "threat",
+   "txmnId": 0,
+   "shape": "dragon",
+   "stage": "stage2",
+   "types": [
+    "metal"
+   ],
+   "tags": [],
+   "terrains": [],
+   "height": 0.1,
+   "weight": 100,
+   "genderWeights": {
+    "neuter": 1
+   },
+   "catchRate": 35,
+   "catchResistance": [
+    0.95,
+    1.05
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "electrical_storm",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "wall_of_steel",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "shrapnel",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "beam",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "blade",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "acid",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "platinum",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "crystal",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "lineage",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "terror",
+     "level": 34,
+     "method": "level_up"
+    },
+    {
+     "technique": "sunburst",
+     "level": 37,
+     "method": "level_up"
+    },
+    {
+     "technique": "gold_digger",
+     "level": 40,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/mk01_delta-sheet.png",
      "width": 128,
      "height": 128,
      "rect": [
@@ -16910,6 +20482,141 @@
     ]
    }
   },
+  "moloch": {
+   "species": "devil",
+   "txmnId": 12,
+   "shape": "brute",
+   "stage": "stage2",
+   "types": [
+    "wood",
+    "heroic"
+   ],
+   "tags": [
+    "claws",
+    "bite",
+    "megafauna",
+    "plant"
+   ],
+   "terrains": [],
+   "height": 216,
+   "weight": 90,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 35,
+   "catchResistance": [
+    0.85,
+    1.1
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "sting",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "blossom",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "poison_courtship",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "splinter",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "boulder",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "overgrowth",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "peregrine",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "spit_poison",
+     "level": 34,
+     "method": "level_up"
+    },
+    {
+     "technique": "thunderball",
+     "level": 43,
+     "method": "level_up"
+    },
+    {
+     "technique": "shadow_boxing",
+     "level": 46,
+     "method": "level_up"
+    },
+    {
+     "technique": "invictus",
+     "level": 52,
+     "method": "level_up"
+    },
+    {
+     "technique": "energy_beam",
+     "level": 55,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/moloch-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "mrmoswitch": {
    "species": "gremlin",
    "txmnId": 128,
@@ -17105,6 +20812,11 @@
     {
      "technique": "viper",
      "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "horn",
+     "level": 37,
      "method": "level_up"
     },
     {
@@ -17355,6 +21067,144 @@
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/neutrito-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "ninjasmine": {
+   "species": "every_thorn",
+   "txmnId": 206,
+   "shape": "humanoid",
+   "stage": "stage2",
+   "types": [
+    "wood",
+    "venom"
+   ],
+   "tags": [
+    "love",
+    "plant",
+    "toxic",
+    "bomber",
+    "sharp"
+   ],
+   "terrains": [
+    "jungle"
+   ],
+   "height": 160,
+   "weight": 60,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 35,
+   "catchResistance": [
+    0.95,
+    1.05
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "solar_synthesis",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "sting",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "splinter",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "assault",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "blossom",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "stabilo",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "clairaudience",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "fester",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "radiance",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "poison_courtship",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "one_two",
+     "level": 37,
+     "method": "level_up"
+    },
+    {
+     "technique": "flower_bloom",
+     "level": 40,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/ninjasmine-sheet.png",
      "width": 128,
      "height": 128,
      "rect": [
@@ -18297,10 +22147,133 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 9,
+     "monster_slug": "bolt"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/nut-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "octabode": {
+   "species": "hermit",
+   "txmnId": 184,
+   "shape": "polliwog",
+   "stage": "stage1",
+   "types": [
+    "earth",
+    "normal"
+   ],
+   "tags": [
+    "pseudopod",
+    "shielded"
+   ],
+   "terrains": [],
+   "height": 44,
+   "weight": 19,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "flood",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "flow",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "mobbing",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "orbs",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "spit_poison",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "font",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "goad",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "feint",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "venomous_tentacle",
+     "level": 28,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/octabode-sheet.png",
      "width": 128,
      "height": 128,
      "rect": [
@@ -18451,6 +22424,127 @@
     ]
    }
   },
+  "pairagrim": {
+   "species": "bird",
+   "txmnId": 182,
+   "shape": "flier",
+   "stage": "stage1",
+   "types": [
+    "sky"
+   ],
+   "tags": [
+    "bird"
+   ],
+   "terrains": [],
+   "height": 110,
+   "weight": 10,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.95,
+    1.05
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "peck",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "whirlwind",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "assault",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "negation",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "gust",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "wing_tip",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "fluff_up",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "peregrine",
+     "level": 37,
+     "method": "level_up"
+    },
+    {
+     "technique": "one_two",
+     "level": 40,
+     "method": "level_up"
+    },
+    {
+     "technique": "ten_thousand_feathers",
+     "level": 55,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/pairagrim-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "pairagrin": {
    "species": "bird",
    "txmnId": 181,
@@ -18528,7 +22622,12 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 26,
+     "monster_slug": "pairagrim"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/pairagrin-sheet.png",
@@ -18691,6 +22790,141 @@
     ]
    }
   },
+  "parappi": {
+   "species": "spinning_seed",
+   "txmnId": 378,
+   "shape": "blob",
+   "stage": "stage2",
+   "types": [
+    "wood",
+    "sky"
+   ],
+   "tags": [
+    "plant",
+    "food"
+   ],
+   "terrains": [
+    "woodland"
+   ],
+   "height": 120,
+   "weight": 20,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 35,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "solar_synthesis",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "roll",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "overgrowth",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "assault",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "wing_tip",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "sting",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "sylvan",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "all_in",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "chameleon",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "flower_bloom",
+     "level": 37,
+     "method": "level_up"
+    },
+    {
+     "technique": "stabilo",
+     "level": 40,
+     "method": "level_up"
+    },
+    {
+     "technique": "tornado",
+     "level": 55,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/parappi-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "pawsand": {
    "species": "sand_pawn",
    "txmnId": 372,
@@ -18775,10 +23009,172 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "monster_slug": "knightsand",
+     "item": {
+      "sweet_sand": 1
+     }
+    },
+    {
+     "monster_slug": "bishosand",
+     "item": {
+      "earth_booster": 1
+     }
+    },
+    {
+     "monster_slug": "rooksand",
+     "item": {
+      "pyramidion": 1
+     }
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/pawsand-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "pharavion": {
+   "species": "spirit_elephant",
+   "txmnId": 362,
+   "shape": "landrace",
+   "stage": "stage1",
+   "types": [
+    "water",
+    "heroic"
+   ],
+   "tags": [
+    "megafauna",
+    "leadership",
+    "water",
+    "mental",
+    "pseudopod"
+   ],
+   "terrains": [
+    "jungle"
+   ],
+   "height": 300,
+   "weight": 2000,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 35,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "wallow",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "water_bullet",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "flow",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "goad",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "stampede",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "geyser",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "spit_poison",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "water_blast",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "ice_claw",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "chill_mist",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "tsunami",
+     "level": 37,
+     "method": "level_up"
+    },
+    {
+     "technique": "kraken",
+     "level": 40,
+     "method": "level_up"
+    },
+    {
+     "technique": "divinity_beam",
+     "level": 55,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/pharavion-sheet.png",
      "width": 128,
      "height": 128,
      "rect": [
@@ -18913,7 +23309,12 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 24,
+     "monster_slug": "pharavion"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/pharfan-sheet.png",
@@ -20208,6 +24609,141 @@
     ]
    }
   },
+  "qetzlrokilus": {
+   "species": "long_winged",
+   "txmnId": 203,
+   "shape": "flier",
+   "stage": "stage1",
+   "types": [
+    "earth",
+    "fire"
+   ],
+   "tags": [
+    "rock",
+    "flame",
+    "bird",
+    "celestial",
+    "calamity",
+    "weather"
+   ],
+   "terrains": [
+    "jungle",
+    "mountains"
+   ],
+   "height": 183,
+   "weight": 41,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "peck",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "fire_ball",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "sand_spray",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "stampede",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "fire_shield",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "arcane_eye",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "breathe_fire",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "peregrine",
+     "level": 43,
+     "method": "level_up"
+    },
+    {
+     "technique": "all_in",
+     "level": 46,
+     "method": "level_up"
+    },
+    {
+     "technique": "flamethrower",
+     "level": 52,
+     "method": "level_up"
+    },
+    {
+     "technique": "tornado",
+     "level": 55,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/qetzlrokilus-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "rabbitosaur": {
    "species": "rabbit",
    "txmnId": 45,
@@ -20413,8 +24949,18 @@
      "method": "level_up"
     },
     {
+     "technique": "slime",
+     "level": 37,
+     "method": "level_up"
+    },
+    {
      "technique": "lantern",
      "level": 40,
+     "method": "level_up"
+    },
+    {
+     "technique": "tornado",
+     "level": 55,
      "method": "level_up"
     }
    ],
@@ -20522,6 +25068,11 @@
     {
      "technique": "flood",
      "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "horn",
+     "level": 19,
      "method": "level_up"
     },
     {
@@ -20942,6 +25493,11 @@
      "method": "level_up"
     },
     {
+     "technique": "strangulation",
+     "level": 37,
+     "method": "level_up"
+    },
+    {
      "technique": "lust",
      "level": 40,
      "method": "level_up"
@@ -20951,6 +25507,131 @@
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/rocktot-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "rooksand": {
+   "species": "sand_rock",
+   "txmnId": 375,
+   "shape": "blob",
+   "stage": "stage1",
+   "types": [
+    "earth"
+   ],
+   "tags": [
+    "fists",
+    "ground",
+    "water"
+   ],
+   "terrains": [
+    "coastal",
+    "desert"
+   ],
+   "height": 300,
+   "weight": 1000,
+   "genderWeights": {
+    "neuter": 1
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "boulder",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "sand_spray",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "mudslide",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "stonehenge",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "avalanche",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "muck",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "muddle",
+     "level": 22,
+     "method": "level_up"
+    },
+    {
+     "technique": "lineage",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "rocky_barrage",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "energy_beam",
+     "level": 55,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/rooksand-sheet.png",
      "width": 128,
      "height": 128,
      "rect": [
@@ -21084,10 +25765,136 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 32,
+     "monster_slug": "toxiris"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/rosarin-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "runesquito": {
+   "species": "diptera",
+   "txmnId": 334,
+   "shape": "flier",
+   "stage": "stage2",
+   "types": [
+    "earth",
+    "shadow"
+   ],
+   "tags": [
+    "rock",
+    "shielded",
+    "bug",
+    "summoner",
+    "mental",
+    "shapeshifter",
+    "darkness"
+   ],
+   "terrains": [
+    "freshwater",
+    "ruins",
+    "swamp"
+   ],
+   "height": 66,
+   "weight": 6,
+   "genderWeights": {
+    "neuter": 1
+   },
+   "catchRate": 35,
+   "catchResistance": [
+    0.95,
+    1.05
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "boulder",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "buzz",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "petrify",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "rock",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "stonehenge",
+     "level": 10,
+     "method": "level_up"
+    },
+    {
+     "technique": "take_cover",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "electroplate",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "shadow_blast",
+     "level": 40,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/runesquito-sheet.png",
      "width": 128,
      "height": 128,
      "rect": [
@@ -22110,7 +26917,18 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "monster_slug": "loliferno",
+     "item": {
+      "flintstone": 1
+     }
+    },
+    {
+     "monster_slug": "spirain",
+     "at_level": 20
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/seirein-sheet.png",
@@ -22224,10 +27042,257 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 18,
+     "monster_slug": "selmatek"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/selket-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "selmatek": {
+   "species": "sand_steed",
+   "txmnId": 189,
+   "shape": "grub",
+   "stage": "stage1",
+   "types": [
+    "earth",
+    "venom"
+   ],
+   "tags": [
+    "ground",
+    "toxic",
+    "rock"
+   ],
+   "terrains": [],
+   "height": 155,
+   "weight": 80,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "clamp_on",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "rock",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "crystal",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "petrify",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "take_cover",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "quicksand",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "fester",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "avalanche",
+     "level": 31,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/selmatek-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "seraphice": {
+   "species": "carol",
+   "txmnId": 266,
+   "shape": "humanoid",
+   "stage": "stage2",
+   "types": [
+    "frost",
+    "cosmic"
+   ],
+   "tags": [
+    "ice",
+    "leadership",
+    "weather",
+    "light",
+    "healing",
+    "calamity"
+   ],
+   "terrains": [
+    "extraplanar"
+   ],
+   "height": 180,
+   "weight": 85,
+   "genderWeights": {
+    "neuter": 1
+   },
+   "catchRate": 35,
+   "catchResistance": [
+    0.85,
+    1.1
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "ice_claw",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "goad",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "beam",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "orbs",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "neutralize",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "fiery",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "sudden_glow",
+     "level": 34,
+     "method": "level_up"
+    },
+    {
+     "technique": "icicle_spear",
+     "level": 43,
+     "method": "level_up"
+    },
+    {
+     "technique": "snowstorm",
+     "level": 46,
+     "method": "level_up"
+    },
+    {
+     "technique": "divinity_beam",
+     "level": 52,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/seraphice-sheet.png",
      "width": 128,
      "height": 128,
      "rect": [
@@ -22597,7 +27662,15 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "monster_slug": "shrab",
+     "bond": {
+      "comparison": "greater_than",
+      "value": 40
+     }
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/sheye-sheet.png",
@@ -22724,6 +27797,113 @@
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/shnark-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "shrab": {
+   "species": "muscly_crab",
+   "txmnId": 286,
+   "shape": "polliwog",
+   "stage": "stage1",
+   "types": [
+    "water"
+   ],
+   "tags": [
+    "mental",
+    "bite",
+    "shielded"
+   ],
+   "terrains": [
+    "coastal",
+    "freshwater",
+    "sea"
+   ],
+   "height": 100,
+   "weight": 100,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.95,
+    1.05
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "flood",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "ice_shield",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "terror",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "phantasmal_force",
+     "level": 10,
+     "method": "level_up"
+    },
+    {
+     "technique": "mind_vise",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "flow",
+     "level": 19,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/shrab-sheet.png",
      "width": 128,
      "height": 128,
      "rect": [
@@ -22952,7 +28132,12 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 18,
+     "monster_slug": "octabode"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/skwib-sheet.png",
@@ -23205,10 +28390,132 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 18,
+     "monster_slug": "snokari"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/snaki-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "snokari": {
+   "species": "hydra",
+   "txmnId": 228,
+   "shape": "serpent",
+   "stage": "stage1",
+   "types": [
+    "normal"
+   ],
+   "tags": [
+    "toxic",
+    "bite"
+   ],
+   "terrains": [],
+   "height": 145,
+   "weight": 45,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "water_bullet",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "gnaw",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "goad",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "flood",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "midnight_mantle",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "water_blast",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "viper",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "electric_multibite",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "tsunami",
+     "level": 40,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/snokari-sheet.png",
      "width": 128,
      "height": 128,
      "rect": [
@@ -23455,6 +28762,132 @@
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/spighter-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "spirain": {
+   "species": "water_sprite",
+   "txmnId": 164,
+   "shape": "sprite",
+   "stage": "stage1",
+   "types": [
+    "water",
+    "sky"
+   ],
+   "tags": [
+    "water",
+    "darkness",
+    "ghost"
+   ],
+   "terrains": [
+    "freshwater",
+    "swamp"
+   ],
+   "height": 100,
+   "weight": 0.1,
+   "genderWeights": {
+    "neuter": 1
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.95,
+    1.05
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "fire_ball",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "chill_mist",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "muddle",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "invictus",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "midnight_mantle",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "flamethrower",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "water_blast",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "breathe_fire",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "shadow_blast",
+     "level": 40,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [
+    {
+     "at_level": 36,
+     "monster_slug": "tornicane"
+    }
+   ],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/spirain-sheet.png",
      "width": 128,
      "height": 128,
      "rect": [
@@ -23820,7 +29253,12 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 36,
+     "monster_slug": "coaldiak"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/statursus-sheet.png",
@@ -24172,6 +29610,11 @@
     {
      "technique": "shadow_boxing",
      "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "life_surge",
+     "level": 31,
      "method": "level_up"
     },
     {
@@ -24723,6 +30166,259 @@
     ]
    }
   },
+  "tobishimi": {
+   "species": "dragon_roll",
+   "txmnId": 187,
+   "shape": "dragon",
+   "stage": "stage2",
+   "types": [
+    "wood"
+   ],
+   "tags": [
+    "food",
+    "celestial",
+    "shielded"
+   ],
+   "terrains": [
+    "sea",
+    "urban"
+   ],
+   "height": 180,
+   "weight": 169,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 35,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "spit_poison",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "flow",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "grinding",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "muck",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "flood",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "icicle_spear",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "font",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "starfall",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "ice_claw",
+     "level": 40,
+     "method": "level_up"
+    },
+    {
+     "technique": "chill_mist",
+     "level": 43,
+     "method": "level_up"
+    },
+    {
+     "technique": "frostbite",
+     "level": 46,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/tobishimi-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "tornicane": {
+   "species": "water_sprite",
+   "txmnId": 165,
+   "shape": "sprite",
+   "stage": "stage2",
+   "types": [
+    "water",
+    "sky"
+   ],
+   "tags": [
+    "water",
+    "darkness",
+    "ghost",
+    "weather"
+   ],
+   "terrains": [
+    "coastal",
+    "swamp"
+   ],
+   "height": 300,
+   "weight": 0.1,
+   "genderWeights": {
+    "neuter": 1
+   },
+   "catchRate": 35,
+   "catchResistance": [
+    0.95,
+    1.05
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "fire_ball",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "chill_mist",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "muddle",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "invictus",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "midnight_mantle",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "flamethrower",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "water_blast",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "breathe_fire",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "shadow_blast",
+     "level": 40,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/tornicane-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "toufigel": {
    "species": "powder",
    "txmnId": 122,
@@ -24987,6 +30683,149 @@
     ]
    }
   },
+  "toxiris": {
+   "species": "every_thorn",
+   "txmnId": 205,
+   "shape": "humanoid",
+   "stage": "stage1",
+   "types": [
+    "wood",
+    "venom"
+   ],
+   "tags": [
+    "love",
+    "plant",
+    "toxic",
+    "bomber"
+   ],
+   "terrains": [
+    "jungle",
+    "woodland"
+   ],
+   "height": 100,
+   "weight": 25,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.95,
+    1.05
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "solar_synthesis",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "sting",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "splinter",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "assault",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "blossom",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "stabilo",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "clairaudience",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "fester",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "radiance",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "poison_courtship",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "one_two",
+     "level": 37,
+     "method": "level_up"
+    },
+    {
+     "technique": "flower_bloom",
+     "level": 40,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [
+    {
+     "at_level": 30,
+     "monster_slug": "ninjasmine"
+    }
+   ],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/toxiris-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "trapsnap": {
    "species": "barb",
    "txmnId": 85,
@@ -25072,6 +30911,142 @@
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/trapsnap-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "tsushimi": {
+   "species": "dragon_roll",
+   "txmnId": 186,
+   "shape": "dragon",
+   "stage": "stage1",
+   "types": [
+    "wood"
+   ],
+   "tags": [
+    "food",
+    "celestial",
+    "shielded"
+   ],
+   "terrains": [
+    "sea",
+    "urban"
+   ],
+   "height": 136,
+   "weight": 85,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "spit_poison",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "flow",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "grinding",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "muck",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "flood",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "icicle_spear",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "font",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "starfall",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "ice_claw",
+     "level": 40,
+     "method": "level_up"
+    },
+    {
+     "technique": "chill_mist",
+     "level": 43,
+     "method": "level_up"
+    },
+    {
+     "technique": "frostbite",
+     "level": 46,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [
+    {
+     "at_level": 36,
+     "monster_slug": "tobishimi"
+    }
+   ],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/tsushimi-sheet.png",
      "width": 128,
      "height": 128,
      "rect": [
@@ -25699,7 +31674,12 @@
      "method": "level_up"
     }
    ],
-   "evolutions": [],
+   "evolutions": [
+    {
+     "at_level": 24,
+     "monster_slug": "heronquak"
+    }
+   ],
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/tweesher-sheet.png",
@@ -25960,6 +31940,11 @@
      "method": "level_up"
     },
     {
+     "technique": "strangulation",
+     "level": 37,
+     "method": "level_up"
+    },
+    {
      "technique": "steel_jaws",
      "level": 40,
      "method": "level_up"
@@ -26145,6 +32130,137 @@
     ]
    }
   },
+  "velocitile": {
+   "species": "restless",
+   "txmnId": 67,
+   "shape": "humanoid",
+   "stage": "stage2",
+   "types": [
+    "wood"
+   ],
+   "tags": [
+    "plant",
+    "speed"
+   ],
+   "terrains": [
+    "grassland",
+    "jungle",
+    "woodland"
+   ],
+   "height": 150,
+   "weight": 75,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 35,
+   "catchResistance": [
+    0.85,
+    1.1
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "leaf_stab",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "feint",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "assault",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "chameleon",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "whirlwind",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "splinter",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "revenge_stance",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "leaf_barrage",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "needle",
+     "level": 40,
+     "method": "level_up"
+    },
+    {
+     "technique": "all_in",
+     "level": 43,
+     "method": "level_up"
+    },
+    {
+     "technique": "thorn_burst",
+     "level": 46,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/velocitile-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "vigueur": {
    "species": "energised",
    "txmnId": 218,
@@ -26211,6 +32327,11 @@
     {
      "technique": "shadow_boxing",
      "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "life_surge",
+     "level": 31,
      "method": "level_up"
     },
     {
@@ -26606,6 +32727,11 @@
       "shammer_fossil": 0.333,
       "rhincus_fossil": 0.334
      }
+    },
+    {
+     "monster_slug": "vivisource",
+     "at_level": 24,
+     "gender": "male"
     }
    ],
    "art": {
@@ -26735,6 +32861,129 @@
    "art": {
     "sheet": {
      "key": "ui:img.assets/battle/gfx/sprites/battle/viviphyta-sheet.png",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "vivisource": {
+   "species": "purified",
+   "txmnId": 139,
+   "shape": "serpent",
+   "stage": "stage1",
+   "types": [
+    "water"
+   ],
+   "tags": [
+    "shapeshifter",
+    "bite",
+    "water",
+    "toxic"
+   ],
+   "terrains": [
+    "freshwater",
+    "grassland",
+    "jungle",
+    "ruins"
+   ],
+   "height": 107,
+   "weight": 9,
+   "genderWeights": {
+    "male": 1
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "stone_rot",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "hammerhead",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "quicksand",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "spit_poison",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "wallow",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "chill_mist",
+     "level": 24,
+     "method": "level_up"
+    },
+    {
+     "technique": "water_blast",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "flood",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "depth_charge",
+     "level": 31,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:img.assets/battle/gfx/sprites/battle/vivisource-sheet.png",
      "width": 128,
      "height": 128,
      "rect": [
@@ -27469,6 +33718,11 @@
     {
      "technique": "eyebite",
      "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "tornado",
+     "level": 34,
      "method": "level_up"
     }
    ],
@@ -30518,6 +36772,78 @@
     "loops": 0
    }
   },
+  "combat_clone": {
+   "id": 263,
+   "sort": "damage",
+   "category": "exotic",
+   "range": "melee",
+   "speed": "slow",
+   "accuracy": 1,
+   "potency": 1,
+   "power": 1,
+   "healingPower": 0,
+   "recharge": 3,
+   "types": [
+    "normal"
+   ],
+   "target": {
+    "enemy_monster": true,
+    "enemy_team": false,
+    "enemy_trainer": false,
+    "own_monster": false,
+    "own_team": false,
+    "own_trainer": false
+   },
+   "behaviors": {},
+   "effects": [
+    {
+     "type": "foresight",
+     "parameters": [
+      "3"
+     ]
+    },
+    {
+     "type": "give",
+     "parameters": [
+      "elementalshield",
+      "own_monster"
+     ]
+    }
+   ],
+   "conditions": [],
+   "statModifiers": {},
+   "messages": {
+    "use": "combat_used_x",
+    "success": null,
+    "failure": "combat_miss"
+   },
+   "animation": {
+    "slug": "celldivision",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/technique/celldivision.page-0.png",
+      "width": 512,
+      "height": 128,
+      "rect": [
+       0,
+       0,
+       512,
+       128
+      ],
+      "firstFrame": 0,
+      "frames": 9,
+      "columns": 8,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
   "conjurer": {
    "id": 127,
    "sort": "damage",
@@ -30853,6 +37179,72 @@
     "loops": 0
    }
   },
+  "damage_division": {
+   "id": 261,
+   "sort": "damage",
+   "category": "special",
+   "range": "special",
+   "speed": "extremely_slow",
+   "accuracy": 1,
+   "potency": 1,
+   "power": 0,
+   "healingPower": 0,
+   "recharge": 3,
+   "types": [
+    "normal"
+   ],
+   "target": {
+    "enemy_monster": false,
+    "enemy_team": false,
+    "enemy_trainer": false,
+    "own_monster": true,
+    "own_team": false,
+    "own_trainer": false
+   },
+   "behaviors": {},
+   "effects": [
+    {
+     "type": "prop_healing",
+     "parameters": [
+      "own_monster",
+      "0.5"
+     ]
+    }
+   ],
+   "conditions": [],
+   "statModifiers": {},
+   "messages": {
+    "use": "combat_used_x",
+    "success": null,
+    "failure": "combat_miss"
+   },
+   "animation": {
+    "slug": "celldivision",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/technique/celldivision.page-0.png",
+      "width": 512,
+      "height": 128,
+      "rect": [
+       0,
+       0,
+       512,
+       128
+      ],
+      "firstFrame": 0,
+      "frames": 9,
+      "columns": 8,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
   "demiurge": {
    "id": 147,
    "sort": "damage",
@@ -30927,6 +37319,60 @@
     "durationMs": 100,
     "flipAxes": "",
     "loops": 0
+   }
+  },
+  "depth_charge": {
+   "id": 205,
+   "sort": "damage",
+   "category": "simple",
+   "range": "melee",
+   "speed": "normal",
+   "accuracy": 0.8,
+   "potency": 1,
+   "power": 1,
+   "healingPower": 0,
+   "recharge": 4,
+   "types": [
+    "water"
+   ],
+   "target": {
+    "enemy_monster": true,
+    "enemy_team": false,
+    "enemy_trainer": false,
+    "own_monster": false,
+    "own_team": false,
+    "own_trainer": false
+   },
+   "behaviors": {},
+   "effects": [
+    {
+     "type": "disappear",
+     "parameters": [
+      "strike"
+     ]
+    }
+   ],
+   "conditions": [
+    {
+     "type": "status",
+     "parameters": [
+      "grabbed"
+     ],
+     "operator": "not"
+    },
+    {
+     "type": "status",
+     "parameters": [
+      "stuck"
+     ],
+     "operator": "not"
+    }
+   ],
+   "statModifiers": {},
+   "messages": {
+    "use": "combat_used_x",
+    "success": "depth_charge_success",
+    "failure": "depth_charge_fail"
    }
   },
   "diet": {
@@ -31704,6 +38150,69 @@
     ],
     "durationMs": 100,
     "flipAxes": "x",
+    "loops": 0
+   }
+  },
+  "entomb": {
+   "id": 248,
+   "sort": "damage",
+   "category": "powerful",
+   "range": "melee",
+   "speed": "extremely_slow",
+   "accuracy": 0.9,
+   "potency": 0,
+   "power": 3,
+   "healingPower": 0,
+   "recharge": 3,
+   "types": [
+    "earth",
+    "shadow"
+   ],
+   "target": {
+    "enemy_monster": true,
+    "enemy_team": false,
+    "enemy_trainer": false,
+    "own_monster": false,
+    "own_team": false,
+    "own_trainer": false
+   },
+   "behaviors": {},
+   "effects": [
+    {
+     "type": "damage"
+    }
+   ],
+   "conditions": [],
+   "statModifiers": {},
+   "messages": {
+    "use": "combat_used_x",
+    "success": null,
+    "failure": "combat_miss"
+   },
+   "animation": {
+    "slug": "skull",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/technique/skull.page-0.png",
+      "width": 256,
+      "height": 128,
+      "rect": [
+       0,
+       0,
+       256,
+       128
+      ],
+      "firstFrame": 0,
+      "frames": 4,
+      "columns": 4,
+      "frameWidth": 64,
+      "frameHeight": 128,
+      "contentWidth": 54,
+      "contentHeight": 70
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
     "loops": 0
    }
   },
@@ -33568,6 +40077,78 @@
     "loops": 0
    }
   },
+  "gourmet": {
+   "id": 234,
+   "sort": "damage",
+   "category": "condition_imposer",
+   "range": "special",
+   "speed": "normal",
+   "accuracy": 1,
+   "potency": 1,
+   "power": 0,
+   "healingPower": 3,
+   "recharge": 3,
+   "types": [
+    "cosmic"
+   ],
+   "target": {
+    "enemy_monster": false,
+    "enemy_team": false,
+    "enemy_trainer": false,
+    "own_monster": true,
+    "own_team": false,
+    "own_trainer": false
+   },
+   "behaviors": {},
+   "effects": [
+    {
+     "type": "give",
+     "parameters": [
+      "recover",
+      "own_monster"
+     ]
+    },
+    {
+     "type": "healing",
+     "parameters": [
+      "own_monster"
+     ]
+    }
+   ],
+   "conditions": [],
+   "statModifiers": {},
+   "messages": {
+    "use": "combat_used_x",
+    "success": null,
+    "failure": "combat_miss"
+   },
+   "animation": {
+    "slug": "cakechomp",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/technique/cakechomp.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 6,
+      "columns": 6,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
   "greenstone": {
    "id": 106,
    "sort": "damage",
@@ -33926,6 +40507,75 @@
     "loops": 0
    }
   },
+  "heavenly_desserts": {
+   "id": 233,
+   "sort": "damage",
+   "category": "reserved",
+   "range": "melee",
+   "speed": "normal",
+   "accuracy": 0.9,
+   "potency": 1,
+   "power": 3,
+   "healingPower": 0,
+   "recharge": 3,
+   "types": [
+    "cosmic"
+   ],
+   "target": {
+    "enemy_monster": true,
+    "enemy_team": false,
+    "enemy_trainer": false,
+    "own_monster": false,
+    "own_team": false,
+    "own_trainer": false
+   },
+   "behaviors": {},
+   "effects": [
+    {
+     "type": "damage"
+    },
+    {
+     "type": "give",
+     "parameters": [
+      "recover",
+      "enemy_monster"
+     ]
+    }
+   ],
+   "conditions": [],
+   "statModifiers": {},
+   "messages": {
+    "use": "combat_used_x",
+    "success": null,
+    "failure": "combat_miss"
+   },
+   "animation": {
+    "slug": "cakechomp",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/technique/cakechomp.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 6,
+      "columns": 6,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
   "hibernate": {
    "id": 45,
    "sort": "damage",
@@ -34007,6 +40657,68 @@
       "harpooned",
       "enemy_monster"
      ]
+    }
+   ],
+   "conditions": [],
+   "statModifiers": {},
+   "messages": {
+    "use": "combat_used_x",
+    "success": null,
+    "failure": "combat_miss"
+   },
+   "animation": {
+    "slug": "horn",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/technique/horn.page-0.png",
+      "width": 256,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       256,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 4,
+      "columns": 4,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
+  "horn": {
+   "id": 245,
+   "sort": "damage",
+   "category": "powerful",
+   "range": "touch",
+   "speed": "slow",
+   "accuracy": 0.75,
+   "potency": 0,
+   "power": 2.5,
+   "healingPower": 0,
+   "recharge": 1,
+   "types": [
+    "normal"
+   ],
+   "target": {
+    "enemy_monster": true,
+    "enemy_team": false,
+    "enemy_trainer": false,
+    "own_monster": false,
+    "own_team": false,
+    "own_trainer": false
+   },
+   "behaviors": {},
+   "effects": [
+    {
+     "type": "damage"
     }
    ],
    "conditions": [],
@@ -34513,6 +41225,82 @@
     ],
     "durationMs": 100,
     "flipAxes": "xy",
+    "loops": 0
+   }
+  },
+  "just_desserts": {
+   "id": 230,
+   "sort": "damage",
+   "category": "exotic",
+   "range": "ranged",
+   "speed": "normal",
+   "accuracy": 0.8,
+   "potency": 1,
+   "power": 2,
+   "healingPower": 0,
+   "recharge": 2,
+   "types": [
+    "cosmic"
+   ],
+   "target": {
+    "enemy_monster": true,
+    "enemy_team": false,
+    "enemy_trainer": false,
+    "own_monster": false,
+    "own_team": false,
+    "own_trainer": false
+   },
+   "behaviors": {},
+   "effects": [
+    {
+     "type": "damage"
+    },
+    {
+     "type": "give",
+     "parameters": [
+      "revenge",
+      "own_monster"
+     ]
+    },
+    {
+     "type": "give",
+     "parameters": [
+      "poison",
+      "enemy_monster"
+     ]
+    }
+   ],
+   "conditions": [],
+   "statModifiers": {},
+   "messages": {
+    "use": "combat_used_x",
+    "success": null,
+    "failure": "combat_miss"
+   },
+   "animation": {
+    "slug": "foodthrow",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/technique/foodthrow.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 5,
+      "columns": 5,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
     "loops": 0
    }
   },
@@ -35083,6 +41871,78 @@
       "frameHeight": 64,
       "contentWidth": 64,
       "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
+  "life_surge": {
+   "id": 175,
+   "sort": "damage",
+   "category": "exotic",
+   "range": "special",
+   "speed": "normal",
+   "accuracy": 1,
+   "potency": 1,
+   "power": 0,
+   "healingPower": 3,
+   "recharge": 2,
+   "types": [
+    "normal"
+   ],
+   "target": {
+    "enemy_monster": true,
+    "enemy_team": false,
+    "enemy_trainer": false,
+    "own_monster": false,
+    "own_team": false,
+    "own_trainer": false
+   },
+   "behaviors": {},
+   "effects": [
+    {
+     "type": "give",
+     "parameters": [
+      "chargedup",
+      "own_monster"
+     ]
+    },
+    {
+     "type": "healing",
+     "parameters": [
+      "own_monster"
+     ]
+    }
+   ],
+   "conditions": [],
+   "statModifiers": {},
+   "messages": {
+    "use": "combat_used_x",
+    "success": null,
+    "failure": "combat_miss"
+   },
+   "animation": {
+    "slug": "heal_burst_120",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/technique/heal_burst_120.page-0.png",
+      "width": 512,
+      "height": 256,
+      "rect": [
+       0,
+       0,
+       512,
+       256
+      ],
+      "firstFrame": 0,
+      "frames": 5,
+      "columns": 4,
+      "frameWidth": 128,
+      "frameHeight": 128,
+      "contentWidth": 120,
+      "contentHeight": 120
      }
     ],
     "durationMs": 100,
@@ -36099,6 +42959,85 @@
     "loops": 0
    }
   },
+  "mystic_blending": {
+   "id": 139,
+   "sort": "damage",
+   "category": "exotic",
+   "range": "special",
+   "speed": "normal",
+   "accuracy": 1,
+   "potency": 1,
+   "power": 0,
+   "healingPower": 3,
+   "recharge": 4,
+   "types": [
+    "cosmic"
+   ],
+   "target": {
+    "enemy_monster": false,
+    "enemy_team": false,
+    "enemy_trainer": false,
+    "own_monster": true,
+    "own_team": false,
+    "own_trainer": false
+   },
+   "behaviors": {},
+   "effects": [
+    {
+     "type": "give",
+     "parameters": [
+      "recover",
+      "own_monster"
+     ]
+    },
+    {
+     "type": "give",
+     "parameters": [
+      "focused",
+      "enemy_monster"
+     ]
+    },
+    {
+     "type": "healing",
+     "parameters": [
+      "own_monster"
+     ]
+    }
+   ],
+   "conditions": [],
+   "statModifiers": {},
+   "messages": {
+    "use": "combat_used_x",
+    "success": null,
+    "failure": "combat_miss"
+   },
+   "animation": {
+    "slug": "sparks_blue",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/technique/sparks_blue.page-0.png",
+      "width": 256,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       256,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 4,
+      "columns": 4,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
   "needle": {
    "id": 196,
    "sort": "damage",
@@ -36357,6 +43296,49 @@
      "type": "give",
      "parameters": [
       "confused",
+      "enemy_monster"
+     ]
+    }
+   ],
+   "conditions": [],
+   "statModifiers": {},
+   "messages": {
+    "use": "combat_used_x",
+    "success": null,
+    "failure": "combat_miss"
+   }
+  },
+  "one_million_talons": {
+   "id": 186,
+   "sort": "damage",
+   "category": "powerful",
+   "range": "melee",
+   "speed": "slow",
+   "accuracy": 1,
+   "potency": 0.8,
+   "power": 3,
+   "healingPower": 0,
+   "recharge": 3,
+   "types": [
+    "sky"
+   ],
+   "target": {
+    "enemy_monster": true,
+    "enemy_team": false,
+    "enemy_trainer": false,
+    "own_monster": false,
+    "own_team": false,
+    "own_trainer": false
+   },
+   "behaviors": {},
+   "effects": [
+    {
+     "type": "damage"
+    },
+    {
+     "type": "give",
+     "parameters": [
+      "flinching",
       "enemy_monster"
      ]
     }
@@ -37798,6 +44780,69 @@
       "firstFrame": 0,
       "frames": 4,
       "columns": 4,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
+  "pyrokinesis": {
+   "id": 208,
+   "sort": "damage",
+   "category": "exotic",
+   "range": "melee",
+   "speed": "fast",
+   "accuracy": 0.8,
+   "potency": 0,
+   "power": 2.5,
+   "healingPower": 0,
+   "recharge": 4,
+   "types": [
+    "fire",
+    "cosmic"
+   ],
+   "target": {
+    "enemy_monster": true,
+    "enemy_team": false,
+    "enemy_trainer": false,
+    "own_monster": false,
+    "own_team": false,
+    "own_trainer": false
+   },
+   "behaviors": {},
+   "effects": [
+    {
+     "type": "damage"
+    }
+   ],
+   "conditions": [],
+   "statModifiers": {},
+   "messages": {
+    "use": "combat_used_x",
+    "success": null,
+    "failure": "combat_miss"
+   },
+   "animation": {
+    "slug": "fireworks",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/technique/fireworks.page-0.png",
+      "width": 512,
+      "height": 128,
+      "rect": [
+       0,
+       0,
+       512,
+       128
+      ],
+      "firstFrame": 0,
+      "frames": 14,
+      "columns": 8,
       "frameWidth": 64,
       "frameHeight": 64,
       "contentWidth": 64,
@@ -39592,6 +46637,75 @@
     "loops": 0
    }
   },
+  "slime": {
+   "id": 96,
+   "sort": "damage",
+   "category": "simple",
+   "range": "reach",
+   "speed": "normal",
+   "accuracy": 1,
+   "potency": 0.2,
+   "power": 1.1,
+   "healingPower": 0,
+   "recharge": 2,
+   "types": [
+    "venom"
+   ],
+   "target": {
+    "enemy_monster": true,
+    "enemy_team": false,
+    "enemy_trainer": false,
+    "own_monster": false,
+    "own_team": false,
+    "own_trainer": false
+   },
+   "behaviors": {},
+   "effects": [
+    {
+     "type": "damage"
+    },
+    {
+     "type": "give",
+     "parameters": [
+      "festering",
+      "enemy_monster"
+     ]
+    }
+   ],
+   "conditions": [],
+   "statModifiers": {},
+   "messages": {
+    "use": "combat_used_x",
+    "success": null,
+    "failure": "combat_miss"
+   },
+   "animation": {
+    "slug": "sparks_green_alt",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/technique/sparks_green_alt.page-0.png",
+      "width": 256,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       256,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 4,
+      "columns": 4,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
   "snowball": {
    "id": 267,
    "sort": "damage",
@@ -40659,6 +47773,68 @@
       "firstFrame": 0,
       "frames": 5,
       "columns": 5,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
+  "strangulation": {
+   "id": 93,
+   "sort": "damage",
+   "category": "powerful",
+   "range": "melee",
+   "speed": "normal",
+   "accuracy": 0.8,
+   "potency": 0,
+   "power": 2.5,
+   "healingPower": 0,
+   "recharge": 1,
+   "types": [
+    "shadow"
+   ],
+   "target": {
+    "enemy_monster": true,
+    "enemy_team": false,
+    "enemy_trainer": false,
+    "own_monster": false,
+    "own_team": false,
+    "own_trainer": false
+   },
+   "behaviors": {},
+   "effects": [
+    {
+     "type": "damage"
+    }
+   ],
+   "conditions": [],
+   "statModifiers": {},
+   "messages": {
+    "use": "combat_used_x",
+    "success": null,
+    "failure": "combat_miss"
+   },
+   "animation": {
+    "slug": "x_attack",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/technique/x_attack.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 6,
+      "columns": 6,
       "frameWidth": 64,
       "frameHeight": 64,
       "contentWidth": 64,
@@ -42164,6 +49340,75 @@
       "firstFrame": 0,
       "frames": 6,
       "columns": 6,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
+  "tornado": {
+   "id": 194,
+   "sort": "damage",
+   "category": "powerful",
+   "range": "ranged",
+   "speed": "normal",
+   "accuracy": 0.8,
+   "potency": 0.5,
+   "power": 2.9,
+   "healingPower": 0,
+   "recharge": 3,
+   "types": [
+    "sky"
+   ],
+   "target": {
+    "enemy_monster": true,
+    "enemy_team": false,
+    "enemy_trainer": false,
+    "own_monster": false,
+    "own_team": false,
+    "own_trainer": false
+   },
+   "behaviors": {},
+   "effects": [
+    {
+     "type": "damage"
+    },
+    {
+     "type": "give",
+     "parameters": [
+      "slow",
+      "enemy_monster"
+     ]
+    }
+   ],
+   "conditions": [],
+   "statModifiers": {},
+   "messages": {
+    "use": "combat_used_x",
+    "success": null,
+    "failure": "combat_miss"
+   },
+   "animation": {
+    "slug": "tornado_bulk",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/technique/tornado_bulk.page-0.png",
+      "width": 512,
+      "height": 128,
+      "rect": [
+       0,
+       0,
+       512,
+       128
+      ],
+      "firstFrame": 0,
+      "frames": 16,
+      "columns": 8,
       "frameWidth": 64,
       "frameHeight": 64,
       "contentWidth": 64,
@@ -43775,6 +51020,51 @@
    },
    "immunityToStatus": []
   },
+  "cosmic_berry": {
+   "sort": "utility",
+   "category": "elements",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 450,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "switch_type",
+     "parameters": [
+      "cosmic"
+     ]
+    }
+   ],
+   "conditions": [
+    {
+     "type": "base",
+     "parameters": [
+      "types",
+      "cosmic"
+     ],
+     "operator": "not"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": false,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": []
+  },
   "cure_festering": {
    "sort": "utility",
    "category": "none",
@@ -43893,6 +51183,51 @@
    "statModifiers": {},
    "immunityToStatus": []
   },
+  "earth_berry": {
+   "sort": "utility",
+   "category": "elements",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 450,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "switch_type",
+     "parameters": [
+      "earth"
+     ]
+    }
+   ],
+   "conditions": [
+    {
+     "type": "base",
+     "parameters": [
+      "types",
+      "earth"
+     ],
+     "operator": "not"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": false,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": []
+  },
   "escape_key": {
    "sort": "utility",
    "category": "none",
@@ -43913,6 +51248,51 @@
    "behaviors": {
     "requires_monster_menu": false,
     "show_dialog_on_success": false,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": false,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": []
+  },
+  "fire_berry": {
+   "sort": "utility",
+   "category": "elements",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 450,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "switch_type",
+     "parameters": [
+      "fire"
+     ]
+    }
+   ],
+   "conditions": [
+    {
+     "type": "base",
+     "parameters": [
+      "types",
+      "fire"
+     ],
+     "operator": "not"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
     "show_dialog_on_failure": true,
     "consumable": true,
     "visible": true,
@@ -44044,6 +51424,51 @@
    "statModifiers": {},
    "immunityToStatus": []
   },
+  "frost_berry": {
+   "sort": "utility",
+   "category": "elements",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 450,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "switch_type",
+     "parameters": [
+      "frost"
+     ]
+    }
+   ],
+   "conditions": [
+    {
+     "type": "base",
+     "parameters": [
+      "types",
+      "frost"
+     ],
+     "operator": "not"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": false,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": []
+  },
   "gold_pass": {
    "sort": "utility",
    "category": "none",
@@ -44061,6 +51486,51 @@
     "consumable": false,
     "visible": true,
     "resellable": false,
+    "throwable": false,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": []
+  },
+  "heroic_berry": {
+   "sort": "utility",
+   "category": "elements",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 450,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "switch_type",
+     "parameters": [
+      "heroic"
+     ]
+    }
+   ],
+   "conditions": [
+    {
+     "type": "base",
+     "parameters": [
+      "types",
+      "heroic"
+     ],
+     "operator": "not"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
     "throwable": false,
     "holdable": false,
     "repairable": false,
@@ -44148,6 +51618,51 @@
    "behaviors": {
     "requires_monster_menu": true,
     "show_dialog_on_success": false,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": false,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": []
+  },
+  "lightning_berry": {
+   "sort": "utility",
+   "category": "elements",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 450,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "switch_type",
+     "parameters": [
+      "lightning"
+     ]
+    }
+   ],
+   "conditions": [
+    {
+     "type": "base",
+     "parameters": [
+      "types",
+      "lightning"
+     ],
+     "operator": "not"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
     "show_dialog_on_failure": true,
     "consumable": true,
     "visible": true,
@@ -44374,6 +51889,51 @@
    "behaviors": {
     "requires_monster_menu": true,
     "show_dialog_on_success": false,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": false,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": []
+  },
+  "normal_berry": {
+   "sort": "utility",
+   "category": "elements",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 450,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "switch_type",
+     "parameters": [
+      "normal"
+     ]
+    }
+   ],
+   "conditions": [
+    {
+     "type": "base",
+     "parameters": [
+      "types",
+      "normal"
+     ],
+     "operator": "not"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
     "show_dialog_on_failure": true,
     "consumable": true,
     "visible": true,
@@ -45272,6 +52832,51 @@
    "statModifiers": {},
    "immunityToStatus": []
   },
+  "shadow_berry": {
+   "sort": "utility",
+   "category": "elements",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 450,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "switch_type",
+     "parameters": [
+      "shadow"
+     ]
+    }
+   ],
+   "conditions": [
+    {
+     "type": "base",
+     "parameters": [
+      "types",
+      "shadow"
+     ],
+     "operator": "not"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": false,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": []
+  },
   "shammer_fossil": {
    "sort": "utility",
    "category": "fossil",
@@ -45305,6 +52910,51 @@
     "consumable": true,
     "visible": true,
     "resellable": false,
+    "throwable": false,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": []
+  },
+  "sky_berry": {
+   "sort": "utility",
+   "category": "elements",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 450,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "switch_type",
+     "parameters": [
+      "sky"
+     ]
+    }
+   ],
+   "conditions": [
+    {
+     "type": "base",
+     "parameters": [
+      "types",
+      "sky"
+     ],
+     "operator": "not"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
     "throwable": false,
     "holdable": false,
     "repairable": false,
@@ -46526,6 +54176,89 @@
     "loops": 0
    }
   },
+  "tuxeball_ancient": {
+   "sort": "utility",
+   "category": "capture",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": null,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "capture"
+    }
+   ],
+   "conditions": [
+    {
+     "type": "wild_monster",
+     "operator": "is"
+    },
+    {
+     "type": "base",
+     "parameters": [
+      "species",
+      "!threat"
+     ],
+     "operator": "is"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": false,
+    "throwable": true,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": [],
+   "captureSprite": {
+    "key": "ui:img.assets/battle/gfx/items/tuxeball_ancient.png",
+    "width": 32,
+    "height": 32,
+    "rect": [
+     0,
+     0,
+     24,
+     24
+    ]
+   },
+   "animation": {
+    "slug": "capture_1",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/item/capture_1.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 8,
+      "columns": 8,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
   "tuxeball_candy": {
    "sort": "utility",
    "category": "capture",
@@ -46573,6 +54306,89 @@
    "immunityToStatus": [],
    "captureSprite": {
     "key": "ui:img.assets/battle/gfx/items/tuxeball_candy.png",
+    "width": 32,
+    "height": 32,
+    "rect": [
+     0,
+     0,
+     24,
+     24
+    ]
+   },
+   "animation": {
+    "slug": "capture_1",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/item/capture_1.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 8,
+      "columns": 8,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
+  "tuxeball_crusher": {
+   "sort": "utility",
+   "category": "capture",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 400,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "capture"
+    }
+   ],
+   "conditions": [
+    {
+     "type": "wild_monster",
+     "operator": "is"
+    },
+    {
+     "type": "base",
+     "parameters": [
+      "species",
+      "!threat"
+     ],
+     "operator": "is"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": true,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": [],
+   "captureSprite": {
+    "key": "ui:img.assets/battle/gfx/items/tuxeball_crusher.png",
     "width": 32,
     "height": 32,
     "rect": [
@@ -46692,6 +54508,338 @@
     "loops": 0
    }
   },
+  "tuxeball_earth": {
+   "sort": "utility",
+   "category": "capture",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 250,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "capture"
+    }
+   ],
+   "conditions": [
+    {
+     "type": "wild_monster",
+     "operator": "is"
+    },
+    {
+     "type": "base",
+     "parameters": [
+      "species",
+      "!threat"
+     ],
+     "operator": "is"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": true,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": [],
+   "captureSprite": {
+    "key": "ui:img.assets/battle/gfx/items/tuxeball_earth.png",
+    "width": 32,
+    "height": 32,
+    "rect": [
+     0,
+     0,
+     24,
+     24
+    ]
+   },
+   "animation": {
+    "slug": "capture_1",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/item/capture_1.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 8,
+      "columns": 8,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
+  "tuxeball_female": {
+   "sort": "utility",
+   "category": "capture",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 250,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "capture"
+    }
+   ],
+   "conditions": [
+    {
+     "type": "wild_monster",
+     "operator": "is"
+    },
+    {
+     "type": "base",
+     "parameters": [
+      "species",
+      "!threat"
+     ],
+     "operator": "is"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": true,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": [],
+   "captureSprite": {
+    "key": "ui:img.assets/battle/gfx/items/tuxeball_female.png",
+    "width": 32,
+    "height": 32,
+    "rect": [
+     0,
+     0,
+     24,
+     24
+    ]
+   },
+   "animation": {
+    "slug": "capture_1",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/item/capture_1.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 8,
+      "columns": 8,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
+  "tuxeball_fire": {
+   "sort": "utility",
+   "category": "capture",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 250,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "capture"
+    }
+   ],
+   "conditions": [
+    {
+     "type": "wild_monster",
+     "operator": "is"
+    },
+    {
+     "type": "base",
+     "parameters": [
+      "species",
+      "!threat"
+     ],
+     "operator": "is"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": true,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": [],
+   "captureSprite": {
+    "key": "ui:img.assets/battle/gfx/items/tuxeball_fire.png",
+    "width": 32,
+    "height": 32,
+    "rect": [
+     0,
+     0,
+     24,
+     24
+    ]
+   },
+   "animation": {
+    "slug": "capture_1",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/item/capture_1.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 8,
+      "columns": 8,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
+  "tuxeball_gambler": {
+   "sort": "utility",
+   "category": "capture",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 400,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "capture"
+    }
+   ],
+   "conditions": [
+    {
+     "type": "wild_monster",
+     "operator": "is"
+    },
+    {
+     "type": "base",
+     "parameters": [
+      "species",
+      "!threat"
+     ],
+     "operator": "is"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": true,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": [],
+   "captureSprite": {
+    "key": "ui:img.assets/battle/gfx/items/tuxeball_gambler.png",
+    "width": 32,
+    "height": 32,
+    "rect": [
+     0,
+     0,
+     24,
+     24
+    ]
+   },
+   "animation": {
+    "slug": "capture_1",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/item/capture_1.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 8,
+      "columns": 8,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
   "tuxeball_grand": {
    "sort": "utility",
    "category": "capture",
@@ -46739,6 +54887,172 @@
    "immunityToStatus": [],
    "captureSprite": {
     "key": "ui:img.assets/battle/gfx/items/tuxeball_grand.png",
+    "width": 32,
+    "height": 32,
+    "rect": [
+     0,
+     0,
+     24,
+     24
+    ]
+   },
+   "animation": {
+    "slug": "capture_1",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/item/capture_1.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 8,
+      "columns": 8,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
+  "tuxeball_hardened": {
+   "sort": "utility",
+   "category": "capture",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 350,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "capture"
+    }
+   ],
+   "conditions": [
+    {
+     "type": "wild_monster",
+     "operator": "is"
+    },
+    {
+     "type": "base",
+     "parameters": [
+      "species",
+      "!threat"
+     ],
+     "operator": "is"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": true,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": [],
+   "captureSprite": {
+    "key": "ui:img.assets/battle/gfx/items/tuxeball_hardened.png",
+    "width": 32,
+    "height": 32,
+    "rect": [
+     0,
+     0,
+     24,
+     24
+    ]
+   },
+   "animation": {
+    "slug": "capture_1",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/item/capture_1.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 8,
+      "columns": 8,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
+  "tuxeball_hearty": {
+   "sort": "utility",
+   "category": "capture",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 450,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "capture"
+    }
+   ],
+   "conditions": [
+    {
+     "type": "wild_monster",
+     "operator": "is"
+    },
+    {
+     "type": "base",
+     "parameters": [
+      "species",
+      "!threat"
+     ],
+     "operator": "is"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": true,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": [],
+   "captureSprite": {
+    "key": "ui:img.assets/battle/gfx/items/tuxeball_hearty.png",
     "width": 32,
     "height": 32,
     "rect": [
@@ -46941,6 +55255,338 @@
     "loops": 0
    }
   },
+  "tuxeball_male": {
+   "sort": "utility",
+   "category": "capture",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 250,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "capture"
+    }
+   ],
+   "conditions": [
+    {
+     "type": "wild_monster",
+     "operator": "is"
+    },
+    {
+     "type": "base",
+     "parameters": [
+      "species",
+      "!threat"
+     ],
+     "operator": "is"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": true,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": [],
+   "captureSprite": {
+    "key": "ui:img.assets/battle/gfx/items/tuxeball_male.png",
+    "width": 32,
+    "height": 32,
+    "rect": [
+     0,
+     0,
+     24,
+     24
+    ]
+   },
+   "animation": {
+    "slug": "capture_1",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/item/capture_1.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 8,
+      "columns": 8,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
+  "tuxeball_metal": {
+   "sort": "utility",
+   "category": "capture",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 250,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "capture"
+    }
+   ],
+   "conditions": [
+    {
+     "type": "wild_monster",
+     "operator": "is"
+    },
+    {
+     "type": "base",
+     "parameters": [
+      "species",
+      "!threat"
+     ],
+     "operator": "is"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": true,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": [],
+   "captureSprite": {
+    "key": "ui:img.assets/battle/gfx/items/tuxeball_metal.png",
+    "width": 32,
+    "height": 32,
+    "rect": [
+     0,
+     0,
+     24,
+     24
+    ]
+   },
+   "animation": {
+    "slug": "capture_1",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/item/capture_1.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 8,
+      "columns": 8,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
+  "tuxeball_neuter": {
+   "sort": "utility",
+   "category": "capture",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 250,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "capture"
+    }
+   ],
+   "conditions": [
+    {
+     "type": "wild_monster",
+     "operator": "is"
+    },
+    {
+     "type": "base",
+     "parameters": [
+      "species",
+      "!threat"
+     ],
+     "operator": "is"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": true,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": [],
+   "captureSprite": {
+    "key": "ui:img.assets/battle/gfx/items/tuxeball_neuter.png",
+    "width": 32,
+    "height": 32,
+    "rect": [
+     0,
+     0,
+     24,
+     24
+    ]
+   },
+   "animation": {
+    "slug": "capture_1",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/item/capture_1.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 8,
+      "columns": 8,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
+  "tuxeball_noble": {
+   "sort": "utility",
+   "category": "capture",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 200,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "capture"
+    }
+   ],
+   "conditions": [
+    {
+     "type": "wild_monster",
+     "operator": "is"
+    },
+    {
+     "type": "base",
+     "parameters": [
+      "species",
+      "!threat"
+     ],
+     "operator": "is"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": true,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": [],
+   "captureSprite": {
+    "key": "ui:img.assets/battle/gfx/items/tuxeball_noble.png",
+    "width": 32,
+    "height": 32,
+    "rect": [
+     0,
+     0,
+     24,
+     24
+    ]
+   },
+   "animation": {
+    "slug": "capture_1",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/item/capture_1.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 8,
+      "columns": 8,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
   "tuxeball_nocturnal": {
    "sort": "utility",
    "category": "capture",
@@ -47023,6 +55669,772 @@
     "flipAxes": "",
     "loops": 0
    }
+  },
+  "tuxeball_omni": {
+   "sort": "utility",
+   "category": "capture",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 250,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "capture_combined",
+     "parameters": [
+      "monster",
+      "omni",
+      "0.3",
+      "1.4"
+     ]
+    }
+   ],
+   "conditions": [
+    {
+     "type": "wild_monster",
+     "operator": "is"
+    },
+    {
+     "type": "base",
+     "parameters": [
+      "species",
+      "!threat"
+     ],
+     "operator": "is"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": true,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": [],
+   "captureSprite": {
+    "key": "ui:img.assets/battle/gfx/items/tuxeball_omni.png",
+    "width": 32,
+    "height": 32,
+    "rect": [
+     0,
+     0,
+     24,
+     24
+    ]
+   },
+   "animation": {
+    "slug": "capture_1",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/item/capture_1.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 8,
+      "columns": 8,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
+  "tuxeball_peppy": {
+   "sort": "utility",
+   "category": "capture",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 450,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "capture"
+    }
+   ],
+   "conditions": [
+    {
+     "type": "wild_monster",
+     "operator": "is"
+    },
+    {
+     "type": "base",
+     "parameters": [
+      "species",
+      "!threat"
+     ],
+     "operator": "is"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": true,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": [],
+   "captureSprite": {
+    "key": "ui:img.assets/battle/gfx/items/tuxeball_peppy.png",
+    "width": 32,
+    "height": 32,
+    "rect": [
+     0,
+     0,
+     24,
+     24
+    ]
+   },
+   "animation": {
+    "slug": "capture_1",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/item/capture_1.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 8,
+      "columns": 8,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
+  "tuxeball_refined": {
+   "sort": "utility",
+   "category": "capture",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 450,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "capture"
+    }
+   ],
+   "conditions": [
+    {
+     "type": "wild_monster",
+     "operator": "is"
+    },
+    {
+     "type": "base",
+     "parameters": [
+      "species",
+      "!threat"
+     ],
+     "operator": "is"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": true,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": [],
+   "captureSprite": {
+    "key": "ui:img.assets/battle/gfx/items/tuxeball_refined.png",
+    "width": 32,
+    "height": 32,
+    "rect": [
+     0,
+     0,
+     24,
+     24
+    ]
+   },
+   "animation": {
+    "slug": "capture_1",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/item/capture_1.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 8,
+      "columns": 8,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
+  "tuxeball_salty": {
+   "sort": "utility",
+   "category": "capture",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 450,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "capture"
+    }
+   ],
+   "conditions": [
+    {
+     "type": "wild_monster",
+     "operator": "is"
+    },
+    {
+     "type": "base",
+     "parameters": [
+      "species",
+      "!threat"
+     ],
+     "operator": "is"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": true,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": [],
+   "captureSprite": {
+    "key": "ui:img.assets/battle/gfx/items/tuxeball_salty.png",
+    "width": 32,
+    "height": 32,
+    "rect": [
+     0,
+     0,
+     24,
+     24
+    ]
+   },
+   "animation": {
+    "slug": "capture_1",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/item/capture_1.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 8,
+      "columns": 8,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
+  "tuxeball_water": {
+   "sort": "utility",
+   "category": "capture",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 250,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "capture"
+    }
+   ],
+   "conditions": [
+    {
+     "type": "wild_monster",
+     "operator": "is"
+    },
+    {
+     "type": "base",
+     "parameters": [
+      "species",
+      "!threat"
+     ],
+     "operator": "is"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": true,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": [],
+   "captureSprite": {
+    "key": "ui:img.assets/battle/gfx/items/tuxeball_water.png",
+    "width": 32,
+    "height": 32,
+    "rect": [
+     0,
+     0,
+     24,
+     24
+    ]
+   },
+   "animation": {
+    "slug": "capture_1",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/item/capture_1.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 8,
+      "columns": 8,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
+  "tuxeball_wood": {
+   "sort": "utility",
+   "category": "capture",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 250,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "capture"
+    }
+   ],
+   "conditions": [
+    {
+     "type": "wild_monster",
+     "operator": "is"
+    },
+    {
+     "type": "base",
+     "parameters": [
+      "species",
+      "!threat"
+     ],
+     "operator": "is"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": true,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": [],
+   "captureSprite": {
+    "key": "ui:img.assets/battle/gfx/items/tuxeball_wood.png",
+    "width": 32,
+    "height": 32,
+    "rect": [
+     0,
+     0,
+     24,
+     24
+    ]
+   },
+   "animation": {
+    "slug": "capture_1",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/item/capture_1.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 8,
+      "columns": 8,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
+  "tuxeball_xero": {
+   "sort": "utility",
+   "category": "capture",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 300,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "capture_combined",
+     "parameters": [
+      "monster",
+      "xero",
+      "0.3",
+      "1.4"
+     ]
+    }
+   ],
+   "conditions": [
+    {
+     "type": "wild_monster",
+     "operator": "is"
+    },
+    {
+     "type": "base",
+     "parameters": [
+      "species",
+      "!threat"
+     ],
+     "operator": "is"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": true,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": [],
+   "captureSprite": {
+    "key": "ui:img.assets/battle/gfx/items/tuxeball_xero.png",
+    "width": 32,
+    "height": 32,
+    "rect": [
+     0,
+     0,
+     24,
+     24
+    ]
+   },
+   "animation": {
+    "slug": "capture_1",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/item/capture_1.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 8,
+      "columns": 8,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
+  "tuxeball_zesty": {
+   "sort": "utility",
+   "category": "capture",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 450,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "capture"
+    }
+   ],
+   "conditions": [
+    {
+     "type": "wild_monster",
+     "operator": "is"
+    },
+    {
+     "type": "base",
+     "parameters": [
+      "species",
+      "!threat"
+     ],
+     "operator": "is"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": true,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": [],
+   "captureSprite": {
+    "key": "ui:img.assets/battle/gfx/items/tuxeball_zesty.png",
+    "width": 32,
+    "height": 32,
+    "rect": [
+     0,
+     0,
+     24,
+     24
+    ]
+   },
+   "animation": {
+    "slug": "capture_1",
+    "pages": [
+     {
+      "key": "ui:img.assets/battle/animations/item/capture_1.page-0.png",
+      "width": 512,
+      "height": 64,
+      "rect": [
+       0,
+       0,
+       512,
+       64
+      ],
+      "firstFrame": 0,
+      "frames": 8,
+      "columns": 8,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "contentWidth": 64,
+      "contentHeight": 64
+     }
+    ],
+    "durationMs": 100,
+    "flipAxes": "",
+    "loops": 0
+   }
+  },
+  "venom_berry": {
+   "sort": "utility",
+   "category": "elements",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 450,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "switch_type",
+     "parameters": [
+      "venom"
+     ]
+    }
+   ],
+   "conditions": [
+    {
+     "type": "base",
+     "parameters": [
+      "types",
+      "venom"
+     ],
+     "operator": "not"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": false,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": []
+  },
+  "water_berry": {
+   "sort": "utility",
+   "category": "elements",
+   "usableIn": [
+    "MainCombatMenuState"
+   ],
+   "cost": 450,
+   "consumable": true,
+   "effects": [
+    {
+     "type": "switch_type",
+     "parameters": [
+      "water"
+     ]
+    }
+   ],
+   "conditions": [
+    {
+     "type": "base",
+     "parameters": [
+      "types",
+      "water"
+     ],
+     "operator": "not"
+    }
+   ],
+   "behaviors": {
+    "requires_monster_menu": true,
+    "show_dialog_on_success": true,
+    "show_dialog_on_failure": true,
+    "consumable": true,
+    "visible": true,
+    "resellable": true,
+    "throwable": false,
+    "holdable": false,
+    "repairable": false,
+    "craftable": false,
+    "destroy_on_break": false,
+    "wear_on_use": false,
+    "block_evolution": false
+   },
+   "modifiers": [],
+   "statModifiers": {},
+   "immunityToStatus": []
   },
   "wood_berry": {
    "sort": "utility",

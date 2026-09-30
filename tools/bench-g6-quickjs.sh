@@ -35,7 +35,9 @@ for viewport in "480 272" "960 544"; do
   actual=$(sha256sum "$state" | cut -d' ' -f1)
   # Complete post-Billie state, including persistent party/history, the
   # extension RNG cursor, and K4's persistent shop-stock banks.
-  expected=449c38b52331133ab10cea7293bff56a60f993a2d088d5bc6ccf072b8b09088c
+  # Shared economy removes ext.inventory/ext.money and credits battle rewards
+  # to SessionState.gold, changing only the pinned terminal state shape/value.
+  expected=7fdc130b0b90fece5f3814d886dad0a4513417ce31e2d59019dd0ce310d8dd64
   test "$actual" = "$expected"
   echo "STATE viewport=${width}x${height} canonical_sha256=$actual"
 done

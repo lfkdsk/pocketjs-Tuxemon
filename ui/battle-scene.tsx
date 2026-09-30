@@ -22,7 +22,7 @@ const title = (slug: string): string => slug
 const pathFor = (key: string): string => key.startsWith("ui:img.") ? key.slice(7) : key;
 
 function eventMessage(event: BattleEvent | null, monsters: readonly BattleMonster[]): string {
-  if (!event) return "Choose a technique";
+  if (!event) return "Choose an action";
   const monster = (uid: unknown) => monsters.find((candidate) => candidate.uid === uid)?.slug ?? "Tuxemon";
   switch (event.type) {
     case "sendOut": return `${title(monster(event.monster))} enters the battle!`;
@@ -30,6 +30,10 @@ function eventMessage(event: BattleEvent | null, monsters: readonly BattleMonste
     case "technique": return `${title(monster(event.user))} used ${title(String(event.technique ?? "move"))}!`;
     case "faint": return `${title(monster(event.monster))} fainted!`;
     case "status": return `${title(monster(event.target))}: ${title(String(event.status ?? "status"))}.`;
+    case "item": return `${title(String(event.item ?? "item"))} used on ${title(monster(event.target))}.`;
+    case "capture": return event.success ? `${title(monster(event.target))} was captured!` : `${title(monster(event.target))} broke free!`;
+    case "run": return event.success ? "Got away safely!" : "Couldn't escape!";
+    case "swap": return `${title(monster(event.target))} enters the battle!`;
     case "reward": return "Experience gained!";
     case "result": return "The battle is over.";
     default: return title(event.type);
@@ -65,13 +69,31 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
   const allMonsters = () => [...runtime().battle.parties[0], ...runtime().battle.parties[1]];
   const message = () => {
     const result = runtime().battle.result;
+    const event = currentBattleEvent(runtime());
     return result
       ? result.outcome === "won" ? "Victory!"
         : result.outcome === "lost" ? "Your party was defeated."
           : "The battle ended."
-      : eventMessage(currentBattleEvent(runtime()), allMonsters());
+      : event
+        ? eventMessage(event, allMonsters())
+        : runtime().menuMode === "root" ? "Choose an action"
+          : runtime().menuMode === "technique" ? "Choose a technique"
+            : runtime().menuMode === "swap" ? "Choose a Tuxemon"
+              : runtime().menuMode === "capture" ? "Choose a capture device"
+                : "Choose an item";
   };
   const moves = () => runtime().menu;
+  const visibleMoves = () => {
+    const entries = moves();
+    const start = entries.length <= 4 ? 0 : Math.floor(runtime().menuIndex / 4) * 4;
+    return entries.slice(start, start + 4).map((entry, offset) => ({ entry, index: start + offset }));
+  };
+  const menuLabel = (entry: ReturnType<typeof moves>[number]): string => {
+    const target = entry.targetSlug ? ` → ${title(entry.targetSlug)} ${entry.targetSlot}` : "";
+    const quantity = entry.quantity === undefined ? "" : ` ×${entry.quantity}`;
+    const cooldown = entry.cooldown ? ` (${entry.cooldown})` : "";
+    return `${title(entry.slug)}${quantity}${target}${cooldown}`;
+  };
 
   const monsterImage = (
     art: () => MonsterArt,
@@ -121,9 +143,9 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
       {hpPanel(player, 292, 119, "player")}
       <View class="absolute" style={{ posType: 1, insetL: x(8), insetT: y(198), width: px(464), height: px(66), bgColor: "#102b3a" }} debugName="battle-message-panel">
         <Text class="text-sm" style={{ posType: 1, insetL: px(10), insetT: px(7), width: px(444), height: px(18), lineHeight: px(16), textColor: "#f5f1d7" }}>{message()}</Text>
-        {moves().slice(0, 4).map((move, index) => (
-          <Text class="text-xs" style={{ posType: 1, insetL: px(12 + (index % 2) * 222), insetT: px(31 + Math.floor(index / 2) * 15), width: px(210), height: px(14), lineHeight: px(13), textColor: index === runtime().menuIndex ? "#ffd15c" : "#9cc8c1" }}>
-            {`${index === runtime().menuIndex ? ">" : " "} ${title(move.slug)}${move.cooldown ? ` (${move.cooldown})` : ""}`}
+        {visibleMoves().map(({ entry: move, index }, visibleIndex) => (
+          <Text class="text-xs" style={{ posType: 1, insetL: px(12 + (visibleIndex % 2) * 222), insetT: px(31 + Math.floor(visibleIndex / 2) * 15), width: px(210), height: px(14), lineHeight: px(13), textColor: index === runtime().menuIndex ? "#ffd15c" : "#9cc8c1" }}>
+            {`${index === runtime().menuIndex ? ">" : " "} ${menuLabel(move)}`}
           </Text>
         ))}
       </View>

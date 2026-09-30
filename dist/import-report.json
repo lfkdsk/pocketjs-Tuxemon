@@ -281,12 +281,12 @@
  ],
  "schemaErrors": [],
  "byFate": {
-  "T3-dropped": 3591,
-  "T1": 29582,
-  "T4-dropped": 4158,
+  "T3-dropped": 3412,
+  "T1": 30127,
+  "T4-dropped": 3979,
   "T1-lowered": 3897,
   "T2-dropped": 261,
-  "T3-placeholder": 37,
+  "T3-placeholder": 29,
   "structural": 772
  },
  "rows": [
@@ -306,18 +306,18 @@
    "key": "act:add_item:T1",
    "fate": "T1",
    "count": 114,
-   "note": "item add/sub"
+   "note": "session item add/sub"
   },
   {
    "key": "act:add_monster(npc folded):T1",
    "fate": "T1",
-   "count": 677,
+   "count": 695,
    "note": "literal trainer monster folded into Battle Processing setup"
   },
   {
    "key": "act:add_monster:T1",
    "fate": "T1",
-   "count": 108,
+   "count": 90,
    "note": "tux.add_monster spawns into the persistent party"
   },
   {
@@ -517,6 +517,12 @@
    "fate": "T4-dropped",
    "count": 3,
    "note": "presentation / meta"
+  },
+  {
+   "key": "act:evolution:T1",
+   "fate": "T1",
+   "count": 179,
+   "note": "confirmation choice followed by upstream-compatible spawn/transfer/replace"
   },
   {
    "key": "act:format_variable:T3-dropped",
@@ -819,10 +825,10 @@
    "note": "NPC-versus-NPC battles are not supported yet; skipped"
   },
   {
-   "key": "act:start_double_battle:T3-placeholder",
-   "fate": "T3-placeholder",
+   "key": "act:start_double_battle:T1",
+   "fate": "T1",
    "count": 8,
-   "note": "double battles are not supported yet; skipped"
+   "note": "Battle Processing with 4 folded trainer monsters"
   },
   {
    "key": "act:teleport_faint:T1",
@@ -1023,10 +1029,10 @@
    "note": "monster/party/meta state unknown to P1: fixed answer"
   },
   {
-   "key": "cond:is check_evolution:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "cond:is check_evolution:T1",
+   "fate": "T1",
    "count": 179,
-   "note": "monster/party/meta state unknown to P1: fixed answer"
+   "note": "tux.check_evolution reads pending party progression"
   },
   {
    "key": "cond:is check_max_tech:T3-dropped",
@@ -1068,7 +1074,7 @@
    "key": "cond:is has_item:T1",
    "fate": "T1",
    "count": 347,
-   "note": "item count >= n"
+   "note": "session item count >= n"
   },
   {
    "key": "cond:is has_kennel:T3-dropped",
@@ -1248,7 +1254,7 @@
    "key": "cond:not has_item:T1",
    "fate": "T1",
    "count": 58,
-   "note": "item count >= n"
+   "note": "session item count >= n"
   },
   {
    "key": "cond:not has_monster:T1",
@@ -1349,7 +1355,7 @@
   {
    "key": "trigger:guard:T1",
    "fate": "T1",
-   "count": 899,
+   "count": 1078,
    "note": "parallel"
   },
   {
@@ -1367,7 +1373,7 @@
   {
    "key": "trigger:never-true guard:T4-dropped",
    "fate": "T4-dropped",
-   "count": 2369,
+   "count": 2190,
    "note": "fixed-false guard prevents the source event from starting"
   },
   {
@@ -1725,11 +1731,11 @@
    "summary": {
     "types": 98,
     "uses": 13617,
-    "native": 11574,
+    "native": 11584,
     "degraded": 638,
-    "placeholder": 27,
-    "dropped": 1378,
-    "nativePercent": 85,
+    "placeholder": 19,
+    "dropped": 1376,
+    "nativePercent": 85.1,
     "executablePercent": 89.9,
     "tier1": {
      "uses": 6123,
@@ -1762,7 +1768,7 @@
      "dropped": 4,
      "reasons": {
       "native": [
-       "item add/sub"
+       "session item add/sub"
       ],
       "dropped": [
        "NPC bags are combat-only",
@@ -2165,13 +2171,13 @@
     {
      "type": "evolution",
      "total": 2,
-     "native": 0,
+     "native": 2,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 2,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "fixed-false guard prevents the source event from starting"
+      "native": [
+       "confirmation choice followed by upstream-compatible spawn/transfer/replace"
       ]
      }
     },
@@ -2964,13 +2970,14 @@
     {
      "type": "start_double_battle",
      "total": 8,
-     "native": 0,
+     "native": 8,
      "degraded": 0,
-     "placeholder": 8,
+     "placeholder": 0,
      "dropped": 0,
      "reasons": {
-      "placeholder": [
-       "double battles are not supported yet; skipped"
+      "native": [
+       "Battle Processing with 4 folded trainer monsters",
+       "Battle Processing with 2 folded trainer monsters"
       ]
      }
     },
@@ -3163,10 +3170,10 @@
    "summary": {
     "types": 64,
     "uses": 8663,
-    "native": 7664,
-    "degraded": 93,
+    "native": 7666,
+    "degraded": 95,
     "placeholder": 1,
-    "dropped": 905,
+    "dropped": 901,
     "nativePercent": 88.5,
     "executablePercent": 89.6,
     "tier1": {
@@ -3406,13 +3413,13 @@
     {
      "type": "is check_evolution",
      "total": 2,
-     "native": 0,
+     "native": 2,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 2,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "fixed-false guard prevents the source event from starting"
+      "native": [
+       "tux.check_evolution reads pending party progression"
       ]
      }
     },
@@ -3472,9 +3479,9 @@
      "type": "is current_state",
      "total": 78,
      "native": 0,
-     "degraded": 32,
+     "degraded": 34,
      "placeholder": 0,
-     "dropped": 46,
+     "dropped": 44,
      "reasons": {
       "dropped": [
        "fixed-false guard prevents the source event from starting",
@@ -3508,7 +3515,7 @@
      "dropped": 1,
      "reasons": {
       "native": [
-       "item count >= n"
+       "session item count >= n"
       ],
       "dropped": [
        "fixed-false guard prevents the source event from starting"
@@ -3924,7 +3931,7 @@
      "dropped": 0,
      "reasons": {
       "native": [
-       "item count >= n"
+       "session item count >= n"
       ]
      }
     },

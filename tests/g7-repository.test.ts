@@ -34,8 +34,10 @@ const journey = JSON.parse(readFileSync(join(ROOT, "data/g6-journey.json"), "utf
 };
 const GAME_OPTIONS = { extensions: TUXEMON_EXTENSIONS, battle: TUXEMON_BATTLE_RULES } as const;
 // Pin the complete post-Billie state, including the spawned Nut, battle
-// history, rewards, extension RNG cursor, shop stock, and scene/queue slots.
-const EXPECTED_TERMINAL_STATE_SHA256 = "449c38b52331133ab10cea7293bff56a60f993a2d088d5bc6ccf072b8b09088c";
+// history, shared-session rewards, extension RNG cursor, shop stock, and
+// scene/queue slots. The shared-economy migration removes ext.inventory and
+// ext.money; the first-battle reward now lives in SessionState.gold.
+const EXPECTED_TERMINAL_STATE_SHA256 = "7fdc130b0b90fece5f3814d886dad0a4513417ce31e2d59019dd0ce310d8dd64";
 
 function input(mask: number, previous: number): SessionInput {
   const pressed = mask & ~previous;

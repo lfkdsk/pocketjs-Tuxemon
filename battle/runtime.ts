@@ -3,11 +3,14 @@ import type {
   BattleInput,
   BattleRules,
 } from "../vendor/pocket-rpgkit/src/engine/battle.ts";
+import type { ExtensionReadContext } from "../vendor/pocket-rpgkit/src/engine/extensions.ts";
 import type { JsonValue } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 import type { BattleDb, BattleImageRef } from "../importer/battle-schema.ts";
 import {
   initialTuxemonExtensionState,
+  KENNEL_LIMIT,
   packTuxemonExtensionState,
+  PARTY_LIMIT,
   releaseBattleDb,
   resolveBattleDb,
   tuxemonExtensionState,
@@ -18,7 +21,16 @@ import {
 import { battleDbToTuxemonBattleDb } from "./from-battle-db.ts";
 import { nextRandom, type RngState } from "./core.ts";
 import { spawnMonster } from "./spawn.ts";
-import { getMonster, getSide, createBattle, reduceBattle, usableMoves } from "./tuxemon.ts";
+import {
+  canRun,
+  canSwap,
+  canUseBattleItem,
+  getMonster,
+  getSide,
+  createBattle,
+  reduceBattle,
+  usableMoves,
+} from "./tuxemon.ts";
 import type {
   BattleEvent,
   BattleMonster,
@@ -44,6 +56,7 @@ export interface TrainerBattleSetup {
   kind: "trainer";
   opponent: string;
   party?: BattlePartyMemberSetup[];
+  fieldSize?: 1 | 2;
   environment?: string;
   inside?: boolean;
   hour?: number;
@@ -77,20 +90,31 @@ export interface RuntimeBattleState {
   format: typeof TUXEMON_BATTLE_STATE_FORMAT;
   battle: TuxemonBattleState;
   ext: TuxemonExtensionState;
+  /** Session wallet at battle entry; rewards are added on completion. */
+  startingGold: number;
   environment: string;
   visuals: {
     background: BattleImageRef;
     monsters: Record<string, BattleDb["monsters"][string]["art"]>;
   };
   menu: BattleMenuEntry[];
+  menuMode: BattleMenuMode;
   eventCursor: number;
   eventTicks: number;
   menuIndex: number;
 }
 
+export type BattleMenuMode = "root" | "technique" | "item" | "capture" | "swap";
+
 export interface BattleMenuEntry {
+  kind: "fight" | "technique" | "item" | "capture" | "run" | "replacement";
   slug: string;
   cooldown: number;
+  /** Present in doubles, where each move/target pair is a distinct choice. */
+  target?: number;
+  targetSlug?: string;
+  targetSlot?: number;
+  quantity?: number;
 }
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
@@ -173,10 +197,14 @@ function parseSetup(value: JsonValue, db: BattleDb, activeEnvironment: string | 
       if (raw.party !== undefined && !Array.isArray(raw.party)) {
         throw new Error("Tuxemon battle setup party must be an array");
       }
+      if (raw.fieldSize !== undefined && raw.fieldSize !== 1 && raw.fieldSize !== 2) {
+        throw new Error("Tuxemon battle setup fieldSize must be 1 or 2");
+      }
       return {
         kind: "trainer",
         opponent,
         ...(raw.party === undefined ? {} : { party: raw.party.map(parsePartyMember) }),
+        ...(raw.fieldSize === 2 ? { fieldSize: 2 as const } : {}),
         ...common,
       };
     }
@@ -277,36 +305,110 @@ function runtimeState(value: JsonValue): RuntimeBattleState {
     || !isRecord(value.battle) || !isRecord(value.ext)
     || !isRecord(value.visuals) || !isRecord(value.visuals.background)
     || !isRecord(value.visuals.monsters) || !Array.isArray(value.menu)
+    || !["root", "technique", "item", "capture", "swap"].includes(String(value.menuMode))
     || !safeInteger(value.eventCursor) || value.eventCursor < 0
     || !safeInteger(value.eventTicks) || value.eventTicks < 0
     || !safeInteger(value.menuIndex) || value.menuIndex < 0
+    || !safeInteger(value.startingGold) || value.startingGold < 0
     || typeof value.environment !== "string") {
     throw new Error("Tuxemon battle runtime state is invalid");
   }
   return value as unknown as RuntimeBattleState;
 }
 
-function activeOpponent(state: TuxemonBattleState, uid: number): BattleMonster | null {
+function activeOpponents(state: TuxemonBattleState, uid: number): BattleMonster[] {
   const side = getSide(state, uid);
   const targetSide = side === 0 ? 1 : 0;
-  const targetUid = state.field.find((candidate) => getSide(state, candidate) === targetSide);
-  return targetUid === undefined ? null : getMonster(state, targetUid);
+  return state.field
+    .filter((candidate) => getSide(state, candidate) === targetSide)
+    .map((candidate) => getMonster(state, candidate));
 }
 
 export function battleMenuEntries(
   state: RuntimeBattleState,
   db: TuxemonBattleDb,
+  mode: BattleMenuMode = "technique",
 ): BattleMenuEntry[] {
   const awaiting = state.battle.awaiting;
   if (!awaiting) return [];
   const monster = getMonster(state.battle, awaiting.uid);
-  const target = activeOpponent(state.battle, awaiting.uid);
-  if (!target) return [];
-  const usable = new Set(usableMoves(db, monster, target).map(({ moveIndex }) => moveIndex));
-  const entries = monster.moves.flatMap((move, index) =>
-    usable.has(index) ? [{ slug: move.slug, cooldown: move.cooldown }] : []
+  const targets = activeOpponents(state.battle, awaiting.uid);
+  const techniqueEntries = (): BattleMenuEntry[] => {
+    if (targets.length === 0) return [];
+    const usableByTarget = new Map(targets.map((target) => [
+      target.uid,
+      new Set(usableMoves(db, monster, target).map(({ moveIndex }) => moveIndex)),
+    ]));
+    // Keep the reducer/oracle's move-major, target-minor candidate order. This
+    // makes a menu index an explicit move/target choice without hidden state.
+    const entries = monster.moves.flatMap((move, index) => targets.flatMap((target, targetIndex) =>
+      usableByTarget.get(target.uid)!.has(index)
+        ? [{
+            kind: "technique" as const,
+            slug: move.slug,
+            cooldown: move.cooldown,
+            ...(targets.length > 1 ? {
+              target: target.uid,
+              targetSlug: target.slug,
+              targetSlot: targetIndex + 1,
+            } : {}),
+          }]
+        : []
+    ));
+    return entries.length > 0
+      ? entries
+      : [{ kind: "technique", slug: monster.fallback, cooldown: 0 }];
+  };
+  const itemEntries = (capture: boolean): BattleMenuEntry[] => {
+    const itemTargets = capture ? targets : state.battle.parties[0];
+    return Object.keys(state.battle.inventory).sort().flatMap((slug) => {
+      const quantity = state.battle.inventory[slug] ?? 0;
+      if (quantity <= 0) return [];
+      return itemTargets.flatMap((target, targetIndex) =>
+        canUseBattleItem(db, state.battle, slug, target.uid, capture)
+          ? [{
+              kind: capture ? "capture" as const : "item" as const,
+              slug,
+              cooldown: 0,
+              quantity,
+              target: target.uid,
+              targetSlug: target.slug,
+              targetSlot: targetIndex + 1,
+            }]
+          : []
+      );
+    });
+  };
+  const swapEntries = (): BattleMenuEntry[] => state.battle.parties[0].flatMap((target, index) =>
+    canSwap(state.battle, monster.uid, target.uid)
+      ? [{
+          kind: "replacement" as const,
+          slug: target.slug,
+          cooldown: 0,
+          target: target.uid,
+          targetSlug: target.slug,
+          targetSlot: index + 1,
+        }]
+      : []
   );
-  return entries.length > 0 ? entries : [{ slug: monster.fallback, cooldown: 0 }];
+
+  if (mode === "technique") return techniqueEntries();
+  if (mode === "item") return itemEntries(false);
+  if (mode === "capture") return itemEntries(true);
+  if (mode === "swap") return swapEntries();
+
+  const entries: BattleMenuEntry[] = [{ kind: "fight", slug: "fight", cooldown: 0 }];
+  if (itemEntries(false).length > 0) entries.push({ kind: "item", slug: "item", cooldown: 0 });
+  if (itemEntries(true).length > 0) entries.push({ kind: "capture", slug: "capture", cooldown: 0 });
+  if (canRun(state.battle, monster.uid)) entries.push({ kind: "run", slug: "run", cooldown: 0 });
+  if (swapEntries().length > 0) entries.push({ kind: "replacement", slug: "swap", cooldown: 0 });
+  return entries;
+}
+
+function setMenu(state: RuntimeBattleState, db: TuxemonBattleDb, mode: BattleMenuMode): void {
+  state.menuMode = mode;
+  state.menuIndex = 0;
+  state.menu = battleMenuEntries(state, db, mode);
 }
 
 function presentationDone(state: RuntimeBattleState): boolean {
@@ -339,7 +441,18 @@ function writeBackMonster(
   monster: BattleMonster,
 ): SpawnedMonsterSnapshot {
   return {
-    ...snapshot,
+    iid: snapshot.iid,
+    slug: monster.slug,
+    level: boundedInteger(monster.level, "level"),
+    stage: monster.stage,
+    gender: monster.gender,
+    tasteCold: monster.tasteCold,
+    tasteWarm: monster.tasteWarm,
+    height: monster.height,
+    weight: monster.weight,
+    individualValues: { ...monster.individualValues },
+    birthdate: [...monster.birthdate],
+    base: { ...monster.base },
     currentHp: Math.max(0, Math.min(monster.base.hp, boundedInteger(monster.currentHp, "HP"))),
     moves: monster.moves.map((move) => move.slug),
     types: [...monster.originalTypes],
@@ -354,7 +467,38 @@ function writeBackMonster(
       ]),
     ) as SpawnedMonsterSnapshot["trainingPoints"],
     status: monster.status?.slug ?? null,
+    acquisition: monster.acquisition,
+    captureDevice: monster.captureDevice,
+    waitingToEvolve: monster.waitingToEvolve,
   };
+}
+
+function capturedSnapshot(monster: BattleMonster, iid: string): SpawnedMonsterSnapshot {
+  return writeBackMonster({
+    iid,
+    slug: monster.slug,
+    level: monster.level,
+    stage: monster.stage,
+    gender: monster.gender,
+    tasteCold: monster.tasteCold,
+    tasteWarm: monster.tasteWarm,
+    height: monster.height,
+    weight: monster.weight,
+    individualValues: { ...monster.individualValues },
+    birthdate: [...monster.birthdate],
+    base: { ...monster.base },
+    moves: monster.moves.map((move) => move.slug),
+  }, monster);
+}
+
+function nextCapturedIid(state: TuxemonExtensionState): [string, number] {
+  if (!Number.isSafeInteger(state.nextMonsterId + 1)) {
+    throw new Error("Tuxemon battle capture exhausted the monster id space");
+  }
+  return [
+    `txmn-${state.nextMonsterId.toString(36).padStart(6, "0")}`,
+    state.nextMonsterId + 1,
+  ];
 }
 
 function completedExtension(state: RuntimeBattleState): TuxemonExtensionState {
@@ -369,6 +513,18 @@ function completedExtension(state: RuntimeBattleState): TuxemonExtensionState {
     const monster = byIid.get(snapshot.iid!);
     return monster ? writeBackMonster(snapshot, monster) : snapshot;
   });
+  const kennel = [...state.ext.kennel];
+  const caught = [...state.ext.caught];
+  let nextMonsterId = state.ext.nextMonsterId;
+  if (state.battle.capturedUid !== null) {
+    const captured = getMonster(state.battle, state.battle.capturedUid);
+    const allocated = nextCapturedIid({ ...state.ext, nextMonsterId });
+    nextMonsterId = allocated[1];
+    const snapshot = capturedSnapshot(captured, allocated[0]);
+    if (party.length < PARTY_LIMIT) party.push(snapshot);
+    else if (kennel.length < KENNEL_LIMIT) kennel.push(snapshot);
+    if (!caught.includes(captured.slug)) caught.push(captured.slug);
+  }
   const history = [...state.ext.history];
   if (state.battle.kind === "trainer") {
     const outcome = result.battleLastResult as "won" | "lost" | "draw";
@@ -378,9 +534,15 @@ function completedExtension(state: RuntimeBattleState): TuxemonExtensionState {
       { fighter: state.battle.opponent, opponent: "player", outcome: opponentOutcome },
     );
   }
-  const money = state.ext.money + Math.max(0, boundedInteger(result.gold, "reward"));
-  if (!Number.isSafeInteger(money)) throw new Error("Tuxemon battle money exceeds safe integer range");
-  return { ...clone(state.ext), party, history, money };
+  return {
+    ...clone(state.ext),
+    party,
+    kennel,
+    caught,
+    runAttempts: state.battle.runAttempts,
+    history,
+    nextMonsterId,
+  };
 }
 
 function enumCode(enums: VariableEnums, variable: string, value: string): number {
@@ -396,8 +558,22 @@ function completionFor(state: RuntimeBattleState, enums: VariableEnums): BattleC
   const kitResult = result.outcome === "won" ? "win"
     : result.outcome === "lost" ? "lose"
       : result.outcome === "draw" ? "draw" : "escape";
+  const reward = Math.max(0, boundedInteger(result.gold, "reward"));
+  const gold = state.startingGold + reward;
+  if (!Number.isFinite(gold)) throw new Error("Tuxemon battle gold is not finite");
+  const shared = {
+    ext: packTuxemonExtensionState(ext),
+    result: kitResult,
+    items: { ...state.battle.inventory },
+    gold,
+  } as const;
   if (state.battle.kind !== "trainer") {
-    return { ext: packTuxemonExtensionState(ext), result: kitResult };
+    return {
+      ...shared,
+      writes: {
+        "v.battle_last_result": enumCode(enums, "battle_last_result", result.battleLastResult),
+      },
+    };
   }
 
   const opponent = state.battle.opponent;
@@ -419,7 +595,7 @@ function completionFor(state: RuntimeBattleState, enums: VariableEnums): BattleC
   const switches: Record<string, boolean> = { [`bo.${opponent}.${outcome}`]: true };
   if (outcome === "won") switches[`defeated.${opponent}`] = true;
   else if (outcome === "lost") switches["defeated.player"] = true;
-  return { ext: packTuxemonExtensionState(ext), result: kitResult, writes, switches };
+  return { ...shared, writes, switches };
 }
 
 /**
@@ -440,7 +616,7 @@ export function createTuxemonBattleRules(source: BattleDbSource, enums: Variable
     releaseBattleDb(source);
   };
   return {
-    start(extValue, setupValue, seed) {
+    start(extValue, setupValue, seed, context: ExtensionReadContext) {
       // Drop only a stale adapter here. A provider may have deliberately
       // warmed the source database in the immediately preceding add_monster
       // event, which keeps first-battle entry off the cold JSON path.
@@ -473,6 +649,10 @@ export function createTuxemonBattleRules(source: BattleDbSource, enums: Variable
             ...staged.map((member) => enemySnapshot(db, rulesDb, rng, member)),
             ...inline.map((member) => enemySnapshot(db, rulesDb, rng, member)),
           ];
+          if (setup.fieldSize === 2 && ext.party.length + enemy.length < 3) {
+            release();
+            return null;
+          }
           startedExt = cloneExtWithoutNpcParty(ext, opponent);
         } else if (setup.kind === "wild") {
           opponent = `wild:${setup.species}`;
@@ -512,8 +692,10 @@ export function createTuxemonBattleRules(source: BattleDbSource, enums: Variable
           enemy,
           inside: setup.inside,
           hour: setup.hour,
-          fieldSize: 1,
+          fieldSize: setup.kind === "trainer" ? setup.fieldSize ?? 1 : 1,
           moneyMethod: "conserved",
+          inventory: context.items,
+          runAttempts: ext.runAttempts,
         });
         const environment = setup.environment ?? ext.environment!;
         const background = db.environments[environment]?.background ?? db.environments.grass?.background;
@@ -525,14 +707,16 @@ export function createTuxemonBattleRules(source: BattleDbSource, enums: Variable
           format: TUXEMON_BATTLE_STATE_FORMAT,
           battle,
           ext: startedExt,
+          startingGold: context.gold,
           environment,
           visuals: { background, monsters },
           menu: [],
+          menuMode: "root",
           eventCursor: 0,
           eventTicks: 0,
           menuIndex: 0,
         };
-        state.menu = battleMenuEntries(state, rulesDb);
+        state.menu = battleMenuEntries(state, rulesDb, "root");
         return { state: asJson(state), ext: packTuxemonExtensionState(startedExt) };
       } catch (error) {
         release();
@@ -551,16 +735,38 @@ export function createTuxemonBattleRules(source: BattleDbSource, enums: Variable
 
       const { rulesDb } = resources();
       const choices = state.menu;
+      if (input.cancelEdge && state.menuMode !== "root") {
+        setMenu(state, rulesDb, "root");
+        return asJson(state);
+      }
+      if (choices.length === 0) return asJson(state);
       if (input.upEdge) state.menuIndex = (state.menuIndex + choices.length - 1) % choices.length;
       if (input.downEdge) state.menuIndex = (state.menuIndex + 1) % choices.length;
       if (input.confirmEdge) {
-        state.battle = reduceBattle(rulesDb, state.battle, {
-          type: "technique",
-          choice: Math.min(state.menuIndex, Math.max(0, choices.length - 1)),
-        });
-        state.menuIndex = 0;
+        const index = Math.min(state.menuIndex, choices.length - 1);
+        const selected = choices[index]!;
+        if (state.menuMode === "root" && selected.kind !== "run") {
+          const mode = selected.kind === "fight" ? "technique"
+            : selected.kind === "replacement" ? "swap"
+              : selected.kind;
+          setMenu(state, rulesDb, mode);
+          return asJson(state);
+        }
+        if (selected.kind === "technique") {
+          state.battle = reduceBattle(rulesDb, state.battle, { type: "technique", choice: index });
+        } else if (selected.kind === "item" || selected.kind === "capture") {
+          state.battle = reduceBattle(rulesDb, state.battle, {
+            type: selected.kind,
+            item: selected.slug,
+            target: selected.target!,
+          });
+        } else if (selected.kind === "replacement") {
+          state.battle = reduceBattle(rulesDb, state.battle, { type: "replacement", uid: selected.target! });
+        } else if (selected.kind === "run") {
+          state.battle = reduceBattle(rulesDb, state.battle, { type: "run" });
+        }
         state.eventTicks = 0;
-        state.menu = battleMenuEntries(state, rulesDb);
+        setMenu(state, rulesDb, "root");
       }
       return asJson(state);
     },

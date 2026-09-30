@@ -6,6 +6,7 @@ import type {
 import type { JsonValue } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 import type { BattleDb } from "../importer/battle-schema.ts";
 import { battleDbToTuxemonBattleDb } from "./from-battle-db.ts";
+import { evolveMonsterSnapshot } from "./progression.ts";
 import { spawnMonsterWithRandom } from "./spawn.ts";
 import type { SpawnedMonsterSnapshot, Stats } from "./types.ts";
 import { STAT_NAMES } from "./types.ts";
@@ -40,10 +41,10 @@ export interface TuxemonExtensionState {
   party: SpawnedMonsterSnapshot[];
   kennel: SpawnedMonsterSnapshot[];
   caught: string[];
+  /** Upstream keeps failed escape attempts on the player between battles. */
+  runAttempts: number;
   npcParties: Record<string, PendingMonster[]>;
   history: BattleHistoryEntry[];
-  /** Battle rewards not yet reconciled with the kit's generic wallet. */
-  money: number;
   /** Active Tuxemon battle backdrop; null matches an unloaded environment. */
   environment: string | null;
   faintPoints: Record<string, FaintPoint>;
@@ -72,9 +73,9 @@ export function initialTuxemonExtensionState(): TuxemonExtensionState {
     party: [],
     kennel: [],
     caught: [],
+    runAttempts: 0,
     npcParties: {},
     history: [],
-    money: 0,
     environment: null,
     faintPoints: {},
     nextMonsterId: 1,
@@ -198,6 +199,9 @@ function tuxemonStateProblem(value: JsonValue, db?: BattleDb): string | null {
     }
   }
   if (!Array.isArray(state.caught) || !state.caught.every(nonEmptyString)) return "caught must contain strings";
+  if (!safeInteger(state.runAttempts) || state.runAttempts < 0) {
+    return "runAttempts must be a non-negative safe integer";
+  }
   const npcParties = record(state.npcParties);
   if (!npcParties) return "npcParties must be an object";
   for (const [npc, values] of Object.entries(npcParties)) {
@@ -219,9 +223,6 @@ function tuxemonStateProblem(value: JsonValue, db?: BattleDb): string | null {
       || !["won", "lost", "draw"].includes(String(entry.outcome))) {
       return `history[${index}] is invalid`;
     }
-  }
-  if (!safeInteger(state.money) || state.money < 0) {
-    return "money must be a non-negative safe integer";
   }
   if (state.environment !== null && !nonEmptyString(state.environment)) {
     return "environment must be null or a non-empty string";
@@ -290,9 +291,16 @@ function json(state: TuxemonExtensionState): JsonValue {
 
 function migrateV1(value: JsonValue): JsonValue {
   const state = record(value);
-  return state?.version === 1 && state.environment === undefined
-    ? { ...state, environment: null } as JsonValue
-    : value;
+  if (state?.version !== 1) return value;
+  // KB5 makes SessionState.items/gold the only bag and wallet. Older saves
+  // may still carry the former battle-only mirrors; discard those fields
+  // while preserving every Tuxemon-specific extension value.
+  const { inventory: _legacyInventory, money: _legacyMoney, ...extension } = state;
+  return {
+    ...extension,
+    ...(state.environment === undefined ? { environment: null } : {}),
+    ...(state.runAttempts === undefined ? { runAttempts: 0 } : {}),
+  } as JsonValue;
 }
 
 function argsRecord(value: JsonValue, call: string): Record<string, unknown> {
@@ -458,6 +466,68 @@ function statusCommand(source: BattleDbSource) {
   };
 }
 
+function firstWaitingIndex(state: TuxemonExtensionState): number {
+  return state.party.findIndex((monster) => monster.waitingToEvolve === true);
+}
+
+function clearPendingEvolution(state: TuxemonExtensionState): TuxemonExtensionState {
+  const index = firstWaitingIndex(state);
+  if (index < 0) return state;
+  const party = [...state.party];
+  party[index] = { ...party[index]!, waitingToEvolve: false };
+  return { ...state, party };
+}
+
+function evolutionVariables(
+  values: ExtensionReadContext["variables"],
+): Record<string, string | number | boolean> {
+  const result: Record<string, string | number | boolean> = {};
+  for (const [key, value] of Object.entries(values)) {
+    result[key] = value;
+    if (key.startsWith("v.")) result[key.slice(2)] = value;
+  }
+  return result;
+}
+
+function evolutionCommand(source: BattleDbSource) {
+  return (context: ExtensionCommandContext, value: JsonValue) => {
+    const args = argsRecord(value, "tux.evolution");
+    const character = args.character === undefined ? "player" : args.character;
+    if (!nonEmptyString(character)) throw new Error("tux.evolution: character must be a string");
+    if (args.inside !== undefined && typeof args.inside !== "boolean") {
+      throw new Error("tux.evolution: inside must be boolean");
+    }
+    const current = currentExtensionState(context.ext);
+    // The imported story only invokes this action for the player. Staged NPC
+    // parties do not carry full persistent monster state and cannot evolve.
+    if (character !== "player") return { ext: json(current) };
+    const index = firstWaitingIndex(current);
+    if (index < 0) return { ext: json(current) };
+    const db = resolveBattleDb(source);
+    const evolved = evolveMonsterSnapshot(
+      db,
+      battleDbToTuxemonBattleDb(db),
+      current.party[index]!,
+      current.party,
+      {
+        variables: evolutionVariables(context.variables),
+        inside: args.inside === true,
+      },
+      context.random,
+    );
+    if (!evolved) return { ext: json(clearPendingEvolution(current)) };
+    const party = [...current.party];
+    party[index] = evolved.monster;
+    return { ext: json({
+      ...current,
+      party,
+      caught: current.caught.includes(evolved.target)
+        ? current.caught
+        : [...current.caught, evolved.target],
+    }) };
+  };
+}
+
 function partyFor(state: TuxemonExtensionState, character: string): readonly (SpawnedMonsterSnapshot | PendingMonster)[] {
   return character === "player" ? state.party : state.npcParties[character] ?? [];
 }
@@ -492,6 +562,14 @@ export function createTuxemonExtensions(source: BattleDbSource): ExtensionOption
       "tux.add_monster": addMonsterCommand(source),
       "tux.set_monster_health": healthCommand(),
       "tux.set_monster_status": statusCommand(source),
+      "tux.evolution": evolutionCommand(source),
+      "tux.cancel_evolution": (context, value) => {
+        const args = argsRecord(value, "tux.cancel_evolution");
+        const character = args.character === undefined ? "player" : args.character;
+        if (!nonEmptyString(character)) throw new Error("tux.cancel_evolution: character must be a string");
+        const current = currentExtensionState(context.ext);
+        return { ext: json(character === "player" ? clearPendingEvolution(current) : current) };
+      },
       "tux.set_environment": (context, value) => {
         const args = argsRecord(value, "tux.set_environment");
         const environment = args.environment === undefined || args.environment === ""
@@ -539,6 +617,15 @@ export function createTuxemonExtensions(source: BattleDbSource): ExtensionOption
       },
     },
     conditions: {
+      "tux.check_evolution": (context, value) => {
+        const args = argsRecord(value, "tux.check_evolution");
+        const character = args.character === undefined ? "player" : args.character;
+        if (!nonEmptyString(character)) return false;
+        const state = currentExtensionState(context.ext);
+        const waiting = character === "player"
+          && state.party.some((monster) => monster.waitingToEvolve === true);
+        return negate(waiting, args);
+      },
       "tux.environment_is": (context, value) => {
         const args = argsRecord(value, "tux.environment_is");
         if (!nonEmptyString(args.environment)) return false;

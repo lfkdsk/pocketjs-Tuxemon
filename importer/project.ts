@@ -506,6 +506,15 @@ function clauses(c: Cond, m: TuxMap, options: ImportOptions): Clause[] | null {
       noteCondition(c, `${c.op} char_defeated`, "T3-placeholder", "player never defeated in P1; NPC: switch defeated.<slug>");
       if (a[0] === "player") return K(false);
       return [{ k: "sw", id: `defeated.${a[0]}`, on: !not }];
+    case "check_evolution":
+      if (options.battle) {
+        noteCondition(c, `${c.op} check_evolution`, "T1", "tux.check_evolution reads pending party progression");
+        return [{ k: "ext", call: "tux.check_evolution", args: {
+          character: a[0] ?? "player", negate: not,
+        } }];
+      }
+      noteCondition(c, `${c.op} ${c.type}`, "T3-dropped", "monster/party/meta state unknown to P1: fixed answer");
+      return K(false);
     case "party_size":
       if (options.battle) {
         noteCondition(c, `${c.op} party_size`, "T1", "tux.party_size reads the persistent party");
@@ -531,7 +540,7 @@ function clauses(c: Cond, m: TuxMap, options: ImportOptions): Clause[] | null {
         return K(false);
       }
       const count = a[2] && a[3] ? Number(a[3]) + (a[2] === "greater_than" ? 1 : 0) : 1;
-      noteCondition(c, `${c.op} has_item`, a[2] && !["greater_than", "greater_or_equal"].includes(a[2]) ? "T2-dropped" : "T1", "item count >= n");
+      noteCondition(c, `${c.op} has_item`, a[2] && !["greater_than", "greater_or_equal"].includes(a[2]) ? "T2-dropped" : "T1", "session item count >= n");
       return [{ k: "item", id: a[1]!, count, has: !not }];
     }
     case "money_is": {
@@ -882,7 +891,7 @@ function playerOpponent(args: readonly string[]): string | null {
   return null;
 }
 
-/** Fold literal NPC party construction into the next same-event single
+/** Fold literal NPC party construction into the next same-event trainer
  * battle. Variable-backed monsters stay as extension commands because they
  * must resolve against live story variables. */
 function foldedTrainerParties(acts: readonly Rule[]): {
@@ -910,7 +919,7 @@ function foldedTrainerParties(acts: readonly Rule[]): {
         });
         pending.set(character, rows);
       }
-    } else if (action.type === "start_battle") {
+    } else if (action.type === "start_battle" || action.type === "start_double_battle") {
       const opponent = playerOpponent(action.args);
       if (!opponent) continue;
       const rows = pending.get(opponent) ?? [];
@@ -1010,9 +1019,10 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         if (g[2] && g[2] !== "player") { noteAction(a, "add_item(npc)", "T3-dropped", "NPC bags are combat-only"); break; }
         const q = g[1] ? Number(g[1]) : 1;
         if (!q) { noteAction(a, "add_item(zero)", "T4-dropped", "zero quantity is a no-op"); break; }
-        noteAction(a, a.type, "T1", "item add/sub");
+        noteAction(a, a.type, "T1", "session item add/sub");
         ensureItem(g[0]!);
-        out.push({ op: "item", item: g[0]!, set: q > 0 ? "add" : "sub", count: Math.min(99, Math.abs(q)) });
+        const amount = Math.min(99, Math.abs(q)) * (q > 0 ? 1 : -1);
+        out.push({ op: "item", item: g[0]!, set: amount > 0 ? "add" : "sub", count: Math.abs(amount) });
         break;
       }
       case "modify_money":
@@ -1175,7 +1185,7 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
       case "start_battle": case "start_double_battle": {
         const opp = g[0] === "player" ? g[1]! : g[0]!;
         const opponent = playerOpponent(g);
-        if (ctx.options.battle && a.type === "start_battle" && opponent) {
+        if (ctx.options.battle && opponent) {
           const party = foldedParties.parties.get(i) ?? [];
           noteAction(a, a.type, "T1", party.length
             ? `Battle Processing with ${party.length} folded trainer monsters`
@@ -1186,14 +1196,13 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
               kind: "trainer",
               opponent,
               ...(party.length ? { party } : {}),
+              ...(a.type === "start_double_battle" ? { fieldSize: 2 } : {}),
               inside: ctx.m.props.inside === "true",
               hour: 12,
             } as unknown as JsonValue,
           });
         } else if (ctx.options.battle) {
-          const reason = a.type === "start_double_battle"
-            ? "double battles are not supported yet; skipped"
-            : "NPC-versus-NPC battles are not supported yet; skipped";
+          const reason = "NPC-versus-NPC battles are not supported yet; skipped";
           noteAction(a, a.type, "T3-placeholder", reason);
           out.push({ op: "text", lines: [`[BATTLE] ${npcName(opp)}`.slice(0, 52), `(${reason})`.slice(0, 52)] });
         } else {
@@ -1237,6 +1246,30 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         noteAction(a, a.type, "T3-placeholder", "sys.party_size += 1, switch mon.<slug>");
         out.push({ op: "variable", id: "sys.party_size", set: { op: "add", value: 1 } });
         out.push({ op: "switch", id: `mon.${g[0]}`, value: true });
+        break;
+      }
+      case "evolution": {
+        if (!ctx.options.battle) {
+          noteAction(a, a.type, "T4-dropped", "presentation / meta");
+          break;
+        }
+        const character = g[0] || "player";
+        const args = { character, inside: ctx.m.props.inside === "true" };
+        noteAction(a, a.type, "T1", "confirmation choice followed by upstream-compatible spawn/transfer/replace");
+        out.push({
+          op: "choices",
+          prompt: (po.get("allow_evolution") ?? "Allow evolution?").slice(0, 52),
+          options: [
+            {
+              text: (po.get("yes") ?? "Yes").slice(0, 24),
+              commands: [{ op: "ext", call: "tux.evolution", args }],
+            },
+            {
+              text: (po.get("no") ?? "No").slice(0, 24),
+              commands: [{ op: "ext", call: "tux.cancel_evolution", args: { character } }],
+            },
+          ],
+        });
         break;
       }
       case "random_monster":
@@ -2116,7 +2149,9 @@ export function buildProject(
   const variables = Object.fromEntries(
     [...enumTable.entries()]
       .sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0)
-      .map(([name, values]) => [name, [...values]]),
+      .map(([name, values]) => [name, options.battle && name === "battle_last_result"
+        ? [...values, "run", "captured"]
+        : [...values]]),
   );
 
   return {

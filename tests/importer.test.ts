@@ -266,8 +266,10 @@ test("clamped transfers use the nearest deterministic walkable landing", () => {
 test("default import output remains byte-pinned", () => {
   const maps = ["spyder_downstairs", "spyder_paper_town"];
   const bytes = jsonBytes(buildProject(maps, DEFAULT_IMPORT_OPTIONS));
+  // Shared economy removes the former tux.change_item/tux.has_item mirror
+  // nodes, so the importer output changes while its source inputs do not.
   expect(createHash("sha256").update(bytes).digest("hex")).toBe(
-    "688635be500606b78a257d567482f55a5d820fcba12e9fbff6c75dd3e6bfd8e8",
+    "29f6aa1e12b5a6a0446e91a88590e6b0e4237b2fd9ae150b026c07c60687099e",
   );
 });
 
@@ -523,6 +525,42 @@ test("G6 emits native party state and Battle Processing for the first fight", ()
   expect(nodes.some((node) => node.op === "variable" && node.id === "sys.party_size")).toBeFalse();
   expect(nodes.some((node) => node.kind === "ext" && node.call === "tux.party_size")).toBeTrue();
   expect(result.variables.battle_last_loser).toContain("spyder_billie");
+  expect(result.variables.battle_last_result).toEqual(expect.arrayContaining(["captured", "run"]));
+});
+
+test("G6 imports item mutations and conditions through the shared session backpack", () => {
+  const result = buildProject(["spyder_citypark", "spyder_timber_town"], G6_IMPORT_OPTIONS);
+  const nodes = objectNodes(result.project);
+  expect(nodes.some((node) => node.op === "item" && node.item === "tuxeball" && node.set === "add")).toBeTrue();
+  expect(nodes.some((node) => node.op === "ext" && node.call === "tux.change_item")).toBeFalse();
+  expect(nodes.some((node) => node.kind === "item" && node.id === "gold_pass")).toBeTrue();
+  expect(nodes.some((node) => node.kind === "ext" && node.call === "tux.has_item")).toBeFalse();
+});
+
+test("G6 emits pending-evolution guards and an explicit confirmation choice", () => {
+  const result = buildProject(["spyder_paper_town"], G6_IMPORT_OPTIONS);
+  const nodes = objectNodes(result.project);
+  expect(nodes.some((node) => node.kind === "ext" && node.call === "tux.check_evolution" &&
+    (node.args as { character?: string } | undefined)?.character === "player")).toBeTrue();
+  const prompt = nodes.find((node) => node.op === "choices" && node.prompt === "Allow evolution?");
+  expect(prompt).toBeDefined();
+  expect(nodes.some((node) => node.op === "ext" && node.call === "tux.evolution")).toBeTrue();
+  expect(nodes.some((node) => node.op === "ext" && node.call === "tux.cancel_evolution")).toBeTrue();
+});
+
+test("G6 emits all eight Spyder double battles as native Battle Processing", () => {
+  const result = buildProject(["spyder_route5", "spyder_dragonscave"], G6_IMPORT_OPTIONS);
+  const nodes = objectNodes(result.project);
+  const doubles = nodes.filter((node) =>
+    node.op === "battle" && (node.setup as { fieldSize?: number } | undefined)?.fieldSize === 2
+  );
+  expect(doubles).toHaveLength(8);
+  expect(doubles.every((node) => {
+    const setup = node.setup as { kind: string; opponent: string; party?: unknown[] };
+    return setup.kind === "trainer" && setup.opponent.startsWith("spyder_") && (setup.party?.length ?? 0) >= 2;
+  })).toBeTrue();
+  expect(result.report.coverage.actions.rows.find((row) => row.type === "start_double_battle"))
+    .toMatchObject({ total: 8, native: 8, degraded: 0, placeholder: 0, dropped: 0 });
 });
 
 test("simultaneously eligible route1 automatic events run concurrently and release input (N1)", () => {

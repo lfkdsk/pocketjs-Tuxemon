@@ -1,20 +1,25 @@
 import {
   advanceBattle,
+  endBattle,
   enqueueAction,
   makePendingAction,
   nextRandom,
   randomChoice,
   randomIntInclusive,
+  submitAction,
   submitDecision,
   type BattleAction,
   type BattleCoreRules,
 } from "./core.ts";
-import { applyStatModifier, combatStats, monsterFromSnapshot, pythonRound } from "./stats.ts";
+import { calculateDefeatExperience, giveExperience } from "./progression.ts";
+import { applyStatModifier, calculateBaseStats, combatStats, monsterFromSnapshot, pythonRound } from "./stats.ts";
 import {
   STAT_NAMES,
   type BattleMonster,
   type BattleStart,
   type BattleStatus,
+  type DbCaptureDevice,
+  type DbItem,
   type DbRule,
   type DbTechnique,
   type PlayerPolicy,
@@ -52,6 +57,14 @@ interface TechniqueResult {
   hit: boolean;
   /** Upstream ScopeEffect's stat readout; combat_scope renders it as "AR:{AR} DE:{DE} ME:{ME} RD:{RD} SD:{SD}". */
   scope: Pick<Stats, "armour" | "dodge" | "melee" | "ranged" | "speed"> | null;
+}
+
+export interface CaptureAttemptResult {
+  statusModifier: number;
+  deviceModifier: number;
+  shakeCheck: number;
+  success: boolean;
+  shakes: number;
 }
 
 export function cloneBattleState(state: TuxemonBattleState): TuxemonBattleState {
@@ -235,6 +248,81 @@ function techniqueConditionsPass(
     if (condition.type !== "status") return false;
     const actual = target.status?.slug === condition.parameters[0];
     if (condition.operator === "not" ? actual : !actual) return false;
+  }
+  return true;
+}
+
+function compareNumber(operator: string, left: number, right: number): boolean {
+  switch (operator) {
+    case "<": return left < right;
+    case "<=": return left <= right;
+    case ">": return left > right;
+    case ">=": return left >= right;
+    case "==":
+    case "=": return left === right;
+    case "!=": return left !== right;
+    default: throw new Error(`battle: unsupported comparison '${operator}'`);
+  }
+}
+
+function baseConditionPasses(
+  db: TuxemonBattleDb,
+  target: BattleMonster,
+  parameters: string[],
+): boolean {
+  const species = db.monster[target.slug];
+  const source = parameters[0];
+  const dataset = new Set((source === "types" ? target.types
+    : source === "tags" ? species.tags
+      : source === "terrains" ? species.terrains
+        : source === "shape" ? [species.shape]
+          : source === "species" ? [species.species]
+            : []).map((value) => value.trim().toLowerCase()));
+  if (!["types", "tags", "terrains", "shape", "species"].includes(source ?? "")) {
+    throw new Error(`battle: unsupported base condition source '${String(source)}'`);
+  }
+  const checks = (parameters[1] ?? "").split(":").map((raw) => {
+    const option = raw.trim().toLowerCase();
+    if (!option) return false;
+    return option.startsWith("!") ? !dataset.has(option.slice(1)) : dataset.has(option);
+  });
+  const matchAll = ["true", "1", "yes"].includes((parameters[2] ?? "").trim().toLowerCase());
+  return matchAll ? checks.every(Boolean) : checks.some(Boolean);
+}
+
+export function itemConditionsPass(
+  db: TuxemonBattleDb,
+  state: TuxemonBattleState,
+  item: DbItem,
+  target: BattleMonster,
+): boolean {
+  for (const condition of item.conditions) {
+    let actual: boolean;
+    switch (condition.type) {
+      case "base":
+        actual = baseConditionPasses(db, target, condition.parameters);
+        break;
+      case "wild_monster":
+        actual = state.kind === "wild" && getSide(state, target.uid) === 1;
+        break;
+      case "current_hp":
+        actual = compareNumber(
+          condition.parameters[0]!,
+          target.currentHp / target.base.hp,
+          Number(condition.parameters[1]),
+        );
+        break;
+      case "status":
+        actual = target.status?.slug === condition.parameters[0];
+        break;
+      case "has_status":
+        actual = target.status !== null;
+        break;
+      default:
+        throw new Error(`battle: unsupported item condition '${condition.type}' on '${item.slug}'`);
+    }
+    const expected = condition.operator !== "not";
+    if (actual !== expected) return false;
   }
   return true;
 }
@@ -516,6 +604,308 @@ function partyStatuses(state: TuxemonBattleState): Record<string, string | null>
       return [String(uid), monster.status?.slug ?? null];
     }),
   );
+}
+
+function captureStatusModifier(
+  db: TuxemonBattleDb,
+  itemSlug: string,
+  target: BattleMonster,
+): number {
+  const config = db.capture_devices.items[itemSlug];
+  let modifier = db.capture_devices.status_modifier;
+  if (!config || !target.status) return modifier;
+  const specific = config.specific_status_modifiers?.[target.status.slug];
+  if (specific !== undefined) return modifier * specific;
+  const category = db.status[target.status.slug]?.category;
+  if (category) modifier *= category === "negative" ? config.negative_modifier : config.positive_modifier;
+  return modifier;
+}
+
+function captureVariablesMatch(
+  variables: Record<string, string | number | boolean>,
+  rule: { key: string; value: string | number | boolean },
+): boolean {
+  return String(variables[rule.key]) === String(rule.value);
+}
+
+function configuredCaptureDeviceModifier(
+  db: TuxemonBattleDb,
+  state: TuxemonBattleState,
+  itemSlug: string,
+  target: BattleMonster,
+  config: DbCaptureDevice,
+): number {
+  let modifier = db.capture_devices.capdev_modifier;
+  if (config.specific_capdev_modifier) modifier *= config.specific_capdev_modifier;
+
+  if (itemSlug === "tuxeball_crusher") {
+    let crusher = Math.min((target.base.armour / 5) * 0.01 + 1, 1.4);
+    // Preserve the upstream comparison bug: a positive-status multiplier is
+    // compared with the whole calculated modifier and collapses this to 1%.
+    if (captureStatusModifier(db, itemSlug, target) === config.positive_modifier) crusher = 0.01;
+    modifier *= crusher;
+  }
+
+  if (config.specific_element_modifiers) {
+    let matched = false;
+    for (const [slug, value] of Object.entries(config.specific_element_modifiers)) {
+      if (!target.types.includes(slug)) continue;
+      modifier *= value;
+      matched = true;
+    }
+    if (!matched) modifier *= config.fallback_element_malus;
+  }
+
+  if (config.specific_gender_modifiers) {
+    let matched = false;
+    for (const slug of Object.keys(config.specific_gender_modifiers)) {
+      if (target.gender === slug) matched = true;
+    }
+    // Upstream never applies the configured matching multiplier and always
+    // applies one fallback; a mismatch applies it once here and once below.
+    if (!matched) modifier *= config.fallback_gender_malus;
+    modifier *= config.fallback_gender_malus;
+  }
+
+  if (config.specific_variables_modifiers) {
+    let matched = false;
+    for (const rule of config.specific_variables_modifiers) {
+      if (!captureVariablesMatch(state.variables, rule)) continue;
+      modifier *= config.fallback_variables_bonus;
+      matched = true;
+    }
+    if (!matched) modifier *= config.fallback_variables_malus;
+  }
+
+  if (config.random_bounds) {
+    const [lower, upper] = config.random_bounds;
+    modifier *= lower + (upper - lower) * nextRandom(state);
+  }
+  return modifier;
+}
+
+function captureDeviceModifier(
+  db: TuxemonBattleDb,
+  state: TuxemonBattleState,
+  item: DbItem,
+  target: BattleMonster,
+): number {
+  const combined = item.effects.find((effect) => effect.type === "capture_combined");
+  if (combined) {
+    const own = activeOnSide(state, 0)[0];
+    if (!own || own.types.length === 0) return db.capture_devices.capdev_modifier;
+    const same = own.types.length === target.types.length &&
+      own.types.every((slug, index) => slug === target.types[index]);
+    const label = combined.parameters[1];
+    const lower = Number(combined.parameters[2]);
+    const upper = Number(combined.parameters[3]);
+    if (label === "xero") return same ? lower : upper;
+    if (label === "omni") return same ? upper : lower;
+    return db.capture_devices.capdev_modifier;
+  }
+  const config = db.capture_devices.items[item.slug];
+  return config
+    ? configuredCaptureDeviceModifier(db, state, item.slug, target, config)
+    : db.capture_devices.capdev_modifier;
+}
+
+/** Mutates only the serialised RNG cursor and returns the upstream capture roll. */
+export function attemptCapture(
+  db: TuxemonBattleDb,
+  state: TuxemonBattleState,
+  itemSlug: string,
+  target: BattleMonster,
+): CaptureAttemptResult {
+  const item = db.item[itemSlug];
+  if (!item) throw new Error(`battle: unknown item '${itemSlug}'`);
+  const species = db.monster[target.slug];
+  const statusModifier = captureStatusModifier(db, itemSlug, target);
+  const deviceModifier = captureDeviceModifier(db, state, item, target);
+  const catchCheck = (
+    (db.capture.shake_hp_multiplier * target.base.hp -
+      db.capture.shake_current_hp_multiplier * target.currentHp) *
+    species.catch_rate * statusModifier * deviceModifier /
+    (db.capture.shake_hp_divisor * target.base.hp)
+  );
+  let shakeCheck = db.capture.shake_constant /
+    (Math.sqrt(Math.sqrt(db.capture.max_catch_rate / catchCheck)) * db.capture.shake_denominator);
+  const [lower, upper] = species.catch_resistance;
+  shakeCheck *= lower + (upper - lower) * nextRandom(state);
+  let shakes = db.capture.total_shakes;
+  let success = true;
+  for (let index = 0; index < db.capture.total_shakes; index++) {
+    if (randomIntInclusive(state, 0, db.capture.shake_divisor) <= Math.trunc(shakeCheck)) continue;
+    success = false;
+    shakes = index + 1;
+    break;
+  }
+  return { statusModifier, deviceModifier, shakeCheck, success, shakes };
+}
+
+function changeInventory(state: TuxemonBattleState, slug: string, amount: number): void {
+  state.inventory[slug] = Math.max(0, (state.inventory[slug] ?? 0) + amount);
+}
+
+function applyCaptureDeviceEffects(config: DbCaptureDevice, target: BattleMonster): void {
+  for (const effect of config.capdev_effects ?? []) {
+    if (effect.target_attribute === "level") {
+      // Tuxemon 9e6258ff attempts to assign Monster.level, a read-only
+      // property. Keep the exact externally visible bug for differential
+      // parity; Item.use aborts before stock consumption or capture mutation.
+      const error = new Error("property 'level' of 'Monster' object has no setter");
+      error.name = "AttributeError";
+      throw error;
+    }
+    if (effect.target_attribute !== "taste_warm" || effect.operation !== "set" ||
+        typeof effect.value !== "string") {
+      throw new Error(
+        `battle: unsupported capture effect ${effect.operation} ${effect.target_attribute}`,
+      );
+    }
+    target.tasteWarm = effect.value;
+  }
+}
+
+function performCapture(
+  db: TuxemonBattleDb,
+  state: TuxemonBattleState,
+  action: BattleAction,
+  rules: BattleCoreRules<BattleMonster, TuxemonBattleState>,
+): void {
+  const item = db.item[action.ref];
+  const target = getMonster(state, action.target);
+  const roll = attemptCapture(db, state, action.ref, target);
+  const combined = item.effects.some((effect) => effect.type === "capture_combined");
+  const config = db.capture_devices.items[item.slug];
+  if (!combined && config) {
+    if (roll.success && config.capdev_persistent_on_success) changeInventory(state, item.slug, 1);
+    if (!roll.success && config.capdev_persistent_on_failure) changeInventory(state, item.slug, 1);
+    if (roll.success) applyCaptureDeviceEffects(config, target);
+  }
+  if (item.consumable) changeInventory(state, item.slug, -1);
+  state.events.push({
+    type: "capture",
+    turn: state.turn,
+    user: action.user,
+    target: target.uid,
+    item: item.slug,
+    ...roll,
+    quantity: state.inventory[item.slug] ?? 0,
+  });
+  if (!roll.success) return;
+
+  target.captureDevice = item.slug;
+  target.acquisition = "captured";
+  target.bond = 25;
+  state.capturedUid = target.uid;
+  if (target.status && !db.status[target.status.slug]?.behaviors?.persists_after_combat) {
+    clearStatus(db, target);
+  }
+  endBattle(state, rules, "captured");
+}
+
+function performItem(
+  db: TuxemonBattleDb,
+  state: TuxemonBattleState,
+  action: BattleAction,
+): void {
+  const item = db.item[action.ref];
+  if (!item) throw new Error(`battle: unknown item '${action.ref}'`);
+  const target = getMonster(state, action.target);
+  const before = {
+    hp: target.currentHp,
+    status: target.status?.slug ?? null,
+    types: [...target.types],
+    stages: { ...target.stages },
+  };
+  let success = false;
+  for (const effect of item.effects) {
+    switch (effect.type) {
+      case "heal": {
+        if (target.status?.slug === "festering" && item.category === "potion") break;
+        const amount = effect.parameters[1] === "percentage"
+          ? Math.trunc(target.base.hp * Number(effect.parameters[0]))
+          : Math.trunc(Number(effect.parameters[0]));
+        target.currentHp = Math.max(0, Math.min(target.base.hp, target.currentHp + amount));
+        success = true;
+        break;
+      }
+      case "restore": {
+        const category = effect.parameters[0];
+        if (!category || (target.status && db.status[target.status.slug]?.category === category)) {
+          clearStatus(db, target);
+        }
+        success = true;
+        break;
+      }
+      case "statchange": {
+        for (const [stat, modifier] of Object.entries(item.stat_modifiers)) {
+          if (!modifier) continue;
+          const deviation = modifier.max_deviation
+            ? randomIntInclusive(state, -modifier.max_deviation, modifier.max_deviation)
+            : null;
+          applyStatModifier(target, stat as StatName | "current_hp", modifier, deviation);
+        }
+        success = true;
+        break;
+      }
+      case "switch_type": {
+        const requested = effect.parameters[0]!;
+        const element = requested === "random"
+          ? randomChoice(state, db.element_order ?? Object.keys(db.element))
+          : requested;
+        if (!target.types.includes(element)) target.types = [element];
+        success = true;
+        break;
+      }
+      default:
+        throw new Error(`battle: unsupported item effect '${effect.type}' on '${item.slug}'`);
+    }
+  }
+  // The pinned upstream configuration consumes consumables on both success
+  // and failure. Capture persistence is handled separately above.
+  if (item.consumable) changeInventory(state, item.slug, -1);
+  state.events.push({
+    type: "item",
+    turn: state.turn,
+    user: action.user,
+    target: target.uid,
+    item: item.slug,
+    success,
+    quantity: state.inventory[item.slug] ?? 0,
+    before,
+    after: {
+      hp: target.currentHp,
+      status: target.status?.slug ?? null,
+      types: [...target.types],
+      stages: { ...target.stages },
+    },
+  });
+}
+
+function performRun(
+  state: TuxemonBattleState,
+  action: BattleAction,
+  rules: BattleCoreRules<BattleMonster, TuxemonBattleState>,
+): void {
+  const user = getMonster(state, action.user!);
+  const target = getMonster(state, action.target);
+  const chance = 0.4 + 0.15 * (state.runAttempts + user.level - target.level);
+  const roll = nextRandom(state);
+  const success = roll <= chance;
+  if (success) state.runAttempts = 0;
+  else state.runAttempts++;
+  state.events.push({
+    type: "run",
+    turn: state.turn,
+    user: user.uid,
+    target: target.uid,
+    chance,
+    roll,
+    success,
+    runAttempts: state.runAttempts,
+  });
+  if (success) endBattle(state, rules, "ran");
 }
 
 function performTechnique(
@@ -877,23 +1267,19 @@ function pruneMonsterActions(state: TuxemonBattleState, uid: number): void {
   state.pending = state.pending.filter(({ action }) => action.user !== uid && action.target !== uid);
 }
 
-function awardDefeat(state: TuxemonBattleState, loser: BattleMonster): void {
+function awardDefeat(db: TuxemonBattleDb, state: TuxemonBattleState, loser: BattleMonster): void {
   const participants = (state.damageByDefender[String(loser.uid)] ?? [])
     .map((uid) => getMonster(state, uid));
   const playerParticipants = participants.filter((monster) =>
     getSide(state, monster.uid) === 0 && monster.currentHp > 0,
   );
-  const reward = { loser: loser.uid, winners: [] as Array<{ uid: number; experience: number; trainingPoints: StatName[] }>, prize: 0 };
+  const reward = {
+    loser: loser.uid,
+    winners: [] as TuxemonBattleState["rewards"][number]["winners"],
+    prize: 0,
+  };
   for (const winner of playerParticipants) {
-    // Tuxemon floors total XP by level before applying the species modifier,
-    // rounds the resulting pool, then floor-divides it among participants.
-    const baseExperience = Math.trunc(
-      Math.floor(loser.totalExperience / loser.level) * loser.experienceModifier,
-    );
-    const awarded = winner.level >= 100
-      ? 0
-      : Math.floor(pythonRound(baseExperience) / Math.max(1, participants.length));
-    winner.totalExperience += awarded;
+    const awarded = calculateDefeatExperience(db, loser, winner, participants.length);
     const gained: StatName[] = [];
     for (const stat of STAT_NAMES) {
       if (loser.base[stat] > winner.base[stat]) {
@@ -904,8 +1290,47 @@ function awardDefeat(state: TuxemonBattleState, loser: BattleMonster): void {
         }
       }
     }
+    // The legacy GB2 oracle export has no progression config because that
+    // corpus intentionally omitted RewardSystem. Preserve its historical
+    // trace mode; production databases always carry the config below.
+    if (db.progression && gained.length > 0) {
+      winner.base = calculateBaseStats(
+        db,
+        winner.slug,
+        winner.level,
+        winner.individualValues,
+        winner.tasteCold,
+        winner.tasteWarm,
+        winner.trainingPoints,
+      );
+    }
+    const progression = db.progression
+      ? giveExperience(db, winner, awarded, {
+        owned: true,
+        party: state.parties[0],
+        variables: state.variables,
+        inside: state.inside,
+      })
+      : {
+        awardedExperience: awarded,
+        effectiveExperience: awarded,
+        levelsGained: 0,
+        learnedMoves: [],
+        forgottenMoves: [],
+        evolutionTarget: null,
+      };
+    if (!db.progression) winner.totalExperience += awarded;
     winner.bond = Math.min(100, winner.bond + 3);
-    reward.winners.push({ uid: winner.uid, experience: awarded, trainingPoints: gained });
+    reward.winners.push({
+      uid: winner.uid,
+      experience: awarded,
+      effectiveExperience: progression.effectiveExperience,
+      levelsGained: progression.levelsGained,
+      learnedMoves: progression.learnedMoves,
+      forgottenMoves: progression.forgottenMoves,
+      evolutionTarget: progression.evolutionTarget,
+      trainingPoints: gained,
+    });
   }
   if (state.kind === "trainer" && participants.some((monster) => getSide(state, monster.uid) === 0)) {
     if (state.moneyMethod === "conserved") reward.prize = Math.trunc(loser.level * loser.moneyModifier);
@@ -920,6 +1345,68 @@ function awardDefeat(state: TuxemonBattleState, loser: BattleMonster): void {
     const index = attackers.indexOf(loser.uid);
     if (index >= 0) attackers.splice(index, 1);
   }
+}
+
+function captureItem(item: DbItem): boolean {
+  return item.effects.some((effect) => effect.type === "capture" || effect.type === "capture_combined");
+}
+
+function itemBlockedByStatus(db: TuxemonBattleDb, target: BattleMonster): boolean {
+  return Boolean(target.status && db.status[target.status.slug]?.effects.some((effect) => effect.type === "lockdown"));
+}
+
+export function canUseBattleItem(
+  db: TuxemonBattleDb,
+  state: TuxemonBattleState,
+  itemSlug: string,
+  targetUid: number,
+  capture: boolean,
+): boolean {
+  const item = db.item[itemSlug];
+  if (!item || (state.inventory[itemSlug] ?? 0) <= 0 ||
+      !item.usable_in.includes("MainCombatMenuState") || captureItem(item) !== capture) {
+    return false;
+  }
+  let target: BattleMonster;
+  try {
+    target = getMonster(state, targetUid);
+  } catch {
+    return false;
+  }
+  if (capture) {
+    if (state.kind !== "wild" || getSide(state, target.uid) !== 1 || !state.field.includes(target.uid)) {
+      return false;
+    }
+  } else if (getSide(state, target.uid) !== 0) {
+    return false;
+  }
+  return !itemBlockedByStatus(db, target) && itemConditionsPass(db, state, item, target);
+}
+
+export function canRun(state: TuxemonBattleState, userUid: number): boolean {
+  if (state.kind !== "wild" || !state.field.includes(userUid) || getSide(state, userUid) !== 0) {
+    return false;
+  }
+  const status = getMonster(state, userUid).status?.slug;
+  return status !== "grabbed" && status !== "stuck" && activeOnSide(state, 1).length > 0;
+}
+
+export function canSwap(state: TuxemonBattleState, userUid: number, targetUid: number): boolean {
+  let user: BattleMonster;
+  let target: BattleMonster;
+  try {
+    user = getMonster(state, userUid);
+    target = getMonster(state, targetUid);
+  } catch {
+    return false;
+  }
+  if (!state.field.includes(user.uid) || state.field.includes(target.uid) ||
+      getSide(state, user.uid) !== 0 || getSide(state, target.uid) !== 0 || target.currentHp <= 0) {
+    return false;
+  }
+  const status = user.status?.slug;
+  if (status === "grabbed" || status === "stuck") return false;
+  return !state.queue.some((action) => action.kind === "swap" && action.target === target.uid);
 }
 
 function makeRules(db: TuxemonBattleDb): BattleCoreRules<BattleMonster, TuxemonBattleState> {
@@ -967,7 +1454,7 @@ function makeRules(db: TuxemonBattleDb): BattleCoreRules<BattleMonster, TuxemonB
     };
   }
 
-  return {
+  const rules: BattleCoreRules<BattleMonster, TuxemonBattleState> = {
     uid: (monster) => monster.uid,
     side: getSide,
     monster: getMonster,
@@ -1015,9 +1502,16 @@ function makeRules(db: TuxemonBattleDb): BattleCoreRules<BattleMonster, TuxemonB
     },
     sortKey(state, action) {
       if (action.user === null) return [0, 0, 0];
-      const technique = db.technique[action.ref];
-      const primary = SORT_ORDER.indexOf(technique.sort);
+      const sort = action.kind === "run" || action.kind === "swap"
+        ? "meta"
+        : action.kind === "item" || action.kind === "capture"
+          ? db.item[action.ref]?.sort
+          : db.technique[action.ref]?.sort;
+      if (!sort) throw new Error(`battle: no sort category for ${action.kind} '${action.ref}'`);
+      const primary = SORT_ORDER.indexOf(sort);
       const order = primary < 0 ? SORT_ORDER.length : primary;
+      if (action.kind !== "technique") return [-order, 0, action.subPriority];
+      const technique = db.technique[action.ref];
       const monster = getMonster(state, action.user);
       const speed = technique.sort === "meta" || technique.sort === "potion" ? 0 : Math.trunc(
         Math.max(combatStats(monster).speed, 0) *
@@ -1033,8 +1527,35 @@ function makeRules(db: TuxemonBattleDb): BattleCoreRules<BattleMonster, TuxemonB
         applyStatusTick(db, state, getMonster(state, action.target), action.ref);
       } else if (action.kind === "technique") {
         performTechnique(db, state, action);
+      } else if (action.kind === "item") {
+        performItem(db, state, action);
+      } else if (action.kind === "capture") {
+        performCapture(db, state, action, rules);
+      } else if (action.kind === "run") {
+        performRun(state, action, rules);
+      } else if (action.kind === "swap") {
+        const user = getMonster(state, action.user!);
+        const target = getMonster(state, action.target);
+        const index = state.field.indexOf(user.uid);
+        if (index < 0 || target.currentHp <= 0 || state.field.includes(target.uid)) return;
+        for (const queued of state.queue) {
+          if (queued.target === user.uid) queued.target = target.uid;
+        }
+        state.field[index] = target.uid;
+        for (const active of state.field.map((uid) => getMonster(state, uid))) {
+          if (active.status && BOND_STATUSES.has(active.status.slug)) clearStatus(db, active);
+        }
+        statusSwapHook(db, target);
+        statusSwapHook(db, user);
+        state.events.push({
+          type: "swap",
+          turn: state.turn,
+          side: 0,
+          user: user.uid,
+          target: target.uid,
+        });
       } else {
-        throw new Error("battle: item actions are reserved for GB3");
+        throw new Error(`battle: unsupported action '${String(action.kind)}'`);
       }
     },
     checkParty(state) {
@@ -1053,7 +1574,7 @@ function makeRules(db: TuxemonBattleDb): BattleCoreRules<BattleMonster, TuxemonB
         }
         if (monster.currentHp > 0) continue;
         pruneMonsterActions(state, uid);
-        awardDefeat(state, monster);
+        awardDefeat(db, state, monster);
         state.field = state.field.filter((candidate) => candidate !== uid);
         state.events.push({ type: "faint", turn: state.turn, monster: uid });
       }
@@ -1097,6 +1618,7 @@ function makeRules(db: TuxemonBattleDb): BattleCoreRules<BattleMonster, TuxemonB
       };
     },
   };
+  return rules;
 }
 
 export function createBattle(db: TuxemonBattleDb, start: BattleStart): TuxemonBattleState {
@@ -1132,6 +1654,9 @@ export function createBattle(db: TuxemonBattleDb, start: BattleStart): TuxemonBa
     damageByDefender: {},
     result: null,
     runAttempts: start.runAttempts ?? 0,
+    inventory: { ...(start.inventory ?? {}) },
+    variables: { ...(start.variables ?? {}) },
+    capturedUid: null,
   };
   return advanceBattle(state, makeRules(db));
 }
@@ -1143,10 +1668,43 @@ export function reduceBattle(
   decision: TuxemonBattleDecision,
 ): TuxemonBattleState {
   const state = cloneBattleState(previous);
-  if (decision.type !== "technique") {
-    throw new Error(`battle: '${decision.type}' is reserved for GB3`);
+  const rules = makeRules(db);
+  if (decision.type === "technique") {
+    return submitDecision(state, rules, decision.choice);
   }
-  return submitDecision(state, makeRules(db), decision.choice);
+  const user = state.awaiting?.uid;
+  if (user === undefined) throw new Error("battle: no action decision is pending");
+  if (decision.type === "replacement") {
+    if (!canSwap(state, user, decision.uid)) {
+      throw new Error(`battle: replacement ${decision.uid} is unavailable`);
+    }
+    return submitAction(state, rules, {
+      kind: "swap",
+      user,
+      target: decision.uid,
+      ref: "swap",
+    });
+  }
+  if (decision.type === "run") {
+    if (!canRun(state, user)) throw new Error("battle: escape is unavailable");
+    const target = activeOnSide(state, 1)[0]!;
+    return submitAction(state, rules, {
+      kind: "run",
+      user,
+      target: target.uid,
+      ref: "menu_run",
+    });
+  }
+  const capture = decision.type === "capture";
+  if (!canUseBattleItem(db, state, decision.item, decision.target, capture)) {
+    throw new Error(`battle: item '${decision.item}' is unavailable for target ${decision.target}`);
+  }
+  return submitAction(state, rules, {
+    kind: capture ? "capture" : "item",
+    user,
+    target: decision.target,
+    ref: decision.item,
+  });
 }
 
 /** Deterministic headless helper used by golden tests and the future autoplay driver. */

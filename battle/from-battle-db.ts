@@ -22,6 +22,10 @@ import type {
 } from "../importer/battle-schema.ts";
 import type {
   DbMonster,
+  DbCaptureDevice,
+  DbCaptureRules,
+  DbEvolution,
+  DbItem,
   DbRule,
   DbStatModifier,
   DbStatus,
@@ -61,9 +65,18 @@ function toStatModifiers(
 function toMonster(slug: string, monster: BattleDb["monsters"][string]): DbMonster {
   return {
     slug,
+    species: monster.species,
     shape: monster.shape,
     stage: monster.stage,
     types: monster.types,
+    tags: monster.tags,
+    terrains: monster.terrains,
+    catch_rate: monster.catchRate,
+    catch_resistance: monster.catchResistance,
+    evolutions: monster.evolutions.map((evolution) => ({
+      ...evolution,
+      monster_slug: String(evolution.monster_slug),
+    })) as DbEvolution[],
     moveset: monster.moveset.map((move) => ({
       technique: move.technique,
       learning_method: move.method,
@@ -72,6 +85,21 @@ function toMonster(slug: string, monster: BattleDb["monsters"][string]): DbMonst
         evolution_stage_learned: move.evolutionStage,
       }),
     })),
+  };
+}
+
+function toItem(slug: string, item: BattleDb["items"][string]): DbItem {
+  return {
+    slug,
+    sort: item.sort,
+    category: item.category,
+    usable_in: item.usableIn,
+    consumable: item.consumable,
+    effects: toRules(item.effects),
+    conditions: toRules(item.conditions),
+    behaviors: item.behaviors,
+    stat_modifiers: toStatModifiers(item.statModifiers),
+    immunity_to_status: item.immunityToStatus,
   };
 }
 
@@ -130,6 +158,9 @@ export function battleDbToTuxemonBattleDb(db: BattleDb): TuxemonBattleDb {
     technique: Object.fromEntries(
       Object.entries(db.techniques).map(([slug, technique]) => [slug, toTechnique(slug, technique)]),
     ),
+    item: Object.fromEntries(
+      Object.entries(db.items).map(([slug, item]) => [slug, toItem(slug, item)]),
+    ),
     technique_speed: technicalSpeeds(db),
     element: Object.fromEntries(
       Object.entries(db.elements).map(([slug, element]) => [slug, {
@@ -153,5 +184,25 @@ export function battleDbToTuxemonBattleDb(db: BattleDb): TuxemonBattleDb {
     status: Object.fromEntries(
       Object.entries(db.statuses).map(([slug, status]) => [slug, toStatus(slug, status)]),
     ),
+    capture: {
+      ...(db.rules.capture as unknown as Omit<DbCaptureRules, "max_catch_rate">),
+      max_catch_rate: db.rules.catchRateRange[1],
+    },
+    capture_devices: {
+      status_modifier: Number((db.rules.captureDevices as Record<string, unknown>).statusModifier ?? 1),
+      capdev_modifier: Number((db.rules.captureDevices as Record<string, unknown>).deviceModifier ?? 1),
+      items: ((db.rules.captureDevices as Record<string, unknown>).items ?? {}) as Record<string, DbCaptureDevice>,
+    },
+    progression: {
+      level_range: [...db.rules.levelRange],
+      max_moves: db.rules.maxMoves,
+      acquisition_multipliers: { ...db.rules.experience.acquisitionMultipliers },
+      experience_groups: Object.fromEntries(
+        Object.entries(db.rules.experience.groups).map(([slug, group]) => [slug, {
+          multiplier: group.multiplier,
+          experience_coefficient: group.experienceCoefficient,
+        }]),
+      ),
+    },
   };
 }

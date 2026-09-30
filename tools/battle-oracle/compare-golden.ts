@@ -109,7 +109,14 @@ export function compareGoldenCase(
   db: TuxemonBattleDb,
   golden: BattleGoldenCase,
 ): string | null {
-  const state = runPolicyBattle(db, golden.start, Math.max(100, golden.expected.trace.length * 2));
+  // The GB2 trace generator deliberately did not execute RewardSystem. Run
+  // this legacy corpus through the reducer's matching compatibility mode;
+  // GB3's separate progression corpus covers the production reward path.
+  const state = runPolicyBattle(
+    { ...db, progression: undefined },
+    golden.start,
+    Math.max(100, golden.expected.trace.length * 2),
+  );
   const actual = goldenTrace(state);
   const expected = golden.expected.trace;
   const count = Math.max(expected.length, actual.length);
