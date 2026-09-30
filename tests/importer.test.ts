@@ -589,7 +589,7 @@ test("G6 emits native party state and Battle Processing for the first fight", ()
   expect(result.variables.battle_last_result).toEqual(expect.arrayContaining(["captured", "run"]));
 });
 
-test("faint recovery carries its notice across the map-transfer boundary", () => {
+test("faint recovery preserves its notice and yields to the first-loss cutscene", () => {
   const result = buildProject(["spyder_route3", "spyder_leather_center", "spyder_paper_town"], G6_IMPORT_OPTIONS);
   const route3 = result.project.maps.find((map) => map.id === "spyder_route3")!;
   const center = result.project.maps.find((map) => map.id === "spyder_leather_center")!;
@@ -613,12 +613,13 @@ test("faint recovery carries its notice across the map-transfer boundary", () =>
   expect(noticeNodes.findIndex((node) => node.op === "switch" && node.id === "sys.faint_notice" && node.value === false))
     .toBeLessThan(noticeNodes.findIndex((node) => node.op === "text"));
 
+  const paperTransfer = paper.events?.find((event) => event.name === "Teleport Faint");
+  const paperTransferNodes = objectNodes(paperTransfer);
+  expect(paperTransferNodes).toContainEqual({ kind: "variable", id: "v.firstfightdue", op: "==", value: 1 });
+  expect(paperTransferNodes).toContainEqual({ kind: "variable", id: "v.firstfightend", op: "==", value: 1 });
+
   const firstLoss = paper.events?.find((event) => event.name === "First Fight - Lose");
-  expect(objectNodes(firstLoss)).toContainEqual({
-    kind: "ext",
-    call: "tux.char_defeated",
-    args: { character: "player", negate: true },
-  });
+  expect(objectNodes(firstLoss).some((node) => node.kind === "ext" && node.call === "tux.char_defeated")).toBeFalse();
 });
 
 test("G6 imports item mutations and conditions through the shared session backpack", () => {
@@ -761,15 +762,16 @@ test("Spyder first-fight win and loss complete identically at 60, 30, 20, and 4 
         expect(beats(transcripts[2]!)).toEqual(beats(transcripts[0]!));
         expect(beats(transcripts[3]!)).toEqual(beats(transcripts[0]!));
       } else {
-        // At 4 Hz one host frame folds 15 reference ticks, so the two
-        // concurrently eligible loss/teleport fibers can carry the first
-        // modal across a map boundary instead of exposing its duplicate to
-        // this host-frame logger. The authored loss and recovery beats, plus
-        // the final world state below, remain invariant.
+        // Upstream keeps Teleport Faint gated behind SinkState until the
+        // first-loss fiber heals the party. The same visible order must hold
+        // even when one host frame folds many reference ticks.
         for (const transcript of transcripts) {
           expect(transcript).toContain("As expected! Old models can't compare to new ones!");
           expect(transcript).toContain("I'll heal you up this time, but I'm not a charity.");
-          expect(transcript).toContain("spyder_paper_town -> spyder_bedroom @3,4");
+          expect(transcript).toContain("FIRST-LOSS spyder_paper_town");
+          expect(transcript).toContain("Teleport Faint stayed suppressed during the first-loss cutscene");
+          expect(transcript).not.toContain("spyder_paper_town -> spyder_bedroom @3,4");
+          expect(transcript).not.toContain("You should heal your monsters before heading off.");
         }
       }
       for (const result of results.slice(1)) expect(outcome(result)).toEqual(outcome(results[0]!));

@@ -327,6 +327,7 @@ if (OUTCOME === "win") {
   walkTo(21, 9);
   interact(3); // face the Rockitten bin; Rockitten loses to Billie/Budaye
 }
+const firstFightSite: [number, number] = [st.move.tx, st.move.ty];
 settle(["Yes"]);
 const battleExt = tuxemonExtensionState(st.ext, TUXEMON_BATTLE_DB);
 const expectedHistory = OUTCOME === "win" ? "won" : "lost";
@@ -335,29 +336,24 @@ expect(`the first fight ended in a real ${expectedHistory}`, battleExt.history.s
   entry.fighter === "player" && entry.opponent === "spyder_billie" && entry.outcome === expectedHistory
 ));
 if (OUTCOME === "lose") {
-  expect("defeat used the stored faint point", st.mapId === "spyder_bedroom" && st.move.tx === 3 && st.move.ty === 4);
-  const defeatTransferFrame = frames;
-  // On the destination map the upstream teleport_faint quirk heals before a
-  // same-map transfer. Return to town so the concurrently eligible source
-  // First Fight - Lose page can finish its narrative branch as well.
-  settle();
   const recovered = tuxemonExtensionState(st.ext, TUXEMON_BATTLE_DB).party[0];
+  note(`FIRST-LOSS ${st.mapId} @${st.move.tx},${st.move.ty} hp=${recovered?.currentHp}/${recovered?.base.hp}`);
+  expect("First Fight - Lose stayed in Paper Town", st.mapId === "spyder_paper_town");
   expect(
-    "same-map faint recovery restored Rockitten",
-    recovered !== undefined && typeof recovered.currentHp === "number" && recovered.currentHp > 0,
+    "First Fight - Lose healed Rockitten",
+    recovered !== undefined && recovered.currentHp === recovered.base.hp,
   );
-  walkTo(7, 2);
-  settle();
-  goTo(4, 6);
-  tick(BTN_BITS.DOWN);
-  settle();
-  expect("returned to Paper Town after faint recovery", st.mapId === "spyder_paper_town");
-  for (let pass = 0; pass < 100 && v("v.firstfightend") !== 1; pass++) settle();
+  expect("First Fight - Lose returned control at the fight site",
+    st.move.tx === firstFightSite[0] && st.move.ty === firstFightSite[1]);
   const loseDialogs = seenTexts.filter((entry) => entry.lines.includes("As expected! Old models can't compare to new ones!"));
+  const afterDialogs = seenTexts.filter((entry) => entry.lines.join(" ") ===
+    "I'll heal you up this time, but I'm not a charity. Rest up at home next time your monsters get worn out.");
   const faintNotices = seenTexts.filter((entry) => entry.lines.includes("You should heal your monsters before heading off."));
-  expect("First Fight - Lose became visible once, after faint recovery", loseDialogs.length === 1 &&
-    loseDialogs[0]!.frame > defeatTransferFrame);
-  expect("faint recovery notice was shown exactly once", faintNotices.length === 1);
+  expect("First Fight - Lose was shown exactly once after battle exit", loseDialogs.length === 1 &&
+    loseDialogs[0]!.map === "spyder_paper_town" && loseDialogs[0]!.frame > battleEndFrame);
+  expect("the first-loss after-dialog was shown exactly once", afterDialogs.length === 1 &&
+    afterDialogs[0]!.map === "spyder_paper_town" && afterDialogs[0]!.frame > loseDialogs[0]!.frame);
+  expect("Teleport Faint stayed suppressed during the first-loss cutscene", faintNotices.length === 0);
 }
 expect(`the ${OUTCOME} branch closed the fight (firstfightend=no)`, v("v.firstfightend") === 1 && v("v.firstfightdue") === 1);
 let requested = "";
@@ -412,7 +408,9 @@ expect("replaying after L rewind restores the identical result", canonicalJson(r
 note(`END   frames=${frames} at ${HZ} Hz (${(frames / HZ).toFixed(1)} s virtual)`);
 writeOut();
 console.log(journal.join("\n"));
+const tapeDigest = createHash("sha256").update(JSON.stringify(masks)).digest("hex");
 const result = {
+  ...(OUTCOME === "lose" ? { format: "pocket-tuxemon/gb6-first-loss/v1" } : {}),
   hz: HZ,
   frames,
   map: st.mapId,
@@ -431,6 +429,7 @@ const result = {
     billie_won: st.sw.switches["bo.spyder_billie.won"] === true,
     billie_lost: st.sw.switches["bo.spyder_billie.lost"] === true,
   },
+  ...(OUTCOME === "lose" ? { tapeSha256: tapeDigest } : {}),
 };
 const digest = createHash("sha256").update(JSON.stringify(result)).digest("hex");
 const stateDigest = createHash("sha256").update(canonicalJson(st)).digest("hex");

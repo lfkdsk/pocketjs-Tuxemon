@@ -25,9 +25,9 @@
  },
  "mapRepository": {
   "shellBytes": 81950,
-  "entryBytes": 7889985,
+  "entryBytes": 7890051,
   "entries": 263,
-  "manifestHash": "995b7164e2d2e285d3cb00e09e4c5793b479dd6eade66b8e420dd0bb7b53f0ac",
+  "manifestHash": "2190b890e2783332c4486d0e9b4ca8e0812ad37b5ff3e12d026d7dc9c3eb9bd4",
   "schemaHash": "c27e2e51e0256f25fc7c6850b83273dab8bab9664e249a72c0a38d8940939157"
  },
  "terrain": {

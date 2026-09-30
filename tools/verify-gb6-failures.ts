@@ -22,7 +22,8 @@ import { readShardedProject } from "./generated-project.ts";
 const ROOT = resolve(import.meta.dir, "..");
 const HEAL_BEFORE_LEAVE = "You should heal your monsters before heading off.";
 const FIRST_FIGHT_LOSE = "As expected! Old models can't compare to new ones!";
-const FIRST_LOSS_STATE_SHA256 = "69e4ad1dc22c8a71df102737598143c938b2880bc15209bcdefe70d766cf069d";
+const FIRST_FIGHT_AFTER = "I'll heal you up this time, but I'm not a charity. Rest up at home next time your monsters get worn out.";
+const FIRST_LOSS_STATE_SHA256 = "d321b2173aca055d0e0fdc39df6127f57ebad93a4cd3e758d7695c04e44f7aab";
 
 interface SeenText {
   frame: number;
@@ -49,6 +50,7 @@ interface Replay {
   battles: ReplayedBattle[];
   sawFaintedClinic: boolean;
   sawHealedAfterFaint: boolean;
+  sawPostBattleBedroom: boolean;
 }
 
 function expect(label: string, condition: boolean): asserts condition {
@@ -85,6 +87,7 @@ function replay(tape: FrozenTape): Replay {
   let sawFaintedClinic = false;
   let wasFainted = false;
   let sawHealedAfterFaint = false;
+  let sawPostBattleBedroom = false;
   const texts: SeenText[] = [];
   const battles: ReplayedBattle[] = [];
 
@@ -130,20 +133,27 @@ function replay(tape: FrozenTape): Replay {
     if (wasFainted && party.length > 0 && party.every((monster) => monster.currentHp === monster.base.hp)) {
       sawHealedAfterFaint = true;
     }
+    if (battles.some((row) => row.opponent === "spyder_billie") && state.mapId === "spyder_bedroom") {
+      sawPostBattleBedroom = true;
+    }
     if (state.interp.error) throw new Error(`GB6 failure paths: ${state.interp.error.message}`);
   }
   expect("tape ended inside a battle", active === null && state.scene === null);
-  return { state, texts, battles, sawFaintedClinic, sawHealedAfterFaint };
+  return { state, texts, battles, sawFaintedClinic, sawHealedAfterFaint, sawPostBattleBedroom };
 }
 
 const first = JSON.parse(readFileSync(join(ROOT, "data/gb6-first-loss-journey.json"), "utf8")) as
   FrozenTape & {
+    format: string;
     map: string;
     position: [number, number];
     story: { billie_result: string; billie_lost: boolean; billie_won: boolean };
+    tapeSha256: string;
     sha256: string;
   };
 const { sha256: firstRecordedSha, ...firstPayload } = first;
+expect("first-loss format changed", first.format === "pocket-tuxemon/gb6-first-loss/v1");
+expect("first-loss tape hash changed", sha256(JSON.stringify(first.masks)) === first.tapeSha256);
 expect("first-loss payload hash changed", sha256(JSON.stringify(firstPayload)) === firstRecordedSha);
 const firstReplay = replay(first);
 const firstExt = tuxemonExtensionState(firstReplay.state.ext, TUXEMON_BATTLE_DB);
@@ -155,10 +165,16 @@ expect("first loss did not record Billie lost", first.story.billie_result === "l
   firstExt.history.some((row) => row.opponent === "spyder_billie" && row.outcome === "lost"));
 expect("first loss did not close both fight gates", firstReplay.state.sw.variables["v.firstfightdue"] === 1 &&
   firstReplay.state.sw.variables["v.firstfightend"] === 1);
-expect("First Fight - Lose was not shown exactly once after recovery",
-  firstReplay.texts.filter((row) => row.lines.includes(FIRST_FIGHT_LOSE)).length === 1);
-expect("first-loss faint notice was not shown exactly once",
-  firstReplay.texts.filter((row) => row.lines.includes(HEAL_BEFORE_LEAVE)).length === 1);
+const firstLoseTexts = firstReplay.texts.filter((row) => row.lines.join(" ") === FIRST_FIGHT_LOSE);
+const firstAfterTexts = firstReplay.texts.filter((row) => row.lines.join(" ") === FIRST_FIGHT_AFTER);
+expect("First Fight - Lose was not shown exactly once in Paper Town",
+  firstLoseTexts.length === 1 && firstLoseTexts[0]!.map === "spyder_paper_town");
+expect("first-loss after-dialog was not shown exactly once after the loss dialog",
+  firstAfterTexts.length === 1 && firstAfterTexts[0]!.map === "spyder_paper_town" &&
+  firstAfterTexts[0]!.frame > firstLoseTexts[0]!.frame);
+expect("first loss took the Teleport Faint bedroom detour", !firstReplay.sawPostBattleBedroom);
+expect("first-loss faint notice was shown", firstReplay.texts.every((row) => !row.lines.includes(HEAL_BEFORE_LEAVE)));
+expect("First Fight - Lose did not heal the fainted party", firstReplay.sawHealedAfterFaint);
 expect("first-loss terminal state hash changed",
   sha256(canonicalJson(firstReplay.state)) === FIRST_LOSS_STATE_SHA256);
 

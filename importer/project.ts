@@ -1614,15 +1614,17 @@ function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: 
         continue;
       }
       const live = cls.filter((c) => c.k !== "const");
-      // Upstream checks the shared Teleport Faint event before its running
-      // first-fight fiber publishes firstfightend=yes. The transfer therefore
-      // wins that update; First Fight - Lose becomes visible only after the
-      // bedroom's same-map recovery heals the party and the player returns.
-      // K1 samples automatic guards independently, so make that scheduling
-      // dependency explicit instead of briefly opening the lose dialog before
-      // the transfer and replaying it on return.
-      if (options.battle && m.slug === "spyder_paper_town" && e.name === "First Fight - Lose") {
-        live.push({ k: "ext", call: "tux.char_defeated", args: { character: "player", negate: true } });
+      // Upstream's first-fight cutscene keeps a SinkState above WorldState, so
+      // the shared Teleport Faint event's `current_state WorldState` guard is
+      // false until First Fight - Lose has healed the party and closed both
+      // gates. K1 folds current_state for P1 and does not suspend automatic
+      // fibers while input is locked, so preserve that mutual exclusion with
+      // the two source story gates on the one affected map.
+      if (options.battle && m.slug === "spyder_paper_town" && e.name === "Teleport Faint") {
+        live.push(
+          { k: "var", id: varId("firstfightdue"), op: "==", value: code("firstfightdue", "no") },
+          { k: "var", id: varId("firstfightend"), op: "==", value: code("firstfightend", "no") },
+        );
       }
       for (const b of e.behavs) note("behav", b.type, "structural", "talk -> NPC action page");
       const k = triggerClass(e);
