@@ -5,6 +5,7 @@
 mod g6_quickjs_bench {
     use super::*;
     use serde::Deserialize;
+    use std::collections::HashSet;
     use std::ffi::CString;
     use std::fmt::Write as _;
     use std::path::Path;
@@ -15,6 +16,23 @@ mod g6_quickjs_bench {
     #[derive(Deserialize)]
     struct Journey {
         masks: Vec<u32>,
+        #[serde(default)]
+        battles: Vec<JourneyBattle>,
+        #[serde(default)]
+        maps: Vec<JourneyMap>,
+    }
+
+    #[derive(Deserialize)]
+    #[serde(rename_all = "camelCase")]
+    struct JourneyBattle {
+        start_frame: usize,
+        end_frame: usize,
+    }
+
+    #[derive(Deserialize)]
+    struct JourneyMap {
+        frame: usize,
+        map: String,
     }
 
     /// One `ui/gp1-marks.ts` checkpoint (findings/GP1.md "Fix 1"): `at` is a
@@ -239,14 +257,18 @@ mod g6_quickjs_bench {
         moving: bool,
         fade: bool,
         battle: bool,
+        battle_event: Option<String>,
         js_ms: f64,
         core_ms: f64,
         draw_ms: f64,
+        draw_sampled: bool,
         structural: StructuralOps,
     }
 
     struct Bench {
         rt: Runtime,
+        sample_structural: bool,
+        hash_every: usize,
     }
 
     impl Bench {
@@ -302,15 +324,23 @@ mod g6_quickjs_bench {
             }
         }
 
-        fn state(&self) -> (String, bool, bool, bool) {
+        fn state(&self) -> (String, bool, bool, bool, Option<String>) {
             serde_json::from_str(&self.string(
-                "JSON.stringify([globalThis.__rpgSessionState.mapId,!!globalThis.__rpgSessionState.move.moving,!!globalThis.__rpgSessionState.fade,globalThis.__rpgSessionState.scene?.kind==='battle'])",
+                r#"(()=>{const s=globalThis.__rpgSessionState;const b=s.scene?.kind==='battle'?s.scene.state:null;return JSON.stringify([s.mapId,!!s.move.moving,!!s.fade,!!b,b?.battle?.events?.[b.eventCursor]?.type??null])})()"#,
             ))
             .expect("G6 state tuple")
         }
 
-        fn frame(&mut self, frame: usize, mask: u32) -> Sample {
-            self.reset_structural_counter();
+        fn frame(
+            &mut self,
+            frame: usize,
+            mask: u32,
+            frozen: Option<(&str, bool)>,
+            force_hash: bool,
+        ) -> Sample {
+            if self.sample_structural {
+                self.reset_structural_counter();
+            }
             self.rt.buttons = mask;
             self.rt.offload.begin_frame();
             let a = Instant::now();
@@ -329,19 +359,31 @@ mod g6_quickjs_bench {
             }
             let _ = self.rt.surface.svc_drain();
             self.rt.ticks += 1;
-            let _ = self.rt.hash();
+            let draw_sampled = force_hash || self.hash_every <= 1 || frame % self.hash_every == 0;
+            if draw_sampled {
+                let _ = self.rt.hash();
+            }
             let d = Instant::now();
-            let (map, moving, fade, battle) = self.state();
-            let structural = self.structural_ops();
+            let (map, moving, fade, battle, battle_event) = match frozen {
+                Some((map, battle)) => (map.to_owned(), false, false, battle, None),
+                None => self.state(),
+            };
+            let structural = if self.sample_structural {
+                self.structural_ops()
+            } else {
+                StructuralOps::default()
+            };
             Sample {
                 frame,
                 map,
                 moving,
                 fade,
                 battle,
+                battle_event,
                 js_ms: (b - a).as_secs_f64() * 1_000.0,
                 core_ms: (c - b).as_secs_f64() * 1_000.0,
                 draw_ms: (d - c).as_secs_f64() * 1_000.0,
+                draw_sampled,
                 structural,
             }
         }
@@ -365,12 +407,15 @@ mod g6_quickjs_bench {
         let mut js: Vec<f64> = samples.iter().map(|sample| sample.js_ms).collect();
         let mut total: Vec<f64> = samples
             .iter()
+            .filter(|sample| sample.draw_sampled)
             .map(|sample| sample.js_ms + sample.core_ms + sample.draw_ms)
             .collect();
+        assert!(!total.is_empty(), "{label} has no framebuffer samples");
         js.sort_by(|a, b| a.partial_cmp(b).unwrap());
         total.sort_by(|a, b| a.partial_cmp(b).unwrap());
         let worst = samples
             .iter()
+            .filter(|sample| sample.draw_sampled)
             .max_by(|a, b| {
                 (a.js_ms + a.core_ms + a.draw_ms)
                     .partial_cmp(&(b.js_ms + b.core_ms + b.draw_ms))
@@ -391,9 +436,12 @@ mod g6_quickjs_bench {
             .map(|sample| sample.structural.total())
             .max()
             .unwrap_or(0);
+        let js_mean = js.iter().sum::<f64>() / js.len() as f64;
+        let total_mean = total.iter().sum::<f64>() / total.len() as f64;
         println!(
-            "CASE viewport={viewport} kind={label} n={} qjs_p95={:.3}ms qjs_max={:.3}ms total_p95={:.3}ms total_max={:.3}ms worst=f{}:{} structural={}/{}/{}/{} structural_max={}",
+            "CASE viewport={viewport} kind={label} n={} total_n={} qjs_mean={js_mean:.3}ms qjs_p95={:.3}ms qjs_max={:.3}ms total_mean={total_mean:.3}ms total_p95={:.3}ms total_max={:.3}ms worst=f{}:{} structural={}/{}/{}/{} structural_max={}",
             samples.len(),
+            total.len(),
             percentile(&js, 0.95),
             js[js.len() - 1],
             percentile(&total, 0.95),
@@ -499,13 +547,33 @@ mod g6_quickjs_bench {
         );
     }
 
-    fn assert_single_frame_budget(label: &str, samples: &[Sample], limit_ms: f64) {
-        assert_eq!(
-            samples.len(),
-            1,
-            "journey must contain exactly one {label} frame"
+    fn assert_frame_budget(label: &str, samples: &[Sample], limit_ms: f64) {
+        assert!(!samples.is_empty(), "journey must contain at least one {label} frame");
+        let qjs_core = samples
+            .iter()
+            .max_by(|a, b| {
+                (a.js_ms + a.core_ms)
+                    .partial_cmp(&(b.js_ms + b.core_ms))
+                    .unwrap()
+            })
+            .unwrap();
+        let qjs_core_ms = qjs_core.js_ms + qjs_core.core_ms;
+        assert!(
+            qjs_core_ms <= limit_ms,
+            "{label} frame f{}:{} exceeded the {limit_ms} ms QJS/core limit: {:.3} ms",
+            qjs_core.frame,
+            qjs_core.map,
+            qjs_core_ms,
         );
-        let sample = &samples[0];
+        let sample = samples
+            .iter()
+            .filter(|sample| sample.draw_sampled)
+            .max_by(|a, b| {
+                (a.js_ms + a.core_ms + a.draw_ms)
+                    .partial_cmp(&(b.js_ms + b.core_ms + b.draw_ms))
+                    .unwrap()
+            })
+            .unwrap_or_else(|| panic!("{label} has no framebuffer samples"));
         let total_ms = sample.js_ms + sample.core_ms + sample.draw_ms;
         assert!(
             total_ms <= limit_ms,
@@ -517,6 +585,10 @@ mod g6_quickjs_bench {
             sample.js_ms,
             sample.core_ms,
             sample.draw_ms,
+        );
+        println!(
+            "BUDGET kind={label} frames={} qjs_core_max={qjs_core_ms:.3}ms sampled_total_max={total_ms:.3}ms limit={limit_ms:.0}ms",
+            samples.len(),
         );
     }
 
@@ -653,11 +725,60 @@ mod g6_quickjs_bench {
         let (runtime, stages) =
             boot_staged(args(&dist, "pocket-tuxemon", data.clone(), width, height)).unwrap();
         let boot_ms = boot_start.elapsed().as_secs_f64() * 1_000.0;
-        let mut bench = Bench { rt: runtime };
+        let sample_structural = std::env::var("G6_FAST_BENCH").as_deref() != Ok("1");
+        let hash_every = std::env::var("G6_HASH_EVERY")
+            .ok()
+            .and_then(|value| value.parse().ok())
+            .unwrap_or(1usize)
+            .max(1);
+        let mut bench = Bench { rt: runtime, sample_structural, hash_every };
         report_startup_stages(&viewport, &bench, boot_ms, &stages);
-        bench.install_structural_counter();
-        let initial_map = bench.state().0;
-        let first = bench.frame(0, journey.masks[0]);
+        if sample_structural {
+            bench.install_structural_counter();
+        }
+        if sample_structural {
+            assert!(journey.maps.is_empty() || journey.battles.is_empty(),
+                "short probe mode must classify live state rather than frozen metadata");
+        } else {
+            assert!(!journey.maps.is_empty(), "fast benchmark requires journey map checkpoints");
+            assert!(!journey.battles.is_empty(), "fast benchmark requires journey battle checkpoints");
+        }
+        let initial_map = if !sample_structural {
+            journey.maps[0].map.clone()
+        } else {
+            bench.state().0
+        };
+        let frozen_at = |frame: usize| -> Option<(&str, bool)> {
+            if !sample_structural {
+                let map = journey.maps.iter().rev().find(|mark| mark.frame <= frame).unwrap();
+                // Checkpoints describe the post-step scene. `startFrame` is
+                // the input that enters battle; `endFrame` is one past the
+                // input that exits it, so that exit input is already a world
+                // scene sample.
+                let battle = journey.battles.iter().any(|mark|
+                    mark.start_frame <= frame && frame + 1 < mark.end_frame
+                );
+                Some((map.map.as_str(), battle))
+            } else {
+                None
+            }
+        };
+        let mut forced_hashes = HashSet::new();
+        if !sample_structural {
+            for mark in &journey.maps {
+                for frame in mark.frame.saturating_sub(1)..=mark.frame.saturating_add(16) {
+                    forced_hashes.insert(frame);
+                }
+            }
+            for mark in &journey.battles {
+                forced_hashes.insert(mark.start_frame);
+                forced_hashes.insert(mark.start_frame.saturating_add(1));
+                forced_hashes.insert(mark.end_frame.saturating_sub(1));
+                forced_hashes.insert(mark.end_frame);
+            }
+        }
+        let replay_started = Instant::now();
+        let first = bench.frame(0, journey.masks[0], frozen_at(0), forced_hashes.contains(&0));
         let first_paint_ms = boot_start.elapsed().as_secs_f64() * 1_000.0;
         let (used, malloc, objects) = qjs_memory(&bench.rt.guest);
         println!(
@@ -680,6 +801,8 @@ mod g6_quickjs_bench {
         let mut switches = Vec::new();
         let mut battle = Vec::new();
         let mut battle_steady = Vec::new();
+        let mut battle_round = Vec::new();
+        let mut battle_decision = Vec::new();
         let mut battle_entry = Vec::new();
         let mut battle_exit = Vec::new();
         let mut last_map = initial_map;
@@ -688,12 +811,23 @@ mod g6_quickjs_bench {
         let mut switch_tail = 0usize;
         let mut transfers = 0usize;
         for (index, mask) in journey.masks.iter().copied().enumerate().skip(1) {
-            let sample = bench.frame(index, mask);
+            let sample = bench.frame(
+                index,
+                mask,
+                frozen_at(index),
+                forced_hashes.contains(&index),
+            );
             all_frames.push(sample.clone());
             if sample.battle {
                 battle.push(sample.clone());
                 if last_battle {
                     battle_steady.push(sample.clone());
+                }
+                if sample.battle_event.as_deref() == Some("round") {
+                    battle_round.push(sample.clone());
+                }
+                if sample.battle_event.as_deref() == Some("decision") {
+                    battle_decision.push(sample.clone());
                 }
             }
             if sample.battle != last_battle {
@@ -722,8 +856,10 @@ mod g6_quickjs_bench {
                 walking.push(sample);
             }
         }
-        let (end_map, _, _, _) = bench.state();
-        assert_eq!(end_map, "spyder_route1");
+        let replay_wall_ms = replay_started.elapsed().as_secs_f64() * 1_000.0;
+        let (end_map, _, _, _, _) = bench.state();
+        let expected_map = std::env::var("G6_EXPECTED_MAP").unwrap_or_else(|_| "spyder_route1".into());
+        assert_eq!(end_map, expected_map);
         let state_text = bench.string("JSON.stringify(globalThis.__rpgSessionState)");
         let state: serde_json::Value =
             serde_json::from_str(&state_text).expect("terminal state JSON");
@@ -734,14 +870,46 @@ mod g6_quickjs_bench {
         report(&viewport, "walking-before-battle", &walking_before_battle);
         report(&viewport, "walking-after-battle", &walking_after_battle);
         report(&viewport, "map-switch", &switches);
+        assert_frame_budget("map-switch", &switches, 50.0);
         report(&viewport, "battle", &battle);
         report(&viewport, "battle-steady", &battle_steady);
-        assert_zero_structural(&viewport, "battle-steady", &battle_steady);
+        if sample_structural {
+            assert_zero_structural(&viewport, "battle-steady", &battle_steady);
+        } else {
+            println!(
+                "STRUCTURE viewport={viewport} kind=battle-steady frames={} structural=not-sampled",
+                battle_steady.len(),
+            );
+        }
+        if sample_structural {
+            report(&viewport, "battle-round", &battle_round);
+            report(&viewport, "battle-decision", &battle_decision);
+        } else {
+            println!("CASE viewport={viewport} kind=battle-round source=standalone-reducer-benchmark");
+        }
         report(&viewport, "battle-entry", &battle_entry);
         report(&viewport, "battle-exit", &battle_exit);
-        assert_single_frame_budget("battle-entry", &battle_entry, 50.0);
-        assert_single_frame_budget("battle-exit", &battle_exit, 50.0);
+        assert_frame_budget("battle-entry", &battle_entry, 50.0);
+        assert_frame_budget("battle-exit", &battle_exit, 50.0);
         report(&viewport, "all", &all_frames);
+        assert_frame_budget("all", &all_frames, 50.0);
+        let measured_qjs_core_ms = first.js_ms + first.core_ms + all_frames
+            .iter()
+            .map(|sample| sample.js_ms + sample.core_ms)
+            .sum::<f64>();
+        let sampled_draw_ms = std::iter::once(&first)
+            .chain(all_frames.iter())
+            .filter(|sample| sample.draw_sampled)
+            .map(|sample| sample.draw_ms)
+            .sum::<f64>();
+        let sampled_draw_frames = std::iter::once(&first)
+            .chain(all_frames.iter())
+            .filter(|sample| sample.draw_sampled)
+            .count();
+        println!(
+            "REPLAY viewport={viewport} frames={} qjs_core_ms={measured_qjs_core_ms:.3} sampled_draw_ms={sampled_draw_ms:.3} sampled_draw_frames={sampled_draw_frames} hash_every={hash_every} wall_ms={replay_wall_ms:.3}",
+            journey.masks.len(),
+        );
         let (used, malloc, objects) = qjs_memory(&bench.rt.guest);
         println!(
             "END viewport={viewport} frames={} transfers={} map={end_map} qjs_used={:.2}MiB qjs_malloc={:.2}MiB objects={objects}",
@@ -776,7 +944,7 @@ mod g6_quickjs_bench {
         seed_maps(&maps, &data);
         let runtime =
             Runtime::boot(args(&dist, "map-benchmark-entry", data.clone(), 480, 272)).unwrap();
-        let bench = Bench { rt: runtime };
+        let bench = Bench { rt: runtime, sample_structural: false, hash_every: 1 };
         let metadata: Vec<MapMeta> = serde_json::from_str(
             &bench.string("JSON.stringify(globalThis.__rpgMapBenchmark.maps)"),
         )

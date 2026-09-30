@@ -675,6 +675,15 @@ function completionFor(state: RuntimeBattleState, enums: VariableEnums): BattleC
  */
 export function createTuxemonBattleRules(source: BattleDbSource, enums: VariableEnums): BattleRules {
   let active: { db: BattleDb; rulesDb: TuxemonBattleDb } | null = null;
+  // Plain databases and non-releasing providers are immutable for the
+  // registration lifetime. Keep their converted rule view (including its
+  // lazy per-slug caches) across battles; rebuilding it at every exit made a
+  // long journey repeatedly allocate the element/taste/shape tables and
+  // eventually pushed QuickJS transition frames over budget. Function
+  // sources and explicitly releasing providers retain the old acquire/release
+  // lifecycle because they are allowed to return a different database.
+  const reusable = typeof source !== "function"
+    && (!("load" in source) || source.release === undefined);
   const resources = () => {
     if (active) return active;
     const db = resolveBattleDb(source);
@@ -682,15 +691,15 @@ export function createTuxemonBattleRules(source: BattleDbSource, enums: Variable
     return active;
   };
   const release = () => {
+    if (reusable) return;
     active = null;
     releaseBattleDb(source);
   };
   return {
     start(extValue, setupValue, seed, context: ExtensionReadContext) {
-      // Drop only a stale adapter here. A provider may have deliberately
-      // warmed the source database in the immediately preceding add_monster
-      // event, which keeps first-battle entry off the cold JSON path.
-      active = null;
+      // A releasable/dynamic source may have changed since the prior battle.
+      // Stable providers keep the same lazy view and its warmed shard cache.
+      if (!reusable) active = null;
       const { db, rulesDb } = resources();
       try {
         const ext = tuxemonExtensionState(extValue, db);

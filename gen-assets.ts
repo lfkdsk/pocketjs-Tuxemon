@@ -73,13 +73,27 @@ writeFileSync(
 );
 
 // GameView cannot scan unloaded MapDefs, so sharded projects bake the one
-// all-map rendering scalar it needs into the asset manifest.
+// rendering scalar it needs into the asset manifest. Upstream's isolated
+// `test_*` maps are renderer stress fixtures, not world destinations: in
+// particular test_npcs has 500 painted events while the largest playable
+// map has 17. Reserving that fixture's pool on every playable map makes each
+// battle transition tear down/recreate 500 images. Keep the complete fixture
+// imported, report its pressure separately, and size the shipped world pool
+// from maps that can actually be reached in play. A kit-side growable pool can
+// eventually make direct rendering of stress fixtures cheap as well.
 const sprites = project.sprites ?? {};
-const maxActors = Math.max(0, ...project.maps.map((map) =>
+const actorSlots = (map: (typeof project.maps)[number]) =>
   (map.events ?? []).filter((event) => event.pages.some((page) => {
     const sprite = page.sprite == null ? undefined : sprites[page.sprite];
     return !!sprite && (sprite.kind === "walker" || !!sprite.src);
-  })).length));
+  })).length;
+const actorSlotCounts = project.maps.map((map) => ({ id: map.id, slots: actorSlots(map) }));
+const excludedActorStressMaps = actorSlotCounts.filter(({ id }) => id.startsWith("test_"));
+const maxActors = Math.max(0, ...actorSlotCounts.map(({ slots }) => slots));
+const runtimeMaxActors = Math.max(
+  0,
+  ...actorSlotCounts.filter(({ id }) => !id.startsWith("test_")).map(({ slots }) => slots),
+);
 
 // Animated tile atlases are globally shared by equal RGBA sequences.
 const animDir = join(ROOT, "assets/anim");
@@ -211,7 +225,7 @@ function gameAssetsSource(
 
 writeFileSync(
   join(ROOT, "ui/game-assets.ts"),
-  gameAssetsSource(characters.player, maxActors, animatedSplit.index, npcSrcSplit.index),
+  gameAssetsSource(characters.player, runtimeMaxActors, animatedSplit.index, npcSrcSplit.index),
 );
 
 const collisionBodies = project.maps.reduce(
@@ -225,6 +239,8 @@ const assetReport = {
     maps: project.maps.length,
     collisionBodies,
     maxActors,
+    runtimeMaxActors,
+    excludedActorStressMaps,
     options: G6_IMPORT_OPTIONS,
   },
   mapRepository: {

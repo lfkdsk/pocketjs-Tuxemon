@@ -106,6 +106,27 @@ function finish(
 }
 
 describe("Tuxemon BattleRules adapter", () => {
+  test("reuses an immutable provider and its lazy rule caches across battles", () => {
+    let loads = 0;
+    const rules = createTuxemonBattleRules({
+      load() {
+        loads++;
+        return DB;
+      },
+    }, ENUMS);
+    const ext = extensionWith(monster("nut", 20, "txmn-player", 30));
+    const setup = json({
+      kind: "wild",
+      species: "budaye",
+      level: 5,
+      environment: "grass",
+    });
+
+    expect(startBattle(rules, ext, setup, 31)).not.toBeNull();
+    expect(startBattle(rules, ext, setup, 32)).not.toBeNull();
+    expect(loads).toBe(1);
+  });
+
   test("keeps the upstream trainer and wild root-menu profiles with explicit availability", () => {
     const rules = createTuxemonBattleRules(DB, ENUMS);
     const active = monster("nut", 20, "txmn-player-a", 31);

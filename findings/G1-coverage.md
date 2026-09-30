@@ -10,7 +10,7 @@ When conversion discards a whole event, every source rule in it is Dropped.
 
 | Kind | Kinds | Uses | Native | Degraded | Placeholder | Dropped | S1 T1 baseline |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Actions | 98 | 13617 | 11584 | 638 | 19 | 1376 | 6123 / 6246 (44.97% / 45.9%) |
+| Actions | 98 | 13617 | 11583 | 639 | 19 | 1376 | 6123 / 6246 (44.97% / 45.9%) |
 | Conditions | 64 | 8663 | 7666 | 95 | 1 | 901 | 4459 / 4591 (51.47% / 53.0%) |
 
 The S1 acceptance baselines are 6,246 action uses (45.9%) and 4,591
@@ -20,7 +20,7 @@ Degraded count toward them. This import records 6123
 (51.47%), respectively: 123
 action uses and 132 condition uses below the S1 baselines. The old
 type-table Native figure was 5,448 / 13,617 (40.0%); conversion-path accounting
-supersedes it with 11584 / 13617
+supersedes it with 11583 / 13617
 (85.1%). “Executable”
 (native + degraded + deliberate P1 placeholder) is
 89.9% for actions and
@@ -34,6 +34,32 @@ Definitions:
 - **Dropped**: no equivalent output, including rules inside an event that the
   converter proves cannot start or otherwise omits. Per-disposition reasons are
   retained in `dist/import-report.json`.
+
+## P2 battle and monster placeholder audit
+
+There are 20 source-file uses across 6
+battle/monster-related source types that still carry Placeholder disposition.
+Player-versus-trainer, double, scripted-wild, random-wild, battle-outcome,
+party-size, has-monster, evolution, environment, faint-transfer, and live-party
+defeat behavior are Native. The remaining non-native behavior is explicit:
+
+| Kind | Source type | Placeholder uses | Reason |
+|---|---|---:|---|
+| Action | `choice_monster` | 2 | choices -> enum code; nested choice pages retain every option |
+| Action | `choice_npc` | 1 | nested choice pages retain every option |
+| Action | `open_shop` | 7 | monster trading remains a visible placeholder |
+| Action | `remove_monster` | 4 | sys.party_size -= 1 when non-empty |
+| Action | `start_battle` | 5 | NPC-versus-NPC battles are not supported yet; skipped |
+| Condition | `is party_infected` | 1 | no plague in P1: none=true |
+
+The five `start_battle` placeholders are NPC-versus-NPC scenes, for which the
+runtime shows a visible skip notice instead of inventing a player battle. The
+other rows are global or legacy content. Where GB6 reaches a
+`choice_monster` starter prompt, its deterministic enum-choice lowering is
+exercised, but it is not claimed as a general party-selection UI. The remaining
+trading, removal, NPC selection, and plague-state rows stay visible or
+deterministic without being claimed as full P2 behavior. The long-term target
+remains zero Placeholder uses.
 
 ## Economy and item catalog
 
@@ -159,7 +185,7 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `teleport_faint` | 11 | 0 | 0 | 0 | 11 |
 | Action | `trading` | 0 | 0 | 0 | 8 | 8 |
 | Action | `transition_teleport` | 1042 | 3 | 0 | 4 | 1049 |
-| Action | `translated_dialog` | 2014 | 0 | 0 | 54 | 2068 |
+| Action | `translated_dialog` | 2013 | 1 | 0 | 54 | 2068 |
 | Action | `translated_dialog_choice` | 134 | 10 | 0 | 5 | 149 |
 | Action | `tune_radio` | 0 | 0 | 0 | 2 | 2 |
 | Action | `unlock_controls` | 324 | 0 | 0 | 6 | 330 |

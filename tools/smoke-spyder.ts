@@ -15,13 +15,15 @@ import { TUXEMON_BATTLE_DB } from "../battle/game.ts";
 import { tuxemonExtensionState } from "../battle/extension.ts";
 
 const PROJECT_ROOT = resolve(process.env.G6_PROJECT_ROOT ?? new URL("..", import.meta.url).pathname);
-const OUT_DIR = join(PROJECT_ROOT, "dist");
+const OUT_DIR = resolve(process.env.G6_OUT_DIR ?? join(PROJECT_ROOT, "dist"));
 const inlineProject = readInlineProject(PROJECT_ROOT);
 const sharded = readShardedProject(PROJECT_ROOT);
 const project = sharded.project;
 const HZ = Number(process.env.HZ ?? 60); // host rate; the kit folds 60/HZ reference ticks per frame
 const OUTCOME = process.env.GB4_OUTCOME === "lose" ? "lose" : "win";
 const OUTPUT_TAG = OUTCOME === "win" ? `${HZ}hz` : `lose-${HZ}hz`;
+const JOURNEY_OUT = resolve(process.env.GB4_JOURNEY_OUT
+  ?? join(OUT_DIR, `journey-spyder-${OUTPUT_TAG}.json`));
 const sess = createSession(project, HZ, {
   maps: sharded.repository,
   extensions: TUXEMON_EXTENSIONS,
@@ -46,6 +48,7 @@ const BTN_LTRIGGER = 0x0100;
 const journal: string[] = [];
 const masks: number[] = [];
 const checkpoints: { name: string; frame: number; map: string; position: [number, number] }[] = [];
+const seenTexts: { frame: number; map: string; lines: string[] }[] = [];
 let frames = 0;
 let lastModalKey = "";
 let lastMap = st.mapId;
@@ -89,7 +92,10 @@ function tick(buttons = 0, edges: { confirm?: boolean; cancel?: boolean; down?: 
         ? `shop|${m.fiber}|${m.stage}|${m.index}|${m.rows.length}`
         : "";
   if (key && key !== lastModalKey) {
-    if (m?.kind === "text") note(`TEXT  ${m.lines.join(" / ")}`);
+    if (m?.kind === "text") {
+      seenTexts.push({ frame: frames, map: st.mapId, lines: [...m.lines] });
+      note(`TEXT  ${m.lines.join(" / ")}`);
+    }
     else if (m?.kind === "choices") note(`CHOICE [${m.options.join(" | ")}]`);
     else if (m?.kind === "shop") note(`SHOP  ${m.fiber} (${m.stage})`);
   }
@@ -330,6 +336,7 @@ expect(`the first fight ended in a real ${expectedHistory}`, battleExt.history.s
 ));
 if (OUTCOME === "lose") {
   expect("defeat used the stored faint point", st.mapId === "spyder_bedroom" && st.move.tx === 3 && st.move.ty === 4);
+  const defeatTransferFrame = frames;
   // On the destination map the upstream teleport_faint quirk heals before a
   // same-map transfer. Return to town so the concurrently eligible source
   // First Fight - Lose page can finish its narrative branch as well.
@@ -346,6 +353,11 @@ if (OUTCOME === "lose") {
   settle();
   expect("returned to Paper Town after faint recovery", st.mapId === "spyder_paper_town");
   for (let pass = 0; pass < 100 && v("v.firstfightend") !== 1; pass++) settle();
+  const loseDialogs = seenTexts.filter((entry) => entry.lines.includes("As expected! Old models can't compare to new ones!"));
+  const faintNotices = seenTexts.filter((entry) => entry.lines.includes("You should heal your monsters before heading off."));
+  expect("First Fight - Lose became visible once, after faint recovery", loseDialogs.length === 1 &&
+    loseDialogs[0]!.frame > defeatTransferFrame);
+  expect("faint recovery notice was shown exactly once", faintNotices.length === 1);
 }
 expect(`the ${OUTCOME} branch closed the fight (firstfightend=no)`, v("v.firstfightend") === 1 && v("v.firstfightdue") === 1);
 let requested = "";
@@ -422,7 +434,7 @@ const result = {
 };
 const digest = createHash("sha256").update(JSON.stringify(result)).digest("hex");
 const stateDigest = createHash("sha256").update(canonicalJson(st)).digest("hex");
-writeFileSync(join(OUT_DIR, `journey-spyder-${OUTPUT_TAG}.json`), JSON.stringify({ ...result, sha256: digest }, null, 2) + "\n");
+writeFileSync(JOURNEY_OUT, JSON.stringify({ ...result, sha256: digest }, null, 2) + "\n");
 console.log(`STATE sha256=${stateDigest} (inline=sharded every frame)`);
 console.log("RESULT " + JSON.stringify({
   hz: result.hz,

@@ -4762,7 +4762,7 @@
       "locks": 1,
       "outcome": "unlocked",
       "lockedAt": 0,
-      "resolvedAt": 524,
+      "resolvedAt": 258,
       "finalMap": "spyder_paper_town",
       "staticHint": "reachable",
       "resolutionPath": [
@@ -4774,8 +4774,9 @@
           "lock": 0,
           "outcome": "unlocked",
           "lockedAt": 0,
-          "resolvedAt": 524,
-          "finalMap": "spyder_paper_town"
+          "resolvedAt": 258,
+          "finalMap": "spyder_paper_town",
+          "seededBy": "e025_first_fight_win"
         }
       ]
     },

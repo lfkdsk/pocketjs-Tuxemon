@@ -85,6 +85,15 @@ jobs:
       - name: Test
         run: bun test tests/
 
+      # The frozen 30.5-minute source tape takes about one minute to fold on
+      # CI. Full 60/30/20 alignment, save/load, and rewind checks remain in
+      # `bun run verify:gb6:full` for the release/acceptance gate.
+      - name: Replay the Route 3 battle journey at 60 Hz
+        run: bun run verify:gb6:mainline
+
+      - name: Replay both battle defeat and recovery journeys
+        run: bun run verify:gb6:failures
+
       - name: Every imported input lock is executed to its unlock
         run: bun run verify:g6:locks
 

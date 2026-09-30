@@ -5,6 +5,13 @@
   "maps": 263,
   "collisionBodies": 14,
   "maxActors": 500,
+  "runtimeMaxActors": 17,
+  "excludedActorStressMaps": [
+   {
+    "id": "test_npcs",
+    "slots": 500
+   }
+  ],
   "options": {
    "areas": true,
    "facing": true,
@@ -18,9 +25,9 @@
  },
  "mapRepository": {
   "shellBytes": 81950,
-  "entryBytes": 7869652,
+  "entryBytes": 7889985,
   "entries": 263,
-  "manifestHash": "5c37136940b27ce8c4015aad10bd99a1cc8212d5c81226bb9f78eb10eb91515b",
+  "manifestHash": "995b7164e2d2e285d3cb00e09e4c5793b479dd6eade66b8e420dd0bb7b53f0ac",
   "schemaHash": "c27e2e51e0256f25fc7c6850b83273dab8bab9664e249a72c0a38d8940939157"
  },
  "terrain": {

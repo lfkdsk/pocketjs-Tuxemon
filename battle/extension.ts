@@ -638,6 +638,12 @@ export function createTuxemonExtensions(source: BattleDbSource): ExtensionOption
         const state = currentExtensionState(context.ext);
         return negate(state.faintPoints[args.character] !== undefined, args);
       },
+      "tux.faint_point_is_map": (context, value) => {
+        const args = argsRecord(value, "tux.faint_point_is_map");
+        if (!nonEmptyString(args.character) || !nonEmptyString(args.map)) return false;
+        const state = currentExtensionState(context.ext);
+        return negate(state.faintPoints[args.character]?.map === args.map, args);
+      },
       "tux.party_size": (context, value) => {
         const args = argsRecord(value, "tux.party_size");
         if (!nonEmptyString(args.character) || !safeInteger(args.value)) return false;

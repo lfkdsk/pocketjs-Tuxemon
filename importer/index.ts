@@ -31,6 +31,14 @@ export function coverageMarkdown(report: ImportReport): string {
       `| ${kind} | \`${row.type}\` | ${row.native} | ${row.degraded} | ${row.placeholder} | ${row.dropped} | ${row.total} |`
     )
     .join("\n");
+  const placeholderRows = [
+    ...actions.rows.map((row) => ({ kind: "Action", row })),
+    ...conditions.rows.map((row) => ({ kind: "Condition", row })),
+  ].filter(({ row }) => row.placeholder > 0);
+  const placeholderUses = placeholderRows.reduce((sum, { row }) => sum + row.placeholder, 0);
+  const placeholderAudit = placeholderRows.map(({ kind, row }) =>
+    `| ${kind} | \`${row.type}\` | ${row.placeholder} | ${(row.reasons.placeholder ?? []).join("; ")} |`
+  ).join("\n");
   const repairs = report.transferRepairs.length
     ? report.transferRepairs.map((repair) =>
       `- \`${repair.sourceMap}\` → \`${repair.targetMap}\`: requested (${repair.requested.x}, ${repair.requested.y}), clamped (${repair.clamped.x}, ${repair.clamped.y}), emitted (${repair.emitted.x}, ${repair.emitted.y})`
@@ -73,6 +81,27 @@ Definitions:
 - **Dropped**: no equivalent output, including rules inside an event that the
   converter proves cannot start or otherwise omits. Per-disposition reasons are
   retained in \`dist/import-report.json\`.
+
+## P2 battle and monster placeholder audit
+
+There are ${placeholderUses} source-file uses across ${placeholderRows.length}
+battle/monster-related source types that still carry Placeholder disposition.
+Player-versus-trainer, double, scripted-wild, random-wild, battle-outcome,
+party-size, has-monster, evolution, environment, faint-transfer, and live-party
+defeat behavior are Native. The remaining non-native behavior is explicit:
+
+| Kind | Source type | Placeholder uses | Reason |
+|---|---|---:|---|
+${placeholderAudit}
+
+The five \`start_battle\` placeholders are NPC-versus-NPC scenes, for which the
+runtime shows a visible skip notice instead of inventing a player battle. The
+other rows are global or legacy content. Where GB6 reaches a
+\`choice_monster\` starter prompt, its deterministic enum-choice lowering is
+exercised, but it is not claimed as a general party-selection UI. The remaining
+trading, removal, NPC selection, and plague-state rows stay visible or
+deterministic without being claimed as full P2 behavior. The long-term target
+remains zero Placeholder uses.
 
 ## Economy and item catalog
 

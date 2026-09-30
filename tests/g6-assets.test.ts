@@ -24,6 +24,9 @@ describe("G6 generated game assets", () => {
     expect(report.project).toMatchObject({
       maps: 263,
       collisionBodies: 14,
+      maxActors: 500,
+      runtimeMaxActors: 17,
+      excludedActorStressMaps: [{ id: "test_npcs", slots: 500 }],
       options: {
         areas: true,
         facing: true,
@@ -45,6 +48,7 @@ describe("G6 generated game assets", () => {
       playerSheet: `sprites/${appearances[0]!.template.sprite_name}.png`,
     });
     expect(GAME_ASSETS.order).toHaveLength(263);
+    expect(GAME_ASSETS.maxActors).toBe(17);
     expect(NPC_SRC_INDEX).toHaveLength(175);
     for (const { id, entry } of NPC_SRC_INDEX) {
       const art = JSON.parse(readFileSync(resolve(ROOT, "dist", entry), "utf8")) as NpcArt;

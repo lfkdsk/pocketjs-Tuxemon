@@ -130,6 +130,12 @@ const gameEvent = (value: FutureGameEvent): GameEvent => value;
 
 const po = parsePo(join(MAPS_DIR, "../l18n/en_US/LC_MESSAGES/base.po"));
 const allMaps = new Map(loadAllMaps().map((m) => [m.slug, m]));
+const FAINT_NOTICE_SWITCH = "sys.faint_notice";
+const faintPointMaps = new Set(
+  [...allMaps.values()].flatMap((map) => map.events.flatMap((event) => event.acts
+    .filter((action) => action.type === "set_teleport_faint" && action.args[1])
+    .map((action) => action.args[1]!.replace(/\.tmx$/, "")))),
+);
 const monsterSlugs = new Set(
   readdirSync(join(TUXEMON_SRC, "mods/tuxemon/db/monster"))
     .filter((name) => name.endsWith(".yaml"))
@@ -169,7 +175,10 @@ interface ItemRow {
   slug: string;
   cost?: number | null;
   usable_in?: string[];
+  conditions?: { type?: string; parameters?: unknown[]; operator?: string }[];
+  effects?: { type?: string; parameters?: unknown[] }[];
   behaviors?: { resellable?: boolean };
+  use_success?: string;
 }
 const itemDb = new Map<string, ItemRow>();
 let itemSourceRows = 0;
@@ -184,6 +193,34 @@ for (const f of readdirSync(join(TUXEMON_SRC, "mods/tuxemon/db/item")).sort()) {
     if (!itemDb.has(row.slug)) itemDb.set(row.slug, row);
   }
 }
+
+interface WorldDestroyItem {
+  item: string;
+  targetSprite: string;
+  success: string;
+}
+
+/**
+ * Pocket RPG Kit does not yet expose a world backpack menu. Preserve the
+ * two corpus-defined non-consumable destroy tools without hard-coding maps:
+ * interacting with the matching facing_sprite target uses the held tool.
+ */
+const worldDestroyItems: readonly WorldDestroyItem[] = [...itemDb.values()]
+  .flatMap((row): WorldDestroyItem[] => {
+    if (!row.usable_in?.includes("WorldState") ||
+        !row.effects?.some((effect) => effect.type === "remove_entity")) return [];
+    const facing = row.conditions?.find((condition) =>
+      condition.type === "facing_sprite" && condition.operator !== "not"
+    );
+    const targetSprite = facing?.parameters?.[0];
+    if (typeof targetSprite !== "string" || !targetSprite) return [];
+    return [{
+      item: row.slug,
+      targetSprite,
+      success: po.get(row.use_success ?? "") ?? row.use_success ?? `${row.slug} removed ${targetSprite}.`,
+    }];
+  })
+  .sort((a, b) => a.item < b.item ? -1 : a.item > b.item ? 1 : 0);
 
 // ---------------------------------------------------------------------------
 // conversion log: every action/condition met, and what happened to it
@@ -385,6 +422,11 @@ for (const map of allMaps.values()) {
         addValue(`__loaded_yaml.${map.slug}.${action.args[0]}`, "yes");
       }
     }
+  }
+}
+for (const destroyItem of worldDestroyItems) {
+  for (const npc of npcDb.values()) {
+    if (npc.template.sprite_name === destroyItem.targetSprite) addValue(npc.slug, "remove_entity");
   }
 }
 for (const v of ["won", "lost", "draw"]) addValue("battle_last_result", v);
@@ -954,8 +996,12 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
     const isSelf = (slug?: string) => slug !== undefined && slug === ctx.self;
     switch (a.type) {
       case "translated_dialog":
-        noteAction(a, a.type, "T1", "text boxes from en_US .po (layout args ignored)");
-        out.push(...dialog(g[0]!, ctx.m));
+        if (i > 0 && acts[i - 1]!.type === "teleport_faint" && g[0] === "heal_before_leave") {
+          noteAction(a, a.type, "T1-lowered", "post-transfer faint notice runs on the destination map");
+        } else {
+          noteAction(a, a.type, "T1", "text boxes from en_US .po (layout args ignored)");
+          out.push(...dialog(g[0]!, ctx.m));
+        }
         break;
       case "translated_dialog_choice": case "choice_monster": case "choice_npc": {
         const opts = g[0]!.split(":");
@@ -1435,19 +1481,30 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         if (ctx.options.battle) {
           const character = g[0] || "player";
           const healing = ["true", "1", "yes", "on"].includes((g[1] ?? "").toLowerCase());
+          const carriesNotice = acts[i + 1]?.type === "translated_dialog" &&
+            acts[i + 1]?.args[0] === "heal_before_leave";
           noteAction(a, a.type, "T1", "guarded variable transfer to the stored faint point");
           out.push({
             op: "if",
             if: { kind: "ext", call: "tux.has_faint_point", args: { character } },
             then: [
               { op: "ext", call: "tux.prepare_faint_transfer", args: { character, healing, currentMap: ctx.m.slug } },
+              ...(carriesNotice ? [{ op: "switch" as const, id: FAINT_NOTICE_SWITCH, value: true }] : []),
               {
-                op: "transfer",
-                map: { variable: "tux.faint.map" },
-                x: { variable: "tux.faint.x" },
-                y: { variable: "tux.faint.y" },
-                dir: "keep",
-                fade: numeric(g[2], 0.3),
+                op: "if",
+                if: {
+                  kind: "ext",
+                  call: "tux.faint_point_is_map",
+                  args: { character, map: ctx.m.slug, negate: true },
+                },
+                then: [{
+                  op: "transfer",
+                  map: { variable: "tux.faint.map" },
+                  x: { variable: "tux.faint.x" },
+                  y: { variable: "tux.faint.y" },
+                  dir: "keep",
+                  fade: numeric(g[2], 0.3),
+                }],
               },
             ],
           });
@@ -1557,6 +1614,16 @@ function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: 
         continue;
       }
       const live = cls.filter((c) => c.k !== "const");
+      // Upstream checks the shared Teleport Faint event before its running
+      // first-fight fiber publishes firstfightend=yes. The transfer therefore
+      // wins that update; First Fight - Lose becomes visible only after the
+      // bedroom's same-map recovery heals the party and the player returns.
+      // K1 samples automatic guards independently, so make that scheduling
+      // dependency explicit instead of briefly opening the lose dialog before
+      // the transfer and replaying it on return.
+      if (options.battle && m.slug === "spyder_paper_town" && e.name === "First Fight - Lose") {
+        live.push({ k: "ext", call: "tux.char_defeated", args: { character: "player", negate: true } });
+      }
       for (const b of e.behavs) note("behav", b.type, "structural", "talk -> NPC action page");
       const k = triggerClass(e);
 
@@ -1708,6 +1775,29 @@ function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: 
     }
   }
 
+  // A transfer rebuilds the map interpreter, so commands authored after
+  // teleport_faint cannot remain on the source-map fiber.  Preserve the
+  // upstream-visible recovery notice with a one-shot destination fiber.
+  if (options.battle && faintPointMaps.has(m.slug)) {
+    events.push({
+      id: nextId("Faint Recovery Notice"),
+      name: "Faint Recovery Notice",
+      x: 0,
+      y: 0,
+      pages: [{
+        trigger: "parallel",
+        sprite: null,
+        // Keep the page alive after consuming its own switch. At low host
+        // rates several reference ticks fold into one frame; a page-level
+        // condition would otherwise cancel the text before it is presented.
+        commands: guard([{ k: "sw", id: FAINT_NOTICE_SWITCH, on: true }], [
+          { op: "switch", id: FAINT_NOTICE_SWITCH, value: false },
+          ...dialog("heal_before_leave", m),
+        ]),
+      }],
+    });
+  }
+
   if (options.areas) {
     // Make a cell membership grid for each trigger. Greedily coalesce equal
     // membership signatures into rectangles. At an overlap, one event owns
@@ -1826,6 +1916,32 @@ function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: 
       if (!t.cls.length) chain.push(...t.cmds);
       else chain.push({ op: "if", if: { kind: "switch", id: flag(i), value: true }, then: t.cmds });
     });
+    const destroyItem = worldDestroyItems.find((candidate) =>
+      candidate.targetSprite === row?.template.sprite_name
+    );
+    if (destroyItem) {
+      const fallback = chain.splice(0);
+      chain.push({
+        op: "if",
+        if: { kind: "item", id: destroyItem.item, count: 1 },
+        then: [
+          { op: "text", lines: [destroyItem.success] },
+          {
+            op: "variable",
+            id: varId(agg.slug),
+            set: { op: "set", value: code(agg.slug, "remove_entity") },
+          },
+          { op: "variable", id: npcVar(agg.slug), set: { op: "set", value: 0 } },
+        ],
+        ...(fallback.length ? { else: fallback } : {}),
+      });
+      note(
+        "behav",
+        "world remove_entity item",
+        "T1-lowered",
+        `held ${destroyItem.item} auto-uses when interacting with facing_sprite ${destroyItem.targetSprite}`,
+      );
+    }
     if (agg.talks.length) {
       if (options.routes) {
         chain.unshift(command({

@@ -25,6 +25,7 @@ import {
 import type { Command } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
+const BTN_CONFIRM = 0x2000;
 
 type TransferCommand = Extract<Command, { op: "transfer" }>;
 type LiteralTransferCommand = TransferCommand & { map: string; x: number; y: number };
@@ -127,7 +128,7 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   });
   expect(new Set(result.report.rows.map((row) => row.key)).size).toBe(result.report.rows.length);
   expect(result.report.rows.some((row) => row.key === "trigger:touch:facing:T1-lowered")).toBeTrue();
-  expect(Object.keys(result.variables)).toHaveLength(495);
+  expect(Object.keys(result.variables)).toHaveLength(498);
   expect(Object.values(result.variables).filter((values) => values.length === 0)).toHaveLength(19);
   expect(
     result.report.coverage.actions.summary.native +
@@ -269,7 +270,7 @@ test("default import output remains byte-pinned", () => {
   // Shared economy removes the former tux.change_item/tux.has_item mirror
   // nodes, so the importer output changes while its source inputs do not.
   expect(createHash("sha256").update(bytes).digest("hex")).toBe(
-    "29f6aa1e12b5a6a0446e91a88590e6b0e4237b2fd9ae150b026c07c60687099e",
+    "b2c82d95edce9ab3065a711d54d2a850d99e9741962c4c8769230c6034107566",
   );
 });
 
@@ -503,6 +504,66 @@ test("open_shop imports item economies and keeps monster buying visible", () => 
   expect(shopLines.join("\n")).toContain("P1 placeholder; trading is unavailable.");
 });
 
+test("world destroy tools lower to held-item interactions for matching sprites", () => {
+  const result = buildProject(["spyder_route3"], G6_IMPORT_OPTIONS);
+  const route3 = result.project.maps.find((map) => map.id === "spyder_route3")!;
+  const boulder = route3.events?.find((event) => event.id === "npc_spyder_boulder");
+  expect(boulder).toBeDefined();
+  const nodes = objectNodes(boulder);
+  expect(nodes).toContainEqual(expect.objectContaining({
+    op: "if",
+    if: { kind: "item", id: "sledgehammer", count: 1 },
+  }));
+  expect(nodes).toContainEqual({
+    op: "text",
+    lines: ["The sledgehammer smashes the boulder apart."],
+  });
+  expect(nodes).toContainEqual({
+    op: "variable",
+    id: "v.spyder_boulder",
+    set: { op: "set", value: 1 },
+  });
+  expect(nodes).toContainEqual({
+    op: "variable",
+    id: "local.npc.spyder_boulder",
+    set: { op: "set", value: 0 },
+  });
+  expect(result.report.rows).toContainEqual(expect.objectContaining({
+    key: "behav:world remove_entity item:T1-lowered",
+    count: 1,
+  }));
+
+  const session = createSession(result.project, 60, {
+    extensions: TUXEMON_EXTENSIONS,
+    battle: TUXEMON_BATTLE_RULES,
+  });
+  let state = startSession(result.project, session);
+  state.move = {
+    ...state.move,
+    tx: 32,
+    ty: 8,
+    px: 32 * result.project.tileSize,
+    py: 8 * result.project.tileSize,
+    facing: 2,
+    stepDir: 2,
+  };
+  state.sw.items.sledgehammer = 1;
+  state.sw.variables["local.npc.spyder_boulder"] = 1;
+  for (let frame = 0; frame < 20; frame++) {
+    state = stepSession(session, state, { buttons: 0 });
+  }
+  expect(state.chars.chars.npc_spyder_boulder?.blocks).toBeTrue();
+  state = stepSession(session, state, { buttons: BTN_CONFIRM, confirmEdge: true });
+  state = stepSession(session, state, { buttons: 0 });
+  for (let frame = 0; frame < 20; frame++) {
+    const confirm = state.interp.modal?.kind === "text" && frame % 2 === 0;
+    state = stepSession(session, state, { buttons: confirm ? BTN_CONFIRM : 0, confirmEdge: confirm });
+  }
+  expect(state.sw.variables["v.spyder_boulder"]).toBe(1);
+  expect(numericVariable(state, "local.npc.spyder_boulder")).toBe(0);
+  expect(state.chars.chars.npc_spyder_boulder?.blocks).not.toBeTrue();
+});
+
 test("G6 emits native party state and Battle Processing for the first fight", () => {
   const result = buildProject(["spyder_paper_town"], G6_IMPORT_OPTIONS);
   const nodes = objectNodes(result.project);
@@ -526,6 +587,38 @@ test("G6 emits native party state and Battle Processing for the first fight", ()
   expect(nodes.some((node) => node.kind === "ext" && node.call === "tux.party_size")).toBeTrue();
   expect(result.variables.battle_last_loser).toContain("spyder_billie");
   expect(result.variables.battle_last_result).toEqual(expect.arrayContaining(["captured", "run"]));
+});
+
+test("faint recovery carries its notice across the map-transfer boundary", () => {
+  const result = buildProject(["spyder_route3", "spyder_leather_center", "spyder_paper_town"], G6_IMPORT_OPTIONS);
+  const route3 = result.project.maps.find((map) => map.id === "spyder_route3")!;
+  const center = result.project.maps.find((map) => map.id === "spyder_leather_center")!;
+  const paper = result.project.maps.find((map) => map.id === "spyder_paper_town")!;
+  const transfer = route3.events?.find((event) => event.name === "Teleport Faint");
+  const transferNodes = objectNodes(transfer);
+  expect(transferNodes).toContainEqual({ op: "switch", id: "sys.faint_notice", value: true });
+  expect(transferNodes.some((node) => node.op === "transfer" &&
+    (node.map as { variable?: string } | undefined)?.variable === "tux.faint.map")).toBeTrue();
+  expect(transferNodes.some((node) => node.op === "text")).toBeFalse();
+
+  const notice = center.events?.find((event) => event.name === "Faint Recovery Notice");
+  expect(notice?.pages[0]?.condition).toBeUndefined();
+  const noticeNodes = objectNodes(notice);
+  expect(noticeNodes).toContainEqual({ kind: "switch", id: "sys.faint_notice", value: true });
+  expect(noticeNodes).toContainEqual({
+    op: "text",
+    lines: ["You should heal your monsters before heading off."],
+  });
+  expect(noticeNodes).toContainEqual({ op: "switch", id: "sys.faint_notice", value: false });
+  expect(noticeNodes.findIndex((node) => node.op === "switch" && node.id === "sys.faint_notice" && node.value === false))
+    .toBeLessThan(noticeNodes.findIndex((node) => node.op === "text"));
+
+  const firstLoss = paper.events?.find((event) => event.name === "First Fight - Lose");
+  expect(objectNodes(firstLoss)).toContainEqual({
+    kind: "ext",
+    call: "tux.char_defeated",
+    args: { character: "player", negate: true },
+  });
 });
 
 test("G6 imports item mutations and conditions through the shared session backpack", () => {

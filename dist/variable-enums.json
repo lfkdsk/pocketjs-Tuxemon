@@ -2033,6 +2033,9 @@
   "paper_town",
   "timber_town"
  ],
+ "rock": [
+  "remove_entity"
+ ],
  "rockittenball": [
   "yes"
  ],
@@ -2282,6 +2285,9 @@
  "spyder_intro": [
   "yes"
  ],
+ "spyder_log": [
+  "remove_entity"
+ ],
  "stahp": [
   "stop"
  ],
@@ -2453,6 +2459,9 @@
  ],
  "water_intro": [
   "yes"
+ ],
+ "water_rock": [
+  "remove_entity"
  ],
  "waterdefeatedguy1": [
   "yes"

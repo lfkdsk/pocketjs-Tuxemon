@@ -282,9 +282,9 @@
  "schemaErrors": [],
  "byFate": {
   "T3-dropped": 3412,
-  "T1": 30127,
+  "T1": 30033,
   "T4-dropped": 3979,
-  "T1-lowered": 3897,
+  "T1-lowered": 3995,
   "T2-dropped": 261,
   "T3-placeholder": 29,
   "structural": 772
@@ -863,8 +863,14 @@
   {
    "key": "act:translated_dialog:T1",
    "fate": "T1",
-   "count": 2270,
+   "count": 2176,
    "note": "text boxes from en_US .po (layout args ignored)"
+  },
+  {
+   "key": "act:translated_dialog:T1-lowered",
+   "fate": "T1-lowered",
+   "count": 94,
+   "note": "post-transfer faint notice runs on the destination map"
   },
   {
    "key": "act:translated_dialog_choice(paginated):T1-lowered",
@@ -931,6 +937,12 @@
    "fate": "structural",
    "count": 772,
    "note": "talk -> NPC action page"
+  },
+  {
+   "key": "behav:world remove_entity item:T1-lowered",
+   "fate": "T1-lowered",
+   "count": 4,
+   "note": "held sledgehammer auto-uses when interacting with facing_sprite boulder"
   },
   {
    "key": "cond:is battle_outcome:T1",
@@ -1731,8 +1743,8 @@
    "summary": {
     "types": 98,
     "uses": 13617,
-    "native": 11584,
-    "degraded": 638,
+    "native": 11583,
+    "degraded": 639,
     "placeholder": 19,
     "dropped": 1376,
     "nativePercent": 85.1,
@@ -3031,8 +3043,8 @@
     {
      "type": "translated_dialog",
      "total": 2068,
-     "native": 2014,
-     "degraded": 0,
+     "native": 2013,
+     "degraded": 1,
      "placeholder": 0,
      "dropped": 54,
      "reasons": {
@@ -3041,6 +3053,9 @@
       ],
       "dropped": [
        "fixed-false guard prevents the source event from starting"
+      ],
+      "degraded": [
+       "post-transfer faint notice runs on the destination map"
       ]
      }
     },

@@ -281,6 +281,16 @@ describe("Tuxemon party extension", () => {
     const { state } = run([
       { op: "ext", call: "tux.set_faint_point", args: { character: "player", map: "bedroom", x: 3, y: 4 } },
       { op: "ext", call: "tux.prepare_faint_transfer", args: { character: "player" } },
+      {
+        op: "if",
+        if: { kind: "ext", call: "tux.faint_point_is_map", args: { character: "player", map: "bedroom" } },
+        then: [{ op: "switch", id: "at-faint-map", value: true }],
+      },
+      {
+        op: "if",
+        if: { kind: "ext", call: "tux.faint_point_is_map", args: { character: "player", map: "route", negate: true } },
+        then: [{ op: "switch", id: "away-from-faint-map", value: true }],
+      },
     ]);
     expect(tuxemonExtensionState(state.ext, DB).faintPoints.player).toEqual({ map: "bedroom", x: 3, y: 4 });
     expect(state.sw.variables).toMatchObject({
@@ -288,6 +298,7 @@ describe("Tuxemon party extension", () => {
       "tux.faint.x": 3,
       "tux.faint.y": 4,
     });
+    expect(state.sw.switches).toMatchObject({ "at-faint-map": true, "away-from-faint-map": true });
   });
 
   test("environment and guarded faint recovery live entirely in extension state", () => {

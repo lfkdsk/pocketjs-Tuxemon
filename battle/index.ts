@@ -1,4 +1,5 @@
 export * from "./core.ts";
+export * from "./autoplay.ts";
 export * from "./extension.ts";
 export * from "./from-battle-db.ts";
 export * from "./progression.ts";
