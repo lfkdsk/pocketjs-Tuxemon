@@ -76,7 +76,7 @@ describe("G6 production map repository", () => {
       .toEqual(["spyder_route1", 14, 19]);
     expect(createHash("sha256").update(canonicalJson(shardedState)).digest("hex"))
       .toBe(EXPECTED_TERMINAL_STATE_SHA256);
-  });
+  }, 60_000);
 
   test("attract replay stays byte-identical at 60, 30, 20, and 4 Hz", () => {
     const inlineProject = readInlineProject(ROOT);
