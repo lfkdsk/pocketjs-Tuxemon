@@ -207,7 +207,8 @@ export async function cookCharacters(project: Project, options: CharacterCookOpt
     player,
     imagesJson,
     report: {
-      source: sourceRoot,
+      // Upstream repository, not the local checkout path (see terrain.ts).
+      source: "https://github.com/Tuxemon/Tuxemon",
       spriteKeys: Object.keys(project.sprites ?? {}).length,
       walkers,
       staticObjects,

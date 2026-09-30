@@ -1,5 +1,5 @@
 {
-  "source": "/var/tmp/tuxemon-src",
+  "source": "https://github.com/Tuxemon/Tuxemon",
   "sourceRevision": "9e6258ff726b786040a267e8bdbbf037b560285e",
   "chunkPx": 256,
   "maps": 263,

@@ -926,7 +926,9 @@ export function importTerrain(options: GenerateTerrainOptions = {}): TerrainBuil
   };
   const pak = pack(entries.map((entry) => ({ key: entry.key, dtype: PAK_DTYPE.u8, data: entry.blob })));
   const report: TerrainReport = {
-    source: sourceRoot,
+    // The upstream repository, not the local checkout path: reports must be
+    // identical wherever the pinned source is fetched (sourceRevision pins it).
+    source: "https://github.com/Tuxemon/Tuxemon",
     sourceRevision: revision,
     chunkPx,
     maps: files.length,

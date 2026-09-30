@@ -27,7 +27,7 @@ jobs:
     env:
       TUXEMON_SRC: ${{ github.workspace }}/.tuxemon-src
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           submodules: recursive
 
@@ -41,7 +41,7 @@ jobs:
           targets: wasm32-unknown-unknown
 
       - name: Cache the wasm core build
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: |
             ~/.cargo/registry
@@ -51,7 +51,7 @@ jobs:
           restore-keys: ${{ runner.os }}-pocketjs-wasm-
 
       - name: Cache the pinned Tuxemon source
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: .tuxemon-src
           key: tuxemon-src-${{ hashFiles('tools/fetch-tuxemon.sh') }}
@@ -95,7 +95,7 @@ jobs:
         run: bun tools/verify-web-journey.ts
 
       - name: Keep the web site
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: web-site
           path: dist/web
@@ -103,7 +103,7 @@ jobs:
 
       - name: Keep the journey screenshot
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: web-journey
           path: dist/web-journey/*.png

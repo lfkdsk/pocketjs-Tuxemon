@@ -35,7 +35,7 @@
   "atlasBytes": 27543
  },
  "characters": {
-  "source": "/var/tmp/tuxemon-src",
+  "source": "https://github.com/Tuxemon/Tuxemon",
   "spriteKeys": 175,
   "walkers": 152,
   "staticObjects": 22,
