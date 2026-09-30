@@ -18,7 +18,8 @@
           "button": "CROSS",
           "action": "Back / cancel"
         }
-      ]
+      ],
+      "preview": "docs/screenshots/paper-town.png"
     }
   }
 }
