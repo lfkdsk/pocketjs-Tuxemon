@@ -37,7 +37,7 @@ const GAME_OPTIONS = { extensions: TUXEMON_EXTENSIONS, battle: TUXEMON_BATTLE_RU
 // history, shared-session rewards, extension RNG cursor, shop stock, and
 // scene/queue slots. The shared-economy migration removes ext.inventory and
 // ext.money; the first-battle reward now lives in SessionState.gold.
-const EXPECTED_TERMINAL_STATE_SHA256 = "7fdc130b0b90fece5f3814d886dad0a4513417ce31e2d59019dd0ce310d8dd64";
+const EXPECTED_TERMINAL_STATE_SHA256 = "5653f0110656dd4e0a930ff1908c833c9f9fc221c9cfd3a90d22b138ef8d4827";
 
 function input(mask: number, previous: number): SessionInput {
   const pressed = mask & ~previous;

@@ -54,7 +54,7 @@ function revealCurrentMenu(rules: BattleRules, value: JsonValue): JsonValue {
   for (let guard = 0; guard < 1_000; guard++) {
     const state = tuxemonRuntimeBattleState(value);
     if (state.eventCursor >= state.battle.events.length) return value;
-    value = rules.step(value, { buttons: 0, confirmEdge: true }, 0);
+    value = rules.step(value, { buttons: 0, confirmEdge: true }, BATTLE_EVENT_TICKS);
   }
   throw new Error("battle presentation did not reach its menu");
 }
@@ -106,6 +106,48 @@ function finish(
 }
 
 describe("Tuxemon BattleRules adapter", () => {
+  test("keeps the upstream trainer and wild root-menu profiles with explicit availability", () => {
+    const rules = createTuxemonBattleRules(DB, ENUMS);
+    const active = monster("nut", 20, "txmn-player-a", 31);
+    active.currentHp = active.currentHp! - 1;
+    const trainerExt = extensionWith(active);
+    trainerExt.party.push(monster("rockitten", 20, "txmn-player-b", 32));
+
+    const trainer = tuxemonRuntimeBattleState(revealCurrentMenu(rules, startBattle(rules, trainerExt, json({
+      kind: "trainer",
+      opponent: OPPONENT,
+      party: [{ species: "budaye", level: 5 }],
+      environment: "grass",
+    }), 616, { potion: 1 })!.state));
+    expect(trainer.menu.map(({ kind, slug, available }) => ({ kind, slug, available }))).toEqual([
+      { kind: "fight", slug: "fight", available: true },
+      { kind: "replacement", slug: "swap", available: true },
+      { kind: "item", slug: "item", available: true },
+      { kind: "forfeit", slug: "forfeit", available: false },
+    ]);
+
+    const wild = tuxemonRuntimeBattleState(revealCurrentMenu(rules, startBattle(
+      rules,
+      extensionWith(monster("nut", 20, "txmn-player", 33)),
+      json({ kind: "wild", species: "budaye", level: 5, environment: "grass" }),
+      717,
+    )!.state));
+    expect(wild.menu.map(({ kind, slug, available }) => ({ kind, slug, available }))).toEqual([
+      { kind: "fight", slug: "fight", available: true },
+      { kind: "replacement", slug: "swap", available: false },
+      { kind: "item", slug: "item", available: false },
+      { kind: "capture", slug: "capture", available: false },
+      { kind: "run", slug: "run", available: true },
+    ]);
+
+    let value = rules.step(json(wild), { buttons: 0, downEdge: true }, 0);
+    expect(tuxemonRuntimeBattleState(value).menuIndex).toBe(4);
+    value = rules.step(value, { buttons: 0, downEdge: true }, 0);
+    expect(tuxemonRuntimeBattleState(value).menuIndex).toBe(0);
+    value = rules.step(value, { buttons: 0, upEdge: true }, 0);
+    expect(tuxemonRuntimeBattleState(value).menuIndex).toBe(4);
+  });
+
   test("wins a trainer battle, consumes its staged party, and writes persistent rewards", () => {
     const ext = extensionWith(monster("nut", 50, "txmn-player", 91));
     ext.npcParties[OPPONENT] = [{
@@ -124,6 +166,19 @@ describe("Tuxemon BattleRules adapter", () => {
     expect(started).not.toBeNull();
     expect(tuxemonExtensionState(started!.ext, DB).npcParties[OPPONENT]).toBeUndefined();
 
+    const presentation = tuxemonRuntimeBattleState(started!.state).visuals;
+    expect(presentation.environment).toEqual(DB.environments.grass);
+    expect(presentation.ui).toEqual({ hpBar: DB.ui.hpBar, expBar: DB.ui.expBar });
+    expect(presentation.trainers.player).toEqual(DB.ui.trainerSheets.adventurer);
+    expect(presentation.trainers.opponent).toBeNull();
+    expect(presentation.monsters.nut).toEqual(DB.monsters.nut.art);
+    expect(presentation.statusIcons.burn).toEqual(DB.statuses.burn.icon);
+    for (const fighter of tuxemonRuntimeBattleState(started!.state).battle.parties.flat()) {
+      for (const technique of [fighter.fallback, ...fighter.moves.map((move) => move.slug)]) {
+        expect(presentation.techniques[technique], technique).toBeDefined();
+      }
+    }
+
     const before = ext.party[0]!;
     const { state, completion } = finish(rules, started!);
     const persisted = tuxemonExtensionState(completion.ext, DB);
@@ -141,6 +196,25 @@ describe("Tuxemon BattleRules adapter", () => {
     expect(after.acquisition).toBe(finishedMonster.acquisition);
     expect(after.captureDevice).toBe(finishedMonster.captureDevice);
     expect(after.waitingToEvolve).toBe(finishedMonster.waitingToEvolve);
+    expect(state.presentationRewards).toEqual([
+      expect.objectContaining({
+        eventIndex: expect.any(Number),
+        loser: expect.any(Number),
+        winners: [expect.objectContaining({
+          uid: finishedMonster.uid,
+          before: expect.objectContaining({
+            level: before.level,
+            totalExperience: before.totalExperience,
+            maxHp: before.base.hp,
+          }),
+          after: expect.objectContaining({
+            level: finishedMonster.level,
+            totalExperience: finishedMonster.totalExperience,
+            maxHp: finishedMonster.base.hp,
+          }),
+        })],
+      }),
+    ]);
     expect(persisted.history).toEqual([
       { fighter: "player", opponent: OPPONENT, outcome: "won" },
       { fighter: OPPONENT, opponent: "player", outcome: "lost" },
@@ -175,9 +249,17 @@ describe("Tuxemon BattleRules adapter", () => {
     }), 717, items, 45)!;
     let value = revealCurrentMenu(rules, started.state);
     let runtime = tuxemonRuntimeBattleState(value);
+    expect(runtime.visuals.items.tuxeball_ancient?.captureSprite)
+      .toEqual(DB.items.tuxeball_ancient.captureSprite);
     expect(runtime.battle.inventory).toEqual(items);
     expect(runtime.battle.runAttempts).toBe(3);
-    expect(runtime.menu.map(({ kind }) => kind)).toEqual(["fight", "capture", "run"]);
+    expect(runtime.menu.map(({ kind, available }) => [kind, available])).toEqual([
+      ["fight", true],
+      ["replacement", false],
+      ["item", false],
+      ["capture", true],
+      ["run", true],
+    ]);
     value = rules.step(value, { buttons: 0, downEdge: true }, 0);
     value = rules.step(value, { buttons: 0, confirmEdge: true }, 0);
     value = rules.step(value, { buttons: 0, confirmEdge: true }, 0);
@@ -421,10 +503,15 @@ describe("Tuxemon BattleRules adapter", () => {
       environment: "grass",
     }), 919, { potion: 2, tuxeball_ancient: 1 })!.state);
     let state = tuxemonRuntimeBattleState(value);
-    expect(state.menu.map(({ kind }) => kind)).toEqual([
-      "fight", "item", "capture", "run", "replacement",
+    expect(state.menu.map(({ kind, available }) => [kind, available])).toEqual([
+      ["fight", true],
+      ["replacement", true],
+      ["item", true],
+      ["capture", true],
+      ["run", true],
     ]);
 
+    value = rules.step(value, { buttons: 0, downEdge: true }, 0);
     value = rules.step(value, { buttons: 0, downEdge: true }, 0);
     value = rules.step(value, { buttons: 0, confirmEdge: true }, 0);
     state = tuxemonRuntimeBattleState(value);
@@ -441,6 +528,7 @@ describe("Tuxemon BattleRules adapter", () => {
     expect(state.menuMode).toBe("root");
     value = rules.step(value, { buttons: 0, downEdge: true }, 0);
     value = rules.step(value, { buttons: 0, downEdge: true }, 0);
+    value = rules.step(value, { buttons: 0, downEdge: true }, 0);
     value = rules.step(value, { buttons: 0, confirmEdge: true }, 0);
     state = tuxemonRuntimeBattleState(value);
     expect(state.menuMode).toBe("capture");
@@ -452,9 +540,7 @@ describe("Tuxemon BattleRules adapter", () => {
     }));
 
     value = rules.step(value, { buttons: 0, cancelEdge: true }, 0);
-    for (let index = 0; index < 4; index++) {
-      value = rules.step(value, { buttons: 0, downEdge: true }, 0);
-    }
+    value = rules.step(value, { buttons: 0, downEdge: true }, 0);
     value = rules.step(value, { buttons: 0, confirmEdge: true }, 0);
     state = tuxemonRuntimeBattleState(value);
     expect(state.menuMode).toBe("swap");
@@ -465,6 +551,7 @@ describe("Tuxemon BattleRules adapter", () => {
     })]);
 
     value = rules.step(value, { buttons: 0, cancelEdge: true }, 0);
+    value = rules.step(value, { buttons: 0, downEdge: true }, 0);
     value = rules.step(value, { buttons: 0, downEdge: true }, 0);
     value = rules.step(value, { buttons: 0, confirmEdge: true }, 0);
     value = rules.step(value, { buttons: 0, confirmEdge: true }, 0);
@@ -501,7 +588,7 @@ describe("Tuxemon BattleRules adapter", () => {
     const rates = [1, 2, 3, 15];
     const advanced = starts.map((start, index) => {
       let value = start;
-      for (let elapsed = 0; elapsed < BATTLE_EVENT_TICKS * 4; elapsed += rates[index]!) {
+      for (let elapsed = 0; elapsed < 30; elapsed += rates[index]!) {
         value = rules.step(value, { buttons: 0 }, rates[index]!);
       }
       return value;

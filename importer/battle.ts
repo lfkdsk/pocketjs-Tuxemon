@@ -819,10 +819,10 @@ function jsonBytes(value: unknown): Uint8Array {
   return new TextEncoder().encode(JSON.stringify(value, null, 1) + "\n");
 }
 
-/** Project the validated import down to fields read by spawn.ts,
- * from-battle-db.ts, runtime.ts, and the minimal scene. The complete database
- * remains the canonical artifact and pak entry; this smaller generated view
- * avoids retaining unrelated item/NPC/animation metadata in QuickJS. */
+/** Project the validated import down to fields read by the battle reducer and
+ * its scene. The complete database remains the canonical artifact and pak
+ * entry; this generated view keeps only rule fields plus presentation assets
+ * that can actually appear during a battle. */
 export function runtimeBattleDb(db: BattleDb): BattleDb {
   const monsters = Object.fromEntries(Object.entries(db.monsters).map(([slug, monster]) => [slug, {
     species: monster.species,
@@ -854,6 +854,8 @@ export function runtimeBattleDb(db: BattleDb): BattleDb {
     effects: technique.effects,
     conditions: technique.conditions,
     statModifiers: technique.statModifiers,
+    messages: technique.messages,
+    ...(technique.animation ? { animation: technique.animation } : {}),
   }]));
   const statuses = Object.fromEntries(Object.entries(db.statuses).map(([slug, status]) => [slug, {
     category: status.category,
@@ -869,6 +871,8 @@ export function runtimeBattleDb(db: BattleDb): BattleDb {
     maxStacks: status.maxStacks,
     statModifiers: status.statModifiers,
     modifiers: status.modifiers,
+    icon: status.icon,
+    ...(status.animation ? { animation: status.animation } : {}),
   }]));
   const items = Object.fromEntries(Object.entries(db.items).map(([slug, item]) => [slug, {
     sort: item.sort,
@@ -880,6 +884,8 @@ export function runtimeBattleDb(db: BattleDb): BattleDb {
     behaviors: item.behaviors,
     statModifiers: item.statModifiers,
     immunityToStatus: item.immunityToStatus,
+    ...(item.captureSprite ? { captureSprite: item.captureSprite } : {}),
+    ...(item.animation ? { animation: item.animation } : {}),
   }]));
   return {
     format: db.format,
@@ -898,9 +904,16 @@ export function runtimeBattleDb(db: BattleDb): BattleDb {
     items,
     statuses,
     encounters: db.encounters,
-    environments: Object.fromEntries(Object.entries(db.environments).map(([slug, environment]) => [slug, {
-      background: environment.background,
+    npcs: Object.fromEntries(Object.entries(db.npcs).map(([slug, npc]) => [slug, {
+      combatSheet: npc.combatSheet,
+      ...(npc.art ? { art: npc.art } : {}),
     }])),
+    environments: db.environments,
+    ui: {
+      hpBar: db.ui.hpBar,
+      expBar: db.ui.expBar,
+      trainerSheets: db.ui.trainerSheets,
+    },
   } as unknown as BattleDb;
 }
 

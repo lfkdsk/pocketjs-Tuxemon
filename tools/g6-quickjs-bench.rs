@@ -34,6 +34,20 @@ mod g6_quickjs_bench {
         total_ms: f64,
     }
 
+    #[derive(Clone, Copy, Default)]
+    struct StructuralOps {
+        create: u64,
+        destroy: u64,
+        insert: u64,
+        remove: u64,
+    }
+
+    impl StructuralOps {
+        fn total(self) -> u64 {
+            self.create + self.destroy + self.insert + self.remove
+        }
+    }
+
     #[derive(Clone)]
     struct Sample {
         frame: usize,
@@ -44,6 +58,7 @@ mod g6_quickjs_bench {
         js_ms: f64,
         core_ms: f64,
         draw_ms: f64,
+        structural: StructuralOps,
     }
 
     struct Bench {
@@ -69,6 +84,40 @@ mod g6_quickjs_bench {
                 .with(|ctx| ctx.eval::<(), _>(source).expect("QuickJS unit eval"));
         }
 
+        fn install_structural_counter(&self) {
+            self.unit(
+                r#"
+                globalThis.__g6BattleOps = {createNode:0,destroyNode:0,insertBefore:0,removeChild:0};
+                for (const name of ["createNode","destroyNode","insertBefore","removeChild"]) {
+                  const original = globalThis.ui[name];
+                  globalThis.ui[name] = function(...args) {
+                    globalThis.__g6BattleOps[name]++;
+                    return original.apply(globalThis.ui, args);
+                  };
+                }
+                "#,
+            );
+        }
+
+        fn reset_structural_counter(&self) {
+            self.unit(
+                "for(const name of Object.keys(globalThis.__g6BattleOps))globalThis.__g6BattleOps[name]=0",
+            );
+        }
+
+        fn structural_ops(&self) -> StructuralOps {
+            let values: (u64, u64, u64, u64) = serde_json::from_str(&self.string(
+                "JSON.stringify([__g6BattleOps.createNode,__g6BattleOps.destroyNode,__g6BattleOps.insertBefore,__g6BattleOps.removeChild])",
+            ))
+            .expect("G6 structural-op tuple");
+            StructuralOps {
+                create: values.0,
+                destroy: values.1,
+                insert: values.2,
+                remove: values.3,
+            }
+        }
+
         fn state(&self) -> (String, bool, bool, bool) {
             serde_json::from_str(&self.string(
                 "JSON.stringify([globalThis.__rpgSessionState.mapId,!!globalThis.__rpgSessionState.move.moving,!!globalThis.__rpgSessionState.fade,globalThis.__rpgSessionState.scene?.kind==='battle'])",
@@ -77,6 +126,7 @@ mod g6_quickjs_bench {
         }
 
         fn frame(&mut self, frame: usize, mask: u32) -> Sample {
+            self.reset_structural_counter();
             self.rt.buttons = mask;
             self.rt.offload.begin_frame();
             let a = Instant::now();
@@ -98,6 +148,7 @@ mod g6_quickjs_bench {
             let _ = self.rt.hash();
             let d = Instant::now();
             let (map, moving, fade, battle) = self.state();
+            let structural = self.structural_ops();
             Sample {
                 frame,
                 map,
@@ -107,6 +158,7 @@ mod g6_quickjs_bench {
                 js_ms: (b - a).as_secs_f64() * 1_000.0,
                 core_ms: (c - b).as_secs_f64() * 1_000.0,
                 draw_ms: (d - c).as_secs_f64() * 1_000.0,
+                structural,
             }
         }
     }
@@ -141,8 +193,22 @@ mod g6_quickjs_bench {
                     .unwrap()
             })
             .unwrap();
+        let structural = samples
+            .iter()
+            .fold(StructuralOps::default(), |mut total, sample| {
+                total.create += sample.structural.create;
+                total.destroy += sample.structural.destroy;
+                total.insert += sample.structural.insert;
+                total.remove += sample.structural.remove;
+                total
+            });
+        let structural_max = samples
+            .iter()
+            .map(|sample| sample.structural.total())
+            .max()
+            .unwrap_or(0);
         println!(
-            "CASE viewport={viewport} kind={label} n={} qjs_p95={:.3}ms qjs_max={:.3}ms total_p95={:.3}ms total_max={:.3}ms worst=f{}:{}",
+            "CASE viewport={viewport} kind={label} n={} qjs_p95={:.3}ms qjs_max={:.3}ms total_p95={:.3}ms total_max={:.3}ms worst=f{}:{} structural={}/{}/{}/{} structural_max={}",
             samples.len(),
             percentile(&js, 0.95),
             js[js.len() - 1],
@@ -150,6 +216,37 @@ mod g6_quickjs_bench {
             total[total.len() - 1],
             worst.frame,
             worst.map,
+            structural.create,
+            structural.destroy,
+            structural.insert,
+            structural.remove,
+            structural_max,
+        );
+    }
+
+    fn assert_zero_structural(viewport: &str, label: &str, samples: &[Sample]) {
+        let churn: Vec<String> = samples
+            .iter()
+            .filter(|sample| sample.structural.total() != 0)
+            .map(|sample| {
+                format!(
+                    "f{}:{}/{}/{}/{}",
+                    sample.frame,
+                    sample.structural.create,
+                    sample.structural.destroy,
+                    sample.structural.insert,
+                    sample.structural.remove,
+                )
+            })
+            .collect();
+        assert!(
+            churn.is_empty(),
+            "{viewport} {label} performed structural UI operations: {}",
+            churn.join(","),
+        );
+        println!(
+            "STRUCTURE viewport={viewport} kind={label} frames={} structural=0",
+            samples.len()
         );
     }
 
@@ -222,7 +319,8 @@ mod g6_quickjs_bench {
     fn journey() {
         let dist = PathBuf::from(std::env::var("G6_DIST").expect("G6_DIST"));
         let journey_path = PathBuf::from(std::env::var("G6_JOURNEY").expect("G6_JOURNEY"));
-        let journey: Journey = serde_json::from_slice(&std::fs::read(journey_path).unwrap()).unwrap();
+        let journey: Journey =
+            serde_json::from_slice(&std::fs::read(journey_path).unwrap()).unwrap();
         let width: u32 = std::env::var("G6_BENCH_W").unwrap().parse().unwrap();
         let height: u32 = std::env::var("G6_BENCH_H").unwrap().parse().unwrap();
         let viewport = format!("{width}x{height}");
@@ -232,9 +330,11 @@ mod g6_quickjs_bench {
         seed_maps(&maps, &data);
 
         let boot_start = Instant::now();
-        let runtime = Runtime::boot(args(&dist, "pocket-tuxemon", data.clone(), width, height)).unwrap();
+        let runtime =
+            Runtime::boot(args(&dist, "pocket-tuxemon", data.clone(), width, height)).unwrap();
         let boot_ms = boot_start.elapsed().as_secs_f64() * 1_000.0;
         let mut bench = Bench { rt: runtime };
+        bench.install_structural_counter();
         let initial_map = bench.state().0;
         let first = bench.frame(0, journey.masks[0]);
         let first_paint_ms = boot_start.elapsed().as_secs_f64() * 1_000.0;
@@ -253,6 +353,7 @@ mod g6_quickjs_bench {
         let mut walking_after_battle = Vec::new();
         let mut switches = Vec::new();
         let mut battle = Vec::new();
+        let mut battle_steady = Vec::new();
         let mut battle_entry = Vec::new();
         let mut battle_exit = Vec::new();
         let mut last_map = initial_map;
@@ -265,6 +366,9 @@ mod g6_quickjs_bench {
             all_frames.push(sample.clone());
             if sample.battle {
                 battle.push(sample.clone());
+                if last_battle {
+                    battle_steady.push(sample.clone());
+                }
             }
             if sample.battle != last_battle {
                 if sample.battle {
@@ -295,14 +399,18 @@ mod g6_quickjs_bench {
         let (end_map, _, _, _) = bench.state();
         assert_eq!(end_map, "spyder_route1");
         let state_text = bench.string("JSON.stringify(globalThis.__rpgSessionState)");
-        let state: serde_json::Value = serde_json::from_str(&state_text).expect("terminal state JSON");
+        let state: serde_json::Value =
+            serde_json::from_str(&state_text).expect("terminal state JSON");
         let state_out = PathBuf::from(std::env::var("G6_STATE_OUT").expect("G6_STATE_OUT"));
-        std::fs::write(&state_out, serde_json::to_vec(&state).unwrap()).expect("write canonical state");
+        std::fs::write(&state_out, serde_json::to_vec(&state).unwrap())
+            .expect("write canonical state");
         report(&viewport, "walking", &walking);
         report(&viewport, "walking-before-battle", &walking_before_battle);
         report(&viewport, "walking-after-battle", &walking_after_battle);
         report(&viewport, "map-switch", &switches);
         report(&viewport, "battle", &battle);
+        report(&viewport, "battle-steady", &battle_steady);
+        assert_zero_structural(&viewport, "battle-steady", &battle_steady);
         report(&viewport, "battle-entry", &battle_entry);
         report(&viewport, "battle-exit", &battle_exit);
         assert_single_frame_budget("battle-entry", &battle_entry, 50.0);
@@ -340,11 +448,13 @@ mod g6_quickjs_bench {
         let report = PathBuf::from(std::env::var("G6_MAP_REPORT").expect("G6_MAP_REPORT"));
         let data = bench_root.join(format!("qjs-map-data-{}", std::process::id()));
         seed_maps(&maps, &data);
-        let runtime = Runtime::boot(args(&dist, "map-benchmark-entry", data.clone(), 480, 272)).unwrap();
+        let runtime =
+            Runtime::boot(args(&dist, "map-benchmark-entry", data.clone(), 480, 272)).unwrap();
         let bench = Bench { rt: runtime };
         let metadata: Vec<MapMeta> = serde_json::from_str(
             &bench.string("JSON.stringify(globalThis.__rpgMapBenchmark.maps)"),
-        ).expect("map benchmark metadata");
+        )
+        .expect("map benchmark metadata");
         assert_eq!(metadata.len(), 263, "benchmark must see every imported map");
 
         let mut samples = Vec::with_capacity(metadata.len());
@@ -352,21 +462,19 @@ mod g6_quickjs_bench {
             let id = serde_json::to_string(&meta.id).unwrap();
             bench.unit(&format!("globalThis.__rpgMapBenchmark.begin({id})"));
             let total_started = Instant::now();
-            let (parsed, read_parse_ms) = timed_bool(
-                &bench,
-                &format!("globalThis.__rpgMapBenchmark.step({id})"),
-            );
-            let (validated, validate_ms) = timed_bool(
-                &bench,
-                &format!("globalThis.__rpgMapBenchmark.step({id})"),
-            );
-            let (compiled, compile_ms) = timed_bool(
-                &bench,
-                &format!("globalThis.__rpgMapBenchmark.step({id})"),
-            );
+            let (parsed, read_parse_ms) =
+                timed_bool(&bench, &format!("globalThis.__rpgMapBenchmark.step({id})"));
+            let (validated, validate_ms) =
+                timed_bool(&bench, &format!("globalThis.__rpgMapBenchmark.step({id})"));
+            let (compiled, compile_ms) =
+                timed_bool(&bench, &format!("globalThis.__rpgMapBenchmark.step({id})"));
             assert!(!parsed, "{} parse step must remain staged", meta.id);
             assert!(!validated, "{} validation step must remain staged", meta.id);
-            assert!(compiled, "{} compile step must complete preparation", meta.id);
+            assert!(
+                compiled,
+                "{} compile step must complete preparation",
+                meta.id
+            );
             let commit_ms = timed_unit(
                 &bench,
                 &format!("globalThis.__rpgMapBenchmark.commit({id})"),
@@ -393,7 +501,8 @@ mod g6_quickjs_bench {
         let mut worst_non_exempt: Option<(&MapSample, f64)> = None;
         let mut worst_all: Option<(&MapSample, f64)> = None;
         for sample in &samples {
-            let worst = sample.read_parse_ms
+            let worst = sample
+                .read_parse_ms
                 .max(sample.validate_ms)
                 .max(sample.compile_ms)
                 .max(sample.commit_ms);
@@ -427,7 +536,8 @@ mod g6_quickjs_bench {
                 worst,
                 sample.total_ms,
                 limit,
-            ).unwrap();
+            )
+            .unwrap();
         }
         if let Some(parent) = report.parent() {
             std::fs::create_dir_all(parent).expect("create map report directory");

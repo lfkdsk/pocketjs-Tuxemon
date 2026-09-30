@@ -19,6 +19,7 @@
     "verify:g6:frozen": "bun tools/frozen-k1.ts",
     "verify:g6:locks": "bun tools/verify-g6-locks.ts",
     "goldens:g6": "HZ=60 bun tools/smoke-spyder.ts && bun tools/update-g6-goldens.ts",
+    "goldens:gb5:battle": "bun tools/update-gb5-battle-goldens.ts",
     "bench:g6:quickjs": "bash tools/bench-g6-quickjs.sh",
     "build:wasm": "bun vendor/pocket-rpgkit/vendor/pocketjs/tools/wasm.ts",
     "build": "bun tools/build.ts",

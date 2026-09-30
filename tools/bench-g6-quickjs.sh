@@ -37,7 +37,7 @@ for viewport in "480 272" "960 544"; do
   # extension RNG cursor, and K4's persistent shop-stock banks.
   # Shared economy removes ext.inventory/ext.money and credits battle rewards
   # to SessionState.gold, changing only the pinned terminal state shape/value.
-  expected=7fdc130b0b90fece5f3814d886dad0a4513417ce31e2d59019dd0ce310d8dd64
+  expected=5653f0110656dd4e0a930ff1908c833c9f9fc221c9cfd3a90d22b138ef8d4827
   test "$actual" = "$expected"
   echo "STATE viewport=${width}x${height} canonical_sha256=$actual"
 done

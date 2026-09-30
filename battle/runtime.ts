@@ -5,7 +5,7 @@ import type {
 } from "../vendor/pocket-rpgkit/src/engine/battle.ts";
 import type { ExtensionReadContext } from "../vendor/pocket-rpgkit/src/engine/extensions.ts";
 import type { JsonValue } from "../vendor/pocket-rpgkit/src/engine/types.ts";
-import type { BattleDb, BattleImageRef } from "../importer/battle-schema.ts";
+import type { BattleAnimationRef, BattleDb, BattleImageRef } from "../importer/battle-schema.ts";
 import {
   initialTuxemonExtensionState,
   KENNEL_LIMIT,
@@ -20,6 +20,11 @@ import {
 } from "./extension.ts";
 import { battleDbToTuxemonBattleDb } from "./from-battle-db.ts";
 import { nextRandom, type RngState } from "./core.ts";
+import {
+  BATTLE_EVENT_TICKS,
+  battleEventDuration,
+  presentationEventSkippable,
+} from "./presentation.ts";
 import { spawnMonster } from "./spawn.ts";
 import {
   canRun,
@@ -40,7 +45,7 @@ import type {
 } from "./types.ts";
 
 export const TUXEMON_BATTLE_STATE_FORMAT = "pocket-tuxemon/battle-runtime/v1";
-export const BATTLE_EVENT_TICKS = 12;
+export { BATTLE_EVENT_TICKS } from "./presentation.ts";
 
 export type VariableEnums = Readonly<Record<string, readonly string[]>>;
 
@@ -94,9 +99,36 @@ export interface RuntimeBattleState {
   startingGold: number;
   environment: string;
   visuals: {
-    background: BattleImageRef;
+    environment: BattleDb["environments"][string];
+    ui: Pick<BattleDb["ui"], "hpBar" | "expBar">;
+    trainers: {
+      player: BattleImageRef | null;
+      opponent: BattleImageRef | null;
+    };
     monsters: Record<string, BattleDb["monsters"][string]["art"]>;
+    techniques: Record<string, {
+      range: string;
+      types: string[];
+      messages: BattleDb["techniques"][string]["messages"];
+      animation?: BattleAnimationRef;
+    }>;
+    items: Record<string, {
+      captureSprite?: BattleImageRef;
+      animation?: BattleAnimationRef;
+    }>;
+    statusIcons: Record<string, BattleImageRef>;
   };
+  presentationRewards: Array<{
+    eventIndex: number;
+    loser: number;
+    winners: Array<{
+      uid: number;
+      effectiveExperience: number;
+      levelsGained: number;
+      before: { level: number; totalExperience: number; maxHp: number };
+      after: { level: number; totalExperience: number; maxHp: number };
+    }>;
+  }>;
   menu: BattleMenuEntry[];
   menuMode: BattleMenuMode;
   eventCursor: number;
@@ -107,9 +139,11 @@ export interface RuntimeBattleState {
 export type BattleMenuMode = "root" | "technique" | "item" | "capture" | "swap";
 
 export interface BattleMenuEntry {
-  kind: "fight" | "technique" | "item" | "capture" | "run" | "replacement";
+  kind: "fight" | "technique" | "item" | "capture" | "run" | "replacement" | "forfeit";
   slug: string;
   cooldown: number;
+  /** Disabled root commands stay serialised so the UI can show their labels. */
+  available: boolean;
   /** Present in doubles, where each move/target pair is a distinct choice. */
   target?: number;
   targetSlug?: string;
@@ -303,8 +337,10 @@ function cloneExtWithoutNpcParty(ext: TuxemonExtensionState, opponent: string): 
 function runtimeState(value: JsonValue): RuntimeBattleState {
   if (!isRecord(value) || value.format !== TUXEMON_BATTLE_STATE_FORMAT
     || !isRecord(value.battle) || !isRecord(value.ext)
-    || !isRecord(value.visuals) || !isRecord(value.visuals.background)
-    || !isRecord(value.visuals.monsters) || !Array.isArray(value.menu)
+    || !isRecord(value.visuals) || !isRecord(value.visuals.environment)
+    || !isRecord(value.visuals.ui) || !isRecord(value.visuals.trainers)
+    || !isRecord(value.visuals.monsters) || !Array.isArray(value.presentationRewards)
+    || !Array.isArray(value.menu)
     || !["root", "technique", "item", "capture", "swap"].includes(String(value.menuMode))
     || !safeInteger(value.eventCursor) || value.eventCursor < 0
     || !safeInteger(value.eventTicks) || value.eventTicks < 0
@@ -347,6 +383,7 @@ export function battleMenuEntries(
             kind: "technique" as const,
             slug: move.slug,
             cooldown: move.cooldown,
+            available: true,
             ...(targets.length > 1 ? {
               target: target.uid,
               targetSlug: target.slug,
@@ -357,7 +394,7 @@ export function battleMenuEntries(
     ));
     return entries.length > 0
       ? entries
-      : [{ kind: "technique", slug: monster.fallback, cooldown: 0 }];
+      : [{ kind: "technique", slug: monster.fallback, cooldown: 0, available: true }];
   };
   const itemEntries = (capture: boolean): BattleMenuEntry[] => {
     const itemTargets = capture ? targets : state.battle.parties[0];
@@ -370,6 +407,7 @@ export function battleMenuEntries(
               kind: capture ? "capture" as const : "item" as const,
               slug,
               cooldown: 0,
+              available: true,
               quantity,
               target: target.uid,
               targetSlug: target.slug,
@@ -385,6 +423,7 @@ export function battleMenuEntries(
           kind: "replacement" as const,
           slug: target.slug,
           cooldown: 0,
+          available: true,
           target: target.uid,
           targetSlug: target.slug,
           targetSlot: index + 1,
@@ -397,18 +436,46 @@ export function battleMenuEntries(
   if (mode === "capture") return itemEntries(true);
   if (mode === "swap") return swapEntries();
 
-  const entries: BattleMenuEntry[] = [{ kind: "fight", slug: "fight", cooldown: 0 }];
-  if (itemEntries(false).length > 0) entries.push({ kind: "item", slug: "item", cooldown: 0 });
-  if (itemEntries(true).length > 0) entries.push({ kind: "capture", slug: "capture", cooldown: 0 });
-  if (canRun(state.battle, monster.uid)) entries.push({ kind: "run", slug: "run", cooldown: 0 });
-  if (swapEntries().length > 0) entries.push({ kind: "replacement", slug: "swap", cooldown: 0 });
+  // Tuxemon's menu profile always constructs Fight, Tuxemon, Item, and the
+  // battle-kind-specific final command in this order. Visibility is the
+  // command's enabled state, not permission to remove its label. Capture is
+  // split out from Item by this runtime and therefore sits beside Item, but is
+  // only part of the wild-battle profile.
+  const entries: BattleMenuEntry[] = [
+    { kind: "fight", slug: "fight", cooldown: 0, available: true },
+    { kind: "replacement", slug: "swap", cooldown: 0, available: swapEntries().length > 0 },
+    { kind: "item", slug: "item", cooldown: 0, available: itemEntries(false).length > 0 },
+  ];
+  if (state.battle.kind === "trainer") {
+    // Upstream only enables this when the opposing trainer offers to forfeit;
+    // that state has no reducer equivalent yet, so retain the original label
+    // in its default disabled state.
+    entries.push({ kind: "forfeit", slug: "forfeit", cooldown: 0, available: false });
+  } else {
+    entries.push(
+      { kind: "capture", slug: "capture", cooldown: 0, available: itemEntries(true).length > 0 },
+      { kind: "run", slug: "run", cooldown: 0, available: canRun(state.battle, monster.uid) },
+    );
+  }
   return entries;
+}
+
+function movedMenuIndex(entries: readonly BattleMenuEntry[], current: number, delta: -1 | 1): number {
+  if (entries.length === 0) return 0;
+  const start = Math.min(current, entries.length - 1);
+  let candidate = start;
+  do {
+    candidate = (candidate + delta + entries.length) % entries.length;
+    if (entries[candidate]!.available) return candidate;
+  } while (candidate !== start);
+  return start;
 }
 
 function setMenu(state: RuntimeBattleState, db: TuxemonBattleDb, mode: BattleMenuMode): void {
   state.menuMode = mode;
-  state.menuIndex = 0;
   state.menu = battleMenuEntries(state, db, mode);
+  const firstAvailable = state.menu.findIndex((entry) => entry.available);
+  state.menuIndex = firstAvailable < 0 ? 0 : firstAvailable;
 }
 
 function presentationDone(state: RuntimeBattleState): boolean {
@@ -416,10 +483,13 @@ function presentationDone(state: RuntimeBattleState): boolean {
 }
 
 function advancePresentation(state: RuntimeBattleState, ticks: number, skip: boolean): void {
-  if (skip && !presentationDone(state)) state.eventTicks = BATTLE_EVENT_TICKS;
   let remaining = ticks;
-  while (!presentationDone(state) && (remaining > 0 || state.eventTicks >= BATTLE_EVENT_TICKS)) {
-    const required = Math.max(0, BATTLE_EVENT_TICKS - state.eventTicks);
+  while (!presentationDone(state)) {
+    const event = state.battle.events[state.eventCursor]!;
+    const duration = battleEventDuration(state, event);
+    if (skip && presentationEventSkippable(event)) state.eventTicks = duration;
+    if (remaining <= 0 && state.eventTicks < duration) return;
+    const required = Math.max(0, duration - state.eventTicks);
     if (required > remaining) {
       state.eventTicks += remaining;
       return;
@@ -698,18 +768,55 @@ export function createTuxemonBattleRules(source: BattleDbSource, enums: Variable
           runAttempts: ext.runAttempts,
         });
         const environment = setup.environment ?? ext.environment!;
-        const background = db.environments[environment]?.background ?? db.environments.grass?.background;
-        if (!background) throw new Error(`Tuxemon battle environment '${environment}' has no background`);
+        const battleEnvironment = db.environments[environment] ?? db.environments.grass;
+        if (!battleEnvironment?.background || !battleEnvironment.island) {
+          throw new Error(`Tuxemon battle environment '${environment}' has incomplete presentation art`);
+        }
         const monsters = Object.fromEntries(
           battle.parties.flat().map((monster) => [monster.slug, db.monsters[monster.slug]!.art]),
         );
+        const techniqueSlugs = new Set(battle.parties.flat().flatMap((monster) => [
+          monster.fallback,
+          ...monster.moves.map((move) => move.slug),
+        ]));
+        const techniques = Object.fromEntries([...techniqueSlugs].map((slug) => {
+          const technique = db.techniques[slug]!;
+          return [slug, {
+            range: technique.range,
+            types: [...technique.types],
+            messages: technique.messages,
+            ...(technique.animation ? { animation: technique.animation } : {}),
+          }];
+        }));
+        const items = Object.fromEntries(Object.keys(context.items).map((slug) => {
+          const item = db.items[slug];
+          return [slug, {
+            ...(item?.captureSprite ? { captureSprite: item.captureSprite } : {}),
+            ...(item?.animation ? { animation: item.animation } : {}),
+          }];
+        }));
+        const statusIcons = Object.fromEntries(Object.entries(db.statuses).flatMap(([slug, status]) =>
+          status.icon ? [[slug, status.icon] as const] : []
+        ));
         const state: RuntimeBattleState = {
           format: TUXEMON_BATTLE_STATE_FORMAT,
           battle,
           ext: startedExt,
           startingGold: context.gold,
           environment,
-          visuals: { background, monsters },
+          visuals: {
+            environment: battleEnvironment,
+            ui: { hpBar: db.ui.hpBar, expBar: db.ui.expBar },
+            trainers: {
+              player: db.ui.trainerSheets.adventurer ?? null,
+              opponent: db.npcs?.[opponent]?.art ?? null,
+            },
+            monsters,
+            techniques,
+            items,
+            statusIcons,
+          },
+          presentationRewards: [],
           menu: [],
           menuMode: "root",
           eventCursor: 0,
@@ -740,18 +847,25 @@ export function createTuxemonBattleRules(source: BattleDbSource, enums: Variable
         return asJson(state);
       }
       if (choices.length === 0) return asJson(state);
-      if (input.upEdge) state.menuIndex = (state.menuIndex + choices.length - 1) % choices.length;
-      if (input.downEdge) state.menuIndex = (state.menuIndex + 1) % choices.length;
+      if (input.upEdge) state.menuIndex = movedMenuIndex(choices, state.menuIndex, -1);
+      if (input.downEdge) state.menuIndex = movedMenuIndex(choices, state.menuIndex, 1);
       if (input.confirmEdge) {
         const index = Math.min(state.menuIndex, choices.length - 1);
         const selected = choices[index]!;
-        if (state.menuMode === "root" && selected.kind !== "run") {
+        if (!selected.available) return asJson(state);
+        if (state.menuMode === "root" && selected.kind !== "run" && selected.kind !== "forfeit") {
           const mode = selected.kind === "fight" ? "technique"
             : selected.kind === "replacement" ? "swap"
               : selected.kind;
           setMenu(state, rulesDb, mode);
           return asJson(state);
         }
+        const rewardCount = state.battle.rewards.length;
+        const beforeProgression = new Map(state.battle.parties.flat().map((monster) => [monster.uid, {
+          level: monster.level,
+          totalExperience: monster.totalExperience,
+          maxHp: monster.base.hp,
+        }]));
         if (selected.kind === "technique") {
           state.battle = reduceBattle(rulesDb, state.battle, { type: "technique", choice: index });
         } else if (selected.kind === "item" || selected.kind === "capture") {
@@ -764,6 +878,31 @@ export function createTuxemonBattleRules(source: BattleDbSource, enums: Variable
           state.battle = reduceBattle(rulesDb, state.battle, { type: "replacement", uid: selected.target! });
         } else if (selected.kind === "run") {
           state.battle = reduceBattle(rulesDb, state.battle, { type: "run" });
+        }
+        for (const reward of state.battle.rewards.slice(rewardCount)) {
+          const eventIndex = state.battle.events.findIndex((event, eventIndex) =>
+            eventIndex >= state.eventCursor && event.type === "faint" && event.monster === reward.loser
+          );
+          state.presentationRewards.push({
+            eventIndex,
+            loser: reward.loser,
+            winners: reward.winners.map((winner) => {
+              const before = beforeProgression.get(winner.uid);
+              const after = state.battle.parties.flat().find((monster) => monster.uid === winner.uid);
+              if (!before || !after) throw new Error(`Tuxemon battle reward references unknown winner ${winner.uid}`);
+              return {
+                uid: winner.uid,
+                effectiveExperience: winner.effectiveExperience,
+                levelsGained: winner.levelsGained,
+                before,
+                after: {
+                  level: after.level,
+                  totalExperience: after.totalExperience,
+                  maxHp: after.base.hp,
+                },
+              };
+            }),
+          });
         }
         state.eventTicks = 0;
         setMenu(state, rulesDb, "root");

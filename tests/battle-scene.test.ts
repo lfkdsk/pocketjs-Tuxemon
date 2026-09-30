@@ -22,10 +22,10 @@ test("battle layout scales exactly at both target resolutions", () => {
   const player = { currentHp: 31, base: { hp: 62 } as any };
   const enemy = { currentHp: 17, base: { hp: 40 } as any };
   expect(battleSceneLayout(480, 272, player, enemy)).toEqual({
-    scale: 1, left: 0, top: 0, playerHpWidth: 58, enemyHpWidth: 49,
+    scale: 1, left: 0, top: 0, playerHpWidth: 50, enemyHpWidth: 60,
   });
   expect(battleSceneLayout(960, 544, player, enemy)).toEqual({
-    scale: 2, left: 0, top: 0, playerHpWidth: 58, enemyHpWidth: 49,
+    scale: 2, left: 0, top: 0, playerHpWidth: 50, enemyHpWidth: 60,
   });
 });
 
