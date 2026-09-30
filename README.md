@@ -2,7 +2,7 @@
 
 [Tuxemon](https://github.com/Tuxemon/Tuxemon)'s world — its maps, events,
 characters and dialogue — imported into
-[Pocket RPG Kit](https://github.com/lfkdsk/pocket-rpgkit) and played on
+[Pocket RPG Kit](https://github.com/lfkdsk/pocketjs-rpgkit) and played on
 [PocketJS](https://github.com/pocket-nexus/pocketjs) (desktop, web, PSP).
 
 Work in progress. The importer reads a pinned Tuxemon checkout
