@@ -62,11 +62,15 @@ function toMonster(slug: string, monster: BattleDb["monsters"][string]): DbMonst
   return {
     slug,
     shape: monster.shape,
+    stage: monster.stage,
     types: monster.types,
     moveset: monster.moveset.map((move) => ({
       technique: move.technique,
       learning_method: move.method,
       level_learned: move.level,
+      ...(move.evolutionStage === undefined ? {} : {
+        evolution_stage_learned: move.evolutionStage,
+      }),
     })),
   };
 }
@@ -142,6 +146,7 @@ export function battleDbToTuxemonBattleDb(db: BattleDb): TuxemonBattleDb {
         modifiers: [{ values: [taste.stat], multiplier: taste.multiplier }],
       }]),
     ),
+    taste_order: db.tasteOrder,
     shape: Object.fromEntries(
       Object.entries(db.shapes).map(([slug, shape]) => [slug, { attributes: shape as Stats }]),
     ),

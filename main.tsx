@@ -7,6 +7,8 @@ import type { ProjectShell } from "./vendor/pocket-rpgkit/src/engine/types.ts";
 import { GameView } from "./vendor/pocket-rpgkit/src/ui/GameView.tsx";
 import { GAME_ASSETS } from "./ui/game-assets.ts";
 import { BATTLE_ASSET_PATHS } from "./ui/battle-assets.ts";
+import { TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS } from "./battle/production.ts";
+import { TuxemonBattleScene } from "./ui/battle-scene.tsx";
 
 const project = rawProject as unknown as ProjectShell;
 const repository = createJsonMapRepository(project.mapIndex, {
@@ -24,6 +26,9 @@ mount(() => (
   <GameView
     project={project}
     maps={repository}
+    extensions={TUXEMON_EXTENSIONS}
+    battle={TUXEMON_BATTLE_RULES}
+    battleScene={TuxemonBattleScene}
     assets={GAME_ASSETS}
     theme={{
       border: "#224f68",

@@ -28,6 +28,7 @@ mkdir -p /var/tmp/fleet/gb2-oracle
 /var/tmp/fleet/gb2-oracle-venv/bin/python tools/battle-oracle/extract_spyder_parties.py tools/battle-oracle/spyder-parties.json
 TUXEMON_SRC=/var/tmp/tuxemon-src /var/tmp/fleet/gb2-oracle-venv/bin/python tools/battle-oracle/export_data.py tools/battle-oracle/tuxemon-battle.json
 TUXEMON_SRC=/var/tmp/tuxemon-src /var/tmp/fleet/gb2-oracle-venv/bin/python tools/battle-oracle/generate_spyder.py tools/battle-oracle/spyder-parties.json tests/goldens/gb2-spyder-traces.ndjson.gz 20
+TUXEMON_SRC=/var/tmp/tuxemon-src /var/tmp/fleet/gb2-oracle-venv/bin/python tools/battle-oracle/generate_spawn.py data/battle-db.json tests/goldens/gb4-monster-spawns.json.gz
 bun tools/battle-oracle/compare-golden.ts tests/goldens/gb2-spyder-traces.ndjson.gz tools/battle-oracle/tuxemon-battle.json
 ```
 
@@ -38,6 +39,10 @@ techniques is replaced with stable active-field order, and a true draw is a
 player defeat with a retained `draw` result instead of invoking Tuxemon's
 crashing draw handler. The generator writes sorted compact JSON into gzip with
 `mtime=0`, making repeated output byte-identical.
+
+The spawn corpus covers every imported trainer definition at three seeds and
+twelve representative wild species. It compares all persistent spawn fields
+and the final random cursor; every monster must consume exactly thirteen draws.
 
 To verify determinism without replacing committed files, generate twice under
 `/var/tmp/fleet/gb2-oracle` and compare them with `cmp`. To run the checked-in

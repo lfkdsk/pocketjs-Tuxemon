@@ -1020,6 +1020,20 @@
    "multiplier": 1.1
   }
  },
+ "tasteOrder": [
+  "mild",
+  "sweet",
+  "soft",
+  "flakey",
+  "dry",
+  "peppy",
+  "salty",
+  "hearty",
+  "zesty",
+  "refined",
+  "savory",
+  "bland"
+ ],
  "monsters": {
   "aardart": {
    "species": "anteater",

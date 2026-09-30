@@ -12,6 +12,7 @@ import {
 } from "../importer/project.ts";
 import { jsonBytes } from "../importer/index.ts";
 import { applyTerrain, importTerrain } from "../importer/terrain.ts";
+import { TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS } from "../battle/game.ts";
 import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
 import { canStepFrom, type Dir4 } from "../vendor/pocket-rpgkit/src/engine/passability.ts";
 import { createSwitchState } from "../vendor/pocket-rpgkit/src/engine/interpreter.ts";
@@ -126,7 +127,7 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   });
   expect(new Set(result.report.rows.map((row) => row.key)).size).toBe(result.report.rows.length);
   expect(result.report.rows.some((row) => row.key === "trigger:touch:facing:T1-lowered")).toBeTrue();
-  expect(Object.keys(result.variables)).toHaveLength(493);
+  expect(Object.keys(result.variables)).toHaveLength(494);
   expect(Object.values(result.variables).filter((values) => values.length === 0)).toHaveLength(19);
   expect(
     result.report.coverage.actions.summary.native +
@@ -266,7 +267,7 @@ test("default import output remains byte-pinned", () => {
   const maps = ["spyder_downstairs", "spyder_paper_town"];
   const bytes = jsonBytes(buildProject(maps, DEFAULT_IMPORT_OPTIONS));
   expect(createHash("sha256").update(bytes).digest("hex")).toBe(
-    "1f4aa5b232b560d9de776188ea4787d08fc8a68e8a12df503767c0d0948d428c",
+    "31c70a9cb23ed6817379144403c1530a39f13999aceca66a796bcd2d7a2d48c0",
   );
 });
 
@@ -458,6 +459,30 @@ test("open_shop becomes a visible G6 stock-summary placeholder", () => {
   expect(shopLines.join("\n")).toContain("P1 placeholder; trading is unavailable.");
 });
 
+test("G6 emits native party state and Battle Processing for the first fight", () => {
+  const result = buildProject(["spyder_paper_town"], G6_IMPORT_OPTIONS);
+  const nodes = objectNodes(result.project);
+  const billie = nodes.find((node) => node.op === "ext" && node.call === "tux.add_monster" &&
+    (node.args as { character?: string } | undefined)?.character === "spyder_billie");
+  expect(billie?.args).toEqual({
+    species: {
+      variable: "v.billie_choice",
+      values: ["bamboon", "bigfin", "budaye", "dollfin", "eruptibus", "grintot", "grintrock", "ignibus", "memnomnom", "miaownolith"],
+    },
+    level: 5,
+    character: "spyder_billie",
+    experienceModifier: 5,
+    moneyModifier: 10,
+  });
+  expect(nodes).toContainEqual({
+    op: "battle",
+    setup: { kind: "trainer", opponent: "spyder_billie", inside: false, hour: 12 },
+  });
+  expect(nodes.some((node) => node.op === "variable" && node.id === "sys.party_size")).toBeFalse();
+  expect(nodes.some((node) => node.kind === "ext" && node.call === "tux.party_size")).toBeTrue();
+  expect(result.variables.battle_last_loser).toContain("spyder_billie");
+});
+
 test("simultaneously eligible route1 automatic events run concurrently and release input (N1)", () => {
   const result = buildProject(["route1"], G6_IMPORT_OPTIONS);
   const projectWithTerrain = applyTerrain(result.project, importTerrain({ mapIds: ["route1"] }).fragment);
@@ -470,7 +495,10 @@ test("simultaneously eligible route1 automatic events run concurrently and relea
     ...projectWithTerrain,
     start: { map: "route1", x: 31, y: 25, dir: "down" as const },
   };
-  const session = createSession(project, 60);
+  const session = createSession(project, 60, {
+    extensions: TUXEMON_EXTENSIONS,
+    battle: TUXEMON_BATTLE_RULES,
+  });
   let state = startSession(project, session, createSwitchState({
     variables: { "sys.party_size": 1, "v.whoartthou": 5 },
   }));
@@ -494,7 +522,7 @@ test("simultaneously eligible route1 automatic events run concurrently and relea
   expect(state.interp.error).toBeUndefined();
 });
 
-test("Spyder opening completes identically at 60, 30, 20, and 4 Hz", () => {
+test("Spyder first-fight win and loss complete identically at 60, 30, 20, and 4 Hz", () => {
   const maintainedProject = resolve(ROOT, "dist/project.json");
   const before = readFileSync(maintainedProject);
   const scratchParent = resolve(process.env.G6_SCRATCH_ROOT ?? "/var/tmp/fleet/pocket-tuxemon");
@@ -502,17 +530,19 @@ test("Spyder opening completes identically at 60, 30, 20, and 4 Hz", () => {
   const isolatedRoot = mkdtempSync(join(scratchParent, "g6-hz-"));
   const transcripts: string[] = [];
   const results: Record<string, unknown>[] = [];
-  const runAt = (hz: number) => {
+  let firstWin: Record<string, unknown> | undefined;
+  const runAt = (hz: number, outcome: "win" | "lose" = "win") => {
     const run = spawnSync(process.execPath, ["tools/smoke-spyder.ts"], {
       cwd: ROOT,
       encoding: "utf8",
-      env: { ...process.env, G6_PROJECT_ROOT: isolatedRoot, HZ: String(hz) },
+      env: { ...process.env, G6_PROJECT_ROOT: isolatedRoot, HZ: String(hz), GB4_OUTCOME: outcome },
       timeout: 30_000,
     });
     if (run.status !== 0) {
       throw new Error(`smoke ${hz} Hz failed\n${run.stdout}\n${run.stderr}`);
     }
-    const result = JSON.parse(readFileSync(resolve(isolatedRoot, `dist/journey-spyder-${hz}hz.json`), "utf8")) as Record<string, unknown>;
+    const tag = outcome === "win" ? `${hz}hz` : `lose-${hz}hz`;
+    const result = JSON.parse(readFileSync(resolve(isolatedRoot, `dist/journey-spyder-${tag}.json`), "utf8")) as Record<string, unknown>;
     return { run, result };
   };
   try {
@@ -528,23 +558,12 @@ test("Spyder opening completes identically at 60, 30, 20, and 4 Hz", () => {
     const assetReport = JSON.parse(readFileSync(resolve(isolatedRoot, "data/g6-assets-report.json"), "utf8"));
     expect(assetReport.project).toMatchObject({ maps: 263, options: G6_IMPORT_OPTIONS });
 
-    for (const hz of [60, 30, 20, 4]) {
-      const { run, result } = runAt(hz);
-      expect(run.stdout.match(/PASS  /g)).toHaveLength(12);
-      expect(run.stdout).toContain('"map":"spyder_route1"');
-      transcripts.push(run.stdout.replace(/\[\s*\d+\]/g, "[frame]"));
-      results.push(result);
-    }
     const beats = (transcript: string) => transcript
       .split("\n")
       // PASS lines can straddle a new map's first autorun text at low host
       // rates because one folded host frame advances both. The observable
       // story sequence and final state must still be identical.
       .filter((line) => /(?:TEXT|PICK|MAP)/.test(line));
-    expect(beats(transcripts[1]!)).toEqual(beats(transcripts[0]!));
-    expect(beats(transcripts[2]!)).toEqual(beats(transcripts[0]!));
-    expect(beats(transcripts[3]!)).toEqual(beats(transcripts[0]!));
-
     const outcome = (result: Record<string, unknown>) => ({
       map: result.map,
       position: result.position,
@@ -552,11 +571,41 @@ test("Spyder opening completes identically at 60, 30, 20, and 4 Hz", () => {
       checkpoints: (result.checkpoints as { name: string; map: string; position: [number, number] }[])
         .map(({ name, map, position }) => ({ name, map, position })),
     });
-    for (const result of results.slice(1)) expect(outcome(result)).toEqual(outcome(results[0]!));
+    for (const wanted of ["win", "lose"] as const) {
+      transcripts.length = 0;
+      results.length = 0;
+      for (const hz of [60, 30, 20, 4]) {
+        const { run, result } = runAt(hz, wanted);
+        expect(run.stdout).not.toContain("FAIL  ");
+        expect(run.stdout).toContain("PASS  L rewind crossed back into the active battle");
+        expect(run.stdout).toContain("PASS  replaying after L rewind restores the identical result");
+        expect(run.stdout).toContain('"map":"spyder_route1"');
+        transcripts.push(run.stdout.replace(/\[\s*\d+\]/g, "[frame]"));
+        results.push(result);
+      }
+      if (wanted === "win") {
+        expect(beats(transcripts[1]!)).toEqual(beats(transcripts[0]!));
+        expect(beats(transcripts[2]!)).toEqual(beats(transcripts[0]!));
+        expect(beats(transcripts[3]!)).toEqual(beats(transcripts[0]!));
+      } else {
+        // At 4 Hz one host frame folds 15 reference ticks, so the two
+        // concurrently eligible loss/teleport fibers can carry the first
+        // modal across a map boundary instead of exposing its duplicate to
+        // this host-frame logger. The authored loss and recovery beats, plus
+        // the final world state below, remain invariant.
+        for (const transcript of transcripts) {
+          expect(transcript).toContain("As expected! Old models can't compare to new ones!");
+          expect(transcript).toContain("I'll heal you up this time, but I'm not a charity.");
+          expect(transcript).toContain("spyder_paper_town -> spyder_bedroom @3,4");
+        }
+      }
+      for (const result of results.slice(1)) expect(outcome(result)).toEqual(outcome(results[0]!));
+      if (wanted === "win") firstWin = results[0];
+    }
 
-    const repeated = runAt(60).result;
-    expect(repeated.sha256).toBe(results[0]!.sha256);
-    expect(repeated.masks).toEqual(results[0]!.masks);
+    const repeated = runAt(60, "win").result;
+    expect(repeated.sha256).toBe(firstWin!.sha256);
+    expect(repeated.masks).toEqual(firstWin!.masks);
   } finally {
     rmSync(isolatedRoot, { recursive: true, force: true });
   }

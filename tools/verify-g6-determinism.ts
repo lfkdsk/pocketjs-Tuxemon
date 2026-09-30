@@ -17,6 +17,7 @@ const GENERATED = [
   "data/terrain-report.json",
   "data/g6-assets-report.json",
   "data/battle-db.json",
+  "data/battle-runtime-db.json",
   "data/battle-assets-report.json",
   "dist/maps",
   "dist/project.json",

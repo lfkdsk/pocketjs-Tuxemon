@@ -11,7 +11,8 @@
   "localReset": true,
   "place": true,
   "inputLock": true,
-  "routes": true
+  "routes": true,
+  "battle": true
  },
  "maps": [
   "37707_tower",
@@ -280,12 +281,12 @@
  ],
  "schemaErrors": [],
  "byFate": {
-  "T3-dropped": 5024,
-  "T1": 25074,
-  "T3-placeholder": 2185,
-  "T4-dropped": 4852,
-  "T1-lowered": 3656,
+  "T3-dropped": 3591,
+  "T1": 29545,
+  "T4-dropped": 4174,
+  "T1-lowered": 3897,
   "T2-dropped": 261,
+  "T3-placeholder": 58,
   "structural": 772
  },
  "rows": [
@@ -308,16 +309,16 @@
    "note": "item add/sub"
   },
   {
-   "key": "act:add_monster(npc):T3-dropped",
-   "fate": "T3-dropped",
-   "count": 717,
-   "note": "trainer teams are P2"
+   "key": "act:add_monster(npc folded):T1",
+   "fate": "T1",
+   "count": 677,
+   "note": "literal trainer monster folded into Battle Processing setup"
   },
   {
-   "key": "act:add_monster:T3-placeholder",
-   "fate": "T3-placeholder",
-   "count": 68,
-   "note": "sys.party_size += 1, switch mon.<slug>"
+   "key": "act:add_monster:T1",
+   "fate": "T1",
+   "count": 108,
+   "note": "tux.add_monster spawns into the persistent party"
   },
   {
    "key": "act:add_step_tracker:T4-dropped",
@@ -400,13 +401,13 @@
   {
    "key": "act:char_face:T1",
    "fate": "T1",
-   "count": 528,
+   "count": 531,
    "note": "K2 moveRoute targets an arbitrary event"
   },
   {
    "key": "act:char_face:T1-lowered",
    "fate": "T1-lowered",
-   "count": 440,
+   "count": 446,
    "note": "spawn facing becomes the NPC page route"
   },
   {
@@ -490,7 +491,7 @@
   {
    "key": "act:clear_variable:T1",
    "fate": "T1",
-   "count": 32,
+   "count": 35,
    "note": "variable set 0"
   },
   {
@@ -550,7 +551,7 @@
   {
    "key": "act:lock_controls:T1",
    "fate": "T1",
-   "count": 323,
+   "count": 325,
    "note": "K1 cross-event input lock command"
   },
   {
@@ -592,7 +593,7 @@
   {
    "key": "act:pathfind:T1",
    "fate": "T1",
-   "count": 325,
+   "count": 326,
    "note": "K2 deterministic pathTo route"
   },
   {
@@ -616,7 +617,7 @@
   {
    "key": "act:play_sound:T1",
    "fate": "T1",
-   "count": 68,
+   "count": 72,
    "note": "se cue"
   },
   {
@@ -632,10 +633,10 @@
    "note": "presentation / meta"
   },
   {
-   "key": "act:random_encounter:T3-placeholder",
-   "fate": "T3-placeholder",
+   "key": "act:random_encounter:T1",
+   "fate": "T1",
    "count": 438,
-   "note": "intentionally silent in P1"
+   "note": "Battle Processing with deterministic encounter-table sampling"
   },
   {
    "key": "act:random_integer:T1",
@@ -664,7 +665,7 @@
   {
    "key": "act:remove_npc:T1",
    "fate": "T1",
-   "count": 217,
+   "count": 219,
    "note": "local.npc.<slug> = 0"
   },
   {
@@ -716,10 +717,10 @@
    "note": "presentation / meta"
   },
   {
-   "key": "act:set_environment:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "act:set_environment:T1",
+   "fate": "T1",
    "count": 118,
-   "note": "monster/combat subsystem (P2)"
+   "note": "tux.set_environment updates the active battle backdrop"
   },
   {
    "key": "act:set_facing_mode:T2-dropped",
@@ -730,7 +731,7 @@
   {
    "key": "act:set_layer:T4-dropped",
    "fate": "T4-dropped",
-   "count": 65,
+   "count": 68,
    "note": "presentation / meta"
   },
   {
@@ -746,10 +747,10 @@
    "note": "monster/combat subsystem (P2)"
   },
   {
-   "key": "act:set_monster_health:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "act:set_monster_health:T1",
+   "fate": "T1",
    "count": 88,
-   "note": "monster/combat subsystem (P2)"
+   "note": "tux.set_monster_health updates persistent party HP"
   },
   {
    "key": "act:set_monster_level:T4-dropped",
@@ -758,10 +759,10 @@
    "note": "presentation / meta"
   },
   {
-   "key": "act:set_monster_status:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "act:set_monster_status:T1",
+   "fate": "T1",
    "count": 88,
-   "note": "monster/combat subsystem (P2)"
+   "note": "tux.set_monster_status updates persistent party status"
   },
   {
    "key": "act:set_party_status:T4-dropped",
@@ -776,10 +777,10 @@
    "note": "variable random enum code"
   },
   {
-   "key": "act:set_teleport_faint:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "act:set_teleport_faint:T1",
+   "fate": "T1",
    "count": 27,
-   "note": "monster/combat subsystem (P2)"
+   "note": "tux.set_faint_point stores the character's recovery destination"
   },
   {
    "key": "act:set_template:T4-dropped",
@@ -796,26 +797,32 @@
   {
    "key": "act:set_variable:T1",
    "fate": "T1",
-   "count": 1246,
+   "count": 1248,
    "note": "variable set enum code"
+  },
+  {
+   "key": "act:start_battle:T1",
+   "fate": "T1",
+   "count": 325,
+   "note": "Battle Processing with extension-staged trainer party"
   },
   {
    "key": "act:start_battle:T3-placeholder",
    "fate": "T3-placeholder",
-   "count": 330,
-   "note": "inline placeholder: text + outcome writes"
+   "count": 5,
+   "note": "NPC-versus-NPC battles are not supported yet; skipped"
   },
   {
    "key": "act:start_double_battle:T3-placeholder",
    "fate": "T3-placeholder",
    "count": 8,
-   "note": "inline placeholder: text + outcome writes"
+   "note": "double battles are not supported yet; skipped"
   },
   {
-   "key": "act:teleport_faint:T4-dropped",
-   "fate": "T4-dropped",
-   "count": 2,
-   "note": "presentation / meta"
+   "key": "act:teleport_faint:T1",
+   "fate": "T1",
+   "count": 104,
+   "note": "guarded variable transfer to the stored faint point"
   },
   {
    "key": "act:trading:T4-dropped",
@@ -832,7 +839,7 @@
   {
    "key": "act:transition_teleport:T1",
    "fate": "T1",
-   "count": 1044,
+   "count": 1045,
    "note": "transfer (terminal; dir from trailing char_face)"
   },
   {
@@ -844,7 +851,7 @@
   {
    "key": "act:translated_dialog:T1",
    "fate": "T1",
-   "count": 2164,
+   "count": 2270,
    "note": "text boxes from en_US .po (layout args ignored)"
   },
   {
@@ -868,7 +875,7 @@
   {
    "key": "act:unlock_controls:T1",
    "fate": "T1",
-   "count": 328,
+   "count": 330,
    "note": "K1 cross-event input lock command"
   },
   {
@@ -892,14 +899,14 @@
   {
    "key": "act:wait:T1",
    "fate": "T1",
-   "count": 425,
+   "count": 427,
    "note": "wait seconds"
   },
   {
-   "key": "act:wild_encounter:T3-placeholder",
-   "fate": "T3-placeholder",
+   "key": "act:wild_encounter:T1",
+   "fate": "T1",
    "count": 20,
-   "note": "scripted wild battle auto-wins in P1"
+   "note": "Battle Processing with a scripted wild monster"
   },
   {
    "key": "behav:talk(char_face npc,player):T1",
@@ -914,28 +921,16 @@
    "note": "talk -> NPC action page"
   },
   {
-   "key": "cond:is battle_outcome(draw):T3-placeholder",
-   "fate": "T3-placeholder",
-   "count": 1,
-   "note": "P1 never loses"
+   "key": "cond:is battle_outcome:T1",
+   "fate": "T1",
+   "count": 227,
+   "note": "tux.battle_outcome extension condition"
   },
   {
-   "key": "cond:is battle_outcome(lost):T3-placeholder",
-   "fate": "T3-placeholder",
-   "count": 1,
-   "note": "P1 never loses"
-  },
-  {
-   "key": "cond:is battle_outcome:T3-placeholder",
-   "fate": "T3-placeholder",
-   "count": 225,
-   "note": "switch bo.<opp>.won written by the battle placeholder"
-  },
-  {
-   "key": "cond:is battle_outcome_count:T3-placeholder",
-   "fate": "T3-placeholder",
+   "key": "cond:is battle_outcome_count:T1",
+   "fate": "T1",
    "count": 2,
-   "note": "variable boc.<opp>.won counted by the placeholder"
+   "note": "tux.battle_outcome_count extension condition"
   },
   {
    "key": "cond:is bill_is:T3-dropped",
@@ -956,10 +951,10 @@
    "note": "consumed by trigger selection"
   },
   {
-   "key": "cond:is char_defeated:T3-placeholder",
-   "fate": "T3-placeholder",
+   "key": "cond:is char_defeated:T1",
+   "fate": "T1",
    "count": 206,
-   "note": "player never defeated in P1; NPC: switch defeated.<slug>"
+   "note": "tux.char_defeated reads live party HP"
   },
   {
    "key": "cond:is char_exists:T1",
@@ -1058,10 +1053,10 @@
    "note": "folded against the P1 WorldState-only runtime"
   },
   {
-   "key": "cond:is environment_is:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "cond:is environment_is:T1",
+   "fate": "T1",
    "count": 28,
-   "note": "battle backdrop only"
+   "note": "tux.environment_is reads the active battle backdrop"
   },
   {
    "key": "cond:is has_item:T1",
@@ -1076,10 +1071,10 @@
    "note": "monster/party/meta state unknown to P1: fixed answer"
   },
   {
-   "key": "cond:is has_monster:T3-placeholder",
-   "fate": "T3-placeholder",
+   "key": "cond:is has_monster:T1",
+   "fate": "T1",
    "count": 24,
-   "note": "switch mon.<slug> set by add_monster"
+   "note": "tux.has_monster reads the persistent party"
   },
   {
    "key": "cond:is has_tuxepedia:T3-dropped",
@@ -1130,10 +1125,10 @@
    "note": "no plague in P1: none=true"
   },
   {
-   "key": "cond:is party_size:T3-placeholder",
-   "fate": "T3-placeholder",
+   "key": "cond:is party_size:T1",
+   "fate": "T1",
    "count": 250,
-   "note": "variable sys.party_size kept by add_monster"
+   "note": "tux.party_size reads the persistent party"
   },
   {
    "key": "cond:is player_facing_tile:T2-dropped",
@@ -1166,28 +1161,16 @@
    "note": "page/if variable compare on the enum code"
   },
   {
-   "key": "cond:not battle_outcome(draw):T3-placeholder",
-   "fate": "T3-placeholder",
-   "count": 1,
-   "note": "P1 never loses"
+   "key": "cond:not battle_outcome:T1",
+   "fate": "T1",
+   "count": 363,
+   "note": "tux.battle_outcome extension condition"
   },
   {
-   "key": "cond:not battle_outcome(lost):T3-placeholder",
-   "fate": "T3-placeholder",
-   "count": 1,
-   "note": "P1 never loses"
-  },
-  {
-   "key": "cond:not battle_outcome:T3-placeholder",
-   "fate": "T3-placeholder",
-   "count": 361,
-   "note": "switch bo.<opp>.won written by the battle placeholder"
-  },
-  {
-   "key": "cond:not battle_outcome_count:T3-placeholder",
-   "fate": "T3-placeholder",
+   "key": "cond:not battle_outcome_count:T1",
+   "fate": "T1",
    "count": 9,
-   "note": "variable boc.<opp>.won counted by the placeholder"
+   "note": "tux.battle_outcome_count extension condition"
   },
   {
    "key": "cond:not bill_exists:T3-dropped",
@@ -1196,10 +1179,10 @@
    "note": "monster/party/meta state unknown to P1: fixed answer"
   },
   {
-   "key": "cond:not char_defeated:T3-placeholder",
-   "fate": "T3-placeholder",
+   "key": "cond:not char_defeated:T1",
+   "fate": "T1",
    "count": 179,
-   "note": "player never defeated in P1; NPC: switch defeated.<slug>"
+   "note": "tux.char_defeated reads live party HP"
   },
   {
    "key": "cond:not char_exists:T1",
@@ -1250,10 +1233,10 @@
    "note": "monster/party/meta state unknown to P1: fixed answer"
   },
   {
-   "key": "cond:not environment_is:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "cond:not environment_is:T1",
+   "fate": "T1",
    "count": 367,
-   "note": "battle backdrop only"
+   "note": "tux.environment_is reads the active battle backdrop"
   },
   {
    "key": "cond:not has_item:T1",
@@ -1262,10 +1245,10 @@
    "note": "item count >= n"
   },
   {
-   "key": "cond:not has_monster:T3-placeholder",
-   "fate": "T3-placeholder",
+   "key": "cond:not has_monster:T1",
+   "fate": "T1",
    "count": 11,
-   "note": "switch mon.<slug> set by add_monster"
+   "note": "tux.has_monster reads the persistent party"
   },
   {
    "key": "cond:not has_tuxepedia:T3-dropped",
@@ -1310,10 +1293,10 @@
    "note": "no music in P1"
   },
   {
-   "key": "cond:not party_size:T3-placeholder",
-   "fate": "T3-placeholder",
+   "key": "cond:not party_size:T1",
+   "fate": "T1",
    "count": 5,
-   "note": "variable sys.party_size kept by add_monster"
+   "note": "tux.party_size reads the persistent party"
   },
   {
    "key": "cond:not tile_property_updated:T3-dropped",
@@ -1360,7 +1343,7 @@
   {
    "key": "trigger:guard:T1",
    "fate": "T1",
-   "count": 679,
+   "count": 899,
    "note": "parallel"
   },
   {
@@ -1378,13 +1361,13 @@
   {
    "key": "trigger:never-true guard:T4-dropped",
    "fate": "T4-dropped",
-   "count": 2478,
+   "count": 2369,
    "note": "fixed-false guard prevents the source event from starting"
   },
   {
    "key": "trigger:no-op after conversion:T4-dropped",
    "fate": "T4-dropped",
-   "count": 1200,
+   "count": 630,
    "note": "every action was removed, so no project event was emitted"
   },
   {
@@ -1402,7 +1385,7 @@
   {
    "key": "trigger:stacked event areas:T1-lowered",
    "fate": "T1-lowered",
-   "count": 223,
+   "count": 458,
    "note": "partitioned: match flags then bodies"
   },
   {
@@ -1414,13 +1397,19 @@
   {
    "key": "trigger:touch:facing(area):T1",
    "fate": "T1",
-   "count": 931,
+   "count": 936,
    "note": "K1 rectangular event area (overlaps partitioned after guard sampling)"
   },
   {
    "key": "trigger:touch:on(area):T1",
    "fate": "T1",
-   "count": 346,
+   "count": 348,
+   "note": "K1 rectangular event area (overlaps partitioned after guard sampling)"
+  },
+  {
+   "key": "trigger:touch:step(area):T1",
+   "fate": "T1",
+   "count": 452,
    "note": "K1 rectangular event area (overlaps partitioned after guard sampling)"
   }
  ],
@@ -1483,15 +1472,15 @@
    "summary": {
     "types": 98,
     "uses": 13617,
-    "native": 9619,
-    "degraded": 637,
-    "placeholder": 461,
-    "dropped": 2900,
-    "nativePercent": 70.6,
-    "executablePercent": 78.7,
+    "native": 11537,
+    "degraded": 638,
+    "placeholder": 48,
+    "dropped": 1394,
+    "nativePercent": 84.7,
+    "executablePercent": 89.8,
     "tier1": {
-     "uses": 6099,
-     "percent": 44.79,
+     "uses": 6123,
+     "percent": 44.97,
      "requiredUses": 6246,
      "requiredPercent": 45.9,
      "meetsBaseline": false
@@ -1531,16 +1520,17 @@
     {
      "type": "add_monster",
      "total": 792,
-     "native": 0,
+     "native": 785,
      "degraded": 0,
-     "placeholder": 68,
-     "dropped": 724,
+     "placeholder": 0,
+     "dropped": 7,
      "reasons": {
-      "placeholder": [
-       "sys.party_size += 1, switch mon.<slug>"
+      "native": [
+       "tux.add_monster spawns into the persistent party",
+       "literal trainer monster folded into Battle Processing setup",
+       "tux.add_monster stages a live-variable or cross-event trainer monster"
       ],
       "dropped": [
-       "trainer teams are P2",
        "fixed-false guard prevents the source event from starting"
       ]
      }
@@ -1666,10 +1656,10 @@
     {
      "type": "char_face",
      "total": 2027,
-     "native": 1552,
-     "degraded": 440,
+     "native": 1555,
+     "degraded": 441,
      "placeholder": 0,
-     "dropped": 35,
+     "dropped": 31,
      "reasons": {
       "degraded": [
        "spawn facing becomes the NPC page route",
@@ -1837,10 +1827,10 @@
     {
      "type": "clear_variable",
      "total": 36,
-     "native": 32,
+     "native": 35,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 4,
+     "dropped": 1,
      "reasons": {
       "native": [
        "variable set 0"
@@ -2028,10 +2018,10 @@
     {
      "type": "lock_controls",
      "total": 323,
-     "native": 317,
+     "native": 319,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 6,
+     "dropped": 4,
      "reasons": {
       "native": [
        "K1 cross-event input lock command"
@@ -2141,10 +2131,10 @@
     {
      "type": "pathfind",
      "total": 336,
-     "native": 325,
+     "native": 326,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 11,
+     "dropped": 10,
      "reasons": {
       "native": [
        "K2 deterministic pathTo route"
@@ -2176,6 +2166,7 @@
      "dropped": 276,
      "reasons": {
       "dropped": [
+       "presentation / meta",
        "every action was removed, so no project event was emitted"
       ]
      }
@@ -2198,10 +2189,10 @@
     {
      "type": "play_sound",
      "total": 67,
-     "native": 62,
+     "native": 66,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 5,
+     "dropped": 1,
      "reasons": {
       "native": [
        "se cue"
@@ -2254,13 +2245,15 @@
     {
      "type": "random_encounter",
      "total": 476,
-     "native": 0,
+     "native": 438,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 476,
+     "dropped": 38,
      "reasons": {
+      "native": [
+       "Battle Processing with deterministic encounter-table sampling"
+      ],
       "dropped": [
-       "every action was removed, so no project event was emitted",
        "fixed-false guard prevents the source event from starting"
       ]
      }
@@ -2324,10 +2317,10 @@
     {
      "type": "remove_npc",
      "total": 224,
-     "native": 217,
+     "native": 219,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 7,
+     "dropped": 5,
      "reasons": {
       "native": [
        "local.npc.<slug> = 0"
@@ -2459,14 +2452,15 @@
     {
      "type": "set_environment",
      "total": 174,
-     "native": 0,
+     "native": 118,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 174,
+     "dropped": 56,
      "reasons": {
+      "native": [
+       "tux.set_environment updates the active battle backdrop"
+      ],
       "dropped": [
-       "every action was removed, so no project event was emitted",
-       "monster/combat subsystem (P2)",
        "fixed-false guard prevents the source event from starting",
        "source event is not materialized by any map"
       ]
@@ -2543,14 +2537,15 @@
     {
      "type": "set_monster_health",
      "total": 83,
-     "native": 0,
+     "native": 82,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 83,
+     "dropped": 1,
      "reasons": {
+      "native": [
+       "tux.set_monster_health updates persistent party HP"
+      ],
       "dropped": [
-       "monster/combat subsystem (P2)",
-       "every action was removed, so no project event was emitted",
        "fixed-false guard prevents the source event from starting"
       ]
      }
@@ -2571,14 +2566,15 @@
     {
      "type": "set_monster_status",
      "total": 83,
-     "native": 0,
+     "native": 82,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 83,
+     "dropped": 1,
      "reasons": {
+      "native": [
+       "tux.set_monster_status updates persistent party status"
+      ],
       "dropped": [
-       "monster/combat subsystem (P2)",
-       "every action was removed, so no project event was emitted",
        "fixed-false guard prevents the source event from starting"
       ]
      }
@@ -2626,13 +2622,15 @@
     {
      "type": "set_teleport_faint",
      "total": 29,
-     "native": 0,
+     "native": 27,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 29,
+     "dropped": 2,
      "reasons": {
+      "native": [
+       "tux.set_faint_point stores the character's recovery destination"
+      ],
       "dropped": [
-       "monster/combat subsystem (P2)",
        "fixed-false guard prevents the source event from starting"
       ]
      }
@@ -2668,10 +2666,10 @@
     {
      "type": "set_variable",
      "total": 715,
-     "native": 692,
+     "native": 694,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 23,
+     "dropped": 21,
      "reasons": {
       "native": [
        "variable set enum code"
@@ -2685,13 +2683,22 @@
     {
      "type": "start_battle",
      "total": 331,
-     "native": 0,
+     "native": 325,
      "degraded": 0,
-     "placeholder": 330,
+     "placeholder": 5,
      "dropped": 1,
      "reasons": {
+      "native": [
+       "Battle Processing with extension-staged trainer party",
+       "Battle Processing with 2 folded trainer monsters",
+       "Battle Processing with 1 folded trainer monsters",
+       "Battle Processing with 4 folded trainer monsters",
+       "Battle Processing with 3 folded trainer monsters",
+       "Battle Processing with 5 folded trainer monsters",
+       "Battle Processing with 6 folded trainer monsters"
+      ],
       "placeholder": [
-       "inline placeholder: text + outcome writes"
+       "NPC-versus-NPC battles are not supported yet; skipped"
       ],
       "dropped": [
        "source event is not materialized by any map"
@@ -2707,21 +2714,20 @@
      "dropped": 0,
      "reasons": {
       "placeholder": [
-       "inline placeholder: text + outcome writes"
+       "double battles are not supported yet; skipped"
       ]
      }
     },
     {
      "type": "teleport_faint",
      "total": 11,
-     "native": 0,
+     "native": 11,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 11,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "fixed-false guard prevents the source event from starting",
-       "presentation / meta"
+      "native": [
+       "guarded variable transfer to the stored faint point"
       ]
      }
     },
@@ -2741,10 +2747,10 @@
     {
      "type": "transition_teleport",
      "total": 1049,
-     "native": 1041,
+     "native": 1042,
      "degraded": 3,
      "placeholder": 0,
-     "dropped": 5,
+     "dropped": 4,
      "reasons": {
       "native": [
        "transfer (terminal; dir from trailing char_face)"
@@ -2762,10 +2768,10 @@
     {
      "type": "translated_dialog",
      "total": 2068,
-     "native": 2006,
+     "native": 2014,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 62,
+     "dropped": 54,
      "reasons": {
       "native": [
        "text boxes from en_US .po (layout args ignored)"
@@ -2810,10 +2816,10 @@
     {
      "type": "unlock_controls",
      "total": 330,
-     "native": 322,
+     "native": 324,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 8,
+     "dropped": 6,
      "reasons": {
       "native": [
        "K1 cross-event input lock command"
@@ -2867,10 +2873,10 @@
     {
      "type": "wait",
      "total": 441,
-     "native": 419,
+     "native": 421,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 22,
+     "dropped": 20,
      "reasons": {
       "native": [
        "wait seconds"
@@ -2885,13 +2891,13 @@
     {
      "type": "wild_encounter",
      "total": 20,
-     "native": 0,
+     "native": 20,
      "degraded": 0,
-     "placeholder": 20,
+     "placeholder": 0,
      "dropped": 0,
      "reasons": {
-      "placeholder": [
-       "scripted wild battle auto-wins in P1"
+      "native": [
+       "Battle Processing with a scripted wild monster"
       ]
      }
     }
@@ -2901,15 +2907,15 @@
    "summary": {
     "types": 64,
     "uses": 8663,
-    "native": 5757,
-    "degraded": 12,
-    "placeholder": 850,
-    "dropped": 2044,
-    "nativePercent": 66.5,
-    "executablePercent": 76.4,
+    "native": 7664,
+    "degraded": 93,
+    "placeholder": 1,
+    "dropped": 905,
+    "nativePercent": 88.5,
+    "executablePercent": 89.6,
     "tier1": {
-     "uses": 3537,
-     "percent": 40.83,
+     "uses": 4459,
+     "percent": 51.47,
      "requiredUses": 4591,
      "requiredPercent": 53,
      "meetsBaseline": false
@@ -2919,30 +2925,29 @@
     {
      "type": "is battle_outcome",
      "total": 230,
-     "native": 0,
+     "native": 227,
      "degraded": 0,
-     "placeholder": 225,
-     "dropped": 5,
+     "placeholder": 0,
+     "dropped": 3,
      "reasons": {
-      "placeholder": [
-       "switch bo.<opp>.won written by the battle placeholder"
+      "native": [
+       "tux.battle_outcome extension condition"
       ],
       "dropped": [
-       "source event is not materialized by any map",
-       "fixed-false guard prevents the source event from starting"
+       "source event is not materialized by any map"
       ]
      }
     },
     {
      "type": "is battle_outcome_count",
      "total": 2,
-     "native": 0,
+     "native": 2,
      "degraded": 0,
-     "placeholder": 2,
+     "placeholder": 0,
      "dropped": 0,
      "reasons": {
-      "placeholder": [
-       "variable boc.<opp>.won counted by the placeholder"
+      "native": [
+       "tux.battle_outcome_count extension condition"
       ]
      }
     },
@@ -2979,10 +2984,10 @@
     {
      "type": "is char_at",
      "total": 1811,
-     "native": 1352,
+     "native": 1806,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 459,
+     "dropped": 5,
      "reasons": {
       "native": [
        "consumed by trigger selection"
@@ -2997,11 +3002,14 @@
     {
      "type": "is char_defeated",
      "total": 10,
-     "native": 0,
+     "native": 9,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 10,
+     "dropped": 1,
      "reasons": {
+      "native": [
+       "tux.char_defeated reads live party HP"
+      ],
       "dropped": [
        "fixed-false guard prevents the source event from starting"
       ]
@@ -3100,11 +3108,14 @@
     {
      "type": "is char_moved",
      "total": 454,
-     "native": 0,
+     "native": 452,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 454,
+     "dropped": 2,
      "reasons": {
+      "native": [
+       "consumed by trigger selection"
+      ],
       "dropped": [
        "every action was removed, so no project event was emitted"
       ]
@@ -3205,9 +3216,9 @@
      "type": "is current_state",
      "total": 78,
      "native": 0,
-     "degraded": 4,
+     "degraded": 32,
      "placeholder": 0,
-     "dropped": 74,
+     "dropped": 46,
      "reasons": {
       "dropped": [
        "fixed-false guard prevents the source event from starting",
@@ -3264,13 +3275,13 @@
     {
      "type": "is has_monster",
      "total": 24,
-     "native": 0,
+     "native": 24,
      "degraded": 0,
-     "placeholder": 24,
+     "placeholder": 0,
      "dropped": 0,
      "reasons": {
-      "placeholder": [
-       "switch mon.<slug> set by add_monster"
+      "native": [
+       "tux.has_monster reads the persistent party"
       ]
      }
     },
@@ -3375,16 +3386,15 @@
     {
      "type": "is party_size",
      "total": 50,
-     "native": 0,
+     "native": 45,
      "degraded": 0,
-     "placeholder": 36,
-     "dropped": 14,
+     "placeholder": 0,
+     "dropped": 5,
      "reasons": {
-      "placeholder": [
-       "variable sys.party_size kept by add_monster"
+      "native": [
+       "tux.party_size reads the persistent party"
       ],
       "dropped": [
-       "every action was removed, so no project event was emitted",
        "source event is not materialized by any map",
        "fixed-false guard prevents the source event from starting"
       ]
@@ -3433,45 +3443,46 @@
      "type": "is time_is",
      "total": 67,
      "native": 0,
-     "degraded": 0,
+     "degraded": 2,
      "placeholder": 0,
-     "dropped": 67,
+     "dropped": 65,
      "reasons": {
       "dropped": [
-       "fixed-false guard prevents the source event from starting",
-       "every action was removed, so no project event was emitted"
+       "fixed-false guard prevents the source event from starting"
+      ],
+      "degraded": [
+       "no clock in P1: folded against fixed daytime"
       ]
      }
     },
     {
      "type": "is variable_set",
      "total": 730,
-     "native": 678,
+     "native": 691,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 52,
+     "dropped": 39,
      "reasons": {
       "native": [
        "page/if variable compare on the enum code"
       ],
       "dropped": [
-       "every action was removed, so no project event was emitted",
        "fixed-false guard prevents the source event from starting",
-       "source event is not materialized by any map"
+       "source event is not materialized by any map",
+       "every action was removed, so no project event was emitted"
       ]
      }
     },
     {
      "type": "not battle_outcome",
      "total": 363,
-     "native": 0,
+     "native": 358,
      "degraded": 0,
-     "placeholder": 358,
+     "placeholder": 0,
      "dropped": 5,
      "reasons": {
-      "placeholder": [
-       "switch bo.<opp>.won written by the battle placeholder",
-       "P1 never loses"
+      "native": [
+       "tux.battle_outcome extension condition"
       ],
       "dropped": [
        "fixed-false guard prevents the source event from starting"
@@ -3481,13 +3492,13 @@
     {
      "type": "not battle_outcome_count",
      "total": 9,
-     "native": 0,
+     "native": 9,
      "degraded": 0,
-     "placeholder": 9,
+     "placeholder": 0,
      "dropped": 0,
      "reasons": {
-      "placeholder": [
-       "variable boc.<opp>.won counted by the placeholder"
+      "native": [
+       "tux.battle_outcome_count extension condition"
       ]
      }
     },
@@ -3507,13 +3518,13 @@
     {
      "type": "not char_defeated",
      "total": 181,
-     "native": 0,
+     "native": 179,
      "degraded": 0,
-     "placeholder": 179,
+     "placeholder": 0,
      "dropped": 2,
      "reasons": {
-      "placeholder": [
-       "player never defeated in P1; NPC: switch defeated.<slug>"
+      "native": [
+       "tux.char_defeated reads live party HP"
       ],
       "dropped": [
        "source event is not materialized by any map"
@@ -3586,7 +3597,7 @@
      "dropped": 29,
      "reasons": {
       "dropped": [
-       "every action was removed, so no project event was emitted",
+       "monster/party/meta state unknown to P1: fixed answer",
        "fixed-false guard prevents the source event from starting"
       ]
      }
@@ -3634,13 +3645,15 @@
     {
      "type": "not environment_is",
      "total": 172,
-     "native": 0,
+     "native": 116,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 172,
+     "dropped": 56,
      "reasons": {
+      "native": [
+       "tux.environment_is reads the active battle backdrop"
+      ],
       "dropped": [
-       "every action was removed, so no project event was emitted",
        "fixed-false guard prevents the source event from starting",
        "source event is not materialized by any map"
       ]
@@ -3662,13 +3675,13 @@
     {
      "type": "not has_monster",
      "total": 11,
-     "native": 0,
+     "native": 11,
      "degraded": 0,
-     "placeholder": 11,
+     "placeholder": 0,
      "dropped": 0,
      "reasons": {
-      "placeholder": [
-       "switch mon.<slug> set by add_monster"
+      "native": [
+       "tux.has_monster reads the persistent party"
       ]
      }
     },
@@ -3714,13 +3727,13 @@
     {
      "type": "not location_type",
      "total": 1,
-     "native": 0,
+     "native": 1,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 1,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "fixed-false guard prevents the source event from starting"
+      "native": [
+       "static map property, folded at import"
       ]
      }
     },
@@ -3757,13 +3770,13 @@
     {
      "type": "not party_size",
      "total": 5,
-     "native": 0,
+     "native": 5,
      "degraded": 0,
-     "placeholder": 5,
+     "placeholder": 0,
      "dropped": 0,
      "reasons": {
-      "placeholder": [
-       "variable sys.party_size kept by add_monster"
+      "native": [
+       "tux.party_size reads the persistent party"
       ]
      }
     },
@@ -3784,16 +3797,15 @@
      "type": "not time_is",
      "total": 61,
      "native": 0,
-     "degraded": 8,
+     "degraded": 59,
      "placeholder": 0,
-     "dropped": 53,
+     "dropped": 2,
      "reasons": {
-      "dropped": [
-       "every action was removed, so no project event was emitted",
-       "fixed-false guard prevents the source event from starting"
-      ],
       "degraded": [
        "no clock in P1: folded against fixed daytime"
+      ],
+      "dropped": [
+       "fixed-false guard prevents the source event from starting"
       ]
      }
     },
@@ -3813,10 +3825,10 @@
     {
      "type": "not variable_set",
      "total": 671,
-     "native": 638,
+     "native": 640,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 33,
+     "dropped": 31,
      "reasons": {
       "native": [
        "page/if variable compare on the enum code"

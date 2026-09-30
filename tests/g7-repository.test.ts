@@ -15,7 +15,7 @@ import {
 } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import {
   canonicalJson,
-  createSnapshot,
+  createSessionSnapshot,
   decodeEnvelopeText,
   encodeEnvelope,
 } from "../vendor/pocket-rpgkit/src/engine/save.ts";
@@ -26,14 +26,16 @@ import {
 import { AttractController } from "../vendor/pocket-rpgkit/src/engine/attract.ts";
 import type { ProjectShell } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 import { readInlineProject, readShardedProject } from "../tools/generated-project.ts";
+import { TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS } from "../battle/game.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
 const journey = JSON.parse(readFileSync(join(ROOT, "data/g6-journey.json"), "utf8")) as {
   masks: number[];
 };
-// KB1/KB2 adds the default ext/scene slots and empty battle queue to saved
-// state. Removing only those fields still produces the former 937ca7f7… hash.
-const EXPECTED_TERMINAL_STATE_SHA256 = "ce3ec0ac665936c0c6388d5a890c3d9e1f463ab816ba0fea3a0075275d38e5f1";
+const GAME_OPTIONS = { extensions: TUXEMON_EXTENSIONS, battle: TUXEMON_BATTLE_RULES } as const;
+// Pin the complete post-Billie state, including the spawned Nut, battle
+// history, rewards, extension RNG cursor, and the core's scene/queue slots.
+const EXPECTED_TERMINAL_STATE_SHA256 = "fa06b6c6d379c889c5e51ba9356199e3e55845b20ef830f51c50d7c67a0d7993";
 
 function input(mask: number, previous: number): SessionInput {
   const pressed = mask & ~previous;
@@ -50,8 +52,8 @@ describe("G6 production map repository", () => {
   test("the maintained journey is byte-identical to inline on every frame", () => {
     const inlineProject = readInlineProject(ROOT);
     const sharded = readShardedProject(ROOT);
-    const inlineSession = createSession(inlineProject, 60);
-    const shardedSession = createSession(sharded.project, 60, sharded.repository);
+    const inlineSession = createSession(inlineProject, 60, GAME_OPTIONS);
+    const shardedSession = createSession(sharded.project, 60, { maps: sharded.repository, ...GAME_OPTIONS });
     let inlineState = startSession(inlineProject, inlineSession);
     let shardedState = startSession(sharded.project, shardedSession);
     let previous = 0;
@@ -79,10 +81,11 @@ describe("G6 production map repository", () => {
     const terminalHashes: string[] = [];
     for (const hz of [60, 30, 20, 4]) {
       const sharded = readShardedProject(ROOT);
-      const inline = new AttractController(inlineProject, journey.masks, { hz });
+      const inline = new AttractController(inlineProject, journey.masks, { hz, ...GAME_OPTIONS });
       const lazy = new AttractController(sharded.project, journey.masks, {
         hz,
         maps: sharded.repository,
+        ...GAME_OPTIONS,
       });
       inline.startAttract();
       lazy.startAttract();
@@ -108,8 +111,8 @@ describe("G6 production map repository", () => {
   test("a cross-map save restores an evicted map and rejects another content build", () => {
     const inlineProject = readInlineProject(ROOT);
     const sharded = readShardedProject(ROOT);
-    const inlineSession = createSession(inlineProject, 60);
-    const shardedSession = createSession(sharded.project, 60, sharded.repository);
+    const inlineSession = createSession(inlineProject, 60, GAME_OPTIONS);
+    const shardedSession = createSession(sharded.project, 60, { maps: sharded.repository, ...GAME_OPTIONS });
     let inlineState: SessionState = startSession(inlineProject, inlineSession);
     let shardedState: SessionState = startSession(sharded.project, shardedSession);
     let previous = 0;
@@ -125,8 +128,8 @@ describe("G6 production map repository", () => {
       previous = mask;
       if (frame === 1292) {
         savedMap = shardedState.mapId;
-        const inlineSnapshot = createSnapshot(inlineState.mapId, inlineState.move, inlineState.interp, mask);
-        const shardedSnapshot = createSnapshot(shardedState.mapId, shardedState.move, shardedState.interp, mask);
+        const inlineSnapshot = createSessionSnapshot(inlineSession, inlineState, mask);
+        const shardedSnapshot = createSessionSnapshot(shardedSession, shardedState, mask);
         inlineEnvelope = encodeEnvelope(inlineSnapshot);
         shardedEnvelope = encodeEnvelope(shardedSnapshot, shardedSession.content);
         expect(canonicalJson(shardedSnapshot)).toBe(canonicalJson(inlineSnapshot));
@@ -161,7 +164,7 @@ describe("G6 production map repository", () => {
         return new Uint8Array(readFileSync(join(ROOT, "dist", entry)));
       },
     });
-    const mismatchedSession = createSession(mismatched, 60, repository);
+    const mismatchedSession = createSession(mismatched, 60, { maps: repository, ...GAME_OPTIONS });
     expect(reads).toBe(1);
     expect(() => restoreSessionEnvelope(mismatchedSession, shardedEnvelope)).toThrow(/manifest hash/);
     expect(reads).toBe(1);

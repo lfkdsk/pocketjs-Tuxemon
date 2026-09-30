@@ -6,6 +6,7 @@ import { resolve } from "node:path";
 import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
 import { createSwitchState, type SwitchState } from "../vendor/pocket-rpgkit/src/engine/interpreter.ts";
 import { canStepFrom, type Dir4 } from "../vendor/pocket-rpgkit/src/engine/passability.ts";
+import type { BattleRules } from "../vendor/pocket-rpgkit/src/engine/battle.ts";
 import { createSession, startSession, stepSession } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import type { Command, Condition, Dir, GameEvent, Page, PageCondition, Project } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 import { materializeShardedProject } from "./generated-project.ts";
@@ -14,6 +15,16 @@ const ROOT = resolve(import.meta.dir, "..");
 const DIRS = ["down", "left", "up", "right"] as const satisfies readonly Dir[];
 const DX = [0, -1, 0, 1] as const;
 const DY = [1, 0, -1, 0] as const;
+// The lock checker instruments isolated control-flow paths across the entire
+// imported world, including maps outside the shipped Spyder battle-data
+// slice. Extension calls are deliberately preview no-ops and battle requests
+// complete immediately: only lock acquisition/release is under test here.
+const LOCK_BATTLE_RULES: BattleRules = {
+  start: () => null,
+  step: (state) => state,
+  done: () => null,
+};
+const GAME_OPTIONS = { extensions: { allowUnknown: true }, battle: LOCK_BATTLE_RULES } as const;
 
 export interface LockCheckRow {
   map: string;
@@ -158,7 +169,7 @@ function satisfy(
 }
 
 function startCell(project: Project, mapId: string, event: GameEvent, dir: Dir): { x: number; y: number } {
-  const session = createSession(project, 60);
+  const session = createSession(project, 60, GAME_OPTIONS);
   const table = session.tables.get(mapId)!;
   const d = DIRS.indexOf(dir) as Dir4;
   const cells: [number, number][] = [];
@@ -211,7 +222,7 @@ function checkPage(
       ? { ...map, events: (map.events ?? []).map((candidate) => candidate.id === event.id ? forced : candidate) }
       : map),
   };
-  const session = createSession(runProject, 60);
+  const session = createSession(runProject, 60, GAME_OPTIONS);
   let state = startSession(runProject, session, initial.sw);
   Object.assign(state.sw.variables, initial.localVariables);
   let lockedAt = -1;

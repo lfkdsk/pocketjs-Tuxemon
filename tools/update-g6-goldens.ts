@@ -19,7 +19,7 @@ interface JourneyFile {
   position: [number, number];
   masks: number[];
   checkpoints: { name: string; frame: number; map: string; position: [number, number] }[];
-  story: Record<string, number | boolean>;
+  story: Record<string, number | boolean | string>;
   sha256: string;
 }
 

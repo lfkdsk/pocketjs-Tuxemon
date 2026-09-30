@@ -148,6 +148,7 @@ export function monsterFromSnapshot(
   });
   return {
     uid,
+    ...(snapshot.iid === undefined ? {} : { iid: snapshot.iid }),
     slug: snapshot.slug,
     level: snapshot.level,
     originalTypes: [...(snapshot.types ?? species.types)],
@@ -177,11 +178,26 @@ export function monsterFromSnapshot(
   };
 }
 
-export function learnedMoves(db: TuxemonBattleDb, slug: string, level: number): string[] {
+export function learnedMoves(
+  db: TuxemonBattleDb,
+  slug: string,
+  level: number,
+  stage?: string,
+  maxMoves = 4,
+): string[] {
   const monster = db.monster[slug];
   if (!monster) throw new Error(`battle: unknown monster '${slug}'`);
-  return monster.moveset
-    .filter((entry) => entry.learning_method === "level_up" && entry.level_learned <= level)
-    .map((entry) => entry.technique)
-    .slice(-4);
+  const currentStage = stage ?? monster.stage;
+  // Upstream's eligibility lookup deliberately uses the first schedule row
+  // for a technique, even while iterating duplicate rows in the schedule.
+  const eligible = monster.moveset.filter((entry) => {
+    const first = monster.moveset.find((candidate) => candidate.technique === entry.technique)!;
+    return first.learning_method === "level_up"
+      && first.level_learned <= level
+      && (first.evolution_stage_learned === undefined
+        || first.evolution_stage_learned === currentStage);
+  }).map((entry) => entry.technique).slice(-maxMoves);
+  // MonsterMovesHandler.learn skips a duplicate technique after the final
+  // max-moves slice has already happened.
+  return eligible.filter((technique, index) => eligible.indexOf(technique) === index);
 }

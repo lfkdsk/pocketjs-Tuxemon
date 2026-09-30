@@ -6,6 +6,7 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
+import type { BattleRules } from "../vendor/pocket-rpgkit/src/engine/battle.ts";
 import {
   createSession,
   startSession,
@@ -15,17 +16,30 @@ import {
 import type { Command, Project } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 import { materializeShardedProject } from "./generated-project.ts";
 
+// This corpus probe isolates world/event liveness from game-owned extension
+// and battle behavior. It must accept every imported call while completing a
+// Battle Processing request immediately, including maps outside the shipped
+// Spyder battle-data slice.
+const SCAN_BATTLE_RULES: BattleRules = {
+  start: () => null,
+  step: (state) => state,
+  done: () => null,
+};
+const SCAN_OPTIONS = { extensions: { allowUnknown: true }, battle: SCAN_BATTLE_RULES } as const;
+
 function collectLandings(commands: readonly Command[], landing: Map<string, [number, number]>): void {
   for (const command of commands) {
     if (command.op === "transfer") {
+      // Dynamic destinations (the faint-point flow) have no static landing
+      // to seed. Their target maps are already covered independently by the
+      // corpus-wide centre/inbound scan.
       if (
-        typeof command.map !== "string" ||
-        typeof command.x !== "number" ||
-        typeof command.y !== "number"
+        typeof command.map === "string" &&
+        typeof command.x === "number" &&
+        typeof command.y === "number"
       ) {
-        throw new Error("freeze scan requires importer-authored literal transfers");
+        if (!landing.has(command.map)) landing.set(command.map, [command.x, command.y]);
       }
-      if (!landing.has(command.map)) landing.set(command.map, [command.x, command.y]);
     } else if (command.op === "if") {
       collectLandings(command.then, landing);
       collectLandings(command.else ?? [], landing);
@@ -105,7 +119,7 @@ export function verifyFrozenProject(project: Project, windowFrames = WINDOW): Fr
       ...project,
       start: { map: map.id, x: start[0], y: start[1], dir: "down" },
     };
-    const session = createSession(localProject, 60);
+    const session = createSession(localProject, 60, SCAN_OPTIONS);
     let state = startSession(localProject, session);
     const cells = new Set<string>();
     let error: string | undefined;

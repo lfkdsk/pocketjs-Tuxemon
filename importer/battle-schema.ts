@@ -121,6 +121,8 @@ export interface BattleDb {
     stat: BattleStat;
     multiplier: number;
   }>;
+  /** Upstream table insertion order; weighted taste generation depends on it. */
+  tasteOrder: string[];
   monsters: Record<string, {
     species: string;
     txmnId: number;
@@ -313,6 +315,12 @@ export function validateBattleDb(value: unknown, pakKeys?: ReadonlySet<string>):
   assert(
     db.elementOrder.length === Object.keys(db.elements).length && db.elementOrder.every((slug) => slug in db.elements),
     "elementOrder must be a permutation of elements",
+  );
+  assert(Array.isArray(db.tasteOrder), "tasteOrder must be an array");
+  assert(new Set(db.tasteOrder).size === db.tasteOrder.length, "tasteOrder contains duplicates");
+  assert(
+    db.tasteOrder.length === Object.keys(db.tastes).length && db.tasteOrder.every((slug) => slug in db.tastes),
+    "tasteOrder must be a permutation of tastes",
   );
   assert(isRecord(db.rules) && isRecord(db.ui), "rules and ui must be objects");
   assert(isFiniteRange(db.rules.levelRange), "levelRange must be an ordered numeric pair");

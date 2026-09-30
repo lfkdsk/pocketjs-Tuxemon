@@ -9,9 +9,9 @@ test("every G6 lockInput page dynamically releases or transfers", () => {
   const project = materializeShardedProject(ROOT);
   const report = verifyProjectLocks(project);
   expect(report.format).toBe("pocket-tuxemon/g6-lock-check/v2");
-  expect(report.lockCommands).toBe(323);
-  expect(report.dynamicChecks).toBe(323);
-  expect(report.pages).toBe(319);
+  expect(report.lockCommands).toBe(333);
+  expect(report.dynamicChecks).toBe(333);
+  expect(report.pages).toBe(329);
   expect(report.outcomes).toMatchObject({ unresolved: 0, error: 0 });
   expect(report.failures).toEqual([]);
   expect(report.exceptions).toEqual([]);

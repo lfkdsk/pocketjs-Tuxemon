@@ -9,6 +9,7 @@ import {
   type SessionState,
 } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import type { Project } from "../vendor/pocket-rpgkit/src/engine/types.ts";
+import { TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS } from "../battle/game.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
 const project = JSON.parse(readFileSync(resolve(ROOT, "dist/project.json"), "utf8")) as Project;
@@ -23,7 +24,10 @@ function numericVariable(state: SessionState, id: string): number {
 
 function bedroom(x = 4, y = 4, dir: "down" | "left" = "down") {
   const runProject: Project = { ...project, start: { map: "spyder_bedroom", x, y, dir } };
-  const session = createSession(runProject, 60);
+  const session = createSession(runProject, 60, {
+    extensions: TUXEMON_EXTENSIONS,
+    battle: TUXEMON_BATTLE_RULES,
+  });
   return { session, state: startSession(runProject, session) };
 }
 

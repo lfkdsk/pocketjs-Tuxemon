@@ -1,7 +1,7 @@
 import { afterAll, describe, expect, test } from "bun:test";
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { join, resolve } from "node:path";
-import { battleArtifactPaths, writeBattleArtifacts } from "../importer/battle.ts";
+import { battleArtifactPaths, runtimeBattleDb, writeBattleArtifacts } from "../importer/battle.ts";
 import { collectBattleArtRefs, validateBattleDb, type BattleDb } from "../importer/battle-schema.ts";
 import { decodePng } from "../importer/png.ts";
 import { BATTLE_PREVIEW_HEIGHT, BATTLE_PREVIEW_WIDTH, renderBattlePreview } from "../tools/render-battle-preview.ts";
@@ -9,6 +9,7 @@ import { BATTLE_ASSET_PATHS } from "../ui/battle-assets.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
 const db = JSON.parse(readFileSync(join(ROOT, "data/battle-db.json"), "utf8")) as unknown;
+const runtimeDb = JSON.parse(readFileSync(join(ROOT, "data/battle-runtime-db.json"), "utf8")) as unknown;
 const report = JSON.parse(readFileSync(join(ROOT, "data/battle-assets-report.json"), "utf8"));
 const images = JSON.parse(readFileSync(join(ROOT, "images.json"), "utf8")) as Record<string, { psm: number }>;
 const pakManifest = JSON.parse(readFileSync(join(ROOT, "pak.json"), "utf8")) as Array<{ key: string; file: string }>;
@@ -16,6 +17,11 @@ const battleKeys = new Set(BATTLE_ASSET_PATHS.map((path) => `ui:img.${path}`));
 const validated = validateBattleDb(db, battleKeys);
 
 describe("GB1 battle database", () => {
+  test("derives a byte-stable reducer-only production projection", () => {
+    expect(runtimeDb).toEqual(runtimeBattleDb(validated));
+    expect(report.runtimeDbBytes).toBe(readFileSync(join(ROOT, "data/battle-runtime-db.json")).byteLength);
+  });
+
   test("matches the generated Spyder campaign slice", () => {
     expect(report.scope).toBe("spyder");
     expect(report.sourceRevision).toBe("9e6258ff726b786040a267e8bdbbf037b560285e");
@@ -200,5 +206,6 @@ describe("GB1 full database switch", () => {
     expect(full.report.art.maxWidth).toBeLessThanOrEqual(512);
     expect(full.report.art.maxHeight).toBeLessThanOrEqual(512);
     expect(existsSync(join(fullRoot, "data/battle-db.json"))).toBeTrue();
+    expect(existsSync(join(fullRoot, "data/battle-runtime-db.json"))).toBeTrue();
   }, 60_000);
 });

@@ -24,7 +24,7 @@
   "sourceBytes": 1598170,
   "pngBytes": 1070236,
   "textureBytes": 23414264,
-  "pakBytes": 24498560,
+  "pakBytes": 24498720,
   "maxWidth": 512,
   "maxHeight": 512,
   "categories": {
@@ -114,6 +114,7 @@
    }
   }
  },
- "battleDbBytes": 1037968,
+ "battleDbBytes": 1038121,
+ "runtimeDbBytes": 552088,
  "pakKey": "game:battle-db"
 }

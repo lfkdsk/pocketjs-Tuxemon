@@ -12,14 +12,15 @@
    "localReset": true,
    "place": true,
    "inputLock": true,
-   "routes": true
+   "routes": true,
+   "battle": true
   }
  },
  "mapRepository": {
   "shellBytes": 61846,
-  "entryBytes": 7374469,
+  "entryBytes": 7774651,
   "entries": 263,
-  "manifestHash": "b17b7a2b048daa9ff4296ebbc8642ba2938fb4ca2e4207b51b62ba44d2c988c7",
+  "manifestHash": "fb378823e940775f93e6393ac843579189d26bea40ca8984c1d34e9a44183332",
   "schemaHash": "462299c3e20212f9a5a092a88fc563164a87bd4e473214c1e909389baa12cc90"
  },
  "terrain": {
@@ -70,7 +71,7 @@
    "sourceBytes": 1598170,
    "pngBytes": 1070236,
    "textureBytes": 23414264,
-   "pakBytes": 24498560,
+   "pakBytes": 24498720,
    "maxWidth": 512,
    "maxHeight": 512,
    "categories": {
@@ -160,7 +161,8 @@
     }
    }
   },
-  "battleDbBytes": 1037968,
+  "battleDbBytes": 1038121,
+  "runtimeDbBytes": 552088,
   "pakKey": "game:battle-db"
  }
 }

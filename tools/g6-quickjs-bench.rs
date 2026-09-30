@@ -34,11 +34,13 @@ mod g6_quickjs_bench {
         total_ms: f64,
     }
 
+    #[derive(Clone)]
     struct Sample {
         frame: usize,
         map: String,
         moving: bool,
         fade: bool,
+        battle: bool,
         js_ms: f64,
         core_ms: f64,
         draw_ms: f64,
@@ -67,9 +69,9 @@ mod g6_quickjs_bench {
                 .with(|ctx| ctx.eval::<(), _>(source).expect("QuickJS unit eval"));
         }
 
-        fn state(&self) -> (String, bool, bool) {
+        fn state(&self) -> (String, bool, bool, bool) {
             serde_json::from_str(&self.string(
-                "JSON.stringify([globalThis.__rpgSessionState.mapId,!!globalThis.__rpgSessionState.move.moving,!!globalThis.__rpgSessionState.fade])",
+                "JSON.stringify([globalThis.__rpgSessionState.mapId,!!globalThis.__rpgSessionState.move.moving,!!globalThis.__rpgSessionState.fade,globalThis.__rpgSessionState.scene?.kind==='battle'])",
             ))
             .expect("G6 state tuple")
         }
@@ -95,12 +97,13 @@ mod g6_quickjs_bench {
             self.rt.ticks += 1;
             let _ = self.rt.hash();
             let d = Instant::now();
-            let (map, moving, fade) = self.state();
+            let (map, moving, fade, battle) = self.state();
             Sample {
                 frame,
                 map,
                 moving,
                 fade,
+                battle,
                 js_ms: (b - a).as_secs_f64() * 1_000.0,
                 core_ms: (c - b).as_secs_f64() * 1_000.0,
                 draw_ms: (d - c).as_secs_f64() * 1_000.0,
@@ -176,7 +179,8 @@ mod g6_quickjs_bench {
     }
 
     fn seed_maps(source: &Path, data_root: &Path) {
-        let destination = data_root.join(BENCH_APP_ID).join("data/maps");
+        let app_data = data_root.join(BENCH_APP_ID).join("data");
+        let destination = app_data.join("maps");
         let _ = std::fs::remove_dir_all(&destination);
         std::fs::create_dir_all(&destination).expect("create benchmark map data directory");
         let mut copied = 0usize;
@@ -223,12 +227,30 @@ mod g6_quickjs_bench {
         );
 
         let mut walking = Vec::new();
+        let mut all_frames = Vec::with_capacity(journey.masks.len().saturating_sub(1));
+        let mut walking_before_battle = Vec::new();
+        let mut walking_after_battle = Vec::new();
         let mut switches = Vec::new();
+        let mut battle = Vec::new();
+        let mut battle_transitions = Vec::new();
         let mut last_map = initial_map;
+        let mut last_battle = first.battle;
+        let mut battle_completed = false;
         let mut switch_tail = 0usize;
         let mut transfers = 0usize;
         for (index, mask) in journey.masks.iter().copied().enumerate().skip(1) {
             let sample = bench.frame(index, mask);
+            all_frames.push(sample.clone());
+            if sample.battle {
+                battle.push(sample.clone());
+            }
+            if sample.battle != last_battle {
+                battle_transitions.push(sample.clone());
+                if last_battle && !sample.battle {
+                    battle_completed = true;
+                }
+                last_battle = sample.battle;
+            }
             if sample.map != last_map {
                 last_map = sample.map.clone();
                 transfers += 1;
@@ -238,17 +260,27 @@ mod g6_quickjs_bench {
                 switches.push(sample);
                 switch_tail = switch_tail.saturating_sub(1);
             } else if sample.moving || mask & 0x00f0 != 0 {
+                if battle_completed {
+                    walking_after_battle.push(sample.clone());
+                } else {
+                    walking_before_battle.push(sample.clone());
+                }
                 walking.push(sample);
             }
         }
-        let (end_map, _, _) = bench.state();
+        let (end_map, _, _, _) = bench.state();
         assert_eq!(end_map, "spyder_route1");
         let state_text = bench.string("JSON.stringify(globalThis.__rpgSessionState)");
         let state: serde_json::Value = serde_json::from_str(&state_text).expect("terminal state JSON");
         let state_out = PathBuf::from(std::env::var("G6_STATE_OUT").expect("G6_STATE_OUT"));
         std::fs::write(&state_out, serde_json::to_vec(&state).unwrap()).expect("write canonical state");
         report(&viewport, "walking", &walking);
+        report(&viewport, "walking-before-battle", &walking_before_battle);
+        report(&viewport, "walking-after-battle", &walking_after_battle);
         report(&viewport, "map-switch", &switches);
+        report(&viewport, "battle", &battle);
+        report(&viewport, "battle-entry-exit", &battle_transitions);
+        report(&viewport, "all", &all_frames);
         let (used, malloc, objects) = qjs_memory(&bench.rt.guest);
         println!(
             "END viewport={viewport} frames={} transfers={} map={end_map} qjs_used={:.2}MiB qjs_malloc={:.2}MiB objects={objects}",

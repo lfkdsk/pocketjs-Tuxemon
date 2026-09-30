@@ -8,7 +8,11 @@ import { canStepFrom, type Dir4 } from "../vendor/pocket-rpgkit/src/engine/passa
 import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
 import { searchWalk } from "../vendor/pocket-rpgkit/src/engine/journey-search.ts";
 import { canonicalJson } from "../vendor/pocket-rpgkit/src/engine/save.ts";
+import { AttractController } from "../vendor/pocket-rpgkit/src/engine/attract.ts";
 import { readInlineProject, readShardedProject } from "./generated-project.ts";
+import { TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS } from "../battle/game.ts";
+import { TUXEMON_BATTLE_DB } from "../battle/game.ts";
+import { tuxemonExtensionState } from "../battle/extension.ts";
 
 const PROJECT_ROOT = resolve(process.env.G6_PROJECT_ROOT ?? new URL("..", import.meta.url).pathname);
 const OUT_DIR = join(PROJECT_ROOT, "dist");
@@ -16,9 +20,18 @@ const inlineProject = readInlineProject(PROJECT_ROOT);
 const sharded = readShardedProject(PROJECT_ROOT);
 const project = sharded.project;
 const HZ = Number(process.env.HZ ?? 60); // host rate; the kit folds 60/HZ reference ticks per frame
-const sess = createSession(project, HZ, sharded.repository);
+const OUTCOME = process.env.GB4_OUTCOME === "lose" ? "lose" : "win";
+const OUTPUT_TAG = OUTCOME === "win" ? `${HZ}hz` : `lose-${HZ}hz`;
+const sess = createSession(project, HZ, {
+  maps: sharded.repository,
+  extensions: TUXEMON_EXTENSIONS,
+  battle: TUXEMON_BATTLE_RULES,
+});
 let st: SessionState = startSession(project, sess);
-const inlineSession = createSession(inlineProject, HZ);
+const inlineSession = createSession(inlineProject, HZ, {
+  extensions: TUXEMON_EXTENSIONS,
+  battle: TUXEMON_BATTLE_RULES,
+});
 let inlineState: SessionState = startSession(inlineProject, inlineSession);
 if (canonicalJson(st) !== canonicalJson(inlineState)) {
   throw new Error("smoke: initial sharded SessionState differs from inline");
@@ -28,6 +41,7 @@ const DX = [0, -1, 0, 1];
 const DY = [1, 0, -1, 0];
 const BTN_OF: Record<Dir4, number> = { 0: BTN_BITS.DOWN, 1: BTN_BITS.LEFT, 2: BTN_BITS.UP, 3: BTN_BITS.RIGHT };
 const BTN_CONFIRM = 0x2000;
+const BTN_LTRIGGER = 0x0100;
 const journal: string[] = [];
 const masks: number[] = [];
 const checkpoints: { name: string; frame: number; map: string; position: [number, number] }[] = [];
@@ -35,6 +49,8 @@ let frames = 0;
 let lastModalKey = "";
 let lastMap = st.mapId;
 let prevButtons = 0;
+let battleStartFrame = -1;
+let battleEndFrame = -1;
 
 function note(s: string): void {
   journal.push(`[${String(frames).padStart(5)}] ${s}`);
@@ -51,6 +67,7 @@ function tick(buttons = 0, edges: { confirm?: boolean; down?: boolean; up?: bool
   const downEdge = edges.down ?? !!((mask & BTN_BITS.DOWN) && !(prevButtons & BTN_BITS.DOWN));
   const upEdge = edges.up ?? !!((mask & BTN_BITS.UP) && !(prevButtons & BTN_BITS.UP));
   const input = { buttons: mask, confirmEdge: !!edges.confirm, downEdge, upEdge, cancelEdge: false };
+  const sceneBefore = st.scene;
   st = stepSession(sess, st, input);
   inlineState = stepSession(inlineSession, inlineState, input);
   if (canonicalJson(st) !== canonicalJson(inlineState)) {
@@ -59,6 +76,8 @@ function tick(buttons = 0, edges: { confirm?: boolean; down?: boolean; up?: bool
   prevButtons = mask;
   masks.push(mask >>> 0);
   frames++;
+  if (!sceneBefore && st.scene) battleStartFrame = frames;
+  if (sceneBefore && !st.scene) battleEndFrame = frames;
   const m = st.interp.modal;
   const key = m ? `${m.kind}|${m.kind === "text" ? m.lines.join("/") : m.prompt + "|" + m.options.join("/")}` : "";
   if (key && key !== lastModalKey) note(m!.kind === "text" ? `TEXT  ${m!.lines.join(" / ")}` : `CHOICE [${(m as { options: string[] }).options.join(" | ")}]`);
@@ -78,13 +97,18 @@ const v = (id: string): number => {
 function settle(answers: string[] = [], maxFrames = 3000): void {
   const startMap = st.mapId;
   for (let i = 0; i < maxFrames; i++) {
+    if (st.scene) {
+      tick(0, { confirm: true });
+      tick();
+      continue;
+    }
     // a transfer ends this beat once its fade has finished
     if (st.mapId !== startMap && !st.fade) return;
     const m = st.interp.modal;
     if (!m) {
       // let autoruns start / fades end; stop once idle for a few frames
       let idle = 0;
-      while (!st.interp.modal && idle < 12) {
+      while (!st.interp.modal && !st.scene && idle < 12) {
         tick();
         if (st.mapId !== startMap && !st.fade) return;
         // Blocking automatic events are parallel fibers so concurrently
@@ -94,6 +118,7 @@ function settle(answers: string[] = [], maxFrames = 3000): void {
         idle = st.interp.main || st.interp.inputLocked || st.fade ? 0 : idle + 1;
         if (frames > 200000) return;
       }
+      if (st.scene) continue;
       if (!st.interp.modal) return;
       continue;
     }
@@ -228,7 +253,7 @@ function checkpoint(name: string): void {
 }
 
 function writeOut(): void {
-  writeFileSync(join(OUT_DIR, `smoke-spyder-${HZ}hz.log`), journal.join("\n") + "\n");
+  writeFileSync(join(OUT_DIR, `smoke-spyder-${OUTPUT_TAG}.log`), journal.join("\n") + "\n");
 }
 
 // --- the story beats --------------------------------------------------------
@@ -276,12 +301,40 @@ checkpoint("paper-town");
 walkTo(24, 13);
 settle();
 expect("the first-monster strip (touch area) ran Dante's scene", v("v.dantebin") > 0);
-walkTo(21, 9);
-interact(3); // face the Rockitten bin
+if (OUTCOME === "win") {
+  walkTo(26, 9);
+  interact(3); // face the Nut bin; Nut beats Billie/Budaye for every scout seed
+} else {
+  walkTo(21, 9);
+  interact(3); // face the Rockitten bin; Rockitten loses to Billie/Budaye
+}
 settle(["Yes"]);
-expect("choosing Rockitten gave a monster (placeholder party)", v("sys.party_size") === 1);
-expect("the first fight ran the battle placeholder", st.sw.switches["bo.spyder_billie.won"] === true);
-expect("the win branch closed the fight (firstfightend=no)", v("v.firstfightend") > 0 && v("v.firstfightdue") > 0);
+const battleExt = tuxemonExtensionState(st.ext, TUXEMON_BATTLE_DB);
+const expectedHistory = OUTCOME === "win" ? "won" : "lost";
+expect(`choosing ${OUTCOME === "win" ? "Nut" : "Rockitten"} created a persistent monster`, battleExt.party.length === 1);
+expect(`the first fight ended in a real ${expectedHistory}`, battleExt.history.some((entry) =>
+  entry.fighter === "player" && entry.opponent === "spyder_billie" && entry.outcome === expectedHistory
+));
+if (OUTCOME === "lose") {
+  expect("defeat used the stored faint point", st.mapId === "spyder_bedroom" && st.move.tx === 3 && st.move.ty === 4);
+  // On the destination map the upstream teleport_faint quirk heals before a
+  // same-map transfer. Return to town so the concurrently eligible source
+  // First Fight - Lose page can finish its narrative branch as well.
+  settle();
+  const recovered = tuxemonExtensionState(st.ext, TUXEMON_BATTLE_DB).party[0];
+  expect(
+    "same-map faint recovery restored Rockitten",
+    recovered !== undefined && typeof recovered.currentHp === "number" && recovered.currentHp > 0,
+  );
+  walkTo(7, 2);
+  settle();
+  goTo(4, 6);
+  tick(BTN_BITS.DOWN);
+  settle();
+  expect("returned to Paper Town after faint recovery", st.mapId === "spyder_paper_town");
+  for (let pass = 0; pass < 100 && v("v.firstfightend") !== 1; pass++) settle();
+}
+expect(`the ${OUTCOME} branch closed the fight (firstfightend=no)`, v("v.firstfightend") === 1 && v("v.firstfightdue") === 1);
 let requested = "";
 try {
   goTo(14, 1);
@@ -298,6 +351,39 @@ try {
 }
 expect(`the Route 1 exit opens after the fight (${requested || st.mapId})`, st.mapId === "spyder_route1");
 checkpoint("route-1");
+expect("the journey entered and completed Battle Processing", battleStartFrame > 0 && battleEndFrame > battleStartFrame);
+
+// Replay the exact host-rate tape through the product rewind controller.
+// Rewind just after the battle back into its middle, then replay the retained
+// suffix. Both boundary crossings and the game-owned extension state must
+// recover byte-for-byte.
+const attractOptions = {
+  hz: HZ,
+  attractEnabled: false,
+  extensions: TUXEMON_EXTENSIONS,
+  battle: TUXEMON_BATTLE_RULES,
+} as const;
+const baseline = new AttractController(inlineProject, [], {
+  ...attractOptions,
+  rewindSeconds: 1 / HZ,
+});
+baseline.startPlay();
+for (const mask of masks) baseline.step(mask);
+expect("the recorded tape replays to the reducer-identical result", canonicalJson(baseline.state) === canonicalJson(st));
+
+const rewindTarget = Math.floor((battleStartFrame + battleEndFrame) / 2);
+const rewindAt = Math.min(masks.length, battleEndFrame + Math.max(2, Math.ceil(HZ / 5)));
+const rewound = new AttractController(inlineProject, [], {
+  ...attractOptions,
+  rewindSeconds: (rewindAt - rewindTarget) / HZ,
+});
+rewound.startPlay();
+for (let frame = 0; frame < rewindAt; frame++) rewound.step(masks[frame]!);
+rewound.step(BTN_LTRIGGER);
+expect("L rewind crossed back into the active battle", rewound.state.scene?.kind === "battle");
+for (let frame = rewindTarget; frame < masks.length; frame++) rewound.step(masks[frame]!);
+expect("replaying after L rewind restores the identical result", canonicalJson(rewound.state) === canonicalJson(baseline.state));
+
 note(`END   frames=${frames} at ${HZ} Hz (${(frames / HZ).toFixed(1)} s virtual)`);
 writeOut();
 console.log(journal.join("\n"));
@@ -308,19 +394,22 @@ const result = {
   position: [st.move.tx, st.move.ty],
   checkpoints,
   masks,
+  rewind: { target: rewindTarget, from: rewindAt, restored: true },
   story: {
     intro_scoop: v("v.intro_scoop"),
     spokenmom: v("v.spokenmom"),
     dantebin: v("v.dantebin"),
     firstfightend: v("v.firstfightend"),
     firstfightdue: v("v.firstfightdue"),
-    party_size: v("sys.party_size"),
+    party_size: tuxemonExtensionState(st.ext, TUXEMON_BATTLE_DB).party.length,
+    billie_result: expectedHistory,
     billie_won: st.sw.switches["bo.spyder_billie.won"] === true,
+    billie_lost: st.sw.switches["bo.spyder_billie.lost"] === true,
   },
 };
 const digest = createHash("sha256").update(JSON.stringify(result)).digest("hex");
 const stateDigest = createHash("sha256").update(canonicalJson(st)).digest("hex");
-writeFileSync(join(OUT_DIR, `journey-spyder-${HZ}hz.json`), JSON.stringify({ ...result, sha256: digest }, null, 2) + "\n");
+writeFileSync(join(OUT_DIR, `journey-spyder-${OUTPUT_TAG}.json`), JSON.stringify({ ...result, sha256: digest }, null, 2) + "\n");
 console.log(`STATE sha256=${stateDigest} (inline=sharded every frame)`);
 console.log("RESULT " + JSON.stringify({
   hz: result.hz,

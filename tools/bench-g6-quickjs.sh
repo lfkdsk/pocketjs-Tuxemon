@@ -33,9 +33,9 @@ for viewport in "480 272" "960 544"; do
     G6_BENCH_W="$width" G6_BENCH_H="$height" \
     "$binary" g6_quickjs_bench::journey --ignored --exact --nocapture
   actual=$(sha256sum "$state" | cut -d' ' -f1)
-  # KB1/KB2 adds default ext/scene/pendingBattles fields; the legacy view
-  # (with only those fields removed) retains the former 937ca7f7... hash.
-  expected=ce3ec0ac665936c0c6388d5a890c3d9e1f463ab816ba0fea3a0075275d38e5f1
+  # Complete post-Billie state, including persistent party/history and the
+  # extension RNG cursor produced by the real battle.
+  expected=fa06b6c6d379c889c5e51ba9356199e3e55845b20ef830f51c50d7c67a0d7993
   test "$actual" = "$expected"
   echo "STATE viewport=${width}x${height} canonical_sha256=$actual"
 done

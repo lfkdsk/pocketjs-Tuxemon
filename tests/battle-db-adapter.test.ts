@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { battleDbToTuxemonBattleDb } from "../battle/from-battle-db.ts";
 import type { TuxemonBattleDb } from "../battle/index.ts";
 import { validateBattleDb } from "../importer/battle-schema.ts";
+import type { BattleDb } from "../importer/battle-schema.ts";
 import {
   compareGoldenCase,
   readBattleGolden,
@@ -15,7 +16,10 @@ const ROOT = join(import.meta.dir, "..");
 const GB1 = validateBattleDb(
   JSON.parse(readFileSync(join(ROOT, "data/battle-db.json"), "utf8")),
 );
-const ADAPTED = battleDbToTuxemonBattleDb(GB1);
+const RUNTIME_DB = JSON.parse(
+  readFileSync(join(ROOT, "data/battle-runtime-db.json"), "utf8"),
+) as BattleDb;
+const ADAPTED = battleDbToTuxemonBattleDb(RUNTIME_DB);
 const ORACLE = JSON.parse(
   readFileSync(join(ROOT, "tools/battle-oracle/tuxemon-battle.json"), "utf8"),
 ) as TuxemonBattleDb;
@@ -63,6 +67,10 @@ function moveKey(move: { technique: string; learning_method: string; level_learn
 }
 
 describe("GB1 battle-db, adapted, drives the GB2 reducer", () => {
+  test("runtime projection preserves the canonical reducer database", () => {
+    expect(ADAPTED).toEqual(battleDbToTuxemonBattleDb(GB1));
+  });
+
   test("passes the full Spyder differential corpus (8,560 cases)", () => {
     const differences: string[] = [];
     for (const golden of GOLDEN.cases) {

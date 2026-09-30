@@ -14,6 +14,7 @@ import {
   type Session,
 } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import { createJsonMapRepository } from "../vendor/pocket-rpgkit/src/engine/map-repository.ts";
+import type { BattleRules } from "../vendor/pocket-rpgkit/src/engine/battle.ts";
 import type { ProjectShell } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 
 interface MapBenchmarkEntry {
@@ -37,13 +38,25 @@ declare global {
 
 const project = rawProject as unknown as ProjectShell;
 let session: Session | undefined;
+const BENCH_BATTLE_RULES: BattleRules = {
+  start: () => null,
+  step: (state) => state,
+  done: () => null,
+};
 
 function benchmarkSession(): Session {
   if (session) return session;
   const repository = createJsonMapRepository(project.mapIndex, {
     read: (entry) => readFileSync(entry),
   });
-  session = createSession(project, 60, repository);
+  // This probe measures only map repository stages. Accept game-owned calls
+  // and complete Battle Processing immediately so every shard can be loaded
+  // without pulling the production battle database into the scratch bundle.
+  session = createSession(project, 60, {
+    maps: repository,
+    extensions: { allowUnknown: true },
+    battle: BENCH_BATTLE_RULES,
+  });
   releaseSessionMapsExcept(session, []);
   return session;
 }

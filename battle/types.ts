@@ -51,11 +51,14 @@ export interface DbTechnique {
 export interface DbMonster {
   slug: string;
   shape: string;
+  /** Evolution stage gates some level-up moves. */
+  stage?: string;
   types: string[];
   moveset: Array<{
     technique: string;
     learning_method: string;
     level_learned: number;
+    evolution_stage_learned?: string;
   }>;
 }
 
@@ -92,6 +95,8 @@ export interface TuxemonBattleDb {
     rarity_score?: number;
     modifiers: Array<{ values: string[]; multiplier: number }>;
   }>;
+  /** Source database insertion order used by weighted taste generation. */
+  taste_order?: string[];
   shape: Record<string, { attributes: Stats }>;
   status: Record<string, DbStatus>;
 }
@@ -117,6 +122,8 @@ export interface BattleStatus {
 
 export interface BattleMonster {
   uid: number;
+  /** Stable session identity for writing persistent player state back. */
+  iid?: string;
   slug: string;
   level: number;
   originalTypes: string[];
@@ -141,8 +148,18 @@ export interface BattleMonster {
 }
 
 export interface MonsterSnapshot {
+  /** Stable session identity. Spawn RNG never generates this value. */
+  iid?: string;
   slug: string;
   level: number;
+  stage?: string;
+  gender?: string;
+  tasteCold?: string;
+  tasteWarm?: string;
+  height?: number;
+  weight?: number;
+  individualValues?: Stats;
+  birthdate?: [number, number];
   base: Stats;
   currentHp?: number;
   moves: string[];
@@ -153,6 +170,18 @@ export interface MonsterSnapshot {
   bond?: number;
   trainingPoints?: Partial<Stats>;
   status?: string | null;
+}
+
+/** Complete persistent snapshot produced by the Tuxemon spawn pipeline. */
+export interface SpawnedMonsterSnapshot extends MonsterSnapshot {
+  stage: string;
+  gender: string;
+  tasteCold: string;
+  tasteWarm: string;
+  height: number;
+  weight: number;
+  individualValues: Stats;
+  birthdate: [number, number];
 }
 
 export type PlayerPolicy = "first" | "cycle";

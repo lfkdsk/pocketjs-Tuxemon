@@ -29,6 +29,7 @@ import type {
   Dir,
   GameEvent,
   Item,
+  JsonValue,
   MapDef,
   MoveStep,
   Page,
@@ -56,6 +57,8 @@ export interface ImportOptions {
   inputLock: boolean;
   /** K2: target arbitrary events and emit turn/path/approach route steps. */
   routes: boolean;
+  /** P2: emit game-owned party commands, conditions and Battle Processing. */
+  battle: boolean;
 }
 
 export const DEFAULT_IMPORT_OPTIONS: Readonly<ImportOptions> = Object.freeze({
@@ -66,6 +69,7 @@ export const DEFAULT_IMPORT_OPTIONS: Readonly<ImportOptions> = Object.freeze({
   place: false,
   inputLock: false,
   routes: false,
+  battle: false,
 });
 
 export const KIT_V2_IMPORT_OPTIONS: Readonly<ImportOptions> = Object.freeze({
@@ -76,6 +80,7 @@ export const KIT_V2_IMPORT_OPTIONS: Readonly<ImportOptions> = Object.freeze({
   place: true,
   inputLock: true,
   routes: true,
+  battle: true,
 });
 
 /** The K1-only profile remains useful for focused importer regression tests. */
@@ -87,12 +92,14 @@ export const K1_IMPORT_OPTIONS: Readonly<ImportOptions> = Object.freeze({
   place: true,
   inputLock: true,
   routes: false,
+  battle: false,
 });
 
 /** The playable G6 profile: all merged K1 constructs plus K2 routes. */
 export const G6_IMPORT_OPTIONS: Readonly<ImportOptions> = Object.freeze({
   ...K1_IMPORT_OPTIONS,
   routes: true,
+  battle: true,
 });
 
 const resolveOptions = (options: Partial<ImportOptions> = {}): ImportOptions => ({
@@ -122,6 +129,11 @@ const gameEvent = (value: FutureGameEvent): GameEvent => value;
 
 const po = parsePo(join(MAPS_DIR, "../l18n/en_US/LC_MESSAGES/base.po"));
 const allMaps = new Map(loadAllMaps().map((m) => [m.slug, m]));
+const monsterSlugs = new Set(
+  readdirSync(join(TUXEMON_SRC, "mods/tuxemon/db/monster"))
+    .filter((name) => name.endsWith(".yaml"))
+    .map((name) => name.slice(0, -5)),
+);
 
 interface NpcRow {
   slug: string;
@@ -310,7 +322,17 @@ for (const ev of loadAllFileEvents()) {
       if (name) valuesFor(name);
     }
     if (a.type === "translated_dialog_choice" || a.type === "choice_monster" || a.type === "choice_npc") for (const o of a.args[0]!.split(":")) addValue(a.args[1]!, o);
-    if (a.type === "start_battle" || a.type === "start_double_battle") addValue("battle_last_trainer", a.args[0] === "player" ? a.args[1]! : a.args[0]!);
+    if (a.type === "start_battle" || a.type === "start_double_battle") {
+      const participants = [a.args[0], a.args[1] ?? "player"].filter((value): value is string => Boolean(value));
+      const legacyOpponent = participants[0] === "player" ? participants[1] : participants[0];
+      if (legacyOpponent) addValue("battle_last_trainer", legacyOpponent);
+      const opponent = participants[0] === "player" ? participants[1]
+        : participants[1] === "player" ? participants[0] : undefined;
+      if (opponent) {
+        addValue("battle_last_winner", opponent);
+        addValue("battle_last_loser", opponent);
+      }
+    }
     if (a.type === "wild_encounter" && a.args[0]) addValue("battle_last_trainer", a.args[0]);
   }
   for (const c of ev.conds) {
@@ -338,6 +360,7 @@ for (const map of allMaps.values()) {
 }
 for (const v of ["won", "lost", "draw"]) addValue("battle_last_result", v);
 addValue("battle_last_winner", "player");
+addValue("battle_last_loser", "player");
 const enumTable = new Map([...enumValues.entries()].map(([k, s]) => [k, [...s].sort()]));
 const varId = (name: string) => `v.${name.replace(/[^A-Za-z0-9_.-]/g, "_")}`;
 function code(name: string, value: string): number {
@@ -356,6 +379,7 @@ type Clause =
   | { k: "item"; id: string; count: number; has: boolean }
   | { k: "gold"; amount: number; has: boolean }
   | { k: "facing"; dir: Dir }
+  | { k: "ext"; call: string; args: JsonValue }
   | { k: "const"; value: boolean };
 
 const npcVar = (slug: string) => `local.npc.${slug.replace(/[^A-Za-z0-9_.-]/g, "_")}`;
@@ -427,21 +451,49 @@ function clauses(c: Cond, m: TuxMap, options: ImportOptions): Clause[] | null {
       );
       return [{ k: "var", id: npcVar(a[0]!), op: not ? "==" : "!=", value: 0 }];
     case "battle_outcome":
+      if (options.battle) {
+        noteCondition(c, `${c.op} battle_outcome`, "T1", "tux.battle_outcome extension condition");
+        return [{ k: "ext", call: "tux.battle_outcome", args: {
+          fighter: a[0]!, outcome: a[1]!, opponent: a[2]!, negate: not,
+        } }];
+      }
       if (a[1] !== "won") { noteCondition(c, `${c.op} battle_outcome(${a[1]})`, "T3-placeholder", "P1 never loses"); return K(false); }
       noteCondition(c, `${c.op} battle_outcome`, "T3-placeholder", "switch bo.<opp>.won written by the battle placeholder");
       return [{ k: "sw", id: `bo.${a[2]}.won`, on: !not }];
     case "battle_outcome_count":
+      if (options.battle) {
+        noteCondition(c, `${c.op} battle_outcome_count`, "T1", "tux.battle_outcome_count extension condition");
+        return [{ k: "ext", call: "tux.battle_outcome_count", args: {
+          fighter: a[0]!, outcome: a[1]!, opponent: a[2]!, count: Number(a[3]), negate: not,
+        } }];
+      }
       noteCondition(c, `${c.op} battle_outcome_count`, "T3-placeholder", "variable boc.<opp>.won counted by the placeholder");
       return [cmpClause(`boc.${a[2]}.won`, "greater_or_equal", Number(a[3]), not)];
     case "char_defeated":
+      if (options.battle) {
+        noteCondition(c, `${c.op} char_defeated`, "T1", "tux.char_defeated reads live party HP");
+        return [{ k: "ext", call: "tux.char_defeated", args: { character: a[0]!, negate: not } }];
+      }
       noteCondition(c, `${c.op} char_defeated`, "T3-placeholder", "player never defeated in P1; NPC: switch defeated.<slug>");
       if (a[0] === "player") return K(false);
       return [{ k: "sw", id: `defeated.${a[0]}`, on: !not }];
     case "party_size":
+      if (options.battle) {
+        noteCondition(c, `${c.op} party_size`, "T1", "tux.party_size reads the persistent party");
+        return [{ k: "ext", call: "tux.party_size", args: {
+          character: a[0]!, operator: a[1]!, value: Number(a[2]), negate: not,
+        } }];
+      }
       if (a[0] !== "player") { noteCondition(c, `${c.op} party_size(npc)`, "T3-placeholder", "NPC parties assumed non-empty"); return K(true); }
       noteCondition(c, `${c.op} party_size`, "T3-placeholder", "variable sys.party_size kept by add_monster");
       return [cmpClause("sys.party_size", a[1]!, Number(a[2]), not)];
     case "has_monster":
+      if (options.battle) {
+        noteCondition(c, `${c.op} has_monster`, "T1", "tux.has_monster reads the persistent party");
+        return [{ k: "ext", call: "tux.has_monster", args: {
+          character: a[0]!, species: a[1]!, negate: not,
+        } }];
+      }
       noteCondition(c, `${c.op} has_monster`, "T3-placeholder", "switch mon.<slug> set by add_monster");
       return [{ k: "sw", id: `mon.${a[1]}`, on: !not }];
     case "has_item": {
@@ -494,6 +546,10 @@ function clauses(c: Cond, m: TuxMap, options: ImportOptions): Clause[] | null {
       noteCondition(c, `${c.op} music_playing`, "T4-dropped", "no music in P1");
       return K(false);
     case "environment_is":
+      if (options.battle) {
+        noteCondition(c, `${c.op} environment_is`, "T1", "tux.environment_is reads the active battle backdrop");
+        return [{ k: "ext", call: "tux.environment_is", args: { environment: a[0]!, negate: not } }];
+      }
       noteCondition(c, `${c.op} environment_is`, "T3-dropped", "battle backdrop only");
       return K(false);
     case "party_infected":
@@ -515,6 +571,7 @@ function toIf(cl: Clause): { cond: Condition; negate: boolean } {
       cond: { kind: "facing", dir: cl.dir } as unknown as Condition,
       negate: false,
     };
+    case "ext": return { cond: { kind: "ext", call: cl.call, args: cl.args }, negate: false };
     case "const": throw new Error("const clause");
   }
 }
@@ -721,9 +778,9 @@ function shopPlaceholder(npc: string, menu: string, economySlug: string | undefi
   return commands;
 }
 
-function battle(opp: string): Command[] {
+function battlePlaceholder(opp: string, reason = "P1 placeholder: the player wins"): Command[] {
   const body: Command[] = [
-    { op: "text", lines: [`[BATTLE] ${npcName(opp)}`.slice(0, 52), "(P1 placeholder: the player wins)"] },
+    { op: "text", lines: [`[BATTLE] ${npcName(opp)}`.slice(0, 52), `(${reason})`.slice(0, 52)] },
     { op: "switch", id: `bo.${opp}.won`, value: true },
     { op: "switch", id: `defeated.${opp}`, value: true },
     { op: "variable", id: `boc.${opp}.won`, set: { op: "add", value: 1 } },
@@ -735,8 +792,78 @@ function battle(opp: string): Command[] {
   return [{ op: "if", if: { kind: "variable", id: "sys.party_size", op: ">=", value: 1 }, then: body }];
 }
 
+interface InlineBattlePartyMember {
+  species: string;
+  level: number;
+  experienceModifier: number;
+  moneyModifier: number;
+}
+
+function playerOpponent(args: readonly string[]): string | null {
+  const first = args[0];
+  const second = args[1] ?? "player";
+  if (first === "player" && second && second !== "player") return second;
+  if (second === "player" && first && first !== "player") return first;
+  return null;
+}
+
+/** Fold literal NPC party construction into the next same-event single
+ * battle. Variable-backed monsters stay as extension commands because they
+ * must resolve against live story variables. */
+function foldedTrainerParties(acts: readonly Rule[]): {
+  folded: Set<number>;
+  parties: Map<number, InlineBattlePartyMember[]>;
+} {
+  const folded = new Set<number>();
+  const parties = new Map<number, InlineBattlePartyMember[]>();
+  const pending = new Map<string, { index: number; member: InlineBattlePartyMember }[]>();
+  for (let index = 0; index < acts.length; index++) {
+    const action = acts[index]!;
+    if (action.type === "add_monster") {
+      const [species, rawLevel, rawCharacter, rawExperience, rawMoney] = action.args;
+      const character = rawCharacter || "player";
+      if (character !== "player" && species && monsterSlugs.has(species)) {
+        const rows = pending.get(character) ?? [];
+        rows.push({
+          index,
+          member: {
+            species,
+            level: Number(rawLevel),
+            experienceModifier: rawExperience === undefined ? 1 : Number(rawExperience),
+            moneyModifier: rawMoney === undefined ? 0 : Number(rawMoney),
+          },
+        });
+        pending.set(character, rows);
+      }
+    } else if (action.type === "start_battle") {
+      const opponent = playerOpponent(action.args);
+      if (!opponent) continue;
+      const rows = pending.get(opponent) ?? [];
+      if (rows.length) {
+        parties.set(index, rows.map((row) => row.member));
+        for (const row of rows) folded.add(row.index);
+        pending.delete(opponent);
+      }
+    }
+  }
+  return { folded, parties };
+}
+
+function monsterSpeciesArg(raw: string): JsonValue {
+  if (monsterSlugs.has(raw)) return raw;
+  return { variable: varId(raw), values: enumTable.get(raw) ?? [] };
+}
+
+function numeric(raw: string | undefined, fallback: number): number {
+  const value = raw === undefined || raw === "" ? fallback : Number(raw);
+  return Number.isFinite(value) ? value : fallback;
+}
+
 function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
   const out: Command[] = [];
+  const foldedParties = ctx.options.battle
+    ? foldedTrainerParties(acts)
+    : { folded: new Set<number>(), parties: new Map<number, InlineBattlePartyMember[]>() };
   for (let i = 0; i < acts.length; i++) {
     const a = acts[i]!;
     const g = a.args;
@@ -972,8 +1099,32 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         break;
       case "start_battle": case "start_double_battle": {
         const opp = g[0] === "player" ? g[1]! : g[0]!;
-        noteAction(a, a.type, "T3-placeholder", "inline placeholder: text + outcome writes");
-        out.push(...battle(opp));
+        const opponent = playerOpponent(g);
+        if (ctx.options.battle && a.type === "start_battle" && opponent) {
+          const party = foldedParties.parties.get(i) ?? [];
+          noteAction(a, a.type, "T1", party.length
+            ? `Battle Processing with ${party.length} folded trainer monsters`
+            : "Battle Processing with extension-staged trainer party");
+          out.push({
+            op: "battle",
+            setup: {
+              kind: "trainer",
+              opponent,
+              ...(party.length ? { party } : {}),
+              inside: ctx.m.props.inside === "true",
+              hour: 12,
+            } as unknown as JsonValue,
+          });
+        } else if (ctx.options.battle) {
+          const reason = a.type === "start_double_battle"
+            ? "double battles are not supported yet; skipped"
+            : "NPC-versus-NPC battles are not supported yet; skipped";
+          noteAction(a, a.type, "T3-placeholder", reason);
+          out.push({ op: "text", lines: [`[BATTLE] ${npcName(opp)}`.slice(0, 52), `(${reason})`.slice(0, 52)] });
+        } else {
+          noteAction(a, a.type, "T3-placeholder", "inline placeholder: text + outcome writes");
+          out.push(...battlePlaceholder(opp));
+        }
         break;
       }
       case "char_talk": {
@@ -985,6 +1136,28 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         break;
       }
       case "add_monster": {
+        if (ctx.options.battle) {
+          if (foldedParties.folded.has(i)) {
+            noteAction(a, "add_monster(npc folded)", "T1", "literal trainer monster folded into Battle Processing setup");
+            break;
+          }
+          const character = g[2] || "player";
+          noteAction(a, a.type, "T1", character === "player"
+            ? "tux.add_monster spawns into the persistent party"
+            : "tux.add_monster stages a live-variable or cross-event trainer monster");
+          out.push({
+            op: "ext",
+            call: "tux.add_monster",
+            args: {
+              species: monsterSpeciesArg(g[0]!),
+              level: Number(g[1]),
+              character,
+              experienceModifier: numeric(g[3], 1),
+              moneyModifier: numeric(g[4], 0),
+            },
+          });
+          break;
+        }
         if (g[2] && g[2] !== "player") { noteAction(a, "add_monster(npc)", "T3-dropped", "trainer teams are P2"); break; }
         noteAction(a, a.type, "T3-placeholder", "sys.party_size += 1, switch mon.<slug>");
         out.push({ op: "variable", id: "sys.party_size", set: { op: "add", value: 1 } });
@@ -1009,11 +1182,37 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         });
         break;
       case "wild_encounter":
-        noteAction(a, a.type, "T3-placeholder", "scripted wild battle auto-wins in P1");
-        out.push(...battle(g[0]!));
+        if (ctx.options.battle) {
+          noteAction(a, a.type, "T1", "Battle Processing with a scripted wild monster");
+          out.push({ op: "battle", setup: {
+            kind: "wild",
+            species: g[0]!,
+            level: Number(g[1]),
+            experienceModifier: numeric(g[2], 1),
+            moneyModifier: numeric(g[3], 0),
+            ...(g[4] ? { environment: g[4] } : {}),
+            inside: ctx.m.props.inside === "true",
+            hour: 12,
+          } });
+        } else {
+          noteAction(a, a.type, "T3-placeholder", "scripted wild battle auto-wins in P1");
+          out.push(...battlePlaceholder(g[0]!));
+        }
         break;
       case "random_encounter":
-        noteAction(a, a.type, "T3-placeholder", "intentionally silent in P1");
+        if (ctx.options.battle) {
+          noteAction(a, a.type, "T1", "Battle Processing with deterministic encounter-table sampling");
+          out.push({ op: "battle", setup: {
+            kind: "random",
+            table: g[0]!,
+            probability: numeric(g[1], 1),
+            variables: { daytime: "true" },
+            inside: ctx.m.props.inside === "true",
+            hour: 12,
+          } });
+        } else {
+          noteAction(a, a.type, "T3-placeholder", "intentionally silent in P1");
+        }
         break;
       case "open_shop":
         noteAction(a, a.type, "T3-placeholder", "visible stock summary until the K4 shop UI lands");
@@ -1072,7 +1271,63 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
       case "rename_player":
         noteAction(a, a.type, "T2-dropped", "name entry (P1: fixed name)");
         break;
-      case "set_environment": case "set_monster_health": case "set_monster_status": case "set_teleport_faint":
+      case "set_environment":
+        if (ctx.options.battle) {
+          noteAction(a, a.type, "T1", "tux.set_environment updates the active battle backdrop");
+          out.push({ op: "ext", call: "tux.set_environment", args: g[0] ? { environment: g[0] } : {} });
+        } else noteAction(a, a.type, "T3-dropped", "monster/combat subsystem (P2)");
+        break;
+      case "set_monster_health":
+        if (ctx.options.battle) {
+          const args: Record<string, JsonValue> = {};
+          if (g[0]) args.variable = varId(g[0]);
+          if (g[1] !== undefined && g[1] !== "") args.health = {
+            kind: g[1]!.includes(".") ? "fraction" : "points",
+            value: Number(g[1]),
+          };
+          noteAction(a, a.type, "T1", "tux.set_monster_health updates persistent party HP");
+          out.push({ op: "ext", call: "tux.set_monster_health", args });
+        } else noteAction(a, a.type, "T3-dropped", "monster/combat subsystem (P2)");
+        break;
+      case "set_monster_status":
+        if (ctx.options.battle) {
+          const args: Record<string, JsonValue> = {};
+          if (g[0]) args.variable = varId(g[0]);
+          if (g[1]) args.status = g[1];
+          noteAction(a, a.type, "T1", "tux.set_monster_status updates persistent party status");
+          out.push({ op: "ext", call: "tux.set_monster_status", args });
+        } else noteAction(a, a.type, "T3-dropped", "monster/combat subsystem (P2)");
+        break;
+      case "set_teleport_faint":
+        if (ctx.options.battle) {
+          noteAction(a, a.type, "T1", "tux.set_faint_point stores the character's recovery destination");
+          out.push({ op: "ext", call: "tux.set_faint_point", args: {
+            character: g[0]!, map: g[1]!.replace(/\.tmx$/, ""), x: Number(g[2]), y: Number(g[3]),
+          } });
+        } else noteAction(a, a.type, "T3-dropped", "monster/combat subsystem (P2)");
+        break;
+      case "teleport_faint":
+        if (ctx.options.battle) {
+          const character = g[0] || "player";
+          const healing = ["true", "1", "yes", "on"].includes((g[1] ?? "").toLowerCase());
+          noteAction(a, a.type, "T1", "guarded variable transfer to the stored faint point");
+          out.push({
+            op: "if",
+            if: { kind: "ext", call: "tux.has_faint_point", args: { character } },
+            then: [
+              { op: "ext", call: "tux.prepare_faint_transfer", args: { character, healing, currentMap: ctx.m.slug } },
+              {
+                op: "transfer",
+                map: { variable: "tux.faint.map" },
+                x: { variable: "tux.faint.x" },
+                y: { variable: "tux.faint.y" },
+                dir: "keep",
+                fade: numeric(g[2], 0.3),
+              },
+            ],
+          });
+        } else noteAction(a, a.type, "T3-dropped", "monster/combat subsystem (P2)");
+        break;
       case "set_monster_attribute": case "open_journal": case "access_pc":
       case "get_player_monster": case "set_bill": case "format_variable":
         noteAction(a, a.type, "T3-dropped", "monster/combat subsystem (P2)");
@@ -1088,7 +1343,7 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
 // events
 
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "").slice(0, 32) || "event";
-const BLOCKING = new Set<Command["op"]>(["text", "choices", "wait", "transfer", "moveRoute"]);
+const BLOCKING = new Set<Command["op"]>(["text", "choices", "wait", "transfer", "moveRoute", "battle"]);
 const hasBlocking = (cmds: Command[]): boolean =>
   cmds.some((c) => BLOCKING.has(c.op) || (c.op === "if" && (hasBlocking(c.then) || hasBlocking(c.else ?? []))) || (c.op === "choices"));
 const hasCommand = (cmds: readonly Command[], wanted: FutureCommand["op"]): boolean =>
@@ -1616,13 +1871,9 @@ function transferErrors(project: Project): TransferError[] {
   const visit = (sourceMap: string, event: string, commands: readonly Command[]): void => {
     for (const command of commands) {
       if (command.op === "transfer") {
-        if (
-          typeof command.map !== "string" ||
-          typeof command.x !== "number" ||
-          typeof command.y !== "number"
-        ) {
-          throw new Error("importer invariant: generated transfers must use literal destinations");
-        }
+        // Faint recovery resolves a previously validated destination from the
+        // live extension state. Only literal imports can be checked here.
+        if (typeof command.map !== "string" || typeof command.x !== "number" || typeof command.y !== "number") continue;
         const target = maps.get(command.map);
         const reason = !target
           ? "missing-map"
