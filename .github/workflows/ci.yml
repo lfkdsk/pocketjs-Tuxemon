@@ -1,0 +1,111 @@
+name: CI
+
+# Re-import Tuxemon from the pinned upstream commit and check that the
+# committed project, maps, art and battle data are exactly what the importer
+# produces; then typecheck, build, run the tests and the import/journey
+# audits, and play the whole maintained journey (bedroom -> first battle ->
+# Route 1) in headless Chrome against the built web site. The web site is
+# kept as an artifact so it can be downloaded and played locally.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      TUXEMON_SRC: ${{ github.workspace }}/.tuxemon-src
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.x
+
+      # The wasm core is a build artifact, not a checked-in file.
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - name: Cache the wasm core build
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            vendor/pocket-rpgkit/vendor/pocketjs/engine/wasm/target
+          key: ${{ runner.os }}-pocketjs-wasm-${{ hashFiles('vendor/pocket-rpgkit/vendor/pocketjs/engine/wasm/Cargo.lock', 'vendor/pocket-rpgkit/vendor/pocketjs/engine/**/Cargo.toml', 'vendor/pocket-rpgkit/vendor/pocketjs/engine/wasm/src/**', 'vendor/pocket-rpgkit/vendor/pocketjs/engine/core/src/**') }}
+          restore-keys: ${{ runner.os }}-pocketjs-wasm-
+
+      - name: Cache the pinned Tuxemon source
+        uses: actions/cache@v4
+        with:
+          path: .tuxemon-src
+          key: tuxemon-src-${{ hashFiles('tools/fetch-tuxemon.sh') }}
+
+      - name: Fetch the pinned Tuxemon source
+        run: sh tools/fetch-tuxemon.sh .tuxemon-src
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Import Tuxemon and check the committed output is unchanged
+        run: |
+          bun run import
+          git status --porcelain
+          test -z "$(git status --porcelain)"
+
+      - name: Typecheck
+        run: bunx tsc --noEmit
+
+      - name: Build the game bundle and the wasm core
+        run: |
+          bun run build
+          bun run build:wasm
+
+      - name: Test
+        run: bun test tests/
+
+      - name: Every imported input lock is executed to its unlock
+        run: bun run verify:g6:locks
+
+      - name: No map can freeze the player
+        run: bun run verify:g6:frozen
+
+      - name: Two isolated imports are byte-identical
+        run: bun run verify:g6:determinism
+
+      - name: Build the web site
+        run: bun run web
+
+      - name: Play the journey in headless Chrome
+        run: bun tools/verify-web-journey.ts
+
+      - name: Keep the web site
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-site
+          path: dist/web
+          retention-days: 14
+
+      - name: Keep the journey screenshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-journey
+          path: dist/web-journey/*.png
+          retention-days: 14
+          if-no-files-found: ignore

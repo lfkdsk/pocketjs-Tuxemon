@@ -49,6 +49,22 @@ minimal one; Tuxemon's full skin and animations come next.)
   <img src="docs/screenshots/battle.png" width="480" alt="The first trainer battle">
 </p>
 
+## Play it
+
+- **In a browser, from CI:** every push builds the web version. Open the
+  latest [CI run](../../actions/workflows/ci.yml), download the `web-site`
+  artifact, unzip it and serve the folder, e.g.
+  `python3 -m http.server -d web-site 8000`, then open
+  <http://localhost:8000/pocket-tuxemon/>.
+- **Locally:** `bun run web`, then serve `dist/web` the same way; or
+  `bun run desktop` for the desktop host.
+- **Keys:** arrows walk, `A`/`Z`/`Enter` talks and confirms, `B`/`Esc` goes back.
+
+CI also plays the whole maintained journey — bedroom, Paper Town, the first
+battle, Route 1 — in headless Chrome against the built site
+(`bun tools/verify-web-journey.ts`) and checks every checkpoint's state and
+pixels against the goldens.
+
 ## Running
 
 ```sh

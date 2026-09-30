@@ -4,7 +4,7 @@
   "games": {
     "pocket-tuxemon": {
       "title": "Pocket Tuxemon",
-      "description": "Walk from Spyder's bedroom through Paper Town and Route 1, with imported maps, NPCs, dialogue, events, and visible battle placeholders.",
+      "description": "Walk from Spyder's bedroom through Paper Town to Route 1 — imported maps, NPCs, dialogue, shops and real battles (the first fight against Billie included).",
       "controls": [
         {
           "button": "DPAD",
@@ -13,6 +13,10 @@
         {
           "button": "CIRCLE",
           "action": "Talk / confirm"
+        },
+        {
+          "button": "CROSS",
+          "action": "Back / cancel"
         }
       ]
     }
