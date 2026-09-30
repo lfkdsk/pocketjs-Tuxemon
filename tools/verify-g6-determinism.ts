@@ -20,6 +20,11 @@ const GENERATED = [
   "data/battle-runtime-db.json",
   "data/battle-assets-report.json",
   "dist/maps",
+  "dist/battle",
+  "dist/battle-runtime-shell.json",
+  "dist/animated",
+  "dist/npc-src",
+  "dist/terrain-stream",
   "dist/project.json",
   "dist/project-shell.json",
   "dist/import-report.json",
@@ -31,6 +36,8 @@ const GENERATED = [
   "ui/game-assets.ts",
   "ui/battle-assets.ts",
   "ui/terrain-assets.ts",
+  "ui/npc-src-assets.ts",
+  "ui/animated-assets.ts",
 ] as const;
 
 interface Snapshot {

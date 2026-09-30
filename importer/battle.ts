@@ -27,6 +27,8 @@ import {
   type BattleImageRef,
   type BattlePlugin,
   type BattleRangeRule,
+  type BattleRuntimeIndexEntry,
+  type BattleRuntimeShell,
   type BattleScope,
   type BattleStat,
 } from "./battle-schema.ts";
@@ -200,6 +202,12 @@ export interface BattleImportReport {
   battleDbBytes: number;
   runtimeDbBytes: number;
   pakKey: string;
+  /** GP1: the sharded, lazily-loaded projection of the runtime database. */
+  battleRepository: {
+    shellBytes: number;
+    entries: number;
+    entryBytes: number;
+  };
 }
 
 export interface BattleBuild {
@@ -207,6 +215,9 @@ export interface BattleBuild {
   report: BattleImportReport;
   imagesJson: Record<string, { psm: number }>;
   assetPaths: string[];
+  battleRepository: {
+    pakEntries: Array<{ key: string; file: string }>;
+  };
 }
 
 export interface BattleImportOptions {
@@ -917,6 +928,72 @@ export function runtimeBattleDb(db: BattleDb): BattleDb {
   } as unknown as BattleDb;
 }
 
+export interface SplitBattleRuntimeEntry {
+  path: string;
+  bytes: Uint8Array;
+  meta: BattleRuntimeIndexEntry;
+}
+
+export interface SplitBattleRuntimeDb {
+  shell: BattleRuntimeShell;
+  shellText: string;
+  entries: readonly SplitBattleRuntimeEntry[];
+}
+
+/** GP1: splits the runtime projection's four dominant tables (monsters,
+ * techniques, items, statuses — ~80% of its bytes) into one canonical entry
+ * per slug, keyed `battle/<table>/<slug>.json`. The remainder (rules,
+ * shapes, elements, tastes, encounters, environments, npcs, ui — all small,
+ * all needed by every battle) stays inline in the shell. `battle/battle-
+ * repository.ts` reads the shell directly (bundled, like `project-
+ * shell.json`) and resolves each shard entry from the pak/data.fs on first
+ * use, so a played battle parses only the species/techniques it touches
+ * instead of the whole database. */
+export function splitBattleRuntimeDb(db: BattleDb): SplitBattleRuntimeDb {
+  const tableEntries = <T>(
+    table: Record<string, T>,
+    prefix: string,
+  ): { index: BattleRuntimeIndexEntry[]; entries: SplitBattleRuntimeEntry[] } => {
+    const index: BattleRuntimeIndexEntry[] = [];
+    const entries: SplitBattleRuntimeEntry[] = [];
+    for (const slug of Object.keys(table).sort()) {
+      const path = `battle/${prefix}/${slug}.json`;
+      const meta: BattleRuntimeIndexEntry = { id: slug, entry: path };
+      index.push(meta);
+      entries.push({ path, bytes: jsonBytes(table[slug]), meta });
+    }
+    return { index, entries };
+  };
+  const monsters = tableEntries(db.monsters, "monsters");
+  const techniques = tableEntries(db.techniques, "techniques");
+  const items = tableEntries(db.items, "items");
+  const statuses = tableEntries(db.statuses, "statuses");
+  const shell: BattleRuntimeShell = {
+    format: db.format,
+    sourceRevision: db.sourceRevision,
+    scope: db.scope,
+    rules: db.rules,
+    shapes: db.shapes,
+    elements: db.elements,
+    elementOrder: db.elementOrder,
+    tastes: db.tastes,
+    tasteOrder: db.tasteOrder,
+    encounters: db.encounters,
+    environments: db.environments,
+    npcs: db.npcs,
+    ui: db.ui,
+    monstersIndex: monsters.index,
+    techniquesIndex: techniques.index,
+    itemsIndex: items.index,
+    statusesIndex: statuses.index,
+  };
+  return {
+    shell,
+    shellText: new TextDecoder().decode(jsonBytes(shell)),
+    entries: [...monsters.entries, ...techniques.entries, ...items.entries, ...statuses.entries],
+  };
+}
+
 /** Build and materialise one battle-db/art scope. */
 export function writeBattleArtifacts(options: BattleImportOptions): BattleBuild {
   const outputRoot = normalize(options.outputRoot);
@@ -1267,7 +1344,9 @@ export function writeBattleArtifacts(options: BattleImportOptions): BattleBuild 
   const pakKeys = new Set([...cooker.assets.values()].map((asset) => asset.key));
   validateBattleDb(db, pakKeys);
   const dbData = jsonBytes(db);
-  const runtimeDbData = jsonBytes(runtimeBattleDb(db));
+  const runtimeDb = runtimeBattleDb(db);
+  const runtimeDbData = jsonBytes(runtimeDb);
+  const split = splitBattleRuntimeDb(runtimeDb);
   const blobs: PakBlob[] = [...cooker.assets.values()].sort((a, b) => a.key.localeCompare(b.key)).map((asset) => ({
     key: asset.key,
     dtype: PAK_DTYPE.u8,
@@ -1301,6 +1380,11 @@ export function writeBattleArtifacts(options: BattleImportOptions): BattleBuild 
     battleDbBytes: dbData.byteLength,
     runtimeDbBytes: runtimeDbData.byteLength,
     pakKey: DB_PAK_KEY,
+    battleRepository: {
+      shellBytes: split.shellText.length,
+      entries: split.entries.length,
+      entryBytes: split.entries.reduce((sum, entry) => sum + entry.bytes.byteLength, 0),
+    },
   };
 
   mkdirSync(join(outputRoot, "data"), { recursive: true });
@@ -1308,6 +1392,15 @@ export function writeBattleArtifacts(options: BattleImportOptions): BattleBuild 
   writeFileSync(join(outputRoot, "data/battle-db.json"), dbData);
   writeFileSync(join(outputRoot, "data/battle-runtime-db.json"), runtimeDbData);
   writeFileSync(join(outputRoot, "data/battle-assets-report.json"), jsonBytes(report));
+  const dist = join(outputRoot, "dist");
+  const battleShardDir = join(dist, "battle");
+  rmSync(battleShardDir, { recursive: true, force: true });
+  for (const entry of split.entries) {
+    const path = join(dist, entry.path);
+    mkdirSync(dirname(path), { recursive: true });
+    writeFileSync(path, entry.bytes);
+  }
+  writeFileSync(join(dist, "battle-runtime-shell.json"), split.shellText);
   const paths = [...cooker.assets.keys()].sort();
   const source = "// AUTO-GENERATED by gen-assets.ts — do not edit.\n" +
     "// Keeping these literal paths reachable makes PocketJS bake every battle texture into the app pak.\n" +
@@ -1318,6 +1411,9 @@ export function writeBattleArtifacts(options: BattleImportOptions): BattleBuild 
     report,
     imagesJson: Object.fromEntries(paths.map((path) => [path, { psm: PSM_4444 }])),
     assetPaths: paths,
+    battleRepository: {
+      pakEntries: split.entries.map((entry) => ({ key: entry.meta.entry, file: `dist/${entry.path}` })),
+    },
   };
 }
 

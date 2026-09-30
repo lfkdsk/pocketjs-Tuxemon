@@ -1,5 +1,2797 @@
 [
   {
+    "key": "animated/37707_town.json",
+    "file": "dist/animated/37707_town.json"
+  },
+  {
+    "key": "animated/37707_town_missing.json",
+    "file": "dist/animated/37707_town_missing.json"
+  },
+  {
+    "key": "animated/candy_town.json",
+    "file": "dist/animated/candy_town.json"
+  },
+  {
+    "key": "animated/citypark.json",
+    "file": "dist/animated/citypark.json"
+  },
+  {
+    "key": "animated/classic_route_1.json",
+    "file": "dist/animated/classic_route_1.json"
+  },
+  {
+    "key": "animated/cotton_town.json",
+    "file": "dist/animated/cotton_town.json"
+  },
+  {
+    "key": "animated/eclipse_crystal_town.json",
+    "file": "dist/animated/eclipse_crystal_town.json"
+  },
+  {
+    "key": "animated/eclipse_lion_mountain_high.json",
+    "file": "dist/animated/eclipse_lion_mountain_high.json"
+  },
+  {
+    "key": "animated/eclipse_lion_mountain_low.json",
+    "file": "dist/animated/eclipse_lion_mountain_low.json"
+  },
+  {
+    "key": "animated/eclipse_lion_mountain_middle.json",
+    "file": "dist/animated/eclipse_lion_mountain_middle.json"
+  },
+  {
+    "key": "animated/eclipse_park.json",
+    "file": "dist/animated/eclipse_park.json"
+  },
+  {
+    "key": "animated/eclipse_route7.json",
+    "file": "dist/animated/eclipse_route7.json"
+  },
+  {
+    "key": "animated/eclipse_routeg.json",
+    "file": "dist/animated/eclipse_routeg.json"
+  },
+  {
+    "key": "animated/flower_city.json",
+    "file": "dist/animated/flower_city.json"
+  },
+  {
+    "key": "animated/leather_town.json",
+    "file": "dist/animated/leather_town.json"
+  },
+  {
+    "key": "animated/manhattan_beach.json",
+    "file": "dist/animated/manhattan_beach.json"
+  },
+  {
+    "key": "animated/route1.json",
+    "file": "dist/animated/route1.json"
+  },
+  {
+    "key": "animated/route1_sanglorian.json",
+    "file": "dist/animated/route1_sanglorian.json"
+  },
+  {
+    "key": "animated/route3.json",
+    "file": "dist/animated/route3.json"
+  },
+  {
+    "key": "animated/route4.json",
+    "file": "dist/animated/route4.json"
+  },
+  {
+    "key": "animated/routea.json",
+    "file": "dist/animated/routea.json"
+  },
+  {
+    "key": "animated/rubberduck_city_01.json",
+    "file": "dist/animated/rubberduck_city_01.json"
+  },
+  {
+    "key": "animated/spyder_candy_port.json",
+    "file": "dist/animated/spyder_candy_port.json"
+  },
+  {
+    "key": "animated/spyder_candy_town.json",
+    "file": "dist/animated/spyder_candy_town.json"
+  },
+  {
+    "key": "animated/spyder_citypark.json",
+    "file": "dist/animated/spyder_citypark.json"
+  },
+  {
+    "key": "animated/spyder_cotton_town.json",
+    "file": "dist/animated/spyder_cotton_town.json"
+  },
+  {
+    "key": "animated/spyder_diamond_hill.json",
+    "file": "dist/animated/spyder_diamond_hill.json"
+  },
+  {
+    "key": "animated/spyder_flower_city.json",
+    "file": "dist/animated/spyder_flower_city.json"
+  },
+  {
+    "key": "animated/spyder_leather_town.json",
+    "file": "dist/animated/spyder_leather_town.json"
+  },
+  {
+    "key": "animated/spyder_paper_town.json",
+    "file": "dist/animated/spyder_paper_town.json"
+  },
+  {
+    "key": "animated/spyder_route1.json",
+    "file": "dist/animated/spyder_route1.json"
+  },
+  {
+    "key": "animated/spyder_route2.json",
+    "file": "dist/animated/spyder_route2.json"
+  },
+  {
+    "key": "animated/spyder_route3.json",
+    "file": "dist/animated/spyder_route3.json"
+  },
+  {
+    "key": "animated/spyder_route4.json",
+    "file": "dist/animated/spyder_route4.json"
+  },
+  {
+    "key": "animated/spyder_routea.json",
+    "file": "dist/animated/spyder_routea.json"
+  },
+  {
+    "key": "animated/spyder_routeb.json",
+    "file": "dist/animated/spyder_routeb.json"
+  },
+  {
+    "key": "animated/spyder_routee.json",
+    "file": "dist/animated/spyder_routee.json"
+  },
+  {
+    "key": "animated/spyder_timber_town.json",
+    "file": "dist/animated/spyder_timber_town.json"
+  },
+  {
+    "key": "animated/taba_town.json",
+    "file": "dist/animated/taba_town.json"
+  },
+  {
+    "key": "animated/timber_town.json",
+    "file": "dist/animated/timber_town.json"
+  },
+  {
+    "key": "animated/tt_forest_route1.json",
+    "file": "dist/animated/tt_forest_route1.json"
+  },
+  {
+    "key": "animated/tt_searoute1.json",
+    "file": "dist/animated/tt_searoute1.json"
+  },
+  {
+    "key": "animated/water_end_of_desert.json",
+    "file": "dist/animated/water_end_of_desert.json"
+  },
+  {
+    "key": "animated/water_lower_village.json",
+    "file": "dist/animated/water_lower_village.json"
+  },
+  {
+    "key": "animated/water_outskirts.json",
+    "file": "dist/animated/water_outskirts.json"
+  },
+  {
+    "key": "animated/water_river_village.json",
+    "file": "dist/animated/water_river_village.json"
+  },
+  {
+    "key": "animated/water_route_grass.json",
+    "file": "dist/animated/water_route_grass.json"
+  },
+  {
+    "key": "animated/water_volcano_path.json",
+    "file": "dist/animated/water_volcano_path.json"
+  },
+  {
+    "key": "battle/items/aardant.json",
+    "file": "dist/battle/items/aardant.json"
+  },
+  {
+    "key": "battle/items/ancient_egg.json",
+    "file": "dist/battle/items/ancient_egg.json"
+  },
+  {
+    "key": "battle/items/antidote_grapes.json",
+    "file": "dist/battle/items/antidote_grapes.json"
+  },
+  {
+    "key": "battle/items/app_map.json",
+    "file": "dist/battle/items/app_map.json"
+  },
+  {
+    "key": "battle/items/app_tuxepedia.json",
+    "file": "dist/battle/items/app_tuxepedia.json"
+  },
+  {
+    "key": "battle/items/book_wishes.json",
+    "file": "dist/battle/items/book_wishes.json"
+  },
+  {
+    "key": "battle/items/boost_armour.json",
+    "file": "dist/battle/items/boost_armour.json"
+  },
+  {
+    "key": "battle/items/boost_dodge.json",
+    "file": "dist/battle/items/boost_dodge.json"
+  },
+  {
+    "key": "battle/items/boost_melee.json",
+    "file": "dist/battle/items/boost_melee.json"
+  },
+  {
+    "key": "battle/items/boost_ranged.json",
+    "file": "dist/battle/items/boost_ranged.json"
+  },
+  {
+    "key": "battle/items/boost_speed.json",
+    "file": "dist/battle/items/boost_speed.json"
+  },
+  {
+    "key": "battle/items/cosmic_berry.json",
+    "file": "dist/battle/items/cosmic_berry.json"
+  },
+  {
+    "key": "battle/items/cure_festering.json",
+    "file": "dist/battle/items/cure_festering.json"
+  },
+  {
+    "key": "battle/items/cureall.json",
+    "file": "dist/battle/items/cureall.json"
+  },
+  {
+    "key": "battle/items/dojo_pass.json",
+    "file": "dist/battle/items/dojo_pass.json"
+  },
+  {
+    "key": "battle/items/earth_berry.json",
+    "file": "dist/battle/items/earth_berry.json"
+  },
+  {
+    "key": "battle/items/escape_key.json",
+    "file": "dist/battle/items/escape_key.json"
+  },
+  {
+    "key": "battle/items/fire_berry.json",
+    "file": "dist/battle/items/fire_berry.json"
+  },
+  {
+    "key": "battle/items/fishing_rod.json",
+    "file": "dist/battle/items/fishing_rod.json"
+  },
+  {
+    "key": "battle/items/flintstone.json",
+    "file": "dist/battle/items/flintstone.json"
+  },
+  {
+    "key": "battle/items/friendship_scroll.json",
+    "file": "dist/battle/items/friendship_scroll.json"
+  },
+  {
+    "key": "battle/items/frost_berry.json",
+    "file": "dist/battle/items/frost_berry.json"
+  },
+  {
+    "key": "battle/items/gold_pass.json",
+    "file": "dist/battle/items/gold_pass.json"
+  },
+  {
+    "key": "battle/items/heroic_berry.json",
+    "file": "dist/battle/items/heroic_berry.json"
+  },
+  {
+    "key": "battle/items/imperial_potion.json",
+    "file": "dist/battle/items/imperial_potion.json"
+  },
+  {
+    "key": "battle/items/imperial_tea.json",
+    "file": "dist/battle/items/imperial_tea.json"
+  },
+  {
+    "key": "battle/items/lightning_berry.json",
+    "file": "dist/battle/items/lightning_berry.json"
+  },
+  {
+    "key": "battle/items/lucky_bamboo.json",
+    "file": "dist/battle/items/lucky_bamboo.json"
+  },
+  {
+    "key": "battle/items/mega_potion.json",
+    "file": "dist/battle/items/mega_potion.json"
+  },
+  {
+    "key": "battle/items/metal_berry.json",
+    "file": "dist/battle/items/metal_berry.json"
+  },
+  {
+    "key": "battle/items/miaow_milk.json",
+    "file": "dist/battle/items/miaow_milk.json"
+  },
+  {
+    "key": "battle/items/mystery_tea.json",
+    "file": "dist/battle/items/mystery_tea.json"
+  },
+  {
+    "key": "battle/items/normal_berry.json",
+    "file": "dist/battle/items/normal_berry.json"
+  },
+  {
+    "key": "battle/items/nu_phone.json",
+    "file": "dist/battle/items/nu_phone.json"
+  },
+  {
+    "key": "battle/items/ox_stick.json",
+    "file": "dist/battle/items/ox_stick.json"
+  },
+  {
+    "key": "battle/items/p_monsters_eyes.json",
+    "file": "dist/battle/items/p_monsters_eyes.json"
+  },
+  {
+    "key": "battle/items/p_starry_night.json",
+    "file": "dist/battle/items/p_starry_night.json"
+  },
+  {
+    "key": "battle/items/p_trepidation.json",
+    "file": "dist/battle/items/p_trepidation.json"
+  },
+  {
+    "key": "battle/items/peace_lily.json",
+    "file": "dist/battle/items/peace_lily.json"
+  },
+  {
+    "key": "battle/items/petrified_dung.json",
+    "file": "dist/battle/items/petrified_dung.json"
+  },
+  {
+    "key": "battle/items/potion.json",
+    "file": "dist/battle/items/potion.json"
+  },
+  {
+    "key": "battle/items/pyramidion.json",
+    "file": "dist/battle/items/pyramidion.json"
+  },
+  {
+    "key": "battle/items/raise_armour.json",
+    "file": "dist/battle/items/raise_armour.json"
+  },
+  {
+    "key": "battle/items/raise_dodge.json",
+    "file": "dist/battle/items/raise_dodge.json"
+  },
+  {
+    "key": "battle/items/raise_hp.json",
+    "file": "dist/battle/items/raise_hp.json"
+  },
+  {
+    "key": "battle/items/raise_melee.json",
+    "file": "dist/battle/items/raise_melee.json"
+  },
+  {
+    "key": "battle/items/raise_ranged.json",
+    "file": "dist/battle/items/raise_ranged.json"
+  },
+  {
+    "key": "battle/items/raise_speed.json",
+    "file": "dist/battle/items/raise_speed.json"
+  },
+  {
+    "key": "battle/items/refreshing_slice.json",
+    "file": "dist/battle/items/refreshing_slice.json"
+  },
+  {
+    "key": "battle/items/repellent.json",
+    "file": "dist/battle/items/repellent.json"
+  },
+  {
+    "key": "battle/items/restoration.json",
+    "file": "dist/battle/items/restoration.json"
+  },
+  {
+    "key": "battle/items/revive.json",
+    "file": "dist/battle/items/revive.json"
+  },
+  {
+    "key": "battle/items/rhincus_fossil.json",
+    "file": "dist/battle/items/rhincus_fossil.json"
+  },
+  {
+    "key": "battle/items/sea_girdle.json",
+    "file": "dist/battle/items/sea_girdle.json"
+  },
+  {
+    "key": "battle/items/shadow_berry.json",
+    "file": "dist/battle/items/shadow_berry.json"
+  },
+  {
+    "key": "battle/items/shammer_fossil.json",
+    "file": "dist/battle/items/shammer_fossil.json"
+  },
+  {
+    "key": "battle/items/sky_berry.json",
+    "file": "dist/battle/items/sky_berry.json"
+  },
+  {
+    "key": "battle/items/sledgehammer.json",
+    "file": "dist/battle/items/sledgehammer.json"
+  },
+  {
+    "key": "battle/items/spyder_pass.json",
+    "file": "dist/battle/items/spyder_pass.json"
+  },
+  {
+    "key": "battle/items/stovepipe.json",
+    "file": "dist/battle/items/stovepipe.json"
+  },
+  {
+    "key": "battle/items/super_potion.json",
+    "file": "dist/battle/items/super_potion.json"
+  },
+  {
+    "key": "battle/items/surfboard.json",
+    "file": "dist/battle/items/surfboard.json"
+  },
+  {
+    "key": "battle/items/sweet_sand.json",
+    "file": "dist/battle/items/sweet_sand.json"
+  },
+  {
+    "key": "battle/items/tea.json",
+    "file": "dist/battle/items/tea.json"
+  },
+  {
+    "key": "battle/items/tectonic_drill.json",
+    "file": "dist/battle/items/tectonic_drill.json"
+  },
+  {
+    "key": "battle/items/thunderstone.json",
+    "file": "dist/battle/items/thunderstone.json"
+  },
+  {
+    "key": "battle/items/tm_acid.json",
+    "file": "dist/battle/items/tm_acid.json"
+  },
+  {
+    "key": "battle/items/tm_all_in.json",
+    "file": "dist/battle/items/tm_all_in.json"
+  },
+  {
+    "key": "battle/items/tm_altitude.json",
+    "file": "dist/battle/items/tm_altitude.json"
+  },
+  {
+    "key": "battle/items/tm_avalanche.json",
+    "file": "dist/battle/items/tm_avalanche.json"
+  },
+  {
+    "key": "battle/items/tm_blade.json",
+    "file": "dist/battle/items/tm_blade.json"
+  },
+  {
+    "key": "battle/items/tm_blossom.json",
+    "file": "dist/battle/items/tm_blossom.json"
+  },
+  {
+    "key": "battle/items/tm_frostbite.json",
+    "file": "dist/battle/items/tm_frostbite.json"
+  },
+  {
+    "key": "battle/items/tm_ice_shield.json",
+    "file": "dist/battle/items/tm_ice_shield.json"
+  },
+  {
+    "key": "battle/items/tm_leaf_barrage.json",
+    "file": "dist/battle/items/tm_leaf_barrage.json"
+  },
+  {
+    "key": "battle/items/tm_panjandrum.json",
+    "file": "dist/battle/items/tm_panjandrum.json"
+  },
+  {
+    "key": "battle/items/tm_scope.json",
+    "file": "dist/battle/items/tm_scope.json"
+  },
+  {
+    "key": "battle/items/tm_shadow_boxing.json",
+    "file": "dist/battle/items/tm_shadow_boxing.json"
+  },
+  {
+    "key": "battle/items/tm_supernova.json",
+    "file": "dist/battle/items/tm_supernova.json"
+  },
+  {
+    "key": "battle/items/tm_ubuntu.json",
+    "file": "dist/battle/items/tm_ubuntu.json"
+  },
+  {
+    "key": "battle/items/tm_vorpal.json",
+    "file": "dist/battle/items/tm_vorpal.json"
+  },
+  {
+    "key": "battle/items/tuxeball.json",
+    "file": "dist/battle/items/tuxeball.json"
+  },
+  {
+    "key": "battle/items/tuxeball_ancient.json",
+    "file": "dist/battle/items/tuxeball_ancient.json"
+  },
+  {
+    "key": "battle/items/tuxeball_candy.json",
+    "file": "dist/battle/items/tuxeball_candy.json"
+  },
+  {
+    "key": "battle/items/tuxeball_crusher.json",
+    "file": "dist/battle/items/tuxeball_crusher.json"
+  },
+  {
+    "key": "battle/items/tuxeball_diurnal.json",
+    "file": "dist/battle/items/tuxeball_diurnal.json"
+  },
+  {
+    "key": "battle/items/tuxeball_earth.json",
+    "file": "dist/battle/items/tuxeball_earth.json"
+  },
+  {
+    "key": "battle/items/tuxeball_female.json",
+    "file": "dist/battle/items/tuxeball_female.json"
+  },
+  {
+    "key": "battle/items/tuxeball_fire.json",
+    "file": "dist/battle/items/tuxeball_fire.json"
+  },
+  {
+    "key": "battle/items/tuxeball_gambler.json",
+    "file": "dist/battle/items/tuxeball_gambler.json"
+  },
+  {
+    "key": "battle/items/tuxeball_grand.json",
+    "file": "dist/battle/items/tuxeball_grand.json"
+  },
+  {
+    "key": "battle/items/tuxeball_hardened.json",
+    "file": "dist/battle/items/tuxeball_hardened.json"
+  },
+  {
+    "key": "battle/items/tuxeball_hearty.json",
+    "file": "dist/battle/items/tuxeball_hearty.json"
+  },
+  {
+    "key": "battle/items/tuxeball_lavish.json",
+    "file": "dist/battle/items/tuxeball_lavish.json"
+  },
+  {
+    "key": "battle/items/tuxeball_majestic.json",
+    "file": "dist/battle/items/tuxeball_majestic.json"
+  },
+  {
+    "key": "battle/items/tuxeball_male.json",
+    "file": "dist/battle/items/tuxeball_male.json"
+  },
+  {
+    "key": "battle/items/tuxeball_metal.json",
+    "file": "dist/battle/items/tuxeball_metal.json"
+  },
+  {
+    "key": "battle/items/tuxeball_neuter.json",
+    "file": "dist/battle/items/tuxeball_neuter.json"
+  },
+  {
+    "key": "battle/items/tuxeball_noble.json",
+    "file": "dist/battle/items/tuxeball_noble.json"
+  },
+  {
+    "key": "battle/items/tuxeball_nocturnal.json",
+    "file": "dist/battle/items/tuxeball_nocturnal.json"
+  },
+  {
+    "key": "battle/items/tuxeball_omni.json",
+    "file": "dist/battle/items/tuxeball_omni.json"
+  },
+  {
+    "key": "battle/items/tuxeball_peppy.json",
+    "file": "dist/battle/items/tuxeball_peppy.json"
+  },
+  {
+    "key": "battle/items/tuxeball_refined.json",
+    "file": "dist/battle/items/tuxeball_refined.json"
+  },
+  {
+    "key": "battle/items/tuxeball_salty.json",
+    "file": "dist/battle/items/tuxeball_salty.json"
+  },
+  {
+    "key": "battle/items/tuxeball_water.json",
+    "file": "dist/battle/items/tuxeball_water.json"
+  },
+  {
+    "key": "battle/items/tuxeball_wood.json",
+    "file": "dist/battle/items/tuxeball_wood.json"
+  },
+  {
+    "key": "battle/items/tuxeball_xero.json",
+    "file": "dist/battle/items/tuxeball_xero.json"
+  },
+  {
+    "key": "battle/items/tuxeball_zesty.json",
+    "file": "dist/battle/items/tuxeball_zesty.json"
+  },
+  {
+    "key": "battle/items/venom_berry.json",
+    "file": "dist/battle/items/venom_berry.json"
+  },
+  {
+    "key": "battle/items/water_berry.json",
+    "file": "dist/battle/items/water_berry.json"
+  },
+  {
+    "key": "battle/items/wood_berry.json",
+    "file": "dist/battle/items/wood_berry.json"
+  },
+  {
+    "key": "battle/items/xp_feeder.json",
+    "file": "dist/battle/items/xp_feeder.json"
+  },
+  {
+    "key": "battle/items/xp_transmitter.json",
+    "file": "dist/battle/items/xp_transmitter.json"
+  },
+  {
+    "key": "battle/monsters/aardart.json",
+    "file": "dist/battle/monsters/aardart.json"
+  },
+  {
+    "key": "battle/monsters/aardorn.json",
+    "file": "dist/battle/monsters/aardorn.json"
+  },
+  {
+    "key": "battle/monsters/abesnaki.json",
+    "file": "dist/battle/monsters/abesnaki.json"
+  },
+  {
+    "key": "battle/monsters/agnidon.json",
+    "file": "dist/battle/monsters/agnidon.json"
+  },
+  {
+    "key": "battle/monsters/agnigon.json",
+    "file": "dist/battle/monsters/agnigon.json"
+  },
+  {
+    "key": "battle/monsters/agnite.json",
+    "file": "dist/battle/monsters/agnite.json"
+  },
+  {
+    "key": "battle/monsters/agnsher.json",
+    "file": "dist/battle/monsters/agnsher.json"
+  },
+  {
+    "key": "battle/monsters/allagon.json",
+    "file": "dist/battle/monsters/allagon.json"
+  },
+  {
+    "key": "battle/monsters/ampystoma.json",
+    "file": "dist/battle/monsters/ampystoma.json"
+  },
+  {
+    "key": "battle/monsters/angesnow.json",
+    "file": "dist/battle/monsters/angesnow.json"
+  },
+  {
+    "key": "battle/monsters/angrito.json",
+    "file": "dist/battle/monsters/angrito.json"
+  },
+  {
+    "key": "battle/monsters/anoleaf.json",
+    "file": "dist/battle/monsters/anoleaf.json"
+  },
+  {
+    "key": "battle/monsters/anu.json",
+    "file": "dist/battle/monsters/anu.json"
+  },
+  {
+    "key": "battle/monsters/apeoro.json",
+    "file": "dist/battle/monsters/apeoro.json"
+  },
+  {
+    "key": "battle/monsters/araignee.json",
+    "file": "dist/battle/monsters/araignee.json"
+  },
+  {
+    "key": "battle/monsters/arthrobolt.json",
+    "file": "dist/battle/monsters/arthrobolt.json"
+  },
+  {
+    "key": "battle/monsters/av8r.json",
+    "file": "dist/battle/monsters/av8r.json"
+  },
+  {
+    "key": "battle/monsters/axolightl.json",
+    "file": "dist/battle/monsters/axolightl.json"
+  },
+  {
+    "key": "battle/monsters/b_ver_1.json",
+    "file": "dist/battle/monsters/b_ver_1.json"
+  },
+  {
+    "key": "battle/monsters/bamboon.json",
+    "file": "dist/battle/monsters/bamboon.json"
+  },
+  {
+    "key": "battle/monsters/baobaraffe.json",
+    "file": "dist/battle/monsters/baobaraffe.json"
+  },
+  {
+    "key": "battle/monsters/baoby.json",
+    "file": "dist/battle/monsters/baoby.json"
+  },
+  {
+    "key": "battle/monsters/bearloch.json",
+    "file": "dist/battle/monsters/bearloch.json"
+  },
+  {
+    "key": "battle/monsters/bigfin.json",
+    "file": "dist/battle/monsters/bigfin.json"
+  },
+  {
+    "key": "battle/monsters/birdling.json",
+    "file": "dist/battle/monsters/birdling.json"
+  },
+  {
+    "key": "battle/monsters/bishosand.json",
+    "file": "dist/battle/monsters/bishosand.json"
+  },
+  {
+    "key": "battle/monsters/blasdoor.json",
+    "file": "dist/battle/monsters/blasdoor.json"
+  },
+  {
+    "key": "battle/monsters/bolt.json",
+    "file": "dist/battle/monsters/bolt.json"
+  },
+  {
+    "key": "battle/monsters/boltnu.json",
+    "file": "dist/battle/monsters/boltnu.json"
+  },
+  {
+    "key": "battle/monsters/botbot.json",
+    "file": "dist/battle/monsters/botbot.json"
+  },
+  {
+    "key": "battle/monsters/boxali.json",
+    "file": "dist/battle/monsters/boxali.json"
+  },
+  {
+    "key": "battle/monsters/breem.json",
+    "file": "dist/battle/monsters/breem.json"
+  },
+  {
+    "key": "battle/monsters/brewdin.json",
+    "file": "dist/battle/monsters/brewdin.json"
+  },
+  {
+    "key": "battle/monsters/bricgard.json",
+    "file": "dist/battle/monsters/bricgard.json"
+  },
+  {
+    "key": "battle/monsters/brickhemoth.json",
+    "file": "dist/battle/monsters/brickhemoth.json"
+  },
+  {
+    "key": "battle/monsters/budaye.json",
+    "file": "dist/battle/monsters/budaye.json"
+  },
+  {
+    "key": "battle/monsters/bugnin.json",
+    "file": "dist/battle/monsters/bugnin.json"
+  },
+  {
+    "key": "battle/monsters/bursa.json",
+    "file": "dist/battle/monsters/bursa.json"
+  },
+  {
+    "key": "battle/monsters/cairfrey.json",
+    "file": "dist/battle/monsters/cairfrey.json"
+  },
+  {
+    "key": "battle/monsters/caper.json",
+    "file": "dist/battle/monsters/caper.json"
+  },
+  {
+    "key": "battle/monsters/capinyah.json",
+    "file": "dist/battle/monsters/capinyah.json"
+  },
+  {
+    "key": "battle/monsters/capiti.json",
+    "file": "dist/battle/monsters/capiti.json"
+  },
+  {
+    "key": "battle/monsters/cardiling.json",
+    "file": "dist/battle/monsters/cardiling.json"
+  },
+  {
+    "key": "battle/monsters/cardinale.json",
+    "file": "dist/battle/monsters/cardinale.json"
+  },
+  {
+    "key": "battle/monsters/cardiwing.json",
+    "file": "dist/battle/monsters/cardiwing.json"
+  },
+  {
+    "key": "battle/monsters/cataspike.json",
+    "file": "dist/battle/monsters/cataspike.json"
+  },
+  {
+    "key": "battle/monsters/cateye.json",
+    "file": "dist/battle/monsters/cateye.json"
+  },
+  {
+    "key": "battle/monsters/chrome_robo.json",
+    "file": "dist/battle/monsters/chrome_robo.json"
+  },
+  {
+    "key": "battle/monsters/chromeye.json",
+    "file": "dist/battle/monsters/chromeye.json"
+  },
+  {
+    "key": "battle/monsters/coaldiak.json",
+    "file": "dist/battle/monsters/coaldiak.json"
+  },
+  {
+    "key": "battle/monsters/cochini.json",
+    "file": "dist/battle/monsters/cochini.json"
+  },
+  {
+    "key": "battle/monsters/cocrune.json",
+    "file": "dist/battle/monsters/cocrune.json"
+  },
+  {
+    "key": "battle/monsters/coleorus.json",
+    "file": "dist/battle/monsters/coleorus.json"
+  },
+  {
+    "key": "battle/monsters/conifrost.json",
+    "file": "dist/battle/monsters/conifrost.json"
+  },
+  {
+    "key": "battle/monsters/coppi.json",
+    "file": "dist/battle/monsters/coppi.json"
+  },
+  {
+    "key": "battle/monsters/coproblight.json",
+    "file": "dist/battle/monsters/coproblight.json"
+  },
+  {
+    "key": "battle/monsters/corvix.json",
+    "file": "dist/battle/monsters/corvix.json"
+  },
+  {
+    "key": "battle/monsters/cowpignon.json",
+    "file": "dist/battle/monsters/cowpignon.json"
+  },
+  {
+    "key": "battle/monsters/crankus.json",
+    "file": "dist/battle/monsters/crankus.json"
+  },
+  {
+    "key": "battle/monsters/criniotherme.json",
+    "file": "dist/battle/monsters/criniotherme.json"
+  },
+  {
+    "key": "battle/monsters/dandicub.json",
+    "file": "dist/battle/monsters/dandicub.json"
+  },
+  {
+    "key": "battle/monsters/dandylion.json",
+    "file": "dist/battle/monsters/dandylion.json"
+  },
+  {
+    "key": "battle/monsters/dark_robo.json",
+    "file": "dist/battle/monsters/dark_robo.json"
+  },
+  {
+    "key": "battle/monsters/delfeco.json",
+    "file": "dist/battle/monsters/delfeco.json"
+  },
+  {
+    "key": "battle/monsters/dinoflop.json",
+    "file": "dist/battle/monsters/dinoflop.json"
+  },
+  {
+    "key": "battle/monsters/djinnbo.json",
+    "file": "dist/battle/monsters/djinnbo.json"
+  },
+  {
+    "key": "battle/monsters/dollfin.json",
+    "file": "dist/battle/monsters/dollfin.json"
+  },
+  {
+    "key": "battle/monsters/dracune.json",
+    "file": "dist/battle/monsters/dracune.json"
+  },
+  {
+    "key": "battle/monsters/dragarbor.json",
+    "file": "dist/battle/monsters/dragarbor.json"
+  },
+  {
+    "key": "battle/monsters/drashimi.json",
+    "file": "dist/battle/monsters/drashimi.json"
+  },
+  {
+    "key": "battle/monsters/drokoro.json",
+    "file": "dist/battle/monsters/drokoro.json"
+  },
+  {
+    "key": "battle/monsters/duggot.json",
+    "file": "dist/battle/monsters/duggot.json"
+  },
+  {
+    "key": "battle/monsters/dune_pincher.json",
+    "file": "dist/battle/monsters/dune_pincher.json"
+  },
+  {
+    "key": "battle/monsters/dynastor.json",
+    "file": "dist/battle/monsters/dynastor.json"
+  },
+  {
+    "key": "battle/monsters/eaglace.json",
+    "file": "dist/battle/monsters/eaglace.json"
+  },
+  {
+    "key": "battle/monsters/elofly.json",
+    "file": "dist/battle/monsters/elofly.json"
+  },
+  {
+    "key": "battle/monsters/elostorm.json",
+    "file": "dist/battle/monsters/elostorm.json"
+  },
+  {
+    "key": "battle/monsters/elowind.json",
+    "file": "dist/battle/monsters/elowind.json"
+  },
+  {
+    "key": "battle/monsters/embazook.json",
+    "file": "dist/battle/monsters/embazook.json"
+  },
+  {
+    "key": "battle/monsters/embra.json",
+    "file": "dist/battle/monsters/embra.json"
+  },
+  {
+    "key": "battle/monsters/enduros.json",
+    "file": "dist/battle/monsters/enduros.json"
+  },
+  {
+    "key": "battle/monsters/eruptibus.json",
+    "file": "dist/battle/monsters/eruptibus.json"
+  },
+  {
+    "key": "battle/monsters/exapode.json",
+    "file": "dist/battle/monsters/exapode.json"
+  },
+  {
+    "key": "battle/monsters/exclawvate.json",
+    "file": "dist/battle/monsters/exclawvate.json"
+  },
+  {
+    "key": "battle/monsters/eyenemy.json",
+    "file": "dist/battle/monsters/eyenemy.json"
+  },
+  {
+    "key": "battle/monsters/eyesore.json",
+    "file": "dist/battle/monsters/eyesore.json"
+  },
+  {
+    "key": "battle/monsters/fancair.json",
+    "file": "dist/battle/monsters/fancair.json"
+  },
+  {
+    "key": "battle/monsters/ferricran.json",
+    "file": "dist/battle/monsters/ferricran.json"
+  },
+  {
+    "key": "battle/monsters/firomenis.json",
+    "file": "dist/battle/monsters/firomenis.json"
+  },
+  {
+    "key": "battle/monsters/flacono.json",
+    "file": "dist/battle/monsters/flacono.json"
+  },
+  {
+    "key": "battle/monsters/flambear.json",
+    "file": "dist/battle/monsters/flambear.json"
+  },
+  {
+    "key": "battle/monsters/flisces.json",
+    "file": "dist/battle/monsters/flisces.json"
+  },
+  {
+    "key": "battle/monsters/flounce.json",
+    "file": "dist/battle/monsters/flounce.json"
+  },
+  {
+    "key": "battle/monsters/flummack.json",
+    "file": "dist/battle/monsters/flummack.json"
+  },
+  {
+    "key": "battle/monsters/flummby.json",
+    "file": "dist/battle/monsters/flummby.json"
+  },
+  {
+    "key": "battle/monsters/fluoresfin.json",
+    "file": "dist/battle/monsters/fluoresfin.json"
+  },
+  {
+    "key": "battle/monsters/fluttaflap.json",
+    "file": "dist/battle/monsters/fluttaflap.json"
+  },
+  {
+    "key": "battle/monsters/foofle.json",
+    "file": "dist/battle/monsters/foofle.json"
+  },
+  {
+    "key": "battle/monsters/forturtle.json",
+    "file": "dist/battle/monsters/forturtle.json"
+  },
+  {
+    "key": "battle/monsters/foxko.json",
+    "file": "dist/battle/monsters/foxko.json"
+  },
+  {
+    "key": "battle/monsters/frondly.json",
+    "file": "dist/battle/monsters/frondly.json"
+  },
+  {
+    "key": "battle/monsters/furnursus.json",
+    "file": "dist/battle/monsters/furnursus.json"
+  },
+  {
+    "key": "battle/monsters/galnec.json",
+    "file": "dist/battle/monsters/galnec.json"
+  },
+  {
+    "key": "battle/monsters/gectile.json",
+    "file": "dist/battle/monsters/gectile.json"
+  },
+  {
+    "key": "battle/monsters/ghosteeth.json",
+    "file": "dist/battle/monsters/ghosteeth.json"
+  },
+  {
+    "key": "battle/monsters/graffiki.json",
+    "file": "dist/battle/monsters/graffiki.json"
+  },
+  {
+    "key": "battle/monsters/grimachin.json",
+    "file": "dist/battle/monsters/grimachin.json"
+  },
+  {
+    "key": "battle/monsters/grinflare.json",
+    "file": "dist/battle/monsters/grinflare.json"
+  },
+  {
+    "key": "battle/monsters/grintot.json",
+    "file": "dist/battle/monsters/grintot.json"
+  },
+  {
+    "key": "battle/monsters/grintrock.json",
+    "file": "dist/battle/monsters/grintrock.json"
+  },
+  {
+    "key": "battle/monsters/gryfix.json",
+    "file": "dist/battle/monsters/gryfix.json"
+  },
+  {
+    "key": "battle/monsters/hampotamos.json",
+    "file": "dist/battle/monsters/hampotamos.json"
+  },
+  {
+    "key": "battle/monsters/happito.json",
+    "file": "dist/battle/monsters/happito.json"
+  },
+  {
+    "key": "battle/monsters/hatchling.json",
+    "file": "dist/battle/monsters/hatchling.json"
+  },
+  {
+    "key": "battle/monsters/heronquak.json",
+    "file": "dist/battle/monsters/heronquak.json"
+  },
+  {
+    "key": "battle/monsters/hydrone.json",
+    "file": "dist/battle/monsters/hydrone.json"
+  },
+  {
+    "key": "battle/monsters/ignibus.json",
+    "file": "dist/battle/monsters/ignibus.json"
+  },
+  {
+    "key": "battle/monsters/imbrickcile.json",
+    "file": "dist/battle/monsters/imbrickcile.json"
+  },
+  {
+    "key": "battle/monsters/incandesfin.json",
+    "file": "dist/battle/monsters/incandesfin.json"
+  },
+  {
+    "key": "battle/monsters/jemuar.json",
+    "file": "dist/battle/monsters/jemuar.json"
+  },
+  {
+    "key": "battle/monsters/k9.json",
+    "file": "dist/battle/monsters/k9.json"
+  },
+  {
+    "key": "battle/monsters/katacoon.json",
+    "file": "dist/battle/monsters/katacoon.json"
+  },
+  {
+    "key": "battle/monsters/katapill.json",
+    "file": "dist/battle/monsters/katapill.json"
+  },
+  {
+    "key": "battle/monsters/kernel.json",
+    "file": "dist/battle/monsters/kernel.json"
+  },
+  {
+    "key": "battle/monsters/knightsand.json",
+    "file": "dist/battle/monsters/knightsand.json"
+  },
+  {
+    "key": "battle/monsters/knindling.json",
+    "file": "dist/battle/monsters/knindling.json"
+  },
+  {
+    "key": "battle/monsters/komodraw.json",
+    "file": "dist/battle/monsters/komodraw.json"
+  },
+  {
+    "key": "battle/monsters/komoduel.json",
+    "file": "dist/battle/monsters/komoduel.json"
+  },
+  {
+    "key": "battle/monsters/lambert.json",
+    "file": "dist/battle/monsters/lambert.json"
+  },
+  {
+    "key": "battle/monsters/lapinou.json",
+    "file": "dist/battle/monsters/lapinou.json"
+  },
+  {
+    "key": "battle/monsters/legko.json",
+    "file": "dist/battle/monsters/legko.json"
+  },
+  {
+    "key": "battle/monsters/lightmare.json",
+    "file": "dist/battle/monsters/lightmare.json"
+  },
+  {
+    "key": "battle/monsters/loliferno.json",
+    "file": "dist/battle/monsters/loliferno.json"
+  },
+  {
+    "key": "battle/monsters/manosting.json",
+    "file": "dist/battle/monsters/manosting.json"
+  },
+  {
+    "key": "battle/monsters/masknake.json",
+    "file": "dist/battle/monsters/masknake.json"
+  },
+  {
+    "key": "battle/monsters/mauai.json",
+    "file": "dist/battle/monsters/mauai.json"
+  },
+  {
+    "key": "battle/monsters/medushock.json",
+    "file": "dist/battle/monsters/medushock.json"
+  },
+  {
+    "key": "battle/monsters/memnomnom.json",
+    "file": "dist/battle/monsters/memnomnom.json"
+  },
+  {
+    "key": "battle/monsters/metesaur.json",
+    "file": "dist/battle/monsters/metesaur.json"
+  },
+  {
+    "key": "battle/monsters/miaownolith.json",
+    "file": "dist/battle/monsters/miaownolith.json"
+  },
+  {
+    "key": "battle/monsters/mingdyn.json",
+    "file": "dist/battle/monsters/mingdyn.json"
+  },
+  {
+    "key": "battle/monsters/mk01_alpha.json",
+    "file": "dist/battle/monsters/mk01_alpha.json"
+  },
+  {
+    "key": "battle/monsters/mk01_beta.json",
+    "file": "dist/battle/monsters/mk01_beta.json"
+  },
+  {
+    "key": "battle/monsters/mk01_delta.json",
+    "file": "dist/battle/monsters/mk01_delta.json"
+  },
+  {
+    "key": "battle/monsters/mk01_gamma.json",
+    "file": "dist/battle/monsters/mk01_gamma.json"
+  },
+  {
+    "key": "battle/monsters/mk01_omega.json",
+    "file": "dist/battle/monsters/mk01_omega.json"
+  },
+  {
+    "key": "battle/monsters/mk01_proto.json",
+    "file": "dist/battle/monsters/mk01_proto.json"
+  },
+  {
+    "key": "battle/monsters/moloch.json",
+    "file": "dist/battle/monsters/moloch.json"
+  },
+  {
+    "key": "battle/monsters/mrmoswitch.json",
+    "file": "dist/battle/monsters/mrmoswitch.json"
+  },
+  {
+    "key": "battle/monsters/mystikapi.json",
+    "file": "dist/battle/monsters/mystikapi.json"
+  },
+  {
+    "key": "battle/monsters/narcileaf.json",
+    "file": "dist/battle/monsters/narcileaf.json"
+  },
+  {
+    "key": "battle/monsters/neutrito.json",
+    "file": "dist/battle/monsters/neutrito.json"
+  },
+  {
+    "key": "battle/monsters/ninjasmine.json",
+    "file": "dist/battle/monsters/ninjasmine.json"
+  },
+  {
+    "key": "battle/monsters/noctalo.json",
+    "file": "dist/battle/monsters/noctalo.json"
+  },
+  {
+    "key": "battle/monsters/noctula.json",
+    "file": "dist/battle/monsters/noctula.json"
+  },
+  {
+    "key": "battle/monsters/nostray.json",
+    "file": "dist/battle/monsters/nostray.json"
+  },
+  {
+    "key": "battle/monsters/nudiflot_female.json",
+    "file": "dist/battle/monsters/nudiflot_female.json"
+  },
+  {
+    "key": "battle/monsters/nudiflot_male.json",
+    "file": "dist/battle/monsters/nudiflot_male.json"
+  },
+  {
+    "key": "battle/monsters/nudikill.json",
+    "file": "dist/battle/monsters/nudikill.json"
+  },
+  {
+    "key": "battle/monsters/nudimind.json",
+    "file": "dist/battle/monsters/nudimind.json"
+  },
+  {
+    "key": "battle/monsters/nut.json",
+    "file": "dist/battle/monsters/nut.json"
+  },
+  {
+    "key": "battle/monsters/octabode.json",
+    "file": "dist/battle/monsters/octabode.json"
+  },
+  {
+    "key": "battle/monsters/ouroboutlet.json",
+    "file": "dist/battle/monsters/ouroboutlet.json"
+  },
+  {
+    "key": "battle/monsters/pairagrim.json",
+    "file": "dist/battle/monsters/pairagrim.json"
+  },
+  {
+    "key": "battle/monsters/pairagrin.json",
+    "file": "dist/battle/monsters/pairagrin.json"
+  },
+  {
+    "key": "battle/monsters/pantherafira.json",
+    "file": "dist/battle/monsters/pantherafira.json"
+  },
+  {
+    "key": "battle/monsters/parappi.json",
+    "file": "dist/battle/monsters/parappi.json"
+  },
+  {
+    "key": "battle/monsters/pawsand.json",
+    "file": "dist/battle/monsters/pawsand.json"
+  },
+  {
+    "key": "battle/monsters/pharavion.json",
+    "file": "dist/battle/monsters/pharavion.json"
+  },
+  {
+    "key": "battle/monsters/pharfan.json",
+    "file": "dist/battle/monsters/pharfan.json"
+  },
+  {
+    "key": "battle/monsters/picc.json",
+    "file": "dist/battle/monsters/picc.json"
+  },
+  {
+    "key": "battle/monsters/pigabyte.json",
+    "file": "dist/battle/monsters/pigabyte.json"
+  },
+  {
+    "key": "battle/monsters/pipis.json",
+    "file": "dist/battle/monsters/pipis.json"
+  },
+  {
+    "key": "battle/monsters/polyrock.json",
+    "file": "dist/battle/monsters/polyrock.json"
+  },
+  {
+    "key": "battle/monsters/possessun.json",
+    "file": "dist/battle/monsters/possessun.json"
+  },
+  {
+    "key": "battle/monsters/propellercat.json",
+    "file": "dist/battle/monsters/propellercat.json"
+  },
+  {
+    "key": "battle/monsters/prophetoise.json",
+    "file": "dist/battle/monsters/prophetoise.json"
+  },
+  {
+    "key": "battle/monsters/puparmor.json",
+    "file": "dist/battle/monsters/puparmor.json"
+  },
+  {
+    "key": "battle/monsters/pyraminx.json",
+    "file": "dist/battle/monsters/pyraminx.json"
+  },
+  {
+    "key": "battle/monsters/pythwire.json",
+    "file": "dist/battle/monsters/pythwire.json"
+  },
+  {
+    "key": "battle/monsters/qetzlrokilus.json",
+    "file": "dist/battle/monsters/qetzlrokilus.json"
+  },
+  {
+    "key": "battle/monsters/rabbitosaur.json",
+    "file": "dist/battle/monsters/rabbitosaur.json"
+  },
+  {
+    "key": "battle/monsters/rhincus.json",
+    "file": "dist/battle/monsters/rhincus.json"
+  },
+  {
+    "key": "battle/monsters/rhinocarpe.json",
+    "file": "dist/battle/monsters/rhinocarpe.json"
+  },
+  {
+    "key": "battle/monsters/rockat.json",
+    "file": "dist/battle/monsters/rockat.json"
+  },
+  {
+    "key": "battle/monsters/rockitten.json",
+    "file": "dist/battle/monsters/rockitten.json"
+  },
+  {
+    "key": "battle/monsters/rocktot.json",
+    "file": "dist/battle/monsters/rocktot.json"
+  },
+  {
+    "key": "battle/monsters/rooksand.json",
+    "file": "dist/battle/monsters/rooksand.json"
+  },
+  {
+    "key": "battle/monsters/rosarin.json",
+    "file": "dist/battle/monsters/rosarin.json"
+  },
+  {
+    "key": "battle/monsters/runesquito.json",
+    "file": "dist/battle/monsters/runesquito.json"
+  },
+  {
+    "key": "battle/monsters/ruption.json",
+    "file": "dist/battle/monsters/ruption.json"
+  },
+  {
+    "key": "battle/monsters/sadito.json",
+    "file": "dist/battle/monsters/sadito.json"
+  },
+  {
+    "key": "battle/monsters/sampsack.json",
+    "file": "dist/battle/monsters/sampsack.json"
+  },
+  {
+    "key": "battle/monsters/sampsage.json",
+    "file": "dist/battle/monsters/sampsage.json"
+  },
+  {
+    "key": "battle/monsters/sapragon.json",
+    "file": "dist/battle/monsters/sapragon.json"
+  },
+  {
+    "key": "battle/monsters/sapsnap.json",
+    "file": "dist/battle/monsters/sapsnap.json"
+  },
+  {
+    "key": "battle/monsters/sclairus.json",
+    "file": "dist/battle/monsters/sclairus.json"
+  },
+  {
+    "key": "battle/monsters/seirein.json",
+    "file": "dist/battle/monsters/seirein.json"
+  },
+  {
+    "key": "battle/monsters/selket.json",
+    "file": "dist/battle/monsters/selket.json"
+  },
+  {
+    "key": "battle/monsters/selmatek.json",
+    "file": "dist/battle/monsters/selmatek.json"
+  },
+  {
+    "key": "battle/monsters/seraphice.json",
+    "file": "dist/battle/monsters/seraphice.json"
+  },
+  {
+    "key": "battle/monsters/shammer.json",
+    "file": "dist/battle/monsters/shammer.json"
+  },
+  {
+    "key": "battle/monsters/sharpfin.json",
+    "file": "dist/battle/monsters/sharpfin.json"
+  },
+  {
+    "key": "battle/monsters/sheye.json",
+    "file": "dist/battle/monsters/sheye.json"
+  },
+  {
+    "key": "battle/monsters/shnark.json",
+    "file": "dist/battle/monsters/shnark.json"
+  },
+  {
+    "key": "battle/monsters/shrab.json",
+    "file": "dist/battle/monsters/shrab.json"
+  },
+  {
+    "key": "battle/monsters/shybulb.json",
+    "file": "dist/battle/monsters/shybulb.json"
+  },
+  {
+    "key": "battle/monsters/skwib.json",
+    "file": "dist/battle/monsters/skwib.json"
+  },
+  {
+    "key": "battle/monsters/sludgehog.json",
+    "file": "dist/battle/monsters/sludgehog.json"
+  },
+  {
+    "key": "battle/monsters/snaki.json",
+    "file": "dist/battle/monsters/snaki.json"
+  },
+  {
+    "key": "battle/monsters/snokari.json",
+    "file": "dist/battle/monsters/snokari.json"
+  },
+  {
+    "key": "battle/monsters/sockeserp.json",
+    "file": "dist/battle/monsters/sockeserp.json"
+  },
+  {
+    "key": "battle/monsters/spighter.json",
+    "file": "dist/battle/monsters/spighter.json"
+  },
+  {
+    "key": "battle/monsters/spirain.json",
+    "file": "dist/battle/monsters/spirain.json"
+  },
+  {
+    "key": "battle/monsters/spycozeus.json",
+    "file": "dist/battle/monsters/spycozeus.json"
+  },
+  {
+    "key": "battle/monsters/squabbit.json",
+    "file": "dist/battle/monsters/squabbit.json"
+  },
+  {
+    "key": "battle/monsters/statursus.json",
+    "file": "dist/battle/monsters/statursus.json"
+  },
+  {
+    "key": "battle/monsters/strella.json",
+    "file": "dist/battle/monsters/strella.json"
+  },
+  {
+    "key": "battle/monsters/sumchon.json",
+    "file": "dist/battle/monsters/sumchon.json"
+  },
+  {
+    "key": "battle/monsters/tarpeur.json",
+    "file": "dist/battle/monsters/tarpeur.json"
+  },
+  {
+    "key": "battle/monsters/taupypus.json",
+    "file": "dist/battle/monsters/taupypus.json"
+  },
+  {
+    "key": "battle/monsters/tetrchimp.json",
+    "file": "dist/battle/monsters/tetrchimp.json"
+  },
+  {
+    "key": "battle/monsters/tigrock.json",
+    "file": "dist/battle/monsters/tigrock.json"
+  },
+  {
+    "key": "battle/monsters/tikorch.json",
+    "file": "dist/battle/monsters/tikorch.json"
+  },
+  {
+    "key": "battle/monsters/tobishimi.json",
+    "file": "dist/battle/monsters/tobishimi.json"
+  },
+  {
+    "key": "battle/monsters/tornicane.json",
+    "file": "dist/battle/monsters/tornicane.json"
+  },
+  {
+    "key": "battle/monsters/toufigel.json",
+    "file": "dist/battle/monsters/toufigel.json"
+  },
+  {
+    "key": "battle/monsters/tourbidi.json",
+    "file": "dist/battle/monsters/tourbidi.json"
+  },
+  {
+    "key": "battle/monsters/toxiris.json",
+    "file": "dist/battle/monsters/toxiris.json"
+  },
+  {
+    "key": "battle/monsters/trapsnap.json",
+    "file": "dist/battle/monsters/trapsnap.json"
+  },
+  {
+    "key": "battle/monsters/tsushimi.json",
+    "file": "dist/battle/monsters/tsushimi.json"
+  },
+  {
+    "key": "battle/monsters/tumblebee.json",
+    "file": "dist/battle/monsters/tumblebee.json"
+  },
+  {
+    "key": "battle/monsters/tumbledillo.json",
+    "file": "dist/battle/monsters/tumbledillo.json"
+  },
+  {
+    "key": "battle/monsters/tumblequill.json",
+    "file": "dist/battle/monsters/tumblequill.json"
+  },
+  {
+    "key": "battle/monsters/tumbleworm.json",
+    "file": "dist/battle/monsters/tumbleworm.json"
+  },
+  {
+    "key": "battle/monsters/tweesher.json",
+    "file": "dist/battle/monsters/tweesher.json"
+  },
+  {
+    "key": "battle/monsters/urcheedle.json",
+    "file": "dist/battle/monsters/urcheedle.json"
+  },
+  {
+    "key": "battle/monsters/urcine.json",
+    "file": "dist/battle/monsters/urcine.json"
+  },
+  {
+    "key": "battle/monsters/vamporm.json",
+    "file": "dist/battle/monsters/vamporm.json"
+  },
+  {
+    "key": "battle/monsters/velocitile.json",
+    "file": "dist/battle/monsters/velocitile.json"
+  },
+  {
+    "key": "battle/monsters/vigueur.json",
+    "file": "dist/battle/monsters/vigueur.json"
+  },
+  {
+    "key": "battle/monsters/vivicinder.json",
+    "file": "dist/battle/monsters/vivicinder.json"
+  },
+  {
+    "key": "battle/monsters/vividactil.json",
+    "file": "dist/battle/monsters/vividactil.json"
+  },
+  {
+    "key": "battle/monsters/vivipere.json",
+    "file": "dist/battle/monsters/vivipere.json"
+  },
+  {
+    "key": "battle/monsters/viviphyta.json",
+    "file": "dist/battle/monsters/viviphyta.json"
+  },
+  {
+    "key": "battle/monsters/vivisource.json",
+    "file": "dist/battle/monsters/vivisource.json"
+  },
+  {
+    "key": "battle/monsters/viviteel.json",
+    "file": "dist/battle/monsters/viviteel.json"
+  },
+  {
+    "key": "battle/monsters/vivitrans.json",
+    "file": "dist/battle/monsters/vivitrans.json"
+  },
+  {
+    "key": "battle/monsters/vivitron.json",
+    "file": "dist/battle/monsters/vivitron.json"
+  },
+  {
+    "key": "battle/monsters/volcoli.json",
+    "file": "dist/battle/monsters/volcoli.json"
+  },
+  {
+    "key": "battle/monsters/volconey.json",
+    "file": "dist/battle/monsters/volconey.json"
+  },
+  {
+    "key": "battle/monsters/weavifly.json",
+    "file": "dist/battle/monsters/weavifly.json"
+  },
+  {
+    "key": "battle/monsters/windeye.json",
+    "file": "dist/battle/monsters/windeye.json"
+  },
+  {
+    "key": "battle/monsters/wolffsky.json",
+    "file": "dist/battle/monsters/wolffsky.json"
+  },
+  {
+    "key": "battle/monsters/xeon.json",
+    "file": "dist/battle/monsters/xeon.json"
+  },
+  {
+    "key": "battle/monsters/xeon_2.json",
+    "file": "dist/battle/monsters/xeon_2.json"
+  },
+  {
+    "key": "battle/monsters/zunna.json",
+    "file": "dist/battle/monsters/zunna.json"
+  },
+  {
+    "key": "battle/statuses/blinded.json",
+    "file": "dist/battle/statuses/blinded.json"
+  },
+  {
+    "key": "battle/statuses/burn.json",
+    "file": "dist/battle/statuses/burn.json"
+  },
+  {
+    "key": "battle/statuses/chargedup.json",
+    "file": "dist/battle/statuses/chargedup.json"
+  },
+  {
+    "key": "battle/statuses/charging.json",
+    "file": "dist/battle/statuses/charging.json"
+  },
+  {
+    "key": "battle/statuses/charmed.json",
+    "file": "dist/battle/statuses/charmed.json"
+  },
+  {
+    "key": "battle/statuses/confused.json",
+    "file": "dist/battle/statuses/confused.json"
+  },
+  {
+    "key": "battle/statuses/diehard.json",
+    "file": "dist/battle/statuses/diehard.json"
+  },
+  {
+    "key": "battle/statuses/elementalshield.json",
+    "file": "dist/battle/statuses/elementalshield.json"
+  },
+  {
+    "key": "battle/statuses/eliminated.json",
+    "file": "dist/battle/statuses/eliminated.json"
+  },
+  {
+    "key": "battle/statuses/enraged.json",
+    "file": "dist/battle/statuses/enraged.json"
+  },
+  {
+    "key": "battle/statuses/exhausted.json",
+    "file": "dist/battle/statuses/exhausted.json"
+  },
+  {
+    "key": "battle/statuses/faint.json",
+    "file": "dist/battle/statuses/faint.json"
+  },
+  {
+    "key": "battle/statuses/feedback.json",
+    "file": "dist/battle/statuses/feedback.json"
+  },
+  {
+    "key": "battle/statuses/festering.json",
+    "file": "dist/battle/statuses/festering.json"
+  },
+  {
+    "key": "battle/statuses/flinching.json",
+    "file": "dist/battle/statuses/flinching.json"
+  },
+  {
+    "key": "battle/statuses/focused.json",
+    "file": "dist/battle/statuses/focused.json"
+  },
+  {
+    "key": "battle/statuses/grabbed.json",
+    "file": "dist/battle/statuses/grabbed.json"
+  },
+  {
+    "key": "battle/statuses/hardshell.json",
+    "file": "dist/battle/statuses/hardshell.json"
+  },
+  {
+    "key": "battle/statuses/harpooned.json",
+    "file": "dist/battle/statuses/harpooned.json"
+  },
+  {
+    "key": "battle/statuses/lifegift.json",
+    "file": "dist/battle/statuses/lifegift.json"
+  },
+  {
+    "key": "battle/statuses/lifeleech.json",
+    "file": "dist/battle/statuses/lifeleech.json"
+  },
+  {
+    "key": "battle/statuses/lockdown.json",
+    "file": "dist/battle/statuses/lockdown.json"
+  },
+  {
+    "key": "battle/statuses/noddingoff.json",
+    "file": "dist/battle/statuses/noddingoff.json"
+  },
+  {
+    "key": "battle/statuses/poison.json",
+    "file": "dist/battle/statuses/poison.json"
+  },
+  {
+    "key": "battle/statuses/prickly.json",
+    "file": "dist/battle/statuses/prickly.json"
+  },
+  {
+    "key": "battle/statuses/recover.json",
+    "file": "dist/battle/statuses/recover.json"
+  },
+  {
+    "key": "battle/statuses/retaliate.json",
+    "file": "dist/battle/statuses/retaliate.json"
+  },
+  {
+    "key": "battle/statuses/revenge.json",
+    "file": "dist/battle/statuses/revenge.json"
+  },
+  {
+    "key": "battle/statuses/slow.json",
+    "file": "dist/battle/statuses/slow.json"
+  },
+  {
+    "key": "battle/statuses/sniping.json",
+    "file": "dist/battle/statuses/sniping.json"
+  },
+  {
+    "key": "battle/statuses/softened.json",
+    "file": "dist/battle/statuses/softened.json"
+  },
+  {
+    "key": "battle/statuses/spiky.json",
+    "file": "dist/battle/statuses/spiky.json"
+  },
+  {
+    "key": "battle/statuses/stuck.json",
+    "file": "dist/battle/statuses/stuck.json"
+  },
+  {
+    "key": "battle/statuses/wasting.json",
+    "file": "dist/battle/statuses/wasting.json"
+  },
+  {
+    "key": "battle/statuses/wild.json",
+    "file": "dist/battle/statuses/wild.json"
+  },
+  {
+    "key": "battle/techniques/acid.json",
+    "file": "dist/battle/techniques/acid.json"
+  },
+  {
+    "key": "battle/techniques/adamantine.json",
+    "file": "dist/battle/techniques/adamantine.json"
+  },
+  {
+    "key": "battle/techniques/air_chain.json",
+    "file": "dist/battle/techniques/air_chain.json"
+  },
+  {
+    "key": "battle/techniques/all_in.json",
+    "file": "dist/battle/techniques/all_in.json"
+  },
+  {
+    "key": "battle/techniques/altitude.json",
+    "file": "dist/battle/techniques/altitude.json"
+  },
+  {
+    "key": "battle/techniques/amnesia.json",
+    "file": "dist/battle/techniques/amnesia.json"
+  },
+  {
+    "key": "battle/techniques/ants.json",
+    "file": "dist/battle/techniques/ants.json"
+  },
+  {
+    "key": "battle/techniques/arcane_eye.json",
+    "file": "dist/battle/techniques/arcane_eye.json"
+  },
+  {
+    "key": "battle/techniques/assault.json",
+    "file": "dist/battle/techniques/assault.json"
+  },
+  {
+    "key": "battle/techniques/avalanche.json",
+    "file": "dist/battle/techniques/avalanche.json"
+  },
+  {
+    "key": "battle/techniques/barking.json",
+    "file": "dist/battle/techniques/barking.json"
+  },
+  {
+    "key": "battle/techniques/battery_acid.json",
+    "file": "dist/battle/techniques/battery_acid.json"
+  },
+  {
+    "key": "battle/techniques/battery_discharge.json",
+    "file": "dist/battle/techniques/battery_discharge.json"
+  },
+  {
+    "key": "battle/techniques/beam.json",
+    "file": "dist/battle/techniques/beam.json"
+  },
+  {
+    "key": "battle/techniques/berserk.json",
+    "file": "dist/battle/techniques/berserk.json"
+  },
+  {
+    "key": "battle/techniques/biting_winds.json",
+    "file": "dist/battle/techniques/biting_winds.json"
+  },
+  {
+    "key": "battle/techniques/blade.json",
+    "file": "dist/battle/techniques/blade.json"
+  },
+  {
+    "key": "battle/techniques/blood_bond.json",
+    "file": "dist/battle/techniques/blood_bond.json"
+  },
+  {
+    "key": "battle/techniques/blood_nets.json",
+    "file": "dist/battle/techniques/blood_nets.json"
+  },
+  {
+    "key": "battle/techniques/blossom.json",
+    "file": "dist/battle/techniques/blossom.json"
+  },
+  {
+    "key": "battle/techniques/boulder.json",
+    "file": "dist/battle/techniques/boulder.json"
+  },
+  {
+    "key": "battle/techniques/breath.json",
+    "file": "dist/battle/techniques/breath.json"
+  },
+  {
+    "key": "battle/techniques/breathe_fire.json",
+    "file": "dist/battle/techniques/breathe_fire.json"
+  },
+  {
+    "key": "battle/techniques/bubble_trap.json",
+    "file": "dist/battle/techniques/bubble_trap.json"
+  },
+  {
+    "key": "battle/techniques/bullet.json",
+    "file": "dist/battle/techniques/bullet.json"
+  },
+  {
+    "key": "battle/techniques/burrow_blast.json",
+    "file": "dist/battle/techniques/burrow_blast.json"
+  },
+  {
+    "key": "battle/techniques/buzz.json",
+    "file": "dist/battle/techniques/buzz.json"
+  },
+  {
+    "key": "battle/techniques/canine.json",
+    "file": "dist/battle/techniques/canine.json"
+  },
+  {
+    "key": "battle/techniques/cat_calling.json",
+    "file": "dist/battle/techniques/cat_calling.json"
+  },
+  {
+    "key": "battle/techniques/caustic_spray.json",
+    "file": "dist/battle/techniques/caustic_spray.json"
+  },
+  {
+    "key": "battle/techniques/chameleon.json",
+    "file": "dist/battle/techniques/chameleon.json"
+  },
+  {
+    "key": "battle/techniques/changeling.json",
+    "file": "dist/battle/techniques/changeling.json"
+  },
+  {
+    "key": "battle/techniques/chill_mist.json",
+    "file": "dist/battle/techniques/chill_mist.json"
+  },
+  {
+    "key": "battle/techniques/clairaudience.json",
+    "file": "dist/battle/techniques/clairaudience.json"
+  },
+  {
+    "key": "battle/techniques/clamp_on.json",
+    "file": "dist/battle/techniques/clamp_on.json"
+  },
+  {
+    "key": "battle/techniques/cloud_aether.json",
+    "file": "dist/battle/techniques/cloud_aether.json"
+  },
+  {
+    "key": "battle/techniques/combat_clone.json",
+    "file": "dist/battle/techniques/combat_clone.json"
+  },
+  {
+    "key": "battle/techniques/conjurer.json",
+    "file": "dist/battle/techniques/conjurer.json"
+  },
+  {
+    "key": "battle/techniques/constrict.json",
+    "file": "dist/battle/techniques/constrict.json"
+  },
+  {
+    "key": "battle/techniques/crushing_bite.json",
+    "file": "dist/battle/techniques/crushing_bite.json"
+  },
+  {
+    "key": "battle/techniques/crystal.json",
+    "file": "dist/battle/techniques/crystal.json"
+  },
+  {
+    "key": "battle/techniques/cutting_leaves.json",
+    "file": "dist/battle/techniques/cutting_leaves.json"
+  },
+  {
+    "key": "battle/techniques/damage_division.json",
+    "file": "dist/battle/techniques/damage_division.json"
+  },
+  {
+    "key": "battle/techniques/demiurge.json",
+    "file": "dist/battle/techniques/demiurge.json"
+  },
+  {
+    "key": "battle/techniques/depth_charge.json",
+    "file": "dist/battle/techniques/depth_charge.json"
+  },
+  {
+    "key": "battle/techniques/diet.json",
+    "file": "dist/battle/techniques/diet.json"
+  },
+  {
+    "key": "battle/techniques/divinity_beam.json",
+    "file": "dist/battle/techniques/divinity_beam.json"
+  },
+  {
+    "key": "battle/techniques/dreamwalk.json",
+    "file": "dist/battle/techniques/dreamwalk.json"
+  },
+  {
+    "key": "battle/techniques/earthquake.json",
+    "file": "dist/battle/techniques/earthquake.json"
+  },
+  {
+    "key": "battle/techniques/egg_smash.json",
+    "file": "dist/battle/techniques/egg_smash.json"
+  },
+  {
+    "key": "battle/techniques/electric_multibite.json",
+    "file": "dist/battle/techniques/electric_multibite.json"
+  },
+  {
+    "key": "battle/techniques/electrical_storm.json",
+    "file": "dist/battle/techniques/electrical_storm.json"
+  },
+  {
+    "key": "battle/techniques/electroplate.json",
+    "file": "dist/battle/techniques/electroplate.json"
+  },
+  {
+    "key": "battle/techniques/empty.json",
+    "file": "dist/battle/techniques/empty.json"
+  },
+  {
+    "key": "battle/techniques/energy_beam.json",
+    "file": "dist/battle/techniques/energy_beam.json"
+  },
+  {
+    "key": "battle/techniques/energy_claws.json",
+    "file": "dist/battle/techniques/energy_claws.json"
+  },
+  {
+    "key": "battle/techniques/energy_field.json",
+    "file": "dist/battle/techniques/energy_field.json"
+  },
+  {
+    "key": "battle/techniques/entomb.json",
+    "file": "dist/battle/techniques/entomb.json"
+  },
+  {
+    "key": "battle/techniques/evasion.json",
+    "file": "dist/battle/techniques/evasion.json"
+  },
+  {
+    "key": "battle/techniques/eyebite.json",
+    "file": "dist/battle/techniques/eyebite.json"
+  },
+  {
+    "key": "battle/techniques/feint.json",
+    "file": "dist/battle/techniques/feint.json"
+  },
+  {
+    "key": "battle/techniques/fester.json",
+    "file": "dist/battle/techniques/fester.json"
+  },
+  {
+    "key": "battle/techniques/fiery.json",
+    "file": "dist/battle/techniques/fiery.json"
+  },
+  {
+    "key": "battle/techniques/fire_ball.json",
+    "file": "dist/battle/techniques/fire_ball.json"
+  },
+  {
+    "key": "battle/techniques/fire_claw.json",
+    "file": "dist/battle/techniques/fire_claw.json"
+  },
+  {
+    "key": "battle/techniques/fire_shield.json",
+    "file": "dist/battle/techniques/fire_shield.json"
+  },
+  {
+    "key": "battle/techniques/firestorm.json",
+    "file": "dist/battle/techniques/firestorm.json"
+  },
+  {
+    "key": "battle/techniques/flamethrower.json",
+    "file": "dist/battle/techniques/flamethrower.json"
+  },
+  {
+    "key": "battle/techniques/fledgling.json",
+    "file": "dist/battle/techniques/fledgling.json"
+  },
+  {
+    "key": "battle/techniques/flood.json",
+    "file": "dist/battle/techniques/flood.json"
+  },
+  {
+    "key": "battle/techniques/flow.json",
+    "file": "dist/battle/techniques/flow.json"
+  },
+  {
+    "key": "battle/techniques/flower_armor.json",
+    "file": "dist/battle/techniques/flower_armor.json"
+  },
+  {
+    "key": "battle/techniques/flower_bloom.json",
+    "file": "dist/battle/techniques/flower_bloom.json"
+  },
+  {
+    "key": "battle/techniques/fluff_up.json",
+    "file": "dist/battle/techniques/fluff_up.json"
+  },
+  {
+    "key": "battle/techniques/font.json",
+    "file": "dist/battle/techniques/font.json"
+  },
+  {
+    "key": "battle/techniques/food_fight.json",
+    "file": "dist/battle/techniques/food_fight.json"
+  },
+  {
+    "key": "battle/techniques/frighten.json",
+    "file": "dist/battle/techniques/frighten.json"
+  },
+  {
+    "key": "battle/techniques/frostbite.json",
+    "file": "dist/battle/techniques/frostbite.json"
+  },
+  {
+    "key": "battle/techniques/fume.json",
+    "file": "dist/battle/techniques/fume.json"
+  },
+  {
+    "key": "battle/techniques/fungal_spore.json",
+    "file": "dist/battle/techniques/fungal_spore.json"
+  },
+  {
+    "key": "battle/techniques/geyser.json",
+    "file": "dist/battle/techniques/geyser.json"
+  },
+  {
+    "key": "battle/techniques/give_all.json",
+    "file": "dist/battle/techniques/give_all.json"
+  },
+  {
+    "key": "battle/techniques/glower.json",
+    "file": "dist/battle/techniques/glower.json"
+  },
+  {
+    "key": "battle/techniques/gnaw.json",
+    "file": "dist/battle/techniques/gnaw.json"
+  },
+  {
+    "key": "battle/techniques/goad.json",
+    "file": "dist/battle/techniques/goad.json"
+  },
+  {
+    "key": "battle/techniques/gold_digger.json",
+    "file": "dist/battle/techniques/gold_digger.json"
+  },
+  {
+    "key": "battle/techniques/gourmet.json",
+    "file": "dist/battle/techniques/gourmet.json"
+  },
+  {
+    "key": "battle/techniques/greenstone.json",
+    "file": "dist/battle/techniques/greenstone.json"
+  },
+  {
+    "key": "battle/techniques/grinding.json",
+    "file": "dist/battle/techniques/grinding.json"
+  },
+  {
+    "key": "battle/techniques/gust.json",
+    "file": "dist/battle/techniques/gust.json"
+  },
+  {
+    "key": "battle/techniques/hallucinogen_spore.json",
+    "file": "dist/battle/techniques/hallucinogen_spore.json"
+  },
+  {
+    "key": "battle/techniques/hammerhead.json",
+    "file": "dist/battle/techniques/hammerhead.json"
+  },
+  {
+    "key": "battle/techniques/hawk.json",
+    "file": "dist/battle/techniques/hawk.json"
+  },
+  {
+    "key": "battle/techniques/heavenly_desserts.json",
+    "file": "dist/battle/techniques/heavenly_desserts.json"
+  },
+  {
+    "key": "battle/techniques/hibernate.json",
+    "file": "dist/battle/techniques/hibernate.json"
+  },
+  {
+    "key": "battle/techniques/hook.json",
+    "file": "dist/battle/techniques/hook.json"
+  },
+  {
+    "key": "battle/techniques/horn.json",
+    "file": "dist/battle/techniques/horn.json"
+  },
+  {
+    "key": "battle/techniques/ice_claw.json",
+    "file": "dist/battle/techniques/ice_claw.json"
+  },
+  {
+    "key": "battle/techniques/ice_shield.json",
+    "file": "dist/battle/techniques/ice_shield.json"
+  },
+  {
+    "key": "battle/techniques/ice_storm.json",
+    "file": "dist/battle/techniques/ice_storm.json"
+  },
+  {
+    "key": "battle/techniques/icicle_spear.json",
+    "file": "dist/battle/techniques/icicle_spear.json"
+  },
+  {
+    "key": "battle/techniques/infectious_bite.json",
+    "file": "dist/battle/techniques/infectious_bite.json"
+  },
+  {
+    "key": "battle/techniques/insanity.json",
+    "file": "dist/battle/techniques/insanity.json"
+  },
+  {
+    "key": "battle/techniques/invictus.json",
+    "file": "dist/battle/techniques/invictus.json"
+  },
+  {
+    "key": "battle/techniques/just_desserts.json",
+    "file": "dist/battle/techniques/just_desserts.json"
+  },
+  {
+    "key": "battle/techniques/kindling_flame.json",
+    "file": "dist/battle/techniques/kindling_flame.json"
+  },
+  {
+    "key": "battle/techniques/kraken.json",
+    "file": "dist/battle/techniques/kraken.json"
+  },
+  {
+    "key": "battle/techniques/lantern.json",
+    "file": "dist/battle/techniques/lantern.json"
+  },
+  {
+    "key": "battle/techniques/laser_beam.json",
+    "file": "dist/battle/techniques/laser_beam.json"
+  },
+  {
+    "key": "battle/techniques/lava.json",
+    "file": "dist/battle/techniques/lava.json"
+  },
+  {
+    "key": "battle/techniques/leaf_barrage.json",
+    "file": "dist/battle/techniques/leaf_barrage.json"
+  },
+  {
+    "key": "battle/techniques/leaf_stab.json",
+    "file": "dist/battle/techniques/leaf_stab.json"
+  },
+  {
+    "key": "battle/techniques/levitate.json",
+    "file": "dist/battle/techniques/levitate.json"
+  },
+  {
+    "key": "battle/techniques/lick_lash.json",
+    "file": "dist/battle/techniques/lick_lash.json"
+  },
+  {
+    "key": "battle/techniques/life_surge.json",
+    "file": "dist/battle/techniques/life_surge.json"
+  },
+  {
+    "key": "battle/techniques/lightning_spheres.json",
+    "file": "dist/battle/techniques/lightning_spheres.json"
+  },
+  {
+    "key": "battle/techniques/lineage.json",
+    "file": "dist/battle/techniques/lineage.json"
+  },
+  {
+    "key": "battle/techniques/lock_horns.json",
+    "file": "dist/battle/techniques/lock_horns.json"
+  },
+  {
+    "key": "battle/techniques/lust.json",
+    "file": "dist/battle/techniques/lust.json"
+  },
+  {
+    "key": "battle/techniques/magma.json",
+    "file": "dist/battle/techniques/magma.json"
+  },
+  {
+    "key": "battle/techniques/magnetic_body.json",
+    "file": "dist/battle/techniques/magnetic_body.json"
+  },
+  {
+    "key": "battle/techniques/meltdown.json",
+    "file": "dist/battle/techniques/meltdown.json"
+  },
+  {
+    "key": "battle/techniques/mending.json",
+    "file": "dist/battle/techniques/mending.json"
+  },
+  {
+    "key": "battle/techniques/midnight_mantle.json",
+    "file": "dist/battle/techniques/midnight_mantle.json"
+  },
+  {
+    "key": "battle/techniques/mind_explosion.json",
+    "file": "dist/battle/techniques/mind_explosion.json"
+  },
+  {
+    "key": "battle/techniques/mind_vise.json",
+    "file": "dist/battle/techniques/mind_vise.json"
+  },
+  {
+    "key": "battle/techniques/mobbing.json",
+    "file": "dist/battle/techniques/mobbing.json"
+  },
+  {
+    "key": "battle/techniques/muck.json",
+    "file": "dist/battle/techniques/muck.json"
+  },
+  {
+    "key": "battle/techniques/muddle.json",
+    "file": "dist/battle/techniques/muddle.json"
+  },
+  {
+    "key": "battle/techniques/mudslide.json",
+    "file": "dist/battle/techniques/mudslide.json"
+  },
+  {
+    "key": "battle/techniques/mystic_blending.json",
+    "file": "dist/battle/techniques/mystic_blending.json"
+  },
+  {
+    "key": "battle/techniques/needle.json",
+    "file": "dist/battle/techniques/needle.json"
+  },
+  {
+    "key": "battle/techniques/negation.json",
+    "file": "dist/battle/techniques/negation.json"
+  },
+  {
+    "key": "battle/techniques/nest.json",
+    "file": "dist/battle/techniques/nest.json"
+  },
+  {
+    "key": "battle/techniques/neutralize.json",
+    "file": "dist/battle/techniques/neutralize.json"
+  },
+  {
+    "key": "battle/techniques/oedipus.json",
+    "file": "dist/battle/techniques/oedipus.json"
+  },
+  {
+    "key": "battle/techniques/one_million_talons.json",
+    "file": "dist/battle/techniques/one_million_talons.json"
+  },
+  {
+    "key": "battle/techniques/one_two.json",
+    "file": "dist/battle/techniques/one_two.json"
+  },
+  {
+    "key": "battle/techniques/orbs.json",
+    "file": "dist/battle/techniques/orbs.json"
+  },
+  {
+    "key": "battle/techniques/oven.json",
+    "file": "dist/battle/techniques/oven.json"
+  },
+  {
+    "key": "battle/techniques/overfeed.json",
+    "file": "dist/battle/techniques/overfeed.json"
+  },
+  {
+    "key": "battle/techniques/overgrowth.json",
+    "file": "dist/battle/techniques/overgrowth.json"
+  },
+  {
+    "key": "battle/techniques/panjandrum.json",
+    "file": "dist/battle/techniques/panjandrum.json"
+  },
+  {
+    "key": "battle/techniques/peck.json",
+    "file": "dist/battle/techniques/peck.json"
+  },
+  {
+    "key": "battle/techniques/peregrine.json",
+    "file": "dist/battle/techniques/peregrine.json"
+  },
+  {
+    "key": "battle/techniques/perfect_cut.json",
+    "file": "dist/battle/techniques/perfect_cut.json"
+  },
+  {
+    "key": "battle/techniques/petrify.json",
+    "file": "dist/battle/techniques/petrify.json"
+  },
+  {
+    "key": "battle/techniques/phantasmal_force.json",
+    "file": "dist/battle/techniques/phantasmal_force.json"
+  },
+  {
+    "key": "battle/techniques/piece_of_cake.json",
+    "file": "dist/battle/techniques/piece_of_cake.json"
+  },
+  {
+    "key": "battle/techniques/pit.json",
+    "file": "dist/battle/techniques/pit.json"
+  },
+  {
+    "key": "battle/techniques/platinum.json",
+    "file": "dist/battle/techniques/platinum.json"
+  },
+  {
+    "key": "battle/techniques/poison_courtship.json",
+    "file": "dist/battle/techniques/poison_courtship.json"
+  },
+  {
+    "key": "battle/techniques/pollen_blast.json",
+    "file": "dist/battle/techniques/pollen_blast.json"
+  },
+  {
+    "key": "battle/techniques/potluck.json",
+    "file": "dist/battle/techniques/potluck.json"
+  },
+  {
+    "key": "battle/techniques/pouch.json",
+    "file": "dist/battle/techniques/pouch.json"
+  },
+  {
+    "key": "battle/techniques/proboscis.json",
+    "file": "dist/battle/techniques/proboscis.json"
+  },
+  {
+    "key": "battle/techniques/pseudopod.json",
+    "file": "dist/battle/techniques/pseudopod.json"
+  },
+  {
+    "key": "battle/techniques/punch.json",
+    "file": "dist/battle/techniques/punch.json"
+  },
+  {
+    "key": "battle/techniques/pyrokinesis.json",
+    "file": "dist/battle/techniques/pyrokinesis.json"
+  },
+  {
+    "key": "battle/techniques/quicksand.json",
+    "file": "dist/battle/techniques/quicksand.json"
+  },
+  {
+    "key": "battle/techniques/radiance.json",
+    "file": "dist/battle/techniques/radiance.json"
+  },
+  {
+    "key": "battle/techniques/ram.json",
+    "file": "dist/battle/techniques/ram.json"
+  },
+  {
+    "key": "battle/techniques/refresh.json",
+    "file": "dist/battle/techniques/refresh.json"
+  },
+  {
+    "key": "battle/techniques/revenge_stance.json",
+    "file": "dist/battle/techniques/revenge_stance.json"
+  },
+  {
+    "key": "battle/techniques/rift_dash.json",
+    "file": "dist/battle/techniques/rift_dash.json"
+  },
+  {
+    "key": "battle/techniques/ring.json",
+    "file": "dist/battle/techniques/ring.json"
+  },
+  {
+    "key": "battle/techniques/riposte.json",
+    "file": "dist/battle/techniques/riposte.json"
+  },
+  {
+    "key": "battle/techniques/rock.json",
+    "file": "dist/battle/techniques/rock.json"
+  },
+  {
+    "key": "battle/techniques/rocky_barrage.json",
+    "file": "dist/battle/techniques/rocky_barrage.json"
+  },
+  {
+    "key": "battle/techniques/roll.json",
+    "file": "dist/battle/techniques/roll.json"
+  },
+  {
+    "key": "battle/techniques/rot.json",
+    "file": "dist/battle/techniques/rot.json"
+  },
+  {
+    "key": "battle/techniques/ruby.json",
+    "file": "dist/battle/techniques/ruby.json"
+  },
+  {
+    "key": "battle/techniques/rust_bomb.json",
+    "file": "dist/battle/techniques/rust_bomb.json"
+  },
+  {
+    "key": "battle/techniques/saber.json",
+    "file": "dist/battle/techniques/saber.json"
+  },
+  {
+    "key": "battle/techniques/salamander.json",
+    "file": "dist/battle/techniques/salamander.json"
+  },
+  {
+    "key": "battle/techniques/sand_spray.json",
+    "file": "dist/battle/techniques/sand_spray.json"
+  },
+  {
+    "key": "battle/techniques/sands_of_time.json",
+    "file": "dist/battle/techniques/sands_of_time.json"
+  },
+  {
+    "key": "battle/techniques/scope.json",
+    "file": "dist/battle/techniques/scope.json"
+  },
+  {
+    "key": "battle/techniques/shadow_blast.json",
+    "file": "dist/battle/techniques/shadow_blast.json"
+  },
+  {
+    "key": "battle/techniques/shadow_boxing.json",
+    "file": "dist/battle/techniques/shadow_boxing.json"
+  },
+  {
+    "key": "battle/techniques/shapechange.json",
+    "file": "dist/battle/techniques/shapechange.json"
+  },
+  {
+    "key": "battle/techniques/shrapnel.json",
+    "file": "dist/battle/techniques/shrapnel.json"
+  },
+  {
+    "key": "battle/techniques/shuriken.json",
+    "file": "dist/battle/techniques/shuriken.json"
+  },
+  {
+    "key": "battle/techniques/sleep_bomb.json",
+    "file": "dist/battle/techniques/sleep_bomb.json"
+  },
+  {
+    "key": "battle/techniques/sleeping_powder.json",
+    "file": "dist/battle/techniques/sleeping_powder.json"
+  },
+  {
+    "key": "battle/techniques/slice.json",
+    "file": "dist/battle/techniques/slice.json"
+  },
+  {
+    "key": "battle/techniques/slime.json",
+    "file": "dist/battle/techniques/slime.json"
+  },
+  {
+    "key": "battle/techniques/snowball.json",
+    "file": "dist/battle/techniques/snowball.json"
+  },
+  {
+    "key": "battle/techniques/snowstorm.json",
+    "file": "dist/battle/techniques/snowstorm.json"
+  },
+  {
+    "key": "battle/techniques/solar_synthesis.json",
+    "file": "dist/battle/techniques/solar_synthesis.json"
+  },
+  {
+    "key": "battle/techniques/spiky_strike.json",
+    "file": "dist/battle/techniques/spiky_strike.json"
+  },
+  {
+    "key": "battle/techniques/spit_poison.json",
+    "file": "dist/battle/techniques/spit_poison.json"
+  },
+  {
+    "key": "battle/techniques/splinter.json",
+    "file": "dist/battle/techniques/splinter.json"
+  },
+  {
+    "key": "battle/techniques/stabilo.json",
+    "file": "dist/battle/techniques/stabilo.json"
+  },
+  {
+    "key": "battle/techniques/staff_smash.json",
+    "file": "dist/battle/techniques/staff_smash.json"
+  },
+  {
+    "key": "battle/techniques/stampede.json",
+    "file": "dist/battle/techniques/stampede.json"
+  },
+  {
+    "key": "battle/techniques/starfall.json",
+    "file": "dist/battle/techniques/starfall.json"
+  },
+  {
+    "key": "battle/techniques/static_field.json",
+    "file": "dist/battle/techniques/static_field.json"
+  },
+  {
+    "key": "battle/techniques/steel_jaws.json",
+    "file": "dist/battle/techniques/steel_jaws.json"
+  },
+  {
+    "key": "battle/techniques/stick.json",
+    "file": "dist/battle/techniques/stick.json"
+  },
+  {
+    "key": "battle/techniques/sting.json",
+    "file": "dist/battle/techniques/sting.json"
+  },
+  {
+    "key": "battle/techniques/stone_rot.json",
+    "file": "dist/battle/techniques/stone_rot.json"
+  },
+  {
+    "key": "battle/techniques/stonehenge.json",
+    "file": "dist/battle/techniques/stonehenge.json"
+  },
+  {
+    "key": "battle/techniques/strangulation.json",
+    "file": "dist/battle/techniques/strangulation.json"
+  },
+  {
+    "key": "battle/techniques/strike.json",
+    "file": "dist/battle/techniques/strike.json"
+  },
+  {
+    "key": "battle/techniques/struggle.json",
+    "file": "dist/battle/techniques/struggle.json"
+  },
+  {
+    "key": "battle/techniques/suck_poison.json",
+    "file": "dist/battle/techniques/suck_poison.json"
+  },
+  {
+    "key": "battle/techniques/sudden_glow.json",
+    "file": "dist/battle/techniques/sudden_glow.json"
+  },
+  {
+    "key": "battle/techniques/sunburst.json",
+    "file": "dist/battle/techniques/sunburst.json"
+  },
+  {
+    "key": "battle/techniques/supernova.json",
+    "file": "dist/battle/techniques/supernova.json"
+  },
+  {
+    "key": "battle/techniques/suplex.json",
+    "file": "dist/battle/techniques/suplex.json"
+  },
+  {
+    "key": "battle/techniques/surge.json",
+    "file": "dist/battle/techniques/surge.json"
+  },
+  {
+    "key": "battle/techniques/sylvan.json",
+    "file": "dist/battle/techniques/sylvan.json"
+  },
+  {
+    "key": "battle/techniques/tail_lash.json",
+    "file": "dist/battle/techniques/tail_lash.json"
+  },
+  {
+    "key": "battle/techniques/take_cover.json",
+    "file": "dist/battle/techniques/take_cover.json"
+  },
+  {
+    "key": "battle/techniques/ten_thousand_feathers.json",
+    "file": "dist/battle/techniques/ten_thousand_feathers.json"
+  },
+  {
+    "key": "battle/techniques/terror.json",
+    "file": "dist/battle/techniques/terror.json"
+  },
+  {
+    "key": "battle/techniques/thorn_burst.json",
+    "file": "dist/battle/techniques/thorn_burst.json"
+  },
+  {
+    "key": "battle/techniques/thunderball.json",
+    "file": "dist/battle/techniques/thunderball.json"
+  },
+  {
+    "key": "battle/techniques/thunderclap.json",
+    "file": "dist/battle/techniques/thunderclap.json"
+  },
+  {
+    "key": "battle/techniques/time_crisis.json",
+    "file": "dist/battle/techniques/time_crisis.json"
+  },
+  {
+    "key": "battle/techniques/tinder.json",
+    "file": "dist/battle/techniques/tinder.json"
+  },
+  {
+    "key": "battle/techniques/tip.json",
+    "file": "dist/battle/techniques/tip.json"
+  },
+  {
+    "key": "battle/techniques/tonguespear.json",
+    "file": "dist/battle/techniques/tonguespear.json"
+  },
+  {
+    "key": "battle/techniques/tooth_for_tooth.json",
+    "file": "dist/battle/techniques/tooth_for_tooth.json"
+  },
+  {
+    "key": "battle/techniques/torch.json",
+    "file": "dist/battle/techniques/torch.json"
+  },
+  {
+    "key": "battle/techniques/tornado.json",
+    "file": "dist/battle/techniques/tornado.json"
+  },
+  {
+    "key": "battle/techniques/trample.json",
+    "file": "dist/battle/techniques/trample.json"
+  },
+  {
+    "key": "battle/techniques/tsunami.json",
+    "file": "dist/battle/techniques/tsunami.json"
+  },
+  {
+    "key": "battle/techniques/ubuntu.json",
+    "file": "dist/battle/techniques/ubuntu.json"
+  },
+  {
+    "key": "battle/techniques/undertaker.json",
+    "file": "dist/battle/techniques/undertaker.json"
+  },
+  {
+    "key": "battle/techniques/venomous_tentacle.json",
+    "file": "dist/battle/techniques/venomous_tentacle.json"
+  },
+  {
+    "key": "battle/techniques/viper.json",
+    "file": "dist/battle/techniques/viper.json"
+  },
+  {
+    "key": "battle/techniques/vorpal.json",
+    "file": "dist/battle/techniques/vorpal.json"
+  },
+  {
+    "key": "battle/techniques/wall_fire.json",
+    "file": "dist/battle/techniques/wall_fire.json"
+  },
+  {
+    "key": "battle/techniques/wall_of_steel.json",
+    "file": "dist/battle/techniques/wall_of_steel.json"
+  },
+  {
+    "key": "battle/techniques/wallow.json",
+    "file": "dist/battle/techniques/wallow.json"
+  },
+  {
+    "key": "battle/techniques/walls.json",
+    "file": "dist/battle/techniques/walls.json"
+  },
+  {
+    "key": "battle/techniques/water_blast.json",
+    "file": "dist/battle/techniques/water_blast.json"
+  },
+  {
+    "key": "battle/techniques/water_bullet.json",
+    "file": "dist/battle/techniques/water_bullet.json"
+  },
+  {
+    "key": "battle/techniques/web.json",
+    "file": "dist/battle/techniques/web.json"
+  },
+  {
+    "key": "battle/techniques/webs_wind.json",
+    "file": "dist/battle/techniques/webs_wind.json"
+  },
+  {
+    "key": "battle/techniques/whirlwind.json",
+    "file": "dist/battle/techniques/whirlwind.json"
+  },
+  {
+    "key": "battle/techniques/wing_tip.json",
+    "file": "dist/battle/techniques/wing_tip.json"
+  },
+  {
+    "key": "battle/techniques/woodsmash.json",
+    "file": "dist/battle/techniques/woodsmash.json"
+  },
+  {
     "key": "game:battle-db",
     "file": "data/battle-db.json"
   },
@@ -1054,6 +3846,2810 @@
   {
     "key": "maps/witcher_route_7.json",
     "file": "dist/maps/witcher_route_7.json"
+  },
+  {
+    "key": "npc-src/npc.37707_female.json",
+    "file": "dist/npc-src/npc.37707_female.json"
+  },
+  {
+    "key": "npc-src/npc.37707_female_missing.json",
+    "file": "dist/npc-src/npc.37707_female_missing.json"
+  },
+  {
+    "key": "npc-src/npc.37707_male_missing.json",
+    "file": "dist/npc-src/npc.37707_male_missing.json"
+  },
+  {
+    "key": "npc-src/npc.barmaid.json",
+    "file": "dist/npc-src/npc.barmaid.json"
+  },
+  {
+    "key": "npc-src/npc.barmaid_blonde.json",
+    "file": "dist/npc-src/npc.barmaid_blonde.json"
+  },
+  {
+    "key": "npc-src/npc.barmaid_red.json",
+    "file": "dist/npc-src/npc.barmaid_red.json"
+  },
+  {
+    "key": "npc-src/npc.beachcomber.json",
+    "file": "dist/npc-src/npc.beachcomber.json"
+  },
+  {
+    "key": "npc-src/npc.beachcomber_black.json",
+    "file": "dist/npc-src/npc.beachcomber_black.json"
+  },
+  {
+    "key": "npc-src/npc.beachcomber_blue.json",
+    "file": "dist/npc-src/npc.beachcomber_blue.json"
+  },
+  {
+    "key": "npc-src/npc.beachcomber_copper.json",
+    "file": "dist/npc-src/npc.beachcomber_copper.json"
+  },
+  {
+    "key": "npc-src/npc.beachcomber_fiery.json",
+    "file": "dist/npc-src/npc.beachcomber_fiery.json"
+  },
+  {
+    "key": "npc-src/npc.beachcomber_gray.json",
+    "file": "dist/npc-src/npc.beachcomber_gray.json"
+  },
+  {
+    "key": "npc-src/npc.bob.json",
+    "file": "dist/npc-src/npc.bob.json"
+  },
+  {
+    "key": "npc-src/npc.boss_orange.json",
+    "file": "dist/npc-src/npc.boss_orange.json"
+  },
+  {
+    "key": "npc-src/npc.boss_red.json",
+    "file": "dist/npc-src/npc.boss_red.json"
+  },
+  {
+    "key": "npc-src/npc.boulder.json",
+    "file": "dist/npc-src/npc.boulder.json"
+  },
+  {
+    "key": "npc-src/npc.box.json",
+    "file": "dist/npc-src/npc.box.json"
+  },
+  {
+    "key": "npc-src/npc.catgirl.json",
+    "file": "dist/npc-src/npc.catgirl.json"
+  },
+  {
+    "key": "npc-src/npc.catgirl_blonde.json",
+    "file": "dist/npc-src/npc.catgirl_blonde.json"
+  },
+  {
+    "key": "npc-src/npc.catgirl_blue.json",
+    "file": "dist/npc-src/npc.catgirl_blue.json"
+  },
+  {
+    "key": "npc-src/npc.catgirl_fiery.json",
+    "file": "dist/npc-src/npc.catgirl_fiery.json"
+  },
+  {
+    "key": "npc-src/npc.catgirl_green.json",
+    "file": "dist/npc-src/npc.catgirl_green.json"
+  },
+  {
+    "key": "npc-src/npc.catgirl_violet.json",
+    "file": "dist/npc-src/npc.catgirl_violet.json"
+  },
+  {
+    "key": "npc-src/npc.ceo.json",
+    "file": "dist/npc-src/npc.ceo.json"
+  },
+  {
+    "key": "npc-src/npc.childactor.json",
+    "file": "dist/npc-src/npc.childactor.json"
+  },
+  {
+    "key": "npc-src/npc.childactor_black.json",
+    "file": "dist/npc-src/npc.childactor_black.json"
+  },
+  {
+    "key": "npc-src/npc.childactor_blonde.json",
+    "file": "dist/npc-src/npc.childactor_blonde.json"
+  },
+  {
+    "key": "npc-src/npc.childactor_fiery.json",
+    "file": "dist/npc-src/npc.childactor_fiery.json"
+  },
+  {
+    "key": "npc-src/npc.christie.json",
+    "file": "dist/npc-src/npc.christie.json"
+  },
+  {
+    "key": "npc-src/npc.conileaf.json",
+    "file": "dist/npc-src/npc.conileaf.json"
+  },
+  {
+    "key": "npc-src/npc.cooldude.json",
+    "file": "dist/npc-src/npc.cooldude.json"
+  },
+  {
+    "key": "npc-src/npc.cooldude_black.json",
+    "file": "dist/npc-src/npc.cooldude_black.json"
+  },
+  {
+    "key": "npc-src/npc.cooldude_blue.json",
+    "file": "dist/npc-src/npc.cooldude_blue.json"
+  },
+  {
+    "key": "npc-src/npc.cooldude_fiery.json",
+    "file": "dist/npc-src/npc.cooldude_fiery.json"
+  },
+  {
+    "key": "npc-src/npc.disciple.json",
+    "file": "dist/npc-src/npc.disciple.json"
+  },
+  {
+    "key": "npc-src/npc.dragonrider.json",
+    "file": "dist/npc-src/npc.dragonrider.json"
+  },
+  {
+    "key": "npc-src/npc.dragonrider_black.json",
+    "file": "dist/npc-src/npc.dragonrider_black.json"
+  },
+  {
+    "key": "npc-src/npc.dragonrider_blue.json",
+    "file": "dist/npc-src/npc.dragonrider_blue.json"
+  },
+  {
+    "key": "npc-src/npc.dragonrider_fiery.json",
+    "file": "dist/npc-src/npc.dragonrider_fiery.json"
+  },
+  {
+    "key": "npc-src/npc.dragonrider_green.json",
+    "file": "dist/npc-src/npc.dragonrider_green.json"
+  },
+  {
+    "key": "npc-src/npc.drokoro.json",
+    "file": "dist/npc-src/npc.drokoro.json"
+  },
+  {
+    "key": "npc-src/npc.fashionista.json",
+    "file": "dist/npc-src/npc.fashionista.json"
+  },
+  {
+    "key": "npc-src/npc.fashionista_fiery.json",
+    "file": "dist/npc-src/npc.fashionista_fiery.json"
+  },
+  {
+    "key": "npc-src/npc.firefighter.json",
+    "file": "dist/npc-src/npc.firefighter.json"
+  },
+  {
+    "key": "npc-src/npc.firenymph.json",
+    "file": "dist/npc-src/npc.firenymph.json"
+  },
+  {
+    "key": "npc-src/npc.fisher.json",
+    "file": "dist/npc-src/npc.fisher.json"
+  },
+  {
+    "key": "npc-src/npc.fisher_fiery.json",
+    "file": "dist/npc-src/npc.fisher_fiery.json"
+  },
+  {
+    "key": "npc-src/npc.florist.json",
+    "file": "dist/npc-src/npc.florist.json"
+  },
+  {
+    "key": "npc-src/npc.florist_black.json",
+    "file": "dist/npc-src/npc.florist_black.json"
+  },
+  {
+    "key": "npc-src/npc.florist_blue.json",
+    "file": "dist/npc-src/npc.florist_blue.json"
+  },
+  {
+    "key": "npc-src/npc.florist_brown.json",
+    "file": "dist/npc-src/npc.florist_brown.json"
+  },
+  {
+    "key": "npc-src/npc.florist_fiery.json",
+    "file": "dist/npc-src/npc.florist_fiery.json"
+  },
+  {
+    "key": "npc-src/npc.florist_rose.json",
+    "file": "dist/npc-src/npc.florist_rose.json"
+  },
+  {
+    "key": "npc-src/npc.girl1.json",
+    "file": "dist/npc-src/npc.girl1.json"
+  },
+  {
+    "key": "npc-src/npc.goth.json",
+    "file": "dist/npc-src/npc.goth.json"
+  },
+  {
+    "key": "npc-src/npc.granny.json",
+    "file": "dist/npc-src/npc.granny.json"
+  },
+  {
+    "key": "npc-src/npc.granny_green.json",
+    "file": "dist/npc-src/npc.granny_green.json"
+  },
+  {
+    "key": "npc-src/npc.granny_lapi.json",
+    "file": "dist/npc-src/npc.granny_lapi.json"
+  },
+  {
+    "key": "npc-src/npc.granny_yellow.json",
+    "file": "dist/npc-src/npc.granny_yellow.json"
+  },
+  {
+    "key": "npc-src/npc.heroine.json",
+    "file": "dist/npc-src/npc.heroine.json"
+  },
+  {
+    "key": "npc-src/npc.heroine_brown.json",
+    "file": "dist/npc-src/npc.heroine_brown.json"
+  },
+  {
+    "key": "npc-src/npc.heroine_red.json",
+    "file": "dist/npc-src/npc.heroine_red.json"
+  },
+  {
+    "key": "npc-src/npc.homemaker.json",
+    "file": "dist/npc-src/npc.homemaker.json"
+  },
+  {
+    "key": "npc-src/npc.homemaker_black.json",
+    "file": "dist/npc-src/npc.homemaker_black.json"
+  },
+  {
+    "key": "npc-src/npc.homemaker_blonde.json",
+    "file": "dist/npc-src/npc.homemaker_blonde.json"
+  },
+  {
+    "key": "npc-src/npc.homemaker_fiery.json",
+    "file": "dist/npc-src/npc.homemaker_fiery.json"
+  },
+  {
+    "key": "npc-src/npc.knight.json",
+    "file": "dist/npc-src/npc.knight.json"
+  },
+  {
+    "key": "npc-src/npc.knight_green.json",
+    "file": "dist/npc-src/npc.knight_green.json"
+  },
+  {
+    "key": "npc-src/npc.knight_red.json",
+    "file": "dist/npc-src/npc.knight_red.json"
+  },
+  {
+    "key": "npc-src/npc.knight_yellow.json",
+    "file": "dist/npc-src/npc.knight_yellow.json"
+  },
+  {
+    "key": "npc-src/npc.knightlord.json",
+    "file": "dist/npc-src/npc.knightlord.json"
+  },
+  {
+    "key": "npc-src/npc.landrace.json",
+    "file": "dist/npc-src/npc.landrace.json"
+  },
+  {
+    "key": "npc-src/npc.magician.json",
+    "file": "dist/npc-src/npc.magician.json"
+  },
+  {
+    "key": "npc-src/npc.magician_black.json",
+    "file": "dist/npc-src/npc.magician_black.json"
+  },
+  {
+    "key": "npc-src/npc.magician_blonde.json",
+    "file": "dist/npc-src/npc.magician_blonde.json"
+  },
+  {
+    "key": "npc-src/npc.magician_brown.json",
+    "file": "dist/npc-src/npc.magician_brown.json"
+  },
+  {
+    "key": "npc-src/npc.magician_fiery.json",
+    "file": "dist/npc-src/npc.magician_fiery.json"
+  },
+  {
+    "key": "npc-src/npc.magician_grey.json",
+    "file": "dist/npc-src/npc.magician_grey.json"
+  },
+  {
+    "key": "npc-src/npc.maniac.json",
+    "file": "dist/npc-src/npc.maniac.json"
+  },
+  {
+    "key": "npc-src/npc.maniac_green.json",
+    "file": "dist/npc-src/npc.maniac_green.json"
+  },
+  {
+    "key": "npc-src/npc.maniac_rose.json",
+    "file": "dist/npc-src/npc.maniac_rose.json"
+  },
+  {
+    "key": "npc-src/npc.maniac_violet.json",
+    "file": "dist/npc-src/npc.maniac_violet.json"
+  },
+  {
+    "key": "npc-src/npc.maniac_yellow.json",
+    "file": "dist/npc-src/npc.maniac_yellow.json"
+  },
+  {
+    "key": "npc-src/npc.miner.json",
+    "file": "dist/npc-src/npc.miner.json"
+  },
+  {
+    "key": "npc-src/npc.miner_blue.json",
+    "file": "dist/npc-src/npc.miner_blue.json"
+  },
+  {
+    "key": "npc-src/npc.miner_green.json",
+    "file": "dist/npc-src/npc.miner_green.json"
+  },
+  {
+    "key": "npc-src/npc.miner_red.json",
+    "file": "dist/npc-src/npc.miner_red.json"
+  },
+  {
+    "key": "npc-src/npc.miner_yellow.json",
+    "file": "dist/npc-src/npc.miner_yellow.json"
+  },
+  {
+    "key": "npc-src/npc.missing.json",
+    "file": "dist/npc-src/npc.missing.json"
+  },
+  {
+    "key": "npc-src/npc.monk.json",
+    "file": "dist/npc-src/npc.monk.json"
+  },
+  {
+    "key": "npc-src/npc.monk_black.json",
+    "file": "dist/npc-src/npc.monk_black.json"
+  },
+  {
+    "key": "npc-src/npc.monk_blue.json",
+    "file": "dist/npc-src/npc.monk_blue.json"
+  },
+  {
+    "key": "npc-src/npc.monk_green.json",
+    "file": "dist/npc-src/npc.monk_green.json"
+  },
+  {
+    "key": "npc-src/npc.monk_orange.json",
+    "file": "dist/npc-src/npc.monk_orange.json"
+  },
+  {
+    "key": "npc-src/npc.monk_red.json",
+    "file": "dist/npc-src/npc.monk_red.json"
+  },
+  {
+    "key": "npc-src/npc.ninja.json",
+    "file": "dist/npc-src/npc.ninja.json"
+  },
+  {
+    "key": "npc-src/npc.ninja_blue.json",
+    "file": "dist/npc-src/npc.ninja_blue.json"
+  },
+  {
+    "key": "npc-src/npc.ninja_red.json",
+    "file": "dist/npc-src/npc.ninja_red.json"
+  },
+  {
+    "key": "npc-src/npc.nurse.json",
+    "file": "dist/npc-src/npc.nurse.json"
+  },
+  {
+    "key": "npc-src/npc.nurse_blonde.json",
+    "file": "dist/npc-src/npc.nurse_blonde.json"
+  },
+  {
+    "key": "npc-src/npc.nurse_blue.json",
+    "file": "dist/npc-src/npc.nurse_blue.json"
+  },
+  {
+    "key": "npc-src/npc.nurse_green.json",
+    "file": "dist/npc-src/npc.nurse_green.json"
+  },
+  {
+    "key": "npc-src/npc.nurse_lapi.json",
+    "file": "dist/npc-src/npc.nurse_lapi.json"
+  },
+  {
+    "key": "npc-src/npc.nurse_red.json",
+    "file": "dist/npc-src/npc.nurse_red.json"
+  },
+  {
+    "key": "npc-src/npc.omnichannelallie.json",
+    "file": "dist/npc-src/npc.omnichannelallie.json"
+  },
+  {
+    "key": "npc-src/npc.overseer.json",
+    "file": "dist/npc-src/npc.overseer.json"
+  },
+  {
+    "key": "npc-src/npc.p_five.json",
+    "file": "dist/npc-src/npc.p_five.json"
+  },
+  {
+    "key": "npc-src/npc.p_four.json",
+    "file": "dist/npc-src/npc.p_four.json"
+  },
+  {
+    "key": "npc-src/npc.p_one.json",
+    "file": "dist/npc-src/npc.p_one.json"
+  },
+  {
+    "key": "npc-src/npc.p_three.json",
+    "file": "dist/npc-src/npc.p_three.json"
+  },
+  {
+    "key": "npc-src/npc.p_two.json",
+    "file": "dist/npc-src/npc.p_two.json"
+  },
+  {
+    "key": "npc-src/npc.picnicker.json",
+    "file": "dist/npc-src/npc.picnicker.json"
+  },
+  {
+    "key": "npc-src/npc.postboy.json",
+    "file": "dist/npc-src/npc.postboy.json"
+  },
+  {
+    "key": "npc-src/npc.postboy_green.json",
+    "file": "dist/npc-src/npc.postboy_green.json"
+  },
+  {
+    "key": "npc-src/npc.postboy_red.json",
+    "file": "dist/npc-src/npc.postboy_red.json"
+  },
+  {
+    "key": "npc-src/npc.professor.json",
+    "file": "dist/npc-src/npc.professor.json"
+  },
+  {
+    "key": "npc-src/npc.professor_black.json",
+    "file": "dist/npc-src/npc.professor_black.json"
+  },
+  {
+    "key": "npc-src/npc.professor_blue.json",
+    "file": "dist/npc-src/npc.professor_blue.json"
+  },
+  {
+    "key": "npc-src/npc.professor_brown.json",
+    "file": "dist/npc-src/npc.professor_brown.json"
+  },
+  {
+    "key": "npc-src/npc.professor_fiery.json",
+    "file": "dist/npc-src/npc.professor_fiery.json"
+  },
+  {
+    "key": "npc-src/npc.professor_green.json",
+    "file": "dist/npc-src/npc.professor_green.json"
+  },
+  {
+    "key": "npc-src/npc.professor_lapi.json",
+    "file": "dist/npc-src/npc.professor_lapi.json"
+  },
+  {
+    "key": "npc-src/npc.riverboatcaptain.json",
+    "file": "dist/npc-src/npc.riverboatcaptain.json"
+  },
+  {
+    "key": "npc-src/npc.robot.json",
+    "file": "dist/npc-src/npc.robot.json"
+  },
+  {
+    "key": "npc-src/npc.rockitten.json",
+    "file": "dist/npc-src/npc.rockitten.json"
+  },
+  {
+    "key": "npc-src/npc.rogue.json",
+    "file": "dist/npc-src/npc.rogue.json"
+  },
+  {
+    "key": "npc-src/npc.rogue_copper.json",
+    "file": "dist/npc-src/npc.rogue_copper.json"
+  },
+  {
+    "key": "npc-src/npc.rogue_green.json",
+    "file": "dist/npc-src/npc.rogue_green.json"
+  },
+  {
+    "key": "npc-src/npc.rogue_red.json",
+    "file": "dist/npc-src/npc.rogue_red.json"
+  },
+  {
+    "key": "npc-src/npc.scientist.json",
+    "file": "dist/npc-src/npc.scientist.json"
+  },
+  {
+    "key": "npc-src/npc.scientist_black.json",
+    "file": "dist/npc-src/npc.scientist_black.json"
+  },
+  {
+    "key": "npc-src/npc.scientist_brown.json",
+    "file": "dist/npc-src/npc.scientist_brown.json"
+  },
+  {
+    "key": "npc-src/npc.scientist_fiery.json",
+    "file": "dist/npc-src/npc.scientist_fiery.json"
+  },
+  {
+    "key": "npc-src/npc.screen.json",
+    "file": "dist/npc-src/npc.screen.json"
+  },
+  {
+    "key": "npc-src/npc.screen_small.json",
+    "file": "dist/npc-src/npc.screen_small.json"
+  },
+  {
+    "key": "npc-src/npc.shopassistant.json",
+    "file": "dist/npc-src/npc.shopassistant.json"
+  },
+  {
+    "key": "npc-src/npc.shopassistant_black.json",
+    "file": "dist/npc-src/npc.shopassistant_black.json"
+  },
+  {
+    "key": "npc-src/npc.shopassistant_grey.json",
+    "file": "dist/npc-src/npc.shopassistant_grey.json"
+  },
+  {
+    "key": "npc-src/npc.shopassistant_red.json",
+    "file": "dist/npc-src/npc.shopassistant_red.json"
+  },
+  {
+    "key": "npc-src/npc.shopkeeper.json",
+    "file": "dist/npc-src/npc.shopkeeper.json"
+  },
+  {
+    "key": "npc-src/npc.shopkeeper_blonde.json",
+    "file": "dist/npc-src/npc.shopkeeper_blonde.json"
+  },
+  {
+    "key": "npc-src/npc.shopkeeper_brown.json",
+    "file": "dist/npc-src/npc.shopkeeper_brown.json"
+  },
+  {
+    "key": "npc-src/npc.sign.json",
+    "file": "dist/npc-src/npc.sign.json"
+  },
+  {
+    "key": "npc-src/npc.snugglepot.json",
+    "file": "dist/npc-src/npc.snugglepot.json"
+  },
+  {
+    "key": "npc-src/npc.soldier.json",
+    "file": "dist/npc-src/npc.soldier.json"
+  },
+  {
+    "key": "npc-src/npc.spyderboss.json",
+    "file": "dist/npc-src/npc.spyderboss.json"
+  },
+  {
+    "key": "npc-src/npc.spyderboss_blonde.json",
+    "file": "dist/npc-src/npc.spyderboss_blonde.json"
+  },
+  {
+    "key": "npc-src/npc.spyderboss_fiery.json",
+    "file": "dist/npc-src/npc.spyderboss_fiery.json"
+  },
+  {
+    "key": "npc-src/npc.spyderboss_green.json",
+    "file": "dist/npc-src/npc.spyderboss_green.json"
+  },
+  {
+    "key": "npc-src/npc.spyderboss_lapi.json",
+    "file": "dist/npc-src/npc.spyderboss_lapi.json"
+  },
+  {
+    "key": "npc-src/npc.spyderrookie.json",
+    "file": "dist/npc-src/npc.spyderrookie.json"
+  },
+  {
+    "key": "npc-src/npc.statue_blue.json",
+    "file": "dist/npc-src/npc.statue_blue.json"
+  },
+  {
+    "key": "npc-src/npc.statue_green.json",
+    "file": "dist/npc-src/npc.statue_green.json"
+  },
+  {
+    "key": "npc-src/npc.statue_grey.json",
+    "file": "dist/npc-src/npc.statue_grey.json"
+  },
+  {
+    "key": "npc-src/npc.statue_orange.json",
+    "file": "dist/npc-src/npc.statue_orange.json"
+  },
+  {
+    "key": "npc-src/npc.statue_orange_tipped.json",
+    "file": "dist/npc-src/npc.statue_orange_tipped.json"
+  },
+  {
+    "key": "npc-src/npc.statue_red.json",
+    "file": "dist/npc-src/npc.statue_red.json"
+  },
+  {
+    "key": "npc-src/npc.swimmer.json",
+    "file": "dist/npc-src/npc.swimmer.json"
+  },
+  {
+    "key": "npc-src/npc.swimmer_blue.json",
+    "file": "dist/npc-src/npc.swimmer_blue.json"
+  },
+  {
+    "key": "npc-src/npc.swimmer_green.json",
+    "file": "dist/npc-src/npc.swimmer_green.json"
+  },
+  {
+    "key": "npc-src/npc.swimmer_orange.json",
+    "file": "dist/npc-src/npc.swimmer_orange.json"
+  },
+  {
+    "key": "npc-src/npc.swimmer_red.json",
+    "file": "dist/npc-src/npc.swimmer_red.json"
+  },
+  {
+    "key": "npc-src/npc.tennisplayer.json",
+    "file": "dist/npc-src/npc.tennisplayer.json"
+  },
+  {
+    "key": "npc-src/npc.tennisplayer_fiery.json",
+    "file": "dist/npc-src/npc.tennisplayer_fiery.json"
+  },
+  {
+    "key": "npc-src/npc.tennisplayer_green.json",
+    "file": "dist/npc-src/npc.tennisplayer_green.json"
+  },
+  {
+    "key": "npc-src/npc.tennisplayer_lapi.json",
+    "file": "dist/npc-src/npc.tennisplayer_lapi.json"
+  },
+  {
+    "key": "npc-src/npc.tuxeball_green.json",
+    "file": "dist/npc-src/npc.tuxeball_green.json"
+  },
+  {
+    "key": "npc-src/npc.tuxeball_red.json",
+    "file": "dist/npc-src/npc.tuxeball_red.json"
+  },
+  {
+    "key": "npc-src/npc.tuxeball_yellow.json",
+    "file": "dist/npc-src/npc.tuxeball_yellow.json"
+  },
+  {
+    "key": "npc-src/npc.varmint.json",
+    "file": "dist/npc-src/npc.varmint.json"
+  },
+  {
+    "key": "npc-src/npc.volcoli.json",
+    "file": "dist/npc-src/npc.volcoli.json"
+  },
+  {
+    "key": "npc-src/npc.warrior.json",
+    "file": "dist/npc-src/npc.warrior.json"
+  },
+  {
+    "key": "npc-src/npc.water_jemuar.json",
+    "file": "dist/npc-src/npc.water_jemuar.json"
+  },
+  {
+    "key": "npc-src/npc.woodnymph.json",
+    "file": "dist/npc-src/npc.woodnymph.json"
+  },
+  {
+    "key": "npc-src/npc.xerogrunt.json",
+    "file": "dist/npc-src/npc.xerogrunt.json"
+  },
+  {
+    "key": "terrain-stream/ground/37707_tower.json",
+    "file": "dist/terrain-stream/ground/37707_tower.json"
+  },
+  {
+    "key": "terrain-stream/ground/37707_town.json",
+    "file": "dist/terrain-stream/ground/37707_town.json"
+  },
+  {
+    "key": "terrain-stream/ground/37707_town_missing.json",
+    "file": "dist/terrain-stream/ground/37707_town_missing.json"
+  },
+  {
+    "key": "terrain-stream/ground/azure_town.json",
+    "file": "dist/terrain-stream/ground/azure_town.json"
+  },
+  {
+    "key": "terrain-stream/ground/azure_town_hall.json",
+    "file": "dist/terrain-stream/ground/azure_town_hall.json"
+  },
+  {
+    "key": "terrain-stream/ground/bedroom_test.json",
+    "file": "dist/terrain-stream/ground/bedroom_test.json"
+  },
+  {
+    "key": "terrain-stream/ground/buddha_mountain.json",
+    "file": "dist/terrain-stream/ground/buddha_mountain.json"
+  },
+  {
+    "key": "terrain-stream/ground/candy_town.json",
+    "file": "dist/terrain-stream/ground/candy_town.json"
+  },
+  {
+    "key": "terrain-stream/ground/city1_mart_junkyard.json",
+    "file": "dist/terrain-stream/ground/city1_mart_junkyard.json"
+  },
+  {
+    "key": "terrain-stream/ground/citypark.json",
+    "file": "dist/terrain-stream/ground/citypark.json"
+  },
+  {
+    "key": "terrain-stream/ground/citypark_house1.json",
+    "file": "dist/terrain-stream/ground/citypark_house1.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_aerolume_city.json",
+    "file": "dist/terrain-stream/ground/classic_aerolume_city.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_gym_astra.json",
+    "file": "dist/terrain-stream/ground/classic_gym_astra.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_gym_bravion.json",
+    "file": "dist/terrain-stream/ground/classic_gym_bravion.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_gym_ferrum.json",
+    "file": "dist/terrain-stream/ground/classic_gym_ferrum.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_gym_granite.json",
+    "file": "dist/terrain-stream/ground/classic_gym_granite.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_gym_marin.json",
+    "file": "dist/terrain-stream/ground/classic_gym_marin.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_gym_mila.json",
+    "file": "dist/terrain-stream/ground/classic_gym_mila.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_gym_orion.json",
+    "file": "dist/terrain-stream/ground/classic_gym_orion.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_gym_pyra.json",
+    "file": "dist/terrain-stream/ground/classic_gym_pyra.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_gym_shade.json",
+    "file": "dist/terrain-stream/ground/classic_gym_shade.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_gym_sylva.json",
+    "file": "dist/terrain-stream/ground/classic_gym_sylva.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_gym_voltessa.json",
+    "file": "dist/terrain-stream/ground/classic_gym_voltessa.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_gym_vyre.json",
+    "file": "dist/terrain-stream/ground/classic_gym_vyre.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_gym_zephra.json",
+    "file": "dist/terrain-stream/ground/classic_gym_zephra.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_hearthrock_city.json",
+    "file": "dist/terrain-stream/ground/classic_hearthrock_city.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_route_1.json",
+    "file": "dist/terrain-stream/ground/classic_route_1.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_route_2.json",
+    "file": "dist/terrain-stream/ground/classic_route_2.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_route_3.json",
+    "file": "dist/terrain-stream/ground/classic_route_3.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_route_4.json",
+    "file": "dist/terrain-stream/ground/classic_route_4.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_route_5.json",
+    "file": "dist/terrain-stream/ground/classic_route_5.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_route_6.json",
+    "file": "dist/terrain-stream/ground/classic_route_6.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_route_7.json",
+    "file": "dist/terrain-stream/ground/classic_route_7.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_route_8.json",
+    "file": "dist/terrain-stream/ground/classic_route_8.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_steamshore_city.json",
+    "file": "dist/terrain-stream/ground/classic_steamshore_city.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_stormpeak_city.json",
+    "file": "dist/terrain-stream/ground/classic_stormpeak_city.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_thornwood_city.json",
+    "file": "dist/terrain-stream/ground/classic_thornwood_city.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_umbrastar_city.json",
+    "file": "dist/terrain-stream/ground/classic_umbrastar_city.json"
+  },
+  {
+    "key": "terrain-stream/ground/classic_valorhold_city.json",
+    "file": "dist/terrain-stream/ground/classic_valorhold_city.json"
+  },
+  {
+    "key": "terrain-stream/ground/cotton_cafe.json",
+    "file": "dist/terrain-stream/ground/cotton_cafe.json"
+  },
+  {
+    "key": "terrain-stream/ground/cotton_cafe_basement.json",
+    "file": "dist/terrain-stream/ground/cotton_cafe_basement.json"
+  },
+  {
+    "key": "terrain-stream/ground/cotton_cathedral.json",
+    "file": "dist/terrain-stream/ground/cotton_cathedral.json"
+  },
+  {
+    "key": "terrain-stream/ground/cotton_daycare.json",
+    "file": "dist/terrain-stream/ground/cotton_daycare.json"
+  },
+  {
+    "key": "terrain-stream/ground/cotton_misa_house.json",
+    "file": "dist/terrain-stream/ground/cotton_misa_house.json"
+  },
+  {
+    "key": "terrain-stream/ground/cotton_misa_house_upstairs.json",
+    "file": "dist/terrain-stream/ground/cotton_misa_house_upstairs.json"
+  },
+  {
+    "key": "terrain-stream/ground/cotton_scoop.json",
+    "file": "dist/terrain-stream/ground/cotton_scoop.json"
+  },
+  {
+    "key": "terrain-stream/ground/cotton_town.json",
+    "file": "dist/terrain-stream/ground/cotton_town.json"
+  },
+  {
+    "key": "terrain-stream/ground/cotton_underground.json",
+    "file": "dist/terrain-stream/ground/cotton_underground.json"
+  },
+  {
+    "key": "terrain-stream/ground/dojo1.json",
+    "file": "dist/terrain-stream/ground/dojo1.json"
+  },
+  {
+    "key": "terrain-stream/ground/dojo2.json",
+    "file": "dist/terrain-stream/ground/dojo2.json"
+  },
+  {
+    "key": "terrain-stream/ground/dojo3.json",
+    "file": "dist/terrain-stream/ground/dojo3.json"
+  },
+  {
+    "key": "terrain-stream/ground/downstairs_test.json",
+    "file": "dist/terrain-stream/ground/downstairs_test.json"
+  },
+  {
+    "key": "terrain-stream/ground/dragonscave.json",
+    "file": "dist/terrain-stream/ground/dragonscave.json"
+  },
+  {
+    "key": "terrain-stream/ground/dryadsgrove.json",
+    "file": "dist/terrain-stream/ground/dryadsgrove.json"
+  },
+  {
+    "key": "terrain-stream/ground/eclipse_crystal_bank1.json",
+    "file": "dist/terrain-stream/ground/eclipse_crystal_bank1.json"
+  },
+  {
+    "key": "terrain-stream/ground/eclipse_crystal_bank2.json",
+    "file": "dist/terrain-stream/ground/eclipse_crystal_bank2.json"
+  },
+  {
+    "key": "terrain-stream/ground/eclipse_crystal_bank3.json",
+    "file": "dist/terrain-stream/ground/eclipse_crystal_bank3.json"
+  },
+  {
+    "key": "terrain-stream/ground/eclipse_crystal_center.json",
+    "file": "dist/terrain-stream/ground/eclipse_crystal_center.json"
+  },
+  {
+    "key": "terrain-stream/ground/eclipse_crystal_town.json",
+    "file": "dist/terrain-stream/ground/eclipse_crystal_town.json"
+  },
+  {
+    "key": "terrain-stream/ground/eclipse_crystal_town_cafe.json",
+    "file": "dist/terrain-stream/ground/eclipse_crystal_town_cafe.json"
+  },
+  {
+    "key": "terrain-stream/ground/eclipse_crystal_town_house.json",
+    "file": "dist/terrain-stream/ground/eclipse_crystal_town_house.json"
+  },
+  {
+    "key": "terrain-stream/ground/eclipse_lion_mountain_high.json",
+    "file": "dist/terrain-stream/ground/eclipse_lion_mountain_high.json"
+  },
+  {
+    "key": "terrain-stream/ground/eclipse_lion_mountain_low.json",
+    "file": "dist/terrain-stream/ground/eclipse_lion_mountain_low.json"
+  },
+  {
+    "key": "terrain-stream/ground/eclipse_lion_mountain_middle.json",
+    "file": "dist/terrain-stream/ground/eclipse_lion_mountain_middle.json"
+  },
+  {
+    "key": "terrain-stream/ground/eclipse_obsidian_center.json",
+    "file": "dist/terrain-stream/ground/eclipse_obsidian_center.json"
+  },
+  {
+    "key": "terrain-stream/ground/eclipse_obsidian_town.json",
+    "file": "dist/terrain-stream/ground/eclipse_obsidian_town.json"
+  },
+  {
+    "key": "terrain-stream/ground/eclipse_obsidian_town_house.json",
+    "file": "dist/terrain-stream/ground/eclipse_obsidian_town_house.json"
+  },
+  {
+    "key": "terrain-stream/ground/eclipse_park.json",
+    "file": "dist/terrain-stream/ground/eclipse_park.json"
+  },
+  {
+    "key": "terrain-stream/ground/eclipse_park_cabin.json",
+    "file": "dist/terrain-stream/ground/eclipse_park_cabin.json"
+  },
+  {
+    "key": "terrain-stream/ground/eclipse_park_cave.json",
+    "file": "dist/terrain-stream/ground/eclipse_park_cave.json"
+  },
+  {
+    "key": "terrain-stream/ground/eclipse_park_entrance.json",
+    "file": "dist/terrain-stream/ground/eclipse_park_entrance.json"
+  },
+  {
+    "key": "terrain-stream/ground/eclipse_park_south.json",
+    "file": "dist/terrain-stream/ground/eclipse_park_south.json"
+  },
+  {
+    "key": "terrain-stream/ground/eclipse_route7.json",
+    "file": "dist/terrain-stream/ground/eclipse_route7.json"
+  },
+  {
+    "key": "terrain-stream/ground/eclipse_routef.json",
+    "file": "dist/terrain-stream/ground/eclipse_routef.json"
+  },
+  {
+    "key": "terrain-stream/ground/eclipse_routeg.json",
+    "file": "dist/terrain-stream/ground/eclipse_routeg.json"
+  },
+  {
+    "key": "terrain-stream/ground/eclipse_routeh.json",
+    "file": "dist/terrain-stream/ground/eclipse_routeh.json"
+  },
+  {
+    "key": "terrain-stream/ground/eclipse_routei.json",
+    "file": "dist/terrain-stream/ground/eclipse_routei.json"
+  },
+  {
+    "key": "terrain-stream/ground/flower_city.json",
+    "file": "dist/terrain-stream/ground/flower_city.json"
+  },
+  {
+    "key": "terrain-stream/ground/gadget_store1.json",
+    "file": "dist/terrain-stream/ground/gadget_store1.json"
+  },
+  {
+    "key": "terrain-stream/ground/gaming_hall.json",
+    "file": "dist/terrain-stream/ground/gaming_hall.json"
+  },
+  {
+    "key": "terrain-stream/ground/healing_center.json",
+    "file": "dist/terrain-stream/ground/healing_center.json"
+  },
+  {
+    "key": "terrain-stream/ground/leather_scoop.json",
+    "file": "dist/terrain-stream/ground/leather_scoop.json"
+  },
+  {
+    "key": "terrain-stream/ground/leather_shaft1.json",
+    "file": "dist/terrain-stream/ground/leather_shaft1.json"
+  },
+  {
+    "key": "terrain-stream/ground/leather_shaft2.json",
+    "file": "dist/terrain-stream/ground/leather_shaft2.json"
+  },
+  {
+    "key": "terrain-stream/ground/leather_town.json",
+    "file": "dist/terrain-stream/ground/leather_town.json"
+  },
+  {
+    "key": "terrain-stream/ground/manhattan_beach.json",
+    "file": "dist/terrain-stream/ground/manhattan_beach.json"
+  },
+  {
+    "key": "terrain-stream/ground/mansion.json",
+    "file": "dist/terrain-stream/ground/mansion.json"
+  },
+  {
+    "key": "terrain-stream/ground/mansion_basement.json",
+    "file": "dist/terrain-stream/ground/mansion_basement.json"
+  },
+  {
+    "key": "terrain-stream/ground/mansion_top.json",
+    "file": "dist/terrain-stream/ground/mansion_top.json"
+  },
+  {
+    "key": "terrain-stream/ground/maple_bedroom.json",
+    "file": "dist/terrain-stream/ground/maple_bedroom.json"
+  },
+  {
+    "key": "terrain-stream/ground/maple_house.json",
+    "file": "dist/terrain-stream/ground/maple_house.json"
+  },
+  {
+    "key": "terrain-stream/ground/omnichannel0.json",
+    "file": "dist/terrain-stream/ground/omnichannel0.json"
+  },
+  {
+    "key": "terrain-stream/ground/omnichannel1.json",
+    "file": "dist/terrain-stream/ground/omnichannel1.json"
+  },
+  {
+    "key": "terrain-stream/ground/omnichannel2.json",
+    "file": "dist/terrain-stream/ground/omnichannel2.json"
+  },
+  {
+    "key": "terrain-stream/ground/omnichannel3.json",
+    "file": "dist/terrain-stream/ground/omnichannel3.json"
+  },
+  {
+    "key": "terrain-stream/ground/omnichannel4.json",
+    "file": "dist/terrain-stream/ground/omnichannel4.json"
+  },
+  {
+    "key": "terrain-stream/ground/player_house_bedroom.json",
+    "file": "dist/terrain-stream/ground/player_house_bedroom.json"
+  },
+  {
+    "key": "terrain-stream/ground/player_house_downstairs.json",
+    "file": "dist/terrain-stream/ground/player_house_downstairs.json"
+  },
+  {
+    "key": "terrain-stream/ground/professor_lab.json",
+    "file": "dist/terrain-stream/ground/professor_lab.json"
+  },
+  {
+    "key": "terrain-stream/ground/route1.json",
+    "file": "dist/terrain-stream/ground/route1.json"
+  },
+  {
+    "key": "terrain-stream/ground/route1_sanglorian.json",
+    "file": "dist/terrain-stream/ground/route1_sanglorian.json"
+  },
+  {
+    "key": "terrain-stream/ground/route2.json",
+    "file": "dist/terrain-stream/ground/route2.json"
+  },
+  {
+    "key": "terrain-stream/ground/route3.json",
+    "file": "dist/terrain-stream/ground/route3.json"
+  },
+  {
+    "key": "terrain-stream/ground/route4.json",
+    "file": "dist/terrain-stream/ground/route4.json"
+  },
+  {
+    "key": "terrain-stream/ground/route5.json",
+    "file": "dist/terrain-stream/ground/route5.json"
+  },
+  {
+    "key": "terrain-stream/ground/route6.json",
+    "file": "dist/terrain-stream/ground/route6.json"
+  },
+  {
+    "key": "terrain-stream/ground/routea.json",
+    "file": "dist/terrain-stream/ground/routea.json"
+  },
+  {
+    "key": "terrain-stream/ground/routec.json",
+    "file": "dist/terrain-stream/ground/routec.json"
+  },
+  {
+    "key": "terrain-stream/ground/rubberduck_cave_01.json",
+    "file": "dist/terrain-stream/ground/rubberduck_cave_01.json"
+  },
+  {
+    "key": "terrain-stream/ground/rubberduck_city_01.json",
+    "file": "dist/terrain-stream/ground/rubberduck_city_01.json"
+  },
+  {
+    "key": "terrain-stream/ground/rubberduck_route_01.json",
+    "file": "dist/terrain-stream/ground/rubberduck_route_01.json"
+  },
+  {
+    "key": "terrain-stream/ground/russell_practice_1.json",
+    "file": "dist/terrain-stream/ground/russell_practice_1.json"
+  },
+  {
+    "key": "terrain-stream/ground/scoop1.json",
+    "file": "dist/terrain-stream/ground/scoop1.json"
+  },
+  {
+    "key": "terrain-stream/ground/scoop2.json",
+    "file": "dist/terrain-stream/ground/scoop2.json"
+  },
+  {
+    "key": "terrain-stream/ground/scoop3.json",
+    "file": "dist/terrain-stream/ground/scoop3.json"
+  },
+  {
+    "key": "terrain-stream/ground/scoop4.json",
+    "file": "dist/terrain-stream/ground/scoop4.json"
+  },
+  {
+    "key": "terrain-stream/ground/sphalian_center.json",
+    "file": "dist/terrain-stream/ground/sphalian_center.json"
+  },
+  {
+    "key": "terrain-stream/ground/sphalian_town.json",
+    "file": "dist/terrain-stream/ground/sphalian_town.json"
+  },
+  {
+    "key": "terrain-stream/ground/sphalian_town_house.json",
+    "file": "dist/terrain-stream/ground/sphalian_town_house.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_bedroom.json",
+    "file": "dist/terrain-stream/ground/spyder_bedroom.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_brideswood.json",
+    "file": "dist/terrain-stream/ground/spyder_brideswood.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_candy_cafe.json",
+    "file": "dist/terrain-stream/ground/spyder_candy_cafe.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_candy_center.json",
+    "file": "dist/terrain-stream/ground/spyder_candy_center.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_candy_hospital1.json",
+    "file": "dist/terrain-stream/ground/spyder_candy_hospital1.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_candy_hospital2.json",
+    "file": "dist/terrain-stream/ground/spyder_candy_hospital2.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_candy_hospital3.json",
+    "file": "dist/terrain-stream/ground/spyder_candy_hospital3.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_candy_house1.json",
+    "file": "dist/terrain-stream/ground/spyder_candy_house1.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_candy_house2.json",
+    "file": "dist/terrain-stream/ground/spyder_candy_house2.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_candy_house3.json",
+    "file": "dist/terrain-stream/ground/spyder_candy_house3.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_candy_inn1.json",
+    "file": "dist/terrain-stream/ground/spyder_candy_inn1.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_candy_inn2.json",
+    "file": "dist/terrain-stream/ground/spyder_candy_inn2.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_candy_port.json",
+    "file": "dist/terrain-stream/ground/spyder_candy_port.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_candy_scoop.json",
+    "file": "dist/terrain-stream/ground/spyder_candy_scoop.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_candy_town.json",
+    "file": "dist/terrain-stream/ground/spyder_candy_town.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_citypark.json",
+    "file": "dist/terrain-stream/ground/spyder_citypark.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_citypark_house1.json",
+    "file": "dist/terrain-stream/ground/spyder_citypark_house1.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_cotton_artshop.json",
+    "file": "dist/terrain-stream/ground/spyder_cotton_artshop.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_cotton_cafe.json",
+    "file": "dist/terrain-stream/ground/spyder_cotton_cafe.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_cotton_house1.json",
+    "file": "dist/terrain-stream/ground/spyder_cotton_house1.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_cotton_house2.json",
+    "file": "dist/terrain-stream/ground/spyder_cotton_house2.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_cotton_scoop.json",
+    "file": "dist/terrain-stream/ground/spyder_cotton_scoop.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_cotton_town.json",
+    "file": "dist/terrain-stream/ground/spyder_cotton_town.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_cotton_tunnel.json",
+    "file": "dist/terrain-stream/ground/spyder_cotton_tunnel.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_datacenter.json",
+    "file": "dist/terrain-stream/ground/spyder_datacenter.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_diamond_hill.json",
+    "file": "dist/terrain-stream/ground/spyder_diamond_hill.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_dojo1.json",
+    "file": "dist/terrain-stream/ground/spyder_dojo1.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_dojo2.json",
+    "file": "dist/terrain-stream/ground/spyder_dojo2.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_dojo3.json",
+    "file": "dist/terrain-stream/ground/spyder_dojo3.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_dojo4.json",
+    "file": "dist/terrain-stream/ground/spyder_dojo4.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_downstairs.json",
+    "file": "dist/terrain-stream/ground/spyder_downstairs.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_dragonscave.json",
+    "file": "dist/terrain-stream/ground/spyder_dragonscave.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_dryadsgrove.json",
+    "file": "dist/terrain-stream/ground/spyder_dryadsgrove.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_flower_center.json",
+    "file": "dist/terrain-stream/ground/spyder_flower_center.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_flower_city.json",
+    "file": "dist/terrain-stream/ground/spyder_flower_city.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_flower_house1.json",
+    "file": "dist/terrain-stream/ground/spyder_flower_house1.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_flower_house2.json",
+    "file": "dist/terrain-stream/ground/spyder_flower_house2.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_flower_petshop.json",
+    "file": "dist/terrain-stream/ground/spyder_flower_petshop.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_flower_scoop.json",
+    "file": "dist/terrain-stream/ground/spyder_flower_scoop.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_greenwash.json",
+    "file": "dist/terrain-stream/ground/spyder_greenwash.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_greenwash_greenhouse.json",
+    "file": "dist/terrain-stream/ground/spyder_greenwash_greenhouse.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_greenwash_level2.json",
+    "file": "dist/terrain-stream/ground/spyder_greenwash_level2.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_greenwash_level3.json",
+    "file": "dist/terrain-stream/ground/spyder_greenwash_level3.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_healing_center.json",
+    "file": "dist/terrain-stream/ground/spyder_healing_center.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_leather_center.json",
+    "file": "dist/terrain-stream/ground/spyder_leather_center.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_leather_gym.json",
+    "file": "dist/terrain-stream/ground/spyder_leather_gym.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_leather_house1.json",
+    "file": "dist/terrain-stream/ground/spyder_leather_house1.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_leather_house2.json",
+    "file": "dist/terrain-stream/ground/spyder_leather_house2.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_leather_museum.json",
+    "file": "dist/terrain-stream/ground/spyder_leather_museum.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_leather_scoop.json",
+    "file": "dist/terrain-stream/ground/spyder_leather_scoop.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_leather_shaft1.json",
+    "file": "dist/terrain-stream/ground/spyder_leather_shaft1.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_leather_shaft2.json",
+    "file": "dist/terrain-stream/ground/spyder_leather_shaft2.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_leather_town.json",
+    "file": "dist/terrain-stream/ground/spyder_leather_town.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_mansion.json",
+    "file": "dist/terrain-stream/ground/spyder_mansion.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_mansion_basement.json",
+    "file": "dist/terrain-stream/ground/spyder_mansion_basement.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_mansion_top.json",
+    "file": "dist/terrain-stream/ground/spyder_mansion_top.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_nimrod_bottom.json",
+    "file": "dist/terrain-stream/ground/spyder_nimrod_bottom.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_nimrod_middle.json",
+    "file": "dist/terrain-stream/ground/spyder_nimrod_middle.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_nimrod_room.json",
+    "file": "dist/terrain-stream/ground/spyder_nimrod_room.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_nimrod_top.json",
+    "file": "dist/terrain-stream/ground/spyder_nimrod_top.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_omnichannel1.json",
+    "file": "dist/terrain-stream/ground/spyder_omnichannel1.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_omnichannel2.json",
+    "file": "dist/terrain-stream/ground/spyder_omnichannel2.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_omnichannel3.json",
+    "file": "dist/terrain-stream/ground/spyder_omnichannel3.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_omnichannel4.json",
+    "file": "dist/terrain-stream/ground/spyder_omnichannel4.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_paper_daycare.json",
+    "file": "dist/terrain-stream/ground/spyder_paper_daycare.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_paper_manor.json",
+    "file": "dist/terrain-stream/ground/spyder_paper_manor.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_paper_rival_bedroom.json",
+    "file": "dist/terrain-stream/ground/spyder_paper_rival_bedroom.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_paper_rival_downstairs.json",
+    "file": "dist/terrain-stream/ground/spyder_paper_rival_downstairs.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_paper_rival_office.json",
+    "file": "dist/terrain-stream/ground/spyder_paper_rival_office.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_paper_scoop.json",
+    "file": "dist/terrain-stream/ground/spyder_paper_scoop.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_paper_town.json",
+    "file": "dist/terrain-stream/ground/spyder_paper_town.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_radiotower.json",
+    "file": "dist/terrain-stream/ground/spyder_radiotower.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_route1.json",
+    "file": "dist/terrain-stream/ground/spyder_route1.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_route2.json",
+    "file": "dist/terrain-stream/ground/spyder_route2.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_route3.json",
+    "file": "dist/terrain-stream/ground/spyder_route3.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_route4.json",
+    "file": "dist/terrain-stream/ground/spyder_route4.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_route5.json",
+    "file": "dist/terrain-stream/ground/spyder_route5.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_route6.json",
+    "file": "dist/terrain-stream/ground/spyder_route6.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_routea.json",
+    "file": "dist/terrain-stream/ground/spyder_routea.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_routeb.json",
+    "file": "dist/terrain-stream/ground/spyder_routeb.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_routec.json",
+    "file": "dist/terrain-stream/ground/spyder_routec.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_routed.json",
+    "file": "dist/terrain-stream/ground/spyder_routed.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_routee.json",
+    "file": "dist/terrain-stream/ground/spyder_routee.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_scoop1.json",
+    "file": "dist/terrain-stream/ground/spyder_scoop1.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_scoop2.json",
+    "file": "dist/terrain-stream/ground/spyder_scoop2.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_scoop3.json",
+    "file": "dist/terrain-stream/ground/spyder_scoop3.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_scoop4.json",
+    "file": "dist/terrain-stream/ground/spyder_scoop4.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_test_map.json",
+    "file": "dist/terrain-stream/ground/spyder_test_map.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_timber_cafe.json",
+    "file": "dist/terrain-stream/ground/spyder_timber_cafe.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_timber_center.json",
+    "file": "dist/terrain-stream/ground/spyder_timber_center.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_timber_house.json",
+    "file": "dist/terrain-stream/ground/spyder_timber_house.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_timber_scoop.json",
+    "file": "dist/terrain-stream/ground/spyder_timber_scoop.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_timber_town.json",
+    "file": "dist/terrain-stream/ground/spyder_timber_town.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_timber_walledgarden1.json",
+    "file": "dist/terrain-stream/ground/spyder_timber_walledgarden1.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_timber_walledgarden2.json",
+    "file": "dist/terrain-stream/ground/spyder_timber_walledgarden2.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_tunnel.json",
+    "file": "dist/terrain-stream/ground/spyder_tunnel.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_tunnel_below.json",
+    "file": "dist/terrain-stream/ground/spyder_tunnel_below.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_wayfarer_inn1.json",
+    "file": "dist/terrain-stream/ground/spyder_wayfarer_inn1.json"
+  },
+  {
+    "key": "terrain-stream/ground/spyder_wayfarer_inn2.json",
+    "file": "dist/terrain-stream/ground/spyder_wayfarer_inn2.json"
+  },
+  {
+    "key": "terrain-stream/ground/start_tuxemon.json",
+    "file": "dist/terrain-stream/ground/start_tuxemon.json"
+  },
+  {
+    "key": "terrain-stream/ground/taba_ba_br_1.json",
+    "file": "dist/terrain-stream/ground/taba_ba_br_1.json"
+  },
+  {
+    "key": "terrain-stream/ground/taba_ba_br_2.json",
+    "file": "dist/terrain-stream/ground/taba_ba_br_2.json"
+  },
+  {
+    "key": "terrain-stream/ground/taba_ba_br_3.json",
+    "file": "dist/terrain-stream/ground/taba_ba_br_3.json"
+  },
+  {
+    "key": "terrain-stream/ground/taba_ba_br_4.json",
+    "file": "dist/terrain-stream/ground/taba_ba_br_4.json"
+  },
+  {
+    "key": "terrain-stream/ground/taba_ba_br_master.json",
+    "file": "dist/terrain-stream/ground/taba_ba_br_master.json"
+  },
+  {
+    "key": "terrain-stream/ground/taba_ba_br_master_foyer.json",
+    "file": "dist/terrain-stream/ground/taba_ba_br_master_foyer.json"
+  },
+  {
+    "key": "terrain-stream/ground/taba_ba_foyer.json",
+    "file": "dist/terrain-stream/ground/taba_ba_foyer.json"
+  },
+  {
+    "key": "terrain-stream/ground/taba_ba_main.json",
+    "file": "dist/terrain-stream/ground/taba_ba_main.json"
+  },
+  {
+    "key": "terrain-stream/ground/taba_ba_passageway_1.json",
+    "file": "dist/terrain-stream/ground/taba_ba_passageway_1.json"
+  },
+  {
+    "key": "terrain-stream/ground/taba_ba_passageway_2.json",
+    "file": "dist/terrain-stream/ground/taba_ba_passageway_2.json"
+  },
+  {
+    "key": "terrain-stream/ground/taba_ba_passageway_3.json",
+    "file": "dist/terrain-stream/ground/taba_ba_passageway_3.json"
+  },
+  {
+    "key": "terrain-stream/ground/taba_ba_passageway_4.json",
+    "file": "dist/terrain-stream/ground/taba_ba_passageway_4.json"
+  },
+  {
+    "key": "terrain-stream/ground/taba_ba_stairwell_1.json",
+    "file": "dist/terrain-stream/ground/taba_ba_stairwell_1.json"
+  },
+  {
+    "key": "terrain-stream/ground/taba_ba_stairwell_2.json",
+    "file": "dist/terrain-stream/ground/taba_ba_stairwell_2.json"
+  },
+  {
+    "key": "terrain-stream/ground/taba_house1.json",
+    "file": "dist/terrain-stream/ground/taba_house1.json"
+  },
+  {
+    "key": "terrain-stream/ground/taba_house2.json",
+    "file": "dist/terrain-stream/ground/taba_house2.json"
+  },
+  {
+    "key": "terrain-stream/ground/taba_house2_upstairs.json",
+    "file": "dist/terrain-stream/ground/taba_house2_upstairs.json"
+  },
+  {
+    "key": "terrain-stream/ground/taba_house3.json",
+    "file": "dist/terrain-stream/ground/taba_house3.json"
+  },
+  {
+    "key": "terrain-stream/ground/taba_house3_upstairs.json",
+    "file": "dist/terrain-stream/ground/taba_house3_upstairs.json"
+  },
+  {
+    "key": "terrain-stream/ground/taba_house4.json",
+    "file": "dist/terrain-stream/ground/taba_house4.json"
+  },
+  {
+    "key": "terrain-stream/ground/taba_town.json",
+    "file": "dist/terrain-stream/ground/taba_town.json"
+  },
+  {
+    "key": "terrain-stream/ground/tabathas.json",
+    "file": "dist/terrain-stream/ground/tabathas.json"
+  },
+  {
+    "key": "terrain-stream/ground/test_npcs.json",
+    "file": "dist/terrain-stream/ground/test_npcs.json"
+  },
+  {
+    "key": "terrain-stream/ground/timber_town.json",
+    "file": "dist/terrain-stream/ground/timber_town.json"
+  },
+  {
+    "key": "terrain-stream/ground/tt_forest_route1.json",
+    "file": "dist/terrain-stream/ground/tt_forest_route1.json"
+  },
+  {
+    "key": "terrain-stream/ground/tt_paper_town.json",
+    "file": "dist/terrain-stream/ground/tt_paper_town.json"
+  },
+  {
+    "key": "terrain-stream/ground/tt_searoute1.json",
+    "file": "dist/terrain-stream/ground/tt_searoute1.json"
+  },
+  {
+    "key": "terrain-stream/ground/tunnel.json",
+    "file": "dist/terrain-stream/ground/tunnel.json"
+  },
+  {
+    "key": "terrain-stream/ground/tunnel_below.json",
+    "file": "dist/terrain-stream/ground/tunnel_below.json"
+  },
+  {
+    "key": "terrain-stream/ground/tuxe_mart_taba.json",
+    "file": "dist/terrain-stream/ground/tuxe_mart_taba.json"
+  },
+  {
+    "key": "terrain-stream/ground/water_cathedral.json",
+    "file": "dist/terrain-stream/ground/water_cathedral.json"
+  },
+  {
+    "key": "terrain-stream/ground/water_end_of_desert.json",
+    "file": "dist/terrain-stream/ground/water_end_of_desert.json"
+  },
+  {
+    "key": "terrain-stream/ground/water_lower_village.json",
+    "file": "dist/terrain-stream/ground/water_lower_village.json"
+  },
+  {
+    "key": "terrain-stream/ground/water_outskirts.json",
+    "file": "dist/terrain-stream/ground/water_outskirts.json"
+  },
+  {
+    "key": "terrain-stream/ground/water_river_village.json",
+    "file": "dist/terrain-stream/ground/water_river_village.json"
+  },
+  {
+    "key": "terrain-stream/ground/water_route_grass.json",
+    "file": "dist/terrain-stream/ground/water_route_grass.json"
+  },
+  {
+    "key": "terrain-stream/ground/water_route_ice.json",
+    "file": "dist/terrain-stream/ground/water_route_ice.json"
+  },
+  {
+    "key": "terrain-stream/ground/water_snow_village.json",
+    "file": "dist/terrain-stream/ground/water_snow_village.json"
+  },
+  {
+    "key": "terrain-stream/ground/water_underwater.json",
+    "file": "dist/terrain-stream/ground/water_underwater.json"
+  },
+  {
+    "key": "terrain-stream/ground/water_volcano_path.json",
+    "file": "dist/terrain-stream/ground/water_volcano_path.json"
+  },
+  {
+    "key": "terrain-stream/ground/water_volcano_village.json",
+    "file": "dist/terrain-stream/ground/water_volcano_village.json"
+  },
+  {
+    "key": "terrain-stream/ground/wayfarer_inn1.json",
+    "file": "dist/terrain-stream/ground/wayfarer_inn1.json"
+  },
+  {
+    "key": "terrain-stream/ground/wayfarer_inn2.json",
+    "file": "dist/terrain-stream/ground/wayfarer_inn2.json"
+  },
+  {
+    "key": "terrain-stream/ground/witcher_route_7.json",
+    "file": "dist/terrain-stream/ground/witcher_route_7.json"
+  },
+  {
+    "key": "terrain-stream/upper/37707_tower.json",
+    "file": "dist/terrain-stream/upper/37707_tower.json"
+  },
+  {
+    "key": "terrain-stream/upper/37707_town.json",
+    "file": "dist/terrain-stream/upper/37707_town.json"
+  },
+  {
+    "key": "terrain-stream/upper/37707_town_missing.json",
+    "file": "dist/terrain-stream/upper/37707_town_missing.json"
+  },
+  {
+    "key": "terrain-stream/upper/azure_town.json",
+    "file": "dist/terrain-stream/upper/azure_town.json"
+  },
+  {
+    "key": "terrain-stream/upper/azure_town_hall.json",
+    "file": "dist/terrain-stream/upper/azure_town_hall.json"
+  },
+  {
+    "key": "terrain-stream/upper/bedroom_test.json",
+    "file": "dist/terrain-stream/upper/bedroom_test.json"
+  },
+  {
+    "key": "terrain-stream/upper/buddha_mountain.json",
+    "file": "dist/terrain-stream/upper/buddha_mountain.json"
+  },
+  {
+    "key": "terrain-stream/upper/candy_town.json",
+    "file": "dist/terrain-stream/upper/candy_town.json"
+  },
+  {
+    "key": "terrain-stream/upper/city1_mart_junkyard.json",
+    "file": "dist/terrain-stream/upper/city1_mart_junkyard.json"
+  },
+  {
+    "key": "terrain-stream/upper/citypark.json",
+    "file": "dist/terrain-stream/upper/citypark.json"
+  },
+  {
+    "key": "terrain-stream/upper/citypark_house1.json",
+    "file": "dist/terrain-stream/upper/citypark_house1.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_aerolume_city.json",
+    "file": "dist/terrain-stream/upper/classic_aerolume_city.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_gym_astra.json",
+    "file": "dist/terrain-stream/upper/classic_gym_astra.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_gym_bravion.json",
+    "file": "dist/terrain-stream/upper/classic_gym_bravion.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_gym_ferrum.json",
+    "file": "dist/terrain-stream/upper/classic_gym_ferrum.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_gym_granite.json",
+    "file": "dist/terrain-stream/upper/classic_gym_granite.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_gym_marin.json",
+    "file": "dist/terrain-stream/upper/classic_gym_marin.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_gym_mila.json",
+    "file": "dist/terrain-stream/upper/classic_gym_mila.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_gym_orion.json",
+    "file": "dist/terrain-stream/upper/classic_gym_orion.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_gym_pyra.json",
+    "file": "dist/terrain-stream/upper/classic_gym_pyra.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_gym_shade.json",
+    "file": "dist/terrain-stream/upper/classic_gym_shade.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_gym_sylva.json",
+    "file": "dist/terrain-stream/upper/classic_gym_sylva.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_gym_voltessa.json",
+    "file": "dist/terrain-stream/upper/classic_gym_voltessa.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_gym_vyre.json",
+    "file": "dist/terrain-stream/upper/classic_gym_vyre.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_gym_zephra.json",
+    "file": "dist/terrain-stream/upper/classic_gym_zephra.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_hearthrock_city.json",
+    "file": "dist/terrain-stream/upper/classic_hearthrock_city.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_route_1.json",
+    "file": "dist/terrain-stream/upper/classic_route_1.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_route_2.json",
+    "file": "dist/terrain-stream/upper/classic_route_2.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_route_3.json",
+    "file": "dist/terrain-stream/upper/classic_route_3.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_route_4.json",
+    "file": "dist/terrain-stream/upper/classic_route_4.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_route_5.json",
+    "file": "dist/terrain-stream/upper/classic_route_5.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_route_6.json",
+    "file": "dist/terrain-stream/upper/classic_route_6.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_route_7.json",
+    "file": "dist/terrain-stream/upper/classic_route_7.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_route_8.json",
+    "file": "dist/terrain-stream/upper/classic_route_8.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_steamshore_city.json",
+    "file": "dist/terrain-stream/upper/classic_steamshore_city.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_stormpeak_city.json",
+    "file": "dist/terrain-stream/upper/classic_stormpeak_city.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_thornwood_city.json",
+    "file": "dist/terrain-stream/upper/classic_thornwood_city.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_umbrastar_city.json",
+    "file": "dist/terrain-stream/upper/classic_umbrastar_city.json"
+  },
+  {
+    "key": "terrain-stream/upper/classic_valorhold_city.json",
+    "file": "dist/terrain-stream/upper/classic_valorhold_city.json"
+  },
+  {
+    "key": "terrain-stream/upper/cotton_cafe.json",
+    "file": "dist/terrain-stream/upper/cotton_cafe.json"
+  },
+  {
+    "key": "terrain-stream/upper/cotton_cafe_basement.json",
+    "file": "dist/terrain-stream/upper/cotton_cafe_basement.json"
+  },
+  {
+    "key": "terrain-stream/upper/cotton_cathedral.json",
+    "file": "dist/terrain-stream/upper/cotton_cathedral.json"
+  },
+  {
+    "key": "terrain-stream/upper/cotton_daycare.json",
+    "file": "dist/terrain-stream/upper/cotton_daycare.json"
+  },
+  {
+    "key": "terrain-stream/upper/cotton_misa_house.json",
+    "file": "dist/terrain-stream/upper/cotton_misa_house.json"
+  },
+  {
+    "key": "terrain-stream/upper/cotton_misa_house_upstairs.json",
+    "file": "dist/terrain-stream/upper/cotton_misa_house_upstairs.json"
+  },
+  {
+    "key": "terrain-stream/upper/cotton_scoop.json",
+    "file": "dist/terrain-stream/upper/cotton_scoop.json"
+  },
+  {
+    "key": "terrain-stream/upper/cotton_town.json",
+    "file": "dist/terrain-stream/upper/cotton_town.json"
+  },
+  {
+    "key": "terrain-stream/upper/cotton_underground.json",
+    "file": "dist/terrain-stream/upper/cotton_underground.json"
+  },
+  {
+    "key": "terrain-stream/upper/dojo1.json",
+    "file": "dist/terrain-stream/upper/dojo1.json"
+  },
+  {
+    "key": "terrain-stream/upper/dojo2.json",
+    "file": "dist/terrain-stream/upper/dojo2.json"
+  },
+  {
+    "key": "terrain-stream/upper/dojo3.json",
+    "file": "dist/terrain-stream/upper/dojo3.json"
+  },
+  {
+    "key": "terrain-stream/upper/downstairs_test.json",
+    "file": "dist/terrain-stream/upper/downstairs_test.json"
+  },
+  {
+    "key": "terrain-stream/upper/dragonscave.json",
+    "file": "dist/terrain-stream/upper/dragonscave.json"
+  },
+  {
+    "key": "terrain-stream/upper/dryadsgrove.json",
+    "file": "dist/terrain-stream/upper/dryadsgrove.json"
+  },
+  {
+    "key": "terrain-stream/upper/eclipse_crystal_bank1.json",
+    "file": "dist/terrain-stream/upper/eclipse_crystal_bank1.json"
+  },
+  {
+    "key": "terrain-stream/upper/eclipse_crystal_bank2.json",
+    "file": "dist/terrain-stream/upper/eclipse_crystal_bank2.json"
+  },
+  {
+    "key": "terrain-stream/upper/eclipse_crystal_bank3.json",
+    "file": "dist/terrain-stream/upper/eclipse_crystal_bank3.json"
+  },
+  {
+    "key": "terrain-stream/upper/eclipse_crystal_center.json",
+    "file": "dist/terrain-stream/upper/eclipse_crystal_center.json"
+  },
+  {
+    "key": "terrain-stream/upper/eclipse_crystal_town.json",
+    "file": "dist/terrain-stream/upper/eclipse_crystal_town.json"
+  },
+  {
+    "key": "terrain-stream/upper/eclipse_crystal_town_cafe.json",
+    "file": "dist/terrain-stream/upper/eclipse_crystal_town_cafe.json"
+  },
+  {
+    "key": "terrain-stream/upper/eclipse_crystal_town_house.json",
+    "file": "dist/terrain-stream/upper/eclipse_crystal_town_house.json"
+  },
+  {
+    "key": "terrain-stream/upper/eclipse_lion_mountain_high.json",
+    "file": "dist/terrain-stream/upper/eclipse_lion_mountain_high.json"
+  },
+  {
+    "key": "terrain-stream/upper/eclipse_lion_mountain_low.json",
+    "file": "dist/terrain-stream/upper/eclipse_lion_mountain_low.json"
+  },
+  {
+    "key": "terrain-stream/upper/eclipse_lion_mountain_middle.json",
+    "file": "dist/terrain-stream/upper/eclipse_lion_mountain_middle.json"
+  },
+  {
+    "key": "terrain-stream/upper/eclipse_obsidian_center.json",
+    "file": "dist/terrain-stream/upper/eclipse_obsidian_center.json"
+  },
+  {
+    "key": "terrain-stream/upper/eclipse_obsidian_town.json",
+    "file": "dist/terrain-stream/upper/eclipse_obsidian_town.json"
+  },
+  {
+    "key": "terrain-stream/upper/eclipse_obsidian_town_house.json",
+    "file": "dist/terrain-stream/upper/eclipse_obsidian_town_house.json"
+  },
+  {
+    "key": "terrain-stream/upper/eclipse_park.json",
+    "file": "dist/terrain-stream/upper/eclipse_park.json"
+  },
+  {
+    "key": "terrain-stream/upper/eclipse_park_cabin.json",
+    "file": "dist/terrain-stream/upper/eclipse_park_cabin.json"
+  },
+  {
+    "key": "terrain-stream/upper/eclipse_park_cave.json",
+    "file": "dist/terrain-stream/upper/eclipse_park_cave.json"
+  },
+  {
+    "key": "terrain-stream/upper/eclipse_park_entrance.json",
+    "file": "dist/terrain-stream/upper/eclipse_park_entrance.json"
+  },
+  {
+    "key": "terrain-stream/upper/eclipse_park_south.json",
+    "file": "dist/terrain-stream/upper/eclipse_park_south.json"
+  },
+  {
+    "key": "terrain-stream/upper/eclipse_route7.json",
+    "file": "dist/terrain-stream/upper/eclipse_route7.json"
+  },
+  {
+    "key": "terrain-stream/upper/eclipse_routef.json",
+    "file": "dist/terrain-stream/upper/eclipse_routef.json"
+  },
+  {
+    "key": "terrain-stream/upper/eclipse_routeg.json",
+    "file": "dist/terrain-stream/upper/eclipse_routeg.json"
+  },
+  {
+    "key": "terrain-stream/upper/eclipse_routeh.json",
+    "file": "dist/terrain-stream/upper/eclipse_routeh.json"
+  },
+  {
+    "key": "terrain-stream/upper/eclipse_routei.json",
+    "file": "dist/terrain-stream/upper/eclipse_routei.json"
+  },
+  {
+    "key": "terrain-stream/upper/flower_city.json",
+    "file": "dist/terrain-stream/upper/flower_city.json"
+  },
+  {
+    "key": "terrain-stream/upper/gadget_store1.json",
+    "file": "dist/terrain-stream/upper/gadget_store1.json"
+  },
+  {
+    "key": "terrain-stream/upper/gaming_hall.json",
+    "file": "dist/terrain-stream/upper/gaming_hall.json"
+  },
+  {
+    "key": "terrain-stream/upper/healing_center.json",
+    "file": "dist/terrain-stream/upper/healing_center.json"
+  },
+  {
+    "key": "terrain-stream/upper/leather_scoop.json",
+    "file": "dist/terrain-stream/upper/leather_scoop.json"
+  },
+  {
+    "key": "terrain-stream/upper/leather_shaft1.json",
+    "file": "dist/terrain-stream/upper/leather_shaft1.json"
+  },
+  {
+    "key": "terrain-stream/upper/leather_shaft2.json",
+    "file": "dist/terrain-stream/upper/leather_shaft2.json"
+  },
+  {
+    "key": "terrain-stream/upper/leather_town.json",
+    "file": "dist/terrain-stream/upper/leather_town.json"
+  },
+  {
+    "key": "terrain-stream/upper/manhattan_beach.json",
+    "file": "dist/terrain-stream/upper/manhattan_beach.json"
+  },
+  {
+    "key": "terrain-stream/upper/mansion.json",
+    "file": "dist/terrain-stream/upper/mansion.json"
+  },
+  {
+    "key": "terrain-stream/upper/mansion_basement.json",
+    "file": "dist/terrain-stream/upper/mansion_basement.json"
+  },
+  {
+    "key": "terrain-stream/upper/mansion_top.json",
+    "file": "dist/terrain-stream/upper/mansion_top.json"
+  },
+  {
+    "key": "terrain-stream/upper/maple_bedroom.json",
+    "file": "dist/terrain-stream/upper/maple_bedroom.json"
+  },
+  {
+    "key": "terrain-stream/upper/maple_house.json",
+    "file": "dist/terrain-stream/upper/maple_house.json"
+  },
+  {
+    "key": "terrain-stream/upper/omnichannel0.json",
+    "file": "dist/terrain-stream/upper/omnichannel0.json"
+  },
+  {
+    "key": "terrain-stream/upper/omnichannel1.json",
+    "file": "dist/terrain-stream/upper/omnichannel1.json"
+  },
+  {
+    "key": "terrain-stream/upper/omnichannel2.json",
+    "file": "dist/terrain-stream/upper/omnichannel2.json"
+  },
+  {
+    "key": "terrain-stream/upper/omnichannel3.json",
+    "file": "dist/terrain-stream/upper/omnichannel3.json"
+  },
+  {
+    "key": "terrain-stream/upper/omnichannel4.json",
+    "file": "dist/terrain-stream/upper/omnichannel4.json"
+  },
+  {
+    "key": "terrain-stream/upper/player_house_bedroom.json",
+    "file": "dist/terrain-stream/upper/player_house_bedroom.json"
+  },
+  {
+    "key": "terrain-stream/upper/player_house_downstairs.json",
+    "file": "dist/terrain-stream/upper/player_house_downstairs.json"
+  },
+  {
+    "key": "terrain-stream/upper/professor_lab.json",
+    "file": "dist/terrain-stream/upper/professor_lab.json"
+  },
+  {
+    "key": "terrain-stream/upper/route1.json",
+    "file": "dist/terrain-stream/upper/route1.json"
+  },
+  {
+    "key": "terrain-stream/upper/route1_sanglorian.json",
+    "file": "dist/terrain-stream/upper/route1_sanglorian.json"
+  },
+  {
+    "key": "terrain-stream/upper/route2.json",
+    "file": "dist/terrain-stream/upper/route2.json"
+  },
+  {
+    "key": "terrain-stream/upper/route3.json",
+    "file": "dist/terrain-stream/upper/route3.json"
+  },
+  {
+    "key": "terrain-stream/upper/route4.json",
+    "file": "dist/terrain-stream/upper/route4.json"
+  },
+  {
+    "key": "terrain-stream/upper/route5.json",
+    "file": "dist/terrain-stream/upper/route5.json"
+  },
+  {
+    "key": "terrain-stream/upper/route6.json",
+    "file": "dist/terrain-stream/upper/route6.json"
+  },
+  {
+    "key": "terrain-stream/upper/routea.json",
+    "file": "dist/terrain-stream/upper/routea.json"
+  },
+  {
+    "key": "terrain-stream/upper/routec.json",
+    "file": "dist/terrain-stream/upper/routec.json"
+  },
+  {
+    "key": "terrain-stream/upper/rubberduck_cave_01.json",
+    "file": "dist/terrain-stream/upper/rubberduck_cave_01.json"
+  },
+  {
+    "key": "terrain-stream/upper/rubberduck_city_01.json",
+    "file": "dist/terrain-stream/upper/rubberduck_city_01.json"
+  },
+  {
+    "key": "terrain-stream/upper/rubberduck_route_01.json",
+    "file": "dist/terrain-stream/upper/rubberduck_route_01.json"
+  },
+  {
+    "key": "terrain-stream/upper/russell_practice_1.json",
+    "file": "dist/terrain-stream/upper/russell_practice_1.json"
+  },
+  {
+    "key": "terrain-stream/upper/scoop1.json",
+    "file": "dist/terrain-stream/upper/scoop1.json"
+  },
+  {
+    "key": "terrain-stream/upper/scoop2.json",
+    "file": "dist/terrain-stream/upper/scoop2.json"
+  },
+  {
+    "key": "terrain-stream/upper/scoop3.json",
+    "file": "dist/terrain-stream/upper/scoop3.json"
+  },
+  {
+    "key": "terrain-stream/upper/scoop4.json",
+    "file": "dist/terrain-stream/upper/scoop4.json"
+  },
+  {
+    "key": "terrain-stream/upper/sphalian_center.json",
+    "file": "dist/terrain-stream/upper/sphalian_center.json"
+  },
+  {
+    "key": "terrain-stream/upper/sphalian_town.json",
+    "file": "dist/terrain-stream/upper/sphalian_town.json"
+  },
+  {
+    "key": "terrain-stream/upper/sphalian_town_house.json",
+    "file": "dist/terrain-stream/upper/sphalian_town_house.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_bedroom.json",
+    "file": "dist/terrain-stream/upper/spyder_bedroom.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_brideswood.json",
+    "file": "dist/terrain-stream/upper/spyder_brideswood.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_candy_cafe.json",
+    "file": "dist/terrain-stream/upper/spyder_candy_cafe.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_candy_center.json",
+    "file": "dist/terrain-stream/upper/spyder_candy_center.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_candy_hospital1.json",
+    "file": "dist/terrain-stream/upper/spyder_candy_hospital1.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_candy_hospital2.json",
+    "file": "dist/terrain-stream/upper/spyder_candy_hospital2.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_candy_hospital3.json",
+    "file": "dist/terrain-stream/upper/spyder_candy_hospital3.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_candy_house1.json",
+    "file": "dist/terrain-stream/upper/spyder_candy_house1.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_candy_house2.json",
+    "file": "dist/terrain-stream/upper/spyder_candy_house2.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_candy_house3.json",
+    "file": "dist/terrain-stream/upper/spyder_candy_house3.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_candy_inn1.json",
+    "file": "dist/terrain-stream/upper/spyder_candy_inn1.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_candy_inn2.json",
+    "file": "dist/terrain-stream/upper/spyder_candy_inn2.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_candy_port.json",
+    "file": "dist/terrain-stream/upper/spyder_candy_port.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_candy_scoop.json",
+    "file": "dist/terrain-stream/upper/spyder_candy_scoop.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_candy_town.json",
+    "file": "dist/terrain-stream/upper/spyder_candy_town.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_citypark.json",
+    "file": "dist/terrain-stream/upper/spyder_citypark.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_citypark_house1.json",
+    "file": "dist/terrain-stream/upper/spyder_citypark_house1.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_cotton_artshop.json",
+    "file": "dist/terrain-stream/upper/spyder_cotton_artshop.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_cotton_cafe.json",
+    "file": "dist/terrain-stream/upper/spyder_cotton_cafe.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_cotton_house1.json",
+    "file": "dist/terrain-stream/upper/spyder_cotton_house1.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_cotton_house2.json",
+    "file": "dist/terrain-stream/upper/spyder_cotton_house2.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_cotton_scoop.json",
+    "file": "dist/terrain-stream/upper/spyder_cotton_scoop.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_cotton_town.json",
+    "file": "dist/terrain-stream/upper/spyder_cotton_town.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_cotton_tunnel.json",
+    "file": "dist/terrain-stream/upper/spyder_cotton_tunnel.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_datacenter.json",
+    "file": "dist/terrain-stream/upper/spyder_datacenter.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_diamond_hill.json",
+    "file": "dist/terrain-stream/upper/spyder_diamond_hill.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_dojo1.json",
+    "file": "dist/terrain-stream/upper/spyder_dojo1.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_dojo2.json",
+    "file": "dist/terrain-stream/upper/spyder_dojo2.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_dojo3.json",
+    "file": "dist/terrain-stream/upper/spyder_dojo3.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_dojo4.json",
+    "file": "dist/terrain-stream/upper/spyder_dojo4.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_downstairs.json",
+    "file": "dist/terrain-stream/upper/spyder_downstairs.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_dragonscave.json",
+    "file": "dist/terrain-stream/upper/spyder_dragonscave.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_dryadsgrove.json",
+    "file": "dist/terrain-stream/upper/spyder_dryadsgrove.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_flower_center.json",
+    "file": "dist/terrain-stream/upper/spyder_flower_center.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_flower_city.json",
+    "file": "dist/terrain-stream/upper/spyder_flower_city.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_flower_house1.json",
+    "file": "dist/terrain-stream/upper/spyder_flower_house1.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_flower_house2.json",
+    "file": "dist/terrain-stream/upper/spyder_flower_house2.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_flower_petshop.json",
+    "file": "dist/terrain-stream/upper/spyder_flower_petshop.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_flower_scoop.json",
+    "file": "dist/terrain-stream/upper/spyder_flower_scoop.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_greenwash.json",
+    "file": "dist/terrain-stream/upper/spyder_greenwash.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_greenwash_greenhouse.json",
+    "file": "dist/terrain-stream/upper/spyder_greenwash_greenhouse.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_greenwash_level2.json",
+    "file": "dist/terrain-stream/upper/spyder_greenwash_level2.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_greenwash_level3.json",
+    "file": "dist/terrain-stream/upper/spyder_greenwash_level3.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_healing_center.json",
+    "file": "dist/terrain-stream/upper/spyder_healing_center.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_leather_center.json",
+    "file": "dist/terrain-stream/upper/spyder_leather_center.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_leather_gym.json",
+    "file": "dist/terrain-stream/upper/spyder_leather_gym.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_leather_house1.json",
+    "file": "dist/terrain-stream/upper/spyder_leather_house1.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_leather_house2.json",
+    "file": "dist/terrain-stream/upper/spyder_leather_house2.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_leather_museum.json",
+    "file": "dist/terrain-stream/upper/spyder_leather_museum.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_leather_scoop.json",
+    "file": "dist/terrain-stream/upper/spyder_leather_scoop.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_leather_shaft1.json",
+    "file": "dist/terrain-stream/upper/spyder_leather_shaft1.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_leather_shaft2.json",
+    "file": "dist/terrain-stream/upper/spyder_leather_shaft2.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_leather_town.json",
+    "file": "dist/terrain-stream/upper/spyder_leather_town.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_mansion.json",
+    "file": "dist/terrain-stream/upper/spyder_mansion.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_mansion_basement.json",
+    "file": "dist/terrain-stream/upper/spyder_mansion_basement.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_mansion_top.json",
+    "file": "dist/terrain-stream/upper/spyder_mansion_top.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_nimrod_bottom.json",
+    "file": "dist/terrain-stream/upper/spyder_nimrod_bottom.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_nimrod_middle.json",
+    "file": "dist/terrain-stream/upper/spyder_nimrod_middle.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_nimrod_room.json",
+    "file": "dist/terrain-stream/upper/spyder_nimrod_room.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_nimrod_top.json",
+    "file": "dist/terrain-stream/upper/spyder_nimrod_top.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_omnichannel1.json",
+    "file": "dist/terrain-stream/upper/spyder_omnichannel1.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_omnichannel2.json",
+    "file": "dist/terrain-stream/upper/spyder_omnichannel2.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_omnichannel3.json",
+    "file": "dist/terrain-stream/upper/spyder_omnichannel3.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_omnichannel4.json",
+    "file": "dist/terrain-stream/upper/spyder_omnichannel4.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_paper_daycare.json",
+    "file": "dist/terrain-stream/upper/spyder_paper_daycare.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_paper_manor.json",
+    "file": "dist/terrain-stream/upper/spyder_paper_manor.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_paper_rival_bedroom.json",
+    "file": "dist/terrain-stream/upper/spyder_paper_rival_bedroom.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_paper_rival_downstairs.json",
+    "file": "dist/terrain-stream/upper/spyder_paper_rival_downstairs.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_paper_rival_office.json",
+    "file": "dist/terrain-stream/upper/spyder_paper_rival_office.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_paper_scoop.json",
+    "file": "dist/terrain-stream/upper/spyder_paper_scoop.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_paper_town.json",
+    "file": "dist/terrain-stream/upper/spyder_paper_town.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_radiotower.json",
+    "file": "dist/terrain-stream/upper/spyder_radiotower.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_route1.json",
+    "file": "dist/terrain-stream/upper/spyder_route1.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_route2.json",
+    "file": "dist/terrain-stream/upper/spyder_route2.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_route3.json",
+    "file": "dist/terrain-stream/upper/spyder_route3.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_route4.json",
+    "file": "dist/terrain-stream/upper/spyder_route4.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_route5.json",
+    "file": "dist/terrain-stream/upper/spyder_route5.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_route6.json",
+    "file": "dist/terrain-stream/upper/spyder_route6.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_routea.json",
+    "file": "dist/terrain-stream/upper/spyder_routea.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_routeb.json",
+    "file": "dist/terrain-stream/upper/spyder_routeb.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_routec.json",
+    "file": "dist/terrain-stream/upper/spyder_routec.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_routed.json",
+    "file": "dist/terrain-stream/upper/spyder_routed.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_routee.json",
+    "file": "dist/terrain-stream/upper/spyder_routee.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_scoop1.json",
+    "file": "dist/terrain-stream/upper/spyder_scoop1.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_scoop2.json",
+    "file": "dist/terrain-stream/upper/spyder_scoop2.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_scoop3.json",
+    "file": "dist/terrain-stream/upper/spyder_scoop3.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_scoop4.json",
+    "file": "dist/terrain-stream/upper/spyder_scoop4.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_test_map.json",
+    "file": "dist/terrain-stream/upper/spyder_test_map.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_timber_cafe.json",
+    "file": "dist/terrain-stream/upper/spyder_timber_cafe.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_timber_center.json",
+    "file": "dist/terrain-stream/upper/spyder_timber_center.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_timber_house.json",
+    "file": "dist/terrain-stream/upper/spyder_timber_house.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_timber_scoop.json",
+    "file": "dist/terrain-stream/upper/spyder_timber_scoop.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_timber_town.json",
+    "file": "dist/terrain-stream/upper/spyder_timber_town.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_timber_walledgarden1.json",
+    "file": "dist/terrain-stream/upper/spyder_timber_walledgarden1.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_timber_walledgarden2.json",
+    "file": "dist/terrain-stream/upper/spyder_timber_walledgarden2.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_tunnel.json",
+    "file": "dist/terrain-stream/upper/spyder_tunnel.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_tunnel_below.json",
+    "file": "dist/terrain-stream/upper/spyder_tunnel_below.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_wayfarer_inn1.json",
+    "file": "dist/terrain-stream/upper/spyder_wayfarer_inn1.json"
+  },
+  {
+    "key": "terrain-stream/upper/spyder_wayfarer_inn2.json",
+    "file": "dist/terrain-stream/upper/spyder_wayfarer_inn2.json"
+  },
+  {
+    "key": "terrain-stream/upper/start_tuxemon.json",
+    "file": "dist/terrain-stream/upper/start_tuxemon.json"
+  },
+  {
+    "key": "terrain-stream/upper/taba_ba_br_1.json",
+    "file": "dist/terrain-stream/upper/taba_ba_br_1.json"
+  },
+  {
+    "key": "terrain-stream/upper/taba_ba_br_2.json",
+    "file": "dist/terrain-stream/upper/taba_ba_br_2.json"
+  },
+  {
+    "key": "terrain-stream/upper/taba_ba_br_3.json",
+    "file": "dist/terrain-stream/upper/taba_ba_br_3.json"
+  },
+  {
+    "key": "terrain-stream/upper/taba_ba_br_4.json",
+    "file": "dist/terrain-stream/upper/taba_ba_br_4.json"
+  },
+  {
+    "key": "terrain-stream/upper/taba_ba_br_master.json",
+    "file": "dist/terrain-stream/upper/taba_ba_br_master.json"
+  },
+  {
+    "key": "terrain-stream/upper/taba_ba_br_master_foyer.json",
+    "file": "dist/terrain-stream/upper/taba_ba_br_master_foyer.json"
+  },
+  {
+    "key": "terrain-stream/upper/taba_ba_foyer.json",
+    "file": "dist/terrain-stream/upper/taba_ba_foyer.json"
+  },
+  {
+    "key": "terrain-stream/upper/taba_ba_main.json",
+    "file": "dist/terrain-stream/upper/taba_ba_main.json"
+  },
+  {
+    "key": "terrain-stream/upper/taba_ba_passageway_1.json",
+    "file": "dist/terrain-stream/upper/taba_ba_passageway_1.json"
+  },
+  {
+    "key": "terrain-stream/upper/taba_ba_passageway_2.json",
+    "file": "dist/terrain-stream/upper/taba_ba_passageway_2.json"
+  },
+  {
+    "key": "terrain-stream/upper/taba_ba_passageway_3.json",
+    "file": "dist/terrain-stream/upper/taba_ba_passageway_3.json"
+  },
+  {
+    "key": "terrain-stream/upper/taba_ba_passageway_4.json",
+    "file": "dist/terrain-stream/upper/taba_ba_passageway_4.json"
+  },
+  {
+    "key": "terrain-stream/upper/taba_ba_stairwell_1.json",
+    "file": "dist/terrain-stream/upper/taba_ba_stairwell_1.json"
+  },
+  {
+    "key": "terrain-stream/upper/taba_ba_stairwell_2.json",
+    "file": "dist/terrain-stream/upper/taba_ba_stairwell_2.json"
+  },
+  {
+    "key": "terrain-stream/upper/taba_house1.json",
+    "file": "dist/terrain-stream/upper/taba_house1.json"
+  },
+  {
+    "key": "terrain-stream/upper/taba_house2.json",
+    "file": "dist/terrain-stream/upper/taba_house2.json"
+  },
+  {
+    "key": "terrain-stream/upper/taba_house2_upstairs.json",
+    "file": "dist/terrain-stream/upper/taba_house2_upstairs.json"
+  },
+  {
+    "key": "terrain-stream/upper/taba_house3.json",
+    "file": "dist/terrain-stream/upper/taba_house3.json"
+  },
+  {
+    "key": "terrain-stream/upper/taba_house3_upstairs.json",
+    "file": "dist/terrain-stream/upper/taba_house3_upstairs.json"
+  },
+  {
+    "key": "terrain-stream/upper/taba_house4.json",
+    "file": "dist/terrain-stream/upper/taba_house4.json"
+  },
+  {
+    "key": "terrain-stream/upper/taba_town.json",
+    "file": "dist/terrain-stream/upper/taba_town.json"
+  },
+  {
+    "key": "terrain-stream/upper/tabathas.json",
+    "file": "dist/terrain-stream/upper/tabathas.json"
+  },
+  {
+    "key": "terrain-stream/upper/test_npcs.json",
+    "file": "dist/terrain-stream/upper/test_npcs.json"
+  },
+  {
+    "key": "terrain-stream/upper/timber_town.json",
+    "file": "dist/terrain-stream/upper/timber_town.json"
+  },
+  {
+    "key": "terrain-stream/upper/tt_forest_route1.json",
+    "file": "dist/terrain-stream/upper/tt_forest_route1.json"
+  },
+  {
+    "key": "terrain-stream/upper/tt_paper_town.json",
+    "file": "dist/terrain-stream/upper/tt_paper_town.json"
+  },
+  {
+    "key": "terrain-stream/upper/tt_searoute1.json",
+    "file": "dist/terrain-stream/upper/tt_searoute1.json"
+  },
+  {
+    "key": "terrain-stream/upper/tunnel.json",
+    "file": "dist/terrain-stream/upper/tunnel.json"
+  },
+  {
+    "key": "terrain-stream/upper/tunnel_below.json",
+    "file": "dist/terrain-stream/upper/tunnel_below.json"
+  },
+  {
+    "key": "terrain-stream/upper/tuxe_mart_taba.json",
+    "file": "dist/terrain-stream/upper/tuxe_mart_taba.json"
+  },
+  {
+    "key": "terrain-stream/upper/water_cathedral.json",
+    "file": "dist/terrain-stream/upper/water_cathedral.json"
+  },
+  {
+    "key": "terrain-stream/upper/water_end_of_desert.json",
+    "file": "dist/terrain-stream/upper/water_end_of_desert.json"
+  },
+  {
+    "key": "terrain-stream/upper/water_lower_village.json",
+    "file": "dist/terrain-stream/upper/water_lower_village.json"
+  },
+  {
+    "key": "terrain-stream/upper/water_outskirts.json",
+    "file": "dist/terrain-stream/upper/water_outskirts.json"
+  },
+  {
+    "key": "terrain-stream/upper/water_river_village.json",
+    "file": "dist/terrain-stream/upper/water_river_village.json"
+  },
+  {
+    "key": "terrain-stream/upper/water_route_grass.json",
+    "file": "dist/terrain-stream/upper/water_route_grass.json"
+  },
+  {
+    "key": "terrain-stream/upper/water_route_ice.json",
+    "file": "dist/terrain-stream/upper/water_route_ice.json"
+  },
+  {
+    "key": "terrain-stream/upper/water_snow_village.json",
+    "file": "dist/terrain-stream/upper/water_snow_village.json"
+  },
+  {
+    "key": "terrain-stream/upper/water_underwater.json",
+    "file": "dist/terrain-stream/upper/water_underwater.json"
+  },
+  {
+    "key": "terrain-stream/upper/water_volcano_path.json",
+    "file": "dist/terrain-stream/upper/water_volcano_path.json"
+  },
+  {
+    "key": "terrain-stream/upper/water_volcano_village.json",
+    "file": "dist/terrain-stream/upper/water_volcano_village.json"
+  },
+  {
+    "key": "terrain-stream/upper/wayfarer_inn1.json",
+    "file": "dist/terrain-stream/upper/wayfarer_inn1.json"
+  },
+  {
+    "key": "terrain-stream/upper/wayfarer_inn2.json",
+    "file": "dist/terrain-stream/upper/wayfarer_inn2.json"
+  },
+  {
+    "key": "terrain-stream/upper/witcher_route_7.json",
+    "file": "dist/terrain-stream/upper/witcher_route_7.json"
   },
   {
     "key": "ui:tile.tuxemon-37707_tower-ground-0",

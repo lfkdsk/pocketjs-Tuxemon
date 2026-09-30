@@ -4,7 +4,10 @@
 
 import { readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
-import { createJsonMapRepository } from "../vendor/pocket-rpgkit/src/engine/map-repository.ts";
+import {
+  assertShellManifestFresh,
+  createJsonMapRepository,
+} from "../vendor/pocket-rpgkit/src/engine/map-repository.ts";
 import type {
   MapRepository,
   Project,
@@ -25,6 +28,10 @@ export function readShardedProject(root: string): GeneratedShardedProject {
   const project = JSON.parse(
     readFileSync(join(absolute, "dist/project-shell.json"), "utf8"),
   ) as ProjectShell;
+  // The runtime trusts the shell's declared mapManifestHash, so every
+  // tool/test that feeds a disk-read shell to the runtime verifies the
+  // declaration here instead of recomputing it per session.
+  assertShellManifestFresh(project);
   const repository = createJsonMapRepository(project.mapIndex, {
     read: (entry) => new Uint8Array(readFileSync(join(absolute, "dist", entry))),
   });

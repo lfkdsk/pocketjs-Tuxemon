@@ -28,7 +28,9 @@ for viewport in "480 272" "960 544"; do
   read -r width height <<<"$viewport"
   state="$bench_root/state-${width}x${height}.json"
   G6_DIST="$root/dist/linux-app" G6_JOURNEY="$root/data/g6-journey.json" \
-    G6_MAPS="$root/dist/maps" G6_BENCH_ROOT="$bench_root" \
+    G6_MAPS="$root/dist/maps" G6_BATTLE="$root/dist/battle" \
+    G6_ANIMATED="$root/dist/animated" G6_NPC_SRC="$root/dist/npc-src" \
+    G6_TERRAIN_STREAM="$root/dist/terrain-stream" G6_BENCH_ROOT="$bench_root" \
     G6_STATE_OUT="$state" \
     G6_BENCH_W="$width" G6_BENCH_H="$height" \
     "$binary" g6_quickjs_bench::journey --ignored --exact --nocapture

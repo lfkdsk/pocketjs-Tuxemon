@@ -94,13 +94,25 @@ describe("Tuxemon Monster.spawn_base", () => {
   });
 
   test("filters level-up moves by evolution stage before taking the final four", () => {
-    const db = structuredClone(RULES_DB);
-    db.monster.nut!.stage = "basic";
-    db.monster.nut!.moveset = [
-      { technique: "bullet", learning_method: "level_up", level_learned: 1 },
-      { technique: "static_field", learning_method: "level_up", level_learned: 1, evolution_stage_learned: "stage1" },
-      { technique: "shuriken", learning_method: "level_up", level_learned: 4, evolution_stage_learned: "basic" },
-    ];
+    // GP1's rulesDb.monster is a lazily-resolved Proxy (production only
+    // touches the species/techniques a battle actually uses), which
+    // structuredClone cannot copy. A plain-object override of just the one
+    // monster under test achieves the same isolation from RULES_DB.
+    const db = {
+      ...RULES_DB,
+      monster: {
+        ...RULES_DB.monster,
+        nut: {
+          ...RULES_DB.monster.nut!,
+          stage: "basic",
+          moveset: [
+            { technique: "bullet", learning_method: "level_up", level_learned: 1 },
+            { technique: "static_field", learning_method: "level_up", level_learned: 1, evolution_stage_learned: "stage1" },
+            { technique: "shuriken", learning_method: "level_up", level_learned: 4, evolution_stage_learned: "basic" },
+          ],
+        },
+      },
+    };
     expect(learnedMoves(db, "nut", 5)).toEqual(["bullet", "shuriken"]);
   });
 });

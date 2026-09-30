@@ -251,6 +251,36 @@ export interface BattleDb {
   };
 }
 
+/** GP1: one sharded monster/technique/item/status pak entry. */
+export interface BattleRuntimeIndexEntry {
+  readonly id: string;
+  readonly entry: string;
+}
+
+/** GP1: the compact, bundled projection of `runtimeBattleDb()`. Carries every
+ * small, always-needed table inline and replaces `monsters`/`techniques`/
+ * `items`/`statuses` — together ~80% of the runtime database's bytes — with
+ * per-slug indexes that `battle/battle-repository.ts` resolves on demand. */
+export interface BattleRuntimeShell {
+  format: BattleDb["format"];
+  sourceRevision: string;
+  scope: BattleScope;
+  rules: BattleDb["rules"];
+  shapes: BattleDb["shapes"];
+  elements: BattleDb["elements"];
+  elementOrder: string[];
+  tastes: BattleDb["tastes"];
+  tasteOrder: string[];
+  encounters: BattleDb["encounters"];
+  environments: BattleDb["environments"];
+  npcs: BattleDb["npcs"];
+  ui: BattleDb["ui"];
+  monstersIndex: BattleRuntimeIndexEntry[];
+  techniquesIndex: BattleRuntimeIndexEntry[];
+  itemsIndex: BattleRuntimeIndexEntry[];
+  statusesIndex: BattleRuntimeIndexEntry[];
+}
+
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value);
 

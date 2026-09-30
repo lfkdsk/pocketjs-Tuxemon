@@ -34,6 +34,14 @@
   "atlases": 86,
   "atlasBytes": 27543
  },
+ "animatedRepository": {
+  "entries": 48,
+  "entryBytes": 505687
+ },
+ "npcSrcRepository": {
+  "entries": 175,
+  "entryBytes": 120566
+ },
  "characters": {
   "source": "https://github.com/Tuxemon/Tuxemon",
   "spriteKeys": 175,
@@ -163,6 +171,11 @@
   },
   "battleDbBytes": 1195862,
   "runtimeDbBytes": 1042969,
-  "pakKey": "game:battle-db"
+  "pakKey": "game:battle-db",
+  "battleRepository": {
+   "shellBytes": 191257,
+   "entries": 650,
+   "entryBytes": 781408
+  }
  }
 }

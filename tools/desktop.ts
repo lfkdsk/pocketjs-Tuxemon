@@ -29,6 +29,30 @@ const mapData = join(dataRoot, plan.app.id, "data", "maps");
 rmSync(mapData, { recursive: true, force: true });
 mkdirSync(resolve(mapData, ".."), { recursive: true });
 cpSync(join(root, "dist", "maps"), mapData, { recursive: true });
+// GP1: the sharded battle-runtime tables (monsters/techniques/items/
+// statuses) are read the same way as maps — readFileSync from data.fs on
+// desktop, since fsHost() selects that path over the pak.
+const battleData = join(dataRoot, plan.app.id, "data", "battle");
+rmSync(battleData, { recursive: true, force: true });
+mkdirSync(resolve(battleData, ".."), { recursive: true });
+cpSync(join(root, "dist", "battle"), battleData, { recursive: true });
+// GP1 fix 1: the sharded animated-tile table (dist/animated/<mapId>.json)
+// and per-NPC sprite table (dist/npc-src/<npcId>.json) are read the same
+// way — readFileSync from data.fs on desktop.
+const animatedData = join(dataRoot, plan.app.id, "data", "animated");
+rmSync(animatedData, { recursive: true, force: true });
+mkdirSync(resolve(animatedData, ".."), { recursive: true });
+cpSync(join(root, "dist", "animated"), animatedData, { recursive: true });
+const npcSrcData = join(dataRoot, plan.app.id, "data", "npc-src");
+rmSync(npcSrcData, { recursive: true, force: true });
+mkdirSync(resolve(npcSrcData, ".."), { recursive: true });
+cpSync(join(root, "dist", "npc-src"), npcSrcData, { recursive: true });
+// GP1 fix 1: the sharded terrain-stream ground/upper chunk-ref tables
+// (dist/terrain-stream/{ground,upper}/<mapId>.json) are read the same way.
+const terrainStreamData = join(dataRoot, plan.app.id, "data", "terrain-stream");
+rmSync(terrainStreamData, { recursive: true, force: true });
+mkdirSync(resolve(terrainStreamData, ".."), { recursive: true });
+cpSync(join(root, "dist", "terrain-stream"), terrainStreamData, { recursive: true });
 const planPath = join(root, ".pocket", target, `${plan.app.output}.plan.json`);
 mkdirSync(resolve(planPath, ".."), { recursive: true });
 await Bun.write(planPath, JSON.stringify(plan, null, 2) + "\n");

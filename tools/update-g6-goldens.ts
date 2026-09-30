@@ -10,7 +10,8 @@ import { encodePNG } from "../vendor/pocket-rpgkit/vendor/pocketjs/tests/png.ts"
 import { walkPose } from "../vendor/pocket-rpgkit/src/engine/movement.ts";
 import type { CameraState, Project } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 import type { SessionState } from "../vendor/pocket-rpgkit/src/engine/session.ts";
-import { NPC_SRC, PLAYER } from "../ui/game-assets.ts";
+import { NPC_SRC_INDEX, PLAYER } from "../ui/game-assets.ts";
+import { createNpcSrcProvider } from "../ui/npc-src-repository.ts";
 
 interface JourneyFile {
   hz: number;
@@ -24,6 +25,7 @@ interface JourneyFile {
 }
 
 const ROOT = resolve(import.meta.dir, "..");
+const NPC_SRC = createNpcSrcProvider(NPC_SRC_INDEX, { read: (entry) => readFileSync(join(ROOT, "dist", entry)) });
 const bundle = join(ROOT, "dist/main");
 const journeyPath = join(ROOT, "dist/journey-spyder-60hz.json");
 if (!existsSync(bundle + ".js") || !existsSync(bundle + ".pak")) {

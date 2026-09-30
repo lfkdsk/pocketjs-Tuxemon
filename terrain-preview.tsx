@@ -2,14 +2,33 @@
 // StreamedChunkLayer.  It is intentionally tiny and is not the eventual G1
 // game entry point.
 
-import { mount } from "@pocketjs/framework";
+import { mount, pakGet } from "@pocketjs/framework";
 import { View } from "@pocketjs/framework/components";
 import { jump } from "@pocketjs/framework/animation";
+import { fsHost, readFileSync } from "@pocketjs/framework/fs";
 import { getOps, hostViewport } from "@pocketjs/framework/host";
 import { onFrame } from "@pocketjs/framework/lifecycle";
 import { createElement, insertNode, setProp } from "@pocketjs/framework/renderer";
 import { StreamedChunkLayer, type StreamedChunkLayerStats } from "./vendor/pocket-rpgkit/src/ui/StreamedChunkLayer.tsx";
-import { TERRAIN_STREAM, TERRAIN_WORLD, TERRAIN_ORDER } from "./ui/terrain-assets.ts";
+import {
+  TERRAIN_STREAM_META,
+  TERRAIN_STREAM_GROUND_INDEX,
+  TERRAIN_STREAM_UPPER_INDEX,
+  TERRAIN_WORLD,
+  TERRAIN_ORDER,
+} from "./ui/terrain-assets.ts";
+import { createTerrainStreamProvider } from "./ui/terrain-stream-repository.ts";
+
+// GP1 fix 1: ground/upper chunk refs are no longer inline literals (see
+// importer/terrain.ts's splitStreamRefs); this preview reads them the same
+// way main.tsx does — data.fs on desktop, the pak elsewhere.
+const readEntry = (entry: string) => fsHost() ? readFileSync(entry) : pakGet(entry);
+const TERRAIN_STREAM = createTerrainStreamProvider(
+  TERRAIN_STREAM_META,
+  TERRAIN_STREAM_GROUND_INDEX,
+  TERRAIN_STREAM_UPPER_INDEX,
+  { read: readEntry },
+);
 
 interface PreviewCommand {
   map?: string;

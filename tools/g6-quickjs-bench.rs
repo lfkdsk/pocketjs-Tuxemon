@@ -5,6 +5,7 @@
 mod g6_quickjs_bench {
     use super::*;
     use serde::Deserialize;
+    use std::ffi::CString;
     use std::fmt::Write as _;
     use std::path::Path;
     use std::time::Instant;
@@ -14,6 +15,189 @@ mod g6_quickjs_bench {
     #[derive(Deserialize)]
     struct Journey {
         masks: Vec<u32>,
+    }
+
+    /// One `ui/gp1-marks.ts` checkpoint (findings/GP1.md "Fix 1"): `at` is a
+    /// `Date.now()` epoch-ms timestamp recorded by the real production
+    /// bundle's own module graph, not a synthetic probe.
+    #[derive(Deserialize)]
+    struct Gp1Mark {
+        name: String,
+        at: f64,
+    }
+
+    /// GP1: the exact marker sequence main.tsx's module
+    /// graph must produce. A missing/renamed/reordered mark is a real bundle
+    /// regression (a wrapper stopped importing what it used to, or a new
+    /// stage was inserted without updating this list) and must fail the
+    /// bench, not print a silently-ignored partial table.
+    const EXPECTED_GP1_MARKS: [&str; 5] =
+        ["module-start", "engine", "json-literals", "battle-registration", "mount"];
+
+    fn assert_gp1_marks(marks: &[Gp1Mark]) {
+        let names: Vec<&str> = marks.iter().map(|mark| mark.name.as_str()).collect();
+        assert_eq!(
+            names,
+            EXPECTED_GP1_MARKS.to_vec(),
+            "gp1 marks must be exactly {EXPECTED_GP1_MARKS:?} in that order",
+        );
+        for pair in marks.windows(2) {
+            assert!(
+                pair[1].at >= pair[0].at,
+                "gp1 marks must be non-decreasing: {} (at {}) came before {} (at {})",
+                pair[0].name,
+                pair[0].at,
+                pair[1].name,
+                pair[1].at,
+            );
+        }
+    }
+
+    /// GP1: `Runtime::boot`'s stages up to and including
+    /// the bundle eval, timed at their real host-call boundaries instead of
+    /// reconstructed from `ui/gp1-marks.ts` deltas. `host_init_ms` covers
+    /// pak/source read plus surface/fs mount (no JS runs yet); `compile_ms`
+    /// and `eval_ms` are the two halves of what `Guest::eval` normally does
+    /// in one call (see `gp1_eval_staged`); `host_finish_ms` is the small
+    /// tail after eval (frame-handler check, initial `svc_push`, wiring).
+    struct StageTimes {
+        host_init_ms: f64,
+        compile_ms: f64,
+        eval_ms: f64,
+        host_finish_ms: f64,
+    }
+
+    /// GP1: `pocket_mod::Guest::eval` (vendor/) does one
+    /// `JS_Eval` call that both compiles and runs the bundle's top level, so
+    /// no existing pocket-mod API can time those halves separately. This
+    /// duplicates that one call via the raw quickjs FFI (already used by
+    /// `qjs_memory` in this file) instead of modifying pocket-mod: a
+    /// `JS_EVAL_FLAG_COMPILE_ONLY` pass produces bytecode without running
+    /// anything (real parse + codegen time, not a guess), then
+    /// `JS_EvalFunction` runs it (real "everything the bundle's top level
+    /// does before `mount()` returns" time — including solid-js's own
+    /// module init, which runs before `ui/gp1-marks.ts`'s first mark and so
+    /// was invisible to the mark-delta table alone; the old report
+    /// attributed that stretch to nothing).
+    /// `JS_EvalFunction` always consumes its `fun_obj` argument (quickjs.c
+    /// `JS_EvalFunctionInternal`), so the compiled value must not be freed
+    /// after a successful compile — only on the compile-failure path, where
+    /// `JS_EvalFunction` is never called.
+    fn gp1_eval_staged(guest: &Guest, label: &str, source: &str) -> Result<(f64, f64)> {
+        use pocket_mod::qjs::qjs as ffi;
+        let c_source = CString::new(source)
+            .map_err(|_| anyhow!("pocket-mod: bundle source has an embedded NUL byte"))?;
+        let c_label = CString::new(label)
+            .map_err(|_| anyhow!("pocket-mod: bundle label has an embedded NUL byte"))?;
+        let source_len = c_source.as_bytes().len();
+        let timings = guest.with(|ctx| -> Result<(f64, f64)> {
+            let raw = ctx.as_raw().as_ptr();
+            unsafe {
+                let compile_start = Instant::now();
+                let compiled = ffi::JS_Eval(
+                    raw,
+                    c_source.as_ptr(),
+                    source_len as u64,
+                    c_label.as_ptr(),
+                    (ffi::JS_EVAL_TYPE_GLOBAL | ffi::JS_EVAL_FLAG_COMPILE_ONLY) as i32,
+                );
+                let compile_ms = compile_start.elapsed().as_secs_f64() * 1_000.0;
+                if compiled.tag == ffi::JS_TAG_EXCEPTION as i64 {
+                    ffi::JS_FreeValue(raw, compiled);
+                    return Err(anyhow!("pocket-mod: compiling '{label}' failed"));
+                }
+                let eval_start = Instant::now();
+                let result = ffi::JS_EvalFunction(raw, compiled);
+                let eval_ms = eval_start.elapsed().as_secs_f64() * 1_000.0;
+                if result.tag == ffi::JS_TAG_EXCEPTION as i64 {
+                    ffi::JS_FreeValue(raw, result);
+                    return Err(anyhow!("pocket-mod: evaluating '{label}' failed"));
+                }
+                ffi::JS_FreeValue(raw, result);
+                Ok((compile_ms, eval_ms))
+            }
+        })?;
+        guest.drain_jobs();
+        Ok(timings)
+    }
+
+    /// GP1: a copy of `Runtime::boot`
+    /// (vendor/pocket-rpgkit/vendor/pocketjs/hosts/desktop/src/main.rs)
+    /// with the single `guest.eval(...)` call replaced by
+    /// `gp1_eval_staged` so the compile/eval split above can be timed
+    /// inside the exact same realm/surfaces/fs-mount the production 250 ms
+    /// budget boots against. `include!` splices this file into main.rs's
+    /// own module, so `Runtime`'s private fields and `boot`'s private
+    /// helpers (`resolve_asset`, `text_worker`, `HOST_ID`, `HOST_ABI`,
+    /// `epoch_ms`, `fs::*`, `AppSupervisor::new`) are directly reachable
+    /// here without editing main.rs itself — this is a benchmark-only
+    /// duplicate, not a vendor/ change; if `Runtime::boot` changes shape,
+    /// this needs re-syncing by hand.
+    fn boot_staged(args: Args) -> Result<(Runtime, StageTimes)> {
+        if args.native_text {
+            return Err(anyhow!(
+                "text.layout.native is unavailable; use the portable text offload capability"
+            ));
+        }
+        let host_init_start = Instant::now();
+        let pak = std::fs::read(resolve_asset(args.pak.clone(), &args.app, "pak")?)?;
+        let source = std::fs::read_to_string(resolve_asset(args.js.clone(), &args.app, "js")?)?;
+        let surface = UiSurface::new_with_density(
+            (args.viewport.0 as f32, args.viewport.1 as f32),
+            args.density,
+        );
+        surface.set_identity(HOST_ID, HOST_ABI);
+        surface.set_tick_rate(60);
+        surface.set_svc_allowlist(args.companions.clone());
+        surface.feed_pak(&pak);
+        let supervisor = AppSupervisor::new(args.system.as_ref(), &surface, args.data_root.clone())?;
+        let guest = Guest::new()?;
+        surface.mount(&guest)?;
+        let offload = text_worker(pak);
+        offload.mount(&guest)?;
+        let app_id = args.app_id.clone().unwrap_or_else(|| args.app.clone());
+        let fs_roots = fs::data_roots(args.data_root.as_deref(), &app_id)?;
+        let fs_mount = fs::mount_fs(&guest, &fs_roots)?;
+        let host_init_ms = host_init_start.elapsed().as_secs_f64() * 1_000.0;
+
+        let (compile_ms, eval_ms) = gp1_eval_staged(&guest, &args.app, &source)?;
+
+        let host_finish_start = Instant::now();
+        if !guest.has_frame() {
+            return Err(anyhow!("bundle installed no frame handler"));
+        }
+        surface.svc_push(
+            json!({"t":"hello","w":args.viewport.0,"h":args.viewport.1,"epoch":epoch_ms()})
+                .to_string(),
+        );
+        if let Some(file) = &args.file
+            && let Ok(text) = std::fs::read_to_string(file)
+        {
+            surface.svc_push(json!({"t":"load","text":text}).to_string());
+        }
+        let wire = args
+            .svc_connect
+            .clone()
+            .map(|addr| net::SvcWire::spawn(addr, args.app.clone()));
+        let host_finish_ms = host_finish_start.elapsed().as_secs_f64() * 1_000.0;
+        let runtime = Runtime {
+            viewport: args.viewport,
+            script: args.script.clone(),
+            args,
+            surface,
+            guest,
+            supervisor,
+            offload,
+            _fs: fs_mount,
+            ticks: 0,
+            buttons: 0,
+            script_buttons: 0,
+            script_mouse: false,
+            click_edge: false,
+            mouse_down: false,
+            wire,
+        };
+        Ok((runtime, StageTimes { host_init_ms, compile_ms, eval_ms, host_finish_ms }))
     }
 
     #[derive(Deserialize)]
@@ -250,6 +434,71 @@ mod g6_quickjs_bench {
         );
     }
 
+    /// Reads `globalThis.__gp1Marks` right after boot and prints the full
+    /// startup breakdown (findings/GP1.md "Fix 1"/"Fix 2",
+    /// GP1: host init, bundle compile, bundle eval split
+    /// into "before module-start" (solid-js + framework top-level init,
+    /// invisible to the marks alone — see `gp1_eval_staged`) and the four
+    /// `ui/gp1-marks.ts` stages (engine/json-literals/battle-registration/
+    /// mount), then the small post-eval host tail. `stages` (host_init_ms,
+    /// compile_ms, eval_ms, host_finish_ms) all come from `Instant` at the
+    /// real host call boundaries in `boot_staged` — nanosecond resolution.
+    /// The four named JS stages still come from `Date.now()` marks (integer
+    /// ms — QuickJS has no `performance.now()` and none of this may touch
+    /// pocket-mod/vendor to add one), so only their *sum* is cross-checked
+    /// against the host-measured `eval_ms - pre_module_start_ms`, not each
+    /// individual delta. `assert_gp1_marks` fails the bench outright on a
+    /// missing, renamed, or reordered mark — this can no longer silently
+    /// print a partial table.
+    fn report_startup_stages(viewport: &str, bench: &Bench, boot_ms: f64, stages: &StageTimes) {
+        let marks: Vec<Gp1Mark> = serde_json::from_str(&bench.string(
+            "JSON.stringify(globalThis.__gp1Marks ?? [])",
+        ))
+        .expect("gp1 marks JSON");
+        assert_gp1_marks(&marks);
+        println!(
+            "STAGE viewport={viewport} name=host-init at_ms=0.000 delta_ms={:.3}",
+            stages.host_init_ms,
+        );
+        println!(
+            "STAGE viewport={viewport} name=compile at_ms={:.3} delta_ms={:.3}",
+            stages.host_init_ms,
+            stages.compile_ms,
+        );
+        let eval_start_ms = stages.host_init_ms + stages.compile_ms;
+        let t0 = marks[0].at;
+        let marked_span_ms = marks[marks.len() - 1].at - t0;
+        let pre_module_start_ms = (stages.eval_ms - marked_span_ms).max(0.0);
+        println!(
+            "STAGE viewport={viewport} name=eval-before-module-start at_ms={:.3} delta_ms={:.3}",
+            eval_start_ms,
+            pre_module_start_ms,
+        );
+        let mut prev = t0;
+        for mark in &marks {
+            println!(
+                "STAGE viewport={viewport} name={} at_ms={:.3} delta_ms={:.3}",
+                mark.name,
+                eval_start_ms + pre_module_start_ms + (mark.at - t0),
+                mark.at - prev,
+            );
+            prev = mark.at;
+        }
+        let eval_end_ms = eval_start_ms + stages.eval_ms;
+        println!(
+            "STAGE viewport={viewport} name=host-finish at_ms={:.3} delta_ms={:.3}",
+            eval_end_ms,
+            stages.host_finish_ms,
+        );
+        let accounted_ms = eval_end_ms + stages.host_finish_ms;
+        println!(
+            "STAGE viewport={viewport} name=TOTAL accounted_ms={:.3} boot_ms={:.3} unaccounted_ms={:.3}",
+            accounted_ms,
+            boot_ms,
+            boot_ms - accounted_ms,
+        );
+    }
+
     fn assert_single_frame_budget(label: &str, samples: &[Sample], limit_ms: f64) {
         assert_eq!(
             samples.len(),
@@ -314,6 +563,69 @@ mod g6_quickjs_bench {
         assert_eq!(copied, 263, "benchmark must stage every imported map");
     }
 
+    /// Recursively stages the sharded battle-runtime tree (`battle/monsters`,
+    /// `battle/techniques`, `battle/items`, `battle/statuses`) the same way
+    /// the desktop launcher does: readFileSync on desktop resolves against
+    /// data.fs, not the pak, so a battle started under this bench needs these
+    /// files physically present under the benchmark's own data root.
+    fn copy_dir_recursive(source: &Path, destination: &Path) -> usize {
+        std::fs::create_dir_all(destination).expect("create benchmark battle data directory");
+        let mut copied = 0usize;
+        for entry in std::fs::read_dir(source).expect("read G6_BATTLE") {
+            let entry = entry.expect("read battle directory entry");
+            let path = entry.path();
+            let target = destination.join(entry.file_name());
+            if path.is_dir() {
+                copied += copy_dir_recursive(&path, &target);
+            } else if path.extension().and_then(|value| value.to_str()) == Some("json") {
+                std::fs::copy(&path, &target).expect("copy battle entry");
+                copied += 1;
+            }
+        }
+        copied
+    }
+
+    fn seed_battle(source: &Path, data_root: &Path) {
+        let app_data = data_root.join(BENCH_APP_ID).join("data");
+        let destination = app_data.join("battle");
+        let _ = std::fs::remove_dir_all(&destination);
+        let copied = copy_dir_recursive(source, &destination);
+        assert!(copied > 0, "benchmark must stage the sharded battle database");
+    }
+
+    /// Stages the sharded animated-tile tree (`dist/animated/<mapId>.json`,
+    /// findings/GP1.md "Fix 1") the same way maps and battle shards are
+    /// staged: readFileSync on desktop resolves against data.fs, so any map
+    /// with animated tiles needs its shard physically present here.
+    fn seed_animated(source: &Path, data_root: &Path) {
+        let app_data = data_root.join(BENCH_APP_ID).join("data");
+        let destination = app_data.join("animated");
+        let _ = std::fs::remove_dir_all(&destination);
+        let copied = copy_dir_recursive(source, &destination);
+        assert!(copied > 0, "benchmark must stage the sharded animated-tile table");
+    }
+
+    /// Stages the sharded per-NPC sprite table (`dist/npc-src/<npcId>.json`,
+    /// findings/GP1.md "Fix 1"), same reasoning as `seed_animated`.
+    fn seed_npc_src(source: &Path, data_root: &Path) {
+        let app_data = data_root.join(BENCH_APP_ID).join("data");
+        let destination = app_data.join("npc-src");
+        let _ = std::fs::remove_dir_all(&destination);
+        let copied = copy_dir_recursive(source, &destination);
+        assert!(copied > 0, "benchmark must stage the sharded NPC sprite table");
+    }
+
+    /// Stages the sharded terrain-stream ground/upper chunk-ref tables
+    /// (`dist/terrain-stream/{ground,upper}/<mapId>.json`, findings/GP1.md
+    /// "Fix 1"), same reasoning as `seed_battle`.
+    fn seed_terrain_stream(source: &Path, data_root: &Path) {
+        let app_data = data_root.join(BENCH_APP_ID).join("data");
+        let destination = app_data.join("terrain-stream");
+        let _ = std::fs::remove_dir_all(&destination);
+        let copied = copy_dir_recursive(source, &destination);
+        assert!(copied > 0, "benchmark must stage the sharded terrain-stream tables");
+    }
+
     #[test]
     #[ignore]
     fn journey() {
@@ -328,12 +640,21 @@ mod g6_quickjs_bench {
         let data = bench_root.join(format!("qjs-data-{}-{width}x{height}", std::process::id()));
         let maps = PathBuf::from(std::env::var("G6_MAPS").expect("G6_MAPS"));
         seed_maps(&maps, &data);
+        let battle = PathBuf::from(std::env::var("G6_BATTLE").expect("G6_BATTLE"));
+        seed_battle(&battle, &data);
+        let animated = PathBuf::from(std::env::var("G6_ANIMATED").expect("G6_ANIMATED"));
+        seed_animated(&animated, &data);
+        let npc_src = PathBuf::from(std::env::var("G6_NPC_SRC").expect("G6_NPC_SRC"));
+        seed_npc_src(&npc_src, &data);
+        let terrain_stream = PathBuf::from(std::env::var("G6_TERRAIN_STREAM").expect("G6_TERRAIN_STREAM"));
+        seed_terrain_stream(&terrain_stream, &data);
 
         let boot_start = Instant::now();
-        let runtime =
-            Runtime::boot(args(&dist, "pocket-tuxemon", data.clone(), width, height)).unwrap();
+        let (runtime, stages) =
+            boot_staged(args(&dist, "pocket-tuxemon", data.clone(), width, height)).unwrap();
         let boot_ms = boot_start.elapsed().as_secs_f64() * 1_000.0;
         let mut bench = Bench { rt: runtime };
+        report_startup_stages(&viewport, &bench, boot_ms, &stages);
         bench.install_structural_counter();
         let initial_map = bench.state().0;
         let first = bench.frame(0, journey.masks[0]);
@@ -345,6 +666,11 @@ mod g6_quickjs_bench {
             first.js_ms + first.core_ms + first.draw_ms,
             used as f64 / 1_048_576.0,
             malloc as f64 / 1_048_576.0,
+        );
+        assert!(
+            first_paint_ms <= 250.0,
+            "startup viewport={viewport} exceeded the 250 ms startup-to-first-paint budget: {:.3} ms",
+            first_paint_ms,
         );
 
         let mut walking = Vec::new();

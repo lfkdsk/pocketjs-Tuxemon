@@ -3,7 +3,10 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { splitProjectMaps } from "../vendor/pocket-rpgkit/tools/lib/map-project.ts";
-import { createJsonMapRepository } from "../vendor/pocket-rpgkit/src/engine/map-repository.ts";
+import {
+  assertShellManifestFresh,
+  createJsonMapRepository,
+} from "../vendor/pocket-rpgkit/src/engine/map-repository.ts";
 import type { Project, ProjectShell } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
@@ -55,5 +58,18 @@ describe("generated per-map repository", () => {
       repository.releaseExcept([]);
     }
     expect(reads).toEqual(shell.mapIndex.map((entry) => entry.entry));
+  });
+
+  test("the packaged shell's declared mapManifestHash is fresh", () => {
+    // The runtime trusts the declared hash instead of rehashing at startup,
+    // so the build pipeline must prove the packaged shell is fresh. The real
+    // bytes on disk pass; a hand-edit to any non-hash field (in memory) must
+    // be rejected with both digests.
+    expect(() => assertShellManifestFresh(shell)).not.toThrow();
+    const handEdited = { ...shell, title: `${shell.title} (hand-edited)` };
+    expect(() => assertShellManifestFresh(handEdited)).toThrow("shell manifest hash mismatch");
+    const undeclared = { ...shell } as Partial<ProjectShell>;
+    delete undeclared.mapManifestHash;
+    expect(() => assertShellManifestFresh(undeclared as ProjectShell)).toThrow("no mapManifestHash");
   });
 });

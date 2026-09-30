@@ -1,17 +1,26 @@
-import runtimeDbJson from "../data/battle-runtime-db.json";
+import shellJson from "../dist/battle-runtime-shell.json";
 import variableEnumsJson from "../dist/variable-enums.json";
 
-import type { BattleDb } from "../importer/battle-schema.ts";
+import type { BattleRuntimeShell } from "../importer/battle-schema.ts";
+import { createTuxemonBattleDbProvider, type BattleEntrySource } from "./battle-repository.ts";
 import { createTuxemonExtensions } from "./extension.ts";
 import { createTuxemonBattleRules, type VariableEnums } from "./runtime.ts";
 
-// The importer derives this complete reducer-facing projection from the
-// validated canonical database. Keeping it as an object literal avoids a
-// runtime JSON parse while omitting metadata no battle path can read.
-const RUNTIME_BATTLE_DB = runtimeDbJson as unknown as BattleDb;
+// GP1: the importer splits the runtime projection into this compact shell
+// (bundled, like project-shell.json) plus one pak/data.fs entry per
+// monster/technique/item/status. Building the provider here — instead of
+// importing the full 801 KB battle-runtime-db.json as an object literal —
+// keeps species/technique data out of the bundle and off the startup path;
+// each battle then parses only the slugs it actually touches.
+const RUNTIME_SHELL = shellJson as unknown as BattleRuntimeShell;
 
-export const TUXEMON_EXTENSIONS = createTuxemonExtensions(RUNTIME_BATTLE_DB);
-export const TUXEMON_BATTLE_RULES = createTuxemonBattleRules(
-  RUNTIME_BATTLE_DB,
-  variableEnumsJson as VariableEnums,
-);
+export function createProductionTuxemonBattle(source: BattleEntrySource): {
+  extensions: ReturnType<typeof createTuxemonExtensions>;
+  rules: ReturnType<typeof createTuxemonBattleRules>;
+} {
+  const provider = createTuxemonBattleDbProvider(RUNTIME_SHELL, source);
+  return {
+    extensions: createTuxemonExtensions(provider),
+    rules: createTuxemonBattleRules(provider, variableEnumsJson as VariableEnums),
+  };
+}

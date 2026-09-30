@@ -141,27 +141,50 @@ function toStatus(slug: string, status: BattleDb["statuses"][string]): DbStatus 
   };
 }
 
-/** Derives each technique's numeric speed tier from its named speed rank. */
-function technicalSpeeds(db: BattleDb): Record<string, number> {
-  const tiers = db.rules.actionOrder.speedTiers;
-  return Object.fromEntries(
-    Object.entries(db.techniques).map(([slug, technique]) => [slug, tiers[technique.speed] ?? 0]),
-  );
+/** A lazily-resolved, cached view of `source`'s keys through `resolve`. GB1's
+ * `monsters`/`techniques`/`items`/`statuses` tables dominate the database's
+ * size (~80%); a battle only ever touches a handful of slugs, so converting
+ * on first read — instead of eagerly mapping every entry, as this function
+ * used to — is what makes a sharded, on-demand `BattleDb` source (GP1's
+ * `battle-repository.ts`) pay only for the slugs a battle actually uses.
+ * `source` may itself be an eager plain object (tests, `battle/game.ts`) or
+ * a lazy shard-table Proxy; either way `prop in source` and `source[prop]`
+ * are the only operations used, so both compose transparently. */
+function lazyRecord<T>(source: Record<string, unknown>, resolve: (slug: string) => T): Record<string, T> {
+  const cache = new Map<string, T>();
+  const resolveCached = (slug: string): T => {
+    const cached = cache.get(slug);
+    if (cached !== undefined) return cached;
+    const value = resolve(slug);
+    cache.set(slug, value);
+    return value;
+  };
+  return new Proxy({} as Record<string, T>, {
+    get(_target, prop) {
+      if (typeof prop !== "string" || !(prop in source)) return undefined;
+      return resolveCached(prop);
+    },
+    has(_target, prop) {
+      return typeof prop === "string" && prop in source;
+    },
+    ownKeys() {
+      return Object.keys(source);
+    },
+    getOwnPropertyDescriptor(_target, prop) {
+      if (typeof prop !== "string" || !(prop in source)) return undefined;
+      return { value: resolveCached(prop), enumerable: true, configurable: true, writable: false };
+    },
+  });
 }
 
 /** Pure conversion; throws if GB1 references a rule the reducer cannot use. */
 export function battleDbToTuxemonBattleDb(db: BattleDb): TuxemonBattleDb {
+  const speedTiers = db.rules.actionOrder.speedTiers;
   return {
-    monster: Object.fromEntries(
-      Object.entries(db.monsters).map(([slug, monster]) => [slug, toMonster(slug, monster)]),
-    ),
-    technique: Object.fromEntries(
-      Object.entries(db.techniques).map(([slug, technique]) => [slug, toTechnique(slug, technique)]),
-    ),
-    item: Object.fromEntries(
-      Object.entries(db.items).map(([slug, item]) => [slug, toItem(slug, item)]),
-    ),
-    technique_speed: technicalSpeeds(db),
+    monster: lazyRecord(db.monsters, (slug) => toMonster(slug, db.monsters[slug]!)),
+    technique: lazyRecord(db.techniques, (slug) => toTechnique(slug, db.techniques[slug]!)),
+    item: lazyRecord(db.items, (slug) => toItem(slug, db.items[slug]!)),
+    technique_speed: lazyRecord(db.techniques, (slug) => speedTiers[db.techniques[slug]!.speed] ?? 0),
     element: Object.fromEntries(
       Object.entries(db.elements).map(([slug, element]) => [slug, {
         types: Object.entries(element.multipliers)
@@ -181,9 +204,7 @@ export function battleDbToTuxemonBattleDb(db: BattleDb): TuxemonBattleDb {
     shape: Object.fromEntries(
       Object.entries(db.shapes).map(([slug, shape]) => [slug, { attributes: shape as Stats }]),
     ),
-    status: Object.fromEntries(
-      Object.entries(db.statuses).map(([slug, status]) => [slug, toStatus(slug, status)]),
-    ),
+    status: lazyRecord(db.statuses, (slug) => toStatus(slug, db.statuses[slug]!)),
     capture: {
       ...(db.rules.capture as unknown as Omit<DbCaptureRules, "max_catch_rate">),
       max_catch_rate: db.rules.catchRateRange[1],

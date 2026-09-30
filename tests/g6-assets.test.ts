@@ -4,7 +4,8 @@ import { resolve } from "node:path";
 import { decodePng } from "../importer/png.ts";
 import { DEFAULT_TUXEMON_SRC } from "../importer/terrain.ts";
 import { BATTLE_ASSET_PATHS } from "../ui/battle-assets.ts";
-import { ANIMATED, GAME_ASSETS, NPC_SRC, PLAYER } from "../ui/game-assets.ts";
+import { ANIMATED_INDEX, GAME_ASSETS, NPC_SRC_INDEX, PLAYER } from "../ui/game-assets.ts";
+import type { AnimatedTile, NpcArt } from "../vendor/pocket-rpgkit/src/ui/game-assets.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
 const report = JSON.parse(readFileSync(resolve(ROOT, "data/g6-assets-report.json"), "utf8"));
@@ -44,8 +45,17 @@ describe("G6 generated game assets", () => {
       playerSheet: `sprites/${appearances[0]!.template.sprite_name}.png`,
     });
     expect(GAME_ASSETS.order).toHaveLength(263);
-    expect(Object.keys(NPC_SRC)).toHaveLength(175);
-    expect(Object.values(ANIMATED).reduce((sum, placements) => sum + placements.length, 0)).toBe(5_785);
+    expect(NPC_SRC_INDEX).toHaveLength(175);
+    for (const { id, entry } of NPC_SRC_INDEX) {
+      const art = JSON.parse(readFileSync(resolve(ROOT, "dist", entry), "utf8")) as NpcArt;
+      expect(typeof art === "string" ? art.length > 0 : art.idle.length > 0, id).toBeTrue();
+    }
+    expect(ANIMATED_INDEX).toHaveLength(48);
+    const animatedTotal = ANIMATED_INDEX.reduce((sum, { entry }) => {
+      const tiles = JSON.parse(readFileSync(resolve(ROOT, "dist", entry), "utf8")) as AnimatedTile[];
+      return sum + tiles.length;
+    }, 0);
+    expect(animatedTotal).toBe(5_785);
     expect(GAME_ASSETS.playerHeight).toBe(32);
   });
 
