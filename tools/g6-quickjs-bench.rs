@@ -13,6 +13,92 @@ mod g6_quickjs_bench {
 
     const BENCH_APP_ID: &str = "dev.lfkdsk.pocket-tuxemon-bench";
 
+    /// Per-frame timing source.  The 50 ms frame budget asserts on THREAD CPU
+    /// time, not wall clock: on a shared host the bench thread is routinely
+    /// descheduled for >100 ms, which made the wall-
+    /// clock max assertion flaky even though the frame did no work during
+    /// the gap.  `CLOCK_THREAD_CPUTIME_ID` advances only while the calling
+    /// thread runs, so a descheduled frame shows its real (small) CPU cost
+    /// while a frame that genuinely burns >50 ms of CPU still trips the
+    /// assertion.  Wall clock is still measured and reported everywhere.
+    #[cfg(target_os = "linux")]
+    mod thread_cpu {
+        #[repr(C)]
+        struct Timespec {
+            sec: i64,
+            nsec: i64,
+        }
+        unsafe extern "C" {
+            fn clock_gettime(clk_id: i32, tp: *mut Timespec) -> i32;
+        }
+        const CLOCK_THREAD_CPUTIME_ID: i32 = 3;
+        pub fn now_ms() -> f64 {
+            let mut tp = Timespec { sec: 0, nsec: 0 };
+            unsafe {
+                clock_gettime(CLOCK_THREAD_CPUTIME_ID, &mut tp);
+            }
+            tp.sec as f64 * 1_000.0 + tp.nsec as f64 / 1_000_000.0
+        }
+        pub const AVAILABLE: bool = true;
+    }
+
+    #[cfg(not(target_os = "linux"))]
+    mod thread_cpu {
+        pub fn now_ms() -> f64 {
+            // Non-Linux fallback: the host crate has no libc dependency, so
+            // fall back to a monotonic wall-clock delta.  The assertion is
+            // then as noisy as before on these platforms; the Linux bench
+            // (the acceptance host) uses true thread CPU time.
+            use std::sync::OnceLock;
+            static EPOCH: OnceLock<std::time::Instant> = OnceLock::new();
+            let epoch = EPOCH.get_or_init(std::time::Instant::now);
+            epoch.elapsed().as_secs_f64() * 1_000.0
+        }
+        pub const AVAILABLE: bool = false;
+    }
+
+    /// Optional CPU-work injection for the red-test: when
+    /// G6_INJECT_CPU_FRAME names the current frame, burn G6_INJECT_CPU_MS
+    /// milliseconds of real thread CPU time in a busy loop.  This makes the
+    /// frame's CPU time exceed the 50 ms budget, proving the assertion
+    /// still catches genuinely expensive frames (battle entry/exit, etc.).
+    fn maybe_inject_cpu(frame: usize) {
+        let Ok(target) = std::env::var("G6_INJECT_CPU_FRAME") else {
+            return;
+        };
+        if target.parse::<usize>().ok() != Some(frame) {
+            return;
+        }
+        let ms: f64 = std::env::var("G6_INJECT_CPU_MS")
+            .ok()
+            .and_then(|v| v.parse().ok())
+            .unwrap_or(80.0);
+        let start = thread_cpu::now_ms();
+        while thread_cpu::now_ms() - start < ms {
+            std::hint::black_box(0u64.wrapping_add(1));
+        }
+    }
+
+    /// Complement to maybe_inject_cpu: when G6_INJECT_SLEEP_FRAME names the
+    /// current frame, sleep G6_INJECT_SLEEP_MS milliseconds.  This
+    /// deschedules the thread (a >100 ms scheduling gap): the
+    /// wall-clock duration spikes but the thread CPU time does not, so the
+    /// CPU-time budget still passes while the old wall-clock budget would
+    /// have failed.  Proves the assertion is immune to scheduling gaps.
+    fn maybe_inject_sleep(frame: usize) {
+        let Ok(target) = std::env::var("G6_INJECT_SLEEP_FRAME") else {
+            return;
+        };
+        if target.parse::<usize>().ok() != Some(frame) {
+            return;
+        }
+        let ms: u64 = std::env::var("G6_INJECT_SLEEP_MS")
+            .ok()
+            .and_then(|v| v.parse().ok())
+            .unwrap_or(120);
+        std::thread::sleep(std::time::Duration::from_millis(ms));
+    }
+
     #[derive(Deserialize)]
     struct Journey {
         masks: Vec<u32>,
@@ -261,14 +347,25 @@ mod g6_quickjs_bench {
         js_ms: f64,
         core_ms: f64,
         draw_ms: f64,
+        /// Thread CPU time for the same three segments.  The 50 ms frame
+        /// budget asserts on these, not on the wall-clock *_ms fields, so a
+        /// descheduling gap does not trip the budget.
+        js_cpu_ms: f64,
+        core_cpu_ms: f64,
+        draw_cpu_ms: f64,
         draw_sampled: bool,
         structural: StructuralOps,
+        // G6_BATTLE_BUCKETS: per-frame battle shape for the p95 explanation.
+        player_party: u8,
+        enemy_party: u8,
+        menu_mode: Option<String>,
     }
 
     struct Bench {
         rt: Runtime,
         sample_structural: bool,
         hash_every: usize,
+        battle_buckets: bool,
     }
 
     impl Bench {
@@ -331,6 +428,17 @@ mod g6_quickjs_bench {
             .expect("G6 state tuple")
         }
 
+        /// Richer per-frame battle shape for the p95 explanation: party sizes
+        /// (full party, active+reserve) and the battle menu mode.  Read AFTER
+        /// the frame timing points (same as `state`), so the extra eval never
+        /// skews js_ms/core_ms/draw_ms.
+        fn state_rich(&self) -> (String, bool, bool, bool, Option<String>, u8, u8, Option<String>) {
+            serde_json::from_str(&self.string(
+                r#"(()=>{const s=globalThis.__rpgSessionState;const b=s.scene?.kind==='battle'?s.scene.state:null;return JSON.stringify([s.mapId,!!s.move.moving,!!s.fade,!!b,b?.battle?.events?.[b.eventCursor]?.type??null,b?b.battle.parties[0].length:0,b?b.battle.parties[1].length:0,b?b.menuMode:null])})()"#,
+            ))
+            .expect("G6 rich state tuple")
+        }
+
         fn frame(
             &mut self,
             frame: usize,
@@ -344,10 +452,20 @@ mod g6_quickjs_bench {
             self.rt.buttons = mask;
             self.rt.offload.begin_frame();
             let a = Instant::now();
+            let a_cpu = thread_cpu::now_ms();
+            // Injection point: inside the measured region so the burned CPU
+            // time lands in js_cpu_ms, exactly as a slower QuickJS frame would.
+            maybe_inject_cpu(frame);
+            // Sleep injection: a descheduling gap inflates the wall-clock
+            // segment but not the CPU segment, so the CPU-time budget is
+            // immune to it.
+            maybe_inject_sleep(frame);
             self.rt.guest.frame(mask).expect("QuickJS frame");
             let b = Instant::now();
+            let b_cpu = thread_cpu::now_ms();
             self.rt.surface.tick();
             let c = Instant::now();
+            let c_cpu = thread_cpu::now_ms();
             for (id, error) in self
                 .rt
                 .supervisor
@@ -364,9 +482,21 @@ mod g6_quickjs_bench {
                 let _ = self.rt.hash();
             }
             let d = Instant::now();
-            let (map, moving, fade, battle, battle_event) = match frozen {
-                Some((map, battle)) => (map.to_owned(), false, false, battle, None),
-                None => self.state(),
+            let d_cpu = thread_cpu::now_ms();
+            let (map, moving, fade, battle, battle_event, player_party, enemy_party, menu_mode) = if self.battle_buckets {
+                let rich = self.state_rich();
+                match frozen {
+                    Some((fmap, fbattle)) => {
+                        (fmap.to_owned(), rich.1, rich.2, fbattle, rich.4, rich.5, rich.6, rich.7)
+                    }
+                    None => rich,
+                }
+            } else {
+                let (map, moving, fade, battle, battle_event) = match frozen {
+                    Some((map, battle)) => (map.to_owned(), false, false, battle, None),
+                    None => self.state(),
+                };
+                (map, moving, fade, battle, battle_event, 0, 0, None)
             };
             let structural = if self.sample_structural {
                 self.structural_ops()
@@ -383,8 +513,14 @@ mod g6_quickjs_bench {
                 js_ms: (b - a).as_secs_f64() * 1_000.0,
                 core_ms: (c - b).as_secs_f64() * 1_000.0,
                 draw_ms: (d - c).as_secs_f64() * 1_000.0,
+                js_cpu_ms: b_cpu - a_cpu,
+                core_cpu_ms: c_cpu - b_cpu,
+                draw_cpu_ms: d_cpu - c_cpu,
                 draw_sampled,
                 structural,
+                player_party,
+                enemy_party,
+                menu_mode,
             }
         }
     }
@@ -482,6 +618,41 @@ mod g6_quickjs_bench {
         );
     }
 
+    /// G6_BATTLE_BUCKETS: break battle-steady frames down by player/enemy
+    /// party size, battle event (performance stage), and menu mode, so the
+    /// short-vs-long journey p95 delta can be attributed to sample shape
+    /// (more monsters, longer animations) rather than a regression.
+    fn report_buckets(viewport: &str, label: &str, samples: &[Sample]) {
+        use std::collections::BTreeMap;
+        let mut groups: BTreeMap<(u8, u8, String, String), Vec<f64>> = BTreeMap::new();
+        for sample in samples {
+            let key = (
+                sample.player_party,
+                sample.enemy_party,
+                sample.battle_event.clone().unwrap_or_else(|| "-".into()),
+                sample.menu_mode.clone().unwrap_or_else(|| "-".into()),
+            );
+            groups.entry(key).or_default().push(sample.js_ms);
+        }
+        let mut rows: Vec<_> = groups.into_iter().collect();
+        rows.sort_by(|a, b| b.1.len().cmp(&a.1.len()).then_with(|| a.0.cmp(&b.0)));
+        println!(
+            "BUCKETS viewport={viewport} kind={label} groups={} frames={}",
+            rows.len(),
+            samples.len()
+        );
+        for ((pp, ep, event, menu), mut js) in rows {
+            js.sort_by(|a, b| a.partial_cmp(b).unwrap());
+            let p95 = percentile(&js, 0.95);
+            let max = js[js.len() - 1];
+            let mean = js.iter().sum::<f64>() / js.len() as f64;
+            println!(
+                "BUCKET viewport={viewport} kind={label} pp={pp} ep={ep} event={event} menu={menu} n={} qjs_mean={mean:.3}ms qjs_p95={p95:.3}ms qjs_max={max:.3}ms",
+                js.len(),
+            );
+        }
+    }
+
     /// Reads `globalThis.__gp1Marks` right after boot and prints the full
     /// startup breakdown: host init, bundle compile, bundle eval split
     /// into "before module-start" (solid-js + framework top-level init,
@@ -548,46 +719,55 @@ mod g6_quickjs_bench {
 
     fn assert_frame_budget(label: &str, samples: &[Sample], limit_ms: f64) {
         assert!(!samples.is_empty(), "journey must contain at least one {label} frame");
+        // The budget asserts on THREAD CPU time (js_cpu + core_cpu), which is
+        // immune to host descheduling: a frame the scheduler parks for 100 ms
+        // shows only its real CPU cost.  Wall clock is reported alongside for
+        // the record but is not the assertion basis.
         let qjs_core = samples
             .iter()
             .max_by(|a, b| {
-                (a.js_ms + a.core_ms)
-                    .partial_cmp(&(b.js_ms + b.core_ms))
+                (a.js_cpu_ms + a.core_cpu_ms)
+                    .partial_cmp(&(b.js_cpu_ms + b.core_cpu_ms))
                     .unwrap()
             })
             .unwrap();
-        let qjs_core_ms = qjs_core.js_ms + qjs_core.core_ms;
+        let qjs_core_cpu = qjs_core.js_cpu_ms + qjs_core.core_cpu_ms;
+        let qjs_core_wall = qjs_core.js_ms + qjs_core.core_ms;
         assert!(
-            qjs_core_ms <= limit_ms,
-            "{label} frame f{}:{} exceeded the {limit_ms} ms QJS/core limit: {:.3} ms",
+            qjs_core_cpu <= limit_ms,
+            "{label} frame f{}:{} exceeded the {limit_ms} ms QJS/core CPU limit: {:.3} ms (wall {:.3} ms)",
             qjs_core.frame,
             qjs_core.map,
-            qjs_core_ms,
+            qjs_core_cpu,
+            qjs_core_wall,
         );
         let sample = samples
             .iter()
             .filter(|sample| sample.draw_sampled)
             .max_by(|a, b| {
-                (a.js_ms + a.core_ms + a.draw_ms)
-                    .partial_cmp(&(b.js_ms + b.core_ms + b.draw_ms))
+                (a.js_cpu_ms + a.core_cpu_ms + a.draw_cpu_ms)
+                    .partial_cmp(&(b.js_cpu_ms + b.core_cpu_ms + b.draw_cpu_ms))
                     .unwrap()
             })
             .unwrap_or_else(|| panic!("{label} has no framebuffer samples"));
-        let total_ms = sample.js_ms + sample.core_ms + sample.draw_ms;
+        let total_cpu = sample.js_cpu_ms + sample.core_cpu_ms + sample.draw_cpu_ms;
+        let total_wall = sample.js_ms + sample.core_ms + sample.draw_ms;
         assert!(
-            total_ms <= limit_ms,
-            "{label} frame f{}:{} exceeded the {:.0} ms limit: {:.3} ms (qjs {:.3} + core {:.3} + draw {:.3})",
+            total_cpu <= limit_ms,
+            "{label} frame f{}:{} exceeded the {:.0} ms CPU limit: {:.3} ms (wall {:.3} ms = qjs {:.3} + core {:.3} + draw {:.3})",
             sample.frame,
             sample.map,
             limit_ms,
-            total_ms,
-            sample.js_ms,
-            sample.core_ms,
-            sample.draw_ms,
+            total_cpu,
+            total_wall,
+            sample.js_cpu_ms,
+            sample.core_cpu_ms,
+            sample.draw_cpu_ms,
         );
         println!(
-            "BUDGET kind={label} frames={} qjs_core_max={qjs_core_ms:.3}ms sampled_total_max={total_ms:.3}ms limit={limit_ms:.0}ms",
+            "BUDGET kind={label} frames={} qjs_core_max_cpu={qjs_core_cpu:.3}ms wall={qjs_core_wall:.3}ms sampled_total_max_cpu={total_cpu:.3}ms wall={total_wall:.3}ms limit={limit_ms:.0}ms cpu_clock={}",
             samples.len(),
+            if thread_cpu::AVAILABLE { "thread-cputime" } else { "wall-fallback" },
         );
     }
 
@@ -725,12 +905,13 @@ mod g6_quickjs_bench {
             boot_staged(args(&dist, "pocket-tuxemon", data.clone(), width, height)).unwrap();
         let boot_ms = boot_start.elapsed().as_secs_f64() * 1_000.0;
         let sample_structural = std::env::var("G6_FAST_BENCH").as_deref() != Ok("1");
+        let battle_buckets = std::env::var("G6_BATTLE_BUCKETS").as_deref() == Ok("1");
         let hash_every = std::env::var("G6_HASH_EVERY")
             .ok()
             .and_then(|value| value.parse().ok())
             .unwrap_or(1usize)
             .max(1);
-        let mut bench = Bench { rt: runtime, sample_structural, hash_every };
+        let mut bench = Bench { rt: runtime, sample_structural, hash_every, battle_buckets };
         report_startup_stages(&viewport, &bench, boot_ms, &stages);
         if sample_structural {
             bench.install_structural_counter();
@@ -890,6 +1071,9 @@ mod g6_quickjs_bench {
         report(&viewport, "battle-exit", &battle_exit);
         assert_frame_budget("battle-entry", &battle_entry, 50.0);
         assert_frame_budget("battle-exit", &battle_exit, 50.0);
+        if battle_buckets {
+            report_buckets(&viewport, "battle-steady", &battle_steady);
+        }
         report(&viewport, "all", &all_frames);
         assert_frame_budget("all", &all_frames, 50.0);
         let measured_qjs_core_ms = first.js_ms + first.core_ms + all_frames
@@ -943,7 +1127,7 @@ mod g6_quickjs_bench {
         seed_maps(&maps, &data);
         let runtime =
             Runtime::boot(args(&dist, "map-benchmark-entry", data.clone(), 480, 272)).unwrap();
-        let bench = Bench { rt: runtime, sample_structural: false, hash_every: 1 };
+        let bench = Bench { rt: runtime, sample_structural: false, hash_every: 1, battle_buckets: false };
         let metadata: Vec<MapMeta> = serde_json::from_str(
             &bench.string("JSON.stringify(globalThis.__rpgMapBenchmark.maps)"),
         )

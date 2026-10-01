@@ -9,9 +9,11 @@ frames（30 分 33.017 秒）、100 场真实战斗，其中 22 场训练师战�
 `spyder_route3 @4,6`，canonical state SHA-256 为
 `bd3616c750f5aa2b76ba105713c4e921f434d397ab5a0618845e382df62fa0d0`。
 
-规格列出的 19 场全部完成。实际地理路线还必须穿过 Wayfarer Inn，因此 Morningstar、Bravo、
-Victor 三场也会触发；本 tape 没有绕过它们，所以实际总数是 22，而不是把这三场从验收记录中
-隐藏。原有 3,793 帧短 tape `data/g6-journey.json` 保持字节不变，继续承担网页与快速回放。
+规格列出的 19 场全部完成。本 tape 选择了经过 Wayfarer Inn 的路线，因此 Morningstar、Bravo、
+Victor 三场额外训练师战也会触发，实际总数是 22，而不是把这三场从验收记录中隐藏。是否存在
+绕行路线未证明——静态与按状态的两次必经证明尝试都因建模不完整被审查否定，见
+`findings/review-task-1976.md`、`findings/review-task-2001.md`。原有 3,793 帧短 tape
+`data/g6-journey.json` 保持字节不变，继续承担网页与快速回放。
 
 ## 1. 自动战斗策略
 
@@ -61,7 +63,7 @@ Cotton Cafe 回血。City Park 使用现场治疗点，Route 3 每个主要对�
 
 “我方”是开战前完整队伍及 HP；帧区间为左闭右开。前 18 行对应规格的 Paper Town、Cotton
 Town、Route 2、City Park 与 Route 3 前九名，最后的 QQQ 是规格中 Route 3 第十名；19–21 行是
-实际路线额外强制触发的 Wayfarer Inn 三人。
+本 tape 路线经过 Wayfarer Inn 时触发的三人（路线选择，非地理必经）。
 
 | # | 对手 | 对方队伍 | 我方队伍（开战前） | 回合 | 帧区间 | 结果 |
 | ---: | --- | --- | --- | ---: | ---: | --- |
@@ -227,6 +229,23 @@ checkpoint 比对）；`verify:gb6:full`（stateful 存读档/倒带 + 60/30/20 
 按既有设计只在本地/发布验收跑，不进 CI。估计 CI 总时长约 15–20 分钟（GitHub runner 核少，按本机
 2–3 倍估）。
 
+### 7.5 战斗 p95：12 ms → 20 ms 是样本差异，不是回退（GB6-F2）
+
+GB5 短 journey 的战斗稳态 p95 ~12 ms，GB6 长 journey ~20 ms。用同一基准
+（`g6-quickjs-bench.rs` 的 `G6_BATTLE_BUCKETS=1` 模式，480×272）分别重放两条 journey 并按
+`(我方队伍规模, 敌方队伍规模, 战斗事件, 菜单状态)` 分桶后：
+
+- **1v1 帧在两个 journey 上几乎相同**：technique p95 11.779 ms（短，n=673）vs 11.667 ms（长，n=2,071）；
+  status/sendOut/faint/end 各桶差都在 ~1 ms 噪声内。若有回退，1v1 桶会先涨。
+- **长 journey 的 20 ms 来自大队伍帧**：technique p95 随我方队伍规模单调上升（pp=1→6：11.7→18.5 ms）；
+  pp=6/ep=4 的 technique/faint/sendOut 桶 p95 24–29 ms。长 journey 后期是 6 只怪、L32 的队伍
+  （Wanda 6 只、Zoolander 4 只、Connor 6 只），每帧场上精灵更多、sendOut/faint 事件更多、高等级
+  招式演出更长，battle-steady 的 p95 落在这些大队伍帧上。
+- 两个数字本就不是同一桶：~12 ms 是 1v1 首战的 battle-round/decision 桶；~20 ms 是全部 battle-steady
+  帧（含所有演出阶段）。
+
+结论：无需定位回退提交——没有回退。完整分桶数据与方法见 `findings/GB6-F2.md` §3。
+
 ## 8. 最终验收
 
 | 门禁 | 结果 |
@@ -267,5 +286,18 @@ checkpoint 比对）；`verify:gb6:full`（stateful 存读档/倒带 + 60/30/20 
 | 本提交 | docs: GB6 最终报告（§7 性能、§8 验收、§9 状态） |
 
 没有修改 `bun.lock` 或 `vendor/`，没有 push。
+
+## 10. 跟进（GB6-F2）
+
+review-task-1963 的跟进项（自动战斗边界、Wayfarer 路线、p95 解释）已全部完成，详见
+`findings/GB6-F2.md`：
+
+1. **自动战斗边界测试**：`battle/autoplay.ts` 的四个阈值（回血 0.35、捕获 0.4、换怪 0.2、后备优势
+   严格 +0.25）与五个并列分支（技能/道具/后备/捕获球/遗忘招式）补齐边界值测试。四次变异
+   （`<=`→`<`、并列取末个）全部变红；策略行为零改动，`verify:gb6:mainline` 终态不变。
+2. **Wayfarer Inn 路线**：本 tape 选择了经过 Wayfarer Inn 的路线（3 场额外训练师战）；是否存在
+   绕行未证明——静态与按状态的两次必经证明尝试都因建模不完整被审查否定，见
+   `findings/review-task-1976.md`、`findings/review-task-2001.md`。
+3. **战斗 p95 解释**：见 §7.5——12 ms → 20 ms 是样本差异（大队伍帧），不是回退。
 
 PASS

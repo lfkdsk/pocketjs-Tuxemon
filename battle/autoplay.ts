@@ -82,6 +82,9 @@ function bestTechnique(db: TuxemonBattleDb, state: RuntimeBattleState): BattleAu
   for (let index = 0; index < entries.length; index++) {
     const entry = entries[index]!;
     const expectedDamage = expectedTechniqueDamage(db, state, entry);
+    // Tie-break convention: strict `>` keeps the FIRST entry attaining the
+    // max.  Menu order is the reducer's stable move-major order, so the choice
+    // is deterministic and RNG-free; battle-autoplay.test.ts pins first-max.
     if (best && expectedDamage <= (best.expectedDamage ?? 0)) continue;
     best = {
       mode: "technique",
@@ -169,6 +172,8 @@ function bestReserve(db: TuxemonBattleDb, state: RuntimeBattleState): BattleAuto
       target: entry.target,
       reason: "switch",
     };
+    // Tie-break: max damage, then healthier reserve, then first in party
+    // order (strict comparisons keep the earliest attaining entry).
     if (!best || damage > best.damage || (damage === best.damage && hpRatio > best.hpRatio)) {
       best = { choice, damage, hpRatio };
     }
@@ -199,6 +204,8 @@ function bestCapture(db: TuxemonBattleDb, state: RuntimeBattleState): BattleAuto
       ...(entry.target === undefined ? {} : { target: entry.target }),
       reason: "capture",
     };
+    // Tie-break: strict `>` keeps the first device attaining the max modifier
+    // (item entries are already in sorted slug order).
     if (!best || modifier > best.modifier) best = { choice, modifier };
   }
   return best?.choice ?? null;
@@ -287,6 +294,8 @@ export function autoplayMoveToForget(
     const score = technique
       ? Math.max(0, technique.power) * Math.max(0, Math.min(1, technique.accuracy))
       : 0;
+    // Tie-break: strict `<` forgets the FIRST (oldest) move attaining the
+    // lowest score; same stable-order convention as the menu selections.
     if (score < selectedScore) {
       selected = index;
       selectedScore = score;
