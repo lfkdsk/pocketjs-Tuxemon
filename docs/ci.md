@@ -2,10 +2,11 @@
 
 CI is a single workflow, `.github/workflows/ci.yml`. Four jobs run in
 parallel from the shared prepare action — `import`, `test` (four matrix
-legs), `journey` (five matrix legs) and `web`, eleven runners in all — and
-`deploy` publishes Pages once they all pass. A run takes about three
-minutes. It runs on pushes to `main`,
-on pull requests, and on manual dispatch.
+legs), `journey` (seven matrix legs) and `web`, thirteen runners in all —
+and `deploy` publishes Pages once they all pass. The slowest journey leg
+(`verify:chapters`, which re-bakes and suffix-replays every chapter) sets
+the wall-clock. It runs on pushes to `main`, on pull requests, and on
+manual dispatch.
 
 ## The prepare action
 
@@ -47,7 +48,7 @@ bunch the slow battle and replay suites together:
 | `importer` | `tests/importer.test.ts` |
 | `replays` | `tests/g7-repository.test.ts`, `tests/g6-golden.test.ts` |
 | `locks, battle data and terrain` | `tests/g6-locks.test.ts`, `tests/battle-db-adapter.test.ts`, `tests/battle-golden.test.ts`, `tests/terrain.test.ts` |
-| `rest` | every other `tests/*.test.ts` (35 files), selected by an exclusion grep over the seven files above |
+| `rest` | every other `tests/*.test.ts` (38 files), selected by an exclusion grep over the seven files above |
 
 New test files land in `rest` automatically — no workflow edit is needed.
 If a new file is slow enough to deserve an explicit group, add it to that
@@ -56,19 +57,21 @@ it runs twice.
 
 ### journey — the maintained tapes
 
-Five parallel legs, one `bun run verify:*` script each:
+Seven parallel legs, one `bun run verify:*` script each:
 
 | Leg | Script | What it proves |
 |---|---|---|
 | Route 3 battle journey at 60 Hz | `verify:gb6:mainline` | the 109,983-frame mainline tape replays to the frozen terminal state with every map and battle checkpoint intact. |
 | Captain-return journey from frame zero at 60 Hz | `verify:j1:mainline` | the J1 continuation, concatenated with the GB6 tape and replayed from frame zero, ends at the Captain's return. |
+| Hospital-cure journey from frame zero at 60 Hz | `verify:j2:mainline` | the J2 continuation, concatenated with GB6 and J1 and replayed from frame zero (172,060 frames), ends with the hospital cure. |
 | Battle defeat and recovery journeys | `verify:gb6:failures` | both committed defeat tapes replay with their visible recovery order. |
 | Every imported input lock is executed to its unlock | `verify:g6:locks` | every `lockInput` page releases its lock. |
 | No map can freeze the player | `verify:g6:frozen` | a corpus-wide stuck/lock scan over all 263 maps. |
+| Chapter snapshots and thumbnails | `verify:chapters` | the thirteen demo chapters re-bake byte-identical: save envelopes pass the kit's save validator, the 480×272 thumbnails match the committed PNGs, and every envelope restored and resumed at its timeline frame suffix-replays to the full-tape terminal state. |
 
 The full 60/30/20 Hz alignment, save/load and rewind checks stay in
-`bun run verify:gb6:full` and `bun run verify:j1:full` as release gates; they
-are too slow for every push. See [verification.md](verification.md).
+`bun run verify:gb6:full`, `bun run verify:j1:full` and `bun run verify:j2:full`
+as release gates; they are too slow for every push. See [verification.md](verification.md).
 
 ### web — the site and a real browser
 
@@ -127,9 +130,11 @@ bun test $(ls tests/*.test.ts | grep -v -E '(importer|g7-repository|g6-golden|g6
 # journey job (one leg per line)
 bun run verify:gb6:mainline
 bun run verify:j1:mainline
+bun run verify:j2:mainline
 bun run verify:gb6:failures
 bun run verify:g6:locks
 bun run verify:g6:frozen
+bun run verify:chapters
 
 # web job (needs Chrome or Chromium)
 bun run web

@@ -104,6 +104,8 @@ jobs:
             run: bun run verify:g6:locks
           - name: No map can freeze the player
             run: bun run verify:g6:frozen
+          - name: Chapter snapshots and thumbnails
+            run: bun run verify:chapters
     steps:
       - uses: actions/checkout@v7
         with:

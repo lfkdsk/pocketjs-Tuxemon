@@ -21,7 +21,7 @@ Per-action numbers come from the import coverage report,
 
 | Feature | Status | Notes |
 | --- | --- | --- |
-| Event import | Partial | 89.0% of action uses and 90.6% of condition uses are native; 93.8% and 92.1%, respectively, are executable. The rest is dropped or a visible placeholder, each with a reason; see [importer](importer.md) |
+| Event import | Partial | 89.0% of action uses and 92.1% of condition uses are native; 93.8% and 92.1%, respectively, are executable. The rest is dropped or a visible placeholder, each with a reason; see [importer](importer.md) |
 | Dialogue, choices, variables, items, NPC creation and removal | Done | Imported from the scenario YAML, TMX properties and the en_US `.po` strings |
 | Input locks | Done | Every imported input lock runs to its unlock (`verify:g6:locks`); no map can freeze the player (`verify:g6:frozen`) |
 | `WorldState` gating through the kit's `worldIdle` condition | Done | Compared against upstream Tuxemon runs |
@@ -93,6 +93,7 @@ Per-action numbers come from the import coverage report,
 | Feature | Status | Notes |
 | --- | --- | --- |
 | Saving and loading the game | Planned | The kit has save slots, but the game does not wire them in yet |
+| Chapter snapshots and map-warp spawns | Partial | Data is committed: `data/chapters.json` (thirteen save envelopes along the mainline from the new-game bedroom to the recovered hospital cure, tape suffix offsets, 480×272 thumbnails; `verify:chapters` proves each envelope resumes at its `timelineFrame` and suffix-replays to the full-tape terminal state) and `data/warp.json` (one spawn per map, standable and clear of every event area; eighteen maps with no event-free standable cell are marked `blocked`). The demo menu wiring is in progress |
 | Auto-play demo with take-over and rewind | Planned | |
 
 ## Mainline progress
@@ -117,4 +118,4 @@ Per-action numbers come from the import coverage report,
 | Feature | Status | Notes |
 | --- | --- | --- |
 | Determinism, locks, freeze scan, journey replays, pixel goldens | Done | [verification](verification.md) |
-| Parallel CI with Pages deploy | Done | About 3 minutes per run; see [ci](ci.md) |
+| Parallel CI with Pages deploy | Done | The slowest journey leg (`verify:chapters`) sets the wall-clock; see [ci](ci.md) |

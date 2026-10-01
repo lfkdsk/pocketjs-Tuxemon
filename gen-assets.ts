@@ -20,6 +20,7 @@ import { coverageMarkdown, jsonBytes } from "./importer/index.ts";
 import { decodePng } from "./importer/png.ts";
 import { availableMapIds, buildProject, G6_IMPORT_OPTIONS } from "./importer/project.ts";
 import { applyTerrain, DEFAULT_TUXEMON_SRC, writeTerrain } from "./importer/terrain.ts";
+import { buildWarpIndex } from "./importer/warp.ts";
 
 // Tests and determinism checks can cook into a disposable root without
 // touching the maintained project tree. Source modules still come from this
@@ -382,6 +383,9 @@ writeFileSync(join(DIST, "weather.json"), jsonBytes({
   source: imported.report.weather.source,
   entries: imported.report.weather.entries,
 }));
+// One spawn per map for the demo menu's map jump list: a transfer landing
+// when one exists, else the first standable cell outside every event area.
+writeFileSync(join(ROOT, "data/warp.json"), jsonBytes(buildWarpIndex(project)));
 writeFileSync(join(ROOT, "reports/G1-coverage.md"), coverageMarkdown(imported.report));
 
 function gameAssetsSource(

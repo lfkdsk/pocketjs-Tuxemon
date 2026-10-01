@@ -1,10 +1,12 @@
 # Verification
 
-This repository verifies the imported world two ways: by replaying
+This repository verifies the imported world three ways: by replaying
 deterministic input recordings ("tapes") through the runtime and checking the
-final state, and by comparing rendered keyframes against committed golden
-images. CI runs the fast subset on every push (see [ci.md](ci.md)); the full
-multi-rate, save/load and rewind checks are release gates you run locally.
+final state, by comparing rendered keyframes against committed golden
+images, and by re-baking the demo chapter snapshots and warp spawns and
+proving each chapter resumes to the same terminal state. CI runs the fast
+subset on every push (see [ci.md](ci.md)); the full multi-rate, save/load
+and rewind checks are release gates you run locally.
 
 ## The verify scripts
 
@@ -13,7 +15,7 @@ where noted. Set `TUXEMON_SRC` first (or keep a repo-local `.tuxemon-src`).
 
 | Script | What it proves | Input | Rough duration |
 |---|---|---|---|
-| `verify:g6:determinism` | Two full imports into isolated roots produce byte-identical output (4,637 files). | Tuxemon source | ~25 s |
+| `verify:g6:determinism` | Two full imports into isolated roots produce byte-identical output (4,638 files). | Tuxemon source | ~25 s |
 | `verify:terrain:determinism` | The terrain corpus alone is byte-stable across two runs. | Tuxemon source | ~15 s |
 | `verify:terrain:collision` | Imported collision matches an independent Python oracle that mirrors Tuxemon's own movement code, cell by cell and direction by direction (default: 11 maps, 56,176 directed steps; `--all` for every map). | `data/terrain.json`, Tuxemon source, PyYAML | under a second for the default set; minutes for `--all` |
 | `verify:g6:locks` | Every imported `lockInput` page releases its lock, either through `unlockInput` or a map transfer (330 pages, 334 checks). | imported project | ~15 s |
@@ -22,21 +24,25 @@ where noted. Set `TUXEMON_SRC` first (or keep a repo-local `.tuxemon-src`).
 | `verify:gb6:failures` | Both committed defeat tapes (the first loss against Billie, and the later Route 3 loss) replay with their visible recovery order: faint-point teleport, heal-before-leaving block, nurse recovery. | `data/gb6-first-loss-journey.json`, `data/gb6-later-loss-journey.json` | ~40 s |
 | `verify:j1:mainline` | The Captain-return continuation, concatenated with the GB6 tape and replayed from frame zero (122,145 frames), ends at the mansion with the captain's return and all 17 battles (10 trainer, 7 wild) intact. | `data/gb6-mainline-journey.json`, `data/j1-captainreturns-journey.json` | ~67 s |
 | `verify:j2:mainline` | The hospital-cure continuation, concatenated with GB6 and J1 and replayed from frame zero (172,060 frames), ends in the Candy Town hospital with the cure granted and all 56 battles (50 trainer, 6 wild) won. | `data/gb6-mainline-journey.json`, `data/j1-captainreturns-journey.json`, `data/j2-hospitalcure-journey.json` | ~130 s |
+| `verify:chapters` | The demo chapters re-bake byte-identical: each save envelope passes the kit's save validator (decode + map-aware restore), the 480×272 thumbnails re-render from the built game to the committed PNG hashes, and every envelope restored and resumed at its `timelineFrame` suffix-replays to the full-tape terminal state. Fails with the rebake command when the kit, the tape or the importer moves a checkpoint. | `data/chapters.json`, `docs/screenshots/chapters/`, built bundle | ~12 min |
 
 Durations are wall-clock measured on a current developer machine; the CI
 machines fold the mainline tapes in about a minute each.
 
-### Modes of the two big verifiers
+### Modes of the three big verifiers
 
-`verify-gb6-mainline.ts` and `verify-j1-mainline.ts` share a mode switch:
+`verify-gb6-mainline.ts`, `verify-j1-mainline.ts` and `verify-j2-mainline.ts`
+share the same modes, each selected by its own env var (`GB6_VERIFY_MODE`,
+`J1_VERIFY_MODE`, `J2_VERIFY_MODE`); the `:mainline` script runs the CI
+default:
 
-| Mode (GB6 / J1) | What it adds |
+| Mode | What it adds |
 |---|---|
-| default (`:mainline`) | One 60 Hz replay of the frozen tape against the production reducer. This is the CI leg. |
-| `:segment` (J1 only) | Replays just the J1 segment from a rebuilt GB6 terminal snapshot. |
-| `:stateful` | Saves mid-journey, restores the snapshot, and continues to the frozen terminal. |
-| `:rates` (`:rate-60`, `:rate-30`, `:rate-20`) | Replays the same 60 Hz-authored tape at a lower host tick rate and compares the full session state against an independent 60 Hz fold, source frame by source frame. |
-| `:full` | Standalone/merged replay plus save/load, rewind and all three rates. The release/acceptance gate; about ten minutes for GB6. |
+| `ci` (default) | One 60 Hz replay of the frozen tape against the production reducer. This is the CI leg. |
+| `segment` (J1, J2) | Replays just the continuation segment from a rebuilt ancestor terminal snapshot. |
+| `stateful` | Saves mid-journey, restores the snapshot, and continues to the frozen terminal; J1 and J2 also verify the battle rewind. |
+| `rate-60`, `rate-30`, `rate-20` | Replays the same 60 Hz-authored tape at a lower host tick rate and compares the full session state against an independent 60 Hz fold, source frame by source frame. |
+| `full` | Standalone/merged replay plus save/load, rewind and all three rates. The release/acceptance gate; about ten minutes for GB6. |
 
 ### The QuickJS benches
 
@@ -119,6 +125,44 @@ After re-recording, update the verifier's pinned hashes and checkpoint lists,
 regenerate the affected goldens (below), and re-run every verify script plus
 the web journey. A re-recorded tape is a change to the game's contract, not a
 test fixture refresh.
+
+## Chapter snapshots and warp spawns
+
+The web demo menu's data lives in two committed files:
+
+- `data/chapters.json` — thirteen named checkpoints along the GB6+J1+J2 mainline
+  (new-game bedroom, Paper Town, before the first Billie battle, starter
+  chosen, Route 1, Cotton Town, City Park, the Route 3 north end, Flower
+  City, the captain's return, Candy Town, Greenwash with the Aardant, the
+  recovered hospital cure). Each entry is a kit save envelope taken at a
+  safe point (`canSave`, no input lock, no fade), the frame where its tape
+  suffix starts (an offset into the concatenated GB6+J1+J2 masks), and the
+  480×272 thumbnail hash.
+- `data/warp.json` — one safe spawn per imported map: a clear incoming
+  transfer landing when one exists, otherwise the standable cell nearest
+  the first landing (or the first standable cell in row-major order when
+  nobody transfers here). A spawn must be standable on the engine's
+  passage table and clear of every event area, not just blocking ones.
+  Eighteen maps have no standable event-free cell and are marked `blocked`:
+  `classic_route_4` is solid everywhere, and the other seventeen are
+  blanketed by Tuxemon's full-map one-shot visit-tracker regions.
+
+Rebake both after a kit, tape or importer change that moves a checkpoint or
+a spawn:
+
+```sh
+bun run import                 # refreshes data/warp.json
+bun tools/bake-chapters.ts     # refreshes data/chapters.json + docs/screenshots/chapters/
+```
+
+`bun run verify:chapters` re-bakes in memory and byte-diffs `data/chapters.json`
+and every thumbnail, then restores each committed envelope, sets the global
+reducer frame to its `timelineFrame`, and suffix-replays to the full-tape
+terminal state. The warp spawns are covered by `tests/warp-spawns.test.ts`
+(every spawn stands on the engine's passage table and clear of every event
+area; the eighteen `blocked` maps have no standable event-free cell) and by
+the import job's cleanliness check. Open the rebaked thumbnails and look at
+them before committing, the same as goldens.
 
 ## Goldens
 

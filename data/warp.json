@@ -1,0 +1,1846 @@
+{
+ "format": "pocket-tuxemon/warp/v1",
+ "maps": [
+  {
+   "id": "37707_tower",
+   "name": "37707_tower",
+   "x": 12,
+   "y": 21,
+   "from": "transfer"
+  },
+  {
+   "id": "37707_town",
+   "name": "37707_town",
+   "x": 24,
+   "y": 6,
+   "from": "transfer"
+  },
+  {
+   "id": "37707_town_missing",
+   "name": "37707_town_missing",
+   "x": 24,
+   "y": 6,
+   "from": "transfer"
+  },
+  {
+   "id": "azure_town",
+   "name": "Azure",
+   "x": 41,
+   "y": 23,
+   "from": "transfer"
+  },
+  {
+   "id": "azure_town_hall",
+   "name": "azure_town_hall",
+   "x": 20,
+   "y": 18,
+   "from": "fallback"
+  },
+  {
+   "id": "bedroom_test",
+   "name": "bedroom_test",
+   "x": 8,
+   "y": 2,
+   "from": "transfer"
+  },
+  {
+   "id": "buddha_mountain",
+   "name": "buddha_mountain",
+   "x": 3,
+   "y": 89,
+   "from": "transfer"
+  },
+  {
+   "id": "candy_town",
+   "name": "Candy Town",
+   "x": 7,
+   "y": 38,
+   "from": "fallback"
+  },
+  {
+   "id": "city1_mart_junkyard",
+   "name": "city1_mart_junkyard",
+   "x": 11,
+   "y": 4,
+   "from": "transfer"
+  },
+  {
+   "id": "citypark",
+   "name": "City Park",
+   "x": 36,
+   "y": 4,
+   "from": "transfer"
+  },
+  {
+   "id": "citypark_house1",
+   "name": "citypark_house1",
+   "x": 6,
+   "y": 6,
+   "from": "fallback"
+  },
+  {
+   "id": "classic_aerolume_city",
+   "name": "classic_aerolume_city",
+   "x": 1,
+   "y": 17,
+   "from": "fallback"
+  },
+  {
+   "id": "classic_gym_astra",
+   "name": "classic_gym_astra",
+   "x": 10,
+   "y": 18,
+   "from": "fallback"
+  },
+  {
+   "id": "classic_gym_bravion",
+   "name": "classic_gym_bravion",
+   "x": 10,
+   "y": 18,
+   "from": "fallback"
+  },
+  {
+   "id": "classic_gym_ferrum",
+   "name": "classic_gym_ferrum",
+   "x": 2,
+   "y": 0,
+   "from": "fallback"
+  },
+  {
+   "id": "classic_gym_granite",
+   "name": "classic_gym_granite",
+   "x": 10,
+   "y": 18,
+   "from": "fallback"
+  },
+  {
+   "id": "classic_gym_marin",
+   "name": "classic_gym_marin",
+   "x": 10,
+   "y": 18,
+   "from": "fallback"
+  },
+  {
+   "id": "classic_gym_mila",
+   "name": "classic_gym_mila",
+   "x": 10,
+   "y": 18,
+   "from": "fallback"
+  },
+  {
+   "id": "classic_gym_orion",
+   "name": "classic_gym_orion",
+   "x": 2,
+   "y": 0,
+   "from": "fallback"
+  },
+  {
+   "id": "classic_gym_pyra",
+   "name": "classic_gym_pyra",
+   "x": 10,
+   "y": 18,
+   "from": "fallback"
+  },
+  {
+   "id": "classic_gym_shade",
+   "name": "classic_gym_shade",
+   "x": 2,
+   "y": 0,
+   "from": "fallback"
+  },
+  {
+   "id": "classic_gym_sylva",
+   "name": "classic_gym_sylva",
+   "x": 2,
+   "y": 0,
+   "from": "fallback"
+  },
+  {
+   "id": "classic_gym_voltessa",
+   "name": "classic_gym_voltessa",
+   "x": 10,
+   "y": 18,
+   "from": "fallback"
+  },
+  {
+   "id": "classic_gym_vyre",
+   "name": "classic_gym_vyre",
+   "x": 2,
+   "y": 0,
+   "from": "fallback"
+  },
+  {
+   "id": "classic_gym_zephra",
+   "name": "classic_gym_zephra",
+   "x": 2,
+   "y": 0,
+   "from": "fallback"
+  },
+  {
+   "id": "classic_hearthrock_city",
+   "name": "classic_hearthrock_city",
+   "x": 23,
+   "y": 14,
+   "from": "transfer"
+  },
+  {
+   "id": "classic_route_1",
+   "name": "classic_route_1",
+   "x": 33,
+   "y": 18,
+   "from": "fallback"
+  },
+  {
+   "id": "classic_route_2",
+   "name": "classic_route_2",
+   "x": 1,
+   "y": 3,
+   "from": "fallback"
+  },
+  {
+   "id": "classic_route_3",
+   "name": "classic_route_3",
+   "x": 20,
+   "y": 19,
+   "from": "transfer"
+  },
+  {
+   "id": "classic_route_4",
+   "name": "classic_route_4",
+   "x": 20,
+   "y": 0,
+   "from": "blocked"
+  },
+  {
+   "id": "classic_route_5",
+   "name": "classic_route_5",
+   "x": 38,
+   "y": 17,
+   "from": "fallback"
+  },
+  {
+   "id": "classic_route_6",
+   "name": "classic_route_6",
+   "x": 1,
+   "y": 2,
+   "from": "fallback"
+  },
+  {
+   "id": "classic_route_7",
+   "name": "classic_route_7",
+   "x": 36,
+   "y": 1,
+   "from": "fallback"
+  },
+  {
+   "id": "classic_route_8",
+   "name": "classic_route_8",
+   "x": 1,
+   "y": 16,
+   "from": "fallback"
+  },
+  {
+   "id": "classic_steamshore_city",
+   "name": "classic_steamshore_city",
+   "x": 31,
+   "y": 5,
+   "from": "transfer"
+  },
+  {
+   "id": "classic_stormpeak_city",
+   "name": "classic_stormpeak_city",
+   "x": 35,
+   "y": 4,
+   "from": "transfer"
+  },
+  {
+   "id": "classic_thornwood_city",
+   "name": "classic_thornwood_city",
+   "x": 1,
+   "y": 17,
+   "from": "fallback"
+  },
+  {
+   "id": "classic_umbrastar_city",
+   "name": "classic_umbrastar_city",
+   "x": 1,
+   "y": 17,
+   "from": "fallback"
+  },
+  {
+   "id": "classic_valorhold_city",
+   "name": "classic_valorhold_city",
+   "x": 27,
+   "y": 13,
+   "from": "transfer"
+  },
+  {
+   "id": "cotton_cafe",
+   "name": "cotton_cafe",
+   "x": 1,
+   "y": 10,
+   "from": "transfer"
+  },
+  {
+   "id": "cotton_cafe_basement",
+   "name": "cotton_cafe_basement",
+   "x": 1,
+   "y": 10,
+   "from": "transfer"
+  },
+  {
+   "id": "cotton_cathedral",
+   "name": "cotton_cathedral",
+   "x": 6,
+   "y": 9,
+   "from": "fallback"
+  },
+  {
+   "id": "cotton_daycare",
+   "name": "cotton_daycare",
+   "x": 2,
+   "y": 7,
+   "from": "transfer"
+  },
+  {
+   "id": "cotton_misa_house",
+   "name": "cotton_misa_house",
+   "x": 4,
+   "y": 2,
+   "from": "transfer"
+  },
+  {
+   "id": "cotton_misa_house_upstairs",
+   "name": "cotton_misa_house_upstairs",
+   "x": 8,
+   "y": 2,
+   "from": "transfer"
+  },
+  {
+   "id": "cotton_scoop",
+   "name": "cotton_scoop",
+   "x": 5,
+   "y": 9,
+   "from": "fallback"
+  },
+  {
+   "id": "cotton_town",
+   "name": "Cotton Town",
+   "x": 10,
+   "y": 17,
+   "from": "transfer"
+  },
+  {
+   "id": "cotton_underground",
+   "name": "cotton_underground",
+   "x": 10,
+   "y": 16,
+   "from": "transfer"
+  },
+  {
+   "id": "dojo1",
+   "name": "dojo1",
+   "x": 11,
+   "y": 5,
+   "from": "transfer"
+  },
+  {
+   "id": "dojo2",
+   "name": "dojo2",
+   "x": 10,
+   "y": 9,
+   "from": "transfer"
+  },
+  {
+   "id": "dojo3",
+   "name": "dojo3",
+   "x": 10,
+   "y": 9,
+   "from": "transfer"
+  },
+  {
+   "id": "downstairs_test",
+   "name": "downstairs_test",
+   "x": 0,
+   "y": 2,
+   "from": "transfer"
+  },
+  {
+   "id": "dragonscave",
+   "name": "Dragon's Cave",
+   "x": 12,
+   "y": 38,
+   "from": "fallback"
+  },
+  {
+   "id": "dryadsgrove",
+   "name": "Dryad's Grove",
+   "x": 1,
+   "y": 7,
+   "from": "fallback"
+  },
+  {
+   "id": "eclipse_crystal_bank1",
+   "name": "eclipse_crystal_bank1",
+   "x": 1,
+   "y": 10,
+   "from": "transfer"
+  },
+  {
+   "id": "eclipse_crystal_bank2",
+   "name": "eclipse_crystal_bank2",
+   "x": 2,
+   "y": 15,
+   "from": "transfer"
+  },
+  {
+   "id": "eclipse_crystal_bank3",
+   "name": "eclipse_crystal_bank3",
+   "x": 2,
+   "y": 12,
+   "from": "transfer"
+  },
+  {
+   "id": "eclipse_crystal_center",
+   "name": "eclipse_crystal_center",
+   "x": 6,
+   "y": 7,
+   "from": "transfer"
+  },
+  {
+   "id": "eclipse_crystal_town",
+   "name": "Obsidian",
+   "x": 6,
+   "y": 8,
+   "from": "transfer"
+  },
+  {
+   "id": "eclipse_crystal_town_cafe",
+   "name": "eclipse_crystal_town_cafe",
+   "x": 8,
+   "y": 10,
+   "from": "fallback"
+  },
+  {
+   "id": "eclipse_crystal_town_house",
+   "name": "eclipse_crystal_town_house",
+   "x": 4,
+   "y": 6,
+   "from": "fallback"
+  },
+  {
+   "id": "eclipse_lion_mountain_high",
+   "name": "Lion Mountain",
+   "x": 39,
+   "y": 13,
+   "from": "transfer"
+  },
+  {
+   "id": "eclipse_lion_mountain_low",
+   "name": "Lion Mountain",
+   "x": 0,
+   "y": 9,
+   "from": "transfer"
+  },
+  {
+   "id": "eclipse_lion_mountain_middle",
+   "name": "Lion Mountain",
+   "x": 2,
+   "y": 1,
+   "from": "fallback"
+  },
+  {
+   "id": "eclipse_obsidian_center",
+   "name": "eclipse_obsidian_center",
+   "x": 6,
+   "y": 9,
+   "from": "fallback"
+  },
+  {
+   "id": "eclipse_obsidian_town",
+   "name": "eclipse_obsidian_town",
+   "x": 16,
+   "y": 9,
+   "from": "transfer"
+  },
+  {
+   "id": "eclipse_obsidian_town_house",
+   "name": "eclipse_obsidian_town_house",
+   "x": 4,
+   "y": 6,
+   "from": "fallback"
+  },
+  {
+   "id": "eclipse_park",
+   "name": "Pepper Park",
+   "x": 38,
+   "y": 13,
+   "from": "transfer"
+  },
+  {
+   "id": "eclipse_park_cabin",
+   "name": "eclipse_park_cabin",
+   "x": 6,
+   "y": 4,
+   "from": "fallback"
+  },
+  {
+   "id": "eclipse_park_cave",
+   "name": "eclipse_park_cave",
+   "x": 32,
+   "y": 11,
+   "from": "fallback"
+  },
+  {
+   "id": "eclipse_park_entrance",
+   "name": "eclipse_park_entrance",
+   "x": 4,
+   "y": 3,
+   "from": "transfer"
+  },
+  {
+   "id": "eclipse_park_south",
+   "name": "Pepper Park",
+   "x": 6,
+   "y": 35,
+   "from": "transfer"
+  },
+  {
+   "id": "eclipse_route7",
+   "name": "Route 7",
+   "x": 35,
+   "y": 1,
+   "from": "fallback"
+  },
+  {
+   "id": "eclipse_routef",
+   "name": "eclipse_routef",
+   "x": 24,
+   "y": 0,
+   "from": "transfer"
+  },
+  {
+   "id": "eclipse_routeg",
+   "name": "eclipse_routeg",
+   "x": 24,
+   "y": 38,
+   "from": "fallback"
+  },
+  {
+   "id": "eclipse_routeh",
+   "name": "eclipse_routeh",
+   "x": 23,
+   "y": 39,
+   "from": "transfer"
+  },
+  {
+   "id": "eclipse_routei",
+   "name": "eclipse_routei",
+   "x": 26,
+   "y": 10,
+   "from": "transfer"
+  },
+  {
+   "id": "flower_city",
+   "name": "Flower City",
+   "x": 3,
+   "y": 18,
+   "from": "transfer"
+  },
+  {
+   "id": "gadget_store1",
+   "name": "gadget_store1",
+   "x": 0,
+   "y": 3,
+   "from": "fallback"
+  },
+  {
+   "id": "gaming_hall",
+   "name": "gaming_hall",
+   "x": 1,
+   "y": 0,
+   "from": "fallback"
+  },
+  {
+   "id": "healing_center",
+   "name": "healing_center",
+   "x": 6,
+   "y": 9,
+   "from": "fallback"
+  },
+  {
+   "id": "leather_scoop",
+   "name": "leather_scoop",
+   "x": 5,
+   "y": 9,
+   "from": "fallback"
+  },
+  {
+   "id": "leather_shaft1",
+   "name": "leather_shaft1",
+   "x": 12,
+   "y": 13,
+   "from": "fallback"
+  },
+  {
+   "id": "leather_shaft2",
+   "name": "leather_shaft2",
+   "x": 4,
+   "y": 8,
+   "from": "fallback"
+  },
+  {
+   "id": "leather_town",
+   "name": "Leather Town",
+   "x": 24,
+   "y": 10,
+   "from": "transfer"
+  },
+  {
+   "id": "manhattan_beach",
+   "name": "manhattan_beach",
+   "x": 27,
+   "y": 38,
+   "from": "transfer"
+  },
+  {
+   "id": "mansion",
+   "name": "Mansion",
+   "x": 1,
+   "y": 15,
+   "from": "transfer"
+  },
+  {
+   "id": "mansion_basement",
+   "name": "mansion_basement",
+   "x": 6,
+   "y": 20,
+   "from": "transfer"
+  },
+  {
+   "id": "mansion_top",
+   "name": "mansion_top",
+   "x": 1,
+   "y": 16,
+   "from": "transfer"
+  },
+  {
+   "id": "maple_bedroom",
+   "name": "maple_bedroom",
+   "x": 8,
+   "y": 2,
+   "from": "transfer"
+  },
+  {
+   "id": "maple_house",
+   "name": "maple_house",
+   "x": 11,
+   "y": 2,
+   "from": "transfer"
+  },
+  {
+   "id": "omnichannel0",
+   "name": "omnichannel0",
+   "x": 1,
+   "y": 5,
+   "from": "transfer"
+  },
+  {
+   "id": "omnichannel1",
+   "name": "omnichannel1",
+   "x": 1,
+   "y": 3,
+   "from": "transfer"
+  },
+  {
+   "id": "omnichannel2",
+   "name": "omnichannel2",
+   "x": 1,
+   "y": 12,
+   "from": "transfer"
+  },
+  {
+   "id": "omnichannel3",
+   "name": "omnichannel3",
+   "x": 1,
+   "y": 12,
+   "from": "transfer"
+  },
+  {
+   "id": "omnichannel4",
+   "name": "omnichannel4",
+   "x": 1,
+   "y": 12,
+   "from": "transfer"
+  },
+  {
+   "id": "player_house_bedroom",
+   "name": "player_house_bedroom",
+   "x": 1,
+   "y": 3,
+   "from": "transfer"
+  },
+  {
+   "id": "player_house_downstairs",
+   "name": "player_house_downstairs",
+   "x": 1,
+   "y": 2,
+   "from": "fallback"
+  },
+  {
+   "id": "professor_lab",
+   "name": "professor_lab",
+   "x": 6,
+   "y": 16,
+   "from": "fallback"
+  },
+  {
+   "id": "route1",
+   "name": "Route 1",
+   "x": 18,
+   "y": 6,
+   "from": "transfer"
+  },
+  {
+   "id": "route1_sanglorian",
+   "name": "Sanglorian Avenue",
+   "x": 10,
+   "y": 1,
+   "from": "fallback"
+  },
+  {
+   "id": "route2",
+   "name": "Route 2",
+   "x": 11,
+   "y": 1,
+   "from": "fallback"
+  },
+  {
+   "id": "route3",
+   "name": "Route 3",
+   "x": 35,
+   "y": 5,
+   "from": "transfer"
+  },
+  {
+   "id": "route4",
+   "name": "Route 4",
+   "x": 18,
+   "y": 3,
+   "from": "fallback"
+  },
+  {
+   "id": "route5",
+   "name": "Route 5",
+   "x": 1,
+   "y": 15,
+   "from": "fallback"
+  },
+  {
+   "id": "route6",
+   "name": "Route 6",
+   "x": 7,
+   "y": 1,
+   "from": "fallback"
+  },
+  {
+   "id": "routea",
+   "name": "Route A",
+   "x": 6,
+   "y": 13,
+   "from": "transfer"
+  },
+  {
+   "id": "routec",
+   "name": "Route C",
+   "x": 38,
+   "y": 5,
+   "from": "transfer"
+  },
+  {
+   "id": "rubberduck_cave_01",
+   "name": "rubberduck_cave_01",
+   "x": 49,
+   "y": 14,
+   "from": "fallback"
+  },
+  {
+   "id": "rubberduck_city_01",
+   "name": "rubberduck_city_01",
+   "x": 12,
+   "y": 12,
+   "from": "transfer"
+  },
+  {
+   "id": "rubberduck_route_01",
+   "name": "rubberduck_route_01",
+   "x": 37,
+   "y": 10,
+   "from": "transfer"
+  },
+  {
+   "id": "russell_practice_1",
+   "name": "russell_practice_1",
+   "x": 1,
+   "y": 0,
+   "from": "fallback"
+  },
+  {
+   "id": "scoop1",
+   "name": "scoop1",
+   "x": 19,
+   "y": 3,
+   "from": "transfer"
+  },
+  {
+   "id": "scoop2",
+   "name": "scoop2",
+   "x": 7,
+   "y": 4,
+   "from": "transfer"
+  },
+  {
+   "id": "scoop3",
+   "name": "scoop3",
+   "x": 5,
+   "y": 3,
+   "from": "transfer"
+  },
+  {
+   "id": "scoop4",
+   "name": "scoop4",
+   "x": 9,
+   "y": 20,
+   "from": "fallback"
+  },
+  {
+   "id": "sphalian_center",
+   "name": "sphalian_center",
+   "x": 6,
+   "y": 9,
+   "from": "fallback"
+  },
+  {
+   "id": "sphalian_town",
+   "name": "sphalian_town",
+   "x": 21,
+   "y": 14,
+   "from": "fallback"
+  },
+  {
+   "id": "sphalian_town_house",
+   "name": "sphalian_town_house",
+   "x": 5,
+   "y": 6,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_bedroom",
+   "name": "spyder_bedroom",
+   "x": 8,
+   "y": 2,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_brideswood",
+   "name": "Brideswood",
+   "x": 1,
+   "y": 27,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_candy_cafe",
+   "name": "spyder_candy_cafe",
+   "x": 4,
+   "y": 7,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_candy_center",
+   "name": "spyder_candy_center",
+   "x": 14,
+   "y": 5,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_candy_hospital1",
+   "name": "spyder_candy_hospital1",
+   "x": 7,
+   "y": 15,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_candy_hospital2",
+   "name": "spyder_candy_hospital2",
+   "x": 11,
+   "y": 15,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_candy_hospital3",
+   "name": "spyder_candy_hospital3",
+   "x": 5,
+   "y": 18,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_candy_house1",
+   "name": "spyder_candy_house1",
+   "x": 6,
+   "y": 6,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_candy_house2",
+   "name": "spyder_candy_house2",
+   "x": 6,
+   "y": 6,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_candy_house3",
+   "name": "spyder_candy_house3",
+   "x": 6,
+   "y": 6,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_candy_inn1",
+   "name": "spyder_candy_inn1",
+   "x": 3,
+   "y": 2,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_candy_inn2",
+   "name": "spyder_candy_inn2",
+   "x": 5,
+   "y": 2,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_candy_port",
+   "name": "Candy Port",
+   "x": 22,
+   "y": 5,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_candy_scoop",
+   "name": "spyder_candy_scoop",
+   "x": 5,
+   "y": 9,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_candy_town",
+   "name": "Candy Town",
+   "x": 4,
+   "y": 19,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_citypark",
+   "name": "City Park",
+   "x": 36,
+   "y": 4,
+   "from": "blocked"
+  },
+  {
+   "id": "spyder_citypark_house1",
+   "name": "spyder_citypark_house1",
+   "x": 6,
+   "y": 6,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_cotton_artshop",
+   "name": "spyder_cotton_artshop",
+   "x": 2,
+   "y": 8,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_cotton_cafe",
+   "name": "spyder_cotton_cafe",
+   "x": 8,
+   "y": 10,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_cotton_house1",
+   "name": "spyder_cotton_house1",
+   "x": 6,
+   "y": 6,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_cotton_house2",
+   "name": "spyder_cotton_house2",
+   "x": 5,
+   "y": 2,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_cotton_scoop",
+   "name": "spyder_cotton_scoop",
+   "x": 5,
+   "y": 9,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_cotton_town",
+   "name": "Cotton Town",
+   "x": 16,
+   "y": 17,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_cotton_tunnel",
+   "name": "spyder_cotton_tunnel",
+   "x": 35,
+   "y": 3,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_datacenter",
+   "name": "spyder_datacenter",
+   "x": 2,
+   "y": 18,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_diamond_hill",
+   "name": "Diamond Hill",
+   "x": 18,
+   "y": 51,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_dojo1",
+   "name": "spyder_dojo1",
+   "x": 11,
+   "y": 5,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_dojo2",
+   "name": "spyder_dojo2",
+   "x": 10,
+   "y": 8,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_dojo3",
+   "name": "spyder_dojo3",
+   "x": 10,
+   "y": 8,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_dojo4",
+   "name": "spyder_dojo4",
+   "x": 10,
+   "y": 8,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_downstairs",
+   "name": "spyder_downstairs",
+   "x": 0,
+   "y": 2,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_dragonscave",
+   "name": "Dragon's Cave",
+   "x": 16,
+   "y": 5,
+   "from": "blocked"
+  },
+  {
+   "id": "spyder_dryadsgrove",
+   "name": "Dryad's Grove",
+   "x": 39,
+   "y": 7,
+   "from": "blocked"
+  },
+  {
+   "id": "spyder_flower_center",
+   "name": "spyder_flower_center",
+   "x": 6,
+   "y": 9,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_flower_city",
+   "name": "Flower City",
+   "x": 17,
+   "y": 30,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_flower_house1",
+   "name": "spyder_flower_house1",
+   "x": 6,
+   "y": 6,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_flower_house2",
+   "name": "spyder_flower_house2",
+   "x": 2,
+   "y": 7,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_flower_petshop",
+   "name": "spyder_flower_petshop",
+   "x": 1,
+   "y": 6,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_flower_scoop",
+   "name": "spyder_flower_scoop",
+   "x": 5,
+   "y": 9,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_greenwash",
+   "name": "spyder_greenwash",
+   "x": 14,
+   "y": 19,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_greenwash_greenhouse",
+   "name": "spyder_greenwash_greenhouse",
+   "x": 1,
+   "y": 7,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_greenwash_level2",
+   "name": "spyder_greenwash_level2",
+   "x": 1,
+   "y": 4,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_greenwash_level3",
+   "name": "spyder_greenwash_level3",
+   "x": 13,
+   "y": 2,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_healing_center",
+   "name": "spyder_healing_center",
+   "x": 6,
+   "y": 9,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_leather_center",
+   "name": "spyder_leather_center",
+   "x": 6,
+   "y": 9,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_leather_gym",
+   "name": "spyder_leather_gym",
+   "x": 1,
+   "y": 9,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_leather_house1",
+   "name": "spyder_leather_house1",
+   "x": 4,
+   "y": 6,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_leather_house2",
+   "name": "spyder_leather_house2",
+   "x": 2,
+   "y": 6,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_leather_museum",
+   "name": "spyder_leather_museum",
+   "x": 0,
+   "y": 10,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_leather_scoop",
+   "name": "spyder_leather_scoop",
+   "x": 5,
+   "y": 9,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_leather_shaft1",
+   "name": "spyder_leather_shaft1",
+   "x": 12,
+   "y": 13,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_leather_shaft2",
+   "name": "spyder_leather_shaft2",
+   "x": 4,
+   "y": 8,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_leather_town",
+   "name": "Leather Town",
+   "x": 17,
+   "y": 19,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_mansion",
+   "name": "Mansion",
+   "x": 1,
+   "y": 15,
+   "from": "blocked"
+  },
+  {
+   "id": "spyder_mansion_basement",
+   "name": "spyder_mansion_basement",
+   "x": 6,
+   "y": 20,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_mansion_top",
+   "name": "spyder_mansion_top",
+   "x": 1,
+   "y": 16,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_nimrod_bottom",
+   "name": "spyder_nimrod_bottom",
+   "x": 16,
+   "y": 19,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_nimrod_middle",
+   "name": "spyder_nimrod_middle",
+   "x": 15,
+   "y": 18,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_nimrod_room",
+   "name": "spyder_nimrod_room",
+   "x": 8,
+   "y": 6,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_nimrod_top",
+   "name": "spyder_nimrod_top",
+   "x": 0,
+   "y": 17,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_omnichannel1",
+   "name": "spyder_omnichannel1",
+   "x": 2,
+   "y": 11,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_omnichannel2",
+   "name": "spyder_omnichannel2",
+   "x": 1,
+   "y": 12,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_omnichannel3",
+   "name": "spyder_omnichannel3",
+   "x": 1,
+   "y": 12,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_omnichannel4",
+   "name": "spyder_omnichannel4",
+   "x": 1,
+   "y": 12,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_paper_daycare",
+   "name": "spyder_paper_daycare",
+   "x": 0,
+   "y": 3,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_paper_manor",
+   "name": "spyder_paper_manor",
+   "x": 6,
+   "y": 6,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_paper_rival_bedroom",
+   "name": "spyder_paper_rival_bedroom",
+   "x": 1,
+   "y": 3,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_paper_rival_downstairs",
+   "name": "spyder_paper_rival_downstairs",
+   "x": 7,
+   "y": 9,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_paper_rival_office",
+   "name": "spyder_paper_rival_office",
+   "x": 5,
+   "y": 3,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_paper_scoop",
+   "name": "spyder_paper_scoop",
+   "x": 4,
+   "y": 8,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_paper_town",
+   "name": "Paper Town",
+   "x": 4,
+   "y": 13,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_radiotower",
+   "name": "spyder_radiotower",
+   "x": 2,
+   "y": 17,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_route1",
+   "name": "Route 1",
+   "x": 39,
+   "y": 5,
+   "from": "blocked"
+  },
+  {
+   "id": "spyder_route2",
+   "name": "Route 2",
+   "x": 36,
+   "y": 19,
+   "from": "blocked"
+  },
+  {
+   "id": "spyder_route3",
+   "name": "Route 3",
+   "x": 9,
+   "y": 39,
+   "from": "blocked"
+  },
+  {
+   "id": "spyder_route4",
+   "name": "Route 4",
+   "x": 0,
+   "y": 4,
+   "from": "blocked"
+  },
+  {
+   "id": "spyder_route5",
+   "name": "Route 5",
+   "x": 39,
+   "y": 9,
+   "from": "blocked"
+  },
+  {
+   "id": "spyder_route6",
+   "name": "Route 6",
+   "x": 30,
+   "y": 19,
+   "from": "blocked"
+  },
+  {
+   "id": "spyder_routea",
+   "name": "Route A",
+   "x": 8,
+   "y": 39,
+   "from": "blocked"
+  },
+  {
+   "id": "spyder_routeb",
+   "name": "Route B",
+   "x": 6,
+   "y": 4,
+   "from": "blocked"
+  },
+  {
+   "id": "spyder_routec",
+   "name": "Route C",
+   "x": 0,
+   "y": 35,
+   "from": "blocked"
+  },
+  {
+   "id": "spyder_routed",
+   "name": "Route D",
+   "x": 33,
+   "y": 39,
+   "from": "blocked"
+  },
+  {
+   "id": "spyder_routee",
+   "name": "Route E",
+   "x": 19,
+   "y": 16,
+   "from": "blocked"
+  },
+  {
+   "id": "spyder_scoop1",
+   "name": "spyder_scoop1",
+   "x": 19,
+   "y": 3,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_scoop2",
+   "name": "spyder_scoop2",
+   "x": 7,
+   "y": 4,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_scoop3",
+   "name": "spyder_scoop3",
+   "x": 5,
+   "y": 3,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_scoop4",
+   "name": "spyder_scoop4",
+   "x": 9,
+   "y": 20,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_test_map",
+   "name": "Cotton Town",
+   "x": 2,
+   "y": 2,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_timber_cafe",
+   "name": "spyder_timber_cafe",
+   "x": 8,
+   "y": 10,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_timber_center",
+   "name": "spyder_timber_center",
+   "x": 6,
+   "y": 9,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_timber_house",
+   "name": "spyder_timber_house",
+   "x": 6,
+   "y": 6,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_timber_scoop",
+   "name": "spyder_timber_scoop",
+   "x": 5,
+   "y": 9,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_timber_town",
+   "name": "Timber Town",
+   "x": 8,
+   "y": 21,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_timber_walledgarden1",
+   "name": "spyder_timber_walledgarden1",
+   "x": 7,
+   "y": 3,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_timber_walledgarden2",
+   "name": "spyder_timber_walledgarden2",
+   "x": 7,
+   "y": 18,
+   "from": "fallback"
+  },
+  {
+   "id": "spyder_tunnel",
+   "name": "Tunnel",
+   "x": 19,
+   "y": 35,
+   "from": "blocked"
+  },
+  {
+   "id": "spyder_tunnel_below",
+   "name": "Tunnel (Below)",
+   "x": 7,
+   "y": 2,
+   "from": "blocked"
+  },
+  {
+   "id": "spyder_wayfarer_inn1",
+   "name": "spyder_wayfarer_inn1",
+   "x": 9,
+   "y": 6,
+   "from": "transfer"
+  },
+  {
+   "id": "spyder_wayfarer_inn2",
+   "name": "spyder_wayfarer_inn2",
+   "x": 5,
+   "y": 2,
+   "from": "transfer"
+  },
+  {
+   "id": "start_tuxemon",
+   "name": "start_tuxemon",
+   "x": 1,
+   "y": 0,
+   "from": "fallback"
+  },
+  {
+   "id": "taba_ba_br_1",
+   "name": "Taba Battle Area - Battle Room 1",
+   "x": 12,
+   "y": 7,
+   "from": "fallback"
+  },
+  {
+   "id": "taba_ba_br_2",
+   "name": "Taba Battle Area - Battle Room 2",
+   "x": 7,
+   "y": 1,
+   "from": "transfer"
+  },
+  {
+   "id": "taba_ba_br_3",
+   "name": "Taba Battle Area - Battle Room 3",
+   "x": 1,
+   "y": 3,
+   "from": "transfer"
+  },
+  {
+   "id": "taba_ba_br_4",
+   "name": "taba_ba_br_4",
+   "x": 4,
+   "y": 1,
+   "from": "transfer"
+  },
+  {
+   "id": "taba_ba_br_master",
+   "name": "taba_ba_br_master",
+   "x": 1,
+   "y": 0,
+   "from": "fallback"
+  },
+  {
+   "id": "taba_ba_br_master_foyer",
+   "name": "taba_ba_br_master_foyer",
+   "x": 2,
+   "y": 15,
+   "from": "transfer"
+  },
+  {
+   "id": "taba_ba_foyer",
+   "name": "Taba Battle Area - Foyer",
+   "x": 2,
+   "y": 8,
+   "from": "fallback"
+  },
+  {
+   "id": "taba_ba_main",
+   "name": "Taba Battle Area - Main Hall",
+   "x": 1,
+   "y": 13,
+   "from": "transfer"
+  },
+  {
+   "id": "taba_ba_passageway_1",
+   "name": "Taba Battle Area - Passageway 1",
+   "x": 1,
+   "y": 16,
+   "from": "transfer"
+  },
+  {
+   "id": "taba_ba_passageway_2",
+   "name": "Taba Battle Area - Passageway 2",
+   "x": 14,
+   "y": 17,
+   "from": "transfer"
+  },
+  {
+   "id": "taba_ba_passageway_3",
+   "name": "taba_ba_passageway_3",
+   "x": 9,
+   "y": 1,
+   "from": "transfer"
+  },
+  {
+   "id": "taba_ba_passageway_4",
+   "name": "taba_ba_passageway_4",
+   "x": 3,
+   "y": 18,
+   "from": "transfer"
+  },
+  {
+   "id": "taba_ba_stairwell_1",
+   "name": "taba_ba_stairwell_1",
+   "x": 1,
+   "y": 8,
+   "from": "transfer"
+  },
+  {
+   "id": "taba_ba_stairwell_2",
+   "name": "taba_ba_stairwell_2",
+   "x": 8,
+   "y": 1,
+   "from": "transfer"
+  },
+  {
+   "id": "taba_house1",
+   "name": "taba_house1",
+   "x": 7,
+   "y": 5,
+   "from": "fallback"
+  },
+  {
+   "id": "taba_house2",
+   "name": "taba_house2",
+   "x": 5,
+   "y": 2,
+   "from": "transfer"
+  },
+  {
+   "id": "taba_house2_upstairs",
+   "name": "taba_house2_upstairs",
+   "x": 7,
+   "y": 2,
+   "from": "transfer"
+  },
+  {
+   "id": "taba_house3",
+   "name": "taba_house3",
+   "x": 7,
+   "y": 2,
+   "from": "transfer"
+  },
+  {
+   "id": "taba_house3_upstairs",
+   "name": "taba_house3_upstairs",
+   "x": 7,
+   "y": 2,
+   "from": "transfer"
+  },
+  {
+   "id": "taba_house4",
+   "name": "taba_house4",
+   "x": 7,
+   "y": 5,
+   "from": "fallback"
+  },
+  {
+   "id": "taba_town",
+   "name": "Taba",
+   "x": 40,
+   "y": 4,
+   "from": "transfer"
+  },
+  {
+   "id": "tabathas",
+   "name": "tabathas",
+   "x": 6,
+   "y": 9,
+   "from": "transfer"
+  },
+  {
+   "id": "test_npcs",
+   "name": "test_npcs",
+   "x": 13,
+   "y": 1,
+   "from": "fallback"
+  },
+  {
+   "id": "timber_town",
+   "name": "Timber Town",
+   "x": 10,
+   "y": 23,
+   "from": "transfer"
+  },
+  {
+   "id": "tt_forest_route1",
+   "name": "tt_forest_route1",
+   "x": 8,
+   "y": 38,
+   "from": "transfer"
+  },
+  {
+   "id": "tt_paper_town",
+   "name": "tt_paper_town",
+   "x": 14,
+   "y": 4,
+   "from": "transfer"
+  },
+  {
+   "id": "tt_searoute1",
+   "name": "tt_searoute1",
+   "x": 38,
+   "y": 0,
+   "from": "fallback"
+  },
+  {
+   "id": "tunnel",
+   "name": "Tunnel",
+   "x": 7,
+   "y": 3,
+   "from": "transfer"
+  },
+  {
+   "id": "tunnel_below",
+   "name": "Tunnel (Below)",
+   "x": 13,
+   "y": 25,
+   "from": "fallback"
+  },
+  {
+   "id": "tuxe_mart_taba",
+   "name": "tuxe_mart_taba",
+   "x": 6,
+   "y": 9,
+   "from": "fallback"
+  },
+  {
+   "id": "water_cathedral",
+   "name": "water_cathedral",
+   "x": 23,
+   "y": 58,
+   "from": "fallback"
+  },
+  {
+   "id": "water_end_of_desert",
+   "name": "water_end_of_desert",
+   "x": 11,
+   "y": 32,
+   "from": "transfer"
+  },
+  {
+   "id": "water_lower_village",
+   "name": "water_lower_village",
+   "x": 34,
+   "y": 22,
+   "from": "transfer"
+  },
+  {
+   "id": "water_outskirts",
+   "name": "water_outskirts",
+   "x": 28,
+   "y": 4,
+   "from": "transfer"
+  },
+  {
+   "id": "water_river_village",
+   "name": "water_river_village",
+   "x": 17,
+   "y": 28,
+   "from": "transfer"
+  },
+  {
+   "id": "water_route_grass",
+   "name": "water_route_grass",
+   "x": 23,
+   "y": 48,
+   "from": "fallback"
+  },
+  {
+   "id": "water_route_ice",
+   "name": "water_route_ice",
+   "x": 23,
+   "y": 20,
+   "from": "transfer"
+  },
+  {
+   "id": "water_snow_village",
+   "name": "water_snow_village",
+   "x": 11,
+   "y": 28,
+   "from": "fallback"
+  },
+  {
+   "id": "water_underwater",
+   "name": "water_underwater",
+   "x": 42,
+   "y": 38,
+   "from": "fallback"
+  },
+  {
+   "id": "water_volcano_path",
+   "name": "water_volcano_path",
+   "x": 10,
+   "y": 10,
+   "from": "transfer"
+  },
+  {
+   "id": "water_volcano_village",
+   "name": "water_volcano_village",
+   "x": 1,
+   "y": 26,
+   "from": "fallback"
+  },
+  {
+   "id": "wayfarer_inn1",
+   "name": "wayfarer_inn1",
+   "x": 12,
+   "y": 2,
+   "from": "transfer"
+  },
+  {
+   "id": "wayfarer_inn2",
+   "name": "wayfarer_inn2",
+   "x": 5,
+   "y": 2,
+   "from": "transfer"
+  },
+  {
+   "id": "witcher_route_7",
+   "name": "Witcher Route 7",
+   "x": 0,
+   "y": 11,
+   "from": "fallback"
+  }
+ ]
+}

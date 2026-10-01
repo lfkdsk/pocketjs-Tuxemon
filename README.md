@@ -54,8 +54,8 @@ summary:
   the same host: map switches 15.9 ms / 14.7 ms, battle entry 22.2 ms /
   22.6 ms, battle exit 34.4 ms / 38.5 ms (480×272 / 960×544). The QuickJS
   benches assert a 250 ms startup budget and a 50 ms per-frame CPU budget.
-- **Import coverage:** 85.8% of Tuxemon action uses and 89.6% of condition
-  uses map natively to kit commands; 91.1% / 91.1% are executable (native,
+- **Import coverage:** 89.0% of Tuxemon action uses and 92.1% of condition
+  uses map natively to kit commands; 93.8% / 92.1% are executable (native,
   degraded, or a deliberate placeholder). The full per-type breakdown is in
   [reports/G1-coverage.md](reports/G1-coverage.md).
 - **Day/night:** a saved, rewindable calendar drives Tuxemon's time conditions
@@ -134,6 +134,7 @@ bun run test            # the test suite (build first for the pixel replays)
 bun run verify:g6:determinism   # two imports are byte-identical
 bun run verify:gb6:mainline     # replay the Route 3 mainline tape
 bun run verify:j1:mainline      # replay the Captain-return tape
+bun run verify:j2:mainline      # replay the hospital-cure tape
 bun run bench:g6:quickjs        # short two-viewport QuickJS performance gate
 bun run bench:gb6:quickjs       # full 480x272 QuickJS journey gate
 ```

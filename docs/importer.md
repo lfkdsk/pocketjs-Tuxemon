@@ -140,8 +140,8 @@ Current coverage (G6 profile):
 
 | Kind | Types | Uses | Native | Degraded | Placeholder | Dropped | Executable |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Actions | 98 | 13,617 | 11,679 | 642 | 89 | 1,207 | 91.1% |
-| Conditions | 64 | 8,663 | 7,765 | 0 | 124 | 774 | 91.1% |
+| Actions | 98 | 13,617 | 12,122 | 628 | 19 | 848 | 93.8% |
+| Conditions | 64 | 8,663 | 7,976 | 2 | 1 | 684 | 92.1% |
 
 ## Adding or changing a mapping
 
