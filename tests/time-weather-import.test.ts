@@ -236,6 +236,7 @@ describe("time/weather runtime handlers", () => {
     variables: {},
     items: {},
     gold: 0,
+    playerName: "Player",
     random: () => { throw new Error("time/weather must not consume battle RNG"); },
   };
 

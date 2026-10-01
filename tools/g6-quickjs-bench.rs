@@ -362,7 +362,8 @@ mod g6_quickjs_bench {
         bytes: u64,
         read_parse_ms: f64,
         validate_ms: f64,
-        compile_ms: f64,
+        world_compile_ms: f64,
+        passage_compile_ms: f64,
         commit_ms: f64,
         total_ms: f64,
     }
@@ -1199,13 +1200,20 @@ mod g6_quickjs_bench {
                 timed_bool(&bench, &format!("globalThis.__rpgMapBenchmark.step({id})"));
             let (validated, validate_ms) =
                 timed_bool(&bench, &format!("globalThis.__rpgMapBenchmark.step({id})"));
-            let (compiled, compile_ms) =
+            let (world_compiled, world_compile_ms) =
+                timed_bool(&bench, &format!("globalThis.__rpgMapBenchmark.step({id})"));
+            let (compiled, passage_compile_ms) =
                 timed_bool(&bench, &format!("globalThis.__rpgMapBenchmark.step({id})"));
             assert!(!parsed, "{} parse step must remain staged", meta.id);
             assert!(!validated, "{} validation step must remain staged", meta.id);
             assert!(
+                !world_compiled,
+                "{} world compilation must remain staged",
+                meta.id
+            );
+            assert!(
                 compiled,
-                "{} compile step must complete preparation",
+                "{} passage compilation must complete preparation",
                 meta.id
             );
             let commit_ms = timed_unit(
@@ -1221,14 +1229,15 @@ mod g6_quickjs_bench {
                 bytes,
                 read_parse_ms,
                 validate_ms,
-                compile_ms,
+                world_compile_ms,
+                passage_compile_ms,
                 commit_ms,
                 total_ms,
             });
         }
 
         let mut table = String::from(
-            "map\twidth\theight\tbytes\tread_parse_ms\tvalidate_ms\tcompile_ms\tcommit_ms\tworst_stage_ms\ttotal_ms\tlimit\n",
+            "map\twidth\theight\tbytes\tread_parse_ms\tvalidate_ms\tworld_compile_ms\tpassage_compile_ms\tcommit_ms\tworst_stage_ms\ttotal_ms\tlimit\n",
         );
         let mut stages = Vec::with_capacity(samples.len());
         let mut worst_non_exempt: Option<(&MapSample, f64)> = None;
@@ -1237,7 +1246,8 @@ mod g6_quickjs_bench {
             let worst = sample
                 .read_parse_ms
                 .max(sample.validate_ms)
-                .max(sample.compile_ms)
+                .max(sample.world_compile_ms)
+                .max(sample.passage_compile_ms)
                 .max(sample.commit_ms);
             stages.push(worst);
             if worst_all.map_or(true, |(_, value)| worst > value) {
@@ -1257,14 +1267,15 @@ mod g6_quickjs_bench {
             };
             writeln!(
                 table,
-                "{}\t{}\t{}\t{}\t{:.3}\t{:.3}\t{:.3}\t{:.3}\t{:.3}\t{:.3}\t{}",
+                "{}\t{}\t{}\t{}\t{:.3}\t{:.3}\t{:.3}\t{:.3}\t{:.3}\t{:.3}\t{:.3}\t{}",
                 sample.meta.id,
                 sample.meta.width,
                 sample.meta.height,
                 sample.bytes,
                 sample.read_parse_ms,
                 sample.validate_ms,
-                sample.compile_ms,
+                sample.world_compile_ms,
+                sample.passage_compile_ms,
                 sample.commit_ms,
                 worst,
                 sample.total_ms,

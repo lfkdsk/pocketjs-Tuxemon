@@ -280,12 +280,13 @@
   "witcher_route_7"
  ],
  "schemaErrors": [],
+ "audioQoaPending": [],
  "byFate": {
   "T3-dropped": 2360,
-  "T1": 34557,
-  "T4-dropped": 2534,
+  "T1": 35150,
+  "T4-dropped": 2141,
   "T1-lowered": 2375,
-  "T2-dropped": 619,
+  "T2-dropped": 420,
   "T3-placeholder": 29,
   "structural": 776
  },
@@ -525,6 +526,12 @@
    "note": "confirmation choice followed by upstream-compatible spawn/transfer/replace"
   },
   {
+   "key": "act:fadeout_music:T1",
+   "fate": "T1",
+   "count": 1,
+   "note": "fadeoutBgm 1.000s + fading flag"
+  },
+  {
    "key": "act:format_variable:T3-dropped",
    "fate": "T3-dropped",
    "count": 221,
@@ -621,16 +628,16 @@
    "note": "KA1 map animation at the character's sampled tile"
   },
   {
-   "key": "act:play_music:T2-dropped",
-   "fate": "T2-dropped",
+   "key": "act:play_music:T1",
+   "fate": "T1",
    "count": 199,
-   "note": "bgm hook (P1: silent)"
+   "note": "playBgm music_mystic_island (no asset: silent)"
   },
   {
    "key": "act:play_sound:T1",
    "fate": "T1",
    "count": 72,
-   "note": "se cue"
+   "note": "playSe japanese_temple_bell_small"
   },
   {
    "key": "act:play_tile_animation:T1",
@@ -1149,10 +1156,10 @@
    "note": "gold >= n"
   },
   {
-   "key": "cond:is music_playing:T4-dropped",
-   "fate": "T4-dropped",
+   "key": "cond:is music_playing:T1",
+   "fate": "T1",
    "count": 1,
-   "note": "no music in P1"
+   "note": "bgmPlaying condition (paused/combat inversion noted; safe for the map-enter idiom)"
   },
   {
    "key": "cond:is party_infected:T3-placeholder",
@@ -1329,10 +1336,10 @@
    "note": "gold >= n"
   },
   {
-   "key": "cond:not music_playing:T4-dropped",
-   "fate": "T4-dropped",
+   "key": "cond:not music_playing:T1",
+   "fate": "T1",
    "count": 196,
-   "note": "no music in P1"
+   "note": "bgmPlaying condition (paused/combat inversion noted; safe for the map-enter idiom)"
   },
   {
    "key": "cond:not party_size:T1",
@@ -1397,7 +1404,7 @@
   {
    "key": "trigger:guard:T1",
    "fate": "T1",
-   "count": 1504,
+   "count": 1695,
    "note": "parallel"
   },
   {
@@ -1413,15 +1420,21 @@
    "note": "Tuxemon's integer tile boundary never contains a point for a zero-size TMX event"
   },
   {
+   "key": "trigger:init:T1",
+   "fate": "T1",
+   "count": 5,
+   "note": "parallel"
+  },
+  {
    "key": "trigger:never-true guard:T4-dropped",
    "fate": "T4-dropped",
-   "count": 1571,
+   "count": 1570,
    "note": "fixed-false guard prevents the source event from starting"
   },
   {
    "key": "trigger:no-op after conversion:T4-dropped",
    "fate": "T4-dropped",
-   "count": 416,
+   "count": 221,
    "note": "every action was removed, so no project event was emitted"
   },
   {
@@ -1936,18 +1949,18 @@
    "summary": {
     "types": 98,
     "uses": 13617,
-    "native": 12122,
+    "native": 12322,
     "degraded": 628,
     "placeholder": 19,
-    "dropped": 848,
-    "nativePercent": 89,
-    "executablePercent": 93.8,
+    "dropped": 648,
+    "nativePercent": 90.5,
+    "executablePercent": 95.2,
     "tier1": {
-     "uses": 6155,
-     "percent": 45.2,
+     "uses": 6355,
+     "percent": 46.67,
      "requiredUses": 6246,
      "requiredPercent": 45.9,
-     "meetsBaseline": false
+     "meetsBaseline": true
     }
    },
    "rows": [
@@ -2385,13 +2398,13 @@
     {
      "type": "fadeout_music",
      "total": 1,
-     "native": 0,
+     "native": 1,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 1,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "fixed-false guard prevents the source event from starting"
+      "native": [
+       "fadeoutBgm 1.000s + fading flag"
       ]
      }
     },
@@ -2636,14 +2649,40 @@
     {
      "type": "play_music",
      "total": 200,
-     "native": 0,
+     "native": 199,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 200,
+     "dropped": 1,
      "reasons": {
+      "native": [
+       "playBgm music_mystic_island (no asset: silent)",
+       "playBgm music_mystic_island_reverse (no asset: silent)",
+       "playBgm music_adventure_begins (no asset: silent)",
+       "playBgm music_town_theme",
+       "playBgm music_city_park",
+       "playBgm music_cathedral_theme",
+       "playBgm music_home",
+       "playBgm music_dojo_theme (no asset: silent)",
+       "playBgm lunar_joyride_mp3 (no asset: silent)",
+       "playBgm music_dragons_cave (no asset: silent)",
+       "playBgm legend_bofie_all-the-tea-in-china_mp3 (no asset: silent)",
+       "playBgm music_jester_theme",
+       "playBgm music_omnichannel (no asset: silent)",
+       "playBgm music_chibi_ninja (no asset: silent)",
+       "playBgm music_the_wild_places",
+       "playBgm music_the_princess (no asset: silent)",
+       "playBgm come_and_find_me_ogg (no asset: silent)",
+       "playBgm music_sphalian_theme (no asset: silent)",
+       "playBgm music_07_town",
+       "playBgm music_10_empire",
+       "playBgm music_18_nighttide_waltz (no asset: silent)",
+       "playBgm music_fields_loop (no asset: silent)",
+       "playBgm music_discovery (no asset: silent)",
+       "playBgm music_dizzy_spells (no asset: silent)",
+       "playBgm music_come_find_me (no asset: silent)",
+       "playBgm music_valor_heroes (no asset: silent)"
+      ],
       "dropped": [
-       "every action was removed, so no project event was emitted",
-       "bgm hook (P1: silent)",
        "Tuxemon never starts an event without source conditions or behavior"
       ]
      }
@@ -2657,7 +2696,9 @@
      "dropped": 1,
      "reasons": {
       "native": [
-       "se cue"
+       "playSe sound_confirm",
+       "playSe coinecho",
+       "playSe japanese_temple_bell_small"
       ],
       "dropped": [
        "fixed-false guard prevents the source event from starting"
@@ -3380,18 +3421,18 @@
    "summary": {
     "types": 64,
     "uses": 8663,
-    "native": 7976,
+    "native": 8173,
     "degraded": 2,
     "placeholder": 1,
-    "dropped": 684,
-    "nativePercent": 92.1,
-    "executablePercent": 92.1,
+    "dropped": 487,
+    "nativePercent": 94.3,
+    "executablePercent": 94.4,
     "tier1": {
-     "uses": 4500,
-     "percent": 51.95,
+     "uses": 4697,
+     "percent": 54.22,
      "requiredUses": 4591,
      "requiredPercent": 53,
-     "meetsBaseline": false
+     "meetsBaseline": true
     }
    },
    "rows": [
@@ -3821,13 +3862,13 @@
     {
      "type": "is music_playing",
      "total": 1,
-     "native": 0,
+     "native": 1,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 1,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "fixed-false guard prevents the source event from starting"
+      "native": [
+       "bgmPlaying condition (paused/combat inversion noted; safe for the map-enter idiom)"
       ]
      }
     },
@@ -4222,14 +4263,13 @@
     {
      "type": "not music_playing",
      "total": 196,
-     "native": 0,
+     "native": 196,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 196,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "every action was removed, so no project event was emitted",
-       "no music in P1"
+      "native": [
+       "bgmPlaying condition (paused/combat inversion noted; safe for the map-enter idiom)"
       ]
      }
     },

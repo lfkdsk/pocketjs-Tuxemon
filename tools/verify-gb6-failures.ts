@@ -23,7 +23,7 @@ const ROOT = resolve(import.meta.dir, "..");
 const HEAL_BEFORE_LEAVE = "You should heal your monsters before heading off.";
 const FIRST_FIGHT_LOSE = "As expected! Old models can't compare to new ones!";
 const FIRST_FIGHT_AFTER = "I'll heal you up this time, but I'm not a charity. Rest up at home next time your monsters get worn out.";
-const FIRST_LOSS_STATE_SHA256 = "de25bbd6eed6ff39c8c6f1bafa181b4e46de2d41d6f9d43ff5e513972ba773bf";
+const FIRST_LOSS_STATE_SHA256 = "4e532690749ae07d1d78cd5e85fe19ba6651b511a3349e4ee02920d19aa4b693";
 
 interface SeenText {
   frame: number;

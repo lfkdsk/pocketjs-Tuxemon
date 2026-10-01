@@ -308,7 +308,9 @@ describe("GB3 capture/item/run reducer differential", () => {
     });
     expect(state.awaiting?.uid).toBe(1);
     expect(canSwap(state, 1, 2)).toBeTrue();
+    const before = JSON.stringify(state);
     const next = reduceBattle(DB, state, { type: "replacement", uid: 2 });
+    expect(JSON.stringify(state)).toBe(before);
     expect(state.field).toEqual([3, 1]);
     expect(next.field).toContain(2);
     expect(next.field).not.toContain(1);

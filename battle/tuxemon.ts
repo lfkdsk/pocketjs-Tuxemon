@@ -12,7 +12,7 @@ import {
   type BattleCoreRules,
 } from "./core.ts";
 import { calculateDefeatExperience, giveExperience } from "./progression.ts";
-import { applyStatModifier, calculateBaseStats, combatStats, monsterFromSnapshot, pythonRound } from "./stats.ts";
+import { applyStatModifier, calculateBaseStats, combatStat, monsterFromSnapshot, pythonRound } from "./stats.ts";
 import {
   STAT_NAMES,
   type BattleMonster,
@@ -71,24 +71,68 @@ export function cloneBattleState(state: TuxemonBattleState): TuxemonBattleState 
   return JSON.parse(JSON.stringify(state)) as TuxemonBattleState;
 }
 
+/** Own each mutable branch; historical events and rewards are append-only.
+ * Base stats and type lists are replaced as whole values by battle rules;
+ * individual values and birthdate never change during a battle. */
+function battleDraft(state: TuxemonBattleState): TuxemonBattleState {
+  const monster = (value: BattleMonster): BattleMonster => ({
+    ...value,
+    stages: { ...value.stages },
+    statusBoosts: { ...value.statusBoosts },
+    trainingPoints: { ...value.trainingPoints },
+    moves: value.moves.map(move => ({ ...move })),
+    status: value.status ? { ...value.status, appliedEffects: [...value.status.appliedEffects] } : null,
+  });
+  return {
+    ...state,
+    parties: [state.parties[0].map(monster), state.parties[1].map(monster)],
+    field: [...state.field],
+    queue: state.queue.map((action) => ({ ...action })),
+    pending: state.pending.map((entry) => ({ ...entry, action: { ...entry.action } })),
+    hitRolls: { ...state.hitRolls },
+    decisionQueue: [...state.decisionQueue],
+    awaiting: state.awaiting ? { ...state.awaiting } : null,
+    events: [...state.events],
+    rewards: [...state.rewards],
+    damageByDefender: Object.fromEntries(Object.entries(state.damageByDefender).map(([uid, attackers]) => [uid, [...attackers]])),
+    result: state.result ? { ...state.result } : null,
+    inventory: { ...state.inventory },
+    variables: { ...state.variables },
+  };
+}
+
+// An index exists only while a reducer owns its draft. Public helpers still
+// observe caller mutations when used outside that transaction.
+const draftIndexes = new WeakMap<TuxemonBattleState, Map<number, { monster: BattleMonster; side: 0 | 1 }>>();
+
 export function getMonster(state: TuxemonBattleState, uid: number): BattleMonster {
-  for (const party of state.parties) {
-    const monster = party.find((candidate) => candidate.uid === uid);
-    if (monster) return monster;
+  const index = draftIndexes.get(state);
+  if (index) {
+    const entry = index.get(uid);
+    if (entry) return entry.monster;
+  } else {
+    for (const party of state.parties) for (const monster of party) if (monster.uid === uid) return monster;
   }
   throw new Error(`battle: unknown monster uid ${uid}`);
 }
 
 export function getSide(state: TuxemonBattleState, uid: number): 0 | 1 {
-  if (state.parties[0].some((monster) => monster.uid === uid)) return 0;
-  if (state.parties[1].some((monster) => monster.uid === uid)) return 1;
+  const index = draftIndexes.get(state);
+  if (index) {
+    const entry = index.get(uid);
+    if (entry) return entry.side;
+  } else {
+    for (let side = 0; side < 2; side++) {
+      for (const monster of state.parties[side]!) if (monster.uid === uid) return side as 0 | 1;
+    }
+  }
   throw new Error(`battle: uid ${uid} has no owner`);
 }
 
 function activeOnSide(state: TuxemonBattleState, side: 0 | 1): BattleMonster[] {
-  return state.field
-    .filter((uid) => getSide(state, uid) === side)
-    .map((uid) => getMonster(state, uid));
+  const result: BattleMonster[] = [];
+  for (const uid of state.field) if (getSide(state, uid) === side) result.push(getMonster(state, uid));
+  return result;
 }
 
 function aliveParty(state: TuxemonBattleState, side: 0 | 1): BattleMonster[] {
@@ -443,12 +487,10 @@ export function calculateDamage(
 ): readonly [number, number] {
   const range = RANGE_MAP[technique.range];
   if (!range) return [0, 0];
-  const userStats = combatStats(user);
-  const targetStats = combatStats(target);
   const strength = range[0] === "level"
     ? 7 + user.level
-    : userStats[range[0]] * (7 + user.level);
-  const resistance = Math.max(1, range[1] === "resist" ? 1 : targetStats[range[1]]);
+    : combatStat(user, range[0]) * (7 + user.level);
+  const resistance = Math.max(1, range[1] === "resist" ? 1 : combatStat(target, range[1]));
   const multiplier = affinity(db, technique.types, target.types);
   return [Math.trunc(strength * move.power * multiplier / resistance), multiplier];
 }
@@ -1514,9 +1556,9 @@ function makeRules(db: TuxemonBattleDb): BattleCoreRules<BattleMonster, TuxemonB
       const technique = db.technique[action.ref];
       const monster = getMonster(state, action.user);
       const speed = technique.sort === "meta" || technique.sort === "potion" ? 0 : Math.trunc(
-        Math.max(combatStats(monster).speed, 0) *
+        Math.max(combatStat(monster, "speed"), 0) *
         (1 + (db.technique_speed[technique.slug] ?? 0) * 0.25) +
-        Math.max(combatStats(monster).dodge, 0) * 0.01,
+        Math.max(combatStat(monster, "dodge"), 0) * 0.01,
       );
       // meta/potion actions really use zero; only speed_test clamps ordinary
       // techniques to a minimum of one.
@@ -1667,44 +1709,55 @@ export function reduceBattle(
   previous: TuxemonBattleState,
   decision: TuxemonBattleDecision,
 ): TuxemonBattleState {
-  const state = cloneBattleState(previous);
-  const rules = makeRules(db);
-  if (decision.type === "technique") {
-    return submitDecision(state, rules, decision.choice);
+  const state = battleDraft(previous);
+  const index = new Map<number, { monster: BattleMonster; side: 0 | 1 }>();
+  for (let side = 0; side < 2; side++) {
+    for (const monster of state.parties[side]!) {
+      if (!index.has(monster.uid)) index.set(monster.uid, { monster, side: side as 0 | 1 });
+    }
   }
-  const user = state.awaiting?.uid;
-  if (user === undefined) throw new Error("battle: no action decision is pending");
-  if (decision.type === "replacement") {
-    if (!canSwap(state, user, decision.uid)) {
-      throw new Error(`battle: replacement ${decision.uid} is unavailable`);
+  draftIndexes.set(state, index);
+  try {
+    const rules = makeRules(db);
+    if (decision.type === "technique") {
+      return submitDecision(state, rules, decision.choice);
+    }
+    const user = state.awaiting?.uid;
+    if (user === undefined) throw new Error("battle: no action decision is pending");
+    if (decision.type === "replacement") {
+      if (!canSwap(state, user, decision.uid)) {
+        throw new Error(`battle: replacement ${decision.uid} is unavailable`);
+      }
+      return submitAction(state, rules, {
+        kind: "swap",
+        user,
+        target: decision.uid,
+        ref: "swap",
+      });
+    }
+    if (decision.type === "run") {
+      if (!canRun(state, user)) throw new Error("battle: escape is unavailable");
+      const target = activeOnSide(state, 1)[0]!;
+      return submitAction(state, rules, {
+        kind: "run",
+        user,
+        target: target.uid,
+        ref: "menu_run",
+      });
+    }
+    const capture = decision.type === "capture";
+    if (!canUseBattleItem(db, state, decision.item, decision.target, capture)) {
+      throw new Error(`battle: item '${decision.item}' is unavailable for target ${decision.target}`);
     }
     return submitAction(state, rules, {
-      kind: "swap",
+      kind: capture ? "capture" : "item",
       user,
-      target: decision.uid,
-      ref: "swap",
+      target: decision.target,
+      ref: decision.item,
     });
+  } finally {
+    draftIndexes.delete(state);
   }
-  if (decision.type === "run") {
-    if (!canRun(state, user)) throw new Error("battle: escape is unavailable");
-    const target = activeOnSide(state, 1)[0]!;
-    return submitAction(state, rules, {
-      kind: "run",
-      user,
-      target: target.uid,
-      ref: "menu_run",
-    });
-  }
-  const capture = decision.type === "capture";
-  if (!canUseBattleItem(db, state, decision.item, decision.target, capture)) {
-    throw new Error(`battle: item '${decision.item}' is unavailable for target ${decision.target}`);
-  }
-  return submitAction(state, rules, {
-    kind: capture ? "capture" : "item",
-    user,
-    target: decision.target,
-    ref: decision.item,
-  });
 }
 
 /** Deterministic headless helper used by golden tests and the future autoplay driver. */

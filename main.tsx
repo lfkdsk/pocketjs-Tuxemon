@@ -24,6 +24,7 @@ import {
   timeWeatherFromLocalDate,
   type CivilDateTime,
 } from "./battle/time-weather.ts";
+import { createAudioEffects } from "./vendor/pocket-rpgkit/src/ui/audio/index.ts";
 
 // ui/gp1-kit-stage.ts and ui/gp1-data-stage.ts are thin re-export wrappers:
 // each one's trailing gp1Mark() call fires right
@@ -73,12 +74,14 @@ const assets = {
 
 mount(() => (
   <GameView
+    immutableState
     project={project}
     maps={repository}
     extensions={extensions}
     battle={rules}
     battleScene={TuxemonBattleScene}
     assets={assets}
+    effects={createAudioEffects(project.audio ?? {})}
     theme={{
       border: "#224f68",
       rim: "#65d5c3",

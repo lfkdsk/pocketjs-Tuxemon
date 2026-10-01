@@ -67,6 +67,7 @@ function start(options: {
     variables: {},
     items: options.items ?? {},
     gold: 0,
+    playerName: "Player",
   });
   if (!started) throw new Error("autoplay fixture did not start");
   const state = tuxemonRuntimeBattleState(started.state);

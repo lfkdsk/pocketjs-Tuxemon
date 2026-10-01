@@ -1,0 +1,96 @@
+{
+  "format": "pocket-tuxemon/audio-manifest/v1",
+  "ffmpeg": "ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers",
+  "rate": 22050,
+  "channels": 1,
+  "files": {
+    "music/music_home.qoa": {
+      "slug": "music_home",
+      "kind": "music",
+      "source": "All of Us.ogg",
+      "pakKey": "audio:qoa.music/music_home.qoa",
+      "bytes": 1585808,
+      "sha256": "c5e29693c9fc2160c38700c39df088193dec789b855f569f20571530ef06d236"
+    },
+    "music/music_cathedral_theme.qoa": {
+      "slug": "music_cathedral_theme",
+      "kind": "music",
+      "source": "JRPG_royalCourt_loop.ogg",
+      "pakKey": "audio:qoa.music/music_cathedral_theme.qoa",
+      "bytes": 514272,
+      "sha256": "2f839afff3dfe13a6702a8b8deee373e2ec97b91e103e5815583048ca347af4f"
+    },
+    "music/music_town_theme.qoa": {
+      "slug": "music_town_theme",
+      "kind": "music",
+      "source": "JRPG_town_loop.ogg",
+      "pakKey": "audio:qoa.music/music_town_theme.qoa",
+      "bytes": 1204536,
+      "sha256": "ee2cd1f9c9d51660022c6152e4693c7b40d365a5b8ba3fc73aba2e103a6295da"
+    },
+    "music/music_the_wild_places.qoa": {
+      "slug": "music_the_wild_places",
+      "kind": "music",
+      "source": "peasant_kingdom.ogg",
+      "pakKey": "audio:qoa.music/music_the_wild_places.qoa",
+      "bytes": 1379464,
+      "sha256": "40f94693a5132867d0eb7f7766415711a7054f70a96d957812d81cc26ab929bb"
+    },
+    "music/music_city_park.qoa": {
+      "slug": "music_city_park",
+      "kind": "music",
+      "source": "back34.mp3",
+      "pakKey": "audio:qoa.music/music_city_park.qoa",
+      "bytes": 818424,
+      "sha256": "bb0dcea64b6f739652c7270de3d22a4aa6190dcf04cee4fc6232d464915568e6"
+    },
+    "music/music_10_empire.qoa": {
+      "slug": "music_10_empire",
+      "kind": "music",
+      "source": "JRPG-OSTR2/10 - The Empire.ogg",
+      "pakKey": "audio:qoa.music/music_10_empire.qoa",
+      "bytes": 412744,
+      "sha256": "a7f8389d9c784197ee6965ea97ee04e5c30c84808cf4d5a2cb09f2c85276224a"
+    },
+    "music/music_07_town.qoa": {
+      "slug": "music_07_town",
+      "kind": "music",
+      "source": "JRPG-OSTR2/07 - Town.ogg",
+      "pakKey": "audio:qoa.music/music_07_town.qoa",
+      "bytes": 440096,
+      "sha256": "fb578ce7c9be3b0481859ce9f652054eb125102d42df21aac0e9ad963ffe7ada"
+    },
+    "music/music_jester_theme.qoa": {
+      "slug": "music_jester_theme",
+      "kind": "music",
+      "source": "Jester Theme.mp3",
+      "pakKey": "audio:qoa.music/music_jester_theme.qoa",
+      "bytes": 581144,
+      "sha256": "dd2f6880772818a66bf0a1230f4b63f3d8da9c0fd07f5ae6d842b16266bd4780"
+    },
+    "sounds/japanese_temple_bell_small.wav": {
+      "slug": "japanese_temple_bell_small",
+      "kind": "sfx",
+      "source": "setting/japanese_temple_bell_small.mp3",
+      "pakKey": "audio:wav.sounds/japanese_temple_bell_small.wav",
+      "bytes": 169998,
+      "sha256": "abc07aac5b1f005ac23c427ded422239158be84e76e480a6745671495a6a7c21"
+    },
+    "sounds/sound_confirm.wav": {
+      "slug": "sound_confirm",
+      "kind": "sfx",
+      "source": "interface/confirm.ogg",
+      "pakKey": "audio:wav.sounds/sound_confirm.wav",
+      "bytes": 25094,
+      "sha256": "0ee4541d8c175362323bf596b389b3783d58715b919bc6ac8e0b7b349dd7ed20"
+    },
+    "sounds/coinecho.wav": {
+      "slug": "coinecho",
+      "kind": "sfx",
+      "source": "setting/coinecho.wav",
+      "pakKey": "audio:wav.sounds/coinecho.wav",
+      "bytes": 75842,
+      "sha256": "e6867fc646984ed9de1a48360f771898826e96f2009b79c78f9655cb227671b1"
+    }
+  }
+}

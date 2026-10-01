@@ -56,7 +56,10 @@ const T1_ACTIONS = new Set([
   "load_yaml",
   "lock_controls",
   "modify_money",
+  "pause_music",
+  "play_music",
   "play_sound",
+  "fadeout_music",
   "random_integer",
   "remove_collision",
   "set_random_variable",
@@ -65,6 +68,7 @@ const T1_ACTIONS = new Set([
   "translated_dialog",
   "translated_dialog_choice",
   "unlock_controls",
+  "unpause_music",
   "wait",
 ]);
 
@@ -77,6 +81,7 @@ const T1_CONDITIONS = new Set([
   "location_inside",
   "location_type",
   "money_is",
+  "music_playing",
   "tracker",
   "variable_set",
 ]);

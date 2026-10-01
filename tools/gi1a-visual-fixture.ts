@@ -139,7 +139,7 @@ function appearanceCommand(project: RawProject): RawCommand {
 }
 
 function mapAnimationCommand(project: RawProject): RawCommand {
-  const event = eventOf(mapOf(project, "spyder_route1"), "e006_encounters_r022");
+  const event = eventOf(mapOf(project, "spyder_route1"), "e007_encounters_r022");
   const command = commandOf(event, "mapAnim");
   if (
     command.anim !== "tux_grass_100000us" || command.target !== "player" ||
@@ -151,7 +151,7 @@ function mapAnimationCommand(project: RawProject): RawCommand {
 }
 
 function screenFadeCommand(project: RawProject): RawCommand {
-  const event = eventOf(mapOf(project, "spyder_bedroom"), "e004_resting_in_bed_r004");
+  const event = eventOf(mapOf(project, "spyder_bedroom"), "e005_resting_in_bed_r004");
   const command = commandOf(event, "screenFade");
   if (command.direction !== "out" || command.duration !== 1 || command.wait !== true) {
     throw new Error("GI1a visuals: selected screen-fade command changed");
@@ -276,7 +276,7 @@ export async function captureGi1aVisuals(): Promise<Gi1aVisualCapture> {
     throw new Error("GI1a visuals: imported bed fade did not reach its midpoint");
   }
   const fiber = live.state.interp.main?.key ?? null;
-  if (!fiber?.endsWith("/e004_resting_in_bed_r004")) {
+  if (!fiber?.endsWith("/e005_resting_in_bed_r004")) {
     throw new Error(`GI1a visuals: fade belongs to unexpected fiber ${String(fiber)}`);
   }
 

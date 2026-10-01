@@ -10,21 +10,21 @@ When conversion discards a whole event, every source rule in it is Dropped.
 
 | Kind | Kinds | Uses | Native | Degraded | Placeholder | Dropped | S1 T1 baseline |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Actions | 98 | 13617 | 12122 | 628 | 19 | 848 | 6155 / 6246 (45.20% / 45.9%) |
-| Conditions | 64 | 8663 | 7976 | 2 | 1 | 684 | 4500 / 4591 (51.95% / 53.0%) |
+| Actions | 98 | 13617 | 12322 | 628 | 19 | 648 | 6355 / 6246 (46.67% / 45.9%) |
+| Conditions | 64 | 8663 | 8173 | 2 | 1 | 487 | 4697 / 4591 (54.22% / 53.0%) |
 
 The S1 acceptance baselines are 6,246 action uses (45.9%) and 4,591
 condition uses (53.0%). Only T1 source types whose disposition is Native or
-Degraded count toward them. This import records 6155
-(45.20%) and 4500
-(51.95%), respectively: 91
-action uses and 91 condition uses below the S1 baselines. The old
+Degraded count toward them. This import records 6355
+(46.67%) and 4697
+(54.22%), respectively: -109
+action uses and -106 condition uses below the S1 baselines. The old
 type-table Native figure was 5,448 / 13,617 (40.0%); conversion-path accounting
-supersedes it with 12122 / 13617
-(89.0%). “Executable”
+supersedes it with 12322 / 13617
+(90.5%). “Executable”
 (native + degraded + deliberate P1 placeholder) is
-93.8% for actions and
-92.1% for conditions.
+95.2% for actions and
+94.4% for conditions.
 
 Definitions:
 
@@ -163,7 +163,7 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `daycare` | 0 | 0 | 0 | 2 | 2 |
 | Action | `dojo_method` | 0 | 0 | 0 | 3 | 3 |
 | Action | `evolution` | 2 | 0 | 0 | 0 | 2 |
-| Action | `fadeout_music` | 0 | 0 | 0 | 1 | 1 |
+| Action | `fadeout_music` | 1 | 0 | 0 | 0 | 1 |
 | Action | `format_variable` | 0 | 0 | 0 | 10 | 10 |
 | Action | `get_party_monster` | 0 | 0 | 0 | 9 | 9 |
 | Action | `get_pending_moves` | 0 | 0 | 0 | 2 | 2 |
@@ -181,7 +181,7 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `pathfind` | 332 | 0 | 0 | 4 | 336 |
 | Action | `pathfind_to_char` | 201 | 0 | 0 | 0 | 201 |
 | Action | `play_map_animation` | 276 | 0 | 0 | 0 | 276 |
-| Action | `play_music` | 0 | 0 | 0 | 200 | 200 |
+| Action | `play_music` | 199 | 0 | 0 | 1 | 200 |
 | Action | `play_sound` | 66 | 0 | 0 | 1 | 67 |
 | Action | `play_tile_animation` | 1 | 0 | 0 | 0 | 1 |
 | Action | `quarantine` | 0 | 0 | 0 | 8 | 8 |
@@ -269,7 +269,7 @@ census.
 | Condition | `is location_inside` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `is location_type` | 1 | 0 | 0 | 0 | 1 |
 | Condition | `is money_is` | 12 | 0 | 0 | 3 | 15 |
-| Condition | `is music_playing` | 0 | 0 | 0 | 1 | 1 |
+| Condition | `is music_playing` | 1 | 0 | 0 | 0 | 1 |
 | Condition | `is party_infected` | 0 | 0 | 1 | 2 | 3 |
 | Condition | `is party_size` | 45 | 0 | 0 | 5 | 50 |
 | Condition | `is player_facing_tile` | 0 | 0 | 0 | 1 | 1 |
@@ -297,7 +297,7 @@ census.
 | Condition | `not location_inside` | 1 | 0 | 0 | 1 | 2 |
 | Condition | `not location_type` | 1 | 0 | 0 | 0 | 1 |
 | Condition | `not money_is` | 6 | 0 | 0 | 3 | 9 |
-| Condition | `not music_playing` | 0 | 0 | 0 | 196 | 196 |
+| Condition | `not music_playing` | 196 | 0 | 0 | 0 | 196 |
 | Condition | `not party_size` | 5 | 0 | 0 | 0 | 5 |
 | Condition | `not tile_property_updated` | 0 | 2 | 0 | 0 | 2 |
 | Condition | `not time_is` | 60 | 0 | 0 | 1 | 61 |

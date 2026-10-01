@@ -57,15 +57,16 @@ summary:
   but only the active battle working set is resident.
 
   On the desktop QuickJS host (measured 2026-10-01), startup to first frame is
-  131.888 ms / 144.089 ms; walking p95 is 1.883 ms / 1.834 ms; journey map
-  switches peak at 9.211 ms / 9.228 ms; battle entry is 25.276 ms /
-  29.406 ms and exit is 7.358 ms / 7.750 ms (480×272 / 960×544). Across all
-  263 maps, a compact shard's cold first visit is about 12 ms p95 versus
-  4.040 ms for canonical JSON, the explicit time-for-size tradeoff. The
-  QuickJS benches assert a 250 ms startup budget and a 50 ms per-frame CPU
-  budget.
-- **Import coverage:** 89.0% of Tuxemon action uses and 92.1% of condition
-  uses map natively to kit commands; 93.8% / 92.1% are executable (native,
+  128.943 ms / 130.491 ms; walking p95 is 1.126 ms / 1.087 ms; journey map
+  switches peak at 8.947 ms / 9.360 ms; battle entry peaks at 19.357 ms /
+  24.038 ms and exit at 1.344 ms / 1.328 ms (480×272 / 960×544, CPU time).
+  The full 109,983-frame, 100-battle replay at 480×272 has a 0.265 ms steady
+  battle p95, 7.642 ms entry p95, 3.155 ms exit p95 and a 32.489 ms slowest CPU
+  frame. Across all 263 maps, a compact shard's staged cold first visit is
+  11.724 ms p95 and 39.846 ms maximum. The QuickJS benches assert a 250 ms
+  startup budget and a 50 ms per-frame CPU budget.
+- **Import coverage:** 90.5% of Tuxemon action uses and 94.3% of condition
+  uses map natively to kit commands; 95.2% / 94.4% are executable (native,
   degraded, or a deliberate placeholder). The full per-type breakdown is in
   [reports/G1-coverage.md](reports/G1-coverage.md).
 - **Day/night:** a saved, rewindable calendar drives Tuxemon's time conditions
@@ -147,12 +148,50 @@ bun run verify:j1:mainline      # replay the Captain-return tape
 bun run verify:j2:mainline      # replay the hospital-cure tape
 bun run bench:g6:quickjs        # short two-viewport QuickJS performance gate
 bun run bench:gb6:quickjs       # full 480x272 QuickJS journey gate
+bun run build:psp               # release EBOOT plus external asset pak
 ```
 
 The importer reads the Tuxemon source from the repo-local `.tuxemon-src`
 checkout that `bun run fetch:tuxemon` creates. To reuse an existing Tuxemon
 checkout instead, set `TUXEMON_SRC` to its path (e.g.
 `TUXEMON_SRC=/path/to/Tuxemon bun run import`).
+
+## PSP
+
+The PSP build keeps the complete resource archive beside the executable so
+textures and map shards can be read by index instead of occupying the EBOOT.
+The current build contains all 263 maps and all battle art in a
+39,021,296-byte `assets.pak`; its embedded boot pak is 992,608 bytes and holds
+only fonts, sprite atlases, styles and the external archive index.
+
+Install PocketJS's pinned, checksum-verified PSP SDK, Rust nightly and
+`cargo-psp` once, then build the game:
+
+```sh
+(cd vendor/pocket-rpgkit/vendor/pocketjs && bun run bootstrap)
+bun run build:psp
+```
+
+Copy `dist/psp/EBOOT.PBP` and `dist/psp/assets.pak` into the same directory on
+the memory stick. `dist/psp/pocket-tuxemon.prx` is also emitted for PSPLINK
+development. Linux builds use Clang against the pinned PSP sysroot; macOS uses
+the pinned PSP GCC wrapper by default. Set `POCKETJS_PSP_C_COMPILER` to
+`clang` or `gcc` to choose explicitly.
+
+For a deterministic device or emulator check, build with
+`bun run build:psp --journey`, run that EBOOT, retain its `profile.jsonl`, and
+compare the completed session with a fresh production replay:
+
+```sh
+bun run verify:psp:journey -- path/to/profile.jsonl
+```
+
+The 3,793-frame opening journey (bedroom through the Billie battle to Route 1)
+passes this check under PPSSPP, including its PSP double-ABI probe. A captured
+480×272 framebuffer was also checked for the bedroom and dialogue UI. Emulator
+timings are not hardware results: doodlewind's 333 MHz, firmware 6.61 device
+run reports 43–60 displayed fps, with map transitions and texture loads still
+causing stalls. The full 100-battle mainline has not been run on physical PSP.
 
 ## Documentation
 
@@ -179,3 +218,6 @@ repository imports) are copied verbatim from Tuxemon `9e6258ff` into
 [`licenses/TUXEMON-ATTRIBUTIONS.md`](licenses/TUXEMON-ATTRIBUTIONS.md), with its
 contributor list in
 [`licenses/TUXEMON-CONTRIBUTORS.md`](licenses/TUXEMON-CONTRIBUTORS.md).
+The imported music and sound effects carry their own upstream licenses
+(CC0, CC-BY, CC-BY-SA); the per-file credits are in
+[`licenses/AUDIO-ATTRIBUTIONS.md`](licenses/AUDIO-ATTRIBUTIONS.md).

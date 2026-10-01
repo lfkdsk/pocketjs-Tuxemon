@@ -192,6 +192,50 @@
     "file": "dist/animated/water_volcano_path.json"
   },
   {
+    "key": "audio:qoa.music/music_07_town.qoa",
+    "file": "assets/audio/music/music_07_town.qoa"
+  },
+  {
+    "key": "audio:qoa.music/music_10_empire.qoa",
+    "file": "assets/audio/music/music_10_empire.qoa"
+  },
+  {
+    "key": "audio:qoa.music/music_cathedral_theme.qoa",
+    "file": "assets/audio/music/music_cathedral_theme.qoa"
+  },
+  {
+    "key": "audio:qoa.music/music_city_park.qoa",
+    "file": "assets/audio/music/music_city_park.qoa"
+  },
+  {
+    "key": "audio:qoa.music/music_home.qoa",
+    "file": "assets/audio/music/music_home.qoa"
+  },
+  {
+    "key": "audio:qoa.music/music_jester_theme.qoa",
+    "file": "assets/audio/music/music_jester_theme.qoa"
+  },
+  {
+    "key": "audio:qoa.music/music_the_wild_places.qoa",
+    "file": "assets/audio/music/music_the_wild_places.qoa"
+  },
+  {
+    "key": "audio:qoa.music/music_town_theme.qoa",
+    "file": "assets/audio/music/music_town_theme.qoa"
+  },
+  {
+    "key": "audio:wav.sounds/coinecho.wav",
+    "file": "assets/audio/sounds/coinecho.wav"
+  },
+  {
+    "key": "audio:wav.sounds/japanese_temple_bell_small.wav",
+    "file": "assets/audio/sounds/japanese_temple_bell_small.wav"
+  },
+  {
+    "key": "audio:wav.sounds/sound_confirm.wav",
+    "file": "assets/audio/sounds/sound_confirm.wav"
+  },
+  {
     "key": "battle/items/aardant.json",
     "file": "dist/battle/items/aardant.json"
   },

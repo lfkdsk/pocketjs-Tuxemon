@@ -146,7 +146,7 @@ describe("GI1a imported production visuals", () => {
       left: 30,
       toAlpha: 255,
     });
-    expect(capture.fadeState.fiber).toEndWith("/e004_resting_in_bed_r004");
+    expect(capture.fadeState.fiber).toEndWith("/e005_resting_in_bed_r004");
     let darker = 0;
     let brighter = 0;
     let nonOpaque = 0;

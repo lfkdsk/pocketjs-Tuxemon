@@ -1,9 +1,9 @@
 # CI
 
-CI is a single workflow, `.github/workflows/ci.yml`. Four jobs run in
+CI is a single workflow, `.github/workflows/ci.yml`. Five jobs run in
 parallel from the shared prepare action — `import`, `test` (four matrix
-legs), `journey` (seven matrix legs) and `web`, thirteen runners in all —
-and `deploy` publishes Pages once they all pass. The slowest journey leg
+legs), `journey` (seven matrix legs), `web` and `psp`, fourteen runners in all —
+and `deploy` publishes Pages once all but `psp` pass. The slowest journey leg
 (`verify:chapters`, which re-bakes and suffix-replays every chapter) sets
 the wall-clock. It runs on pushes to `main`, on pull requests, and on
 manual dispatch.
@@ -84,10 +84,23 @@ goldens; any console error fails the run. The site is uploaded as the
 `web-journey`. On pushes to `main` the site is also staged as the Pages
 artifact.
 
+### psp — the release package
+
+Prepare with `build: "false"`, install the `llvm-18` package (the runner
+image has clang but not `llvm-ar`, `llvm-ranlib` or `llvm-objcopy`) and point
+`POCKETJS_LLVM_BIN` at `/usr/lib/llvm-18/bin`, restore PocketJS's
+content-addressed PSP toolchain cache, and run the pinned bootstrap. The bootstrap installs and
+verifies the PSP SDK checksum, Rust nightly and `cargo-psp` revision declared
+by PocketJS. `bun run build:psp --skip-assets` then consumes the import already
+produced by prepare and builds the release EBOOT with its seekable external
+asset archive. CI retains `EBOOT.PBP`, `assets.pak`, the PSPLINK PRX and the
+build receipt as the `psp-release` artifact for 14 days. This job does not
+gate the Pages deploy.
+
 ### deploy — GitHub Pages
 
-Runs only on pushes to `main`, after every other job (every matrix leg) has
-passed, and deploys the staged Pages artifact.
+Runs only on pushes to `main`, after `import`, `test`, `journey` and `web`
+(every matrix leg) have passed, and deploys the staged Pages artifact.
 
 ## Caches
 
@@ -100,6 +113,11 @@ The prepare action defines two caches:
 
 There is no dependency cache: `bun install --frozen-lockfile` is fast enough
 that the lockfile is the cache key.
+
+The `psp` job separately caches `~/.cache/pocket-nexus`, keyed by PocketJS's
+PSP toolchain manifest. The cache contains the checksum-verified SDK and pinned
+`cargo-psp` tools; the bootstrap remains the authority and validates a restored
+cache before building.
 
 ## Reproducing a job locally
 
@@ -139,6 +157,10 @@ bun run verify:chapters
 # web job (needs Chrome or Chromium)
 bun run web
 bun tools/verify-web-journey.ts
+
+# psp job (downloads the pinned toolchain on first use)
+(cd vendor/pocket-rpgkit/vendor/pocketjs && bun run bootstrap)
+bun run build:psp --skip-assets
 ```
 
 The deploy job is a single GitHub Actions call and has no local equivalent.

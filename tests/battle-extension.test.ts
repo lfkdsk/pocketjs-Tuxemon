@@ -140,6 +140,7 @@ describe("Tuxemon party extension", () => {
         variables: {},
         items: {},
         gold: 0,
+        playerName: "Player",
         random: () => {
           draws++;
           return 0.25;

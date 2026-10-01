@@ -357,6 +357,18 @@ const mapPakEntries: PakManifestEntry[] = split.entries.map((entry) => ({
   key: entry.meta.entry,
   file: `dist/${entry.path}`,
 }));
+// GM1: the committed transcoded audio (eight mainline QOA music tracks and
+// three SFX WAVs) ships as raw pak entries under the keys the audio manifest
+// declares; Project.audio maps logical ids to those keys. Hosts without an
+// audio module stay silent; QOA playback lands with the kit's streaming
+// decoder.
+const audioManifest = JSON.parse(
+  readFileSync(join(import.meta.dir, "assets/audio/manifest.json"), "utf8"),
+) as { files: Record<string, { pakKey: string; bytes: number }> };
+const audioPakEntries: PakManifestEntry[] = Object.entries(audioManifest.files)
+  .map(([path, entry]) => ({ key: entry.pakKey, file: `assets/audio/${path}` }))
+  .sort((a, b) => a.key < b.key ? -1 : a.key > b.key ? 1 : 0);
+const audioBytes = Object.values(audioManifest.files).reduce((sum, f) => sum + f.bytes, 0);
 const pakEntries = [
   ...pakManifest(terrain.entries),
   ...mapPakEntries,
@@ -365,6 +377,7 @@ const pakEntries = [
   ...animatedPakEntries,
   ...npcSrcPakEntries,
   ...terrain.streamPakEntries,
+  ...audioPakEntries,
   { key: "world-index.json", file: "dist/world-index.json" },
 ].sort((a, b) => a.key < b.key ? -1 : a.key > b.key ? 1 : 0);
 
@@ -506,6 +519,10 @@ const assetReport = {
   npcSrcRepository: {
     entries: npcSrcSplit.entries.length,
     entryBytes: npcSrcSplit.entries.reduce((sum, entry) => sum + entry.bytes.byteLength, 0),
+  },
+  audio: {
+    entries: audioPakEntries.length,
+    entryBytes: audioBytes,
   },
   characters: characters.report,
   battle: battle.report,

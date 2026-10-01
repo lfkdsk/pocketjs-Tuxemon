@@ -11,6 +11,8 @@
   "scripts": {
     "setup": "git submodule update --init --recursive && bun install",
     "fetch:tuxemon": "sh tools/fetch-tuxemon.sh",
+    "transcode:audio": "bun tools/transcode-audio.ts",
+    "verify:audio": "bun tools/transcode-audio.ts --verify",
     "import": "bun gen-assets.ts",
     "gen-assets": "bun gen-assets.ts",
     "verify:terrain:determinism": "bun tools/verify-terrain-determinism.ts",
@@ -51,7 +53,9 @@
     "web": "bun gen-assets.ts && bun vendor/pocket-rpgkit/tools/web.ts --project-root . pocket-tuxemon",
     "web:verify": "bun vendor/pocket-rpgkit/tools/web-verify.ts --site dist/web --out dist/web-verify",
     "test": "bun test tests/",
-    "tsc": "bunx tsc --noEmit"
+    "tsc": "bunx tsc --noEmit",
+    "build:psp": "bun tools/psp.ts",
+    "verify:psp:journey": "bun tools/verify-psp-journey.ts"
   },
   "devDependencies": {
     "@types/bun": "^1.2.0",

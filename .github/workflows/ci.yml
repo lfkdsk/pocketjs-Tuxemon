@@ -146,7 +146,48 @@ jobs:
           retention-days: 14
           if-no-files-found: ignore
 
+  psp:
+    name: PSP release package
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      # The runner image ships clang-18 but not the LLVM binutils the PSP
+      # toolchain also needs (llvm-ar, llvm-ranlib, llvm-objcopy); the llvm-18
+      # package installs them next to clang under /usr/lib/llvm-18/bin.
+      POCKETJS_LLVM_BIN: /usr/lib/llvm-18/bin
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: recursive
+      - uses: ./.github/actions/prepare
+        with:
+          build: "false"
+      - name: Cache the pinned PSP toolchain
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/pocket-nexus
+          key: ${{ runner.os }}-pocketjs-psp-${{ hashFiles('vendor/pocket-rpgkit/vendor/pocketjs/tools/cli/psp-toolchain.json') }}
+      - name: Install the LLVM binutils
+        run: sudo apt-get update && sudo apt-get install -y llvm-18
+      - name: Install and verify the pinned PSP toolchain
+        working-directory: vendor/pocket-rpgkit/vendor/pocketjs
+        run: bun run bootstrap
+      - name: Build the PSP release package
+        run: bun run build:psp --skip-assets
+      - name: Keep the PSP release package
+        uses: actions/upload-artifact@v7
+        with:
+          name: psp-release
+          path: |
+            dist/psp/EBOOT.PBP
+            dist/psp/assets.pak
+            dist/psp/pocket-tuxemon.prx
+            dist/psp/build-receipt.json
+          retention-days: 14
+
   deploy:
+    # The PSP package is built and kept as an artifact but does not gate the
+    # Pages deploy.
     needs: [import, test, journey, web]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest

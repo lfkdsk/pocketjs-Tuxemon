@@ -53,12 +53,19 @@ export function battleSceneLayout(
   player: Pick<BattleMonster, "currentHp" | "base">,
   enemy: Pick<BattleMonster, "currentHp" | "base">,
 ): BattleSceneLayout {
+  return {
+    ...battleViewportLayout(width, height),
+    playerHpWidth: hpBarWidth(player.currentHp, player.base.hp, BATTLE_PLAYER_HP_WIDTH),
+    enemyHpWidth: hpBarWidth(enemy.currentHp, enemy.base.hp, BATTLE_ENEMY_HP_WIDTH),
+  };
+}
+
+/** Canvas geometry depends on the viewport; combat HP does not move it. */
+export function battleViewportLayout(width: number, height: number): Pick<BattleSceneLayout, "scale" | "left" | "top"> {
   const scale = Math.min(width / BATTLE_BASE_WIDTH, height / BATTLE_BASE_HEIGHT);
   return {
     scale,
     left: Math.floor((width - BATTLE_BASE_WIDTH * scale) / 2),
     top: Math.floor((height - BATTLE_BASE_HEIGHT * scale) / 2),
-    playerHpWidth: hpBarWidth(player.currentHp, player.base.hp, BATTLE_PLAYER_HP_WIDTH),
-    enemyHpWidth: hpBarWidth(enemy.currentHp, enemy.base.hp, BATTLE_ENEMY_HP_WIDTH),
   };
 }

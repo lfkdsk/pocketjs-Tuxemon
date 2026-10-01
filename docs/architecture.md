@@ -14,9 +14,9 @@ lives here; everything reusable lives in the kit.
 | `battle/` | The Tuxemon battle system: pure reducer, extension handlers, scene. |
 | `ui/` | UI stage modules and generated asset tables. |
 | `data/` | Generated JSON: terrain, battle database, journey tapes, golden manifests. All generated, all committed. |
-| `assets/` | Generated art, committed: streamed terrain chunks (`stream/`), character walkers (`characters/`), animated-tile atlases (`anim/`), and battle PNGs retained as preview/golden sources (`battle/`). |
+| `assets/` | Generated art, committed: streamed terrain chunks (`stream/`), character walkers (`characters/`), animated-tile atlases (`anim/`), battle PNGs retained as preview/golden sources (`battle/`), and transcoded audio (`audio/`). |
 | `tools/` | Verifies, benches, journey recorders, golden updaters, renderers. See [verification.md](verification.md). |
-| `tests/` | The test suite (42 files) plus `tests/goldens/` (PNG keyframes and gzipped trace fixtures). |
+| `tests/` | The test suite (52 files) plus `tests/goldens/` (PNG keyframes and gzipped trace fixtures). |
 | `main.tsx` | Game entry: mounts the kit's `GameView` with the project shell, map repository, extensions, battle rules and scene. |
 | `pocket.json` | PocketJS app manifest (viewport 480x272, entry `main.tsx`, engine capabilities). |
 | `web.json` | Web-site card metadata (title, intro, controls, preview). |
@@ -121,6 +121,38 @@ The QuickJS benchmark harnesses compile copied desktop-host crates with
 The interactive desktop launcher uses the kit's feature detector: it enables
 the audio host when ALSA development metadata is available and otherwise
 builds a silent desktop host.
+
+## Audio pipeline
+
+Music and sound effects are committed as transcoded blobs, not generated at
+build time, so the import is byte-stable across ffmpeg versions:
+
+1. `tools/fetch-tuxemon.sh` sparse-checks the eight mainline music tracks and
+   the three used SFX from the pinned Tuxemon checkout.
+2. `bun run transcode:audio` (`tools/transcode-audio.ts`) decodes each
+   ogg/mp3 to s16 22.05 kHz mono and encodes music as QOA and SFX as WAV,
+   writing `assets/audio/` with a manifest recording the ffmpeg version and
+   per-file SHA-256. `bun run verify:audio` re-checks the committed blobs.
+3. `gen-assets.ts` reads the manifest and packs each blob as a raw pak entry
+   (`audio:qoa.*` / `audio:wav.*`); the importer's `Project.audio` table maps
+   sanitized slugs to those pak keys.
+4. The importer maps `play_music` → `playBgm`, `fadeout_music` →
+   `fadeoutBgm`/`stopBgm`, `pause_music`/`unpause_music` → `pauseBgm`/
+   `resumeBgm`, `play_sound` → `playSe`, and `music_playing` → `bgmPlaying`.
+   Because the kit keeps `bgmPlaying` true until a fade completes while
+   upstream clears `current_song` the moment `fadeout_music` starts,
+   `fadeout_music` also sets a `sys.music_fading` switch (cleared by
+   `play_music`) and the positive `music_playing` form excludes the fading
+   window, so a guarded parallel page cannot re-trigger the fade every frame.
+   Slugs without a committed asset (the 13 non-mainline tracks and the dead
+   slugs) still emit the command so the reducer tracks the state, but stay
+   silent.
+
+`main.tsx` opts `GameView` in to the kit's `createAudioEffects`, which
+bridges reducer audio intent to the host audio module. Hosts without an
+audio module (the desktop host today, the static web player until it mounts
+the namespace) stay completely silent; the reducer and presentation are
+unaffected. The QOA music decoder rides on the kit's streaming audio work.
 
 ## Game extensions: the `tux.*` namespace
 

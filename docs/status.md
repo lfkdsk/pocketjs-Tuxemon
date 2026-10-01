@@ -21,7 +21,7 @@ Per-action numbers come from the import coverage report,
 
 | Feature | Status | Notes |
 | --- | --- | --- |
-| Event import | Partial | 89.0% of action uses and 92.1% of condition uses are native; 93.8% and 92.1%, respectively, are executable. The rest is dropped or a visible placeholder, each with a reason; see [importer](importer.md) |
+| Event import | Partial | 90.5% of action uses and 94.3% of condition uses are native; 95.2% and 94.4%, respectively, are executable. The rest is dropped or a visible placeholder, each with a reason; see [importer](importer.md) |
 | Dialogue, choices, variables, items, NPC creation and removal | Done | Imported from the scenario YAML, TMX properties and the en_US `.po` strings |
 | Input locks | Done | Every imported input lock runs to its unlock (`verify:g6:locks`); no map can freeze the player (`verify:g6:frozen`) |
 | `WorldState` gating through the kit's `worldIdle` condition | Done | Compared against upstream Tuxemon runs |
@@ -85,8 +85,8 @@ Per-action numbers come from the import coverage report,
 
 | Feature | Status | Notes |
 | --- | --- | --- |
-| Sound effects (`play_sound`) | Partial | 66 uses are imported as kit sound cues, but nothing plays them yet |
-| Music (`play_music`, `music_playing`) | Planned | The kit's audio support is in progress. Tuxemon's source checkout has no music files, so music support will cover the state and conditions first |
+| Sound effects (`play_sound`) | Partial | The three used SFX (coinecho, temple bell, confirm) are transcoded to 22.05 kHz mono WAV, packed in the pak, and mapped to `playSe` with the authored volume. Silent until a host mounts the audio namespace |
+| Music (`play_music`, `music_playing`, `fadeout_music`) | Partial | The eight mainline tracks are transcoded to QOA and packed in the pak; `playBgm`/`fadeoutBgm`/`pauseBgm`/`resumeBgm` and the `bgmPlaying` condition are mapped, so the reducer tracks music state across maps, saves and rewinds. `fadeout_music` sets a `sys.music_fading` switch so `music_playing` is false immediately (matching upstream), while the audible fade runs to completion. The other 13 used tracks are declared but silent (no committed asset). Web playback depends on the kit's QOA streaming decoder; the desktop host has no audio module yet |
 
 ## Saving and demos
 
@@ -110,8 +110,8 @@ Per-action numbers come from the import coverage report,
 | --- | --- | --- |
 | Web | Done | Deployed to GitHub Pages from `main` after CI passes. The game pak is 39,253,664 B; it was 66.8 MB before compact maps and indexed battle art. The browser renders at 2× density: fonts use native physical samples while tiles and sprites stay nearest-neighbour; compare the [Paper Town dialog](screenshots/web-density-paper-dialog.png) and [battle menu](screenshots/web-density-battle-menu.png). CI plays the journey in headless Chrome |
 | Desktop (Linux, macOS) | Done | `bun run desktop`; the launcher enables ALSA when its development package is available and otherwise builds the silent host automatically |
-| PSP | Planned | The pak is still too large to embed and needs seekable pak reads in PocketJS. Battle art no longer has to be resident at boot: the all-image indexed footprint is 13,185,792 B and the runtime keeps only the active battle working set |
-| Startup and frame time | Done | The desktop QuickJS benches enforce 250 ms startup and 50 ms frame budgets, reject a desktop bundle built from different map shards, and take the GB6 terminal hash from its tape. Compact-map cold first visits trade size for decode time (about 12 ms p95 across all maps, still inside the frame budget). See [verification](verification.md) and the dated measurements in the README |
+| PSP | Partial | `bun run build:psp` emits an EBOOT with a 992,608-byte boot pak and a seekable 39,021,296-byte `assets.pak` sidecar containing all 263 maps and battle art. The 3,793-frame opening journey reaches Route 1 and matches the production replay under PPSSPP; a 333 MHz firmware 6.61 hardware run reports 43–60 displayed fps. Map/texture-load stalls remain, emulator timing is not hardware evidence, and the full 100-battle mainline has not run on device. See the [PSP build instructions](../README.md#psp) |
+| Startup and frame time | Done | The desktop QuickJS benches enforce 250 ms startup and 50 ms frame budgets, reject a desktop bundle built from different map shards, and take the GB6 terminal hash from its tape. At 480×272, the 109,983-frame replay has a 0.265 ms steady-battle p95, 7.642 ms battle-entry p95, 3.155 ms exit p95 and a 32.489 ms slowest CPU frame. Compact-map staged cold first visits are 11.724 ms p95 and 39.846 ms maximum across all maps. See [verification](verification.md) and the dated measurements in the README |
 
 ## Verification and CI
 

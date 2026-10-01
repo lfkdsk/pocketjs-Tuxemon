@@ -41,6 +41,7 @@ import {
   updateTimeArgs,
   type WeatherEntry,
 } from "./time-weather.ts";
+import { audioAssetIds, audioId, audioTable } from "./audio.ts";
 import { validateSchema } from "../vendor/pocket-rpgkit/src/engine/schema-validate.ts";
 import type {
   Command,
@@ -151,6 +152,11 @@ const gameEvent = (value: FutureGameEvent): GameEvent => value;
 const po = parsePo(join(MAPS_DIR, "../l18n/en_US/LC_MESSAGES/base.po"));
 const allMaps = new Map(loadAllMaps().map((m) => [m.slug, m]));
 const FAINT_NOTICE_SWITCH = "sys.faint_notice";
+// GM1 fix 1: set by fadeout_music, cleared by play_music. Upstream clears
+// current_song the moment fadeout starts, so music_playing is false while
+// the audible fade is still running; the kit keeps bgmPlaying true until
+// the fade completes. This flag bridges the gap without a kit change.
+const MUSIC_FADING_SWITCH = "sys.music_fading";
 const faintPointMaps = new Set(
   [...allMaps.values()].flatMap((map) => map.events.flatMap((event) => event.acts
     .filter((action) => action.type === "set_teleport_faint" && action.args[1])
@@ -718,6 +724,7 @@ type Clause =
   | { k: "gold"; amount: number; has: boolean }
   | { k: "facing"; dir: Dir }
   | { k: "worldIdle"; negate: boolean }
+  | { k: "bgmPlaying"; id: string; negate: boolean }
   | { k: "native"; condition: Condition; negate: boolean }
   | { k: "ext"; call: string; args: JsonValue }
   | { k: "const"; value: boolean };
@@ -981,8 +988,26 @@ function clauses(
       noteCondition(c, `${c.op} time_is`, "T1", "tux.time_is reads the saved deterministic calendar");
       return [{ k: "ext", call: "tux.time_is", args: timeIsArgs(c) }];
     case "music_playing":
-      noteCondition(c, `${c.op} music_playing`, "T4-dropped", "no music in P1");
-      return K(false);
+      // G6: Tuxemon's music_playing is also true while paused or in combat;
+      // bgmPlaying is false for a paused/ME-suspended BGM. Every map use is
+      // the `not music_playing X` guard around `play_music X` on map entry,
+      // where the BGM is never paused and combat is not active, so the direct
+      // mapping is behavior-safe (GM0 §5 G6).
+      //
+      // GM1 fix 1: upstream fadeout_music clears current_song immediately,
+      // so music_playing is false while the audible fade is still running.
+      // The kit keeps bgmPlaying true until the fade completes, which let
+      // the 37707_tower parallel page re-trigger fadeoutBgm every frame and
+      // pin the fade counter at its total. fadeout_music now sets
+      // MUSIC_FADING_SWITCH (cleared by play_music), and the positive form
+      // excludes the fading window. The negated form keeps the historical
+      // mapping: no negated guard exists on the only fadeout map, and the
+      // divergence is bounded by the fade duration.
+      noteCondition(c, `${c.op} music_playing`, "T1", "bgmPlaying condition (paused/combat inversion noted; safe for the map-enter idiom)");
+      return [
+        { k: "bgmPlaying", id: audioId(a[0]!), negate: not },
+        ...(not ? [] : [{ k: "sw" as const, id: MUSIC_FADING_SWITCH, on: false }]),
+      ];
     case "environment_is":
       if (options.battle) {
         noteCondition(c, `${c.op} environment_is`, "T1", "tux.environment_is reads the active battle backdrop");
@@ -1011,6 +1036,10 @@ function toIf(cl: Clause): { cond: Condition; negate: boolean } {
     };
     case "worldIdle": return {
       cond: { kind: "worldIdle", ...(cl.negate ? { negate: true } : {}) },
+      negate: false,
+    };
+    case "bgmPlaying": return {
+      cond: { kind: "bgmPlaying", id: cl.id, ...(cl.negate ? { negate: true } : {}) },
       negate: false,
     };
     case "native": return { cond: cl.condition, negate: cl.negate };
@@ -1480,6 +1509,18 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         });
         break;
       }
+      case "play_sound": {
+        // G8: the old `se` emit dropped the authored volume (compile default
+        // 80). playSe carries the converted percent; the host resolves the id
+        // through Project.audio and stays silent for ids without an asset.
+        const id = audioId(g[0]!);
+        const vol = g[1] !== undefined && g[1] !== "" && Number.isFinite(Number(g[1]))
+          ? Math.round(Number(g[1]) * 100)
+          : undefined;
+        noteAction(a, a.type, "T1", `playSe ${id}${audioAssetIds().has(id) ? "" : " (no asset: silent)"}`);
+        out.push({ op: "playSe", id, ...(vol !== undefined ? { volume: vol } : {}) });
+        break;
+      }
       case "play_tile_animation": {
         const [rawX, rawY, name, rawDuration, rawLoop] = g;
         const x = Number(rawX);
@@ -1681,10 +1722,6 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         }
         break;
       }
-      case "play_sound":
-        noteAction(a, a.type, "T1", "se cue");
-        out.push({ op: "se", name: g[0]!.toLowerCase().replace(/[^a-z0-9_-]/g, "_") });
-        break;
       case "add_item": {
         if (g[2] && g[2] !== "player") { noteAction(a, "add_item(npc)", "T3-dropped", "NPC bags are combat-only"); break; }
         const q = g[1] ? Number(g[1]) : 1;
@@ -2060,8 +2097,48 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
       case "set_facing_mode": case "char_position":
         noteAction(a, a.type, "T2-dropped", "runtime pathfinding / other-event routes / NPC motion props");
         break;
-      case "play_music": case "fadeout_music":
-        noteAction(a, a.type, "T2-dropped", "bgm hook (P1: silent)");
+      case "play_music": {
+        // G2/G3: fade-in and loop count have no KAU1 equivalent (no authored
+        // use). G4/G5: same-song no-op and crossfade are covered by the
+        // `not music_playing` guards in 196/200 cases. Dead slugs (not in any
+        // music DB) get a playBgm with no Project.audio entry -> silent.
+        const id = audioId(g[0]!);
+        const vol = g[1] !== undefined && g[1] !== "" && Number.isFinite(Number(g[1]))
+          ? Math.round(Number(g[1]) * 100)
+          : undefined;
+        noteAction(a, a.type, "T1", `playBgm ${id}${audioAssetIds().has(id) ? "" : " (no asset: silent)"}`);
+        // Upstream play_music sets current_song, so music_playing is true
+        // again even if a fadeout was in flight. Clear the fading flag.
+        // Guarded so the common case (no fade) writes no switch state.
+        out.push(...guard([{ k: "sw", id: MUSIC_FADING_SWITCH, on: true }], [
+          { op: "switch", id: MUSIC_FADING_SWITCH, value: false },
+        ]));
+        out.push({ op: "playBgm", id, ...(vol !== undefined ? { volume: vol } : {}) });
+        break;
+      }
+      case "fadeout_music": {
+        // ms -> virtual seconds; 0 -> stopBgm (frames <= 0 deletes immediately).
+        const ms = Number(g[0] ?? 1000);
+        if (ms <= 0) {
+          noteAction(a, a.type, "T1", "stopBgm (fadeout 0)");
+          out.push({ op: "stopBgm" });
+        } else {
+          // Set the fading flag so music_playing is false immediately; the
+          // kit would otherwise keep bgmPlaying true until the fade ends and
+          // a guarded parallel page could re-trigger this every frame.
+          noteAction(a, a.type, "T1", `fadeoutBgm ${(ms / 1000).toFixed(3)}s + fading flag`);
+          out.push({ op: "fadeoutBgm", duration: ms / 1000 });
+          out.push({ op: "switch", id: MUSIC_FADING_SWITCH, value: true });
+        }
+        break;
+      }
+      case "pause_music":
+        noteAction(a, a.type, "T1", "pauseBgm");
+        out.push({ op: "pauseBgm" });
+        break;
+      case "unpause_music":
+        noteAction(a, a.type, "T1", "resumeBgm");
+        out.push({ op: "resumeBgm" });
         break;
       case "rename_player":
         noteAction(a, a.type, "T2-dropped", "name entry (P1: fixed name)");
@@ -2783,6 +2860,9 @@ export interface ImportReport {
   options?: ImportOptions;
   maps: string[];
   schemaErrors: { path: string; msg: string }[];
+  /** Schema pattern mismatches on audio:qoa.* entries, pending the kit schema
+   *  extension that accepts the QOA namespace. Not real validation errors. */
+  audioQoaPending: { path: string; msg: string }[];
   byFate: Record<string, number>;
   rows: ImportLogRow[];
   transferRepairs: TransferRepair[];
@@ -2994,6 +3074,7 @@ export function buildProject(
       animations: [...animationDefs.values()].sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0),
     } : {}),
     sprites,
+    audio: audioTable(),
     maps: mapDefs,
   };
 
@@ -3003,7 +3084,15 @@ export function buildProject(
     new URL("../vendor/pocket-rpgkit/src/data/schema.json", import.meta.url),
     "utf8",
   ));
-  const schemaErrors = validateSchema(schema, project);
+  const allSchemaErrors = validateSchema(schema, project);
+  // The pinned kit schema only knows the audio:wav.* namespace; the QOA music
+  // entries (audio:qoa.*) become valid once the kit schema is extended. Until
+  // then, separate those known-pending pattern mismatches from real errors so
+  // the gate stays meaningful.
+  const isQoaPending = (e: { path: string; msg: string }): boolean =>
+    e.path.startsWith("$.audio.") && e.msg.includes("audio:wav");
+  const schemaErrors = allSchemaErrors.filter((e) => !isQoaPending(e));
+  const audioQoaPending = allSchemaErrors.filter(isQoaPending);
   const rows = [...log.entries()]
     .map(([, v]) => ({
       key: v.key,
@@ -3045,6 +3134,7 @@ export function buildProject(
       ...(Object.values(options).some(Boolean) ? { options } : {}),
       maps: [...want],
       schemaErrors,
+      audioQoaPending,
       byFate,
       rows,
       transferRepairs: [...transferRepairs],

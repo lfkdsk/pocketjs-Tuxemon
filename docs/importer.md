@@ -10,10 +10,12 @@ whole import is re-run.
 
 `bun run fetch:tuxemon` checks out Tuxemon at the pinned commit
 (`9e6258ff`, recorded in `tools/fetch-tuxemon.sh`) into the repo-local
-`.tuxemon-src/`. The checkout is blobless and sparse (music, fonts and docs
-are excluded). To reuse an existing checkout instead, set `TUXEMON_SRC` to
-its path; the importer reads it from `importer/source.ts` and the art
-cookers, and battle art and events always come from the same checkout.
+`.tuxemon-src/`. The checkout is blobless and sparse: fonts and docs are
+excluded, but the eight mainline music tracks and the three used SFX are
+included (see [verification](verification.md) for the audio pipeline). To
+reuse an existing checkout instead, set `TUXEMON_SRC` to its path; the
+importer reads it from `importer/source.ts` and the art cookers, and
+battle art and events always come from the same checkout.
 
 ## How Tuxemon events become kit commands
 
@@ -67,6 +69,11 @@ definitions below are the report's own:
 | `is battle_outcome` | `tux.battle_outcome` extension condition reading live battle history. |
 | `add_monster`, `set_monster_health`, `set_monster_status`, `evolution` | the matching `tux.*` extension command. |
 | `open_shop` (item economy) | the kit `shop` command with imported goods, prices and stock. |
+| `play_music` | `playBgm`; the slug resolves through the `Project.audio` table to a committed QOA pak entry (eight mainline tracks) or stays silent (the other 13 used tracks). |
+| `fadeout_music` | `fadeoutBgm` (ms → seconds); `0` becomes `stopBgm`. |
+| `pause_music` / `unpause_music` | `pauseBgm` / `resumeBgm`. |
+| `play_sound` | `playSe` with the authored volume carried through; resolves through `Project.audio` to a WAV pak entry. |
+| `is music_playing` / `not music_playing` | `bgmPlaying` (with `negate`); Tuxemon's paused/combat inversion is safe for the map-enter guard idiom. |
 | `screen_transition` | two blocking `screenFade` commands that retain each fade half's source duration and RGBA colour. |
 | `play_map_animation` / `play_tile_animation` | `mapAnim` at the sampled character tile or fixed source tile. |
 | `set_layer` | a native screen `layer` selecting or clearing a packaged RGBA or PNG overlay. |
@@ -109,7 +116,6 @@ faint-point actions and environment checks are now native.
 
 | Tuxemon | Reason |
 |---|---|
-| `play_music` / `fadeout_music` | the kit has a sound-effect command but no BGM command; music is not imported. |
 | `is environment_is` (outside battle content) | environment is a battle backdrop; the condition is constant false there. |
 | `transition_teleport` targeting an NPC | only the player transfers. |
 | `modify_money` with a variable amount | only literal amounts are supported. |
@@ -140,8 +146,8 @@ Current coverage (G6 profile):
 
 | Kind | Types | Uses | Native | Degraded | Placeholder | Dropped | Executable |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Actions | 98 | 13,617 | 12,122 | 628 | 19 | 848 | 93.8% |
-| Conditions | 64 | 8,663 | 7,976 | 2 | 1 | 684 | 92.1% |
+| Actions | 98 | 13,617 | 12,322 | 628 | 19 | 648 | 95.2% |
+| Conditions | 64 | 8,663 | 8,173 | 2 | 1 | 487 | 94.4% |
 
 ## Adding or changing a mapping
 

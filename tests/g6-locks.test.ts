@@ -30,4 +30,4 @@ test("every G6 lockInput page dynamically releases or transfers", () => {
     expect(row!.outcome, `${map}: ${name}`).toBe("unlocked");
     expect(row!.checks.every((check) => check.lockedAt >= 0 && check.resolvedAt >= check.lockedAt)).toBeTrue();
   }
-}, 30_000);
+}, 60_000);

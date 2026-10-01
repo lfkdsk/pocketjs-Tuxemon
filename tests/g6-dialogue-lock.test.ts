@@ -92,7 +92,7 @@ test("declining the skip cannot escape the CEO monologue and preserves story ord
         state = stepSession(session, state, { ...NONE, buttons });
       }
     }
-    expect(state.interp.modal?.fiber).toContain("e005_spyder_intro");
+    expect(state.interp.modal?.fiber).toContain("e006_spyder_intro");
     expect([state.mapId, state.move.tx, state.move.ty]).toEqual(["spyder_bedroom", 4, 4]);
     expect(numericVariable(state, "v.spyder_intro")).toBe(0);
   }

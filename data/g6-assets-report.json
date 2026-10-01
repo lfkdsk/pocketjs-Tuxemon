@@ -4,12 +4,12 @@
  "project": {
   "maps": 263,
   "collisionBodies": 14,
-  "maxActors": 502,
-  "runtimeMaxActors": 217,
+  "maxActors": 503,
+  "runtimeMaxActors": 218,
   "excludedActorStressMaps": [
    {
     "id": "test_npcs",
-    "slots": 502
+    "slots": 503
    }
   ],
   "options": {
@@ -28,12 +28,12 @@
    "compact": 263,
    "json": 0
   },
-  "shellBytes": 82969,
-  "entryBytes": 4191161,
-  "canonicalJsonBytes": 9231016,
+  "shellBytes": 83620,
+  "entryBytes": 4253489,
+  "canonicalJsonBytes": 9306146,
   "entries": 263,
-  "manifestHash": "67366d2963c09bfbd2f61f139a8849fb9a4d2240c4ec964c13427849a9b0ad7e",
-  "schemaHash": "47cf3d8ffdb35044fb6b099d98455368123db4710bc8516875a0bc06902c6d59"
+  "manifestHash": "64dbee1cea5d9dc942f286f89592808d17727727a74570d53ef816d65089c52d",
+  "schemaHash": "0b9fff5b478b87e0dcae1f37044a444043c735339ca45245bdbbb9e2e36e7ab5"
  },
  "terrain": {
   "entries": 430,
@@ -64,6 +64,10 @@
  "npcSrcRepository": {
   "entries": 183,
   "entryBytes": 125878
+ },
+ "audio": {
+  "entries": 11,
+  "entryBytes": 7207422
  },
  "characters": {
   "source": "https://github.com/Tuxemon/Tuxemon",

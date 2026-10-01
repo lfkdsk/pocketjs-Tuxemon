@@ -75,28 +75,29 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   expect(result.report.coverage.actions.summary).toMatchObject({
     types: 98,
     uses: 13_617,
-    native: 6_657,
+    native: 6_857,
     degraded: 2_817,
     placeholder: 709,
-    dropped: 3_434,
-    nativePercent: 48.9,
+    dropped: 3_234,
+    nativePercent: 50.4,
     tier1: {
-      uses: 6_130,
-      percent: 45.02,
+      uses: 6_330,
+      percent: 46.49,
       requiredUses: 6_246,
-      meetsBaseline: false,
+      meetsBaseline: true,
     },
   });
   expect(result.report.coverage.conditions.summary).toMatchObject({
     types: 64,
     uses: 8_663,
-    native: 4_179,
+    native: 4_376,
     degraded: 1_229,
     placeholder: 859,
-    dropped: 2_396,
+    dropped: 2_199,
+    nativePercent: 50.5,
     tier1: {
-      uses: 4_117,
-      percent: 47.52,
+      uses: 4_314,
+      percent: 49.8,
       requiredUses: 4_591,
       meetsBaseline: false,
     },
@@ -509,10 +510,11 @@ test("default import output remains byte-pinned", () => {
   const bytes = jsonBytes(buildProject(maps, DEFAULT_IMPORT_OPTIONS));
   // This pins the complete ImportBuild: condition lowering, the stable source
   // inputs, the generated outdoor world index and its compact report summary.
-  // The deterministic clock and native presentation/terrain mappings are
-  // included in this combined pin.
+  // The deterministic clock, native presentation/terrain mappings, the GM1
+  // audio commands, and the sys.music_fading fadeout guard are all included
+  // in this combined pin.
   expect(createHash("sha256").update(bytes).digest("hex")).toBe(
-    "b2c992b1431ae402127deaa3405c803fde21840c1e44b4370c4e1e3f8b20901e",
+    "e97ba443006deb9d06f13fae87a19b36a2f6b3c8eb10727de73a6b7b3c1c9db7",
   );
 });
 

@@ -78,6 +78,7 @@ function startBattle(
     variables: {},
     items,
     gold,
+    playerName: "Player",
   });
 }
 
@@ -666,4 +667,26 @@ describe("Tuxemon BattleRules adapter", () => {
     };
     expect(rules.done(json(hidden))).toBeNull();
   });
+});
+
+test("presentation, menus and decisions preserve every published battle snapshot", () => {
+  const rules = createTuxemonBattleRules(DB, ENUMS);
+  const started = startBattle(rules, extensionWith(monster("nut", 20, "txmn-player", 33)),
+    json({ kind: "wild", species: "budaye", level: 5, environment: "grass" }), 717)!;
+  const frozen = new WeakSet<object>();
+  function freeze(value: unknown): void {
+    if (!value || typeof value !== "object" || frozen.has(value)) return;
+    frozen.add(value); for (const child of Object.values(value)) freeze(child); Object.freeze(value);
+  }
+  let value = started.state;
+  const originalVisuals = tuxemonRuntimeBattleState(value).visuals;
+  for (let tick = 0; tick < 300; tick++) {
+    freeze(value);
+    const before = JSON.stringify(value);
+    const next = rules.step(value, { buttons: 0, confirmEdge: tick % 2 === 0 }, 1);
+    expect(JSON.stringify(value)).toBe(before);
+    expect(tuxemonRuntimeBattleState(next).visuals).toBe(originalVisuals);
+    value = next;
+    if (rules.done(value)) break;
+  }
 });
