@@ -145,7 +145,10 @@ ownership metadata is deleted after each state fold; character revision caches
 retain at most 16 states. Battle turns copy mutable fields and share historical
 events. Command handlers retain defensive copies. Dialogue keeps text nodes
 mounted and hides empty rows through display styles. Sprite motion and HP
-fills use paint transforms. Texture draws at integer scale are split at cache
+fills use paint transforms. Actor art tracks the page conditions of visible NPCs;
+modal-owned input reuses trigger scans while advancing the active fiber.
+Battle party icons publish changes per slot, and viewport geometry does not
+depend on combat HP. Texture draws at integer scale are split at cache
 column boundaries. The GE command buffer occupies complete CPU cache lines
 and is flushed and invalidated before its first uncached write.
 
@@ -166,18 +169,22 @@ timing build measured:
 
 | 300-frame window | Mean work time | Measured presentation rate |
 | --- | ---: | ---: |
-| Paper Scoop walking/dialogue (300–599) | 13.51 ms | 54.94 fps |
-| Paper Town dialogue/cutscene (1500–1799) | 15.06 ms | 48.25 fps |
-| Billie battle (2100–2399) | 11.54 ms | 56.10 fps |
-| Billie battle (2400–2699) | 12.15 ms | 54.89 fps |
-| Route 1 idle (4200–4499) | 11.57 ms | 59.89 fps |
+| Paper Scoop walking/dialogue (300–599) | 13.47 ms | 54.77 fps |
+| Paper Town dialogue/cutscene (1500–1799) | 14.88 ms | 48.51 fps |
+| Billie battle (2100–2399) | 11.38 ms | 55.93 fps |
+| Billie battle (2400–2699) | 11.82 ms | 55.24 fps |
+| Post-battle Town traversal (3300–3599) | 16.18 ms | 46.37 fps |
+| Town / Route 1 transition (3600–3899) | 17.37 ms | 43.03 fps |
+| Route 1 idle (4200–4499) | 11.60 ms | 59.84 fps |
 
 The retained dialogue rows preserve all 3,793 opening frames' pixels against
 the preceding build in the WASM renderer. In the Town window, they reduced
 p95 CPU work from 40.72 ms to 30.44 ms; an affected frame's native layout time
 fell from 15.58 ms to 3.53 ms. These frames still exceed the 16.7 ms budget.
-The 2100–2399 battle window contains an 80.53 ms turn and has 17.30 ms p95
-CPU work; its mean frame time does not establish smooth battle input.
+Per-slot HUD updates reduced the first measured turn from 80.76 ms to
+75.84 ms; later turns still take 64–65 ms. The 2100–2399 battle window has
+17.22 ms p95 CPU work. Stalls remain beyond the first battle entry, and
+these mean rates do not establish smooth battle input.
 An earlier build with the metadata lifetime fix held 59.83–60.02 fps over
 395 seconds of Route 1 idle, with no explicit QuickJS GC in those windows.
 This idle result does not establish walking or battle acceptance.

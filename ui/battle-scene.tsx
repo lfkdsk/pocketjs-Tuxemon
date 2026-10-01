@@ -29,7 +29,7 @@ import {
   BATTLE_BASE_HEIGHT,
   BATTLE_BASE_WIDTH,
   BATTLE_RECTS as R,
-  battleSceneLayout,
+  battleViewportLayout,
 } from "./battle-layout.ts";
 
 type Runtime = ReturnType<typeof tuxemonRuntimeBattleState>;
@@ -209,7 +209,7 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
   });
   const player = () => paint.player;
   const enemy = () => paint.enemy;
-  const layout = createMemo(() => battleSceneLayout(props.width, props.height, player(), enemy()));
+  const layout = createMemo(() => battleViewportLayout(props.width, props.height));
   const environment = createMemo(() => runtime().visuals.environment);
   const playerArt = createMemo(() => runtime().visuals.monsters[player().slug]!);
   const enemyArt = createMemo(() => runtime().visuals.monsters[enemy().slug]!);
@@ -399,6 +399,7 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
     const hp = side === 0 ? R.playerHp : R.enemyHp;
     const status = side === 0 ? R.playerStatus : R.enemyStatus;
     const icon = createMemo(() => monster().status ? runtime().visuals.statusIcons[monster().status!.slug] : undefined);
+    const label = createMemo(() => `${title(monster().slug)}  Lv${shownLevel()} ${genderMark(monster().gender)}`);
     return (
       <>
         <Image
@@ -420,7 +421,7 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
           }}
           debugName={`${side === 0 ? "player" : "enemy"}-hud-name`}
         >
-          {`${title(monster().slug)}  Lv${shownLevel()} ${genderMark(monster().gender)}`}
+          {label()}
         </Text>
         <View class="absolute" style={{ posType: 1, insetL: hp.x, insetT: hp.y }}>
           <StatBar
@@ -464,7 +465,7 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
         />
         <For each={PARTY_SLOTS}>
           {(slot) => {
-            const icon = () => (side === 0 ? paint.playerIcons : paint.enemyIcons)[slot]!;
+            const icon = createMemo(() => (side === 0 ? paint.playerIcons : paint.enemyIcons)[slot]!);
             return (
               <Image
                 src={pathFor(icon().key)}

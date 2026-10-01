@@ -387,7 +387,7 @@ index 257b9a1..f7ecd5b 100644
 +  if (error) throw new Error(`${label}: $${error}`);
 +}
 diff --git a/src/engine/interpreter.ts b/src/engine/interpreter.ts
-index fdbd858..c4d03ec 100644
+index fdbd858..9589fc9 100644
 --- a/src/engine/interpreter.ts
 +++ b/src/engine/interpreter.ts
 @@ -25,6 +25,7 @@
@@ -948,7 +948,7 @@ index fdbd858..c4d03ec 100644
  ): JsonValue {
    const extension: MutableExtensionScope = { runtime: w.extensions, ext: ext0 };
    // A fatalized state is frozen: no triggers scan, no fiber advances. The
-@@ -2137,22 +2317,104 @@ export function stepInterpWithExtensionsInPlace(
+@@ -2137,22 +2317,105 @@ export function stepInterpWithExtensionsInPlace(
    s.pendingPlacements = [];
    s.abortedRoutes = [];
  
@@ -957,11 +957,12 @@ index fdbd858..c4d03ec 100644
 +  // A scan that ran only completed IF/JMP prefixes has no clock-dependent
 +  // fiber left. Reuse it only with the complete read context unchanged.
 +  // A blocking fiber still advances below, with the original remaining budget.
-+  // Live parallels, input edges and non-deterministic handlers never sleep.
++  // Input that can start an action event and non-deterministic handlers never
++  // sleep. Edges owned by an existing modal still reach its fiber below.
 +  const parallelKeys = Object.keys(s.parallels);
 +  const canCacheScan = immutable && w.extensions.immutableConditions && w.extensions.deterministicConditions &&
 +    s.pendingBattles.length === 0 &&
-+    !input.confirmEdge && !input.cancelEdge && !input.upEdge && !input.downEdge;
++    (!input.confirmEdge || s.main !== null || s.inputLocked || messageHoldsPlayer(w, s));
 +  const canSleep = canCacheScan && parallelKeys.length === 0;
 +  const sleeping = canSleep ? idleScans.get(w) : undefined;
 +  if (sleeping && sameIdleScan(sleeping, s, input, ext0)) {
@@ -1587,7 +1588,7 @@ index 227443c..32692cd 100644
          </View>
        </Show>
 diff --git a/src/ui/GameView.tsx b/src/ui/GameView.tsx
-index 752e417..da36c7d 100644
+index 752e417..7859a08 100644
 --- a/src/ui/GameView.tsx
 +++ b/src/ui/GameView.tsx
 @@ -25,7 +25,7 @@
@@ -1599,7 +1600,15 @@ index 752e417..da36c7d 100644
  import { Image, Text, View, type NodeMirror } from "@pocketjs/framework/components";
  import { createJumpBatch, type JumpBatch } from "@pocketjs/framework/animation";
  import { createElement, setProp } from "@pocketjs/framework/renderer";
-@@ -99,6 +99,9 @@ function collectMapSlots(map: MapDef, sprites: Sprites): GameEvent[] {
+@@ -76,6 +76,7 @@ import { ChunkLayer } from "./ChunkLayer.tsx";
+ import { StreamedChunkLayer, type StreamedChunkLayerStats } from "./StreamedChunkLayer.tsx";
+ import { actorDepth, OccludingUpperLayer } from "./OccludingUpperLayer.tsx";
+ import { startupProfileMark } from "../startup-profile.ts";
++import { npcArtInputs } from "./npc-art-inputs.ts";
+ 
+ type Sprites = Record<string, SpriteDef>;
+ 
+@@ -99,6 +100,9 @@ function collectMapSlots(map: MapDef, sprites: Sprites): GameEvent[] {
  }
  
  interface NpcRenderSlot {
@@ -1609,7 +1618,7 @@ index 752e417..da36c7d 100644
    node: NodeMirror;
    px: number;
    py: number;
-@@ -120,13 +123,19 @@ function npcFrame(
+@@ -120,13 +124,19 @@ function npcFrame(
    sprites: Sprites,
    npcSrc: GameAssets["npcSrc"],
    extensions: ExtensionRuntime,
@@ -1635,7 +1644,7 @@ index 752e417..da36c7d 100644
    const ch = state.chars.chars[event.id];
    return [
      ch ? ch.px : event.x * TILE,
-@@ -145,6 +154,7 @@ function npcStyle(height: 16 | 32, depth: number) {
+@@ -145,6 +155,7 @@ function npcStyle(height: 16 | 32, depth: number) {
  /** The only mounted actor subtree. It owns enough stable image slots for any
   *  transfer destination and rebinds them without replacing native nodes. */
  function CurrentMapActors(props: {
@@ -1643,7 +1652,7 @@ index 752e417..da36c7d 100644
    slots: () => readonly GameEvent[];
    slotCount: number;
    worldWidth: number;
-@@ -165,14 +175,14 @@ function CurrentMapActors(props: {
+@@ -165,14 +176,14 @@ function CurrentMapActors(props: {
    const stride = props.worldWidth;
    const npcs: NpcRenderSlot[] = Array.from({ length: props.slotCount }, (_, index) => {
      const source = slots[index];
@@ -1661,26 +1670,40 @@ index 752e417..da36c7d 100644
    });
    startupProfileMark("ui-actors:pooled");
  
-@@ -223,8 +233,18 @@ function CurrentMapActors(props: {
+@@ -223,11 +234,31 @@ function CurrentMapActors(props: {
  
    onMount(compilePositions);
  
 +  let artSignature: string | readonly unknown[] = "";
++  let broadArtSignature: string | readonly unknown[] = "";
++  let readArtInputs = npcArtInputs(slots, initial.mapId);
 +  let artVersion = 0;
 +  let previousCharacters = initial.chars.chars;
 +  const selectedArt = new Map<GameEvent, { art: NpcArt | "" }>();
    onFrame(() => {
      const state = props.state();
-+    const inputs = [state.mapId, state.sw.switches, state.sw.self, state.sw.variables,
-+      state.sw.items, state.sw.gold, state.ext, state.move.facing, isSessionWorldIdle(state)];
-+    const nextArtSignature = props.immutableState ? inputs : JSON.stringify(inputs);
-+    const same = nextArtSignature === artSignature || (typeof nextArtSignature !== "string" &&
-+      typeof artSignature !== "string" && nextArtSignature.every((value, i) => value === artSignature[i]));
-+    if (!same) { selectedArt.clear(); artSignature = nextArtSignature; artVersion++; }
      const next = props.slots();
      const transfer = next !== slots;
-     if (transfer) slots = next;
-@@ -243,15 +263,22 @@ function CurrentMapActors(props: {
+-    if (transfer) slots = next;
++    if (transfer) { slots = next; readArtInputs = npcArtInputs(slots, state.mapId); }
++    const idle = isSessionWorldIdle(state);
++    const inputs = [state.mapId, state.sw.switches, state.sw.self, state.sw.variables,
++      state.sw.items, state.sw.gold, state.ext, state.move.facing, idle];
++    const broad = props.immutableState ? inputs : JSON.stringify(inputs);
++    let same = !transfer && (broad === broadArtSignature || (typeof broad !== "string" &&
++      typeof broadArtSignature !== "string" && broad.every((value, i) => value === broadArtSignature[i])));
++    if (!same) {
++      const values = readArtInputs(state, idle);
++      const signature = props.immutableState ? values : JSON.stringify(values);
++      same = !transfer && (signature === artSignature || (typeof signature !== "string" &&
++        typeof artSignature !== "string" && signature.every((value, i) => value === artSignature[i])));
++      broadArtSignature = broad;
++      if (!same) { selectedArt.clear(); artSignature = signature; artVersion++; }
++    }
+     let moved = false;
+     let dirty = transfer;
+     const camera = props.camera();
+@@ -243,15 +274,22 @@ function CurrentMapActors(props: {
        dirty = true;
      }
  
@@ -1708,7 +1731,7 @@ index 752e417..da36c7d 100644
        if (!transfer && source && (npc.px !== frame[0] || npc.py !== frame[1])) {
          positions?.set(4 + index * 2, frame[0]);
          positions?.set(5 + index * 2, frame[1]);
-@@ -265,7 +292,7 @@ function CurrentMapActors(props: {
+@@ -265,7 +303,7 @@ function CurrentMapActors(props: {
      if (dirty) {
        const nextOrder = depthOrder([
          [state.move.px, state.move.py],
@@ -1717,7 +1740,7 @@ index 752e417..da36c7d 100644
        ], stride);
        reorder ||= order !== nextOrder;
        order = nextOrder;
-@@ -273,13 +300,17 @@ function CurrentMapActors(props: {
+@@ -273,13 +311,17 @@ function CurrentMapActors(props: {
      if (transfer) compilePositions();
      else if (moved) positions?.commit();
      if (reorder) setPlayerDepth(actorDepth(state.move.px, state.move.py, stride));
@@ -1739,7 +1762,7 @@ index 752e417..da36c7d 100644
        if (transfer) setProp(npc.node, "debugName", slots[index] ? `rpgkit-npc-${slots[index]!.id}` : undefined);
      }
      px = state.move.px;
-@@ -334,6 +365,8 @@ export interface BattleSceneViewProps {
+@@ -334,6 +376,8 @@ export interface BattleSceneViewProps {
  export type BattleSceneComponent = Component<BattleSceneViewProps>;
  
  export interface GameViewProps {
@@ -1748,7 +1771,7 @@ index 752e417..da36c7d 100644
    project: ProjectSource;
    /** Required with ProjectShell; omitted for backwards-compatible inline
     * projects. Local repositories acquire synchronously. */
-@@ -392,6 +425,7 @@ export function GameView(props: GameViewProps) {
+@@ -392,6 +436,7 @@ export function GameView(props: GameViewProps) {
          extensions: props.extensions,
          battle: props.battle,
          scene: props.scene,
@@ -1756,7 +1779,7 @@ index 752e417..da36c7d 100644
        })
      : null;
    const session: Session = attract
-@@ -401,6 +435,7 @@ export function GameView(props: GameViewProps) {
+@@ -401,6 +446,7 @@ export function GameView(props: GameViewProps) {
          extensions: props.extensions,
          battle: props.battle,
          scene: props.scene,
@@ -1764,7 +1787,7 @@ index 752e417..da36c7d 100644
        });
    startupProfileMark("game-view:session");
    let state: SessionState = attract ? attract.state : startSession(project, session);
-@@ -443,7 +478,8 @@ export function GameView(props: GameViewProps) {
+@@ -443,7 +489,8 @@ export function GameView(props: GameViewProps) {
    const [facing, setFacing] = createSignal<Facing>(state.move.facing);
    const [modal, setModal] = createSignal<Modal | null>(null);
    const [demo, setDemo] = createSignal<AttractStatus | null>(null);
@@ -1774,7 +1797,7 @@ index 752e417..da36c7d 100644
    const [fatalError, setFatalError] = createSignal<string | null>(state.interp.error?.message ?? null);
    // Live host viewport: console hosts omit ui.__viewport (spec screen),
    // desktop windows publish and resize it. Polled in onFrame like
-@@ -465,12 +501,12 @@ export function GameView(props: GameViewProps) {
+@@ -465,12 +512,12 @@ export function GameView(props: GameViewProps) {
      if (!indexed) throw new Error(`GameView: unknown map size ${JSON.stringify(id)}`);
      return { w: indexed.width * TILE, h: indexed.height * TILE };
    };
@@ -1789,7 +1812,7 @@ index 752e417..da36c7d 100644
    const cameraFor = (st: SessionState): CameraState => {
      const vp = viewport();
      const size = mapSize(st.mapId);
-@@ -491,25 +527,19 @@ export function GameView(props: GameViewProps) {
+@@ -491,25 +538,19 @@ export function GameView(props: GameViewProps) {
    // (confirm, cancel, choices up/down) is derived from the folded button
    // mask (one unified input stream), so the view never fires edges itself.
    const edge = { confirm: false, cancel: false };
@@ -1824,7 +1847,7 @@ index 752e417..da36c7d 100644
      }
      // A game-owned scene (ui/GameView.tsx's BattleSceneView) reads no map
      // modal, so without this branch a scene's cancel/escape command (a
-@@ -517,14 +547,11 @@ export function GameView(props: GameViewProps) {
+@@ -517,14 +558,11 @@ export function GameView(props: GameViewProps) {
      // reducer's cancelEdge and a scene author is forced to read raw button
      // bits itself (contracts/spec/spec.ts BTN.CROSS) instead of the
      // portable confirm/cancel edges every other input path uses.
@@ -1843,7 +1866,7 @@ index 752e417..da36c7d 100644
  
    // The world camera and actor slots stay stable across transfers, so their
    // coordinates can share one precompiled position batch.
-@@ -613,7 +640,8 @@ export function GameView(props: GameViewProps) {
+@@ -613,7 +651,8 @@ export function GameView(props: GameViewProps) {
        if (op !== fade()) setFade(op);
        const shownModal = attract ? attract.presentedModal() : state.interp.modal;
        setModal((m) => (modalChanged(m, shownModal) ? deepClone(shownModal) : m));
@@ -1853,7 +1876,7 @@ index 752e417..da36c7d 100644
        setFatalError(state.interp.error?.message ?? null);
        if (status) {
          const st = status;
-@@ -633,7 +661,7 @@ export function GameView(props: GameViewProps) {
+@@ -633,7 +672,7 @@ export function GameView(props: GameViewProps) {
  
    const view = (
      <View class="w-full h-full overflow-hidden bg-black">
@@ -1862,7 +1885,7 @@ index 752e417..da36c7d 100644
          <>
            {/* The frame clips each axis to min(map, viewport). Undersized axes
                are centered over the black root; oversized axes start at zero
-@@ -707,6 +735,7 @@ export function GameView(props: GameViewProps) {
+@@ -707,6 +746,7 @@ export function GameView(props: GameViewProps) {
              onAnimatedStats={(stats) => props.onAnimatedStats?.("above", stats)}
            >
              <CurrentMapActors
@@ -1870,7 +1893,7 @@ index 752e417..da36c7d 100644
                slots={currentSlots}
                slotCount={actorSlotCount}
                worldWidth={worldWidth}
-@@ -726,6 +755,7 @@ export function GameView(props: GameViewProps) {
+@@ -726,6 +766,7 @@ export function GameView(props: GameViewProps) {
            </View>
  
            <DialogBox
@@ -1878,7 +1901,7 @@ index 752e417..da36c7d 100644
              modal={modal}
              legend={actions.legend}
              theme={props.theme}
-@@ -736,7 +766,7 @@ export function GameView(props: GameViewProps) {
+@@ -736,7 +777,7 @@ export function GameView(props: GameViewProps) {
          </>
        </Show>
  
@@ -2415,7 +2438,7 @@ index 92f85f1..f8df339 100644
          setTheme(THEMES[scene.theme ?? "default"]);
          setFaces(scene.faces ? FACES : undefined);
 diff --git a/tests/interpreter.test.ts b/tests/interpreter.test.ts
-index 1cfbc0e..9fd5ff7 100644
+index 1cfbc0e..62f7dda 100644
 --- a/tests/interpreter.test.ts
 +++ b/tests/interpreter.test.ts
 @@ -20,10 +20,14 @@ import {
@@ -2433,10 +2456,47 @@ index 1cfbc0e..9fd5ff7 100644
  import { validateSchema, type VError } from "../src/engine/schema-validate.ts";
  import type { Command, GameEvent, MapDef, Project } from "../src/engine/types.ts";
  
-@@ -1000,6 +1004,55 @@ describe("host-portable interpreter cloning (F1/1173 QuickJS)", () => {
+@@ -1000,6 +1004,92 @@ describe("host-portable interpreter cloning (F1/1173 QuickJS)", () => {
  describe("runaway backstop (review 1274 B1)", () => {
    const CELL = { x: 10, y: 10 };
  
++  for (const trigger of ["autorun", "parallel"] as const)
++    for (const messageBlocksPlayer of [false, true])
++      test(`cached scans deliver modal edges and subsequent actions: ${trigger}, hold=${messageBlocksPlayer}`, () => {
++        const events = [
++          event("guard", 0, 0, [{ op: "if", if: { kind: "variable", id: "never", op: "==", value: 1 }, then: [] }], "parallel"),
++          event("dialog", 0, 0, [
++            { op: "text", lines: ["A line", "Another line"], cps: 20 },
++            { op: "choices", prompt: "Pick", options: [
++              { text: "One", commands: [{ op: "variable", id: "pick", set: { op: "set", value: 1 } }] },
++              { text: "Two", commands: [{ op: "variable", id: "pick", set: { op: "set", value: 2 } }] },
++            ], cancel: { commands: [{ op: "variable", id: "pick", set: { op: "set", value: 3 } }] } },
++            { op: "erase" },
++          ], trigger),
++          event("action", 10, 9, [{ op: "variable", id: "actions", set: { op: "add", value: 1 } }]),
++        ];
++        const histories: InterpState[][] = [];
++        for (const immutable of [false, true]) {
++          const w = createWorld(map(events), [], 60, { messageBlocksPlayer, extensions: createExtensionRuntime({
++            immutableConditions: true, deterministicConditions: true,
++          }) });
++          let s = createInterpState();
++          const history: InterpState[] = [];
++          for (let frame = 0; frame < 30; frame++) {
++            s = shareInterp(s, immutable);
++            stepInterpWithExtensionsInPlace(w, s, input({
++              confirmEdge: frame % 4 === 2, cancelEdge: frame % 7 === 6,
++              upEdge: frame % 3 === 0, downEdge: frame % 3 === 1,
++            }), null, undefined, immutable);
++            history.push(s);
++          }
++          expect(s.sw.variables.pick).toBeDefined();
++          expect(s.sw.variables.actions).toBeGreaterThan(0);
++          histories.push(history);
++        }
++        expect(histories[1]).toEqual(histories[0]);
++      });
++
 +  test("a sleeping parallel scan reserves its budget when the blocking wait finishes", () => {
 +    const events = [
 +      event("guard", 10, 10, Array.from({ length: 80 }, () => ({
@@ -2789,3 +2849,139 @@ index 0000000..c6a59c0
 +    this.values.set(key, value);
 +  }
 +}
+diff --git a/src/ui/npc-art-inputs.ts b/src/ui/npc-art-inputs.ts
+new file mode 100644
+index 0000000..e63d70b
+--- /dev/null
++++ b/src/ui/npc-art-inputs.ts
+@@ -0,0 +1,46 @@
++import type { SessionState } from "../engine/session.ts";
++import type { GameEvent } from "../engine/types.ts";
++
++/** Inputs read by the visible actors' page conditions. Invisible event pages
++ * do not select actor art; movement clocks do not select it either. */
++export function npcArtInputs(events: readonly GameEvent[], mapId: string) {
++  const switches = new Set<string>(), variables = new Set<string>();
++  const self = new Set<string>(), items = new Set<string>();
++  let gold = false, facing = false, worldIdle = false, extension = false;
++  for (const ev of events) for (const page of ev.pages) {
++    const c = page.condition;
++    if (!c) continue;
++    if (c.switch !== undefined) switches.add(c.switch);
++    if (c.variable) variables.add(c.variable.id);
++    if (c.selfSwitch !== undefined) self.add(`${mapId}/${ev.id}`);
++    if (c.item !== undefined) items.add(c.item);
++    for (const clause of c.all ?? []) switch (clause.kind) {
++      case "switch": switches.add(clause.id); break;
++      case "variable": variables.add(clause.id); break;
++      case "selfSwitch": self.add(`${mapId}/${ev.id}`); break;
++      case "item": items.add(clause.id); break;
++      case "gold": gold = true; break;
++      case "facing": facing = true; break;
++      case "worldIdle": worldIdle = true; break;
++      case "ext": extension = true; break;
++    }
++  }
++  // An opaque extension condition retains the previous broad invalidation
++  // context, including inputs not exposed through its read-context object.
++  if (extension) return (state: SessionState, idle: boolean): readonly unknown[] => [
++    state.mapId, state.sw.switches, state.sw.self, state.sw.variables,
++    state.sw.items, state.sw.gold, state.ext, state.move.facing, idle,
++  ];
++  const reads = [["switches", [...switches]], ["variables", [...variables]],
++    ["self", [...self]], ["items", [...items]]] as const;
++  return (state: SessionState, idle: boolean): readonly unknown[] => {
++    const values: unknown[] = [state.mapId];
++    for (const [bank, keys] of reads) {
++      for (const key of keys) values.push(Object.hasOwn(state.sw[bank], key) ? state.sw[bank][key] : undefined);
++    }
++    if (gold) values.push(state.sw.gold);
++    if (facing) values.push(state.move.facing);
++    if (worldIdle) values.push(idle);
++    return values;
++  };
++}
+diff --git a/tests/npc-art-inputs.test.ts b/tests/npc-art-inputs.test.ts
+new file mode 100644
+index 0000000..7e9e45e
+--- /dev/null
++++ b/tests/npc-art-inputs.test.ts
+@@ -0,0 +1,78 @@
++import { describe, expect, test } from "bun:test";
++import { activePage, createSwitchState } from "../src/engine/interpreter.ts";
++import { createExtensionRuntime } from "../src/engine/extensions.ts";
++import type { SessionState } from "../src/engine/session.ts";
++import type { GameEvent, PageCondition } from "../src/engine/types.ts";
++import { npcArtInputs } from "../src/ui/npc-art-inputs.ts";
++
++const state = (): SessionState => ({ mapId: "map", sw: createSwitchState(), move: { facing: 0 }, ext: null } as SessionState);
++const event = (condition: PageCondition): GameEvent => ({ id: "npc", x: 0, y: 0, pages: [
++  { trigger: "action", sprite: "base", commands: [] },
++  { trigger: "action", sprite: "changed", commands: [], condition },
++] });
++
++describe("NPC art condition inputs", () => {
++  const cases: [PageCondition, (s: SessionState) => void][] = [
++    [{ switch: "gate" }, s => { s.sw.switches.gate = true; }],
++    [{ variable: { id: "shown", op: "==", value: 1 } }, s => { s.sw.variables.shown = 1; }],
++    [{ selfSwitch: "A" }, s => { s.sw.self["map/npc"] = "A"; }],
++    [{ item: "key" }, s => { s.sw.items.key = 1; }],
++    [{ all: [{ kind: "switch", id: "gate" }] }, s => { s.sw.switches.gate = true; }],
++    [{ all: [{ kind: "variable", id: "shown", op: "==", value: 1 }] }, s => { s.sw.variables.shown = 1; }],
++    [{ all: [{ kind: "selfSwitch", key: "A" }] }, s => { s.sw.self["map/npc"] = "A"; }],
++    [{ all: [{ kind: "item", id: "key", count: 2 }] }, s => { s.sw.items.key = 2; }],
++    [{ all: [{ kind: "gold", amount: 2 }] }, s => { s.sw.gold = 2; }],
++    [{ all: [{ kind: "facing", dir: "right" }] }, s => { s.move.facing = 3; }],
++  ];
++  for (const [condition, change] of cases) test(`tracks ${JSON.stringify(condition)}`, () => {
++    const ev = event(condition), read = npcArtInputs([ev], "map"), before = state(), after = state();
++    const original = read(before, false);
++    change(after);
++    expect(activePage(ev, before.sw, "map", before.move.facing)?.index).toBe(0);
++    expect(activePage(ev, after.sw, "map", after.move.facing)?.index).toBe(1);
++    expect(read(after, false)).not.toEqual(original);
++    expect(read(before, false)).toEqual(original);
++  });
++
++  test("unrelated variables, movement and dialogue idle changes leave actor inputs unchanged", () => {
++    const ev = event({ variable: { id: "shown", op: "==", value: 1 } });
++    const read = npcArtInputs([ev], "map"), s = state(), before = read(s, true);
++    s.sw.variables = { unrelated: 4 };
++    s.move.facing = 2; s.ext = "unrelated";
++    expect(read(s, false)).toEqual(before);
++    s.sw.variables = { shown: 1, unrelated: 4 };
++    expect(read(s, false)).not.toEqual(before);
++  });
++
++  test("world idle and event self-switch keys are explicit inputs", () => {
++    const s = state(), idle = npcArtInputs([event({ all: [{ kind: "worldIdle" }] })], "map");
++    expect(idle(s, false)).not.toEqual(idle(s, true));
++    const self = npcArtInputs([event({ selfSwitch: "A" })], "map"), before = self(s, false);
++    s.sw.self["other/npc"] = "A";
++    expect(self(s, false)).toEqual(before);
++    s.sw.self["map/npc"] = "A";
++    expect(self(s, false)).not.toEqual(before);
++  });
++
++  test("extension pages retain complete bank and extension dependencies", () => {
++    const ev = event({ all: [{ kind: "ext", call: "game.visible", args: null }] });
++    const read = npcArtInputs([ev], "map"), before = state(), after = state();
++    const runtime = createExtensionRuntime({ immutableConditions: true, deterministicConditions: true,
++      conditions: { "game.visible": c => c.ext === "shown" && c.variables.flag === 1 && c.gold > 0 } });
++    after.ext = "shown"; after.sw.variables.flag = 1; after.sw.gold = 2;
++    expect(read(after, false)).not.toEqual(read(before, false));
++    expect(activePage(ev, before.sw, "map", 0, { runtime, ext: before.ext })?.index).toBe(0);
++    expect(activePage(ev, after.sw, "map", 0, { runtime, ext: after.ext })?.index).toBe(1);
++  });
++
++  test("inherited bank keys cannot select a page or change its inputs", () => {
++    const ev = event({ switch: "gate" }), read = npcArtInputs([ev], "map"), s = state();
++    const before = read(s, false);
++    s.sw.switches = Object.create({ gate: true });
++    expect(read(s, false)).toEqual(before);
++    expect(activePage(ev, s.sw, "map")?.index).toBe(0);
++    s.sw.switches.gate = true;
++    expect(read(s, false)).not.toEqual(before);
++    expect(activePage(ev, s.sw, "map")?.index).toBe(1);
++  });
++});
