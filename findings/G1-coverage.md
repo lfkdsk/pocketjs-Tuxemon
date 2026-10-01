@@ -81,6 +81,42 @@ is currently degraded.
 - **Degraded — full bag:** A purchase that would introduce item kind 100 is refused; Tuxemon routes it to the locker, which is not implemented.
 - **Degraded — item descriptions:** Descriptions are retained in this import report because rpgkit-project/v1 Item has no description field.
 
+## Outdoor world index
+
+The four Tiled world files contribute 139 source
+members. TMX `inside=true` excludes 72
+interiors, leaving 67 stitchable outdoor maps.
+Corrected TMX geometry yields 91 positive-span
+edge contacts: 71 enter the evidence-backed seam
+allowlist and 20 remain rejected.
+The index also records 14 non-spatial portal/cardinal links,
+0 overlaps, and
+49 stale/zero source dimensions
+(20 outdoors).
+
+Topology evidence does not by itself authorize coordinate-preserving handoff.
+Of the allowlisted seams, 41 have
+only compatible portal openings, 1 mix
+compatible and portal-only openings, 19 have
+only fixed/misaligned portal openings, and 10
+have cardinal metadata but no edge portal. Across individual openings,
+258 are coordinate-preserving and
+39 must retain teleport semantics.
+1 non-unique cardinal aliases are retained
+as ambiguity diagnostics and are not expanded into pairwise gaps.
+
+Artifact: `dist/world-index.json`; content SHA-256:
+`c681c230fe432bbbf8809fe11a5bbc42fc8eb4f62c2ec1a6be141fd0c35f2143`. S5 expected 71
+accepted seams; generated 71
+(match).
+
+| World | Outdoor / source | Bbox tiles | Contacts | Allowlisted | Handoff seams (safe / mixed / portal / direction) | Rejected contacts | Linked gaps | Size fixes | Components |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| classic | 15 / 15 | 280×120 | 15 | 15 | 0 / 0 / 15 / 0 | 0 | 0 | 0 | 15 |
+| eclipse | 12 / 12 | 120×240 | 14 | 9 | 0 / 0 / 0 / 9 | 5 | 0 | 0 | 8 + 1 + 1 + 1 + 1 |
+| normal | 17 / 17 | 200×341 | 18 | 15 | 13 / 1 / 1 / 0 | 3 | 4 | 0 | 16 + 1 |
+| spyder | 23 / 95 | 180×200 | 44 | 32 | 28 / 0 / 3 / 1 | 12 | 10 | 49 | 23 |
+
 ## Transfer repairs
 
 The generated project has 0 invalid transfers.

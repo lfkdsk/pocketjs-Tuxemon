@@ -29,6 +29,7 @@ const GENERATED = [
   "dist/project-shell.json",
   "dist/import-report.json",
   "dist/variable-enums.json",
+  "dist/world-index.json",
   "findings/G1-coverage.md",
   "images.json",
   "pak.json",

@@ -1741,6 +1741,169 @@
    }
   }
  },
+ "world": {
+  "format": "pocket-tuxemon/world-import-report/v1",
+  "artifact": "dist/world-index.json",
+  "contentHash": "c681c230fe432bbbf8809fe11a5bbc42fc8eb4f62c2ec1a6be141fd0c35f2143",
+  "totals": {
+   "worlds": 4,
+   "sourceMembers": 139,
+   "outdoorMaps": 67,
+   "excludedIndoorMaps": 72,
+   "geometricContacts": 91,
+   "acceptedSeams": 71,
+   "rejectedGeometricContacts": 20,
+   "rejectedOverlaps": 0,
+   "rejectedGaps": 14,
+   "dimensionCorrections": 49,
+   "outdoorDimensionCorrections": 20,
+   "portals": 452,
+   "coordinatePreservingSeams": 41,
+   "mixedHandoffSeams": 1,
+   "portalOnlySeams": 19,
+   "directionOnlySeams": 10,
+   "coordinatePreservingOpenings": 258,
+   "portalOnlyOpenings": 39,
+   "ambiguousDirections": 1
+  },
+  "worlds": [
+   {
+    "worldId": "classic",
+    "sourceMembers": 15,
+    "outdoorMaps": 15,
+    "excludedIndoorMaps": 0,
+    "bboxTiles": {
+     "x": 69,
+     "y": -16,
+     "width": 280,
+     "height": 120
+    },
+    "geometricContacts": 15,
+    "acceptedSeams": 15,
+    "rejectedGeometricContacts": 0,
+    "rejectedOverlaps": 0,
+    "rejectedGaps": 0,
+    "dimensionCorrections": 0,
+    "outdoorDimensionCorrections": 0,
+    "portals": 37,
+    "coordinatePreservingSeams": 0,
+    "mixedHandoffSeams": 0,
+    "portalOnlySeams": 15,
+    "directionOnlySeams": 0,
+    "coordinatePreservingOpenings": 0,
+    "portalOnlyOpenings": 30,
+    "ambiguousDirections": 0,
+    "componentSizes": [
+     15
+    ],
+    "s5ExpectedSeams": 15
+   },
+   {
+    "worldId": "eclipse",
+    "sourceMembers": 12,
+    "outdoorMaps": 12,
+    "excludedIndoorMaps": 0,
+    "bboxTiles": {
+     "x": -60,
+     "y": 0,
+     "width": 120,
+     "height": 240
+    },
+    "geometricContacts": 14,
+    "acceptedSeams": 9,
+    "rejectedGeometricContacts": 5,
+    "rejectedOverlaps": 0,
+    "rejectedGaps": 0,
+    "dimensionCorrections": 0,
+    "outdoorDimensionCorrections": 0,
+    "portals": 0,
+    "coordinatePreservingSeams": 0,
+    "mixedHandoffSeams": 0,
+    "portalOnlySeams": 0,
+    "directionOnlySeams": 9,
+    "coordinatePreservingOpenings": 0,
+    "portalOnlyOpenings": 0,
+    "ambiguousDirections": 1,
+    "componentSizes": [
+     8,
+     1,
+     1,
+     1,
+     1
+    ],
+    "s5ExpectedSeams": 9
+   },
+   {
+    "worldId": "normal",
+    "sourceMembers": 17,
+    "outdoorMaps": 17,
+    "excludedIndoorMaps": 0,
+    "bboxTiles": {
+     "x": -33,
+     "y": -281,
+     "width": 200,
+     "height": 341
+    },
+    "geometricContacts": 18,
+    "acceptedSeams": 15,
+    "rejectedGeometricContacts": 3,
+    "rejectedOverlaps": 0,
+    "rejectedGaps": 4,
+    "dimensionCorrections": 0,
+    "outdoorDimensionCorrections": 0,
+    "portals": 173,
+    "coordinatePreservingSeams": 13,
+    "mixedHandoffSeams": 1,
+    "portalOnlySeams": 1,
+    "directionOnlySeams": 0,
+    "coordinatePreservingOpenings": 104,
+    "portalOnlyOpenings": 4,
+    "ambiguousDirections": 0,
+    "componentSizes": [
+     16,
+     1
+    ],
+    "s5ExpectedSeams": 15
+   },
+   {
+    "worldId": "spyder",
+    "sourceMembers": 95,
+    "outdoorMaps": 23,
+    "excludedIndoorMaps": 72,
+    "bboxTiles": {
+     "x": 0,
+     "y": 0,
+     "width": 180,
+     "height": 200
+    },
+    "geometricContacts": 44,
+    "acceptedSeams": 32,
+    "rejectedGeometricContacts": 12,
+    "rejectedOverlaps": 0,
+    "rejectedGaps": 10,
+    "dimensionCorrections": 49,
+    "outdoorDimensionCorrections": 20,
+    "portals": 242,
+    "coordinatePreservingSeams": 28,
+    "mixedHandoffSeams": 0,
+    "portalOnlySeams": 3,
+    "directionOnlySeams": 1,
+    "coordinatePreservingOpenings": 154,
+    "portalOnlyOpenings": 5,
+    "ambiguousDirections": 0,
+    "componentSizes": [
+     23
+    ],
+    "s5ExpectedSeams": 32
+   }
+  ],
+  "s5Comparison": {
+   "expectedSeams": 71,
+   "actualSeams": 71,
+   "matches": true,
+   "differences": []
+  }
+ },
  "coverage": {
   "view": "source-file",
   "accounting": "conversion-path",

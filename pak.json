@@ -8370,5 +8370,9 @@
   {
     "key": "ui:tile.tuxemon-witcher_route_7-ground",
     "file": "assets/stream/tuxemon-witcher_route_7-ground.pkts"
+  },
+  {
+    "key": "world-index.json",
+    "file": "dist/world-index.json"
   }
 ]

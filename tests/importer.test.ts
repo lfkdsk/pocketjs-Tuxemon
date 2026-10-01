@@ -268,9 +268,10 @@ test("clamped transfers use the nearest deterministic walkable landing", () => {
 test("default import output remains byte-pinned", () => {
   const maps = ["spyder_downstairs", "spyder_paper_town"];
   const bytes = jsonBytes(buildProject(maps, DEFAULT_IMPORT_OPTIONS));
-  // The hash pins condition lowering as well as the stable source inputs.
+  // This pins the complete ImportBuild: condition lowering, the stable source
+  // inputs, the generated outdoor world index and its compact report summary.
   expect(createHash("sha256").update(bytes).digest("hex")).toBe(
-    "c56c84e332081de5e29ab91822f1d98d0721489896c768e7c9f132a1d6f57dde",
+    "03ceb6cecbfc329f80fa3e930366b29d2ec3bc45ab20a6cad14e752db6b0f77c",
   );
 });
 

@@ -171,6 +171,7 @@ const pakEntries = [
   ...animatedPakEntries,
   ...npcSrcPakEntries,
   ...terrain.streamPakEntries,
+  { key: "world-index.json", file: "dist/world-index.json" },
 ].sort((a, b) => a.key < b.key ? -1 : a.key > b.key ? 1 : 0);
 
 writeFileSync(join(ROOT, "sprites.json"), jsonBytes(cooked.spritesJson));
@@ -186,6 +187,7 @@ writeFileSync(join(DIST, "project-shell.json"), split.shellText);
 // fresh: read the shell back and verify the declaration against a recompute.
 assertShellManifestFresh(JSON.parse(readFileSync(join(DIST, "project-shell.json"), "utf8")));
 writeFileSync(join(DIST, "variable-enums.json"), jsonBytes(imported.variables));
+writeFileSync(join(DIST, "world-index.json"), jsonBytes(imported.worldIndex));
 writeFileSync(join(DIST, "import-report.json"), jsonBytes(imported.report));
 writeFileSync(join(ROOT, "findings/G1-coverage.md"), coverageMarkdown(imported.report));
 

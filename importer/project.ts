@@ -22,6 +22,8 @@ import {
   type CoverageReport,
   type Disposition,
 } from "./coverage.ts";
+import { buildOutdoorWorldIndex, type WorldImportReport } from "./world.ts";
+import type { OutdoorWorldIndex } from "./world-schema.ts";
 import { validateSchema } from "../vendor/pocket-rpgkit/src/engine/schema-validate.ts";
 import type {
   Command,
@@ -2119,6 +2121,7 @@ export interface ImportReport {
       itemDescription: { disposition: "degraded"; reason: string };
     };
   };
+  world: WorldImportReport;
   coverage: CoverageReport;
 }
 
@@ -2142,6 +2145,7 @@ export interface TransferError {
 export interface ImportBuild {
   project: Project;
   variables: Record<string, string[]>;
+  worldIndex: OutdoorWorldIndex;
   report: ImportReport;
 }
 
@@ -2199,6 +2203,7 @@ export function buildProject(
   for (const id of [...itemDb.keys()].sort()) ensureItem(id);
   transferRepairs.length = 0;
   conversionCoverage.reset();
+  const world = buildOutdoorWorldIndex([...allMaps.values()]);
 
   const mapDefs: MapDef[] = [];
   const sprites: Record<string, SpriteDef> = {};
@@ -2300,6 +2305,7 @@ export function buildProject(
   return {
     project,
     variables,
+    worldIndex: world.index,
     report: {
       format: "pocket-tuxemon/import-report/v1",
       source: { maps: "mods/tuxemon/maps", locale: "en_US" },
@@ -2337,6 +2343,7 @@ export function buildProject(
           },
         },
       },
+      world: world.report,
       coverage: conversionCoverage.report(),
     },
   };
