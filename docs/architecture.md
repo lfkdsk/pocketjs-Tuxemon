@@ -1,0 +1,177 @@
+# Architecture
+
+This repository is a game, not an engine: it imports Tuxemon's world into
+[rpgkit-project/v1](https://github.com/lfkdsk/pocketjs-rpgkit) documents and
+runs them on the vendored Pocket RPG Kit runtime. Everything game-specific
+lives here; everything reusable lives in the kit.
+
+## Repository layout
+
+| Path | Role |
+|---|---|
+| `gen-assets.ts` | Import entry point. `bun run import` runs this. |
+| `importer/` | Tuxemon → rpgkit-project/v1 converters (see below). |
+| `battle/` | The Tuxemon battle system: pure reducer, extension handlers, scene. |
+| `ui/` | UI stage modules and generated asset tables. |
+| `data/` | Generated JSON: terrain, battle database, journey tapes, golden manifests. All generated, all committed. |
+| `assets/` | Generated art, committed: streamed terrain chunks (`stream/`), character walkers (`characters/`), animated-tile atlases (`anim/`), battle textures (`battle/`). |
+| `tools/` | Verifies, benches, journey recorders, golden updaters, renderers. See [verification.md](verification.md). |
+| `tests/` | The test suite (42 files) plus `tests/goldens/` (PNG keyframes and gzipped trace fixtures). |
+| `main.tsx` | Game entry: mounts the kit's `GameView` with the project shell, map repository, extensions, battle rules and scene. |
+| `pocket.json` | PocketJS app manifest (viewport 480x272, entry `main.tsx`, engine capabilities). |
+| `web.json` | Web-site card metadata (title, intro, controls, preview). |
+| `pak.json`, `images.json`, `sprites.json` | Generated manifests consumed by PocketJS's pak builder. |
+| `reports/G1-coverage.md` | The committed import coverage report. See [importer.md](importer.md). |
+| `vendor/pocket-rpgkit` | The kit submodule (with nested `vendor/pocketjs`). |
+| `dist/` | Build output, gitignored: project shell and map shards, battle shards, the JS bundle, the web site. |
+| `findings/` | Research and milestone notes. Process documentation, not user docs. |
+
+`bunfig.toml` pins the test root to `tests/` so `bun test` never walks into
+the vendored suites.
+
+### `importer/`
+
+- `source.ts` — reads Tuxemon TMX maps and scenario YAML, mirroring Tuxemon's
+  own event loader. `TUXEMON_SRC` defaults to the repo-local `.tuxemon-src`.
+- `xml.ts` — minimal deterministic XML reader for TMX/TSX.
+- `terrain.ts` — composites tile layers into CLUT8+RLE streamed chunks,
+  collision and animation metadata.
+- `project.ts` — the core event converter: Tuxemon actions/conditions to kit
+  commands, plus the coverage recorder.
+- `shapes.ts` — classifies an event's guard shape to pick the kit trigger.
+- `characters.ts` — cooks Tuxemon's walkers into per-character sprite frames.
+- `animated.ts`, `npc-src.ts` — split generated placements into lazy shards.
+- `battle.ts` — imports the battle database and battle textures.
+- `world.ts`, `world-schema.ts` — the outdoor-world topology index.
+- `time-weather.ts` — the game clock and weather state: versioned codec, the
+  imported weather tables, and the argument shapes for the time/weather
+  extension calls.
+- `coverage.ts` — the coverage report builder.
+- `index.ts` — library entry and report renderer.
+- `png.ts` — build-time decoder for Tuxemon's palette PNGs.
+- `battle-schema.ts` — runtime types for the generated battle database.
+
+### `battle/`
+
+- `core.ts` — deterministic, clock-free turn runner (JSON state in, JSON
+  events out).
+- `tuxemon.ts`, `stats.ts`, `progression.ts`, `spawn.ts` — damage, stats,
+  XP/evolution, monster spawning.
+- `runtime.ts` — adapts the reducer to the kit's `BattleRules` interface.
+- `extension.ts` — registers the `tux.*` extension commands and conditions
+  (see below).
+- `presentation.ts` — projects battle state onto the scene; every pose is
+  derived from the serialized event cursor and a 60 Hz reference tick.
+- `production.ts` — lazy registration used by `main.tsx` (battle data loaded
+  from shards). `game.ts` is the eager registration used by tools and tests.
+- `autoplay.ts` — the deterministic autoplay policy used by journey tapes.
+- `battle-repository.ts`, `from-battle-db.ts` — lazy shard provider and the
+  importer-to-reducer adapter.
+
+## Data flow
+
+```
+Tuxemon source (pinned checkout)
+   |
+   |  bun run import  (gen-assets.ts)
+   v
+terrain chunks + project conversion + characters + battle data + sharding
+   |
+   +--> committed: data/*.json, assets/**, ui/*-assets.ts,
+   |                pak.json, images.json, sprites.json, reports/G1-coverage.md
+   +--> gitignored: dist/project-shell.json, dist/maps/*, dist/battle/*,
+                     dist/animated/*, dist/npc-src/*, dist/import-report.json
+   |
+   |  bun run build     (tools/build.ts: import, then bundle main.tsx)
+   |  bun run web       (import, then the kit's static-site builder)
+   v
+dist/ bundle + pak, loaded by the desktop host or the web player
+```
+
+The import runs in this order: terrain, project conversion (all 263 maps,
+events, NPCs, dialogue, shops, world index), terrain merge into the project,
+character cook, battle data and art, NPC-src sharding, animated atlases, map
+sharding, manifests, dist reports, and finally the coverage report and the
+asset report. Two full imports into isolated roots must be byte-identical
+(`bun run verify:g6:determinism`).
+
+`bun run build` re-runs the import and then bundles the game with PocketJS's
+builder for the desktop target. `bun run web` re-runs the import and builds
+the static site into `dist/web`. Both are self-contained: they need
+`TUXEMON_SRC` available (or a repo-local `.tuxemon-src`).
+
+At runtime, `main.tsx` loads the project shell and a lazy map repository
+(desktop reads entries through the data-fs channel; web and consoles read
+them from the pak), registers the battle extensions and rules, and mounts the
+kit's `GameView`. Maps, battle data, NPC sprites and animated tiles are all
+sharded: only the entries the session touches are read.
+
+## Game extensions: the `tux.*` namespace
+
+The kit's event vocabulary covers the RPG-Maker-style commands (35 ops and 10
+condition kinds at the current pin, plus the `ext`/`extChoice` escape hatches
+and the `battle` op). Tuxemon-specific behavior that has no kit equivalent
+lives in this repository as namespaced extension calls, all registered in one
+place: `createTuxemonExtensions` in `battle/extension.ts`. The kit enforces
+dotted, namespaced call names and dispatches `ext` conditions and commands to
+the registered handlers.
+
+| Call | Kind | What it does |
+|---|---|---|
+| `tux.add_monster` | command | Adds a monster (slug or enum-variable reference) to the player party or an NPC party, with kennel overflow handling. |
+| `tux.set_monster_health` | command | Sets a player monster's HP (full, fraction or points); zero faints it. |
+| `tux.set_monster_status` | command | Sets or clears a named imported status condition. |
+| `tux.evolution` | command | Evolves the party monster flagged as waiting to evolve. |
+| `tux.cancel_evolution` | command | Clears the pending-evolution flag. |
+| `tux.set_environment` | command | Sets the active battle backdrop. |
+| `tux.update_time` | command | Advances the game clock. Placeholder no-op until the runtime clock lands. |
+| `tux.set_layer` | command | Changes a map layer's visibility. Placeholder no-op until the overlay visuals land. |
+| `tux.set_faint_point` | command | Stores a character's recovery destination. |
+| `tux.prepare_faint_transfer` | command | Heals the party if standing on the healing faint point, and writes the faint-teleport target. |
+| `tux.check_evolution` | condition | A party monster is waiting to evolve. |
+| `tux.environment_is` | condition | The active environment equals the argument. |
+| `tux.time_is` | condition | The in-game clock matches the requested time range. Placeholder: folds to fixed daytime until the runtime clock lands. |
+| `tux.has_faint_point` | condition | The character has a stored faint point. |
+| `tux.faint_point_is_map` | condition | The faint point is on the given map. |
+| `tux.party_size` | condition | Compares party size with an operator and value. |
+| `tux.has_monster` | condition | The party contains a species. |
+| `tux.char_defeated` | condition | Every party monster is at 0 HP. |
+| `tux.battle_outcome` | condition | Battle history contains a fighter/opponent/outcome triple. |
+| `tux.battle_outcome_count` | condition | At least N matching battle-history entries. |
+
+Every condition also accepts `negate: true`. The importer emits these calls
+when converting the corresponding Tuxemon actions and conditions; see
+[importer.md](importer.md). Extension state has a packed-string save codec, so
+saves and rewinds carry it.
+
+## The component repo boundary
+
+`vendor/pocket-rpgkit` is a separate, reusable repository: the pure-TS engine
+(event interpreter, sessions, tile movement, saves, battle scene plumbing),
+the Solid UI (`GameView`, dialogs, the streamed chunk layer), the build-time
+asset pipelines, the web site builder, and the `rpgkit-project/v1` schema.
+This repository consumes it as a git submodule and contributes nothing back
+into it by accident: game logic, content and art all live here. Its nested
+`vendor/pocketjs` submodule provides the host runtimes (desktop, web, PSP),
+the pak builder and the wasm core; the desktop launcher in `tools/desktop.ts`
+drives PocketJS's builder directly.
+
+### Upgrading the kit pointer
+
+1. In the kit repository, land the change on its main branch.
+2. Here, `git -C vendor/pocket-rpgkit fetch && git -C vendor/pocket-rpgkit checkout <new-commit>`, then commit the gitlink.
+3. Re-run the full gate, because the engine interprets every imported event:
+   - `bun run import` leaves `git status --porcelain` empty (the committed
+     output is exactly what the importer produces);
+   - `bunx tsc --noEmit`;
+   - `bun run verify:g6:determinism`;
+   - `bun run test`;
+   - the maintained journeys: `bun run verify:gb6:mainline`,
+     `bun run verify:j1:mainline`, `bun run verify:gb6:failures`,
+     `bun run verify:g6:locks`, `bun run verify:g6:frozen`;
+   - `bun run web` plus `bun tools/verify-web-journey.ts` in headless Chrome;
+   - the QuickJS benches (`bun run bench:g6:quickjs`,
+     `bun run bench:gb6:quickjs`): the terminal state hashes must match the
+     pinned tapes and frame budgets must hold.
+4. If the import output changed, commit the regenerated files in the same
+   change as the pointer bump.
