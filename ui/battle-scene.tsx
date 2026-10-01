@@ -17,7 +17,6 @@ import type { BattleImageRef } from "../importer/battle-schema.ts";
 import type { BattleSceneViewProps } from "../vendor/pocket-rpgkit/src/ui/GameView.tsx";
 import {
   CommandGrid,
-  FrameStrip,
   ListMenu,
   MessageBand,
   NO_EFFECT,
@@ -55,20 +54,20 @@ const title = (slug: string): string => slug
 
 const pathFor = (key: string): string => key.startsWith("ui:img.") ? key.slice(7) : key;
 
-function eventMessage(state: Runtime, event: BattleEvent | null, monsters: readonly BattleMonster[]): string {
+function eventMessage(state: Runtime, event: BattleEvent | null, monsters: readonly BattleMonster[], tick: number): string {
   if (!event) return "Choose an action";
   const monster = (uid: unknown) => monsters.find((candidate) => candidate.uid === uid)?.slug ?? "Tuxemon";
   switch (event.type) {
     case "sendOut": return `${title(monster(event.monster))} enters the battle!`;
     case "decision": return `${title(monster(event.user))} chose ${title(String(event.technique ?? "move"))}.`;
     case "technique": {
-      if (state.eventTicks >= 34 && event.hit === false) return "The attack missed!";
-      if (state.eventTicks >= 34 && Number(event.damage) > 0) return `${Math.trunc(Number(event.damage))} damage!`;
+      if (tick >= 34 && event.hit === false) return "The attack missed!";
+      if (tick >= 34 && Number(event.damage) > 0) return `${Math.trunc(Number(event.damage))} damage!`;
       return `${title(monster(event.user))} used ${title(String(event.technique ?? "move"))}!`;
     }
     case "faint": {
       const reward = currentReward(state);
-      if (reward && state.eventTicks >= REWARD_TICK) {
+      if (reward && tick >= REWARD_TICK) {
         const winner = reward.winners[0];
         if (winner?.levelsGained) return `${title(monster(winner.uid))} grew ${winner.levelsGained} level${winner.levelsGained === 1 ? "" : "s"}!`;
         if (winner) return `${title(monster(winner.uid))} gained ${winner.effectiveExperience} XP!`;
@@ -78,7 +77,7 @@ function eventMessage(state: Runtime, event: BattleEvent | null, monsters: reado
     case "status": return `${title(monster(event.target))}: ${title(String(event.status ?? "status"))}.`;
     case "item": return `${title(String(event.item ?? "item"))} used on ${title(monster(event.target))}.`;
     case "capture": {
-      const landed = state.eventTicks - CAPTURE_FLIGHT_TICKS;
+      const landed = tick - CAPTURE_FLIGHT_TICKS;
       const shakes = Math.max(1, Math.trunc(Number(event.shakes) || 1));
       if (landed >= 0 && landed < shakes * CAPTURE_SHAKE_TICKS) {
         const count = Math.min(shakes, Math.floor(landed / CAPTURE_SHAKE_TICKS) + 1);
@@ -169,10 +168,11 @@ function fieldProjection<T extends object>(initial: T) {
 }
 
 function samePose(a: ReturnType<typeof battlerPresentation>, b: ReturnType<typeof battlerPresentation>): boolean {
-  return a.offsetX === b.offsetX && a.opacity === b.opacity && a.effect.kind === b.effect.kind &&
+  return a === b || a.offsetX === b.offsetX && a.opacity === b.opacity && a.effect.kind === b.effect.kind &&
     a.effect.startTick === b.effect.startTick && a.effect.duration === b.effect.duration;
 }
 function sameFields(a: object, b: object): boolean {
+  if (a === b) return true;
   const left = a as Record<string, unknown>, right = b as Record<string, unknown>;
   for (const key of Object.keys(left)) if (left[key] !== right[key]) return false;
   return true;
@@ -216,9 +216,21 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
   const allMonsters = createMemo(() => [...runtime().battle.parties[0], ...runtime().battle.parties[1]]);
   const presenting = createMemo(() => currentPresentationEvent(runtime()) !== null);
   const event = createMemo(() => currentPresentationEvent(runtime()));
+  const messageTick = createMemo(() => {
+    const shown = event();
+    if (shown?.type === "technique") return runtime().eventTicks >= 34 ? 34 : 0;
+    if (shown?.type === "faint") return runtime().eventTicks >= REWARD_TICK ? REWARD_TICK : 0;
+    if (shown?.type === "capture") {
+      const landed = runtime().eventTicks - CAPTURE_FLIGHT_TICKS;
+      const shakes = Math.max(1, Math.trunc(Number(shown.shakes) || 1));
+      return landed >= 0 && landed < shakes * CAPTURE_SHAKE_TICKS
+        ? CAPTURE_FLIGHT_TICKS + Math.floor(landed / CAPTURE_SHAKE_TICKS) * CAPTURE_SHAKE_TICKS : 0;
+    }
+    return 0;
+  });
   const message = createMemo(() => {
     const result = runtime().battle.result;
-    if (presenting()) return eventMessage(runtime(), event(), allMonsters());
+    if (presenting()) return eventMessage(runtime(), event(), allMonsters(), messageTick());
     if (result) return result.outcome === "won" ? "Victory!"
       : result.outcome === "lost" ? "Your party was defeated."
         : "The battle ended.";
@@ -228,8 +240,16 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
           : runtime().menuMode === "capture" ? "Choose a capture device"
             : "Choose an item";
   });
-  const rootEntries = createMemo(() => runtime().menuMode === "root" ? runtime().menu : []);
-  const rootStart = createMemo(() => runtime().menuIndex < 4 ? 0 : Math.max(0, rootEntries().length - 4));
+  const menuReady = createMemo(() => !presenting() && runtime().battle.awaiting !== null);
+  const rootVisible = createMemo(() => menuReady() && runtime().menuMode === "root");
+  const listVisible = createMemo(() => menuReady() && runtime().menuMode !== "root");
+  // Opacity-hidden menus retain their last content. Publishing a battle turn
+  // must not reshape both menus while only the message band is visible.
+  const rootEntries = createMemo<Runtime["menu"]>(previous => rootVisible() ? runtime().menu : previous ?? []);
+  const rootIndex = createMemo<number>(previous => rootVisible() ? runtime().menuIndex : previous ?? 0);
+  const listIndex = createMemo<number>(previous => listVisible() ? runtime().menuIndex : previous ?? 0);
+  const listTitle = createMemo<string>(previous => listVisible() ? menuTitle(runtime().menuMode) : previous ?? "Commands");
+  const rootStart = createMemo(() => rootIndex() < 4 ? 0 : Math.max(0, rootEntries().length - 4));
   const commandCells = createMemo((): readonly [CommandCell, CommandCell, CommandCell, CommandCell] => {
     const start = rootStart();
     return [0, 1, 2, 3].map((offset) => {
@@ -239,7 +259,8 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
         : { label: " ", disabled: true };
     }) as unknown as readonly [CommandCell, CommandCell, CommandCell, CommandCell];
   });
-  const listRows = createMemo((): ListMenuRow[] => {
+  const listRows = createMemo<ListMenuRow[]>(previous => {
+    if (!listVisible()) return previous ?? [{ label: " ", detail: " " }, { label: " ", detail: " " }];
     const rows = runtime().menu.map((entry) => ({
       label: menuLabel(entry),
       // ListMenu owns fixed Text nodes, but Solid's universal renderer
@@ -251,9 +272,7 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
     while (rows.length < 2) rows.push({ label: " ", detail: " " });
     return rows;
   });
-  const menuReady = createMemo(() => !presenting() && runtime().battle.awaiting !== null);
-  const rootVisible = createMemo(() => menuReady() && runtime().menuMode === "root");
-  const listVisible = createMemo(() => menuReady() && runtime().menuMode !== "root");
+
   const bandLines = createMemo(() => wrapMessage(message(), rootVisible() || listVisible() ? 27 : 58));
   const playerLevel = () => paint.playerLevel;
   const playerXp = createMemo(() => experienceProgress(
@@ -354,10 +373,6 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
   const animationPage = createMemo(() => animation().page ?? environment().partyIcons.icon_empty!);
   const animationRect = createMemo(() => runtime().battle.parties[0].some((monster) => monster.uid === animation().target)
     ? R.playerMonster : R.enemyMonster);
-  const animationFrames = createMemo(() => {
-    const frames = animation().frameKeys.map(pathFor);
-    return frames.length > 0 ? frames : [pathFor(environment().partyIcons.icon_empty!.key)];
-  });
 
   const island = (side: "player" | "enemy") => {
     const rect = side === "player" ? R.playerIsland : R.enemyIsland;
@@ -416,6 +431,7 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
             fill={hpColour(shownHp(), shownMaxHp())}
             track="#263b43"
             showNumbers={side === 0}
+            numbersWidth={BATTLE_BASE_WIDTH - hp.x - hp.width - 6}
             theme={UI_THEME}
             debugName={`${side === 0 ? "player" : "enemy"}-hp`}
           />
@@ -515,15 +531,13 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
           }}
           debugName="battle-animation-clip"
         >
-          <FrameStrip
-            frames={animationFrames()}
-            frameTicks={animation().frameTicks}
-            startTick={animation().startTick}
-            nowTick={runtime().eventTicks}
-            x={(128 - (animation().page?.contentWidth ?? 8) * 2) / 2 - animation().sourceX * 2}
-            y={(128 - (animation().page?.contentHeight ?? 8) * 2) / 2 - animation().sourceY * 2}
-            width={animationPage().width * 2}
-            height={animationPage().height * 2}
+          <Image
+            class="absolute"
+            src={pathFor(animationPage().key)}
+            style={{ posType: 1, insetL: 0, insetT: 0,
+              translateX: (128 - (animation().page?.contentWidth ?? 8) * 2) / 2 - animation().sourceX * 2,
+              translateY: (128 - (animation().page?.contentHeight ?? 8) * 2) / 2 - animation().sourceY * 2,
+              width: animationPage().width * 2, height: animationPage().height * 2 }}
             debugName="battle-animation"
           />
         </View>
@@ -531,8 +545,10 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
           class="absolute overflow-hidden"
           style={{
             posType: 1,
-            insetL: ball().x + ball().shake,
-            insetT: ball().y,
+            insetL: 0,
+            insetT: 0,
+            translateX: ball().x + ball().shake,
+            translateY: ball().y,
             width: ballSize(),
             height: ballSize(),
             opacity: ball().opacity,
@@ -576,15 +592,15 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
         />
         <CommandGrid
           cells={commandCells()}
-          index={Math.max(0, runtime().menuIndex - rootStart())}
+          index={Math.max(0, rootIndex() - rootStart())}
           theme={UI_THEME}
           style={{ insetL: R.menu.x, insetT: R.menu.y + 4, opacity: rootVisible() ? 1 : 0 }}
           debugName="battle-commands"
         />
         <ListMenu
-          title={menuTitle(runtime().menuMode)}
+          title={listTitle()}
           rows={listRows()}
-          index={runtime().menuIndex}
+          index={listIndex()}
           visibleRows={2}
           width={232}
           labelMax={18}

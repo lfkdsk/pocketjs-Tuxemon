@@ -68,16 +68,18 @@ export function calculateBaseStats(
   return result;
 }
 
+export function combatStat(monster: BattleMonster, stat: StatName): number {
+  const base = monster.base[stat];
+  const stage = Math.max(-6, Math.min(6, monster.stages[stat] ?? 0));
+  let boost = stage === 0 ? 0 : Math.trunc(base * NONLINEAR_STAGE[stage]!) - base;
+  boost += monster.statusBoosts[stat] ?? 0;
+  if (boost < 0) boost = Math.max(boost, 1 - base);
+  return base + boost;
+}
+
 export function combatStats(monster: BattleMonster): Stats {
   const result = {} as Stats;
-  for (const stat of STAT_NAMES) {
-    const base = monster.base[stat];
-    const stage = Math.max(-6, Math.min(6, monster.stages[stat] ?? 0));
-    let boost = stage === 0 ? 0 : Math.trunc(base * NONLINEAR_STAGE[stage]!) - base;
-    boost += monster.statusBoosts[stat] ?? 0;
-    if (boost < 0) boost = Math.max(boost, 1 - base);
-    result[stat] = base + boost;
-  }
+  for (const stat of STAT_NAMES) result[stat] = combatStat(monster, stat);
   return result;
 }
 

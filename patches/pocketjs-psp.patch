@@ -1,3 +1,38 @@
+diff --git a/framework/src/frame.ts b/framework/src/frame.ts
+index 4b5edab9..92f5f130 100644
+--- a/framework/src/frame.ts
++++ b/framework/src/frame.ts
+@@ -34,6 +34,15 @@ export function resetFrameHooks(): void {
+   resetLifecycleHooks();
+ }
+ 
++function collectDeferredPresses(
++  node: NodeMirror,
++  pending: ReadonlyMap<NodeMirror, readonly (() => void)[]>,
++  ordered: { node: NodeMirror; invoke: () => void }[],
++): void {
++  for (const invoke of pending.get(node) ?? []) ordered.push({ node, invoke });
++  for (const child of node.children) collectDeferredPresses(child, pending, ordered);
++}
++
+ export function runFrameHooks(buttons: number, axisDeltas?: readonly AxisDelta[], resolveInput?: (defer: DeferredPress) => void, beforeHooks?: (defer: DeferredPress) => void): void {
+   __beginAxisFrame(axisDeltas);
+   try {
+@@ -63,11 +72,9 @@ export function runFrameHooks(buttons: number, axisDeltas?: readonly AxisDelta[]
+           roots.add(root);
+         }
+         const ordered: { node: NodeMirror; invoke: () => void }[] = [];
+-        const collect = (node: NodeMirror): void => {
+-          for (const invoke of pending.get(node) ?? []) ordered.push({ node, invoke });
+-          for (const child of node.children) collect(child);
+-        };
+-        for (const root of roots) collect(root);
++        // A local recursive closure would retain this frame's queue in a
++        // reference cycle until the host performs a full garbage collection.
++        for (const root of roots) collectDeferredPresses(root, pending, ordered);
+         for (const { node, invoke } of ordered) withRowSnapshot(nodeRow(node), invoke);
+       }
+       reactModelRegions();
 diff --git a/framework/src/host.ts b/framework/src/host.ts
 index 969e8d66..30be8588 100644
 --- a/framework/src/host.ts
@@ -397,28 +432,37 @@ index f780b816..5b3525d5 100644
 +
 +mod tex_strips;
 diff --git a/hosts/psp/src/main.rs b/hosts/psp/src/main.rs
-index a05ed148..629579f9 100644
+index a05ed148..08aff836 100644
 --- a/hosts/psp/src/main.rs
 +++ b/hosts/psp/src/main.rs
-@@ -149,6 +149,8 @@ struct BenchState {
+@@ -149,6 +149,13 @@ struct BenchState {
      eval_end_us: u64,
      frame0_complete_us: u64,
      frames: u32,
 +    window_start: u32,
 +    samples: [u32; 300],
++    // Slowest frames: frame, work, JS, jobs, tick, draw, render (microseconds).
++    slowest: [[u32; 7]; 8],
++    gc_count: u32,
++    gc_sum_us: u64,
++    max_gc_us: u64,
      js_sum_us: u64,
      jobs_sum_us: u64,
      tick_sum_us: u64,
-@@ -172,6 +174,8 @@ impl BenchState {
+@@ -172,6 +179,12 @@ impl BenchState {
              eval_end_us: 0,
              frame0_complete_us: 0,
              frames: 0,
 +            window_start: 0,
 +            samples: [0; 300],
++            slowest: [[0; 7]; 8],
++            gc_count: 0,
++            gc_sum_us: 0,
++            max_gc_us: 0,
              js_sum_us: 0,
              jobs_sum_us: 0,
              tick_sum_us: 0,
-@@ -260,7 +264,7 @@ unsafe fn bench_window() -> (u32, u32) {
+@@ -260,7 +273,7 @@ unsafe fn bench_window() -> (u32, u32) {
      }
      #[cfg(not(feature = "capture"))]
      {
@@ -427,7 +471,24 @@ index a05ed148..629579f9 100644
      }
  }
  
-@@ -294,6 +298,7 @@ unsafe fn bench_record_frame(
+@@ -286,6 +299,16 @@ unsafe fn bench_record_frame(
+     let draw_us = after_draw.saturating_sub(after_tick);
+     let render_us = after_render.saturating_sub(after_draw).saturating_sub(present_us);
+     let work_us = after_render.saturating_sub(t0).saturating_sub(present_us);
++    for index in 0..BENCH.slowest.len() {
++        if work_us > BENCH.slowest[index][1] as u64 {
++            for next in ((index + 1)..BENCH.slowest.len()).rev() {
++                BENCH.slowest[next] = BENCH.slowest[next - 1];
++            }
++            BENCH.slowest[index] = [frame_count, work_us as u32, js_us as u32,
++                jobs_us as u32, tick_us as u32, draw_us as u32, render_us as u32];
++            break;
++        }
++    }
+     if BENCH.frames > 0 {
+         let interval_us = t0.saturating_sub(BENCH.previous_frame_start_us);
+         BENCH.frame_interval_sum_us = BENCH.frame_interval_sum_us.saturating_add(interval_us);
+@@ -294,6 +317,7 @@ unsafe fn bench_record_frame(
          }
      }
      BENCH.previous_frame_start_us = t0;
@@ -435,10 +496,16 @@ index a05ed148..629579f9 100644
      BENCH.frames = BENCH.frames.saturating_add(1);
      BENCH.js_sum_us = BENCH.js_sum_us.saturating_add(js_us);
      BENCH.jobs_sum_us = BENCH.jobs_sum_us.saturating_add(jobs_us);
-@@ -365,6 +370,18 @@ unsafe fn bench_maybe_flush(frame_count: u32) {
+@@ -365,6 +389,24 @@ unsafe fn bench_maybe_flush(frame_count: u32) {
          arena_stats.configured_bytes,
      );
      bench_write(line.as_bytes());
++    let qjs = pocketjs_psp::qjs_alloc::stats();
++    bench_write(alloc::format!(
++        "{{\"window_start\":{},\"slowest_columns\":[\"frame\",\"work_us\",\"js_us\",\"jobs_us\",\"tick_us\",\"draw_us\",\"render_us\"],\"slowest\":{:?},\"gc_count\":{},\"gc_us\":{},\"max_gc_us\":{},\"qjs_live_bytes\":{},\"qjs_peak_bytes\":{},\"qjs_failed_request\":{}}}\n",
++        start, BENCH.slowest, BENCH.gc_count, BENCH.gc_sum_us, BENCH.max_gc_us,
++        qjs.live_requested, qjs.peak_requested, qjs.last_failed_request,
++    ).as_bytes());
 +    #[cfg(not(feature = "capture"))]
 +    {
 +        BENCH.samples.sort_unstable();
@@ -454,6 +521,23 @@ index a05ed148..629579f9 100644
  }
  
  unsafe fn boot() {
+@@ -682,7 +724,16 @@ unsafe fn run_guest(
+             const GC_BUMP_STEP: usize = 256 * 1024;
+             let bump = arena::stats().bump_bytes;
+             if bump > LAST_GC_BUMP.saturating_add(GC_BUMP_STEP) {
++                #[cfg(feature = "bench")]
++                let gc_start = bench_now_us();
+                 JS_RunGC(rt);
++                #[cfg(feature = "bench")]
++                {
++                    let elapsed = bench_now_us().saturating_sub(gc_start);
++                    BENCH.gc_count += 1;
++                    BENCH.gc_sum_us += elapsed;
++                    BENCH.max_gc_us = BENCH.max_gc_us.max(elapsed);
++                }
+                 LAST_GC_BUMP = arena::stats().bump_bytes;
+             }
+         }
 diff --git a/hosts/psp/src/pak.rs b/hosts/psp/src/pak.rs
 index 7d0a6dd5..24e3644c 100644
 --- a/hosts/psp/src/pak.rs

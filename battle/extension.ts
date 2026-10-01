@@ -559,6 +559,7 @@ export function createTuxemonExtensions(source: BattleDbSource): ExtensionOption
   return {
     initial,
     immutableConditions: true,
+    deterministicConditions: true,
     commands: {
       "tux.add_monster": addMonsterCommand(source),
       "tux.set_monster_health": healthCommand(),

@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
-import { runPolicyBattle, type TuxemonBattleDb } from "../battle/index.ts";
+import { createBattle, reduceBattle, runPolicyBattle, type TuxemonBattleDb } from "../battle/index.ts";
 import {
   compareGoldenCase,
   readBattleGolden,
@@ -57,4 +57,31 @@ describe("Tuxemon battle differential corpus (oracle fixture)", () => {
       battleLastResult: "draw",
     });
   });
+});
+
+
+test("battle drafts preserve frozen snapshots for every trainer and policy", () => {
+  const seen = new Set<string>();
+  for (const golden of GOLDEN.cases) {
+    const key = `${golden.definition}:${golden.policy}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    const frozen = new WeakSet<object>();
+    function freeze(value: unknown): void {
+      if (value === null || typeof value !== "object" || frozen.has(value)) return;
+      frozen.add(value);
+      for (const child of Object.values(value)) freeze(child);
+      Object.freeze(value);
+    }
+    let state = createBattle(DB, golden.start);
+    for (let guard = 0; state.phase !== "ended" && guard < 10000; guard++) {
+      freeze(state);
+      const choice = state.policy === "cycle" ? state.turn - 1 : 0;
+      state = reduceBattle(DB, state, { type: "technique", choice });
+    }
+    expect(state.phase).toBe("ended");
+    expect(String(state.outcome)).toBe(golden.expected.outcome);
+    expect(state.rngDraws).toBe(golden.expected.rngDraws);
+  }
+  expect(seen.size).toBe(428);
 });

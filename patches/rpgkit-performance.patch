@@ -50,33 +50,66 @@ index 8f1c392..625d6ac 100644
    };
  }
 diff --git a/src/engine/chars.ts b/src/engine/chars.ts
-index 3f54fea..db64148 100644
+index 3f54fea..aa4e5f5 100644
 --- a/src/engine/chars.ts
 +++ b/src/engine/chars.ts
-@@ -206,12 +206,22 @@ export function cloneChars(s0: CharsState): CharsState {
+@@ -41,6 +41,7 @@ import {
+   type SwitchState,
+ } from "./interpreter.ts";
+ import { keyedRecord } from "./clone.ts";
++import { RecentStateMetadata, trackStateMetadata } from "./state-metadata.ts";
+ import { stepPixels, stepFrames, type MovementConfig } from "./movement.ts";
+ import type { Dir4, PassageTable } from "./passability.ts";
+ import { canStepFrom } from "./passability.ts";
+@@ -205,13 +206,37 @@ export function cloneChars(s0: CharsState): CharsState {
+ /** Ids of the characters a shareChars copy has copied so far. A state absent
   *  from this map (cloneChars, createChars) owns every character it holds. */
  const OWNED = new WeakMap<CharsState, Set<string>>();
- 
++const SHARED_TABLES = new WeakSet<CharsState>();
++function ownTable(s: CharsState): void {
++  if (SHARED_TABLES.delete(s)) s.chars = keyedRecord(s.chars);
++}
++
 +// Page membership and flags change only in syncPagesInPlace. Movement copies
 +// inherit this token; callers using it must keep published states immutable.
-+const PAGE_REVISION = new WeakMap<CharsState, object>();
++const PAGE_REVISION = new RecentStateMetadata<CharsState, object>();
++const POSITION_REVISION = new RecentStateMetadata<CharsState, object>();
++/** Token changes on a tile landing or page reconciliation, not pixel interpolation. */
++export function charsPositionRevision(s: CharsState): object {
++  let token = POSITION_REVISION.get(s);
++  if (!token) { token = {}; POSITION_REVISION.set(s, token); }
++  return token;
++}
 +export function charsPageRevision(s: CharsState): object {
 +  let token = PAGE_REVISION.get(s);
 +  if (!token) { token = {}; PAGE_REVISION.set(s, token); }
 +  return token;
 +}
-+
+ 
  /** A working copy that shares each character object with `s0` until the
   *  first write to it (ownChar). stepSession folds one of these per frame:
   *  most characters stand still, so most are never copied. */
- export function shareChars(s0: CharsState): CharsState {
-   const s: CharsState = { rng: s0.rng, chars: keyedRecord(s0.chars) };
+-export function shareChars(s0: CharsState): CharsState {
+-  const s: CharsState = { rng: s0.rng, chars: keyedRecord(s0.chars) };
++export function shareChars(s0: CharsState, immutable = false): CharsState {
++  const s: CharsState = { rng: s0.rng, chars: immutable ? s0.chars : keyedRecord(s0.chars) };
++  if (immutable) { SHARED_TABLES.add(s); trackStateMetadata(SHARED_TABLES, s); }
    OWNED.set(s, new Set());
++  trackStateMetadata(OWNED, s);
 +  PAGE_REVISION.set(s, charsPageRevision(s0));
++  POSITION_REVISION.set(s, charsPositionRevision(s0));
    return s;
  }
  
-@@ -295,19 +305,23 @@ export function syncPagesInPlace(
+@@ -223,6 +248,7 @@ function ownChar(s: CharsState, id: string): CharState {
+   if (!owned || owned.has(id)) return ch;
+   owned.add(id);
+   const copy = cloneChar(ch);
++  ownTable(s);
+   s.chars[id] = copy;
+   return copy;
+ }
+@@ -295,19 +321,23 @@ export function syncPagesInPlace(
    motion?: Record<string, MotionType>,
    detachPatrol = true,
    conditionContext?: ConditionContext,
@@ -104,7 +137,15 @@ index 3f54fea..db64148 100644
        // A `place` command relocates the spawn origin; MV Set Event
        // Location moves a not-yet-loaded event's future start too.
        const placed = placements[ev.id];
-@@ -338,6 +352,7 @@ export function syncPagesInPlace(
+@@ -315,6 +345,7 @@ export function syncPagesInPlace(
+       const oy = placed ? placed.y : ev.y;
+       const initialFacing: Dir4 = placed?.dir ? DIR4[placed.dir] : (page.dir ? DIR4[page.dir] : 0);
+       OWNED.get(s)?.add(ev.id);
++      ownTable(s);
+       s.chars[ev.id] = {
+         id: ev.id,
+         tx: ox,
+@@ -338,6 +369,7 @@ export function syncPagesInPlace(
      const visible = page.sprite != null;
      const blocks = page.blocks === true;
      if (existing.visible === visible && existing.blocks === blocks && existing.pageIndex === index) continue;
@@ -112,7 +153,7 @@ index 3f54fea..db64148 100644
      existing = ownChar(s, ev.id);
      existing.visible = visible;
      existing.blocks = blocks;
-@@ -363,17 +378,15 @@ export function syncPagesInPlace(
+@@ -363,17 +395,19 @@ export function syncPagesInPlace(
    }
  
    // A character is live while any event carrying its id is.
@@ -125,15 +166,46 @@ index 3f54fea..db64148 100644
 +    if (!liveIds.has(id)) {
        const gone = s.chars[id]!;
        if (gone.route?.waiter) abortedWaiters.push(gone.route.waiter);
++      ownTable(s);
        delete s.chars[id];
 +      changed = true;
      }
    }
-+  if (changed) PAGE_REVISION.set(s, {});
++  if (changed) {
++    PAGE_REVISION.set(s, {});
++    POSITION_REVISION.set(s, {});
++  }
    return { abortedWaiters };
  }
  
-@@ -578,7 +591,8 @@ export function stepCharsInPlace(
+@@ -568,6 +602,22 @@ export function stepChars(
+ }
+ 
+ /** stepChars on a working copy the caller owns; returns finishedWaiters. */
++const tickIds = new WeakMap<object, WeakMap<object, readonly string[]>>();
++function characterTickIds(s: CharsState, motion: Readonly<Record<string, MotionType>>): readonly string[] {
++  const revision = charsPageRevision(s);
++  let byMotion = tickIds.get(revision);
++  if (!byMotion) { byMotion = new WeakMap(); tickIds.set(revision, byMotion); }
++  let ids = byMotion.get(motion);
++  if (!ids) {
++    ids = Object.keys(s.chars).sort().filter(id => {
++      const ch = s.chars[id]!;
++      return ch.moving || ch.route !== null || ch.thinkIn > 0 || (motion[id] ?? "static") !== "static";
++    });
++    byMotion.set(motion, ids);
++  }
++  return ids;
++}
++
+ export function stepCharsInPlace(
+   s: CharsState,
+   table: PassageTable,
+@@ -575,12 +625,14 @@ export function stepCharsInPlace(
+   cfg: MovementConfig,
+   locked: ReadonlySet<string>,
+   motion: Readonly<Record<string, MotionType>>,
++  immutable = false,
  ): string[] {
    const frames = stepFrames(cfg);
    const finishedWaiters: string[] = [];
@@ -141,9 +213,12 @@ index 3f54fea..db64148 100644
 +  let others: Map<string, CharState> | undefined;
 +  const otherChars = () => others ??= new Map(Object.entries(s.chars));
  
-   for (const id of Object.keys(s.chars).sort()) {
+-  for (const id of Object.keys(s.chars).sort()) {
++  for (const id of immutable ? characterTickIds(s, motion) : Object.keys(s.chars).sort()) {
      const shared = s.chars[id]!;
-@@ -589,7 +603,7 @@ export function stepCharsInPlace(
+     // Characters the branches below leave untouched stay shared: a locked
+     // one, and an idle one with no route, no pause and a static page.
+@@ -589,7 +641,7 @@ export function stepCharsInPlace(
        if (!shared.route && shared.thinkIn === 0 && (motion[id] ?? "static") === "static") continue;
      }
      const ch = ownChar(s, id);
@@ -152,7 +227,15 @@ index 3f54fea..db64148 100644
  
      // Mid-step: interpolate. Nothing interrupts a step once committed
      // (locks and page changes snap at boundaries via syncPages).
-@@ -614,7 +628,7 @@ export function stepCharsInPlace(
+@@ -604,6 +656,7 @@ export function stepCharsInPlace(
+       }
+       ch.tx += DX[ch.stepDir];
+       ch.ty += DY[ch.stepDir];
++      POSITION_REVISION.set(s, {});
+       ch.px = ch.tx * cfg.tile;
+       ch.py = ch.ty * cfg.tile;
+       ch.phase = 0;
+@@ -614,7 +667,7 @@ export function stepCharsInPlace(
        if (ch.route?.plan?.done) {
          const ap = ch.route.plan.approach;
          if (ap) {
@@ -161,7 +244,7 @@ index 3f54fea..db64148 100644
            if (tc) {
              const f = facingToward(ch.tx, ch.ty, tc.x, tc.y);
              if (f !== null) { ch.facing = f; ch.stepDir = f; }
-@@ -638,7 +652,7 @@ export function stepCharsInPlace(
+@@ -638,7 +691,7 @@ export function stepCharsInPlace(
      }
  
      if (ch.route) {
@@ -170,7 +253,7 @@ index 3f54fea..db64148 100644
        continue;
      }
  
-@@ -647,8 +661,8 @@ export function stepCharsInPlace(
+@@ -647,8 +700,8 @@ export function stepCharsInPlace(
        if (ch.thinkIn > 0) continue; // decide on the tick the pause ends
      }
      const kind = motion[id] ?? "static";
@@ -181,6 +264,33 @@ index 3f54fea..db64148 100644
    }
  
    return finishedWaiters;
+diff --git a/src/engine/chunk-window.ts b/src/engine/chunk-window.ts
+index 7c1974e..3b39ee6 100644
+--- a/src/engine/chunk-window.ts
++++ b/src/engine/chunk-window.ts
+@@ -63,6 +63,22 @@ export function chunkWindow(
+   };
+ }
+ 
++/** One layer's last window. Snapshot numbers: hosts may mutate the camera
++ * or viewport object in place. The returned window belongs to this reader. */
++export function createChunkWindowReader(): typeof chunkWindow {
++  let x: number, y: number, w: number, h: number;
++  let size: number, cols: number, rows: number, margin: number;
++  let previous: ChunkWindow | undefined;
++  return (camera, viewport, chunkPx, columns, rowCount, extra = 0) => {
++    if (previous && x === camera.x && y === camera.y && w === viewport.w && h === viewport.h &&
++        size === chunkPx && cols === columns && rows === rowCount && margin === extra) return previous;
++    const next = chunkWindow(camera, viewport, chunkPx, columns, rowCount, extra);
++    x = camera.x; y = camera.y; w = viewport.w; h = viewport.h;
++    size = chunkPx; cols = columns; rows = rowCount; margin = extra;
++    return previous = next;
++  };
++}
++
+ export function chunkWindowContains(window: ChunkWindow, x: number, y: number): boolean {
+   return x >= window.x0 && x <= window.x1 && y >= window.y0 && y <= window.y1;
+ }
 diff --git a/src/engine/clone.ts b/src/engine/clone.ts
 index de9bfe9..4c3add9 100644
 --- a/src/engine/clone.ts
@@ -197,35 +307,39 @@ index de9bfe9..4c3add9 100644
    return out;
  }
 diff --git a/src/engine/extensions.ts b/src/engine/extensions.ts
-index 257b9a1..8699e0b 100644
+index 257b9a1..f7ecd5b 100644
 --- a/src/engine/extensions.ts
 +++ b/src/engine/extensions.ts
-@@ -55,6 +55,8 @@ export interface ExtensionCodec {
+@@ -55,6 +55,10 @@ export interface ExtensionCodec {
  export type ExtensionValidator = (value: JsonValue) => boolean | string | void;
  
  export interface ExtensionOptions {
 +  /** Condition handlers promise to leave their argument and ext trees unchanged. */
 +  immutableConditions?: boolean;
++  /** Same context and arguments produce the same result, without observable effects. */
++  deterministicConditions?: boolean;
    /** Fresh-session value. Defaults to null. */
    initial?: JsonValue;
    commands?: Readonly<Record<string, ExtensionCommandHandler>>;
-@@ -75,6 +77,7 @@ export interface ExtensionRuntime {
+@@ -75,6 +79,8 @@ export interface ExtensionRuntime {
    readonly codec: ExtensionCodec | null;
    readonly validate: ExtensionValidator | null;
    readonly allowUnknown: boolean;
 +  readonly immutableConditions: boolean;
++  readonly deterministicConditions: boolean;
  }
  
  const CALL_RE = /^[A-Za-z][A-Za-z0-9_-]*(?:\.[A-Za-z][A-Za-z0-9_-]*)+$/;
-@@ -135,6 +138,7 @@ export function createExtensionRuntime(options: ExtensionOptions = {}): Extensio
+@@ -135,6 +141,8 @@ export function createExtensionRuntime(options: ExtensionOptions = {}): Extensio
      codec: options.codec ?? null,
      validate: options.validate ?? null,
      allowUnknown: options.allowUnknown ?? false,
 +    immutableConditions: options.immutableConditions === true,
++    deterministicConditions: options.deterministicConditions === true,
    };
    validateExtension(runtime, initial, "extension initial state");
    return runtime;
-@@ -159,3 +163,36 @@ export function decodeExtension(runtime: ExtensionRuntime, value: JsonValue): Js
+@@ -159,3 +167,46 @@ export function decodeExtension(runtime: ExtensionRuntime, value: JsonValue): Js
    validateExtension(runtime, decoded, "decoded extension state");
    return deepClone(decoded);
  }
@@ -233,40 +347,58 @@ index 257b9a1..8699e0b 100644
 +// Only callers with an explicit immutable-state contract may use this cache.
 +// Nodes enter the cache after complete validation, so cycles remain errors.
 +const validatedImmutableJson = new WeakSet<object>();
-+export function assertImmutableJsonValue(value: unknown, label: string): asserts value is JsonValue {
-+  const active = new Set<object>();
-+  const visit = (value: unknown): string | null => {
-+    if (value === null || typeof value === "string" || typeof value === "boolean") return null;
-+    if (typeof value === "number") return Number.isFinite(value) ? null : ": finite number required";
-+    if (typeof value !== "object") return ": JSON value required";
-+    if (validatedImmutableJson.has(value)) return null;
-+    if (active.has(value)) return ": cyclic value is not JSON";
-+    active.add(value);
-+    if (Array.isArray(value)) {
-+      for (let i = 0; i < value.length; i++) {
-+        const error = visit(value[i]);
-+        if (error) return `[${i}]${error}`;
-+      }
-+    } else {
-+      const proto = Object.getPrototypeOf(value);
-+      if (proto !== Object.prototype && proto !== null) return ": plain JSON object required";
-+      for (const key of Object.keys(value)) {
-+        const error = visit((value as Record<string, unknown>)[key]);
-+        if (error) return `.${key}${error}`;
-+      }
++// Keep recursion outside the per-call scope: a self-capturing local closure
++// creates a cycle that reference-counting runtimes retain until a full GC.
++function immutableJsonProblem(value: unknown, active: Set<object>): string | null {
++  if (value === null || typeof value === "string" || typeof value === "boolean") return null;
++  if (typeof value === "number") return Number.isFinite(value) ? null : ": finite number required";
++  if (typeof value !== "object") return ": JSON value required";
++  if (validatedImmutableJson.has(value)) return null;
++  if (active.has(value)) return ": cyclic value is not JSON";
++  active.add(value);
++  if (Array.isArray(value)) {
++    for (let i = 0; i < value.length; i++) {
++      const child = value[i], kind = typeof child;
++      // Primitive leaves need no recursion, active-set entry or cache lookup.
++      const error = kind === "object" && child !== null ? immutableJsonProblem(child, active)
++        : kind === "number" ? Number.isFinite(child) ? null : ": finite number required"
++        : child === null || kind === "string" || kind === "boolean" ? null : ": JSON value required";
++      if (error) return `[${i}]${error}`;
 +    }
-+    active.delete(value);
-+    validatedImmutableJson.add(value);
-+    return null;
-+  };
-+  const error = visit(value);
++  } else {
++    const proto = Object.getPrototypeOf(value);
++    if (proto !== Object.prototype && proto !== null) return ": plain JSON object required";
++    for (const key of Object.keys(value)) {
++      const child = (value as Record<string, unknown>)[key], kind = typeof child;
++      const error = kind === "object" && child !== null ? immutableJsonProblem(child, active)
++        : kind === "number" ? Number.isFinite(child) ? null : ": finite number required"
++        : child === null || kind === "string" || kind === "boolean" ? null : ": JSON value required";
++      if (error) return `.${key}${error}`;
++    }
++  }
++  active.delete(value);
++  validatedImmutableJson.add(value);
++  return null;
++}
++
++export function assertImmutableJsonValue(value: unknown, label: string): asserts value is JsonValue {
++  if (value !== null && typeof value === "object" && validatedImmutableJson.has(value)) return;
++  const error = immutableJsonProblem(value, new Set<object>());
 +  if (error) throw new Error(`${label}: $${error}`);
 +}
 diff --git a/src/engine/interpreter.ts b/src/engine/interpreter.ts
-index fdbd858..7df5f62 100644
+index fdbd858..c4d03ec 100644
 --- a/src/engine/interpreter.ts
 +++ b/src/engine/interpreter.ts
-@@ -148,7 +148,7 @@ export function createSwitchState(init?: Partial<SwitchState>): SwitchState {
+@@ -25,6 +25,7 @@
+ // its self switch, which changes its active page.
+ 
+ import { deepClone, keyedRecord } from "./clone.ts";
++import { RecentStateMetadata, trackStateMetadata } from "./state-metadata.ts";
+ import {
+   assertJsonValue,
+   cloneExtension,
+@@ -148,7 +149,7 @@ export function createSwitchState(init?: Partial<SwitchState>): SwitchState {
  }
  
  function keyedValue<T>(record: Readonly<Record<string, T>>, key: string): T | undefined {
@@ -275,7 +407,7 @@ index fdbd858..7df5f62 100644
  }
  
  // --- conditions and page selection ------------------------------------------
-@@ -209,13 +209,13 @@ export function evalCondition(
+@@ -209,13 +210,13 @@ export function evalCondition(
          throw new Error(`extension condition ${JSON.stringify(c.call)} is not registered`);
        }
        const context: ExtensionReadContext = {
@@ -291,7 +423,7 @@ index fdbd858..7df5f62 100644
        if (typeof result !== "boolean") {
          throw new Error(`extension condition ${JSON.stringify(c.call)} must return a boolean`);
        }
-@@ -306,8 +306,6 @@ export function activePage(
+@@ -306,8 +307,6 @@ export function activePage(
    return index < 0 ? null : { page: ev.pages[index]!, index };
  }
  
@@ -300,7 +432,7 @@ index fdbd858..7df5f62 100644
  export function activeIndexAt(
    ev: GameEvent,
    s: SwitchState,
-@@ -317,7 +315,8 @@ export function activeIndexAt(
+@@ -317,7 +316,8 @@ export function activeIndexAt(
    context?: ConditionContext,
  ): number {
    for (let i = ev.pages.length - 1; i >= 0; i--) {
@@ -310,7 +442,7 @@ index fdbd858..7df5f62 100644
    }
    return -1;
  }
-@@ -332,13 +331,7 @@ export function eventKey(mapId: string, eventId: string): string {
+@@ -332,13 +332,7 @@ export function eventKey(mapId: string, eventId: string): string {
   *  the two hosts (review C12). Trigger arbitration must depend only on the
   *  authored id bytes, never on the host's collation tables. */
  export function eventIdLess(a: string, b: string): boolean {
@@ -325,7 +457,7 @@ index fdbd858..7df5f62 100644
  }
  
  // --- compiled programs -------------------------------------------------------
-@@ -1023,6 +1016,11 @@ type SwitchRecord = "switches" | "self" | "items" | "variables" | "shopStock";
+@@ -1023,6 +1017,11 @@ type SwitchRecord = "switches" | "self" | "items" | "variables" | "shopStock";
   *  wrote keeps its record identities from state to state, and a record a
   *  state was returned with is never written again. */
  const SHARED_RECORDS = new WeakMap<SwitchState, Set<SwitchRecord>>();
@@ -337,7 +469,7 @@ index fdbd858..7df5f62 100644
  
  /** The switch-bank record `k` of `sw`, copied first if a shareInterp copy
   *  still shares it. Every write to a record of a working copy goes through
-@@ -1030,6 +1028,7 @@ const SHARED_RECORDS = new WeakMap<SwitchState, Set<SwitchRecord>>();
+@@ -1030,6 +1029,7 @@ const SHARED_RECORDS = new WeakMap<SwitchState, Set<SwitchRecord>>();
  export function ownRecord<K extends SwitchRecord>(sw: SwitchState, k: K): SwitchState[K] {
    const shared = SHARED_RECORDS.get(sw);
    if (shared?.delete(k)) sw[k] = keyedRecord(sw[k] as Record<string, unknown>) as SwitchState[K];
@@ -345,17 +477,74 @@ index fdbd858..7df5f62 100644
    return sw[k];
  }
  
-@@ -1153,6 +1152,9 @@ function worldEventById(w: World, id: string): GameEvent | undefined {
+@@ -1049,7 +1049,7 @@ export function cloneInterp(s0: InterpState): InterpState {
+ /** cloneInterp for stepSession's private working copy: the switch-bank
+  *  records stay shared with `s0` until a write goes through ownRecord.
+  *  Callers must not write the records directly. */
+-export function shareInterp(s0: InterpState): InterpState {
++export function shareInterp(s0: InterpState, immutable = false): InterpState {
+   const sw: SwitchState = {
+     switches: s0.sw.switches,
+     self: s0.sw.self,
+@@ -1061,10 +1061,23 @@ export function shareInterp(s0: InterpState): InterpState {
+     rng: s0.sw.rng,
+   };
+   SHARED_RECORDS.set(sw, new Set<SwitchRecord>(["switches", "self", "items", "variables", "shopStock"]));
+-  return copyInterp(s0, sw);
++  trackStateMetadata(SHARED_RECORDS, sw);
++  return copyInterp(s0, sw, immutable);
++}
++
++type InterpRecord = "erased" | "touched" | "placements";
++const SHARED_INTERP = new WeakMap<InterpState, number>();
++function ownInterpRecord<K extends InterpRecord>(s: InterpState, key: K): InterpState[K] {
++  const flag = key === "erased" ? 1 : key === "touched" ? 2 : 4;
++  const shared = SHARED_INTERP.get(s) ?? 0;
++  if (shared & flag) {
++    s[key] = keyedRecord(s[key] as Record<string, never>) as InterpState[K];
++    SHARED_INTERP.set(s, shared & ~flag);
++  } else RECORD_REVISIONS.set(s[key], {});
++  return s[key];
+ }
+ 
+-function copyInterp(s0: InterpState, sw: SwitchState): InterpState {
++function copyInterp(s0: InterpState, sw: SwitchState, immutable = false): InterpState {
+   const main = s0.main ? cloneFiber(s0.main) : null;
+   const parallels = keyedRecord<Fiber>();
+   for (const key of Object.keys(s0.parallels)) parallels[key] = cloneFiber(s0.parallels[key]!);
+@@ -1078,10 +1091,10 @@ function copyInterp(s0: InterpState, sw: SwitchState): InterpState {
+     main,
+     parallels,
+     modal: cloneModal(s0.modal),
+-    erased: keyedRecord(s0.erased),
+-    touched: keyedRecord(s0.touched),
++    erased: immutable ? s0.erased : keyedRecord(s0.erased),
++    touched: immutable ? s0.touched : keyedRecord(s0.touched),
+     inputLocked: s0.inputLocked,
+-    placements: clonePlacements(s0.placements),
++    placements: immutable ? s0.placements : clonePlacements(s0.placements),
+     cues: s0.cues.map((cue) => ({ ...cue })),
+     pendingTransfer: s0.pendingTransfer ? { ...s0.pendingTransfer } : null,
+     pendingMoveRoutes: s0.pendingMoveRoutes.map((r) => ({
+@@ -1096,6 +1109,7 @@ function copyInterp(s0: InterpState, sw: SwitchState): InterpState {
+     abortedRoutes: [...s0.abortedRoutes],
+   };
+   if (s0.error) s.error = { ...s0.error };
++  if (immutable) { SHARED_INTERP.set(s, 7); trackStateMetadata(SHARED_INTERP, s); }
+   return s;
+ }
+ 
+@@ -1153,6 +1167,9 @@ function worldEventById(w: World, id: string): GameEvent | undefined {
   *  Authored areas come from the per-cell index. Autorun/parallel pages are
   *  always eligible, while placed or moving events are added dynamically
   *  because their live rectangle no longer matches the authored index. */
 +const staticCandidates = new WeakMap<World, Map<string, GameEvent[]>>();
-+const displacedCandidates = new WeakMap<object, Map<string, GameEvent[]>>();
++const displacedCandidates = new RecentStateMetadata<object, Map<string, GameEvent[]>>();
 +
  function triggerCandidates(s: InterpState, w: World, input: InterpInput): GameEvent[] {
    // Keep structural compatibility for callers that construct a World
    // directly instead of using createWorld(): without an index, conservatively
-@@ -1161,27 +1163,48 @@ function triggerCandidates(s: InterpState, w: World, input: InterpInput): GameEv
+@@ -1161,27 +1178,48 @@ function triggerCandidates(s: InterpState, w: World, input: InterpInput): GameEv
      return [...(w.map.events ?? [])]
        .sort((a, b) => (eventIdLess(a.id, b.id) ? -1 : a.id === b.id ? 0 : 1));
    }
@@ -418,7 +607,7 @@ index fdbd858..7df5f62 100644
  }
  
  function startFiber(
-@@ -1231,7 +1254,33 @@ function cancelStaleParallels(
+@@ -1231,7 +1269,134 @@ function cancelStaleParallels(
    }
  }
  
@@ -448,14 +637,123 @@ index fdbd858..7df5f62 100644
 +  return out;
 +}
 +type PendingParallel = { index: number; prog: Prog };
++// A completed, effect-free entry prefix can sleep until a dependency changes.
++// Its instruction count still consumes the shared runaway budget at its
++// original key-order position. Earlier fibers' writes therefore remain visible.
++interface GuardMemo {
++  mask: number;
++  steps: number;
++  pc: number;
++  key: string;
++  runtime: ExtensionRuntime;
++  switches?: object;
++  variables?: object;
++  self?: object;
++  items?: object;
++  gold?: number;
++  facing?: Facing;
++  idle?: boolean;
++  ext?: JsonValue;
++}
++const sleepingGuards = new WeakMap<Prog, GuardMemo>();
++function guardMask(c: Condition, runtime: ExtensionRuntime): number {
++  switch (c.kind) {
++    case "switch": return 1;
++    case "variable": return 2;
++    case "selfSwitch": return 4;
++    case "item": return 8;
++    case "gold": return 16;
++    case "facing": return 32;
++    case "worldIdle": return 64;
++    case "ext": return runtime.immutableConditions && runtime.deterministicConditions ? 1 | 2 | 8 | 16 | 128 : -1;
++  }
++}
++function guardUnchanged(m: GuardMemo, s: InterpState, input: InterpInput, extension: ExtensionScope, key: string): boolean {
++  const mask = m.mask;
++  return m.key === key && m.runtime === extension.runtime &&
++    (!(mask & 1) || m.switches === recordRevision(s.sw.switches)) &&
++    (!(mask & 2) || m.variables === recordRevision(s.sw.variables)) &&
++    (!(mask & 4) || m.self === recordRevision(s.sw.self)) &&
++    (!(mask & 8) || m.items === recordRevision(s.sw.items)) &&
++    (!(mask & 16) || Object.is(m.gold, s.sw.gold)) &&
++    (!(mask & 32) || m.facing === input.facing) &&
++    (!(mask & 64) || m.idle === isWorldIdle(s, input.worldIdleBlockers)) &&
++    (!(mask & 128) || m.ext === extension.ext);
++}
++function rememberGuard(prog: Prog, mask: number, steps: number, pc: number, key: string,
++  s: InterpState, input: InterpInput, extension: ExtensionScope): void {
++  sleepingGuards.set(prog, {
++    mask, steps, pc, key, runtime: extension.runtime,
++    switches: mask & 1 ? recordRevision(s.sw.switches) : undefined,
++    variables: mask & 2 ? recordRevision(s.sw.variables) : undefined,
++    self: mask & 4 ? recordRevision(s.sw.self) : undefined,
++    items: mask & 8 ? recordRevision(s.sw.items) : undefined,
++    gold: mask & 16 ? s.sw.gold : undefined,
++    facing: mask & 32 ? input.facing : undefined,
++    idle: mask & 64 ? isWorldIdle(s, input.worldIdleBlockers) : undefined,
++    ext: mask & 128 ? extension.ext : undefined,
++  });
++}
++
++interface IdleScanMemo {
++  switches: object; variables: object; self: object; items: object;
++  erased: object; touched: object; placements: object;
++  ext: JsonValue; gold: number; locked: boolean; idle: boolean;
++  x: number; y: number; prevX: number; prevY: number;
++  facing: Facing; prevFacing: Facing | undefined;
++  cells: InterpInput["eventCells"];
++  main: string | undefined; mainPage: number | undefined;
++  modal: string | undefined; modalKind: Modal["kind"] | undefined;
++  steps: number;
++}
++const idleScans = new WeakMap<World, IdleScanMemo>();
++const activeScans = new WeakMap<World, {
++  signature: IdleScanMemo;
++  pages: Record<string, number>;
++  count: number;
++  pending: Record<string, PendingParallel>;
++  keys: string[];
++}>();
++function sameIdleScan(m: IdleScanMemo, s: InterpState, input: InterpInput, ext: JsonValue): boolean {
++  return m.ext === ext && Object.is(m.gold, s.sw.gold) && m.locked === s.inputLocked &&
++    m.main === s.main?.key && m.mainPage === s.main?.pageIndex &&
++    m.modal === s.modal?.fiber && m.modalKind === s.modal?.kind &&
++    m.x === input.playerCell.x && m.y === input.playerCell.y &&
++    m.prevX === input.prevCell.x && m.prevY === input.prevCell.y &&
++    m.facing === input.facing && m.prevFacing === input.prevFacing && m.cells === input.eventCells &&
++    m.switches === recordRevision(s.sw.switches) && m.variables === recordRevision(s.sw.variables) &&
++    m.self === recordRevision(s.sw.self) && m.items === recordRevision(s.sw.items) &&
++    m.erased === recordRevision(s.erased) && m.touched === recordRevision(s.touched) &&
++    m.placements === recordRevision(s.placements) && m.idle === isWorldIdle(s, input.worldIdleBlockers);
++}
++function idleScanSnapshot(s: InterpState, input: InterpInput, ext: JsonValue, steps: number): IdleScanMemo {
++  return {
++    switches: recordRevision(s.sw.switches), variables: recordRevision(s.sw.variables),
++    self: recordRevision(s.sw.self), items: recordRevision(s.sw.items),
++    erased: recordRevision(s.erased), touched: recordRevision(s.touched), placements: recordRevision(s.placements),
++    ext, gold: s.sw.gold, locked: s.inputLocked, idle: isWorldIdle(s, input.worldIdleBlockers),
++    x: input.playerCell.x, y: input.playerCell.y, prevX: input.prevCell.x, prevY: input.prevCell.y,
++    facing: input.facing, prevFacing: input.prevFacing, cells: input.eventCells,
++    main: s.main?.key, mainPage: s.main?.pageIndex, modal: s.modal?.fiber, modalKind: s.modal?.kind, steps,
++  };
++}
++
 +function scanTriggers(s: InterpState, w: World, input: InterpInput, extension: ExtensionScope, selected?: PageSelections): Record<string, PendingParallel> {
 +  const pending = keyedRecord<PendingParallel>();
    const rectOf = (ev: GameEvent): Rect | null => eventRect(ev, eventOrigin(ev, s, input));
    const moved = input.prevCell.x !== input.playerCell.x || input.prevCell.y !== input.playerCell.y;
    const prevFacing = input.prevFacing ?? input.facing;
-@@ -1252,38 +1301,40 @@ function scanTriggers(s: InterpState, w: World, input: InterpInput, extension: E
+@@ -1246,44 +1411,46 @@ function scanTriggers(s: InterpState, w: World, input: InterpInput, extension: E
+   for (const key of Object.keys(s.touched)) {
+     const ev = worldEventById(w, key.slice(w.map.id.length + 1));
+     if (!ev) {
+-      delete s.touched[key];
++      delete ownInterpRecord(s, "touched")[key];
+       continue;
+     }
      const r = rectOf(ev);
-     if (moved || !r || !cellInRect(input.playerCell, r)) delete s.touched[key];
+-    if (moved || !r || !cellInRect(input.playerCell, r)) delete s.touched[key];
++    if (moved || !r || !cellInRect(input.playerCell, r)) delete ownInterpRecord(s, "touched")[key];
    }
 +  let selectionContext = liveConditionContext(s, input.worldIdleBlockers);
    // Ascending event-id order so parallel starts and the blocking-fiber
@@ -507,7 +805,7 @@ index fdbd858..7df5f62 100644
      } else if (page.trigger === "action") {
        // While the cross-event input lock is held, confirm presses
        // start no event (the cutscene owns control); autorun/parallel above
-@@ -1300,6 +1351,7 @@ function scanTriggers(s: InterpState, w: World, input: InterpInput, extension: E
+@@ -1300,6 +1467,7 @@ function scanTriggers(s: InterpState, w: World, input: InterpInput, extension: E
        const front = { x: input.playerCell.x + fx, y: input.playerCell.y + fy };
        if (cellInRect(front, r) || cellInRect(input.playerCell, r)) {
          s.main = startFiber(s, key, index, false, w.pagePrograms.get(key)![index]!);
@@ -515,9 +813,12 @@ index fdbd858..7df5f62 100644
        }
      } else if (page.trigger === "playerTouch") {
        if (held) continue;
-@@ -1313,9 +1365,11 @@ function scanTriggers(s: InterpState, w: World, input: InterpInput, extension: E
+@@ -1311,11 +1479,13 @@ function scanTriggers(s: InterpState, w: World, input: InterpInput, extension: E
+       // the player turns in place to the direction the page now requires.
+       const turnEdge = turned && !moved && pageReadsFacing(page);
        if (stepEdge || turnEdge) {
-         s.touched[key] = true;
+-        s.touched[key] = true;
++        ownInterpRecord(s, "touched")[key] = true;
          s.main = startFiber(s, key, index, false, w.pagePrograms.get(key)![index]!);
 +      selectionContext = { worldIdle: false };
        }
@@ -527,7 +828,7 @@ index fdbd858..7df5f62 100644
  }
  
  // --- fiber execution -----------------------------------------------------------
-@@ -1431,16 +1485,23 @@ function clampVariableRecord(
+@@ -1431,16 +1601,23 @@ function clampVariableRecord(
    return out;
  }
  
@@ -554,7 +855,7 @@ index fdbd858..7df5f62 100644
          s.sw.rng = r.next;
        } else if ("from" in ins.set) {
          // T2-16: the operand is another variable's live value (target OP
-@@ -1451,14 +1512,14 @@ function runInstant(s: InterpState, f: Fiber, ins: InstantInstr): void {
+@@ -1451,14 +1628,14 @@ function runInstant(s: InterpState, f: Fiber, ins: InstantInstr): void {
          // write); the arithmetic ops treat a non-number source/target as 0.
          const op = ins.set.op;
          if (op === "copy") {
@@ -574,7 +875,7 @@ index fdbd858..7df5f62 100644
              op === "add" ? a + b
              : op === "sub" ? a - b
              : op === "mul" ? a * b
-@@ -1467,18 +1528,20 @@ function runInstant(s: InterpState, f: Fiber, ins: InstantInstr): void {
+@@ -1467,18 +1644,20 @@ function runInstant(s: InterpState, f: Fiber, ins: InstantInstr): void {
            );
          }
        } else {
@@ -598,7 +899,16 @@ index fdbd858..7df5f62 100644
        break;
      case "gold":
        s.sw.gold = clampFiniteVar(s.sw.gold + (ins.set === "add" ? ins.amount : -ins.amount));
-@@ -1692,11 +1755,10 @@ function runExtensionCommand(
+@@ -1497,7 +1676,7 @@ function runInstant(s: InterpState, f: Fiber, ins: InstantInstr): void {
+ }
+ 
+ function finishFiber(s: InterpState, f: Fiber): void {
+-  if (f.erase) s.erased[f.key] = true;
++  if (f.erase) ownInterpRecord(s, "erased")[f.key] = true;
+   if (s.modal?.fiber === f.key) s.modal = null;
+   if (f.parallel) delete s.parallels[f.key];
+   else if (s.main?.key === f.key) s.main = null;
+@@ -1692,11 +1871,10 @@ function runExtensionCommand(
      ? undefined
      : replaceItemCounts(s.sw.items, itemReplacements, w.inventory);
    extension.ext = nextExt;
@@ -611,7 +921,7 @@ index fdbd858..7df5f62 100644
    }
    if (items !== undefined) s.sw.items = items;
    if (gold !== undefined) s.sw.gold = gold;
-@@ -1933,7 +1995,7 @@ function runFiber(
+@@ -1933,7 +2111,7 @@ function runFiber(
            f.key,
            input.facing,
            extension,
@@ -620,36 +930,92 @@ index fdbd858..7df5f62 100644
          ) ? top.pc + 1 : ins.onFalse;
          break;
        case "jmp":
-@@ -2116,6 +2178,7 @@ export function stepInterpWithExtensionsInPlace(
+@@ -1959,7 +2137,7 @@ function runFiber(
+       case "place": {
+         const eventId = ins.target === "this" ? f.key.split("/").pop()! : ins.target.event;
+         const p = { x: ins.x, y: ins.y, dir: ins.dir };
+-        s.placements[eventId] = p;
++        ownInterpRecord(s, "placements")[eventId] = p;
+         s.pendingPlacements.push({ eventId, ...p });
+         top.pc++;
+         break;
+@@ -2116,6 +2294,8 @@ export function stepInterpWithExtensionsInPlace(
    s: InterpState,
    input: InterpInput,
    ext0: JsonValue,
 +  selectedPages?: PageSelections,
++  immutable = false,
  ): JsonValue {
    const extension: MutableExtensionScope = { runtime: w.extensions, ext: ext0 };
    // A fatalized state is frozen: no triggers scan, no fiber advances. The
-@@ -2138,7 +2201,8 @@ export function stepInterpWithExtensionsInPlace(
+@@ -2137,22 +2317,104 @@ export function stepInterpWithExtensionsInPlace(
+   s.pendingPlacements = [];
    s.abortedRoutes = [];
  
-   cancelStaleParallels(s, w, input.facing, extension, input.worldIdleBlockers);
+-  cancelStaleParallels(s, w, input.facing, extension, input.worldIdleBlockers);
 -  scanTriggers(s, w, input, extension);
-+  const pending = scanTriggers(s, w, input, extension, selectedPages);
++  // A scan that ran only completed IF/JMP prefixes has no clock-dependent
++  // fiber left. Reuse it only with the complete read context unchanged.
++  // A blocking fiber still advances below, with the original remaining budget.
++  // Live parallels, input edges and non-deterministic handlers never sleep.
++  const parallelKeys = Object.keys(s.parallels);
++  const canCacheScan = immutable && w.extensions.immutableConditions && w.extensions.deterministicConditions &&
++    s.pendingBattles.length === 0 &&
++    !input.confirmEdge && !input.cancelEdge && !input.upEdge && !input.downEdge;
++  const canSleep = canCacheScan && parallelKeys.length === 0;
++  const sleeping = canSleep ? idleScans.get(w) : undefined;
++  if (sleeping && sameIdleScan(sleeping, s, input, ext0)) {
++    if (s.main) runFiber(s, w, s.main, input, { remaining: RUNAWAY_STEP_LIMIT - sleeping.steps }, extension);
++    return extension.ext;
++  }
++
++  const mainBeforeScan = s.main, modalBeforeScan = s.modal;
++  const active = canCacheScan && parallelKeys.length > 0 ? activeScans.get(w) : undefined;
++  let pending: Record<string, PendingParallel>;
++  let keys: string[];
++  if (active && active.count === parallelKeys.length &&
++      parallelKeys.every(key => active.pages[key] === s.parallels[key]!.pageIndex) &&
++      sameIdleScan(active.signature, s, input, ext0)) {
++    pending = active.pending;
++    keys = active.keys;
++  } else {
++    cancelStaleParallels(s, w, input.facing, extension, input.worldIdleBlockers);
++    pending = scanTriggers(s, w, input, extension, selectedPages);
++    const liveKeys = Object.keys(s.parallels);
++    keys = [...liveKeys, ...Object.keys(pending)].sort();
++    if (canCacheScan && liveKeys.length > 0 && s.main === mainBeforeScan && s.modal === modalBeforeScan) {
++      const pages = keyedRecord<number>();
++      for (const key of liveKeys) pages[key] = s.parallels[key]!.pageIndex;
++      activeScans.set(w, { signature: idleScanSnapshot(s, input, extension.ext, 0),
++        pages, count: liveKeys.length, pending, keys });
++    }
++  }
 +  // Commands may write the bank. Cached selections only span the read phase.
    const budget: StepBudget = { remaining: RUNAWAY_STEP_LIMIT };
    const queuedBattleCount = s.pendingBattles.length;
++  let ranFiber = false;
  
-@@ -2147,7 +2211,36 @@ export function stepInterpWithExtensionsInPlace(
+   // Parallels first (ascending key), then the blocking fiber, so a parallel
+   // can never observe a value the main fiber sets later in the same frame.
    // Battle requests are the one exception to the resulting publication
    // order: collect this tick's parallel requests, run main, then append the
    // new requests main-first behind every request already in the FIFO.
 -  for (const key of Object.keys(s.parallels).sort()) {
-+  const keys = [...Object.keys(s.parallels), ...Object.keys(pending)].sort();
 +  for (const key of keys) {
 +    const entry = pending[key];
 +    if (entry) {
 +      // Run effect-free entry branches at the same point in key order as
 +      // the original fiber. A branch ending here needs no mutable cursor.
 +      let pc = 0;
++      let dependencies = 0;
++      const initialBudget = budget.remaining;
++      const memo = immutable ? sleepingGuards.get(entry.prog) : undefined;
++      let reusedGuard = false;
++      if (memo && budget.remaining >= memo.steps && guardUnchanged(memo, s, input, extension, key)) {
++        budget.remaining -= memo.steps;
++        pc = memo.pc;
++        reusedGuard = true;
++      }
 +      while (pc < entry.prog.length) {
 +        const ins = entry.prog[pc]!;
 +        if (ins.op !== "if" && ins.op !== "jmp") break;
@@ -657,11 +1023,14 @@ index fdbd858..7df5f62 100644
 +          s.error = { kind: "runaway", message: `interpreter: runaway program in ${key}` };
 +          break;
 +        }
++        if (immutable && ins.op === "if") dependencies |= guardMask(ins.cond, extension.runtime);
 +        pc = ins.op === "jmp" ? ins.to
 +          : evalCondition(ins.cond, s.sw, key, input.facing, extension, ins.cond.kind === "worldIdle" ? liveConditionContext(s, input.worldIdleBlockers) : undefined) ? pc + 1 : ins.onFalse;
 +      }
 +      if (s.error) break;
 +      if (pc >= entry.prog.length) {
++        if (immutable && !reusedGuard && dependencies >= 0)
++          rememberGuard(entry.prog, dependencies, initialBudget - budget.remaining, pc, key, s, input, extension);
 +        if (budget.remaining-- <= 0) {
 +          s.error = { kind: "runaway", message: `interpreter: runaway program in ${key}` };
 +          break;
@@ -673,14 +1042,34 @@ index fdbd858..7df5f62 100644
 +      fiber.stack[0]!.pc = pc;
 +      s.parallels[key] = fiber;
 +    }
++    ranFiber = true;
      runFiber(s, w, s.parallels[key]!, input, budget, extension);
      if (s.error) break;
    }
+   const parallelBattles = s.pendingBattles.splice(queuedBattleCount);
+-  if (!s.error && s.main) runFiber(s, w, s.main, input, budget, extension);
++  if (canSleep && !ranFiber && s.main === mainBeforeScan && s.modal === modalBeforeScan && !s.error)
++    idleScans.set(w, idleScanSnapshot(s, input, extension.ext, RUNAWAY_STEP_LIMIT - budget.remaining));
++  if (!s.error && s.main) {
++    ranFiber = true;
++    runFiber(s, w, s.main, input, budget, extension);
++  }
+   const mainBattles = s.pendingBattles.splice(queuedBattleCount);
+   s.pendingBattles.push(...mainBattles, ...parallelBattles);
+   return extension.ext;
 diff --git a/src/engine/session.ts b/src/engine/session.ts
-index bf9aa54..2af126a 100644
+index bf9aa54..b3ab5fb 100644
 --- a/src/engine/session.ts
 +++ b/src/engine/session.ts
-@@ -49,6 +49,7 @@ import {
+@@ -31,6 +31,7 @@
+ //
+ // No host imports, no wall clock, no Math.random (docs/SIMULATION.md).
+ 
++import { beginStateMetadata, endStateMetadata, RecentStateMetadata } from "./state-metadata.ts";
+ import { deepClone, keyedRecord } from "./clone.ts";
+ import { startupProfileMark } from "../startup-profile.ts";
+ 
+@@ -49,6 +50,7 @@ import {
    ownRecord,
    randInt,
    replaceItemCounts,
@@ -688,7 +1077,12 @@ index bf9aa54..2af126a 100644
    rngNext,
    secondsToFrames,
    shareInterp,
-@@ -66,6 +67,7 @@ import {
+@@ -62,10 +64,12 @@ import {
+   type SwitchState,
+   type WorldIdleBlockers,
+   type WorldOptions,
++  type World,
+ } from "./interpreter.ts";
  import {
    assertJsonValue,
    cloneExtension,
@@ -696,15 +1090,16 @@ index bf9aa54..2af126a 100644
    createExtensionRuntime,
    extensionCallNameValid,
    type ExtensionOptions,
-@@ -79,6 +81,7 @@ import {
+@@ -79,6 +83,8 @@ import {
  } from "./battle.ts";
  import {
    createChars,
 +  charsPageRevision,
++  charsPositionRevision,
    installRoute,
    placeChar,
    shareChars,
-@@ -120,6 +123,7 @@ import {
+@@ -120,6 +126,7 @@ import {
  } from "./map-repository.ts";
  import type {
    CommonEvent,
@@ -712,7 +1107,7 @@ index bf9aa54..2af126a 100644
    Dir,
    Facing,
    MapDef,
-@@ -242,6 +246,8 @@ export interface Session {
+@@ -242,6 +249,8 @@ export interface Session {
    battle: BattleRules | null;
    /** Scene policy is immutable host configuration, never reducer state. */
    sceneOptions: Required<SceneOptions>;
@@ -721,7 +1116,7 @@ index bf9aa54..2af126a 100644
  }
  
  export interface SceneOptions {
-@@ -251,6 +257,9 @@ export interface SceneOptions {
+@@ -251,6 +260,9 @@ export interface SceneOptions {
  }
  
  export interface SessionOptions {
@@ -731,7 +1126,7 @@ index bf9aa54..2af126a 100644
    maps?: MapRepository;
    /** Recompute and verify a ProjectShell's declared mapManifestHash. Splitter
     * output in a trusted app package uses the declared build identity directly
-@@ -509,6 +518,7 @@ export function createSession(
+@@ -509,6 +521,7 @@ export function createSession(
        extensions,
        battle: options.battle ?? null,
        sceneOptions: { worldContinues: options.scene?.worldContinues === true },
@@ -739,7 +1134,7 @@ index bf9aa54..2af126a 100644
      };
      acquireSessionMap(session, project.start.map);
      releaseSessionMapsExcept(session, [project.start.map]);
-@@ -546,6 +556,7 @@ export function createSession(
+@@ -546,6 +559,7 @@ export function createSession(
      extensions,
      battle: options.battle ?? null,
      sceneOptions: { worldContinues: options.scene?.worldContinues === true },
@@ -747,7 +1142,7 @@ index bf9aa54..2af126a 100644
    };
  }
  
-@@ -735,12 +746,13 @@ function startBattleScene(sess: Session, s: SessionState, request: PendingBattle
+@@ -735,12 +749,13 @@ function startBattleScene(sess: Session, s: SessionState, request: PendingBattle
    if (typeof started !== "object" || Array.isArray(started)) {
      throw new Error("battle start: BattleStart object or null required");
    }
@@ -763,7 +1158,7 @@ index bf9aa54..2af126a 100644
      pausedTicks: 0,
    };
    return true;
-@@ -812,16 +824,18 @@ function advanceBattleScene(
+@@ -812,16 +827,18 @@ function advanceBattleScene(
    s: SessionState,
    input: Readonly<BattleInput>,
    ticks: number,
@@ -786,7 +1181,7 @@ index bf9aa54..2af126a 100644
    if (completion === null) return;
    if (typeof completion !== "object" || Array.isArray(completion)) {
      throw new Error("battle done: BattleCompletion object or null required");
-@@ -885,6 +899,10 @@ function advanceBattleScene(
+@@ -885,6 +902,10 @@ function advanceBattleScene(
      ? undefined
      : replaceItemCounts(s.interp.sw.items, itemReplacements, sess.worldOptions.inventory);
  
@@ -797,24 +1192,33 @@ index bf9aa54..2af126a 100644
    s.ext = nextExt;
    // B1 (fix 3): a battle completion's numeric write shares
    // the interpreter's finite-safe-integer normalizer, same as an ext
-@@ -923,13 +941,14 @@ export function stepSession(
+@@ -921,15 +942,23 @@ export function stepSession(
+   s0: SessionState,
+   input: SessionInput,
  ): SessionState {
++  if (!sess.immutableState) return foldSession(sess, s0, input);
++  const metadata = beginStateMetadata();
++  try { return foldSession(sess, s0, input); }
++  finally { endStateMetadata(metadata); }
++}
++
++function foldSession(sess: Session, s0: SessionState, input: SessionInput): SessionState {
    // One working copy per frame. The reference ticks below advance it in
    // place; characters and switch records stay shared with s0 until written.
 -  const interp = shareInterp(s0.interp);
 +  const frozen = s0.scene !== null && !sess.sceneOptions.worldContinues;
-+  const interp = frozen ? { ...s0.interp } : shareInterp(s0.interp);
++  const interp = frozen ? { ...s0.interp } : shareInterp(s0.interp, sess.immutableState);
    const s: SessionState = {
      frame: s0.frame,
      mapId: s0.mapId,
      sw: interp.sw,
      move: { ...s0.move },
 -    chars: shareChars(s0.chars),
-+    chars: frozen ? s0.chars : shareChars(s0.chars),
++    chars: frozen ? s0.chars : shareChars(s0.chars, sess.immutableState),
      interp,
      fade: s0.fade ? { ...s0.fade } : null,
      playerRoute: s0.playerRoute
-@@ -948,8 +967,8 @@ export function stepSession(
+@@ -948,8 +977,8 @@ export function stepSession(
              : null,
          }
        : null,
@@ -825,7 +1229,7 @@ index bf9aa54..2af126a 100644
    };
    s.frame++;
    const ticks = sess.ticksPerFrame;
-@@ -979,11 +998,32 @@ export function stepSession(
+@@ -979,11 +1008,61 @@ export function stepSession(
        s,
        sceneAtFrameStart ? battleInput(input) : battleInput(NO_MAP_INPUT),
        sceneTicks,
@@ -839,10 +1243,39 @@ index bf9aa54..2af126a 100644
 +// Position, patrol clocks and RNG do not select pages. Keep a value snapshot
 +// so restored states and in-place bank edits invalidate the cached result.
 +const pageSyncMemo = new WeakMap<object, { signature: string | readonly unknown[]; motion: Record<string, MotionType>; pages: Map<GameEvent, number>; runtime: ExtensionRuntime }>();
++const pagesReadExtensions = new WeakMap<World, boolean>();
++function canCachePages(world: World): boolean {
++  if (world.extensions.immutableConditions && world.extensions.deterministicConditions) return true;
++  let reads = pagesReadExtensions.get(world);
++  if (reads === undefined) {
++    reads = (world.map.events ?? []).some(ev => ev.pages.some(page =>
++      page.condition?.all?.some(clause => clause.kind === "ext")));
++    pagesReadExtensions.set(world, reads);
++  }
++  // Opaque handlers may depend on state outside their arguments.
++  return !reads;
++}
++const displacedCellMemo = new WeakMap<object, RecentStateMetadata<object, Record<string, { x: number; y: number }>>>();
++function displacedCells(map: MapDef, chars: CharsState, immutable: boolean): Record<string, { x: number; y: number }> {
++  let byPosition = immutable ? displacedCellMemo.get(map) : undefined;
++  const revision = immutable ? charsPositionRevision(chars) : undefined;
++  const prior = revision ? byPosition?.get(revision) : undefined;
++  if (prior) return prior;
++  const cells = keyedRecord<{ x: number; y: number }>();
++  for (const ev of map.events ?? []) {
++    const ch = chars.chars[ev.id];
++    if (ch && (ch.tx !== ev.x || ch.ty !== ev.y)) cells[ev.id] = { x: ch.tx, y: ch.ty };
++  }
++  if (revision) {
++    if (!byPosition) { byPosition = new RecentStateMetadata(); displacedCellMemo.set(map, byPosition); }
++    byPosition.set(revision, cells);
++  }
++  return cells;
++}
 +function pageSyncSignature(s: SessionState, worldIdle: boolean, immutable = false): string | readonly unknown[] {
 +  if (immutable) return [recordRevision(s.sw.switches), recordRevision(s.sw.self),
 +    recordRevision(s.sw.variables), recordRevision(s.sw.items), s.sw.gold,
-+    s.ext, JSON.stringify(s.interp.erased), JSON.stringify(s.interp.placements),
++    s.ext, recordRevision(s.interp.erased), recordRevision(s.interp.placements),
 +    s.move.facing, worldIdle, charsPageRevision(s.chars)];
 +  const chars: unknown[] = [];
 +  for (const id of Object.keys(s.chars.chars)) {
@@ -858,7 +1291,7 @@ index bf9aa54..2af126a 100644
  /** Advance the session one MOTION_HZ reference tick, mutating the working
   *  clone `s`. Returns the player cell the next tick sees as prevCell. */
  function stepReferenceTick(
-@@ -1040,9 +1080,16 @@ function stepReferenceTick(
+@@ -1040,9 +1119,16 @@ function stepReferenceTick(
    const extension: ExtensionScope = { runtime: sess.extensions, ext: s.ext };
    const conditionContext: ConditionContext = { worldIdle: isSessionWorldIdle(s) };
    const syncFacing = s.move.facing;
@@ -868,7 +1301,7 @@ index bf9aa54..2af126a 100644
 -  const synced = syncPagesInPlace(
 +  const signature = pageSyncSignature(s, conditionContext.worldIdle ?? false, sess.immutableState);
 +  const memo = pageSyncMemo.get(world);
-+  const reusePages = memo !== undefined && memo.runtime === sess.extensions &&
++  const reusePages = memo !== undefined && memo.runtime === sess.extensions && canCachePages(world) &&
 +    (memo.signature === signature || (typeof signature !== "string" && typeof memo.signature !== "string" &&
 +      signature.every((value, i) => value === memo.signature[i])));
 +  if (reusePages) syncMotion = memo!.motion;
@@ -877,7 +1310,7 @@ index bf9aa54..2af126a 100644
      s.chars,
      keyed.events,
      keyed.slotsById,
-@@ -1055,7 +1102,9 @@ function stepReferenceTick(
+@@ -1055,7 +1141,9 @@ function stepReferenceTick(
      syncMotion,
      true,
      conditionContext,
@@ -887,16 +1320,274 @@ index bf9aa54..2af126a 100644
    for (const waiter of synced.abortedWaiters) {
      s.interp = continueExternal(s.interp, waiter);
    }
-@@ -1130,6 +1179,7 @@ function stepReferenceTick(
+@@ -1097,6 +1185,7 @@ function stepReferenceTick(
+     s.move.facing === syncFacing
+       ? syncMotion
+       : motionOf(map, s.sw, s.move.facing, extension, conditionContext),
++    sess.immutableState,
+   );
+   for (const waiter of finishedWaiters) {
+     s.interp = continueExternal(s.interp, waiter);
+@@ -1108,11 +1197,7 @@ function stepReferenceTick(
+   // 4. Interpreter — only displaced NPC cells need to supplement the
+   // world's authored spatial index. Static characters resolve from the
+   // indexed event origin without growing the per-frame record.
+-  const eventCells = keyedRecord<{ x: number; y: number }>();
+-  for (const ev of map.events ?? []) {
+-    const ch = s.chars.chars[ev.id];
+-    if (ch && (ch.tx !== ev.x || ch.ty !== ev.y)) eventCells[ev.id] = { x: ch.tx, y: ch.ty };
+-  }
++  const eventCells = displacedCells(map, s.chars, sess.immutableState);
+   const interpInput: InterpInput = {
+     confirmEdge: input.confirmEdge,
+     cancelEdge: input.cancelEdge,
+@@ -1130,6 +1215,8 @@ function stepReferenceTick(
      s.interp,
      interpInput,
      s.ext,
 +    { indices: selectedPages, facing: syncFacing, worldIdle: conditionContext.worldIdle ?? false },
++    sess.immutableState,
    );
    // continueExternal above may have replaced s.interp with a copy whose
    // switch bank is a new object; re-alias the session's top-level bank to it
+diff --git a/src/ui/AnimatedTiles.tsx b/src/ui/AnimatedTiles.tsx
+index 9df9a3a..f2c2740 100644
+--- a/src/ui/AnimatedTiles.tsx
++++ b/src/ui/AnimatedTiles.tsx
+@@ -24,7 +24,7 @@ import {
+ } from "@pocketjs/framework/renderer";
+ import type { AnimatedTile } from "./game-assets.ts";
+ import {
+-  chunkWindow,
++  createChunkWindowReader,
+   type ChunkPoint,
+   type ChunkViewport,
+   type ChunkWindow,
+@@ -67,6 +67,7 @@ const EMPTY: ChunkWindow = { x0: 0, y0: 0, x1: -1, y1: -1 };
+ /** One animated-tile z-band. The parent owns the world translation; nodes
+  *  sit at world tile coordinates and rebind only when the window changes. */
+ export function AnimatedTiles(props: AnimatedTilesProps): SolidJSX.Element {
++  const chunkWindow = createChunkWindowReader();
+   startupProfileMark(`ui-animated-${props.above ? "above" : "below"}:start`);
+   const root = createElement("view");
+   setProp(root, "style", { posType: 1, insetL: 0, insetT: 0, width: 0, height: 0 });
+@@ -76,8 +77,8 @@ export function AnimatedTiles(props: AnimatedTilesProps): SolidJSX.Element {
+   /** Key `${x},${y}` -> bound node, for the current map only. */
+   const live = new Map<string, NodeMirror>();
+   let currentMap = "";
+-  /** Tile key -> atlas name for the current map/band. */
+-  const atlasAt = new Map<string, string>();
++  /** Sparse rows keep window changes proportional to animated cells. */
++  const rows = new Map<number, { x: number; key: string; sprite: string }[]>();
+   let hasTiles = false;
+   let lastWindow: ChunkWindow = EMPTY;
+   let created = 0;
+@@ -95,11 +96,20 @@ export function AnimatedTiles(props: AnimatedTilesProps): SolidJSX.Element {
+     for (const node of live.values()) unbind(node);
+     live.clear();
+     currentMap = mapId;
+-    atlasAt.clear();
+-    for (const t of props.tiles[mapId] ?? []) {
+-      if (t.above === props.above) atlasAt.set(`${t.x},${t.y}`, t.sprite);
++    rows.clear();
++    const cells = new Map<string, AnimatedTile>();
++    for (const tile of props.tiles[mapId] ?? []) {
++      if (tile.above === props.above && Number.isInteger(tile.x) && Number.isInteger(tile.y)) {
++        cells.set(`${tile.x},${tile.y}`, tile);
++      }
++    }
++    for (const [key, tile] of cells) {
++      let row = rows.get(tile.y);
++      if (!row) rows.set(tile.y, row = []);
++      row.push({ x: tile.x, key, sprite: tile.sprite });
+     }
+-    hasTiles = atlasAt.size > 0;
++    for (const row of rows.values()) row.sort((a, b) => a.x - b.x);
++    hasTiles = cells.size > 0;
+     lastWindow = EMPTY;
+   };
+ 
+@@ -146,11 +156,12 @@ export function AnimatedTiles(props: AnimatedTilesProps): SolidJSX.Element {
+     }
+ 
+     for (let y = win.y0; y <= win.y1; y++) {
+-      for (let x = win.x0; x <= win.x1; x++) {
+-        const key = `${x},${y}`;
++      const row = rows.get(y);
++      if (!row) continue;
++      for (const { x, key, sprite } of row) {
++        if (x < win.x0) continue;
++        if (x > win.x1) break;
+         if (live.has(key)) continue;
+-        const sprite = atlasAt.get(key);
+-        if (sprite === undefined) continue;
+         const node = nodeFor();
+         setProp(node, "debugName", `${props.debugName ?? "rpgkit-anim"}-tile-${key}`);
+         jump(node, "translateX", x * TILE);
+diff --git a/src/ui/DialogBox.tsx b/src/ui/DialogBox.tsx
+index 227443c..32692cd 100644
+--- a/src/ui/DialogBox.tsx
++++ b/src/ui/DialogBox.tsx
+@@ -58,6 +58,8 @@ const BOX_TOP = 100;
+ export interface DialogBoxProps {
+   modal: Accessor<Modal | null>;
+   legend: Accessor<string>;
++  /** Screen width for fixed message cells; omit to retain intrinsic layout. */
++  viewportWidth?: number;
+   /** Colours of both boxes; missing keys keep DEFAULT_UI_THEME. */
+   theme?: Partial<UiTheme>;
+   /** Speaker portraits: NAME -> 64x64 image src (a full string literal
+@@ -74,7 +76,7 @@ export interface DialogBoxProps {
+ }
+ 
+ /** Slice the joined "line\nline" text to `revealed` chars; lines whose turn
+- *  has not come render as empty strings (every row node stays mounted). */
++ *  has not come render as empty strings. The view hides their retained rows. */
+ function visibleLines(lines: string[], revealed: number): string[] {
+   let left = revealed;
+   return lines.map((line, i) => {
+@@ -102,12 +104,14 @@ const NO_SPEAKER: SpeakerSplit = { name: null, rest: "", cut: 0 };
+ export function DialogBox(props: DialogBoxProps) {
+   startupProfileMark("ui-dialog:start");
+   const theme = createMemo(() => resolveUiTheme(props.theme));
+-  const isChoice = () => props.modal()?.kind === "choices";
+-  const isShop = () => props.modal()?.kind === "shop";
++  const choice = createMemo(() => { const m = props.modal(); return m?.kind === "choices" ? m : null; });
++  const shop = createMemo(() => { const m = props.modal(); return m?.kind === "shop" ? m : null; });
++  const message = createMemo(() => { const m = props.modal(); return m?.kind === "text" ? m : null; });
++  const isChoice = () => choice() !== null;
+   // Re-evaluated per typed character; downstream only sees a new speaker.
+   const speaker = createMemo(
+     () => {
+-      const m = props.modal();
++      const m = message();
+       const faces = props.faces;
+       if (!faces || m?.kind !== "text" || m.lines.length === 0) return NO_SPEAKER;
+       return splitSpeaker(m.lines[0]!, faces);
+@@ -115,45 +119,50 @@ export function DialogBox(props: DialogBoxProps) {
+     NO_SPEAKER,
+     { equals: (a, b) => a.name === b.name && a.cut === b.cut && a.rest === b.rest },
+   );
+-  const textLines = () => {
+-    const m = props.modal();
++  const textLines = createMemo(() => {
++    const m = message();
+     if (m?.kind !== "text") return ["", "", "", ""];
+     const sp = speaker();
+     const lines = sp.name ? [sp.rest, ...m.lines.slice(1)] : m.lines;
+     const visible = visibleLines(lines, Math.max(0, m.revealed - sp.cut));
+     return TEXT_ROWS.map((i) => visible[i] ?? "");
+-  };
++  });
+   // display: 0 shows, 1 hides (the column and the tab stay mounted).
+-  const faceDisplay = () => (speaker().name ? 0 : 1);
++  const faceDisplay = createMemo(() => (speaker().name ? 0 : 1));
+   // All three boxes stay mounted and hide while unused: opening a dialog updates
+   // text rows instead of mounting the box subtree (on a 333 MHz PSP a mount
+   // costs about 100 ms of QuickJS time).
+-  const choicesDisplay = () => (isChoice() ? 0 : 1);
+-  const shopDisplay = () => (isShop() ? 0 : 1);
+-  const messageDisplay = () => (props.modal()?.kind === "text" ? 0 : 1);
++  const choicesDisplay = createMemo(() => (isChoice() ? 0 : 1));
++  const shopDisplay = createMemo(() => (shop() ? 0 : 1));
++  const messageDisplay = createMemo(() => (message() ? 0 : 1));
++  const textWidth = createMemo(() => props.viewportWidth === undefined ? Number.NaN
++    : Math.max(0, props.viewportWidth - 36 - (props.faces && speaker().name ? props.faceWidth ?? FACE_WIDTH : 0)));
++  const messageLegend = createMemo(() => message()?.complete ? props.legend() : "");
+ 
++  // Solid replaces an empty string's Text child on the next character. Keep
++  // a space in that child and hide its row instead: the row still occupies
++  // no layout space, while revealing it only restyles the retained leaf.
+   // Four text rows + the legend row; the column holding them is the paper
+   // itself, or the text column right of the portrait when faces are on.
+   const messageRows = () => (
+     <>
+       <For each={TEXT_ROWS}>
+-        {(row) => (
+-          <Text
+-            class="text-xs"
+-            style={{ textColor: theme().ink, lineHeight: 15, height: 15 }}
+-            debugName={`rpgkit-message-row-${row}`}
+-          >
+-            {`${textLines()[row]!}`}
+-          </Text>
+-        )}
++        {(row) => {
++          const line = createMemo(() => textLines()[row]!);
++          return (
++            <Text
++              class="text-xs"
++              style={{ textColor: theme().ink, lineHeight: 15, height: 15, width: textWidth(), display: line() ? 0 : 1 }}
++              debugName={`rpgkit-message-row-${row}`}
++            >
++              {line() || " "}
++            </Text>
++          );
++        }}
+       </For>
+       <View class="flex-row justify-end" style={{ height: 12 }}>
+-        <Text class="text-xs" style={{ textColor: theme().dim, lineHeight: 12, height: 12 }} debugName="rpgkit-message-legend">
+-          {`${(() => {
+-            const m = props.modal();
+-            if (m?.kind !== "text") return "";
+-            return m.complete ? props.legend() : "";
+-          })()}`}
++        <Text class="text-xs" style={{ textColor: theme().dim, lineHeight: 12, height: 12, width: textWidth(), textAlign: 2, display: messageLegend() ? 0 : 1 }} debugName="rpgkit-message-legend">
++          {messageLegend() || " "}
+         </Text>
+       </View>
+     </>
+@@ -175,12 +184,12 @@ export function DialogBox(props: DialogBoxProps) {
+         debugName="rpgkit-choices-box"
+       >
+         <Text class="text-xs" style={{ textColor: theme().dim, lineHeight: 14, height: 14 }} debugName="rpgkit-choice-prompt">
+-          {`${isChoice() ? (props.modal() as Extract<Modal, { kind: "choices" }>).prompt : ""}`}
++          {choice()?.prompt ?? ""}
+         </Text>
+         <View class="flex-col" style={{ height: 4 }} />
+         <For each={CHOICE_ROWS}>
+           {(row) => {
+-            const m = () => props.modal() as Extract<Modal, { kind: "choices" }> | null;
++            const m = choice;
+             const total = () => m()?.options.length ?? 0;
+             // A pure function of the live cursor index: never desyncs
+             // from the reducer, and wrap-around (top<->bottom) recomputes
+@@ -226,13 +235,13 @@ export function DialogBox(props: DialogBoxProps) {
+             <View class="flex-row justify-between" style={{ height: 14 }}>
+               <Text class="text-xs" style={{ textColor: theme().dim, lineHeight: 14, height: 14 }} debugName="rpgkit-shop-stage">
+                 {`${(() => {
+-                  const m = props.modal();
++                  const m = shop();
+                   return m?.kind === "shop" ? (m.stage === "buy" ? "Buy" : "Sell") : "";
+                 })()}`}
+               </Text>
+               <Text class="text-xs" style={{ textColor: theme().dim, lineHeight: 14, height: 14 }} debugName="rpgkit-shop-gold">
+                 {`${(() => {
+-                  const m = props.modal();
++                  const m = shop();
+                   return m?.kind === "shop" ? `Gold: ${m.gold}` : "";
+                 })()}`}
+               </Text>
+@@ -240,7 +249,7 @@ export function DialogBox(props: DialogBoxProps) {
+             <View class="flex-col" style={{ height: 4 }} />
+             <For each={CHOICE_ROWS}>
+               {(row) => {
+-                const m = () => props.modal() as Extract<Modal, { kind: "shop" }> | null;
++                const m = shop;
+                 const total = () => m()?.rows.length ?? 0;
+                 const start = () => windowStart(m()?.index ?? 0, total(), VISIBLE_ROWS);
+                 const rowIndex = () => start() + row;
+@@ -340,7 +349,7 @@ export function DialogBox(props: DialogBoxProps) {
+           debugName="rpgkit-message-name"
+         >
+           <Text class="text-xs" style={{ textColor: theme().paper, lineHeight: 15, height: 15 }}>
+-            {`${speaker().name ? speakerLabel(speaker().name!) : ""}`}
++            {speaker().name ? speakerLabel(speaker().name!) : " "}
+           </Text>
+         </View>
+       </Show>
 diff --git a/src/ui/GameView.tsx b/src/ui/GameView.tsx
-index 752e417..8708c8d 100644
+index 752e417..da36c7d 100644
 --- a/src/ui/GameView.tsx
 +++ b/src/ui/GameView.tsx
 @@ -25,7 +25,7 @@
@@ -970,12 +1661,13 @@ index 752e417..8708c8d 100644
    });
    startupProfileMark("ui-actors:pooled");
  
-@@ -223,8 +233,17 @@ function CurrentMapActors(props: {
+@@ -223,8 +233,18 @@ function CurrentMapActors(props: {
  
    onMount(compilePositions);
  
 +  let artSignature: string | readonly unknown[] = "";
 +  let artVersion = 0;
++  let previousCharacters = initial.chars.chars;
 +  const selectedArt = new Map<GameEvent, { art: NpcArt | "" }>();
    onFrame(() => {
      const state = props.state();
@@ -988,7 +1680,16 @@ index 752e417..8708c8d 100644
      const next = props.slots();
      const transfer = next !== slots;
      if (transfer) slots = next;
-@@ -247,11 +266,14 @@ function CurrentMapActors(props: {
+@@ -243,15 +263,22 @@ function CurrentMapActors(props: {
+       dirty = true;
+     }
+ 
+-    const touched = transfer ? npcs.length : slots.length;
++    // Immutable character dictionaries retain identity until a character changes.
++    // Player/camera motion does not require rescanning every static NPC slot.
++    const repaint = transfer || !props.immutableState || !same || previousCharacters !== state.chars.chars;
++    previousCharacters = state.chars.chars;
++    const touched = transfer ? npcs.length : repaint ? slots.length : 0;
      const frames: NpcFrame[] = [];
      for (let index = 0; index < touched; index++) {
        const source = slots[index];
@@ -1007,9 +1708,23 @@ index 752e417..8708c8d 100644
        if (!transfer && source && (npc.px !== frame[0] || npc.py !== frame[1])) {
          positions?.set(4 + index * 2, frame[0]);
          positions?.set(5 + index * 2, frame[1]);
-@@ -276,10 +298,14 @@ function CurrentMapActors(props: {
-     for (let index = 0; index < touched; index++) {
-       const frame = frames[index]!;
+@@ -265,7 +292,7 @@ function CurrentMapActors(props: {
+     if (dirty) {
+       const nextOrder = depthOrder([
+         [state.move.px, state.move.py],
+-        ...frames.slice(0, slots.length),
++        ...(repaint ? frames.slice(0, slots.length) : npcs.slice(0, slots.length).map(npc => npc.frame)),
+       ], stride);
+       reorder ||= order !== nextOrder;
+       order = nextOrder;
+@@ -273,13 +300,17 @@ function CurrentMapActors(props: {
+     if (transfer) compilePositions();
+     else if (moved) positions?.commit();
+     if (reorder) setPlayerDepth(actorDepth(state.move.px, state.move.py, stride));
+-    for (let index = 0; index < touched; index++) {
+-      const frame = frames[index]!;
++    for (let index = 0; index < (reorder ? Math.max(touched, slots.length) : touched); index++) {
++      const frame = frames[index] ?? npcs[index]!.frame;
        const npc = npcs[index]!;
 +      if (!transfer && !reorder && frame === npc.frame) continue;
 +      npc.frame = frame;
@@ -1024,7 +1739,7 @@ index 752e417..8708c8d 100644
        if (transfer) setProp(npc.node, "debugName", slots[index] ? `rpgkit-npc-${slots[index]!.id}` : undefined);
      }
      px = state.move.px;
-@@ -334,6 +360,8 @@ export interface BattleSceneViewProps {
+@@ -334,6 +365,8 @@ export interface BattleSceneViewProps {
  export type BattleSceneComponent = Component<BattleSceneViewProps>;
  
  export interface GameViewProps {
@@ -1033,7 +1748,7 @@ index 752e417..8708c8d 100644
    project: ProjectSource;
    /** Required with ProjectShell; omitted for backwards-compatible inline
     * projects. Local repositories acquire synchronously. */
-@@ -392,6 +420,7 @@ export function GameView(props: GameViewProps) {
+@@ -392,6 +425,7 @@ export function GameView(props: GameViewProps) {
          extensions: props.extensions,
          battle: props.battle,
          scene: props.scene,
@@ -1041,7 +1756,7 @@ index 752e417..8708c8d 100644
        })
      : null;
    const session: Session = attract
-@@ -401,6 +430,7 @@ export function GameView(props: GameViewProps) {
+@@ -401,6 +435,7 @@ export function GameView(props: GameViewProps) {
          extensions: props.extensions,
          battle: props.battle,
          scene: props.scene,
@@ -1049,7 +1764,7 @@ index 752e417..8708c8d 100644
        });
    startupProfileMark("game-view:session");
    let state: SessionState = attract ? attract.state : startSession(project, session);
-@@ -443,7 +473,8 @@ export function GameView(props: GameViewProps) {
+@@ -443,7 +478,8 @@ export function GameView(props: GameViewProps) {
    const [facing, setFacing] = createSignal<Facing>(state.move.facing);
    const [modal, setModal] = createSignal<Modal | null>(null);
    const [demo, setDemo] = createSignal<AttractStatus | null>(null);
@@ -1059,7 +1774,7 @@ index 752e417..8708c8d 100644
    const [fatalError, setFatalError] = createSignal<string | null>(state.interp.error?.message ?? null);
    // Live host viewport: console hosts omit ui.__viewport (spec screen),
    // desktop windows publish and resize it. Polled in onFrame like
-@@ -465,12 +496,12 @@ export function GameView(props: GameViewProps) {
+@@ -465,12 +501,12 @@ export function GameView(props: GameViewProps) {
      if (!indexed) throw new Error(`GameView: unknown map size ${JSON.stringify(id)}`);
      return { w: indexed.width * TILE, h: indexed.height * TILE };
    };
@@ -1074,16 +1789,61 @@ index 752e417..8708c8d 100644
    const cameraFor = (st: SessionState): CameraState => {
      const vp = viewport();
      const size = mapSize(st.mapId);
-@@ -517,7 +548,7 @@ export function GameView(props: GameViewProps) {
+@@ -491,25 +527,19 @@ export function GameView(props: GameViewProps) {
+   // (confirm, cancel, choices up/down) is derived from the folded button
+   // mask (one unified input stream), so the view never fires edges itself.
+   const edge = { confirm: false, cancel: false };
+-  const fire = (key: "confirm" | "cancel") =>
+-    attract
+-      ? undefined
+-      : () => {
+-          edge[key] = true;
+-        };
+-  const actions = useActions(() => {
++  const confirm = attract ? undefined : () => { edge.confirm = true; };
++  const cancel = attract ? undefined : () => { edge.cancel = true; };
++  const talkActions = { confirm: { label: "talk", run: confirm } };
++  const textActions = { confirm: { label: "next", run: confirm } };
++  const choiceActions = { confirm: { label: "ok", run: confirm } };
++  const backActions = { ...choiceActions, back: { label: "back", run: cancel } };
++  const actions = useActions(createMemo(() => {
+     const m = modal();
+     if (m?.kind === "choices") {
+-      return {
+-        confirm: { label: "ok", run: fire("confirm") },
+-        ...(m.cancellable ? { back: { label: "back", run: fire("cancel") } } : {}),
+-      };
++      return m.cancellable ? backActions : choiceActions;
+     }
+     if (m?.kind === "shop") {
+-      return {
+-        confirm: { label: "ok", run: fire("confirm") },
+-        back: { label: "back", run: fire("cancel") },
+-      };
++      return backActions;
+     }
+     // A game-owned scene (ui/GameView.tsx's BattleSceneView) reads no map
+     // modal, so without this branch a scene's cancel/escape command (a
+@@ -517,14 +547,11 @@ export function GameView(props: GameViewProps) {
      // reducer's cancelEdge and a scene author is forced to read raw button
      // bits itself (contracts/spec/spec.ts BTN.CROSS) instead of the
      // portable confirm/cancel edges every other input path uses.
 -    if (scene() !== null) {
+-      return {
+-        confirm: { label: "ok", run: fire("confirm") },
+-        back: { label: "back", run: fire("cancel") },
+-      };
 +    if (sceneActive()) {
-       return {
-         confirm: { label: "ok", run: fire("confirm") },
-         back: { label: "back", run: fire("cancel") },
-@@ -613,7 +644,8 @@ export function GameView(props: GameViewProps) {
++      return backActions;
+     }
+-    return { confirm: { label: m ? "next" : "talk", run: fire("confirm") } };
+-  });
++    return m ? textActions : talkActions;
++  }));
+ 
+   // The world camera and actor slots stay stable across transfers, so their
+   // coordinates can share one precompiled position batch.
+@@ -613,7 +640,8 @@ export function GameView(props: GameViewProps) {
        if (op !== fade()) setFade(op);
        const shownModal = attract ? attract.presentedModal() : state.interp.modal;
        setModal((m) => (modalChanged(m, shownModal) ? deepClone(shownModal) : m));
@@ -1093,7 +1853,7 @@ index 752e417..8708c8d 100644
        setFatalError(state.interp.error?.message ?? null);
        if (status) {
          const st = status;
-@@ -633,7 +665,7 @@ export function GameView(props: GameViewProps) {
+@@ -633,7 +661,7 @@ export function GameView(props: GameViewProps) {
  
    const view = (
      <View class="w-full h-full overflow-hidden bg-black">
@@ -1102,7 +1862,7 @@ index 752e417..8708c8d 100644
          <>
            {/* The frame clips each axis to min(map, viewport). Undersized axes
                are centered over the black root; oversized axes start at zero
-@@ -707,6 +739,7 @@ export function GameView(props: GameViewProps) {
+@@ -707,6 +735,7 @@ export function GameView(props: GameViewProps) {
              onAnimatedStats={(stats) => props.onAnimatedStats?.("above", stats)}
            >
              <CurrentMapActors
@@ -1110,7 +1870,15 @@ index 752e417..8708c8d 100644
                slots={currentSlots}
                slotCount={actorSlotCount}
                worldWidth={worldWidth}
-@@ -736,7 +769,7 @@ export function GameView(props: GameViewProps) {
+@@ -726,6 +755,7 @@ export function GameView(props: GameViewProps) {
+           </View>
+ 
+           <DialogBox
++            viewportWidth={viewport().w}
+             modal={modal}
+             legend={actions.legend}
+             theme={props.theme}
+@@ -736,7 +766,7 @@ export function GameView(props: GameViewProps) {
          </>
        </Show>
  
@@ -1119,8 +1887,143 @@ index 752e417..8708c8d 100644
          {BattleSceneView ? (
            <BattleSceneView
              state={scene()!.state}
+diff --git a/src/ui/OccludingUpperLayer.tsx b/src/ui/OccludingUpperLayer.tsx
+index 2c39f4e..7e0fd6c 100644
+--- a/src/ui/OccludingUpperLayer.tsx
++++ b/src/ui/OccludingUpperLayer.tsx
+@@ -29,7 +29,7 @@ import {
+ } from "@pocketjs/framework/renderer";
+ import { ENUMS } from "../../vendor/pocketjs/contracts/spec/spec.ts";
+ import {
+-  chunkWindow,
++  createChunkWindowReader,
+   chunkWindowContains,
+   expandChunkWindow,
+   type ChunkPoint,
+@@ -103,6 +103,8 @@ export interface OccludingUpperLayerProps {
+ /** Persistent current-map upper/actor plane. Rows and image slices remain
+  *  attached while scrolling or transferring; animation nodes are retained. */
+ export function OccludingUpperLayer(props: OccludingUpperLayerProps): SolidJSX.Element {
++  const chunkWindow = createChunkWindowReader();
++  const tileWindow = createChunkWindowReader();
+   startupProfileMark("ui-upper:start");
+   const root = createElement("view");
+   setProp(root, "style", { posType: ENUMS.PosType.Absolute, insetL: 0, insetT: 0, width: 0, height: 0 });
+@@ -331,8 +333,10 @@ export function OccludingUpperLayer(props: OccludingUpperLayerProps): SolidJSX.E
+     const node = createElement("image");
+     setProp(node, "style", {
+       posType: ENUMS.PosType.Absolute,
+-      insetL: x * chunkPx,
+-      insetT: Math.floor((row.y * TILE) / chunkPx) * chunkPx - row.y * TILE,
++      insetL: 0,
++      translateX: x * chunkPx,
++      insetT: 0,
++      translateY: Math.floor((row.y * TILE) / chunkPx) * chunkPx - row.y * TILE,
+       width: chunkPx,
+       height: chunkPx,
+     });
+@@ -346,7 +350,8 @@ export function OccludingUpperLayer(props: OccludingUpperLayerProps): SolidJSX.E
+     setProp(node, "style", {
+       posType: ENUMS.PosType.Absolute,
+       insetL: 0,
+-      insetT: y * TILE,
++      insetT: 0,
++      translateY: y * TILE,
+       width: worldWidth,
+       height: TILE,
+       overflow: ENUMS.Overflow.Hidden,
+@@ -374,8 +379,10 @@ export function OccludingUpperLayer(props: OccludingUpperLayerProps): SolidJSX.E
+     }
+     const x = index % columns;
+     setProp(node, "style", {
+-      insetL: x * chunkPx,
+-      insetT: Math.floor((row.y * TILE) / chunkPx) * chunkPx - row.y * TILE,
++      insetL: 0,
++      translateX: x * chunkPx,
++      insetT: 0,
++      translateY: Math.floor((row.y * TILE) / chunkPx) * chunkPx - row.y * TILE,
+     }, node.domAttrs?.style);
+     setProp(node, "debugName", `rpgkit-upper-row-${row.y}-chunk-${index}`);
+     if (isStreamed) {
+@@ -435,7 +442,7 @@ export function OccludingUpperLayer(props: OccludingUpperLayerProps): SolidJSX.E
+   };
+ 
+   const syncRows = (): void => {
+-    const tileWin = chunkWindow(
++    const tileWin = tileWindow(
+       props.camera(),
+       props.viewport(),
+       TILE,
+@@ -475,7 +482,8 @@ export function OccludingUpperLayer(props: OccludingUpperLayerProps): SolidJSX.E
+         clearRow(row);
+         row.y = y;
+         setProp(row.node, "style", {
+-          insetT: y * TILE,
++          insetT: 0,
++          translateY: y * TILE,
+           zIndex: upperRowDepth(y, worldWidth),
+         }, row.node.domAttrs?.style);
+       }
+diff --git a/src/ui/StreamedChunkLayer.tsx b/src/ui/StreamedChunkLayer.tsx
+index 17a82d1..345007f 100644
+--- a/src/ui/StreamedChunkLayer.tsx
++++ b/src/ui/StreamedChunkLayer.tsx
+@@ -16,7 +16,7 @@ import {
+   type NodeMirror,
+ } from "@pocketjs/framework/renderer";
+ import {
+-  chunkWindow,
++  createChunkWindowReader,
+   chunkWindowContains,
+   expandChunkWindow,
+   type ChunkPoint,
+@@ -81,6 +81,7 @@ function parseRef(ref: string): { key: string; index: number } {
+ /** One streamed world layer. The parent owns camera translation; chunk nodes
+  * remain at world coordinates and change only when the chunk window changes. */
+ export function StreamedChunkLayer(props: StreamedChunkLayerProps): SolidJSX.Element {
++  const chunkWindow = createChunkWindowReader();
+   const root = createElement("view");
+   setProp(root, "style", { posType: 1, insetL: 0, insetT: 0, width: 0, height: 0 });
+   setProp(root, "debugName", props.debugName ?? "rpgkit-stream");
+diff --git a/src/ui/battle/CommandGrid.tsx b/src/ui/battle/CommandGrid.tsx
+index ed2c4f8..968a2bc 100644
+--- a/src/ui/battle/CommandGrid.tsx
++++ b/src/ui/battle/CommandGrid.tsx
+@@ -3,7 +3,7 @@
+ // and each cell's enabled state are props read straight off the battle
+ // state, so the grid can never desync from the reducer.
+ 
+-import { For } from "solid-js";
++import { createMemo, For } from "solid-js";
+ import { Text, View } from "@pocketjs/framework/components";
+ import { Panel } from "../Panel.tsx";
+ import { resolveUiTheme, type UiTheme } from "../theme.ts";
+@@ -29,7 +29,7 @@ const CELL_W = 116;
+ const CELL_H = 22;
+ 
+ export function CommandGrid(props: CommandGridProps) {
+-  const theme = () => resolveUiTheme(props.theme);
++  const theme = createMemo(() => resolveUiTheme(props.theme));
+   const rows = [0, 1] as const;
+   const cols = [0, 1] as const;
+ 
+@@ -46,10 +46,10 @@ export function CommandGrid(props: CommandGridProps) {
+             <For each={cols}>
+               {(col) => {
+                 const i = row * 2 + col;
+-                const cell = () => props.cells[i]!;
+-                const selected = () => props.index === i;
+-                const colour = () =>
+-                  cell().disabled ? theme().dim : selected() ? theme().accent : theme().ink;
++                const cell = createMemo(() => props.cells[i]!);
++                const selected = createMemo(() => props.index === i);
++                const colour = createMemo(() =>
++                  cell().disabled ? theme().dim : selected() ? theme().accent : theme().ink);
+                 return (
+                   <View
+                     class="flex-row items-center"
 diff --git a/src/ui/battle/FrameStrip.tsx b/src/ui/battle/FrameStrip.tsx
-index d35e5cf..eca834f 100644
+index d35e5cf..4e4bd99 100644
 --- a/src/ui/battle/FrameStrip.tsx
 +++ b/src/ui/battle/FrameStrip.tsx
 @@ -7,6 +7,7 @@
@@ -1144,8 +2047,110 @@ index d35e5cf..eca834f 100644
  
    return (
      <Image
+@@ -37,8 +38,10 @@ export function FrameStrip(props: FrameStripProps) {
+       src={src()}
+       style={{
+         posType: 1,
+-        insetL: props.x,
+-        insetT: props.y,
++        insetL: 0,
++        insetT: 0,
++        translateX: props.x,
++        translateY: props.y,
+         width: props.width,
+         height: props.height,
+         zIndex: props.zIndex ?? 0,
+diff --git a/src/ui/battle/ListMenu.tsx b/src/ui/battle/ListMenu.tsx
+index bd70a35..07fc576 100644
+--- a/src/ui/battle/ListMenu.tsx
++++ b/src/ui/battle/ListMenu.tsx
+@@ -4,7 +4,7 @@
+ // choices/shop boxes, so a battle skill list scrolls exactly like every
+ // other list in the kit.
+ 
+-import { For } from "solid-js";
++import { createMemo, For } from "solid-js";
+ import { Text, View } from "@pocketjs/framework/components";
+ import { truncateLabel, windowStart } from "../list-window.ts";
+ import { Panel } from "../Panel.tsx";
+@@ -39,12 +39,12 @@ const DEFAULT_WIDTH = 200;
+ const DEFAULT_LABEL_MAX = 20;
+ 
+ export function ListMenu(props: ListMenuProps) {
+-  const theme = () => resolveUiTheme(props.theme);
++  const theme = createMemo(() => resolveUiTheme(props.theme));
+   const visible = () => props.visibleRows ?? DEFAULT_VISIBLE;
+   const width = () => props.width ?? DEFAULT_WIDTH;
+   const labelMax = () => props.labelMax ?? DEFAULT_LABEL_MAX;
+-  const start = () => windowStart(props.index, props.rows.length, visible());
+-  const rowSlots = () => Array.from({ length: visible() }, (_, i) => i);
++  const start = createMemo(() => windowStart(props.index, props.rows.length, visible()));
++  const rowSlots = createMemo(() => Array.from({ length: visible() }, (_, i) => i));
+   const titleH = () => (props.title !== undefined ? ROW_H + 4 : 0);
+   const descriptionH = () => (props.description !== undefined ? ROW_H + 4 : 0);
+ 
+@@ -74,12 +74,12 @@ export function ListMenu(props: ListMenuProps) {
+           const rowIndex = () => start() + slot;
+           const exists = () => rowIndex() < props.rows.length;
+           const row = () => (exists() ? props.rows[rowIndex()]! : null);
+-          const selected = () => exists() && rowIndex() === props.index;
+-          const colour = () => {
++          const selected = createMemo(() => exists() && rowIndex() === props.index);
++          const colour = createMemo(() => {
+             const r = row();
+             if (!r) return theme().ink;
+             return r.disabled ? theme().dim : selected() ? theme().accent : theme().ink;
+-          };
++          });
+           const label = () => {
+             const r = row();
+             if (!r) return "";
+diff --git a/src/ui/battle/MessageBand.tsx b/src/ui/battle/MessageBand.tsx
+index 1f4491a..eb9236c 100644
+--- a/src/ui/battle/MessageBand.tsx
++++ b/src/ui/battle/MessageBand.tsx
+@@ -56,16 +56,17 @@ function visibleLines(lines: readonly string[], revealed: number): string[] {
+ }
+ 
+ export function MessageBand(props: MessageBandProps) {
+-  const theme = () => resolveUiTheme(props.theme);
++  const theme = createMemo(() => resolveUiTheme(props.theme));
+   const rows = () => props.rows ?? DEFAULT_ROWS;
+   const rowIndices = createMemo(() => Array.from({ length: rows() }, (_, i) => i));
+-  const total = () => props.lines.join("\n").length;
++  const contentWidth = createMemo(() => Math.max(0, (props.width ?? DEFAULT_WIDTH) - 16));
++  const total = createMemo(() => props.lines.join("\n").length);
+   const shown = () => Math.max(0, Math.min(props.revealed ?? total(), total()));
+   const complete = () => shown() >= total();
+-  const textLines = () => {
++  const textLines = createMemo(() => {
+     const visible = visibleLines(props.lines, shown());
+     return rowIndices().map((i) => visible[i] ?? "");
+-  };
++  });
+ 
+   return (
+     <Panel
+@@ -83,7 +84,7 @@ export function MessageBand(props: MessageBandProps) {
+         {(row) => (
+           <Text
+             class="text-xs"
+-            style={{ textColor: theme().ink, lineHeight: ROW_H, height: ROW_H }}
++            style={{ textColor: theme().ink, lineHeight: ROW_H, height: ROW_H, width: contentWidth() }}
+             debugName={props.debugName ? `${props.debugName}-row-${row}` : undefined}
+           >
+             {orBlank(textLines()[row]!)}
+@@ -94,7 +95,7 @@ export function MessageBand(props: MessageBandProps) {
+         <View class="flex-row justify-end" style={{ height: 12, insetT: 2 }}>
+           <Text
+             class="text-xs"
+-            style={{ textColor: theme().dim, lineHeight: 12, height: 12 }}
++            style={{ textColor: theme().dim, lineHeight: 12, height: 12, width: contentWidth(), textAlign: 2 }}
+             debugName={props.debugName ? `${props.debugName}-legend` : undefined}
+           >
+             {orBlank(complete() ? props.legend! : "")}
 diff --git a/src/ui/battle/SpriteSlot.tsx b/src/ui/battle/SpriteSlot.tsx
-index 4de3202..856a7a0 100644
+index 4de3202..da54899 100644
 --- a/src/ui/battle/SpriteSlot.tsx
 +++ b/src/ui/battle/SpriteSlot.tsx
 @@ -5,6 +5,7 @@
@@ -1176,24 +2181,156 @@ index 4de3202..856a7a0 100644
  
    return (
      <Image
+@@ -37,8 +43,10 @@ export function SpriteSlot(props: SpriteSlotProps) {
+       src={props.src}
+       style={{
+         posType: 1,
+-        insetL: props.x + dx(),
+-        insetT: props.y + faint().sinkY,
++        insetL: 0,
++        insetT: 0,
++        translateX: props.x + dx(),
++        translateY: props.y + faint().sinkY,
+         width: props.width,
+         height: props.height,
+         opacity: opacity(),
+diff --git a/src/ui/battle/StatBar.tsx b/src/ui/battle/StatBar.tsx
+index bc9ba71..6baad35 100644
+--- a/src/ui/battle/StatBar.tsx
++++ b/src/ui/battle/StatBar.tsx
+@@ -5,6 +5,7 @@
+ // L-rewind paints the same width.
+ 
+ import { Text, View } from "@pocketjs/framework/components";
++import { createMemo } from "solid-js";
+ import { resolveUiTheme, type UiTheme } from "../theme.ts";
+ import { barFillWidth } from "./effects.ts";
+ 
+@@ -22,15 +23,18 @@ export interface StatBarProps {
+   theme?: Partial<UiTheme>;
+   /** "137 / 220" readout to the bar's right. Omit for a bare bar. */
+   showNumbers?: boolean;
++  /** Fixed readout cell for paint-only number changes in a reserved HUD area. */
++  numbersWidth?: number;
+   debugName?: string;
+ }
+ 
+ const BAR_HEIGHT = 6;
+ 
+ export function StatBar(props: StatBarProps) {
+-  const theme = () => resolveUiTheme(props.theme);
++  const theme = createMemo(() => resolveUiTheme(props.theme));
+   const height = () => props.height ?? BAR_HEIGHT;
+-  const fillWidth = () => barFillWidth(props.current, props.max, props.width);
++  const fillScale = createMemo(() => props.width > 0
++    ? barFillWidth(props.current, props.max, props.width) / props.width : 0);
+ 
+   return (
+     <View class="flex-row items-center" debugName={props.debugName}>
+@@ -40,14 +44,15 @@ export function StatBar(props: StatBarProps) {
+         debugName={props.debugName ? `${props.debugName}-track` : undefined}
+       >
+         <View
+-          style={{ width: fillWidth(), height: height(), bgColor: props.fill ?? theme().accent }}
++          style={{ width: props.width, height: height(), bgColor: props.fill ?? theme().accent,
++            scaleX: fillScale(), originX: -0.5 }}
+           debugName={props.debugName ? `${props.debugName}-fill` : undefined}
+         />
+       </View>
+       {props.showNumbers ? (
+         <Text
+           class="text-xs"
+-          style={{ textColor: theme().ink, lineHeight: 14, height: 14, insetL: 6 }}
++          style={{ textColor: theme().ink, lineHeight: 14, height: 14, width: props.numbersWidth ?? "auto", insetL: 6 }}
+           debugName={props.debugName ? `${props.debugName}-numbers` : undefined}
+         >
+           {`${Math.max(0, Math.round(props.current))} / ${Math.round(props.max)}`}
+diff --git a/tests/chunk-window.test.ts b/tests/chunk-window.test.ts
+index b8d41ca..9f76a7d 100644
+--- a/tests/chunk-window.test.ts
++++ b/tests/chunk-window.test.ts
+@@ -1,7 +1,24 @@
+ import { describe, expect, test } from "bun:test";
+-import { chunkWindow, chunkWindowContains, expandChunkWindow } from "../src/engine/chunk-window.ts";
++import { chunkWindow, chunkWindowContains, createChunkWindowReader, expandChunkWindow } from "../src/engine/chunk-window.ts";
+ 
+ describe("chunkWindow", () => {
++  test("a layer reader follows scrolling, in-place viewport resize and grid changes", () => {
++    const read = createChunkWindowReader();
++    const camera = { x: 0, y: 0 }, viewport = { w: 480, h: 272 };
++    for (const size of [16, 256]) for (const columns of [0, 4, 80]) for (const rows of [0, 3, 60]) {
++      for (const margin of [0, 16, 256]) for (const x of [-500, 0, 15, 16, 255, 256, 800]) {
++        camera.x = x; camera.y = x / 2;
++        for (const width of [0, 1, 480, 960]) {
++          viewport.w = width; viewport.h = width / 2;
++          const expected = chunkWindow(camera, viewport, size, columns, rows, margin);
++          expect(read(camera, viewport, size, columns, rows, margin)).toEqual(expected);
++          expect(read(camera, viewport, size, columns, rows, margin)).toEqual(expected);
++        }
++      }
++    }
++    expect(() => read(camera, viewport, 0, 4, 3)).toThrow("invalid grid");
++    expect(read(camera, viewport, 16, 4, 3)).toEqual(chunkWindow(camera, viewport, 16, 4, 3));
++  });
+   test("maps a 480x272 viewport plus 16px margin onto an inclusive 256px grid", () => {
+     expect(chunkWindow({ x: 0, y: 0 }, { w: 480, h: 272 }, 256, 4, 3, 16)).toEqual({
+       x0: 0, y0: 0, x1: 1, y1: 1,
 diff --git a/tests/extensions.test.ts b/tests/extensions.test.ts
-index 265ae63..3f0aa29 100644
+index 265ae63..648abd5 100644
 --- a/tests/extensions.test.ts
 +++ b/tests/extensions.test.ts
 @@ -1,7 +1,8 @@
  import { describe, expect, test } from "bun:test";
  import { loadProject, serializeProject } from "../editor/engine/document.ts";
-+import { createExtensionRuntime } from "../src/engine/extensions.ts";
++import { assertImmutableJsonValue, createExtensionRuntime } from "../src/engine/extensions.ts";
  import { AttractController } from "../src/engine/attract.ts";
 -import { rngNext } from "../src/engine/interpreter.ts";
 +import { createSwitchState, evalCondition, rngNext } from "../src/engine/interpreter.ts";
  import {
    createSession,
    startSession,
-@@ -55,6 +56,36 @@ function step(session: Session, state: SessionState): SessionState {
+@@ -55,6 +56,74 @@ function step(session: Session, state: SessionState): SessionState {
  }
  
  describe("KB1 extension commands and conditions", () => {
++  for (const hz of [60, 30, 20, 4]) test(`sleeping guards see earlier parallel writes at ${hz} Hz`, () => {
++    const p = project([]);
++    p.maps[0]!.events = [
++      { id: "00-writer", x: 0, y: 0, pages: [{ trigger: "parallel", commands: [
++        { op: "wait", seconds: 0.2 },
++        { op: "variable", id: "open", set: { op: "set", value: 1 } },
++        { op: "erase" },
++      ] }] },
++      { id: "10-guard", x: 1, y: 0, pages: [{ trigger: "parallel", commands: [
++        { op: "if", if: { kind: "ext", call: "demo.open", args: null }, then: [
++          { op: "switch", id: "observed", value: true }, { op: "erase" },
++        ] },
++      ] }] },
++    ];
++    const histories: string[][] = [];
++    const calls: number[] = [];
++    for (const deterministicConditions of [false, true]) {
++      let count = 0;
++      const session = createSession(p, hz, { immutableState: true, extensions: {
++        immutableConditions: true, deterministicConditions,
++        conditions: { "demo.open": context => { count++; return context.variables.open === 1; } },
++      } });
++      let state = startSession(p, session);
++      const history: string[] = [];
++      for (let frame = 0; frame < hz; frame++) {
++        const prior = state, bytes = JSON.stringify(prior);
++        state = step(session, state);
++        expect(JSON.stringify(prior)).toBe(bytes);
++        history.push(JSON.stringify(state));
++      }
++      expect(state.sw.switches.observed).toBe(true);
++      histories.push(history);
++      calls.push(count);
++    }
++    expect(histories[1]).toEqual(histories[0]);
++    expect(calls[1]).toBeLessThan(calls[0]!);
++  });
++
 +  test("condition isolation defaults to copies and can opt into immutable references", () => {
 +    for (const immutableConditions of [false, true]) {
 +      const args = { count: 2 };
@@ -1227,16 +2364,297 @@ index 265ae63..3f0aa29 100644
    test("a command reads/writes ext and variables and draws only from the saved session RNG", () => {
      const p = project([
        { op: "ext", call: "demo.increment", args: { amount: 2 } },
+@@ -309,3 +378,20 @@ describe("KB1 extension commands and conditions", () => {
+     expect(serializeProject(loaded.project)).toBe(text);
+   });
+ });
++
++
++test("immutable JSON validation reuses valid branches without accepting invalid descendants", () => {
++  const child = Object.freeze({ count: 3, tags: Object.freeze(["a", "b", 1, null, false]) });
++  assertImmutableJsonValue(child, "shared");
++  assertImmutableJsonValue({ left: child, right: child }, "dag");
++  for (const value of [NaN, Infinity, -Infinity, undefined, () => 0, new Date(), Symbol("x"), 1n]) {
++    expect(() => assertImmutableJsonValue({ child, nested: [{ bad: value }] }, "state"))
++      .toThrow("state: $.nested[0].bad:");
++    expect(() => assertImmutableJsonValue([child, value], "state"))
++      .toThrow("state: $[1]:");
++  }
++  const cycle: Record<string, unknown> = { child };
++  cycle.next = cycle;
++  expect(() => assertImmutableJsonValue(cycle, "state")).toThrow("state: $.next: cyclic");
++  expect(() => assertImmutableJsonValue(cycle, "state")).toThrow("state: $.next: cyclic");
++});
+diff --git a/tests/fixtures/ui-theme/scenes.ts b/tests/fixtures/ui-theme/scenes.ts
+index 8cc234c..9f54637 100644
+--- a/tests/fixtures/ui-theme/scenes.ts
++++ b/tests/fixtures/ui-theme/scenes.ts
+@@ -178,6 +178,8 @@ export const CODE = "AbCdEfGhIjKlMnOpQrStUvWxYz0123456789-_".repeat(6);
+ 
+ export interface FixtureScene {
+   modal?: keyof typeof MODALS;
++  /** Override text reveal to exercise every row and legend boundary. */
++  revealed?: number;
+   menu?: keyof typeof MENUS;
+   theme?: keyof typeof THEMES;
+   /** Pass FACES to the DialogBox. */
+diff --git a/tests/fixtures/ui-theme/ui-theme.tsx b/tests/fixtures/ui-theme/ui-theme.tsx
+index 92f85f1..f8df339 100644
+--- a/tests/fixtures/ui-theme/ui-theme.tsx
++++ b/tests/fixtures/ui-theme/ui-theme.tsx
+@@ -31,7 +31,10 @@ function Fixture() {
+   globalThis.__uiFixture = {
+     show(scene) {
+       batch(() => {
+-        setModal(MODALS[scene.modal ?? "none"]);
++        const next = MODALS[scene.modal ?? "none"];
++        setModal(next?.kind === "text" && scene.revealed !== undefined
++          ? { ...next, revealed: scene.revealed, complete: scene.revealed >= next.total }
++          : next);
+         setMenu(MENUS[scene.menu ?? "closed"]);
+         setTheme(THEMES[scene.theme ?? "default"]);
+         setFaces(scene.faces ? FACES : undefined);
+diff --git a/tests/interpreter.test.ts b/tests/interpreter.test.ts
+index 1cfbc0e..9fd5ff7 100644
+--- a/tests/interpreter.test.ts
++++ b/tests/interpreter.test.ts
+@@ -20,10 +20,14 @@ import {
+   revealedChars,
+   secondsToFrames,
+   stepInterp,
++  stepInterpWithExtensionsInPlace,
++  shareInterp,
++  ownRecord,
+   type InterpInput,
+   type InterpState,
+ } from "../src/engine/interpreter.ts";
+ import { activePage, evalCondition, cloneInterp } from "../src/engine/interpreter.ts";
++import { createExtensionRuntime } from "../src/engine/extensions.ts";
+ import { validateSchema, type VError } from "../src/engine/schema-validate.ts";
+ import type { Command, GameEvent, MapDef, Project } from "../src/engine/types.ts";
+ 
+@@ -1000,6 +1004,55 @@ describe("host-portable interpreter cloning (F1/1173 QuickJS)", () => {
+ describe("runaway backstop (review 1274 B1)", () => {
+   const CELL = { x: 10, y: 10 };
+ 
++  test("a sleeping parallel scan reserves its budget when the blocking wait finishes", () => {
++    const events = [
++      event("guard", 10, 10, Array.from({ length: 80 }, () => ({
++        op: "if", if: { kind: "variable", id: "never", op: "==", value: 1 }, then: [],
++      })), "parallel"),
++      event("main", 0, 0, [{ op: "wait", seconds: 0.1 },
++        ...Array.from({ length: 9950 }, () => ({ op: "switch" as const, id: "work", value: true })),
++      ], "autorun"),
++    ];
++    const histories: InterpState[][] = [];
++    for (const immutable of [false, true]) {
++      const w = createWorld(map(events), [], 60, { extensions: createExtensionRuntime({
++        immutableConditions: true, deterministicConditions: true,
++      }) });
++      let s = createInterpState();
++      const history: InterpState[] = [];
++      for (let frame = 0; frame < 12; frame++) {
++        s = shareInterp(s, immutable);
++        stepInterpWithExtensionsInPlace(w, s, input(), null, undefined, immutable);
++        history.push(s);
++      }
++      expect(s.error?.kind).toBe("runaway");
++      histories.push(history);
++    }
++    expect(histories[1]).toEqual(histories[0]);
++  });
++
++  for (const guardId of ["a", "b"]) test(`cached guards preserve the shared budget in key order ${guardId}`, () => {
++    const guards: Command[] = Array.from({ length: 80 }, () => ({
++      op: "if", if: { kind: "variable", id: "never", op: "==", value: 1 }, then: [],
++    }));
++    const worker = event(guardId === "a" ? "b" : "a", 11, 10,
++      Array.from({ length: 9950 }, () => ({ op: "switch", id: "work", value: true })), "parallel");
++    worker.pages[0]!.condition = { all: [{ kind: "switch", id: "armed", value: true }] };
++    const outputs: InterpState[] = [];
++    for (const immutable of [false, true]) {
++      const w = createWorld(map([event(guardId, 10, 10, guards, "parallel"), worker]));
++      let s = createInterpState();
++      stepInterpWithExtensionsInPlace(w, s, input(), null, undefined, immutable);
++      expect(s.error).toBeUndefined();
++      s = shareInterp(s);
++      ownRecord(s.sw, "switches").armed = true;
++      stepInterpWithExtensionsInPlace(w, s, input(), null, undefined, immutable);
++      expect(s.error?.kind).toBe("runaway");
++      outputs.push(s);
++    }
++    expect(outputs[1]).toEqual(outputs[0]);
++  });
++
+   /** A state with a hand-built (non-compiler-emitted) parallel fiber. */
+   function stateWithParallel(prog: unknown, pc = 0): InterpState {
+     const s = createInterpState();
 diff --git a/tests/session.test.ts b/tests/session.test.ts
-index df2fae8..2470609 100644
+index df2fae8..c0d1381 100644
 --- a/tests/session.test.ts
 +++ b/tests/session.test.ts
-@@ -825,3 +825,28 @@ describe("session reducer purity", () => {
+@@ -15,7 +15,7 @@ import {
+ } from "../src/engine/session.ts";
+ import { createSwitchState } from "../src/engine/interpreter.ts";
+ import { buildMiniProject } from "../examples/meadow/mini-project.ts";
+-import type { Command, GameEvent, MapDef, MoveStep, Project, TileId } from "../src/engine/types.ts";
++import type { Command, GameEvent, MapDef, MoveStep, PageCondition, Project, TileId } from "../src/engine/types.ts";
+ 
+ const GRASS: TileId = "town.0";
+ 
+@@ -825,3 +825,175 @@ describe("session reducer purity", () => {
      }
    });
  });
 +
 +describe("immutable session page cache", () => {
++  for (const hz of [60, 30, 20, 4]) for (const opaque of [false, true])
++    test(`page reads follow every bank, facing, idle and rewind at ${hz} Hz, extension=${opaque}`, () => {
++      const conditions: PageCondition[] = [
++        { switch: "gate" }, { variable: { id: "phase", op: ">=", value: 1 } },
++        { selfSwitch: "A" }, { item: "key" },
++        { all: [{ kind: "switch", id: "gate", value: false }] },
++        { all: [{ kind: "variable", id: "phase", op: "==", value: 2 }] },
++        { all: [{ kind: "selfSwitch", key: "B", value: false }] },
++        { all: [{ kind: "item", id: "key", count: 2 }] },
++        { all: [{ kind: "gold", amount: 10 }] },
++        { all: [{ kind: "facing", dir: "right" }] },
++        { all: [{ kind: "worldIdle" }] },
++      ];
++      if (opaque) conditions.push({ all: [{ kind: "ext", call: "demo.page", args: null }] });
++      const p = project([map("a", 24, 16, conditions.map((condition, i) =>
++        ge(`npc-${i}`, i + 1, 12, [
++          { trigger: "action", commands: [], blocks: false },
++          { trigger: "action", commands: [], blocks: true, condition },
++        ])))]);
++      const extensions = { initial: 0, immutableConditions: true, deterministicConditions: true,
++        conditions: { "demo.page": (c: { ext: unknown; gold: number; variables: Record<string, unknown> }) =>
++          c.ext === 1 || (c.gold >= 10 && c.variables.phase === 2) } };
++      const reference = createSession(p, hz, { extensions });
++      const cached = createSession(p, hz, { extensions, immutableState: true });
++      let a = startSession(p, reference), b = startSession(p, cached);
++      const history: SessionState[] = [];
++      const saved: string[] = [];
++      for (let frame = 0; frame < 30; frame++) {
++        const modify = (s: SessionState): SessionState => {
++          const sw: SessionState["sw"] = { ...s.sw, variables: { ...s.sw.variables, unrelated: frame } };
++          const value = frame < 15 ? 2 : 0;
++          switch (frame % 15) {
++            case 2: sw.switches = { ...sw.switches, gate: value > 0 }; break;
++            case 4: sw.variables.phase = value; break;
++            case 6: sw.self = { ...sw.self, "a/npc-2": value ? "A" : undefined, "a/npc-6": value ? "B" : undefined }; break;
++            case 8: sw.items = { ...sw.items, key: value }; break;
++            case 10: sw.gold = value * 10; break;
++          }
++          return { ...s, sw, interp: { ...s.interp, sw }, ext: frame >= 12 && frame < 27 ? 1 : 0 };
++        };
++        const input = { buttons: frame % 7 === 0 ? 0x0020 : 0 };
++        a = stepSession(reference, modify(a), input);
++        b = stepSession(cached, modify(b), input);
++        expect(b).toEqual(a);
++        history.push(b); saved.push(JSON.stringify(b));
++      }
++      for (let i = history.length - 1; i >= 0; i--) {
++        expect(JSON.stringify(history[i])).toBe(saved[i]!);
++        const restored = JSON.parse(saved[i]!);
++        expect(stepSession(cached, history[i]!, { buttons: 0 }))
++          .toEqual(stepSession(reference, restored, { buttons: 0 }));
++      }
++    });
++
++  test("page conditions without a determinism contract run again with unchanged state", () => {
++    let open = false;
++    const p = project([map("a", 8, 8, [ge("gate", 6, 6, [
++      { trigger: "action", commands: [] },
++      { trigger: "action", commands: [], condition: { all: [{ kind: "ext", call: "demo.open", args: null }] } },
++    ])])]);
++    const sess = createSession(p, 60, { immutableState: true, extensions: {
++      immutableConditions: true, conditions: { "demo.open": () => open },
++    } });
++    let state = startSession(p, sess);
++    for (const next of [false, true, false, true]) {
++      open = next;
++      state = stepSession(sess, state, { buttons: 0 });
++      expect(state.chars.chars.gate!.pageIndex).toBe(next ? 1 : 0);
++    }
++  });
++
++  for (const hz of [60, 30, 20, 4]) test(`wakes an idle scan on input, bank writes, placement and restore at ${hz} Hz`, () => {
++    const p = project([map("a", 12, 8, [
++      ge("sleep", 0, 0, page("parallel", [{ op: "if",
++        if: { kind: "ext", call: "demo.awake", args: null },
++        then: [{ op: "variable", id: "clock", set: { op: "add", value: 1 } }],
++      }])),
++      ge("button", 2, 1, page("action", [
++        { op: "wait", seconds: 0.1 },
++        { op: "ext", call: "demo.wake", args: null },
++        { op: "place", target: { event: "npc" }, x: 3, y: 1, dir: "left" },
++        { op: "erase" },
++      ])),
++      ge("npc", 7, 4, page("playerTouch", [
++        { op: "variable", id: "touches", set: { op: "add", value: 1 } },
++      ], { blocks: false })),
++    ])], { map: "a", x: 1, y: 1, dir: "right" });
++    const extensions = {
++      initial: "sleep", immutableConditions: true, deterministicConditions: true,
++      conditions: { "demo.awake": (context: { ext: unknown }) => context.ext === "awake" },
++      commands: { "demo.wake": () => ({ ext: "awake", writes: { clock: 0 } }) },
++    };
++    const regular = createSession(p, hz, { extensions });
++    const optimized = createSession(p, hz, { extensions, immutableState: true });
++    let a = startSession(p, regular), b = startSession(p, optimized);
++    const history: Array<{ state: SessionState; json: string }> = [];
++    for (let frame = 0; frame < hz * 4; frame++) {
++      history.push({ state: b, json: JSON.stringify(b) });
++      const input = { buttons: frame >= hz * 2 && frame < hz * 3 ? 0x0020 : 0,
++        confirmEdge: frame === hz };
++      a = stepSession(regular, a, input);
++      b = stepSession(optimized, b, input);
++      expect(b).toEqual(a);
++      if (frame === hz - 1) { a = JSON.parse(JSON.stringify(a)); b = JSON.parse(JSON.stringify(b)); }
++    }
++    for (const prior of history) expect(JSON.stringify(prior.state)).toBe(prior.json);
++    expect(b.ext).toBe("awake");
++    expect(b.interp.erased["a/button"]).toBe(true);
++    expect(b.sw.variables.clock).toBeGreaterThan(0);
++    expect(b.sw.variables.touches).toBe(1);
++    expect([b.chars.chars.npc!.tx, b.chars.chars.npc!.ty]).toEqual([3, 1]);
++  });
++
++  for (const hz of [60, 30, 20, 4]) test(`shares idle characters while preserving routes, collisions and placements at ${hz} Hz`, () => {
++    const p = project([map("a", 24, 16, [
++      ...Array.from({ length: 40 }, (_, i) => ge(`static-${i}`, i % 20, 12 + Math.floor(i / 20), page("action", [], { blocks: true }))),
++      ge("random", 4, 4, page("action", [], { moveType: "random", blocks: true })),
++      ge("patrol", 8, 4, page("action", [], { blocks: true,
++        moveRoute: { steps: ["moveLeft", "wait", "moveRight"], repeat: true, skippable: true } })),
++      ge("npc", 6, 4, [
++        { trigger: "action", commands: [], blocks: true },
++        { trigger: "action", commands: [], blocks: false, condition: { all: [{ kind: "switch", id: "phase", value: true }] } },
++      ]),
++      ge("driver", 0, 0, page("parallel", [
++        { op: "wait", seconds: 0.1 },
++        { op: "moveRoute", target: { event: "npc" }, wait: true,
++          route: { steps: ["moveRight", "moveDown", "moveLeft"], repeat: false, skippable: true } },
++        { op: "place", target: { event: "npc" }, x: 3, y: 3, dir: "up" },
++        { op: "switch", id: "phase", value: true },
++        { op: "erase" },
++      ])),
++    ])]);
++    const regular = createSession(p, hz), optimized = createSession(p, hz, { immutableState: true });
++    let a = startSession(p, regular), b = startSession(p, optimized);
++    for (let frame = 0; frame < hz * 3; frame++) {
++      const before = JSON.stringify(b), retained = b;
++      const input = { buttons: frame < hz ? 0x0020 : frame < hz * 2 ? 0x0040 : 0 };
++      a = stepSession(regular, a, input);
++      b = stepSession(optimized, b, input);
++      expect(JSON.stringify(b)).toBe(JSON.stringify(a));
++      expect(JSON.stringify(retained)).toBe(before);
++      if (frame === hz) { a = JSON.parse(JSON.stringify(a)); b = JSON.parse(JSON.stringify(b)); }
++    }
++    expect(b.sw.switches.phase).toBe(true);
++    expect([b.chars.chars.npc!.tx, b.chars.chars.npc!.ty]).toEqual([3, 3]);
++  });
++
 +  for (const hz of [60, 30, 20, 4]) test(`preserves tick, bank-write and restore behavior at ${hz} Hz`, () => {
 +    const p = project([map("a", 8, 8, [
 +      ge("counter", 0, 0, page("parallel", [{ op: "variable", id: "clock", set: { op: "add", value: 1 } }])),
@@ -1260,3 +2678,114 @@ index df2fae8..2470609 100644
 +    expect(b.sw.switches.opened).toBe(true);
 +  });
 +});
+diff --git a/tests/ui-theme-sim.test.ts b/tests/ui-theme-sim.test.ts
+index 8b41434..be41543 100644
+--- a/tests/ui-theme-sim.test.ts
++++ b/tests/ui-theme-sim.test.ts
+@@ -32,7 +32,7 @@ import { bootWorld, fnv1a, treeHasText, type SimWorld } from "../vendor/pocketjs
+ import { decodePng } from "../vendor/pocketjs/framework/compiler/pak.ts";
+ import { DEFAULT_UI_THEME } from "../src/ui/theme.ts";
+ import { FACE_PX, faceRgba, FACE_PALETTES } from "./fixtures/ui-theme/faces.ts";
+-import { SAVE_TITLE, THEMES, type FixtureScene } from "./fixtures/ui-theme/scenes.ts";
++import { MODALS, SAVE_TITLE, THEMES, type FixtureScene } from "./fixtures/ui-theme/scenes.ts";
+ import { appBundle, appPreflight } from "./helpers/boot.ts";
+ 
+ const preflight = appPreflight("ui-theme");
+@@ -115,6 +115,8 @@ const shopRow = (row: number) => ({ x0: 228, x1: 460, y0: 104 + row * 14, y1: 11
+ 
+ let world: SimWorld;
+ let opCount = 0;
++let structuralOps = 0;
++const STRUCTURAL_OPS = new Set(["createNode", "destroyNode", "insertBefore", "removeChild"]);
+ 
+ /** Render one scene from a clean screen (both components unmounted). */
+ function shot(scene: FixtureScene): Uint8Array {
+@@ -136,6 +138,7 @@ simDescribe("ui theme — built fixture on the sim host", () => {
+         if (typeof fn !== "function") continue;
+         ops[name] = (...args: unknown[]) => {
+           opCount++;
++          if (STRUCTURAL_OPS.has(name)) structuralOps++;
+           return (fn as (...a: unknown[]) => unknown).apply(ops, args);
+         };
+       }
+@@ -339,6 +342,29 @@ simDescribe("ui theme — built fixture on the sim host", () => {
+     expect(opCount).toBe(0);
+   });
+ 
++  test("message reveal, row boundaries, clearing and rewind retain every text node", () => {
++    for (const faces of [false, true]) {
++      const scene: FixtureScene = { modal: "speaker", faces };
++      const complete = shot(scene);
++      show({ ...scene, revealed: 0 });
++      structuralOps = 0;
++      if (MODALS.speaker.kind !== "text") throw new Error("Expected a text fixture");
++      const total = MODALS.speaker.total;
++      for (let revealed = 1; revealed <= total; revealed++) {
++        show({ ...scene, revealed });
++        expect(structuralOps, `faces=${faces} reveal=${revealed}`).toBe(0);
++      }
++      expect(world.render()).toEqual(complete);
++      for (let revealed = total - 1; revealed >= 0; revealed--) {
++        show({ ...scene, revealed });
++        expect(structuralOps, `faces=${faces} rewind=${revealed}`).toBe(0);
++      }
++      show({ faces });
++      expect(show(scene)).toEqual(complete);
++      expect(structuralOps).toBe(0);
++    }
++  });
++
+   // --- T2-9 scrolling choices --------------------------------------------
+ 
+   test("more than 4 choices scroll a 4-row window that follows the live cursor", () => {
+diff --git a/src/engine/state-metadata.ts b/src/engine/state-metadata.ts
+new file mode 100644
+index 0000000..c6a59c0
+--- /dev/null
++++ b/src/engine/state-metadata.ts
+@@ -0,0 +1,45 @@
++// Runtime metadata stays outside serialised state. QuickJS can retain dead
++// weak-map entries until GC, so frame-local ownership entries have an explicit
++// lifetime. Nested folds own separate scopes, including exceptional exits.
++interface DeletableMetadata { delete(key: object): boolean }
++interface MetadataScope {
++  parent: MetadataScope | null;
++  maps: DeletableMetadata[];
++  keys: object[];
++}
++let currentScope: MetadataScope | null = null;
++
++export function beginStateMetadata(): MetadataScope {
++  const scope: MetadataScope = { parent: currentScope, maps: [], keys: [] };
++  currentScope = scope;
++  return scope;
++}
++
++export function trackStateMetadata(map: DeletableMetadata, key: object): void {
++  if (!currentScope) return;
++  currentScope.maps.push(map);
++  currentScope.keys.push(key);
++}
++
++export function endStateMetadata(scope: MetadataScope): void {
++  currentScope = scope.parent;
++  for (let i = 0; i < scope.maps.length; i++) scope.maps[i]!.delete(scope.keys[i]!);
++}
++
++/** Eviction only invalidates a derived revision cache; it never owns state.
++ * Strong keys bound retention without leaving weak-entry tombstones each frame. */
++export class RecentStateMetadata<K extends object, V> {
++  private readonly values = new Map<K, V>();
++  private readonly keys: K[] = [];
++  private cursor = 0;
++  get(key: K): V | undefined { return this.values.get(key); }
++  set(key: K, value: V): void {
++    if (!this.values.has(key)) {
++      const previous = this.keys[this.cursor];
++      if (previous) this.values.delete(previous);
++      this.keys[this.cursor] = key;
++      this.cursor = (this.cursor + 1) % 16;
++    }
++    this.values.set(key, value);
++  }
++}

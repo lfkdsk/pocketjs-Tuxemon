@@ -121,8 +121,8 @@ mkdir -p "$RUN/host0"
 cp dist/psp/pocket-tuxemon.prx dist/psp/assets.pak "$RUN/host0/"
 usbhostfs_pc -b 10000 "$RUN/host0"
 # In another terminal, with PSPLINK running on the PSP:
-pspsh -p 10000 -e reset
-pspsh -p 10000 -e 'ldstart host0:/pocket-tuxemon.prx'
+pspsh -i 127.0.0.1 -p 10000 -e reset
+pspsh -i 127.0.0.1 -p 10000 -e 'ldstart host0:/pocket-tuxemon.prx'
 ```
 
 The build uses the pinned PSP GCC toolchain for QuickJS (`-O3 -fno-gcse`).
@@ -137,8 +137,15 @@ pins and applies those patches without replacing other local changes.
 The session's `immutableState` option requires callers to treat published
 snapshots as read-only. Restoring a snapshot constructs a new state.
 The extension's `immutableConditions` option requires condition handlers
-to leave their argument and extension state trees unchanged. Command handlers
-retain defensive copies. Texture draws at integer scale are split at cache
+to leave their argument and extension state trees unchanged;
+`deterministicConditions` requires equal arguments to return equal results.
+The interpreter reuses completed condition branches with unchanged inputs,
+preserving instruction budgets and parallel-event order. Frame-local copy
+ownership metadata is deleted after each state fold; character revision caches
+retain at most 16 states. Battle turns copy mutable fields and share historical
+events. Command handlers retain defensive copies. Dialogue keeps text nodes
+mounted and hides empty rows through display styles. Sprite motion and HP
+fills use paint transforms. Texture draws at integer scale are split at cache
 column boundaries. The GE command buffer occupies complete CPU cache lines
 and is flushed and invalidated before its first uncached write.
 
@@ -159,11 +166,21 @@ timing build measured:
 
 | 300-frame window | Mean work time | Measured presentation rate |
 | --- | ---: | ---: |
-| Paper Scoop walking/dialogue (300–599) | 18.05 ms | 39.83 fps |
-| Paper Town walking (1500–1799) | 24.10 ms | 27.35 fps |
-| Billie battle (2100–2399) | 14.48 ms | 48.55 fps |
-| Billie battle (2400–2699) | 15.71 ms | 43.07 fps |
-| Route 1 idle (4200–4499) | 16.57 ms | 54.28 fps |
+| Paper Scoop walking/dialogue (300–599) | 13.51 ms | 54.94 fps |
+| Paper Town dialogue/cutscene (1500–1799) | 15.06 ms | 48.25 fps |
+| Billie battle (2100–2399) | 11.54 ms | 56.10 fps |
+| Billie battle (2400–2699) | 12.15 ms | 54.89 fps |
+| Route 1 idle (4200–4499) | 11.57 ms | 59.89 fps |
+
+The retained dialogue rows preserve all 3,793 opening frames' pixels against
+the preceding build in the WASM renderer. In the Town window, they reduced
+p95 CPU work from 40.72 ms to 30.44 ms; an affected frame's native layout time
+fell from 15.58 ms to 3.53 ms. These frames still exceed the 16.7 ms budget.
+The 2100–2399 battle window contains an 80.53 ms turn and has 17.30 ms p95
+CPU work; its mean frame time does not establish smooth battle input.
+An earlier build with the metadata lifetime fix held 59.83–60.02 fps over
+395 seconds of Route 1 idle, with no explicit QuickJS GC in those windows.
+This idle result does not establish walking or battle acceptance.
 
 The physical PSPLINK run reaches Route 1 after the Billie battle, with a terminal state
 matching the production replay (SHA-256
