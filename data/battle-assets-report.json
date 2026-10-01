@@ -24,9 +24,21 @@
   "sourceBytes": 1889960,
   "pngBytes": 1187501,
   "textureBytes": 25192464,
-  "pakBytes": 26440560,
+  "encodedBytes": 2158468,
+  "residentBytes": 13185792,
+  "pakBytes": 3392752,
   "maxWidth": 512,
   "maxHeight": 512,
+  "quantization": {
+   "sourceColours": 9831,
+   "paletteColours": 9831,
+   "quantizedFiles": 0,
+   "quantizedColours": 0,
+   "remappedPixels": 0,
+   "totalSquaredError": 0,
+   "maxSquaredError": 0,
+   "meanSquaredError": 0
+  },
   "categories": {
    "backgrounds": {
     "sourceFiles": 8,
@@ -114,12 +126,12 @@
    }
   }
  },
- "battleDbBytes": 1195862,
- "runtimeDbBytes": 1042969,
+ "battleDbBytes": 1188006,
+ "runtimeDbBytes": 1035441,
  "pakKey": "game:battle-db",
  "battleRepository": {
-  "shellBytes": 191257,
+  "shellBytes": 188345,
   "entries": 650,
-  "entryBytes": 781408
+  "entryBytes": 776792
  }
 }

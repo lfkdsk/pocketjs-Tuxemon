@@ -24,7 +24,7 @@ mkdir -p "$bundle"
 bun "$pocketjs/tools/build.ts" "$root/tools/c1-readpath-entry.tsx" \
   --framework=solid --project-root="$root" --outdir="$bundle"
 
-CARGO_TARGET_DIR="$target" cargo test --manifest-path "$scratch/Cargo.toml" --release --no-run
+CARGO_TARGET_DIR="$target" cargo test --manifest-path "$scratch/Cargo.toml" --release --no-default-features --no-run
 binary=$(find "$target/release/deps" -maxdepth 1 -type f -name 'pocket_desktop_host-*' -perm -111 -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)
 
 C1_DIST="$bundle" C1_MAPS="$root/dist/maps" C1_BENCH_ROOT="$bench_root" \

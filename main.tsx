@@ -11,7 +11,6 @@ import {
   TERRAIN_STREAM_META,
   TERRAIN_STREAM_GROUND_INDEX,
   TERRAIN_STREAM_UPPER_INDEX,
-  BATTLE_ASSET_PATHS,
   NPC_SRC_ASSET_PATHS,
   ANIMATED_ATLAS_NAMES,
   createProductionTuxemonBattle,
@@ -54,9 +53,6 @@ const { extensions, rules } = createProductionTuxemonBattle(
   { initialTimeWeather },
 );
 gp1Mark("battle-registration");
-// The generated literal list is the build-time asset root. Battle UI resolves
-// these paths dynamically from battle-db at runtime.
-void BATTLE_ASSET_PATHS;
 // Same reason: NPC_SRC's sprite-frame paths now live in dist/npc-src shards
 // instead of a scanned TS literal, so this keeps them reachable for the pak
 // baker. GameView resolves the actual paths dynamically via npcSrc.

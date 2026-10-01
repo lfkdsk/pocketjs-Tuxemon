@@ -1,5 +1,5 @@
 import { For } from "solid-js";
-import { Image, Text, View } from "@pocketjs/framework/components";
+import { Text, View } from "@pocketjs/framework/components";
 import type { Component } from "solid-js";
 
 import {
@@ -24,7 +24,9 @@ import type { BattleImageRef } from "../importer/battle-schema.ts";
 import type { BattleSceneViewProps } from "../vendor/pocket-rpgkit/src/ui/GameView.tsx";
 import {
   CommandGrid,
+  createBattleImageCache,
   FrameStrip,
+  LazyImage,
   ListMenu,
   MessageBand,
   NO_EFFECT,
@@ -32,6 +34,7 @@ import {
   StatBar,
   type CommandCell,
   type ListMenuRow,
+  type TileImageSource,
 } from "../vendor/pocket-rpgkit/src/ui/battle/index.ts";
 import {
   BATTLE_BASE_HEIGHT,
@@ -60,7 +63,12 @@ const title = (slug: string): string => slug
   .map((part) => part ? part[0]!.toUpperCase() + part.slice(1) : part)
   .join(" ");
 
-const pathFor = (key: string): string => key.startsWith("ui:img.") ? key.slice(7) : key;
+const imageSource = (ref: BattleImageRef): TileImageSource => ({
+  kind: "tile",
+  ref: ref.key,
+  sourceWidth: ref.width,
+  sourceHeight: ref.height,
+});
 
 function eventMessage(state: Runtime, event: BattleEvent | null, monsters: readonly BattleMonster[]): string {
   if (!event) return "Choose an action";
@@ -161,6 +169,14 @@ function menuTitle(mode: Runtime["menuMode"]): string {
  * this 480x272 root so the 960x544 target is the same nearest-neighbour
  * composition at exactly 2x. */
 export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
+  const imageCache = createBattleImageCache(() => props.active);
+  // A kept-alive battle subtree can reactivate its image effects in the same
+  // batch as the cache-scope effect. Reopen synchronously while deriving an
+  // active source so no child can observe the just-ended previous scope.
+  const activeImageSource = (ref: BattleImageRef): TileImageSource => {
+    if (props.active) imageCache.beginScope();
+    return imageSource(ref);
+  };
   const runtime = () => tuxemonRuntimeBattleState(props.state);
   const player = () => presentationActiveMonster(runtime(), 0);
   const enemy = () => presentationActiveMonster(runtime(), 1);
@@ -239,7 +255,9 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
         debugName={`${debugName}-clip`}
       >
         <SpriteSlot
-          src={pathFor(art().sheet.key)}
+          src={activeImageSource(art().sheet)}
+          cache={imageCache}
+          active={props.active}
           x={-source()[0] * 2}
           y={-source()[1] * 2}
           width={art().sheet.width * 2}
@@ -283,7 +301,9 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
           }}
         >
           <SpriteSlot
-            src={pathFor(ref().key)}
+            src={activeImageSource(ref())}
+            cache={imageCache}
+            active={props.active}
             x={-sourceX() * sourceScale()}
             y={0}
             width={ref().width * sourceScale()}
@@ -309,8 +329,10 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
   const animationRect = () => runtime().battle.parties[0].some((monster) => monster.uid === animation().target)
     ? R.playerMonster : R.enemyMonster;
   const animationFrames = () => {
-    const frames = animation().frameKeys.map(pathFor);
-    return frames.length > 0 ? frames : [pathFor(environment().partyIcons.icon_empty!.key)];
+    const frames = (animation().animation?.pages ?? []).flatMap((page) =>
+      Array.from({ length: page.frames }, () => activeImageSource(page))
+    );
+    return frames.length > 0 ? frames : [activeImageSource(environment().partyIcons.icon_empty!)];
   };
 
   const island = (side: "player" | "enemy") => {
@@ -318,8 +340,10 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
     const sourceX = side === "player" ? 0 : -192;
     return (
       <View class="absolute overflow-hidden" style={{ posType: 1, insetL: rect.x, insetT: rect.y, width: rect.width, height: rect.height }}>
-        <Image
-          src={pathFor(environment().island.key)}
+        <LazyImage
+          src={activeImageSource(environment().island)}
+          cache={imageCache}
+          active={props.active}
           class="absolute"
           style={{ posType: 1, insetL: sourceX, insetT: 0, width: environment().island.width * 2, height: environment().island.height * 2 }}
           debugName={`${side}-island`}
@@ -340,8 +364,10 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
     const icon = () => monster().status ? runtime().visuals.statusIcons[monster().status!.slug] : undefined;
     return (
       <>
-        <Image
-          src={pathFor(image().key)}
+        <LazyImage
+          src={activeImageSource(image())}
+          cache={imageCache}
+          active={props.active}
           class="absolute"
           style={{ posType: 1, insetL: rect.x, insetT: rect.y, width: image().width * 2, height: image().height * 2 }}
           debugName={`${side === 0 ? "player" : "enemy"}-hud-frame`}
@@ -378,8 +404,10 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
           class="absolute overflow-hidden"
           style={{ posType: 1, insetL: status.x, insetT: status.y, width: status.width, height: status.height, opacity: icon() ? 1 : 0 }}
         >
-          <Image
-            src={pathFor((icon() ?? environment().partyIcons.icon_empty!).key)}
+          <LazyImage
+            src={activeImageSource(icon() ?? environment().partyIcons.icon_empty!)}
+            cache={imageCache}
+            active={props.active}
             class="absolute"
             style={{ posType: 1, insetL: 0, insetT: 0, width: (icon() ?? environment().partyIcons.icon_empty!).width * 2, height: (icon() ?? environment().partyIcons.icon_empty!).height * 2 }}
             debugName={`${side === 0 ? "player" : "enemy"}-status`}
@@ -394,8 +422,10 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
     const ref = () => side === 0 ? environment().hud.playerTray! : environment().hud.opponentTray!;
     return (
       <>
-        <Image
-          src={pathFor(ref().key)}
+        <LazyImage
+          src={activeImageSource(ref())}
+          cache={imageCache}
+          active={props.active}
           class="absolute"
           style={{ posType: 1, insetL: rect.x, insetT: rect.y, width: ref().width * 2, height: ref().height * 2 }}
           debugName={`${side === 0 ? "player" : "enemy"}-party-tray`}
@@ -404,8 +434,10 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
           {(slot) => {
             const icon = () => partyIcon(runtime(), side, slot);
             return (
-              <Image
-                src={pathFor(icon().key)}
+              <LazyImage
+                src={activeImageSource(icon())}
+                cache={imageCache}
+                active={props.active}
                 class="absolute"
                 style={{
                   posType: 1,
@@ -445,8 +477,10 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
         }}
         debugName="tux-battle-canvas"
       >
-        <Image
-          src={pathFor(environment().background.key)}
+        <LazyImage
+          src={activeImageSource(environment().background)}
+          cache={imageCache}
+          active={props.active}
           class="absolute"
           style={{ posType: 1, insetL: R.background.x, insetT: R.background.y, width: R.background.width, height: R.background.height }}
           debugName="battle-background"
@@ -471,6 +505,8 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
         >
           <FrameStrip
             frames={animationFrames()}
+            cache={imageCache}
+            active={props.active}
             frameTicks={animation().frameTicks}
             startTick={animation().startTick}
             nowTick={runtime().eventTicks}
@@ -494,7 +530,9 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
           debugName="battle-ball-clip"
         >
           <SpriteSlot
-            src={pathFor(ballRef().key)}
+            src={activeImageSource(ballRef())}
+            cache={imageCache}
+            active={props.active}
             x={0}
             y={0}
             width={ballSize()}

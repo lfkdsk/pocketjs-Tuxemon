@@ -13,7 +13,7 @@ Per-action numbers come from the import coverage report,
 
 | Feature | Status | Notes |
 | --- | --- | --- |
-| All 263 maps imported, terrain matching Tuxemon's renders | Done | One-way ledges, animated tiles and 16×32 walkers. Maps load one at a time from the pak; see [architecture](architecture.md) |
+| All 263 maps imported, terrain matching Tuxemon's renders | Done | One-way ledges, animated tiles and 16×32 walkers. Maps load one at a time from self-describing compact shards; all 263 currently use `rpgkit-map/1` (4,191,161 B rather than 9,231,016 B of canonical JSON). See [architecture](architecture.md) |
 | Map transfers | Done | 1,042 of 1,049 `transition_teleport` uses are native |
 | Seamless outdoor world | Partial | The outdoor-world topology index is built at import time. Travelling between maps without a transfer is planned |
 
@@ -53,7 +53,7 @@ Per-action numbers come from the import coverage report,
 | Trainer and wild battles, including double battles | Done | `battle/` is a pure reducer that matches Tuxemon's Python engine on 8,560 recorded battles |
 | Capture, items, escape, swapping, levelling, evolution | Done | |
 | Losing a battle | Done | First loss against Billie, and a later loss with the faint-point teleport and recovery (`verify:gb6:failures`) |
-| Battle presentation | Done | Imported backgrounds, trainers, monsters and HUD; every animation is driven by the rewindable reference tick |
+| Battle presentation | Done | Imported backgrounds, trainers, monsters and HUD; all 578 images are single-tile CLUT8+PackBits entries loaded only while a battle uses them and released on exit. Every animation is driven by the rewindable reference tick |
 | NPC-versus-NPC battles | Planned | 5 uses show a visible skip notice |
 
 ## Monsters and party
@@ -108,10 +108,10 @@ Per-action numbers come from the import coverage report,
 
 | Feature | Status | Notes |
 | --- | --- | --- |
-| Web | Done | Deployed to GitHub Pages from `main` after CI passes. The browser renders at 2× density: fonts use native physical samples while tiles and sprites stay nearest-neighbour; compare the [Paper Town dialog](screenshots/web-density-paper-dialog.png) and [battle menu](screenshots/web-density-battle-menu.png). CI plays the journey in headless Chrome |
-| Desktop (Linux, macOS) | Done | `bun run desktop` |
-| PSP | Planned | The pak is too large to embed. It needs seekable pak reads in PocketJS |
-| Startup and frame time | Done | The desktop QuickJS benches enforce 250 ms startup and 50 ms frame budgets, reject a desktop bundle built from different map shards, and take the GB6 terminal hash from its tape. See [verification](verification.md) and the dated measurements in the README |
+| Web | Done | Deployed to GitHub Pages from `main` after CI passes. The game pak is 39,253,664 B; it was 66.8 MB before compact maps and indexed battle art. The browser renders at 2× density: fonts use native physical samples while tiles and sprites stay nearest-neighbour; compare the [Paper Town dialog](screenshots/web-density-paper-dialog.png) and [battle menu](screenshots/web-density-battle-menu.png). CI plays the journey in headless Chrome |
+| Desktop (Linux, macOS) | Done | `bun run desktop`; the launcher enables ALSA when its development package is available and otherwise builds the silent host automatically |
+| PSP | Planned | The pak is still too large to embed and needs seekable pak reads in PocketJS. Battle art no longer has to be resident at boot: the all-image indexed footprint is 13,185,792 B and the runtime keeps only the active battle working set |
+| Startup and frame time | Done | The desktop QuickJS benches enforce 250 ms startup and 50 ms frame budgets, reject a desktop bundle built from different map shards, and take the GB6 terminal hash from its tape. Compact-map cold first visits trade size for decode time (about 12 ms p95 across all maps, still inside the frame budget). See [verification](verification.md) and the dated measurements in the README |
 
 ## Verification and CI
 

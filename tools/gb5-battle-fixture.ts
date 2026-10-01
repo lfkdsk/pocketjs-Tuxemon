@@ -13,6 +13,7 @@ import type { BattleEvent } from "../battle/types.ts";
 import type { BattleDb } from "../importer/battle-schema.ts";
 import type { SessionState } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import type { JsonValue } from "../vendor/pocket-rpgkit/src/engine/types.ts";
+import { PSM } from "../vendor/pocket-rpgkit/vendor/pocketjs/contracts/spec/spec.ts";
 import {
   bootWorld,
   type SimWorld,
@@ -49,6 +50,18 @@ export interface StructuralSample extends StructuralCounts {
   eventTicks: number;
 }
 
+export interface BattleTextureOp {
+  kind: "load" | "set" | "free";
+  handle: number;
+  node?: number;
+}
+
+export interface BattleTextureCycle {
+  loads: number[];
+  frees: number[];
+  operations: BattleTextureOp[];
+}
+
 export interface Gb5BattleCapture {
   width: number;
   height: number;
@@ -57,6 +70,8 @@ export interface Gb5BattleCapture {
    * synthetic capture checkpoint had replaced its serialised scene state. */
   rewoundHit: Uint8Array;
   structuralSamples: StructuralSample[];
+  /** Three active/inactive cycles over the same persistent battle subtree. */
+  textureCycles: BattleTextureCycle[];
 }
 
 interface JourneyPrefix {
@@ -94,17 +109,52 @@ function currentEvent(state = runtimeState()): BattleEvent | null {
   return state.battle.events[state.eventCursor] ?? null;
 }
 
-function wrapStructuralOps(counts: StructuralCounts) {
+function wrapTrackedOps(counts: StructuralCounts | null, textures: BattleTextureOp[] | null) {
   return (ops: Record<string, unknown>): void => {
-    for (const name of STRUCTURAL_OPS) {
-      const original = ops[name] as ((...args: unknown[]) => unknown) | undefined;
-      if (!original) continue;
-      ops[name] = (...args: unknown[]) => {
-        counts[name]++;
-        return original.apply(ops, args);
-      };
+    if (counts) {
+      for (const name of STRUCTURAL_OPS) {
+        const original = ops[name] as ((...args: unknown[]) => unknown) | undefined;
+        if (!original) continue;
+        ops[name] = (...args: unknown[]) => {
+          counts[name]++;
+          return original.apply(ops, args);
+        };
+      }
+    }
+    if (textures) {
+      const upload = ops.uploadImgEntry as ((blob: Uint8Array) => number) | undefined;
+      const free = ops.freeTexture as ((handle: number) => void) | undefined;
+      const setImage = ops.setImage as ((node: number, handle: number) => void) | undefined;
+      if (upload) {
+        ops.uploadImgEntry = (blob: Uint8Array): number => {
+          const handle = upload.call(ops, blob);
+          if (blob[4] === PSM.PSM_T8) textures.push({ kind: "load", handle });
+          return handle;
+        };
+      }
+      if (free) {
+        ops.freeTexture = (handle: number): void => {
+          textures.push({ kind: "free", handle });
+          free.call(ops, handle);
+        };
+      }
+      if (setImage) {
+        ops.setImage = (node: number, handle: number): void => {
+          textures.push({ kind: "set", node, handle });
+          setImage.call(ops, node, handle);
+        };
+      }
     }
   };
+}
+
+function textureCycle(operations: readonly BattleTextureOp[]): BattleTextureCycle {
+  const loads = operations.filter((op) => op.kind === "load").map((op) => op.handle);
+  const loaded = new Set(loads);
+  const frees = operations
+    .filter((op) => op.kind === "free" && loaded.has(op.handle))
+    .map((op) => op.handle);
+  return { loads, frees, operations: [...operations] };
 }
 
 class Driver {
@@ -239,7 +289,7 @@ function replaceSceneState(state: RuntimeBattleState): void {
 
 export async function captureGb5BattleFrames(
   viewport: { width: number; height: number },
-  options: { root?: string; trackStructure?: boolean } = {},
+  options: { root?: string; trackStructure?: boolean; trackTextures?: boolean } = {},
 ): Promise<Gb5BattleCapture> {
   const root = resolve(options.root ?? ROOT);
   const bundle = join(root, "dist/main");
@@ -249,18 +299,23 @@ export async function captureGb5BattleFrames(
   const journey = JSON.parse(readFileSync(join(root, "data/g6-journey.json"), "utf8")) as JourneyPrefix;
   const db = JSON.parse(readFileSync(join(root, "data/battle-runtime-db.json"), "utf8")) as BattleDb;
   const counts = options.trackStructure ? zeroCounts() : null;
+  const textureOps: BattleTextureOp[] | null = options.trackTextures ? [] : null;
   const world = await bootWorld(
     bundle,
     60,
     FIXED_TIME_HOST_GLOBALS,
-    counts ? wrapStructuralOps(counts) : undefined,
+    counts || textureOps ? wrapTrackedOps(counts, textureOps) : undefined,
     viewport,
   );
   const driver = new Driver(world, counts);
 
   let foundRoot = false;
+  let firstBattleTextureStart = textureOps?.length ?? 0;
   for (const mask of journey.masks) {
+    const activeBefore = sessionState().scene?.kind === "battle";
+    const operationStart = textureOps?.length ?? 0;
     driver.step(mask);
+    if (!activeBefore && sessionState().scene?.kind === "battle") firstBattleTextureStart = operationStart;
     if (sessionState().scene?.kind === "battle" && isReadyRoot(runtimeState())) {
       // Release the confirm pulse that completed the final send-out frame.
       if (mask !== 0) driver.step(0);
@@ -324,11 +379,30 @@ export async function captureGb5BattleFrames(
   if (rewound.eventCursor !== hitState.eventCursor || rewound.eventTicks !== hitState.eventTicks) {
     throw new Error("GB5 battle fixture: rewind did not restore the hit cursor");
   }
+  const rewoundHit = world.render().slice();
+
+  const textureCycles: BattleTextureCycle[] = [];
+  if (textureOps) {
+    const repeatScene = structuredClone(sessionState().scene);
+    if (!repeatScene) throw new Error("GB5 battle fixture: cannot cycle an inactive scene");
+    let cycleStart = firstBattleTextureStart;
+    for (let cycle = 0; cycle < 3; cycle++) {
+      sessionState().scene = null;
+      driver.step();
+      textureCycles.push(textureCycle(textureOps.slice(cycleStart)));
+      if (cycle < 2) {
+        cycleStart = textureOps.length;
+        sessionState().scene = structuredClone(repeatScene);
+        driver.step();
+      }
+    }
+  }
 
   return {
     ...viewport,
     frames,
-    rewoundHit: world.render().slice(),
+    rewoundHit,
     structuralSamples: driver.structuralSamples,
+    textureCycles,
   };
 }

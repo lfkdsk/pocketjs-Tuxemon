@@ -18,6 +18,7 @@ import {
   type Gb5CapturedFrame,
   type Gb5FrameName,
 } from "../tools/gb5-battle-fixture.ts";
+import { battlePreviewSourcePath } from "../tools/render-battle-preview.ts";
 import { BATTLE_RECTS as R } from "../ui/battle-layout.ts";
 import { barFillWidth } from "../vendor/pocket-rpgkit/src/ui/battle/effects.ts";
 import { fnv1a } from "../vendor/pocket-rpgkit/vendor/pocketjs/hosts/sim/sim.ts";
@@ -105,7 +106,10 @@ function assertGolden(capture: Gb5BattleCapture, name: Gb5FrameName): void {
 let captures: Promise<{ small: Gb5BattleCapture; large: Gb5BattleCapture }> | undefined;
 function captured() {
   return captures ??= (async () => ({
-    small: await captureGb5BattleFrames({ width: 480, height: 272 }, { trackStructure: true }),
+    small: await captureGb5BattleFrames(
+      { width: 480, height: 272 },
+      { trackStructure: true, trackTextures: true },
+    ),
     large: await captureGb5BattleFrames({ width: 960, height: 544 }),
   }))();
 }
@@ -196,7 +200,7 @@ describe("GB5 real battle scene goldens", () => {
     expect(pose).toMatchObject({ kind: "capture", x: 352, y: 48, shake: 7, opacity: 1 });
     const ref = capture.state.visuals.items.tuxeball!.captureSprite!;
     const ball = decodePng(
-      new Uint8Array(readFileSync(join(ROOT, ref.key.startsWith("ui:img.") ? ref.key.slice(7) : ref.key))),
+      new Uint8Array(readFileSync(battlePreviewSourcePath(ROOT, ref))),
       ref.key,
     );
     let matched = 0;
@@ -204,8 +208,8 @@ describe("GB5 real battle scene goldens", () => {
       const source = (y * ball.width + x) * PIXEL_BYTES;
       if (ball.rgba[source + 3] !== 255) continue;
       expect(rgb(capture.rgba, 480, pose.x + pose.shake + x, pose.y + y))
-        // PocketJS's packed texture path stores RGBA4444, so opaque PNG
-        // channels are truncated to four bits and expanded by 17 on paint.
+        // The indexed migration preserves the old RGBA4444 framebuffer
+        // contract: opaque PNG channels are truncated and expanded by 17.
         .toEqual([...ball.rgba.slice(source, source + 3)].map((channel) => Math.floor(channel / 16) * 17));
       matched++;
     }
@@ -235,6 +239,28 @@ describe("GB5 real battle scene goldens", () => {
         sample.createNode + sample.destroyNode + sample.insertBefore + sample.removeChild,
         `structural churn at host frame ${sample.hostFrame} (${sample.event}@${sample.eventTicks})`,
       ).toBe(0);
+    }
+  }, 60_000);
+
+  test("three battle scopes detach and free every lazy texture", async () => {
+    const { small } = await captured();
+    expect(small.textureCycles).toHaveLength(3);
+    for (const [cycleIndex, cycle] of small.textureCycles.entries()) {
+      expect(cycle.loads.length, `cycle ${cycleIndex} loads`).toBeGreaterThan(0);
+      expect(new Set(cycle.loads).size, `cycle ${cycleIndex} unique loads`).toBe(cycle.loads.length);
+      expect([...cycle.frees].sort((a, b) => a - b), `cycle ${cycleIndex} balanced frees`)
+        .toEqual([...cycle.loads].sort((a, b) => a - b));
+
+      const attached = new Map<number, number>();
+      for (const operation of cycle.operations) {
+        if (operation.kind === "set") attached.set(operation.node!, operation.handle);
+        if (operation.kind === "free" && cycle.loads.includes(operation.handle)) {
+          expect(
+            [...attached.values()].includes(operation.handle),
+            `cycle ${cycleIndex} handle ${operation.handle} must detach before free`,
+          ).toBeFalse();
+        }
+      }
     }
   }, 60_000);
 });

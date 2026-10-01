@@ -46,14 +46,24 @@ summary:
   islands, trainers, monsters, HUD frames, status/party icons and
   technique strips; every slide, hit, HP/XP tween, faint and capture shake
   is driven by the reducer's rewindable reference tick rather than a wall
-  clock.
-- **Performance:** maps load one at a time from the pak — the game JS
-  bundle is 1.29 MB and reaches its first frame in about 150 ms on the
-  desktop QuickJS host (measured 2026-09-30: medians 151.897 ms at 480×272
-  and 155.168 ms at 960×544 over 10-run samples). Per-frame worst cases on
-  the same host: map switches 15.9 ms / 14.7 ms, battle entry 22.2 ms /
-  22.6 ms, battle exit 34.4 ms / 38.5 ms (480×272 / 960×544). The QuickJS
-  benches assert a 250 ms startup budget and a 50 ms per-frame CPU budget.
+  clock. The 578 images are indexed single-tile entries, loaded on demand
+  through one battle cache and detached/freed on exit.
+- **Performance:** compact map shards use 4,191,161 B instead of 9,231,016 B
+  of canonical JSON, and indexed battle art plus its database uses 3,392,752 B
+  instead of 26,440,560 B. The Web game pak is 39,253,664 B; before compact
+  maps and indexed battle art it was 66,791,328 B, measured on the tree just
+  before day and night were added. The all-image battle encoding is
+  2,158,468 B on disk and 13,185,792 B if every PSM_T8 texture were decoded,
+  but only the active battle working set is resident.
+
+  On the desktop QuickJS host (measured 2026-10-01), startup to first frame is
+  131.888 ms / 144.089 ms; walking p95 is 1.883 ms / 1.834 ms; journey map
+  switches peak at 9.211 ms / 9.228 ms; battle entry is 25.276 ms /
+  29.406 ms and exit is 7.358 ms / 7.750 ms (480×272 / 960×544). Across all
+  263 maps, a compact shard's cold first visit is about 12 ms p95 versus
+  4.040 ms for canonical JSON, the explicit time-for-size tradeoff. The
+  QuickJS benches assert a 250 ms startup budget and a 50 ms per-frame CPU
+  budget.
 - **Import coverage:** 89.0% of Tuxemon action uses and 92.1% of condition
   uses map natively to kit commands; 93.8% / 92.1% are executable (native,
   degraded, or a deliberate placeholder). The full per-type breakdown is in

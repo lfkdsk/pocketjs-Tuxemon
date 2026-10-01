@@ -277,7 +277,18 @@ mod g6_quickjs_bench {
         surface.set_tick_rate(60);
         surface.set_svc_allowlist(args.companions.clone());
         surface.feed_pak(&pak);
-        let supervisor = AppSupervisor::new(args.system.as_ref(), &surface, args.data_root.clone())?;
+        let audio_host = audio::AudioHost::new(
+            1 + args
+                .system
+                .as_ref()
+                .map_or(0, |system| system.applications.len()),
+        );
+        let supervisor = AppSupervisor::new(
+            args.system.as_ref(),
+            &surface,
+            args.data_root.clone(),
+            &audio_host,
+        )?;
         let guest = Guest::new()?;
         surface.mount(&guest)?;
         let offload = text_worker(pak);
@@ -292,6 +303,8 @@ mod g6_quickjs_bench {
             "g6-fixed-clock",
             "globalThis.__pocketTuxemonInitialCivilTime={year:2024,month:6,day:15,hour:9,minute:0};",
         )?;
+        let audio = audio::AudioSurface::new(audio_host.client(0));
+        audio.mount(&guest)?;
         let host_init_ms = host_init_start.elapsed().as_secs_f64() * 1_000.0;
 
         let (compile_ms, eval_ms) = gp1_eval_staged(&guest, &args.app, &source)?;
@@ -323,6 +336,8 @@ mod g6_quickjs_bench {
             supervisor,
             offload,
             _fs: fs_mount,
+            audio,
+            _audio_host: audio_host,
             ticks: 0,
             buttons: 0,
             script_buttons: 0,
@@ -480,6 +495,8 @@ mod g6_quickjs_bench {
                 self.reset_structural_counter();
             }
             self.rt.buttons = mask;
+            self.rt._audio_host.begin_tick();
+            self.rt.audio.begin_tick();
             self.rt.offload.begin_frame();
             let a = Instant::now();
             let a_cpu = thread_cpu::now_ms();
@@ -839,7 +856,12 @@ mod g6_quickjs_bench {
         for entry in std::fs::read_dir(source).expect("read G6_MAPS") {
             let entry = entry.expect("read map directory entry");
             let path = entry.path();
-            if path.extension().and_then(|value| value.to_str()) != Some("json") {
+            if !entry.file_type().expect("read map entry type").is_file()
+                || !matches!(
+                    path.extension().and_then(|value| value.to_str()),
+                    Some("json" | "rkm")
+                )
+            {
                 continue;
             }
             std::fs::copy(&path, destination.join(entry.file_name())).expect("copy map entry");

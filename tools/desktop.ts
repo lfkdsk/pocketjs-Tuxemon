@@ -3,6 +3,7 @@
 import { cpSync, mkdirSync, rmSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { $ } from "bun";
+import { desktopHostFeatures } from "../vendor/pocket-rpgkit/tools/lib/desktop.ts";
 import { validateAndResolveBuildPlan } from "../vendor/pocket-rpgkit/vendor/pocketjs/framework/src/manifest/resolve.ts";
 
 const root = resolve(import.meta.dir, "..");
@@ -57,7 +58,7 @@ const planPath = join(root, ".pocket", target, `${plan.app.output}.plan.json`);
 mkdirSync(resolve(planPath, ".."), { recursive: true });
 await Bun.write(planPath, JSON.stringify(plan, null, 2) + "\n");
 await $`bun ${join(pocketjs, "tools", "build.ts")} --plan=${planPath} --project-root=${root} --outdir=${outdir}`.cwd(root);
-await $`cargo build --release`.cwd(join(pocketjs, "hosts", "desktop"));
+await $`cargo build --release ${desktopHostFeatures()}`.cwd(join(pocketjs, "hosts", "desktop"));
 
 const bin = join(pocketjs, "hosts", "desktop", "target", "release", "pocket-desktop-host");
 if (buildOnly) {

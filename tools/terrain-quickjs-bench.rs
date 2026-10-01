@@ -62,6 +62,8 @@ mod terrain_quickjs_bench {
 
         fn frame(&mut self, label: &str) -> Sample {
             let before = gc_threshold(&self.rt.guest);
+            self.rt._audio_host.begin_tick();
+            self.rt.audio.begin_tick();
             self.rt.offload.begin_frame();
             let a = Instant::now();
             self.rt.guest.frame(0).unwrap();
@@ -133,10 +135,13 @@ mod terrain_quickjs_bench {
         let height = env_u32("G5_BENCH_H", 272);
         let repetitions = env_u32("G5_BENCH_REPS", 3) as usize;
         let stable_frames = env_u32("G5_BENCH_STABLE", 600) as usize;
-        let data = std::env::temp_dir().join(format!(
-            "tuxemon-terrain-quickjs-data-{}",
-            std::process::id()
-        ));
+        let external_data = std::env::var_os("G5_DATA_ROOT").map(PathBuf::from);
+        let data = external_data.clone().unwrap_or_else(|| {
+            std::env::temp_dir().join(format!(
+                "tuxemon-terrain-quickjs-data-{}",
+                std::process::id()
+            ))
+        });
         let args = Args {
             app: "terrain-preview".into(),
             js: Some(dist.join("terrain-preview.js")),
@@ -211,6 +216,8 @@ mod terrain_quickjs_bench {
             used as f64 / 1_048_576.0,
             malloc as f64 / 1_048_576.0,
         );
-        let _ = std::fs::remove_dir_all(data);
+        if external_data.is_none() {
+            let _ = std::fs::remove_dir_all(data);
+        }
     }
 }

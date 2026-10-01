@@ -91,6 +91,8 @@ mod c1_readpath {
 
         fn frame(&mut self, mask: u32) -> f64 {
             self.rt.buttons = mask;
+            self.rt._audio_host.begin_tick();
+            self.rt.audio.begin_tick();
             self.rt.offload.begin_frame();
             let a = Instant::now();
             self.rt.guest.frame(mask).expect("QuickJS frame");
@@ -118,7 +120,12 @@ mod c1_readpath {
         for entry in std::fs::read_dir(source).expect("read C1_MAPS") {
             let entry = entry.expect("map dir entry");
             let path = entry.path();
-            if path.extension().and_then(|e| e.to_str()) != Some("json") {
+            if !entry.file_type().expect("read map entry type").is_file()
+                || !matches!(
+                    path.extension().and_then(|value| value.to_str()),
+                    Some("json" | "rkm")
+                )
+            {
                 continue;
             }
             std::fs::copy(&path, destination.join(entry.file_name())).expect("copy map entry");

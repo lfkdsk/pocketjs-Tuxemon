@@ -18,6 +18,7 @@ export interface BattlePlugin {
 }
 
 export interface BattleImageRef {
+  /** Complete lazy TILESET reference: `ui:tile.<name>#0`. */
   key: string;
   width: number;
   height: number;
@@ -468,12 +469,15 @@ export function validateBattleDb(value: unknown, pakKeys?: ReadonlySet<string>):
   }
 
   for (const ref of collectBattleArtRefs(db)) {
-    assert(ref.key.startsWith("ui:img."), `art key ${ref.key} is not a pak image key`);
+    assert(/^ui:tile\.[^#]+#0$/.test(ref.key), `art key ${ref.key} is not a single-tile pak ref`);
     assert(isPow2(ref.width) && isPow2(ref.height), `art ${ref.key} is not power-of-two`);
     assert(ref.width <= 512 && ref.height <= 512, `art ${ref.key} exceeds 512px`);
     assert(ref.rect[0] >= 0 && ref.rect[1] >= 0 && ref.rect[2] > 0 && ref.rect[3] > 0, `art ${ref.key} has invalid rect`);
     assert(ref.rect[0] + ref.rect[2] <= ref.width && ref.rect[1] + ref.rect[3] <= ref.height, `art ${ref.key} rect exceeds texture`);
-    if (pakKeys) assert(pakKeys.has(ref.key), `art ${ref.key} is absent from pak manifest`);
+    if (pakKeys) {
+      const pakKey = ref.key.slice(0, -2);
+      assert(pakKeys.has(pakKey), `art ${ref.key} is absent from pak manifest`);
+    }
   }
   return db;
 }

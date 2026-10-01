@@ -15,8 +15,12 @@ import {
 } from "node:fs";
 import { dirname, extname, join, normalize, relative } from "node:path";
 import { encodePNG } from "../vendor/pocket-rpgkit/vendor/pocketjs/tests/png.ts";
-import { encodeImageEntry, pack, type PakBlob } from "../vendor/pocket-rpgkit/vendor/pocketjs/framework/compiler/pak.ts";
-import { PAK_DTYPE, PSM } from "../vendor/pocket-rpgkit/vendor/pocketjs/contracts/spec/spec.ts";
+import {
+  encodeClut8Tile,
+  type Clut8EncodeReport,
+} from "../vendor/pocket-rpgkit/tools/lib/clut8.ts";
+import { pack, type PakBlob } from "../vendor/pocket-rpgkit/vendor/pocketjs/framework/compiler/pak.ts";
+import { PAK_DTYPE } from "../vendor/pocket-rpgkit/vendor/pocketjs/contracts/spec/spec.ts";
 import { decodePng } from "./png.ts";
 import { loadAllMaps, TUXEMON_SRC, type Rule, type TuxEvent, type TuxMap } from "./source.ts";
 import {
@@ -33,8 +37,6 @@ import {
   type BattleStat,
 } from "./battle-schema.ts";
 
-const PSM_4444 = PSM.PSM_4444;
-const IMAGE_KEY_PREFIX = "ui:img.";
 const DB_PAK_KEY = "game:battle-db";
 const PLAYER_NAMES = new Set(["", "player"]);
 const STATS = ["hp", "armour", "dodge", "melee", "ranged", "speed"] as const satisfies readonly BattleStat[];
@@ -194,9 +196,23 @@ export interface BattleImportReport {
     sourceBytes: number;
     pngBytes: number;
     textureBytes: number;
+    /** Sum of the complete one-tile CLUT8 + PackBits blobs. */
+    encodedBytes: number;
+    /** CLUT8 palette/index backing if every battle texture were resident. */
+    residentBytes: number;
     pakBytes: number;
     maxWidth: number;
     maxHeight: number;
+    quantization: {
+      sourceColours: number;
+      paletteColours: number;
+      quantizedFiles: number;
+      quantizedColours: number;
+      remappedPixels: number;
+      totalSquaredError: number;
+      maxSquaredError: number;
+      meanSquaredError: number;
+    };
     categories: Record<string, BattleAssetStats>;
   };
   battleDbBytes: number;
@@ -214,7 +230,10 @@ export interface BattleBuild {
   db: BattleDb;
   report: BattleImportReport;
   imagesJson: Record<string, { psm: number }>;
+  /** PNG previews/golden inputs. These are deliberately absent from runtime source scanning. */
   assetPaths: string[];
+  /** Complete CLUT8 TILESET files to append to the application's pak manifest. */
+  rawPakEntries: Array<{ key: string; file: string }>;
   battleRepository: {
     pakEntries: Array<{ key: string; file: string }>;
   };
@@ -641,13 +660,35 @@ interface CookedAsset extends BattleImageRef {
   relative: string;
   rgba: Uint8Array;
   png: Uint8Array;
+  pakKey: string;
+  pakFile: string;
+  encoded: Uint8Array;
+  encoding: Clut8EncodeReport;
   source: string;
   sourceBytes: number;
   categories: Set<string>;
 }
 
+/** Match the pixels produced by the legacy PSM_4444 battle textures before
+ * indexing them. Every channel used to be truncated to its high nibble and
+ * expanded by 17 in the renderer. Keeping that contract makes the CLUT8
+ * migration framebuffer-identical while reducing every current image to at
+ * most 256 palette entries. Fully transparent RGB is canonicalized by the
+ * CLUT8 encoder and is therefore intentionally irrelevant. */
+function legacyBattleRgba(rgba: Uint8Array): Uint8Array {
+  const out = rgba.slice();
+  for (let offset = 0; offset < out.length; offset += 4) {
+    out[offset] = (out[offset]! >> 4) * 17;
+    out[offset + 1] = (out[offset + 1]! >> 4) * 17;
+    out[offset + 2] = (out[offset + 2]! >> 4) * 17;
+    out[offset + 3] = (out[offset + 3]! >> 4) * 17;
+  }
+  return out;
+}
+
 class BattleArtCooker {
   readonly assets = new Map<string, CookedAsset>();
+  private readonly assetsByRef = new Map<string, CookedAsset>();
   readonly animations = new Map<string, Omit<BattleAnimationRef, "flipAxes" | "loops">>();
 
   constructor(
@@ -676,20 +717,28 @@ class BattleArtCooker {
     const path = join(this.outputRoot, relativePath);
     mkdirSync(dirname(path), { recursive: true });
     writeFileSync(path, png);
-    const key = `${IMAGE_KEY_PREFIX}${relativePath}`;
-    this.assets.set(relativePath, {
+    const tileName = relativePath.slice("assets/".length, -".png".length);
+    const tile = encodeClut8Tile(tileName, { width, height, rgba: legacyBattleRgba(rgba) });
+    const pakFile = `dist/battle-art/${tileName.slice("battle/".length)}.pkts`;
+    const asset: CookedAsset = {
       relative: relativePath,
-      key,
+      key: tile.descriptor.ref,
       width,
       height,
       rect,
       rgba,
       png,
+      pakKey: tile.key,
+      pakFile,
+      encoded: tile.blob,
+      encoding: tile.report,
       source,
       sourceBytes: statSync(this.sourcePath(source)).size,
       categories: new Set([category]),
-    });
-    return { key, width, height, rect };
+    };
+    this.assets.set(relativePath, asset);
+    this.assetsByRef.set(asset.key, asset);
+    return { key: asset.key, width, height, rect };
   }
 
   staticImage(source: string, category: string): BattleImageRef {
@@ -775,7 +824,7 @@ class BattleArtCooker {
       cached = { slug, pages, durationMs: Math.round(number(meta.duration, 0.1) * 1000) };
       this.animations.set(slug, cached);
     } else {
-      for (const page of cached.pages) this.assets.get(page.key.slice(IMAGE_KEY_PREFIX.length))!.categories.add(category);
+      for (const page of cached.pages) this.assetsByRef.get(page.key)!.categories.add(category);
     }
     return {
       ...cached,
@@ -799,6 +848,8 @@ class BattleArtCooker {
         textureBytes: assets.reduce((sum, asset) => sum + asset.width * asset.height * 2 + 8, 0),
       };
     }
+    const pixels = all.reduce((sum, asset) => sum + asset.width * asset.height, 0);
+    const totalSquaredError = all.reduce((sum, asset) => sum + asset.encoding.totalSquaredError, 0);
     return {
       sourceFiles: new Set(all.map((asset) => asset.source)).size,
       files: all.length,
@@ -806,9 +857,21 @@ class BattleArtCooker {
         .reduce((sum, bytes) => sum + bytes, 0),
       pngBytes: all.reduce((sum, asset) => sum + asset.png.byteLength, 0),
       textureBytes: all.reduce((sum, asset) => sum + asset.width * asset.height * 2 + 8, 0),
+      encodedBytes: all.reduce((sum, asset) => sum + asset.encoded.byteLength, 0),
+      residentBytes: all.reduce((sum, asset) => sum + 1024 + ((asset.width * asset.height + 15) & ~15), 0),
       pakBytes: 0,
       maxWidth: Math.max(...all.map((asset) => asset.width)),
       maxHeight: Math.max(...all.map((asset) => asset.height)),
+      quantization: {
+        sourceColours: all.reduce((sum, asset) => sum + asset.encoding.colours, 0),
+        paletteColours: all.reduce((sum, asset) => sum + asset.encoding.paletteColours, 0),
+        quantizedFiles: all.filter((asset) => asset.encoding.quantized).length,
+        quantizedColours: all.reduce((sum, asset) => sum + asset.encoding.quantizedColours, 0),
+        remappedPixels: all.reduce((sum, asset) => sum + asset.encoding.remappedPixels, 0),
+        totalSquaredError,
+        maxSquaredError: Math.max(0, ...all.map((asset) => asset.encoding.maxSquaredError)),
+        meanSquaredError: pixels > 0 ? totalSquaredError / pixels : 0,
+      },
       categories,
     };
   }
@@ -1005,8 +1068,11 @@ export function writeBattleArtifacts(options: BattleImportOptions): BattleBuild 
   const tables = loadTables(sourceRoot);
   const selection = buildSelection(scope, tables, loadAllMaps(), sourceRoot);
   const battleDir = join(outputRoot, "assets/battle");
+  const battlePakDir = join(outputRoot, "dist/battle-art");
   rmSync(battleDir, { recursive: true, force: true });
+  rmSync(battlePakDir, { recursive: true, force: true });
   mkdirSync(battleDir, { recursive: true });
+  mkdirSync(battlePakDir, { recursive: true });
   const cooker = new BattleArtCooker(sourceRoot, outputRoot, tables.animation);
 
   const shapes: BattleDb["shapes"] = {};
@@ -1341,16 +1407,17 @@ export function writeBattleArtifacts(options: BattleImportOptions): BattleBuild 
     },
   };
 
-  const pakKeys = new Set([...cooker.assets.values()].map((asset) => asset.key));
+  const cookedAssets = [...cooker.assets.values()].sort((a, b) => a.pakKey.localeCompare(b.pakKey));
+  const pakKeys = new Set(cookedAssets.map((asset) => asset.pakKey));
   validateBattleDb(db, pakKeys);
   const dbData = jsonBytes(db);
   const runtimeDb = runtimeBattleDb(db);
   const runtimeDbData = jsonBytes(runtimeDb);
   const split = splitBattleRuntimeDb(runtimeDb);
-  const blobs: PakBlob[] = [...cooker.assets.values()].sort((a, b) => a.key.localeCompare(b.key)).map((asset) => ({
-    key: asset.key,
+  const blobs: PakBlob[] = cookedAssets.map((asset) => ({
+    key: asset.pakKey,
     dtype: PAK_DTYPE.u8,
-    data: encodeImageEntry({ width: asset.width, height: asset.height, rgba: asset.rgba }, PSM_4444),
+    data: asset.encoded,
   }));
   blobs.push({ key: DB_PAK_KEY, dtype: PAK_DTYPE.u8, data: dbData });
   const art = cooker.stats();
@@ -1392,6 +1459,11 @@ export function writeBattleArtifacts(options: BattleImportOptions): BattleBuild 
   writeFileSync(join(outputRoot, "data/battle-db.json"), dbData);
   writeFileSync(join(outputRoot, "data/battle-runtime-db.json"), runtimeDbData);
   writeFileSync(join(outputRoot, "data/battle-assets-report.json"), jsonBytes(report));
+  for (const asset of cookedAssets) {
+    const path = join(outputRoot, asset.pakFile);
+    mkdirSync(dirname(path), { recursive: true });
+    writeFileSync(path, asset.encoded);
+  }
   const dist = join(outputRoot, "dist");
   const battleShardDir = join(dist, "battle");
   rmSync(battleShardDir, { recursive: true, force: true });
@@ -1403,14 +1475,15 @@ export function writeBattleArtifacts(options: BattleImportOptions): BattleBuild 
   writeFileSync(join(dist, "battle-runtime-shell.json"), split.shellText);
   const paths = [...cooker.assets.keys()].sort();
   const source = "// AUTO-GENERATED by gen-assets.ts — do not edit.\n" +
-    "// Keeping these literal paths reachable makes PocketJS bake every battle texture into the app pak.\n" +
-    `export const BATTLE_ASSET_PATHS = ${JSON.stringify(paths, null, 2)} as const;\n`;
+    "// Battle PNGs are preview/golden inputs only; runtime art is supplied as raw TILESET pak entries.\n" +
+    "export const BATTLE_ASSET_PATHS = [] as const;\n";
   writeFileSync(join(outputRoot, "ui/battle-assets.ts"), source);
   return {
     db,
     report,
-    imagesJson: Object.fromEntries(paths.map((path) => [path, { psm: PSM_4444 }])),
+    imagesJson: {},
     assetPaths: paths,
+    rawPakEntries: cookedAssets.map((asset) => ({ key: asset.pakKey, file: asset.pakFile })),
     battleRepository: {
       pakEntries: split.entries.map((entry) => ({ key: entry.meta.entry, file: `dist/${entry.path}` })),
     },

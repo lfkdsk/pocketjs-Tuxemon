@@ -55,7 +55,7 @@ if [[ ${G6_SKIP_MAP_BENCH:-0} != 1 ]]; then
     --framework=solid --project-root="$root" --outdir="$map_bundle"
 fi
 
-CARGO_TARGET_DIR="$target" cargo test --manifest-path "$scratch/Cargo.toml" --release --no-run
+CARGO_TARGET_DIR="$target" cargo test --manifest-path "$scratch/Cargo.toml" --release --no-default-features --no-run
 binary=$(find "$target/release/deps" -maxdepth 1 -type f -name 'pocket_desktop_host-*' -perm -111 -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)
 
 if [[ -n ${G6_BENCH_VIEWPORT:-} ]]; then

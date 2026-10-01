@@ -19,7 +19,7 @@ cp "$root/tools/battle-quickjs-bench.rs" "$scratch/src/battle-quickjs-bench.rs"
 sed -i "s#path = \"../../engine#path = \"$pocketjs/engine#g" "$scratch/Cargo.toml"
 sed -i '$a include!("battle-quickjs-bench.rs");' "$scratch/src/main.rs"
 
-CARGO_TARGET_DIR="$target" cargo test --manifest-path "$scratch/Cargo.toml" --release --no-run
+CARGO_TARGET_DIR="$target" cargo test --manifest-path "$scratch/Cargo.toml" --release --no-default-features --no-run
 binary=$(find "$target/release/deps" -maxdepth 1 -type f -name 'pocket_desktop_host-*' -perm -111 -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)
 
 GB2_BENCH_JS="$bundle" "$binary" battle_quickjs_bench::run --ignored --exact --nocapture

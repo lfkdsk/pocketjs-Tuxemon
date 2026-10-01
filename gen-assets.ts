@@ -245,10 +245,10 @@ const npcSrcPakEntries: PakManifestEntry[] = npcSrcSplit.entries.map((entry) => 
   file: `dist/${entry.path}`,
 }));
 // PocketJS bakes an "assets/..." image into the pak only when its literal
-// path string is reachable from scanned TS/TSX source (this is how
-// ui/battle-assets.ts's BATTLE_ASSET_PATHS already works for battle
-// textures). Moving NPC_SRC into JSON shards hid these paths from that
-// scanner, so this keeps them reachable the same way.
+// path string is reachable from scanned TS/TSX source. Moving NPC_SRC into
+// JSON shards hid these paths from that scanner, so this keeps them reachable.
+// Battle art does not use this path: its raw TILESET entries are listed in
+// pak.json below and loaded on demand.
 const npcSrcAssetPaths = [...new Set(Object.values(characters.npcSrc).flatMap(collectNpcSrcAssetPaths))].sort();
 writeFileSync(
   join(ROOT, "ui/npc-src-assets.ts"),
@@ -332,9 +332,18 @@ writeFileSync(
 );
 
 // Keep the inline document as an out-of-bundle parity oracle, while the game
-// imports only the compact shell. Each canonical ASCII map payload is a raw
-// pak entry addressed by the exact path carried in shell.mapIndex.
-const split = splitProjectMaps(project, { shellEntry: "project-shell.json" });
+// imports only the compact shell. Prefer the reversible rpgkit-map/1
+// transport whenever it is smaller (all current maps qualify), while keeping
+// a safe JSON fallback for future maps. Entries are addressed by the exact
+// path in shell.mapIndex.
+const split = splitProjectMaps(project, {
+  shellEntry: "project-shell.json",
+  entryEncoding: "auto",
+});
+const canonicalMapBytes = splitProjectMaps(project, {
+  shellEntry: "project-shell.json",
+  entryEncoding: "json",
+}).entries.reduce((sum, entry) => sum + entry.bytes.byteLength, 0);
 const mapsDir = join(DIST, "maps");
 rmSync(mapsDir, { recursive: true, force: true });
 mkdirSync(mapsDir, { recursive: true });
@@ -351,6 +360,7 @@ const mapPakEntries: PakManifestEntry[] = split.entries.map((entry) => ({
 const pakEntries = [
   ...pakManifest(terrain.entries),
   ...mapPakEntries,
+  ...battle.rawPakEntries,
   ...battle.battleRepository.pakEntries,
   ...animatedPakEntries,
   ...npcSrcPakEntries,
@@ -454,8 +464,15 @@ const assetReport = {
     options: G6_IMPORT_OPTIONS,
   },
   mapRepository: {
+    encodings: Object.fromEntries(
+      ["compact", "json"].map((encoding) => [
+        encoding,
+        split.entries.filter((entry) => entry.encoding === encoding).length,
+      ]),
+    ),
     shellBytes: split.files[0]!.bytes.byteLength,
     entryBytes: split.entries.reduce((sum, entry) => sum + entry.bytes.byteLength, 0),
+    canonicalJsonBytes: canonicalMapBytes,
     entries: split.entries.length,
     manifestHash: split.shell.mapManifestHash,
     schemaHash: split.shell.mapSchemaHash,

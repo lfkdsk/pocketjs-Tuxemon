@@ -6,6 +6,7 @@ import { encodePNG } from "../vendor/pocket-rpgkit/vendor/pocketjs/tests/png.ts"
 import { decodePng } from "../importer/png.ts";
 import type { BattleDb, BattleImageRef } from "../importer/battle-schema.ts";
 import { hpBarWidth } from "../ui/battle-layout.ts";
+import { battlePreviewSourcePath } from "./render-battle-preview.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
 export const GB4_BATTLE_WIDTH = 480;
@@ -14,9 +15,6 @@ export const GB4_PLAYER_HP = { current: 31, maximum: 62 } as const;
 export const GB4_ENEMY_HP = { current: 17, maximum: 40 } as const;
 export const GB4_PLAYER_BAR = { x: 328, y: 143, width: 116, height: 10 } as const;
 export const GB4_ENEMY_BAR = { x: 60, y: 44, width: 116, height: 10 } as const;
-
-const imagePath = (root: string, ref: BattleImageRef): string =>
-  join(root, ref.key.startsWith("ui:img.") ? ref.key.slice(7) : ref.key);
 
 const FONT_3X5: Readonly<Record<string, readonly string[]>> = {
   " ": ["000", "000", "000", "000", "000"],
@@ -88,7 +86,7 @@ function blitScaled(
   dw: number,
   dh: number,
 ): void {
-  const image = decodePng(new Uint8Array(readFileSync(imagePath(root, ref))), ref.key);
+  const image = decodePng(new Uint8Array(readFileSync(battlePreviewSourcePath(root, ref))), ref.key);
   const [sx, sy, sw, sh] = rect;
   for (let y = 0; y < dh; y++) for (let x = 0; x < dw; x++) {
     const sourceX = sx + Math.min(sw - 1, Math.floor(x * sw / dw));

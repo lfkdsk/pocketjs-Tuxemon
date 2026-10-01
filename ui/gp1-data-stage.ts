@@ -13,7 +13,6 @@ import {
   TERRAIN_STREAM_GROUND_INDEX,
   TERRAIN_STREAM_UPPER_INDEX,
 } from "./terrain-assets.ts";
-import { BATTLE_ASSET_PATHS } from "./battle-assets.ts";
 import { NPC_SRC_ASSET_PATHS } from "./npc-src-assets.ts";
 import { ANIMATED_ATLAS_NAMES } from "./animated-assets.ts";
 import { createProductionTuxemonBattle } from "../battle/production.ts";
@@ -28,7 +27,6 @@ export {
   TERRAIN_STREAM_META,
   TERRAIN_STREAM_GROUND_INDEX,
   TERRAIN_STREAM_UPPER_INDEX,
-  BATTLE_ASSET_PATHS,
   NPC_SRC_ASSET_PATHS,
   ANIMATED_ATLAS_NAMES,
   createProductionTuxemonBattle,

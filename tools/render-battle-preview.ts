@@ -17,10 +17,12 @@ interface SourceRect {
   rect?: readonly [number, number, number, number];
 }
 
-function sourcePath(root: string, ref: BattleImageRef): string {
-  const prefix = "ui:img.";
-  if (!ref.key.startsWith(prefix)) throw new Error(`GB1 preview: unsupported image key ${ref.key}`);
-  return join(root, ref.key.slice(prefix.length));
+export function battlePreviewSourcePath(root: string, ref: BattleImageRef): string {
+  const legacyPrefix = "ui:img.";
+  if (ref.key.startsWith(legacyPrefix)) return join(root, ref.key.slice(legacyPrefix.length));
+  const tile = /^ui:tile\.([^#]+)#0$/.exec(ref.key);
+  if (!tile) throw new Error(`GB1 preview: unsupported image key ${ref.key}`);
+  return join(root, "assets", `${tile[1]}.png`);
 }
 
 function fill(rgba: Uint8Array, colour: readonly [number, number, number, number]): void {
@@ -35,7 +37,7 @@ function blit(
   dy: number,
   scale = 1,
 ): void {
-  const image = decodePng(new Uint8Array(readFileSync(sourcePath(root, source.ref))), source.ref.key);
+  const image = decodePng(new Uint8Array(readFileSync(battlePreviewSourcePath(root, source.ref))), source.ref.key);
   const [sx, sy, sw, sh] = source.rect ?? source.ref.rect;
   for (let y = 0; y < sh; y++) {
     for (let x = 0; x < sw; x++) {

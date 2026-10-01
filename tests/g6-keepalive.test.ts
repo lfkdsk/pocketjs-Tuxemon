@@ -74,7 +74,10 @@ describe("GP1 keepalive manifests (bidirectional)", () => {
       for (const key of collectStreamRefKeys(refs)) referenced.add(key);
     }
     const pak = readJson<{ key: string; file: string }[]>("pak.json");
-    const tileEntries = new Map(pak.filter((entry) => entry.key.startsWith("ui:tile.")).map((entry) => [entry.key, entry.file]));
+    const tileEntries = new Map(pak
+      .filter((entry) => entry.file.startsWith("assets/stream/"))
+      .map((entry) => [entry.key, entry.file]));
+    expect([...tileEntries.keys()].every((key) => key.startsWith("ui:tile."))).toBeTrue();
     const listed = new Set(tileEntries.keys());
     const missing = [...referenced].filter((key) => !listed.has(key)).sort();
     const extra = [...listed].filter((key) => !referenced.has(key)).sort();

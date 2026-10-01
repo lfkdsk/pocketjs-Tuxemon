@@ -14,7 +14,7 @@ lives here; everything reusable lives in the kit.
 | `battle/` | The Tuxemon battle system: pure reducer, extension handlers, scene. |
 | `ui/` | UI stage modules and generated asset tables. |
 | `data/` | Generated JSON: terrain, battle database, journey tapes, golden manifests. All generated, all committed. |
-| `assets/` | Generated art, committed: streamed terrain chunks (`stream/`), character walkers (`characters/`), animated-tile atlases (`anim/`), battle textures (`battle/`). |
+| `assets/` | Generated art, committed: streamed terrain chunks (`stream/`), character walkers (`characters/`), animated-tile atlases (`anim/`), and battle PNGs retained as preview/golden sources (`battle/`). |
 | `tools/` | Verifies, benches, journey recorders, golden updaters, renderers. See [verification.md](verification.md). |
 | `tests/` | The test suite (42 files) plus `tests/goldens/` (PNG keyframes and gzipped trace fixtures). |
 | `main.tsx` | Game entry: mounts the kit's `GameView` with the project shell, map repository, extensions, battle rules and scene. |
@@ -23,7 +23,7 @@ lives here; everything reusable lives in the kit.
 | `pak.json`, `images.json`, `sprites.json` | Generated manifests consumed by PocketJS's pak builder. |
 | `reports/G1-coverage.md` | The committed import coverage report. See [importer.md](importer.md). |
 | `vendor/pocket-rpgkit` | The kit submodule (with nested `vendor/pocketjs`). |
-| `dist/` | Build output, gitignored: project shell and map shards, battle shards, the JS bundle, the web site. |
+| `dist/` | Build output, gitignored: project shell, compact map shards (`maps/*.rkm`), indexed battle images (`battle-art/*.pkts`), battle/data shards, the JS bundle and the web site. |
 | `findings/` | Research and milestone notes. Process documentation, not user docs. |
 
 `bunfig.toml` pins the test root to `tests/` so `bun test` never walks into
@@ -41,7 +41,8 @@ the vendored suites.
 - `shapes.ts` — classifies an event's guard shape to pick the kit trigger.
 - `characters.ts` — cooks Tuxemon's walkers into per-character sprite frames.
 - `animated.ts`, `npc-src.ts` — split generated placements into lazy shards.
-- `battle.ts` — imports the battle database and battle textures.
+- `battle.ts` — imports the battle database, retains preview PNGs, and emits
+  one CLUT8+PackBits TILESET entry per runtime battle image.
 - `world.ts`, `world-schema.ts` — the outdoor-world topology index.
 - `time-weather.ts` — the game clock and weather state: versioned codec, the
   imported weather tables, and the argument shapes for the time/weather
@@ -79,8 +80,9 @@ terrain chunks + project conversion + characters + battle data + sharding
    |
    +--> committed: data/*.json, assets/**, ui/*-assets.ts,
    |                pak.json, images.json, sprites.json, reports/G1-coverage.md
-   +--> gitignored: dist/project-shell.json, dist/maps/*, dist/battle/*,
-                     dist/animated/*, dist/npc-src/*, dist/import-report.json
+   +--> gitignored: dist/project-shell.json, dist/maps/*.rkm,
+                    dist/battle-art/*.pkts, dist/battle/*,
+                    dist/animated/*, dist/npc-src/*, dist/import-report.json
    |
    |  bun run build     (tools/build.ts: import, then bundle main.tsx)
    |  bun run web       (import, then the kit's static-site builder)
@@ -92,8 +94,12 @@ The import runs in this order: terrain, project conversion (all 263 maps,
 events, NPCs, dialogue, shops, world index), terrain merge into the project,
 character cook, battle data and art, NPC-src sharding, animated atlases, map
 sharding, manifests, dist reports, and finally the coverage report and the
-asset report. Two full imports into isolated roots must be byte-identical
-(`bun run verify:g6:determinism`).
+asset report. The map splitter chooses canonical JSON or `rpgkit-map/1` per
+entry, whichever is smaller (the current 263 maps all choose compact). Battle
+images are normalized to the existing RGBA4444 display precision, then stored
+as deterministic single-tile CLUT8+PackBits entries; the PNG copies are not
+registered as eager runtime images. Two full imports into isolated roots must
+be byte-identical (`bun run verify:g6:determinism`).
 
 `bun run build` re-runs the import and then bundles the game with PocketJS's
 builder for the desktop target. `bun run web` re-runs the import and builds
@@ -102,9 +108,19 @@ the static site into `dist/web`. Both are self-contained: they need
 
 At runtime, `main.tsx` loads the project shell and a lazy map repository
 (desktop reads entries through the data-fs channel; web and consoles read
-them from the pak), registers the battle extensions and rules, and mounts the
-kit's `GameView`. Maps, battle data, NPC sprites and animated tiles are all
-sharded: only the entries the session touches are read.
+them from the pak). The repository recognizes the compact envelope and
+reconstructs the ordinary `MapDef` before the engine sees it. Battle scene
+images use one shared reference-counted cache: the first visible borrower
+loads its `ui:tile.*#0` entry, multiple widgets share the handle, and leaving
+the battle detaches every node before freeing its working set. Battle data,
+NPC sprites and animated tiles remain separately sharded, so only entries the
+session touches are read.
+
+The QuickJS benchmark harnesses compile copied desktop-host crates with
+`--no-default-features`, so performance gates do not require ALSA headers.
+The interactive desktop launcher uses the kit's feature detector: it enables
+the audio host when ALSA development metadata is available and otherwise
+builds a silent desktop host.
 
 ## Game extensions: the `tux.*` namespace
 
@@ -170,7 +186,8 @@ drives PocketJS's builder directly.
    - `bun run verify:g6:determinism`;
    - `bun run test`;
    - the maintained journeys: `bun run verify:gb6:mainline`,
-     `bun run verify:j1:mainline`, `bun run verify:gb6:failures`,
+     `bun run verify:j1:mainline`, `bun run verify:j2:mainline`,
+     `bun run verify:gb6:failures`,
      `bun run verify:g6:locks`, `bun run verify:g6:frozen`;
    - `bun run web` plus `bun tools/verify-web-journey.ts` in headless Chrome;
    - the QuickJS benches (`bun run bench:g6:quickjs`,

@@ -14,6 +14,10 @@ import {
   decodeMapEntryBytes,
   validateMapDefStructure,
 } from "../vendor/pocket-rpgkit/src/engine/map-repository.ts";
+import {
+  decodeCompactMap,
+  isCompactMapValue,
+} from "../vendor/pocket-rpgkit/src/engine/compact-map.ts";
 import { createWorld } from "../vendor/pocket-rpgkit/src/engine/interpreter.ts";
 import { buildPassage } from "../vendor/pocket-rpgkit/src/engine/passability.ts";
 import { MOTION_HZ } from "../vendor/pocket-rpgkit/src/engine/motion-clock.ts";
@@ -164,7 +168,8 @@ globalThis.__c1ReadBench = {
     return scratch.text.length;
   },
   parseJson() {
-    scratch.map = JSON.parse(scratch.text);
+    const transport = JSON.parse(scratch.text);
+    scratch.map = isCompactMapValue(transport) ? decodeCompactMap(transport) : transport;
     return (scratch.map as { id: string }).id;
   },
   lightValidate() {

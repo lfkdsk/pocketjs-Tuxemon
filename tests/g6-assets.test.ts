@@ -3,9 +3,10 @@ import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { decodePng } from "../importer/png.ts";
 import { DEFAULT_TUXEMON_SRC } from "../importer/terrain.ts";
-import { BATTLE_ASSET_PATHS } from "../ui/battle-assets.ts";
 import { ANIMATED_INDEX, GAME_ASSETS, NPC_SRC_INDEX, PLAYER } from "../ui/game-assets.ts";
+import { createMapRepository } from "../vendor/pocket-rpgkit/src/engine/map-repository.ts";
 import type { AnimatedTile, NpcArt } from "../vendor/pocket-rpgkit/src/ui/game-assets.ts";
+import type { ProjectShell } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
 const report = JSON.parse(readFileSync(resolve(ROOT, "data/g6-assets-report.json"), "utf8"));
@@ -131,16 +132,14 @@ describe("G6 generated game assets", () => {
     // appearance ops can give any event a sprite — so the baked pool must
     // cover the event count of every map a session can load. The test_*
     // stress fixtures stay exempt by design (see gen-assets.ts).
-    const shell = JSON.parse(readFileSync(resolve(ROOT, "dist/project-shell.json"), "utf8")) as {
-      mapIndex: Record<string, { id: string; entry: string }>;
-    };
+    const shell = JSON.parse(readFileSync(resolve(ROOT, "dist/project-shell.json"), "utf8")) as ProjectShell;
+    const repository = createMapRepository(shell.mapIndex, {
+      read: (entry) => new Uint8Array(readFileSync(resolve(ROOT, "dist", entry))),
+    });
     let playableMax = 0;
     let testNpcsEvents = 0;
-    for (const meta of Object.values(shell.mapIndex)) {
-      const map = JSON.parse(readFileSync(resolve(ROOT, "dist", meta.entry), "utf8")) as {
-        id: string;
-        events?: unknown[];
-      };
+    for (const meta of shell.mapIndex) {
+      const map = repository.acquire(meta.id);
       const events = map.events?.length ?? 0;
       if (map.id === "test_npcs") {
         testNpcsEvents = events;
@@ -148,6 +147,7 @@ describe("G6 generated game assets", () => {
         expect(events, `${map.id} needs ${events} actor slots`).toBeLessThanOrEqual(GAME_ASSETS.maxActors!);
         playableMax = Math.max(playableMax, events);
       }
+      repository.releaseExcept([]);
     }
     // The pool is exactly the playable max: sprite-based counting would shrink
     // it below the real event counts, and dropping the test_* exemption would
@@ -157,12 +157,10 @@ describe("G6 generated game assets", () => {
   });
 
   test("all R2 character images are portable power-of-two RGBAs", () => {
-    const battlePaths = new Set<string>(BATTLE_ASSET_PATHS);
     const characterImages = Object.entries(images).filter(([relative]) =>
       relative.startsWith("assets/characters/")
     );
     expect(characterImages).toHaveLength(1_955);
-    expect(BATTLE_ASSET_PATHS.every((relative) => images[relative]?.psm === 2)).toBeTrue();
     for (const [relative, meta] of characterImages) {
       const path = resolve(ROOT, relative);
       expect(existsSync(path), relative).toBeTrue();
