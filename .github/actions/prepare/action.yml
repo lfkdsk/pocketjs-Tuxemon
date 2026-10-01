@@ -1,0 +1,62 @@
+name: Prepare
+description: >-
+  Install Bun and Rust, restore caches, fetch the pinned Tuxemon source,
+  install dependencies, import Tuxemon and build the game bundle and the
+  wasm core. Every CI job starts from here so jobs can run in parallel.
+
+inputs:
+  build:
+    description: Build the game bundle and the wasm core after importing.
+    default: "true"
+
+runs:
+  using: composite
+  steps:
+    - uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: 1.3.x
+
+    # The wasm core is a build artifact, not a checked-in file.
+    - uses: dtolnay/rust-toolchain@stable
+      with:
+        targets: wasm32-unknown-unknown
+
+    - name: Cache the wasm core build
+      uses: actions/cache@v6
+      with:
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+          vendor/pocket-rpgkit/vendor/pocketjs/engine/wasm/target
+        key: ${{ runner.os }}-pocketjs-wasm-${{ hashFiles('vendor/pocket-rpgkit/vendor/pocketjs/engine/wasm/Cargo.lock', 'vendor/pocket-rpgkit/vendor/pocketjs/engine/**/Cargo.toml', 'vendor/pocket-rpgkit/vendor/pocketjs/engine/wasm/src/**', 'vendor/pocket-rpgkit/vendor/pocketjs/engine/core/src/**') }}
+        restore-keys: ${{ runner.os }}-pocketjs-wasm-
+
+    - name: Cache the pinned Tuxemon source
+      uses: actions/cache@v6
+      with:
+        path: .tuxemon-src
+        key: tuxemon-src-${{ hashFiles('tools/fetch-tuxemon.sh') }}
+
+    - name: Fetch the pinned Tuxemon source
+      shell: bash
+      run: |
+        sh tools/fetch-tuxemon.sh .tuxemon-src
+        echo "TUXEMON_SRC=${{ github.workspace }}/.tuxemon-src" >> "$GITHUB_ENV"
+
+    - name: Install dependencies
+      shell: bash
+      run: bun install --frozen-lockfile
+
+    - name: Import Tuxemon
+      shell: bash
+      run: bun run import
+
+    # The first clean build writes PocketJS's ignored
+    # framework/src/styles.generated.ts mid-run; the build serves it
+    # virtually (jsxPlugin onResolve/onLoad), so a single run resolves it.
+    - name: Build the game bundle and the wasm core
+      if: inputs.build == 'true'
+      shell: bash
+      run: |
+        bun run build
+        bun run build:wasm

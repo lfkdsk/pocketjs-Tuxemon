@@ -2,10 +2,12 @@ name: CI
 
 # Re-import Tuxemon from the pinned upstream commit and check that the
 # committed project, maps, art and battle data are exactly what the importer
-# produces; then typecheck, build, run the tests and the import/journey
-# audits, and play the whole maintained journey (bedroom -> first battle ->
-# Route 1) in headless Chrome against the built web site. The web site is
-# kept as an artifact so it can be downloaded and played locally.
+# produces; then typecheck, build, run the tests, the import audits and the
+# maintained journeys, and play the opening journey in headless Chrome
+# against the built web site. The checks run as parallel jobs, each starting
+# from the shared prepare action; the web site is kept as an artifact and is
+# published to GitHub Pages from main once every job passes
+# (Settings -> Pages -> Source: GitHub Actions).
 
 on:
   push:
@@ -16,118 +18,118 @@ on:
 permissions:
   contents: read
 
-# The web site is published to GitHub Pages from main after every check
-# passes (Settings -> Pages -> Source: GitHub Actions).
-
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  check:
+  import:
+    name: Import, typecheck and determinism
     runs-on: ubuntu-latest
-    timeout-minutes: 60
-    env:
-      TUXEMON_SRC: ${{ github.workspace }}/.tuxemon-src
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v7
         with:
           submodules: recursive
-
-      - uses: oven-sh/setup-bun@v2
+      - uses: ./.github/actions/prepare
         with:
-          bun-version: 1.3.x
-
-      # The wasm core is a build artifact, not a checked-in file.
-      - uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: wasm32-unknown-unknown
-
-      - name: Cache the wasm core build
-        uses: actions/cache@v6
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            vendor/pocket-rpgkit/vendor/pocketjs/engine/wasm/target
-          key: ${{ runner.os }}-pocketjs-wasm-${{ hashFiles('vendor/pocket-rpgkit/vendor/pocketjs/engine/wasm/Cargo.lock', 'vendor/pocket-rpgkit/vendor/pocketjs/engine/**/Cargo.toml', 'vendor/pocket-rpgkit/vendor/pocketjs/engine/wasm/src/**', 'vendor/pocket-rpgkit/vendor/pocketjs/engine/core/src/**') }}
-          restore-keys: ${{ runner.os }}-pocketjs-wasm-
-
-      - name: Cache the pinned Tuxemon source
-        uses: actions/cache@v6
-        with:
-          path: .tuxemon-src
-          key: tuxemon-src-${{ hashFiles('tools/fetch-tuxemon.sh') }}
-
-      - name: Fetch the pinned Tuxemon source
-        run: sh tools/fetch-tuxemon.sh .tuxemon-src
-
-      - name: Install dependencies
-        run: bun install --frozen-lockfile
-
-      - name: Import Tuxemon and check the committed output is unchanged
+          build: "false"
+      - name: The committed output is exactly what the importer produces
         run: |
-          bun run import
           git status --porcelain
           test -z "$(git status --porcelain)"
-
       - name: Typecheck
         run: bunx tsc --noEmit
-
-      # The first clean build writes PocketJS's ignored
-      # framework/src/styles.generated.ts mid-run; the build serves it
-      # virtually (jsxPlugin onResolve/onLoad), so a single run resolves it.
-      - name: Build the game bundle and the wasm core
-        run: |
-          bun run build
-          bun run build:wasm
-
-      - name: Test
-        run: bun test tests/
-
-      # The frozen 30.5-minute source tape takes about one minute to fold on
-      # CI. Full 60/30/20 alignment, save/load, and rewind checks remain in
-      # `bun run verify:gb6:full` for the release/acceptance gate.
-      - name: Replay the Route 3 battle journey at 60 Hz
-        run: bun run verify:gb6:mainline
-
-      # J1 is stored as a standalone continuation, but CI concatenates its
-      # input masks with GB6 and replays from frame zero so the snapshot cannot
-      # hide a historical divergence. Stateful and multi-rate checks remain in
-      # `bun run verify:j1:full` for the release/acceptance gate.
-      - name: Replay the captain-return journey from frame zero at 60 Hz
-        run: bun run verify:j1:mainline
-
-      - name: Replay both battle defeat and recovery journeys
-        run: bun run verify:gb6:failures
-
-      - name: Every imported input lock is executed to its unlock
-        run: bun run verify:g6:locks
-
-      - name: No map can freeze the player
-        run: bun run verify:g6:frozen
-
       - name: Two isolated imports are byte-identical
         run: bun run verify:g6:determinism
 
+  test:
+    name: Tests (${{ matrix.name }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        # Explicit groups of roughly a minute each: bun's --shard cuts the
+        # sorted file list into contiguous runs, which bunches the slow
+        # battle and replay suites together. New test files land in "rest".
+        include:
+          - name: importer
+            files: tests/importer.test.ts
+          - name: replays
+            files: tests/g7-repository.test.ts tests/g6-golden.test.ts
+          - name: locks, battle data and terrain
+            files: tests/g6-locks.test.ts tests/battle-db-adapter.test.ts tests/battle-golden.test.ts tests/terrain.test.ts
+          - name: rest
+            files: rest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: recursive
+      - uses: ./.github/actions/prepare
+      - name: Test
+        run: |
+          files="${{ matrix.files }}"
+          if [ "$files" = rest ]; then
+            files=$(ls tests/*.test.ts | grep -v -E '(importer|g7-repository|g6-golden|g6-locks|battle-db-adapter|battle-golden|terrain)\.test\.ts$')
+          fi
+          bun test $files
+
+  journey:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # The frozen 30.5-minute source tape folds in about a minute on CI.
+          # Full 60/30/20 alignment, save/load and rewind checks remain in
+          # `bun run verify:gb6:full` for the release/acceptance gate.
+          - name: Route 3 battle journey at 60 Hz
+            run: bun run verify:gb6:mainline
+          # J1 is stored as a standalone continuation, but CI concatenates its
+          # input masks with GB6 and replays from frame zero so the snapshot
+          # cannot hide a historical divergence.
+          - name: Captain-return journey from frame zero at 60 Hz
+            run: bun run verify:j1:mainline
+          - name: Battle defeat and recovery journeys
+            run: bun run verify:gb6:failures
+          - name: Every imported input lock is executed to its unlock
+            run: bun run verify:g6:locks
+          - name: No map can freeze the player
+            run: bun run verify:g6:frozen
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: recursive
+      - uses: ./.github/actions/prepare
+      - name: ${{ matrix.name }}
+        run: ${{ matrix.run }}
+
+  web:
+    name: Web site and headless Chrome journey
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: recursive
+      - uses: ./.github/actions/prepare
       - name: Build the web site
         run: bun run web
-
       - name: Play the journey in headless Chrome
         run: bun tools/verify-web-journey.ts
-
       - name: Keep the web site
         uses: actions/upload-artifact@v7
         with:
           name: web-site
           path: dist/web
           retention-days: 14
-
       - uses: actions/upload-pages-artifact@v5
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         with:
           path: dist/web
-
       - name: Keep the journey screenshot
         if: always()
         uses: actions/upload-artifact@v7
@@ -138,7 +140,7 @@ jobs:
           if-no-files-found: ignore
 
   deploy:
-    needs: check
+    needs: [import, test, journey, web]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 10
