@@ -1,0 +1,1262 @@
+diff --git a/src/engine/attract.ts b/src/engine/attract.ts
+index e8550ae..aacf0ec 100644
+--- a/src/engine/attract.ts
++++ b/src/engine/attract.ts
+@@ -115,6 +115,7 @@ export function attractReadHoldSeconds(chars: number): number {
+ export type AttractPhase = "attract" | "play";
+ 
+ export interface AttractOptions {
++  immutableState?: boolean;
+   /** Virtual frames per second; seconds-based timings derive from it. */
+   hz: number;
+   /** Source rate of the published tape. Defaults to 60 Hz. Tests that feed
+@@ -307,6 +308,7 @@ export class AttractController {
+       extensions: opts.extensions,
+       battle: opts.battle,
+       scene: opts.scene,
++      immutableState: opts.immutableState,
+     });
+     this.idleFrames = opts.idleFrames ?? this.hz * 10;
+     this.endHoldFrames = opts.endHoldFrames ?? this.timelineHz * 2;
+diff --git a/src/engine/battle.ts b/src/engine/battle.ts
+index 8f1c392..625d6ac 100644
+--- a/src/engine/battle.ts
++++ b/src/engine/battle.ts
+@@ -47,6 +47,9 @@ export interface BattleStart {
+ }
+ 
+ export interface BattleRules {
++  /** Opt in only when callbacks preserve every published state and return
++   * persistent JSON values. The engine can then share validated subtrees. */
++  readonly immutableState?: boolean;
+   start(
+     ext: JsonValue,
+     setup: JsonValue,
+@@ -70,13 +73,13 @@ export interface BattleScene {
+ 
+ export type SceneSlot = BattleScene;
+ 
+-export function cloneScene(scene: SceneSlot | null): SceneSlot | null {
++export function cloneScene(scene: SceneSlot | null, immutableState = false): SceneSlot | null {
+   if (scene === null) return null;
+-  assertJsonValue(scene.state, "battle scene state");
++  if (!immutableState) assertJsonValue(scene.state, "battle scene state");
+   return {
+     kind: "battle",
+     fiber: scene.fiber,
+-    state: deepClone(scene.state),
++    state: immutableState ? scene.state : deepClone(scene.state),
+     pausedTicks: scene.pausedTicks ?? 0,
+   };
+ }
+diff --git a/src/engine/chars.ts b/src/engine/chars.ts
+index 3f54fea..db64148 100644
+--- a/src/engine/chars.ts
++++ b/src/engine/chars.ts
+@@ -206,12 +206,22 @@ export function cloneChars(s0: CharsState): CharsState {
+  *  from this map (cloneChars, createChars) owns every character it holds. */
+ const OWNED = new WeakMap<CharsState, Set<string>>();
+ 
++// Page membership and flags change only in syncPagesInPlace. Movement copies
++// inherit this token; callers using it must keep published states immutable.
++const PAGE_REVISION = new WeakMap<CharsState, object>();
++export function charsPageRevision(s: CharsState): object {
++  let token = PAGE_REVISION.get(s);
++  if (!token) { token = {}; PAGE_REVISION.set(s, token); }
++  return token;
++}
++
+ /** A working copy that shares each character object with `s0` until the
+  *  first write to it (ownChar). stepSession folds one of these per frame:
+  *  most characters stand still, so most are never copied. */
+ export function shareChars(s0: CharsState): CharsState {
+   const s: CharsState = { rng: s0.rng, chars: keyedRecord(s0.chars) };
+   OWNED.set(s, new Set());
++  PAGE_REVISION.set(s, charsPageRevision(s0));
+   return s;
+ }
+ 
+@@ -295,19 +305,23 @@ export function syncPagesInPlace(
+   motion?: Record<string, MotionType>,
+   detachPatrol = true,
+   conditionContext?: ConditionContext,
++  selectedPages?: Map<GameEvent, number>,
+ ): SyncResult {
+   const abortedWaiters: string[] = [];
+-  const liveSlot = new Array<boolean>(events.length);
++  const liveIds = new Set<string>();
++  let changed = false;
+ 
+-  for (const { ev, key, index: slot } of events) {
++  for (const { ev, key } of events) {
+     const index = activeIndexAt(ev, sw, key, facing, extension, conditionContext);
++    selectedPages?.set(ev, index);
+     if (motion && index >= 0) motion[ev.id] = ev.pages[index]!.moveType ?? "static";
+-    liveSlot[slot] = index >= 0 && !isErased(key);
+-    if (!liveSlot[slot]) continue;
++    if (index < 0 || isErased(key)) continue;
++    liveIds.add(ev.id);
+     const page = ev.pages[index]!;
+ 
+     let existing = s.chars[ev.id];
+     if (!existing) {
++      changed = true;
+       // A `place` command relocates the spawn origin; MV Set Event
+       // Location moves a not-yet-loaded event's future start too.
+       const placed = placements[ev.id];
+@@ -338,6 +352,7 @@ export function syncPagesInPlace(
+     const visible = page.sprite != null;
+     const blocks = page.blocks === true;
+     if (existing.visible === visible && existing.blocks === blocks && existing.pageIndex === index) continue;
++    changed = true;
+     existing = ownChar(s, ev.id);
+     existing.visible = visible;
+     existing.blocks = blocks;
+@@ -363,17 +378,15 @@ export function syncPagesInPlace(
+   }
+ 
+   // A character is live while any event carrying its id is.
+-  const live = (id: string): boolean => {
+-    for (const slot of slotsById.get(id) ?? []) if (liveSlot[slot]) return true;
+-    return false;
+-  };
+   for (const id of Object.keys(s.chars)) {
+-    if (!live(id)) {
++    if (!liveIds.has(id)) {
+       const gone = s.chars[id]!;
+       if (gone.route?.waiter) abortedWaiters.push(gone.route.waiter);
+       delete s.chars[id];
++      changed = true;
+     }
+   }
++  if (changed) PAGE_REVISION.set(s, {});
+   return { abortedWaiters };
+ }
+ 
+@@ -578,7 +591,8 @@ export function stepCharsInPlace(
+ ): string[] {
+   const frames = stepFrames(cfg);
+   const finishedWaiters: string[] = [];
+-  const others = new Map(Object.entries(s.chars));
++  let others: Map<string, CharState> | undefined;
++  const otherChars = () => others ??= new Map(Object.entries(s.chars));
+ 
+   for (const id of Object.keys(s.chars).sort()) {
+     const shared = s.chars[id]!;
+@@ -589,7 +603,7 @@ export function stepCharsInPlace(
+       if (!shared.route && shared.thinkIn === 0 && (motion[id] ?? "static") === "static") continue;
+     }
+     const ch = ownChar(s, id);
+-    others.set(id, ch);
++    others?.set(id, ch);
+ 
+     // Mid-step: interpolate. Nothing interrupts a step once committed
+     // (locks and page changes snap at boundaries via syncPages).
+@@ -614,7 +628,7 @@ export function stepCharsInPlace(
+       if (ch.route?.plan?.done) {
+         const ap = ch.route.plan.approach;
+         if (ap) {
+-          const tc = resolveTargetCell(ap.target, player, others);
++          const tc = resolveTargetCell(ap.target, player, otherChars());
+           if (tc) {
+             const f = facingToward(ch.tx, ch.ty, tc.x, tc.y);
+             if (f !== null) { ch.facing = f; ch.stepDir = f; }
+@@ -638,7 +652,7 @@ export function stepCharsInPlace(
+     }
+ 
+     if (ch.route) {
+-      stepRoute(s, ch, table, player, others, cfg, finishedWaiters);
++      stepRoute(s, ch, table, player, otherChars(), cfg, finishedWaiters);
+       continue;
+     }
+ 
+@@ -647,8 +661,8 @@ export function stepCharsInPlace(
+       if (ch.thinkIn > 0) continue; // decide on the tick the pause ends
+     }
+     const kind = motion[id] ?? "static";
+-    if (kind === "random") randomStep(s, ch, table, player, others, cfg);
+-    else if (kind === "approach") approachStep(ch, table, player, others, cfg);
++    if (kind === "random") randomStep(s, ch, table, player, otherChars(), cfg);
++    else if (kind === "approach") approachStep(ch, table, player, otherChars(), cfg);
+   }
+ 
+   return finishedWaiters;
+diff --git a/src/engine/clone.ts b/src/engine/clone.ts
+index de9bfe9..4c3add9 100644
+--- a/src/engine/clone.ts
++++ b/src/engine/clone.ts
+@@ -37,7 +37,9 @@ export function deepClone<T>(v: T): T {
+ export function keyedRecord<T>(src?: Readonly<Record<string, T>>): Record<string, T> {
+   const out = Object.create(null) as Record<string, T>;
+   if (src) {
+-    for (const key of Object.keys(src)) out[key] = src[key]!;
++    Object.assign(out, src);
++    // Match the string-keyed JSON contract if a caller supplied symbols.
++    for (const key of Object.getOwnPropertySymbols(out)) delete (out as Record<PropertyKey, unknown>)[key];
+   }
+   return out;
+ }
+diff --git a/src/engine/extensions.ts b/src/engine/extensions.ts
+index 257b9a1..8699e0b 100644
+--- a/src/engine/extensions.ts
++++ b/src/engine/extensions.ts
+@@ -55,6 +55,8 @@ export interface ExtensionCodec {
+ export type ExtensionValidator = (value: JsonValue) => boolean | string | void;
+ 
+ export interface ExtensionOptions {
++  /** Condition handlers promise to leave their argument and ext trees unchanged. */
++  immutableConditions?: boolean;
+   /** Fresh-session value. Defaults to null. */
+   initial?: JsonValue;
+   commands?: Readonly<Record<string, ExtensionCommandHandler>>;
+@@ -75,6 +77,7 @@ export interface ExtensionRuntime {
+   readonly codec: ExtensionCodec | null;
+   readonly validate: ExtensionValidator | null;
+   readonly allowUnknown: boolean;
++  readonly immutableConditions: boolean;
+ }
+ 
+ const CALL_RE = /^[A-Za-z][A-Za-z0-9_-]*(?:\.[A-Za-z][A-Za-z0-9_-]*)+$/;
+@@ -135,6 +138,7 @@ export function createExtensionRuntime(options: ExtensionOptions = {}): Extensio
+     codec: options.codec ?? null,
+     validate: options.validate ?? null,
+     allowUnknown: options.allowUnknown ?? false,
++    immutableConditions: options.immutableConditions === true,
+   };
+   validateExtension(runtime, initial, "extension initial state");
+   return runtime;
+@@ -159,3 +163,36 @@ export function decodeExtension(runtime: ExtensionRuntime, value: JsonValue): Js
+   validateExtension(runtime, decoded, "decoded extension state");
+   return deepClone(decoded);
+ }
++
++// Only callers with an explicit immutable-state contract may use this cache.
++// Nodes enter the cache after complete validation, so cycles remain errors.
++const validatedImmutableJson = new WeakSet<object>();
++export function assertImmutableJsonValue(value: unknown, label: string): asserts value is JsonValue {
++  const active = new Set<object>();
++  const visit = (value: unknown): string | null => {
++    if (value === null || typeof value === "string" || typeof value === "boolean") return null;
++    if (typeof value === "number") return Number.isFinite(value) ? null : ": finite number required";
++    if (typeof value !== "object") return ": JSON value required";
++    if (validatedImmutableJson.has(value)) return null;
++    if (active.has(value)) return ": cyclic value is not JSON";
++    active.add(value);
++    if (Array.isArray(value)) {
++      for (let i = 0; i < value.length; i++) {
++        const error = visit(value[i]);
++        if (error) return `[${i}]${error}`;
++      }
++    } else {
++      const proto = Object.getPrototypeOf(value);
++      if (proto !== Object.prototype && proto !== null) return ": plain JSON object required";
++      for (const key of Object.keys(value)) {
++        const error = visit((value as Record<string, unknown>)[key]);
++        if (error) return `.${key}${error}`;
++      }
++    }
++    active.delete(value);
++    validatedImmutableJson.add(value);
++    return null;
++  };
++  const error = visit(value);
++  if (error) throw new Error(`${label}: $${error}`);
++}
+diff --git a/src/engine/interpreter.ts b/src/engine/interpreter.ts
+index fdbd858..7df5f62 100644
+--- a/src/engine/interpreter.ts
++++ b/src/engine/interpreter.ts
+@@ -148,7 +148,7 @@ export function createSwitchState(init?: Partial<SwitchState>): SwitchState {
+ }
+ 
+ function keyedValue<T>(record: Readonly<Record<string, T>>, key: string): T | undefined {
+-  return Object.prototype.hasOwnProperty.call(record, key) ? record[key] : undefined;
++  return Object.hasOwn(record, key) ? record[key] : undefined;
+ }
+ 
+ // --- conditions and page selection ------------------------------------------
+@@ -209,13 +209,13 @@ export function evalCondition(
+         throw new Error(`extension condition ${JSON.stringify(c.call)} is not registered`);
+       }
+       const context: ExtensionReadContext = {
+-        ext: deepClone(extension.ext),
++        ext: extension.runtime.immutableConditions ? extension.ext : deepClone(extension.ext),
+         switches: s.switches,
+         variables: s.variables,
+         items: s.items,
+         gold: s.gold,
+       };
+-      const result = handler(context, deepClone(c.args));
++      const result = handler(context, extension.runtime.immutableConditions ? c.args : deepClone(c.args));
+       if (typeof result !== "boolean") {
+         throw new Error(`extension condition ${JSON.stringify(c.call)} must return a boolean`);
+       }
+@@ -306,8 +306,6 @@ export function activePage(
+   return index < 0 ? null : { page: ev.pages[index]!, index };
+ }
+ 
+-/** activePage's page index for a caller that already holds the event key;
+- *  -1 when no page condition holds. */
+ export function activeIndexAt(
+   ev: GameEvent,
+   s: SwitchState,
+@@ -317,7 +315,8 @@ export function activeIndexAt(
+   context?: ConditionContext,
+ ): number {
+   for (let i = ev.pages.length - 1; i >= 0; i--) {
+-    if (pageConditionHolds(ev.pages[i]!, s, key, facing, extension, context)) return i;
++    const page = ev.pages[i]!;
++    if (!page.condition || pageConditionHolds(page, s, key, facing, extension, context)) return i;
+   }
+   return -1;
+ }
+@@ -332,13 +331,7 @@ export function eventKey(mapId: string, eventId: string): string {
+  *  the two hosts (review C12). Trigger arbitration must depend only on the
+  *  authored id bytes, never on the host's collation tables. */
+ export function eventIdLess(a: string, b: string): boolean {
+-  const n = Math.min(a.length, b.length);
+-  for (let i = 0; i < n; i++) {
+-    const ca = a.charCodeAt(i);
+-    const cb = b.charCodeAt(i);
+-    if (ca !== cb) return ca < cb;
+-  }
+-  return a.length < b.length;
++  return a < b;
+ }
+ 
+ // --- compiled programs -------------------------------------------------------
+@@ -1023,6 +1016,11 @@ type SwitchRecord = "switches" | "self" | "items" | "variables" | "shopStock";
+  *  wrote keeps its record identities from state to state, and a record a
+  *  state was returned with is never written again. */
+ const SHARED_RECORDS = new WeakMap<SwitchState, Set<SwitchRecord>>();
++const RECORD_REVISIONS = new WeakMap<object, object>();
++/** Token changes on a bank write, including later writes within one host frame. */
++export function recordRevision(record: object): object {
++  return RECORD_REVISIONS.get(record) ?? record;
++}
+ 
+ /** The switch-bank record `k` of `sw`, copied first if a shareInterp copy
+  *  still shares it. Every write to a record of a working copy goes through
+@@ -1030,6 +1028,7 @@ const SHARED_RECORDS = new WeakMap<SwitchState, Set<SwitchRecord>>();
+ export function ownRecord<K extends SwitchRecord>(sw: SwitchState, k: K): SwitchState[K] {
+   const shared = SHARED_RECORDS.get(sw);
+   if (shared?.delete(k)) sw[k] = keyedRecord(sw[k] as Record<string, unknown>) as SwitchState[K];
++  else RECORD_REVISIONS.set(sw[k], {});
+   return sw[k];
+ }
+ 
+@@ -1153,6 +1152,9 @@ function worldEventById(w: World, id: string): GameEvent | undefined {
+  *  Authored areas come from the per-cell index. Autorun/parallel pages are
+  *  always eligible, while placed or moving events are added dynamically
+  *  because their live rectangle no longer matches the authored index. */
++const staticCandidates = new WeakMap<World, Map<string, GameEvent[]>>();
++const displacedCandidates = new WeakMap<object, Map<string, GameEvent[]>>();
++
+ function triggerCandidates(s: InterpState, w: World, input: InterpInput): GameEvent[] {
+   // Keep structural compatibility for callers that construct a World
+   // directly instead of using createWorld(): without an index, conservatively
+@@ -1161,27 +1163,48 @@ function triggerCandidates(s: InterpState, w: World, input: InterpInput): GameEv
+     return [...(w.map.events ?? [])]
+       .sort((a, b) => (eventIdLess(a.id, b.id) ? -1 : a.id === b.id ? 0 : 1));
+   }
+-  const byId = new Map<string, GameEvent>();
+-  const add = (events: readonly GameEvent[]): void => {
+-    for (const ev of events) byId.set(ev.id, ev);
+-  };
+-  add(w.alwaysScanEvents);
+-  add(indexedEventsAt(w, input.playerCell));
+-  const [fx, fy] = FRONT[input.facing];
+-  add(indexedEventsAt(w, { x: input.playerCell.x + fx, y: input.playerCell.y + fy }));
+-  for (const id of Object.keys(s.placements)) {
+-    const ev = w.eventsById.get(id);
+-    if (ev) byId.set(id, ev);
++  // Geometry is immutable. Cache only the static union; moving and placed
++  // events are still merged from the current snapshot on every frame.
++  const cellKey = `${input.playerCell.x},${input.playerCell.y},${input.facing}`;
++  let cache = staticCandidates.get(w);
++  if (!cache) { cache = new Map(); staticCandidates.set(w, cache); }
++  let base = cache.get(cellKey);
++  if (!base) {
++    const union = new Map<string, GameEvent>();
++    for (const ev of w.alwaysScanEvents) union.set(ev.id, ev);
++    for (const ev of indexedEventsAt(w, input.playerCell)) union.set(ev.id, ev);
++    const [fx, fy] = FRONT[input.facing];
++    for (const ev of indexedEventsAt(w, { x: input.playerCell.x + fx, y: input.playerCell.y + fy })) union.set(ev.id, ev);
++    base = [...union.values()].sort((a, b) => eventIdLess(a.id, b.id) ? -1 : a.id === b.id ? 0 : 1);
++    if (cache.size >= 8) cache.delete(cache.keys().next().value!);
++    cache.set(cellKey, base);
+   }
++  const displaced = Object.keys(s.placements);
+   if (input.eventCells) {
+     for (const id of Object.keys(input.eventCells)) {
+       const ev = w.eventsById.get(id);
+       const cell = input.eventCells[id]!;
+-      if (ev && (cell.x !== ev.x || cell.y !== ev.y)) byId.set(id, ev);
++      if (ev && (cell.x !== ev.x || cell.y !== ev.y)) displaced.push(id);
+     }
+   }
+-  return [...byId.values()]
+-    .sort((a, b) => (eventIdLess(a.id, b.id) ? -1 : a.id === b.id ? 0 : 1));
++  if (displaced.length === 0) return base;
++  // Membership is stable while an NPC moves. Its current rectangle is
++  // checked by scanTriggers, so coordinates do not belong in this key.
++  const displacedKey = JSON.stringify(displaced);
++  let movedCache = displacedCandidates.get(base);
++  if (!movedCache) { movedCache = new Map(); displacedCandidates.set(base, movedCache); }
++  const previous = movedCache.get(displacedKey);
++  if (previous) return previous;
++  const byId = new Map<string, GameEvent>();
++  for (const ev of base) byId.set(ev.id, ev);
++  for (const id of displaced) {
++    const ev = w.eventsById.get(id);
++    if (ev) byId.set(id, ev);
++  }
++  const result = [...byId.values()].sort((a, b) => eventIdLess(a.id, b.id) ? -1 : a.id === b.id ? 0 : 1);
++  if (movedCache.size >= 8) movedCache.delete(movedCache.keys().next().value!);
++  movedCache.set(displacedKey, result);
++  return result;
+ }
+ 
+ function startFiber(
+@@ -1231,7 +1254,33 @@ function cancelStaleParallels(
+   }
+ }
+ 
+-function scanTriggers(s: InterpState, w: World, input: InterpInput, extension: ExtensionScope): void {
++export interface PageSelections {
++  facing: Facing | undefined;
++  worldIdle: boolean;
++  indices: ReadonlyMap<GameEvent, number>;
++}
++interface PreparedTrigger { ev: GameEvent; key: string; index: number; contextual: boolean }
++const preparedTriggers = new WeakMap<object, WeakMap<object, PreparedTrigger[]>>();
++function prepareTriggers(w: World, events: readonly GameEvent[], selected: PageSelections): PreparedTrigger[] {
++  let byCandidates = preparedTriggers.get(selected.indices);
++  if (!byCandidates) { byCandidates = new WeakMap(); preparedTriggers.set(selected.indices, byCandidates); }
++  const previous = byCandidates.get(events);
++  if (previous) return previous;
++  const out: PreparedTrigger[] = [];
++  for (const ev of events) {
++    // Starting a blocking event changes worldIdle during the scan. Such
++    // pages remain candidates even when their initial selection is empty.
++    const contextual = ev.pages.some(page => page.condition?.all?.some(c => c.kind === "worldIdle"));
++    const index = selected.indices.get(ev) ?? -1;
++    if (!contextual && (index < 0 || ev.pages[index]!.commands.length === 0)) continue;
++    out.push({ ev, key: eventKey(w.map.id, ev.id), index, contextual });
++  }
++  byCandidates.set(events, out);
++  return out;
++}
++type PendingParallel = { index: number; prog: Prog };
++function scanTriggers(s: InterpState, w: World, input: InterpInput, extension: ExtensionScope, selected?: PageSelections): Record<string, PendingParallel> {
++  const pending = keyedRecord<PendingParallel>();
+   const rectOf = (ev: GameEvent): Rect | null => eventRect(ev, eventOrigin(ev, s, input));
+   const moved = input.prevCell.x !== input.playerCell.x || input.prevCell.y !== input.playerCell.y;
+   const prevFacing = input.prevFacing ?? input.facing;
+@@ -1252,38 +1301,40 @@ function scanTriggers(s: InterpState, w: World, input: InterpInput, extension: E
+     const r = rectOf(ev);
+     if (moved || !r || !cellInRect(input.playerCell, r)) delete s.touched[key];
+   }
++  let selectionContext = liveConditionContext(s, input.worldIdleBlockers);
+   // Ascending event-id order so parallel starts and the blocking-fiber
+   // choice are deterministic across frames. The order is explicit UTF-16
+   // code units (eventIdLess), never localeCompare, whose collation differs
+   // between the Bun and QuickJS hosts (review C12).
+-  for (const ev of triggerCandidates(s, w, input)) {
+-    const key = eventKey(w.map.id, ev.id);
++  const candidates = triggerCandidates(s, w, input);
++  const prepared = selected?.facing === input.facing && selected?.worldIdle === selectionContext.worldIdle
++    ? prepareTriggers(w, candidates, selected) : null;
++  for (let candidate = 0; candidate < (prepared ?? candidates).length; candidate++) {
++    const record = prepared?.[candidate];
++    const ev = record ? record.ev : candidates[candidate]!;
++    const key = record ? record.key : eventKey(w.map.id, ev.id);
+     if (s.erased[key]) continue;
+     // Page selection sees the live player facing, so a `facing` clause
+     // gates the page by direction.
+-    const active = activePage(
+-      ev,
+-      s.sw,
+-      w.map.id,
+-      input.facing,
+-      extension,
+-      liveConditionContext(s, input.worldIdleBlockers),
+-    );
+-    if (!active) continue;
+-    const { page, index } = active;
++    const cachedIndex = record && (!record.contextual || selected!.worldIdle === selectionContext.worldIdle)
++      ? record.index : undefined;
++    const index = cachedIndex ?? activeIndexAt(ev, s.sw, key, input.facing, extension, selectionContext);
++    if (index < 0) continue;
++    const page = ev.pages[index]!;
+     // A page with no commands has no fiber: an opened gate's touch page and
+     // a victory event's spent parallel page are inert markers, not
+     // per-frame start/finish spin.
+     if (page.commands.length === 0) continue;
+     if (page.trigger === "parallel") {
+       if (!keyedValue(s.parallels, key)) {
+-        s.parallels[key] = startFiber(s, key, index, true, w.pagePrograms.get(key)![index]!);
++        pending[key] = { index, prog: w.pagePrograms.get(key)![index]! };
+       }
+       continue;
+     }
+     if (s.main) continue; // one blocking fiber at a time
+     if (page.trigger === "autorun") {
+       s.main = startFiber(s, key, index, false, w.pagePrograms.get(key)![index]!);
++      selectionContext = { worldIdle: false };
+     } else if (page.trigger === "action") {
+       // While the cross-event input lock is held, confirm presses
+       // start no event (the cutscene owns control); autorun/parallel above
+@@ -1300,6 +1351,7 @@ function scanTriggers(s: InterpState, w: World, input: InterpInput, extension: E
+       const front = { x: input.playerCell.x + fx, y: input.playerCell.y + fy };
+       if (cellInRect(front, r) || cellInRect(input.playerCell, r)) {
+         s.main = startFiber(s, key, index, false, w.pagePrograms.get(key)![index]!);
++      selectionContext = { worldIdle: false };
+       }
+     } else if (page.trigger === "playerTouch") {
+       if (held) continue;
+@@ -1313,9 +1365,11 @@ function scanTriggers(s: InterpState, w: World, input: InterpInput, extension: E
+       if (stepEdge || turnEdge) {
+         s.touched[key] = true;
+         s.main = startFiber(s, key, index, false, w.pagePrograms.get(key)![index]!);
++      selectionContext = { worldIdle: false };
+       }
+     }
+   }
++  return pending;
+ }
+ 
+ // --- fiber execution -----------------------------------------------------------
+@@ -1431,16 +1485,23 @@ function clampVariableRecord(
+   return out;
+ }
+ 
++function writeVariable(sw: SwitchState, id: string, value: VariableValue): void {
++  if (!Object.hasOwn(sw.variables, id) || !Object.is(sw.variables[id], value))
++    ownRecord(sw, "variables")[id] = value;
++}
++
+ function runInstant(s: InterpState, f: Fiber, ins: InstantInstr): void {
+   switch (ins.op) {
+     case "switch":
+-      ownRecord(s.sw, "switches")[ins.id] = ins.value;
++      if (!Object.hasOwn(s.sw.switches, ins.id) || s.sw.switches[ins.id] !== ins.value)
++        ownRecord(s.sw, "switches")[ins.id] = ins.value;
+       break;
+     case "variable": {
+-      const variables = ownRecord(s.sw, "variables");
++      const variables = s.sw.variables;
++      let value: VariableValue;
+       if (ins.set.op === "random") {
+         const r = randInt(s.sw.rng, ins.set.min, ins.set.max);
+-        variables[ins.id] = clampFiniteVar(r.value);
++        value = clampFiniteVar(r.value);
+         s.sw.rng = r.next;
+       } else if ("from" in ins.set) {
+         // T2-16: the operand is another variable's live value (target OP
+@@ -1451,14 +1512,14 @@ function runInstant(s: InterpState, f: Fiber, ins: InstantInstr): void {
+         // write); the arithmetic ops treat a non-number source/target as 0.
+         const op = ins.set.op;
+         if (op === "copy") {
+-          const b = variables[ins.set.from] ?? 0;
+-          variables[ins.id] = typeof b === "number" ? clampFiniteVar(b) : b;
++          const b = keyedValue(variables, ins.set.from) ?? 0;
++          value = typeof b === "number" ? clampFiniteVar(b) : b;
+         } else {
+-          const held = variables[ins.id];
++          const held = keyedValue(variables, ins.id);
+           const a = typeof held === "number" ? held : 0;
+-          const source = variables[ins.set.from];
++          const source = keyedValue(variables, ins.set.from);
+           const b = typeof source === "number" ? source : 0;
+-          variables[ins.id] = clampFiniteVar(
++          value = clampFiniteVar(
+             op === "add" ? a + b
+             : op === "sub" ? a - b
+             : op === "mul" ? a * b
+@@ -1467,18 +1528,20 @@ function runInstant(s: InterpState, f: Fiber, ins: InstantInstr): void {
+           );
+         }
+       } else {
+-        const held = variables[ins.id];
++        const held = keyedValue(variables, ins.id);
+         const cur = typeof held === "number" ? held : 0;
+-        variables[ins.id] = clampFiniteVar(
++        value = clampFiniteVar(
+           ins.set.op === "set" ? ins.set.value
+           : ins.set.op === "add" ? cur + ins.set.value
+           : cur - ins.set.value,
+         );
+       }
++      writeVariable(s.sw, ins.id, value);
+       break;
+     }
+     case "selfSwitch":
+-      ownRecord(s.sw, "self")[f.key] = ins.value ? ins.key : undefined;
++      if (!Object.hasOwn(s.sw.self, f.key) || s.sw.self[f.key] !== (ins.value ? ins.key : undefined))
++        ownRecord(s.sw, "self")[f.key] = ins.value ? ins.key : undefined;
+       break;
+     case "gold":
+       s.sw.gold = clampFiniteVar(s.sw.gold + (ins.set === "add" ? ins.amount : -ins.amount));
+@@ -1692,11 +1755,10 @@ function runExtensionCommand(
+     ? undefined
+     : replaceItemCounts(s.sw.items, itemReplacements, w.inventory);
+   extension.ext = nextExt;
+-  const variables = writes.length > 0 ? ownRecord(s.sw, "variables") : null;
+   for (const [id, value] of writes) {
+     // B1 (fix 3): an ext command's numeric write shares the same
+     // finite-safe-integer normalizer as every other variable write.
+-    variables![id] = typeof value === "number" ? clampFiniteVar(value) : value;
++    writeVariable(s.sw, id, typeof value === "number" ? clampFiniteVar(value) : value);
+   }
+   if (items !== undefined) s.sw.items = items;
+   if (gold !== undefined) s.sw.gold = gold;
+@@ -1933,7 +1995,7 @@ function runFiber(
+           f.key,
+           input.facing,
+           extension,
+-          liveConditionContext(s, input.worldIdleBlockers),
++          ins.cond.kind === "worldIdle" ? liveConditionContext(s, input.worldIdleBlockers) : undefined,
+         ) ? top.pc + 1 : ins.onFalse;
+         break;
+       case "jmp":
+@@ -2116,6 +2178,7 @@ export function stepInterpWithExtensionsInPlace(
+   s: InterpState,
+   input: InterpInput,
+   ext0: JsonValue,
++  selectedPages?: PageSelections,
+ ): JsonValue {
+   const extension: MutableExtensionScope = { runtime: w.extensions, ext: ext0 };
+   // A fatalized state is frozen: no triggers scan, no fiber advances. The
+@@ -2138,7 +2201,8 @@ export function stepInterpWithExtensionsInPlace(
+   s.abortedRoutes = [];
+ 
+   cancelStaleParallels(s, w, input.facing, extension, input.worldIdleBlockers);
+-  scanTriggers(s, w, input, extension);
++  const pending = scanTriggers(s, w, input, extension, selectedPages);
++  // Commands may write the bank. Cached selections only span the read phase.
+   const budget: StepBudget = { remaining: RUNAWAY_STEP_LIMIT };
+   const queuedBattleCount = s.pendingBattles.length;
+ 
+@@ -2147,7 +2211,36 @@ export function stepInterpWithExtensionsInPlace(
+   // Battle requests are the one exception to the resulting publication
+   // order: collect this tick's parallel requests, run main, then append the
+   // new requests main-first behind every request already in the FIFO.
+-  for (const key of Object.keys(s.parallels).sort()) {
++  const keys = [...Object.keys(s.parallels), ...Object.keys(pending)].sort();
++  for (const key of keys) {
++    const entry = pending[key];
++    if (entry) {
++      // Run effect-free entry branches at the same point in key order as
++      // the original fiber. A branch ending here needs no mutable cursor.
++      let pc = 0;
++      while (pc < entry.prog.length) {
++        const ins = entry.prog[pc]!;
++        if (ins.op !== "if" && ins.op !== "jmp") break;
++        if (budget.remaining-- <= 0) {
++          s.error = { kind: "runaway", message: `interpreter: runaway program in ${key}` };
++          break;
++        }
++        pc = ins.op === "jmp" ? ins.to
++          : evalCondition(ins.cond, s.sw, key, input.facing, extension, ins.cond.kind === "worldIdle" ? liveConditionContext(s, input.worldIdleBlockers) : undefined) ? pc + 1 : ins.onFalse;
++      }
++      if (s.error) break;
++      if (pc >= entry.prog.length) {
++        if (budget.remaining-- <= 0) {
++          s.error = { kind: "runaway", message: `interpreter: runaway program in ${key}` };
++          break;
++        }
++        if (s.modal?.fiber === key) s.modal = null;
++        continue;
++      }
++      const fiber = startFiber(s, key, entry.index, true, entry.prog);
++      fiber.stack[0]!.pc = pc;
++      s.parallels[key] = fiber;
++    }
+     runFiber(s, w, s.parallels[key]!, input, budget, extension);
+     if (s.error) break;
+   }
+diff --git a/src/engine/session.ts b/src/engine/session.ts
+index bf9aa54..2af126a 100644
+--- a/src/engine/session.ts
++++ b/src/engine/session.ts
+@@ -49,6 +49,7 @@ import {
+   ownRecord,
+   randInt,
+   replaceItemCounts,
++  recordRevision,
+   rngNext,
+   secondsToFrames,
+   shareInterp,
+@@ -66,6 +67,7 @@ import {
+ import {
+   assertJsonValue,
+   cloneExtension,
++  assertImmutableJsonValue,
+   createExtensionRuntime,
+   extensionCallNameValid,
+   type ExtensionOptions,
+@@ -79,6 +81,7 @@ import {
+ } from "./battle.ts";
+ import {
+   createChars,
++  charsPageRevision,
+   installRoute,
+   placeChar,
+   shareChars,
+@@ -120,6 +123,7 @@ import {
+ } from "./map-repository.ts";
+ import type {
+   CommonEvent,
++  GameEvent,
+   Dir,
+   Facing,
+   MapDef,
+@@ -242,6 +246,8 @@ export interface Session {
+   battle: BattleRules | null;
+   /** Scene policy is immutable host configuration, never reducer state. */
+   sceneOptions: Required<SceneOptions>;
++  /** Published snapshots and their banks must not be mutated by the caller. */
++  immutableState: boolean;
+ }
+ 
+ export interface SceneOptions {
+@@ -251,6 +257,9 @@ export interface SceneOptions {
+ }
+ 
+ export interface SessionOptions {
++  /** Opt into identity-based dependency checks. Callers must treat every
++   * published snapshot as immutable, including restored snapshots. */
++  immutableState?: boolean;
+   maps?: MapRepository;
+   /** Recompute and verify a ProjectShell's declared mapManifestHash. Splitter
+    * output in a trusted app package uses the declared build identity directly
+@@ -509,6 +518,7 @@ export function createSession(
+       extensions,
+       battle: options.battle ?? null,
+       sceneOptions: { worldContinues: options.scene?.worldContinues === true },
++      immutableState: options.immutableState === true,
+     };
+     acquireSessionMap(session, project.start.map);
+     releaseSessionMapsExcept(session, [project.start.map]);
+@@ -546,6 +556,7 @@ export function createSession(
+     extensions,
+     battle: options.battle ?? null,
+     sceneOptions: { worldContinues: options.scene?.worldContinues === true },
++    immutableState: options.immutableState === true,
+   };
+ }
+ 
+@@ -735,12 +746,13 @@ function startBattleScene(sess: Session, s: SessionState, request: PendingBattle
+   if (typeof started !== "object" || Array.isArray(started)) {
+     throw new Error("battle start: BattleStart object or null required");
+   }
+-  assertJsonValue(started.state, "battle start state");
++  if (rules.immutableState) assertImmutableJsonValue(started.state, "battle start state");
++  else assertJsonValue(started.state, "battle start state");
+   s.ext = cloneExtension(sess.extensions, started.ext, "battle start extension state");
+   s.scene = {
+     kind: "battle",
+     fiber: request.fiber,
+-    state: deepClone(started.state),
++    state: rules.immutableState ? started.state : deepClone(started.state),
+     pausedTicks: 0,
+   };
+   return true;
+@@ -812,16 +824,18 @@ function advanceBattleScene(
+   s: SessionState,
+   input: Readonly<BattleInput>,
+   ticks: number,
++  frozenShared = false,
+ ): void {
+   const scene = s.scene;
+   const rules = sess.battle;
+   if (!scene || !rules) return;
+   if (ticks > 0) {
+-    const stepped = rules.step(deepClone(scene.state), input, ticks);
+-    assertJsonValue(stepped, "battle step state");
+-    scene.state = deepClone(stepped);
++    const stepped = rules.step(rules.immutableState ? scene.state : deepClone(scene.state), input, ticks);
++    if (rules.immutableState) assertImmutableJsonValue(stepped, "battle step state");
++    else assertJsonValue(stepped, "battle step state");
++    scene.state = rules.immutableState ? stepped : deepClone(stepped);
+   }
+-  const completion = rules.done(deepClone(scene.state));
++  const completion = rules.done(rules.immutableState ? scene.state : deepClone(scene.state));
+   if (completion === null) return;
+   if (typeof completion !== "object" || Array.isArray(completion)) {
+     throw new Error("battle done: BattleCompletion object or null required");
+@@ -885,6 +899,10 @@ function advanceBattleScene(
+     ? undefined
+     : replaceItemCounts(s.interp.sw.items, itemReplacements, sess.worldOptions.inventory);
+ 
++  if (frozenShared) {
++    s.interp = shareInterp(s.interp);
++    s.sw = s.interp.sw;
++  }
+   s.ext = nextExt;
+   // B1 (fix 3): a battle completion's numeric write shares
+   // the interpreter's finite-safe-integer normalizer, same as an ext
+@@ -923,13 +941,14 @@ export function stepSession(
+ ): SessionState {
+   // One working copy per frame. The reference ticks below advance it in
+   // place; characters and switch records stay shared with s0 until written.
+-  const interp = shareInterp(s0.interp);
++  const frozen = s0.scene !== null && !sess.sceneOptions.worldContinues;
++  const interp = frozen ? { ...s0.interp } : shareInterp(s0.interp);
+   const s: SessionState = {
+     frame: s0.frame,
+     mapId: s0.mapId,
+     sw: interp.sw,
+     move: { ...s0.move },
+-    chars: shareChars(s0.chars),
++    chars: frozen ? s0.chars : shareChars(s0.chars),
+     interp,
+     fade: s0.fade ? { ...s0.fade } : null,
+     playerRoute: s0.playerRoute
+@@ -948,8 +967,8 @@ export function stepSession(
+             : null,
+         }
+       : null,
+-    ext: cloneExtension(sess.extensions, s0.ext),
+-    scene: cloneScene(s0.scene),
++    ext: frozen ? s0.ext : cloneExtension(sess.extensions, s0.ext),
++    scene: cloneScene(s0.scene, sess.battle?.immutableState),
+   };
+   s.frame++;
+   const ticks = sess.ticksPerFrame;
+@@ -979,11 +998,32 @@ export function stepSession(
+       s,
+       sceneAtFrameStart ? battleInput(input) : battleInput(NO_MAP_INPUT),
+       sceneTicks,
++      frozen,
+     );
+   }
+   return s;
+ }
+ 
++// Reconciliation reads page conditions, erasures and character page flags.
++// Position, patrol clocks and RNG do not select pages. Keep a value snapshot
++// so restored states and in-place bank edits invalidate the cached result.
++const pageSyncMemo = new WeakMap<object, { signature: string | readonly unknown[]; motion: Record<string, MotionType>; pages: Map<GameEvent, number>; runtime: ExtensionRuntime }>();
++function pageSyncSignature(s: SessionState, worldIdle: boolean, immutable = false): string | readonly unknown[] {
++  if (immutable) return [recordRevision(s.sw.switches), recordRevision(s.sw.self),
++    recordRevision(s.sw.variables), recordRevision(s.sw.items), s.sw.gold,
++    s.ext, JSON.stringify(s.interp.erased), JSON.stringify(s.interp.placements),
++    s.move.facing, worldIdle, charsPageRevision(s.chars)];
++  const chars: unknown[] = [];
++  for (const id of Object.keys(s.chars.chars)) {
++    const ch = s.chars.chars[id]!;
++    chars.push(id, ch.pageIndex, ch.visible, ch.blocks);
++  }
++  return JSON.stringify([
++    s.sw.switches, s.sw.self, s.sw.variables, s.sw.items, s.sw.gold,
++    s.ext, s.interp.erased, s.interp.placements, s.move.facing, worldIdle, chars,
++  ]);
++}
++
+ /** Advance the session one MOTION_HZ reference tick, mutating the working
+  *  clone `s`. Returns the player cell the next tick sees as prevCell. */
+ function stepReferenceTick(
+@@ -1040,9 +1080,16 @@ function stepReferenceTick(
+   const extension: ExtensionScope = { runtime: sess.extensions, ext: s.ext };
+   const conditionContext: ConditionContext = { worldIdle: isSessionWorldIdle(s) };
+   const syncFacing = s.move.facing;
+-  const syncMotion = keyedRecord<MotionType>();
++  let syncMotion = keyedRecord<MotionType>();
+   const keyed = keyedEventsOf(world);
+-  const synced = syncPagesInPlace(
++  const signature = pageSyncSignature(s, conditionContext.worldIdle ?? false, sess.immutableState);
++  const memo = pageSyncMemo.get(world);
++  const reusePages = memo !== undefined && memo.runtime === sess.extensions &&
++    (memo.signature === signature || (typeof signature !== "string" && typeof memo.signature !== "string" &&
++      signature.every((value, i) => value === memo.signature[i])));
++  if (reusePages) syncMotion = memo!.motion;
++  const selectedPages = reusePages ? memo!.pages : new Map<GameEvent, number>();
++  const synced = reusePages ? { abortedWaiters: [] as string[] } : syncPagesInPlace(
+     s.chars,
+     keyed.events,
+     keyed.slotsById,
+@@ -1055,7 +1102,9 @@ function stepReferenceTick(
+     syncMotion,
+     true,
+     conditionContext,
++    selectedPages,
+   );
++  if (!reusePages) pageSyncMemo.set(world, { signature: pageSyncSignature(s, conditionContext.worldIdle ?? false, sess.immutableState), motion: syncMotion, pages: selectedPages, runtime: sess.extensions });
+   for (const waiter of synced.abortedWaiters) {
+     s.interp = continueExternal(s.interp, waiter);
+   }
+@@ -1130,6 +1179,7 @@ function stepReferenceTick(
+     s.interp,
+     interpInput,
+     s.ext,
++    { indices: selectedPages, facing: syncFacing, worldIdle: conditionContext.worldIdle ?? false },
+   );
+   // continueExternal above may have replaced s.interp with a copy whose
+   // switch bank is a new object; re-alias the session's top-level bank to it
+diff --git a/src/ui/GameView.tsx b/src/ui/GameView.tsx
+index 752e417..8708c8d 100644
+--- a/src/ui/GameView.tsx
++++ b/src/ui/GameView.tsx
+@@ -25,7 +25,7 @@
+ // the world camera commit through one precompiled jump batch; chunk images
+ // stay mounted while the player walks.
+ 
+-import { batch, createSignal, onMount, Show, type Accessor, type Component } from "solid-js";
++import { batch, createMemo, createSignal, onMount, Show, type Accessor, type Component } from "solid-js";
+ import { Image, Text, View, type NodeMirror } from "@pocketjs/framework/components";
+ import { createJumpBatch, type JumpBatch } from "@pocketjs/framework/animation";
+ import { createElement, setProp } from "@pocketjs/framework/renderer";
+@@ -99,6 +99,9 @@ function collectMapSlots(map: MapDef, sprites: Sprites): GameEvent[] {
+ }
+ 
+ interface NpcRenderSlot {
++  frame: NpcFrame;
++  character: SessionState["chars"]["chars"][string] | undefined;
++  artVersion: number;
+   node: NodeMirror;
+   px: number;
+   py: number;
+@@ -120,13 +123,19 @@ function npcFrame(
+   sprites: Sprites,
+   npcSrc: GameAssets["npcSrc"],
+   extensions: ExtensionRuntime,
++  selectedArt?: Map<GameEvent, { art: NpcArt | "" }>,
+ ): NpcFrame {
+-  const active = activePage(event, state.sw, state.mapId, state.move.facing, {
+-    runtime: extensions,
+-    ext: state.ext,
+-  }, { worldIdle: isSessionWorldIdle(state) });
+-  const name = active?.page.sprite;
+-  const art: NpcArt | "" = name && spritePaints(sprites[name]) ? (npcSrc[name] ?? "") : "";
++  let selected = selectedArt?.get(event);
++  if (!selected) {
++    const active = activePage(event, state.sw, state.mapId, state.move.facing, {
++      runtime: extensions,
++      ext: state.ext,
++    }, { worldIdle: isSessionWorldIdle(state) });
++    const name = active?.page.sprite;
++    selected = { art: name && spritePaints(sprites[name]) ? (npcSrc[name] ?? "") : "" };
++    selectedArt?.set(event, selected);
++  }
++  const art = selected.art;
+   const ch = state.chars.chars[event.id];
+   return [
+     ch ? ch.px : event.x * TILE,
+@@ -145,6 +154,7 @@ function npcStyle(height: 16 | 32, depth: number) {
+ /** The only mounted actor subtree. It owns enough stable image slots for any
+  *  transfer destination and rebinds them without replacing native nodes. */
+ function CurrentMapActors(props: {
++  immutableState?: boolean;
+   slots: () => readonly GameEvent[];
+   slotCount: number;
+   worldWidth: number;
+@@ -165,14 +175,14 @@ function CurrentMapActors(props: {
+   const stride = props.worldWidth;
+   const npcs: NpcRenderSlot[] = Array.from({ length: props.slotCount }, (_, index) => {
+     const source = slots[index];
+-    const frame = source
++    const frame: NpcFrame = source
+       ? npcFrame(initial, source, props.sprites, props.npcSrc, props.extensions)
+-      : [0, 0, "", 16] as const;
++      : [0, 0, "", 16];
+     const node = createElement("image");
+     setProp(node, "style", npcStyle(frame[3], actorDepth(frame[0], frame[1], stride)));
+     setProp(node, "src", frame[2]);
+     if (source) setProp(node, "debugName", `rpgkit-npc-${source.id}`);
+-    return { node, px: frame[0], py: frame[1] };
++    return { node, frame, character: source ? initial.chars.chars[source.id] : undefined, artVersion: -1, px: frame[0], py: frame[1] };
+   });
+   startupProfileMark("ui-actors:pooled");
+ 
+@@ -223,8 +233,17 @@ function CurrentMapActors(props: {
+ 
+   onMount(compilePositions);
+ 
++  let artSignature: string | readonly unknown[] = "";
++  let artVersion = 0;
++  const selectedArt = new Map<GameEvent, { art: NpcArt | "" }>();
+   onFrame(() => {
+     const state = props.state();
++    const inputs = [state.mapId, state.sw.switches, state.sw.self, state.sw.variables,
++      state.sw.items, state.sw.gold, state.ext, state.move.facing, isSessionWorldIdle(state)];
++    const nextArtSignature = props.immutableState ? inputs : JSON.stringify(inputs);
++    const same = nextArtSignature === artSignature || (typeof nextArtSignature !== "string" &&
++      typeof artSignature !== "string" && nextArtSignature.every((value, i) => value === artSignature[i]));
++    if (!same) { selectedArt.clear(); artSignature = nextArtSignature; artVersion++; }
+     const next = props.slots();
+     const transfer = next !== slots;
+     if (transfer) slots = next;
+@@ -247,11 +266,14 @@ function CurrentMapActors(props: {
+     const frames: NpcFrame[] = [];
+     for (let index = 0; index < touched; index++) {
+       const source = slots[index];
+-      const frame: NpcFrame = source
+-        ? npcFrame(state, source, props.sprites, props.npcSrc, props.extensions)
+-        : [0, 0, "", 16];
+-      frames.push(frame);
+       const npc = npcs[index]!;
++      const character = source ? state.chars.chars[source.id] : undefined;
++      const frame: NpcFrame = props.immutableState && !transfer && npc.artVersion === artVersion && npc.character === character
++        ? npc.frame
++        : source ? npcFrame(state, source, props.sprites, props.npcSrc, props.extensions, selectedArt) : [0, 0, "", 16];
++      frames.push(frame);
++      npc.character = character;
++      npc.artVersion = artVersion;
+       if (!transfer && source && (npc.px !== frame[0] || npc.py !== frame[1])) {
+         positions?.set(4 + index * 2, frame[0]);
+         positions?.set(5 + index * 2, frame[1]);
+@@ -276,10 +298,14 @@ function CurrentMapActors(props: {
+     for (let index = 0; index < touched; index++) {
+       const frame = frames[index]!;
+       const npc = npcs[index]!;
++      if (!transfer && !reorder && frame === npc.frame) continue;
++      npc.frame = frame;
+       const oldStyle = npc.node.domAttrs?.style as ReturnType<typeof npcStyle> | undefined;
+       setProp(npc.node, "src", frame[2], npc.node.domAttrs?.src as string | undefined);
+-      setProp(npc.node, "style", npcStyle(frame[3],
+-        slots[index] && reorder ? actorDepth(frame[0], frame[1], stride) : oldStyle?.zIndex ?? 0), oldStyle);
++      const depth = slots[index] && reorder ? actorDepth(frame[0], frame[1], stride) : oldStyle?.zIndex ?? 0;
++      if (!oldStyle || oldStyle.height !== frame[3] || oldStyle.zIndex !== depth) {
++        setProp(npc.node, "style", npcStyle(frame[3], depth), oldStyle);
++      }
+       if (transfer) setProp(npc.node, "debugName", slots[index] ? `rpgkit-npc-${slots[index]!.id}` : undefined);
+     }
+     px = state.move.px;
+@@ -334,6 +360,8 @@ export interface BattleSceneViewProps {
+ export type BattleSceneComponent = Component<BattleSceneViewProps>;
+ 
+ export interface GameViewProps {
++  /** Published game snapshots are read-only when enabled. */
++  immutableState?: boolean;
+   project: ProjectSource;
+   /** Required with ProjectShell; omitted for backwards-compatible inline
+    * projects. Local repositories acquire synchronously. */
+@@ -392,6 +420,7 @@ export function GameView(props: GameViewProps) {
+         extensions: props.extensions,
+         battle: props.battle,
+         scene: props.scene,
++        immutableState: props.immutableState,
+       })
+     : null;
+   const session: Session = attract
+@@ -401,6 +430,7 @@ export function GameView(props: GameViewProps) {
+         extensions: props.extensions,
+         battle: props.battle,
+         scene: props.scene,
++        immutableState: props.immutableState,
+       });
+   startupProfileMark("game-view:session");
+   let state: SessionState = attract ? attract.state : startSession(project, session);
+@@ -443,7 +473,8 @@ export function GameView(props: GameViewProps) {
+   const [facing, setFacing] = createSignal<Facing>(state.move.facing);
+   const [modal, setModal] = createSignal<Modal | null>(null);
+   const [demo, setDemo] = createSignal<AttractStatus | null>(null);
+-  const [scene, setScene] = createSignal<SceneSlot | null>(cloneScene(state.scene));
++  const [scene, setScene] = createSignal<SceneSlot | null>(cloneScene(state.scene, props.battle?.immutableState));
++  const [sceneActive, setSceneActive] = createSignal(state.scene !== null);
+   const [fatalError, setFatalError] = createSignal<string | null>(state.interp.error?.message ?? null);
+   // Live host viewport: console hosts omit ui.__viewport (spec screen),
+   // desktop windows publish and resize it. Polled in onFrame like
+@@ -465,12 +496,12 @@ export function GameView(props: GameViewProps) {
+     if (!indexed) throw new Error(`GameView: unknown map size ${JSON.stringify(id)}`);
+     return { w: indexed.width * TILE, h: indexed.height * TILE };
+   };
+-  const worldFrame = () => {
++  const worldFrame = createMemo(() => {
+     const vp = viewport();
+     const size = mapSize(mapId());
+     const off = centerOffset(size, vp);
+     return { x: off.x, y: off.y, w: Math.min(size.w, vp.w), h: Math.min(size.h, vp.h) };
+-  };
++  });
+   const cameraFor = (st: SessionState): CameraState => {
+     const vp = viewport();
+     const size = mapSize(st.mapId);
+@@ -517,7 +548,7 @@ export function GameView(props: GameViewProps) {
+     // reducer's cancelEdge and a scene author is forced to read raw button
+     // bits itself (contracts/spec/spec.ts BTN.CROSS) instead of the
+     // portable confirm/cancel edges every other input path uses.
+-    if (scene() !== null) {
++    if (sceneActive()) {
+       return {
+         confirm: { label: "ok", run: fire("confirm") },
+         back: { label: "back", run: fire("cancel") },
+@@ -613,7 +644,8 @@ export function GameView(props: GameViewProps) {
+       if (op !== fade()) setFade(op);
+       const shownModal = attract ? attract.presentedModal() : state.interp.modal;
+       setModal((m) => (modalChanged(m, shownModal) ? deepClone(shownModal) : m));
+-      setScene(state.scene ? cloneScene(state.scene) : null);
++      setSceneActive(state.scene !== null);
++      setScene(state.scene ? cloneScene(state.scene, props.battle?.immutableState) : null);
+       setFatalError(state.interp.error?.message ?? null);
+       if (status) {
+         const st = status;
+@@ -633,7 +665,7 @@ export function GameView(props: GameViewProps) {
+ 
+   const view = (
+     <View class="w-full h-full overflow-hidden bg-black">
+-      <Show when={scene() === null}>
++      <Show when={!sceneActive()}>
+         <>
+           {/* The frame clips each axis to min(map, viewport). Undersized axes
+               are centered over the black root; oversized axes start at zero
+@@ -707,6 +739,7 @@ export function GameView(props: GameViewProps) {
+             onAnimatedStats={(stats) => props.onAnimatedStats?.("above", stats)}
+           >
+             <CurrentMapActors
++                immutableState={props.immutableState}
+               slots={currentSlots}
+               slotCount={actorSlotCount}
+               worldWidth={worldWidth}
+@@ -736,7 +769,7 @@ export function GameView(props: GameViewProps) {
+         </>
+       </Show>
+ 
+-      <Show when={scene() !== null}>
++      <Show when={sceneActive()}>
+         {BattleSceneView ? (
+           <BattleSceneView
+             state={scene()!.state}
+diff --git a/src/ui/battle/FrameStrip.tsx b/src/ui/battle/FrameStrip.tsx
+index d35e5cf..eca834f 100644
+--- a/src/ui/battle/FrameStrip.tsx
++++ b/src/ui/battle/FrameStrip.tsx
+@@ -7,6 +7,7 @@
+ // carry, so a state-dependent effect must swap discrete image keys the
+ // same way PlayerSprite chooses a walk pose.
+ 
++import { createMemo } from "solid-js";
+ import { Image } from "@pocketjs/framework/components";
+ import { frameIndexAt } from "./effects.ts";
+ 
+@@ -27,9 +28,9 @@ export interface FrameStripProps {
+ }
+ 
+ export function FrameStrip(props: FrameStripProps) {
+-  const index = () =>
+-    frameIndexAt(props.nowTick, props.startTick, props.frameTicks, props.frames.length, props.loop ?? false);
+-  const src = () => props.frames[index()] ?? "";
++  const index = createMemo(() => props.frames.length <= 1 ? 0 :
++    frameIndexAt(props.nowTick, props.startTick, props.frameTicks, props.frames.length, props.loop ?? false));
++  const src = createMemo(() => props.frames[index()] ?? "");
+ 
+   return (
+     <Image
+diff --git a/src/ui/battle/SpriteSlot.tsx b/src/ui/battle/SpriteSlot.tsx
+index 4de3202..856a7a0 100644
+--- a/src/ui/battle/SpriteSlot.tsx
++++ b/src/ui/battle/SpriteSlot.tsx
+@@ -5,6 +5,7 @@
+ // two renders of the same props are pixel-identical (the rewind/multi-Hz
+ // contract every KB4 piece keeps).
+ 
++import { createMemo } from "solid-js";
+ import { Image } from "@pocketjs/framework/components";
+ import { faintPose, flashOpacity, shakeOffsetX, type SpriteEffect } from "./effects.ts";
+ 
+@@ -26,10 +27,15 @@ export interface SpriteSlotProps {
+ }
+ 
+ export function SpriteSlot(props: SpriteSlotProps) {
+-  const dx = () => shakeOffsetX(props.effect, props.nowTick, props.shakeAmplitude);
+-  const flash = () => flashOpacity(props.effect, props.nowTick);
+-  const faint = () => faintPose(props.effect, props.nowTick, props.faintSink);
+-  const opacity = () => flash() * faint().opacity;
++  const effect = createMemo(() => props.effect, undefined, {
++    equals: (a, b) => a.kind === b.kind && a.startTick === b.startTick && a.duration === b.duration,
++  });
++  const dx = createMemo(() => effect().kind === "shake" ? shakeOffsetX(effect(), props.nowTick, props.shakeAmplitude) : 0);
++  const flash = createMemo(() => effect().kind === "flash" ? flashOpacity(effect(), props.nowTick) : 1);
++  const faint = createMemo(() => effect().kind === "faint" ? faintPose(effect(), props.nowTick, props.faintSink) : { sinkY: 0, opacity: 1 }, undefined, {
++    equals: (a, b) => a.sinkY === b.sinkY && a.opacity === b.opacity,
++  });
++  const opacity = createMemo(() => flash() * faint().opacity);
+ 
+   return (
+     <Image
+diff --git a/tests/extensions.test.ts b/tests/extensions.test.ts
+index 265ae63..3f0aa29 100644
+--- a/tests/extensions.test.ts
++++ b/tests/extensions.test.ts
+@@ -1,7 +1,8 @@
+ import { describe, expect, test } from "bun:test";
+ import { loadProject, serializeProject } from "../editor/engine/document.ts";
++import { createExtensionRuntime } from "../src/engine/extensions.ts";
+ import { AttractController } from "../src/engine/attract.ts";
+-import { rngNext } from "../src/engine/interpreter.ts";
++import { createSwitchState, evalCondition, rngNext } from "../src/engine/interpreter.ts";
+ import {
+   createSession,
+   startSession,
+@@ -55,6 +56,36 @@ function step(session: Session, state: SessionState): SessionState {
+ }
+ 
+ describe("KB1 extension commands and conditions", () => {
++  test("condition isolation defaults to copies and can opt into immutable references", () => {
++    for (const immutableConditions of [false, true]) {
++      const args = { count: 2 };
++      let observedExt: JsonValue = null;
++      let observedArgs: JsonValue = null;
++      const runtime = createExtensionRuntime({
++        immutableConditions,
++        initial: { count: 2 },
++        conditions: { "demo.check": (context, value) => {
++          observedExt = context.ext;
++          observedArgs = value;
++          const matches = (context.ext as typeof args).count === (value as typeof args).count;
++          if (!immutableConditions) {
++            (context.ext as typeof args).count = 99;
++            (value as typeof args).count = 99;
++          }
++          return matches;
++        } },
++      });
++      const ext = Object.freeze({ count: 2 });
++      Object.freeze(args);
++      expect(evalCondition({ kind: "ext", call: "demo.check", args },
++        createSwitchState(), "event", undefined, { runtime, ext })).toBe(true);
++      expect(ext).toEqual({ count: 2 });
++      expect(args).toEqual({ count: 2 });
++      expect(observedExt === ext).toBe(immutableConditions);
++      expect(observedArgs === args).toBe(immutableConditions);
++    }
++  });
++
+   test("a command reads/writes ext and variables and draws only from the saved session RNG", () => {
+     const p = project([
+       { op: "ext", call: "demo.increment", args: { amount: 2 } },
+diff --git a/tests/session.test.ts b/tests/session.test.ts
+index df2fae8..2470609 100644
+--- a/tests/session.test.ts
++++ b/tests/session.test.ts
+@@ -825,3 +825,28 @@ describe("session reducer purity", () => {
+     }
+   });
+ });
++
++describe("immutable session page cache", () => {
++  for (const hz of [60, 30, 20, 4]) test(`preserves tick, bank-write and restore behavior at ${hz} Hz`, () => {
++    const p = project([map("a", 8, 8, [
++      ge("counter", 0, 0, page("parallel", [{ op: "variable", id: "clock", set: { op: "add", value: 1 } }])),
++      ge("gate", 4, 4, [
++        { trigger: "parallel", commands: [] },
++        { trigger: "parallel", condition: { all: [{ kind: "variable", id: "clock", op: ">=", value: 2 }] },
++          commands: [{ op: "switch", id: "opened", value: true }], sprite: "gate", blocks: true },
++      ]),
++    ])]);
++    const regular = createSession(p, hz), cached = createSession(p, hz, { immutableState: true });
++    let a = startSession(p, regular), b = startSession(p, cached);
++    for (let frame = 0; frame < 20; frame++) {
++      const before = JSON.stringify(b);
++      const prior = b;
++      a = stepSession(regular, a, { buttons: 0 });
++      b = stepSession(cached, b, { buttons: 0 });
++      expect(JSON.stringify(prior)).toBe(before);
++      expect(JSON.stringify(b)).toBe(JSON.stringify(a));
++      if (frame === 9) { a = JSON.parse(JSON.stringify(a)); b = JSON.parse(JSON.stringify(b)); }
++    }
++    expect(b.sw.switches.opened).toBe(true);
++  });
++});

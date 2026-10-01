@@ -10,3 +10,6 @@ __pycache__/
 
 # The Tuxemon source the importer reads (tools/fetch-tuxemon.sh)
 .tuxemon-src/
+
+# Local builds and physical-device validation
+.pocket-build/

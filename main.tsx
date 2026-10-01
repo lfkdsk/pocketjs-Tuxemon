@@ -68,6 +68,7 @@ const assets = {
 
 mount(() => (
   <GameView
+    immutableState
     project={project}
     maps={repository}
     extensions={extensions}

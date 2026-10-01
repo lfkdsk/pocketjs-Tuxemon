@@ -10,7 +10,7 @@
 import { readdirSync, readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 
-export const TUXEMON_SRC = process.env.TUXEMON_SRC ?? "/var/tmp/tuxemon-src";
+export const TUXEMON_SRC = process.env.TUXEMON_SRC ?? join(import.meta.dir, "../.tuxemon-src");
 export const MAPS_DIR = join(TUXEMON_SRC, "mods/tuxemon/maps");
 
 export interface Rule {

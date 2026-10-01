@@ -9,7 +9,7 @@
     "vendor/pocket-rpgkit/vendor/pocketjs"
   ],
   "scripts": {
-    "setup": "git submodule update --init --recursive && bun install",
+    "setup": "git submodule update --init --recursive && bun tools/apply-vendor-patches.ts && bun install",
     "fetch:tuxemon": "sh tools/fetch-tuxemon.sh",
     "import": "bun gen-assets.ts",
     "gen-assets": "bun gen-assets.ts",
@@ -34,7 +34,9 @@
     "web": "bun gen-assets.ts && bun vendor/pocket-rpgkit/tools/web.ts --project-root . pocket-tuxemon",
     "web:verify": "bun vendor/pocket-rpgkit/tools/web-verify.ts --site dist/web --out dist/web-verify",
     "test": "bun test tests/",
-    "tsc": "bunx tsc --noEmit"
+    "tsc": "bunx tsc --noEmit",
+    "build:psp": "bun tools/apply-vendor-patches.ts && bun tools/psp.ts",
+    "patch:vendor": "bun tools/apply-vendor-patches.ts"
   },
   "devDependencies": {
     "@types/bun": "^1.2.0",

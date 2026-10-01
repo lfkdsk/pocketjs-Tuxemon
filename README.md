@@ -40,7 +40,7 @@ Work in progress. The importer reads a pinned Tuxemon checkout
   technique strips; every slide, hit, HP/XP tween, faint and capture shake
   is driven by the reducer's rewindable reference tick rather than a wall
   clock.
-- **Performance:** maps load one at a time from the pak — the game JS is
+- **Desktop performance:** maps load one at a time from the pak — the game JS is
   1.1 MB and reaches its first frame in about 150 ms on the desktop QuickJS
   host (measured medians: 151.897 ms at 480×272 and 155.168 ms at 960×544,
   10-run samples); walking stays near 1 ms per frame and map transfers
@@ -101,6 +101,88 @@ bun run desktop         # play on the desktop host
 bun run web             # build the web version into dist/web
 bun test                # tests (build first for the pixel replays)
 ```
+
+## PSP build and physical validation
+
+`bun run build:psp` builds a release PRX and EBOOT in `dist/psp`. The
+complete **62,206,272-byte asset pack** stays in `assets.pak` beside the
+executable. Only fonts, sprite atlases, styles and the external directory
+are embedded. A 2 MiB cache retains unbound image textures; textures used
+by live nodes stay resident. All 263 maps and 578 battle textures remain
+in the package.
+
+```sh
+bun run setup
+bun run fetch:tuxemon
+bun run build:psp
+
+RUN=.pocket-build/validation/psp/local
+mkdir -p "$RUN/host0"
+cp dist/psp/pocket-tuxemon.prx dist/psp/assets.pak "$RUN/host0/"
+usbhostfs_pc -b 10000 "$RUN/host0"
+# In another terminal, with PSPLINK running on the PSP:
+pspsh -p 10000 -e reset
+pspsh -p 10000 -e 'ldstart host0:/pocket-tuxemon.prx'
+```
+
+The build uses the pinned PSP GCC toolchain for QuickJS (`-O3 -fno-gcse`).
+The wrapper normalizes GNU object metadata for Rust's LLVM linker.
+`POCKETJS_PSP_C_COMPILER=clang bun run build:psp` selects the Clang build.
+The hardware journey checks C/Rust double round trips, including signed zero,
+subnormals, NaN and infinities, before running the input tape.
+`dist/psp/build-receipt.json` records source revisions, changed-file hashes
+and artifact SHA-256 values. `patches/` contains the runtime changes
+against the existing submodule pins; `bun run patch:vendor` checks the
+pins and applies those patches without replacing other local changes.
+The session's `immutableState` option requires callers to treat published
+snapshots as read-only. Restoring a snapshot constructs a new state.
+The extension's `immutableConditions` option requires condition handlers
+to leave their argument and extension state trees unchanged. Command handlers
+retain defensive copies. Texture draws at integer scale are split at cache
+column boundaries. The GE command buffer occupies complete CPU cache lines
+and is flushed and invalidated before its first uncached write.
+
+For repeatable hardware validation, build with `bun run build:psp --journey`,
+copy the new PRX to the same `host0` directory and reload it. This feeds the
+maintained 3,793-frame opening tape through the game on the PSP, then returns
+to live controls. `PocketJS-bench.jsonl` records 300-frame windows of CPU
+work, p50/p95/p99 work times and measured presentation intervals.
+`profile.jsonl` records checkpoints and the complete terminal state:
+
+```sh
+bun tools/verify-psp-journey.ts "$RUN/host0/profile.jsonl"
+```
+
+**The 60 fps hardware acceptance target is still unmet.** At 333 MHz on
+physical PSP firmware 6.61 through PSPLINK on 2026-10-01, the GCC release
+timing build measured:
+
+| 300-frame window | Mean work time | Measured presentation rate |
+| --- | ---: | ---: |
+| Paper Scoop walking/dialogue (300–599) | 18.05 ms | 39.83 fps |
+| Paper Town walking (1500–1799) | 24.10 ms | 27.35 fps |
+| Billie battle (2100–2399) | 14.48 ms | 48.55 fps |
+| Billie battle (2400–2699) | 15.71 ms | 43.07 fps |
+| Route 1 idle (4200–4499) | 16.57 ms | 54.28 fps |
+
+The physical PSPLINK run reaches Route 1 after the Billie battle, with a terminal state
+matching the production replay (SHA-256
+`5653f0110656dd4e0a930ff1908c833c9f9fc221c9cfd3a90d22b138ef8d4827`).
+The 60 Hz simulation setting does not prove 60 displayed frames per second;
+use `1,000,000 / avg_frame_interval_us` from the device log. Map transitions
+and first texture loads also cause stalls. Timing logs include periodic
+file I/O, so retain the work-time distribution as well as the intervals.
+Rebuild without `--journey` or `--bench` and reload the normal release for
+human acceptance. Keep raw logs, screenshots and build receipts under
+`.pocket-build/validation/`.
+
+Validation commands are `bunx tsc --noEmit`, `bun run build`, `bun test`,
+`bun test tests/battle-presentation-sim.test.ts` and
+`GB6_IMMUTABLE=1 bun run verify:gb6:full`. The engine suite runs with
+`cd vendor/pocket-rpgkit && bun test tests/`. The 109,983-frame, 100-battle
+mainline with save/load, rewind and 60/30/20 Hz equivalence was checked on
+desktop Bun; the physical acceptance covers the 3,793-frame opening. The
+PSP has not passed a 60 fps acceptance run or the full 100-battle mainline.
 
 ## License
 

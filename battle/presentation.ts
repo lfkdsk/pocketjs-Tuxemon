@@ -134,8 +134,8 @@ export function presentationField(state: RuntimeBattleState): number[] {
   return field;
 }
 
-export function presentationActiveMonster(state: RuntimeBattleState, side: 0 | 1): BattleMonster {
-  const active = presentationField(state).find((monsterUid) => sideOf(state, monsterUid) === side);
+export function presentationActiveMonster(state: RuntimeBattleState, side: 0 | 1, field = presentationField(state)): BattleMonster {
+  const active = field.find((monsterUid) => sideOf(state, monsterUid) === side);
   return state.battle.parties[side].find((monster) => monster.uid === active)
     ?? state.battle.parties[side].find((monster) => monster.currentHp > 0)
     ?? state.battle.parties[side][0]!;
@@ -197,9 +197,8 @@ function triangle(start: number, duration: number, now: number): number {
   return p < 0.5 ? p * 2 : (1 - p) * 2;
 }
 
-export function battlerPresentation(state: RuntimeBattleState, monsterUid: number): BattlerPresentation {
+export function battlerPresentation(state: RuntimeBattleState, monsterUid: number, field = presentationField(state)): BattlerPresentation {
   const event = currentPresentationEvent(state);
-  const field = presentationField(state);
   let opacity = field.includes(monsterUid) ? 1 : 0;
   let offsetX = 0;
   let effect: Readonly<SpriteEffect> = NO_EFFECT;
@@ -301,14 +300,15 @@ export interface AnimationPresentation {
   opacity: number;
 }
 
-export function animationPresentation(state: RuntimeBattleState): AnimationPresentation {
+export function animationPresentation(state: RuntimeBattleState, previous?: AnimationPresentation): AnimationPresentation {
   const event = currentPresentationEvent(state);
   const animation = eventAnimation(state, event) ?? null;
   const startTick = 8;
   if (!animation || !event) {
     return { animation: null, frameKeys: [], frameTicks: 1, startTick, page: null, sourceX: 0, sourceY: 0, target: null, opacity: 0 };
   }
-  const frameKeys = animation.pages.flatMap((page) => Array.from({ length: page.frames }, () => page.key));
+  const frameKeys = previous?.animation === animation ? previous.frameKeys
+    : animation.pages.flatMap((page) => Array.from({ length: page.frames }, () => page.key));
   const ticks = animationFrameTicks(animation);
   const index = frameIndexAt(state.eventTicks, startTick, ticks, frameKeys.length, false);
   const page = animation.pages.find((candidate) =>

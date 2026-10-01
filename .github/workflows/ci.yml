@@ -65,11 +65,14 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      - name: Apply the pinned runtime patches
+        run: bun run patch:vendor
+
       - name: Import Tuxemon and check the committed output is unchanged
         run: |
           bun run import
-          git status --porcelain
-          test -z "$(git status --porcelain)"
+          git status --porcelain --ignore-submodules=dirty
+          test -z "$(git status --porcelain --ignore-submodules=dirty)"
 
       - name: Typecheck
         run: bunx tsc --noEmit

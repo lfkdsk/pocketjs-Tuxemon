@@ -1,23 +1,16 @@
-import { For } from "solid-js";
+import { batch, createMemo, createRenderEffect, createSignal, For, untrack } from "solid-js";
 import { Image, Text, View } from "@pocketjs/framework/components";
 import type { Component } from "solid-js";
 
 import {
-  animationPresentation,
-  ballPresentation,
   battlerPresentation,
   CAPTURE_FLIGHT_TICKS,
   CAPTURE_SHAKE_TICKS,
   currentPresentationEvent,
   currentReward,
-  presentationActiveMonster,
-  presentationExperience,
-  presentationHp,
-  presentationLevel,
-  presentationMaxHp,
   REWARD_TICK,
-  trainerPresentation,
 } from "../battle/presentation.ts";
+import { battlePaint } from "./battle-paint.ts";
 import { tuxemonRuntimeBattleState } from "../battle/runtime.ts";
 import type { BattleEvent, BattleMonster } from "../battle/types.ts";
 import type { BattleImageRef } from "../importer/battle-schema.ts";
@@ -129,14 +122,6 @@ function experienceProgress(totalExperience: number, level: number): { current: 
   };
 }
 
-function partyIcon(state: Runtime, side: 0 | 1, slot: number): BattleImageRef {
-  const member = state.battle.parties[side][slot];
-  const icons = state.visuals.environment.partyIcons;
-  if (!member) return icons.icon_empty!;
-  if (presentationHp(state, member.uid) <= 0) return icons.icon_faint!;
-  if (member.status) return icons.icon_status!;
-  return icons.icon_alive!;
-}
 
 function menuLabel(entry: Runtime["menu"][number]): string {
   if (entry.kind === "replacement") return "Swap";
@@ -160,18 +145,78 @@ function menuTitle(mode: Runtime["menuMode"]): string {
 /** Read-only projection of the serialised battle scene. All scaling is on
  * this 480x272 root so the 960x544 target is the same nearest-neighbour
  * composition at exactly 2x. */
+// Publish changed fields through signals. Advancing eventTicks
+// leaves the monster art, party, menu and environment dependencies unchanged.
+function fieldProjection<T extends object>(initial: T) {
+  const value = {} as T;
+  let previous = initial;
+  const fields = (Object.keys(initial) as (keyof T)[]).map((key) => {
+    const [read, write] = createSignal(initial[key]);
+    Object.defineProperty(value, key, { enumerable: true, get: read });
+    return { key, value: initial[key], write };
+  });
+  return { value, update(next: T) {
+    if (next === previous) return;
+    previous = next;
+    for (const field of fields) {
+      const value = next[field.key];
+      if (value !== field.value) {
+        field.value = value;
+        field.write(() => value);
+      }
+    }
+  } };
+}
+
+function samePose(a: ReturnType<typeof battlerPresentation>, b: ReturnType<typeof battlerPresentation>): boolean {
+  return a.offsetX === b.offsetX && a.opacity === b.opacity && a.effect.kind === b.effect.kind &&
+    a.effect.startTick === b.effect.startTick && a.effect.duration === b.effect.duration;
+}
+function sameFields(a: object, b: object): boolean {
+  const left = a as Record<string, unknown>, right = b as Record<string, unknown>;
+  for (const key of Object.keys(left)) if (left[key] !== right[key]) return false;
+  return true;
+}
+
 export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
-  const runtime = () => tuxemonRuntimeBattleState(props.state);
-  const player = () => presentationActiveMonster(runtime(), 0);
-  const enemy = () => presentationActiveMonster(runtime(), 1);
-  const layout = () => battleSceneLayout(props.width, props.height, player(), enemy());
-  const environment = () => runtime().visuals.environment;
-  const playerArt = () => runtime().visuals.monsters[player().slug]!;
-  const enemyArt = () => runtime().visuals.monsters[enemy().slug]!;
-  const allMonsters = () => [...runtime().battle.parties[0], ...runtime().battle.parties[1]];
-  const presenting = () => currentPresentationEvent(runtime()) !== null;
-  const event = () => currentPresentationEvent(runtime());
-  const message = () => {
+  let previousRuntime = untrack(() => tuxemonRuntimeBattleState(props.state));
+  let previousPaint = battlePaint(previousRuntime);
+  const fields = fieldProjection(previousRuntime);
+  const painted = fieldProjection(previousPaint);
+  const runtime = () => fields.value;
+  const paint = painted.value;
+  createRenderEffect(() => {
+    const state = tuxemonRuntimeBattleState(props.state);
+    if (state === previousRuntime) return;
+    const next = battlePaint(state, previousRuntime, previousPaint);
+    previousRuntime = state;
+    const prev = previousPaint;
+    if (prev) {
+      if (sameFields(prev.playerSprite, next.playerSprite)) next.playerSprite = prev.playerSprite;
+      if (sameFields(prev.enemySprite, next.enemySprite)) next.enemySprite = prev.enemySprite;
+      if (samePose(prev.playerPose, next.playerPose)) next.playerPose = prev.playerPose;
+      if (samePose(prev.enemyPose, next.enemyPose)) next.enemyPose = prev.enemyPose;
+      if (sameFields(prev.playerTrainer, next.playerTrainer)) next.playerTrainer = prev.playerTrainer;
+      if (sameFields(prev.enemyTrainer, next.enemyTrainer)) next.enemyTrainer = prev.enemyTrainer;
+      if (sameFields(prev.ball, next.ball)) next.ball = prev.ball;
+      const a = prev.animation, b = next.animation;
+      if (a.animation === b.animation && a.page === b.page && a.sourceX === b.sourceX && a.sourceY === b.sourceY && a.target === b.target && a.opacity === b.opacity) next.animation = a;
+      if (prev.playerIcons.every((icon, i) => icon === next.playerIcons[i])) next.playerIcons = prev.playerIcons;
+      if (prev.enemyIcons.every((icon, i) => icon === next.enemyIcons[i])) next.enemyIcons = prev.enemyIcons;
+    }
+    previousPaint = next;
+    batch(() => { fields.update(state); painted.update(next); });
+  });
+  const player = () => paint.player;
+  const enemy = () => paint.enemy;
+  const layout = createMemo(() => battleSceneLayout(props.width, props.height, player(), enemy()));
+  const environment = createMemo(() => runtime().visuals.environment);
+  const playerArt = createMemo(() => runtime().visuals.monsters[player().slug]!);
+  const enemyArt = createMemo(() => runtime().visuals.monsters[enemy().slug]!);
+  const allMonsters = createMemo(() => [...runtime().battle.parties[0], ...runtime().battle.parties[1]]);
+  const presenting = createMemo(() => currentPresentationEvent(runtime()) !== null);
+  const event = createMemo(() => currentPresentationEvent(runtime()));
+  const message = createMemo(() => {
     const result = runtime().battle.result;
     if (presenting()) return eventMessage(runtime(), event(), allMonsters());
     if (result) return result.outcome === "won" ? "Victory!"
@@ -182,10 +227,10 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
         : runtime().menuMode === "swap" ? "Choose a Tuxemon"
           : runtime().menuMode === "capture" ? "Choose a capture device"
             : "Choose an item";
-  };
-  const rootEntries = () => runtime().menuMode === "root" ? runtime().menu : [];
-  const rootStart = () => runtime().menuIndex < 4 ? 0 : Math.max(0, rootEntries().length - 4);
-  const commandCells = (): readonly [CommandCell, CommandCell, CommandCell, CommandCell] => {
+  });
+  const rootEntries = createMemo(() => runtime().menuMode === "root" ? runtime().menu : []);
+  const rootStart = createMemo(() => runtime().menuIndex < 4 ? 0 : Math.max(0, rootEntries().length - 4));
+  const commandCells = createMemo((): readonly [CommandCell, CommandCell, CommandCell, CommandCell] => {
     const start = rootStart();
     return [0, 1, 2, 3].map((offset) => {
       const entry = rootEntries()[start + offset];
@@ -193,8 +238,8 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
         ? { label: menuLabel(entry), disabled: !entry.available }
         : { label: " ", disabled: true };
     }) as unknown as readonly [CommandCell, CommandCell, CommandCell, CommandCell];
-  };
-  const listRows = (): ListMenuRow[] => {
+  });
+  const listRows = createMemo((): ListMenuRow[] => {
     const rows = runtime().menu.map((entry) => ({
       label: menuLabel(entry),
       // ListMenu owns fixed Text nodes, but Solid's universal renderer
@@ -205,16 +250,16 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
     }));
     while (rows.length < 2) rows.push({ label: " ", detail: " " });
     return rows;
-  };
-  const menuReady = () => !presenting() && runtime().battle.awaiting !== null;
-  const rootVisible = () => menuReady() && runtime().menuMode === "root";
-  const listVisible = () => menuReady() && runtime().menuMode !== "root";
-  const bandLines = () => wrapMessage(message(), rootVisible() || listVisible() ? 27 : 58);
-  const playerLevel = () => presentationLevel(runtime(), player().uid);
-  const playerXp = () => experienceProgress(
-    presentationExperience(runtime(), player().uid),
+  });
+  const menuReady = createMemo(() => !presenting() && runtime().battle.awaiting !== null);
+  const rootVisible = createMemo(() => menuReady() && runtime().menuMode === "root");
+  const listVisible = createMemo(() => menuReady() && runtime().menuMode !== "root");
+  const bandLines = createMemo(() => wrapMessage(message(), rootVisible() || listVisible() ? 27 : 58));
+  const playerLevel = () => paint.playerLevel;
+  const playerXp = createMemo(() => experienceProgress(
+    paint.playerExperience,
     playerLevel(),
-  );
+  ));
 
   const monsterSlot = (
     monster: () => BattleMonster,
@@ -223,14 +268,16 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
     rect: typeof R.playerMonster,
     debugName: string,
   ) => {
-    const source = () => art()[side];
-    const pose = () => battlerPresentation(runtime(), monster().uid);
+    const source = createMemo(() => art()[side]);
+    const pose = () => side === "back" ? paint.playerPose : paint.enemyPose;
+    const sprite = () => side === "back" ? paint.playerSprite : paint.enemySprite;
     return (
       <View
         class="absolute overflow-hidden"
         style={{
           posType: 1,
-          insetL: rect.x + pose().offsetX,
+          insetL: rect.x,
+          translateX: pose().offsetX,
           insetT: rect.y,
           width: rect.width,
           height: rect.height,
@@ -238,14 +285,12 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
         }}
         debugName={`${debugName}-clip`}
       >
-        <SpriteSlot
+        <Image
+          class="absolute"
           src={pathFor(art().sheet.key)}
-          x={-source()[0] * 2}
-          y={-source()[1] * 2}
-          width={art().sheet.width * 2}
-          height={art().sheet.height * 2}
-          effect={pose().effect}
-          nowTick={runtime().eventTicks}
+          style={{ posType: 1, insetL: -source()[0] * 2, insetT: -source()[1] * 2,
+            width: art().sheet.width * 2, height: art().sheet.height * 2,
+            translateX: sprite().dx, translateY: sprite().sinkY, opacity: sprite().opacity }}
           debugName={debugName}
         />
       </View>
@@ -253,18 +298,19 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
   };
 
   const trainerSlot = (side: 0 | 1) => {
-    const ref = () => runtime().visuals.trainers[side === 0 ? "player" : "opponent"]
-      ?? environment().partyIcons.icon_empty!;
-    const pose = () => trainerPresentation(runtime(), side);
+    const ref = createMemo(() => runtime().visuals.trainers[side === 0 ? "player" : "opponent"]
+      ?? environment().partyIcons.icon_empty!);
+    const pose = () => side === 0 ? paint.playerTrainer : paint.enemyTrainer;
     const rect = side === 0 ? R.playerMonster : R.enemyMonster;
-    const sourceScale = () => side === 0 && ref().rect[3] > 64 ? 1 : 2;
-    const sourceX = () => side === 1 && ref().rect[2] >= 128 ? 64 : 0;
+    const sourceScale = createMemo(() => side === 0 && ref().rect[3] > 64 ? 1 : 2);
+    const sourceX = createMemo(() => side === 1 && ref().rect[2] >= 128 ? 64 : 0);
     return (
       <View
         class="absolute overflow-hidden"
         style={{
           posType: 1,
-          insetL: rect.x + pose().offsetX,
+          insetL: rect.x,
+          translateX: pose().offsetX,
           insetT: rect.y,
           width: rect.width,
           height: rect.height,
@@ -297,21 +343,21 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
     );
   };
 
-  const ball = () => ballPresentation(runtime());
-  const ballRef = () => {
+  const ball = () => paint.ball;
+  const ballRef = createMemo(() => {
     const item = ball().item ? runtime().visuals.items[ball().item!] : undefined;
     return item?.captureSprite ?? environment().partyIcons.icon_alive!;
-  };
-  const ballSize = () => ball().kind === "capture" ? 32 : 16;
+  });
+  const ballSize = createMemo(() => ball().kind === "capture" ? 32 : 16);
 
-  const animation = () => animationPresentation(runtime());
-  const animationPage = () => animation().page ?? environment().partyIcons.icon_empty!;
-  const animationRect = () => runtime().battle.parties[0].some((monster) => monster.uid === animation().target)
-    ? R.playerMonster : R.enemyMonster;
-  const animationFrames = () => {
+  const animation = () => paint.animation;
+  const animationPage = createMemo(() => animation().page ?? environment().partyIcons.icon_empty!);
+  const animationRect = createMemo(() => runtime().battle.parties[0].some((monster) => monster.uid === animation().target)
+    ? R.playerMonster : R.enemyMonster);
+  const animationFrames = createMemo(() => {
     const frames = animation().frameKeys.map(pathFor);
     return frames.length > 0 ? frames : [pathFor(environment().partyIcons.icon_empty!.key)];
-  };
+  });
 
   const island = (side: "player" | "enemy") => {
     const rect = side === "player" ? R.playerIsland : R.enemyIsland;
@@ -330,14 +376,14 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
 
   const hud = (side: 0 | 1) => {
     const monster = side === 0 ? player : enemy;
-    const shownHp = () => presentationHp(runtime(), monster().uid);
-    const shownLevel = () => presentationLevel(runtime(), monster().uid);
-    const shownMaxHp = () => presentationMaxHp(runtime(), monster().uid);
+    const shownHp = () => side === 0 ? paint.playerHp : paint.enemyHp;
+    const shownLevel = () => side === 0 ? paint.playerLevel : paint.enemyLevel;
+    const shownMaxHp = () => side === 0 ? paint.playerMaxHp : paint.enemyMaxHp;
     const rect = side === 0 ? R.playerHud : R.enemyHud;
-    const image = () => side === 0 ? environment().hud.player! : environment().hud.opponent!;
+    const image = createMemo(() => side === 0 ? environment().hud.player! : environment().hud.opponent!);
     const hp = side === 0 ? R.playerHp : R.enemyHp;
     const status = side === 0 ? R.playerStatus : R.enemyStatus;
-    const icon = () => monster().status ? runtime().visuals.statusIcons[monster().status!.slug] : undefined;
+    const icon = createMemo(() => monster().status ? runtime().visuals.statusIcons[monster().status!.slug] : undefined);
     return (
       <>
         <Image
@@ -391,7 +437,7 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
 
   const partyTray = (side: 0 | 1) => {
     const rect = side === 0 ? R.playerTray : R.enemyTray;
-    const ref = () => side === 0 ? environment().hud.playerTray! : environment().hud.opponentTray!;
+    const ref = createMemo(() => side === 0 ? environment().hud.playerTray! : environment().hud.opponentTray!);
     return (
       <>
         <Image
@@ -402,7 +448,7 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
         />
         <For each={PARTY_SLOTS}>
           {(slot) => {
-            const icon = () => partyIcon(runtime(), side, slot);
+            const icon = () => (side === 0 ? paint.playerIcons : paint.enemyIcons)[slot]!;
             return (
               <Image
                 src={pathFor(icon().key)}

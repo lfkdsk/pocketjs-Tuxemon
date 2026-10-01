@@ -40,7 +40,7 @@ const ROOT = resolve(import.meta.dir, "..");
 const JOURNEY_PATH = resolve(process.env.GB6_JOURNEY ?? join(ROOT, "data/gb6-mainline-journey.json"));
 const MODE = process.env.GB6_VERIFY_MODE ?? "ci";
 const BTN_LTRIGGER = 0x0100;
-const GAME_OPTIONS = { extensions: TUXEMON_EXTENSIONS, battle: TUXEMON_BATTLE_RULES } as const;
+const GAME_OPTIONS = { immutableState: process.env.GB6_IMMUTABLE === "1", extensions: TUXEMON_EXTENSIONS, battle: TUXEMON_BATTLE_RULES } as const;
 const REQUIRED_TRAINERS: Readonly<Record<string, number>> = {
   spyder_billie: 2,
   spyder_confusedperson: 1,

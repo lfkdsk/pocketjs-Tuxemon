@@ -1,0 +1,741 @@
+diff --git a/framework/src/host.ts b/framework/src/host.ts
+index 969e8d66..30be8588 100644
+--- a/framework/src/host.ts
++++ b/framework/src/host.ts
+@@ -154,6 +154,9 @@ export interface HostOps {
+   /** Decode tile `index` of a TILESET pak entry (`key`) into a texture.
+    *  → generation-tagged handle, or -1 (absent/solid/malformed tile). */
+   loadTileTexture?(key: string, index: number): number;
++  /** Optional file-backed image source. The renderer owns residency. */
++  loadImageTexture?(key: string): number;
++  imageTextureBytes?(handle: number): number;
+   /** Release a texture slot. The handle is dead afterwards (stale handles
+    *  draw nothing — handles are generation-tagged, spec TEX_SLOT_BITS). */
+   freeTexture?(handle: number): void;
+diff --git a/framework/src/native-tree.ts b/framework/src/native-tree.ts
+index 451cde80..05796a8b 100644
+--- a/framework/src/native-tree.ts
++++ b/framework/src/native-tree.ts
+@@ -331,6 +331,10 @@ export function registerTexture(key: string, handle: number): void {
+ }
+ 
+ export function resetTextures(): void {
++  for (const entry of streamImages.values()) getOps().freeTexture?.(entry.handle);
++  streamImages.clear();
++  nodeImages.clear();
++  streamImageBytes = 0;
+   textures.clear();
+ }
+ 
+@@ -397,6 +401,7 @@ export function runSweep(): void {
+       keep.push(node);
+       continue;
+     }
++    releaseImageTree(node);
+     clearNodeReferences(node);
+     ops.destroyNode(node.id);
+   }
+@@ -603,16 +608,67 @@ function setClass(node: NodeMirror, value: unknown): void {
+   ops.setStyle(node.id, styleId);
+ }
+ 
++interface StreamImage { handle: number; refs: number; bytes: number }
++const streamImages = new Map<string, StreamImage>();
++const nodeImages = new Map<number, string>();
++let streamImageBytes = 0;
++const STREAM_IMAGE_BUDGET = 2 * 1024 * 1024;
++function releaseImage(node: NodeMirror): void {
++  const key = nodeImages.get(node.id);
++  if (key !== undefined) {
++    const entry = streamImages.get(key);
++    if (entry) entry.refs--;
++    nodeImages.delete(node.id);
++  }
++}
++function releaseImageTree(node: NodeMirror): void {
++  releaseImage(node);
++  for (const child of node.children) releaseImageTree(child);
++  trimImages();
++}
++function trimImages(): void {
++  if (streamImageBytes <= STREAM_IMAGE_BUDGET) return;
++  for (const [key, entry] of streamImages) {
++    if (entry.refs !== 0) continue;
++    getOps().freeTexture?.(entry.handle);
++    streamImageBytes -= entry.bytes;
++    streamImages.delete(key);
++    if (streamImageBytes <= STREAM_IMAGE_BUDGET) break;
++  }
++}
+ function setSrc(node: NodeMirror, value: unknown): void {
+   const ops = getOps();
++  if (typeof value === "string" && nodeImages.get(node.id) === value) return;
+   if (value == null || value === "") {
+     ops.setImage(node.id, -1);
++    releaseImage(node);
++    trimImages();
+     return;
+   }
+   if (typeof value !== "string") {
+     throw new Error("PocketJS: src must be a string key");
+   }
+-  const handle = textures.get(value);
++  let handle = textures.get(value);
++  if (handle === undefined && ops.loadImageTexture) {
++    let entry = streamImages.get(value);
++    if (!entry) {
++      const loaded = ops.loadImageTexture(value);
++      if (loaded >= 0) {
++        entry = { handle: loaded, refs: 0, bytes: ops.imageTextureBytes?.(loaded) ?? 0 };
++        streamImages.set(value, entry);
++        streamImageBytes += entry.bytes;
++      }
++    }
++    if (entry) {
++      releaseImage(node);
++      entry.refs++;
++      nodeImages.set(node.id, value);
++      handle = entry.handle;
++      // Move each hit to the end: evict least-recently-used unbound images.
++      streamImages.delete(value);
++      streamImages.set(value, entry);
++    }
++  }
+   if (handle === undefined) {
+     if (getHost().strict) {
+       throw new Error(
+@@ -622,7 +678,9 @@ function setSrc(node: NodeMirror, value: unknown): void {
+     missCounters.unknownTexture++;
+     return;
+   }
++  if (textures.has(value)) releaseImage(node);
+   ops.setImage(node.id, handle);
++  trimImages();
+ }
+ 
+ /** `sprite` prop → bind an animated sprite atlas. Auto-play is native; JS never
+@@ -639,6 +697,8 @@ function setSpriteSrc(node: NodeMirror, value: unknown): void {
+   const ops = getOps();
+   if (value == null || value === "") {
+     ops.setSprite(node.id, -1, 0, 0, 0);
++    releaseImage(node);
++    trimImages();
+     return;
+   }
+   if (typeof value !== "string") {
+@@ -655,6 +715,8 @@ function setSpriteSrc(node: NodeMirror, value: unknown): void {
+     return;
+   }
+   ops.setSprite(node.id, meta.handle, meta.frames, meta.cols, spriteStep(node, meta.step));
++  releaseImage(node);
++  trimImages();
+ }
+ 
+ /** Re-emit the node's current sprite binding, resetting the core's
+diff --git a/framework/src/pak.ts b/framework/src/pak.ts
+index af5ddb7b..e75979ed 100644
+--- a/framework/src/pak.ts
++++ b/framework/src/pak.ts
+@@ -21,6 +21,7 @@ interface Entry {
+   off: number; // blob offset from pack start
+   len: number; // blob byte length
+   dtype: number; // advisory PAK_DTYPE
++  external?: boolean;
+ }
+ 
+ let map: Map<string, Entry> | null = null;
+@@ -60,6 +61,21 @@ function parse(ab: ArrayBuffer): void {
+       dtype,
+     });
+   }
++  // A PSP split pack embeds the complete directory while its payloads
++  // remain in assets.pak. Preserve enumeration, dtype and range semantics.
++  const index = m.get("pocket:external-index");
++  if (index) {
++    const external = u8.subarray(index.off, index.off + index.len);
++    const view = new DataView(external.buffer, external.byteOffset, external.byteLength);
++    if (external.length < PAK_HEADER_SIZE || view.getUint32(0, true) !== PAK_MAGIC || view.getUint16(4, true) !== PAK_VERSION)
++      throw new Error("pak: invalid external index");
++    const count = view.getUint32(8, true), directory = view.getUint32(12, true), names = view.getUint32(16, true);
++    for (let i = 0; i < count; i++) {
++      const e = directory + i * PAK_ENTRY_SIZE;
++      const key = readKey(external, names + view.getUint32(e + 12, true), view.getUint16(e + 16, true));
++      if (!m.has(key)) m.set(key, { off: view.getUint32(e + 4, true), len: view.getUint32(e + 8, true), dtype: external[e + 18]!, external: true });
++    }
++  }
+   map = m;
+   bytes = u8;
+ }
+@@ -117,6 +133,12 @@ export function get(key: string, start = 0, end?: number): Uint8Array {
+   const stop = end ?? e.len;
+   if (!Number.isSafeInteger(start) || !Number.isSafeInteger(stop) || start < 0 || stop < start || stop > e.len)
+     throw new RangeError("pak: invalid byte range");
++  if (e.external) {
++    const read = (globalThis as { __pakRead?: (key: string, start: number, end: number) => ArrayBuffer | undefined }).__pakRead;
++    const value = read?.(key, start, stop);
++    if (!value || value.byteLength !== stop - start) throw new Error("pak: external read failed for " + key);
++    return new Uint8Array(value);
++  }
+   return bytes!.slice(e.off + start, e.off + stop);
+ }
+ 
+diff --git a/hosts/psp/src/ffi.rs b/hosts/psp/src/ffi.rs
+index e693c44c..42fe2441 100644
+--- a/hosts/psp/src/ffi.rs
++++ b/hosts/psp/src/ffi.rs
+@@ -20,6 +20,7 @@ use alloc::vec::Vec;
+ 
+ use libquickjs_sys::*;
+ extern "C" {
++    fn JS_NewArrayBufferCopy(ctx: *mut JSContext, buf: *const u8, len: usize) -> JSValue;
+     fn JS_ParseJSON(
+         ctx: *mut JSContext,
+         buf: *const core::ffi::c_char,
+@@ -294,7 +295,7 @@ unsafe extern "C" fn js_load_tile_texture(
+     let handle = match core::str::from_utf8(core::slice::from_raw_parts(s as *const u8, len)) {
+         Ok(key) => match crate::pak::find(crate::pak::installed(), key) {
+             Some(blob) => ui().upload_tileset_tile(blob, arg_i32(ctx, argc, argv, 1) as u32),
+-            None => -1,
++            None => crate::pak_external::read(key).map(|blob| ui().upload_tileset_tile(&blob, arg_i32(ctx, argc, argv, 1) as u32)).unwrap_or(-1),
+         },
+         Err(_) => -1,
+     };
+@@ -313,6 +314,9 @@ unsafe extern "C" fn js_free_texture(
+     argc: i32,
+     argv: *mut JSValue,
+ ) -> JSValue {
++    // The previous display list can still reference this RAM while JS
++    // prepares the next frame. Finish its reads before reusing the block.
++    psp::sys::sceGuSync(psp::sys::GuSyncMode::Finish, psp::sys::GuSyncBehavior::Wait);
+     ui().free_texture(arg_i32(ctx, argc, argv, 0));
+     JS_UNDEFINED
+ }
+@@ -1262,7 +1266,18 @@ pub unsafe fn register(
+         add_fn(ctx, io, b"uploadIndexedImage\0", js_offload_upload_indexed, 4);
+         JS_SetPropertyStr(ctx, global, b"offload\0".as_ptr() as *const _, io);
+     }
++    #[cfg(feature = "bench")]
++    {
++        add_fn(ctx, global, b"__pspNow\0", js_psp_now, 0);
++        add_fn(ctx, global, b"__pspRoundTrip\0", js_psp_round_trip, 1);
++        add_fn(ctx, global, b"__pspLog\0", js_psp_log, 1);
++    }
+     let ui_obj = JS_NewObject(ctx);
++    if crate::pak_external::enabled() {
++        add_fn(ctx, global, b"__pakRead\0", js_pak_read, 3);
++        add_fn(ctx, ui_obj, b"loadImageTexture\0", js_load_image_texture, 1);
++        add_fn(ctx, ui_obj, b"imageTextureBytes\0", js_image_texture_bytes, 1);
++    }
+ 
+     add_fn(ctx, ui_obj, b"createNode\0", js_create_node, 1);
+     add_fn(ctx, ui_obj, b"destroyNode\0", js_destroy_node, 1);
+@@ -1408,3 +1423,66 @@ pub unsafe fn register_audio(ctx: *mut JSContext, global: JSValue) {
+     add_fn(ctx, audio_obj, b"poll\0", js_audio_poll, 0);
+     JS_SetPropertyStr(ctx, global, b"audio\0".as_ptr() as *const _, audio_obj);
+ }
++
++unsafe extern "C" fn js_pak_read(ctx: *mut JSContext, _: JSValue, n: i32, a: *mut JSValue) -> JSValue {
++    if n < 1 { return JS_UNDEFINED; }
++    let mut len = 0;
++    let p = JS_ToCStringLen2(ctx, &mut len, *a, 0);
++    if p.is_null() { return JS_UNDEFINED; }
++    let out = core::str::from_utf8(core::slice::from_raw_parts(p as *const u8, len)).ok()
++        .and_then(|key| crate::pak_external::read(key));
++    JS_FreeCString(ctx, p);
++    match out {
++        Some(bytes) => {
++            let start = arg_i32(ctx, n, a, 1).max(0) as usize;
++            let end = if n < 3 || JS_IsUndefined(*a.add(2)) { bytes.len() } else { arg_i32(ctx, n, a, 2).max(0) as usize };
++            match bytes.get(start..end) {
++                Some(slice) => JS_NewArrayBufferCopy(ctx, slice.as_ptr(), slice.len()),
++                None => JS_UNDEFINED,
++            }
++        }
++        None => JS_UNDEFINED,
++    }
++}
++unsafe extern "C" fn js_load_image_texture(ctx: *mut JSContext, _: JSValue, n: i32, a: *mut JSValue) -> JSValue {
++    if n < 1 { return JS_NewInt32(ctx, -1); }
++    let mut len = 0;
++    let p = JS_ToCStringLen2(ctx, &mut len, *a, 0);
++    if p.is_null() { return JS_NewInt32(ctx, -1); }
++    let handle = core::str::from_utf8(core::slice::from_raw_parts(p as *const u8, len)).ok()
++        .and_then(|key| crate::pak_external::read(&alloc::format!("ui:img.{}", key)))
++        .map(|bytes| ui().upload_img_entry(&bytes)).unwrap_or(-1);
++    JS_FreeCString(ctx, p);
++    if handle >= 0 { crate::ge::writeback_texture(ui(), handle); }
++    JS_NewInt32(ctx, handle)
++}
++unsafe extern "C" fn js_image_texture_bytes(ctx: *mut JSContext, _: JSValue, n: i32, a: *mut JSValue) -> JSValue {
++    let bytes = ui().texture(arg_i32(ctx, n, a, 0)).map(|t| t.pixels.len() + t.palette.map_or(0, |p| p.len())).unwrap_or(0);
++    JS_NewInt32(ctx, bytes as i32)
++}
++
++#[cfg(feature = "bench")]
++unsafe extern "C" fn js_psp_now(ctx: *mut JSContext, _: JSValue, _: i32, _: *mut JSValue) -> JSValue {
++    JS_NewFloat64(ctx, psp::sys::sceKernelGetSystemTimeWide() as f64)
++}
++#[cfg(feature = "bench")]
++unsafe extern "C" fn js_psp_log(ctx: *mut JSContext, _: JSValue, n: i32, a: *mut JSValue) -> JSValue {
++    use psp::sys::{self, IoOpenFlags};
++    if n < 1 { return JS_UNDEFINED; }
++    let mut len = 0;
++    let p = JS_ToCStringLen2(ctx, &mut len, *a, 0);
++    if !p.is_null() {
++        let fd = sys::sceIoOpen(b"host0:/profile.jsonl\0".as_ptr(), IoOpenFlags::WR_ONLY | IoOpenFlags::CREAT | IoOpenFlags::APPEND, 0o777);
++        if fd.0 >= 0 { sys::sceIoWrite(fd, p as *const _, len); sys::sceIoWrite(fd, b"\n".as_ptr() as *const _, 1); sys::sceIoClose(fd); }
++        JS_FreeCString(ctx, p);
++    }
++    JS_UNDEFINED
++}
++
++#[cfg(feature = "bench")]
++unsafe extern "C" fn js_psp_round_trip(ctx: *mut JSContext, _: JSValue, n: i32, a: *mut JSValue) -> JSValue {
++    if n < 1 { return JS_UNDEFINED; }
++    let mut value = 0.0;
++    if JS_ToFloat64(ctx, &mut value, *a) < 0 { return JS_UNDEFINED; }
++    JS_NewFloat64(ctx, value)
++}
+diff --git a/hosts/psp/src/ge.rs b/hosts/psp/src/ge.rs
+index ddd91ba2..0d6510ae 100644
+--- a/hosts/psp/src/ge.rs
++++ b/hosts/psp/src/ge.rs
+@@ -398,22 +398,7 @@ fn strip_texels(psm: u32) -> i32 {
+     }
+ }
+ 
+-/// Sprites one TEX_QUAD becomes: 1 unless the quad maps texels 1:1 in the
+-/// positive direction on whole-texel bounds and is wider than one strip.
+-fn strip_count(texels: (f32, f32, f32, f32), w: i32, h: i32, strip: i32) -> usize {
+-    let (u0, v0, u1, v1) = texels;
+-    let whole = |t: f32| t == (t as i32) as f32;
+-    if w <= strip
+-        || u0 < 0.0
+-        || !(whole(u0) && whole(u1) && whole(v0) && whole(v1))
+-        || u1 as i32 - u0 as i32 != w
+-        || v1 as i32 - v0 as i32 != h
+-    {
+-        return 1;
+-    }
+-    let (a, b) = (u0 as i32, u1 as i32);
+-    ((b + strip - 1) / strip - a / strip) as usize
+-}
++use crate::tex_strips::strip_count;
+ 
+ /// Render one frame's DrawList into the open display list.
+ pub unsafe fn render(ui: &Ui, words: &[u32]) {
+@@ -715,16 +700,17 @@ pub unsafe fn render_over(ui: &Ui, words: &[u32]) {
+                             s += 1;
+                             continue;
+                         }
+-                        // 1:1 texel mapping: cut at absolute multiples of the
++                        // Integer texel mapping: cut at absolute multiples of the
+                         // strip width so every strip stays inside one
+                         // texture-cache-sized column of the source.
+                         let u0 = tu0 as i32;
+                         let u1 = tu1 as i32;
++                        let scale = qw / (u1 - u0);
+                         let mut a = u0;
+                         while a < u1 {
+                             let b = ((a / strip + 1) * strip).min(u1);
+-                            let x0 = qx as i32 + (a - u0);
+-                            let x1 = qx as i32 + (b - u0);
++                            let x0 = qx as i32 + (a - u0) * scale;
++                            let x1 = qx as i32 + (b - u0) * scale;
+                             *verts.add(s * 2) = vert(a as f32, tv0, x0, qy as i32);
+                             *verts.add(s * 2 + 1) = vert(b as f32, tv1, x1, qy as i32 + qh);
+                             s += 1;
+diff --git a/hosts/psp/src/host.rs b/hosts/psp/src/host.rs
+index 8ed7c942..6ebca605 100644
+--- a/hosts/psp/src/host.rs
++++ b/hosts/psp/src/host.rs
+@@ -11,12 +11,17 @@ use psp::sys::{
+     TexturePixelFormat, ThreadAttributes,
+ };
+ use psp::vram_alloc::get_vram_allocator;
+-use psp::{Align16, BUF_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH};
++use psp::{BUF_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH};
+ 
+-// GE display list buffer (1 MB), 16-byte aligned. One per program; the
++// GE display list buffer (1 MB), isolated on 64-byte CPU cache lines. The
++// GU writes through its uncached alias; cached BSS initialization must not
++// overwrite those commands on a later cache eviction.
++#[repr(C, align(64))]
++struct CommandList([u32; 0x40000]);
++// One per program; the
+ // frame loop owns sceGuStart/Finish against it (the "dreamcart contract" —
+ // ge.rs never opens or kicks lists).
+-static mut LIST: Align16<[u32; 0x40000]> = Align16([0; 0x40000]);
++static mut LIST: CommandList = CommandList([0; 0x40000]);
+ 
+ /// The display-list pointer for `sceGuStart`.
+ pub fn list_ptr() -> *mut c_void {
+@@ -147,6 +152,7 @@ pub unsafe fn init_graphics_with_format(cfg: GfxConfig, format: DisplayPixelForm
+     }
+ 
+     sys::sceGuInit();
++    sys::sceKernelDcacheWritebackInvalidateRange(list_ptr(), core::mem::size_of::<CommandList>() as u32);
+     sys::sceGuStart(GuContextType::Direct, list_ptr());
+     sys::sceGuDrawBuffer(format, fbp0 as _, BUF_WIDTH as i32);
+     if !matches!(format, DisplayPixelFormat::Psm8888) {
+diff --git a/hosts/psp/src/lib.rs b/hosts/psp/src/lib.rs
+index f780b816..5b3525d5 100644
+--- a/hosts/psp/src/lib.rs
++++ b/hosts/psp/src/lib.rs
+@@ -31,6 +31,7 @@ mod framebuffer;
+ pub mod ge;
+ pub mod host;
+ pub mod pak;
++pub mod pak_external;
+ pub mod qjs_alloc;
+ pub mod stats;
+ pub mod svc;
+@@ -42,3 +43,5 @@ pub mod offload;
+ pub mod offload_image;
+ pub mod offload_local;
+ pub mod offload_packet;
++
++mod tex_strips;
+diff --git a/hosts/psp/src/main.rs b/hosts/psp/src/main.rs
+index a05ed148..629579f9 100644
+--- a/hosts/psp/src/main.rs
++++ b/hosts/psp/src/main.rs
+@@ -149,6 +149,8 @@ struct BenchState {
+     eval_end_us: u64,
+     frame0_complete_us: u64,
+     frames: u32,
++    window_start: u32,
++    samples: [u32; 300],
+     js_sum_us: u64,
+     jobs_sum_us: u64,
+     tick_sum_us: u64,
+@@ -172,6 +174,8 @@ impl BenchState {
+             eval_end_us: 0,
+             frame0_complete_us: 0,
+             frames: 0,
++            window_start: 0,
++            samples: [0; 300],
+             js_sum_us: 0,
+             jobs_sum_us: 0,
+             tick_sum_us: 0,
+@@ -260,7 +264,7 @@ unsafe fn bench_window() -> (u32, u32) {
+     }
+     #[cfg(not(feature = "capture"))]
+     {
+-        (0, 120)
++        (BENCH.window_start, 300)
+     }
+ }
+ 
+@@ -294,6 +298,7 @@ unsafe fn bench_record_frame(
+         }
+     }
+     BENCH.previous_frame_start_us = t0;
++    if (BENCH.frames as usize) < BENCH.samples.len() { BENCH.samples[BENCH.frames as usize] = work_us as u32; }
+     BENCH.frames = BENCH.frames.saturating_add(1);
+     BENCH.js_sum_us = BENCH.js_sum_us.saturating_add(js_us);
+     BENCH.jobs_sum_us = BENCH.jobs_sum_us.saturating_add(jobs_us);
+@@ -365,6 +370,18 @@ unsafe fn bench_maybe_flush(frame_count: u32) {
+         arena_stats.configured_bytes,
+     );
+     bench_write(line.as_bytes());
++    #[cfg(not(feature = "capture"))]
++    {
++        BENCH.samples.sort_unstable();
++        bench_write(alloc::format!("{{\"window_start\":{},\"work_p50_us\":{},\"work_p95_us\":{},\"work_p99_us\":{},\"work_over_16ms\":{}}}\n", start, BENCH.samples[150], BENCH.samples[285], BENCH.samples[297], BENCH.samples.iter().filter(|&&us| us > 16683).count()).as_bytes());
++        let old = BENCH;
++        BENCH = BenchState::new();
++        BENCH.run_start_us = old.run_start_us;
++        BENCH.eval_begin_us = old.eval_begin_us;
++        BENCH.eval_end_us = old.eval_end_us;
++        BENCH.frame0_complete_us = old.frame0_complete_us;
++        BENCH.window_start = start + n;
++    }
+ }
+ 
+ unsafe fn boot() {
+diff --git a/hosts/psp/src/pak.rs b/hosts/psp/src/pak.rs
+index 7d0a6dd5..24e3644c 100644
+--- a/hosts/psp/src/pak.rs
++++ b/hosts/psp/src/pak.rs
+@@ -38,7 +38,8 @@ static mut PAK: &[u8] = &[];
+ /// Single-threaded main-thread contract (ffi::UI's): no concurrent
+ /// `install`/`installed` calls exist.
+ pub unsafe fn install(pak: &'static [u8]) {
+-    PAK = pak
++    PAK = pak;
++    crate::pak_external::install(find(pak, "pocket:external-index").unwrap_or(&[]));
+ }
+ 
+ /// The installed pak (empty slice until `install` runs — every `find` on it
+diff --git a/tests/renderer.test.ts b/tests/renderer.test.ts
+index 1460423d..0958087c 100644
+--- a/tests/renderer.test.ts
++++ b/tests/renderer.test.ts
+@@ -1939,3 +1939,25 @@ test("Text resource swaps one complete value and unsubscribes from superseded ba
+   expect(host.of("setText").some(c => c[2] === "Error")).toBe(true);
+   dispose(); expect(second.listeners.size).toBe(0);
+ });
++
++test("streamed images share handles and evict only after their last binding is released", () => {
++  const loads: string[] = [], freed: number[] = [];
++  host.ops.loadImageTexture = key => { loads.push(key); return key === "missing" ? -1 : loads.length - 1; };
++  host.ops.imageTextureBytes = () => 1536 * 1024;
++  host.ops.freeTexture = handle => { freed.push(handle); };
++  const a = createElement("image"), b = createElement("image"), c = createElement("image");
++  setProp(a, "src", "shared", undefined);
++  setProp(b, "src", "shared", undefined);
++  setProp(c, "src", "other", undefined);
++  expect(loads).toEqual(["shared", "other"]);
++  expect(freed).toEqual([]);
++  expect(() => setProp(a, "src", "missing", "shared")).toThrow(/unknown image/);
++  setProp(a, "src", "", "missing");
++  expect(freed).toEqual([]);
++  setProp(b, "src", "", "shared");
++  expect(freed).toEqual([0]);
++  registerSprite("atlas", { handle: 99, frames: 2, cols: 2, step: 1 });
++  setProp(a, "src", "third", "");
++  setProp(c, "sprite", "atlas", undefined);
++  expect(freed).toEqual([0, 1]);
++});
+diff --git a/tools/psp.ts b/tools/psp.ts
+index 61d9b9ea..2ba7513a 100644
+--- a/tools/psp.ts
++++ b/tools/psp.ts
+@@ -307,20 +307,26 @@ const hostEnvironment = buildPlan
+       POCKETJS_RASTER_DENSITY: "1",
+     };
+ 
++const gcc = process.env.POCKETJS_PSP_C_COMPILER === "gcc";
+ const env = {
+   POCKETJS_OFFLOAD_SLOT: buildPlan?.features["io.offload"] ? createHash("sha256").update(buildPlan.app.id).digest("hex").slice(0, 16) : "",
+   ...toolchain.environment,
+   RUSTFLAGS: rustflags,
+   CRATE_CC_NO_DEFAULTS: "1",
+-  TARGET_CC: "clang",
++  TARGET_CC: gcc ? pspUiDir + "tools/cli/psp-gcc-wrapper.ts" : "clang",
++  POCKETJS_PSP_GCC: `${sdk}/bin/psp-gcc`,
++  POCKETJS_PSP_OBJCOPY: `${toolchain.llvmBin}/llvm-objcopy`,
+   TARGET_AR: `${toolchain.llvmBin}/llvm-ar`,
+   // Match the Rust PSP target's +noabicalls mode. -G0 avoids clang's MIPS
+   // backend selecting unsupported GP-relative accesses for large C sources.
+-  // -O2 must live HERE: CRATE_CC_NO_DEFAULTS=1 makes the cc crate drop its
++  // Optimization flags must live here: CRATE_CC_NO_DEFAULTS=1 drops the
+   // synthesized flags, including the -O from build.rs opt_level() — without
+   // it every C dependency (QuickJS!) silently compiles at -O0.
+-  TARGET_CFLAGS:
+-    `-target mipsel-sony-psp -mcpu=mips2 -msingle-float -mlittle-endian -mno-abicalls -fno-pic -G0 -mno-check-zero-division ` +
++  TARGET_CFLAGS: gcc
++    ? `-march=allegrex -mabi=32 -msingle-float -EL -mno-abicalls -fno-pic -G0 -mno-check-zero-division ` +
++      `-fno-stack-protector -fomit-frame-pointer -O3 -fno-gcse -std=gnu11 -fwrapv -fno-strict-aliasing ` +
++      `-Wno-error=incompatible-pointer-types -I${sdk}/psp/include -I${sdk}/psp/sdk/include`
++    : `-target mipsel-sony-psp -mcpu=mips2 -msingle-float -mlittle-endian -mno-abicalls -fno-pic -G0 -mno-check-zero-division ` +
+     `-fno-stack-protector -O2 -I${sdk}/psp/include -I${sdk}/psp/sdk/include`,
+   // CRITICAL: archive MIPS objects with llvm-ar (Apple ar drops them -> undefined JS_*).
+   AR_mipsel_sony_psp: `${toolchain.llvmBin}/llvm-ar`,
+diff --git a/hosts/psp/src/pak_external.rs b/hosts/psp/src/pak_external.rs
+new file mode 100644
+index 00000000..ebfe5c68
+--- /dev/null
++++ b/hosts/psp/src/pak_external.rs
+@@ -0,0 +1,78 @@
++//! File-backed PAK blobs. Only the validated directory is embedded; payloads
++//! are read on demand from assets.pak beside the executable or on host0:.
++use alloc::vec;
++use alloc::vec::Vec;
++use core::ffi::c_void;
++use psp::sys::{self, IoOpenFlags, IoWhence, SceUid};
++use pocketjs_core::spec;
++
++static mut INDEX: &[u8] = &[];
++static mut FILE: SceUid = SceUid(-1);
++static mut FILE_LEN: usize = 0;
++fn u32_at(b: &[u8], off: usize) -> Option<usize> {
++    Some(u32::from_le_bytes(b.get(off..off + 4)?.try_into().ok()?) as usize)
++}
++/// Single guest thread; replacing a package closes its previous file.
++pub unsafe fn install(index: &'static [u8]) {
++    if FILE.0 >= 0 { sys::sceIoClose(FILE); }
++    INDEX = &[];
++    FILE = SceUid(-1);
++    if index.len() < 32 || u32_at(index, 0) != Some(spec::pak::MAGIC as usize) { return; }
++    for path in [b"assets.pak\0".as_slice(), b"host0:/assets.pak\0".as_slice()] {
++        let fd = sys::sceIoOpen(path.as_ptr(), IoOpenFlags::RD_ONLY, 0);
++        if fd.0 < 0 { continue; }
++        let len = sys::sceIoLseek(fd, 0, IoWhence::End);
++        if len > 0 && Some(len as usize) == u32_at(index, 24) {
++            // Verify the entire index against the staged file before use.
++            let mut actual = vec![0u8; index.len()];
++            FILE = fd;
++            FILE_LEN = len as usize;
++            if read_at(0, &mut actual) && actual == index { INDEX = index; return; }
++            FILE = SceUid(-1);
++        }
++        sys::sceIoClose(fd);
++    }
++    psp::dprintln!("[PocketJS pak] assets.pak missing or index mismatch");
++}
++pub unsafe fn enabled() -> bool { !INDEX.is_empty() }
++unsafe fn read_at(off: usize, bytes: &mut [u8]) -> bool {
++    if FILE.0 < 0 || off.checked_add(bytes.len()).map_or(true, |end| end > FILE_LEN) { return false; }
++    if sys::sceIoLseek(FILE, off as i64, IoWhence::Set) != off as i64 { return false; }
++    let mut n = 0;
++    while n < bytes.len() {
++        let got = sys::sceIoRead(FILE, bytes[n..].as_mut_ptr() as *mut c_void, (bytes.len() - n) as u32);
++        if got <= 0 { return false; }
++        n += got as usize;
++    }
++    true
++}
++/// The producer sorts names. Binary search avoids scanning thousands of keys
++/// on each chunk or JSON load; comparisons require no allocations.
++pub unsafe fn read(key: &str) -> Option<Vec<u8>> {
++    let b = INDEX;
++    let count = u32_at(b, 8)?;
++    let dir = u32_at(b, 12)?;
++    let names = u32_at(b, 16)?;
++    let mut lo = 0;
++    let mut hi = count;
++    while lo < hi {
++        let mid = lo + (hi - lo) / 2;
++        let e = dir.checked_add(mid.checked_mul(spec::pak::ENTRY_SIZE)?)?;
++        let name_off = names.checked_add(u32_at(b, e + 12)?)?;
++        let name_len = u16::from_le_bytes(b.get(e + 16..e + 18)?.try_into().ok()?) as usize;
++        let name = b.get(name_off..name_off.checked_add(name_len)?)?;
++        match name.cmp(key.as_bytes()) {
++            core::cmp::Ordering::Less => lo = mid + 1,
++            core::cmp::Ordering::Greater => hi = mid,
++            core::cmp::Ordering::Equal => {
++                let off = u32_at(b, e + 4)?;
++                let len = u32_at(b, e + 8)?;
++                // Large individual entries must be split by the cooker.
++                if len > 4 * 1024 * 1024 { return None; }
++                let mut bytes = vec![0u8; len];
++                return if read_at(off, &mut bytes) { Some(bytes) } else { None };
++            }
++        }
++    }
++    None
++}
+diff --git a/hosts/psp/src/tex_strips.rs b/hosts/psp/src/tex_strips.rs
+new file mode 100644
+index 00000000..5ab1dcf8
+--- /dev/null
++++ b/hosts/psp/src/tex_strips.rs
+@@ -0,0 +1,56 @@
++//! Cache-line sprite columns for exact integer nearest-neighbour scaling.
++//! Fractional, mirrored and non-integral UV mappings retain one sprite.
++pub fn strip_count(texels: (f32, f32, f32, f32), w: i32, h: i32, strip: i32) -> usize {
++    let (u0, v0, u1, v1) = texels;
++    let whole = |t: f32| t.is_finite() && (0.0..=32767.0).contains(&t) && t == (t as i32) as f32;
++    if strip <= 0 || w <= 0 || h <= 0 || u0 < 0.0
++        || !(whole(u0) && whole(u1) && whole(v0) && whole(v1)) { return 1; }
++    let (a, b) = (u0 as i32, u1 as i32);
++    let du = b - a;
++    let dv = v1 as i32 - v0 as i32;
++    if du <= strip || dv <= 0 || w < du || h < dv || w % du != 0 || h % dv != 0 { return 1; }
++    ((b + strip - 1) / strip - a / strip) as usize
++}
++
++#[cfg(test)]
++mod tests {
++    use super::*;
++    #[test]
++    fn integer_scaled_columns_preserve_every_nearest_neighbour_sample() {
++        for scale in [1, 2, 3, 4] {
++            for start in [0, 5, 63, 64] {
++                for width in [65, 127, 240, 480] {
++                    let end = start + width;
++                    let count = strip_count((start as f32, 0.0, end as f32, 160.0), width * scale, 160 * scale, 64);
++                    let mut covered = vec![None; (width * scale) as usize];
++                    let mut a = start;
++                    let mut actual_count = 0;
++                    while a < end {
++                        let b = ((a / 64 + 1) * 64).min(end);
++                        assert!(b - a <= 64);
++                        let x0 = (a - start) * scale;
++                        let x1 = (b - start) * scale;
++                        for x in x0..x1 {
++                            assert!(covered[x as usize].is_none(), "overlapping columns");
++                            covered[x as usize] = Some(a + (x - x0) / scale);
++                        }
++                        a = b;
++                        actual_count += 1;
++                    }
++                    assert_eq!(count, actual_count);
++                    for (x, sample) in covered.into_iter().enumerate() {
++                        assert_eq!(sample, Some(start + x as i32 / scale));
++                    }
++                }
++            }
++        }
++    }
++    #[test]
++    fn fractional_mirrored_and_downscaled_mappings_are_unsplit() {
++        assert_eq!(strip_count((0.5, 0.0, 240.5, 160.0), 480, 320, 64), 1);
++        assert_eq!(strip_count((240.0, 0.0, 0.0, 160.0), 480, 320, 64), 1);
++        assert_eq!(strip_count((0.0, 0.0, 240.0, 160.0), 360, 240, 64), 1);
++        assert_eq!(strip_count((0.0, 0.0, 240.0, 160.0), 120, 80, 64), 1);
++        assert_eq!(strip_count((0.0, 0.0, 64.0, 32.0), 128, 64, 64), 1);
++    }
++}
+diff --git a/tests/external-pak.test.ts b/tests/external-pak.test.ts
+new file mode 100644
+index 00000000..aabed3ff
+--- /dev/null
++++ b/tests/external-pak.test.ts
+@@ -0,0 +1,22 @@
++import { afterEach, expect, test } from "bun:test";
++import { pack } from "../framework/compiler/pak.ts";
++import { dtypeOf, entries, get, loadPack, resetPack } from "../framework/src/pak.ts";
++const globals = globalThis as typeof globalThis & { __pakRead?: (key: string, start: number, end: number) => ArrayBuffer | undefined };
++afterEach(() => { delete globals.__pakRead; resetPack(); });
++test("a split pack preserves enumeration, dtype, copy and bounded-read contracts", () => {
++  const full = pack([{ key: "data", dtype: 3, data: new Uint8Array([1, 2, 3, 4]) }]);
++  const offset = new DataView(full.buffer, full.byteOffset, full.byteLength).getUint32(20, true);
++  const boot = pack([{ key: "pocket:external-index", dtype: 0, data: full.slice(0, offset) }]);
++  loadPack(boot.buffer.slice(boot.byteOffset, boot.byteOffset + boot.byteLength));
++  const calls: number[][] = [];
++  globals.__pakRead = (key, start, end) => { expect(key).toBe("data"); calls.push([start, end]); return new Uint8Array([1, 2, 3, 4]).slice(start, end).buffer; };
++  expect(entries("data")).toEqual(["data"]);
++  expect(dtypeOf("data")).toBe(3);
++  expect([...get("data", 1, 3)]).toEqual([2, 3]);
++  const copy = get("data"); copy[0] = 9;
++  expect([...get("data")]).toEqual([1, 2, 3, 4]);
++  for (const [start, end] of [[-1, 2], [0.5, 2], [2, 1], [0, 5]]) expect(() => get("data", start, end)).toThrow(RangeError);
++  expect(calls).toEqual([[1, 3], [0, 4], [0, 4]]);
++  globals.__pakRead = () => undefined;
++  expect(() => get("data")).toThrow(/external read failed/);
++});
+diff --git a/tools/cli/psp-gcc-wrapper.ts b/tools/cli/psp-gcc-wrapper.ts
+new file mode 100755
+index 00000000..15aabae2
+--- /dev/null
++++ b/tools/cli/psp-gcc-wrapper.ts
+@@ -0,0 +1,26 @@
++#!/usr/bin/env bun
++// Normalize objects from the pinned PSP GNU assembler for Rust's LLVM linker.
++// Allegrex's vendor machine tag collides with LLVM's Loongson tag. Both the
++// PSP Clang and GCC single-float builds pass software doubles in integer
++// registers; the SDK's FP attribute uses a different name for that ABI.
++import { readFileSync, writeFileSync, renameSync } from "node:fs";
++const compiler = process.env.POCKETJS_PSP_GCC;
++const objcopy = process.env.POCKETJS_PSP_OBJCOPY;
++if (!compiler || !objcopy) throw new Error("PSP GCC wrapper requires the pinned SDK and LLVM paths");
++const args = process.argv.slice(2);
++const compiled = Bun.spawnSync([compiler, ...args], { stdout: "inherit", stderr: "inherit" });
++if (compiled.exitCode !== 0) process.exit(compiled.exitCode);
++if (args.includes("-c") && args.includes("-o")) {
++  const output = args[args.indexOf("-o") + 1]!;
++  const temporary = `${output}.normalized`;
++  // Rewriting the symbol table also repairs the GNU assembler's local-symbol
++  // ordering. The linked image receives ABI metadata from the Rust target.
++  const copied = Bun.spawnSync([objcopy, "--remove-section=.MIPS.abiflags", "--remove-section=.gnu.attributes", output, temporary], { stdout: "inherit", stderr: "inherit" });
++  if (copied.exitCode !== 0) process.exit(copied.exitCode);
++  const bytes = readFileSync(temporary);
++  if (bytes.length < 52 || bytes.readUInt32LE(0) !== 0x464c457f || bytes[4] !== 1 || bytes[5] !== 1)
++    throw new Error("PSP compiler produced an unexpected object format");
++  bytes.writeUInt32LE((bytes.readUInt32LE(36) & ~0x00ff0000) >>> 0, 36);
++  writeFileSync(temporary, bytes);
++  renameSync(temporary, output);
++}

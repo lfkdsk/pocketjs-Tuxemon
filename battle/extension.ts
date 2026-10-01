@@ -558,6 +558,7 @@ export function createTuxemonExtensions(source: BattleDbSource): ExtensionOption
   let lastValidatedRuntime: string | null = null;
   return {
     initial,
+    immutableConditions: true,
     commands: {
       "tux.add_monster": addMonsterCommand(source),
       "tux.set_monster_health": healthCommand(),

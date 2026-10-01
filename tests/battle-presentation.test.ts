@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import { allBattlePaint, battlePaint } from "../ui/battle-paint.ts";
 
 import {
   animationPresentation,
@@ -192,4 +193,27 @@ describe("battle presentation projection", () => {
     expect(Math.abs(ballPresentation(beat).shake)).toBe(7);
     expect(battleEventDuration(beat, capture[2]!)).toBe(90);
   });
+});
+
+
+test("incremental battle paint matches full projection at every tick and on rewind", () => {
+  const base = state(0, 0, [...EVENTS,
+    { type: "item", turn: 2, target: 1, before: { hp: 50 }, after: { hp: 75 } },
+    { type: "status", turn: 2, target: 1, hp: { "1": 30 } },
+    { type: "capture", turn: 2, target: 2, item: "capture", shakes: 3, success: true },
+    { type: "swap", turn: 2, user: 1, target: 3 },
+  ]);
+  base.battle.parties[0].push({ ...base.battle.parties[0][0]!, uid: 3 });
+  base.visuals.environment.partyIcons = Object.fromEntries(["icon_empty", "icon_alive", "icon_faint", "icon_status"].map(key => [key, image(key)]));
+  let prior: RuntimeBattleState | undefined;
+  let paint: ReturnType<typeof battlePaint> | undefined;
+  for (let cursor = 0; cursor < base.battle.events.length; cursor++) {
+    const duration = battleEventDuration(base, base.battle.events[cursor]!);
+    for (const ticks of [...Array.from({ length: duration + 3 }, (_, i) => i), 20, 0, 10, duration]) {
+      const next = { ...base, eventCursor: cursor, eventTicks: ticks };
+      paint = battlePaint(next, prior, paint);
+      expect(paint).toEqual(allBattlePaint(next));
+      prior = next;
+    }
+  }
 });

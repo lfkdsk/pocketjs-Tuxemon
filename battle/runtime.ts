@@ -696,6 +696,7 @@ export function createTuxemonBattleRules(source: BattleDbSource, enums: Variable
     releaseBattleDb(source);
   };
   return {
+    immutableState: true,
     start(extValue, setupValue, seed, context: ExtensionReadContext) {
       // A releasable/dynamic source may have changed since the prior battle.
       // Stable providers keep the same lazy view and its warmed shard cache.
@@ -842,12 +843,15 @@ export function createTuxemonBattleRules(source: BattleDbSource, enums: Variable
 
     step(value, input: Readonly<BattleInput>, ticks) {
       if (!safeInteger(ticks) || ticks < 0) throw new Error("Tuxemon battle ticks must be non-negative integer");
-      const state = clone(runtimeState(value));
-      if (!presentationDone(state)) {
+      const previous = runtimeState(value);
+      if (!presentationDone(previous)) {
+        const state = { ...previous };
         advancePresentation(state, ticks, input.confirmEdge === true);
         return asJson(state);
       }
-      if (state.battle.phase === "ended" || !state.battle.awaiting) return asJson(state);
+      if (previous.battle.phase === "ended" || !previous.battle.awaiting) return value;
+      if (!input.confirmEdge && !input.cancelEdge && !input.upEdge && !input.downEdge) return value;
+      const state = { ...previous };
 
       const { rulesDb } = resources();
       const choices = state.menu;
@@ -888,6 +892,7 @@ export function createTuxemonBattleRules(source: BattleDbSource, enums: Variable
         } else if (selected.kind === "run") {
           state.battle = reduceBattle(rulesDb, state.battle, { type: "run" });
         }
+        if (state.battle.rewards.length > rewardCount) state.presentationRewards = [...state.presentationRewards];
         for (const reward of state.battle.rewards.slice(rewardCount)) {
           const eventIndex = state.battle.events.findIndex((event, eventIndex) =>
             eventIndex >= state.eventCursor && event.type === "faint" && event.monster === reward.loser

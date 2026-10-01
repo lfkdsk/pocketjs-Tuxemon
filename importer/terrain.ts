@@ -34,7 +34,7 @@ import { child, children, parseXml, type XmlNode } from "./xml.ts";
 export const TILE_PX = 16;
 export const TERRAIN_SHEET_ID = "tuxemon-passage";
 export const TERRAIN_FORMAT = "tuxemon-terrain/v1";
-export const DEFAULT_TUXEMON_SRC = "/var/tmp/tuxemon-src";
+export const DEFAULT_TUXEMON_SRC = join(import.meta.dir, "../.tuxemon-src");
 
 const FLIP_H = 0x8000_0000;
 const FLIP_V = 0x4000_0000;
