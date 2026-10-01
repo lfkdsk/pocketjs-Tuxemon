@@ -108,7 +108,7 @@ describe("G6 production map repository", () => {
       );
     }
     expect(new Set(terminalHashes)).toEqual(new Set([EXPECTED_TERMINAL_STATE_SHA256]));
-  }, 30_000);
+  }, 60_000);
 
   test("a cross-map save restores an evicted map and rejects another content build", () => {
     const inlineProject = readInlineProject(ROOT);

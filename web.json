@@ -19,7 +19,8 @@
           "action": "Back / cancel"
         }
       ],
-      "preview": "docs/screenshots/paper-town-overview.png"
+      "preview": "docs/screenshots/paper-town-overview.png",
+      "rasterDensity": 2
     }
   }
 }
