@@ -48,6 +48,7 @@ function benchmarkSession(): Session {
   if (session) return session;
   const repository = createJsonMapRepository(project.mapIndex, {
     read: (entry) => readFileSync(entry),
+    readText: (entry) => readFileSync(entry, "utf8"),
   });
   // This probe measures only map repository stages. Accept game-owned calls
   // and complete Battle Processing immediately so every shard can be loaded

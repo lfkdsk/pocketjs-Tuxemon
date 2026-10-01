@@ -1,13 +1,7 @@
 // @title Pocket Tuxemon — the imported Tuxemon world on Pocket RPG Kit
 import { gp1Mark } from "./ui/gp1-marks.ts";
-import {
-  mount,
-  pakGet,
-  fsHost,
-  readFileSync,
-  createJsonMapRepository,
-  GameView,
-} from "./ui/gp1-kit-stage.ts";
+import { mount, fsHost, GameView } from "./ui/gp1-kit-stage.ts";
+import { createGameMapRepository } from "./ui/entry-readers.ts";
 import type { ProjectShell } from "./vendor/pocket-rpgkit/src/engine/types.ts";
 import {
   rawProject,
@@ -35,14 +29,12 @@ import { createTerrainStreamProvider } from "./ui/terrain-stream-repository.ts";
 // init, battle-rule registration, or GameView mount — actually costs time.
 const project = rawProject as unknown as ProjectShell;
 // splitProjectMaps/splitBattleRuntimeDb/splitAnimatedTiles/splitNpcSrc/
-// splitStreamRefs emit ASCII bytes. Supplying bytes, rather than a decoded
-// string, selects the bounded QuickJS fast decode path. The desktop
-// launcher stages entries in data.fs; web and consoles use the pak that
-// their host installs before evaluating this bundle. Maps, battle shards,
-// animated-tile shards, NPC sprite shards, and terrain-stream shards all
-// share this same entry-keyed convention, so one reader serves all of them.
-const readEntry = (entry: string) => fsHost() ? readFileSync(entry) : pakGet(entry);
-const repository = createJsonMapRepository(project.mapIndex, { read: readEntry });
+// splitStreamRefs emit ASCII JSON. Desktop reads map entries through the
+// optional native UTF-8 text channel (KP2) and every other shard through
+// data.fs bytes; web and consoles use the pak installed before this bundle
+// runs. ui/entry-readers.ts wires both paths for the map repository and
+// the battle/animated/npc-src/terrain-stream providers.
+const { repository, readEntry } = createGameMapRepository(project.mapIndex, fsHost());
 const { extensions, rules } = createProductionTuxemonBattle({ read: readEntry });
 gp1Mark("battle-registration");
 // The generated literal list is the build-time asset root. Battle UI resolves

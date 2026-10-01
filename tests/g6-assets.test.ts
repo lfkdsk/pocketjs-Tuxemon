@@ -24,9 +24,9 @@ describe("G6 generated game assets", () => {
     expect(report.project).toMatchObject({
       maps: 263,
       collisionBodies: 14,
-      maxActors: 500,
-      runtimeMaxActors: 17,
-      excludedActorStressMaps: [{ id: "test_npcs", slots: 500 }],
+      maxActors: 501,
+      runtimeMaxActors: 205,
+      excludedActorStressMaps: [{ id: "test_npcs", slots: 501 }],
       options: {
         areas: true,
         facing: true,
@@ -48,7 +48,7 @@ describe("G6 generated game assets", () => {
       playerSheet: `sprites/${appearances[0]!.template.sprite_name}.png`,
     });
     expect(GAME_ASSETS.order).toHaveLength(263);
-    expect(GAME_ASSETS.maxActors).toBe(17);
+    expect(GAME_ASSETS.maxActors).toBe(205);
     expect(NPC_SRC_INDEX).toHaveLength(175);
     for (const { id, entry } of NPC_SRC_INDEX) {
       const art = JSON.parse(readFileSync(resolve(ROOT, "dist", entry), "utf8")) as NpcArt;
@@ -61,6 +61,36 @@ describe("G6 generated game assets", () => {
     }, 0);
     expect(animatedTotal).toBe(5_785);
     expect(GAME_ASSETS.playerHeight).toBe(32);
+  });
+
+  test("sizes the actor pool from every event on every reachable map (KV1)", () => {
+    // KV1's collectMapSlots reserves one actor slot per map event — runtime
+    // appearance ops can give any event a sprite — so the baked pool must
+    // cover the event count of every map a session can load. The test_*
+    // stress fixtures stay exempt by design (see gen-assets.ts).
+    const shell = JSON.parse(readFileSync(resolve(ROOT, "dist/project-shell.json"), "utf8")) as {
+      mapIndex: Record<string, { id: string; entry: string }>;
+    };
+    let playableMax = 0;
+    let testNpcsEvents = 0;
+    for (const meta of Object.values(shell.mapIndex)) {
+      const map = JSON.parse(readFileSync(resolve(ROOT, "dist", meta.entry), "utf8")) as {
+        id: string;
+        events?: unknown[];
+      };
+      const events = map.events?.length ?? 0;
+      if (map.id === "test_npcs") {
+        testNpcsEvents = events;
+      } else if (!map.id.startsWith("test_")) {
+        expect(events, `${map.id} needs ${events} actor slots`).toBeLessThanOrEqual(GAME_ASSETS.maxActors!);
+        playableMax = Math.max(playableMax, events);
+      }
+    }
+    // The pool is exactly the playable max: sprite-based counting would shrink
+    // it below the real event counts, and dropping the test_* exemption would
+    // inflate it to the fixture's 501.
+    expect(playableMax).toBe(GAME_ASSETS.maxActors!);
+    expect(testNpcsEvents, "test_npcs stays a real, exempted stress fixture").toBeGreaterThan(GAME_ASSETS.maxActors!);
   });
 
   test("all R2 character images are portable power-of-two RGBAs", () => {

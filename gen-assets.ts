@@ -73,20 +73,18 @@ writeFileSync(
 );
 
 // GameView cannot scan unloaded MapDefs, so sharded projects bake the one
-// rendering scalar it needs into the asset manifest. Upstream's isolated
-// `test_*` maps are renderer stress fixtures, not world destinations: in
-// particular test_npcs has 500 painted events while the largest playable
-// map has 17. Reserving that fixture's pool on every playable map makes each
-// battle transition tear down/recreate 500 images. Keep the complete fixture
-// imported, report its pressure separately, and size the shipped world pool
-// from maps that can actually be reached in play. A kit-side growable pool can
-// eventually make direct rendering of stress fixtures cheap as well.
-const sprites = project.sprites ?? {};
-const actorSlots = (map: (typeof project.maps)[number]) =>
-  (map.events ?? []).filter((event) => event.pages.some((page) => {
-    const sprite = page.sprite == null ? undefined : sprites[page.sprite];
-    return !!sprite && (sprite.kind === "walker" || !!sprite.src);
-  })).length;
+// rendering scalar it needs into the asset manifest. The kit's collectMapSlots
+// (KV1) reserves one actor slot per map event — runtime appearance ops can
+// give any event a walking sprite — so size the pool from event counts, not
+// sprite-bearing events. Upstream's isolated `test_*` maps are renderer
+// stress fixtures, not world destinations: in particular test_npcs has 501
+// events while the largest playable map has 205. Reserving that fixture's
+// pool on every playable map makes each battle transition tear down/recreate
+// hundreds of images. Keep the complete fixture imported, report its pressure
+// separately, and size the shipped world pool from maps that can actually be
+// reached in play. A kit-side growable pool can eventually make direct
+// rendering of stress fixtures cheap as well.
+const actorSlots = (map: (typeof project.maps)[number]) => (map.events ?? []).length;
 const actorSlotCounts = project.maps.map((map) => ({ id: map.id, slots: actorSlots(map) }));
 const excludedActorStressMaps = actorSlotCounts.filter(({ id }) => id.startsWith("test_"));
 const maxActors = Math.max(0, ...actorSlotCounts.map(({ slots }) => slots));

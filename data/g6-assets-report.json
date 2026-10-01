@@ -4,12 +4,12 @@
  "project": {
   "maps": 263,
   "collisionBodies": 14,
-  "maxActors": 500,
-  "runtimeMaxActors": 17,
+  "maxActors": 501,
+  "runtimeMaxActors": 205,
   "excludedActorStressMaps": [
    {
     "id": "test_npcs",
-    "slots": 500
+    "slots": 501
    }
   ],
   "options": {
@@ -28,7 +28,7 @@
   "entryBytes": 7904035,
   "entries": 263,
   "manifestHash": "e629ee8fc64ade09131af9287ee778fb6047c0d3e3aeaaf3bed69c2bcba2a870",
-  "schemaHash": "0ff7c248ce6b0e4ba42f815b41f869ce333ffa2b748acb69d712e3441a30692c"
+  "schemaHash": "9553e885ee1aca527679ba74ce348290a51bdf2b5714a5533aeca43edc7e99b5"
  },
  "terrain": {
   "entries": 430,
