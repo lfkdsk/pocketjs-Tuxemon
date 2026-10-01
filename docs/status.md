@@ -107,7 +107,7 @@ Per-action numbers come from the import coverage report,
 | Web | Done | Deployed to GitHub Pages from `main` after CI passes. The browser renders at 2× density: fonts use native physical samples while tiles and sprites stay nearest-neighbour; compare the [Paper Town dialog](screenshots/web-density-paper-dialog.png) and [battle menu](screenshots/web-density-battle-menu.png). CI plays the journey in headless Chrome |
 | Desktop (Linux, macOS) | Done | `bun run desktop` |
 | PSP | Planned | The pak is too large to embed. It needs seekable pak reads in PocketJS |
-| Startup and frame time | Done | About 150 ms to the first frame on the desktop QuickJS host. Worst battle-exit frame is 34–39 ms; the kit's keep-alive battles bring it down once the game picks them up. See the README |
+| Startup and frame time | Done | The desktop QuickJS benches enforce 250 ms startup and 50 ms frame budgets, reject a desktop bundle built from different map shards, and take the GB6 terminal hash from its tape. See [verification](verification.md) and the dated measurements in the README |
 
 ## Verification and CI
 

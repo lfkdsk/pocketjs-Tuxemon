@@ -11,6 +11,35 @@ map_report=${G6_MAP_REPORT:-$root/reports/G7-map-first-visits.tsv}
 journey=${G6_JOURNEY:-$root/data/g6-journey.json}
 expected_map=${G6_EXPECTED_MAP:-spyder_route1}
 expected_state=${G6_STATE_SHA256:-5653f0110656dd4e0a930ff1908c833c9f9fc221c9cfd3a90d22b138ef8d4827}
+app_dist=${G6_DIST:-$root/dist/linux-app}
+app_js="$app_dist/pocket-tuxemon.js"
+app_pak="$app_dist/pocket-tuxemon.pak"
+project_shell="$root/dist/project-shell.json"
+
+for artifact in "$app_js" "$app_pak" "$project_shell"; do
+  if [[ ! -f "$artifact" ]]; then
+    echo "bench-g6-quickjs: missing build artifact: $artifact" >&2
+    echo "run 'bun tools/desktop.ts --build-only' before this benchmark" >&2
+    exit 1
+  fi
+done
+
+# The desktop bundle and streamed map shards must come from the same import.
+# A stale bundle can otherwise boot against newer maps and fail deep inside
+# createSession with an apparently unrelated unregistered-extension error.
+map_manifest_hash=$(bun -e '
+  const project = JSON.parse(await Bun.file(process.argv[1]).text());
+  const value = project.mapManifestHash;
+  if (typeof value !== "string" || !/^[0-9a-f]{64}$/.test(value)) {
+    throw new Error("missing or malformed mapManifestHash");
+  }
+  console.log(value);
+' "$project_shell")
+if ! grep -Fq "$map_manifest_hash" "$app_js"; then
+  echo "bench-g6-quickjs: dist/linux-app is stale relative to dist/project-shell.json" >&2
+  echo "run 'bun tools/desktop.ts --build-only' before this benchmark" >&2
+  exit 1
+fi
 
 rm -rf "$scratch"
 mkdir -p "$scratch"
@@ -37,7 +66,7 @@ fi
 for viewport in "${viewports[@]}"; do
   read -r width height <<<"$viewport"
   state="$bench_root/state-${width}x${height}.json"
-  G6_DIST="$root/dist/linux-app" G6_JOURNEY="$journey" \
+  G6_DIST="$app_dist" G6_JOURNEY="$journey" \
     G6_MAPS="$root/dist/maps" G6_BATTLE="$root/dist/battle" \
     G6_ANIMATED="$root/dist/animated" G6_NPC_SRC="$root/dist/npc-src" \
     G6_TERRAIN_STREAM="$root/dist/terrain-stream" G6_BENCH_ROOT="$bench_root" \
@@ -49,7 +78,10 @@ for viewport in "${viewports[@]}"; do
   # extension RNG cursor, and K4's persistent shop-stock banks.
   # Shared economy removes ext.inventory/ext.money and credits battle rewards
   # to SessionState.gold, changing only the pinned terminal state shape/value.
-  test "$actual" = "$expected_state"
+  if [[ "$actual" != "$expected_state" ]]; then
+    echo "STATE MISMATCH viewport=${width}x${height} expected=$expected_state actual=$actual" >&2
+    exit 1
+  fi
   echo "STATE viewport=${width}x${height} canonical_sha256=$actual"
 done
 

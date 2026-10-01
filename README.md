@@ -89,7 +89,7 @@ mainline.
 ## Play it
 
 - **In a browser:** <https://lfkdsk.github.io/pocketjs-tuxemon/pocket-tuxemon/>
-  (deployed from `main` after CI has played the whole journey on it).
+  (deployed from `main` after CI has played the opening browser journey on it).
 - **From a CI run:** every push builds the web version. Open the
   latest [CI run](../../actions/workflows/ci.yml), download the `web-site`
   artifact, unzip it and serve the folder, e.g.
@@ -99,8 +99,8 @@ mainline.
   `bun run desktop` for the desktop host.
 - **Keys:** arrows walk, `A`/`Z`/`Enter` talks and confirms, `B`/`Esc` goes back.
 
-CI also plays the whole maintained journey — bedroom, Paper Town, the first
-battle, Route 1 — in headless Chrome against the built site
+CI also plays the 3,793-frame opening journey — bedroom, Paper Town, the
+first battle, Route 1 — in headless Chrome against the built site
 (`bun tools/verify-web-journey.ts`) and checks every checkpoint's state and
 pixels against the goldens.
 
@@ -110,8 +110,9 @@ pixels against the goldens.
 bun run setup           # submodules + dependencies
 bun run fetch:tuxemon   # pinned Tuxemon checkout into .tuxemon-src
 bun run import          # Tuxemon -> project, maps, art and battle data
-bun run build           # import + desktop bundle into dist/
+bun run build           # import + generic bundle into dist/
 bun run build:wasm      # the wasm core (needs the Rust wasm32 target)
+bun tools/desktop.ts --build-only  # prepare the desktop bundle and host
 bun run desktop         # play on the desktop host
 bun run web             # build the web version into dist/web
 bunx tsc --noEmit       # typecheck
@@ -119,6 +120,8 @@ bun run test            # the test suite (build first for the pixel replays)
 bun run verify:g6:determinism   # two imports are byte-identical
 bun run verify:gb6:mainline     # replay the Route 3 mainline tape
 bun run verify:j1:mainline      # replay the Captain-return tape
+bun run bench:g6:quickjs        # short two-viewport QuickJS performance gate
+bun run bench:gb6:quickjs       # full 480x272 QuickJS journey gate
 ```
 
 The importer reads the Tuxemon source from the repo-local `.tuxemon-src`

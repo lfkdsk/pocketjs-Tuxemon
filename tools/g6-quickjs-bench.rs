@@ -208,14 +208,22 @@ mod g6_quickjs_bench {
                 let compile_ms = compile_start.elapsed().as_secs_f64() * 1_000.0;
                 if compiled.tag == ffi::JS_TAG_EXCEPTION as i64 {
                     ffi::JS_FreeValue(raw, compiled);
-                    return Err(anyhow!("pocket-mod: compiling '{label}' failed"));
+                    let error = pocket_mod::qjs::CaughtError::from_error(
+                        &ctx,
+                        pocket_mod::qjs::Error::Exception,
+                    );
+                    return Err(anyhow!("pocket-mod: compiling '{label}' failed: {error}"));
                 }
                 let eval_start = Instant::now();
                 let result = ffi::JS_EvalFunction(raw, compiled);
                 let eval_ms = eval_start.elapsed().as_secs_f64() * 1_000.0;
                 if result.tag == ffi::JS_TAG_EXCEPTION as i64 {
                     ffi::JS_FreeValue(raw, result);
-                    return Err(anyhow!("pocket-mod: evaluating '{label}' failed"));
+                    let error = pocket_mod::qjs::CaughtError::from_error(
+                        &ctx,
+                        pocket_mod::qjs::Error::Exception,
+                    );
+                    return Err(anyhow!("pocket-mod: evaluating '{label}' failed: {error}"));
                 }
                 ffi::JS_FreeValue(raw, result);
                 Ok((compile_ms, eval_ms))
@@ -223,6 +231,21 @@ mod g6_quickjs_bench {
         })?;
         guest.drain_jobs();
         Ok(timings)
+    }
+
+    #[test]
+    fn staged_eval_reports_javascript_message_and_stack() {
+        let guest = Guest::new().unwrap();
+        let error = gp1_eval_staged(
+            &guest,
+            "diagnostic-probe",
+            "function explode() { throw new Error('staged-eval sentinel'); } explode();",
+        )
+        .unwrap_err()
+        .to_string();
+        assert!(error.contains("evaluating 'diagnostic-probe' failed"), "{error}");
+        assert!(error.contains("staged-eval sentinel"), "{error}");
+        assert!(error.contains("explode"), "{error}");
     }
 
     /// GP1: a copy of `Runtime::boot`

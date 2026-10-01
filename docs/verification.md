@@ -49,6 +49,32 @@ battle entry/exit/steady). The final terminal state must hash to the pinned
 tape value. Use these for any performance claim; Bun/JSC timings are not
 representative of the desktop or PSP targets.
 
+Build the matching desktop bundle before either benchmark. The benchmark
+checks that its embedded map-manifest hash matches the generated project shell
+and stops before compiling the harness when the bundle is missing or stale:
+
+```sh
+bun run build
+bun run build:wasm
+bun tools/desktop.ts --build-only
+bun run bench:g6:quickjs
+bun run bench:gb6:quickjs
+```
+
+The short G6 benchmark replays 3,793 frames at 480×272 and 960×544, then
+measures the first visit to all 263 maps. The long GB6 benchmark replays all
+109,983 frames and 100 battles; it defaults to 480×272, while
+`GB6_BENCH_VIEWPORT="960 544" bun run bench:gb6:quickjs` selects the larger
+viewport. A clean long run takes roughly 11 minutes per viewport on the
+reference workstation. GB6 reads its expected terminal SHA-256 from the tape,
+so re-pinning the tape cannot leave a second stale literal in the wrapper.
+JavaScript compile/evaluation failures include the original message and stack.
+
+These are manual release and performance gates, not CI jobs. Their Rust host
+build and long replay are too expensive for the normal push pipeline, and
+startup plus all-map first-visit measurements still contain wall-clock
+sensitivity on shared runners.
+
 ## The tapes
 
 A tape is a JSON document holding the input masks (one per 60 Hz frame), the
@@ -65,8 +91,8 @@ fail on any mismatch, so a silently corrupted tape is a red build.
 | `data/j1-captainreturns-journey.json` | 12,162 (122,145 combined with GB6) | Wayfarer Inn -> Route 4 -> Flower City -> Route A -> Mansion -> basement -> the captain's return | 17 (10 trainer, 7 wild) | `spyder_mansion @1,13` |
 | `data/j2-hospitalcure-journey.json` | 49,915 (172,060 combined) | Mansion -> Candy Town -> Greenwash -> hospital password -> the cure | 56 (50 trainer, 6 wild) | `spyder_candy_hospital3 @5,7` |
 
-The terminal state hashes and the per-checkpoint expectations live in the
-verifiers (`tools/verify-gb6-mainline.ts`, `tools/verify-j1-mainline.ts`,
+Terminal state hashes and per-checkpoint expectations live in the tapes or
+their verifiers (`tools/verify-gb6-mainline.ts`, `tools/verify-j1-mainline.ts`,
 `tools/verify-gb6-failures.ts`) and are asserted on every run.
 
 ### Re-recording a tape
