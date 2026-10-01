@@ -344,7 +344,11 @@ if (!rateMode) {
   expect("battle checkpoints changed during replay", canonicalJson(baseline.battles) === canonicalJson(journey.battles));
   expect("terminal map/position changed", baseline.state.mapId === journey.map &&
     baseline.state.move.tx === journey.position[0] && baseline.state.move.ty === journey.position[1]);
-  expect("terminal state hash changed", digest(baseline.state) === journey.terminalStateSha256);
+  const actualTerminalStateSha256 = digest(baseline.state);
+  expect(
+    `terminal state hash ${actualTerminalStateSha256} != ${journey.terminalStateSha256}`,
+    actualTerminalStateSha256 === journey.terminalStateSha256,
+  );
   const trainers = baseline.battles.filter((row) => row.kind === "trainer");
   expect("a trainer battle did not report won", trainers.every((row) => row.outcome === "won"));
   expect("the journey did not enter 22 trainer battles", trainers.length === 22);

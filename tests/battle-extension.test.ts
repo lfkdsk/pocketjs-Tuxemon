@@ -10,6 +10,7 @@ import {
   TUXEMON_EXT_SAVE_FORMAT,
   tuxemonExtensionState,
 } from "../battle/extension.ts";
+import { snapshotFromClock } from "../battle/time-weather.ts";
 import { validateBattleDb } from "../importer/battle-schema.ts";
 import { AttractController } from "../vendor/pocket-rpgkit/src/engine/attract.ts";
 import { rngNext } from "../vendor/pocket-rpgkit/src/engine/interpreter.ts";
@@ -351,14 +352,33 @@ describe("Tuxemon party extension", () => {
       money: 300,
     } as Record<string, unknown>;
     delete legacy.runAttempts;
+    delete legacy.clock;
+    delete legacy.weather;
     const migrated = createTuxemonExtensions(DB).codec!.decode({
       format: TUXEMON_EXT_SAVE_FORMAT,
       state: legacy as JsonValue,
     });
     const migratedState = tuxemonExtensionState(migrated, DB);
     expect(migratedState).toMatchObject({ runAttempts: 0 });
+    expect(snapshotFromClock(migratedState.clock)).toMatchObject({
+      year: 2024,
+      month: 6,
+      day: 15,
+      hour: 9,
+      minute: 0,
+    });
+    expect(migratedState.weather).toMatchObject({ slug: "sunny", rngCursor: 0x9e37_79b9 });
     expect(migratedState).not.toHaveProperty("inventory");
     expect(migratedState).not.toHaveProperty("money");
+
+    for (const missing of ["clock", "weather"] as const) {
+      const partial = { ...tuxemonExtensionState(played.state.ext, DB) } as Record<string, unknown>;
+      delete partial[missing];
+      expect(() => createTuxemonExtensions(DB).codec!.decode({
+        format: TUXEMON_EXT_SAVE_FORMAT,
+        state: partial as JsonValue,
+      })).toThrow(/clock and weather must either both be present or both be absent/);
+    }
 
     const invalid = { ...initialTuxemonExtensionState(), nextMonsterId: Number.MAX_SAFE_INTEGER + 1 };
     expect(() => startSession(project([]), played.session, undefined, invalid as unknown as JsonValue))

@@ -1,0 +1,51 @@
+{
+  "format": "pocket-tuxemon/daylight-goldens/v1",
+  "width": 480,
+  "height": 272,
+  "checkpoint": {
+    "name": "paper-town",
+    "frame": 1367,
+    "map": "spyder_paper_town",
+    "position": [
+      10,
+      8
+    ]
+  },
+  "images": [
+    {
+      "name": "day",
+      "civil": {
+        "year": 2024,
+        "month": 6,
+        "day": 15,
+        "hour": 9,
+        "minute": 0
+      },
+      "file": "daylight-day.png",
+      "rgbaFnv1a": "4380c25c",
+      "pngSha256": "5a43f4c6939d3addba62e32e414bce0e4326c1df8d1e404860129f9087fa8d27",
+      "luminance": 140.271,
+      "blueBias": -10.294
+    },
+    {
+      "name": "night",
+      "civil": {
+        "year": 2024,
+        "month": 6,
+        "day": 15,
+        "hour": 21,
+        "minute": 0
+      },
+      "file": "daylight-night.png",
+      "rgbaFnv1a": "ecd10da5",
+      "pngSha256": "c80cdb16c4116e86a82390be75715fdc1fee1842c18333a62f57917c338b46ef",
+      "luminance": 85.706,
+      "blueBias": 24.495
+    }
+  ],
+  "comparison": {
+    "darkerPixels": 129671,
+    "bluerPixels": 122910,
+    "pixels": 130560
+  }
+}

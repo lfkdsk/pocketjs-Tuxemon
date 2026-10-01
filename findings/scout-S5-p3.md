@@ -314,8 +314,10 @@ morning 08–11、afternoon 12–15、dusk 16–19、night 20–03
 （`/var/tmp/tuxemon-src/tuxemon/time_handler.py:63-137`）。照搬 wall clock 会破坏 tape、hash 和倒带。
 
 天气数据库有 misty、windy、freezing、hot、cloudy、foggy、thunderstorm、snow、rain、sunny 共
-10 种，每项 `modifiers: []`（`mods/tuxemon/db/weather/weathers.yaml:22-80`）。本 mod 没有 weather
-动作，也没提供 transition-rules YAML；所以它现在既不挡剧情，也没有战斗 modifier。视觉夜色主要来自
+10 种，每项 `modifiers: []`（`mods/tuxemon/db/weather/weathers.yaml:22-80`）。源码树虽有
+`mods/weather_previsions.yaml`，但内容没有调用 `load_weather` / `set_weather`，该文件也不符合当前
+loader 要求的顶层 `transitions` 包装（无参 loader 还查找 `.yml` 而不是 `.yaml`），因此本 mod
+实际没有启用 weather transition rules；天气既不挡剧情，也没有战斗 modifier。视觉夜色主要来自
 `set_layer`：空值清除，PNG 做 overlay，RGBA 做色层，而不是 weather。
 
 ### 5.2 确定性状态模型

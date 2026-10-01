@@ -282,11 +282,11 @@
  "schemaErrors": [],
  "byFate": {
   "T3-dropped": 2360,
-  "T1": 33939,
+  "T1": 34557,
   "T4-dropped": 2534,
   "T1-lowered": 2375,
   "T2-dropped": 619,
-  "T3-placeholder": 647,
+  "T3-placeholder": 29,
   "structural": 776
  },
  "rows": [
@@ -1191,10 +1191,10 @@
    "note": "KV1 representative cell under the corpus's atomic whole-label invariant"
   },
   {
-   "key": "cond:is time_is:T3-placeholder",
-   "fate": "T3-placeholder",
+   "key": "cond:is time_is:T1",
+   "fate": "T1",
    "count": 361,
-   "note": "tux.time_is ext condition; D2 clock runtime (placeholder folds to fixed morning/daytime)"
+   "note": "tux.time_is reads the saved deterministic calendar"
   },
   {
    "key": "cond:is variable_set:T1",
@@ -1353,10 +1353,10 @@
    "note": "KV1 representative cell under the corpus's atomic whole-label invariant"
   },
   {
-   "key": "cond:not time_is:T3-placeholder",
-   "fate": "T3-placeholder",
+   "key": "cond:not time_is:T1",
+   "fate": "T1",
    "count": 257,
-   "note": "tux.time_is ext condition; D2 clock runtime (placeholder folds to fixed morning/daytime)"
+   "note": "tux.time_is reads the saved deterministic calendar"
   },
   {
    "key": "cond:not tracker:T1",
@@ -3380,11 +3380,11 @@
    "summary": {
     "types": 64,
     "uses": 8663,
-    "native": 7850,
+    "native": 7976,
     "degraded": 2,
-    "placeholder": 127,
+    "placeholder": 1,
     "dropped": 684,
-    "nativePercent": 90.6,
+    "nativePercent": 92.1,
     "executablePercent": 92.1,
     "tier1": {
      "uses": 4500,
@@ -3906,13 +3906,13 @@
     {
      "type": "is time_is",
      "total": 67,
-     "native": 0,
+     "native": 66,
      "degraded": 0,
-     "placeholder": 66,
+     "placeholder": 0,
      "dropped": 1,
      "reasons": {
-      "placeholder": [
-       "tux.time_is ext condition; D2 clock runtime (placeholder folds to fixed morning/daytime)"
+      "native": [
+       "tux.time_is reads the saved deterministic calendar"
       ],
       "dropped": [
        "fixed-false guard prevents the source event from starting"
@@ -4262,13 +4262,13 @@
     {
      "type": "not time_is",
      "total": 61,
-     "native": 0,
+     "native": 60,
      "degraded": 0,
-     "placeholder": 60,
+     "placeholder": 0,
      "dropped": 1,
      "reasons": {
-      "placeholder": [
-       "tux.time_is ext condition; D2 clock runtime (placeholder folds to fixed morning/daytime)"
+      "native": [
+       "tux.time_is reads the saved deterministic calendar"
       ],
       "dropped": [
        "fixed-false guard prevents the source event from starting"

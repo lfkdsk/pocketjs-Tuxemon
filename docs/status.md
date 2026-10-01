@@ -78,8 +78,8 @@ Per-action numbers come from the import coverage report,
 | Feature | Status | Notes |
 | --- | --- | --- |
 | Battle environments (`set_environment`, `environment_is`) | Done | |
-| Clock and weather data | Done | The clock is anchored to the 60 Hz reference tick, and weather has its own random cursor. A versioned codec is included, along with Tuxemon's 10 weather tables |
-| Day and night at run time (`time_is`, `update_time`) | Partial | `time_is` currently always reads as daytime. In progress: the running clock, weather changes and a day/night tint |
+| Day and night at run time (`time_is`, `update_time`) | Done | A saved clock advances on active 60 Hz reference ticks, all upstream calendar comparisons work, and fresh games receive one host-time sample; tests and journeys use 09:00. Dawn, day, dusk and night cross-fade through the named `tux.daylight` tint layer. See [architecture](architecture.md) and [verification](verification.md) |
+| Weather transitions | Partial | The 10 imported weather rows use a saved deadline and an RNG cursor independent of battles. The source campaign never activates its weather-rule file, so the runtime currently uses a deterministic 30–90 minute fallback schedule; weather particles and battle modifiers are not implemented. See [the D2 report](../findings/D2.md) |
 
 ## Music and sound
 

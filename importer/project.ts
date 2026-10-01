@@ -25,6 +25,13 @@ import {
 import { buildOutdoorWorldIndex, type WorldImportReport } from "./world.ts";
 import type { OutdoorWorldIndex } from "./world-schema.ts";
 import {
+  DAYLIGHT_STAGE_VARIABLE,
+  DAYLIGHT_TARGET_VARIABLE,
+  DAYLIGHT_TINT_LAYER,
+  DAYLIGHT_TINT_PROFILES,
+  DAYLIGHT_TWEEN_SECONDS,
+} from "../battle/daylight.ts";
+import {
   importTerrainSurfaceLabels,
   type TerrainSurfaceLabels,
 } from "./terrain.ts";
@@ -971,12 +978,7 @@ function clauses(
       noteCondition(c, `${c.op} location_type`, "T1", "static map property, folded at import");
       return K(a[0]!.split(":").includes(m.props.map_type ?? "notype"));
     case "time_is":
-      // D1: emit the tux.time_is ext condition instead of folding to a
-      // constant. The runtime handler is a D2 placeholder (fixed morning/
-      // daytime fold) so behavior is unchanged; D2 replaces it with the
-      // virtual clock comparison. Folding here used to drop every night/date
-      // event via the never-true guard below.
-      noteCondition(c, `${c.op} time_is`, "T3-placeholder", "tux.time_is ext condition; D2 clock runtime (placeholder folds to fixed morning/daytime)");
+      noteCondition(c, `${c.op} time_is`, "T1", "tux.time_is reads the saved deterministic calendar");
       return [{ k: "ext", call: "tux.time_is", args: timeIsArgs(c) }];
     case "music_playing":
       noteCondition(c, `${c.op} music_playing`, "T4-dropped", "no music in P1");
@@ -1017,6 +1019,20 @@ function toIf(cl: Clause): { cond: Condition; negate: boolean } {
   }
 }
 
+/** Map pages are selected before their terminal time ticker runs. Projecting
+ * one reference tick makes the selected pages and the clock committed later
+ * in that same reducer tick agree exactly at hour/stage boundaries. Guards
+ * inside an already-running fiber use the committed clock and keep offset 0. */
+function pageTickCondition(condition: Condition): Condition {
+  if (condition.kind !== "ext" || condition.call !== "tux.time_is"
+    || condition.args === null || typeof condition.args !== "object"
+    || Array.isArray(condition.args)) return condition;
+  return {
+    ...condition,
+    args: { ...condition.args, tickOffset: 1 },
+  };
+}
+
 /** Wrap commands in nested ifs, one per clause (AND). */
 function guard(cls: Clause[], body: Command[]): Command[] {
   let out = body;
@@ -1045,7 +1061,7 @@ function pageCondition(
         convertible = false;
         break;
       }
-      converted.push(cond as FutureCondition);
+      converted.push(pageTickCondition(cond) as FutureCondition);
     }
     if (convertible && converted.length) {
       return { cond: { all: converted }, rest: [] };
@@ -2123,10 +2139,7 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         noteAction(a, a.type, "T3-dropped", "monster/combat subsystem (P2)");
         break;
       case "update_time":
-        // D1: emit the tux.update_time ext command. The runtime handler is a
-        // D2 placeholder no-op; D2 writes the eight upstream time variables
-        // from the virtual clock.
-        noteAction(a, a.type, "T3-placeholder", "tux.update_time ext command; D2 clock runtime (placeholder no-op)");
+        noteAction(a, a.type, "T1", "tux.update_time writes eight variables from the saved deterministic calendar");
         out.push({ op: "ext", call: "tux.update_time", args: updateTimeArgs(a) });
         break;
       default:
@@ -2624,6 +2637,82 @@ function convertMap(
         ],
       });
     }
+  }
+
+  // One invisible, terminal parallel page is restarted by the interpreter on
+  // every active 60 Hz reference tick. The extension advances clock/weather
+  // and publishes a numeric daylight target only at stage changes; the
+  // following built-in branch starts the matching tint once. Combining both
+  // jobs avoids dynamic extension page scans on every map tick. Fade, frozen
+  // battle, fatal state, and absent host frames bypass the interpreter, so
+  // the virtual clock pauses with the map world.
+  // Appending the event keeps every imported source event id stable.
+  if (options.battle) {
+    const morning = DAYLIGHT_TINT_PROFILES.find((profile) => profile.stage === "morning")!;
+    const dispatchProfiles = [
+      morning,
+      ...DAYLIGHT_TINT_PROFILES.filter((profile) => profile !== morning),
+    ];
+    let daylightDispatch: Command | undefined;
+    for (let index = dispatchProfiles.length - 1; index >= 0; index--) {
+      const profile = dispatchProfiles[index]!;
+      daylightDispatch = {
+        op: "if",
+        if: {
+          kind: "variable",
+          id: DAYLIGHT_TARGET_VARIABLE,
+          op: "==",
+          value: profile.marker,
+        },
+        then: [
+          {
+            op: "screenTint",
+            layer: DAYLIGHT_TINT_LAYER,
+            color: { ...profile.color },
+            duration: DAYLIGHT_TWEEN_SECONDS,
+            wait: false,
+          },
+          {
+            op: "variable",
+            id: DAYLIGHT_STAGE_VARIABLE,
+            set: { op: "set", value: profile.marker },
+          },
+          {
+            op: "variable",
+            id: DAYLIGHT_TARGET_VARIABLE,
+            set: { op: "set", value: 0 },
+          },
+        ],
+        ...(daylightDispatch ? { else: [daylightDispatch] } : {}),
+      };
+    }
+    events.push({
+      id: "tux_runtime_time_weather",
+      name: "Tuxemon time, weather, and daylight",
+      x: 0,
+      y: 0,
+      pages: [{
+        trigger: "parallel",
+        sprite: null,
+        commands: [
+          {
+            op: "ext" as const,
+            call: "tux.tick_time_weather",
+            args: { daylight: true },
+          },
+          {
+            op: "if" as const,
+            if: {
+              kind: "variable" as const,
+              id: DAYLIGHT_TARGET_VARIABLE,
+              op: "!=" as const,
+              value: 0,
+            },
+            then: [daylightDispatch!],
+          },
+        ],
+      }],
+    });
   }
 
   // A handful of source cutscenes intentionally pass a control lock to a

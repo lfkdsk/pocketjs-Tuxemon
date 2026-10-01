@@ -20,6 +20,11 @@ import {
 import { createAnimatedProvider } from "./ui/animated-repository.ts";
 import { createNpcSrcProvider } from "./ui/npc-src-repository.ts";
 import { createTerrainStreamProvider } from "./ui/terrain-stream-repository.ts";
+import {
+  timeWeatherAt,
+  timeWeatherFromLocalDate,
+  type CivilDateTime,
+} from "./battle/time-weather.ts";
 
 // ui/gp1-kit-stage.ts and ui/gp1-data-stage.ts are thin re-export wrappers:
 // each one's trailing gp1Mark() call fires right
@@ -35,7 +40,19 @@ const project = rawProject as unknown as ProjectShell;
 // runs. ui/entry-readers.ts wires both paths for the map repository and
 // the battle/animated/npc-src/terrain-stream providers.
 const { repository, readEntry } = createGameMapRepository(project.mapIndex, fsHost());
-const { extensions, rules } = createProductionTuxemonBattle({ read: readEntry });
+// The effect shell samples local wall time exactly once for a fresh game.
+// Reducer, render, save/restore, and rewind only see the resulting plain
+// state. Simulators and CI inject the fixed override before bundle eval.
+const initialCivilTime = (globalThis as typeof globalThis & {
+  __pocketTuxemonInitialCivilTime?: CivilDateTime;
+}).__pocketTuxemonInitialCivilTime;
+const initialTimeWeather = initialCivilTime === undefined
+  ? timeWeatherFromLocalDate(new Date())
+  : timeWeatherAt(initialCivilTime);
+const { extensions, rules } = createProductionTuxemonBattle(
+  { read: readEntry },
+  { initialTimeWeather },
+);
 gp1Mark("battle-registration");
 // The generated literal list is the build-time asset root. Battle UI resolves
 // these paths dynamically from battle-db at runtime.

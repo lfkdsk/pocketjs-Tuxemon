@@ -1,5 +1,5 @@
-// D1/GI-1a coverage fixtures: time_is/update_time retain their tux.* ext
-// shapes while set_layer now uses the kit's native screen-layer command.
+// Time/weather and screen-layer coverage fixtures: time_is/update_time use
+// live tux.* handlers while set_layer uses the kit's native layer command.
 //
 // S5 §5.1 census: time_is 128 source uses, update_time 3, set_layer 79.
 
@@ -9,7 +9,14 @@ import {
   buildProject,
   G6_IMPORT_OPTIONS,
 } from "../importer/project.ts";
-import { createTuxemonExtensions } from "../battle/extension.ts";
+import {
+  createTuxemonExtensions,
+  tuxemonExtensionState,
+} from "../battle/extension.ts";
+import {
+  DAYLIGHT_STAGE_VARIABLE,
+  DAYLIGHT_TARGET_VARIABLE,
+} from "../battle/daylight.ts";
 import type {
   Command,
   Condition,
@@ -163,7 +170,7 @@ describe("D1 time and GI-1a set_layer imported shapes (G6)", () => {
   });
 });
 
-describe("D1 coverage dispositions (all maps, G6)", () => {
+describe("time/weather coverage dispositions (all maps, G6)", () => {
   const { report } = buildProject(availableMapIds(), G6_IMPORT_OPTIONS);
   const rows = [
     ...report.coverage.actions.rows,
@@ -171,16 +178,16 @@ describe("D1 coverage dispositions (all maps, G6)", () => {
   ];
   const row = (type: string) => rows.find((candidate) => candidate.type === type);
 
-  test("time_is (128 source uses) is Placeholder with the D2 note", () => {
+  test("time_is (128 source uses) is native wherever its event materializes", () => {
     // S5 §5.1: 128 source uses = 67 `is` + 61 `not`.
     const isTime = row("is time_is")!;
     const notTime = row("not time_is")!;
     expect(isTime.total + notTime.total).toBe(128);
-    expect(isTime.placeholder + notTime.placeholder).toBe(126);
+    expect(isTime.native + notTime.native).toBe(126);
+    expect(isTime.placeholder + notTime.placeholder).toBe(0);
     expect(isTime.dropped + notTime.dropped).toBe(2);
     for (const candidate of [isTime, notTime]) {
-      expect(candidate.reasons.placeholder?.[0]).toContain("D2");
-      expect(candidate.reasons.placeholder?.[0]).toContain("tux.time_is");
+      expect(candidate.reasons.native?.[0]).toContain("saved deterministic calendar");
     }
   });
 
@@ -218,35 +225,89 @@ describe("D1 coverage dispositions (all maps, G6)", () => {
   });
 });
 
-describe("D1 time placeholder runtime handlers", () => {
-  // The handlers are registered on the production extension set. They must
-  // replicate the importer's historical fold so imported events keep their
-  // behavior until D2 lands the virtual clock.
+describe("time/weather runtime handlers", () => {
   const extensions = createTuxemonExtensions({} as never);
   const timeIs = extensions.conditions!["tux.time_is"]!;
   const updateTime = extensions.commands!["tux.update_time"]!;
-  const ctx = {} as never;
+  const tick = extensions.commands!["tux.tick_time_weather"]!;
+  const ctx = {
+    ext: extensions.initial!,
+    switches: {},
+    variables: {},
+    items: {},
+    gold: 0,
+    random: () => { throw new Error("time/weather must not consume battle RNG"); },
+  };
 
-  test("tux.time_is folds stage_of_day to the fixed morning", () => {
-    // Matches the importer's pre-D1 fold: stage_of_day "morning".
+  test("tux.time_is reads all three comparison paths from the fixed clock", () => {
     expect(timeIs(ctx, { property: "stage_of_day", operation: "equals", value: "morning", negate: false })).toBe(true);
     expect(timeIs(ctx, { property: "stage_of_day", operation: "equals", value: "night", negate: false })).toBe(false);
     expect(timeIs(ctx, { property: "stage_of_day", operation: "equals", value: "night", negate: true })).toBe(true);
     expect(timeIs(ctx, { property: "stage_of_day", operation: "not_equals", value: "morning", negate: false })).toBe(false);
-  });
-
-  test("tux.time_is folds daytime to the fixed true", () => {
     expect(timeIs(ctx, { property: "daytime", operation: "equals", value: "true", negate: false })).toBe(true);
-    expect(timeIs(ctx, { property: "daytime", operation: "equals", value: "false", negate: false })).toBe(false);
+    expect(timeIs(ctx, { property: "hour", operation: ">=", value: "9", negate: false })).toBe(true);
+    expect(timeIs(ctx, { property: "date", operation: "equals", value: "6-15", negate: false })).toBe(true);
+    expect(timeIs(ctx, { property: "season", operation: "equals", value: "spring", negate: false })).toBe(true);
   });
 
-  test("tux.time_is is false for date/hour/season (no clock in P1)", () => {
-    for (const property of ["date", "hour", "day_of_year", "year", "month", "day", "weekday", "leap_year", "season"]) {
-      expect(timeIs(ctx, { property, operation: "equals", value: "anything", negate: false })).toBe(false);
-    }
+  test("tux.update_time publishes the eight upstream variables", () => {
+    expect(updateTime(ctx, { character: "player" })).toEqual({ writes: {
+      "v.hour": "9",
+      "v.day_of_year": "167",
+      "v.year": "2024",
+      "v.weekday": "saturday",
+      "v.leap_year": "true",
+      "v.daytime": "true",
+      "v.stage_of_day": "morning",
+      "v.season": "spring",
+    } });
   });
 
-  test("tux.update_time is a no-op", () => {
-    expect(updateTime(ctx, { character: "player" })).toBeUndefined();
+  test("tux.tick_time_weather advances only the extension stream", () => {
+    const result = tick(ctx, {});
+    expect(result?.writes).toBeUndefined();
+    const beforeWire = ctx.ext as string;
+    const afterWire = result!.ext! as string;
+    expect(afterWire.startsWith("pocket-tuxemon/ext-runtime/v2:")).toBeTrue();
+    expect(afterWire.split("\n")[0]).toBe(beforeWire.split("\n")[0]);
+    const state = tuxemonExtensionState(result!.ext!, undefined);
+    expect(state.clock).toMatchObject({ refTick: 1, subMinuteTicks: 1 });
+    expect(state.weather).toEqual(tuxemonExtensionState(ctx.ext).weather);
+  });
+
+  test("tux.tick_time_weather publishes the daylight target only when it changes", () => {
+    const first = tick(ctx, { daylight: true });
+    expect(first?.writes).toEqual({ [DAYLIGHT_TARGET_VARIABLE]: 2 });
+    const stable = tick({
+      ...ctx,
+      ext: first!.ext!,
+      variables: { [DAYLIGHT_STAGE_VARIABLE]: 2, [DAYLIGHT_TARGET_VARIABLE]: 0 },
+    }, { daylight: true });
+    expect(stable?.writes).toBeUndefined();
+  });
+
+  test("runtime v2 validates its trust boundary and rejects a stale deadline", () => {
+    const isolated = createTuxemonExtensions({} as never);
+    const isolatedTick = isolated.commands!["tux.tick_time_weather"]!;
+    const initial = isolated.initial! as string;
+    expect(isolated.validate!(initial)).toBeUndefined();
+    const advanced = isolatedTick({ ...ctx, ext: initial }, {})!.ext! as string;
+    expect(isolated.validate!(advanced)).toBeUndefined();
+
+    const forged = advanced.split("\n");
+    forged[1] = String(Number.MAX_SAFE_INTEGER);
+    forged[7] = "0";
+    forged[8] = "1";
+    expect(isolated.validate!(forged.join("\n"))).toContain("must be > clock.refTick");
+  });
+
+  test("reads legacy runtime v1 and emits v2 on the next tick", () => {
+    const isolated = createTuxemonExtensions({} as never);
+    const state = tuxemonExtensionState(isolated.initial!);
+    const legacy = `pocket-tuxemon/ext-runtime/v1:${JSON.stringify(state)}`;
+    expect(tuxemonExtensionState(legacy)).toEqual(state);
+    const advanced = isolated.commands!["tux.tick_time_weather"]!({ ...ctx, ext: legacy }, {})!;
+    expect(String(advanced.ext).startsWith("pocket-tuxemon/ext-runtime/v2:")).toBeTrue();
+    expect(tuxemonExtensionState(advanced.ext!).clock.refTick).toBe(1);
   });
 });

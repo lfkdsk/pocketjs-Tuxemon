@@ -7,6 +7,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
 import { bootWorld, fnv1a } from "../vendor/pocket-rpgkit/vendor/pocketjs/hosts/sim/sim.ts";
+import { FIXED_TIME_HOST_GLOBALS } from "../battle/time-weather.ts";
 import { encodePNG } from "../vendor/pocket-rpgkit/vendor/pocketjs/tests/png.ts";
 import type { CameraState } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 import type { SessionState } from "../vendor/pocket-rpgkit/src/engine/session.ts";
@@ -45,7 +46,7 @@ for (const viewport of viewports) {
   const wanted = new Map<number, (typeof checkpoints)[number]>(
     checkpoints.map((checkpoint) => [checkpoint.frame, checkpoint]),
   );
-  const world = await bootWorld(BUNDLE, 60, undefined, undefined, viewport);
+  const world = await bootWorld(BUNDLE, 60, FIXED_TIME_HOST_GLOBALS, undefined, viewport);
   for (let frame = 0; frame <= checkpoints.at(-1)!.frame; frame++) {
     world.frame(journey.masks[frame]!);
     world.tick();

@@ -41,6 +41,7 @@
     "goldens:j1": "bun tools/update-j1-goldens.ts",
     "goldens:gi1a": "bun tools/update-gi1a-goldens.ts",
     "goldens:j2": "bun tools/update-j2-goldens.ts",
+    "goldens:daylight": "bun tools/update-daylight-goldens.ts",
     "bench:g6:quickjs": "bash tools/bench-g6-quickjs.sh",
     "bench:gb6:quickjs": "bash tools/bench-gb6-quickjs.sh",
     "build:wasm": "bun vendor/pocket-rpgkit/vendor/pocketjs/tools/wasm.ts",

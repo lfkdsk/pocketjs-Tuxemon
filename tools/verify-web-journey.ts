@@ -14,6 +14,7 @@
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
+import { FIXED_INITIAL_CIVIL_TIME } from "../battle/time-weather.ts";
 import { decodePng } from "../vendor/pocket-rpgkit/vendor/pocketjs/framework/compiler/pak.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
@@ -99,7 +100,8 @@ await send("Runtime.enable");
 await send("Page.enable");
 // Freeze the page's real-time clock: the player only advances when we step it.
 await send("Page.addScriptToEvaluateOnNewDocument", {
-  source: "window.requestAnimationFrame = () => 0; window.cancelAnimationFrame = () => {};",
+  source: `globalThis.__pocketTuxemonInitialCivilTime = ${JSON.stringify(FIXED_INITIAL_CIVIL_TIME)};
+window.requestAnimationFrame = () => 0; window.cancelAnimationFrame = () => {};`,
 });
 const t0 = performance.now();
 await send("Page.navigate", { url: `http://127.0.0.1:${server.port}/pocket-tuxemon/` });

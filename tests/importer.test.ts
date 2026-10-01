@@ -90,9 +90,9 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   expect(result.report.coverage.conditions.summary).toMatchObject({
     types: 64,
     uses: 8_663,
-    native: 4_161,
+    native: 4_179,
     degraded: 1_229,
-    placeholder: 877,
+    placeholder: 859,
     dropped: 2_396,
     tier1: {
       uses: 4_117,
@@ -509,10 +509,10 @@ test("default import output remains byte-pinned", () => {
   const bytes = jsonBytes(buildProject(maps, DEFAULT_IMPORT_OPTIONS));
   // This pins the complete ImportBuild: condition lowering, the stable source
   // inputs, the generated outdoor world index and its compact report summary.
-  // D1 time/weather: time_is/update_time emit tux.* ext shapes and the
-  // report carries the weather table, so the pinned bytes move again.
+  // The deterministic clock and native presentation/terrain mappings are
+  // included in this combined pin.
   expect(createHash("sha256").update(bytes).digest("hex")).toBe(
-    "2b5c7beaec9e4caf748a46fc9156bd09f34e984490a1e95728cd254dee1c37ea",
+    "b2c992b1431ae402127deaa3405c803fde21840c1e44b4370c4e1e3f8b20901e",
   );
 });
 

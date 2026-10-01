@@ -285,6 +285,13 @@ mod g6_quickjs_bench {
         let app_id = args.app_id.clone().unwrap_or_else(|| args.app.clone());
         let fs_roots = fs::data_roots(args.data_root.as_deref(), &app_id)?;
         let fs_mount = fs::mount_fs(&guest, &fs_roots)?;
+        // Journey and performance fixtures must not inherit the machine wall
+        // clock. Install the same fixed civil time used by the Bun and web
+        // harnesses before the application bundle is evaluated.
+        guest.eval(
+            "g6-fixed-clock",
+            "globalThis.__pocketTuxemonInitialCivilTime={year:2024,month:6,day:15,hour:9,minute:0};",
+        )?;
         let host_init_ms = host_init_start.elapsed().as_secs_f64() * 1_000.0;
 
         let (compile_ms, eval_ms) = gp1_eval_staged(&guest, &args.app, &source)?;
@@ -564,6 +571,7 @@ mod g6_quickjs_bench {
     fn report(viewport: &str, label: &str, samples: &[Sample]) {
         assert!(!samples.is_empty(), "{label} has no samples");
         let mut js: Vec<f64> = samples.iter().map(|sample| sample.js_ms).collect();
+        let mut js_cpu: Vec<f64> = samples.iter().map(|sample| sample.js_cpu_ms).collect();
         let mut total: Vec<f64> = samples
             .iter()
             .filter(|sample| sample.draw_sampled)
@@ -571,6 +579,7 @@ mod g6_quickjs_bench {
             .collect();
         assert!(!total.is_empty(), "{label} has no framebuffer samples");
         js.sort_by(|a, b| a.partial_cmp(b).unwrap());
+        js_cpu.sort_by(|a, b| a.partial_cmp(b).unwrap());
         total.sort_by(|a, b| a.partial_cmp(b).unwrap());
         let worst = samples
             .iter()
@@ -596,13 +605,15 @@ mod g6_quickjs_bench {
             .max()
             .unwrap_or(0);
         let js_mean = js.iter().sum::<f64>() / js.len() as f64;
+        let js_cpu_mean = js_cpu.iter().sum::<f64>() / js_cpu.len() as f64;
         let total_mean = total.iter().sum::<f64>() / total.len() as f64;
         println!(
-            "CASE viewport={viewport} kind={label} n={} total_n={} qjs_mean={js_mean:.3}ms qjs_p95={:.3}ms qjs_max={:.3}ms total_mean={total_mean:.3}ms total_p95={:.3}ms total_max={:.3}ms worst=f{}:{} structural={}/{}/{}/{} structural_max={}",
+            "CASE viewport={viewport} kind={label} n={} total_n={} qjs_mean={js_mean:.3}ms qjs_p95={:.3}ms qjs_max={:.3}ms qjs_cpu_mean={js_cpu_mean:.3}ms qjs_cpu_p95={:.3}ms total_mean={total_mean:.3}ms total_p95={:.3}ms total_max={:.3}ms worst=f{}:{} structural={}/{}/{}/{} structural_max={}",
             samples.len(),
             total.len(),
             percentile(&js, 0.95),
             js[js.len() - 1],
+            percentile(&js_cpu, 0.95),
             percentile(&total, 0.95),
             total[total.len() - 1],
             worst.frame,

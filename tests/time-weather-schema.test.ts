@@ -36,7 +36,7 @@ describe("time-weather schema codec", () => {
       weather: {
         slug: "rain",
         enteredAtTick: 1_000,
-        nextTransitionTick: 5_000,
+        nextTransitionTick: 125_000,
         rngCursor: 0xdead_beef,
       },
     };
@@ -98,7 +98,7 @@ describe("time-weather schema codec", () => {
     expect(P1_FIXED_STAGE_OF_DAY).toBe("morning");
     expect(P1_FIXED_DAYTIME).toBe("true");
     const state = initialTimeWeatherState();
-    expect(Math.floor(state.clock.minuteOfDay / 60)).toBe(8);
+    expect(Math.floor(state.clock.minuteOfDay / 60)).toBe(9);
   });
 });
 
@@ -178,6 +178,18 @@ describe("time-weather validation", () => {
       clock: state.clock,
       weather: { ...state.weather, enteredAtTick: 100, nextTransitionTick: 50 },
     })).toContain("nextTransitionTick");
+  });
+
+  test("rejects a stale or future-entered weather stream relative to the clock", () => {
+    const state = valid();
+    expect(timeWeatherProblem({
+      clock: { ...state.clock, refTick: Number.MAX_SAFE_INTEGER },
+      weather: { ...state.weather, enteredAtTick: 0, nextTransitionTick: 1 },
+    })).toContain("must be > clock.refTick");
+    expect(timeWeatherProblem({
+      clock: state.clock,
+      weather: { ...state.weather, enteredAtTick: 1 },
+    })).toContain("must be <= clock.refTick");
   });
 
   test("decode throws the weather problem when only the weather is bad", () => {

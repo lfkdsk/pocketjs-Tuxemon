@@ -11,7 +11,7 @@ When conversion discards a whole event, every source rule in it is Dropped.
 | Kind | Kinds | Uses | Native | Degraded | Placeholder | Dropped | S1 T1 baseline |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Actions | 98 | 13617 | 12122 | 628 | 19 | 848 | 6155 / 6246 (45.20% / 45.9%) |
-| Conditions | 64 | 8663 | 7850 | 2 | 127 | 684 | 4500 / 4591 (51.95% / 53.0%) |
+| Conditions | 64 | 8663 | 7976 | 2 | 1 | 684 | 4500 / 4591 (51.95% / 53.0%) |
 
 The S1 acceptance baselines are 6,246 action uses (45.9%) and 4,591
 condition uses (53.0%). Only T1 source types whose disposition is Native or
@@ -30,19 +30,16 @@ Definitions:
 
 - **Native**: represented by current RPG Kit v1 commands without a gameplay loss.
 - **Degraded**: runs in v1 with a documented limitation or importer lowering.
-- **Placeholder**: deliberate P1 behavior for battle/monster state and the
-  D1 time/weather ext shapes (`time_is`, `update_time`) whose runtime
-  lands in D2 (clock/weather). Map overlays are native KV1 layers.
+- **Placeholder**: deliberate visible or deterministic fallback for behavior
+  whose complete runtime or presentation mapping has not landed yet.
 - **Dropped**: no equivalent output, including rules inside an event that the
   converter proves cannot start or otherwise omits. Per-disposition reasons are
   retained in `dist/import-report.json`.
 
 ## P2 battle and monster placeholder audit
 
-There are 146 source-file uses across 8
-source types that still carry Placeholder disposition: battle/monster behavior
-plus the D1 time/weather ext shapes (`time_is`, `update_time`) whose runtime
-lands in D2 (clock/weather).
+There are 20 source-file uses across 6
+source types that still carry Placeholder disposition: battle/monster behavior.
 Player-versus-trainer, double, scripted-wild, random-wild, battle-outcome,
 party-size, has-monster, evolution, environment, faint-transfer, and live-party
 defeat behavior are Native. The remaining non-native behavior is explicit:
@@ -55,8 +52,6 @@ defeat behavior are Native. The remaining non-native behavior is explicit:
 | Action | `remove_monster` | 4 | sys.party_size -= 1 when non-empty |
 | Action | `start_battle` | 5 | NPC-versus-NPC battles are not supported yet; skipped |
 | Condition | `is party_infected` | 1 | no plague in P1: none=true |
-| Condition | `is time_is` | 66 | tux.time_is ext condition; D2 clock runtime (placeholder folds to fixed morning/daytime) |
-| Condition | `not time_is` | 60 | tux.time_is ext condition; D2 clock runtime (placeholder folds to fixed morning/daytime) |
 
 The five `start_battle` placeholders are NPC-versus-NPC scenes, for which the
 runtime shows a visible skip notice instead of inventing a player battle. The
@@ -280,7 +275,7 @@ census.
 | Condition | `is player_facing_tile` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `is step_tracker` | 0 | 0 | 0 | 7 | 7 |
 | Condition | `is tile_property_updated` | 4 | 0 | 0 | 0 | 4 |
-| Condition | `is time_is` | 0 | 0 | 66 | 1 | 67 |
+| Condition | `is time_is` | 66 | 0 | 0 | 1 | 67 |
 | Condition | `is variable_set` | 709 | 0 | 0 | 21 | 730 |
 | Condition | `not battle_outcome` | 358 | 0 | 0 | 5 | 363 |
 | Condition | `not battle_outcome_count` | 9 | 0 | 0 | 0 | 9 |
@@ -305,6 +300,6 @@ census.
 | Condition | `not music_playing` | 0 | 0 | 0 | 196 | 196 |
 | Condition | `not party_size` | 5 | 0 | 0 | 0 | 5 |
 | Condition | `not tile_property_updated` | 0 | 2 | 0 | 0 | 2 |
-| Condition | `not time_is` | 0 | 0 | 60 | 1 | 61 |
+| Condition | `not time_is` | 60 | 0 | 0 | 1 | 61 |
 | Condition | `not tracker` | 22 | 0 | 0 | 0 | 22 |
 | Condition | `not variable_set` | 645 | 0 | 0 | 26 | 671 |

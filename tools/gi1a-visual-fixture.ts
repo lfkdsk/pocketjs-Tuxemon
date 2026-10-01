@@ -22,6 +22,7 @@ import {
 import type { MapAnimInstance } from "../vendor/pocket-rpgkit/src/engine/interpreter.ts";
 import type { SessionState } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import type { CameraState } from "../vendor/pocket-rpgkit/src/engine/types.ts";
+import { FIXED_TIME_HOST_GLOBALS } from "../battle/time-weather.ts";
 
 export const GI1A_VISUAL_WIDTH = 480;
 export const GI1A_VISUAL_HEIGHT = 272;
@@ -188,7 +189,7 @@ export async function captureGi1aVisuals(): Promise<Gi1aVisualCapture> {
   const bedroom = journey.checkpoints.find((checkpoint) => checkpoint.name === "bedroom");
   if (!bedroom) throw new Error("GI1a visuals: G6 tape has no bedroom checkpoint");
 
-  const world = await bootWorld(BUNDLE, 60, undefined, undefined, {
+  const world = await bootWorld(BUNDLE, 60, FIXED_TIME_HOST_GLOBALS, undefined, {
     width: GI1A_VISUAL_WIDTH,
     height: GI1A_VISUAL_HEIGHT,
   });

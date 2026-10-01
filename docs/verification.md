@@ -135,6 +135,7 @@ a single differing pixel fails.
 | `bun run goldens:gb6:route` | The four mainline route keyframes at both viewports and `data/gb6-route-goldens.json`. |
 | `bun run goldens:j1` | The three Captain-return keyframes at both viewports and `data/j1-goldens.json`. |
 | `bun run goldens:j2` | The hospital-cure keyframes (Aardant acquired, hospital password, the cure) at both viewports and `data/j2-goldens.json`. |
+| `bun run goldens:daylight` | The same Paper Town checkpoint at fixed 09:00 and 21:00 starts, plus `data/daylight-goldens.json`. The test recomputes luminance, blue bias and per-pixel day/night differences from the decoded PNGs. |
 
 Regenerate goldens only when the rendering change is intentional, and always
 open the regenerated PNGs and look at them. A hash pins the bytes; it cannot

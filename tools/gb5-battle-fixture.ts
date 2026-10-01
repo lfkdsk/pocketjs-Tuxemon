@@ -17,6 +17,7 @@ import {
   bootWorld,
   type SimWorld,
 } from "../vendor/pocket-rpgkit/vendor/pocketjs/hosts/sim/sim.ts";
+import { FIXED_TIME_HOST_GLOBALS } from "../battle/time-weather.ts";
 
 export const GB5_FRAME_NAMES = [
   "main-menu",
@@ -251,7 +252,7 @@ export async function captureGb5BattleFrames(
   const world = await bootWorld(
     bundle,
     60,
-    undefined,
+    FIXED_TIME_HOST_GLOBALS,
     counts ? wrapStructuralOps(counts) : undefined,
     viewport,
   );

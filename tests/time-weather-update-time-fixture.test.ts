@@ -99,12 +99,13 @@ describe("R2: update_time imports through a materializable fixture event", () =>
     expect(pages[0]!.trigger).toBe("action");
   });
 
-  test("update_time coverage is Placeholder with the D2 note", () => {
+  test("update_time coverage is Native once the saved clock handler is present", () => {
     expect(updateTimeRow).toBeDefined();
     expect(updateTimeRow!.total).toBe(1);
-    expect(updateTimeRow!.placeholder).toBe(1);
+    expect(updateTimeRow!.native).toBe(1);
+    expect(updateTimeRow!.placeholder).toBe(0);
     expect(updateTimeRow!.dropped).toBe(0);
-    expect(updateTimeRow!.reasons.placeholder?.[0]).toContain("D2");
-    expect(updateTimeRow!.reasons.placeholder?.[0]).toContain("tux.update_time");
+    expect(updateTimeRow!.reasons.native?.[0]).toContain("tux.update_time");
+    expect(updateTimeRow!.reasons.native?.[0]).toContain("saved deterministic calendar");
   });
 });

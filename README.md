@@ -58,6 +58,11 @@ summary:
   uses map natively to kit commands; 91.1% / 91.1% are executable (native,
   degraded, or a deliberate placeholder). The full per-type breakdown is in
   [reports/G1-coverage.md](reports/G1-coverage.md).
+- **Day/night:** a saved, rewindable calendar drives Tuxemon's time conditions
+  and its real day/night event pages. Fresh games start from one local-clock
+  sample; tests and journey replays pin 09:00. Dawn, day, dusk and night use a
+  smoothly changing named tint, while weather has its own deterministic RNG
+  and transition deadline.
 
 ## Screenshots
 
@@ -84,6 +89,15 @@ mainline.
 <p align="center">
   <img src="docs/screenshots/cotton-town.png" width="480" alt="Cotton Town, a frame from the autoplay journey">
   <img src="docs/screenshots/route-3-end.png" width="480" alt="The north end of Route 3, a frame from the autoplay journey">
+</p>
+
+The same Paper Town checkpoint at fixed 09:00 and 21:00 starts. The night
+frame is intentionally darker and bluer; the golden test verifies those
+properties from the decoded pixels as well as pinning the PNG bytes.
+
+<p align="center">
+  <img src="tests/goldens/daylight-day.png" width="480" alt="Paper Town during the day">
+  <img src="tests/goldens/daylight-night.png" width="480" alt="Paper Town at night with a blue tint">
 </p>
 
 ## Play it

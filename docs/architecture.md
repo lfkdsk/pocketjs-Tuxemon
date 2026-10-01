@@ -124,12 +124,13 @@ the registered handlers.
 | `tux.evolution` | command | Evolves the party monster flagged as waiting to evolve. |
 | `tux.cancel_evolution` | command | Clears the pending-evolution flag. |
 | `tux.set_environment` | command | Sets the active battle backdrop. |
-| `tux.update_time` | command | Advances the game clock. Placeholder no-op until the runtime clock lands. |
+| `tux.tick_time_weather` | command | Advances the saved clock by one active 60 Hz reference tick, applies due weather transitions, and publishes daylight-stage changes. |
+| `tux.update_time` | command | Writes Tuxemon's eight derived calendar variables from the saved clock. |
 | `tux.set_faint_point` | command | Stores a character's recovery destination. |
 | `tux.prepare_faint_transfer` | command | Heals the party if standing on the healing faint point, and writes the faint-teleport target. |
 | `tux.check_evolution` | condition | A party monster is waiting to evolve. |
 | `tux.environment_is` | condition | The active environment equals the argument. |
-| `tux.time_is` | condition | The in-game clock matches the requested time range. Placeholder: folds to fixed daytime until the runtime clock lands. |
+| `tux.time_is` | condition | Compares the saved calendar by number, string or month/day tuple, including daytime, stage, weekday, season and leap year. |
 | `tux.has_faint_point` | condition | The character has a stored faint point. |
 | `tux.faint_point_is_map` | condition | The faint point is on the given map. |
 | `tux.party_size` | condition | Compares party size with an operator and value. |
@@ -140,8 +141,11 @@ the registered handlers.
 
 Every condition also accepts `negate: true`. The importer emits these calls
 when converting the corresponding Tuxemon actions and conditions; see
-[importer.md](importer.md). Extension state has a packed-string save codec, so
-saves and rewinds carry it.
+[importer.md](importer.md). Extension state has a packed-string runtime
+representation and a versioned save codec, so the clock, weather
+cursor/deadline, parties and battle history all survive saves and rewinds.
+The production effect shell samples local wall time once when creating a fresh
+game; reducers and renderers never read it.
 
 ## The component repo boundary
 

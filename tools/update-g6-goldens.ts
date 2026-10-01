@@ -11,6 +11,7 @@ import { walkPose } from "../vendor/pocket-rpgkit/src/engine/movement.ts";
 import type { CameraState, Project } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 import type { SessionState } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import { NPC_SRC_INDEX, PLAYER } from "../ui/game-assets.ts";
+import { FIXED_TIME_HOST_GLOBALS } from "../battle/time-weather.ts";
 import { createNpcSrcProvider } from "../ui/npc-src-repository.ts";
 
 interface JourneyFile {
@@ -47,7 +48,7 @@ mkdirSync(dir, { recursive: true });
 for (const file of readdirSync(dir)) {
   if (/^g6-.*\.png$/.test(file)) rmSync(join(dir, file));
 }
-const world = await bootWorld(bundle, 60, undefined, undefined, { width: 480, height: 272 });
+const world = await bootWorld(bundle, 60, FIXED_TIME_HOST_GLOBALS, undefined, { width: 480, height: 272 });
 const frames: Record<string, unknown>[] = [];
 const actorAt: Readonly<Record<string, string>> = {
   "downstairs-mom": "npc_spyder_papertown_mom",

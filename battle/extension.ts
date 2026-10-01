@@ -5,9 +5,29 @@ import type {
 } from "../vendor/pocket-rpgkit/src/engine/extensions.ts";
 import type { JsonValue } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 import type { BattleDb } from "../importer/battle-schema.ts";
+import {
+  DAYLIGHT_STAGE_VARIABLE,
+  DAYLIGHT_TARGET_VARIABLE,
+  DAYLIGHT_TINT_PROFILES,
+} from "./daylight.ts";
 import { battleDbToTuxemonBattleDb } from "./from-battle-db.ts";
 import { evolveMonsterSnapshot } from "./progression.ts";
 import { spawnMonsterWithRandom } from "./spawn.ts";
+import {
+  advanceClock,
+  advanceTimeWeather,
+  DEFAULT_WEATHER_SLUGS,
+  initialTimeWeatherState,
+  stageOfDayFromMinute,
+  timeIs,
+  timeWeatherProblem,
+  updateTimeWrites,
+  type ClockState,
+  type Hemisphere,
+  type TimeWeatherState,
+  type WeatherSchedule,
+  type WeatherState,
+} from "./time-weather.ts";
 import type { SpawnedMonsterSnapshot, Stats } from "./types.ts";
 import { STAT_NAMES } from "./types.ts";
 
@@ -15,6 +35,23 @@ export const PARTY_LIMIT = 6;
 export const KENNEL_LIMIT = 30;
 export const TUXEMON_EXT_SAVE_FORMAT = "pocket-tuxemon/ext/v1";
 const TUXEMON_EXT_RUNTIME_PREFIX = "pocket-tuxemon/ext-runtime/v1:";
+const TUXEMON_EXT_RUNTIME_V2_PREFIX = "pocket-tuxemon/ext-runtime/v2:";
+
+interface TuxemonRuntimeEnvelope {
+  wire: string;
+  coreWire: string;
+  corePrefix: string;
+  refTick: number;
+  epochDay: number;
+  minuteOfDay: number;
+  subMinuteTicks: number;
+  ticksPerGameMinute: number;
+  weatherSlug: string;
+  weatherSlugWire: string;
+  weatherEnteredAtTick: number;
+  weatherNextTransitionTick: number;
+  weatherRngCursor: number;
+}
 
 export interface PendingMonster {
   iid: string;
@@ -49,6 +86,18 @@ export interface TuxemonExtensionState {
   environment: string | null;
   faintPoints: Record<string, FaintPoint>;
   nextMonsterId: number;
+  /** Deterministic virtual calendar; advanced only by active world ticks. */
+  clock: ClockState;
+  /** Saved weather stream, deliberately independent from the battle RNG. */
+  weather: WeatherState;
+}
+
+export interface TuxemonExtensionRuntimeOptions {
+  /** Fresh-game clock/weather sampled or fixed by the effect shell. */
+  initialTimeWeather?: TimeWeatherState;
+  /** Imported weather slugs and deterministic duration bounds. */
+  weatherSchedule?: WeatherSchedule;
+  hemisphere?: Hemisphere;
 }
 
 export interface BattleDbProvider {
@@ -67,7 +116,9 @@ export function releaseBattleDb(source: BattleDbSource): void {
   if (typeof source !== "function" && "load" in source) source.release?.();
 }
 
-export function initialTuxemonExtensionState(): TuxemonExtensionState {
+export function initialTuxemonExtensionState(
+  timeWeather: Readonly<TimeWeatherState> = initialTimeWeatherState(),
+): TuxemonExtensionState {
   return {
     version: 1,
     party: [],
@@ -79,6 +130,8 @@ export function initialTuxemonExtensionState(): TuxemonExtensionState {
     environment: null,
     faintPoints: {},
     nextMonsterId: 1,
+    clock: { ...timeWeather.clock },
+    weather: { ...timeWeather.weather },
   };
 }
 
@@ -167,19 +220,94 @@ function pendingProblem(value: unknown, label: string, db?: BattleDb): string | 
   return null;
 }
 
-function unpackRuntimeExtension(value: JsonValue): JsonValue {
-  if (typeof value !== "string") return value;
-  if (!value.startsWith(TUXEMON_EXT_RUNTIME_PREFIX)) {
-    throw new Error("runtime state has an unknown encoding");
-  }
+let lastRuntimeEnvelope: TuxemonRuntimeEnvelope | null = null;
+
+function runtimeEnvelope(value: JsonValue): TuxemonRuntimeEnvelope | null {
+  if (typeof value !== "string" || !value.startsWith(TUXEMON_EXT_RUNTIME_V2_PREFIX)) return null;
+  if (value === lastRuntimeEnvelope?.wire) return lastRuntimeEnvelope;
+  const fields = value.slice(TUXEMON_EXT_RUNTIME_V2_PREFIX.length).split("\n");
+  if (fields.length !== 10) return null;
+  const numbers = [fields[1], fields[2], fields[3], fields[4], fields[5], fields[7], fields[8], fields[9]];
+  if (!numbers.every((part) => /^(?:0|[1-9]\d*)$/.test(part!))) return null;
+  const parsed = numbers.map(Number);
+  if (!parsed.every(Number.isSafeInteger)) return null;
+  let weatherSlug: unknown;
   try {
-    return JSON.parse(value.slice(TUXEMON_EXT_RUNTIME_PREFIX.length)) as JsonValue;
+    weatherSlug = JSON.parse(fields[6]!);
+  } catch {
+    return null;
+  }
+  if (typeof weatherSlug !== "string") return null;
+  const envelope: TuxemonRuntimeEnvelope = {
+    wire: value,
+    coreWire: fields[0]!,
+    corePrefix: `${TUXEMON_EXT_RUNTIME_V2_PREFIX}${fields[0]!}\n`,
+    refTick: parsed[0]!,
+    epochDay: parsed[1]!,
+    minuteOfDay: parsed[2]!,
+    subMinuteTicks: parsed[3]!,
+    ticksPerGameMinute: parsed[4]!,
+    weatherSlug,
+    weatherSlugWire: fields[6]!,
+    weatherEnteredAtTick: parsed[5]!,
+    weatherNextTransitionTick: parsed[6]!,
+    weatherRngCursor: parsed[7]!,
+  };
+  lastRuntimeEnvelope = envelope;
+  return envelope;
+}
+
+function parseRuntimePart(value: string): JsonValue {
+  try {
+    return JSON.parse(value) as JsonValue;
   } catch {
     throw new Error("runtime state contains malformed JSON");
   }
 }
 
-function tuxemonStateProblem(value: JsonValue, db?: BattleDb): string | null {
+function unpackRuntimeExtension(value: JsonValue): JsonValue {
+  const envelope = runtimeEnvelope(value);
+  if (envelope) {
+    const core = record(parseRuntimePart(envelope.coreWire));
+    if (!core) throw new Error("runtime state core must be an object");
+    return {
+      ...core,
+      clock: clockFromRuntimeEnvelope(envelope),
+      weather: weatherFromRuntimeEnvelope(envelope),
+    } as unknown as JsonValue;
+  }
+  if (typeof value !== "string") return value;
+  if (!value.startsWith(TUXEMON_EXT_RUNTIME_PREFIX)) {
+    throw new Error("runtime state has an unknown encoding");
+  }
+  return parseRuntimePart(value.slice(TUXEMON_EXT_RUNTIME_PREFIX.length));
+}
+
+function clockFromRuntimeEnvelope(envelope: TuxemonRuntimeEnvelope): ClockState {
+  return {
+    mode: "game",
+    refTick: envelope.refTick,
+    epochDay: envelope.epochDay,
+    minuteOfDay: envelope.minuteOfDay,
+    subMinuteTicks: envelope.subMinuteTicks,
+    ticksPerGameMinute: envelope.ticksPerGameMinute,
+  };
+}
+
+function weatherFromRuntimeEnvelope(envelope: TuxemonRuntimeEnvelope): WeatherState {
+  return {
+    slug: envelope.weatherSlug,
+    enteredAtTick: envelope.weatherEnteredAtTick,
+    nextTransitionTick: envelope.weatherNextTransitionTick,
+    rngCursor: envelope.weatherRngCursor,
+  };
+}
+
+function tuxemonStateProblem(
+  value: JsonValue,
+  db?: BattleDb,
+  weatherSlugs?: ReadonlySet<string>,
+): string | null {
   const state = record(value);
   if (!state || state.version !== 1) return "version must be 1";
   if (!Array.isArray(state.party) || state.party.length > PARTY_LIMIT) {
@@ -239,25 +367,38 @@ function tuxemonStateProblem(value: JsonValue, db?: BattleDb): string | null {
   if (!safeInteger(state.nextMonsterId) || state.nextMonsterId < 1) {
     return "nextMonsterId must be a positive safe integer";
   }
+  const timeProblem = timeWeatherProblem(
+    { clock: state.clock, weather: state.weather },
+    weatherSlugs,
+  );
+  if (timeProblem) return timeProblem;
   return null;
 }
 
-export function tuxemonExtensionProblem(value: JsonValue, db?: BattleDb): string | null {
+export function tuxemonExtensionProblem(
+  value: JsonValue,
+  db?: BattleDb,
+  weatherSlugs?: ReadonlySet<string>,
+): string | null {
   try {
-    return tuxemonStateProblem(unpackRuntimeExtension(value), db);
+    return tuxemonStateProblem(unpackRuntimeExtension(value), db, weatherSlugs);
   } catch (error) {
     return error instanceof Error ? error.message : "runtime state cannot be decoded";
   }
 }
 
-export function tuxemonExtensionState(value: JsonValue, db?: BattleDb): TuxemonExtensionState {
+export function tuxemonExtensionState(
+  value: JsonValue,
+  db?: BattleDb,
+  weatherSlugs?: ReadonlySet<string>,
+): TuxemonExtensionState {
   let unpacked: JsonValue;
   try {
     unpacked = unpackRuntimeExtension(value);
   } catch (error) {
     throw new Error(`Tuxemon extension state: ${error instanceof Error ? error.message : "cannot decode"}`);
   }
-  const problem = tuxemonStateProblem(unpacked, db);
+  const problem = tuxemonStateProblem(unpacked, db, weatherSlugs);
   if (problem) throw new Error(`Tuxemon extension state: ${problem}`);
   return unpacked as unknown as TuxemonExtensionState;
 }
@@ -266,27 +407,155 @@ export function tuxemonExtensionState(value: JsonValue, db?: BattleDb): TuxemonE
  * start of the current reducer frame. Avoid re-walking the full party once
  * for every page condition; command results are validated by the engine
  * before they become the following frame's state. */
-let lastRuntimeWire: string | null = null;
 let lastRuntimeState: TuxemonExtensionState | null = null;
+let lastRuntimeStateWire: string | null = null;
+let lastRuntimeCoreWire: string | null = null;
+let lastRuntimeCore: Record<string, unknown> | null = null;
 function currentExtensionState(value: JsonValue): TuxemonExtensionState {
-  if (typeof value === "string") {
-    if (value === lastRuntimeWire && lastRuntimeState) return lastRuntimeState;
-    const state = unpackRuntimeExtension(value) as unknown as TuxemonExtensionState;
-    lastRuntimeWire = value;
+  const envelope = runtimeEnvelope(value);
+  if (envelope) {
+    if (envelope.wire === lastRuntimeStateWire && lastRuntimeState) {
+      return lastRuntimeState;
+    }
+    const core = envelope.coreWire === lastRuntimeCoreWire && lastRuntimeCore
+      ? lastRuntimeCore
+      : record(parseRuntimePart(envelope.coreWire))!;
+    const state = {
+      ...core,
+      clock: clockFromRuntimeEnvelope(envelope),
+      weather: weatherFromRuntimeEnvelope(envelope),
+    } as unknown as TuxemonExtensionState;
+    lastRuntimeEnvelope = envelope;
     lastRuntimeState = state;
+    lastRuntimeStateWire = envelope.wire;
+    lastRuntimeCoreWire = envelope.coreWire;
+    lastRuntimeCore = core;
+    return state;
+  }
+  if (typeof value === "string") {
+    const state = unpackRuntimeExtension(value) as unknown as TuxemonExtensionState;
+    lastRuntimeEnvelope = null;
+    lastRuntimeState = state;
+    lastRuntimeStateWire = value;
     return state;
   }
   return value as unknown as TuxemonExtensionState;
 }
 
-/** Keep the complete state in SessionState.ext while making the kit's
- * mandatory per-frame defensive clone O(1) for ordinary world frames. */
+/**
+ * Keep the whole runtime in one immutable primitive so the kit's mandatory
+ * frame clone is O(1). The large battle core precedes a newline-delimited
+ * clock/weather suffix; ordinary ticks reuse the cached prefix and never
+ * parse or serialize JSON.
+ */
 export function packTuxemonExtensionState(state: TuxemonExtensionState): JsonValue {
-  return `${TUXEMON_EXT_RUNTIME_PREFIX}${JSON.stringify(state)}`;
+  const { clock, weather, ...core } = state;
+  const coreWire = JSON.stringify(core);
+  return `${TUXEMON_EXT_RUNTIME_V2_PREFIX}${coreWire}\n${clock.refTick}\n${clock.epochDay}`
+    + `\n${clock.minuteOfDay}\n${clock.subMinuteTicks}\n${clock.ticksPerGameMinute}`
+    + `\n${JSON.stringify(weather.slug)}\n${weather.enteredAtTick}`
+    + `\n${weather.nextTransitionTick}\n${weather.rngCursor}`;
 }
 
 function json(state: TuxemonExtensionState): JsonValue {
-  return packTuxemonExtensionState(state);
+  const wire = packTuxemonExtensionState(state) as string;
+  const envelope = runtimeEnvelope(wire)!;
+  lastRuntimeEnvelope = envelope;
+  lastRuntimeState = state;
+  lastRuntimeStateWire = wire;
+  lastRuntimeCoreWire = envelope.coreWire;
+  const { clock: _clock, weather: _weather, ...core } = state;
+  lastRuntimeCore = core;
+  return wire;
+}
+
+interface PackedTimeWeatherAdvance {
+  wire: string;
+  minuteOfDay: number;
+  subMinuteTicks: number;
+}
+
+/**
+ * Clock ticks are the only extension mutation that runs on every active
+ * reference tick. Reuse the immutable battle-core string, advance the flat
+ * primitive fields directly, and invoke the general weather reducer only at
+ * a saved deadline.
+ */
+function packTimeWeatherAdvance(
+  currentWire: JsonValue,
+  schedule: Readonly<WeatherSchedule>,
+): PackedTimeWeatherAdvance {
+  const currentEnvelope = runtimeEnvelope(currentWire);
+  if (!currentEnvelope) {
+    const current = currentExtensionState(currentWire);
+    const advanced = advanceTimeWeather(current, 1, schedule);
+    const state = { ...current, ...advanced };
+    return {
+      wire: json(state) as string,
+      minuteOfDay: advanced.clock.minuteOfDay,
+      subMinuteTicks: advanced.clock.subMinuteTicks,
+    };
+  }
+
+  const refTick = currentEnvelope.refTick + 1;
+  let epochDay = currentEnvelope.epochDay;
+  let minuteOfDay = currentEnvelope.minuteOfDay;
+  let subMinuteTicks = currentEnvelope.subMinuteTicks + 1;
+  const ticksPerGameMinute = currentEnvelope.ticksPerGameMinute;
+  if (!Number.isSafeInteger(refTick)) throw new Error("time-weather: clock overflow");
+  if (subMinuteTicks === ticksPerGameMinute) {
+    subMinuteTicks = 0;
+    minuteOfDay++;
+    if (minuteOfDay === 1_440) {
+      minuteOfDay = 0;
+      epochDay++;
+      if (!Number.isSafeInteger(epochDay)) throw new Error("time-weather: clock overflow");
+    }
+  }
+  let weatherSlug = currentEnvelope.weatherSlug;
+  let weatherSlugWire = currentEnvelope.weatherSlugWire;
+  let weatherEnteredAtTick = currentEnvelope.weatherEnteredAtTick;
+  let weatherNextTransitionTick = currentEnvelope.weatherNextTransitionTick;
+  let weatherRngCursor = currentEnvelope.weatherRngCursor;
+  if (weatherNextTransitionTick <= refTick) {
+    const weather = advanceTimeWeather({
+      clock: {
+        mode: "game",
+        refTick,
+        epochDay,
+        minuteOfDay,
+        subMinuteTicks,
+        ticksPerGameMinute,
+      },
+      weather: weatherFromRuntimeEnvelope(currentEnvelope),
+    }, 0, schedule).weather;
+    weatherSlug = weather.slug;
+    weatherSlugWire = JSON.stringify(weather.slug);
+    weatherEnteredAtTick = weather.enteredAtTick;
+    weatherNextTransitionTick = weather.nextTransitionTick;
+    weatherRngCursor = weather.rngCursor;
+  }
+  const wire = `${currentEnvelope.corePrefix}${refTick}\n${epochDay}\n${minuteOfDay}`
+    + `\n${subMinuteTicks}\n${ticksPerGameMinute}\n${weatherSlugWire}`
+    + `\n${weatherEnteredAtTick}\n${weatherNextTransitionTick}\n${weatherRngCursor}`;
+  lastRuntimeEnvelope = {
+    wire,
+    coreWire: currentEnvelope.coreWire,
+    corePrefix: currentEnvelope.corePrefix,
+    refTick,
+    epochDay,
+    minuteOfDay,
+    subMinuteTicks,
+    ticksPerGameMinute,
+    weatherSlug,
+    weatherSlugWire,
+    weatherEnteredAtTick,
+    weatherNextTransitionTick,
+    weatherRngCursor,
+  };
+  lastRuntimeState = null;
+  lastRuntimeStateWire = null;
+  return { wire, minuteOfDay, subMinuteTicks };
 }
 
 function migrateV1(value: JsonValue): JsonValue {
@@ -296,10 +565,18 @@ function migrateV1(value: JsonValue): JsonValue {
   // may still carry the former battle-only mirrors; discard those fields
   // while preserving every Tuxemon-specific extension value.
   const { inventory: _legacyInventory, money: _legacyMoney, ...extension } = state;
+  const hasClock = state.clock !== undefined;
+  const hasWeather = state.weather !== undefined;
+  if (hasClock !== hasWeather) {
+    throw new Error("Tuxemon extension state: clock and weather must either both be present or both be absent");
+  }
   return {
     ...extension,
     ...(state.environment === undefined ? { environment: null } : {}),
     ...(state.runAttempts === undefined ? { runAttempts: 0 } : {}),
+    ...(!hasClock
+      ? initialTimeWeatherState()
+      : {}),
   } as JsonValue;
 }
 
@@ -549,13 +826,35 @@ function compare(operator: unknown, left: number, right: number): boolean {
 }
 
 /** Pure game registration used by createSession, GameView and attract replay. */
-export function createTuxemonExtensions(source: BattleDbSource): ExtensionOptions {
-  const initial = json(initialTuxemonExtensionState());
+export function createTuxemonExtensions(
+  source: BattleDbSource,
+  options: Readonly<TuxemonExtensionRuntimeOptions> = {},
+): ExtensionOptions {
+  const weatherSchedule: WeatherSchedule = {
+    slugs: [...new Set(options.weatherSchedule?.slugs ?? DEFAULT_WEATHER_SLUGS)].sort(),
+    ...(options.weatherSchedule?.minDurationMinutes === undefined
+      ? {}
+      : { minDurationMinutes: options.weatherSchedule.minDurationMinutes }),
+    ...(options.weatherSchedule?.maxDurationMinutes === undefined
+      ? {}
+      : { maxDurationMinutes: options.weatherSchedule.maxDurationMinutes }),
+  };
+  const weatherSlugs = new Set(weatherSchedule.slugs);
+  const hemisphere = options.hemisphere ?? "northern";
+  if (hemisphere !== "northern" && hemisphere !== "southern") {
+    throw new Error(`Tuxemon extension: unsupported hemisphere '${String(hemisphere)}'`);
+  }
+  const initial = json(initialTuxemonExtensionState(options.initialTimeWeather));
   const validationDb = typeof source !== "function" && !("load" in source) ? source : undefined;
-  // cloneExtension invokes the validator on every frame. A packed primitive
-  // is immutable, so validating each distinct string once retains the full
-  // boundary check without reparsing an unchanged party sixty times/second.
+  // cloneExtension invokes the validator on every frame. The envelope's
+  // packed strings are immutable, so validating each distinct tuple once
+  // retains the full boundary check without reparsing an unchanged party.
   let lastValidatedRuntime: string | null = null;
+  // A tick result derives from the already validated current state and only
+  // replaces clock/weather after checking their complete invariants. Keep a
+  // one-shot marker so applyExtensionResult need not parse and re-walk the
+  // unchanged party/history before publishing that exact result.
+  let trustedTickRuntime: string | null = null;
   return {
     initial,
     commands: {
@@ -581,10 +880,39 @@ export function createTuxemonExtensions(source: BattleDbSource): ExtensionOption
         const current = currentExtensionState(context.ext);
         return { ext: json({ ...current, environment }) };
       },
-      "tux.update_time": () => {
-        // D1 placeholder: no-op. D2 writes the eight upstream time variables
-        // (hour, day_of_year, year, weekday, leap_year, daytime, stage_of_day,
-        // season) from the virtual clock.
+      "tux.tick_time_weather": (context, value) => {
+        const args = argsRecord(value, "tux.tick_time_weather");
+        if (args.daylight !== undefined && typeof args.daylight !== "boolean") {
+          throw new Error("tux.tick_time_weather: daylight must be boolean");
+        }
+        const sourceWasValidated = typeof context.ext === "string"
+          && context.ext === lastValidatedRuntime;
+        const packed = packTimeWeatherAdvance(context.ext, weatherSchedule);
+        // Only an engine-validated predecessor may authorize the one-shot
+        // fast validation of its derived tick. Direct handler callers and
+        // forged contexts still take the complete validator path.
+        trustedTickRuntime = sourceWasValidated ? packed.wire : null;
+        if (args.daylight !== true) return { ext: packed.wire };
+        // A stage can only change on a game-minute boundary. The initial
+        // undefined target is still published immediately after boot.
+        if (packed.subMinuteTicks !== 0
+          && context.variables[DAYLIGHT_STAGE_VARIABLE] !== undefined) {
+          return { ext: packed.wire };
+        }
+        const stage = stageOfDayFromMinute(packed.minuteOfDay);
+        const marker = DAYLIGHT_TINT_PROFILES.find((profile) => profile.stage === stage)!.marker;
+        return context.variables[DAYLIGHT_STAGE_VARIABLE] === marker
+          ? { ext: packed.wire }
+          : { ext: packed.wire, writes: { [DAYLIGHT_TARGET_VARIABLE]: marker } };
+      },
+      "tux.update_time": (context, value) => {
+        const args = argsRecord(value, "tux.update_time");
+        const character = args.character === undefined ? "player" : args.character;
+        if (!nonEmptyString(character)) {
+          throw new Error("tux.update_time: character must be a string");
+        }
+        const current = currentExtensionState(context.ext);
+        return { writes: updateTimeWrites(current.clock, hemisphere) };
       },
       "tux.set_faint_point": (context, value) => {
         const args = argsRecord(value, "tux.set_faint_point");
@@ -638,23 +966,22 @@ export function createTuxemonExtensions(source: BattleDbSource): ExtensionOption
         return negate(state.environment === args.environment, args);
       },
       "tux.time_is": (context, value) => {
-        // D1 placeholder: fold against the fixed P1 morning/daytime so the
-        // imported events keep their current behavior. D2 replaces this with
-        // the virtual clock comparison (hour/date/stage/season/...).
         const args = argsRecord(value, "tux.time_is");
-        const property = String(args.property ?? "");
-        const operation = String(args.operation ?? "equals");
-        const target = String(args.value ?? "");
-        const fixed = property === "stage_of_day" ? "morning"
-          : property === "daytime" ? "true"
-          : null;
-        if (fixed === null) return negate(false, args);
-        const result = operation === "equals" || operation === "=="
-          ? fixed === target
-          : operation === "not_equals" || operation === "!="
-            ? fixed !== target
-            : false;
-        return negate(result, args);
+        if (!nonEmptyString(args.property) || !nonEmptyString(args.operation)
+          || typeof args.value !== "string") return false;
+        const tickOffset = args.tickOffset === undefined ? 0 : args.tickOffset;
+        if (tickOffset !== 0 && tickOffset !== 1) return false;
+        const envelope = runtimeEnvelope(context.ext);
+        const clock = envelope
+          ? clockFromRuntimeEnvelope(envelope)
+          : currentExtensionState(context.ext).clock;
+        return negate(timeIs(
+          tickOffset === 0 ? clock : advanceClock(clock, tickOffset),
+          args.property,
+          args.operation,
+          args.value,
+          hemisphere,
+        ), args);
       },
       "tux.has_faint_point": (context, value) => {
         const args = argsRecord(value, "tux.has_faint_point");
@@ -713,29 +1040,34 @@ export function createTuxemonExtensions(source: BattleDbSource): ExtensionOption
     codec: {
       encode: (value) => ({
         format: TUXEMON_EXT_SAVE_FORMAT,
-        state: tuxemonExtensionState(value, resolveBattleDb(source)) as unknown as JsonValue,
+        state: tuxemonExtensionState(value, resolveBattleDb(source), weatherSlugs) as unknown as JsonValue,
       }),
       decode: (value) => {
         if (value === null) return initial;
         const saved = record(value);
         if (saved?.format === TUXEMON_EXT_SAVE_FORMAT && saved.state !== undefined) {
           const migrated = migrateV1(saved.state as JsonValue);
-          return json(tuxemonExtensionState(migrated, resolveBattleDb(source)));
+          return json(tuxemonExtensionState(migrated, resolveBattleDb(source), weatherSlugs));
         }
         // Accept a direct v1 state for development snapshots made before the
         // save wrapper was introduced.
         if (saved?.version === 1) {
-          return json(tuxemonExtensionState(migrateV1(value), resolveBattleDb(source)));
+          return json(tuxemonExtensionState(migrateV1(value), resolveBattleDb(source), weatherSlugs));
         }
         throw new Error("unsupported Tuxemon extension save format");
       },
     },
     validate: (value) => {
       if (typeof value === "string" && value === lastValidatedRuntime) return;
+      if (typeof value === "string" && value === trustedTickRuntime) {
+        trustedTickRuntime = null;
+        lastValidatedRuntime = value;
+        return;
+      }
       // Lazy production sources live in the pak. Commands and save restore
       // perform the database-backed check at their boundary; the hot-frame
       // validator still checks the complete numeric/shape invariants here.
-      const problem = tuxemonExtensionProblem(value, validationDb);
+      const problem = tuxemonExtensionProblem(value, validationDb, weatherSlugs);
       if (!problem && typeof value === "string") lastValidatedRuntime = value;
       return problem ?? undefined;
     },

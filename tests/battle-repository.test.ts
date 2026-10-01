@@ -23,7 +23,7 @@ const journey = JSON.parse(readFileSync(join(ROOT, "data/g6-journey.json"), "utf
 };
 // Same pinned terminal state the G7 map repository test and the QuickJS
 // bench check; GP1 changes only how the battle database is loaded.
-const EXPECTED_TERMINAL_STATE_SHA256 = "5653f0110656dd4e0a930ff1908c833c9f9fc221c9cfd3a90d22b138ef8d4827";
+const EXPECTED_TERMINAL_STATE_SHA256 = "dd83a4af085f2beaef27e8e06c9832aba76e2a6b3d98fa31c608bede20c3cb8b";
 
 function input(mask: number, previous: number): SessionInput {
   const pressed = mask & ~previous;

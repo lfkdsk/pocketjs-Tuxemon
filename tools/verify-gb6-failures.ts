@@ -23,7 +23,7 @@ const ROOT = resolve(import.meta.dir, "..");
 const HEAL_BEFORE_LEAVE = "You should heal your monsters before heading off.";
 const FIRST_FIGHT_LOSE = "As expected! Old models can't compare to new ones!";
 const FIRST_FIGHT_AFTER = "I'll heal you up this time, but I'm not a charity. Rest up at home next time your monsters get worn out.";
-const FIRST_LOSS_STATE_SHA256 = "d321b2173aca055d0e0fdc39df6127f57ebad93a4cd3e758d7695c04e44f7aab";
+const FIRST_LOSS_STATE_SHA256 = "de25bbd6eed6ff39c8c6f1bafa181b4e46de2d41d6f9d43ff5e513972ba773bf";
 
 interface SeenText {
   frame: number;
@@ -227,8 +227,11 @@ expect("later-loss visible recovery text frames changed", recordedTail.every((ro
   const delta = later.texts[index]!.frame - row.frame;
   return delta === 1 || delta === 2;
 }));
-expect("later-loss terminal state hash changed",
-  sha256(canonicalJson(laterReplay.state)) === later.terminalStateSha256);
+const laterTerminalStateSha256 = sha256(canonicalJson(laterReplay.state));
+expect(
+  `later-loss terminal state hash ${laterTerminalStateSha256} != ${later.terminalStateSha256}`,
+  laterTerminalStateSha256 === later.terminalStateSha256,
+);
 
 console.log("GB6 FAILURE PATHS PASS " + JSON.stringify({
   first: {

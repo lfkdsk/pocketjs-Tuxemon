@@ -6,6 +6,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
 import { bootWorld, fnv1a } from "../vendor/pocket-rpgkit/vendor/pocketjs/hosts/sim/sim.ts";
+import { FIXED_TIME_HOST_GLOBALS } from "../battle/time-weather.ts";
 import { encodePNG } from "../vendor/pocket-rpgkit/vendor/pocketjs/tests/png.ts";
 import { walkPose } from "../vendor/pocket-rpgkit/src/engine/movement.ts";
 import { isSessionWorldIdle, type SessionState } from "../vendor/pocket-rpgkit/src/engine/session.ts";
@@ -54,7 +55,7 @@ for (const viewport of VIEWPORTS) {
   // Camera bounds and streamed terrain nodes are derived during a tick. A
   // fresh world per viewport keeps both images on the exact tape frame while
   // exercising the same startup path as the real host.
-  const world = await bootWorld(BUNDLE, 60, undefined, undefined, viewport);
+  const world = await bootWorld(BUNDLE, 60, FIXED_TIME_HOST_GLOBALS, undefined, viewport);
   for (let frame = 0; frame <= checkpoints.at(-1)!.mergedFrame; frame++) {
     world.frame(combined[frame]!);
     world.tick();

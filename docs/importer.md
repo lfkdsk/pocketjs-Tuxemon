@@ -85,21 +85,20 @@ definitions below are the report's own:
 
 ### Placeholder examples
 
-Two kinds of stand-in behavior remain: legacy content, and the clock/weather
-extension calls whose runtime is still being built:
+The remaining stand-in behavior is explicit and reported by source type:
 
 | Tuxemon | Stand-in |
 |---|---|
-| `is time_is` / `not time_is` (128 uses) | a `tux.time_is` extension condition that folds reachable uses to fixed daytime until the runtime clock lands. |
 | `start_battle` (NPC vs NPC, 5 uses) | a visible skip notice in the text box. |
 | `choice_monster` / `choice_npc` | enum-coded `choices`; every option is retained, but there is no party-selection UI. |
 | `open_shop` (monster trading, 7 uses) | a visible menu listing the stock. |
 | `remove_monster` | the party counter decreases by one. |
 | `is party_infected` | constant (there is no plague system). |
 
-(`update_time` also has an extension command, but its three source uses sit
-in events that are dropped for other reasons, so it has no placeholder uses
-of its own.)
+`time_is` now reads the deterministic saved calendar in all 126 materialized
+uses. `update_time` writes the eight upstream time variables; its three source
+uses sit in events dropped for other reasons, so the isolated importer fixture
+exercises that command shape directly.
 
 Earlier in the project, all battles were placeholders (a text line plus win
 switches). Real battles replaced them: `start_battle`, `random_encounter`,

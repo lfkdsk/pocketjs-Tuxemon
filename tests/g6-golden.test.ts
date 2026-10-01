@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { decodePng } from "../importer/png.ts";
+import { FIXED_TIME_HOST_GLOBALS } from "../battle/time-weather.ts";
 import { bootWorld, fnv1a } from "../vendor/pocket-rpgkit/vendor/pocketjs/hosts/sim/sim.ts";
 import type { SessionState } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 
@@ -155,7 +156,7 @@ const simTest = canBoot ? test : test.skip;
 
 describe("G6 built bundle deterministic replay", () => {
   async function drive() {
-    const world = await bootWorld(BUNDLE, 60, undefined, undefined, { width: 480, height: 272 });
+    const world = await bootWorld(BUNDLE, 60, FIXED_TIME_HOST_GLOBALS, undefined, { width: 480, height: 272 });
     const hashes: string[] = [];
     const marked = new Map<number, { hash: string; state: [string, number, number] }>();
     const frames = new Set(journey.checkpoints.map((mark) => mark.frame));

@@ -24,11 +24,11 @@ describe("G6 generated game assets", () => {
     expect(report.project).toMatchObject({
       maps: 263,
       collisionBodies: 14,
-      maxActors: 501,
-      // Runtime appearance materializes extra character slots; the largest
-      // playable map remains below the excluded test_npcs stress map.
-      runtimeMaxActors: 216,
-      excludedActorStressMaps: [{ id: "test_npcs", slots: 501 }],
+      maxActors: 502,
+      // Runtime appearance plus the saved-clock/daylight parallel event add
+      // slots, while Dryad's Grove remains the largest playable map.
+      runtimeMaxActors: 217,
+      excludedActorStressMaps: [{ id: "test_npcs", slots: 502 }],
       options: {
         areas: true,
         facing: true,
@@ -57,7 +57,7 @@ describe("G6 generated game assets", () => {
       playerSheet: `sprites/${appearances[0]!.template.sprite_name}.png`,
     });
     expect(GAME_ASSETS.order).toHaveLength(263);
-    expect(GAME_ASSETS.maxActors).toBe(216);
+    expect(GAME_ASSETS.maxActors).toBe(217);
     expect(NPC_SRC_INDEX).toHaveLength(183);
     for (const { id, entry } of NPC_SRC_INDEX) {
       const art = JSON.parse(readFileSync(resolve(ROOT, "dist", entry), "utf8")) as NpcArt;

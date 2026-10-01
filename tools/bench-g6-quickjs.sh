@@ -10,7 +10,7 @@ map_bundle="$bench_root/map-bundle"
 map_report=${G6_MAP_REPORT:-$root/reports/G7-map-first-visits.tsv}
 journey=${G6_JOURNEY:-$root/data/g6-journey.json}
 expected_map=${G6_EXPECTED_MAP:-spyder_route1}
-expected_state=${G6_STATE_SHA256:-5653f0110656dd4e0a930ff1908c833c9f9fc221c9cfd3a90d22b138ef8d4827}
+expected_state=${G6_STATE_SHA256:-dd83a4af085f2beaef27e8e06c9832aba76e2a6b3d98fa31c608bede20c3cb8b}
 app_dist=${G6_DIST:-$root/dist/linux-app}
 app_js="$app_dist/pocket-tuxemon.js"
 app_pak="$app_dist/pocket-tuxemon.pak"
@@ -75,9 +75,8 @@ for viewport in "${viewports[@]}"; do
     "$binary" g6_quickjs_bench::journey --ignored --exact --nocapture
   actual=$(sha256sum "$state" | cut -d' ' -f1)
   # Complete post-Billie state, including persistent party/history, the
-  # extension RNG cursor, and K4's persistent shop-stock banks.
-  # Shared economy removes ext.inventory/ext.money and credits battle rewards
-  # to SessionState.gold, changing only the pinned terminal state shape/value.
+  # independent battle/weather RNG cursors, saved clock/daylight state, and
+  # persistent shop-stock banks.
   if [[ "$actual" != "$expected_state" ]]; then
     echo "STATE MISMATCH viewport=${width}x${height} expected=$expected_state actual=$actual" >&2
     exit 1
