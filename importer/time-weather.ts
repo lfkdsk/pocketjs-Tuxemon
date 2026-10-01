@@ -7,16 +7,11 @@
 //     TuxemonExtensionState and implements the 60Hz clock, compare/update and
 //     the independent weather RNG/deadline. D1 only fixes the bytes.
 //   - The 10-entry weather table exported from mods/tuxemon/db/weather.
-//   - The import mapping for time_is / update_time / set_layer -> tux.* ext
+//   - The import mapping for time_is / update_time -> tux.* ext
 //     command/condition shapes. The runtime handlers are placeholders until
-//     D2 (clock/weather) and D3 (overlay visuals); the importer emits explicit
-//     ext calls instead of silently dropping them, and coverage records
-//     Placeholder with the D2 note.
-//
-// set_layer is a transparent OVERLAY drawn over the map (a colour or an
-// image), not a map tile layer. It does not overlap the component kit's KV1
-// "runtime layer switching" (which swaps tile layers); its visual home is
-// D3's overlay slot.
+//     D2 (clock/weather); the importer emits explicit ext calls instead of
+//     silently dropping them, and coverage records Placeholder with the D2
+//     note.
 
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -294,7 +289,7 @@ export function weatherSlugs(): ReadonlySet<string> {
 }
 
 // ---------------------------------------------------------------------------
-// import mapping: time_is / update_time / set_layer -> tux.* ext shapes
+// import mapping: time_is / update_time -> tux.* ext shapes
 // ---------------------------------------------------------------------------
 
 /** time_is <property>,<operation>,<value> -> tux.time_is ext condition args.
@@ -321,29 +316,4 @@ export function timeIsArgs(cond: Cond): {
  *  a no-op. */
 export function updateTimeArgs(rule: Rule): { character: string } {
   return { character: rule.args[0] ?? "player" };
-}
-
-/** set_layer [<value>] -> tux.set_layer ext command args. Upstream accepts an
- *  RGBA colour ("R,G,B,A" or "R:G:B:A"), a .png image path, or nothing/"none"
- *  to clear. The overlay visual is D3; the D1/D2 placeholder handler is a
- *  no-op. */
-export type SetLayerArg =
-  | { kind: "clear" }
-  | { kind: "color"; r: number; g: number; b: number; a: number }
-  | { kind: "image"; path: string };
-
-export function setLayerArg(rule: Rule): SetLayerArg {
-  const first = (rule.args[0] ?? "").trim();
-  if (!first || first.toLowerCase() === "none") return { kind: "clear" };
-  if (first.toLowerCase().endsWith(".png")) return { kind: "image", path: first };
-  // RGBA: "R:G:B:A" survives the script parser as one arg, while "R,G,B,A"
-  // is split into four args (splitEscaped). Accept both upstream forms.
-  const channels = rule.args.length >= 4 && rule.args.slice(0, 4).every((p) => /^\d+$/.test(p))
-    ? rule.args.slice(0, 4).map(Number)
-    : first.split(":").map((part) => Number(part.trim()));
-  if (channels.length === 4 && channels.every((n) => Number.isInteger(n) && n >= 0 && n <= 255)) {
-    return { kind: "color", r: channels[0]!, g: channels[1]!, b: channels[2]!, a: channels[3]! };
-  }
-  // Unparseable upstream value: clear rather than invent a colour.
-  return { kind: "clear" };
 }

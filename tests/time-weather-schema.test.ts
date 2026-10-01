@@ -7,14 +7,12 @@ import {
   loadWeatherTable,
   P1_FIXED_DAYTIME,
   P1_FIXED_STAGE_OF_DAY,
-  setLayerArg,
   timeIsArgs,
   TIME_WEATHER_SAVE_FORMAT,
   timeWeatherProblem,
   updateTimeArgs,
   weatherProblem,
   weatherSlugs,
-  type SetLayerArg,
 } from "../importer/time-weather.ts";
 import { parseAction, parseCondition } from "../importer/source.ts";
 
@@ -249,18 +247,5 @@ describe("import mapping shapes", () => {
   test("update_time defaults to player", () => {
     expect(updateTimeArgs(parseAction("update_time player"))).toEqual({ character: "player" });
     expect(updateTimeArgs(parseAction("update_time"))).toEqual({ character: "player" });
-  });
-
-  test("set_layer parses clear, colour and image shapes", () => {
-    const cases: [string, SetLayerArg][] = [
-      ["set_layer", { kind: "clear" }],
-      ["set_layer none", { kind: "clear" }],
-      ["set_layer 0:0:0:255", { kind: "color", r: 0, g: 0, b: 0, a: 255 }],
-      ["set_layer 102,51,0,128", { kind: "color", r: 102, g: 51, b: 0, a: 128 }],
-      ["set_layer gfx/ui/overlay/torchlight.png", { kind: "image", path: "gfx/ui/overlay/torchlight.png" }],
-    ];
-    for (const [text, expected] of cases) {
-      expect(setLayerArg(parseAction(text))).toEqual(expected);
-    }
   });
 });

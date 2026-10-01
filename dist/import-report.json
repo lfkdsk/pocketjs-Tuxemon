@@ -281,12 +281,12 @@
  ],
  "schemaErrors": [],
  "byFate": {
-  "T3-dropped": 3412,
-  "T1": 31345,
-  "T4-dropped": 3823,
-  "T1-lowered": 1896,
+  "T3-dropped": 2360,
+  "T1": 33939,
+  "T4-dropped": 2534,
+  "T1-lowered": 2375,
   "T2-dropped": 619,
-  "T3-placeholder": 741,
+  "T3-placeholder": 647,
   "structural": 776
  },
  "rows": [
@@ -345,22 +345,22 @@
    "note": "presentation / meta"
   },
   {
-   "key": "act:camera_position:T4-dropped",
-   "fate": "T4-dropped",
+   "key": "act:camera_position:T1",
+   "fate": "T1",
    "count": 6,
-   "note": "presentation / meta"
+   "note": "KS1 camera snaps to a fixed tile"
   },
   {
-   "key": "act:change_bg:T4-dropped",
-   "fate": "T4-dropped",
+   "key": "act:change_bg:T1",
+   "fate": "T1",
    "count": 21,
-   "note": "presentation / meta"
+   "note": "KS1 closes the blocking screen backdrop"
   },
   {
-   "key": "act:change_bg_char:T4-dropped",
-   "fate": "T4-dropped",
+   "key": "act:change_bg_char:T1",
+   "fate": "T1",
    "count": 4,
-   "note": "presentation / meta"
+   "note": "KV1 combat-sheet front art on a blocking screen backdrop"
   },
   {
    "key": "act:change_bg_monster:T4-dropped",
@@ -419,7 +419,7 @@
   {
    "key": "act:char_move:T1-lowered",
    "fate": "T1-lowered",
-   "count": 9,
+   "count": 405,
    "note": "moveRoute steps"
   },
   {
@@ -615,10 +615,10 @@
    "note": "K2 deterministic approach route"
   },
   {
-   "key": "act:play_map_animation:T4-dropped",
-   "fate": "T4-dropped",
+   "key": "act:play_map_animation:T1",
+   "fate": "T1",
    "count": 276,
-   "note": "presentation / meta"
+   "note": "KA1 map animation at the character's sampled tile"
   },
   {
    "key": "act:play_music:T2-dropped",
@@ -633,10 +633,10 @@
    "note": "se cue"
   },
   {
-   "key": "act:play_tile_animation:T4-dropped",
-   "fate": "T4-dropped",
+   "key": "act:play_tile_animation:T1",
+   "fate": "T1",
    "count": 1,
-   "note": "presentation / meta"
+   "note": "KA1 map animation at a fixed tile"
   },
   {
    "key": "act:quarantine:T4-dropped",
@@ -699,10 +699,10 @@
    "note": "name entry (P1: fixed name)"
   },
   {
-   "key": "act:screen_transition:T1-lowered",
-   "fate": "T1-lowered",
+   "key": "act:screen_transition:T1",
+   "fate": "T1",
    "count": 25,
-   "note": "fade out+in -> wait 2t (visual fade is T2)"
+   "note": "KS1 blocking fade out followed by fade in"
   },
   {
    "key": "act:set_bill:T3-dropped",
@@ -711,10 +711,10 @@
    "note": "monster/combat subsystem (P2)"
   },
   {
-   "key": "act:set_bubble:T4-dropped",
-   "fate": "T4-dropped",
+   "key": "act:set_bubble:T1",
+   "fate": "T1",
    "count": 16,
-   "note": "presentation / meta"
+   "note": "KS1 persistent balloon"
   },
   {
    "key": "act:set_char_attribute:T4-dropped",
@@ -731,7 +731,7 @@
   {
    "key": "act:set_environment:T1",
    "fate": "T1",
-   "count": 171,
+   "count": 369,
    "note": "tux.set_environment updates the active battle backdrop"
   },
   {
@@ -741,10 +741,10 @@
    "note": "runtime pathfinding / other-event routes / NPC motion props"
   },
   {
-   "key": "act:set_layer:T3-placeholder",
-   "fate": "T3-placeholder",
-   "count": 94,
-   "note": "tux.set_layer ext command; D2 runtime placeholder, D3 overlay visual (no-op)"
+   "key": "act:set_layer:T1",
+   "fate": "T1",
+   "count": 100,
+   "note": "KV1 selects a prepackaged map overlay"
   },
   {
    "key": "act:set_mission:T4-dropped",
@@ -795,10 +795,16 @@
    "note": "tux.set_faint_point stores the character's recovery destination"
   },
   {
-   "key": "act:set_template:T4-dropped",
-   "fate": "T4-dropped",
-   "count": 22,
-   "note": "presentation / meta"
+   "key": "act:set_template:T1",
+   "fate": "T1",
+   "count": 115,
+   "note": "KV1 restores the character's saved race/page appearance baseline"
+  },
+  {
+   "key": "act:set_template:T1-lowered",
+   "fate": "T1-lowered",
+   "count": 12,
+   "note": "KV1 saves the race walking baseline; its combat-sheet choice remains battle-owned"
   },
   {
    "key": "act:set_tuxepedia:T4-dropped",
@@ -809,7 +815,7 @@
   {
    "key": "act:set_variable:T1",
    "fate": "T1",
-   "count": 1251,
+   "count": 1350,
    "note": "variable set enum code"
   },
   {
@@ -897,10 +903,10 @@
    "note": "K1 cross-event input lock command"
   },
   {
-   "key": "act:update_tile_properties:T4-dropped",
-   "fate": "T4-dropped",
-   "count": 198,
-   "note": "presentation / meta"
+   "key": "act:update_tile_properties:T1",
+   "fate": "T1",
+   "count": 32,
+   "note": "KV1 expands the source surface label to exact per-map passage overrides"
   },
   {
    "key": "act:variable_math:T4-dropped",
@@ -1029,10 +1035,10 @@
    "note": "consumed by trigger selection"
   },
   {
-   "key": "cond:is char_sprite:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "cond:is char_sprite:T1",
+   "fate": "T1",
    "count": 331,
-   "note": "monster/party/meta state unknown to P1: fixed answer"
+   "note": "KV1 effective walking appearance condition"
   },
   {
    "key": "cond:is check_char_parameter:T3-dropped",
@@ -1173,10 +1179,16 @@
    "note": "monster/party/meta state unknown to P1: fixed answer"
   },
   {
-   "key": "cond:is tile_property_updated:T3-dropped",
-   "fate": "T3-dropped",
-   "count": 396,
-   "note": "monster/party/meta state unknown to P1: fixed answer"
+   "key": "cond:is tile_property_updated:T1",
+   "fate": "T1",
+   "count": 332,
+   "note": "empty source label keeps all([]) truth semantics"
+  },
+  {
+   "key": "cond:is tile_property_updated:T1-lowered",
+   "fate": "T1-lowered",
+   "count": 64,
+   "note": "KV1 representative cell under the corpus's atomic whole-label invariant"
   },
   {
    "key": "cond:is time_is:T3-placeholder",
@@ -1239,10 +1251,10 @@
    "note": "monster/party/meta state unknown to P1: fixed answer"
   },
   {
-   "key": "cond:not char_sprite:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "cond:not char_sprite:T1",
+   "fate": "T1",
    "count": 127,
-   "note": "monster/party/meta state unknown to P1: fixed answer"
+   "note": "KV1 effective walking appearance condition"
   },
   {
    "key": "cond:not check_char_parameter:T3-dropped",
@@ -1329,10 +1341,16 @@
    "note": "tux.party_size reads the persistent party"
   },
   {
-   "key": "cond:not tile_property_updated:T3-dropped",
-   "fate": "T3-dropped",
-   "count": 198,
-   "note": "monster/party/meta state unknown to P1: fixed answer"
+   "key": "cond:not tile_property_updated:T1",
+   "fate": "T1",
+   "count": 166,
+   "note": "empty source label keeps all([]) truth semantics"
+  },
+  {
+   "key": "cond:not tile_property_updated:T1-lowered",
+   "fate": "T1-lowered",
+   "count": 32,
+   "note": "KV1 representative cell under the corpus's atomic whole-label invariant"
   },
   {
    "key": "cond:not time_is:T3-placeholder",
@@ -1371,9 +1389,15 @@
    "note": "K1 rectangular event area (overlaps partitioned after guard sampling)"
   },
   {
+   "key": "trigger:facingTile:noButton:T1",
+   "fate": "T1",
+   "count": 396,
+   "note": "parallel automatic fiber (blocking commands arbitrate their own UI)"
+  },
+  {
    "key": "trigger:guard:T1",
    "fate": "T1",
-   "count": 1157,
+   "count": 1504,
    "note": "parallel"
   },
   {
@@ -1391,13 +1415,13 @@
   {
    "key": "trigger:never-true guard:T4-dropped",
    "fate": "T4-dropped",
-   "count": 2104,
+   "count": 1571,
    "note": "fixed-false guard prevents the source event from starting"
   },
   {
    "key": "trigger:no-op after conversion:T4-dropped",
    "fate": "T4-dropped",
-   "count": 628,
+   "count": 416,
    "note": "every action was removed, so no project event was emitted"
   },
   {
@@ -1439,7 +1463,7 @@
   {
    "key": "trigger:touch:step(area):T1",
    "fate": "T1",
-   "count": 452,
+   "count": 454,
    "note": "K1 rectangular event area (overlaps partitioned after guard sampling)"
   }
  ],
@@ -1912,15 +1936,15 @@
    "summary": {
     "types": 98,
     "uses": 13617,
-    "native": 11679,
-    "degraded": 642,
-    "placeholder": 89,
-    "dropped": 1207,
-    "nativePercent": 85.8,
-    "executablePercent": 91.1,
+    "native": 12122,
+    "degraded": 628,
+    "placeholder": 19,
+    "dropped": 848,
+    "nativePercent": 89,
+    "executablePercent": 93.8,
     "tier1": {
-     "uses": 6153,
-     "percent": 45.19,
+     "uses": 6155,
+     "percent": 45.2,
      "requiredUses": 6246,
      "requiredPercent": 45.9,
      "meetsBaseline": false
@@ -2031,39 +2055,41 @@
     {
      "type": "camera_position",
      "total": 6,
-     "native": 0,
+     "native": 6,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 6,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "presentation / meta"
+      "native": [
+       "KS1 camera snaps to a fixed tile",
+       "KS1 camera resumes live player following"
       ]
      }
     },
     {
      "type": "change_bg",
      "total": 15,
-     "native": 0,
+     "native": 15,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 15,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "presentation / meta"
+      "native": [
+       "KS1 closes the blocking screen backdrop",
+       "KS1 blocking screen backdrop"
       ]
      }
     },
     {
      "type": "change_bg_char",
      "total": 4,
-     "native": 0,
+     "native": 4,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 4,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "presentation / meta"
+      "native": [
+       "KV1 combat-sheet front art on a blocking screen backdrop"
       ]
      }
     },
@@ -2097,9 +2123,9 @@
      "type": "char_face",
      "total": 2027,
      "native": 1558,
-     "degraded": 443,
+     "degraded": 444,
      "placeholder": 0,
-     "dropped": 26,
+     "dropped": 25,
      "reasons": {
       "degraded": [
        "spawn facing becomes the NPC page route",
@@ -2124,18 +2150,15 @@
      "type": "char_move",
      "total": 77,
      "native": 64,
-     "degraded": 9,
+     "degraded": 13,
      "placeholder": 0,
-     "dropped": 4,
+     "dropped": 0,
      "reasons": {
       "degraded": [
        "moveRoute steps"
       ],
       "native": [
        "moveRoute steps"
-      ],
-      "dropped": [
-       "fixed-false guard prevents the source event from starting"
       ]
      }
     },
@@ -2600,14 +2623,13 @@
     {
      "type": "play_map_animation",
      "total": 276,
-     "native": 0,
+     "native": 276,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 276,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "presentation / meta",
-       "every action was removed, so no project event was emitted"
+      "native": [
+       "KA1 map animation at the character's sampled tile"
       ]
      }
     },
@@ -2645,13 +2667,13 @@
     {
      "type": "play_tile_animation",
      "total": 1,
-     "native": 0,
+     "native": 1,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 1,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "presentation / meta"
+      "native": [
+       "KA1 map animation at a fixed tile"
       ]
      }
     },
@@ -2826,13 +2848,13 @@
     {
      "type": "screen_transition",
      "total": 25,
-     "native": 0,
-     "degraded": 25,
+     "native": 25,
+     "degraded": 0,
      "placeholder": 0,
      "dropped": 0,
      "reasons": {
-      "degraded": [
-       "fade out+in -> wait 2t (visual fade is T2)"
+      "native": [
+       "KS1 blocking fade out followed by fade in"
       ]
      }
     },
@@ -2853,13 +2875,14 @@
     {
      "type": "set_bubble",
      "total": 16,
-     "native": 0,
+     "native": 16,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 16,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "presentation / meta"
+      "native": [
+       "KS1 persistent balloon",
+       "KS1 balloon clear"
       ]
      }
     },
@@ -2892,17 +2915,16 @@
     {
      "type": "set_environment",
      "total": 174,
-     "native": 171,
+     "native": 173,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 3,
+     "dropped": 1,
      "reasons": {
       "native": [
        "tux.set_environment updates the active battle backdrop"
       ],
       "dropped": [
-       "source event is not materialized by any map",
-       "fixed-false guard prevents the source event from starting"
+       "source event is not materialized by any map"
       ]
      }
     },
@@ -2935,13 +2957,14 @@
     {
      "type": "set_layer",
      "total": 79,
-     "native": 0,
+     "native": 77,
      "degraded": 0,
-     "placeholder": 70,
-     "dropped": 9,
+     "placeholder": 0,
+     "dropped": 2,
      "reasons": {
-      "placeholder": [
-       "tux.set_layer ext command; D2 runtime placeholder, D3 overlay visual (no-op)"
+      "native": [
+       "KV1 clears the map overlay layer",
+       "KV1 selects a prepackaged map overlay"
       ],
       "dropped": [
        "fixed-false guard prevents the source event from starting"
@@ -3079,15 +3102,20 @@
     {
      "type": "set_template",
      "total": 24,
-     "native": 0,
-     "degraded": 0,
+     "native": 17,
+     "degraded": 6,
      "placeholder": 0,
-     "dropped": 24,
+     "dropped": 1,
      "reasons": {
+      "native": [
+       "KV1 restores the character's saved race/page appearance baseline",
+       "KV1 selects a runtime walking appearance"
+      ],
       "dropped": [
-       "fixed-false guard prevents the source event from starting",
-       "presentation / meta",
-       "every action was removed, so no project event was emitted"
+       "fixed-false guard prevents the source event from starting"
+      ],
+      "degraded": [
+       "KV1 saves the race walking baseline; its combat-sheet choice remains battle-owned"
       ]
      }
     },
@@ -3107,10 +3135,10 @@
     {
      "type": "set_variable",
      "total": 715,
-     "native": 697,
+     "native": 698,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 18,
+     "dropped": 17,
      "reasons": {
       "native": [
        "variable set enum code"
@@ -3210,10 +3238,10 @@
     {
      "type": "translated_dialog",
      "total": 2068,
-     "native": 2029,
+     "native": 2030,
      "degraded": 1,
      "placeholder": 0,
-     "dropped": 38,
+     "dropped": 37,
      "reasons": {
       "native": [
        "text boxes from en_US .po (layout args ignored)"
@@ -3277,13 +3305,13 @@
     {
      "type": "update_tile_properties",
      "total": 2,
-     "native": 0,
+     "native": 2,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 2,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "every action was removed, so no project event was emitted"
+      "native": [
+       "KV1 expands the source surface label to exact per-map passage overrides"
       ]
      }
     },
@@ -3352,15 +3380,15 @@
    "summary": {
     "types": 64,
     "uses": 8663,
-    "native": 7765,
-    "degraded": 0,
-    "placeholder": 124,
-    "dropped": 774,
-    "nativePercent": 89.6,
-    "executablePercent": 91.1,
+    "native": 7850,
+    "degraded": 2,
+    "placeholder": 127,
+    "dropped": 684,
+    "nativePercent": 90.6,
+    "executablePercent": 92.1,
     "tier1": {
-     "uses": 4470,
-     "percent": 51.6,
+     "uses": 4500,
+     "percent": 51.95,
      "requiredUses": 4591,
      "requiredPercent": 53,
      "meetsBaseline": false
@@ -3428,34 +3456,29 @@
     {
      "type": "is char_at",
      "total": 1811,
-     "native": 1807,
+     "native": 1810,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 4,
+     "dropped": 1,
      "reasons": {
       "native": [
        "consumed by trigger selection"
       ],
       "dropped": [
-       "every action was removed, so no project event was emitted",
-       "Tuxemon's integer tile boundary never contains a point for a zero-size TMX event",
-       "fixed-false guard prevents the source event from starting"
+       "Tuxemon's integer tile boundary never contains a point for a zero-size TMX event"
       ]
      }
     },
     {
      "type": "is char_defeated",
      "total": 10,
-     "native": 9,
+     "native": 10,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 1,
+     "dropped": 0,
      "reasons": {
       "native": [
        "tux.char_defeated reads live party HP"
-      ],
-      "dropped": [
-       "fixed-false guard prevents the source event from starting"
       ]
      }
     },
@@ -3478,35 +3501,33 @@
     {
      "type": "is char_facing",
      "total": 1008,
-     "native": 994,
+     "native": 999,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 14,
+     "dropped": 9,
      "reasons": {
       "native": [
        "K1 facing page condition"
       ],
       "dropped": [
        "trigger predicate unavailable in v1",
-       "Tuxemon's integer tile boundary never contains a point for a zero-size TMX event",
-       "fixed-false guard prevents the source event from starting"
+       "Tuxemon's integer tile boundary never contains a point for a zero-size TMX event"
       ]
      }
     },
     {
      "type": "is char_facing_tile",
      "total": 344,
-     "native": 323,
+     "native": 327,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 21,
+     "dropped": 17,
      "reasons": {
       "native": [
        "consumed by trigger selection"
       ],
       "dropped": [
-       "every action was removed, so no project event was emitted",
-       "fixed-false guard prevents the source event from starting"
+       "every action was removed, so no project event was emitted"
       ]
      }
     },
@@ -3552,29 +3573,29 @@
     {
      "type": "is char_moved",
      "total": 454,
-     "native": 452,
+     "native": 454,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 2,
+     "dropped": 0,
      "reasons": {
       "native": [
        "consumed by trigger selection"
-      ],
-      "dropped": [
-       "every action was removed, so no project event was emitted"
       ]
      }
     },
     {
      "type": "is char_sprite",
      "total": 37,
-     "native": 0,
+     "native": 9,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 37,
+     "dropped": 28,
      "reasons": {
       "dropped": [
        "fixed-false guard prevents the source event from starting"
+      ],
+      "native": [
+       "KV1 effective walking appearance condition"
       ]
      }
     },
@@ -3659,15 +3680,14 @@
     {
      "type": "is current_state",
      "total": 78,
-     "native": 34,
+     "native": 40,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 44,
+     "dropped": 38,
      "reasons": {
       "dropped": [
        "fixed-false guard prevents the source event from starting",
-       "source event is not materialized by any map",
-       "every action was removed, so no project event was emitted"
+       "source event is not materialized by any map"
       ],
       "native": [
        "WorldState arm -> derived worldIdle condition; scene/menu alternatives freeze map fibers"
@@ -3771,13 +3791,13 @@
     {
      "type": "is location_type",
      "total": 1,
-     "native": 0,
+     "native": 1,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 1,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "fixed-false guard prevents the source event from starting"
+      "native": [
+       "static map property, folded at import"
       ]
      }
     },
@@ -3873,13 +3893,13 @@
     {
      "type": "is tile_property_updated",
      "total": 4,
-     "native": 0,
+     "native": 4,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 4,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "fixed-false guard prevents the source event from starting"
+      "native": [
+       "empty source label keeps all([]) truth semantics"
       ]
      }
     },
@@ -3888,8 +3908,8 @@
      "total": 67,
      "native": 0,
      "degraded": 0,
-     "placeholder": 64,
-     "dropped": 3,
+     "placeholder": 66,
+     "dropped": 1,
      "reasons": {
       "placeholder": [
        "tux.time_is ext condition; D2 clock runtime (placeholder folds to fixed morning/daytime)"
@@ -3902,18 +3922,17 @@
     {
      "type": "is variable_set",
      "total": 730,
-     "native": 691,
+     "native": 709,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 39,
+     "dropped": 21,
      "reasons": {
       "native": [
        "page/if variable compare on the enum code"
       ],
       "dropped": [
        "fixed-false guard prevents the source event from starting",
-       "source event is not materialized by any map",
-       "every action was removed, so no project event was emitted"
+       "source event is not materialized by any map"
       ]
      }
     },
@@ -4027,21 +4046,22 @@
      "dropped": 6,
      "reasons": {
       "dropped": [
-       "monster/party/meta state unknown to P1: fixed answer",
-       "fixed-false guard prevents the source event from starting"
+       "monster/party/meta state unknown to P1: fixed answer"
       ]
      }
     },
     {
      "type": "not char_sprite",
      "total": 29,
-     "native": 0,
+     "native": 28,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 29,
+     "dropped": 1,
      "reasons": {
+      "native": [
+       "KV1 effective walking appearance condition"
+      ],
       "dropped": [
-       "monster/party/meta state unknown to P1: fixed answer",
        "fixed-false guard prevents the source event from starting"
       ]
      }
@@ -4082,24 +4102,23 @@
      "dropped": 1,
      "reasons": {
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "monster/party/meta state unknown to P1: fixed answer"
       ]
      }
     },
     {
      "type": "not environment_is",
      "total": 172,
-     "native": 169,
+     "native": 171,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 3,
+     "dropped": 1,
      "reasons": {
       "native": [
        "tux.environment_is reads the active battle backdrop"
       ],
       "dropped": [
-       "source event is not materialized by any map",
-       "fixed-false guard prevents the source event from starting"
+       "source event is not materialized by any map"
       ]
      }
     },
@@ -4158,13 +4177,16 @@
     {
      "type": "not location_inside",
      "total": 2,
-     "native": 0,
+     "native": 1,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 2,
+     "dropped": 1,
      "reasons": {
       "dropped": [
        "fixed-false guard prevents the source event from starting"
+      ],
+      "native": [
+       "static map property, folded at import"
       ]
      }
     },
@@ -4228,12 +4250,12 @@
      "type": "not tile_property_updated",
      "total": 2,
      "native": 0,
-     "degraded": 0,
+     "degraded": 2,
      "placeholder": 0,
-     "dropped": 2,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "every action was removed, so no project event was emitted"
+      "degraded": [
+       "KV1 representative cell under the corpus's atomic whole-label invariant"
       ]
      }
     },
@@ -4242,8 +4264,8 @@
      "total": 61,
      "native": 0,
      "degraded": 0,
-     "placeholder": 59,
-     "dropped": 2,
+     "placeholder": 60,
+     "dropped": 1,
      "reasons": {
       "placeholder": [
        "tux.time_is ext condition; D2 clock runtime (placeholder folds to fixed morning/daytime)"
@@ -4269,10 +4291,10 @@
     {
      "type": "not variable_set",
      "total": 671,
-     "native": 644,
+     "native": 645,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 27,
+     "dropped": 26,
      "reasons": {
       "native": [
        "page/if variable compare on the enum code"

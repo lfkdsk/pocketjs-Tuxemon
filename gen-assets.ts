@@ -3,11 +3,13 @@
 
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
+import { encodePNG } from "./vendor/pocket-rpgkit/vendor/pocketjs/tests/png.ts";
 import { cookAnimationAtlases } from "./vendor/pocket-rpgkit/tools/lib/animated.ts";
+import { loadAnimationSheet } from "./vendor/pocket-rpgkit/tools/lib/anim-sheet.ts";
 import { splitProjectMaps } from "./vendor/pocket-rpgkit/tools/lib/map-project.ts";
 import { pakManifest, type PakManifestEntry } from "./vendor/pocket-rpgkit/tools/lib/stream.ts";
 import { assertShellManifestFresh } from "./vendor/pocket-rpgkit/src/engine/map-repository.ts";
-import type { GameAssets } from "./vendor/pocket-rpgkit/src/ui/game-assets.ts";
+import type { GameAssets, GameScreenLayerAssets } from "./vendor/pocket-rpgkit/src/ui/game-assets.ts";
 import type { PlayerFrames } from "./vendor/pocket-rpgkit/src/ui/PlayerSprite.tsx";
 import type { Project } from "./vendor/pocket-rpgkit/src/engine/types.ts";
 import { splitAnimatedTiles, type AnimatedIndexEntry } from "./importer/animated.ts";
@@ -15,8 +17,9 @@ import { collectNpcSrcAssetPaths, splitNpcSrc, type NpcSrcIndexEntry } from "./i
 import { cookCharacters } from "./importer/characters.ts";
 import { appendBattleDbPakEntry, writeBattleArtifacts } from "./importer/battle.ts";
 import { coverageMarkdown, jsonBytes } from "./importer/index.ts";
+import { decodePng } from "./importer/png.ts";
 import { availableMapIds, buildProject, G6_IMPORT_OPTIONS } from "./importer/project.ts";
-import { applyTerrain, writeTerrain } from "./importer/terrain.ts";
+import { applyTerrain, DEFAULT_TUXEMON_SRC, writeTerrain } from "./importer/terrain.ts";
 
 // Tests and determinism checks can cook into a disposable root without
 // touching the maintained project tree. Source modules still come from this
@@ -27,7 +30,11 @@ mkdirSync(DIST, { recursive: true });
 mkdirSync(join(ROOT, "reports"), { recursive: true });
 
 const terrain = writeTerrain({ outputRoot: ROOT });
-const imported = buildProject(availableMapIds(), G6_IMPORT_OPTIONS);
+const imported = buildProject(
+  availableMapIds(),
+  G6_IMPORT_OPTIONS,
+  Object.fromEntries(terrain.fragment.maps.map((map) => [map.id, map.surfaceLabels])),
+);
 let project = applyTerrain(imported.project, terrain.fragment);
 // The G1 one-tile sheet is now unused: every ground id and passage mask is
 // owned by the generated terrain sheet.
@@ -39,6 +46,183 @@ project = {
 
 const characters = await cookCharacters(project, { outputRoot: ROOT });
 project = characters.project;
+
+function nextPowerOfTwo(value: number): number {
+  let result = 1;
+  while (result < value) result *= 2;
+  return result;
+}
+
+/** PocketJS static IMG entries require power-of-two textures. Resample the
+ * complete authored image to the smallest portable texture; the image node
+ * then scales it back to its logical size, preserving authored geometry. */
+function portableStaticPng(image: {
+  width: number;
+  height: number;
+  rgba: Uint8Array;
+}): { png: Uint8Array; width: number; height: number } {
+  const width = nextPowerOfTwo(image.width);
+  const height = nextPowerOfTwo(image.height);
+  if (width > 512 || height > 512) {
+    throw new Error(`static image ${image.width}x${image.height} exceeds PocketJS's 512px texture limit`);
+  }
+  if (width === image.width && height === image.height) {
+    return { png: encodePNG(image.rgba, width, height), width, height };
+  }
+  const rgba = new Uint8Array(width * height * 4);
+  for (let y = 0; y < height; y++) {
+    const sourceY = Math.min(image.height - 1, Math.floor((y + 0.5) * image.height / height));
+    for (let x = 0; x < width; x++) {
+      const sourceX = Math.min(image.width - 1, Math.floor((x + 0.5) * image.width / width));
+      const sourceOffset = (sourceY * image.width + sourceX) * 4;
+      rgba.set(image.rgba.subarray(sourceOffset, sourceOffset + 4), (y * width + x) * 4);
+    }
+  }
+  return { png: encodePNG(rgba, width, height), width, height };
+}
+
+// KA1 reducer-driven map animations use static per-frame images rather than
+// the host-clock sprite atlases used by terrain animation. Cook only the
+// definitions collected from source actions into a deterministic manifest.
+const mapAnimationDir = join(ROOT, "assets/map-animations");
+rmSync(mapAnimationDir, { recursive: true, force: true });
+mkdirSync(mapAnimationDir, { recursive: true });
+const mapAnimationAssets: Record<string, { frames: string[]; w: number; h: number }> = {};
+const mapAnimationImages: Record<string, { psm: number }> = {};
+let mapAnimationBytes = 0;
+for (const def of [...(project.animations ?? [])].sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0)) {
+  const sourceRoot = process.env.TUXEMON_SRC ?? DEFAULT_TUXEMON_SRC;
+  const cookedAnimation = await loadAnimationSheet(
+    join(sourceRoot, "mods/tuxemon", def.sheet),
+    def,
+  );
+  const frames: string[] = [];
+  cookedAnimation.frames.forEach((sourcePng, index) => {
+    const frame = decodePng(new Uint8Array(sourcePng), `${def.id} frame ${index}`);
+    const { png } = portableStaticPng(frame);
+    const relative = `assets/map-animations/${def.id}-${index}.png`;
+    writeFileSync(join(ROOT, relative), png);
+    mapAnimationImages[relative] = { psm: 3 };
+    mapAnimationBytes += png.byteLength;
+    frames.push(relative);
+  });
+  mapAnimationAssets[def.id] = {
+    frames,
+    w: cookedAnimation.w,
+    h: cookedAnimation.h,
+  };
+}
+
+// KS1 blocking story backdrops. Indexed upstream PNGs are normalised to
+// RGBA, and an optional foreground is centered and source-over composited
+// exactly once at build time so the runtime binds a single screen image.
+const screenLayerDir = join(ROOT, "assets/screen-layers");
+rmSync(screenLayerDir, { recursive: true, force: true });
+mkdirSync(screenLayerDir, { recursive: true });
+const screenLayerImages: Record<string, { psm: number }> = {};
+const backdropVariants: Record<string, { color?: string; image?: string }> = {};
+let screenLayerBytes = 0;
+const sourceRoot = process.env.TUXEMON_SRC ?? DEFAULT_TUXEMON_SRC;
+
+function compositeBackdrop(
+  backgroundPath: string,
+  foregroundPath?: string,
+  crop?: { x: number; y: number; w: number; h: number },
+): Uint8Array {
+  const background = decodePng(
+    new Uint8Array(readFileSync(join(sourceRoot, "mods/tuxemon", backgroundPath))),
+    backgroundPath,
+  );
+  if (background.width !== 256 || background.height !== 144) {
+    throw new Error(`${backgroundPath}: backdrop must be 256x144`);
+  }
+  const rgba = background.rgba.slice();
+  if (foregroundPath) {
+    const foreground = decodePng(
+      new Uint8Array(readFileSync(join(sourceRoot, "mods/tuxemon", foregroundPath))),
+      foregroundPath,
+    );
+    const source = crop ?? { x: 0, y: 0, w: foreground.width, h: foreground.height };
+    if (source.x < 0 || source.y < 0 || source.w <= 0 || source.h <= 0 ||
+        source.x + source.w > foreground.width || source.y + source.h > foreground.height) {
+      throw new Error(`${foregroundPath}: foreground crop exceeds its source image`);
+    }
+    if (source.w > background.width || source.h > background.height) {
+      throw new Error(`${foregroundPath}: foreground exceeds the 256x144 backdrop`);
+    }
+    const left = Math.floor((background.width - source.w) / 2);
+    const top = Math.floor((background.height - source.h) / 2);
+    for (let y = 0; y < source.h; y++) {
+      for (let x = 0; x < source.w; x++) {
+        const sourceOffset = ((source.y + y) * foreground.width + source.x + x) * 4;
+        const target = ((top + y) * background.width + left + x) * 4;
+        const sourceAlpha = foreground.rgba[sourceOffset + 3]!;
+        const targetAlpha = rgba[target + 3]!;
+        const outAlpha = sourceAlpha + Math.round(targetAlpha * (255 - sourceAlpha) / 255);
+        for (let channel = 0; channel < 3; channel++) {
+          const premultiplied = foreground.rgba[sourceOffset + channel]! * sourceAlpha +
+            Math.round(rgba[target + channel]! * targetAlpha * (255 - sourceAlpha) / 255);
+          rgba[target + channel] = outAlpha === 0 ? 0 : Math.round(premultiplied / outAlpha);
+        }
+        rgba[target + 3] = outAlpha;
+      }
+    }
+  }
+  return encodePNG(rgba, background.width, background.height);
+}
+
+for (const source of imported.presentation.backdrops) {
+  if (source.color) {
+    backdropVariants[source.variant] = { color: source.color };
+    continue;
+  }
+  if (!source.background) throw new Error(`backdrop ${source.variant} has no source`);
+  const composed = decodePng(
+    compositeBackdrop(source.background, source.foreground, source.foregroundCrop),
+    source.variant,
+  );
+  const { png } = portableStaticPng(composed);
+  const relative = `assets/screen-layers/tux-backdrop-${source.variant}.png`;
+  writeFileSync(join(ROOT, relative), png);
+  screenLayerImages[relative] = { psm: 3 };
+  screenLayerBytes += png.byteLength;
+  backdropVariants[source.variant] = { image: relative };
+}
+
+const overlayVariants: Record<string, { color?: string; image?: string }> = {};
+for (const source of imported.presentation.overlays) {
+  if (source.color) {
+    overlayVariants[source.variant] = { color: source.color };
+    continue;
+  }
+  if (!source.image) throw new Error(`overlay ${source.variant} has no source`);
+  const image = decodePng(
+    new Uint8Array(readFileSync(join(sourceRoot, "mods/tuxemon", source.image))),
+    source.image,
+  );
+  const { png } = portableStaticPng(image);
+  const relative = `assets/screen-layers/tux-overlay-${source.variant}.png`;
+  writeFileSync(join(ROOT, relative), png);
+  screenLayerImages[relative] = { psm: 3 };
+  screenLayerBytes += png.byteLength;
+  overlayVariants[source.variant] = { image: relative };
+}
+
+const screenLayers: Record<string, GameScreenLayerAssets> = {
+  ...(Object.keys(backdropVariants).length ? {
+    tux_backdrop: {
+      placement: "screen",
+      variants: backdropVariants,
+    } satisfies GameScreenLayerAssets,
+  } : {}),
+  ...(Object.keys(overlayVariants).length ? {
+    tux_overlay: {
+      placement: "screen",
+      defaultVisible: false,
+      variants: overlayVariants,
+    } satisfies GameScreenLayerAssets,
+  } : {}),
+};
 const battleScope = process.env.BATTLE_DB_SCOPE === "full" ? "full" : "spyder";
 const battle = writeBattleArtifacts({ outputRoot: ROOT, scope: battleScope });
 
@@ -174,7 +358,12 @@ const pakEntries = [
 ].sort((a, b) => a.key < b.key ? -1 : a.key > b.key ? 1 : 0);
 
 writeFileSync(join(ROOT, "sprites.json"), jsonBytes(cooked.spritesJson));
-const allImages = { ...characters.imagesJson, ...battle.imagesJson };
+const allImages = {
+  ...characters.imagesJson,
+  ...mapAnimationImages,
+  ...screenLayerImages,
+  ...battle.imagesJson,
+};
 writeFileSync(join(ROOT, "images.json"), jsonBytes(allImages));
 const allPakEntries = appendBattleDbPakEntry(pakEntries)
   .sort((a, b) => a.key < b.key ? -1 : a.key > b.key ? 1 : 0);
@@ -200,6 +389,8 @@ function gameAssetsSource(
   maxActors: number,
   animatedIndex: readonly AnimatedIndexEntry[],
   npcSrcIndex: readonly NpcSrcIndexEntry[],
+  anims: NonNullable<GameAssets["anims"]>,
+  layers: Readonly<Record<string, GameScreenLayerAssets>>,
 ): string {
   return (
     "// AUTO-GENERATED by gen-assets.ts — do not edit.\n" +
@@ -225,13 +416,22 @@ function gameAssetsSource(
     "  order: TERRAIN_ORDER,\n" +
     "  player: PLAYER,\n" +
     "  playerHeight: 32,\n" +
+    `  anims: ${JSON.stringify(anims, null, 2)},\n` +
+    `  layers: ${JSON.stringify(layers, null, 2)},\n` +
     "};\n"
   );
 }
 
 writeFileSync(
   join(ROOT, "ui/game-assets.ts"),
-  gameAssetsSource(characters.player, runtimeMaxActors, animatedSplit.index, npcSrcSplit.index),
+  gameAssetsSource(
+    characters.player,
+    runtimeMaxActors,
+    animatedSplit.index,
+    npcSrcSplit.index,
+    mapAnimationAssets,
+    screenLayers,
+  ),
 );
 
 const collisionBodies = project.maps.reduce(
@@ -266,6 +466,17 @@ const assetReport = {
     sourceSequences: terrain.animationSequences.length,
     atlases: cooked.atlases.length,
     atlasBytes: cooked.atlases.reduce((sum, atlas) => sum + atlas.png.byteLength, 0),
+  },
+  mapAnimations: {
+    definitions: Object.keys(mapAnimationAssets).length,
+    frames: Object.values(mapAnimationAssets).reduce((sum, animation) => sum + animation.frames.length, 0),
+    imageBytes: mapAnimationBytes,
+  },
+  screenLayers: {
+    layers: Object.keys(screenLayers).length,
+    variants: Object.keys(backdropVariants).length + Object.keys(overlayVariants).length,
+    imageVariants: Object.keys(screenLayerImages).length,
+    imageBytes: screenLayerBytes,
   },
   animatedRepository: {
     entries: animatedSplit.entries.length,

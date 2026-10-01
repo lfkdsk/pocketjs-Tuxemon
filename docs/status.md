@@ -21,7 +21,7 @@ Per-action numbers come from the import coverage report,
 
 | Feature | Status | Notes |
 | --- | --- | --- |
-| Event import | Partial | 85.8% of action uses and 89.6% of condition uses are native; 91.1% of both are executable. The rest is dropped or a visible placeholder, each with a reason; see [importer](importer.md) |
+| Event import | Partial | 89.0% of action uses and 90.6% of condition uses are native; 93.8% and 92.1%, respectively, are executable. The rest is dropped or a visible placeholder, each with a reason; see [importer](importer.md) |
 | Dialogue, choices, variables, items, NPC creation and removal | Done | Imported from the scenario YAML, TMX properties and the en_US `.po` strings |
 | Input locks | Done | Every imported input lock runs to its unlock (`verify:g6:locks`); no map can freeze the player (`verify:g6:frozen`) |
 | `WorldState` gating through the kit's `worldIdle` condition | Done | Compared against upstream Tuxemon runs |
@@ -38,10 +38,13 @@ Per-action numbers come from the import coverage report,
 
 | Feature | Status | Notes |
 | --- | --- | --- |
-| Screen transitions (`screen_transition`) | Partial | Simplified to the kit's transfer fade |
-| Map animations (`play_map_animation`, 276 uses) | Planned | In progress: the kit's `mapAnim` |
-| Screen overlays (`set_layer`, 79 uses) | Planned | Imported as a no-op placeholder for now. In progress: the kit's screen layers |
-| Camera moves, speech balloons, full-screen backgrounds, sprite changes | Planned | In progress |
+| Screen transitions (`screen_transition`, 25 uses) | Done | Native blocking fade-out/fade-in keeps each half's source duration and RGBA colour ([coverage](../reports/G1-coverage.md)) |
+| Map animations (`play_map_animation` / `play_tile_animation`, 277 uses) | Partial | All current non-looping effects render at the sampled or fixed tile through `mapAnim`; a future looping effect would be cleared on transfer instead of persisting across maps ([details](../findings/GI1a.md)) |
+| Screen overlays (`set_layer`, 79 uses) | Done | 77 reachable uses select or clear native colour/image screen layers and clear on transfer like Tuxemon; 2 fixed-false uses are dropped ([coverage](../reports/G1-coverage.md)) |
+| Camera moves (`camera_position`, 6 uses) | Partial | Current fixed-tile snapshots and player-follow restores are native; a fixed camera is cleared on transfer instead of surviving it, a difference not exercised by current content ([details](../findings/GI1a.md)) |
+| Speech balloons (`set_bubble`, 16 uses) | Partial | Current persistent icons and clears are native; a player balloon is cleared on transfer instead of surviving it, a difference not exercised by current content ([details](../findings/GI1a.md)) |
+| Full-screen backgrounds (`change_bg` / `change_bg_char`, 19 uses) | Partial | Native blocking composite backgrounds and character portraits cover current ordering; unlike Tuxemon, an already-open backdrop is replaced rather than ignored ([details](../findings/GI1a.md)) |
+| Runtime sprite changes (`set_template`, 24 uses) | Partial | Walking appearance switching and restoration are native; 6 race selections save the walking baseline but do not dynamically update the battle combat sheet, and 1 fixed-false use is dropped ([coverage](../reports/G1-coverage.md)) |
 
 ## Battles
 

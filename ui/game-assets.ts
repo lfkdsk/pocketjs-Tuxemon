@@ -221,6 +221,30 @@ export const ANIMATED_INDEX: readonly { id: string; entry: string }[] = [
 
 export const NPC_SRC_INDEX: readonly { id: string; entry: string }[] = [
   {
+    "id": "adventurer",
+    "entry": "npc-src/adventurer.json"
+  },
+  {
+    "id": "adventurerblack",
+    "entry": "npc-src/adventurerblack.json"
+  },
+  {
+    "id": "brownheroine_brown",
+    "entry": "npc-src/brownheroine_brown.json"
+  },
+  {
+    "id": "enbyasian",
+    "entry": "npc-src/enbyasian.json"
+  },
+  {
+    "id": "heroine",
+    "entry": "npc-src/heroine.json"
+  },
+  {
+    "id": "invisible",
+    "entry": "npc-src/invisible.json"
+  },
+  {
     "id": "npc.37707_female",
     "entry": "npc-src/npc.37707_female.json"
   },
@@ -919,6 +943,14 @@ export const NPC_SRC_INDEX: readonly { id: string; entry: string }[] = [
   {
     "id": "npc.xerogrunt",
     "entry": "npc-src/npc.xerogrunt.json"
+  },
+  {
+    "id": "penguin",
+    "entry": "npc-src/penguin.json"
+  },
+  {
+    "id": "swimmer",
+    "entry": "npc-src/swimmer.json"
   }
 ] as const;
 
@@ -927,9 +959,151 @@ export const GAME_ASSETS: Omit<GameAssets, "npcSrc" | "animated" | "stream"> = {
   upper: {},
   chunkColumns: {},
   maxChunks: 1,
-  maxActors: 207,
+  maxActors: 216,
   world: TERRAIN_WORLD,
   order: TERRAIN_ORDER,
   player: PLAYER,
   playerHeight: 32,
+  anims: {
+  "tux_bubble_exclamation": {
+    "frames": [
+      "assets/map-animations/tux_bubble_exclamation-0.png"
+    ],
+    "w": 16,
+    "h": 16
+  },
+  "tux_dragonbirth_100000us": {
+    "frames": [
+      "assets/map-animations/tux_dragonbirth_100000us-0.png",
+      "assets/map-animations/tux_dragonbirth_100000us-1.png",
+      "assets/map-animations/tux_dragonbirth_100000us-2.png",
+      "assets/map-animations/tux_dragonbirth_100000us-3.png",
+      "assets/map-animations/tux_dragonbirth_100000us-4.png",
+      "assets/map-animations/tux_dragonbirth_100000us-5.png",
+      "assets/map-animations/tux_dragonbirth_100000us-6.png",
+      "assets/map-animations/tux_dragonbirth_100000us-7.png",
+      "assets/map-animations/tux_dragonbirth_100000us-8.png",
+      "assets/map-animations/tux_dragonbirth_100000us-9.png",
+      "assets/map-animations/tux_dragonbirth_100000us-10.png",
+      "assets/map-animations/tux_dragonbirth_100000us-11.png",
+      "assets/map-animations/tux_dragonbirth_100000us-12.png",
+      "assets/map-animations/tux_dragonbirth_100000us-13.png",
+      "assets/map-animations/tux_dragonbirth_100000us-14.png",
+      "assets/map-animations/tux_dragonbirth_100000us-15.png",
+      "assets/map-animations/tux_dragonbirth_100000us-16.png",
+      "assets/map-animations/tux_dragonbirth_100000us-17.png",
+      "assets/map-animations/tux_dragonbirth_100000us-18.png",
+      "assets/map-animations/tux_dragonbirth_100000us-19.png",
+      "assets/map-animations/tux_dragonbirth_100000us-20.png",
+      "assets/map-animations/tux_dragonbirth_100000us-21.png",
+      "assets/map-animations/tux_dragonbirth_100000us-22.png",
+      "assets/map-animations/tux_dragonbirth_100000us-23.png",
+      "assets/map-animations/tux_dragonbirth_100000us-24.png",
+      "assets/map-animations/tux_dragonbirth_100000us-25.png",
+      "assets/map-animations/tux_dragonbirth_100000us-26.png",
+      "assets/map-animations/tux_dragonbirth_100000us-27.png",
+      "assets/map-animations/tux_dragonbirth_100000us-28.png",
+      "assets/map-animations/tux_dragonbirth_100000us-29.png",
+      "assets/map-animations/tux_dragonbirth_100000us-30.png",
+      "assets/map-animations/tux_dragonbirth_100000us-31.png",
+      "assets/map-animations/tux_dragonbirth_100000us-32.png",
+      "assets/map-animations/tux_dragonbirth_100000us-33.png",
+      "assets/map-animations/tux_dragonbirth_100000us-34.png",
+      "assets/map-animations/tux_dragonbirth_100000us-35.png",
+      "assets/map-animations/tux_dragonbirth_100000us-36.png",
+      "assets/map-animations/tux_dragonbirth_100000us-37.png",
+      "assets/map-animations/tux_dragonbirth_100000us-38.png",
+      "assets/map-animations/tux_dragonbirth_100000us-39.png",
+      "assets/map-animations/tux_dragonbirth_100000us-40.png",
+      "assets/map-animations/tux_dragonbirth_100000us-41.png",
+      "assets/map-animations/tux_dragonbirth_100000us-42.png",
+      "assets/map-animations/tux_dragonbirth_100000us-43.png",
+      "assets/map-animations/tux_dragonbirth_100000us-44.png",
+      "assets/map-animations/tux_dragonbirth_100000us-45.png",
+      "assets/map-animations/tux_dragonbirth_100000us-46.png",
+      "assets/map-animations/tux_dragonbirth_100000us-47.png",
+      "assets/map-animations/tux_dragonbirth_100000us-48.png",
+      "assets/map-animations/tux_dragonbirth_100000us-49.png",
+      "assets/map-animations/tux_dragonbirth_100000us-50.png",
+      "assets/map-animations/tux_dragonbirth_100000us-51.png",
+      "assets/map-animations/tux_dragonbirth_100000us-52.png",
+      "assets/map-animations/tux_dragonbirth_100000us-53.png",
+      "assets/map-animations/tux_dragonbirth_100000us-54.png",
+      "assets/map-animations/tux_dragonbirth_100000us-55.png",
+      "assets/map-animations/tux_dragonbirth_100000us-56.png",
+      "assets/map-animations/tux_dragonbirth_100000us-57.png",
+      "assets/map-animations/tux_dragonbirth_100000us-58.png",
+      "assets/map-animations/tux_dragonbirth_100000us-59.png"
+    ],
+    "w": 48,
+    "h": 64
+  },
+  "tux_grass_100000us": {
+    "frames": [
+      "assets/map-animations/tux_grass_100000us-0.png",
+      "assets/map-animations/tux_grass_100000us-1.png"
+    ],
+    "w": 16,
+    "h": 16
+  },
+  "tux_grass_blue_100000us": {
+    "frames": [
+      "assets/map-animations/tux_grass_blue_100000us-0.png",
+      "assets/map-animations/tux_grass_blue_100000us-1.png"
+    ],
+    "w": 16,
+    "h": 16
+  },
+  "tux_grass_red_100000us": {
+    "frames": [
+      "assets/map-animations/tux_grass_red_100000us-0.png",
+      "assets/map-animations/tux_grass_red_100000us-1.png"
+    ],
+    "w": 16,
+    "h": 16
+  }
+},
+  layers: {
+  "tux_backdrop": {
+    "placement": "screen",
+    "variants": {
+      "bg_gradient_blue": {
+        "image": "assets/screen-layers/tux-backdrop-bg_gradient_blue.png"
+      },
+      "bg_gradient_blue_aeble_character": {
+        "image": "assets/screen-layers/tux-backdrop-bg_gradient_blue_aeble_character.png"
+      },
+      "bg_gradient_blue_spyder_monsters_image": {
+        "image": "assets/screen-layers/tux-backdrop-bg_gradient_blue_spyder_monsters_image.png"
+      },
+      "bg_gradient_blue_spyder_morph_image": {
+        "image": "assets/screen-layers/tux-backdrop-bg_gradient_blue_spyder_morph_image.png"
+      },
+      "bg_gradient_blue_spyder_omnichannel_beaverbrook_character": {
+        "image": "assets/screen-layers/tux-backdrop-bg_gradient_blue_spyder_omnichannel_beaverbrook_character.png"
+      },
+      "bg_gradient_blue_spyder_tumble_image": {
+        "image": "assets/screen-layers/tux-backdrop-bg_gradient_blue_spyder_tumble_image.png"
+      }
+    }
+  },
+  "tux_overlay": {
+    "placement": "screen",
+    "defaultVisible": false,
+    "variants": {
+      "color_0_0_0_255": {
+        "color": "#000000ff"
+      },
+      "color_0_0_128_128": {
+        "color": "#00008080"
+      },
+      "color_102_51_0_128": {
+        "color": "#66330080"
+      },
+      "image_gfx_ui_overlay_torchlight_png": {
+        "image": "assets/screen-layers/tux-overlay-image_gfx_ui_overlay_torchlight_png.png"
+      }
+    }
+  }
+},
 };

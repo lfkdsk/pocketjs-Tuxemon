@@ -3848,6 +3848,30 @@
     "file": "dist/maps/witcher_route_7.json"
   },
   {
+    "key": "npc-src/adventurer.json",
+    "file": "dist/npc-src/adventurer.json"
+  },
+  {
+    "key": "npc-src/adventurerblack.json",
+    "file": "dist/npc-src/adventurerblack.json"
+  },
+  {
+    "key": "npc-src/brownheroine_brown.json",
+    "file": "dist/npc-src/brownheroine_brown.json"
+  },
+  {
+    "key": "npc-src/enbyasian.json",
+    "file": "dist/npc-src/enbyasian.json"
+  },
+  {
+    "key": "npc-src/heroine.json",
+    "file": "dist/npc-src/heroine.json"
+  },
+  {
+    "key": "npc-src/invisible.json",
+    "file": "dist/npc-src/invisible.json"
+  },
+  {
     "key": "npc-src/npc.37707_female.json",
     "file": "dist/npc-src/npc.37707_female.json"
   },
@@ -4546,6 +4570,14 @@
   {
     "key": "npc-src/npc.xerogrunt.json",
     "file": "dist/npc-src/npc.xerogrunt.json"
+  },
+  {
+    "key": "npc-src/penguin.json",
+    "file": "dist/npc-src/penguin.json"
+  },
+  {
+    "key": "npc-src/swimmer.json",
+    "file": "dist/npc-src/swimmer.json"
   },
   {
     "key": "terrain-stream/ground/37707_tower.json",

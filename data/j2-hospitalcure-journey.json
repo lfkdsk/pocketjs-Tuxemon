@@ -8,7 +8,7 @@
     "format": "pocket-tuxemon/j1-captainreturns/v1",
     "frames": 122145,
     "tapeSha256": "df33404232ec98bc8423e2dd77978c936f7de7136c22b4da81274b101ea4d719",
-    "terminalStateSha256": "88c3c6914356dd4bf98c64e54ade36da6aaca6fd94a31e393181fa73c2a10ab2",
+    "terminalStateSha256": "670a85f7bffb39728c3a1d2c8c3762c0db958e089feb1764e1b79e6519a15f07",
     "terminalSnapshotSha256": "d3842e69d5a34dd398065da89bb62f147647bf8d7dc22324c8644f1d4f46a4c8",
     "heldMask": 0,
     "timelineFrame": 122145,
@@ -55792,7 +55792,7 @@
     }
   ],
   "initialStateSha256": "77dcf7479288384d520718381c821642fc4bde1484d2444c75440b4a1b5f57ad",
-  "terminalStateSha256": "519154d646891afd2a6378ff20b80e02bcd9190b8c1d8814778cd09adea6a3c4",
+  "terminalStateSha256": "933c8a78b28edb8ac12cd046254cda9adebd3dc0f02ba152513140809d01c60d",
   "tapeSha256": "91f5a9091acfe42672975d094e65807eed2c85a7955d35698a156cdeb2eb126d",
   "combinedTapeSha256": "8df62ff187a551eeedd4da504103555add983711dc9224df334070a39e24b062"
 }

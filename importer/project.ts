@@ -1,6 +1,6 @@
 // Tuxemon event-to-rpgkit-project/v1 conversion.
 
-import { readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import {
   loadAllFileEvents,
@@ -25,8 +25,11 @@ import {
 import { buildOutdoorWorldIndex, type WorldImportReport } from "./world.ts";
 import type { OutdoorWorldIndex } from "./world-schema.ts";
 import {
+  importTerrainSurfaceLabels,
+  type TerrainSurfaceLabels,
+} from "./terrain.ts";
+import {
   loadWeatherTable,
-  setLayerArg,
   timeIsArgs,
   updateTimeArgs,
   type WeatherEntry,
@@ -36,6 +39,7 @@ import type {
   Command,
   Condition,
   Dir,
+  AnimationDef,
   GameEvent,
   Item,
   JsonValue,
@@ -151,9 +155,232 @@ const monsterSlugs = new Set(
     .map((name) => name.slice(0, -5)),
 );
 
+interface SourceAnimationRow {
+  file: string;
+  slug: string;
+  frame_x: number;
+  frame_y: number;
+}
+
+const sourceAnimationDb = new Map<string, SourceAnimationRow>();
+const sourceAnimationDir = join(TUXEMON_SRC, "mods/tuxemon/db/animation");
+for (const file of existsSync(sourceAnimationDir) ? readdirSync(sourceAnimationDir).sort() : []) {
+  if (!file.endsWith(".yaml")) continue;
+  const doc = Bun.YAML.parse(readFileSync(
+    join(sourceAnimationDir, file),
+    "utf8",
+  )) as SourceAnimationRow | SourceAnimationRow[] | null;
+  for (const row of Array.isArray(doc) ? doc : doc ? [doc] : []) {
+    if (typeof row.slug === "string" && typeof row.file === "string" &&
+        Number.isInteger(row.frame_x) && row.frame_x > 0 &&
+        Number.isInteger(row.frame_y) && row.frame_y > 0) {
+      sourceAnimationDb.set(row.slug, row);
+    }
+  }
+}
+
+const animationDefs = new Map<string, AnimationDef>();
+
+export interface BackdropSource {
+  variant: string;
+  background?: string;
+  foreground?: string;
+  foregroundCrop?: { x: number; y: number; w: number; h: number };
+  color?: string;
+}
+
+export interface OverlaySource {
+  variant: string;
+  image?: string;
+  color?: string;
+}
+
+const backdropSources = new Map<string, BackdropSource>();
+const overlaySources = new Map<string, OverlaySource>();
+const appearanceSpriteDefs = new Map<string, SpriteDef>();
+const SCREEN_BACKDROP_LAYER = "tux_backdrop";
+const SCREEN_OVERLAY_LAYER = "tux_overlay";
+
+function safeAssetId(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9_-]+/g, "_").replace(/^_+|_+$/g, "") || "asset";
+}
+
+function pngDimensions(path: string): { width: number; height: number } | null {
+  if (!existsSync(path)) return null;
+  const bytes = readFileSync(path);
+  if (bytes.byteLength < 24 || bytes.toString("ascii", 1, 4) !== "PNG") return null;
+  return { width: bytes.readUInt32BE(16), height: bytes.readUInt32BE(20) };
+}
+
+/** Register a source spritesheet only when a converted command references it.
+ * The duration is part of the id because Tuxemon actions override the
+ * database's per-frame duration at playback time. */
+function ensureMapAnimation(name: string, duration: number): string | null {
+  const row = sourceAnimationDb.get(name);
+  if (!row || !Number.isFinite(duration) || duration <= 0) return null;
+  const sheet = `animations/${row.file}/${name}.png`;
+  const dimensions = pngDimensions(join(TUXEMON_SRC, "mods/tuxemon", sheet));
+  if (!dimensions || dimensions.width % row.frame_x !== 0 || dimensions.height % row.frame_y !== 0) {
+    return null;
+  }
+  const micros = Math.round(duration * 1_000_000);
+  const id = `tux_${safeAssetId(name)}_${micros}us`;
+  const cols = dimensions.width / row.frame_x;
+  const count = cols * (dimensions.height / row.frame_y);
+  const next: AnimationDef = {
+    id,
+    sheet,
+    frameW: row.frame_x,
+    frameH: row.frame_y,
+    cols,
+    count,
+    frameDuration: duration,
+  };
+  const previous = animationDefs.get(id);
+  if (previous && JSON.stringify(previous) !== JSON.stringify(next)) {
+    throw new Error(`conflicting animation definition ${id}`);
+  }
+  animationDefs.set(id, next);
+  return id;
+}
+
+function ensureBubbleAnimation(name: string): string | null {
+  const sheet = `gfx/bubbles/${name}.png`;
+  const dimensions = pngDimensions(join(TUXEMON_SRC, "mods/tuxemon", sheet));
+  if (!dimensions) return null;
+  const id = `tux_bubble_${safeAssetId(name)}`;
+  const next: AnimationDef = {
+    id,
+    sheet,
+    frameW: dimensions.width,
+    frameH: dimensions.height,
+    cols: 1,
+    count: 1,
+    frameDuration: 1,
+    loop: true,
+  };
+  const previous = animationDefs.get(id);
+  if (previous && JSON.stringify(previous) !== JSON.stringify(next)) {
+    throw new Error(`conflicting animation definition ${id}`);
+  }
+  animationDefs.set(id, next);
+  return id;
+}
+
+function parseSourceColor(raw: string): { r: number; g: number; b: number; a: number } | null {
+  const channels = raw.split(":").map(Number);
+  if ((channels.length !== 3 && channels.length !== 4) || channels.some((value) =>
+    !Number.isInteger(value) || value < 0 || value > 255
+  )) return null;
+  return { r: channels[0]!, g: channels[1]!, b: channels[2]!, a: channels[3] ?? 255 };
+}
+
+function colorHex(color: { r: number; g: number; b: number; a: number }): string {
+  return `#${[color.r, color.g, color.b, color.a]
+    .map((channel) => channel.toString(16).padStart(2, "0"))
+    .join("")}`;
+}
+
+function ensureBackdrop(
+  background: string,
+  image: string | undefined,
+  category: string | undefined,
+): string | null {
+  let source: Omit<BackdropSource, "variant">;
+  if (background.includes(":")) {
+    const color = parseSourceColor(background);
+    if (!color) return null;
+    source = { color: colorHex(color) };
+  } else {
+    const backgroundPath = `gfx/ui/background/${background}.png`;
+    if (!existsSync(join(TUXEMON_SRC, "mods/tuxemon", backgroundPath))) return null;
+    let foreground: string | undefined;
+    if (image) {
+      if (category === "image") foreground = `gfx/ui/background/${image}.png`;
+      else if (category === "item" && itemDb.has(image)) foreground = `gfx/items/${image}.png`;
+      else if (category === undefined) foreground = image;
+      else return null;
+      if (!existsSync(join(TUXEMON_SRC, "mods/tuxemon", foreground))) return null;
+    }
+    source = { background: backgroundPath, ...(foreground ? { foreground } : {}) };
+  }
+  const variant = ["bg", background, image, category]
+    .filter((value): value is string => Boolean(value))
+    .map(safeAssetId)
+    .join("_");
+  const next: BackdropSource = { variant, ...source };
+  const previous = backdropSources.get(variant);
+  if (previous && JSON.stringify(previous) !== JSON.stringify(next)) {
+    throw new Error(`conflicting backdrop source ${variant}`);
+  }
+  backdropSources.set(variant, next);
+  return variant;
+}
+
+function ensureCharacterBackdrop(background: string, character: string): string | null {
+  const row = npcDb.get(character);
+  const combatSheet = row?.template.combat_sheet;
+  const frameW = row?.template.combat_frame_width ?? 64;
+  const frameH = row?.template.combat_frame_height ?? 64;
+  if (!combatSheet || !Number.isInteger(frameW) || frameW <= 0 ||
+      !Number.isInteger(frameH) || frameH <= 0) return null;
+  const backgroundPath = `gfx/ui/background/${background}.png`;
+  const foreground = `gfx/sprites/player/${combatSheet}.png`;
+  const dimensions = pngDimensions(join(TUXEMON_SRC, "mods/tuxemon", foreground));
+  if (!existsSync(join(TUXEMON_SRC, "mods/tuxemon", backgroundPath)) ||
+      !dimensions || dimensions.width < frameW * 2 || dimensions.height < frameH) return null;
+  const variant = ["bg", background, character, "character"].map(safeAssetId).join("_");
+  const next: BackdropSource = {
+    variant,
+    background: backgroundPath,
+    foreground,
+    foregroundCrop: { x: frameW, y: 0, w: frameW, h: frameH },
+  };
+  const previous = backdropSources.get(variant);
+  if (previous && JSON.stringify(previous) !== JSON.stringify(next)) {
+    throw new Error(`conflicting backdrop source ${variant}`);
+  }
+  backdropSources.set(variant, next);
+  return variant;
+}
+
+function ensureOverlay(raw: string): string | null {
+  let source: Omit<OverlaySource, "variant">;
+  if (raw.endsWith(".png")) {
+    if (!existsSync(join(TUXEMON_SRC, "mods/tuxemon", raw))) return null;
+    source = { image: raw };
+  } else {
+    const color = parseSourceColor(raw);
+    if (!color) return null;
+    source = { color: colorHex(color) };
+  }
+  const variant = `${source.image ? "image" : "color"}_${safeAssetId(raw)}`;
+  const next: OverlaySource = { variant, ...source };
+  const previous = overlaySources.get(variant);
+  if (previous && JSON.stringify(previous) !== JSON.stringify(next)) {
+    throw new Error(`conflicting overlay source ${variant}`);
+  }
+  overlaySources.set(variant, next);
+  return variant;
+}
+
+function ensureAppearanceSprite(name: string): boolean {
+  if (!/^[A-Za-z0-9_-]+$/.test(name)) return false;
+  const src = `sprites/${name}.png`;
+  if (!existsSync(join(TUXEMON_SRC, "mods/tuxemon", src))) return false;
+  appearanceSpriteDefs.set(name, { kind: "image", src });
+  return true;
+}
+
 interface NpcRow {
   slug: string;
-  template: { sprite_name: string; is_static_prop?: boolean };
+  template: {
+    sprite_name: string;
+    is_static_prop?: boolean;
+    combat_sheet?: string;
+    combat_frame_width?: number;
+    combat_frame_height?: number;
+  };
   speech?: { profile?: { default?: Record<string, string | string[] | undefined> } };
 }
 const npcDb = new Map<string, NpcRow>();
@@ -318,9 +545,33 @@ class ConversionCoverage {
     this.selected.clear();
   }
 
+  /** Scenario YAML is materialized on many maps. Source-file coverage must
+   * not depend on which map sorts first: retain the materialization that
+   * demonstrates the most supported behavior for that one source event. */
+  private quality(event: EventCoverage): readonly number[] {
+    const dispositions = event.entries().map((entry) => entry.disposition);
+    return [
+      dispositions.filter((value) => value !== "dropped").length,
+      dispositions.filter((value) => value === "native").length,
+      dispositions.filter((value) => value === "degraded").length,
+      dispositions.filter((value) => value === "placeholder").length,
+    ];
+  }
+
+  private better(candidate: EventCoverage, current: EventCoverage): boolean {
+    const left = this.quality(candidate);
+    const right = this.quality(current);
+    for (let i = 0; i < left.length; i++) {
+      if (left[i] !== right[i]) return left[i]! > right[i]!;
+    }
+    return false;
+  }
+
   commit(event: EventCoverage): void {
     const key = sourceEventKey(event.event);
-    if (this.canonicalKeys.has(key) && !this.selected.has(key)) this.selected.set(key, event);
+    if (!this.canonicalKeys.has(key)) return;
+    const current = this.selected.get(key);
+    if (!current || this.better(event, current)) this.selected.set(key, event);
   }
 
   report(): CoverageReport {
@@ -460,6 +711,7 @@ type Clause =
   | { k: "gold"; amount: number; has: boolean }
   | { k: "facing"; dir: Dir }
   | { k: "worldIdle"; negate: boolean }
+  | { k: "native"; condition: Condition; negate: boolean }
   | { k: "ext"; call: string; args: JsonValue }
   | { k: "const"; value: boolean };
 
@@ -505,7 +757,12 @@ function cmpClause(id: string, op: string, n: number, negate: boolean): Clause {
 
 /** One Tuxemon condition -> clauses (AND), or null when it is a trigger-
  *  shape condition consumed by the trigger choice. */
-function clauses(c: Cond, m: TuxMap, options: ImportOptions): Clause[] | null {
+function clauses(
+  c: Cond,
+  m: TuxMap,
+  options: ImportOptions,
+  surfaceLabels: Readonly<Record<string, readonly number[]>>,
+): Clause[] | null {
   const a = c.args;
   const not = c.op === "not";
   const K = (value: boolean): Clause[] => [{ k: "const", value: not ? !value : value }];
@@ -547,6 +804,60 @@ function clauses(c: Cond, m: TuxMap, options: ImportOptions): Clause[] | null {
           : "local.npc.<slug> presence variable (per-visit reset is T2)",
       );
       return [{ k: "var", id: npcVar(a[0]!), op: not ? "==" : "!=", value: 0 }];
+    case "char_sprite": {
+      const character = a[0];
+      const sprite = a[1];
+      if (!character || !sprite) {
+        noteCondition(c, `${c.op} char_sprite`, "T4-dropped", "character or sprite is missing");
+        return K(false);
+      }
+      noteCondition(c, `${c.op} char_sprite`, "T1", "KV1 effective walking appearance condition");
+      return [{
+        k: "native",
+        condition: {
+          kind: "appearance",
+          target: character === "player" ? "player" : { event: `npc_${slug(character)}` },
+          sprite,
+        },
+        negate: not,
+      }];
+    }
+    case "tile_property_updated": {
+      const label = a[0];
+      const moverate = Number(a[1]);
+      if (!label || (moverate !== 0 && moverate !== 1)) {
+        noteCondition(c, `${c.op} tile_property_updated`, "T4-dropped", "only corpus moverates 0 and 1 map to passage");
+        return K(false);
+      }
+      const cells = surfaceLabels[label] ?? [];
+      if (!cells.length) {
+        noteCondition(c, `${c.op} tile_property_updated`, "T1", "empty source label keeps all([]) truth semantics");
+        return K(true);
+      }
+      const passage = moverate === 1 ? "pass" as const : null;
+      const index = cells[0]!;
+      // The pinned corpus starts every surfable cell at moverate 0 and its
+      // only writers update the complete label atomically. Therefore every
+      // reachable value is synchronized and one representative cell is
+      // exactly equivalent to upstream's all(cells), without multiplying
+      // shared scenario pages by thousands of conditions.
+      noteCondition(
+        c,
+        `${c.op} tile_property_updated`,
+        "T1-lowered",
+        "KV1 representative cell under the corpus's atomic whole-label invariant",
+      );
+      return [{
+        k: "native",
+        condition: {
+          kind: "tileProperty",
+          x: index % m.width,
+          y: Math.floor(index / m.width),
+          passage,
+        },
+        negate: not,
+      }];
+    }
     case "battle_outcome":
       if (options.battle) {
         noteCondition(c, `${c.op} battle_outcome`, "T1", "tux.battle_outcome extension condition");
@@ -700,6 +1011,7 @@ function toIf(cl: Clause): { cond: Condition; negate: boolean } {
       cond: { kind: "worldIdle", ...(cl.negate ? { negate: true } : {}) },
       negate: false,
     };
+    case "native": return { cond: cl.condition, negate: cl.negate };
     case "ext": return { cond: { kind: "ext", call: cl.call, args: cl.args }, negate: false };
     case "const": throw new Error("const clause");
   }
@@ -721,12 +1033,21 @@ function pageCondition(
   options: ImportOptions,
 ): { cond?: FuturePageCondition; rest: Clause[] } {
   if (options.condAll && cls.length) {
-    const converted = cls.map((cl): FutureCondition | null => {
-      if (cl.k === "const") return null;
+    const converted: FutureCondition[] = [];
+    let convertible = true;
+    for (const cl of cls) {
+      if (cl.k === "const") {
+        convertible = false;
+        break;
+      }
       const { cond, negate } = toIf(cl);
-      return negate ? null : cond as FutureCondition;
-    });
-    if (converted.every((condition): condition is FutureCondition => condition !== null)) {
+      if (negate) {
+        convertible = false;
+        break;
+      }
+      converted.push(cond as FutureCondition);
+    }
+    if (convertible && converted.length) {
       return { cond: { all: converted }, rest: [] };
     }
   }
@@ -815,6 +1136,14 @@ const npcName = (slug: string) => (po.get(slug) ?? slug).slice(0, 40);
 // actions -> commands
 
 const DIRS = new Set(["up", "down", "left", "right"]);
+const RACE_APPEARANCE_SPRITES = new Set([
+  "adventurer",
+  "adventurerblack",
+  "brownheroine_brown",
+  "enbyasian",
+  "heroine",
+  "penguin",
+]);
 const FACE: Record<string, MoveStep> = { up: "faceUp", down: "faceDown", left: "faceLeft", right: "faceRight" };
 const MOVE: Record<string, MoveStep> = { up: "moveUp", down: "moveDown", left: "moveLeft", right: "moveRight" };
 const items = new Map<string, Item>();
@@ -890,6 +1219,7 @@ interface Ctx {
   m: TuxMap;
   options: ImportOptions;
   economies: ReadonlyMap<string, string>;
+  surfaceLabels: Readonly<Record<string, readonly number[]>>;
   /** the NPC slug whose event runs these commands (talk pages), if any */
   self?: string;
 }
@@ -1102,10 +1432,239 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         noteAction(a, a.type, "T1", "wait seconds");
         if (Number(g[0]) > 0) out.push({ op: "wait", seconds: Math.min(30, Number(g[0])) });
         break;
-      case "screen_transition":
-        noteAction(a, a.type, "T1-lowered", "fade out+in -> wait 2t (visual fade is T2)");
-        out.push({ op: "wait", seconds: Math.min(30, 2 * Number(g[0] ?? 0.3)) });
+      case "play_map_animation": {
+        const [name, rawDuration, rawLoop, character] = g;
+        const duration = Number(rawDuration);
+        const anim = name ? ensureMapAnimation(name, duration) : null;
+        const validLoop = rawLoop === "loop" || rawLoop === "noloop";
+        const knownTarget = character === "player" || (character !== undefined &&
+          ctx.m.events.some((event) => event.acts.some((candidate) =>
+            candidate.type === "create_npc" && candidate.args[0] === character
+          )));
+        if (!anim || !validLoop || !knownTarget) {
+          noteAction(
+            a,
+            a.type,
+            "T4-dropped",
+            !anim ? "animation metadata, sheet, or positive frame duration is unavailable"
+              : !validLoop ? "loop mode is neither loop nor noloop"
+              : "animation target is not a character on this map",
+          );
+          break;
+        }
+        noteAction(a, a.type, "T1", "KA1 map animation at the character's sampled tile");
+        out.push({
+          op: "mapAnim",
+          id: `tux_map_${safeAssetId(name!)}`,
+          anim,
+          target: character === "player" ? "player" : { event: `npc_${slug(character!)}` },
+          follow: false,
+          layer: "above",
+          loop: rawLoop === "loop",
+        });
         break;
+      }
+      case "play_tile_animation": {
+        const [rawX, rawY, name, rawDuration, rawLoop] = g;
+        const x = Number(rawX);
+        const y = Number(rawY);
+        const duration = Number(rawDuration);
+        const anim = name ? ensureMapAnimation(name, duration) : null;
+        const validCell = Number.isInteger(x) && Number.isInteger(y) &&
+          x >= 0 && y >= 0 && x < ctx.m.width && y < ctx.m.height;
+        const validLoop = rawLoop === "loop" || rawLoop === "noloop";
+        if (!anim || !validCell || !validLoop) {
+          noteAction(
+            a,
+            a.type,
+            "T4-dropped",
+            !anim ? "animation metadata, sheet, or positive frame duration is unavailable"
+              : !validCell ? "animation tile is outside the current map"
+              : "loop mode is neither loop nor noloop",
+          );
+          break;
+        }
+        noteAction(a, a.type, "T1", "KA1 map animation at a fixed tile");
+        out.push({
+          op: "mapAnim",
+          id: `tux_map_${safeAssetId(name!)}`,
+          anim,
+          x,
+          y,
+          layer: "above",
+          loop: rawLoop === "loop",
+        });
+        break;
+      }
+      case "screen_transition":
+      {
+        const duration = numeric(g[0], 0.3);
+        const color = g[1] ? parseSourceColor(g[1]) : { r: 0, g: 0, b: 0, a: 255 };
+        if (duration < 0 || !color) {
+          noteAction(a, a.type, "T4-dropped", "fade duration or colon-delimited RGB(A) color is invalid");
+          break;
+        }
+        noteAction(a, a.type, "T1", "KS1 blocking fade out followed by fade in");
+        out.push({ op: "screenFade", direction: "out", duration, color, wait: true });
+        out.push({ op: "screenFade", direction: "in", duration, color, wait: true });
+        break;
+      }
+      case "camera_position": {
+        const hasPosition = g[0] !== undefined && g[1] !== undefined;
+        if (!hasPosition) {
+          noteAction(a, a.type, "T1", "KS1 camera resumes live player following");
+          out.push({ op: "camera", target: "player", duration: 0 });
+          break;
+        }
+        const x = Number(g[0]);
+        const y = Number(g[1]);
+        if (!Number.isInteger(x) || !Number.isInteger(y) ||
+            x < 0 || y < 0 || x >= ctx.m.width || y >= ctx.m.height) {
+          noteAction(a, a.type, "T4-dropped", "source camera position is outside the active map boundary");
+          break;
+        }
+        noteAction(a, a.type, "T1", "KS1 camera snaps to a fixed tile");
+        out.push({ op: "camera", target: { x, y }, duration: 0 });
+        break;
+      }
+      case "set_bubble": {
+        const [character, bubble] = g;
+        const knownTarget = character === "player" || (character !== undefined &&
+          ctx.m.events.some((event) => event.acts.some((candidate) =>
+            candidate.type === "create_npc" && candidate.args[0] === character
+          )));
+        const icon = bubble ? ensureBubbleAnimation(bubble) : undefined;
+        if (!character || !knownTarget || (bubble && !icon)) {
+          noteAction(
+            a,
+            a.type,
+            "T4-dropped",
+            !knownTarget ? "bubble target is not a character on this map" : "bubble image is unavailable",
+          );
+          break;
+        }
+        noteAction(a, a.type, "T1", bubble ? "KS1 persistent balloon" : "KS1 balloon clear");
+        out.push({
+          op: "balloon",
+          target: character === "player" ? "player" : { event: `npc_${slug(character)}` },
+          ...(icon ? { icon } : {}),
+        });
+        break;
+      }
+      case "change_bg": {
+        const [background, image, category] = g;
+        if (!background) {
+          noteAction(a, a.type, "T1", "KS1 closes the blocking screen backdrop");
+          out.push({ op: "screenBackdrop", layer: SCREEN_BACKDROP_LAYER, variant: null });
+          break;
+        }
+        const variant = ensureBackdrop(background, image, category);
+        if (!variant) {
+          noteAction(a, a.type, "T4-dropped", "background or optional foreground image is unavailable");
+          break;
+        }
+        noteAction(a, a.type, "T1", "KS1 blocking screen backdrop");
+        out.push({ op: "screenBackdrop", layer: SCREEN_BACKDROP_LAYER, variant });
+        break;
+      }
+      case "change_bg_char": {
+        const [background, character] = g;
+        const variant = background && character
+          ? ensureCharacterBackdrop(background, character)
+          : null;
+        if (!variant) {
+          noteAction(a, a.type, "T4-dropped", "background, NPC template, or combat-sheet front art is unavailable");
+          break;
+        }
+        noteAction(a, a.type, "T1", "KV1 combat-sheet front art on a blocking screen backdrop");
+        out.push({ op: "screenBackdrop", layer: SCREEN_BACKDROP_LAYER, variant });
+        break;
+      }
+      case "set_layer": {
+        const value = g[0];
+        if (!value || value.toLowerCase() === "none") {
+          noteAction(a, a.type, "T1", "KV1 clears the map overlay layer");
+          out.push({ op: "layer", layer: SCREEN_OVERLAY_LAYER, visible: null, variant: null });
+          break;
+        }
+        const variant = ensureOverlay(value);
+        if (!variant) {
+          noteAction(a, a.type, "T4-dropped", "overlay color is invalid or image is unavailable");
+          break;
+        }
+        noteAction(a, a.type, "T1", "KV1 selects a prepackaged map overlay");
+        out.push({ op: "layer", layer: SCREEN_OVERLAY_LAYER, variant, visible: true });
+        break;
+      }
+      case "set_template": {
+        const [character, sprite, combatSheet] = g;
+        const knownTarget = character === "player" || (character !== undefined &&
+          ctx.m.events.some((event) => event.acts.some((candidate) =>
+            candidate.type === "create_npc" && candidate.args[0] === character
+          )));
+        if (!character || !sprite || !knownTarget) {
+          noteAction(a, a.type, "T4-dropped", "appearance target or sprite is unavailable");
+          break;
+        }
+        const target = character === "player"
+          ? "player" as const
+          : isSelf(character) ? "this" as const : { event: `npc_${slug(character)}` };
+        if (sprite === "default") {
+          noteAction(a, a.type, "T1", "KV1 restores the character's saved race/page appearance baseline");
+          out.push({ op: "appearance", target, sprite: null });
+          break;
+        }
+        if (!ensureAppearanceSprite(sprite)) {
+          noteAction(a, a.type, "T4-dropped", "walking appearance sheet is unavailable");
+          break;
+        }
+        const saveDefault = character === "player" && combatSheet !== undefined &&
+          RACE_APPEARANCE_SPRITES.has(sprite);
+        noteAction(
+          a,
+          a.type,
+          saveDefault ? "T1-lowered" : "T1",
+          saveDefault
+            ? "KV1 saves the race walking baseline; its combat-sheet choice remains battle-owned"
+            : "KV1 selects a runtime walking appearance",
+        );
+        out.push({
+          op: "appearance",
+          target,
+          sprite,
+          ...(saveDefault ? { saveDefault: true } : {}),
+        });
+        break;
+      }
+      case "update_tile_properties": {
+        const label = g[0];
+        const moverate = Number(g[1]);
+        if (!label || (moverate !== 0 && moverate !== 1)) {
+          noteAction(a, a.type, "T4-dropped", "only corpus moverates 0 and 1 map to passage");
+          break;
+        }
+        const cells = ctx.surfaceLabels[label] ?? [];
+        noteAction(
+          a,
+          a.type,
+          "T1",
+          cells.length
+            ? "KV1 expands the source surface label to exact per-map passage overrides"
+            : "source surface label has no cells on this map; native no-op",
+        );
+        for (const index of cells) {
+          out.push({
+            op: "tileProperty",
+            x: index % ctx.m.width,
+            y: Math.floor(index / ctx.m.width),
+            // Every authored surfable tile in the pinned corpus starts at
+            // moverate 0. Clearing the override restores that authored block;
+            // moverate 1 explicitly opens it.
+            passage: moverate === 1 ? "pass" : null,
+          });
+        }
+        break;
+      }
       case "play_sound":
         noteAction(a, a.type, "T1", "se cue");
         out.push({ op: "se", name: g[0]!.toLowerCase().replace(/[^a-z0-9_-]/g, "_") });
@@ -1570,14 +2129,6 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         noteAction(a, a.type, "T3-placeholder", "tux.update_time ext command; D2 clock runtime (placeholder no-op)");
         out.push({ op: "ext", call: "tux.update_time", args: updateTimeArgs(a) });
         break;
-      case "set_layer":
-        // D1: emit the tux.set_layer ext command (clear / RGBA colour / PNG
-        // overlay). The runtime handler is a placeholder no-op until D3 draws
-        // the overlay; set_layer is a transparent overlay, not a map tile
-        // layer, so it is distinct from the kit's KV1 layer switching.
-        noteAction(a, a.type, "T3-placeholder", "tux.set_layer ext command; D2 runtime placeholder, D3 overlay visual (no-op)");
-        out.push({ op: "ext", call: "tux.set_layer", args: setLayerArg(a) });
-        break;
       default:
         noteAction(a, a.type, "T4-dropped", "presentation / meta");
     }
@@ -1589,7 +2140,9 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
 // events
 
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "").slice(0, 32) || "event";
-const BLOCKING = new Set<Command["op"]>(["text", "choices", "shop", "wait", "transfer", "moveRoute", "battle"]);
+const BLOCKING = new Set<Command["op"]>([
+  "text", "choices", "shop", "wait", "transfer", "moveRoute", "battle", "screenFade",
+]);
 const hasBlocking = (cmds: Command[]): boolean =>
   cmds.some((c) => BLOCKING.has(c.op) || (c.op === "if" && (hasBlocking(c.then) || hasBlocking(c.else ?? []))) || (c.op === "choices"));
 const hasCommand = (cmds: readonly Command[], wanted: FutureCommand["op"]): boolean =>
@@ -1621,7 +2174,11 @@ interface SpatialPage {
   cells: readonly [number, number][];
 }
 
-function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: Record<string, SpriteDef> } {
+function convertMap(
+  m: TuxMap,
+  options: ImportOptions,
+  surfaceLabels: Readonly<Record<string, readonly number[]>>,
+): { map: MapDef; sprites: Record<string, SpriteDef> } {
   const events: GameEvent[] = [];
   const sprites: Record<string, SpriteDef> = {};
   const npcs = new Map<string, NpcAgg>();
@@ -1669,7 +2226,12 @@ function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: 
         note("trigger", "inert(zero-size TMX area)", "T4-dropped", reason);
         continue;
       }
-      const cls0 = e.conds.map((c) => clauses(c, m, options));
+      const cls0 = e.conds.map((c) => clauses(
+        c,
+        m,
+        options,
+        surfaceLabels,
+      ));
       const cls: Clause[] = cls0.filter((x): x is Clause[] => x !== null).flat();
       if (cls.some((c) => c.k === "const" && !c.value)) {
         const reason = "fixed-false guard prevents the source event from starting";
@@ -1701,7 +2263,10 @@ function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: 
             }
           }
         }
-        const cmds = convertActions(e.acts.filter((a) => a.type !== "char_face" && a.type !== "char_wander"), { m, options, economies });
+        const cmds = convertActions(
+          e.acts.filter((a) => a.type !== "char_face" && a.type !== "char_wander"),
+          { m, options, economies, surfaceLabels },
+        );
         const blocking = hasBlocking(cmds);
         const page = blocking
           // A blocking spawn usually writes the same local.npc variable its
@@ -1731,12 +2296,15 @@ function convertMap(m: TuxMap, options: ImportOptions): { map: MapDef; sprites: 
       const talk = e.behavs.find((b) => b.type === "talk");
       if (talk) {
         const agg = npcOf(talk.args[0]!);
-        agg.talks.push({ cls: live, cmds: convertActions(e.acts, { m, options, economies, self: talk.args[0] }) });
+        agg.talks.push({
+          cls: live,
+          cmds: convertActions(e.acts, { m, options, economies, surfaceLabels, self: talk.args[0] }),
+        });
         note("trigger", "talk", "T1", "NPC event action page (if-chain over talk guards)");
         continue;
       }
 
-      const cmds = convertActions(e.acts, { m, options, economies });
+      const cmds = convertActions(e.acts, { m, options, economies, surfaceLabels });
       if (!cmds.length) {
         const reason = "every action was removed, so no project event was emitted";
         eventCoverage.dropAll(reason);
@@ -2176,6 +2744,10 @@ export interface ImportBuild {
   project: Project;
   variables: Record<string, string[]>;
   worldIndex: OutdoorWorldIndex;
+  presentation: {
+    backdrops: BackdropSource[];
+    overlays: OverlaySource[];
+  };
   report: ImportReport;
 }
 
@@ -2226,24 +2798,50 @@ function transferErrors(project: Project): TransferError[] {
 export function buildProject(
   want: readonly string[] = DEFAULT_MAPS,
   requestedOptions: Partial<ImportOptions> = {},
+  providedSurfaceLabels?: TerrainSurfaceLabels,
 ): ImportBuild {
   const options = resolveOptions(requestedOptions);
   log.clear();
   items.clear();
+  animationDefs.clear();
+  backdropSources.clear();
+  overlaySources.clear();
+  appearanceSpriteDefs.clear();
   for (const id of [...itemDb.keys()].sort()) ensureItem(id);
   transferRepairs.length = 0;
   conversionCoverage.reset();
   const world = buildOutdoorWorldIndex([...allMaps.values()]);
+  const surfaceLabels = providedSurfaceLabels ?? importTerrainSurfaceLabels(want);
+
+  // Register authored presentation assets before trigger pruning. A fixed
+  // source guard may make a command unreachable in today's campaign, but the
+  // generated project remains complete if another imported guard becomes
+  // executable later (notably the swimmer appearance and night overlay).
+  for (const id of want) {
+    const map = allMaps.get(id);
+    if (!map) throw new Error(`no map ${id}`);
+    for (const action of map.events.flatMap((event) => event.acts)) {
+      if (action.type === "set_template" && action.args[1] && action.args[1] !== "default") {
+        ensureAppearanceSprite(action.args[1]);
+      } else if (action.type === "set_layer" && action.args[0] &&
+                 action.args[0]!.toLowerCase() !== "none") {
+        ensureOverlay(action.args[0]!);
+      }
+    }
+  }
 
   const mapDefs: MapDef[] = [];
   const sprites: Record<string, SpriteDef> = {};
   for (const s of want) {
     const m = allMaps.get(s);
     if (!m) throw new Error(`no map ${s}`);
-    const r = convertMap(m, options);
+    const r = convertMap(m, options, surfaceLabels[s] ?? {});
     mapDefs.push(r.map);
     Object.assign(sprites, r.sprites);
   }
+  Object.assign(sprites, Object.fromEntries([...appearanceSpriteDefs.entries()].sort(([a], [b]) =>
+    a < b ? -1 : a > b ? 1 : 0
+  )));
 
   const startId = want.includes("spyder_bedroom") ? "spyder_bedroom" : want[0];
   if (!startId) throw new Error("at least one map must be selected");
@@ -2303,6 +2901,9 @@ export function buildProject(
       defaultPassage: "pass",
     }],
     items: [...items.values()].sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0),
+    ...(animationDefs.size ? {
+      animations: [...animationDefs.values()].sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0),
+    } : {}),
     sprites,
     maps: mapDefs,
   };
@@ -2341,6 +2942,14 @@ export function buildProject(
     project,
     variables,
     worldIndex: world.index,
+    presentation: {
+      backdrops: [...backdropSources.values()].sort((a, b) =>
+        a.variant < b.variant ? -1 : a.variant > b.variant ? 1 : 0
+      ),
+      overlays: [...overlaySources.values()].sort((a, b) =>
+        a.variant < b.variant ? -1 : a.variant > b.variant ? 1 : 0
+      ),
+    },
     report: {
       format: "pocket-tuxemon/import-report/v1",
       source: { maps: "mods/tuxemon/maps", locale: "en_US" },

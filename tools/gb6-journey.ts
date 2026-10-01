@@ -721,10 +721,10 @@ export function runGb6Journey(hz = 60): Gb6JourneyResult {
   // Prove all target events used above still exist in the generated project;
   // this catches renamed/import-dropped sight strips before a vague path error.
   for (const [map, id] of [
-    ["spyder_cotton_town", "e040_battle_confused"],
+    ["spyder_cotton_town", "e041_battle_confused"],
     ["spyder_route2", "e036_billie_encounter_r036"],
-    ["spyder_citypark", "e045_talk_bobette_r053"],
-    ["spyder_route3", "e043_rookie_talk_r009"],
+    ["spyder_citypark", "e046_talk_bobette_r053"],
+    ["spyder_route3", "e044_rookie_talk_r009"],
   ] as const) assertEvent(map, id, session);
 
   const stateJson = canonicalJson(driver.state);

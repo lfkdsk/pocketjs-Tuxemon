@@ -39,6 +39,7 @@
     "goldens:gb5:battle": "bun tools/update-gb5-battle-goldens.ts",
     "goldens:gb6:route": "bun tools/update-gb6-route-goldens.ts",
     "goldens:j1": "bun tools/update-j1-goldens.ts",
+    "goldens:gi1a": "bun tools/update-gi1a-goldens.ts",
     "goldens:j2": "bun tools/update-j2-goldens.ts",
     "bench:g6:quickjs": "bash tools/bench-g6-quickjs.sh",
     "bench:gb6:quickjs": "bash tools/bench-gb6-quickjs.sh",

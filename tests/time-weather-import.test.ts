@@ -1,6 +1,5 @@
-// D1 coverage fixtures: representative time_is / update_time / set_layer
-// source events, asserted by their IMPORTED shape (tux.* ext command/condition
-// args) and their coverage disposition (Placeholder, with the D2 note).
+// D1/GI-1a coverage fixtures: time_is/update_time retain their tux.* ext
+// shapes while set_layer now uses the kit's native screen-layer command.
 //
 // S5 §5.1 census: time_is 128 source uses, update_time 3, set_layer 79.
 
@@ -20,6 +19,7 @@ import type {
 
 type ExtCommand = Extract<Command, { op: "ext" }>;
 type ExtCondition = Extract<Condition, { kind: "ext" }>;
+type LayerCommand = Extract<Command, { op: "layer" }>;
 
 /** Every ext command in a page's command tree (if/choices/battle nested). */
 function collectExtCommands(commands: readonly Command[], out: ExtCommand[]): void {
@@ -35,6 +35,23 @@ function collectExtCommands(commands: readonly Command[], out: ExtCommand[]): vo
       collectExtCommands(command.onWin ?? [], out);
       collectExtCommands(command.onLose ?? [], out);
       collectExtCommands(command.onEscape ?? [], out);
+    }
+  }
+}
+
+function collectLayerCommands(commands: readonly Command[], out: LayerCommand[]): void {
+  for (const command of commands) {
+    if (command.op === "layer") out.push(command);
+    else if (command.op === "if") {
+      collectLayerCommands(command.then, out);
+      collectLayerCommands(command.else ?? [], out);
+    } else if (command.op === "choices") {
+      for (const option of command.options) collectLayerCommands(option.commands, out);
+      collectLayerCommands(command.cancel?.commands ?? [], out);
+    } else if (command.op === "battle") {
+      collectLayerCommands(command.onWin ?? [], out);
+      collectLayerCommands(command.onLose ?? [], out);
+      collectLayerCommands(command.onEscape ?? [], out);
     }
   }
 }
@@ -66,9 +83,17 @@ function projectExtConditions(project: Project, call: string): ExtCondition[] {
   return out.filter((condition) => condition.call === call);
 }
 
-const argsOf = (command: ExtCommand) => command.args as Record<string, unknown>;
+function projectLayerCommands(project: Project): LayerCommand[] {
+  const out: LayerCommand[] = [];
+  for (const map of project.maps) {
+    for (const event of map.events ?? []) {
+      for (const page of event.pages) collectLayerCommands(page.commands, out);
+    }
+  }
+  return out.filter((command) => command.layer === "tux_overlay");
+}
 
-describe("D1 time/set_layer imported shapes (G6)", () => {
+describe("D1 time and GI-1a set_layer imported shapes (G6)", () => {
   test("time_is stage_of_day becomes a tux.time_is ext condition", () => {
     const { project } = buildProject(["spyder_paper_town"], G6_IMPORT_OPTIONS);
     const night = projectExtConditions(project, "tux.time_is")
@@ -99,33 +124,41 @@ describe("D1 time/set_layer imported shapes (G6)", () => {
     });
   });
 
-  test("set_layer RGBA colour becomes a tux.set_layer color command", () => {
+  test("set_layer RGBA colour selects a native screen-layer variant", () => {
     const { project } = buildProject(["spyder_paper_town"], G6_IMPORT_OPTIONS);
-    const night = projectExtCommands(project, "tux.set_layer")
-      .find((c) => argsOf(c).kind === "color");
-    expect(night).toBeDefined();
-    expect(argsOf(night!)).toEqual({ kind: "color", r: 0, g: 0, b: 128, a: 128 });
+    expect(projectLayerCommands(project)).toContainEqual({
+      op: "layer",
+      layer: "tux_overlay",
+      variant: "color_0_0_128_128",
+      visible: true,
+    });
   });
 
-  test("set_layer with no argument becomes a tux.set_layer clear command", () => {
+  test("set_layer with no argument clears the native screen layer", () => {
     const { project } = buildProject(["eclipse_crystal_center"], G6_IMPORT_OPTIONS);
-    const clear = projectExtCommands(project, "tux.set_layer")
-      .find((c) => argsOf(c).kind === "clear");
-    expect(clear).toBeDefined();
+    const layers = projectLayerCommands(project);
+    expect(layers).toContainEqual({
+      op: "layer",
+      layer: "tux_overlay",
+      visible: null,
+      variant: null,
+    });
     // The same cutscene also darkens with an opaque black overlay.
-    const black = projectExtCommands(project, "tux.set_layer")
-      .find((c) => argsOf(c).r === 0 && argsOf(c).g === 0 && argsOf(c).b === 0 && argsOf(c).a === 255);
-    expect(black).toBeDefined();
+    expect(layers).toContainEqual({
+      op: "layer",
+      layer: "tux_overlay",
+      variant: "color_0_0_0_255",
+      visible: true,
+    });
   });
 
-  test("set_layer PNG becomes a tux.set_layer image command", () => {
+  test("set_layer PNG selects the prepackaged native image variant", () => {
     const { project } = buildProject(["spyder_candy_hospital1"], G6_IMPORT_OPTIONS);
-    const image = projectExtCommands(project, "tux.set_layer")
-      .find((c) => argsOf(c).kind === "image");
-    expect(image).toBeDefined();
-    expect(argsOf(image!)).toEqual({
-      kind: "image",
-      path: "gfx/ui/overlay/torchlight.png",
+    expect(projectLayerCommands(project)).toContainEqual({
+      op: "layer",
+      layer: "tux_overlay",
+      variant: "image_gfx_ui_overlay_torchlight_png",
+      visible: true,
     });
   });
 });
@@ -143,21 +176,21 @@ describe("D1 coverage dispositions (all maps, G6)", () => {
     const isTime = row("is time_is")!;
     const notTime = row("not time_is")!;
     expect(isTime.total + notTime.total).toBe(128);
-    expect(isTime.placeholder + notTime.placeholder).toBe(123);
-    expect(isTime.dropped + notTime.dropped).toBe(5);
+    expect(isTime.placeholder + notTime.placeholder).toBe(126);
+    expect(isTime.dropped + notTime.dropped).toBe(2);
     for (const candidate of [isTime, notTime]) {
       expect(candidate.reasons.placeholder?.[0]).toContain("D2");
       expect(candidate.reasons.placeholder?.[0]).toContain("tux.time_is");
     }
   });
 
-  test("set_layer (79 source uses) is Placeholder with the D2/D3 note", () => {
+  test("set_layer (79 source uses) is native when its source asset is available", () => {
     const setLayer = row("set_layer")!;
     expect(setLayer.total).toBe(79);
-    expect(setLayer.placeholder).toBe(70);
-    expect(setLayer.dropped).toBe(9);
-    expect(setLayer.reasons.placeholder?.[0]).toContain("D2");
-    expect(setLayer.reasons.placeholder?.[0]).toContain("tux.set_layer");
+    expect(setLayer.native).toBe(77);
+    expect(setLayer.placeholder).toBe(0);
+    expect(setLayer.dropped).toBe(2);
+    expect(setLayer.reasons.native?.[0]).toContain("KV1");
   });
 
   test("update_time (3 source uses) is Dropped: every source event fails to materialize", () => {
@@ -185,14 +218,13 @@ describe("D1 coverage dispositions (all maps, G6)", () => {
   });
 });
 
-describe("D1 placeholder runtime handlers", () => {
+describe("D1 time placeholder runtime handlers", () => {
   // The handlers are registered on the production extension set. They must
   // replicate the importer's historical fold so imported events keep their
   // behavior until D2 lands the virtual clock.
   const extensions = createTuxemonExtensions({} as never);
   const timeIs = extensions.conditions!["tux.time_is"]!;
   const updateTime = extensions.commands!["tux.update_time"]!;
-  const setLayer = extensions.commands!["tux.set_layer"]!;
   const ctx = {} as never;
 
   test("tux.time_is folds stage_of_day to the fixed morning", () => {
@@ -214,10 +246,7 @@ describe("D1 placeholder runtime handlers", () => {
     }
   });
 
-  test("tux.update_time and tux.set_layer are no-ops", () => {
+  test("tux.update_time is a no-op", () => {
     expect(updateTime(ctx, { character: "player" })).toBeUndefined();
-    expect(setLayer(ctx, { kind: "clear" })).toBeUndefined();
-    expect(setLayer(ctx, { kind: "color", r: 0, g: 0, b: 128, a: 128 })).toBeUndefined();
-    expect(setLayer(ctx, { kind: "image", path: "gfx/ui/overlay/torchlight.png" })).toBeUndefined();
   });
 });

@@ -586,12 +586,6 @@ export function createTuxemonExtensions(source: BattleDbSource): ExtensionOption
         // (hour, day_of_year, year, weekday, leap_year, daytime, stage_of_day,
         // season) from the virtual clock.
       },
-      "tux.set_layer": () => {
-        // D1 placeholder: no-op. D3 draws the overlay (clear / RGBA colour /
-        // PNG image); the command shape is fixed here so imports stop
-        // dropping set_layer. This is a transparent overlay, not a map tile
-        // layer, so it is distinct from the kit's KV1 layer switching.
-      },
       "tux.set_faint_point": (context, value) => {
         const args = argsRecord(value, "tux.set_faint_point");
         const character = args.character === undefined ? "player" : args.character;

@@ -110,6 +110,8 @@ export interface TerrainMapPatch extends Pick<MapDef, "id" | "width" | "height" 
   sheets: [typeof TERRAIN_SHEET_ID];
   /** Label -> row-major cells. G1 turns these into removable blocking events. */
   collisionLabels: Readonly<Record<string, readonly number[]>>;
+  /** Tuxemon surface property -> every row-major cell carrying that key. */
+  surfaceLabels: Readonly<Record<string, readonly number[]>>;
 }
 
 export interface TerrainFragment {
@@ -602,6 +604,7 @@ function tileCollision(
   lineEdges: number;
   yamlCells: number;
   labels: Record<string, number[]>;
+  surfaceLabels: Record<string, number[]>;
 } {
   const staticCells: CollisionCell[] = new Array(width * height);
   const surfaces: (Readonly<Record<string, string>> | undefined)[] = new Array(width * height);
@@ -684,7 +687,13 @@ function tileCollision(
     const region = cells[i];
     if (region?.key && region.key !== "slide") (labels[region.key] ??= []).push(i);
   }
-  return { cells, lineMasks, lineEdges, yamlCells, labels };
+  const surfaceLabels: Record<string, number[]> = {};
+  for (let i = 0; i < surfaces.length; i++) {
+    for (const label of Object.keys(surfaces[i] ?? {}).sort()) {
+      (surfaceLabels[label] ??= []).push(i);
+    }
+  }
+  return { cells, lineMasks, lineEdges, yamlCells, labels, surfaceLabels };
 }
 
 function tuxCanStep(
@@ -861,6 +870,42 @@ function sourceRevision(sourceRoot: string, explicit?: string): string {
   return existsSync(ref) ? readFileSync(ref, "utf8").trim().slice(0, 40) : "9e6258ff";
 }
 
+export type TerrainSurfaceLabels = Readonly<
+  Record<string, Readonly<Record<string, readonly number[]>>>
+>;
+
+/** Read only Tuxemon's per-cell surface-key membership. This shares the
+ * exact visible-layer/tileset rules with the terrain cooker but skips every
+ * PNG, chunk, and pak operation, so standalone importer tests can lower
+ * runtime tile-property commands without paying for a full terrain cook. */
+export function importTerrainSurfaceLabels(
+  mapIds: readonly string[],
+  sourceRoot = process.env.TUXEMON_SRC ?? DEFAULT_TUXEMON_SRC,
+): TerrainSurfaceLabels {
+  const mapsDir = join(normalize(sourceRoot), "mods/tuxemon/maps");
+  const templates = new Map<string, TileTemplate>();
+  const result: Record<string, Record<string, number[]>> = {};
+  for (const id of [...new Set(mapIds)].sort()) {
+    const path = join(mapsDir, `${id}.tmx`);
+    if (!existsSync(path)) throw new Error(`missing TMX map: ${id}`);
+    const root = readXml(path);
+    if (root.name !== "map") throw new Error(`${path}: expected <map>`);
+    const width = integerAttr(root, "width");
+    const height = integerAttr(root, "height");
+    const tilesets = parseMapTilesets(root, mapsDir, templates);
+    const layers = mapLayers(root, width, height);
+    result[id] = tileCollision(
+      root,
+      join(mapsDir, `${id}.yaml`),
+      layers,
+      tilesets,
+      width,
+      height,
+    ).surfaceLabels;
+  }
+  return result;
+}
+
 /** Import all (or a selected subset of) pinned Tuxemon TMX maps in memory. */
 export function importTerrain(options: GenerateTerrainOptions = {}): TerrainBuild {
   const sourceRoot = normalize(options.sourceRoot ?? process.env.TUXEMON_SRC ?? DEFAULT_TUXEMON_SRC);
@@ -964,6 +1009,7 @@ export function importTerrain(options: GenerateTerrainOptions = {}): TerrainBuil
       ground: compiled.ground,
       passage: compiled.passage,
       collisionLabels: collision.labels,
+      surfaceLabels: collision.surfaceLabels,
     });
     animations[id] = animCells;
     byMap[id] = {

@@ -302,8 +302,9 @@ interface EvolutionCase {
 const EVOLUTION_CASES: EvolutionCase[] = [
   {
     map: "spyder_route1",
-    // D1 materializes one time/date event ahead of this page, shifting its id by 1.
-    evolution: "e027_evolution_all",
+    // D1 time/date and GI-1a presentation mappings materialize two events
+    // ahead of this page, shifting its generated id by 2.
+    evolution: "e028_evolution_all",
     storyGate: "battle return (no authored story lock)",
     lockPages: [],
     battleStarts: [],
@@ -312,8 +313,9 @@ const EVOLUTION_CASES: EvolutionCase[] = [
   },
   {
     map: "spyder_paper_town",
-    // D1 materializes one time/date event ahead of this page, shifting its id by 1.
-    evolution: "e054_evolution_all",
+    // D1 time/date and GI-1a presentation mappings materialize two events
+    // ahead of this page, shifting its generated id by 2.
+    evolution: "e055_evolution_all",
     storyGate: "First Fight - Start / result event",
     lockPages: ["e024_first_fight_start"],
     battleStarts: ["e024_first_fight_start"],

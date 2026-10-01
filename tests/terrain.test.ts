@@ -78,6 +78,18 @@ describe("Tuxemon terrain import", () => {
     expect(build.report.byMap.spyder_candy_hospital3!.directedEdgeMismatches).toBe(0);
   });
 
+  test("indexes every authored surface label independently from collision keys", () => {
+    const build = importTerrain({ mapIds: ["spyder_citypark"] });
+    expect(build.fragment.maps[0]!.surfaceLabels).toEqual({
+      surfable: [
+        322, 323, 324, 325, 326, 327, 328, 329, 330,
+        362, 363, 364, 365, 366, 367, 368,
+        402, 403, 404, 405, 406, 407, 408,
+      ],
+    });
+    expect(build.fragment.maps[0]!.collisionLabels).toEqual({});
+  });
+
   test("merges legacy same-name YAML collision rectangles after TMX", () => {
     const build = importTerrain({ mapIds: ["spyder_paper_manor"] });
     const map = build.fragment.maps[0]!;

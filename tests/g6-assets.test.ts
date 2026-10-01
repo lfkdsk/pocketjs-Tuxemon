@@ -25,11 +25,9 @@ describe("G6 generated game assets", () => {
       maps: 263,
       collisionBodies: 14,
       maxActors: 501,
-      // D1 materializes the previously folded time_is events (Environment
-      // Day/Night, Night Day Cycle) in spyder_dryadsgrove, the largest
-      // playable map: 205 -> 207 events. Runtime terminal hashes are
-      // unchanged (the ext commands are D2 no-op placeholders).
-      runtimeMaxActors: 207,
+      // Runtime appearance materializes extra character slots; the largest
+      // playable map remains below the excluded test_npcs stress map.
+      runtimeMaxActors: 216,
       excludedActorStressMaps: [{ id: "test_npcs", slots: 501 }],
       options: {
         areas: true,
@@ -39,21 +37,28 @@ describe("G6 generated game assets", () => {
         place: true,
         inputLock: true,
         routes: true,
+        battle: true,
       },
     });
     expect(report.terrain).toMatchObject({ entries: 430, animatedPlacements: 5_785 });
     expect(report.animation).toMatchObject({ sourceSequences: 86, atlases: 86 });
+    expect(report.mapAnimations).toMatchObject({ definitions: 5, frames: 67 });
+    expect(report.screenLayers).toMatchObject({
+      layers: 2,
+      variants: 10,
+      imageVariants: 7,
+    });
     expect(report.characters).toMatchObject({
-      spriteKeys: 175,
-      walkers: 152,
+      spriteKeys: 183,
+      walkers: 160,
       staticObjects: 22,
       placeholders: 1,
-      imageFiles: 1_859,
+      imageFiles: 1_955,
       playerSheet: `sprites/${appearances[0]!.template.sprite_name}.png`,
     });
     expect(GAME_ASSETS.order).toHaveLength(263);
-    expect(GAME_ASSETS.maxActors).toBe(207);
-    expect(NPC_SRC_INDEX).toHaveLength(175);
+    expect(GAME_ASSETS.maxActors).toBe(216);
+    expect(NPC_SRC_INDEX).toHaveLength(183);
     for (const { id, entry } of NPC_SRC_INDEX) {
       const art = JSON.parse(readFileSync(resolve(ROOT, "dist", entry), "utf8")) as NpcArt;
       expect(typeof art === "string" ? art.length > 0 : art.idle.length > 0, id).toBeTrue();
@@ -65,6 +70,60 @@ describe("G6 generated game assets", () => {
     }, 0);
     expect(animatedTotal).toBe(5_785);
     expect(GAME_ASSETS.playerHeight).toBe(32);
+    expect(Object.keys(GAME_ASSETS.anims ?? {})).toEqual([
+      "tux_bubble_exclamation",
+      "tux_dragonbirth_100000us",
+      "tux_grass_100000us",
+      "tux_grass_blue_100000us",
+      "tux_grass_red_100000us",
+    ]);
+    expect(GAME_ASSETS.layers?.tux_backdrop).toEqual({
+      placement: "screen",
+      variants: {
+        bg_gradient_blue: {
+          image: "assets/screen-layers/tux-backdrop-bg_gradient_blue.png",
+        },
+        bg_gradient_blue_aeble_character: {
+          image: "assets/screen-layers/tux-backdrop-bg_gradient_blue_aeble_character.png",
+        },
+        bg_gradient_blue_spyder_monsters_image: {
+          image: "assets/screen-layers/tux-backdrop-bg_gradient_blue_spyder_monsters_image.png",
+        },
+        bg_gradient_blue_spyder_morph_image: {
+          image: "assets/screen-layers/tux-backdrop-bg_gradient_blue_spyder_morph_image.png",
+        },
+        bg_gradient_blue_spyder_omnichannel_beaverbrook_character: {
+          image: "assets/screen-layers/tux-backdrop-bg_gradient_blue_spyder_omnichannel_beaverbrook_character.png",
+        },
+        bg_gradient_blue_spyder_tumble_image: {
+          image: "assets/screen-layers/tux-backdrop-bg_gradient_blue_spyder_tumble_image.png",
+        },
+      },
+    });
+    expect(GAME_ASSETS.layers?.tux_overlay).toEqual({
+      placement: "screen",
+      defaultVisible: false,
+      variants: {
+        color_0_0_0_255: { color: "#000000ff" },
+        color_0_0_128_128: { color: "#00008080" },
+        color_102_51_0_128: { color: "#66330080" },
+        image_gfx_ui_overlay_torchlight_png: {
+          image: "assets/screen-layers/tux-overlay-image_gfx_ui_overlay_torchlight_png.png",
+        },
+      },
+    });
+    for (const id of [
+      "adventurer",
+      "adventurerblack",
+      "brownheroine_brown",
+      "enbyasian",
+      "heroine",
+      "invisible",
+      "penguin",
+      "swimmer",
+    ]) {
+      expect(NPC_SRC_INDEX.some((entry) => entry.id === id), id).toBeTrue();
+    }
   });
 
   test("sizes the actor pool from every event on every reachable map (KV1)", () => {
@@ -99,9 +158,10 @@ describe("G6 generated game assets", () => {
 
   test("all R2 character images are portable power-of-two RGBAs", () => {
     const battlePaths = new Set<string>(BATTLE_ASSET_PATHS);
-    const characterImages = Object.entries(images).filter(([relative]) => !battlePaths.has(relative));
-    expect(characterImages).toHaveLength(1_859);
-    expect(Object.keys(images)).toHaveLength(1_859 + BATTLE_ASSET_PATHS.length);
+    const characterImages = Object.entries(images).filter(([relative]) =>
+      relative.startsWith("assets/characters/")
+    );
+    expect(characterImages).toHaveLength(1_955);
     expect(BATTLE_ASSET_PATHS.every((relative) => images[relative]?.psm === 2)).toBeTrue();
     for (const [relative, meta] of characterImages) {
       const path = resolve(ROOT, relative);
@@ -121,6 +181,59 @@ describe("G6 generated game assets", () => {
       }
     }
   }, 30_000);
+
+  test("KA1 map animation frames keep authored geometry in portable textures", () => {
+    const anims = GAME_ASSETS.anims ?? {};
+    const framePaths = Object.values(anims).flatMap((animation) => animation.frames);
+    expect(framePaths).toHaveLength(67);
+    expect(new Set(framePaths).size).toBe(framePaths.length);
+    expect(Object.keys(images).filter((relative) => relative.startsWith("assets/map-animations/")))
+      .toEqual(framePaths);
+    for (const [id, animation] of Object.entries(anims)) {
+      for (const relative of animation.frames) {
+        expect(images[relative], `${id}:${relative}`).toEqual({ psm: 3 });
+        const image = decodePng(new Uint8Array(readFileSync(resolve(ROOT, relative))), relative);
+        expect(image.width & (image.width - 1), relative).toBe(0);
+        expect(image.height & (image.height - 1), relative).toBe(0);
+      }
+    }
+    expect(anims.tux_dragonbirth_100000us).toMatchObject({ w: 48, h: 64 });
+    expect(anims.tux_grass_100000us).toMatchObject({ w: 16, h: 16 });
+    const dragon = decodePng(new Uint8Array(readFileSync(resolve(
+      ROOT,
+      anims.tux_dragonbirth_100000us!.frames[0]!,
+    ))));
+    expect([dragon.width, dragon.height]).toEqual([64, 64]);
+  });
+
+  test("KS1 backdrops are composed into registered portable RGBA images", () => {
+    const variants = GAME_ASSETS.layers?.tux_backdrop?.variants ?? {};
+    const paths = Object.values(variants)
+      .map((variant) => variant.image)
+      .filter((relative): relative is string => relative !== undefined);
+    expect(paths).toHaveLength(6);
+    expect(new Set(paths).size).toBe(paths.length);
+    expect(Object.keys(images).filter((relative) =>
+      relative.startsWith("assets/screen-layers/tux-backdrop-")
+    )).toEqual(paths);
+    for (const relative of paths) {
+      expect(images[relative], relative).toEqual({ psm: 3 });
+      const image = decodePng(new Uint8Array(readFileSync(resolve(ROOT, relative))), relative);
+      expect([image.width, image.height], relative).toEqual([256, 256]);
+      expect(image.rgba.some((channel, index) => index % 4 !== 3 && channel !== 0), relative).toBeTrue();
+    }
+  });
+
+  test("KV1 packages the torch overlay and dynamic walking appearances", () => {
+    const overlay = GAME_ASSETS.layers?.tux_overlay;
+    expect(overlay?.placement).toBe("screen");
+    if (!overlay || overlay.placement !== "screen") throw new Error("missing tux_overlay");
+    const torch = overlay.variants.image_gfx_ui_overlay_torchlight_png?.image;
+    expect(torch).toBe("assets/screen-layers/tux-overlay-image_gfx_ui_overlay_torchlight_png.png");
+    expect(images[torch!]).toEqual({ psm: 3 });
+    const image = decodePng(new Uint8Array(readFileSync(resolve(ROOT, torch!))), torch!);
+    expect([image.width, image.height]).toEqual([256, 256]);
+  });
 
   test("all R2 terrain animation atlases match their sprite metadata", () => {
     expect(Object.keys(sprites)).toHaveLength(86);

@@ -48,8 +48,8 @@ definitions below are the report's own:
 - **Native** — represented by current kit commands without gameplay loss.
 - **Degraded** — runs in the kit with a documented limitation or importer
   lowering.
-- **Placeholder** — deliberate stand-in behavior (only legacy
-  battle/monster content remains).
+- **Placeholder** — deliberate stand-in behavior for legacy content and the
+  fixed clock/weather runtime.
 - **Dropped** — no equivalent output, including rules inside events the
   converter proves cannot start.
 
@@ -67,6 +67,10 @@ definitions below are the report's own:
 | `is battle_outcome` | `tux.battle_outcome` extension condition reading live battle history. |
 | `add_monster`, `set_monster_health`, `set_monster_status`, `evolution` | the matching `tux.*` extension command. |
 | `open_shop` (item economy) | the kit `shop` command with imported goods, prices and stock. |
+| `screen_transition` | two blocking `screenFade` commands that retain each fade half's source duration and RGBA colour. |
+| `play_map_animation` / `play_tile_animation` | `mapAnim` at the sampled character tile or fixed source tile. |
+| `set_layer` | a native screen `layer` selecting or clearing a packaged RGBA or PNG overlay. |
+| `camera_position`, `set_bubble`, `change_bg`, `change_bg_char`, `set_template` | native camera, balloon, backdrop and walking-appearance commands within the limits in [the status list](status.md#presentation). |
 
 ### Degraded examples
 
@@ -74,7 +78,6 @@ definitions below are the report's own:
 |---|---|
 | `char_face player,<dir>` | one-step `moveRoute` (the kit has no face op). |
 | `char_stop` | no output: blocking fibers already freeze the player. |
-| `screen_transition` | a `wait`; the visual fade is not modeled. |
 | `add_tracker` | a `switch`; step counters are not modeled. |
 | `transition_teleport` with an out-of-range landing | coordinates clamped into the target map; an isolated landing is repaired to the nearest walkable cell by deterministic four-neighbour BFS. |
 | `char_wander` | an NPC page with random movement; frequency and bounds are omitted. |
@@ -87,8 +90,7 @@ extension calls whose runtime is still being built:
 
 | Tuxemon | Stand-in |
 |---|---|
-| `is time_is` / `not time_is` (123 uses) | a `tux.time_is` extension condition that folds to fixed daytime until the runtime clock lands. |
-| `set_layer` (70 uses) | a `tux.set_layer` extension command; a visible no-op until the overlay visuals land. |
+| `is time_is` / `not time_is` (128 uses) | a `tux.time_is` extension condition that folds reachable uses to fixed daytime until the runtime clock lands. |
 | `start_battle` (NPC vs NPC, 5 uses) | a visible skip notice in the text box. |
 | `choice_monster` / `choice_npc` | enum-coded `choices`; every option is retained, but there is no party-selection UI. |
 | `open_shop` (monster trading, 7 uses) | a visible menu listing the stock. |
@@ -109,7 +111,6 @@ faint-point actions and environment checks are now native.
 | Tuxemon | Reason |
 |---|---|
 | `play_music` / `fadeout_music` | the kit has a sound-effect command but no BGM command; music is not imported. |
-| `play_map_animation` / `play_tile_animation` | presentation-layer map animations; not imported. |
 | `is environment_is` (outside battle content) | environment is a battle backdrop; the condition is constant false there. |
 | `transition_teleport` targeting an NPC | only the player transfers. |
 | `modify_money` with a variable amount | only literal amounts are supported. |

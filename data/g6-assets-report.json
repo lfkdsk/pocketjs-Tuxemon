@@ -5,7 +5,7 @@
   "maps": 263,
   "collisionBodies": 14,
   "maxActors": 501,
-  "runtimeMaxActors": 207,
+  "runtimeMaxActors": 216,
   "excludedActorStressMaps": [
    {
     "id": "test_npcs",
@@ -24,10 +24,10 @@
   }
  },
  "mapRepository": {
-  "shellBytes": 81950,
-  "entryBytes": 7960101,
+  "shellBytes": 83232,
+  "entryBytes": 8676277,
   "entries": 263,
-  "manifestHash": "808617f029b781097cf312d7f6ac6a5f96d693e236ae7d256766c19e00bbc1d3",
+  "manifestHash": "b42688986fac0a12bfc209a22029b8fcbdf9dac5f1b6b903894ab6fea5915713",
   "schemaHash": "8ffba1d4305ed2fa7ea0a2421e2982a98eff38a228ee59b0726fd8865fb816f1"
  },
  "terrain": {
@@ -41,24 +41,35 @@
   "atlases": 86,
   "atlasBytes": 27543
  },
+ "mapAnimations": {
+  "definitions": 5,
+  "frames": 67,
+  "imageBytes": 17509
+ },
+ "screenLayers": {
+  "layers": 2,
+  "variants": 10,
+  "imageVariants": 7,
+  "imageBytes": 24927
+ },
  "animatedRepository": {
   "entries": 48,
   "entryBytes": 505687
  },
  "npcSrcRepository": {
-  "entries": 175,
-  "entryBytes": 120566
+  "entries": 183,
+  "entryBytes": 125878
  },
  "characters": {
   "source": "https://github.com/Tuxemon/Tuxemon",
-  "spriteKeys": 175,
-  "walkers": 152,
+  "spriteKeys": 183,
+  "walkers": 160,
   "staticObjects": 22,
   "tallStaticObjects": 12,
   "placeholders": 1,
   "playerSheet": "sprites/adventurer.png",
-  "imageFiles": 1859,
-  "imageBytes": 509537
+  "imageFiles": 1955,
+  "imageBytes": 531801
  },
  "battle": {
   "format": "pocket-tuxemon/battle-import-report/v1",

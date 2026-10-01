@@ -125,7 +125,6 @@ the registered handlers.
 | `tux.cancel_evolution` | command | Clears the pending-evolution flag. |
 | `tux.set_environment` | command | Sets the active battle backdrop. |
 | `tux.update_time` | command | Advances the game clock. Placeholder no-op until the runtime clock lands. |
-| `tux.set_layer` | command | Changes a map layer's visibility. Placeholder no-op until the overlay visuals land. |
 | `tux.set_faint_point` | command | Stores a character's recovery destination. |
 | `tux.prepare_faint_transfer` | command | Heals the party if standing on the healing faint point, and writes the faint-teleport target. |
 | `tux.check_evolution` | condition | A party monster is waiting to evolve. |

@@ -1,7 +1,7 @@
 import { expect, test } from "bun:test";
 import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { mkdirSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import {
@@ -13,6 +13,7 @@ import {
   lowerCurrentStateCondition,
 } from "../importer/project.ts";
 import { jsonBytes } from "../importer/index.ts";
+import { loadAllFileEvents, TUXEMON_SRC } from "../importer/source.ts";
 import { applyTerrain, importTerrain } from "../importer/terrain.ts";
 import { TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS } from "../battle/game.ts";
 import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
@@ -74,14 +75,14 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   expect(result.report.coverage.actions.summary).toMatchObject({
     types: 98,
     uses: 13_617,
-    native: 6_225,
-    degraded: 2_832,
-    placeholder: 507,
-    dropped: 4_053,
-    nativePercent: 45.7,
+    native: 6_657,
+    degraded: 2_817,
+    placeholder: 709,
+    dropped: 3_434,
+    nativePercent: 48.9,
     tier1: {
-      uses: 6_129,
-      percent: 45.01,
+      uses: 6_130,
+      percent: 45.02,
       requiredUses: 6_246,
       meetsBaseline: false,
     },
@@ -89,13 +90,13 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   expect(result.report.coverage.conditions.summary).toMatchObject({
     types: 64,
     uses: 8_663,
-    native: 3_550,
-    degraded: 1_227,
-    placeholder: 867,
-    dropped: 3_019,
+    native: 4_161,
+    degraded: 1_229,
+    placeholder: 877,
+    dropped: 2_396,
     tier1: {
-      uses: 3_546,
-      percent: 40.93,
+      uses: 4_117,
+      percent: 47.52,
       requiredUses: 4_591,
       meetsBaseline: false,
     },
@@ -112,8 +113,8 @@ test("all maps pass schema and reference valid transfer destinations", () => {
     dropped: 716,
   });
   expect(coverageRows.find((row) => row.type === "char_move")).toMatchObject({
-    degraded: 9,
-    dropped: 68,
+    degraded: 13,
+    dropped: 64,
   });
   expect(coverageRows.find((row) => row.type === "is char_facing")).toMatchObject({
     native: 0,
@@ -128,6 +129,20 @@ test("all maps pass schema and reference valid transfer destinations", () => {
     placeholder: 0,
     dropped: 83,
   });
+  for (const [type, total] of [
+    ["screen_transition", 25],
+    ["camera_position", 6],
+    ["set_bubble", 16],
+    ["change_bg", 15],
+  ] as const) {
+    expect(coverageRows.find((row) => row.type === type)).toMatchObject({
+      total,
+      native: total,
+      degraded: 0,
+      placeholder: 0,
+      dropped: 0,
+    });
+  }
   expect(new Set(result.report.rows.map((row) => row.key)).size).toBe(result.report.rows.length);
   expect(result.report.rows.some((row) => row.key === "trigger:touch:facing:T1-lowered")).toBeTrue();
   expect(Object.keys(result.variables)).toHaveLength(498);
@@ -185,6 +200,229 @@ test("the complete import is byte-stable", () => {
   const second = buildProject(ids);
   expect(jsonBytes(first)).toBe(jsonBytes(second));
 }, 30_000);
+
+test("KA1 imports source map and tile animations with deterministic definitions", () => {
+  const result = buildProject(["spyder_dryadsgrove", "spyder_route3"], G6_IMPORT_OPTIONS);
+  expect(result.report.schemaErrors).toEqual([]);
+  expect(result.project.animations).toEqual([
+    {
+      id: "tux_dragonbirth_100000us",
+      sheet: "animations/tileset/dragonbirth.png",
+      frameW: 48,
+      frameH: 64,
+      cols: 60,
+      count: 60,
+      frameDuration: 0.1,
+    },
+    {
+      id: "tux_grass_100000us",
+      sheet: "animations/tileset/grass.png",
+      frameW: 16,
+      frameH: 16,
+      cols: 2,
+      count: 2,
+      frameDuration: 0.1,
+    },
+  ]);
+
+  const commands = objectNodes(result.project).filter((node) => node.op === "mapAnim");
+  expect(commands).toContainEqual({
+    op: "mapAnim",
+    id: "tux_map_grass",
+    anim: "tux_grass_100000us",
+    target: "player",
+    follow: false,
+    layer: "above",
+    loop: false,
+  });
+  expect(commands).toContainEqual({
+    op: "mapAnim",
+    id: "tux_map_dragonbirth",
+    anim: "tux_dragonbirth_100000us",
+    x: 10,
+    y: 4,
+    layer: "above",
+    loop: false,
+  });
+  expect(result.report.coverage.actions.rows.find((row) => row.type === "play_tile_animation"))
+    .toMatchObject({ total: 1, native: 1, dropped: 0 });
+});
+
+test("KS1 imports fades, scripted camera, balloons, and blocking backdrops", () => {
+  const result = buildProject(["spyder_bedroom", "spyder_greenwash_level3"], G6_IMPORT_OPTIONS);
+  expect(result.report.schemaErrors).toEqual([]);
+  expect(result.project.animations).toContainEqual({
+    id: "tux_bubble_exclamation",
+    sheet: "gfx/bubbles/exclamation.png",
+    frameW: 16,
+    frameH: 16,
+    cols: 1,
+    count: 1,
+    frameDuration: 1,
+    loop: true,
+  });
+  expect(result.presentation.backdrops).toEqual([
+    {
+      variant: "bg_gradient_blue_spyder_monsters_image",
+      background: "gfx/ui/background/gradient_blue.png",
+      foreground: "gfx/ui/background/spyder_monsters.png",
+    },
+    {
+      variant: "bg_gradient_blue_spyder_morph_image",
+      background: "gfx/ui/background/gradient_blue.png",
+      foreground: "gfx/ui/background/spyder_morph.png",
+    },
+    {
+      variant: "bg_gradient_blue_spyder_omnichannel_beaverbrook_character",
+      background: "gfx/ui/background/gradient_blue.png",
+      foreground: "gfx/sprites/player/ceo.png",
+      foregroundCrop: { x: 64, y: 0, w: 64, h: 64 },
+    },
+    {
+      variant: "bg_gradient_blue_spyder_tumble_image",
+      background: "gfx/ui/background/gradient_blue.png",
+      foreground: "gfx/ui/background/spyder_tumble.png",
+    },
+  ]);
+
+  const commands = objectNodes(result.project);
+  expect(commands).toContainEqual({
+    op: "screenFade",
+    direction: "out",
+    duration: 1,
+    color: { r: 0, g: 0, b: 0, a: 255 },
+    wait: true,
+  });
+  expect(commands).toContainEqual({
+    op: "screenFade",
+    direction: "in",
+    duration: 1,
+    color: { r: 0, g: 0, b: 0, a: 255 },
+    wait: true,
+  });
+  expect(commands).toContainEqual({
+    op: "camera",
+    target: { x: 3, y: 4 },
+    duration: 0,
+  });
+  expect(commands).toContainEqual({ op: "camera", target: "player", duration: 0 });
+  expect(commands).toContainEqual({
+    op: "balloon",
+    target: { event: "npc_spyder_greenwash_heidenstam" },
+    icon: "tux_bubble_exclamation",
+  });
+  expect(commands).toContainEqual({
+    op: "balloon",
+    target: { event: "npc_spyder_greenwash_heidenstam" },
+  });
+  expect(commands).toContainEqual({
+    op: "screenBackdrop",
+    layer: "tux_backdrop",
+    variant: "bg_gradient_blue_spyder_tumble_image",
+  });
+});
+
+test("KV1 imports overlays, runtime appearances, and exact surface passage updates", () => {
+  const result = buildProject([
+    "player_house_bedroom",
+    "spyder_citypark",
+    "spyder_greenwash_level3",
+    "spyder_scoop3",
+    "start_tuxemon",
+  ], G6_IMPORT_OPTIONS);
+  expect(result.report.schemaErrors).toEqual([]);
+  expect(result.presentation.overlays).toEqual([
+    { variant: "color_0_0_0_255", color: "#000000ff" },
+    { variant: "color_0_0_128_128", color: "#00008080" },
+    { variant: "color_102_51_0_128", color: "#66330080" },
+  ]);
+  expect(result.presentation.backdrops).toContainEqual({
+    variant: "bg_gradient_blue_aeble_character",
+    background: "gfx/ui/background/gradient_blue.png",
+    foreground: "gfx/sprites/player/adventurer.png",
+    foregroundCrop: { x: 64, y: 0, w: 64, h: 64 },
+  });
+
+  expect(result.project.sprites?.invisible).toEqual({
+    kind: "image",
+    src: "sprites/invisible.png",
+  });
+  expect(result.project.sprites?.swimmer).toEqual({
+    kind: "image",
+    src: "sprites/swimmer.png",
+  });
+  const nodes = objectNodes(result.project);
+  expect(nodes).toContainEqual({
+    op: "layer",
+    layer: "tux_overlay",
+    variant: "color_102_51_0_128",
+    visible: true,
+  });
+  expect(nodes).toContainEqual({
+    op: "layer",
+    layer: "tux_overlay",
+    visible: null,
+    variant: null,
+  });
+  expect(nodes).toContainEqual({ op: "appearance", target: "player", sprite: "invisible" });
+  expect(nodes).toContainEqual({ op: "appearance", target: "player", sprite: null });
+  expect(nodes).toContainEqual({
+    op: "appearance",
+    target: "player",
+    sprite: "adventurer",
+    saveDefault: true,
+  });
+  expect(nodes).toContainEqual({
+    kind: "appearance",
+    target: "player",
+    sprite: "swimmer",
+  });
+
+  const tileCommands = nodes.filter((node) => node.op === "tileProperty");
+  expect(tileCommands).toHaveLength(46);
+  expect(tileCommands.filter((node) => node.passage === "pass")).toHaveLength(23);
+  expect(tileCommands.filter((node) => node.passage === null)).toHaveLength(23);
+  expect(tileCommands).toContainEqual({ op: "tileProperty", x: 2, y: 8, passage: "pass" });
+  expect(tileCommands).toContainEqual({ op: "tileProperty", x: 8, y: 10, passage: null });
+
+  // The source corpus starts the complete label at zero and has only two
+  // whole-label writers. A representative cell therefore preserves both
+  // all(cells) and NOT(all(cells)) for every reachable state.
+  const tilesetDir = join(TUXEMON_SRC, "mods/tuxemon/gfx/tilesets");
+  const authoredSurfableValues = new Set(readdirSync(tilesetDir)
+    .filter((name) => name.endsWith(".tsx"))
+    .flatMap((name) => [...readFileSync(join(tilesetDir, name), "utf8")
+      .matchAll(/<property name="surfable" value="([^"]+)"/g)]
+      .map((match) => match[1]!)));
+  expect([...authoredSurfableValues]).toEqual(["0"]);
+  expect(loadAllFileEvents()
+    .flatMap((event) => event.acts)
+    .filter((action) => action.type === "update_tile_properties")
+    .map((action) => action.raw)
+    .sort()).toEqual([
+      "update_tile_properties surfable,0",
+      "update_tile_properties surfable,1",
+    ]);
+
+  const allowSwim = result.project.maps.find((map) => map.id === "spyder_citypark")!.events!
+    .find((event) => event.name === "Allow Swim")!;
+  const commands = allowSwim.pages[0]!.commands;
+  expect(commands).toHaveLength(1);
+  expect(commands[0]).toMatchObject({
+    op: "if",
+    if: { kind: "tileProperty", x: 2, y: 8, passage: "pass" },
+    then: [],
+  });
+  const allowCommand = commands[0]!;
+  if (allowCommand.op !== "if") throw new Error("Allow Swim must use a guarded tile update");
+  expect(objectNodes(allowCommand.else).filter((command) => command.op === "tileProperty"))
+    .toHaveLength(23);
+
+  expect(result.report.coverage.actions.rows.find((row) => row.type === "update_tile_properties"))
+    .toMatchObject({ total: 2, native: 2, dropped: 0 });
+  expect(result.report.coverage.conditions.rows.find((row) => row.type === "not tile_property_updated"))
+    .toMatchObject({ total: 2, degraded: 2, dropped: 0 });
+});
 
 test("inert source events cannot freeze the Cotton Cafe", () => {
   const result = buildProject(["spyder_cotton_cafe"]);
@@ -271,10 +509,10 @@ test("default import output remains byte-pinned", () => {
   const bytes = jsonBytes(buildProject(maps, DEFAULT_IMPORT_OPTIONS));
   // This pins the complete ImportBuild: condition lowering, the stable source
   // inputs, the generated outdoor world index and its compact report summary.
-  // D1 time/weather: time_is/set_layer now emit tux.* ext shapes and the
+  // D1 time/weather: time_is/update_time emit tux.* ext shapes and the
   // report carries the weather table, so the pinned bytes move again.
   expect(createHash("sha256").update(bytes).digest("hex")).toBe(
-    "b8b18b0e2bf08c51211bb99f429ce016b5d391733ad58409ad2387979d698657",
+    "2b5c7beaec9e4caf748a46fc9156bd09f34e984490a1e95728cd254dee1c37ea",
   );
 });
 

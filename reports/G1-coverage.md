@@ -10,39 +10,39 @@ When conversion discards a whole event, every source rule in it is Dropped.
 
 | Kind | Kinds | Uses | Native | Degraded | Placeholder | Dropped | S1 T1 baseline |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Actions | 98 | 13617 | 11679 | 642 | 89 | 1207 | 6153 / 6246 (45.19% / 45.9%) |
-| Conditions | 64 | 8663 | 7765 | 0 | 124 | 774 | 4470 / 4591 (51.60% / 53.0%) |
+| Actions | 98 | 13617 | 12122 | 628 | 19 | 848 | 6155 / 6246 (45.20% / 45.9%) |
+| Conditions | 64 | 8663 | 7850 | 2 | 127 | 684 | 4500 / 4591 (51.95% / 53.0%) |
 
 The S1 acceptance baselines are 6,246 action uses (45.9%) and 4,591
 condition uses (53.0%). Only T1 source types whose disposition is Native or
-Degraded count toward them. This import records 6153
-(45.19%) and 4470
-(51.60%), respectively: 93
-action uses and 121 condition uses below the S1 baselines. The old
+Degraded count toward them. This import records 6155
+(45.20%) and 4500
+(51.95%), respectively: 91
+action uses and 91 condition uses below the S1 baselines. The old
 type-table Native figure was 5,448 / 13,617 (40.0%); conversion-path accounting
-supersedes it with 11679 / 13617
-(85.8%). “Executable”
+supersedes it with 12122 / 13617
+(89.0%). “Executable”
 (native + degraded + deliberate P1 placeholder) is
-91.1% for actions and
-91.1% for conditions.
+93.8% for actions and
+92.1% for conditions.
 
 Definitions:
 
 - **Native**: represented by current RPG Kit v1 commands without a gameplay loss.
 - **Degraded**: runs in v1 with a documented limitation or importer lowering.
 - **Placeholder**: deliberate P1 behavior for battle/monster state and the
-  D1 time/weather/overlay ext shapes (`time_is`, `update_time`, `set_layer`)
-  whose runtime lands in D2 (clock/weather) and D3 (overlay visuals).
+  D1 time/weather ext shapes (`time_is`, `update_time`) whose runtime
+  lands in D2 (clock/weather). Map overlays are native KV1 layers.
 - **Dropped**: no equivalent output, including rules inside an event that the
   converter proves cannot start or otherwise omits. Per-disposition reasons are
   retained in `dist/import-report.json`.
 
 ## P2 battle and monster placeholder audit
 
-There are 213 source-file uses across 9
+There are 146 source-file uses across 8
 source types that still carry Placeholder disposition: battle/monster behavior
-plus the D1 time/weather ext shapes (`time_is`, `set_layer`) whose runtime
-lands in D2 (clock/weather) and D3 (overlay visuals).
+plus the D1 time/weather ext shapes (`time_is`, `update_time`) whose runtime
+lands in D2 (clock/weather).
 Player-versus-trainer, double, scripted-wild, random-wild, battle-outcome,
 party-size, has-monster, evolution, environment, faint-transfer, and live-party
 defeat behavior are Native. The remaining non-native behavior is explicit:
@@ -53,11 +53,10 @@ defeat behavior are Native. The remaining non-native behavior is explicit:
 | Action | `choice_npc` | 1 | nested choice pages retain every option |
 | Action | `open_shop` | 7 | monster trading remains a visible placeholder |
 | Action | `remove_monster` | 4 | sys.party_size -= 1 when non-empty |
-| Action | `set_layer` | 70 | tux.set_layer ext command; D2 runtime placeholder, D3 overlay visual (no-op) |
 | Action | `start_battle` | 5 | NPC-versus-NPC battles are not supported yet; skipped |
 | Condition | `is party_infected` | 1 | no plague in P1: none=true |
-| Condition | `is time_is` | 64 | tux.time_is ext condition; D2 clock runtime (placeholder folds to fixed morning/daytime) |
-| Condition | `not time_is` | 59 | tux.time_is ext condition; D2 clock runtime (placeholder folds to fixed morning/daytime) |
+| Condition | `is time_is` | 66 | tux.time_is ext condition; D2 clock runtime (placeholder folds to fixed morning/daytime) |
+| Condition | `not time_is` | 60 | tux.time_is ext condition; D2 clock runtime (placeholder folds to fixed morning/daytime) |
 
 The five `start_battle` placeholders are NPC-versus-NPC scenes, for which the
 runtime shows a visible skip notice instead of inventing a player battle. The
@@ -146,13 +145,13 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `add_tech` | 0 | 0 | 0 | 12 | 12 |
 | Action | `add_tracker` | 0 | 24 | 0 | 0 | 24 |
 | Action | `autosave` | 0 | 0 | 0 | 6 | 6 |
-| Action | `camera_position` | 0 | 0 | 0 | 6 | 6 |
-| Action | `change_bg` | 0 | 0 | 0 | 15 | 15 |
-| Action | `change_bg_char` | 0 | 0 | 0 | 4 | 4 |
+| Action | `camera_position` | 6 | 0 | 0 | 0 | 6 |
+| Action | `change_bg` | 15 | 0 | 0 | 0 | 15 |
+| Action | `change_bg_char` | 4 | 0 | 0 | 0 | 4 |
 | Action | `change_bg_monster` | 0 | 0 | 0 | 7 | 7 |
 | Action | `change_taste` | 0 | 0 | 0 | 2 | 2 |
-| Action | `char_face` | 1558 | 443 | 0 | 26 | 2027 |
-| Action | `char_move` | 64 | 9 | 0 | 4 | 77 |
+| Action | `char_face` | 1558 | 444 | 0 | 25 | 2027 |
+| Action | `char_move` | 64 | 13 | 0 | 0 | 77 |
 | Action | `char_plague` | 0 | 0 | 0 | 13 | 13 |
 | Action | `char_position` | 0 | 0 | 0 | 1 | 1 |
 | Action | `char_run` | 0 | 0 | 0 | 2 | 2 |
@@ -186,10 +185,10 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `park_experience` | 0 | 0 | 0 | 8 | 8 |
 | Action | `pathfind` | 332 | 0 | 0 | 4 | 336 |
 | Action | `pathfind_to_char` | 201 | 0 | 0 | 0 | 201 |
-| Action | `play_map_animation` | 0 | 0 | 0 | 276 | 276 |
+| Action | `play_map_animation` | 276 | 0 | 0 | 0 | 276 |
 | Action | `play_music` | 0 | 0 | 0 | 200 | 200 |
 | Action | `play_sound` | 66 | 0 | 0 | 1 | 67 |
-| Action | `play_tile_animation` | 0 | 0 | 0 | 1 | 1 |
+| Action | `play_tile_animation` | 1 | 0 | 0 | 0 | 1 |
 | Action | `quarantine` | 0 | 0 | 0 | 8 | 8 |
 | Action | `quit_world` | 0 | 0 | 0 | 3 | 3 |
 | Action | `random_encounter` | 438 | 0 | 0 | 38 | 476 |
@@ -202,15 +201,15 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `remove_tech` | 0 | 0 | 0 | 2 | 2 |
 | Action | `rename_monster` | 0 | 0 | 0 | 2 | 2 |
 | Action | `rename_player` | 0 | 0 | 0 | 5 | 5 |
-| Action | `screen_transition` | 0 | 25 | 0 | 0 | 25 |
+| Action | `screen_transition` | 25 | 0 | 0 | 0 | 25 |
 | Action | `set_bill` | 0 | 0 | 0 | 2 | 2 |
-| Action | `set_bubble` | 0 | 0 | 0 | 16 | 16 |
+| Action | `set_bubble` | 16 | 0 | 0 | 0 | 16 |
 | Action | `set_char_attribute` | 0 | 0 | 0 | 3 | 3 |
 | Action | `set_economy` | 16 | 0 | 0 | 0 | 16 |
-| Action | `set_environment` | 171 | 0 | 0 | 3 | 174 |
+| Action | `set_environment` | 173 | 0 | 0 | 1 | 174 |
 | Action | `set_facing_mode` | 0 | 0 | 0 | 2 | 2 |
 | Action | `set_kennel_visible` | 0 | 0 | 0 | 2 | 2 |
-| Action | `set_layer` | 0 | 0 | 70 | 9 | 79 |
+| Action | `set_layer` | 77 | 0 | 0 | 2 | 79 |
 | Action | `set_mission` | 0 | 0 | 0 | 6 | 6 |
 | Action | `set_monster_attribute` | 0 | 0 | 0 | 33 | 33 |
 | Action | `set_monster_health` | 82 | 0 | 0 | 1 | 83 |
@@ -220,19 +219,19 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `set_random_variable` | 1 | 0 | 0 | 0 | 1 |
 | Action | `set_step_tracker_milestone_shown` | 0 | 0 | 0 | 3 | 3 |
 | Action | `set_teleport_faint` | 27 | 0 | 0 | 2 | 29 |
-| Action | `set_template` | 0 | 0 | 0 | 24 | 24 |
+| Action | `set_template` | 17 | 6 | 0 | 1 | 24 |
 | Action | `set_tuxepedia` | 0 | 0 | 0 | 6 | 6 |
-| Action | `set_variable` | 697 | 0 | 0 | 18 | 715 |
+| Action | `set_variable` | 698 | 0 | 0 | 17 | 715 |
 | Action | `start_battle` | 325 | 0 | 5 | 1 | 331 |
 | Action | `start_double_battle` | 8 | 0 | 0 | 0 | 8 |
 | Action | `teleport_faint` | 11 | 0 | 0 | 0 | 11 |
 | Action | `trading` | 0 | 0 | 0 | 8 | 8 |
 | Action | `transition_teleport` | 1042 | 3 | 0 | 4 | 1049 |
-| Action | `translated_dialog` | 2029 | 1 | 0 | 38 | 2068 |
+| Action | `translated_dialog` | 2030 | 1 | 0 | 37 | 2068 |
 | Action | `translated_dialog_choice` | 134 | 10 | 0 | 5 | 149 |
 | Action | `tune_radio` | 0 | 0 | 0 | 2 | 2 |
 | Action | `unlock_controls` | 325 | 0 | 0 | 5 | 330 |
-| Action | `update_tile_properties` | 0 | 0 | 0 | 2 | 2 |
+| Action | `update_tile_properties` | 2 | 0 | 0 | 0 | 2 |
 | Action | `update_time` | 0 | 0 | 0 | 3 | 3 |
 | Action | `variable_math` | 0 | 0 | 0 | 5 | 5 |
 | Action | `wait` | 429 | 0 | 0 | 12 | 441 |
@@ -249,23 +248,23 @@ census.
 | Condition | `is battle_outcome_count` | 2 | 0 | 0 | 0 | 2 |
 | Condition | `is bill_is` | 0 | 0 | 0 | 2 | 2 |
 | Condition | `is button_pressed` | 402 | 0 | 0 | 17 | 419 |
-| Condition | `is char_at` | 1807 | 0 | 0 | 4 | 1811 |
-| Condition | `is char_defeated` | 9 | 0 | 0 | 1 | 10 |
+| Condition | `is char_at` | 1810 | 0 | 0 | 1 | 1811 |
+| Condition | `is char_defeated` | 10 | 0 | 0 | 0 | 10 |
 | Condition | `is char_exists` | 3 | 0 | 0 | 6 | 9 |
-| Condition | `is char_facing` | 994 | 0 | 0 | 14 | 1008 |
-| Condition | `is char_facing_tile` | 323 | 0 | 0 | 21 | 344 |
+| Condition | `is char_facing` | 999 | 0 | 0 | 9 | 1008 |
+| Condition | `is char_facing_tile` | 327 | 0 | 0 | 17 | 344 |
 | Condition | `is char_gender` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `is char_healed` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `is char_in` | 0 | 0 | 0 | 1 | 1 |
-| Condition | `is char_moved` | 452 | 0 | 0 | 2 | 454 |
-| Condition | `is char_sprite` | 0 | 0 | 0 | 37 | 37 |
+| Condition | `is char_moved` | 454 | 0 | 0 | 0 | 454 |
+| Condition | `is char_sprite` | 9 | 0 | 0 | 28 | 37 |
 | Condition | `is check_char_parameter` | 0 | 0 | 0 | 40 | 40 |
 | Condition | `is check_evolution` | 2 | 0 | 0 | 0 | 2 |
 | Condition | `is check_max_tech` | 0 | 0 | 0 | 2 | 2 |
 | Condition | `is check_party_parameter` | 0 | 0 | 0 | 8 | 8 |
 | Condition | `is check_world` | 0 | 0 | 0 | 2 | 2 |
 | Condition | `is cooldown_days` | 0 | 0 | 0 | 1 | 1 |
-| Condition | `is current_state` | 34 | 0 | 0 | 44 | 78 |
+| Condition | `is current_state` | 40 | 0 | 0 | 38 | 78 |
 | Condition | `is environment_is` | 0 | 0 | 0 | 28 | 28 |
 | Condition | `is has_item` | 52 | 0 | 0 | 1 | 53 |
 | Condition | `is has_kennel` | 0 | 0 | 0 | 2 | 2 |
@@ -273,16 +272,16 @@ census.
 | Condition | `is has_tuxepedia` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `is kennel` | 0 | 0 | 0 | 2 | 2 |
 | Condition | `is location_inside` | 0 | 0 | 0 | 1 | 1 |
-| Condition | `is location_type` | 0 | 0 | 0 | 1 | 1 |
+| Condition | `is location_type` | 1 | 0 | 0 | 0 | 1 |
 | Condition | `is money_is` | 12 | 0 | 0 | 3 | 15 |
 | Condition | `is music_playing` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `is party_infected` | 0 | 0 | 1 | 2 | 3 |
 | Condition | `is party_size` | 45 | 0 | 0 | 5 | 50 |
 | Condition | `is player_facing_tile` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `is step_tracker` | 0 | 0 | 0 | 7 | 7 |
-| Condition | `is tile_property_updated` | 0 | 0 | 0 | 4 | 4 |
-| Condition | `is time_is` | 0 | 0 | 64 | 3 | 67 |
-| Condition | `is variable_set` | 691 | 0 | 0 | 39 | 730 |
+| Condition | `is tile_property_updated` | 4 | 0 | 0 | 0 | 4 |
+| Condition | `is time_is` | 0 | 0 | 66 | 1 | 67 |
+| Condition | `is variable_set` | 709 | 0 | 0 | 21 | 730 |
 | Condition | `not battle_outcome` | 358 | 0 | 0 | 5 | 363 |
 | Condition | `not battle_outcome_count` | 9 | 0 | 0 | 0 | 9 |
 | Condition | `not bill_exists` | 0 | 0 | 0 | 1 | 1 |
@@ -291,21 +290,21 @@ census.
 | Condition | `not char_gender` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `not char_healed` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `not char_in` | 0 | 0 | 0 | 6 | 6 |
-| Condition | `not char_sprite` | 0 | 0 | 0 | 29 | 29 |
+| Condition | `not char_sprite` | 28 | 0 | 0 | 1 | 29 |
 | Condition | `not check_char_parameter` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `not check_party_parameter` | 0 | 0 | 0 | 6 | 6 |
 | Condition | `not check_world` | 0 | 0 | 0 | 1 | 1 |
-| Condition | `not environment_is` | 169 | 0 | 0 | 3 | 172 |
+| Condition | `not environment_is` | 171 | 0 | 0 | 1 | 172 |
 | Condition | `not has_item` | 58 | 0 | 0 | 0 | 58 |
 | Condition | `not has_monster` | 11 | 0 | 0 | 0 | 11 |
 | Condition | `not has_tuxepedia` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `not kennel` | 0 | 0 | 0 | 1 | 1 |
-| Condition | `not location_inside` | 0 | 0 | 0 | 2 | 2 |
+| Condition | `not location_inside` | 1 | 0 | 0 | 1 | 2 |
 | Condition | `not location_type` | 1 | 0 | 0 | 0 | 1 |
 | Condition | `not money_is` | 6 | 0 | 0 | 3 | 9 |
 | Condition | `not music_playing` | 0 | 0 | 0 | 196 | 196 |
 | Condition | `not party_size` | 5 | 0 | 0 | 0 | 5 |
-| Condition | `not tile_property_updated` | 0 | 0 | 0 | 2 | 2 |
-| Condition | `not time_is` | 0 | 0 | 59 | 2 | 61 |
+| Condition | `not tile_property_updated` | 0 | 2 | 0 | 0 | 2 |
+| Condition | `not time_is` | 0 | 0 | 60 | 1 | 61 |
 | Condition | `not tracker` | 22 | 0 | 0 | 0 | 22 |
-| Condition | `not variable_set` | 644 | 0 | 0 | 27 | 671 |
+| Condition | `not variable_set` | 645 | 0 | 0 | 26 | 671 |
