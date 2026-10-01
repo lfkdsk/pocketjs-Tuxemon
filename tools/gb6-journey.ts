@@ -117,15 +117,16 @@ export class Driver {
   readonly maps: Gb6MapCheckpoint[] = [];
   readonly battles: Gb6BattleCheckpoint[] = [];
   state: SessionState;
-  private previousMask = 0;
+  private previousMask: number;
   private activeBattle: ActiveBattle | null = null;
   private lastMap: string;
   private lastWalkError = "";
   private lastBattleEvents: unknown[] = [];
   captureWild = false;
 
-  constructor(readonly session: Session, readonly hz: number, initial: SessionState) {
+  constructor(readonly session: Session, readonly hz: number, initial: SessionState, previousMask = 0) {
     this.state = initial;
+    this.previousMask = previousMask >>> 0;
     this.lastMap = this.state.mapId;
     this.markMap("start");
   }

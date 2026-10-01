@@ -1,0 +1,280 @@
+{
+  "format": "pocket-tuxemon/j1-goldens/v1",
+  "baseFrames": 109983,
+  "segmentTapeSha256": "21022dffcd3c19e62fc24d6ae7f94bb4c55668562c64d42114d881f28ad5a0bd",
+  "combinedTapeSha256": "df33404232ec98bc8423e2dd77978c936f7de7136c22b4da81274b101ea4d719",
+  "frames": [
+    {
+      "name": "wayfarer-guestbook",
+      "frame": 519,
+      "mergedFrame": 110502,
+      "map": "spyder_wayfarer_inn1",
+      "position": [
+        9,
+        6
+      ],
+      "width": 480,
+      "height": 272,
+      "file": "j1-wayfarer-guestbook.480x272.png",
+      "rgbaFnv1a": "23f7aff4",
+      "pngSha256": "c4972844a5daca3f536c4e649c0a94fa8b809f54f252b00c66cd0a1f458c9761",
+      "camera": [
+        0,
+        0
+      ],
+      "story": {
+        "enforcersResponseDone": 1,
+        "route4Billie": 0,
+        "routeABillie": 0,
+        "foundCaptain": 0,
+        "captainReturns": 0
+      },
+      "player": {
+        "tile": [
+          9,
+          6
+        ],
+        "pixel": [
+          144,
+          96
+        ],
+        "facing": 3,
+        "phase": 0,
+        "image": "assets/characters/player-adventurer-idle-3.png",
+        "height": 32
+      }
+    },
+    {
+      "name": "route-4-billie",
+      "frame": 4732,
+      "mergedFrame": 114715,
+      "map": "spyder_route4",
+      "position": [
+        2,
+        6
+      ],
+      "width": 480,
+      "height": 272,
+      "file": "j1-route-4-billie.480x272.png",
+      "rgbaFnv1a": "6ef63eb4",
+      "pngSha256": "636479e2a8215a2fd5561a416ebd1ce3bb62eae7d2c68e4b791a9f17a474f01a",
+      "camera": [
+        0,
+        0
+      ],
+      "story": {
+        "enforcersResponseDone": 1,
+        "route4Billie": 1,
+        "routeABillie": 0,
+        "foundCaptain": 0,
+        "captainReturns": 0
+      },
+      "player": {
+        "tile": [
+          2,
+          6
+        ],
+        "pixel": [
+          32,
+          96
+        ],
+        "facing": 2,
+        "phase": 0,
+        "image": "assets/characters/player-adventurer-idle-2.png",
+        "height": 32
+      }
+    },
+    {
+      "name": "captain-found",
+      "frame": 11052,
+      "mergedFrame": 121035,
+      "map": "spyder_mansion_basement",
+      "position": [
+        3,
+        5
+      ],
+      "width": 480,
+      "height": 272,
+      "file": "j1-captain-found.480x272.png",
+      "rgbaFnv1a": "6e0438dd",
+      "pngSha256": "bf621fcd9e58c6cc3bfe51cc9e418319eaf7e6616c19caad22cdf81a781b3b34",
+      "camera": [
+        0,
+        0
+      ],
+      "story": {
+        "enforcersResponseDone": 1,
+        "route4Billie": 1,
+        "routeABillie": 1,
+        "foundCaptain": 1,
+        "captainReturns": 0
+      },
+      "player": {
+        "tile": [
+          3,
+          5
+        ],
+        "pixel": [
+          48,
+          80
+        ],
+        "facing": 2,
+        "phase": 0,
+        "image": "assets/characters/player-adventurer-idle-2.png",
+        "height": 32
+      },
+      "actor": {
+        "id": "npc_spyder_basement_flick",
+        "tile": [
+          3,
+          4
+        ],
+        "pixel": [
+          48,
+          64
+        ],
+        "facing": 0,
+        "phase": 0,
+        "sprite": "npc.riverboatcaptain",
+        "image": "assets/characters/npc-npc-riverboatcaptain-idle-0.png",
+        "height": 32
+      }
+    },
+    {
+      "name": "wayfarer-guestbook",
+      "frame": 519,
+      "mergedFrame": 110502,
+      "map": "spyder_wayfarer_inn1",
+      "position": [
+        9,
+        6
+      ],
+      "width": 960,
+      "height": 544,
+      "file": "j1-wayfarer-guestbook.960x544.png",
+      "rgbaFnv1a": "139791f4",
+      "pngSha256": "8680c6de9d31cd1971d77ec1d7d8cb8e0076d5596f18945622d47559873e5459",
+      "camera": [
+        0,
+        0
+      ],
+      "story": {
+        "enforcersResponseDone": 1,
+        "route4Billie": 0,
+        "routeABillie": 0,
+        "foundCaptain": 0,
+        "captainReturns": 0
+      },
+      "player": {
+        "tile": [
+          9,
+          6
+        ],
+        "pixel": [
+          144,
+          96
+        ],
+        "facing": 3,
+        "phase": 0,
+        "image": "assets/characters/player-adventurer-idle-3.png",
+        "height": 32
+      }
+    },
+    {
+      "name": "route-4-billie",
+      "frame": 4732,
+      "mergedFrame": 114715,
+      "map": "spyder_route4",
+      "position": [
+        2,
+        6
+      ],
+      "width": 960,
+      "height": 544,
+      "file": "j1-route-4-billie.960x544.png",
+      "rgbaFnv1a": "d3e11caa",
+      "pngSha256": "2ac7bf53fe440a657d05eeafc0693e15c7bdede1046aad6a8126eb94e8b5f04b",
+      "camera": [
+        0,
+        0
+      ],
+      "story": {
+        "enforcersResponseDone": 1,
+        "route4Billie": 1,
+        "routeABillie": 0,
+        "foundCaptain": 0,
+        "captainReturns": 0
+      },
+      "player": {
+        "tile": [
+          2,
+          6
+        ],
+        "pixel": [
+          32,
+          96
+        ],
+        "facing": 2,
+        "phase": 0,
+        "image": "assets/characters/player-adventurer-idle-2.png",
+        "height": 32
+      }
+    },
+    {
+      "name": "captain-found",
+      "frame": 11052,
+      "mergedFrame": 121035,
+      "map": "spyder_mansion_basement",
+      "position": [
+        3,
+        5
+      ],
+      "width": 960,
+      "height": 544,
+      "file": "j1-captain-found.960x544.png",
+      "rgbaFnv1a": "4fcd2faf",
+      "pngSha256": "6de13fcf8870206b646b26f0244eb6d21e370c9648f80335de61ab427c99d36c",
+      "camera": [
+        0,
+        0
+      ],
+      "story": {
+        "enforcersResponseDone": 1,
+        "route4Billie": 1,
+        "routeABillie": 1,
+        "foundCaptain": 1,
+        "captainReturns": 0
+      },
+      "player": {
+        "tile": [
+          3,
+          5
+        ],
+        "pixel": [
+          48,
+          80
+        ],
+        "facing": 2,
+        "phase": 0,
+        "image": "assets/characters/player-adventurer-idle-2.png",
+        "height": 32
+      },
+      "actor": {
+        "id": "npc_spyder_basement_flick",
+        "tile": [
+          3,
+          4
+        ],
+        "pixel": [
+          48,
+          64
+        ],
+        "facing": 0,
+        "phase": 0,
+        "sprite": "npc.riverboatcaptain",
+        "image": "assets/characters/npc-npc-riverboatcaptain-idle-0.png",
+        "height": 32
+      }
+    }
+  ]
+}

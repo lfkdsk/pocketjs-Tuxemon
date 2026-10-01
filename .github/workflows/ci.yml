@@ -91,6 +91,13 @@ jobs:
       - name: Replay the Route 3 battle journey at 60 Hz
         run: bun run verify:gb6:mainline
 
+      # J1 is stored as a standalone continuation, but CI concatenates its
+      # input masks with GB6 and replays from frame zero so the snapshot cannot
+      # hide a historical divergence. Stateful and multi-rate checks remain in
+      # `bun run verify:j1:full` for the release/acceptance gate.
+      - name: Replay the captain-return journey from frame zero at 60 Hz
+        run: bun run verify:j1:mainline
+
       - name: Replay both battle defeat and recovery journeys
         run: bun run verify:gb6:failures
 
