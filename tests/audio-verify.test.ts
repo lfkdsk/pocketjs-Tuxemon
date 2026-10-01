@@ -87,10 +87,13 @@ describe("verify:audio integration", () => {
   // Runs the real command against the real committed assets. This is the
   // end-to-end proof that the gate is green on the shipped files (and the
   // unit tests above prove it goes red when they are tampered).
-  // verify:audio re-transcodes from the pinned Tuxemon checkout, so it needs
-  // the same source the importer reads (TUXEMON_SRC, else .tuxemon-src).
+  // verify:audio re-transcodes from the pinned Tuxemon checkout with ffmpeg,
+  // so it needs the same source the importer reads (TUXEMON_SRC, else
+  // .tuxemon-src) and an ffmpeg on PATH. The committed-blob checks above run
+  // everywhere.
   const source = process.env.TUXEMON_SRC ?? DEFAULT_TUXEMON_SRC;
-  test.skipIf(!existsSync(source))("bun run verify:audio passes on the committed assets", () => {
+  const runnable = existsSync(source) && Bun.which("ffmpeg") !== null;
+  test.skipIf(!runnable)("bun run verify:audio passes on the committed assets", () => {
     const env = { ...process.env, TUXEMON_SRC: source };
     const out = execFileSync("bun", ["run", "verify:audio"], {
       cwd: join(import.meta.dir, ".."),
