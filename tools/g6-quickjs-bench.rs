@@ -416,15 +416,29 @@ mod g6_quickjs_bench {
 
     impl Bench {
         fn string(&self, source: &str) -> String {
-            self.rt
-                .guest
-                .with(|ctx| ctx.eval::<String, _>(source).expect("QuickJS string eval"))
+            self.rt.guest.with(|ctx| match ctx.eval::<String, _>(source) {
+                Ok(value) => value,
+                Err(error) => {
+                    let message = ctx
+                        .catch()
+                        .as_exception()
+                        .map(|exception| format!("{:?}", exception.message()));
+                    panic!("QuickJS eval failed: {error} {message:?} source={source}")
+                }
+            })
         }
 
         fn boolean(&self, source: &str) -> bool {
-            self.rt
-                .guest
-                .with(|ctx| ctx.eval::<bool, _>(source).expect("QuickJS boolean eval"))
+            self.rt.guest.with(|ctx| match ctx.eval::<bool, _>(source) {
+                Ok(value) => value,
+                Err(error) => {
+                    let message = ctx
+                        .catch()
+                        .as_exception()
+                        .map(|exception| format!("{:?}", exception.message()));
+                    panic!("QuickJS eval failed: {error} {message:?} source={source}")
+                }
+            })
         }
 
         fn unit(&self, source: &str) {

@@ -6,7 +6,7 @@ import { join, resolve } from "node:path";
 import { createTuxemonExtensions } from "../battle/extension.ts";
 import { battleDbToTuxemonBattleDb } from "../battle/from-battle-db.ts";
 import { createTuxemonBattleRules } from "../battle/runtime.ts";
-import { TUXEMON_VARIABLE_ENUMS } from "../battle/game.ts";
+import { TUXEMON_SCENES, TUXEMON_VARIABLE_ENUMS } from "../battle/game.ts";
 import { canonicalJson } from "../vendor/pocket-rpgkit/src/engine/save.ts";
 import {
   createSession,
@@ -23,7 +23,7 @@ const journey = JSON.parse(readFileSync(join(ROOT, "data/g6-journey.json"), "utf
 };
 // Same pinned terminal state the G7 map repository test and the QuickJS
 // bench check; GP1 changes only how the battle database is loaded.
-const EXPECTED_TERMINAL_STATE_SHA256 = "cf3d902a4c50919aaa24780dca800e68db1780d9d2ec6e4e33c732ba89661a06";
+const EXPECTED_TERMINAL_STATE_SHA256 = "6d84498eb06a590d7b89a0a1e5a618af2bce8bca1bdb62aa2704a92e2cbde3c8";
 
 function input(mask: number, previous: number): SessionInput {
   const pressed = mask & ~previous;
@@ -33,6 +33,8 @@ function input(mask: number, previous: number): SessionInput {
     cancelEdge: !!(pressed & 0x4000),
     upEdge: !!(pressed & 0x0010),
     downEdge: !!(pressed & 0x0040),
+    leftEdge: !!(pressed & 0x0080),
+    rightEdge: !!(pressed & 0x0020),
   };
 }
 
@@ -66,10 +68,12 @@ describe("GP1 lazy battle-runtime repository", () => {
     const inlineOptions = {
       extensions: createTuxemonExtensions(inlineDb as never),
       battle: createTuxemonBattleRules(inlineDb as never, TUXEMON_VARIABLE_ENUMS),
+      scenes: TUXEMON_SCENES,
     } as const;
     const shardedOptions = {
       extensions: createTuxemonExtensions(shardedProvider),
       battle: createTuxemonBattleRules(shardedProvider, TUXEMON_VARIABLE_ENUMS),
+      scenes: TUXEMON_SCENES,
     } as const;
     const inlineSession = createSession(project, 60, inlineOptions);
     const shardedSession = createSession(project, 60, shardedOptions);

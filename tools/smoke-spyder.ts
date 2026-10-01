@@ -10,9 +10,10 @@ import { searchWalk } from "../vendor/pocket-rpgkit/src/engine/journey-search.ts
 import { canonicalJson } from "../vendor/pocket-rpgkit/src/engine/save.ts";
 import { AttractController } from "../vendor/pocket-rpgkit/src/engine/attract.ts";
 import { readInlineProject, readShardedProject } from "./generated-project.ts";
-import { TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS } from "../battle/game.ts";
+import { TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS, TUXEMON_SCENES } from "../battle/game.ts";
 import { TUXEMON_BATTLE_DB } from "../battle/game.ts";
 import { tuxemonExtensionState } from "../battle/extension.ts";
+import { utilitySceneAutoplayMask } from "./scene-autoplay.ts";
 
 const PROJECT_ROOT = resolve(process.env.G6_PROJECT_ROOT ?? new URL("..", import.meta.url).pathname);
 const OUT_DIR = resolve(process.env.G6_OUT_DIR ?? join(PROJECT_ROOT, "dist"));
@@ -28,11 +29,13 @@ const sess = createSession(project, HZ, {
   maps: sharded.repository,
   extensions: TUXEMON_EXTENSIONS,
   battle: TUXEMON_BATTLE_RULES,
+  scenes: TUXEMON_SCENES,
 });
 let st: SessionState = startSession(project, sess);
 const inlineSession = createSession(inlineProject, HZ, {
   extensions: TUXEMON_EXTENSIONS,
   battle: TUXEMON_BATTLE_RULES,
+  scenes: TUXEMON_SCENES,
 });
 let inlineState: SessionState = startSession(inlineProject, inlineSession);
 if (canonicalJson(st) !== canonicalJson(inlineState)) {
@@ -60,7 +63,7 @@ function note(s: string): void {
   journal.push(`[${String(frames).padStart(5)}] ${s}`);
 }
 
-function tick(buttons = 0, edges: { confirm?: boolean; cancel?: boolean; down?: boolean; up?: boolean } = {}): void {
+function tick(buttons = 0, edges: { confirm?: boolean; cancel?: boolean; down?: boolean; up?: boolean; left?: boolean; right?: boolean } = {}): void {
   // Record the exact PocketJS button mask that corresponds to the explicit
   // reducer edges used by this adaptive driver. Replaying these masks through
   // GameView exercises the built bundle without a second hand-authored tape.
@@ -68,10 +71,16 @@ function tick(buttons = 0, edges: { confirm?: boolean; cancel?: boolean; down?: 
     (edges.confirm ? BTN_CONFIRM : 0) |
     (edges.cancel ? BTN_CANCEL : 0) |
     (edges.down ? BTN_BITS.DOWN : 0) |
-    (edges.up ? BTN_BITS.UP : 0);
+    (edges.up ? BTN_BITS.UP : 0) |
+    (edges.left ? BTN_BITS.LEFT : 0) |
+    (edges.right ? BTN_BITS.RIGHT : 0);
   const downEdge = edges.down ?? !!((mask & BTN_BITS.DOWN) && !(prevButtons & BTN_BITS.DOWN));
   const upEdge = edges.up ?? !!((mask & BTN_BITS.UP) && !(prevButtons & BTN_BITS.UP));
-  const input = { buttons: mask, confirmEdge: !!edges.confirm, downEdge, upEdge, cancelEdge: !!edges.cancel };
+  const leftEdge = edges.left ?? !!((mask & BTN_BITS.LEFT) && !(prevButtons & BTN_BITS.LEFT));
+  const rightEdge = edges.right ?? !!((mask & BTN_BITS.RIGHT) && !(prevButtons & BTN_BITS.RIGHT));
+  const confirmEdge = edges.confirm ?? !!((mask & BTN_CONFIRM) && !(prevButtons & BTN_CONFIRM));
+  const cancelEdge = edges.cancel ?? !!((mask & BTN_CANCEL) && !(prevButtons & BTN_CANCEL));
+  const input = { buttons: mask, confirmEdge, downEdge, upEdge, leftEdge, rightEdge, cancelEdge };
   const sceneBefore = st.scene;
   st = stepSession(sess, st, input);
   inlineState = stepSession(inlineSession, inlineState, input);
@@ -116,7 +125,8 @@ function settle(answers: string[] = [], maxFrames = 3000): void {
   const startMap = st.mapId;
   for (let i = 0; i < maxFrames; i++) {
     if (st.scene) {
-      tick(0, { confirm: true });
+      const mask = st.scene.kind === "scene" ? utilitySceneAutoplayMask(st.scene) : BTN_CONFIRM;
+      tick(mask);
       tick();
       continue;
     }
@@ -383,6 +393,7 @@ const attractOptions = {
   attractEnabled: false,
   extensions: TUXEMON_EXTENSIONS,
   battle: TUXEMON_BATTLE_RULES,
+  scenes: TUXEMON_SCENES,
 } as const;
 const baseline = new AttractController(inlineProject, [], {
   ...attractOptions,

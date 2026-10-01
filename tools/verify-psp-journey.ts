@@ -72,7 +72,7 @@ if (!terminal || terminal.buildId !== receipt.journeyBuildId) {
 const tape = JSON.parse(readFileSync(join(root, "data/g6-journey.json"), "utf8")).masks as number[];
 if (terminal.frame !== tape.length) throw new Error("PSP journey length mismatch");
 const { project, repository } = readShardedProject(root);
-const { extensions, rules } = createProductionTuxemonBattle(
+const { extensions, rules, scenes } = createProductionTuxemonBattle(
   { read: (entry) => new Uint8Array(readFileSync(join(root, "dist", entry))) },
   { initialTimeWeather: timeWeatherAt(FIXED_INITIAL_CIVIL_TIME) },
 );
@@ -80,6 +80,7 @@ const sessionRuntime = createSession(project, 60, {
   maps: repository,
   extensions,
   battle: rules,
+  scenes,
   immutableState: true,
 });
 let state = startSession(project, sessionRuntime);
@@ -92,6 +93,8 @@ for (const mask of tape) {
     cancelEdge: !!(pressed & 0x4000),
     upEdge: !!(pressed & 0x10),
     downEdge: !!(pressed & 0x40),
+    leftEdge: !!(pressed & 0x80),
+    rightEdge: !!(pressed & 0x20),
   });
   previous = mask;
 }

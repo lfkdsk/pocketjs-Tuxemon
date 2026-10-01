@@ -24,7 +24,12 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
 import { tuxemonExtensionState } from "../battle/extension.ts";
-import { TUXEMON_BATTLE_DB, TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS } from "../battle/game.ts";
+import {
+  TUXEMON_BATTLE_DB,
+  TUXEMON_BATTLE_RULES,
+  TUXEMON_EXTENSIONS,
+  TUXEMON_SCENES,
+} from "../battle/game.ts";
 // Thumbnails boot the built game at the same fixed 09:00 as the reducer
 // replay; without it the daylight tint follows the machine's wall clock.
 import { FIXED_TIME_HOST_GLOBALS } from "../battle/time-weather.ts";
@@ -62,7 +67,11 @@ export const THUMB_REL = "docs/screenshots/chapters";
 export const THUMB_W = 480;
 export const THUMB_H = 272;
 
-const GAME_OPTIONS = { extensions: TUXEMON_EXTENSIONS, battle: TUXEMON_BATTLE_RULES } as const;
+const GAME_OPTIONS = {
+  extensions: TUXEMON_EXTENSIONS,
+  battle: TUXEMON_BATTLE_RULES,
+  scenes: TUXEMON_SCENES,
+} as const;
 const DEBUG = process.env.CHAPTERS_DEBUG === "1";
 
 export interface ChapterRecord {
@@ -141,6 +150,8 @@ function input(mask: number, previous: number): SessionInput {
     cancelEdge: Boolean(pressed & 0x4000),
     upEdge: Boolean(pressed & 0x0010),
     downEdge: Boolean(pressed & 0x0040),
+    leftEdge: Boolean(pressed & 0x0080),
+    rightEdge: Boolean(pressed & 0x0020),
   };
 }
 

@@ -24,7 +24,7 @@ summary:
   NPC walkers, dialogue, cutscene routes and map transfers. The Spyder
   campaign plays from the bedroom through Paper Town, Cotton Town, City Park,
   the north end of Route 3, Route 4 and Flower City to the Captain's return
-  in the Mansion and on through Candy Town to the hospital cure — 172,060
+  in the Mansion and on through Candy Town to the hospital cure — 170,983
   frames at 60 Hz for the full mainline, driven by
   deterministic autoplay tapes — and every imported input lock is executed
   to its unlock.
@@ -37,7 +37,7 @@ summary:
   Captain-return continuation — 10 trainer + 7 wild — and 56 on the way to
   the hospital cure — 50 trainer + 6 wild), and every trainer
   battle enters Battle Processing and ends `won` with its `battle_outcome`
-  written back. The frozen 30-minute 60 Hz tape (109,983 frames / 30 min 33 s)
+  written back. The frozen 30-minute 60 Hz tape (108,618 frames / 30 min 10 s)
   replays byte-identical at 60, 30 and 20 Hz, and both failure paths are
   verified — the first loss against Billie, and a later loss on Route 3
   with the faint-point teleport, the heal-before-leaving block and the
@@ -48,25 +48,26 @@ summary:
   is driven by the reducer's rewindable reference tick rather than a wall
   clock. The 578 images are indexed single-tile entries, loaded on demand
   through one battle cache and detached/freed on exit.
-- **Performance:** compact map shards use 4,191,161 B instead of 9,231,016 B
-  of canonical JSON, and indexed battle art plus its database uses 3,392,752 B
-  instead of 26,440,560 B. The Web game pak is 39,253,664 B; before compact
+- **Names and Tuxepedia:** the authored player- and monster-name prompts use
+  saved, rewindable game scenes. Seen/caught status is persistent and monotonic;
+  journal previews and the normal browser render monster details through the
+  same indexed, lazily loaded battle-image shards as combat.
+- **Performance:** compact map shards use 4,259,041 B instead of 9,312,231 B
+  of canonical JSON, and indexed battle art plus its lazy database occupies
+  3,427,760 B in the pak. The Web game pak is 46,766,928 B; before compact
   maps and indexed battle art it was 66,791,328 B, measured on the tree just
   before day and night were added. The all-image battle encoding is
   2,158,468 B on disk and 13,185,792 B if every PSM_T8 texture were decoded,
   but only the active battle working set is resident.
 
-  On the desktop QuickJS host (measured 2026-10-01), startup to first frame is
-  128.943 ms / 130.491 ms; walking p95 is 1.126 ms / 1.087 ms; journey map
-  switches peak at 8.947 ms / 9.360 ms; battle entry peaks at 19.357 ms /
-  24.038 ms and exit at 1.344 ms / 1.328 ms (480×272 / 960×544, CPU time).
-  The full 109,983-frame, 100-battle replay at 480×272 has a 0.265 ms steady
-  battle p95, 7.642 ms entry p95, 3.155 ms exit p95 and a 32.489 ms slowest CPU
-  frame. Across all 263 maps, a compact shard's staged cold first visit is
-  11.724 ms p95 and 39.846 ms maximum. The QuickJS benches assert a 250 ms
-  startup budget and a 50 ms per-frame CPU budget.
-- **Import coverage:** 90.5% of Tuxemon action uses and 94.3% of condition
-  uses map natively to kit commands; 95.2% / 94.4% are executable (native,
+  On the desktop QuickJS host (measured 2026-10-01), the full 108,618-frame,
+  100-battle replay starts in 139.954 ms / 140.861 ms and its slowest CPU frame
+  is 37.663 ms / 43.475 ms (480×272 / 960×544). Battle entry peaks at
+  19.416 ms / 19.748 ms and exit at 4.546 ms / 4.875 ms. Both runs match the
+  canonical terminal state. The QuickJS benches assert a 250 ms startup budget
+  and a 50 ms per-frame CPU budget.
+- **Import coverage:** 90.5% of Tuxemon action uses and 94.5% of condition
+  uses map natively to kit commands; 95.5% / 94.5% are executable (native,
   degraded, or a deliberate placeholder). The full per-type breakdown is in
   [reports/G1-coverage.md](reports/G1-coverage.md).
 - **Day/night:** a saved, rewindable calendar drives Tuxemon's time conditions
@@ -124,7 +125,7 @@ properties from the decoded pixels as well as pinning the PNG bytes.
   `bun run desktop` for the desktop host.
 - **Keys:** arrows walk, `A`/`Z`/`Enter` talks and confirms, `B`/`Esc` goes back.
 
-CI also plays the 3,793-frame opening journey — bedroom, Paper Town, the
+CI also plays the 3,342-frame opening journey — bedroom, Paper Town, the
 first battle, Route 1 — in headless Chrome against the built site
 (`bun tools/verify-web-journey.ts`) and checks every checkpoint's state and
 pixels against the goldens.
@@ -160,9 +161,9 @@ checkout instead, set `TUXEMON_SRC` to its path (e.g.
 
 The PSP build keeps the complete resource archive beside the executable so
 textures and map shards can be read by index instead of occupying the EBOOT.
-The current build contains all 263 maps and all battle art in a
-39,021,296-byte `assets.pak`; its embedded boot pak is 992,608 bytes and holds
-only fonts, sprite atlases, styles and the external archive index.
+The current build keeps all 263 maps, audio and battle art in a seekable
+`assets.pak`; its small embedded boot pak holds only fonts, sprite atlases,
+styles and the external archive index.
 
 Install PocketJS's pinned, checksum-verified PSP SDK, Rust nightly and
 `cargo-psp` once, then build the game:
@@ -186,7 +187,7 @@ compare the completed session with a fresh production replay:
 bun run verify:psp:journey -- path/to/profile.jsonl
 ```
 
-The 3,793-frame opening journey (bedroom through the Billie battle to Route 1)
+The 3,342-frame opening journey (bedroom through the Billie battle to Route 1)
 passes this check under PPSSPP, including its PSP double-ABI probe. A captured
 480×272 framebuffer was also checked for the bedroom and dialogue UI. Emulator
 timings are not hardware results: doodlewind's 333 MHz, firmware 6.61 device

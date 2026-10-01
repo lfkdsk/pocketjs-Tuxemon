@@ -55,6 +55,8 @@ const title = (slug: string): string => slug
   .map((part) => part ? part[0]!.toUpperCase() + part.slice(1) : part)
   .join(" ");
 
+const monsterName = (monster: Readonly<BattleMonster>): string => monster.nickname ?? title(monster.slug);
+
 const imageSource = (ref: BattleImageRef): TileImageSource => ({
   kind: "tile",
   ref: ref.key,
@@ -64,26 +66,29 @@ const imageSource = (ref: BattleImageRef): TileImageSource => ({
 
 function eventMessage(state: Runtime, event: BattleEvent | null, monsters: readonly BattleMonster[], tick: number): string {
   if (!event) return "Choose an action";
-  const monster = (uid: unknown) => monsters.find((candidate) => candidate.uid === uid)?.slug ?? "Tuxemon";
+  const monster = (uid: unknown) => {
+    const found = monsters.find((candidate) => candidate.uid === uid);
+    return found ? monsterName(found) : "Tuxemon";
+  };
   switch (event.type) {
-    case "sendOut": return `${title(monster(event.monster))} enters the battle!`;
-    case "decision": return `${title(monster(event.user))} chose ${title(String(event.technique ?? "move"))}.`;
+    case "sendOut": return `${monster(event.monster)} enters the battle!`;
+    case "decision": return `${monster(event.user)} chose ${title(String(event.technique ?? "move"))}.`;
     case "technique": {
       if (tick >= 34 && event.hit === false) return "The attack missed!";
       if (tick >= 34 && Number(event.damage) > 0) return `${Math.trunc(Number(event.damage))} damage!`;
-      return `${title(monster(event.user))} used ${title(String(event.technique ?? "move"))}!`;
+      return `${monster(event.user)} used ${title(String(event.technique ?? "move"))}!`;
     }
     case "faint": {
       const reward = currentReward(state);
       if (reward && tick >= REWARD_TICK) {
         const winner = reward.winners[0];
-        if (winner?.levelsGained) return `${title(monster(winner.uid))} grew ${winner.levelsGained} level${winner.levelsGained === 1 ? "" : "s"}!`;
-        if (winner) return `${title(monster(winner.uid))} gained ${winner.effectiveExperience} XP!`;
+        if (winner?.levelsGained) return `${monster(winner.uid)} grew ${winner.levelsGained} level${winner.levelsGained === 1 ? "" : "s"}!`;
+        if (winner) return `${monster(winner.uid)} gained ${winner.effectiveExperience} XP!`;
       }
-      return `${title(monster(event.monster))} fainted!`;
+      return `${monster(event.monster)} fainted!`;
     }
-    case "status": return `${title(monster(event.target))}: ${title(String(event.status ?? "status"))}.`;
-    case "item": return `${title(String(event.item ?? "item"))} used on ${title(monster(event.target))}.`;
+    case "status": return `${monster(event.target)}: ${title(String(event.status ?? "status"))}.`;
+    case "item": return `${title(String(event.item ?? "item"))} used on ${monster(event.target)}.`;
     case "capture": {
       const landed = tick - CAPTURE_FLIGHT_TICKS;
       const shakes = Math.max(1, Math.trunc(Number(event.shakes) || 1));
@@ -92,11 +97,11 @@ function eventMessage(state: Runtime, event: BattleEvent | null, monsters: reado
         return `${count} shake${count === 1 ? "" : "s"}...`;
       }
       return event.success
-        ? `${title(monster(event.target))} was captured!`
-        : `${title(monster(event.target))} broke free!`;
+        ? `${monster(event.target)} was captured!`
+        : `${monster(event.target)} broke free!`;
     }
     case "run": return event.success ? "Got away safely!" : "Couldn't escape!";
-    case "swap": return `${title(monster(event.target))} enters the battle!`;
+    case "swap": return `${monster(event.target)} enters the battle!`;
     case "end": return event.outcome === "won" ? "Victory!"
       : event.outcome === "lost" ? "Your party was defeated."
         : "The battle is over.";
@@ -250,7 +255,7 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
     if (result) return result.outcome === "won" ? "Victory!"
       : result.outcome === "lost" ? "Your party was defeated."
         : "The battle ended.";
-    return runtime().menuMode === "root" ? `What will ${title(player().slug)} do?`
+    return runtime().menuMode === "root" ? `What will ${monsterName(player())} do?`
       : runtime().menuMode === "technique" ? "Choose a technique"
         : runtime().menuMode === "swap" ? "Choose a Tuxemon"
           : runtime().menuMode === "capture" ? "Choose a capture device"
@@ -421,7 +426,7 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
     const hp = side === 0 ? R.playerHp : R.enemyHp;
     const status = side === 0 ? R.playerStatus : R.enemyStatus;
     const icon = createMemo(() => monster().status ? runtime().visuals.statusIcons[monster().status!.slug] : undefined);
-    const label = createMemo(() => `${title(monster().slug)}  Lv${shownLevel()} ${genderMark(monster().gender)}`);
+    const label = createMemo(() => `${monsterName(monster())}  Lv${shownLevel()} ${genderMark(monster().gender)}`);
     return (
       <>
         <LazyImage

@@ -6,8 +6,9 @@ import { join, resolve } from "node:path";
 
 import { battleAutoplayInput } from "../battle/autoplay.ts";
 import { tuxemonExtensionState } from "../battle/extension.ts";
+import { utilitySceneAutoplayMask } from "./scene-autoplay.ts";
 import { battleDbToTuxemonBattleDb } from "../battle/from-battle-db.ts";
-import { TUXEMON_BATTLE_DB, TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS } from "../battle/game.ts";
+import { TUXEMON_BATTLE_DB, TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS, TUXEMON_SCENES } from "../battle/game.ts";
 import { tuxemonRuntimeBattleState } from "../battle/runtime.ts";
 import type { RuntimeBattleState } from "../battle/runtime.ts";
 import type { SpawnedMonsterSnapshot } from "../battle/types.ts";
@@ -143,11 +144,13 @@ export class Driver {
       cancelEdge: Boolean((mask & BTN_CANCEL) && !(this.previousMask & BTN_CANCEL)),
       downEdge: Boolean((mask & BTN_BITS.DOWN) && !(this.previousMask & BTN_BITS.DOWN)),
       upEdge: Boolean((mask & BTN_BITS.UP) && !(this.previousMask & BTN_BITS.UP)),
+      leftEdge: Boolean((mask & BTN_BITS.LEFT) && !(this.previousMask & BTN_BITS.LEFT)),
+      rightEdge: Boolean((mask & BTN_BITS.RIGHT) && !(this.previousMask & BTN_BITS.RIGHT)),
     };
     this.state = stepSession(this.session, this.state, input);
     this.previousMask = mask;
     this.masks.push(mask >>> 0);
-    if (!sceneBefore && this.state.scene) {
+    if ((!sceneBefore || sceneBefore.kind !== "battle") && this.state.scene?.kind === "battle") {
       const battle = tuxemonRuntimeBattleState(this.state.scene.state);
       this.activeBattle = {
         opponent: battle.battle.opponent,
@@ -157,7 +160,7 @@ export class Driver {
         enemy: battle.battle.parties[1].map((monster) => ({ slug: monster.slug, level: monster.level })),
       };
     }
-    if (sceneBefore && !this.state.scene) {
+    if (sceneBefore?.kind === "battle" && this.state.scene?.kind !== "battle") {
       const battle = tuxemonRuntimeBattleState(sceneBefore.state);
       this.lastBattleEvents = battle.battle.events.slice(-40);
       const active = this.activeBattle;
@@ -215,6 +218,11 @@ export class Driver {
     let idle = 0;
     for (let guard = 0; guard < maxFrames; guard++) {
       if (this.state.scene) {
+        if (this.state.scene.kind === "scene") {
+          this.pulse(utilitySceneAutoplayMask(this.state.scene));
+          idle = 0;
+          continue;
+        }
         const battle = tuxemonRuntimeBattleState(this.state.scene.state);
         const input = battleAutoplayInput(RULE_DB, battle, {
           capture: this.captureWild ? "uncaught" : "never",
@@ -480,6 +488,7 @@ export function runGb6Journey(hz = 60): Gb6JourneyResult {
   const session = createSession(project, hz, {
     extensions: TUXEMON_EXTENSIONS,
     battle: TUXEMON_BATTLE_RULES,
+    scenes: TUXEMON_SCENES,
   });
   const driver = new Driver(session, hz, startSession(project, session));
   driver.replayPrefix();

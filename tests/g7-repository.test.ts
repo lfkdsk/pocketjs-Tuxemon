@@ -26,17 +26,18 @@ import {
 import { AttractController } from "../vendor/pocket-rpgkit/src/engine/attract.ts";
 import type { ProjectShell } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 import { readInlineProject, readShardedProject } from "../tools/generated-project.ts";
-import { TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS } from "../battle/game.ts";
+import { TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS, TUXEMON_SCENES } from "../battle/game.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
 const journey = JSON.parse(readFileSync(join(ROOT, "data/g6-journey.json"), "utf8")) as {
   masks: number[];
+  checkpoints: Array<{ name: string; frame: number }>;
 };
-const GAME_OPTIONS = { extensions: TUXEMON_EXTENSIONS, battle: TUXEMON_BATTLE_RULES } as const;
+const GAME_OPTIONS = { extensions: TUXEMON_EXTENSIONS, battle: TUXEMON_BATTLE_RULES, scenes: TUXEMON_SCENES } as const;
 // Pin the complete post-Billie state, including the spawned Nut, battle
 // history, shared-session rewards, independent battle/weather RNG cursors,
 // saved clock, daylight marker/tint, shop stock, and scene/queue slots.
-const EXPECTED_TERMINAL_STATE_SHA256 = "cf3d902a4c50919aaa24780dca800e68db1780d9d2ec6e4e33c732ba89661a06";
+const EXPECTED_TERMINAL_STATE_SHA256 = "6d84498eb06a590d7b89a0a1e5a618af2bce8bca1bdb62aa2704a92e2cbde3c8";
 
 function input(mask: number, previous: number): SessionInput {
   const pressed = mask & ~previous;
@@ -46,6 +47,8 @@ function input(mask: number, previous: number): SessionInput {
     cancelEdge: !!(pressed & 0x4000),
     upEdge: !!(pressed & 0x0010),
     downEdge: !!(pressed & 0x0040),
+    leftEdge: !!(pressed & 0x0080),
+    rightEdge: !!(pressed & 0x0020),
   };
 }
 
@@ -120,14 +123,19 @@ describe("G6 production map repository", () => {
     let inlineEnvelope = "";
     let shardedEnvelope = "";
     let savedMap = "";
+    const saveFrame = journey.checkpoints.find((mark) => mark.name === "bedroom")?.frame;
+    const endFrame = journey.checkpoints.find((mark) => mark.name === "downstairs-mom")?.frame;
+    if (saveFrame === undefined || endFrame === undefined) {
+      throw new Error("G7 repository: maintained journey is missing save/eviction checkpoints");
+    }
 
-    for (let frame = 0; frame <= 1367; frame++) {
+    for (let frame = 0; frame <= endFrame; frame++) {
       const mask = journey.masks[frame]!;
       const frameInput = input(mask, previous);
       inlineState = stepSession(inlineSession, inlineState, frameInput);
       shardedState = stepSession(shardedSession, shardedState, frameInput);
       previous = mask;
-      if (frame === 1292) {
+      if (frame === saveFrame) {
         savedMap = shardedState.mapId;
         const inlineSnapshot = createSessionSnapshot(inlineSession, inlineState, mask);
         const shardedSnapshot = createSessionSnapshot(shardedSession, shardedState, mask);
@@ -138,8 +146,8 @@ describe("G6 production map repository", () => {
       }
     }
 
-    expect(savedMap).toBe("spyder_downstairs");
-    expect(shardedState.mapId).toBe("spyder_paper_town");
+    expect(savedMap).toBe("spyder_bedroom");
+    expect(shardedState.mapId).toBe("spyder_downstairs");
     expect(shardedSession.maps.has(savedMap)).toBeFalse();
     const restoredInline = restoreSessionSnapshot(
       inlineSession,

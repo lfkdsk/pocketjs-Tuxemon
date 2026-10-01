@@ -128,6 +128,37 @@ describe("Tuxemon party extension", () => {
     expect(state.sw.rng).toBe(expectedCursor);
   });
 
+  test("keeps Tuxepedia status monotonic and persists a selected monster nickname", () => {
+    const { state } = run([
+      { op: "ext", call: "tux.set_tuxepedia", args: { character: "player", species: "rockitten", status: "seen" } },
+      { op: "ext", call: "tux.set_tuxepedia", args: { character: "player", species: "rockitten", status: "seen" } },
+      { op: "ext", call: "tux.set_tuxepedia", args: { character: "player", species: "budaye", status: "seen" } },
+      { op: "ext", call: "tux.set_tuxepedia", args: { character: "player", species: "rockitten", status: "caught" } },
+      { op: "ext", call: "tux.set_tuxepedia", args: { character: "player", species: "rockitten", status: "seen" } },
+      { op: "ext", call: "tux.add_monster", args: { species: "nut", level: 5 } },
+      {
+        op: "ext",
+        call: "tux.prepare_monster_rename",
+        args: { variable: "v.add_monster", nameVariable: "tux.rename.name" },
+      },
+    ]);
+    expect(state.sw.variables["tux.rename.name"]).toBe(DB.monsters.nut.name);
+    const apply = createTuxemonExtensions(DB).commands!["tux.apply_monster_rename"]!;
+    const renamed = apply({
+      ext: state.ext,
+      switches: state.sw.switches,
+      variables: { ...state.sw.variables, "tux.rename.name": "Sprout" },
+      items: state.sw.items,
+      gold: state.sw.gold,
+      playerName: state.sw.playerName,
+      random: () => { throw new Error("rename must not consume RNG"); },
+    }, { variable: "v.add_monster", nameVariable: "tux.rename.name" });
+    const ext = tuxemonExtensionState(renamed!.ext!, DB);
+    expect(ext.seen).toEqual(["budaye"]);
+    expect(ext.caught).toEqual(["rockitten", "nut"]);
+    expect(ext.party[0]).toMatchObject({ slug: "nut", nickname: "Sprout" });
+  });
+
   test("routes overflow into a bounded kennel and still consumes each spawn", () => {
     const options = createTuxemonExtensions(DB);
     const add = options.commands!["tux.add_monster"]!;
@@ -196,6 +227,7 @@ describe("Tuxemon party extension", () => {
     const pending = tuxemonExtensionState(added.state.ext, DB);
     pending.party[0] = {
       ...pending.party[0]!,
+      nickname: "Spike",
       waitingToEvolve: true,
       captureDevice: "tuxeball_ancient",
       status: "poison",
@@ -213,6 +245,7 @@ describe("Tuxemon party extension", () => {
     expect(after.party[0]).toMatchObject({
       iid: pending.party[0]!.iid,
       slug: "puparmor",
+      nickname: "Spike",
       stage: "stage1",
       captureDevice: "tuxeball_ancient",
       status: "poison",
@@ -353,6 +386,7 @@ describe("Tuxemon party extension", () => {
       money: 300,
     } as Record<string, unknown>;
     delete legacy.runAttempts;
+    delete legacy.seen;
     delete legacy.clock;
     delete legacy.weather;
     const migrated = createTuxemonExtensions(DB).codec!.decode({
@@ -360,7 +394,7 @@ describe("Tuxemon party extension", () => {
       state: legacy as JsonValue,
     });
     const migratedState = tuxemonExtensionState(migrated, DB);
-    expect(migratedState).toMatchObject({ runAttempts: 0 });
+    expect(migratedState).toMatchObject({ runAttempts: 0, seen: [] });
     expect(snapshotFromClock(migratedState.clock)).toMatchObject({
       year: 2024,
       month: 6,
@@ -387,6 +421,15 @@ describe("Tuxemon party extension", () => {
     const invalidAttempts = { ...initialTuxemonExtensionState(), runAttempts: -1 };
     expect(() => startSession(project([]), played.session, undefined, invalidAttempts as unknown as JsonValue))
       .toThrow(/runAttempts must be a non-negative safe integer/);
+    const overlapping = { ...initialTuxemonExtensionState(), seen: ["nut"], caught: ["nut"] };
+    expect(() => startSession(project([]), played.session, undefined, overlapping as unknown as JsonValue))
+      .toThrow(/seen and caught must be disjoint/);
+    const invalidNickname = { ...initialTuxemonExtensionState(), party: [{
+      ...tuxemonExtensionState(played.state.ext, DB).party[0]!,
+      nickname: "",
+    }] };
+    expect(() => startSession(project([]), played.session, undefined, invalidNickname as unknown as JsonValue))
+      .toThrow(/nickname must contain 1\.\.15 characters/);
   });
 
   test("rewind refolds monster identity, attributes, and RNG byte-for-byte", () => {

@@ -13,7 +13,7 @@ Per-action numbers come from the import coverage report,
 
 | Feature | Status | Notes |
 | --- | --- | --- |
-| All 263 maps imported, terrain matching Tuxemon's renders | Done | One-way ledges, animated tiles and 16×32 walkers. Maps load one at a time from self-describing compact shards; all 263 currently use `rpgkit-map/1` (4,191,161 B rather than 9,231,016 B of canonical JSON). See [architecture](architecture.md) |
+| All 263 maps imported, terrain matching Tuxemon's renders | Done | One-way ledges, animated tiles and 16×32 walkers. Maps load one at a time from self-describing compact shards; all 263 currently use `rpgkit-map/1` (4,259,041 B rather than 9,312,231 B of canonical JSON). See [architecture](architecture.md) |
 | Map transfers | Done | 1,042 of 1,049 `transition_teleport` uses are native |
 | Seamless outdoor world | Partial | The outdoor-world topology index is built at import time. Travelling between maps without a transfer is planned |
 
@@ -21,7 +21,7 @@ Per-action numbers come from the import coverage report,
 
 | Feature | Status | Notes |
 | --- | --- | --- |
-| Event import | Partial | 90.5% of action uses and 94.3% of condition uses are native; 95.2% and 94.4%, respectively, are executable. The rest is dropped or a visible placeholder, each with a reason; see [importer](importer.md) |
+| Event import | Partial | 90.5% of action uses and 94.5% of condition uses are native; 95.5% and 94.5%, respectively, are executable. The rest is dropped or a visible placeholder, each with a reason; see [importer](importer.md) |
 | Dialogue, choices, variables, items, NPC creation and removal | Done | Imported from the scenario YAML, TMX properties and the en_US `.po` strings |
 | Input locks | Done | Every imported input lock runs to its unlock (`verify:g6:locks`); no map can freeze the player (`verify:g6:frozen`) |
 | `WorldState` gating through the kit's `worldIdle` condition | Done | Compared against upstream Tuxemon runs |
@@ -61,10 +61,11 @@ Per-action numbers come from the import coverage report,
 | Feature | Status | Notes |
 | --- | --- | --- |
 | Adding monsters, party size and health changes | Done | |
-| Choosing a party monster (`get_player_monster`, `choice_monster`) | Partial | The starter prompt is lowered to an ordinary choice; the 17 `get_player_monster` uses are dropped. In progress: extension-driven choice boxes |
+| Choosing a party monster (`get_player_monster`, `choice_monster`) | Partial | The starter prompt remains an ordinary choice. Two rename-form `get_player_monster` uses open the saved party picker and return a stable monster ID; the other 15 general uses remain dropped |
 | Removing a monster (`remove_monster`) | Partial | Only lowers the party size |
-| PC storage, trading, daycare and kennel, renaming the player or a monster | Planned | They need the kit's game-scene host, which is in progress |
-| Tuxepedia and journal (`set_tuxepedia`, `open_journal`) | Planned | |
+| Renaming the player or a monster | Partial | All five authored player prompts and both monster prompts use saved, rewindable scenes. Player prompts omit upstream NPC targeting and random-name generation |
+| PC storage, trading, daycare and kennel | Planned | The game-scene host is available, but these systems are not wired yet |
+| Tuxepedia and journal (`set_tuxepedia`, `open_journal`) | Partial | Persistent `seen`/`caught` state is monotonic, journal rows/details use indexed lazy battle art, and all 14 authored direct previews open without mutating discovery. A player-facing menu entry and NPC-owned journal counters/removal are not implemented; see [the GI-2a report](../findings/GI2a.md) |
 
 ## Shops
 
@@ -100,18 +101,18 @@ Per-action numbers come from the import coverage report,
 
 | Segment | Status | Notes |
 | --- | --- | --- |
-| Bedroom → end of Route 3 | Done | 109,983 frames, 100 real battles. Replays byte-identical at 60, 30 and 20 Hz (`verify:gb6:mainline`) |
-| Route 3 → Captain's return | Done | Continues to 122,145 frames in total, with 17 more battles (`verify:j1:mainline`) |
-| Captain's return → hospital cure | Done | Continues to 172,060 frames in total, with 56 more battles (50 trainer, 6 wild), ending with the hospital cure in Candy Town (`verify:j2:mainline`) |
+| Bedroom → end of Route 3 | Done | 108,618 frames, 100 real battles. Replays byte-identical at 60, 30 and 20 Hz (`verify:gb6:mainline`) |
+| Route 3 → Captain's return | Done | Continues to 121,224 frames in total, with 17 more battles (`verify:j1:mainline`) |
+| Captain's return → hospital cure | Done | Continues to 170,983 frames in total, with 56 more battles (50 trainer, 6 wild), ending with the hospital cure in Candy Town (`verify:j2:mainline`) |
 
 ## Platforms and performance
 
 | Feature | Status | Notes |
 | --- | --- | --- |
-| Web | Done | Deployed to GitHub Pages from `main` after CI passes. The game pak is 39,253,664 B; it was 66.8 MB before compact maps and indexed battle art. The browser renders at 2× density: fonts use native physical samples while tiles and sprites stay nearest-neighbour; compare the [Paper Town dialog](screenshots/web-density-paper-dialog.png) and [battle menu](screenshots/web-density-battle-menu.png). CI plays the journey in headless Chrome |
+| Web | Done | Deployed to GitHub Pages from `main` after CI passes. The game pak is 46,766,928 B including the committed mainline audio; it was 66.8 MB before compact maps and indexed battle art. The browser renders at 2× density: fonts use native physical samples while tiles and sprites stay nearest-neighbour; compare the [Paper Town dialog](screenshots/web-density-paper-dialog.png) and [battle menu](screenshots/web-density-battle-menu.png). CI plays the journey in headless Chrome |
 | Desktop (Linux, macOS) | Done | `bun run desktop`; the launcher enables ALSA when its development package is available and otherwise builds the silent host automatically |
-| PSP | Partial | `bun run build:psp` emits an EBOOT with a 992,608-byte boot pak and a seekable 39,021,296-byte `assets.pak` sidecar containing all 263 maps and battle art. The 3,793-frame opening journey reaches Route 1 and matches the production replay under PPSSPP; a 333 MHz firmware 6.61 hardware run reports 43–60 displayed fps. Map/texture-load stalls remain, emulator timing is not hardware evidence, and the full 100-battle mainline has not run on device. See the [PSP build instructions](../README.md#psp) |
-| Startup and frame time | Done | The desktop QuickJS benches enforce 250 ms startup and 50 ms frame budgets, reject a desktop bundle built from different map shards, and take the GB6 terminal hash from its tape. At 480×272, the 109,983-frame replay has a 0.265 ms steady-battle p95, 7.642 ms battle-entry p95, 3.155 ms exit p95 and a 32.489 ms slowest CPU frame. Compact-map staged cold first visits are 11.724 ms p95 and 39.846 ms maximum across all maps. See [verification](verification.md) and the dated measurements in the README |
+| PSP | Partial | `bun run build:psp` emits an EBOOT with a small boot pak and a seekable `assets.pak` sidecar containing all 263 maps, audio and battle art. The 3,342-frame opening journey reaches Route 1 and matches the production replay under PPSSPP; a 333 MHz firmware 6.61 hardware run reports 43–60 displayed fps. Map/texture-load stalls remain, emulator timing is not hardware evidence, and the full 100-battle mainline has not run on device. See the [PSP build instructions](../README.md#psp) |
+| Startup and frame time | Done | The desktop QuickJS benches enforce 250 ms startup and 50 ms frame budgets, reject a desktop bundle built from different map shards, and take the GB6 terminal hash from its tape. The 108,618-frame replay's slowest CPU frame is 37.663 ms at 480×272 and 43.475 ms at 960×544; both are below budget and match the canonical terminal state. See [verification](verification.md) and the dated measurements in the README |
 
 ## Verification and CI
 

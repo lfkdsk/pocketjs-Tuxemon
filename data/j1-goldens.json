@@ -1,13 +1,13 @@
 {
   "format": "pocket-tuxemon/j1-goldens/v1",
-  "baseFrames": 109983,
-  "segmentTapeSha256": "21022dffcd3c19e62fc24d6ae7f94bb4c55668562c64d42114d881f28ad5a0bd",
-  "combinedTapeSha256": "df33404232ec98bc8423e2dd77978c936f7de7136c22b4da81274b101ea4d719",
+  "baseFrames": 108618,
+  "segmentTapeSha256": "f13f31632fa4d9503c44dc880f78ba05ef81926868dc6ac8cb0100b0be486e1b",
+  "combinedTapeSha256": "40b0ba327683985da318f3375d5367c5e60d8c38e44e3b13d89b8992ca9ad33a",
   "frames": [
     {
       "name": "wayfarer-guestbook",
       "frame": 519,
-      "mergedFrame": 110502,
+      "mergedFrame": 109137,
       "map": "spyder_wayfarer_inn1",
       "position": [
         9,
@@ -47,7 +47,7 @@
     {
       "name": "route-4-billie",
       "frame": 4732,
-      "mergedFrame": 114715,
+      "mergedFrame": 113350,
       "map": "spyder_route4",
       "position": [
         2,
@@ -56,8 +56,8 @@
       "width": 480,
       "height": 272,
       "file": "j1-route-4-billie.480x272.png",
-      "rgbaFnv1a": "6ef63eb4",
-      "pngSha256": "636479e2a8215a2fd5561a416ebd1ce3bb62eae7d2c68e4b791a9f17a474f01a",
+      "rgbaFnv1a": "5a7bb4cc",
+      "pngSha256": "181e9c19755062b1970c7f479a6c018302c93f4f76a925a189b7b8c0c23330de",
       "camera": [
         0,
         0
@@ -86,8 +86,8 @@
     },
     {
       "name": "captain-found",
-      "frame": 11052,
-      "mergedFrame": 121035,
+      "frame": 11496,
+      "mergedFrame": 120114,
       "map": "spyder_mansion_basement",
       "position": [
         3,
@@ -143,7 +143,7 @@
     {
       "name": "wayfarer-guestbook",
       "frame": 519,
-      "mergedFrame": 110502,
+      "mergedFrame": 109137,
       "map": "spyder_wayfarer_inn1",
       "position": [
         9,
@@ -183,7 +183,7 @@
     {
       "name": "route-4-billie",
       "frame": 4732,
-      "mergedFrame": 114715,
+      "mergedFrame": 113350,
       "map": "spyder_route4",
       "position": [
         2,
@@ -192,8 +192,8 @@
       "width": 960,
       "height": 544,
       "file": "j1-route-4-billie.960x544.png",
-      "rgbaFnv1a": "d3e11caa",
-      "pngSha256": "2ac7bf53fe440a657d05eeafc0693e15c7bdede1046aad6a8126eb94e8b5f04b",
+      "rgbaFnv1a": "78ab8e10",
+      "pngSha256": "61207991654db78d6d7a55741285237db9e2afac07a16240c807b8bd0f12f8d0",
       "camera": [
         0,
         0
@@ -222,8 +222,8 @@
     },
     {
       "name": "captain-found",
-      "frame": 11052,
-      "mergedFrame": 121035,
+      "frame": 11496,
+      "mergedFrame": 120114,
       "map": "spyder_mansion_basement",
       "position": [
         3,

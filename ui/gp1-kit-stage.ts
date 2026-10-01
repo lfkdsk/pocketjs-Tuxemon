@@ -9,8 +9,19 @@ import { mount, pakGet } from "@pocketjs/framework";
 import { fsHost, readFileSync } from "@pocketjs/framework/fs";
 import { createJsonMapRepository } from "../vendor/pocket-rpgkit/src/engine/map-repository.ts";
 import { GameView } from "../vendor/pocket-rpgkit/src/ui/GameView.tsx";
+import { NAME_INPUT_SCENE_ID } from "../vendor/pocket-rpgkit/src/engine/name-input.ts";
+import { NameInputScene } from "../vendor/pocket-rpgkit/src/ui/name-input/NameInputScene.tsx";
 import { gp1Mark } from "./gp1-marks.ts";
 
-export { mount, pakGet, fsHost, readFileSync, createJsonMapRepository, GameView };
+export {
+  mount,
+  pakGet,
+  fsHost,
+  readFileSync,
+  createJsonMapRepository,
+  GameView,
+  NAME_INPUT_SCENE_ID,
+  NameInputScene,
+};
 
 gp1Mark("engine");

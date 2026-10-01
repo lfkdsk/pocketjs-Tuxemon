@@ -5,7 +5,7 @@ import { createHash } from "node:crypto";
 import { readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
-import { TUXEMON_BATTLE_DB, TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS } from "../battle/game.ts";
+import { TUXEMON_BATTLE_DB, TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS, TUXEMON_SCENES } from "../battle/game.ts";
 import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
 import { restoreSessionSnapshot } from "../vendor/pocket-rpgkit/src/engine/save-restore.ts";
 import {
@@ -78,7 +78,7 @@ export interface J1BaseState {
   masks: number[];
 }
 
-const GAME_OPTIONS = { extensions: TUXEMON_EXTENSIONS, battle: TUXEMON_BATTLE_RULES } as const;
+const GAME_OPTIONS = { extensions: TUXEMON_EXTENSIONS, battle: TUXEMON_BATTLE_RULES, scenes: TUXEMON_SCENES } as const;
 
 function sha256(value: string): string {
   return createHash("sha256").update(value).digest("hex");
@@ -92,6 +92,8 @@ function input(mask: number, previous: number): SessionInput {
     cancelEdge: Boolean(pressed & 0x4000),
     upEdge: Boolean(pressed & BTN_BITS.UP),
     downEdge: Boolean(pressed & BTN_BITS.DOWN),
+    leftEdge: Boolean(pressed & BTN_BITS.LEFT),
+    rightEdge: Boolean(pressed & BTN_BITS.RIGHT),
   };
 }
 

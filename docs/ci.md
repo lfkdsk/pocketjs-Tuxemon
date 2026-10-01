@@ -61,9 +61,9 @@ Seven parallel legs, one `bun run verify:*` script each:
 
 | Leg | Script | What it proves |
 |---|---|---|
-| Route 3 battle journey at 60 Hz | `verify:gb6:mainline` | the 109,983-frame mainline tape replays to the frozen terminal state with every map and battle checkpoint intact. |
+| Route 3 battle journey at 60 Hz | `verify:gb6:mainline` | the 108,618-frame mainline tape replays to the frozen terminal state with every map and battle checkpoint intact. |
 | Captain-return journey from frame zero at 60 Hz | `verify:j1:mainline` | the J1 continuation, concatenated with the GB6 tape and replayed from frame zero, ends at the Captain's return. |
-| Hospital-cure journey from frame zero at 60 Hz | `verify:j2:mainline` | the J2 continuation, concatenated with GB6 and J1 and replayed from frame zero (172,060 frames), ends with the hospital cure. |
+| Hospital-cure journey from frame zero at 60 Hz | `verify:j2:mainline` | the J2 continuation, concatenated with GB6 and J1 and replayed from frame zero (170,983 frames), ends with the hospital cure. |
 | Battle defeat and recovery journeys | `verify:gb6:failures` | both committed defeat tapes replay with their visible recovery order. |
 | Every imported input lock is executed to its unlock | `verify:g6:locks` | every `lockInput` page releases its lock. |
 | No map can freeze the player | `verify:g6:frozen` | a corpus-wide stuck/lock scan over all 263 maps. |

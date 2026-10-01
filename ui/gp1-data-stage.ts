@@ -17,6 +17,15 @@ import { NPC_SRC_ASSET_PATHS } from "./npc-src-assets.ts";
 import { ANIMATED_ATLAS_NAMES } from "./animated-assets.ts";
 import { createProductionTuxemonBattle } from "../battle/production.ts";
 import { TuxemonBattleScene } from "./battle-scene.tsx";
+import {
+  createTuxemonJournalScene,
+  TUXEMON_UI_THEME,
+  TuxemonMonsterPickerScene,
+} from "./journal-scene.tsx";
+import {
+  TUXEMON_JOURNAL_SCENE_ID,
+  TUXEMON_MONSTER_PICKER_SCENE_ID,
+} from "../battle/scenes.ts";
 import { gp1Mark } from "./gp1-marks.ts";
 
 export {
@@ -31,6 +40,11 @@ export {
   ANIMATED_ATLAS_NAMES,
   createProductionTuxemonBattle,
   TuxemonBattleScene,
+  createTuxemonJournalScene,
+  TUXEMON_UI_THEME,
+  TuxemonMonsterPickerScene,
+  TUXEMON_JOURNAL_SCENE_ID,
+  TUXEMON_MONSTER_PICKER_SCENE_ID,
 };
 
 gp1Mark("json-literals");

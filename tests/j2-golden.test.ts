@@ -116,6 +116,24 @@ function countColour(rgba: Uint8Array, red: number, green: number, blue: number)
   return total;
 }
 
+// The merged J2 tape reaches these checkpoints during the afternoon stage.
+// ScreenEffectsLayer paints this tint after the map, actors, and imported
+// overlays. Keep the integer blend identical to PocketJS's RGBA rasterizer so
+// the semantic assertions below still identify the actual source art.
+const J2_DAYLIGHT_TINT = { r: 255, g: 216, b: 128, a: 12 } as const;
+
+function daylightColour(red: number, green: number, blue: number): [number, number, number] {
+  const { r, g, b, a } = J2_DAYLIGHT_TINT;
+  const keep = 255 - a;
+  const mix = (source: number, tint: number): number =>
+    Math.floor((tint * a + source * keep + 127) / 255);
+  return [mix(red, r), mix(green, g), mix(blue, b)];
+}
+
+function countDaylightColour(rgba: Uint8Array, red: number, green: number, blue: number): number {
+  return countColour(rgba, ...daylightColour(red, green, blue));
+}
+
 function matchingComposite(frame: GoldenFrame, marks: readonly PaintMark[]) {
   const target = load(frame.name, frame.width).image;
   const map = project.maps.find((candidate) => candidate.id === frame.map)!;
@@ -142,9 +160,7 @@ function matchingComposite(frame: GoldenFrame, marks: readonly PaintMark[]) {
       expect(ty, `${frame.file}: sprite y`).toBeGreaterThanOrEqual(0);
       expect(ty, `${frame.file}: sprite y`).toBeLessThan(target.height);
       expected.set(ty * target.width + tx, [
-        sprite.rgba[from]!,
-        sprite.rgba[from + 1]!,
-        sprite.rgba[from + 2]!,
+        ...daylightColour(sprite.rgba[from]!, sprite.rgba[from + 1]!, sprite.rgba[from + 2]!),
         sprite.rgba[from + 3]!,
       ]);
     }
@@ -216,12 +232,12 @@ describe("J2 Greenwash and hospital location goldens", () => {
     expect(manifest.frames.map(({ name, map, frame, mergedFrame, width, height }) =>
       [name, map, frame, mergedFrame, width, height]
     )).toEqual([
-      ["aardant-acquired", "spyder_greenwash", 48_537, 170_682, 480, 272],
-      ["hospital-password", "spyder_candy_hospital2", 49_116, 171_261, 480, 272],
-      ["hospital-cure", "spyder_candy_hospital3", 49_914, 172_059, 480, 272],
-      ["aardant-acquired", "spyder_greenwash", 48_537, 170_682, 960, 544],
-      ["hospital-password", "spyder_candy_hospital2", 49_116, 171_261, 960, 544],
-      ["hospital-cure", "spyder_candy_hospital3", 49_914, 172_059, 960, 544],
+      ["aardant-acquired", "spyder_greenwash", 48_381, 169_605, 480, 272],
+      ["hospital-password", "spyder_candy_hospital2", 48_960, 170_184, 480, 272],
+      ["hospital-cure", "spyder_candy_hospital3", 49_758, 170_982, 480, 272],
+      ["aardant-acquired", "spyder_greenwash", 48_381, 169_605, 960, 544],
+      ["hospital-password", "spyder_candy_hospital2", 48_960, 170_184, 960, 544],
+      ["hospital-cure", "spyder_candy_hospital3", 49_758, 170_982, 960, 544],
     ]);
   });
 
@@ -243,7 +259,15 @@ describe("J2 Greenwash and hospital location goldens", () => {
         .toEqual([frame.player.tile[0] * 16, frame.player.tile[1] * 16]);
       const player = matchingComposite(frame, [frame.player]);
       expect(player.painted, frame.file).toBeGreaterThan(80);
-      expect(player.matching, frame.file).toBe(player.painted);
+      if (frame.name === "hospital-password") {
+        // The upstream Hospital 2 autorun installs the opaque torchlight
+        // overlay below the daylight grade. Only the portion of the player
+        // inside its aperture remains the daylight-graded source sprite.
+        expect(player.matching, frame.file).toBeGreaterThan(50);
+        expect(player.matching, frame.file).toBeLessThan(player.painted);
+      } else {
+        expect(player.matching, frame.file).toBe(player.painted);
+      }
     }
   });
 
@@ -266,25 +290,27 @@ describe("J2 Greenwash and hospital location goldens", () => {
   test("Greenwash woodwork and both Candy Hospital laboratories remain visibly distinct", () => {
     for (const width of [480, 960]) {
       const greenwash = load("aardant-acquired", width).image.rgba;
-      expect(countColour(greenwash, 208, 185, 156), `${width}: Greenwash plank floor`)
+      expect(countDaylightColour(greenwash, 208, 185, 156), `${width}: Greenwash plank floor`)
         .toBeGreaterThan(10_000);
-      expect(countColour(greenwash, 174, 147, 122), `${width}: Greenwash plank shading`)
+      expect(countDaylightColour(greenwash, 174, 147, 122), `${width}: Greenwash plank shading`)
         .toBeGreaterThan(8_000);
-      expect(countColour(greenwash, 118, 107, 163), `${width}: Greenwash machinery`)
+      expect(countDaylightColour(greenwash, 118, 107, 163), `${width}: Greenwash machinery`)
         .toBeGreaterThan(4_000);
 
       const hospital2 = load("hospital-password", width).image.rgba;
-      expect(countColour(hospital2, 204, 230, 236), `${width}: Hospital 2 pale floor`)
-        .toBeGreaterThan(22_000);
-      expect(countColour(hospital2, 226, 242, 243), `${width}: Hospital 2 laboratory highlights`)
-        .toBeGreaterThan(5_000);
+      expect(countDaylightColour(hospital2, 0, 0, 0), `${width}: Hospital 2 torchlight darkness`)
+        .toBeGreaterThan(width * (width === 480 ? 272 : 544) * 0.9);
+      expect(countDaylightColour(hospital2, 204, 230, 236), `${width}: Hospital 2 pale floor`)
+        .toBeGreaterThan(1_200);
+      expect(countDaylightColour(hospital2, 226, 242, 243), `${width}: Hospital 2 laboratory highlights`)
+        .toBeGreaterThan(300);
 
       const hospital3 = load("hospital-cure", width).image.rgba;
-      expect(countColour(hospital3, 204, 230, 236), `${width}: Hospital 3 pale floor`)
+      expect(countDaylightColour(hospital3, 204, 230, 236), `${width}: Hospital 3 pale floor`)
         .toBeGreaterThan(18_000);
-      expect(countColour(hospital3, 202, 136, 84), `${width}: Hospital 3 specimen cabinets`)
+      expect(countDaylightColour(hospital3, 202, 136, 84), `${width}: Hospital 3 specimen cabinets`)
         .toBeGreaterThan(400);
-      expect(countColour(hospital3, 50, 103, 90), `${width}: cure console display`)
+      expect(countDaylightColour(hospital3, 50, 103, 90), `${width}: cure console display`)
         .toBeGreaterThan(75);
     }
 
@@ -292,15 +318,15 @@ describe("J2 Greenwash and hospital location goldens", () => {
     // padding a stale 480x272 render with black.
     const greenwashLow = load("aardant-acquired", 480).image.rgba;
     const greenwashHigh = load("aardant-acquired", 960).image.rgba;
-    expect(countColour(greenwashHigh, 208, 185, 156))
-      .toBeGreaterThan(countColour(greenwashLow, 208, 185, 156) * 1.8);
+    expect(countDaylightColour(greenwashHigh, 208, 185, 156))
+      .toBeGreaterThan(countDaylightColour(greenwashLow, 208, 185, 156) * 1.8);
     const hospital2Low = load("hospital-password", 480).image.rgba;
     const hospital2High = load("hospital-password", 960).image.rgba;
-    expect(countColour(hospital2High, 226, 242, 243))
-      .toBeGreaterThan(countColour(hospital2Low, 226, 242, 243) * 1.4);
+    expect(countDaylightColour(hospital2High, 226, 242, 243))
+      .toBeGreaterThan(countDaylightColour(hospital2Low, 226, 242, 243) * 1.4);
     const hospital3Low = load("hospital-cure", 480).image.rgba;
     const hospital3High = load("hospital-cure", 960).image.rgba;
-    expect(countColour(hospital3High, 204, 230, 236))
-      .toBeGreaterThan(countColour(hospital3Low, 204, 230, 236) * 1.15);
+    expect(countDaylightColour(hospital3High, 204, 230, 236))
+      .toBeGreaterThan(countDaylightColour(hospital3Low, 204, 230, 236) * 1.15);
   });
 });

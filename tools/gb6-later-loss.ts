@@ -18,7 +18,7 @@ import type { Gb6JourneyResult } from "./gb6-journey.ts";
 import { Driver } from "./gb6-journey.ts";
 import { readInlineProject } from "./generated-project.ts";
 import { createSession, startSession } from "../vendor/pocket-rpgkit/src/engine/session.ts";
-import { TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS } from "../battle/game.ts";
+import { TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS, TUXEMON_SCENES } from "../battle/game.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
 const MAINLINE = resolve(process.env.GB6_JOURNEY ?? join(ROOT, "data/gb6-mainline-journey.json"));
@@ -130,6 +130,7 @@ const project = readInlineProject(ROOT);
 const session = createSession(project, 60, {
   extensions: TUXEMON_EXTENSIONS,
   battle: TUXEMON_BATTLE_RULES,
+  scenes: TUXEMON_SCENES,
 });
 const driver = new Driver(session, 60, startSession(project, session));
 for (let frame = 0; frame <= target.startFrame; frame++) driver.tick(journey.masks[frame]!);

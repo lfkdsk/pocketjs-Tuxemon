@@ -7,7 +7,12 @@ import { readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
 import { tuxemonExtensionState } from "../battle/extension.ts";
-import { TUXEMON_BATTLE_DB, TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS } from "../battle/game.ts";
+import {
+  TUXEMON_BATTLE_DB,
+  TUXEMON_BATTLE_RULES,
+  TUXEMON_EXTENSIONS,
+  TUXEMON_SCENES,
+} from "../battle/game.ts";
 import { tuxemonRuntimeBattleState } from "../battle/runtime.ts";
 import { canonicalJson } from "../vendor/pocket-rpgkit/src/engine/save.ts";
 import {
@@ -23,7 +28,7 @@ const ROOT = resolve(import.meta.dir, "..");
 const HEAL_BEFORE_LEAVE = "You should heal your monsters before heading off.";
 const FIRST_FIGHT_LOSE = "As expected! Old models can't compare to new ones!";
 const FIRST_FIGHT_AFTER = "I'll heal you up this time, but I'm not a charity. Rest up at home next time your monsters get worn out.";
-const FIRST_LOSS_STATE_SHA256 = "4e532690749ae07d1d78cd5e85fe19ba6651b511a3349e4ee02920d19aa4b693";
+const FIRST_LOSS_STATE_SHA256 = "106b7e03681c1defa71d9b5a381158ddf7cbf23c6c77ba8de4239eea2a72ead0";
 
 interface SeenText {
   frame: number;
@@ -69,6 +74,8 @@ function input(mask: number, previous: number): SessionInput {
     cancelEdge: Boolean(pressed & 0x4000),
     upEdge: Boolean(pressed & 0x0010),
     downEdge: Boolean(pressed & 0x0040),
+    leftEdge: Boolean(pressed & 0x0080),
+    rightEdge: Boolean(pressed & 0x0020),
   };
 }
 
@@ -79,6 +86,7 @@ function replay(tape: FrozenTape): Replay {
     maps,
     extensions: TUXEMON_EXTENSIONS,
     battle: TUXEMON_BATTLE_RULES,
+    scenes: TUXEMON_SCENES,
   });
   let state = startSession(project, session);
   let previous = 0;
@@ -96,13 +104,13 @@ function replay(tape: FrozenTape): Replay {
     const mask = tape.masks[frame]!;
     state = stepSession(session, state, input(mask, previous));
     previous = mask;
-    if (!before && state.scene) {
+    if (before?.kind !== "battle" && state.scene?.kind === "battle") {
       active = {
         opponent: tuxemonRuntimeBattleState(state.scene.state).battle.opponent,
         startFrame: frame,
       };
     }
-    if (before && !state.scene) {
+    if (before?.kind === "battle" && state.scene?.kind !== "battle") {
       expect(`battle exit at f${frame} had no matching entry`, active !== null);
       const ended = tuxemonRuntimeBattleState(before.state).battle;
       battles.push({

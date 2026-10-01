@@ -226,6 +226,8 @@ export interface BattleMonster {
   /** Stable session identity for writing persistent player state back. */
   iid?: string;
   slug: string;
+  /** Optional player-assigned name, preserved across battles and evolution. */
+  nickname?: string;
   level: number;
   stage: string;
   gender: string;
@@ -263,6 +265,8 @@ export interface MonsterSnapshot {
   /** Stable session identity. Spawn RNG never generates this value. */
   iid?: string;
   slug: string;
+  /** Optional player-assigned name. Missing means use the localized species name. */
+  nickname?: string;
   level: number;
   stage?: string;
   gender?: string;

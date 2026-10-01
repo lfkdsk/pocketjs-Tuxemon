@@ -282,11 +282,11 @@
  "schemaErrors": [],
  "audioQoaPending": [],
  "byFate": {
-  "T3-dropped": 2360,
-  "T1": 35150,
-  "T4-dropped": 2141,
-  "T1-lowered": 2375,
-  "T2-dropped": 420,
+  "T3-dropped": 2344,
+  "T1": 35157,
+  "T4-dropped": 2128,
+  "T1-lowered": 2402,
+  "T2-dropped": 415,
   "T3-placeholder": 29,
   "structural": 776
  },
@@ -544,10 +544,16 @@
    "note": "presentation / meta"
   },
   {
+   "key": "act:get_player_monster(rename):T1-lowered",
+   "fate": "T1-lowered",
+   "count": 2,
+   "note": "party picker specialized for the adjacent rename action"
+  },
+  {
    "key": "act:get_player_monster:T3-dropped",
    "fate": "T3-dropped",
-   "count": 23,
-   "note": "monster/combat subsystem (P2)"
+   "count": 21,
+   "note": "only the adjacent rename picker form is implemented"
   },
   {
    "key": "act:info:T4-dropped",
@@ -586,10 +592,10 @@
    "note": "gold add/sub"
   },
   {
-   "key": "act:open_journal:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "act:open_journal:T1-lowered",
+   "fate": "T1-lowered",
    "count": 14,
-   "note": "monster/combat subsystem (P2)"
+   "note": "read-only tux.journal scene with compact imported details"
   },
   {
    "key": "act:open_shop:T1",
@@ -694,16 +700,16 @@
    "note": "presentation / meta"
   },
   {
-   "key": "act:rename_monster:T4-dropped",
-   "fate": "T4-dropped",
+   "key": "act:rename_monster:T1",
+   "fate": "T1",
    "count": 2,
-   "note": "presentation / meta"
+   "note": "handled by the preceding party-picker scene completion"
   },
   {
-   "key": "act:rename_player:T2-dropped",
-   "fate": "T2-dropped",
+   "key": "act:rename_player:T1-lowered",
+   "fate": "T1-lowered",
    "count": 5,
-   "note": "name entry (P1: fixed name)"
+   "note": "rpgkit.nameInput; random-name button is not available"
   },
   {
    "key": "act:screen_transition:T1",
@@ -814,10 +820,10 @@
    "note": "KV1 saves the race walking baseline; its combat-sheet choice remains battle-owned"
   },
   {
-   "key": "act:set_tuxepedia:T4-dropped",
-   "fate": "T4-dropped",
+   "key": "act:set_tuxepedia:T1-lowered",
+   "fate": "T1-lowered",
    "count": 6,
-   "note": "presentation / meta"
+   "note": "persistent seen/caught status; repeat counters and NPC journals are not retained"
   },
   {
    "key": "act:set_variable:T1",
@@ -1380,7 +1386,7 @@
   {
    "key": "trigger:action:facingTile(area):T1",
    "fate": "T1",
-   "count": 437,
+   "count": 442,
    "note": "K1 rectangular event area (overlaps partitioned after guard sampling)"
   },
   {
@@ -1434,7 +1440,7 @@
   {
    "key": "trigger:no-op after conversion:T4-dropped",
    "fate": "T4-dropped",
-   "count": 221,
+   "count": 216,
    "note": "every action was removed, so no project event was emitted"
   },
   {
@@ -1949,12 +1955,12 @@
    "summary": {
     "types": 98,
     "uses": 13617,
-    "native": 12322,
-    "degraded": 628,
+    "native": 12324,
+    "degraded": 655,
     "placeholder": 19,
-    "dropped": 648,
+    "dropped": 619,
     "nativePercent": 90.5,
-    "executablePercent": 95.2,
+    "executablePercent": 95.5,
     "tier1": {
      "uses": 6355,
      "percent": 46.67,
@@ -2453,12 +2459,15 @@
      "type": "get_player_monster",
      "total": 17,
      "native": 0,
-     "degraded": 0,
+     "degraded": 2,
      "placeholder": 0,
-     "dropped": 17,
+     "dropped": 15,
      "reasons": {
+      "degraded": [
+       "party picker specialized for the adjacent rename action"
+      ],
       "dropped": [
-       "monster/combat subsystem (P2)"
+       "only the adjacent rename picker form is implemented"
       ]
      }
     },
@@ -2564,13 +2573,12 @@
      "type": "open_journal",
      "total": 14,
      "native": 0,
-     "degraded": 0,
+     "degraded": 14,
      "placeholder": 0,
-     "dropped": 14,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "monster/combat subsystem (P2)",
-       "every action was removed, so no project event was emitted"
+      "degraded": [
+       "read-only tux.journal scene with compact imported details"
       ]
      }
     },
@@ -2863,13 +2871,13 @@
     {
      "type": "rename_monster",
      "total": 2,
-     "native": 0,
+     "native": 2,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 2,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "presentation / meta"
+      "native": [
+       "handled by the preceding party-picker scene completion"
       ]
      }
     },
@@ -2877,12 +2885,12 @@
      "type": "rename_player",
      "total": 5,
      "native": 0,
-     "degraded": 0,
+     "degraded": 5,
      "placeholder": 0,
-     "dropped": 5,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "name entry (P1: fixed name)"
+      "degraded": [
+       "rpgkit.nameInput; random-name button is not available"
       ]
      }
     },
@@ -3164,12 +3172,12 @@
      "type": "set_tuxepedia",
      "total": 6,
      "native": 0,
-     "degraded": 0,
+     "degraded": 6,
      "placeholder": 0,
-     "dropped": 6,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "presentation / meta"
+      "degraded": [
+       "persistent seen/caught status; repeat counters and NPC journals are not retained"
       ]
      }
     },
@@ -3421,15 +3429,15 @@
    "summary": {
     "types": 64,
     "uses": 8663,
-    "native": 8173,
+    "native": 8183,
     "degraded": 2,
     "placeholder": 1,
-    "dropped": 487,
-    "nativePercent": 94.3,
-    "executablePercent": 94.4,
+    "dropped": 477,
+    "nativePercent": 94.5,
+    "executablePercent": 94.5,
     "tier1": {
-     "uses": 4697,
-     "percent": 54.22,
+     "uses": 4707,
+     "percent": 54.33,
      "requiredUses": 4591,
      "requiredPercent": 53,
      "meetsBaseline": true
@@ -3481,10 +3489,10 @@
     {
      "type": "is button_pressed",
      "total": 419,
-     "native": 402,
+     "native": 407,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 17,
+     "dropped": 12,
      "reasons": {
       "native": [
        "consumed by trigger selection"
@@ -3559,10 +3567,10 @@
     {
      "type": "is char_facing_tile",
      "total": 344,
-     "native": 327,
+     "native": 332,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 17,
+     "dropped": 12,
      "reasons": {
       "native": [
        "consumed by trigger selection"

@@ -1,6 +1,12 @@
 // @title Pocket Tuxemon — the imported Tuxemon world on Pocket RPG Kit
 import { gp1Mark } from "./ui/gp1-marks.ts";
-import { mount, fsHost, GameView } from "./ui/gp1-kit-stage.ts";
+import {
+  mount,
+  fsHost,
+  GameView,
+  NAME_INPUT_SCENE_ID,
+  NameInputScene,
+} from "./ui/gp1-kit-stage.ts";
 import { createGameMapRepository } from "./ui/entry-readers.ts";
 import type { ProjectShell } from "./vendor/pocket-rpgkit/src/engine/types.ts";
 import {
@@ -14,7 +20,12 @@ import {
   NPC_SRC_ASSET_PATHS,
   ANIMATED_ATLAS_NAMES,
   createProductionTuxemonBattle,
+  createTuxemonJournalScene,
+  TUXEMON_JOURNAL_SCENE_ID,
+  TUXEMON_MONSTER_PICKER_SCENE_ID,
+  TUXEMON_UI_THEME,
   TuxemonBattleScene,
+  TuxemonMonsterPickerScene,
 } from "./ui/gp1-data-stage.ts";
 import { createAnimatedProvider } from "./ui/animated-repository.ts";
 import { createNpcSrcProvider } from "./ui/npc-src-repository.ts";
@@ -49,7 +60,7 @@ const initialCivilTime = (globalThis as typeof globalThis & {
 const initialTimeWeather = initialCivilTime === undefined
   ? timeWeatherFromLocalDate(new Date())
   : timeWeatherAt(initialCivilTime);
-const { extensions, rules } = createProductionTuxemonBattle(
+const { extensions, rules, scenes, catalog } = createProductionTuxemonBattle(
   { read: readEntry },
   { initialTimeWeather },
 );
@@ -80,17 +91,15 @@ mount(() => (
     extensions={extensions}
     battle={rules}
     battleScene={TuxemonBattleScene}
+    scenes={scenes}
+    sceneViews={{
+      [NAME_INPUT_SCENE_ID]: NameInputScene,
+      [TUXEMON_JOURNAL_SCENE_ID]: createTuxemonJournalScene(catalog),
+      [TUXEMON_MONSTER_PICKER_SCENE_ID]: TuxemonMonsterPickerScene,
+    }}
     assets={assets}
     effects={createAudioEffects(project.audio ?? {})}
-    theme={{
-      border: "#224f68",
-      rim: "#65d5c3",
-      paper: "#102b3a",
-      ink: "#f5f1d7",
-      dim: "#9cc8c1",
-      accent: "#ffd15c",
-      backdrop: "#06141d",
-    }}
+    theme={TUXEMON_UI_THEME}
   />
 ));
 gp1Mark("mount");

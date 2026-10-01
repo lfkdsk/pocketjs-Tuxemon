@@ -11,6 +11,7 @@ import {
   KENNEL_LIMIT,
   packTuxemonExtensionState,
   PARTY_LIMIT,
+  registerCaughtMonster,
   releaseBattleDb,
   resolveBattleDb,
   tuxemonExtensionState,
@@ -513,6 +514,7 @@ function writeBackMonster(
   return {
     iid: snapshot.iid,
     slug: monster.slug,
+    ...(monster.nickname === undefined ? {} : { nickname: monster.nickname }),
     level: boundedInteger(monster.level, "level"),
     stage: monster.stage,
     gender: monster.gender,
@@ -584,7 +586,7 @@ function completedExtension(state: RuntimeBattleState): TuxemonExtensionState {
     return monster ? writeBackMonster(snapshot, monster) : snapshot;
   });
   const kennel = [...state.ext.kennel];
-  const caught = [...state.ext.caught];
+  let ext = clone(state.ext);
   let nextMonsterId = state.ext.nextMonsterId;
   if (state.battle.capturedUid !== null) {
     const captured = getMonster(state.battle, state.battle.capturedUid);
@@ -593,7 +595,7 @@ function completedExtension(state: RuntimeBattleState): TuxemonExtensionState {
     const snapshot = capturedSnapshot(captured, allocated[0]);
     if (party.length < PARTY_LIMIT) party.push(snapshot);
     else if (kennel.length < KENNEL_LIMIT) kennel.push(snapshot);
-    if (!caught.includes(captured.slug)) caught.push(captured.slug);
+    ext = registerCaughtMonster(ext, captured.slug);
   }
   const history = [...state.ext.history];
   if (state.battle.kind === "trainer") {
@@ -605,10 +607,9 @@ function completedExtension(state: RuntimeBattleState): TuxemonExtensionState {
     );
   }
   return {
-    ...clone(state.ext),
+    ...ext,
     party,
     kennel,
-    caught,
     runAttempts: state.battle.runAttempts,
     history,
     nextMonsterId,

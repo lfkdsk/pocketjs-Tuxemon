@@ -1,13 +1,13 @@
 {
   "format": "pocket-tuxemon/j2-goldens/v1",
-  "baseFrames": 122145,
-  "segmentTapeSha256": "91f5a9091acfe42672975d094e65807eed2c85a7955d35698a156cdeb2eb126d",
-  "combinedTapeSha256": "8df62ff187a551eeedd4da504103555add983711dc9224df334070a39e24b062",
+  "baseFrames": 121224,
+  "segmentTapeSha256": "f217c307622818bc51381c85a84492b7e8695eb3fb2afac1b6435f5b013989f3",
+  "combinedTapeSha256": "61096704c5bc4f83753163d355a52baefc964430e3ca3e2e51cf501483626765",
   "frames": [
     {
       "name": "aardant-acquired",
-      "frame": 48537,
-      "mergedFrame": 170682,
+      "frame": 48381,
+      "mergedFrame": 169605,
       "map": "spyder_greenwash",
       "position": [
         7,
@@ -16,8 +16,8 @@
       "width": 480,
       "height": 272,
       "file": "j2-aardant-acquired.480x272.png",
-      "rgbaFnv1a": "83179cdc",
-      "pngSha256": "993011d973caf514c665990a04df8f6866a8b04bd72bc3862111e410fcc2ec51",
+      "rgbaFnv1a": "aa5bfdb0",
+      "pngSha256": "5b3deaaff6eff7e407beffcafdc195fd6062e258861f51f7b1a8961258529cd6",
       "camera": [
         0,
         240
@@ -71,8 +71,8 @@
     },
     {
       "name": "hospital-password",
-      "frame": 49116,
-      "mergedFrame": 171261,
+      "frame": 48960,
+      "mergedFrame": 170184,
       "map": "spyder_candy_hospital2",
       "position": [
         11,
@@ -81,8 +81,8 @@
       "width": 480,
       "height": 272,
       "file": "j2-hospital-password.480x272.png",
-      "rgbaFnv1a": "1141e2dd",
-      "pngSha256": "35affdfdff70eea2f9f11646c7da24dbff604b0761a2886afe055b25f61af7b6",
+      "rgbaFnv1a": "2ef00f4b",
+      "pngSha256": "c8b9ad3476740c3bb73bb67ce7862a046a8047d64aa17a4de3cc344e604fe9a8",
       "camera": [
         0,
         48
@@ -120,8 +120,8 @@
     },
     {
       "name": "hospital-cure",
-      "frame": 49914,
-      "mergedFrame": 172059,
+      "frame": 49758,
+      "mergedFrame": 170982,
       "map": "spyder_candy_hospital3",
       "position": [
         5,
@@ -130,8 +130,8 @@
       "width": 480,
       "height": 272,
       "file": "j2-hospital-cure.480x272.png",
-      "rgbaFnv1a": "7a4a12ff",
-      "pngSha256": "dbb7ec17bf9738e8596aad46bf9679aac648ba284df5e2fb8b23a53304be0c4f",
+      "rgbaFnv1a": "ced2e731",
+      "pngSha256": "be9b53723de642ed6c0947dc0a143a43260286ea018d9d46b485232dd14960a5",
       "camera": [
         0,
         0
@@ -169,8 +169,8 @@
     },
     {
       "name": "aardant-acquired",
-      "frame": 48537,
-      "mergedFrame": 170682,
+      "frame": 48381,
+      "mergedFrame": 169605,
       "map": "spyder_greenwash",
       "position": [
         7,
@@ -179,8 +179,8 @@
       "width": 960,
       "height": 544,
       "file": "j2-aardant-acquired.960x544.png",
-      "rgbaFnv1a": "5b90d21c",
-      "pngSha256": "9727ed21417d11084d46b72f1d6d1dfe117d5b0a7cc154af5e0b07e458f0ed8f",
+      "rgbaFnv1a": "c6974afc",
+      "pngSha256": "33872c6bbb37b80d49fbb4ee65633e784d53661f136016cdfbce43cde1aeebf7",
       "camera": [
         0,
         0
@@ -234,8 +234,8 @@
     },
     {
       "name": "hospital-password",
-      "frame": 49116,
-      "mergedFrame": 171261,
+      "frame": 48960,
+      "mergedFrame": 170184,
       "map": "spyder_candy_hospital2",
       "position": [
         11,
@@ -244,8 +244,8 @@
       "width": 960,
       "height": 544,
       "file": "j2-hospital-password.960x544.png",
-      "rgbaFnv1a": "73e0223d",
-      "pngSha256": "b6fa8d472f5efddee1a64bb48b8c6e86e0192e878f71a3c2bc42d442d753c452",
+      "rgbaFnv1a": "6009b780",
+      "pngSha256": "3e94fb54f6d9d1c89e1d78865ad77a2c421d1748de76308d09dddf176d2fed3f",
       "camera": [
         0,
         0
@@ -283,8 +283,8 @@
     },
     {
       "name": "hospital-cure",
-      "frame": 49914,
-      "mergedFrame": 172059,
+      "frame": 49758,
+      "mergedFrame": 170982,
       "map": "spyder_candy_hospital3",
       "position": [
         5,
@@ -293,8 +293,8 @@
       "width": 960,
       "height": 544,
       "file": "j2-hospital-cure.960x544.png",
-      "rgbaFnv1a": "104397b7",
-      "pngSha256": "6f4b7a56d3e22b12a71519f99b328b69dd103650ce4928b1e6a1665218d3390e",
+      "rgbaFnv1a": "09803249",
+      "pngSha256": "66a07a972079b46ec1b99a1bcf01e7c0f00a616b9f38e5d84133ebfdd9f41961",
       "camera": [
         0,
         0

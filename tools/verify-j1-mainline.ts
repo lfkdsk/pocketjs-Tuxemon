@@ -6,7 +6,7 @@ import { readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
 import { tuxemonExtensionState } from "../battle/extension.ts";
-import { TUXEMON_BATTLE_DB, TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS } from "../battle/game.ts";
+import { TUXEMON_BATTLE_DB, TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS, TUXEMON_SCENES } from "../battle/game.ts";
 import { tuxemonRuntimeBattleState } from "../battle/runtime.ts";
 import type { SpawnedMonsterSnapshot } from "../battle/types.ts";
 import { AttractController } from "../vendor/pocket-rpgkit/src/engine/attract.ts";
@@ -35,7 +35,7 @@ const BASE_PATH = resolve(process.env.J1_BASE_JOURNEY ?? join(ROOT, "data/gb6-ma
 const JOURNEY_PATH = resolve(process.env.J1_JOURNEY ?? join(ROOT, "data/j1-captainreturns-journey.json"));
 const MODE = process.env.J1_VERIFY_MODE ?? "ci";
 const BTN_LTRIGGER = 0x0100;
-const GAME_OPTIONS = { extensions: TUXEMON_EXTENSIONS, battle: TUXEMON_BATTLE_RULES } as const;
+const GAME_OPTIONS = { extensions: TUXEMON_EXTENSIONS, battle: TUXEMON_BATTLE_RULES, scenes: TUXEMON_SCENES } as const;
 const REQUIRED_STORY = {
   enforcersResponseDone: 1,
   route4Billie: 1,
@@ -89,6 +89,8 @@ function input(mask: number, previous: number): SessionInput {
     cancelEdge: Boolean(pressed & 0x4000),
     upEdge: Boolean(pressed & 0x0010),
     downEdge: Boolean(pressed & 0x0040),
+    leftEdge: Boolean(pressed & 0x0080),
+    rightEdge: Boolean(pressed & 0x0020),
   };
 }
 
@@ -176,8 +178,7 @@ function replay(
     const mask = masks[frame]!;
     state = stepSession(session, state, input(mask, previous));
     previous = mask;
-    if (localFrame >= 0 && !before && state.scene) {
-      expect(`scene at J1 f${localFrame} is not Battle Processing`, state.scene.kind === "battle");
+    if (localFrame >= 0 && before?.kind !== "battle" && state.scene?.kind === "battle") {
       const battle = tuxemonRuntimeBattleState(state.scene.state);
       active = {
         opponent: battle.battle.opponent,
@@ -187,7 +188,7 @@ function replay(
         enemy: battle.battle.parties[1].map((monster) => ({ slug: monster.slug, level: monster.level })),
       };
     }
-    if (localFrame >= 0 && before && !state.scene) {
+    if (localFrame >= 0 && before?.kind === "battle" && state.scene?.kind !== "battle") {
       expect(`battle exit at J1 f${localFrame} had no entry`, active !== null);
       const battle = tuxemonRuntimeBattleState(before.state);
       battles.push({

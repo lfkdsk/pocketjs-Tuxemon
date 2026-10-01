@@ -5,13 +5,13 @@
   "frames": [
     {
       "name": "bedroom",
-      "frame": 1064,
+      "frame": 1121,
       "map": "spyder_bedroom",
       "position": [
         3,
         4
       ],
-      "file": "g6-bedroom.1064.png",
+      "file": "g6-bedroom.1121.png",
       "rgbaFnv1a": "00af3e6f",
       "pngSha256": "3e63b2f4c0e4ac5215d04834dfb41e8ba113400c1af001b1c87cad95ece12c67",
       "camera": [
@@ -35,13 +35,13 @@
     },
     {
       "name": "downstairs-mom",
-      "frame": 1292,
+      "frame": 1349,
       "map": "spyder_downstairs",
       "position": [
         3,
         6
       ],
-      "file": "g6-downstairs-mom.1292.png",
+      "file": "g6-downstairs-mom.1349.png",
       "rgbaFnv1a": "d39d7b7e",
       "pngSha256": "a430bf1404c085ab0b7283a2fa722bf1e506299bd4b461915ee3f4bd37e8aa8d",
       "camera": [
@@ -81,15 +81,15 @@
     },
     {
       "name": "paper-town",
-      "frame": 1367,
+      "frame": 1424,
       "map": "spyder_paper_town",
       "position": [
         10,
         8
       ],
-      "file": "g6-paper-town.1367.png",
-      "rgbaFnv1a": "54d762ac",
-      "pngSha256": "e43e3ff1d9b1460ed3fcf754d9fa1e55679482fccb72ab78aac5772f829744cd",
+      "file": "g6-paper-town.1424.png",
+      "rgbaFnv1a": "7d770f84",
+      "pngSha256": "35304d490aa0dd410ca4f9d34bbb24920dac8c47eaa55096587819b5d016b368",
       "camera": [
         0,
         0
@@ -111,15 +111,15 @@
     },
     {
       "name": "route-1",
-      "frame": 3792,
+      "frame": 3341,
       "map": "spyder_route1",
       "position": [
         14,
         19
       ],
-      "file": "g6-route-1.3792.png",
-      "rgbaFnv1a": "d41ad8c7",
-      "pngSha256": "cb3875b823dbea8a7bcda1e74ae62200fba7b6bc7206f59f31aa5b84041024e6",
+      "file": "g6-route-1.3341.png",
+      "rgbaFnv1a": "aa358549",
+      "pngSha256": "a089d5b5ba2fadd051766f308308cd573cc011f9a6466619b1add230d5042da6",
       "camera": [
         0,
         48

@@ -111,14 +111,14 @@ describe("GB6 Route 3 mainline map goldens", () => {
     expect(manifest.frames.map(({ name, map, frame, width, height }) =>
       [name, map, frame, width, height]
     )).toEqual([
-      ["cotton-town", "spyder_cotton_town", 6_603, 480, 272],
-      ["route-2", "spyder_route2", 11_117, 480, 272],
-      ["city-park", "spyder_citypark", 43_120, 480, 272],
-      ["route-3-end", "spyder_route3", 109_980, 480, 272],
-      ["cotton-town", "spyder_cotton_town", 6_603, 960, 544],
-      ["route-2", "spyder_route2", 11_117, 960, 544],
-      ["city-park", "spyder_citypark", 43_120, 960, 544],
-      ["route-3-end", "spyder_route3", 109_980, 960, 544],
+      ["cotton-town", "spyder_cotton_town", 5_700, 480, 272],
+      ["route-2", "spyder_route2", 10_230, 480, 272],
+      ["city-park", "spyder_citypark", 43_839, 480, 272],
+      ["route-3-end", "spyder_route3", 108_615, 480, 272],
+      ["cotton-town", "spyder_cotton_town", 5_700, 960, 544],
+      ["route-2", "spyder_route2", 10_230, 960, 544],
+      ["city-park", "spyder_citypark", 43_839, 960, 544],
+      ["route-3-end", "spyder_route3", 108_615, 960, 544],
     ]);
     for (const frame of manifest.frames) {
       const loaded = load(frame.name, frame.width);

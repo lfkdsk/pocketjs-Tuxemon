@@ -22,13 +22,14 @@ import {
 import { pack, type PakBlob } from "../vendor/pocket-rpgkit/vendor/pocketjs/framework/compiler/pak.ts";
 import { PAK_DTYPE } from "../vendor/pocket-rpgkit/vendor/pocketjs/contracts/spec/spec.ts";
 import { decodePng } from "./png.ts";
-import { loadAllMaps, TUXEMON_SRC, type Rule, type TuxEvent, type TuxMap } from "./source.ts";
+import { loadAllMaps, parsePo, TUXEMON_SRC, type Rule, type TuxEvent, type TuxMap } from "./source.ts";
 import {
   collectBattleArtRefs,
   validateBattleDb,
   type BattleAnimationRef,
   type BattleDb,
   type BattleImageRef,
+  type JournalMonsterIndexEntry,
   type BattlePlugin,
   type BattleRangeRule,
   type BattleRuntimeIndexEntry,
@@ -469,6 +470,10 @@ function buildSelection(scope: BattleScope, tables: Tables, allMaps: TuxMap[], s
         // Trade rewards are intentionally outside the S4 214-monster battle
         // core; they enter naturally in full scope.
         if (scope === "full") for (const slug of resolve(arg(action, 1), tables.monster)) monsters.add(slug);
+      } else if (action.type === "open_journal" && arg(action, 0) in tables.monster) {
+        monsters.add(arg(action, 0));
+      } else if (action.type === "set_tuxepedia" && arg(action, 1) in tables.monster) {
+        monsters.add(arg(action, 1));
       }
     }
   }
@@ -899,7 +904,10 @@ function jsonBytes(value: unknown): Uint8Array {
  * that can actually appear during a battle. */
 export function runtimeBattleDb(db: BattleDb): BattleDb {
   const monsters = Object.fromEntries(Object.entries(db.monsters).map(([slug, monster]) => [slug, {
+    name: monster.name,
+    description: monster.description,
     species: monster.species,
+    txmnId: monster.txmnId,
     shape: monster.shape,
     stage: monster.stage,
     types: monster.types,
@@ -1027,7 +1035,15 @@ export function splitBattleRuntimeDb(db: BattleDb): SplitBattleRuntimeDb {
     }
     return { index, entries };
   };
-  const monsters = tableEntries(db.monsters, "monsters");
+  const monsterEntries = tableEntries(db.monsters, "monsters");
+  const monsters = {
+    ...monsterEntries,
+    index: monsterEntries.index.map((entry): JournalMonsterIndexEntry => ({
+      ...entry,
+      txmnId: db.monsters[entry.id]!.txmnId,
+      name: db.monsters[entry.id]!.name,
+    })).sort((a, b) => a.txmnId - b.txmnId || a.id.localeCompare(b.id)),
+  };
   const techniques = tableEntries(db.techniques, "techniques");
   const items = tableEntries(db.items, "items");
   const statuses = tableEntries(db.statuses, "statuses");
@@ -1066,6 +1082,7 @@ export function writeBattleArtifacts(options: BattleImportOptions): BattleBuild 
     throw new Error(`battle importer: sourceRoot ${sourceRoot} must match TUXEMON_SRC ${normalize(TUXEMON_SRC)}`);
   }
   const tables = loadTables(sourceRoot);
+  const po = parsePo(join(sourceRoot, "mods/tuxemon/l18n/en_US/LC_MESSAGES/base.po"));
   const selection = buildSelection(scope, tables, loadAllMaps(), sourceRoot);
   const battleDir = join(outputRoot, "assets/battle");
   const battlePakDir = join(outputRoot, "dist/battle-art");
@@ -1117,6 +1134,8 @@ export function writeBattleArtifacts(options: BattleImportOptions): BattleBuild 
     const raw = tables.monster[slug]!;
     const sheet = cooker.staticImage(`gfx/sprites/battle/${slug}-sheet.png`, "monster-sheets");
     monsters[slug] = {
+      name: po.get(slug) ?? slug,
+      description: po.get(`${slug}_description`) ?? slug,
       species: string(raw.species, slug),
       txmnId: Math.trunc(number(raw.txmn_id)),
       shape: string(raw.shape),

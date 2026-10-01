@@ -6,6 +6,7 @@
 // expansion, and the native canvas must match the core's physical framebuffer.
 //
 //   bun run web && bun tools/verify-web-journey.ts [--chrome PATH]
+//   bun tools/verify-web-journey.ts --update-density-golden
 //
 // The page's requestAnimationFrame is frozen before load, so the player
 // advances only when this script steps it: frame 0 is the player's own boot
@@ -20,6 +21,7 @@ import { decodePng } from "../vendor/pocket-rpgkit/vendor/pocketjs/framework/com
 const ROOT = resolve(import.meta.dir, "..");
 const SITE = resolve(ROOT, "dist/web");
 const OUT = resolve(ROOT, "dist/web-journey");
+const UPDATE_DENSITY_GOLDEN = process.argv.includes("--update-density-golden");
 const chromeFlag = process.argv.indexOf("--chrome");
 const CHROME = chromeFlag >= 0 ? process.argv[chromeFlag + 1]! :
   process.env.CHROME ?? Bun.which("google-chrome") ?? Bun.which("chromium") ?? "google-chrome";
@@ -31,7 +33,7 @@ rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 const journey = JSON.parse(readFileSync(join(ROOT, "data/g6-journey.json"), "utf8"));
 const goldens = JSON.parse(readFileSync(join(ROOT, "data/g6-goldens.json"), "utf8"));
-const DENSITY_DIALOG_FRAME = 1537;
+const DENSITY_DIALOG_FRAME = 1594;
 const densityDialog = decodePng(new Uint8Array(readFileSync(
   join(ROOT, "tests/goldens/web-density-paper-dialog.2x.png"),
 )));
@@ -194,6 +196,7 @@ const result = await evaluate(`(async () => {
       const s = globalThis.__rpgSessionState;
       const logical = new Uint8Array(p.wasm.render());
       const physical = new Uint8Array(p.wasm.renderScaled(density));
+      p.paint();
       const modal = s.interp.modal;
       out.densityDialog = {
         frame,
@@ -203,6 +206,7 @@ const result = await evaluate(`(async () => {
         // This rectangle covers both dialog lines. Native-density glyph coverage
         // must differ materially from a mechanical scale-up of the 1x frame.
         textNearestMismatches: nearestMismatches(logical, physical, p.width, p.height, 8, 174, 470, 220),
+        pngBase64: p.canvas.toDataURL("image/png").split(",", 2)[1],
         state: [s.mapId, s.move.tx, s.move.ty],
         modal: modal && { kind: modal.kind, complete: modal.complete, lines: modal.lines },
       };
@@ -239,6 +243,11 @@ const shot = await send("Page.captureScreenshot", { format: "png" });
 writeFileSync(join(OUT, "end.png"), Buffer.from(shot.data, "base64"));
 const canvasUrl = await evaluate(`globalThis.__pocketPlayer.canvas.toDataURL("image/png")`);
 writeFileSync(join(OUT, "end-canvas.png"), Buffer.from(canvasUrl.split(",", 2)[1], "base64"));
+const capturedDialog = Buffer.from(result.densityDialog.pngBase64, "base64");
+writeFileSync(join(OUT, "density-dialog.png"), capturedDialog);
+if (UPDATE_DENSITY_GOLDEN) {
+  writeFileSync(join(ROOT, "tests/goldens/web-density-paper-dialog.2x.png"), capturedDialog);
+}
 
 console.log(`boot ${bootMs.toFixed(0)} ms; replayed ${result.frames + 1} frames in ${result.ms.toFixed(0)} ms; viewport ${result.size.join("x")} @${result.density}x (${result.physicalSize.join("x")})`);
 let ok = true;
@@ -258,10 +267,11 @@ const dialogStateOk = dialog?.frame === DENSITY_DIALOG_FRAME &&
   dialog.state.join() === "spyder_paper_town,24,13" &&
   dialog.modal?.kind === "text" && dialog.modal.complete === true &&
   dialog.modal.lines?.join("\n") === "I recognize you, you're the kid who hasn't got a\nGold Pass.";
-const dialogPixelsOk = dialog?.sha256 === densityDialogSha256;
+const expectedDialogSha256 = UPDATE_DENSITY_GOLDEN ? dialog?.sha256 : densityDialogSha256;
+const dialogPixelsOk = dialog?.sha256 === expectedDialogSha256;
 const dialogDensityOk = dialog?.mapNearestMismatches === 0 && dialog?.textNearestMismatches > 1_000;
 ok &&= !!(dialogStateOk && dialogPixelsOk && dialogDensityOk);
-console.log(`${dialogStateOk && dialogPixelsOk && dialogDensityOk ? "ok  " : "FAIL"} native-density dialog @${DENSITY_DIALOG_FRAME}: state ${dialog?.state?.join(",")}, physical sha256 ${dialog?.sha256} (want ${densityDialogSha256}), map nearest mismatches ${dialog?.mapNearestMismatches}, text native-density mismatches ${dialog?.textNearestMismatches}`);
+console.log(`${dialogStateOk && dialogPixelsOk && dialogDensityOk ? "ok  " : "FAIL"} native-density dialog @${DENSITY_DIALOG_FRAME}: state ${dialog?.state?.join(",")}, physical sha256 ${dialog?.sha256} (want ${expectedDialogSha256}), map nearest mismatches ${dialog?.mapNearestMismatches}, text native-density mismatches ${dialog?.textNearestMismatches}`);
 const endOk = result.end.join() === [journey.map, ...journey.position].join();
 ok &&= endOk;
 console.log(`${endOk ? "ok  " : "FAIL"} end: ${result.end.join(",")} (want ${journey.map},${journey.position.join(",")}), scene ${result.scene}`);

@@ -7,6 +7,7 @@ import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
 import { createSwitchState, type SwitchState } from "../vendor/pocket-rpgkit/src/engine/interpreter.ts";
 import { canStepFrom, type Dir4 } from "../vendor/pocket-rpgkit/src/engine/passability.ts";
 import type { BattleRules } from "../vendor/pocket-rpgkit/src/engine/battle.ts";
+import type { SceneRules } from "../vendor/pocket-rpgkit/src/engine/scene.ts";
 import { createSession, startSession, stepSession } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import type { Command, Condition, Dir, GameEvent, Page, PageCondition, Project } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 import { materializeShardedProject } from "./generated-project.ts";
@@ -24,7 +25,20 @@ const LOCK_BATTLE_RULES: BattleRules = {
   step: (state) => state,
   done: () => null,
 };
-const GAME_OPTIONS = { extensions: { allowUnknown: true }, battle: LOCK_BATTLE_RULES } as const;
+const LOCK_SCENE_RULES: SceneRules = {
+  start: () => null,
+  step: (state) => state,
+  done: () => null,
+};
+const GAME_OPTIONS = {
+  extensions: { allowUnknown: true },
+  battle: LOCK_BATTLE_RULES,
+  scenes: {
+    "rpgkit.nameInput": LOCK_SCENE_RULES,
+    "tux.journal": LOCK_SCENE_RULES,
+    "tux.monsterPicker": LOCK_SCENE_RULES,
+  },
+} as const;
 
 export interface LockCheckRow {
   map: string;

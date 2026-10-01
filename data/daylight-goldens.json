@@ -4,7 +4,7 @@
   "height": 272,
   "checkpoint": {
     "name": "paper-town",
-    "frame": 1367,
+    "frame": 1424,
     "map": "spyder_paper_town",
     "position": [
       10,
@@ -22,10 +22,10 @@
         "minute": 0
       },
       "file": "daylight-day.png",
-      "rgbaFnv1a": "4380c25c",
-      "pngSha256": "5a43f4c6939d3addba62e32e414bce0e4326c1df8d1e404860129f9087fa8d27",
-      "luminance": 140.271,
-      "blueBias": -10.294
+      "rgbaFnv1a": "7d770f84",
+      "pngSha256": "35304d490aa0dd410ca4f9d34bbb24920dac8c47eaa55096587819b5d016b368",
+      "luminance": 140.291,
+      "blueBias": -10.285
     },
     {
       "name": "night",
@@ -37,15 +37,15 @@
         "minute": 0
       },
       "file": "daylight-night.png",
-      "rgbaFnv1a": "ecd10da5",
-      "pngSha256": "c80cdb16c4116e86a82390be75715fdc1fee1842c18333a62f57917c338b46ef",
-      "luminance": 85.706,
-      "blueBias": 24.495
+      "rgbaFnv1a": "26c9fb1d",
+      "pngSha256": "e4b57d55ce00c9f55bf3d6b66ca7c8b960de762be46671257595e683b799d92d",
+      "luminance": 51.137,
+      "blueBias": 61.065
     }
   ],
   "comparison": {
     "darkerPixels": 129671,
-    "bluerPixels": 122910,
+    "bluerPixels": 123152,
     "pixels": 130560
   }
 }

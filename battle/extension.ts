@@ -77,6 +77,8 @@ export interface TuxemonExtensionState {
   version: 1;
   party: SpawnedMonsterSnapshot[];
   kennel: SpawnedMonsterSnapshot[];
+  /** Seen-only Tuxepedia entries. Caught species live in `caught` instead. */
+  seen: string[];
   caught: string[];
   /** Upstream keeps failed escape attempts on the player between battles. */
   runAttempts: number;
@@ -123,6 +125,7 @@ export function initialTuxemonExtensionState(
     version: 1,
     party: [],
     kennel: [],
+    seen: [],
     caught: [],
     runAttempts: 0,
     npcParties: {},
@@ -170,6 +173,10 @@ function monsterProblem(value: unknown, label: string, db?: BattleDb): string | 
   if (!nonEmptyString(monster.iid)) return `${label}.iid must be a non-empty string`;
   if (!nonEmptyString(monster.slug) || (db && !(monster.slug in db.monsters))) {
     return `${label}.slug must name an imported monster`;
+  }
+  if (monster.nickname !== undefined
+    && (!nonEmptyString(monster.nickname) || monster.nickname.length > 15)) {
+    return `${label}.nickname must contain 1..15 characters`;
   }
   if (!safeInteger(monster.level) || monster.level < 1) return `${label}.level must be a positive safe integer`;
   for (const field of ["stage", "gender", "tasteCold", "tasteWarm"] as const) {
@@ -326,7 +333,17 @@ function tuxemonStateProblem(
       identities.add(iid);
     }
   }
+  if (!Array.isArray(state.seen) || !state.seen.every(nonEmptyString)) return "seen must contain strings";
   if (!Array.isArray(state.caught) || !state.caught.every(nonEmptyString)) return "caught must contain strings";
+  const seen = state.seen as string[];
+  const caught = state.caught as string[];
+  if (new Set(seen).size !== seen.length) return "seen must not contain duplicates";
+  if (new Set(caught).size !== caught.length) return "caught must not contain duplicates";
+  if (seen.some((slug) => caught.includes(slug))) return "seen and caught must be disjoint";
+  if (db) {
+    if (seen.some((slug) => !(slug in db.monsters))) return "seen must name imported monsters";
+    if (caught.some((slug) => !(slug in db.monsters))) return "caught must name imported monsters";
+  }
   if (!safeInteger(state.runAttempts) || state.runAttempts < 0) {
     return "runAttempts must be a non-negative safe integer";
   }
@@ -572,6 +589,7 @@ function migrateV1(value: JsonValue): JsonValue {
   }
   return {
     ...extension,
+    ...(state.seen === undefined ? { seen: [] } : {}),
     ...(state.environment === undefined ? { environment: null } : {}),
     ...(state.runAttempts === undefined ? { runAttempts: 0 } : {}),
     ...(!hasClock
@@ -589,6 +607,28 @@ function argsRecord(value: JsonValue, call: string): Record<string, unknown> {
 function nextIid(state: TuxemonExtensionState): [string, number] {
   if (!Number.isSafeInteger(state.nextMonsterId + 1)) throw new Error("tux.add_monster: monster id space exhausted");
   return [`txmn-${state.nextMonsterId.toString(36).padStart(6, "0")}`, state.nextMonsterId + 1];
+}
+
+/** Register a sighting without weakening an existing caught entry. */
+export function registerSeenMonster(
+  state: TuxemonExtensionState,
+  slug: string,
+): TuxemonExtensionState {
+  if (state.caught.includes(slug) || state.seen.includes(slug)) return state;
+  return { ...state, seen: [...state.seen, slug] };
+}
+
+/** Register ownership monotonically: caught wins over seen-only. */
+export function registerCaughtMonster(
+  state: TuxemonExtensionState,
+  slug: string,
+): TuxemonExtensionState {
+  const seen = state.seen.includes(slug)
+    ? state.seen.filter((candidate) => candidate !== slug)
+    : state.seen;
+  const caught = state.caught.includes(slug) ? state.caught : [...state.caught, slug];
+  if (seen === state.seen && caught === state.caught) return state;
+  return { ...state, seen, caught };
 }
 
 function resolveSpecies(
@@ -662,13 +702,12 @@ function addMonsterCommand(source: BattleDbSource) {
     if (party.length < PARTY_LIMIT) party.push(monster);
     else if (kennel.length < KENNEL_LIMIT) kennel.push(monster);
     return {
-      ext: json({
+      ext: json(registerCaughtMonster({
         ...current,
         party,
         kennel,
-        caught: current.caught.includes(slug) ? current.caught : [...current.caught, slug],
         nextMonsterId: followingId,
-      }),
+      }, slug)),
       writes: { "v.add_monster": iid },
     };
   };
@@ -795,13 +834,80 @@ function evolutionCommand(source: BattleDbSource) {
     if (!evolved) return { ext: json(clearPendingEvolution(current)) };
     const party = [...current.party];
     party[index] = evolved.monster;
-    return { ext: json({
+    return { ext: json(registerCaughtMonster({
       ...current,
       party,
-      caught: current.caught.includes(evolved.target)
-        ? current.caught
-        : [...current.caught, evolved.target],
-    }) };
+    }, evolved.target)) };
+  };
+}
+
+function tuxepediaCommand(source: BattleDbSource) {
+  return (context: ExtensionCommandContext, value: JsonValue) => {
+    const args = argsRecord(value, "tux.set_tuxepedia");
+    const character = args.character === undefined ? "player" : args.character;
+    if (!nonEmptyString(character)) throw new Error("tux.set_tuxepedia: character must be a string");
+    if (!nonEmptyString(args.species)) throw new Error("tux.set_tuxepedia: species must be a string");
+    const db = resolveBattleDb(source);
+    if (!(args.species in db.monsters)) {
+      throw new Error(`tux.set_tuxepedia: unknown monster '${args.species}'`);
+    }
+    if (args.status !== "seen" && args.status !== "caught" && args.status !== "unseen") {
+      throw new Error("tux.set_tuxepedia: status must be unseen, seen, or caught");
+    }
+    const current = currentExtensionState(context.ext);
+    if (character !== "player" || args.status === "unseen") return { ext: json(current) };
+    return {
+      ext: json(args.status === "caught"
+        ? registerCaughtMonster(current, args.species)
+        : registerSeenMonster(current, args.species)),
+    };
+  };
+}
+
+function renameTarget(
+  context: ExtensionReadContext,
+  args: Record<string, unknown>,
+  call: string,
+): { state: TuxemonExtensionState; monster: SpawnedMonsterSnapshot } | null {
+  if (!nonEmptyString(args.variable)) throw new Error(`${call}: variable must be a string`);
+  const iid = context.variables[args.variable];
+  if (typeof iid !== "string" || iid.length === 0) return null;
+  const state = currentExtensionState(context.ext);
+  const monster = state.party.find((candidate) => candidate.iid === iid);
+  return monster ? { state, monster } : null;
+}
+
+function prepareMonsterRenameCommand(source: BattleDbSource) {
+  return (context: ExtensionCommandContext, value: JsonValue) => {
+    const args = argsRecord(value, "tux.prepare_monster_rename");
+    if (!nonEmptyString(args.nameVariable)) {
+      throw new Error("tux.prepare_monster_rename: nameVariable must be a string");
+    }
+    const target = renameTarget(context, args, "tux.prepare_monster_rename");
+    if (!target) return;
+    const name = resolveBattleDb(source).monsters[target.monster.slug]?.name;
+    if (!nonEmptyString(name)) {
+      throw new Error(`tux.prepare_monster_rename: unknown monster '${target.monster.slug}'`);
+    }
+    return { writes: { [args.nameVariable]: name.slice(0, 15) } };
+  };
+}
+
+function applyMonsterRenameCommand() {
+  return (context: ExtensionCommandContext, value: JsonValue) => {
+    const args = argsRecord(value, "tux.apply_monster_rename");
+    if (!nonEmptyString(args.nameVariable)) {
+      throw new Error("tux.apply_monster_rename: nameVariable must be a string");
+    }
+    const target = renameTarget(context, args, "tux.apply_monster_rename");
+    if (!target) return;
+    const nickname = context.variables[args.nameVariable];
+    if (!nonEmptyString(nickname) || nickname.length > 15) {
+      throw new Error("tux.apply_monster_rename: name must contain 1..15 characters");
+    }
+    return {
+      ext: json(updatePlayerMonsters(target.state, target.monster.iid!, (monster) => ({ ...monster, nickname }))),
+    };
   };
 }
 
@@ -863,6 +969,9 @@ export function createTuxemonExtensions(
       "tux.add_monster": addMonsterCommand(source),
       "tux.set_monster_health": healthCommand(),
       "tux.set_monster_status": statusCommand(source),
+      "tux.set_tuxepedia": tuxepediaCommand(source),
+      "tux.prepare_monster_rename": prepareMonsterRenameCommand(source),
+      "tux.apply_monster_rename": applyMonsterRenameCommand(),
       "tux.evolution": evolutionCommand(source),
       "tux.cancel_evolution": (context, value) => {
         const args = argsRecord(value, "tux.cancel_evolution");

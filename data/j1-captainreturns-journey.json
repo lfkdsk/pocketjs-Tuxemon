@@ -1,17 +1,17 @@
 {
   "format": "pocket-tuxemon/j1-captainreturns/v1",
   "hz": 60,
-  "frames": 12162,
-  "combinedFrames": 122145,
-  "durationSeconds": 202.7,
+  "frames": 12606,
+  "combinedFrames": 121224,
+  "durationSeconds": 210.1,
   "base": {
     "format": "pocket-tuxemon/gb6-mainline/v1",
-    "frames": 109983,
-    "tapeSha256": "ce6b28fa4fe502a0e5aa88881da7e1854db5d0072b1a5aedca9cb1bf6ff48221",
-    "terminalStateSha256": "80b067c713d05943b1fbe4a49016be92cf2a6eb33e3384c1ccc3514ca5d6735c",
-    "terminalSnapshotSha256": "6434f727af2890d0766f0474d03b930926394fcc5532bbc608502d37204e9970",
+    "frames": 108618,
+    "tapeSha256": "3b1093131ea09a644886d400cf4d2b47201cb93235f9cbf6e563fc144f1bd2ff",
+    "terminalStateSha256": "bf570990738c248ace3f4014bcd1652d298f3f8b71d2af03efe2cc3163c8df08",
+    "terminalSnapshotSha256": "c3ae2316e6af3d5abdb7ce133a6e019500db909653b64fdd106d6440649dbbc5",
     "heldMask": 0,
-    "timelineFrame": 109983,
+    "timelineFrame": 108618,
     "map": "spyder_route3",
     "position": [
       4,
@@ -7695,6 +7695,40 @@
     0,
     8192,
     0,
+    64,
+    0,
+    64,
+    0,
+    64,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
     8192,
     0,
     8192,
@@ -8043,7 +8077,439 @@
     0,
     64,
     0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
     64,
+    0,
+    64,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    64,
+    0,
+    64,
+    0,
+    64,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    64,
+    0,
+    64,
+    0,
+    64,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
     0,
     8192,
     0,
@@ -10361,193 +10827,171 @@
     0,
     8192,
     0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
     64,
     0,
     64,
-    0,
-    64,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
     0,
     8192,
     0,
@@ -12298,7 +12742,7 @@
     },
     {
       "name": "route-a-billie",
-      "frame": 8627,
+      "frame": 9093,
       "map": "spyder_routea",
       "position": [
         16,
@@ -12307,7 +12751,7 @@
     },
     {
       "name": "mansion",
-      "frame": 9865,
+      "frame": 10331,
       "map": "spyder_mansion",
       "position": [
         10,
@@ -12316,7 +12760,7 @@
     },
     {
       "name": "mansion_basement",
-      "frame": 10772,
+      "frame": 11216,
       "map": "spyder_mansion_basement",
       "position": [
         13,
@@ -12325,7 +12769,7 @@
     },
     {
       "name": "captain-found",
-      "frame": 11052,
+      "frame": 11496,
       "map": "spyder_mansion_basement",
       "position": [
         3,
@@ -12334,7 +12778,7 @@
     },
     {
       "name": "mansion",
-      "frame": 11960,
+      "frame": 12404,
       "map": "spyder_mansion",
       "position": [
         1,
@@ -12343,7 +12787,7 @@
     },
     {
       "name": "captainreturns",
-      "frame": 12161,
+      "frame": 12605,
       "map": "spyder_mansion",
       "position": [
         1,
@@ -12360,8 +12804,8 @@
         {
           "slug": "arthrobolt",
           "level": 32,
-          "hp": 167,
-          "maxHp": 167
+          "hp": 166,
+          "maxHp": 166
         },
         {
           "slug": "aardorn",
@@ -12371,9 +12815,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -12382,16 +12826,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -12407,8 +12845,8 @@
         {
           "slug": "arthrobolt",
           "level": 32,
-          "hp": 167,
-          "maxHp": 167
+          "hp": 166,
+          "maxHp": 166
         },
         {
           "slug": "aardorn",
@@ -12418,9 +12856,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -12429,16 +12867,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
@@ -12450,8 +12882,8 @@
         {
           "slug": "arthrobolt",
           "level": 32,
-          "hp": 167,
-          "maxHp": 167
+          "hp": 166,
+          "maxHp": 166
         },
         {
           "slug": "aardorn",
@@ -12461,9 +12893,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -12472,16 +12904,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -12497,8 +12923,8 @@
         {
           "slug": "arthrobolt",
           "level": 32,
-          "hp": 167,
-          "maxHp": 167
+          "hp": 166,
+          "maxHp": 166
         },
         {
           "slug": "aardorn",
@@ -12508,9 +12934,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -12519,16 +12945,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
@@ -12540,8 +12960,8 @@
         {
           "slug": "arthrobolt",
           "level": 32,
-          "hp": 167,
-          "maxHp": 167
+          "hp": 166,
+          "maxHp": 166
         },
         {
           "slug": "aardorn",
@@ -12551,9 +12971,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -12562,16 +12982,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -12598,9 +13012,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -12609,16 +13023,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
@@ -12641,9 +13049,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -12652,16 +13060,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -12681,7 +13083,7 @@
         {
           "slug": "arthrobolt",
           "level": 34,
-          "hp": 175,
+          "hp": 174,
           "maxHp": 175
         },
         {
@@ -12692,9 +13094,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -12703,16 +13105,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
@@ -12724,7 +13120,7 @@
         {
           "slug": "arthrobolt",
           "level": 34,
-          "hp": 175,
+          "hp": 174,
           "maxHp": 175
         },
         {
@@ -12735,9 +13131,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -12746,16 +13142,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -12779,7 +13169,7 @@
         {
           "slug": "arthrobolt",
           "level": 34,
-          "hp": 175,
+          "hp": 174,
           "maxHp": 175
         },
         {
@@ -12790,9 +13180,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -12801,16 +13191,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
@@ -12822,7 +13206,7 @@
         {
           "slug": "arthrobolt",
           "level": 34,
-          "hp": 175,
+          "hp": 174,
           "maxHp": 175
         },
         {
@@ -12833,9 +13217,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -12844,16 +13228,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -12877,7 +13255,7 @@
         {
           "slug": "arthrobolt",
           "level": 35,
-          "hp": 180,
+          "hp": 179,
           "maxHp": 180
         },
         {
@@ -12888,9 +13266,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -12899,16 +13277,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
@@ -12920,7 +13292,7 @@
         {
           "slug": "arthrobolt",
           "level": 35,
-          "hp": 180,
+          "hp": 179,
           "maxHp": 180
         },
         {
@@ -12931,9 +13303,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -12942,16 +13314,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -12971,7 +13337,7 @@
         {
           "slug": "arthrobolt",
           "level": 36,
-          "hp": 184,
+          "hp": 183,
           "maxHp": 184
         },
         {
@@ -12982,9 +13348,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -12993,16 +13359,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
@@ -13014,7 +13374,7 @@
         {
           "slug": "arthrobolt",
           "level": 36,
-          "hp": 184,
+          "hp": 183,
           "maxHp": 184
         },
         {
@@ -13025,9 +13385,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -13036,16 +13396,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -13061,7 +13415,7 @@
         {
           "slug": "arthrobolt",
           "level": 36,
-          "hp": 184,
+          "hp": 183,
           "maxHp": 184
         },
         {
@@ -13072,9 +13426,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -13083,16 +13437,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
@@ -13104,7 +13452,7 @@
         {
           "slug": "arthrobolt",
           "level": 36,
-          "hp": 184,
+          "hp": 183,
           "maxHp": 184
         },
         {
@@ -13115,9 +13463,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -13126,16 +13474,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -13151,7 +13493,7 @@
         {
           "slug": "arthrobolt",
           "level": 36,
-          "hp": 154,
+          "hp": 153,
           "maxHp": 184
         },
         {
@@ -13162,9 +13504,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -13173,16 +13515,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
@@ -13205,9 +13541,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -13216,16 +13552,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -13252,9 +13582,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -13263,16 +13593,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
@@ -13295,9 +13619,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -13306,16 +13630,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -13330,9 +13648,9 @@
       "after": [
         {
           "slug": "arthrobolt",
-          "level": 36,
-          "hp": 184,
-          "maxHp": 184
+          "level": 37,
+          "hp": 188,
+          "maxHp": 188
         },
         {
           "slug": "aardorn",
@@ -13342,9 +13660,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -13353,16 +13671,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
@@ -13373,9 +13685,9 @@
       "before": [
         {
           "slug": "arthrobolt",
-          "level": 36,
-          "hp": 184,
-          "maxHp": 184
+          "level": 37,
+          "hp": 188,
+          "maxHp": 188
         },
         {
           "slug": "aardorn",
@@ -13385,9 +13697,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -13396,16 +13708,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -13426,15 +13732,15 @@
           "level": 17
         }
       ],
-      "endFrame": 8481,
-      "turns": 5,
+      "endFrame": 8947,
+      "turns": 8,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 38,
-          "hp": 182,
-          "maxHp": 191
+          "hp": 115,
+          "maxHp": 192
         },
         {
           "slug": "aardorn",
@@ -13444,9 +13750,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -13455,29 +13761,23 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
     {
       "opponent": "wild:katapill",
       "kind": "wild",
-      "startFrame": 8707,
+      "startFrame": 9173,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 38,
-          "hp": 182,
-          "maxHp": 191
+          "hp": 115,
+          "maxHp": 192
         },
         {
           "slug": "aardorn",
@@ -13487,9 +13787,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -13498,16 +13798,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -13516,15 +13810,15 @@
           "level": 14
         }
       ],
-      "endFrame": 8956,
+      "endFrame": 9422,
       "turns": 1,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 38,
-          "hp": 182,
-          "maxHp": 191
+          "hp": 115,
+          "maxHp": 192
         },
         {
           "slug": "aardorn",
@@ -13534,9 +13828,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -13545,29 +13839,23 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
     {
       "opponent": "wild:shybulb",
       "kind": "wild",
-      "startFrame": 9080,
+      "startFrame": 9546,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 38,
-          "hp": 182,
-          "maxHp": 191
+          "hp": 115,
+          "maxHp": 192
         },
         {
           "slug": "aardorn",
@@ -13577,9 +13865,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -13588,16 +13876,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -13606,15 +13888,15 @@
           "level": 15
         }
       ],
-      "endFrame": 9361,
+      "endFrame": 9827,
       "turns": 1,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 38,
-          "hp": 182,
-          "maxHp": 191
+          "hp": 115,
+          "maxHp": 192
         },
         {
           "slug": "aardorn",
@@ -13624,9 +13906,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -13635,29 +13917,23 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
     {
       "opponent": "spyder_routea_rosy",
       "kind": "trainer",
-      "startFrame": 9480,
+      "startFrame": 9946,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 38,
-          "hp": 182,
-          "maxHp": 191
+          "hp": 115,
+          "maxHp": 192
         },
         {
           "slug": "aardorn",
@@ -13667,9 +13943,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -13678,16 +13954,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -13696,14 +13966,14 @@
           "level": 16
         }
       ],
-      "endFrame": 9760,
+      "endFrame": 10226,
       "turns": 1,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 39,
-          "hp": 187,
+          "hp": 119,
           "maxHp": 196
         },
         {
@@ -13714,9 +13984,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -13725,23 +13995,17 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
     {
       "opponent": "spyder_mansion_lucy",
       "kind": "trainer",
-      "startFrame": 10237,
+      "startFrame": 10703,
       "before": [
         {
           "slug": "arthrobolt",
@@ -13757,9 +14021,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -13768,16 +14032,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -13790,7 +14048,7 @@
           "level": 15
         }
       ],
-      "endFrame": 10699,
+      "endFrame": 11143,
       "turns": 2,
       "outcome": "won",
       "after": [
@@ -13808,9 +14066,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -13819,23 +14077,17 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
     {
       "opponent": "spyder_basement_catholi",
       "kind": "trainer",
-      "startFrame": 11327,
+      "startFrame": 11771,
       "before": [
         {
           "slug": "arthrobolt",
@@ -13851,9 +14103,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -13862,16 +14114,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -13884,7 +14130,7 @@
           "level": 24
         }
       ],
-      "endFrame": 11767,
+      "endFrame": 12211,
       "turns": 2,
       "outcome": "won",
       "after": [
@@ -13902,9 +14148,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -13913,16 +14159,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     }
@@ -13949,9 +14189,9 @@
     },
     {
       "slug": "cardiling",
-      "level": 8,
-      "hp": 58,
-      "maxHp": 58
+      "level": 6,
+      "hp": 50,
+      "maxHp": 50
     },
     {
       "slug": "cataspike",
@@ -13960,20 +14200,14 @@
       "maxHp": 70
     },
     {
-      "slug": "eyenemy",
-      "level": 5,
-      "hp": 83,
-      "maxHp": 83
-    },
-    {
       "slug": "pawsand",
-      "level": 22,
-      "hp": 241,
-      "maxHp": 241
+      "level": 21,
+      "hp": 233,
+      "maxHp": 233
     }
   ],
-  "initialStateSha256": "7a89f008e63f77c156dd55f565c739fc553d71f8a56799000a5451af089cd7b2",
-  "terminalStateSha256": "c8d9b88ebe490b413a70347fe6e769bcbeffe32f1b26bc34ab57f131553cc473",
-  "tapeSha256": "21022dffcd3c19e62fc24d6ae7f94bb4c55668562c64d42114d881f28ad5a0bd",
-  "combinedTapeSha256": "df33404232ec98bc8423e2dd77978c936f7de7136c22b4da81274b101ea4d719"
+  "initialStateSha256": "c3b28df8b53bea0bbcb0582b74843e54cc78168b8af74206a1cc2c30c609fdaf",
+  "terminalStateSha256": "097964c6600ebc98d437e6d4d085515e757006c308cfe8b7da3328cab5b42360",
+  "tapeSha256": "f13f31632fa4d9503c44dc880f78ba05ef81926868dc6ac8cb0100b0be486e1b",
+  "combinedTapeSha256": "40b0ba327683985da318f3375d5367c5e60d8c38e44e3b13d89b8992ca9ad33a"
 }

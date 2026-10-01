@@ -284,6 +284,7 @@ export function evolveMonsterSnapshot(
     monster: {
       ...spawned,
       ...(monster.iid === undefined ? {} : { iid: monster.iid }),
+      ...(monster.nickname === undefined ? {} : { nickname: monster.nickname }),
       level: monster.level,
       gender: evolvedGender(sourceDb, target, monster.gender, random),
       tasteCold: monster.tasteCold,

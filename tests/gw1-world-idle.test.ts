@@ -7,7 +7,7 @@ import {
   type TuxemonExtensionState,
 } from "../battle/extension.ts";
 import { battleDbToTuxemonBattleDb } from "../battle/from-battle-db.ts";
-import { TUXEMON_BATTLE_DB, TUXEMON_EXTENSIONS, TUXEMON_VARIABLE_ENUMS } from "../battle/game.ts";
+import { TUXEMON_BATTLE_DB, TUXEMON_EXTENSIONS, TUXEMON_SCENES, TUXEMON_VARIABLE_ENUMS } from "../battle/game.ts";
 import { spawnMonster } from "../battle/spawn.ts";
 import { buildProject, G6_IMPORT_OPTIONS } from "../importer/project.ts";
 import { applyTerrain, importTerrain } from "../importer/terrain.ts";
@@ -179,6 +179,7 @@ function runRadiotowerLoss(): RadiotowerResult {
   );
   const session = createSession(project, 60, {
     extensions: TUXEMON_EXTENSIONS,
+    scenes: TUXEMON_SCENES,
     battle: RADIOTOWER_LOSS,
   });
   const ext = spawnedExtension("rockitten", 5, {
@@ -244,12 +245,13 @@ describe("GW1 Radiotower WorldState/worldIdle acceptance", () => {
     const result = runRadiotowerLoss();
     const ext = tuxemonExtensionState(result.state.ext, TUXEMON_BATTLE_DB);
     const joined = result.texts.map((entry) => entry.lines.join(" "));
+    const playerName = result.state.sw.playerName ?? "";
     const expectedStoryStarts = [
-      "Hey Red, hold up!",
+      `Hey ${playerName}, hold up!`,
       "I've been watching you from the shop, and I have to say, I'm impressed.",
       "Aha, it's too late for you!",
       "That was a close one! I'm just glad we were able to take down those thieves.",
-      "I'm proud of you, Red. You've come a long way since we first met.",
+      `I'm proud of you, ${playerName}. You've come a long way since we first met.`,
       "No. It's not possible.",
     ];
 
@@ -405,6 +407,7 @@ function runEvolutionBoundary(entry: EvolutionCase): {
   const project = evolutionHarness(entry);
   const session = createSession(project, 60, {
     extensions: TUXEMON_EXTENSIONS,
+    scenes: TUXEMON_SCENES,
     battle: EVOLUTION_BATTLE,
   });
   let state = startSession(

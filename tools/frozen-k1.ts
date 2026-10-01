@@ -7,6 +7,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
 import type { BattleRules } from "../vendor/pocket-rpgkit/src/engine/battle.ts";
+import type { SceneRules } from "../vendor/pocket-rpgkit/src/engine/scene.ts";
 import {
   createSession,
   startSession,
@@ -25,7 +26,20 @@ const SCAN_BATTLE_RULES: BattleRules = {
   step: (state) => state,
   done: () => null,
 };
-const SCAN_OPTIONS = { extensions: { allowUnknown: true }, battle: SCAN_BATTLE_RULES } as const;
+const SCAN_SCENE_RULES: SceneRules = {
+  start: () => null,
+  step: (state) => state,
+  done: () => null,
+};
+const SCAN_OPTIONS = {
+  extensions: { allowUnknown: true },
+  battle: SCAN_BATTLE_RULES,
+  scenes: {
+    "rpgkit.nameInput": SCAN_SCENE_RULES,
+    "tux.journal": SCAN_SCENE_RULES,
+    "tux.monsterPicker": SCAN_SCENE_RULES,
+  },
+} as const;
 
 function collectLandings(commands: readonly Command[], landing: Map<string, [number, number]>): void {
   for (const command of commands) {

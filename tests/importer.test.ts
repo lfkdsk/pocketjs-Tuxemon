@@ -15,7 +15,7 @@ import {
 import { jsonBytes } from "../importer/index.ts";
 import { loadAllFileEvents, TUXEMON_SRC } from "../importer/source.ts";
 import { applyTerrain, importTerrain } from "../importer/terrain.ts";
-import { TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS } from "../battle/game.ts";
+import { TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS, TUXEMON_SCENES } from "../battle/game.ts";
 import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
 import { canStepFrom, type Dir4 } from "../vendor/pocket-rpgkit/src/engine/passability.ts";
 import { createSwitchState } from "../vendor/pocket-rpgkit/src/engine/interpreter.ts";
@@ -497,7 +497,7 @@ test("clamped transfers use the nearest deterministic walkable landing", () => {
   }
   expect(landings).toEqual([{ x: 38, y: 3 }, { x: 38, y: 3 }]);
 
-  const session = createSession(result.project, 60, { extensions: TUXEMON_EXTENSIONS });
+  const session = createSession(result.project, 60, { extensions: TUXEMON_EXTENSIONS, scenes: TUXEMON_SCENES });
   const flower = session.tables.get("flower_city")!;
   const exits = ([0, 1, 2, 3] as Dir4[]).filter((dir) =>
     canStepFrom(flower, repair!.emitted.x, repair!.emitted.y, dir)
@@ -510,11 +510,11 @@ test("default import output remains byte-pinned", () => {
   const bytes = jsonBytes(buildProject(maps, DEFAULT_IMPORT_OPTIONS));
   // This pins the complete ImportBuild: condition lowering, the stable source
   // inputs, the generated outdoor world index and its compact report summary.
-  // The deterministic clock, native presentation/terrain mappings, the GM1
-  // audio commands, and the sys.music_fading fadeout guard are all included
-  // in this combined pin.
+  // The deterministic clock, native presentation/terrain mappings, GM1 audio
+  // commands, sys.music_fading fadeout guard, and GI scene lowering are all
+  // included in this combined pin.
   expect(createHash("sha256").update(bytes).digest("hex")).toBe(
-    "e97ba443006deb9d06f13fae87a19b36a2f6b3c8eb10727de73a6b7b3c1c9db7",
+    "89bc86b1d8f497e506da0998002d97152f410b1b7ad8d87a9d6f55b0c228e77b",
   );
 });
 
@@ -780,6 +780,7 @@ test("world destroy tools lower to held-item interactions for matching sprites",
   const session = createSession(result.project, 60, {
     extensions: TUXEMON_EXTENSIONS,
     battle: TUXEMON_BATTLE_RULES,
+    scenes: TUXEMON_SCENES,
   });
   let state = startSession(result.project, session);
   state.move = {
@@ -831,6 +832,46 @@ test("G6 emits native party state and Battle Processing for the first fight", ()
   expect(nodes.some((node) => node.kind === "ext" && node.call === "tux.party_size")).toBeTrue();
   expect(result.variables.battle_last_loser).toContain("spyder_billie");
   expect(result.variables.battle_last_result).toEqual(expect.arrayContaining(["captured", "run"]));
+});
+
+test("G6 lowers Tuxemon rename and journal actions to registered scenes", () => {
+  const result = buildProject([
+    "healing_center",
+    "player_house_bedroom",
+    "professor_lab",
+    "spyder_dojo4",
+  ], G6_IMPORT_OPTIONS);
+  const nodes = objectNodes(result.project);
+  expect(result.project.playerName).toBe("Red");
+  expect(JSON.stringify(result.project)).toContain("{name}");
+
+  const playerRename = nodes.find((node) => node.op === "scene" && node.id === "rpgkit.nameInput"
+    && (node.args as { default?: string } | undefined)?.default === "");
+  expect(playerRename?.args).toMatchObject({ maxLength: 15, swallowCancel: true, columns: 10 });
+
+  const picker = nodes.find((node) => node.op === "scene" && node.id === "tux.monsterPicker");
+  expect(picker?.args).toEqual({ variable: "v.rename", title: "Choose a Tuxemon" });
+  expect(picker?.onDone).toEqual([
+    {
+      op: "ext",
+      call: "tux.prepare_monster_rename",
+      args: { variable: "v.rename", nameVariable: "tux.rename.name" },
+    },
+    expect.objectContaining({ op: "scene", id: "rpgkit.nameInput" }),
+    {
+      op: "ext",
+      call: "tux.apply_monster_rename",
+      args: { variable: "v.rename", nameVariable: "tux.rename.name" },
+    },
+  ]);
+  expect(nodes.filter((node) => node.op === "scene" && node.id === "tux.journal")).toHaveLength(3);
+  expect(nodes.filter((node) => node.op === "ext" && node.call === "tux.set_tuxepedia")).toHaveLength(6);
+
+  const rows = result.report.coverage.actions.rows;
+  expect(rows.find((row) => row.type === "rename_player")).toMatchObject({ degraded: 3, dropped: 2 });
+  expect(rows.find((row) => row.type === "rename_monster")).toMatchObject({ native: 1, dropped: 1 });
+  expect(rows.find((row) => row.type === "open_journal")).toMatchObject({ degraded: 3, dropped: 11 });
+  expect(rows.find((row) => row.type === "set_tuxepedia")).toMatchObject({ degraded: 6, dropped: 0 });
 });
 
 test("faint recovery preserves its notice and yields to the first-loss cutscene", () => {
@@ -936,6 +977,7 @@ test("simultaneously eligible route1 automatic events run concurrently and relea
   const session = createSession(project, 60, {
     extensions: TUXEMON_EXTENSIONS,
     battle: TUXEMON_BATTLE_RULES,
+    scenes: TUXEMON_SCENES,
   });
   let state = startSession(project, session, createSwitchState({
     variables: { "sys.party_size": 1, "v.whoartthou": 5 },

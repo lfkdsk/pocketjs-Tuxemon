@@ -8,7 +8,12 @@ import { readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
 import { tuxemonExtensionState } from "../battle/extension.ts";
-import { TUXEMON_BATTLE_DB, TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS } from "../battle/game.ts";
+import {
+  TUXEMON_BATTLE_DB,
+  TUXEMON_BATTLE_RULES,
+  TUXEMON_EXTENSIONS,
+  TUXEMON_SCENES,
+} from "../battle/game.ts";
 import { tuxemonRuntimeBattleState } from "../battle/runtime.ts";
 import type { SpawnedMonsterSnapshot } from "../battle/types.ts";
 import { AttractController } from "../vendor/pocket-rpgkit/src/engine/attract.ts";
@@ -44,6 +49,7 @@ const GAME_OPTIONS = {
   immutableState: process.env.GB6_IMMUTABLE === "1",
   extensions: TUXEMON_EXTENSIONS,
   battle: TUXEMON_BATTLE_RULES,
+  scenes: TUXEMON_SCENES,
 } as const;
 const REQUIRED_TRAINERS: Readonly<Record<string, number>> = {
   spyder_billie: 2,
@@ -105,6 +111,8 @@ function input(mask: number, previous: number): SessionInput {
     cancelEdge: Boolean(pressed & 0x4000),
     upEdge: Boolean(pressed & 0x0010),
     downEdge: Boolean(pressed & 0x0040),
+    leftEdge: Boolean(pressed & 0x0080),
+    rightEdge: Boolean(pressed & 0x0020),
   };
 }
 
@@ -163,7 +171,7 @@ function replayBaseline(journey: Gb6JourneyResult): ReplayResult {
     const mask = journey.masks[frame]!;
     state = stepSession(session, state, input(mask, previous));
     previous = mask;
-    if (!before && state.scene) {
+    if (before?.kind !== "battle" && state.scene?.kind === "battle") {
       const battle = tuxemonRuntimeBattleState(state.scene.state);
       active = {
         opponent: battle.battle.opponent,
@@ -173,7 +181,7 @@ function replayBaseline(journey: Gb6JourneyResult): ReplayResult {
         enemy: battle.battle.parties[1].map((monster) => ({ slug: monster.slug, level: monster.level })),
       };
     }
-    if (before && !state.scene) {
+    if (before?.kind === "battle" && state.scene?.kind !== "battle") {
       expect(`battle exit at f${frame} had no matching entry`, active !== null);
       const battle = tuxemonRuntimeBattleState(before.state);
       battles.push({

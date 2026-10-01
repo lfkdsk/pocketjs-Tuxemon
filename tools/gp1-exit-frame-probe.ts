@@ -35,12 +35,14 @@ function input(mask: number, previous: number): SessionInput {
     cancelEdge: !!(pressed & 0x4000),
     upEdge: !!(pressed & 0x0010),
     downEdge: !!(pressed & 0x0040),
+    leftEdge: !!(pressed & 0x0080),
+    rightEdge: !!(pressed & 0x0020),
   };
 }
 
 const readEntry = (entry: string) => readFileSync(join(ROOT, "dist", entry));
-const { extensions, rules } = createProductionTuxemonBattle({ read: readEntry });
-const session = createSession(project, 60, { maps, extensions, battle: rules });
+const { extensions, rules, scenes } = createProductionTuxemonBattle({ read: readEntry });
+const session = createSession(project, 60, { maps, extensions, battle: rules, scenes });
 
 let state = startSession(project, session);
 let previous = 0;

@@ -18,6 +18,9 @@ import {
 const ROOT = resolve(import.meta.dir, "..");
 const db = JSON.parse(readFileSync(join(ROOT, "data/battle-db.json"), "utf8")) as unknown;
 const runtimeDb = JSON.parse(readFileSync(join(ROOT, "data/battle-runtime-db.json"), "utf8")) as unknown;
+const runtimeShell = JSON.parse(readFileSync(join(ROOT, "dist/battle-runtime-shell.json"), "utf8")) as {
+  monstersIndex: Array<{ id: string; entry: string; txmnId: number; name: string }>;
+};
 const report = JSON.parse(readFileSync(join(ROOT, "data/battle-assets-report.json"), "utf8"));
 const images = JSON.parse(readFileSync(join(ROOT, "images.json"), "utf8")) as Record<string, { psm: number }>;
 const pakManifest = JSON.parse(readFileSync(join(ROOT, "pak.json"), "utf8")) as Array<{ key: string; file: string }>;
@@ -136,6 +139,9 @@ describe("GB1 battle database", () => {
     });
     expect(validated.shapes.hunter).toEqual({ armour: 4, dodge: 8, hp: 5, melee: 8, ranged: 4, speed: 7 });
     expect(validated.monsters.rockitten).toMatchObject({
+      name: "Rockitten",
+      description: "It uses its tiny rock ears for snuggling.",
+      txmnId: 1,
       shape: "hunter",
       stage: "basic",
       types: ["earth"],
@@ -146,6 +152,17 @@ describe("GB1 battle database", () => {
     expect(validated.monsters.nut.evolutions).toContainEqual(expect.objectContaining({ monster_slug: "bolt" }));
     expect(validated.monsters.bolt.evolutions).toContainEqual(expect.objectContaining({ monster_slug: "arthrobolt" }));
     expect(validated.monsters.nut.moveset.map((move) => move.technique)).toContain("thunderclap");
+    expect(runtimeShell.monstersIndex.find((entry) => entry.id === "rockitten")).toEqual({
+      id: "rockitten",
+      entry: "battle/monsters/rockitten.json",
+      txmnId: 1,
+      name: "Rockitten",
+    });
+    expect((runtimeDb as BattleDb).monsters.rockitten).toMatchObject({
+      name: "Rockitten",
+      description: validated.monsters.rockitten.description,
+      txmnId: 1,
+    });
     for (const [slug, monster] of Object.entries(validated.monsters)) {
       for (const evolution of monster.evolutions) {
         expect(validated.monsters[String(evolution.monster_slug)], `${slug} evolution target`).toBeDefined();

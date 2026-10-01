@@ -8,6 +8,7 @@ import {
   type TuxemonExtensionRuntimeOptions,
 } from "./extension.ts";
 import { createTuxemonBattleRules, type VariableEnums } from "./runtime.ts";
+import { createTuxemonScenes, runtimeJournalIndex } from "./scenes.ts";
 
 // GP1: the importer splits the runtime projection into this compact shell
 // (bundled, like project-shell.json) plus one pak/data.fs entry per
@@ -23,10 +24,15 @@ export function createProductionTuxemonBattle(
 ): {
   extensions: ReturnType<typeof createTuxemonExtensions>;
   rules: ReturnType<typeof createTuxemonBattleRules>;
+  scenes: ReturnType<typeof createTuxemonScenes>["rules"];
+  catalog: ReturnType<typeof createTuxemonScenes>["catalog"];
 } {
   const provider = createTuxemonBattleDbProvider(RUNTIME_SHELL, source);
+  const sceneBundle = createTuxemonScenes(provider, runtimeJournalIndex(RUNTIME_SHELL));
   return {
     extensions: createTuxemonExtensions(provider, extensionOptions),
     rules: createTuxemonBattleRules(provider, variableEnumsJson as VariableEnums),
+    scenes: sceneBundle.rules,
+    catalog: sceneBundle.catalog,
   };
 }

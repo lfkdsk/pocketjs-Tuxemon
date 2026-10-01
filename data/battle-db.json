@@ -1397,6 +1397,8 @@
  ],
  "monsters": {
   "aardart": {
+   "name": "Aardart",
+   "description": "It keeps count of every ant it has eaten, and celebrates significant numbers.",
    "species": "anteater",
    "txmnId": 43,
    "shape": "varmint",
@@ -1525,6 +1527,8 @@
    }
   },
   "aardorn": {
+   "name": "Aardorn",
+   "description": "When born it is placed in an anthill and left to eat its way out.",
    "species": "snout",
    "txmnId": 42,
    "shape": "varmint",
@@ -1657,6 +1661,8 @@
    }
   },
   "abesnaki": {
+   "name": "Abesnaki",
+   "description": "Each face is a different pattern, and some say the symbols spell out words in a dead language.",
    "species": "shield-mask",
    "txmnId": 99,
    "shape": "serpent",
@@ -1794,6 +1800,8 @@
    }
   },
   "agnidon": {
+   "name": "Agnidon",
+   "description": "It prefers four legs, but can stand on two to open doors, push over trees or hold things.",
    "species": "false_dragon",
    "txmnId": 14,
    "shape": "dragon",
@@ -1928,6 +1936,8 @@
    }
   },
   "agnigon": {
+   "name": "Agnigon",
+   "description": "It is called a 'false dragon', because it appears to be a dragon, but actually evolved from a different line of ancient reptiles.",
    "species": "false_dragon",
    "txmnId": 15,
    "shape": "dragon",
@@ -2064,6 +2074,8 @@
    }
   },
   "agnite": {
+   "name": "Agnite",
+   "description": "It is playful, but must be taught early on to keep its fire in check.",
    "species": "false_dragon",
    "txmnId": 13,
    "shape": "dragon",
@@ -2197,6 +2209,8 @@
    }
   },
   "agnsher": {
+   "name": "Agnsher",
+   "description": "A fusion of two tuxemon.",
    "species": "threat",
    "txmnId": 0,
    "shape": "flier",
@@ -2326,6 +2340,8 @@
    }
   },
   "allagon": {
+   "name": "Allagon",
+   "description": "ALLAGON are drawn to relics made from the metals left behind by their ancestors, and will be violent to retrieve them.",
    "species": "dragon",
    "txmnId": 160,
    "shape": "dragon",
@@ -2468,6 +2484,8 @@
    }
   },
   "ampystoma": {
+   "name": "Ampystoma",
+   "description": "You would think AMPYSTOMA's warning coloration would make ambush impossible, but the murky waters it hunts in obscure it until it is ready to reveal itself. It likes to go on land during thunderstorms.",
    "species": "lightning_salamander",
    "txmnId": 280,
    "shape": "brute",
@@ -2612,6 +2630,8 @@
    }
   },
   "angesnow": {
+   "name": "Angesnow",
+   "description": "Those who survive getting lost in hostile, icy conditions often mention a mysterious presence guiding them even when the snow is too heavy to see through.",
    "species": "driven_snow",
    "txmnId": 263,
    "shape": "humanoid",
@@ -2744,6 +2764,8 @@
    }
   },
   "angrito": {
+   "name": "Angrito",
+   "description": "It cannot understand why humans feel rage and hatred, but ANGRITO feels these urges too.",
    "species": "enraged_emotion",
    "txmnId": 175,
    "shape": "blob",
@@ -2860,6 +2882,8 @@
    }
   },
   "anoleaf": {
+   "name": "Anoleaf",
+   "description": "It considers the plants growing near it to be its brothers and sisters.",
    "species": "sprout",
    "txmnId": 65,
    "shape": "varmint",
@@ -2995,6 +3019,8 @@
    }
   },
   "anu": {
+   "name": "Anu",
+   "description": "It is said that it enters others' dreams to search for its lost love.",
    "species": "dream_fox",
    "txmnId": 61,
    "shape": "varmint",
@@ -3136,6 +3162,8 @@
    }
   },
   "apeoro": {
+   "name": "Apeoro",
+   "description": "The kings of old used psychic powers to transfer their souls into these golden computing machines. Now they live on, unable to communicate but still dreaming of empires.",
    "species": "old_block",
    "txmnId": 197,
    "shape": "humanoid",
@@ -3259,6 +3287,8 @@
    }
   },
   "araignee": {
+   "name": "Araignee",
+   "description": "Pedants who say all spiders have eight legs are strangely quiet on the case of ARAIGNEE.",
    "species": "weaver",
    "txmnId": 100,
    "shape": "grub",
@@ -3396,6 +3426,8 @@
    }
   },
   "arthrobolt": {
+   "name": "Arthrobolt",
+   "description": "It feels uncomfortable commanding its fellow NUT and BOLT, and usually runs away. But then the NUT and BOLT have no one to instruct them.",
    "species": "foreman",
    "txmnId": 6,
    "shape": "humanoid",
@@ -3526,6 +3558,8 @@
    }
   },
   "av8r": {
+   "name": "AV8R",
+   "description": "If the sun is out, it can fly as far or as high as it likes.",
    "species": "heliotrope",
    "txmnId": 126,
    "shape": "flier",
@@ -3640,6 +3674,8 @@
    }
   },
   "axolightl": {
+   "name": "Axolightl",
+   "description": "It lights the deep waters with its tail, marking a safe shelter for fish.",
    "species": "inchoate",
    "txmnId": 101,
    "shape": "polliwog",
@@ -3780,6 +3816,8 @@
    }
   },
   "b_ver_1": {
+   "name": "B-Ver.1",
+   "description": "It is designed for all those times you need something to be bitten by a robot.",
    "species": "gnawer",
    "txmnId": 130,
    "shape": "varmint",
@@ -3894,6 +3932,8 @@
    }
   },
   "bamboon": {
+   "name": "Bamboon",
+   "description": "It fights with its bamboo staff, which it also uses for balance.",
    "species": "prehensile",
    "txmnId": 28,
    "shape": "sprite",
@@ -4029,6 +4069,8 @@
    }
   },
   "baobaraffe": {
+   "name": "Baobaraffe",
+   "description": "It stores mass amounts of water in its huge body so that it can travel long distances across hot, dry deserts. It will also share water with thirsty creatures. When it has no water stored it is skinny.",
    "species": "tree_giraffe",
    "txmnId": 193,
    "shape": "landrace",
@@ -4152,6 +4194,8 @@
    }
   },
   "baoby": {
+   "name": "Baoby",
+   "description": "They travel from river to river in search of water to drink and store. The leafy ossicones on its head conceal movable points that act similar to a dowsing rod. Many creatures follow BAOBY in droughts.",
    "species": "thirsty_okapi",
    "txmnId": 192,
    "shape": "landrace",
@@ -4275,6 +4319,8 @@
    }
   },
   "bearloch": {
+   "name": "Bearloch",
+   "description": "A fusion of two tuxemon.",
    "species": "threat",
    "txmnId": 0,
    "shape": "brute",
@@ -4404,6 +4450,8 @@
    }
   },
   "bigfin": {
+   "name": "Bigfin",
+   "description": "A whole ecosystem exists on its back, so it tries not to go underwater.",
    "species": "island",
    "txmnId": 25,
    "shape": "leviathan",
@@ -4533,6 +4581,8 @@
    }
   },
   "birdling": {
+   "name": "Birdling",
+   "description": "The ignorant believe that it carries its own egg upon its back. It is the guard for a far more important egg than that.",
    "species": "bird_brain",
    "txmnId": 82,
    "shape": "flier",
@@ -4653,6 +4703,8 @@
    }
   },
   "bishosand": {
+   "name": "Bishosand",
+   "description": "BISHOSAND is fascinated by religious or spiritual symbols it sees and likes to collect them, but is believed to not understand any of them.",
    "species": "sand_bishop",
    "txmnId": 373,
    "shape": "humanoid",
@@ -4779,6 +4831,8 @@
    }
   },
   "blasdoor": {
+   "name": "Blasdoor",
+   "description": "BLASDOOR shield those they care about behind their impenetrable bulk, but macerate unwanted intruders and scrap machines between their steel teeth.",
    "species": "trapdoor",
    "txmnId": 251,
    "shape": "sprite",
@@ -4909,6 +4963,8 @@
    }
   },
   "bolt": {
+   "name": "Bolt",
+   "description": "The presence of a BOLT makes a NUT clamp down harder and spark more energy.",
    "species": "hardware",
    "txmnId": 5,
    "shape": "blob",
@@ -5032,6 +5088,8 @@
    }
   },
   "boltnu": {
+   "name": "Boltnu",
+   "description": "It spends most of its time digging burrows into the ground, it remains dizzy from the constant vibrations and movement caused by them digging into the soil.",
    "species": "screwdriver",
    "txmnId": 194,
    "shape": "blob",
@@ -5153,6 +5211,8 @@
    }
   },
   "botbot": {
+   "name": "Botbot",
+   "description": "It is a universal robot that can be adapted for any purpose.",
    "species": "socket",
    "txmnId": 125,
    "shape": "grub",
@@ -5281,6 +5341,8 @@
    }
   },
   "boxali": {
+   "name": "Boxali",
+   "description": "With its long blue cape, BOXALI can glide above the ground - allowing it to perform stunts and aerial attacks.",
    "species": "macropod",
    "txmnId": 295,
    "shape": "brute",
@@ -5418,6 +5480,8 @@
    }
   },
   "breem": {
+   "name": "Breem",
+   "description": "It punctures fruit to place new DUGGOT in them by night. By day it pretends to be a normal bee.",
    "species": "parasitized",
    "txmnId": 344,
    "shape": "flier",
@@ -5542,6 +5606,8 @@
    }
   },
   "brewdin": {
+   "name": "Brewdin",
+   "description": "Born in neglected, once prized, pottery and similar treasures. Rumored to grants wishes to those who can make it smile.",
    "species": "genie",
    "txmnId": 215,
    "shape": "varmint",
@@ -5684,6 +5750,8 @@
    }
   },
   "bricgard": {
+   "name": "Bricgard",
+   "description": "When the winter comes, IMBRICKCILE builds a defensive cocoon of bricks to protect it from predators.",
    "species": "brick_wall",
    "txmnId": 260,
    "shape": "blob",
@@ -5822,6 +5890,8 @@
    }
   },
   "brickhemoth": {
+   "name": "Brickhemoth",
+   "description": "Be wary when kicking a BRICGARD's nest, because percussive force is the trigger the tuxemon needs to burst forth once it has formed into a BRICKHEMOTH.",
    "species": "brick_wall",
    "txmnId": 261,
    "shape": "brute",
@@ -5955,6 +6025,8 @@
    }
   },
   "budaye": {
+   "name": "Budaye",
+   "description": "It can convince any group to cooperate for the common good with some encouraging mewls and waves.",
    "species": "mutual",
    "txmnId": 27,
    "shape": "sprite",
@@ -6091,6 +6163,8 @@
    }
   },
   "bugnin": {
+   "name": "Bugnin",
+   "description": "Its sword is actually an antenna grown and snapped off for that purpose.",
    "species": "honour",
    "txmnId": 58,
    "shape": "brute",
@@ -6222,6 +6296,8 @@
    }
   },
   "bursa": {
+   "name": "Bursa",
+   "description": "It rejects fire as basic, and produces only the fire of the mind.",
    "species": "too_hot",
    "txmnId": 83,
    "shape": "humanoid",
@@ -6349,6 +6425,8 @@
    }
   },
   "cairfrey": {
+   "name": "Cairfrey",
+   "description": "A jolly piece of furniture who awoke one morning and decided to explore.",
    "species": "host",
    "txmnId": 71,
    "shape": "blob",
@@ -6485,6 +6563,8 @@
    }
   },
   "caper": {
+   "name": "Caper",
+   "description": "CAPER play and frolic with each other among the foam of mountain rivers, cold as ice.",
    "species": "kid",
    "txmnId": 275,
    "shape": "landrace",
@@ -6616,6 +6696,8 @@
    }
   },
   "capinyah": {
+   "name": "Capinyah",
+   "description": "Only after intense training in the jungles, lifting logs and river boulders, can CAPITI graduate to become CAPINYAH.",
    "species": "woodwose",
    "txmnId": 103,
    "shape": "humanoid",
@@ -6763,6 +6845,8 @@
    }
   },
   "capiti": {
+   "name": "Capiti",
+   "description": "It looks like a baby, but some specimens have been found that are hundreds of years old.",
    "species": "woodwose",
    "txmnId": 102,
    "shape": "sprite",
@@ -6915,6 +6999,8 @@
    }
   },
   "cardiling": {
+   "name": "Cardiling",
+   "description": "One wouldn't expect it to breathe fire, until it does.",
    "species": "firebird",
    "txmnId": 62,
    "shape": "flier",
@@ -7057,6 +7143,8 @@
    }
   },
   "cardinale": {
+   "name": "Cardinale",
+   "description": "It hates all predators with a passion, and makes war with them and their young when it can.",
    "species": "firebird",
    "txmnId": 64,
    "shape": "flier",
@@ -7195,6 +7283,8 @@
    }
   },
   "cardiwing": {
+   "name": "Cardiwing",
+   "description": "Its song is remarkable, but few dare keep an explosive songbird.",
    "species": "firebird",
    "txmnId": 63,
    "shape": "flier",
@@ -7338,6 +7428,8 @@
    }
   },
   "cataspike": {
+   "name": "Cataspike",
+   "description": "It learns to fight from observation. Left to its own devices, it uses its spike to pick up rubbish.",
    "species": "pointy",
    "txmnId": 33,
    "shape": "grub",
@@ -7466,6 +7558,8 @@
    }
   },
   "cateye": {
+   "name": "Cateye",
+   "description": "They say it blinks once a year, in honor of summer's end.",
    "species": "sentinel",
    "txmnId": 235,
    "shape": "hunter",
@@ -7598,6 +7692,8 @@
    }
   },
   "chrome_robo": {
+   "name": "Chrome Robo",
+   "description": "A hostile robot.",
    "species": "threat",
    "txmnId": 0,
    "shape": "humanoid",
@@ -7726,6 +7822,8 @@
    }
   },
   "chromeye": {
+   "name": "Chromeye",
+   "description": "CHROMEYE was created to observe and learn how humans think and feel.",
    "species": "mixed_emotion",
    "txmnId": 174,
    "shape": "blob",
@@ -7867,6 +7965,8 @@
    }
   },
   "coaldiak": {
+   "name": "Coaldiak",
+   "description": "This bear can set fire to anywhere and draw blood from anything.",
    "species": "ursus",
    "txmnId": 359,
    "shape": "humanoid",
@@ -7982,6 +8082,8 @@
    }
   },
   "cochini": {
+   "name": "Cochini",
+   "description": "It is as intelligent and aware as a three-year old child. It tastes delicious.",
    "species": "tasty",
    "txmnId": 104,
    "shape": "varmint",
@@ -8114,6 +8216,8 @@
    }
   },
   "cocrune": {
+   "name": "Cocrune",
+   "description": "Whichever way it turns, the blood-red eye faces you.",
    "species": "diptera",
    "txmnId": 333,
    "shape": "blob",
@@ -8238,6 +8342,8 @@
    }
   },
   "coleorus": {
+   "name": "Coleorus",
+   "description": "It has existed, unchanged, for millions of years.",
    "species": "timeless",
    "txmnId": 105,
    "shape": "sprite",
@@ -8376,6 +8482,8 @@
    }
   },
   "conifrost": {
+   "name": "Conifrost",
+   "description": "If it sneezes, an avalanche occurs. It has a permanent sniffle.",
    "species": "taiga",
    "txmnId": 106,
    "shape": "blob",
@@ -8508,6 +8616,8 @@
    }
   },
   "coppi": {
+   "name": "Coppi",
+   "description": "COPPI's flowers are surprisingly bitter and smelly, but they are useful in beer brewing and medicine.",
    "species": "spinning_seed",
    "txmnId": 377,
    "shape": "blob",
@@ -8643,6 +8753,8 @@
    }
   },
   "coproblight": {
+   "name": "Coproblight",
+   "description": "Born from the feces of prehistoric Tuxemon, it used the shards of bone within itself for defense.",
    "species": "skull_poo",
    "txmnId": 173,
    "shape": "blob",
@@ -8777,6 +8889,8 @@
    }
   },
   "corvix": {
+   "name": "Corvix",
+   "description": "It arms its wings with bone shards from its victims.",
    "species": "horned_raptor",
    "txmnId": 157,
    "shape": "flier",
@@ -8915,6 +9029,8 @@
    }
   },
   "cowpignon": {
+   "name": "Cowpignon",
+   "description": "Some people dry it out and eat it as a medicinal enhancement.",
    "species": "enhancement",
    "txmnId": 107,
    "shape": "sprite",
@@ -9053,6 +9169,8 @@
    }
   },
   "crankus": {
+   "name": "Crankus",
+   "description": "From one mountaintop to another, CRANKUS can be heard bleating to one another in running arguments that end only with the spring thaws.",
    "species": "cranky",
    "txmnId": 276,
    "shape": "landrace",
@@ -9181,6 +9299,8 @@
    }
   },
   "criniotherme": {
+   "name": "Criniotherme",
+   "description": "Its mane shines during the day, grows big and red at sunset, and blows away as ash at night.",
    "species": "mercury",
    "txmnId": 246,
    "shape": "hunter",
@@ -9296,6 +9416,8 @@
    }
   },
   "dandicub": {
+   "name": "Dandicub",
+   "description": "After a litter is born, they float all over the world and never see their family again.",
    "species": "floret",
    "txmnId": 73,
    "shape": "blob",
@@ -9413,6 +9535,8 @@
    }
   },
   "dandylion": {
+   "name": "Dandylion",
+   "description": "It gives birth to one litter in its life. Then it wanders the world trying to find them.",
    "species": "lions_tooth",
    "txmnId": 74,
    "shape": "hunter",
@@ -9526,6 +9650,8 @@
    }
   },
   "dark_robo": {
+   "name": "Dark Robo",
+   "description": "A hostile robot.",
    "species": "threat",
    "txmnId": 0,
    "shape": "humanoid",
@@ -9654,6 +9780,8 @@
    }
   },
   "delfeco": {
+   "name": "Delfeco",
+   "description": "DELFECO's streamlined body allows for swift navigation through water, and its intelligence is evident in its complex hunting strategies. Despite its size, it's known for its playful nature and strong bond with its trainer.",
    "species": "joyful_dolphin",
    "txmnId": 24,
    "shape": "piscine",
@@ -9792,6 +9920,8 @@
    }
   },
   "dinoflop": {
+   "name": "Dinoflop",
+   "description": "DINOFLOP delights in quickly turning away from its attackers so their blows land on its shielded and spiny back.",
    "species": "volte-face",
    "txmnId": 166,
    "shape": "dragon",
@@ -9924,6 +10054,8 @@
    }
   },
   "djinnbo": {
+   "name": "Djinnbo",
+   "description": "It is mistakenly believed that it is a human who died in a fire. Actually, its relatives did.",
    "species": "vengeance",
    "txmnId": 108,
    "shape": "humanoid",
@@ -10065,6 +10197,8 @@
    }
   },
   "dollfin": {
+   "name": "Dollfin",
+   "description": "Each one follows a ship from place to place, exploring the world.",
    "species": "joyful",
    "txmnId": 23,
    "shape": "leviathan",
@@ -10187,6 +10321,8 @@
    }
   },
   "dracune": {
+   "name": "Dracune",
+   "description": "It is immobile during the day, but can wriggle and bite at night.",
    "species": "cloaked",
    "txmnId": 37,
    "shape": "blob",
@@ -10322,6 +10458,8 @@
    }
   },
   "dragarbor": {
+   "name": "Dragarbor",
+   "description": "When it feels it is coming to the end of its life, it travels to a graveyard where it plants itself. Its tail flower grows forever.",
    "species": "dragon",
    "txmnId": 142,
    "shape": "dragon",
@@ -10463,6 +10601,8 @@
    }
   },
   "drashimi": {
+   "name": "Drashimi",
+   "description": "It lies on the ground, smelling delicious and tempting monsters to take a bite - but when they approach, it bites them first.",
    "species": "dragon_roll",
    "txmnId": 185,
    "shape": "polliwog",
@@ -10598,6 +10738,8 @@
    }
   },
   "drokoro": {
+   "name": "Drokoro",
+   "description": "Once it had a family, but it ate its parents, and it ate its children, and it ate its mate, and it ate all of its kind.",
    "species": "dragon",
    "txmnId": 145,
    "shape": "dragon",
@@ -10736,6 +10878,8 @@
    }
   },
   "duggot": {
+   "name": "Duggot",
+   "description": "When TUMBLEBEE tries to drink fruit juice, a DUGGOT may latch on and take over its brain.",
    "species": "unwelcome_mouthful",
    "txmnId": 343,
    "shape": "varmint",
@@ -10839,6 +10983,8 @@
    }
   },
   "dune_pincher": {
+   "name": "Dune Pincher",
+   "description": "These hermits will wrap themselves in whatever is closest. In the desert, that is the burial shrouds of long-dead pharaohs.",
    "species": "hermit",
    "txmnId": 109,
    "shape": "grub",
@@ -10971,6 +11117,8 @@
    }
   },
   "dynastor": {
+   "name": "Dynastor",
+   "description": "DYNASTOR is a massive insectoid tuxemon with a deep, armored exoskeleton and distinctive wings running along its back. Its mandibles can crush steel. ",
    "species": "bustuarius",
    "txmnId": 60,
    "shape": "humanoid",
@@ -11103,6 +11251,8 @@
    }
   },
   "eaglace": {
+   "name": "Eaglace",
+   "description": "When it takes flight, clouds form. When it claps its wings, hail falls.",
    "species": "cirrus",
    "txmnId": 9,
    "shape": "flier",
@@ -11242,6 +11392,8 @@
    }
   },
   "elofly": {
+   "name": "Elofly",
+   "description": "An ELOFLY on its own is patient and wise, but when it flocks in great numbers it becomes violent and impulsive.",
    "species": "cloudburst",
    "txmnId": 39,
    "shape": "flier",
@@ -11378,6 +11530,8 @@
    }
   },
   "elostorm": {
+   "name": "Elostorm",
+   "description": "Kings and queens, the ELOSTORM rule their people and have great ambition.",
    "species": "cloudburst",
    "txmnId": 41,
    "shape": "flier",
@@ -11510,6 +11664,8 @@
    }
   },
   "elowind": {
+   "name": "Elowind",
+   "description": "The lieutenants of the ELOFLY family, ELOWIND shepherd the flock and keep it focused.",
    "species": "cloudburst",
    "txmnId": 40,
    "shape": "flier",
@@ -11647,6 +11803,8 @@
    }
   },
   "embazook": {
+   "name": "Embazook",
+   "description": "It is trained for use in war and it knows no other life.",
    "species": "gunner",
    "txmnId": 31,
    "shape": "serpent",
@@ -11767,6 +11925,8 @@
    }
   },
   "embra": {
+   "name": "Embra",
+   "description": "It eats everything it can to grow big enough to become a RUPTION.",
    "species": "flicker",
    "txmnId": 75,
    "shape": "blob",
@@ -11903,6 +12063,8 @@
    }
   },
   "enduros": {
+   "name": "Enduros",
+   "description": "ENDUROS is an aggressive brawler that does not pull its blows. Out of the ring, it is quite sociable.",
    "species": "defensive",
    "txmnId": 167,
    "shape": "brute",
@@ -12040,6 +12202,8 @@
    }
   },
   "eruptibus": {
+   "name": "Eruptibus",
+   "description": "Smiths work with it, heating up metals in its caldera.",
    "species": "hot_rock",
    "txmnId": 32,
    "shape": "landrace",
@@ -12159,6 +12323,8 @@
    }
   },
   "exapode": {
+   "name": "Exapode",
+   "description": "It waves its legs to attract attention, but mostly people just run away.",
    "species": "big_frightfear",
    "txmnId": 347,
    "shape": "grub",
@@ -12271,6 +12437,8 @@
    }
   },
   "exclawvate": {
+   "name": "Exclawvate",
+   "description": "Often seen on construction sites, they can use their huge hands and tail to scoop up dirt and rubble. Underneath the Tuxemon are caterpillar tires, giving them a better balance and grip while climbing heaps of rubble.",
    "species": "digger",
    "txmnId": 195,
    "shape": "dragon",
@@ -12391,6 +12559,8 @@
    }
   },
   "eyenemy": {
+   "name": "Eyenemy",
+   "description": "It feeds on beautiful views and other spectacular sights.",
    "species": "pupil",
    "txmnId": 46,
    "shape": "serpent",
@@ -12513,6 +12683,8 @@
    }
   },
   "eyesore": {
+   "name": "Eyesore",
+   "description": "It remembers everything it has ever seen, but not the order that it has seen it in.",
    "species": "overseer",
    "txmnId": 47,
    "shape": "serpent",
@@ -12630,6 +12802,8 @@
    }
   },
   "fancair": {
+   "name": "Fancair",
+   "description": "If someone leaves their fan running when they do not need it, it comes alive and flies out the window to find someone who actually needs to be cooled.",
    "species": "deadly_fan",
    "txmnId": 179,
    "shape": "sprite",
@@ -12746,6 +12920,8 @@
    }
   },
   "ferricran": {
+   "name": "Ferricran",
+   "description": "Once, the FERRICRAN were covered all over with adamantine scales, and had wings of mithril.",
    "species": "dragon",
    "txmnId": 161,
    "shape": "dragon",
@@ -12883,6 +13059,8 @@
    }
   },
   "firomenis": {
+   "name": "Firomenis",
+   "description": "These tuxemon are large and tough from the many years spent as a MERLICUN. Their jaws can crush through trees and bones, and their flight is strong enough to carry people.",
    "species": "dragon_moth",
    "txmnId": 210,
    "shape": "dragon",
@@ -13012,6 +13190,8 @@
    }
   },
   "flacono": {
+   "name": "Flacono",
+   "description": "It is totally unafraid of adversaries, and will attack an enemy of any size without hesitation.",
    "species": "horned_raptor",
    "txmnId": 156,
    "shape": "flier",
@@ -13149,6 +13329,8 @@
    }
   },
   "flambear": {
+   "name": "Flambear",
+   "description": "It can be tracked from the trail of boiled berry bushes and roasted trout it leaves in its wake.",
    "species": "too_hot",
    "txmnId": 84,
    "shape": "brute",
@@ -13271,6 +13453,8 @@
    }
   },
   "flisces": {
+   "name": "Flisces",
+   "description": "It skims the surface of the water, evading detection until a powerful leap brings its sharp fins into play.",
    "species": "cypselurus",
    "txmnId": 238,
    "shape": "piscine",
@@ -13407,6 +13591,8 @@
    }
   },
   "flounce": {
+   "name": "Flounce",
+   "description": "FLOUNCE can be stubborn and solitary, flouncing all the rules unless given good motivation.",
    "species": "firestarter",
    "txmnId": 329,
    "shape": "hunter",
@@ -13535,6 +13721,8 @@
    }
   },
   "flummack": {
+   "name": "Flummack",
+   "description": "FLUMMACK no longer desires to be eaten, but to eat - even other FLUMMBY and FLUMMACK go down a treat.",
    "species": "cannibal_cake",
    "txmnId": 308,
    "shape": "sprite",
@@ -13669,6 +13857,8 @@
    }
   },
   "flummby": {
+   "name": "Flummby",
+   "description": "FLUMMBY was invented by a scientist who thought food that wanted to be eaten would be more ethical. It leaps into the mouth of anyone who could eat it.",
    "species": "pastry",
    "txmnId": 307,
    "shape": "sprite",
@@ -13811,6 +14001,8 @@
    }
   },
   "fluoresfin": {
+   "name": "Fluoresfin",
+   "description": "When threatened, it huddles together with other FLUORESFIN to create a large blinding light to disorientate predators.",
    "species": "light_fin",
    "txmnId": 68,
    "shape": "piscine",
@@ -13946,6 +14138,8 @@
    }
   },
   "fluttaflap": {
+   "name": "Fluttaflap",
+   "description": "It feeds on impurities, so it returns purified blood to those it sucks on.",
    "species": "sanguine",
    "txmnId": 38,
    "shape": "grub",
@@ -14076,6 +14270,8 @@
    }
   },
   "foofle": {
+   "name": "Foofle",
+   "description": "When one is in danger, all FOOFLE hear its cries, wherever they are.",
    "species": "woolly",
    "txmnId": 110,
    "shape": "varmint",
@@ -14207,6 +14403,8 @@
    }
   },
   "forturtle": {
+   "name": "Forturtle",
+   "description": "It heats its shell to read the future from the cracks that emerge.",
    "species": "oracle_bone",
    "txmnId": 87,
    "shape": "humanoid",
@@ -14334,6 +14532,8 @@
    }
   },
   "foxko": {
+   "name": "Foxko",
+   "description": "A fusion of two tuxemon.",
    "species": "threat",
    "txmnId": 0,
    "shape": "serpent",
@@ -14463,6 +14663,8 @@
    }
   },
   "frondly": {
+   "name": "Frondly",
+   "description": "It can do anything with its prehensile tail, even shake hands and pick fruit.",
    "species": "helping_hand",
    "txmnId": 29,
    "shape": "sprite",
@@ -14597,6 +14799,8 @@
    }
   },
   "furnursus": {
+   "name": "Furnursus",
+   "description": "FURNURSUS are friendly, and often forget that their bodies are too hot for others to touch.",
    "species": "fireplace",
    "txmnId": 190,
    "shape": "humanoid",
@@ -14713,6 +14917,8 @@
    }
   },
   "galnec": {
+   "name": "Galnec",
+   "description": "GALNEC buries itself deep in the hot sands of the desert, only its stony tail above ground. In packs, they look like gardens of stone.",
    "species": "dry_desert",
    "txmnId": 168,
    "shape": "hunter",
@@ -14847,6 +15053,8 @@
    }
   },
   "gectile": {
+   "name": "Gectile",
+   "description": "It is so quick and light that it can walk on leaves.",
    "species": "climbing",
    "txmnId": 66,
    "shape": "humanoid",
@@ -14982,6 +15190,8 @@
    }
   },
   "ghosteeth": {
+   "name": "Ghosteeth",
+   "description": "It smiles because it knows how everyone it meets is going to die.",
    "species": "cheshire",
    "txmnId": 111,
    "shape": "blob",
@@ -15120,6 +15330,8 @@
    }
   },
   "graffiki": {
+   "name": "Graffiki",
+   "description": "GRAFFIKI are as at home in cities as they are in the jungle, tagging their territory with elaborate paintings.",
    "species": "gamut",
    "txmnId": 302,
    "shape": "humanoid",
@@ -15256,6 +15468,8 @@
    }
   },
   "grimachin": {
+   "name": "Grimachin",
+   "description": "It was made by a toy company to be a pet, but was too dangerous.",
    "species": "spook",
    "txmnId": 93,
    "shape": "hunter",
@@ -15378,6 +15592,8 @@
    }
   },
   "grinflare": {
+   "name": "Grinflare",
+   "description": "It is said that each is the walking heart of a volcano.",
    "species": "igneous",
    "txmnId": 17,
    "shape": "brute",
@@ -15494,6 +15710,8 @@
    }
   },
   "grintot": {
+   "name": "Grintot",
+   "description": "It is a GRINTROCK or GRINFLARE that has experienced erosion.",
    "species": "pebble",
    "txmnId": 16,
    "shape": "brute",
@@ -15607,6 +15825,8 @@
    }
   },
   "grintrock": {
+   "name": "Grintrock",
+   "description": "It feeds by sitting out in thunderstorms, waiting to be struck by lightning.",
    "species": "thunderstone",
    "txmnId": 18,
    "shape": "brute",
@@ -15724,6 +15944,8 @@
    }
   },
   "gryfix": {
+   "name": "Gryfix",
+   "description": "Bone armor protects GRYFIX from all but the most powerful of attacks.",
    "species": "horned_raptor",
    "txmnId": 158,
    "shape": "flier",
@@ -15858,6 +16080,8 @@
    }
   },
   "hampotamos": {
+   "name": "Hampotamos",
+   "description": "It nibbles on RINOCEREED, clearing away dead skin, moss and weeds.",
    "species": "hungry",
    "txmnId": 358,
    "shape": "landrace",
@@ -15991,6 +16215,8 @@
    }
   },
   "happito": {
+   "name": "Happito",
+   "description": "Why can't people always be happy? HAPPITO will give them exactly what they want, even if it is not what they need.",
    "species": "ecstatic_emotion",
    "txmnId": 176,
    "shape": "blob",
@@ -16108,6 +16334,8 @@
    }
   },
   "hatchling": {
+   "name": "Hatchling",
+   "description": "When an egg does not want to hatch and begin its next life stage, it becomes a HATCHLING.",
    "species": "egg",
    "txmnId": 81,
    "shape": "flier",
@@ -16233,6 +16461,8 @@
    }
   },
   "heronquak": {
+   "name": "Heronquak",
+   "description": "The crystal on its chest is mistaken for a diamond by poachers. It melts when it is removed from HERONQUAK's body.",
    "species": "crested",
    "txmnId": 8,
    "shape": "flier",
@@ -16371,6 +16601,8 @@
    }
   },
   "hydrone": {
+   "name": "Hydrone",
+   "description": "It utilizes an experimental technology that creates power from water.",
    "species": "short_circuit",
    "txmnId": 112,
    "shape": "humanoid",
@@ -16506,6 +16738,8 @@
    }
   },
   "ignibus": {
+   "name": "Ignibus",
+   "description": "When threatened it retreats into its shell and cools down dramatically by venting steam. It could be mistaken for a rock.",
    "species": "hot_rock",
    "txmnId": 30,
    "shape": "leviathan",
@@ -16623,6 +16857,8 @@
    }
   },
   "imbrickcile": {
+   "name": "Imbrickcile",
+   "description": "IMBRICKCILE shelter inside a single brick, emerging only to lift it to build their strength.",
    "species": "brick",
    "txmnId": 259,
    "shape": "sprite",
@@ -16761,6 +16997,8 @@
    }
   },
   "incandesfin": {
+   "name": "Incandesfin",
+   "description": "Its entire body has massively grown in size. However, its light is still the exact same.",
    "species": "light_fin",
    "txmnId": 69,
    "shape": "piscine",
@@ -16897,6 +17135,8 @@
    }
   },
   "jemuar": {
+   "name": "Jemuar",
+   "description": "The gems on its back are the type found when it was born. There are extensive ROCKITTEN breeding facilities over diamond veins.",
    "species": "precious_boulder",
    "txmnId": 3,
    "shape": "hunter",
@@ -17036,6 +17276,8 @@
    }
   },
   "k9": {
+   "name": "K9",
+   "description": "It is a helpful companion that can pull a tonne of weight.",
    "species": "cute",
    "txmnId": 129,
    "shape": "hunter",
@@ -17150,6 +17392,8 @@
    }
   },
   "katacoon": {
+   "name": "Katacoon",
+   "description": "It stays in a meditative pose for its chrysalis, moving only to jab enemies.",
    "species": "stance",
    "txmnId": 57,
    "shape": "grub",
@@ -17283,6 +17527,8 @@
    }
   },
   "katapill": {
+   "name": "Katapill",
+   "description": "It is born fighting. It has to punch out of its eggshell or be trapped.",
    "species": "beat",
    "txmnId": 56,
    "shape": "grub",
@@ -17393,6 +17639,8 @@
    }
   },
   "kernel": {
+   "name": "Kernel",
+   "description": "KERNEL is a core component of the monster system (kennel) and item system (locker), and serves as the main interface between the computer's physical hardware and the processes running on it. Known as JAS-KERI-BIT from its creators.",
    "species": "virtual",
    "txmnId": 253,
    "shape": "sprite",
@@ -17529,6 +17777,8 @@
    }
   },
   "knightsand": {
+   "name": "Knightsand",
+   "description": "KNIGHTSAND patrols around sand castles inhabits by PAWSAND, but is terrible at building them.",
    "species": "sand_knight",
    "txmnId": 374,
    "shape": "humanoid",
@@ -17655,6 +17905,8 @@
    }
   },
   "knindling": {
+   "name": "Knindling",
+   "description": "Any spark from a stone KNINDLING happily tenders into a fire.",
    "species": "firestarter",
    "txmnId": 330,
    "shape": "hunter",
@@ -17778,6 +18030,8 @@
    }
   },
   "komodraw": {
+   "name": "Komodraw",
+   "description": "It uses its claws to carve its firearm out of wood, and uses it for powerful ranged attacks.",
    "species": "quickdraw",
    "txmnId": 92,
    "shape": "humanoid",
@@ -17925,6 +18179,8 @@
    }
   },
   "komoduel": {
+   "name": "Komoduel",
+   "description": "Many a wrongdoer has fled town after seeing just the silhouette of an approaching KOMODUEL.",
    "species": "gunslinger",
    "txmnId": 297,
    "shape": "humanoid",
@@ -18067,6 +18323,8 @@
    }
   },
   "lambert": {
+   "name": "Lambert",
+   "description": "It is placed in its nut by its parent, who then sends it into the world.",
    "species": "gumnut",
    "txmnId": 10,
    "shape": "sprite",
@@ -18199,6 +18457,8 @@
    }
   },
   "lapinou": {
+   "name": "Lapinou",
+   "description": "When SQUABBITS were taken as fashionable pets, they adapted to domestic life and lost their violent natures.",
    "species": "thlay",
    "txmnId": 113,
    "shape": "varmint",
@@ -18331,6 +18591,8 @@
    }
   },
   "legko": {
+   "name": "Legko",
+   "description": "Long thought to be legless, its leaves are actually vestigial limbs.",
    "species": "lizard",
    "txmnId": 11,
    "shape": "serpent",
@@ -18463,6 +18725,8 @@
    }
   },
   "lightmare": {
+   "name": "Lightmare",
+   "description": "It lurks in the depths of the ocean, luring any unsuspecting prey using its light right into its large, gaping mouth.",
    "species": "nightmare_fuel",
    "txmnId": 70,
    "shape": "leviathan",
@@ -18594,6 +18858,8 @@
    }
   },
   "loliferno": {
+   "name": "Loliferno",
+   "description": "It is said that the LOLIFERNO's fire could not be extinguished. Yet, despite its power, LOLIFERNO has a playful side, and is known to dance among the flames it creates.",
    "species": "spirit_fire",
    "txmnId": 163,
    "shape": "humanoid",
@@ -18714,6 +18980,8 @@
    }
   },
   "manosting": {
+   "name": "Manosting",
+   "description": "It floats across the tops of cities, contemplating sharks.",
    "species": "balloon",
    "txmnId": 114,
    "shape": "polliwog",
@@ -18847,6 +19115,8 @@
    }
   },
   "masknake": {
+   "name": "Masknake",
+   "description": "When frightened or aggressive, it flashes a beautiful pattern with its tail.",
    "species": "serpents_tooth",
    "txmnId": 115,
    "shape": "serpent",
@@ -18979,6 +19249,8 @@
    }
   },
   "mauai": {
+   "name": "Mauai",
+   "description": "MAUAI gives itself over to the spirits of lost warriors trapped inside its weapon.",
    "species": "anubis",
    "txmnId": 22,
    "shape": "humanoid",
@@ -19101,6 +19373,8 @@
    }
   },
   "medushock": {
+   "name": "Medushock",
+   "description": "Tend to stay away from shore and known to be aggressive to people. Stingers are used to stun its prey. Swim safely.",
    "species": "jellyfish",
    "txmnId": 345,
    "shape": "polliwog",
@@ -19237,6 +19511,8 @@
    }
   },
   "memnomnom": {
+   "name": "Memnomnom",
+   "description": "It is said that each one's mask is the face of a different dead king.",
    "species": "relic",
    "txmnId": 19,
    "shape": "hunter",
@@ -19358,6 +19634,8 @@
    }
   },
   "metesaur": {
+   "name": "Metesaur",
+   "description": "This Tuxemon would enjoy diving into the ground and leaving marks. Sometimes, the Tuxemon would misjudge the hit and land in trees, starting huge and dangerous forest fires.",
    "species": "meteor",
    "txmnId": 202,
    "shape": "flier",
@@ -19495,6 +19773,8 @@
    }
   },
   "miaownolith": {
+   "name": "Miaownolith",
+   "description": "It can speak the human tongue, but only to say cryptic riddles.",
    "species": "desolate",
    "txmnId": 20,
    "shape": "hunter",
@@ -19616,6 +19896,8 @@
    }
   },
   "mingdyn": {
+   "name": "Mingdyn",
+   "description": "Every 12 years, a single MINGDYN egg is laid. Its discovery marks a time of renewal and upheaval across the land.",
    "species": "dragon",
    "txmnId": 239,
    "shape": "dragon",
@@ -19758,6 +20040,8 @@
    }
   },
   "mk01_alpha": {
+   "name": "MK01 Alpha",
+   "description": "A killer robot fused with a dragon. Don't ask us how.",
    "species": "threat",
    "txmnId": 0,
    "shape": "dragon",
@@ -19880,6 +20164,8 @@
    }
   },
   "mk01_beta": {
+   "name": "Mk01 Beta",
+   "description": "A killer robot fused with a dragon. Don't ask us how.",
    "species": "threat",
    "txmnId": 0,
    "shape": "dragon",
@@ -20002,6 +20288,8 @@
    }
   },
   "mk01_delta": {
+   "name": "Mk01 Delta",
+   "description": "A killer robot fused with a dragon. Don't ask us how.",
    "species": "threat",
    "txmnId": 0,
    "shape": "dragon",
@@ -20130,6 +20418,8 @@
    }
   },
   "mk01_gamma": {
+   "name": "Mk01 Gamma",
+   "description": "A killer robot fused with a dragon. Don't ask us how.",
    "species": "threat",
    "txmnId": 0,
    "shape": "dragon",
@@ -20258,6 +20548,8 @@
    }
   },
   "mk01_omega": {
+   "name": "Mk01 Omega",
+   "description": "A killer robot fused with a dragon. Don't ask us how.",
    "species": "threat",
    "txmnId": 0,
    "shape": "dragon",
@@ -20386,6 +20678,8 @@
    }
   },
   "mk01_proto": {
+   "name": "Mk01 Proto",
+   "description": "A killer robot fused with a dragon. Don't ask us how.",
    "species": "threat",
    "txmnId": 0,
    "shape": "dragon",
@@ -20483,6 +20777,8 @@
    }
   },
   "moloch": {
+   "name": "Moloch",
+   "description": "It can stiffen or soften its skin to respond to friends and foes.",
    "species": "devil",
    "txmnId": 12,
    "shape": "brute",
@@ -20618,6 +20914,8 @@
    }
   },
   "mrmoswitch": {
+   "name": "mRmOswitch",
+   "description": "These cheeky robots are used for their fine motor skills, but they love pranks.",
    "species": "gremlin",
    "txmnId": 128,
    "shape": "sprite",
@@ -20732,6 +21030,8 @@
    }
   },
   "mystikapi": {
+   "name": "Mystikapi",
+   "description": "The MYSTIKAPI's saliva augments psychic powers. It licks its eyes and ears to heighten its senses.",
    "species": "prescient",
    "txmnId": 223,
    "shape": "landrace",
@@ -20867,6 +21167,8 @@
    }
   },
   "narcileaf": {
+   "name": "Narcileaf",
+   "description": "When a SHYBULB has restored a garden to glory, it morphs and proudly takes credit for its work.",
    "species": "gardener",
    "txmnId": 78,
    "shape": "blob",
@@ -20989,6 +21291,8 @@
    }
   },
   "neutrito": {
+   "name": "Neutrito",
+   "description": "NEUTRITO feels nothing. The perfect machine?",
    "species": "calm_emotion",
    "txmnId": 177,
    "shape": "blob",
@@ -21105,6 +21409,8 @@
    }
   },
   "ninjasmine": {
+   "name": "Ninjasmine",
+   "description": "NINJASMINE poisons his opponents quickly using his two poison swords.",
    "species": "every_thorn",
    "txmnId": 206,
    "shape": "humanoid",
@@ -21243,6 +21549,8 @@
    }
   },
   "noctalo": {
+   "name": "Noctalo",
+   "description": "It inhabits only places abandoned by humans - castles, graveyards and sewers.",
    "species": "nightcrawler",
    "txmnId": 51,
    "shape": "flier",
@@ -21360,6 +21668,8 @@
    }
   },
   "noctula": {
+   "name": "Noctula",
+   "description": "It eats fruit and PIPIS eat bugs, so despite living in close proximity they do not compete.",
    "species": "nightcrawler",
    "txmnId": 50,
    "shape": "flier",
@@ -21477,6 +21787,8 @@
    }
   },
   "nostray": {
+   "name": "Nostray",
+   "description": "It can smell anything in the ocean, no matter how far away.",
    "species": "proboscis",
    "txmnId": 152,
    "shape": "piscine",
@@ -21605,6 +21917,8 @@
    }
   },
   "nudiflot_female": {
+   "name": "Nudiflot",
+   "description": "It eats and stores the poison of the sea creatures that it feeds upon.",
    "species": "flopped",
    "txmnId": 54,
    "shape": "polliwog",
@@ -21722,6 +22036,8 @@
    }
   },
   "nudiflot_male": {
+   "name": "Nudiflot",
+   "description": "Its feathery antennas snap off if it is attacked, confusing the predator.",
    "species": "flotsam",
    "txmnId": 52,
    "shape": "polliwog",
@@ -21839,6 +22155,8 @@
    }
   },
   "nudikill": {
+   "name": "Nudikill",
+   "description": "They are called Dark Bishops because their heads are reminiscent of a bishop's hat.",
    "species": "dark_bishop",
    "txmnId": 53,
    "shape": "polliwog",
@@ -21956,6 +22274,8 @@
    }
   },
   "nudimind": {
+   "name": "Nudimind",
+   "description": "It dreams of oceans under other skies.",
    "species": "reverie",
    "txmnId": 55,
    "shape": "polliwog",
@@ -22071,6 +22391,8 @@
    }
   },
   "nut": {
+   "name": "Nut",
+   "description": "In the great ships that cross the oceans, thousands of NUT and BOLT provide power and hold the steel plating together.",
    "species": "hardware",
    "txmnId": 4,
    "shape": "blob",
@@ -22194,6 +22516,8 @@
    }
   },
   "octabode": {
+   "name": "Octabode",
+   "description": "OCTABODE make ancient vessels and artifacts their homes, dreaming of the lives of those who used the relics before them.",
    "species": "hermit",
    "txmnId": 184,
    "shape": "polliwog",
@@ -22312,6 +22636,8 @@
    }
   },
   "ouroboutlet": {
+   "name": "Ouroboutlet",
+   "description": "The circuit focuses energy, creating a new type of electricity called griefed-lightning.",
    "species": "infinite_energy",
    "txmnId": 90,
    "shape": "serpent",
@@ -22425,6 +22751,8 @@
    }
   },
   "pairagrim": {
+   "name": "Pairagrim",
+   "description": "One of PAIRAGRIM's heads is always searching for prey, while the other focuses on flying at great speed.",
    "species": "bird",
    "txmnId": 182,
    "shape": "flier",
@@ -22546,6 +22874,8 @@
    }
   },
   "pairagrin": {
+   "name": "Pairagrin",
+   "description": "The young form of Pairagrim, it is a generally happy creature. It struggles to fly until the two heads learn to work together.",
    "species": "bird",
    "txmnId": 181,
    "shape": "flier",
@@ -22669,6 +22999,8 @@
    }
   },
   "pantherafira": {
+   "name": "Pantherafira",
+   "description": "Each member of the pride lights their mane from a shared bonfire. As long as that fire burns, their strength is shared.",
    "species": "mercury",
    "txmnId": 245,
    "shape": "hunter",
@@ -22791,6 +23123,8 @@
    }
   },
   "parappi": {
+   "name": "Parappi",
+   "description": "When cut PARAPPI oozes syrup that seals and hardens over its enemies, turning them to amber.",
    "species": "spinning_seed",
    "txmnId": 378,
    "shape": "blob",
@@ -22926,6 +23260,8 @@
    }
   },
   "pawsand": {
+   "name": "Pawsand",
+   "description": "PAWSAND inhabits sand castles and sand temples made by BISHOSAND and ROOKSAND, some of which are actually ROOKSAND itself.",
    "species": "sand_pawn",
    "txmnId": 372,
    "shape": "blob",
@@ -23070,6 +23406,8 @@
    }
   },
   "pharavion": {
+   "name": "Pharavion",
+   "description": "After great effort, a trainer may evolve a clumsy PHARFAN calf into its adult form, which gracefully floats despite its huge size.",
    "species": "spirit_elephant",
    "txmnId": 362,
    "shape": "landrace",
@@ -23213,6 +23551,8 @@
    }
   },
   "pharfan": {
+   "name": "Pharfan",
+   "description": "At the watering hole it keeps its friends RINOCEREED and HAMPOTAMOS well watered.",
    "species": "little_elephant",
    "txmnId": 151,
    "shape": "landrace",
@@ -23356,6 +23696,8 @@
    }
   },
   "picc": {
+   "name": "PiCC",
+   "description": "It accompanies divers, providing much needed oxygen.",
    "species": "bladder",
    "txmnId": 127,
    "shape": "piscine",
@@ -23470,6 +23812,8 @@
    }
   },
   "pigabyte": {
+   "name": "Pigabyte",
+   "description": "Scientists found that the best computers have organic implants.",
    "species": "electric_pig",
    "txmnId": 116,
    "shape": "blob",
@@ -23603,6 +23947,8 @@
    }
   },
   "pipis": {
+   "name": "Pipis",
+   "description": "Its cries are considered a bad omen, but it is a gentle creature.",
    "species": "echo",
    "txmnId": 48,
    "shape": "flier",
@@ -23720,6 +24066,8 @@
    }
   },
   "polyrock": {
+   "name": "Polyrock",
+   "description": "It disguises itself as a human child to sneak into dojos and learn from martial arts masters.",
    "species": "grasshopper",
    "txmnId": 117,
    "shape": "brute",
@@ -23854,6 +24202,8 @@
    }
   },
   "possessun": {
+   "name": "Possessun",
+   "description": "It is a ghost that inhabits a dead CAIRFREY.",
    "species": "visitor",
    "txmnId": 72,
    "shape": "blob",
@@ -23986,6 +24336,8 @@
    }
   },
   "propellercat": {
+   "name": "Propellercat",
+   "description": "Is it a new species, or just the pet of an inventor?",
    "species": "eureka",
    "txmnId": 118,
    "shape": "flier",
@@ -24119,6 +24471,8 @@
    }
   },
   "prophetoise": {
+   "name": "Prophetoise",
+   "description": "Its heavenly fire is something foes rarely see coming.",
    "species": "dragon_bone",
    "txmnId": 88,
    "shape": "humanoid",
@@ -24243,6 +24597,8 @@
    }
   },
   "puparmor": {
+   "name": "Puparmor",
+   "description": "Its cocoon is so hard, people are knocked out if a PUPARMOR is dropped on them. They were once loaded into cannons and catapults.",
    "species": "fortified",
    "txmnId": 34,
    "shape": "blob",
@@ -24378,6 +24734,8 @@
    }
   },
   "pyraminx": {
+   "name": "Pyraminx",
+   "description": "It has a tomb hidden somewhere in the land. If it finds it, it can sleep.",
    "species": "noble",
    "txmnId": 21,
    "shape": "hunter",
@@ -24499,6 +24857,8 @@
    }
   },
   "pythwire": {
+   "name": "Pythwire",
+   "description": "Observations of wild PYTHWIRE inspired the inventor of the first electrical outlet.",
    "species": "power_socket",
    "txmnId": 89,
    "shape": "serpent",
@@ -24610,6 +24970,8 @@
    }
   },
   "qetzlrokilus": {
+   "name": "Qetzlrokilus",
+   "description": "This Tuxemon would dive into groups of other dinosaur Tuxemon and burn them. They also enjoy setting forests alight and dropping their ashes into water to spoil its purity.",
    "species": "long_winged",
    "txmnId": 203,
    "shape": "flier",
@@ -24745,6 +25107,8 @@
    }
   },
   "rabbitosaur": {
+   "name": "Rabbitosaur",
+   "description": "Its tunnels are extensive and wide, the site of tremendous wars between burrows.",
    "species": "rabbit",
    "txmnId": 45,
    "shape": "varmint",
@@ -24868,6 +25232,8 @@
    }
   },
   "rhincus": {
+   "name": "Rhincus",
+   "description": "It has some properties of a reptile and some of a bird.",
    "species": "missing_link",
    "txmnId": 143,
    "shape": "flier",
@@ -25006,6 +25372,8 @@
    }
   },
   "rhinocarpe": {
+   "name": "Rhinocarpe",
+   "description": "RHINOCARPE are territorial, charging headfirst at any who swim too near to their coral fortresses.",
    "species": "big_head",
    "txmnId": 252,
    "shape": "piscine",
@@ -25143,6 +25511,8 @@
    }
   },
   "rockat": {
+   "name": "Rockat",
+   "description": "Despite its considerable weight, its footfalls are silent.",
    "species": "sleek_boulder",
    "txmnId": 2,
    "shape": "hunter",
@@ -25280,6 +25650,8 @@
    }
   },
   "rockitten": {
+   "name": "Rockitten",
+   "description": "It uses its tiny rock ears for snuggling.",
    "species": "cute_boulder",
    "txmnId": 1,
    "shape": "hunter",
@@ -25417,6 +25789,8 @@
    }
   },
   "rocktot": {
+   "name": "Rocktot",
+   "description": "A fusion of two tuxemon.",
    "species": "threat",
    "txmnId": 0,
    "shape": "brute",
@@ -25545,6 +25919,8 @@
    }
   },
   "rooksand": {
+   "name": "Rooksand",
+   "description": "ROOKSAND sometimes allows those it deems worthy to live inside its sandcastle, and crushes all others.",
    "species": "sand_rock",
    "txmnId": 375,
    "shape": "blob",
@@ -25670,6 +26046,8 @@
    }
   },
   "rosarin": {
+   "name": "Rosarin",
+   "description": "ROSARIN's love is incredible, he's only asking some affection.",
    "species": "every_thorn",
    "txmnId": 204,
    "shape": "humanoid",
@@ -25812,6 +26190,8 @@
    }
   },
   "runesquito": {
+   "name": "Runesquito",
+   "description": "The blood-red marking is RUNESQUITO. The rest is just a rocky shell it rides alongside.",
    "species": "diptera",
    "txmnId": 334,
    "shape": "flier",
@@ -25933,6 +26313,8 @@
    }
   },
   "ruption": {
+   "name": "Ruption",
+   "description": "Once EMBRA's flame becomes hot enough, it engulfs its entire body, essentially replacing it in the process.",
    "species": "bonfire",
    "txmnId": 76,
    "shape": "brute",
@@ -26064,6 +26446,8 @@
    }
   },
   "sadito": {
+   "name": "Sadito",
+   "description": "When a person is feeling too sad, SADITO will carry that burden for them.",
    "species": "lamenting_emotion",
    "txmnId": 178,
    "shape": "blob",
@@ -26181,6 +26565,8 @@
    }
   },
   "sampsack": {
+   "name": "Sampsack",
+   "description": "A scientist wanted to separate his personalities, but he split his body.",
    "species": "brawn",
    "txmnId": 97,
    "shape": "brute",
@@ -26315,6 +26701,8 @@
    }
   },
   "sampsage": {
+   "name": "Sampsage",
+   "description": "A scientist took a drug that made him clever by day and violent by night.",
    "species": "brains",
    "txmnId": 98,
    "shape": "humanoid",
@@ -26448,6 +26836,8 @@
    }
   },
   "sapragon": {
+   "name": "Sapragon",
+   "description": "In olden times, each element had a mighty dragon - but those creatures have diminished and are rare in these days.",
    "species": "dragon",
    "txmnId": 141,
    "shape": "dragon",
@@ -26593,6 +26983,8 @@
    }
   },
   "sapsnap": {
+   "name": "Sapsnap",
+   "description": "Its terrific anger is off putting, but it passes quickly.",
    "species": "barbed",
    "txmnId": 86,
    "shape": "brute",
@@ -26707,6 +27099,8 @@
    }
   },
   "sclairus": {
+   "name": "Sclairus",
+   "description": "When a crop is left unharvested - be it from laziness or disaster - its scarecrow becomes a dark and living creature.",
    "species": "fallow",
    "txmnId": 119,
    "shape": "blob",
@@ -26840,6 +27234,8 @@
    }
   },
   "seirein": {
+   "name": "Seirein",
+   "description": "It grows lonely in the swamps, so it burns brightly to draw travelers near - but it is painfully shy and flits away when they approach.",
    "species": "spirit_fire",
    "txmnId": 162,
    "shape": "blob",
@@ -26970,6 +27366,8 @@
    }
   },
   "selket": {
+   "name": "Selket",
+   "description": "Lying in wait beneath the sand, they can feel their prey through the vibrations of their footsteps.",
    "species": "sand_scorpion",
    "txmnId": 188,
    "shape": "grub",
@@ -27089,6 +27487,8 @@
    }
   },
   "selmatek": {
+   "name": "Selmatek",
+   "description": "Kept by the ancient kings of the deserts, SELMATEK served as watchdogs, hunting companions and - now - defenders against grave robbers.",
    "species": "sand_steed",
    "txmnId": 189,
    "shape": "grub",
@@ -27203,6 +27603,8 @@
    }
   },
   "seraphice": {
+   "name": "Seraphice",
+   "description": "SERAPHICE can freeze in ice moments of great courage and joy, stored away in deep vaults beneath the mountains for the days when humanity will need them most.",
    "species": "carol",
    "txmnId": 266,
    "shape": "humanoid",
@@ -27331,6 +27733,8 @@
    }
   },
   "shammer": {
+   "name": "Shammer",
+   "description": "In ancient times it hunted RHINCUS beneath ashen skies.",
    "species": "fossil",
    "txmnId": 144,
    "shape": "hunter",
@@ -27463,6 +27867,8 @@
    }
   },
   "sharpfin": {
+   "name": "Sharpfin",
+   "description": "It is invisible in the water, being visible only when it leaps out of the water to drag animals on the shore back into the deep.",
    "species": "rip",
    "txmnId": 26,
    "shape": "piscine",
@@ -27597,6 +28003,8 @@
    }
   },
   "sheye": {
+   "name": "Sheye",
+   "description": "SHEYE are weighed down by heavy thoughts. Edgy trainers like them for their sinister appearance and solemn demeanor.",
    "species": "crabby_mussel",
    "txmnId": 285,
    "shape": "polliwog",
@@ -27712,6 +28120,8 @@
    }
   },
   "shnark": {
+   "name": "Shnark",
+   "description": "SHNARK wears its last meal's flesh as a disguise so it can get close to its trusting prey.",
    "species": "disguised",
    "txmnId": 153,
    "shape": "piscine",
@@ -27835,6 +28245,8 @@
    }
   },
   "shrab": {
+   "name": "Shrab",
+   "description": "When a SHEYE frees its mind from always contemplating serious thoughts, it becomes a SHRAB, free in body to wander the world.",
    "species": "muscly_crab",
    "txmnId": 286,
    "shape": "polliwog",
@@ -27942,6 +28354,8 @@
    }
   },
   "shybulb": {
+   "name": "Shybulb",
+   "description": "When a garden is neglected, a SHYBULB moves in and quietly tends the droopy plants.",
    "species": "gardener",
    "txmnId": 77,
    "shape": "sprite",
@@ -28058,6 +28472,8 @@
    }
   },
   "skwib": {
+   "name": "Skwib",
+   "description": "The SKWIB contentedly floats through the ocean, examining potential shell-homes. It has to fear for its life before it will finally make a choice.",
    "species": "naive",
    "txmnId": 183,
    "shape": "polliwog",
@@ -28179,6 +28595,8 @@
    }
   },
   "sludgehog": {
+   "name": "Sludgehog",
+   "description": "It lives in rubbish, and eats it too. Its spikes seem sharp, but it can soften them at will.",
    "species": "garbage",
    "txmnId": 120,
    "shape": "landrace",
@@ -28315,6 +28733,8 @@
    }
   },
   "snaki": {
+   "name": "Snaki",
+   "description": "SNAKI is a snake that has learned to grow legs by examining the motion of lizards and crocodiles.",
    "species": "false_serpent",
    "txmnId": 227,
    "shape": "serpent",
@@ -28437,6 +28857,8 @@
    }
   },
   "snokari": {
+   "name": "Snokari",
+   "description": "The two heads of SNOKARI each hold great wisdom, but they never agree.",
    "species": "hydra",
    "txmnId": 228,
    "shape": "serpent",
@@ -28554,6 +28976,8 @@
    }
   },
   "sockeserp": {
+   "name": "Sockeserp",
+   "description": "An otherwise formidable enemy, SOCKESERP is easily dispatched if it gets tangled up.",
    "species": "power_socket_snake",
    "txmnId": 91,
    "shape": "serpent",
@@ -28667,6 +29091,8 @@
    }
   },
   "spighter": {
+   "name": "Spighter",
+   "description": "It's not fair that something so good at sneaking up on people, can't be snuck up on itself.",
    "species": "eyerachnid",
    "txmnId": 121,
    "shape": "grub",
@@ -28800,6 +29226,8 @@
    }
   },
   "spirain": {
+   "name": "Spirain",
+   "description": "If a SEIREIN's inner fire dims, its water spirit nature turns it into SPIRAIN.",
    "species": "water_sprite",
    "txmnId": 164,
    "shape": "sprite",
@@ -28926,6 +29354,8 @@
    }
   },
   "spycozeus": {
+   "name": "Spycozeus",
+   "description": "The whispered communications of the forest are given physical form in SPYCOZEUS, which thinks like the trees.",
    "species": "willpower",
    "txmnId": 222,
    "shape": "varmint",
@@ -29059,6 +29489,8 @@
    }
   },
   "squabbit": {
+   "name": "Squabbit",
+   "description": "To prove themselves, they will fight tooth and nail over even the smallest thing.",
    "species": "rabbit",
    "txmnId": 44,
    "shape": "varmint",
@@ -29182,6 +29614,8 @@
    }
   },
   "statursus": {
+   "name": "Statursus",
+   "description": "STATURSUS has learned to channel its emotions into a single pure flame. The mere sight of it sends others into a trance.",
    "species": "inner_fire",
    "txmnId": 191,
    "shape": "humanoid",
@@ -29300,6 +29734,8 @@
    }
   },
   "strella": {
+   "name": "Strella",
+   "description": "Its tails are lures to convince bugs to bite them and be trapped.",
    "species": "trailing",
    "txmnId": 49,
    "shape": "flier",
@@ -29417,6 +29853,8 @@
    }
   },
   "sumchon": {
+   "name": "Sumchon",
+   "description": "It uses its weight to trip much larger enemies. It is as dense as a star.",
    "species": "wrestling",
    "txmnId": 59,
    "shape": "brute",
@@ -29547,6 +29985,8 @@
    }
   },
   "tarpeur": {
+   "name": "Tarpeur",
+   "description": "They rest and grow. They also grow and rest. Rarely, they rest without growing or grow without resting.",
    "species": "restful",
    "txmnId": 217,
    "shape": "grub",
@@ -29670,6 +30110,8 @@
    }
   },
   "taupypus": {
+   "name": "Taupypus",
+   "description": "Upon their birth, a TAUPYPUS' eyes are burst by its mother. That way, their eyes will never sting when they dive into the water.",
    "species": "flatfoot",
    "txmnId": 219,
    "shape": "varmint",
@@ -29802,6 +30244,8 @@
    }
   },
   "tetrchimp": {
+   "name": "Tetrchimp",
+   "description": "They absorb any information they come across. Their constant chatter communicates everything they have learned in order.",
    "species": "chip",
    "txmnId": 196,
    "shape": "humanoid",
@@ -29926,6 +30370,8 @@
    }
   },
   "tigrock": {
+   "name": "Tigrock",
+   "description": "It is said that it had to invent itself because an evolution was not designed.",
    "species": "ex_machina",
    "txmnId": 94,
    "shape": "hunter",
@@ -30048,6 +30494,8 @@
    }
   },
   "tikorch": {
+   "name": "Tikorch",
+   "description": "It is the intermediary between forest and volcano, between sun and earth.",
    "species": "taboo",
    "txmnId": 80,
    "shape": "blob",
@@ -30167,6 +30615,8 @@
    }
   },
   "tobishimi": {
+   "name": "Tobishimi",
+   "description": "TOBISHIMI spawn eggs in vast numbers, and carry them about under their chins for safekeeping until the next full moon - when they hatch.",
    "species": "dragon_roll",
    "txmnId": 187,
    "shape": "dragon",
@@ -30298,6 +30748,8 @@
    }
   },
   "tornicane": {
+   "name": "Tornicane",
+   "description": "TORNICANE harnesses the power of both tornado and hurricane. It is a living force of nature and may be savior or doom to those hoping for rain.",
    "species": "water_sprite",
    "txmnId": 165,
    "shape": "sprite",
@@ -30420,6 +30872,8 @@
    }
   },
   "toufigel": {
+   "name": "Toufigel",
+   "description": "It appears to be a fluffy insect, but it is actually a reptile coated in soft snow.",
    "species": "powder",
    "txmnId": 122,
    "shape": "varmint",
@@ -30551,6 +31005,8 @@
    }
   },
   "tourbidi": {
+   "name": "Tourbidi",
+   "description": "If you find a circle of mushrooms or clover, it is a place where TOURBIDI dance.",
    "species": "elf_ring",
    "txmnId": 123,
    "shape": "humanoid",
@@ -30684,6 +31140,8 @@
    }
   },
   "toxiris": {
+   "name": "Toxiris",
+   "description": "TOXIRIS is extremely powerful, it violently poisons everything in its way.",
    "species": "every_thorn",
    "txmnId": 205,
    "shape": "humanoid",
@@ -30827,6 +31285,8 @@
    }
   },
   "trapsnap": {
+   "name": "Trapsnap",
+   "description": "Its head is the only part of its body that doesn't grow as it ages.",
    "species": "barb",
    "txmnId": 85,
    "shape": "brute",
@@ -30949,6 +31409,8 @@
    }
   },
   "tsushimi": {
+   "name": "Tsushimi",
+   "description": "While sometimes referred to as its armor, the fleshy plates on TSUSHIMI are softer than its skin. Their purpose remains unknown.",
    "species": "dragon_roll",
    "txmnId": 186,
    "shape": "dragon",
@@ -31085,6 +31547,8 @@
    }
   },
   "tumblebee": {
+   "name": "Tumblebee",
+   "description": "It builds hives that are perfect spheres, with the TUMBLEBEE inside just rolling about and buzzing with laughter.",
    "species": "drone",
    "txmnId": 96,
    "shape": "flier",
@@ -31196,6 +31660,8 @@
    }
   },
   "tumbledillo": {
+   "name": "Tumbledillo",
+   "description": "Tumbledillo have a mystical connection to a particular road, and they guard it from people who would interfere with it - even pothole repair crews!",
    "species": "ermine",
    "txmnId": 221,
    "shape": "varmint",
@@ -31330,6 +31796,8 @@
    }
   },
   "tumblequill": {
+   "name": "Tumblequill",
+   "description": "Tumblequill rolls along the highways, gathering up useful items for its nests from the rubbish left by the side of the road.",
    "species": "urchin",
    "txmnId": 220,
    "shape": "varmint",
@@ -31468,6 +31936,8 @@
    }
   },
   "tumbleworm": {
+   "name": "Tumbleworm",
+   "description": "When they have outgrown their honeycomb eggs, they drop to the ground face first.",
    "species": "buzzkill",
    "txmnId": 95,
    "shape": "grub",
@@ -31584,6 +32054,8 @@
    }
   },
   "tweesher": {
+   "name": "Tweesher",
+   "description": "The colder the weather, the harder its beak. At below 0 degrees, it is harder than diamond.",
    "species": "halcyon",
    "txmnId": 7,
    "shape": "flier",
@@ -31721,6 +32193,8 @@
    }
   },
   "urcheedle": {
+   "name": "Urcheedle",
+   "description": "It can't move or attack, so it sits still and prays that the opponent damages itself on its many needles.",
    "species": "spiked",
    "txmnId": 243,
    "shape": "blob",
@@ -31857,6 +32331,8 @@
    }
   },
   "urcine": {
+   "name": "Urcine",
+   "description": "When a FURNURSUS is born without the fire inside, it is abandoned in the forests as an URCINE.",
    "species": "temper",
    "txmnId": 216,
    "shape": "brute",
@@ -31997,6 +32473,8 @@
    }
   },
   "vamporm": {
+   "name": "Vamporm",
+   "description": "It thirsts for blood, but must make do with tree sap.",
    "species": "clot",
    "txmnId": 36,
    "shape": "grub",
@@ -32131,6 +32609,8 @@
    }
   },
   "velocitile": {
+   "name": "Velocitile",
+   "description": "It can outrun a bullet, but only when it has warmed up.",
    "species": "restless",
    "txmnId": 67,
    "shape": "humanoid",
@@ -32262,6 +32742,8 @@
    }
   },
   "vigueur": {
+   "name": "Vigueur",
+   "description": "VIGUEUR compete to see who can lift the heaviest rocks. When they lift one that is too heavy, it squashes them and scatters TARPEUR seeds.",
    "species": "energised",
    "txmnId": 218,
    "shape": "brute",
@@ -32382,6 +32864,8 @@
    }
   },
   "vivicinder": {
+   "name": "Vivicinder",
+   "description": "It makes its nest in long-burning fires, either of its own creation or in memorials, smithies and glassworks.",
    "species": "lit",
    "txmnId": 133,
    "shape": "serpent",
@@ -32509,6 +32993,8 @@
    }
   },
   "vividactil": {
+   "name": "Vividactil",
+   "description": "In ancient times, the Year of the VIVIDACTIL marked a time of renewal and the restoration of authority.",
    "species": "exhumed",
    "txmnId": 138,
    "shape": "flier",
@@ -32635,6 +33121,8 @@
    }
   },
   "vivipere": {
+   "name": "Vivipere",
+   "description": "It hatches in great numbers in the summer, but the rest of its lifespan is a mystery.",
    "species": "potentia",
    "txmnId": 132,
    "shape": "serpent",
@@ -32775,6 +33263,8 @@
    }
   },
   "viviphyta": {
+   "name": "Viviphyta",
+   "description": "It is the king of snakes - or at least believes itself to be such.",
    "species": "germinated",
    "txmnId": 134,
    "shape": "serpent",
@@ -32899,6 +33389,8 @@
    }
   },
   "vivisource": {
+   "name": "Vivisource",
+   "description": "The spring it chooses for its home always has a peculiar oniony taste.",
    "species": "purified",
    "txmnId": 139,
    "shape": "serpent",
@@ -33022,6 +33514,8 @@
    }
   },
   "viviteel": {
+   "name": "Viviteel",
+   "description": "It takes the armor of a fallen warrior and repurposes it for a shell.",
    "species": "galvanised",
    "txmnId": 135,
    "shape": "serpent",
@@ -33149,6 +33643,8 @@
    }
   },
   "vivitrans": {
+   "name": "Vivitrans",
+   "description": "The cold focuses VIVITRANS' mind to a keen edge.",
    "species": "sublimated",
    "txmnId": 136,
    "shape": "serpent",
@@ -33269,6 +33765,8 @@
    }
   },
   "vivitron": {
+   "name": "Vivitron",
+   "description": "Early philosophers used VIVITRON as evidence that natural forces can be tamed and controlled.",
    "species": "sparked",
    "txmnId": 137,
    "shape": "serpent",
@@ -33399,6 +33897,8 @@
    }
   },
   "volcoli": {
+   "name": "Volcoli",
+   "description": "It is the spirit of a forest. Its hair changes with the seasons.",
    "species": "seasonal",
    "txmnId": 124,
    "shape": "humanoid",
@@ -33531,6 +34031,8 @@
    }
   },
   "volconey": {
+   "name": "Volconey",
+   "description": "When VOLCONEY thump the earth with their gigantic feet, they call more and more THUMPURN and VOLCONEY to the warren. But when enough strike the earth at once, it is said to cause volcanic eruptions.",
    "species": "roaming",
    "txmnId": 299,
    "shape": "varmint",
@@ -33639,6 +34141,8 @@
    }
   },
   "weavifly": {
+   "name": "Weavifly",
+   "description": "When it is heavy with egg, it becomes unable to fly.",
    "species": "brood",
    "txmnId": 35,
    "shape": "grub",
@@ -33768,6 +34272,8 @@
    }
   },
   "windeye": {
+   "name": "Windeye",
+   "description": "Like a mighty tree, WINDEYE plants itself on the top of hills to soak in the sun and wind. Recharged, it then leaves to find another place under the sky.",
    "species": "tower",
    "txmnId": 180,
    "shape": "humanoid",
@@ -33884,6 +34390,8 @@
    }
   },
   "wolffsky": {
+   "name": "Wolffsky",
+   "description": "This tuxemon is very friendly. It is common to go hunting with the help of WOLFFSKY.",
    "species": "lupine",
    "txmnId": 231,
    "shape": "hunter",
@@ -34021,6 +34529,8 @@
    }
   },
   "xeon": {
+   "name": "Xeon",
+   "description": "A hostile robot.",
    "species": "threat",
    "txmnId": 0,
    "shape": "humanoid",
@@ -34149,6 +34659,8 @@
    }
   },
   "xeon_2": {
+   "name": "Xeon-2",
+   "description": "A hostile robot.",
    "species": "threat",
    "txmnId": 0,
    "shape": "humanoid",
@@ -34277,6 +34789,8 @@
    }
   },
   "zunna": {
+   "name": "Zunna",
+   "description": "Cheerful ZUNNA sucks up all the food it can find into its stomach.",
    "species": "slurpy",
    "txmnId": 131,
    "shape": "blob",

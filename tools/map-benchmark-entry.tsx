@@ -15,6 +15,7 @@ import {
 } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import { createJsonMapRepository } from "../vendor/pocket-rpgkit/src/engine/map-repository.ts";
 import type { BattleRules } from "../vendor/pocket-rpgkit/src/engine/battle.ts";
+import type { SceneRules } from "../vendor/pocket-rpgkit/src/engine/scene.ts";
 import type { ProjectShell } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 
 interface MapBenchmarkEntry {
@@ -43,6 +44,16 @@ const BENCH_BATTLE_RULES: BattleRules = {
   step: (state) => state,
   done: () => null,
 };
+const BENCH_SCENE_RULES: SceneRules = {
+  start: (ext) => ({ state: null, ext }),
+  step: (state) => state,
+  done: () => ({ cancelled: true }),
+};
+const BENCH_SCENES: Record<string, SceneRules> = {
+  "rpgkit.nameInput": BENCH_SCENE_RULES,
+  "tux.journal": BENCH_SCENE_RULES,
+  "tux.monsterPicker": BENCH_SCENE_RULES,
+};
 
 function benchmarkSession(): Session {
   if (session) return session;
@@ -57,6 +68,10 @@ function benchmarkSession(): Session {
     maps: repository,
     extensions: { allowUnknown: true },
     battle: BENCH_BATTLE_RULES,
+    // First-visit timings validate and compile authored scene commands but do
+    // not execute them. Register inert rules without pulling the production
+    // monster database and scene catalog into this map-only probe.
+    scenes: BENCH_SCENES,
   });
   releaseSessionMapsExcept(session, []);
   return session;

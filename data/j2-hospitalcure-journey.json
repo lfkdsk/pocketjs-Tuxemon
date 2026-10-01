@@ -1,17 +1,17 @@
 {
   "format": "pocket-tuxemon/j2-hospitalcure/v1",
   "hz": 60,
-  "frames": 49915,
-  "combinedFrames": 172060,
-  "durationSeconds": 831.917,
+  "frames": 49759,
+  "combinedFrames": 170983,
+  "durationSeconds": 829.317,
   "base": {
     "format": "pocket-tuxemon/j1-captainreturns/v1",
-    "frames": 122145,
-    "tapeSha256": "df33404232ec98bc8423e2dd77978c936f7de7136c22b4da81274b101ea4d719",
-    "terminalStateSha256": "c8d9b88ebe490b413a70347fe6e769bcbeffe32f1b26bc34ab57f131553cc473",
-    "terminalSnapshotSha256": "19a561888d5d0d4f47692c27ed0de6ffc54b188e620493baa0ba5c642cb456fd",
+    "frames": 121224,
+    "tapeSha256": "40b0ba327683985da318f3375d5367c5e60d8c38e44e3b13d89b8992ca9ad33a",
+    "terminalStateSha256": "097964c6600ebc98d437e6d4d085515e757006c308cfe8b7da3328cab5b42360",
+    "terminalSnapshotSha256": "3bfe16e9cb27e397b37d7caf54e259c50a40827e6642b98c4b7083fafd6c12cc",
     "heldMask": 0,
-    "timelineFrame": 122145,
+    "timelineFrame": 121224,
     "map": "spyder_mansion",
     "position": [
       1,
@@ -13959,362 +13959,6 @@
     0,
     8192,
     0,
-    64,
-    0,
-    64,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
     8192,
     0,
     8192,
@@ -14486,6 +14130,352 @@
     8192,
     0,
     8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    64,
     0,
     8192,
     0,
@@ -34761,180 +34751,6 @@
     0,
     8192,
     0,
-    64,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
-    8192,
-    0,
     8192,
     0,
     8192,
@@ -35098,6 +34914,34 @@
     8192,
     0,
     64,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
+    0,
+    8192,
     0,
     8192,
     0,
@@ -50033,7 +49877,7 @@
     },
     {
       "name": "dojo4",
-      "frame": 20266,
+      "frame": 20256,
       "map": "spyder_dojo4",
       "position": [
         10,
@@ -50042,7 +49886,7 @@
     },
     {
       "name": "dojo3",
-      "frame": 21754,
+      "frame": 21744,
       "map": "spyder_dojo3",
       "position": [
         13,
@@ -50051,7 +49895,7 @@
     },
     {
       "name": "dojo2",
-      "frame": 21815,
+      "frame": 21805,
       "map": "spyder_dojo2",
       "position": [
         13,
@@ -50060,7 +49904,7 @@
     },
     {
       "name": "dojo1",
-      "frame": 21876,
+      "frame": 21866,
       "map": "spyder_dojo1",
       "position": [
         11,
@@ -50069,7 +49913,7 @@
     },
     {
       "name": "flower_city",
-      "frame": 21953,
+      "frame": 21943,
       "map": "spyder_flower_city",
       "position": [
         34,
@@ -50078,7 +49922,7 @@
     },
     {
       "name": "nimrod_bottom",
-      "frame": 22398,
+      "frame": 22388,
       "map": "spyder_nimrod_bottom",
       "position": [
         8,
@@ -50087,7 +49931,7 @@
     },
     {
       "name": "nimrod_middle",
-      "frame": 23122,
+      "frame": 23112,
       "map": "spyder_nimrod_middle",
       "position": [
         15,
@@ -50096,7 +49940,7 @@
     },
     {
       "name": "nimrod_top",
-      "frame": 23287,
+      "frame": 23277,
       "map": "spyder_nimrod_top",
       "position": [
         0,
@@ -50105,7 +49949,7 @@
     },
     {
       "name": "nimrod_middle",
-      "frame": 25271,
+      "frame": 25261,
       "map": "spyder_nimrod_middle",
       "position": [
         1,
@@ -50114,7 +49958,7 @@
     },
     {
       "name": "nimrod_bottom",
-      "frame": 26527,
+      "frame": 26517,
       "map": "spyder_nimrod_bottom",
       "position": [
         2,
@@ -50123,7 +49967,7 @@
     },
     {
       "name": "flower_city",
-      "frame": 27763,
+      "frame": 27753,
       "map": "spyder_flower_city",
       "position": [
         11,
@@ -50132,7 +49976,7 @@
     },
     {
       "name": "route5",
-      "frame": 27920,
+      "frame": 27910,
       "map": "spyder_route5",
       "position": [
         39,
@@ -50141,7 +49985,7 @@
     },
     {
       "name": "timber_town",
-      "frame": 29486,
+      "frame": 29476,
       "map": "spyder_timber_town",
       "position": [
         4,
@@ -50150,7 +49994,7 @@
     },
     {
       "name": "timber_center",
-      "frame": 29623,
+      "frame": 29613,
       "map": "spyder_timber_center",
       "position": [
         6,
@@ -50159,7 +50003,7 @@
     },
     {
       "name": "timber_town",
-      "frame": 29825,
+      "frame": 29815,
       "map": "spyder_timber_town",
       "position": [
         8,
@@ -50168,7 +50012,7 @@
     },
     {
       "name": "scoop1",
-      "frame": 30356,
+      "frame": 30346,
       "map": "spyder_scoop1",
       "position": [
         0,
@@ -50177,7 +50021,7 @@
     },
     {
       "name": "scoop2",
-      "frame": 31628,
+      "frame": 31618,
       "map": "spyder_scoop2",
       "position": [
         0,
@@ -50186,7 +50030,7 @@
     },
     {
       "name": "scoop3",
-      "frame": 31721,
+      "frame": 31711,
       "map": "spyder_scoop3",
       "position": [
         1,
@@ -50195,7 +50039,7 @@
     },
     {
       "name": "scoop4",
-      "frame": 33546,
+      "frame": 33536,
       "map": "spyder_scoop4",
       "position": [
         9,
@@ -50204,7 +50048,7 @@
     },
     {
       "name": "timber_town",
-      "frame": 35868,
+      "frame": 35712,
       "map": "spyder_timber_town",
       "position": [
         17,
@@ -50213,7 +50057,7 @@
     },
     {
       "name": "tunnel",
-      "frame": 36281,
+      "frame": 36125,
       "map": "spyder_tunnel",
       "position": [
         14,
@@ -50222,7 +50066,7 @@
     },
     {
       "name": "tunnel_below",
-      "frame": 36358,
+      "frame": 36202,
       "map": "spyder_tunnel_below",
       "position": [
         7,
@@ -50231,7 +50075,7 @@
     },
     {
       "name": "tunnel",
-      "frame": 37005,
+      "frame": 36849,
       "map": "spyder_tunnel",
       "position": [
         5,
@@ -50240,7 +50084,7 @@
     },
     {
       "name": "route6",
-      "frame": 38376,
+      "frame": 38220,
       "map": "spyder_route6",
       "position": [
         0,
@@ -50249,7 +50093,7 @@
     },
     {
       "name": "candy_town",
-      "frame": 42233,
+      "frame": 42077,
       "map": "spyder_candy_town",
       "position": [
         30,
@@ -50258,7 +50102,7 @@
     },
     {
       "name": "candy_center",
-      "frame": 42867,
+      "frame": 42711,
       "map": "spyder_candy_center",
       "position": [
         6,
@@ -50267,7 +50111,7 @@
     },
     {
       "name": "candy_town",
-      "frame": 43069,
+      "frame": 42913,
       "map": "spyder_candy_town",
       "position": [
         14,
@@ -50276,7 +50120,7 @@
     },
     {
       "name": "greenwash_greenhouse",
-      "frame": 43514,
+      "frame": 43358,
       "map": "spyder_greenwash_greenhouse",
       "position": [
         25,
@@ -50285,7 +50129,7 @@
     },
     {
       "name": "greenwash",
-      "frame": 45103,
+      "frame": 44947,
       "map": "spyder_greenwash",
       "position": [
         14,
@@ -50294,7 +50138,7 @@
     },
     {
       "name": "greenwash_level2",
-      "frame": 46008,
+      "frame": 45852,
       "map": "spyder_greenwash_level2",
       "position": [
         2,
@@ -50303,7 +50147,7 @@
     },
     {
       "name": "greenwash",
-      "frame": 47478,
+      "frame": 47322,
       "map": "spyder_greenwash",
       "position": [
         2,
@@ -50312,7 +50156,7 @@
     },
     {
       "name": "aardant-acquired",
-      "frame": 48537,
+      "frame": 48381,
       "map": "spyder_greenwash",
       "position": [
         7,
@@ -50321,7 +50165,7 @@
     },
     {
       "name": "candy_town",
-      "frame": 48610,
+      "frame": 48454,
       "map": "spyder_candy_town",
       "position": [
         25,
@@ -50330,7 +50174,7 @@
     },
     {
       "name": "candy_center",
-      "frame": 48823,
+      "frame": 48667,
       "map": "spyder_candy_center",
       "position": [
         6,
@@ -50339,7 +50183,7 @@
     },
     {
       "name": "candy_hospital2",
-      "frame": 49096,
+      "frame": 48940,
       "map": "spyder_candy_hospital2",
       "position": [
         11,
@@ -50348,7 +50192,7 @@
     },
     {
       "name": "hospital-password",
-      "frame": 49116,
+      "frame": 48960,
       "map": "spyder_candy_hospital2",
       "position": [
         11,
@@ -50357,7 +50201,7 @@
     },
     {
       "name": "candy_hospital3",
-      "frame": 49525,
+      "frame": 49369,
       "map": "spyder_candy_hospital3",
       "position": [
         5,
@@ -50366,7 +50210,7 @@
     },
     {
       "name": "hospital-cure",
-      "frame": 49914,
+      "frame": 49758,
       "map": "spyder_candy_hospital3",
       "position": [
         5,
@@ -50394,9 +50238,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -50405,16 +50249,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -50445,9 +50283,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -50456,16 +50294,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
@@ -50488,9 +50320,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -50499,16 +50331,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -50523,9 +50349,9 @@
       "after": [
         {
           "slug": "arthrobolt",
-          "level": 41,
-          "hp": 205,
-          "maxHp": 205
+          "level": 42,
+          "hp": 209,
+          "maxHp": 209
         },
         {
           "slug": "aardorn",
@@ -50535,9 +50361,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -50546,16 +50372,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
@@ -50566,9 +50386,9 @@
       "before": [
         {
           "slug": "arthrobolt",
-          "level": 41,
-          "hp": 205,
-          "maxHp": 205
+          "level": 42,
+          "hp": 209,
+          "maxHp": 209
         },
         {
           "slug": "aardorn",
@@ -50578,9 +50398,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -50589,16 +50409,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -50629,9 +50443,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -50640,16 +50454,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
@@ -50672,9 +50480,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -50683,16 +50491,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -50713,7 +50515,7 @@
           "slug": "arthrobolt",
           "level": 43,
           "hp": 213,
-          "maxHp": 213
+          "maxHp": 214
         },
         {
           "slug": "aardorn",
@@ -50723,9 +50525,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -50734,16 +50536,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
@@ -50756,7 +50552,7 @@
           "slug": "arthrobolt",
           "level": 43,
           "hp": 213,
-          "maxHp": 213
+          "maxHp": 214
         },
         {
           "slug": "aardorn",
@@ -50766,9 +50562,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -50777,16 +50573,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -50803,7 +50593,7 @@
           "slug": "arthrobolt",
           "level": 43,
           "hp": 213,
-          "maxHp": 213
+          "maxHp": 214
         },
         {
           "slug": "aardorn",
@@ -50813,9 +50603,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -50824,16 +50614,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
@@ -50845,8 +50629,8 @@
         {
           "slug": "arthrobolt",
           "level": 43,
-          "hp": 213,
-          "maxHp": 213
+          "hp": 214,
+          "maxHp": 214
         },
         {
           "slug": "aardorn",
@@ -50856,9 +50640,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -50867,16 +50651,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -50912,8 +50690,8 @@
         {
           "slug": "arthrobolt",
           "level": 46,
-          "hp": 213,
-          "maxHp": 228
+          "hp": 214,
+          "maxHp": 227
         },
         {
           "slug": "aardorn",
@@ -50923,9 +50701,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -50934,16 +50712,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
@@ -50955,8 +50727,8 @@
         {
           "slug": "arthrobolt",
           "level": 46,
-          "hp": 228,
-          "maxHp": 228
+          "hp": 227,
+          "maxHp": 227
         },
         {
           "slug": "aardorn",
@@ -50966,9 +50738,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -50977,16 +50749,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -51014,7 +50780,7 @@
         {
           "slug": "arthrobolt",
           "level": 48,
-          "hp": 215,
+          "hp": 216,
           "maxHp": 236
         },
         {
@@ -51025,9 +50791,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -51036,16 +50802,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
@@ -51068,9 +50828,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -51079,16 +50839,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -51119,9 +50873,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -51130,16 +50884,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
@@ -51162,9 +50910,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -51173,16 +50921,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -51211,7 +50953,7 @@
           "slug": "arthrobolt",
           "level": 51,
           "hp": 240,
-          "maxHp": 250
+          "maxHp": 249
         },
         {
           "slug": "aardorn",
@@ -51221,9 +50963,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -51232,16 +50974,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
@@ -51253,8 +50989,8 @@
         {
           "slug": "arthrobolt",
           "level": 51,
-          "hp": 250,
-          "maxHp": 250
+          "hp": 249,
+          "maxHp": 249
         },
         {
           "slug": "aardorn",
@@ -51264,9 +51000,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -51275,16 +51011,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -51316,8 +51046,8 @@
         {
           "slug": "arthrobolt",
           "level": 53,
-          "hp": 168,
-          "maxHp": 257
+          "hp": 172,
+          "maxHp": 258
         },
         {
           "slug": "aardorn",
@@ -51327,9 +51057,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -51338,16 +51068,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
@@ -51359,8 +51083,8 @@
         {
           "slug": "arthrobolt",
           "level": 53,
-          "hp": 257,
-          "maxHp": 257
+          "hp": 258,
+          "maxHp": 258
         },
         {
           "slug": "aardorn",
@@ -51370,9 +51094,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -51381,16 +51105,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -51433,9 +51151,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -51444,16 +51162,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
@@ -51476,9 +51188,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -51487,16 +51199,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -51517,7 +51223,7 @@
           "level": 30
         }
       ],
-      "endFrame": 14609,
+      "endFrame": 14599,
       "turns": 5,
       "outcome": "won",
       "after": [
@@ -51525,7 +51231,7 @@
           "slug": "arthrobolt",
           "level": 56,
           "hp": 235,
-          "maxHp": 271
+          "maxHp": 272
         },
         {
           "slug": "aardorn",
@@ -51535,9 +51241,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -51546,29 +51252,23 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
     {
       "opponent": "spyder_dojo_orion",
       "kind": "trainer",
-      "startFrame": 14724,
+      "startFrame": 14714,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 56,
-          "hp": 271,
-          "maxHp": 271
+          "hp": 272,
+          "maxHp": 272
         },
         {
           "slug": "aardorn",
@@ -51578,9 +51278,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -51589,16 +51289,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -51619,14 +51313,14 @@
           "level": 30
         }
       ],
-      "endFrame": 15678,
+      "endFrame": 15668,
       "turns": 5,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 58,
-          "hp": 221,
+          "hp": 226,
           "maxHp": 280
         },
         {
@@ -51637,9 +51331,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -51648,23 +51342,17 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
     {
       "opponent": "spyder_dojo_hermes",
       "kind": "trainer",
-      "startFrame": 15833,
+      "startFrame": 15823,
       "before": [
         {
           "slug": "arthrobolt",
@@ -51680,9 +51368,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -51691,16 +51379,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -51721,14 +51403,14 @@
           "level": 30
         }
       ],
-      "endFrame": 16983,
+      "endFrame": 16973,
       "turns": 6,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 60,
-          "hp": 88,
+          "hp": 102,
           "maxHp": 289
         },
         {
@@ -51739,9 +51421,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -51750,23 +51432,17 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
     {
       "opponent": "spyder_dojo_hephastus",
       "kind": "trainer",
-      "startFrame": 17086,
+      "startFrame": 17076,
       "before": [
         {
           "slug": "arthrobolt",
@@ -51782,9 +51458,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -51793,16 +51469,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -51823,7 +51493,7 @@
           "level": 30
         }
       ],
-      "endFrame": 17874,
+      "endFrame": 17864,
       "turns": 4,
       "outcome": "won",
       "after": [
@@ -51841,9 +51511,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -51852,23 +51522,17 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
     {
       "opponent": "spyder_dojo_saturn",
       "kind": "trainer",
-      "startFrame": 18021,
+      "startFrame": 18011,
       "before": [
         {
           "slug": "arthrobolt",
@@ -51884,9 +51548,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -51895,16 +51559,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -51925,14 +51583,14 @@
           "level": 30
         }
       ],
-      "endFrame": 18839,
+      "endFrame": 18829,
       "turns": 4,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 63,
-          "hp": 305,
+          "hp": 303,
           "maxHp": 307
         },
         {
@@ -51943,9 +51601,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -51954,23 +51612,17 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
     {
       "opponent": "spyder_dojo_tu",
       "kind": "trainer",
-      "startFrame": 19216,
+      "startFrame": 19206,
       "before": [
         {
           "slug": "arthrobolt",
@@ -51986,9 +51638,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -51997,16 +51649,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -52031,7 +51677,7 @@
           "level": 30
         }
       ],
-      "endFrame": 20198,
+      "endFrame": 20188,
       "turns": 5,
       "outcome": "won",
       "after": [
@@ -52049,9 +51695,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -52060,23 +51706,17 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
     {
       "opponent": "spyder_dojo_thri",
       "kind": "trainer",
-      "startFrame": 20369,
+      "startFrame": 20359,
       "before": [
         {
           "slug": "arthrobolt",
@@ -52092,9 +51732,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -52103,16 +51743,10 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ],
       "enemy": [
@@ -52125,15 +51759,15 @@
           "level": 35
         }
       ],
-      "endFrame": 20833,
+      "endFrame": 20823,
       "turns": 2,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 66,
-          "hp": 319,
-          "maxHp": 319
+          "hp": 320,
+          "maxHp": 320
         },
         {
           "slug": "aardorn",
@@ -52143,9 +51777,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -52154,29 +51788,23 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
-        },
-        {
           "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         }
       ]
     },
     {
       "opponent": "spyder_billie",
       "kind": "trainer",
-      "startFrame": 20887,
+      "startFrame": 20877,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 66,
-          "hp": 319,
-          "maxHp": 319
+          "hp": 320,
+          "maxHp": 320
         },
         {
           "slug": "aardorn",
@@ -52186,9 +51814,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -52197,16 +51825,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -52227,7 +51855,7 @@
           "level": 30
         }
       ],
-      "endFrame": 21685,
+      "endFrame": 21675,
       "turns": 4,
       "outcome": "won",
       "after": [
@@ -52245,9 +51873,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -52256,23 +51884,23 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_nimrod_rebel",
       "kind": "trainer",
-      "startFrame": 22789,
+      "startFrame": 22779,
       "before": [
         {
           "slug": "arthrobolt",
@@ -52288,9 +51916,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -52299,16 +51927,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -52317,15 +51945,15 @@
           "level": 30
         }
       ],
-      "endFrame": 23041,
+      "endFrame": 23031,
       "turns": 1,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
-          "level": 67,
-          "hp": 324,
-          "maxHp": 324
+          "level": 68,
+          "hp": 328,
+          "maxHp": 328
         },
         {
           "slug": "aardorn",
@@ -52335,9 +51963,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -52346,29 +51974,29 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_nimrod_justice",
       "kind": "trainer",
-      "startFrame": 23471,
+      "startFrame": 23461,
       "before": [
         {
           "slug": "arthrobolt",
-          "level": 67,
-          "hp": 324,
-          "maxHp": 324
+          "level": 68,
+          "hp": 328,
+          "maxHp": 328
         },
         {
           "slug": "aardorn",
@@ -52378,9 +52006,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -52389,16 +52017,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -52411,15 +52039,15 @@
           "level": 21
         }
       ],
-      "endFrame": 23885,
+      "endFrame": 23875,
       "turns": 2,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 68,
-          "hp": 329,
-          "maxHp": 329
+          "hp": 328,
+          "maxHp": 328
         },
         {
           "slug": "aardorn",
@@ -52429,9 +52057,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -52440,29 +52068,29 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_nimrod_mace",
       "kind": "trainer",
-      "startFrame": 23953,
+      "startFrame": 23943,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 68,
-          "hp": 329,
-          "maxHp": 329
+          "hp": 328,
+          "maxHp": 328
         },
         {
           "slug": "aardorn",
@@ -52472,9 +52100,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -52483,16 +52111,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -52509,15 +52137,15 @@
           "level": 30
         }
       ],
-      "endFrame": 24559,
+      "endFrame": 24549,
       "turns": 3,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 69,
-          "hp": 332,
-          "maxHp": 332
+          "hp": 333,
+          "maxHp": 333
         },
         {
           "slug": "aardorn",
@@ -52527,9 +52155,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -52538,29 +52166,29 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_nimrod_zircon",
       "kind": "trainer",
-      "startFrame": 24778,
+      "startFrame": 24768,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 69,
-          "hp": 332,
-          "maxHp": 332
+          "hp": 333,
+          "maxHp": 333
         },
         {
           "slug": "aardorn",
@@ -52570,9 +52198,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -52581,16 +52209,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -52599,15 +52227,15 @@
           "level": 30
         }
       ],
-      "endFrame": 25030,
+      "endFrame": 25020,
       "turns": 1,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 69,
-          "hp": 332,
-          "maxHp": 332
+          "hp": 333,
+          "maxHp": 333
         },
         {
           "slug": "aardorn",
@@ -52617,9 +52245,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -52628,29 +52256,29 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_nimrod_argon",
       "kind": "trainer",
-      "startFrame": 25451,
+      "startFrame": 25441,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 69,
-          "hp": 332,
-          "maxHp": 332
+          "hp": 333,
+          "maxHp": 333
         },
         {
           "slug": "aardorn",
@@ -52660,9 +52288,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -52671,16 +52299,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -52689,15 +52317,15 @@
           "level": 30
         }
       ],
-      "endFrame": 25703,
+      "endFrame": 25693,
       "turns": 1,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 69,
-          "hp": 332,
-          "maxHp": 332
+          "hp": 333,
+          "maxHp": 333
         },
         {
           "slug": "aardorn",
@@ -52707,9 +52335,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -52718,29 +52346,29 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_nimrod_xeon",
       "kind": "trainer",
-      "startFrame": 25907,
+      "startFrame": 25897,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 69,
-          "hp": 332,
-          "maxHp": 332
+          "hp": 333,
+          "maxHp": 333
         },
         {
           "slug": "aardorn",
@@ -52750,9 +52378,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -52761,16 +52389,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -52779,15 +52407,15 @@
           "level": 25
         }
       ],
-      "endFrame": 26159,
+      "endFrame": 26149,
       "turns": 1,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 69,
-          "hp": 332,
-          "maxHp": 332
+          "hp": 333,
+          "maxHp": 333
         },
         {
           "slug": "aardorn",
@@ -52797,9 +52425,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -52808,29 +52436,29 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_nimrod_chromerobo",
       "kind": "trainer",
-      "startFrame": 26218,
+      "startFrame": 26208,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 69,
-          "hp": 332,
-          "maxHp": 332
+          "hp": 333,
+          "maxHp": 333
         },
         {
           "slug": "aardorn",
@@ -52840,9 +52468,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -52851,16 +52479,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -52869,7 +52497,7 @@
           "level": 25
         }
       ],
-      "endFrame": 26470,
+      "endFrame": 26460,
       "turns": 1,
       "outcome": "won",
       "after": [
@@ -52887,9 +52515,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -52898,23 +52526,23 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_nimrod_tru",
       "kind": "trainer",
-      "startFrame": 26634,
+      "startFrame": 26624,
       "before": [
         {
           "slug": "arthrobolt",
@@ -52930,9 +52558,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -52941,16 +52569,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -52975,7 +52603,7 @@
           "level": 30
         }
       ],
-      "endFrame": 27586,
+      "endFrame": 27576,
       "turns": 5,
       "outcome": "won",
       "after": [
@@ -52993,9 +52621,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -53004,23 +52632,23 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_route5_goliath",
       "kind": "trainer",
-      "startFrame": 27991,
+      "startFrame": 27981,
       "before": [
         {
           "slug": "arthrobolt",
@@ -53036,9 +52664,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -53047,16 +52675,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -53065,15 +52693,15 @@
           "level": 40
         }
       ],
-      "endFrame": 28243,
+      "endFrame": 28233,
       "turns": 1,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 72,
-          "hp": 345,
-          "maxHp": 345
+          "hp": 346,
+          "maxHp": 346
         },
         {
           "slug": "aardorn",
@@ -53083,9 +52711,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -53094,29 +52722,29 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "wild:dracune",
       "kind": "wild",
-      "startFrame": 28438,
+      "startFrame": 28428,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 72,
-          "hp": 345,
-          "maxHp": 345
+          "hp": 346,
+          "maxHp": 346
         },
         {
           "slug": "aardorn",
@@ -53126,9 +52754,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -53137,16 +52765,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -53155,15 +52783,15 @@
           "level": 20
         }
       ],
-      "endFrame": 28691,
+      "endFrame": 28681,
       "turns": 1,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 72,
-          "hp": 345,
-          "maxHp": 345
+          "hp": 346,
+          "maxHp": 346
         },
         {
           "slug": "aardorn",
@@ -53173,9 +52801,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -53184,29 +52812,29 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "wild:vamporm",
       "kind": "wild",
-      "startFrame": 28800,
+      "startFrame": 28790,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 72,
-          "hp": 345,
-          "maxHp": 345
+          "hp": 346,
+          "maxHp": 346
         },
         {
           "slug": "aardorn",
@@ -53216,9 +52844,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -53227,16 +52855,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -53245,15 +52873,15 @@
           "level": 19
         }
       ],
-      "endFrame": 29053,
+      "endFrame": 29043,
       "turns": 1,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 72,
-          "hp": 345,
-          "maxHp": 345
+          "hp": 346,
+          "maxHp": 346
         },
         {
           "slug": "aardorn",
@@ -53263,9 +52891,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -53274,29 +52902,29 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "wild:foofle",
       "kind": "wild",
-      "startFrame": 29153,
+      "startFrame": 29143,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 72,
-          "hp": 345,
-          "maxHp": 345
+          "hp": 346,
+          "maxHp": 346
         },
         {
           "slug": "aardorn",
@@ -53306,9 +52934,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -53317,16 +52945,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -53335,15 +52963,15 @@
           "level": 20
         }
       ],
-      "endFrame": 29406,
+      "endFrame": 29396,
       "turns": 1,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 72,
-          "hp": 345,
-          "maxHp": 345
+          "hp": 346,
+          "maxHp": 346
         },
         {
           "slug": "aardorn",
@@ -53353,9 +52981,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -53364,29 +52992,29 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_scoop_paine",
       "kind": "trainer",
-      "startFrame": 30451,
+      "startFrame": 30441,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 72,
-          "hp": 345,
-          "maxHp": 345
+          "hp": 346,
+          "maxHp": 346
         },
         {
           "slug": "aardorn",
@@ -53396,9 +53024,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -53407,16 +53035,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -53429,14 +53057,14 @@
           "level": 35
         }
       ],
-      "endFrame": 30865,
+      "endFrame": 30855,
       "turns": 2,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 73,
-          "hp": 350,
+          "hp": 351,
           "maxHp": 351
         },
         {
@@ -53447,9 +53075,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -53458,28 +53086,28 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_scoop_rubid",
       "kind": "trainer",
-      "startFrame": 31069,
+      "startFrame": 31059,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 73,
-          "hp": 350,
+          "hp": 351,
           "maxHp": 351
         },
         {
@@ -53490,9 +53118,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -53501,16 +53129,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -53523,15 +53151,15 @@
           "level": 35
         }
       ],
-      "endFrame": 31483,
+      "endFrame": 31473,
       "turns": 2,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
-          "level": 73,
-          "hp": 350,
-          "maxHp": 351
+          "level": 74,
+          "hp": 355,
+          "maxHp": 355
         },
         {
           "slug": "aardorn",
@@ -53541,9 +53169,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -53552,29 +53180,29 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_scoop_alyssa",
       "kind": "trainer",
-      "startFrame": 31777,
+      "startFrame": 31767,
       "before": [
         {
           "slug": "arthrobolt",
-          "level": 73,
-          "hp": 350,
-          "maxHp": 351
+          "level": 74,
+          "hp": 355,
+          "maxHp": 355
         },
         {
           "slug": "aardorn",
@@ -53584,9 +53212,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -53595,16 +53223,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -53613,7 +53241,7 @@
           "level": 45
         }
       ],
-      "endFrame": 32029,
+      "endFrame": 32019,
       "turns": 1,
       "outcome": "won",
       "after": [
@@ -53631,9 +53259,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -53642,23 +53270,23 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_scoop_taggart",
       "kind": "trainer",
-      "startFrame": 32065,
+      "startFrame": 32055,
       "before": [
         {
           "slug": "arthrobolt",
@@ -53674,9 +53302,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -53685,16 +53313,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -53711,7 +53339,7 @@
           "level": 35
         }
       ],
-      "endFrame": 32671,
+      "endFrame": 32661,
       "turns": 3,
       "outcome": "won",
       "after": [
@@ -53729,9 +53357,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -53740,23 +53368,23 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_scoop_donald",
       "kind": "trainer",
-      "startFrame": 32739,
+      "startFrame": 32729,
       "before": [
         {
           "slug": "arthrobolt",
@@ -53772,9 +53400,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -53783,16 +53411,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -53809,15 +53437,15 @@
           "level": 40
         }
       ],
-      "endFrame": 33417,
+      "endFrame": 33407,
       "turns": 4,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 77,
-          "hp": 337,
-          "maxHp": 370
+          "hp": 342,
+          "maxHp": 371
         },
         {
           "slug": "aardorn",
@@ -53827,9 +53455,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -53838,29 +53466,29 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_scoop_weaver",
       "kind": "trainer",
-      "startFrame": 33894,
+      "startFrame": 33884,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 77,
-          "hp": 337,
-          "maxHp": 370
+          "hp": 342,
+          "maxHp": 371
         },
         {
           "slug": "aardorn",
@@ -53870,9 +53498,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -53881,16 +53509,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -53903,15 +53531,15 @@
           "level": 35
         }
       ],
-      "endFrame": 34308,
+      "endFrame": 34298,
       "turns": 2,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 77,
-          "hp": 337,
-          "maxHp": 370
+          "hp": 342,
+          "maxHp": 371
         },
         {
           "slug": "aardorn",
@@ -53921,9 +53549,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -53932,29 +53560,29 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_scoop_arachne",
       "kind": "trainer",
-      "startFrame": 34367,
+      "startFrame": 34357,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 77,
-          "hp": 337,
-          "maxHp": 370
+          "hp": 342,
+          "maxHp": 371
         },
         {
           "slug": "aardorn",
@@ -53964,9 +53592,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -53975,16 +53603,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -54001,14 +53629,14 @@
           "level": 40
         }
       ],
-      "endFrame": 35221,
-      "turns": 5,
+      "endFrame": 35065,
+      "turns": 4,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 79,
-          "hp": 325,
+          "hp": 329,
           "maxHp": 379
         },
         {
@@ -54019,9 +53647,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -54030,28 +53658,28 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "wild:sludgehog",
       "kind": "wild",
-      "startFrame": 35336,
+      "startFrame": 35180,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 79,
-          "hp": 325,
+          "hp": 329,
           "maxHp": 379
         },
         {
@@ -54062,9 +53690,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -54073,16 +53701,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -54091,14 +53719,14 @@
           "level": 40
         }
       ],
-      "endFrame": 35614,
+      "endFrame": 35458,
       "turns": 1,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 79,
-          "hp": 325,
+          "hp": 329,
           "maxHp": 380
         },
         {
@@ -54109,9 +53737,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -54120,28 +53748,28 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_tunnelb_meitner",
       "kind": "trainer",
-      "startFrame": 36590,
+      "startFrame": 36434,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 79,
-          "hp": 325,
+          "hp": 329,
           "maxHp": 380
         },
         {
@@ -54152,9 +53780,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -54163,16 +53791,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -54181,14 +53809,14 @@
           "level": 27
         }
       ],
-      "endFrame": 36868,
+      "endFrame": 36712,
       "turns": 1,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 79,
-          "hp": 325,
+          "hp": 329,
           "maxHp": 380
         },
         {
@@ -54199,9 +53827,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -54210,28 +53838,28 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_tunnelb_greta",
       "kind": "trainer",
-      "startFrame": 37165,
+      "startFrame": 37009,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 79,
-          "hp": 325,
+          "hp": 329,
           "maxHp": 380
         },
         {
@@ -54242,9 +53870,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -54253,16 +53881,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -54291,15 +53919,15 @@
           "level": 21
         }
       ],
-      "endFrame": 38295,
+      "endFrame": 38139,
       "turns": 6,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 80,
-          "hp": 329,
-          "maxHp": 384
+          "hp": 334,
+          "maxHp": 385
         },
         {
           "slug": "aardorn",
@@ -54309,9 +53937,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -54320,29 +53948,29 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_billie",
       "kind": "trainer",
-      "startFrame": 38448,
+      "startFrame": 38292,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 80,
-          "hp": 329,
-          "maxHp": 384
+          "hp": 334,
+          "maxHp": 385
         },
         {
           "slug": "aardorn",
@@ -54352,9 +53980,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -54363,16 +53991,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -54393,15 +54021,15 @@
           "level": 40
         }
       ],
-      "endFrame": 39266,
+      "endFrame": 39110,
       "turns": 4,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 81,
-          "hp": 333,
-          "maxHp": 388
+          "hp": 338,
+          "maxHp": 389
         },
         {
           "slug": "aardorn",
@@ -54411,9 +54039,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -54422,29 +54050,29 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_route6_maxwell",
       "kind": "trainer",
-      "startFrame": 39599,
+      "startFrame": 39443,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 81,
-          "hp": 333,
-          "maxHp": 388
+          "hp": 338,
+          "maxHp": 389
         },
         {
           "slug": "aardorn",
@@ -54454,9 +54082,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -54465,16 +54093,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -54487,14 +54115,14 @@
           "level": 35
         }
       ],
-      "endFrame": 40013,
+      "endFrame": 39857,
       "turns": 2,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 82,
-          "hp": 338,
+          "hp": 342,
           "maxHp": 393
         },
         {
@@ -54505,9 +54133,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -54516,28 +54144,28 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_route6_orion",
       "kind": "trainer",
-      "startFrame": 40176,
+      "startFrame": 40020,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 82,
-          "hp": 338,
+          "hp": 342,
           "maxHp": 393
         },
         {
@@ -54548,9 +54176,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -54559,16 +54187,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -54581,14 +54209,14 @@
           "level": 35
         }
       ],
-      "endFrame": 40590,
+      "endFrame": 40434,
       "turns": 2,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 82,
-          "hp": 338,
+          "hp": 342,
           "maxHp": 393
         },
         {
@@ -54599,9 +54227,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -54610,28 +54238,28 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_route6_blair",
       "kind": "trainer",
-      "startFrame": 40745,
+      "startFrame": 40589,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 82,
-          "hp": 338,
+          "hp": 342,
           "maxHp": 393
         },
         {
@@ -54642,9 +54270,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -54653,16 +54281,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -54675,14 +54303,14 @@
           "level": 35
         }
       ],
-      "endFrame": 41209,
+      "endFrame": 41053,
       "turns": 2,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 83,
-          "hp": 343,
+          "hp": 347,
           "maxHp": 398
         },
         {
@@ -54693,9 +54321,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -54704,28 +54332,28 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_route6_richard",
       "kind": "trainer",
-      "startFrame": 41249,
+      "startFrame": 41093,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 83,
-          "hp": 343,
+          "hp": 347,
           "maxHp": 398
         },
         {
@@ -54736,9 +54364,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -54747,16 +54375,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -54769,14 +54397,14 @@
           "level": 35
         }
       ],
-      "endFrame": 41663,
+      "endFrame": 41507,
       "turns": 2,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 84,
-          "hp": 347,
+          "hp": 351,
           "maxHp": 402
         },
         {
@@ -54787,9 +54415,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -54798,28 +54426,28 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_route6_gunner",
       "kind": "trainer",
-      "startFrame": 41756,
+      "startFrame": 41600,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 84,
-          "hp": 347,
+          "hp": 351,
           "maxHp": 402
         },
         {
@@ -54830,9 +54458,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -54841,16 +54469,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -54863,14 +54491,14 @@
           "level": 25
         }
       ],
-      "endFrame": 42170,
+      "endFrame": 42014,
       "turns": 2,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 84,
-          "hp": 347,
+          "hp": 351,
           "maxHp": 402
         },
         {
@@ -54881,9 +54509,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -54892,23 +54520,23 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_greenwash_hunt",
       "kind": "trainer",
-      "startFrame": 43593,
+      "startFrame": 43437,
       "before": [
         {
           "slug": "arthrobolt",
@@ -54924,9 +54552,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -54935,16 +54563,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -54957,7 +54585,7 @@
           "level": 25
         }
       ],
-      "endFrame": 44057,
+      "endFrame": 43901,
       "turns": 2,
       "outcome": "won",
       "after": [
@@ -54975,9 +54603,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -54986,23 +54614,23 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "wild:sclairus",
       "kind": "wild",
-      "startFrame": 44205,
+      "startFrame": 44049,
       "before": [
         {
           "slug": "arthrobolt",
@@ -55018,9 +54646,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -55029,16 +54657,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -55047,7 +54675,7 @@
           "level": 15
         }
       ],
-      "endFrame": 44458,
+      "endFrame": 44302,
       "turns": 1,
       "outcome": "won",
       "after": [
@@ -55065,9 +54693,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -55076,23 +54704,23 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_greenwash_louis",
       "kind": "trainer",
-      "startFrame": 44660,
+      "startFrame": 44504,
       "before": [
         {
           "slug": "arthrobolt",
@@ -55108,9 +54736,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -55119,16 +54747,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -55137,7 +54765,7 @@
           "level": 24
         }
       ],
-      "endFrame": 44938,
+      "endFrame": 44782,
       "turns": 1,
       "outcome": "won",
       "after": [
@@ -55155,9 +54783,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -55166,23 +54794,23 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_greenwash_lewie",
       "kind": "trainer",
-      "startFrame": 45218,
+      "startFrame": 45062,
       "before": [
         {
           "slug": "arthrobolt",
@@ -55198,9 +54826,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -55209,16 +54837,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -55227,15 +54855,15 @@
           "level": 31
         }
       ],
-      "endFrame": 45470,
+      "endFrame": 45314,
       "turns": 1,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 85,
-          "hp": 406,
-          "maxHp": 406
+          "hp": 407,
+          "maxHp": 407
         },
         {
           "slug": "aardorn",
@@ -55245,9 +54873,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -55256,29 +54884,29 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_greenwash_broer",
       "kind": "trainer",
-      "startFrame": 45621,
+      "startFrame": 45465,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 85,
-          "hp": 406,
-          "maxHp": 406
+          "hp": 407,
+          "maxHp": 407
         },
         {
           "slug": "aardorn",
@@ -55288,9 +54916,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -55299,16 +54927,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -55317,15 +54945,15 @@
           "level": 31
         }
       ],
-      "endFrame": 45899,
+      "endFrame": 45743,
       "turns": 1,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 85,
-          "hp": 406,
-          "maxHp": 406
+          "hp": 407,
+          "maxHp": 407
         },
         {
           "slug": "aardorn",
@@ -55335,9 +54963,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -55346,29 +54974,29 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_greenwash_dippel",
       "kind": "trainer",
-      "startFrame": 46103,
+      "startFrame": 45947,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 85,
-          "hp": 406,
-          "maxHp": 406
+          "hp": 407,
+          "maxHp": 407
         },
         {
           "slug": "aardorn",
@@ -55378,9 +55006,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -55389,16 +55017,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -55411,15 +55039,15 @@
           "level": 27
         }
       ],
-      "endFrame": 46517,
+      "endFrame": 46361,
       "turns": 2,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 85,
-          "hp": 406,
-          "maxHp": 406
+          "hp": 407,
+          "maxHp": 407
         },
         {
           "slug": "aardorn",
@@ -55429,9 +55057,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -55440,29 +55068,29 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_greenwash_dempsey",
       "kind": "trainer",
-      "startFrame": 46752,
+      "startFrame": 46596,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 85,
-          "hp": 406,
-          "maxHp": 406
+          "hp": 407,
+          "maxHp": 407
         },
         {
           "slug": "aardorn",
@@ -55472,9 +55100,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -55483,16 +55111,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -55501,15 +55129,15 @@
           "level": 30
         }
       ],
-      "endFrame": 47030,
+      "endFrame": 46874,
       "turns": 1,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 85,
-          "hp": 406,
-          "maxHp": 406
+          "hp": 407,
+          "maxHp": 407
         },
         {
           "slug": "aardorn",
@@ -55519,9 +55147,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -55530,29 +55158,29 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_greenwash_heidenstam",
       "kind": "trainer",
-      "startFrame": 47153,
+      "startFrame": 46997,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 85,
-          "hp": 406,
-          "maxHp": 406
+          "hp": 407,
+          "maxHp": 407
         },
         {
           "slug": "aardorn",
@@ -55562,9 +55190,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -55573,16 +55201,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -55591,15 +55219,15 @@
           "level": 15
         }
       ],
-      "endFrame": 47405,
+      "endFrame": 47249,
       "turns": 1,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 85,
-          "hp": 406,
-          "maxHp": 406
+          "hp": 407,
+          "maxHp": 407
         },
         {
           "slug": "aardorn",
@@ -55609,9 +55237,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -55620,29 +55248,29 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     },
     {
       "opponent": "spyder_greenwash_looten",
       "kind": "trainer",
-      "startFrame": 47617,
+      "startFrame": 47461,
       "before": [
         {
           "slug": "arthrobolt",
           "level": 85,
-          "hp": 406,
-          "maxHp": 406
+          "hp": 407,
+          "maxHp": 407
         },
         {
           "slug": "aardorn",
@@ -55652,9 +55280,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -55663,16 +55291,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ],
       "enemy": [
@@ -55693,14 +55321,14 @@
           "level": 35
         }
       ],
-      "endFrame": 48497,
+      "endFrame": 48341,
       "turns": 5,
       "outcome": "won",
       "after": [
         {
           "slug": "arthrobolt",
           "level": 87,
-          "hp": 401,
+          "hp": 402,
           "maxHp": 415
         },
         {
@@ -55711,9 +55339,9 @@
         },
         {
           "slug": "cardiling",
-          "level": 8,
-          "hp": 58,
-          "maxHp": 58
+          "level": 6,
+          "hp": 50,
+          "maxHp": 50
         },
         {
           "slug": "cataspike",
@@ -55722,16 +55350,16 @@
           "maxHp": 70
         },
         {
-          "slug": "eyenemy",
-          "level": 5,
-          "hp": 83,
-          "maxHp": 83
+          "slug": "pawsand",
+          "level": 21,
+          "hp": 233,
+          "maxHp": 233
         },
         {
-          "slug": "pawsand",
-          "level": 22,
-          "hp": 241,
-          "maxHp": 241
+          "slug": "sampsack",
+          "level": 35,
+          "hp": 307,
+          "maxHp": 307
         }
       ]
     }
@@ -55768,9 +55396,9 @@
     },
     {
       "slug": "cardiling",
-      "level": 8,
-      "hp": 58,
-      "maxHp": 58
+      "level": 6,
+      "hp": 50,
+      "maxHp": 50
     },
     {
       "slug": "cataspike",
@@ -55779,20 +55407,20 @@
       "maxHp": 70
     },
     {
-      "slug": "eyenemy",
-      "level": 5,
-      "hp": 83,
-      "maxHp": 83
+      "slug": "pawsand",
+      "level": 21,
+      "hp": 233,
+      "maxHp": 233
     },
     {
-      "slug": "pawsand",
-      "level": 22,
-      "hp": 241,
-      "maxHp": 241
+      "slug": "sampsack",
+      "level": 35,
+      "hp": 307,
+      "maxHp": 307
     }
   ],
-  "initialStateSha256": "0af4f8609f7d45ecd4a279f292478766dd9347151f82893ccf1bd8c3fa9fbf3b",
-  "terminalStateSha256": "eb627a3dcf8e927ef8159760786a9a5a677a1b939d471f37cd1cb7393b9df5ce",
-  "tapeSha256": "91f5a9091acfe42672975d094e65807eed2c85a7955d35698a156cdeb2eb126d",
-  "combinedTapeSha256": "8df62ff187a551eeedd4da504103555add983711dc9224df334070a39e24b062"
+  "initialStateSha256": "96a082759c0e4c35baf54eb0aae20ef9b8de58aae05c1f1f9019b51410118e5e",
+  "terminalStateSha256": "99ae90a5a673174877576f7819c257bcf42fce7085809bd10af42437830b1caf",
+  "tapeSha256": "f217c307622818bc51381c85a84492b7e8695eb3fb2afac1b6435f5b013989f3",
+  "combinedTapeSha256": "61096704c5bc4f83753163d355a52baefc964430e3ca3e2e51cf501483626765"
 }

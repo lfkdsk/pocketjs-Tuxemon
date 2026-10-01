@@ -1,0 +1,257 @@
+{
+  "format": "pocket-tuxemon/gi2a-journal-goldens/v2",
+  "frames": [
+    {
+      "case": "unknown",
+      "width": 480,
+      "height": 272,
+      "file": "gi2a-journal-unknown.480x272.png",
+      "rgbaFnv1a": "32a5aab2",
+      "pngSha256": "c32f162e5d6a36a10acbd55780e5bb4fd7a2b05ade179602ed6d2a88fa8f508b",
+      "selected": {
+        "index": 43,
+        "id": "ignibus",
+        "name": "Ignibus",
+        "description": "When threatened it retreats into its shell and cools down dramatically by venting steam. It could be mistaken for a rock.",
+        "artPath": "assets/battle/gfx/sprites/battle/ignibus-sheet.png",
+        "front": [
+          0,
+          0,
+          64,
+          64
+        ]
+      }
+    },
+    {
+      "case": "seen",
+      "width": 480,
+      "height": 272,
+      "file": "gi2a-journal-seen.480x272.png",
+      "rgbaFnv1a": "c68243a6",
+      "pngSha256": "43dfcadfbff497fa931e2db4b047a3641e9b8d06abddbe57729ffa66c4342636",
+      "selected": {
+        "index": 43,
+        "id": "ignibus",
+        "name": "Ignibus",
+        "description": "When threatened it retreats into its shell and cools down dramatically by venting steam. It could be mistaken for a rock.",
+        "artPath": "assets/battle/gfx/sprites/battle/ignibus-sheet.png",
+        "front": [
+          0,
+          0,
+          64,
+          64
+        ]
+      }
+    },
+    {
+      "case": "caught",
+      "width": 480,
+      "height": 272,
+      "file": "gi2a-journal-caught.480x272.png",
+      "rgbaFnv1a": "71a29c2a",
+      "pngSha256": "5f8c17c49e47f395926b2b23b5deeb475d6a7cbcc35267553300b33268ab2acc",
+      "selected": {
+        "index": 43,
+        "id": "ignibus",
+        "name": "Ignibus",
+        "description": "When threatened it retreats into its shell and cools down dramatically by venting steam. It could be mistaken for a rock.",
+        "artPath": "assets/battle/gfx/sprites/battle/ignibus-sheet.png",
+        "front": [
+          0,
+          0,
+          64,
+          64
+        ]
+      }
+    },
+    {
+      "case": "preview",
+      "width": 480,
+      "height": 272,
+      "file": "gi2a-journal.480x272.png",
+      "rgbaFnv1a": "0fd798a2",
+      "pngSha256": "102e4a9a16797147c90778baf7288ef897f1b83d2663a3036206c221283a4ce7",
+      "selected": {
+        "index": 43,
+        "id": "ignibus",
+        "name": "Ignibus",
+        "description": "When threatened it retreats into its shell and cools down dramatically by venting steam. It could be mistaken for a rock.",
+        "artPath": "assets/battle/gfx/sprites/battle/ignibus-sheet.png",
+        "front": [
+          0,
+          0,
+          64,
+          64
+        ]
+      }
+    },
+    {
+      "case": "picker",
+      "width": 480,
+      "height": 272,
+      "file": "gi2a-monster-picker.480x272.png",
+      "rgbaFnv1a": "e22321cf",
+      "pngSha256": "d65e1c86d6fd80ba8b367ca59d2dcf0a3757efa05f7ac8a14db2a0dfb2fb22aa",
+      "selected": {
+        "index": 43,
+        "id": "ignibus",
+        "name": "Ignibus",
+        "description": "When threatened it retreats into its shell and cools down dramatically by venting steam. It could be mistaken for a rock.",
+        "artPath": "assets/battle/gfx/sprites/battle/ignibus-sheet.png",
+        "front": [
+          0,
+          0,
+          64,
+          64
+        ]
+      }
+    },
+    {
+      "case": "nameInput",
+      "width": 480,
+      "height": 272,
+      "file": "gi2a-name-input.480x272.png",
+      "rgbaFnv1a": "8d4ea2ec",
+      "pngSha256": "a52f730b14beaf8a52aa95b7f2947c56cec25bb969804a47536142ea07b15951",
+      "selected": {
+        "index": 43,
+        "id": "ignibus",
+        "name": "Ignibus",
+        "description": "When threatened it retreats into its shell and cools down dramatically by venting steam. It could be mistaken for a rock.",
+        "artPath": "assets/battle/gfx/sprites/battle/ignibus-sheet.png",
+        "front": [
+          0,
+          0,
+          64,
+          64
+        ]
+      }
+    },
+    {
+      "case": "unknown",
+      "width": 960,
+      "height": 544,
+      "file": "gi2a-journal-unknown.960x544.png",
+      "rgbaFnv1a": "e65ccb14",
+      "pngSha256": "9371f60f2bb72c9a5623b330593fcfa5f03fab9e2002674b3050613a13b72052",
+      "selected": {
+        "index": 43,
+        "id": "ignibus",
+        "name": "Ignibus",
+        "description": "When threatened it retreats into its shell and cools down dramatically by venting steam. It could be mistaken for a rock.",
+        "artPath": "assets/battle/gfx/sprites/battle/ignibus-sheet.png",
+        "front": [
+          0,
+          0,
+          64,
+          64
+        ]
+      }
+    },
+    {
+      "case": "seen",
+      "width": 960,
+      "height": 544,
+      "file": "gi2a-journal-seen.960x544.png",
+      "rgbaFnv1a": "ab48eb1a",
+      "pngSha256": "0360d0ec0661c7df05898a61836a817d9e715875a992aa38da11f1d5bfe3c12b",
+      "selected": {
+        "index": 43,
+        "id": "ignibus",
+        "name": "Ignibus",
+        "description": "When threatened it retreats into its shell and cools down dramatically by venting steam. It could be mistaken for a rock.",
+        "artPath": "assets/battle/gfx/sprites/battle/ignibus-sheet.png",
+        "front": [
+          0,
+          0,
+          64,
+          64
+        ]
+      }
+    },
+    {
+      "case": "caught",
+      "width": 960,
+      "height": 544,
+      "file": "gi2a-journal-caught.960x544.png",
+      "rgbaFnv1a": "9d7eaebb",
+      "pngSha256": "0b2e9fdd25f96765793a50a1d03ef63e5328eb0f02bf12241cd008722203e201",
+      "selected": {
+        "index": 43,
+        "id": "ignibus",
+        "name": "Ignibus",
+        "description": "When threatened it retreats into its shell and cools down dramatically by venting steam. It could be mistaken for a rock.",
+        "artPath": "assets/battle/gfx/sprites/battle/ignibus-sheet.png",
+        "front": [
+          0,
+          0,
+          64,
+          64
+        ]
+      }
+    },
+    {
+      "case": "preview",
+      "width": 960,
+      "height": 544,
+      "file": "gi2a-journal.960x544.png",
+      "rgbaFnv1a": "a7fbc0c0",
+      "pngSha256": "83e3632a36bb21254ceb61d39ac1f92588412376bec03de91660b2234e0a9e3a",
+      "selected": {
+        "index": 43,
+        "id": "ignibus",
+        "name": "Ignibus",
+        "description": "When threatened it retreats into its shell and cools down dramatically by venting steam. It could be mistaken for a rock.",
+        "artPath": "assets/battle/gfx/sprites/battle/ignibus-sheet.png",
+        "front": [
+          0,
+          0,
+          64,
+          64
+        ]
+      }
+    },
+    {
+      "case": "picker",
+      "width": 960,
+      "height": 544,
+      "file": "gi2a-monster-picker.960x544.png",
+      "rgbaFnv1a": "431d458e",
+      "pngSha256": "31791e0e9aca51b2e7e092be015412dee16886f80bd5695ab77b4f687921d200",
+      "selected": {
+        "index": 43,
+        "id": "ignibus",
+        "name": "Ignibus",
+        "description": "When threatened it retreats into its shell and cools down dramatically by venting steam. It could be mistaken for a rock.",
+        "artPath": "assets/battle/gfx/sprites/battle/ignibus-sheet.png",
+        "front": [
+          0,
+          0,
+          64,
+          64
+        ]
+      }
+    },
+    {
+      "case": "nameInput",
+      "width": 960,
+      "height": 544,
+      "file": "gi2a-name-input.960x544.png",
+      "rgbaFnv1a": "af682cd8",
+      "pngSha256": "a691540bdb08b29448204a9fb6e2e7d4f0cad66100f97f4d9d82c4b0a0dd0b13",
+      "selected": {
+        "index": 43,
+        "id": "ignibus",
+        "name": "Ignibus",
+        "description": "When threatened it retreats into its shell and cools down dramatically by venting steam. It could be mistaken for a rock.",
+        "artPath": "assets/battle/gfx/sprites/battle/ignibus-sheet.png",
+        "front": [
+          0,
+          0,
+          64,
+          64
+        ]
+      }
+    }
+  ]
+}

@@ -10,21 +10,21 @@ When conversion discards a whole event, every source rule in it is Dropped.
 
 | Kind | Kinds | Uses | Native | Degraded | Placeholder | Dropped | S1 T1 baseline |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Actions | 98 | 13617 | 12322 | 628 | 19 | 648 | 6355 / 6246 (46.67% / 45.9%) |
-| Conditions | 64 | 8663 | 8173 | 2 | 1 | 487 | 4697 / 4591 (54.22% / 53.0%) |
+| Actions | 98 | 13617 | 12324 | 655 | 19 | 619 | 6355 / 6246 (46.67% / 45.9%) |
+| Conditions | 64 | 8663 | 8183 | 2 | 1 | 477 | 4707 / 4591 (54.33% / 53.0%) |
 
 The S1 acceptance baselines are 6,246 action uses (45.9%) and 4,591
 condition uses (53.0%). Only T1 source types whose disposition is Native or
 Degraded count toward them. This import records 6355
-(46.67%) and 4697
-(54.22%), respectively: -109
-action uses and -106 condition uses below the S1 baselines. The old
+(46.67%) and 4707
+(54.33%), respectively: -109
+action uses and -116 condition uses below the S1 baselines. The old
 type-table Native figure was 5,448 / 13,617 (40.0%); conversion-path accounting
-supersedes it with 12322 / 13617
+supersedes it with 12324 / 13617
 (90.5%). “Executable”
 (native + degraded + deliberate P1 placeholder) is
-95.2% for actions and
-94.4% for conditions.
+95.5% for actions and
+94.5% for conditions.
 
 Definitions:
 
@@ -167,7 +167,7 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `format_variable` | 0 | 0 | 0 | 10 | 10 |
 | Action | `get_party_monster` | 0 | 0 | 0 | 9 | 9 |
 | Action | `get_pending_moves` | 0 | 0 | 0 | 2 | 2 |
-| Action | `get_player_monster` | 0 | 0 | 0 | 17 | 17 |
+| Action | `get_player_monster` | 0 | 2 | 0 | 15 | 17 |
 | Action | `info` | 0 | 0 | 0 | 1 | 1 |
 | Action | `load_yaml` | 0 | 7 | 0 | 0 | 7 |
 | Action | `lock_controls` | 320 | 0 | 0 | 3 | 323 |
@@ -175,7 +175,7 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `modify_money` | 18 | 0 | 0 | 1 | 19 |
 | Action | `modify_monster_bond` | 0 | 0 | 0 | 1 | 1 |
 | Action | `not` | 0 | 0 | 0 | 1 | 1 |
-| Action | `open_journal` | 0 | 0 | 0 | 14 | 14 |
+| Action | `open_journal` | 0 | 14 | 0 | 0 | 14 |
 | Action | `open_shop` | 21 | 0 | 7 | 0 | 28 |
 | Action | `park_experience` | 0 | 0 | 0 | 8 | 8 |
 | Action | `pathfind` | 332 | 0 | 0 | 4 | 336 |
@@ -194,8 +194,8 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `remove_npc` | 221 | 0 | 0 | 3 | 224 |
 | Action | `remove_step_tracker` | 0 | 0 | 0 | 5 | 5 |
 | Action | `remove_tech` | 0 | 0 | 0 | 2 | 2 |
-| Action | `rename_monster` | 0 | 0 | 0 | 2 | 2 |
-| Action | `rename_player` | 0 | 0 | 0 | 5 | 5 |
+| Action | `rename_monster` | 2 | 0 | 0 | 0 | 2 |
+| Action | `rename_player` | 0 | 5 | 0 | 0 | 5 |
 | Action | `screen_transition` | 25 | 0 | 0 | 0 | 25 |
 | Action | `set_bill` | 0 | 0 | 0 | 2 | 2 |
 | Action | `set_bubble` | 16 | 0 | 0 | 0 | 16 |
@@ -215,7 +215,7 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `set_step_tracker_milestone_shown` | 0 | 0 | 0 | 3 | 3 |
 | Action | `set_teleport_faint` | 27 | 0 | 0 | 2 | 29 |
 | Action | `set_template` | 17 | 6 | 0 | 1 | 24 |
-| Action | `set_tuxepedia` | 0 | 0 | 0 | 6 | 6 |
+| Action | `set_tuxepedia` | 0 | 6 | 0 | 0 | 6 |
 | Action | `set_variable` | 698 | 0 | 0 | 17 | 715 |
 | Action | `start_battle` | 325 | 0 | 5 | 1 | 331 |
 | Action | `start_double_battle` | 8 | 0 | 0 | 0 | 8 |
@@ -242,12 +242,12 @@ census.
 | Condition | `is battle_outcome` | 227 | 0 | 0 | 3 | 230 |
 | Condition | `is battle_outcome_count` | 2 | 0 | 0 | 0 | 2 |
 | Condition | `is bill_is` | 0 | 0 | 0 | 2 | 2 |
-| Condition | `is button_pressed` | 402 | 0 | 0 | 17 | 419 |
+| Condition | `is button_pressed` | 407 | 0 | 0 | 12 | 419 |
 | Condition | `is char_at` | 1810 | 0 | 0 | 1 | 1811 |
 | Condition | `is char_defeated` | 10 | 0 | 0 | 0 | 10 |
 | Condition | `is char_exists` | 3 | 0 | 0 | 6 | 9 |
 | Condition | `is char_facing` | 999 | 0 | 0 | 9 | 1008 |
-| Condition | `is char_facing_tile` | 327 | 0 | 0 | 17 | 344 |
+| Condition | `is char_facing_tile` | 332 | 0 | 0 | 12 | 344 |
 | Condition | `is char_gender` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `is char_healed` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `is char_in` | 0 | 0 | 0 | 1 | 1 |

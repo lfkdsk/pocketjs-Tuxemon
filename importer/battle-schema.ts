@@ -126,6 +126,10 @@ export interface BattleDb {
   /** Upstream table insertion order; weighted taste generation depends on it. */
   tasteOrder: string[];
   monsters: Record<string, {
+    /** Localized display name from en_US/base.po. */
+    name: string;
+    /** Localized journal copy from <slug>_description. */
+    description: string;
     species: string;
     txmnId: number;
     shape: string;
@@ -258,6 +262,13 @@ export interface BattleRuntimeIndexEntry {
   readonly entry: string;
 }
 
+/** Compact metadata kept in the eager shell so the journal can list every
+ * imported monster without resolving every sharded detail record. */
+export interface JournalMonsterIndexEntry extends BattleRuntimeIndexEntry {
+  readonly txmnId: number;
+  readonly name: string;
+}
+
 /** GP1: the compact, bundled projection of `runtimeBattleDb()`. Carries every
  * small, always-needed table inline and replaces `monsters`/`techniques`/
  * `items`/`statuses` — together ~80% of the runtime database's bytes — with
@@ -276,7 +287,7 @@ export interface BattleRuntimeShell {
   environments: BattleDb["environments"];
   npcs: BattleDb["npcs"];
   ui: BattleDb["ui"];
-  monstersIndex: BattleRuntimeIndexEntry[];
+  monstersIndex: JournalMonsterIndexEntry[];
   techniquesIndex: BattleRuntimeIndexEntry[];
   itemsIndex: BattleRuntimeIndexEntry[];
   statusesIndex: BattleRuntimeIndexEntry[];
@@ -400,6 +411,11 @@ export function validateBattleDb(value: unknown, pakKeys?: ReadonlySet<string>):
   }
 
   for (const [slug, monster] of Object.entries(db.monsters)) {
+    assert(typeof monster.name === "string" && monster.name.length > 0, `monster ${slug} has no localized name`);
+    assert(typeof monster.description === "string" && monster.description.length > 0, `monster ${slug} has no localized description`);
+    // Upstream reserves 0 for monsters that do not yet have a numbered
+    // Tuxepedia entry; retain those rows and sort them deterministically.
+    assert(Number.isInteger(monster.txmnId) && monster.txmnId >= 0, `monster ${slug} has invalid tuxepedia id`);
     assert(monster.shape in db.shapes, `monster ${slug} references missing shape ${monster.shape}`);
     assert(monster.types.length > 0, `monster ${slug} has no element`);
     for (const type of monster.types) assert(type in db.elements, `monster ${slug} references missing element ${type}`);

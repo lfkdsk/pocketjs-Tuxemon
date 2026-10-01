@@ -62,6 +62,8 @@ import type {
 
 export const DEFAULT_MAPS = ["spyder_bedroom", "spyder_paper_scoop", "spyder_downstairs", "spyder_paper_town"];
 const PLAYER_NAME = "Red"; // mod.yaml starting_names: npc_red -> "Red"
+const TUXEMON_NAME_CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890.-! ".split("");
+const MONSTER_RENAME_NAME_VARIABLE = "tux.rename.name";
 const AREA_CELL_CAP = 64; // v1 has no event areas: expand up to this many cells
 
 export interface ImportOptions {
@@ -1134,7 +1136,7 @@ function wrap(text: string, width = 52): string[] {
 
 function format(s: string, m: TuxMap): string {
   return s
-    .replace(/\$\{\{name\}\}/g, PLAYER_NAME)
+    .replace(/\$\{\{name\}\}/g, "{name}")
     .replace(/\$\{\{NAME\}\}/g, PLAYER_NAME.toUpperCase())
     .replace(/\$\{\{currency\}\}/g, "$")
     .replace(/\$\{\{map_name\}\}/g, po.get(m.props.slug ?? m.slug) ?? m.slug)
@@ -2141,7 +2143,23 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         out.push({ op: "resumeBgm" });
         break;
       case "rename_player":
-        noteAction(a, a.type, "T2-dropped", "name entry (P1: fixed name)");
+        if (ctx.options.battle && g[0] === "player") {
+          noteAction(a, a.type, "T1-lowered", "rpgkit.nameInput; random-name button is not available");
+          out.push({
+            op: "scene",
+            id: "rpgkit.nameInput",
+            args: {
+              maxLength: 15,
+              default: "",
+              title: po.get("name") ?? "Name",
+              charset: TUXEMON_NAME_CHARSET,
+              columns: 10,
+              swallowCancel: true,
+            },
+          });
+        } else {
+          noteAction(a, a.type, "T2-dropped", "NPC rename and non-battle profiles have no name scene");
+        }
         break;
       case "set_environment":
         if (ctx.options.battle) {
@@ -2211,8 +2229,71 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
           });
         } else noteAction(a, a.type, "T3-dropped", "monster/combat subsystem (P2)");
         break;
-      case "set_monster_attribute": case "open_journal": case "access_pc":
-      case "get_player_monster": case "set_bill": case "format_variable":
+      case "set_tuxepedia":
+        if (ctx.options.battle && g[0] && g[1] && g[2]) {
+          noteAction(a, a.type, "T1-lowered", "persistent seen/caught status; repeat counters and NPC journals are not retained");
+          out.push({
+            op: "ext",
+            call: "tux.set_tuxepedia",
+            args: { character: g[0], species: g[1], status: g[2] },
+          });
+        } else noteAction(a, a.type, "T3-dropped", "monster subsystem or required arguments unavailable");
+        break;
+      case "open_journal":
+        if (ctx.options.battle && g[0]) {
+          noteAction(a, a.type, "T1-lowered", "read-only tux.journal scene with compact imported details");
+          out.push({ op: "scene", id: "tux.journal", args: { monster: g[0], reveal: true } });
+        } else noteAction(a, a.type, "T3-dropped", "monster subsystem or target unavailable");
+        break;
+      case "get_player_monster": {
+        const rename = acts[i + 1];
+        if (ctx.options.battle && g[0] && rename?.type === "rename_monster" && rename.args[0] === g[0]) {
+          const variable = varId(g[0]);
+          noteAction(a, "get_player_monster(rename)", "T1-lowered", "party picker specialized for the adjacent rename action");
+          out.push({
+            op: "scene",
+            id: "tux.monsterPicker",
+            args: { variable, title: po.get("menu_rename") ?? "Choose a Tuxemon" },
+            onDone: [
+              {
+                op: "ext",
+                call: "tux.prepare_monster_rename",
+                args: { variable, nameVariable: MONSTER_RENAME_NAME_VARIABLE },
+              },
+              {
+                op: "scene",
+                id: "rpgkit.nameInput",
+                args: {
+                  variable: MONSTER_RENAME_NAME_VARIABLE,
+                  maxLength: 15,
+                  title: po.get("name") ?? "Name",
+                  charset: TUXEMON_NAME_CHARSET,
+                  columns: 10,
+                  swallowCancel: true,
+                },
+              },
+              {
+                op: "ext",
+                call: "tux.apply_monster_rename",
+                args: { variable, nameVariable: MONSTER_RENAME_NAME_VARIABLE },
+              },
+            ],
+          });
+        } else {
+          noteAction(a, a.type, "T3-dropped", "only the adjacent rename picker form is implemented");
+        }
+        break;
+      }
+      case "rename_monster":
+        if (ctx.options.battle && g[0] && acts[i - 1]?.type === "get_player_monster"
+          && acts[i - 1]?.args[0] === g[0]) {
+          noteAction(a, a.type, "T1", "handled by the preceding party-picker scene completion");
+        } else {
+          noteAction(a, a.type, "T3-dropped", "requires an adjacent get_player_monster picker");
+        }
+        break;
+      case "set_monster_attribute": case "access_pc":
+      case "set_bill": case "format_variable":
         noteAction(a, a.type, "T3-dropped", "monster/combat subsystem (P2)");
         break;
       case "update_time":
@@ -2231,7 +2312,7 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
 
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "").slice(0, 32) || "event";
 const BLOCKING = new Set<Command["op"]>([
-  "text", "choices", "shop", "wait", "transfer", "moveRoute", "battle", "screenFade",
+  "text", "choices", "shop", "wait", "transfer", "moveRoute", "battle", "screenFade", "scene",
 ]);
 const hasBlocking = (cmds: Command[]): boolean =>
   cmds.some((c) => BLOCKING.has(c.op) || (c.op === "if" && (hasBlocking(c.then) || hasBlocking(c.else ?? []))) || (c.op === "choices"));
@@ -3062,6 +3143,7 @@ export function buildProject(
       dir: "down",
     },
     initialGold: 500,
+    playerName: PLAYER_NAME,
     sheets: [{
       id: "tux",
       pak: "placeholder",
