@@ -3,13 +3,14 @@
 // [runtime | reference | amplified difference] strip.
 
 import { existsSync, mkdirSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { createWasmUi } from "../vendor/pocket-rpgkit/vendor/pocketjs/hosts/web/wasm-ops.js";
 import { encodePNG } from "../vendor/pocket-rpgkit/vendor/pocketjs/tests/png.ts";
 import { decodePng } from "../importer/png.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
-const DIST = process.env.G5_DIST ?? "/var/tmp/fleet/task-1806/dist";
+const DIST = process.env.G5_DIST ?? join(tmpdir(), "tuxemon-g5-dist");
 const WASM = join(ROOT, "vendor/pocket-rpgkit/vendor/pocketjs/hosts/web/pocketjs.wasm");
 
 function arg(name: string, fallback = ""): string {
@@ -23,7 +24,7 @@ const frames = Number(arg("frames", "2"));
 const atParts = arg("at", "0,0").split(",").map(Number);
 const at: [number, number] = [atParts[0]!, atParts[1]!];
 const marker = arg("marker", "true") !== "false";
-const out = arg("out", `/var/tmp/fleet/task-1806/shots/${map}-${width}x${height}.png`);
+const out = arg("out", join(tmpdir(), `tuxemon-g5-shots/${map}-${width}x${height}.png`));
 const referencePath = arg("ref");
 const comparePath = arg("compare");
 

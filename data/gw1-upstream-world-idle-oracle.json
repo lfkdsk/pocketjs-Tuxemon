@@ -1611,6 +1611,6 @@
     ]
   },
   "seed": 1,
-  "source": "/var/tmp/tuxemon-src",
+  "source": "https://github.com/Tuxemon/Tuxemon@9e6258ff",
   "sourceRevision": "9e6258ff726b786040a267e8bdbbf037b560285e"
 }

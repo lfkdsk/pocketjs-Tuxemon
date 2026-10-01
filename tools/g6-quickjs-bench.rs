@@ -35,7 +35,7 @@ mod g6_quickjs_bench {
         map: String,
     }
 
-    /// One `ui/gp1-marks.ts` checkpoint (findings/GP1.md "Fix 1"): `at` is a
+    /// One `ui/gp1-marks.ts` checkpoint: `at` is a
     /// `Date.now()` epoch-ms timestamp recorded by the real production
     /// bundle's own module graph, not a synthetic probe.
     #[derive(Deserialize)]
@@ -483,8 +483,7 @@ mod g6_quickjs_bench {
     }
 
     /// Reads `globalThis.__gp1Marks` right after boot and prints the full
-    /// startup breakdown (findings/GP1.md "Fix 1"/"Fix 2",
-    /// GP1: host init, bundle compile, bundle eval split
+    /// startup breakdown: host init, bundle compile, bundle eval split
     /// into "before module-start" (solid-js + framework top-level init,
     /// invisible to the marks alone — see `gp1_eval_staged`) and the four
     /// `ui/gp1-marks.ts` stages (engine/json-literals/battle-registration/
@@ -665,8 +664,8 @@ mod g6_quickjs_bench {
         assert!(copied > 0, "benchmark must stage the sharded battle database");
     }
 
-    /// Stages the sharded animated-tile tree (`dist/animated/<mapId>.json`,
-    /// findings/GP1.md "Fix 1") the same way maps and battle shards are
+    /// Stages the sharded animated-tile tree (`dist/animated/<mapId>.json`)
+    /// the same way maps and battle shards are
     /// staged: readFileSync on desktop resolves against data.fs, so any map
     /// with animated tiles needs its shard physically present here.
     fn seed_animated(source: &Path, data_root: &Path) {
@@ -677,8 +676,8 @@ mod g6_quickjs_bench {
         assert!(copied > 0, "benchmark must stage the sharded animated-tile table");
     }
 
-    /// Stages the sharded per-NPC sprite table (`dist/npc-src/<npcId>.json`,
-    /// findings/GP1.md "Fix 1"), same reasoning as `seed_animated`.
+    /// Stages the sharded per-NPC sprite table (`dist/npc-src/<npcId>.json`),
+    /// same reasoning as `seed_animated`.
     fn seed_npc_src(source: &Path, data_root: &Path) {
         let app_data = data_root.join(BENCH_APP_ID).join("data");
         let destination = app_data.join("npc-src");
@@ -688,8 +687,8 @@ mod g6_quickjs_bench {
     }
 
     /// Stages the sharded terrain-stream ground/upper chunk-ref tables
-    /// (`dist/terrain-stream/{ground,upper}/<mapId>.json`, findings/GP1.md
-    /// "Fix 1"), same reasoning as `seed_battle`.
+    /// (`dist/terrain-stream/{ground,upper}/<mapId>.json`), same reasoning
+    /// as `seed_battle`.
     fn seed_terrain_stream(source: &Path, data_root: &Path) {
         let app_data = data_root.join(BENCH_APP_ID).join("data");
         let destination = app_data.join("terrain-stream");

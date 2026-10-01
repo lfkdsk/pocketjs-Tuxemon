@@ -26,8 +26,8 @@ const BASE = { armour: 10, dodge: 10, hp: 100, melee: 10, ranged: 10, speed: 10 
 // individual_values {armour:0 dodge:2 hp:15 melee:3 ranged:6 speed:11} and
 // tastes dry/hearty to rockitten, and {armour:7 dodge:5 hp:13 melee:13
 // ranged:2 speed:1} with bland/peppy to nut. Reproduce with:
-//   TUXEMON_SRC=/var/tmp/tuxemon-src \
-//     /var/tmp/fleet/gb2-oracle-venv/bin/python \
+// reproduce with:
+//   TUXEMON_SRC=<tuxemon-checkout> <venv>/bin/python \
 //     tools/battle-oracle/probe_scope.py
 // which printed target nut L17 AR=199 DE=101 ME=109 RD=194 SD=107 HP=195 and
 // attacker rockitten L13 AR=88 DE=146 ME=163 RD=86 SD=151 HP=115. This

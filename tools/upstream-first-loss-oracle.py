@@ -6,10 +6,10 @@ one system-font fallback and makes audio playback inert; map loading, events,
 movement, state transitions, and combat all remain the pinned upstream code.
 
 Usage:
-    TUXEMON_SRC=/var/tmp/tuxemon-src \
-      /var/tmp/fleet/gb2-oracle-venv/bin/python \
+    TUXEMON_SRC=<tuxemon-checkout> \
+      <venv>/bin/python \
       tools/upstream-first-loss-oracle.py \
-      /var/tmp/fleet/<task>/upstream-first-loss-trace.jsonl
+      upstream-first-loss-trace.jsonl
 """
 
 from __future__ import annotations
@@ -30,7 +30,7 @@ os.environ.setdefault("SDL_AUDIODRIVER", "dummy")
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent
-TUXEMON_SRC = Path(os.environ.get("TUXEMON_SRC", "/var/tmp/tuxemon-src"))
+TUXEMON_SRC = Path(os.environ.get("TUXEMON_SRC", REPO_ROOT / ".tuxemon-src"))
 EXPECTED_REVISION = "9e6258ff"
 FALLBACK_FONT = Path(
     "/usr/share/fonts/opentype/urw-base35/NimbusSans-Regular.otf"

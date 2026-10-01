@@ -548,7 +548,7 @@ if (import.meta.main) {
   const projectArg = process.argv.find((arg) => arg.startsWith("--project="));
   const outArg = process.argv.find((arg) => arg.startsWith("--out="));
   const projectPath = projectArg ? resolve(ROOT, projectArg.slice("--project=".length)) : null;
-  const outPath = resolve(ROOT, outArg?.slice("--out=".length) ?? "findings/G6-lock-report.json");
+  const outPath = resolve(ROOT, outArg?.slice("--out=".length) ?? "reports/G6-lock-report.json");
   const project = projectPath
     ? JSON.parse(readFileSync(projectPath, "utf8")) as Project
     : materializeShardedProject(ROOT);

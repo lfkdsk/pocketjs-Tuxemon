@@ -16,7 +16,7 @@ const pixel = (rgba: Uint8Array, width: number, x: number, y: number) =>
 
 test("GB3 action-menu preview is byte-stable and exposes all five decisions", () => {
   const generated = renderGb3Battle(ROOT);
-  expect(generated).toEqual(new Uint8Array(readFileSync(join(ROOT, "findings/GB3-battle.png"))));
+  expect(generated).toEqual(new Uint8Array(readFileSync(join(ROOT, "tests/goldens/GB3-battle.png"))));
   const image = decodePng(generated, "GB3-battle.png");
   expect([image.width, image.height]).toEqual([GB4_BATTLE_WIDTH, GB4_BATTLE_HEIGHT]);
   expect(pixel(image.rgba, image.width, GB3_MENU_PANEL.x + 1, GB3_MENU_PANEL.y + 1))

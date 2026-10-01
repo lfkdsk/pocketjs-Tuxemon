@@ -2,12 +2,12 @@
 set -euo pipefail
 
 root=$(cd "$(dirname "$0")/.." && pwd)
-bench_root=${G6_BENCH_ROOT:-/var/tmp/fleet/pocket-tuxemon-quickjs}
+bench_root=${G6_BENCH_ROOT:-${TMPDIR:-/tmp}/pocket-tuxemon-quickjs}
 scratch="$bench_root/quickjs-host"
 target="$bench_root/quickjs-target"
 pocketjs="$root/vendor/pocket-rpgkit/vendor/pocketjs"
 map_bundle="$bench_root/map-bundle"
-map_report=${G6_MAP_REPORT:-$root/findings/G7-map-first-visits.tsv}
+map_report=${G6_MAP_REPORT:-$root/reports/G7-map-first-visits.tsv}
 journey=${G6_JOURNEY:-$root/data/g6-journey.json}
 expected_map=${G6_EXPECTED_MAP:-spyder_route1}
 expected_state=${G6_STATE_SHA256:-5653f0110656dd4e0a930ff1908c833c9f9fc221c9cfd3a90d22b138ef8d4827}

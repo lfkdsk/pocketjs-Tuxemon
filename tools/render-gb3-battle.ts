@@ -83,7 +83,7 @@ export function renderGb3Battle(root = ROOT): Uint8Array {
 }
 
 if (import.meta.main) {
-  const output = process.argv[2] ? resolve(process.argv[2]) : join(ROOT, "findings/GB3-battle.png");
+  const output = process.argv[2] ? resolve(process.argv[2]) : join(ROOT, "tests/goldens/GB3-battle.png");
   mkdirSync(dirname(output), { recursive: true });
   const png = renderGb3Battle(ROOT);
   writeFileSync(output, png);

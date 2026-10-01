@@ -20,6 +20,7 @@ import os
 import zlib
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
+from pathlib import Path
 
 import numpy as np
 from PIL import Image
@@ -204,7 +205,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("map_ids", nargs="+")
     parser.add_argument("--out", required=True)
-    parser.add_argument("--src", default=os.environ.get("TUXEMON_SRC", "/var/tmp/tuxemon-src"))
+    parser.add_argument("--src", default=os.environ.get("TUXEMON_SRC", str(Path(__file__).resolve().parents[1] / ".tuxemon-src")))
     args = parser.parse_args()
     os.makedirs(args.out, exist_ok=True)
     report: dict[str, dict[str, int | str]] = {}

@@ -102,6 +102,11 @@ bun run web             # build the web version into dist/web
 bun test                # tests (build first for the pixel replays)
 ```
 
+The importer reads the Tuxemon source from the repo-local `.tuxemon-src`
+checkout that `bun run fetch:tuxemon` creates. To reuse an existing Tuxemon
+checkout instead, set `TUXEMON_SRC` to its path (e.g.
+`TUXEMON_SRC=/path/to/Tuxemon bun run import`).
+
 ## License
 
 Tuxemon's code is GPL-3.0-or-later and its art CC BY-SA; this port and

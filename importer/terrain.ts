@@ -13,7 +13,7 @@ import {
   rmSync,
   writeFileSync,
 } from "node:fs";
-import { dirname, join, normalize } from "node:path";
+import { dirname, join, normalize, resolve } from "node:path";
 import { gunzipSync, gzipSync, inflateSync } from "node:zlib";
 import { blitTile } from "../vendor/pocket-rpgkit/tools/lib/chunks.ts";
 import {
@@ -34,7 +34,9 @@ import { child, children, parseXml, type XmlNode } from "./xml.ts";
 export const TILE_PX = 16;
 export const TERRAIN_SHEET_ID = "tuxemon-passage";
 export const TERRAIN_FORMAT = "tuxemon-terrain/v1";
-export const DEFAULT_TUXEMON_SRC = "/var/tmp/tuxemon-src";
+// Defaults to the repo-local checkout created by tools/fetch-tuxemon.sh;
+// set TUXEMON_SRC to point at an existing Tuxemon checkout instead.
+export const DEFAULT_TUXEMON_SRC = resolve(import.meta.dir, "../.tuxemon-src");
 
 const FLIP_H = 0x8000_0000;
 const FLIP_V = 0x4000_0000;

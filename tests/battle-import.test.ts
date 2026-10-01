@@ -1,5 +1,6 @@
 import { afterAll, describe, expect, test } from "bun:test";
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { battleArtifactPaths, runtimeBattleDb, writeBattleArtifacts } from "../importer/battle.ts";
 import { collectBattleArtRefs, validateBattleDb, type BattleDb } from "../importer/battle-schema.ts";
@@ -152,7 +153,7 @@ describe("GB1 battle database", () => {
 
   test("renders a byte-stable battle acceptance sheet with semantic pixels", () => {
     const generated = renderBattlePreview(ROOT);
-    const committed = new Uint8Array(readFileSync(join(ROOT, "findings/GB1-preview.png")));
+    const committed = new Uint8Array(readFileSync(join(ROOT, "tests/goldens/GB1-preview.png")));
     expect(generated).toEqual(committed);
     const preview = decodePng(generated, "GB1-preview.png");
     expect([preview.width, preview.height]).toEqual([BATTLE_PREVIEW_WIDTH, BATTLE_PREVIEW_HEIGHT]);
@@ -189,7 +190,7 @@ describe("GB1 battle database", () => {
   });
 });
 
-const scratchParent = "/var/tmp/fleet/1867";
+const scratchParent = join(tmpdir(), "pocket-tuxemon-gb1-full-test");
 mkdirSync(scratchParent, { recursive: true });
 const fullRoot = mkdtempSync(join(scratchParent, "gb1-full-test-"));
 afterAll(() => rmSync(fullRoot, { recursive: true, force: true }));

@@ -1,5 +1,4 @@
-// Stage-boundary wrapper for the QuickJS startup bench (findings/GP1.md
-// "Fix 1"): re-exports every bundled JSON literal / data module main.tsx
+// Stage-boundary wrapper for the QuickJS startup bench: re-exports every bundled JSON literal / data module main.tsx
 // needs — project-shell.json, ui/game-assets.ts, ui/battle-assets.ts,
 // battle/production.ts (which itself imports dist/battle-runtime-shell.json)
 // and ui/battle-scene.tsx — then marks "json-literals" as its own trailing

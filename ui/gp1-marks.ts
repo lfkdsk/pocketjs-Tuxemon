@@ -1,5 +1,4 @@
-// Startup-stage checkpoints for tools/bench-g6-quickjs.sh (findings/GP1.md
-// "Fix 1"). Bun bundles main.tsx's static dependency graph so that every
+// Startup-stage checkpoints for tools/bench-g6-quickjs.sh. Bun bundles main.tsx's static dependency graph so that every
 // module a wrapper imports finishes evaluating before that wrapper's own
 // trailing statement runs — pushing one mark at the end of a thin,
 // game-owned wrapper module (ui/gp1-kit-stage.ts, ui/gp1-data-stage.ts)

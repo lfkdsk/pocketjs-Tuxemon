@@ -1,5 +1,4 @@
-// Stage-boundary wrapper for the QuickJS startup bench (findings/GP1.md
-// "Fix 1"): re-exports the PocketJS framework entry points and the RPG
+// Stage-boundary wrapper for the QuickJS startup bench: re-exports the PocketJS framework entry points and the RPG
 // Kit UI pieces main.tsx needs, then marks "engine" as its own trailing
 // top-level statement. Because this wrapper's imports are its only
 // dependencies, that mark fires exactly when the framework + kit UI

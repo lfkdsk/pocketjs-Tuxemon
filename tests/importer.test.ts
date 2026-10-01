@@ -2,6 +2,7 @@ import { expect, test } from "bun:test";
 import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { mkdirSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import {
   availableMapIds,
@@ -720,7 +721,7 @@ test("simultaneously eligible route1 automatic events run concurrently and relea
 test("Spyder first-fight win and loss complete identically at 60, 30, 20, and 4 Hz", () => {
   const maintainedProject = resolve(ROOT, "dist/project.json");
   const before = readFileSync(maintainedProject);
-  const scratchParent = resolve(process.env.G6_SCRATCH_ROOT ?? "/var/tmp/fleet/pocket-tuxemon");
+  const scratchParent = resolve(process.env.G6_SCRATCH_ROOT ?? join(tmpdir(), "pocket-tuxemon"));
   mkdirSync(scratchParent, { recursive: true });
   const isolatedRoot = mkdtempSync(join(scratchParent, "g6-hz-"));
   const transcripts: string[] = [];

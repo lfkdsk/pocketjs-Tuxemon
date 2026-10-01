@@ -7,9 +7,8 @@ target has an active armour +1 / speed -1 stage, to confirm ScopeEffect reads
 base_stats and ignores stage modifiers (scope.py:40-47, monster.py:350-372).
 
 Run from the repo root:
-    TUXEMON_SRC=/var/tmp/tuxemon-src \
-      /var/tmp/fleet/gb2-oracle-venv/bin/python \
-      tools/battle-oracle/probe_scope.py
+    TUXEMON_SRC=<tuxemon-checkout> <venv>/bin/python \
+        tools/battle-oracle/probe_scope.py
 """
 
 from __future__ import annotations

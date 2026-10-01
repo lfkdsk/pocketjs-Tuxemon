@@ -3,11 +3,12 @@
 
 import { createHash } from "node:crypto";
 import { mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { join, relative, resolve } from "node:path";
 import { writeTerrain } from "../importer/terrain.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
-const SCRATCH = "/var/tmp/fleet/task-1806/determinism";
+const SCRATCH = join(tmpdir(), "tuxemon-terrain-determinism");
 const FIRST = join(SCRATCH, "first");
 const SECOND = join(SCRATCH, "second");
 
@@ -55,6 +56,6 @@ const report = {
   aggregateSha256: first.sha256,
   identical: true,
 };
-writeFileSync(join(ROOT, "findings/G5-determinism-report.json"), JSON.stringify(report, null, 2) + "\n");
+writeFileSync(join(ROOT, "reports/G5-determinism-report.json"), JSON.stringify(report, null, 2) + "\n");
 rmSync(SCRATCH, { recursive: true, force: true });
 console.log(JSON.stringify(report));

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 root=$(cd "$(dirname "$0")/.." && pwd)
-bench_root="${BATTLE_BENCH_ROOT:-/var/tmp/fleet/pocket-tuxemon/battle-bench}"
+bench_root="${BATTLE_BENCH_ROOT:-${TMPDIR:-/tmp}/pocket-tuxemon-battle-bench}"
 scratch="$bench_root/quickjs-battle-host"
 target="$bench_root/quickjs-battle-target"
 pocketjs="$root/vendor/pocket-rpgkit/vendor/pocketjs"

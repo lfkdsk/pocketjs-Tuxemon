@@ -5,7 +5,7 @@
 set -euo pipefail
 
 root=$(cd "$(dirname "$0")/.." && pwd)
-bench_root=${C1_BENCH_ROOT:-/var/tmp/fleet/pocket-tuxemon-c1-readpath}
+bench_root=${C1_BENCH_ROOT:-${TMPDIR:-/tmp}/pocket-tuxemon-c1-readpath}
 export PATH="$HOME/.cargo/bin:$PATH"
 scratch="$bench_root/quickjs-host"
 target="$bench_root/quickjs-target"

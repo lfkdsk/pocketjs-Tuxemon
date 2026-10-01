@@ -133,8 +133,8 @@ mod terrain_quickjs_bench {
         let height = env_u32("G5_BENCH_H", 272);
         let repetitions = env_u32("G5_BENCH_REPS", 3) as usize;
         let stable_frames = env_u32("G5_BENCH_STABLE", 600) as usize;
-        let data = PathBuf::from(format!(
-            "/var/tmp/fleet/task-1806/quickjs-data-{}",
+        let data = std::env::temp_dir().join(format!(
+            "tuxemon-terrain-quickjs-data-{}",
             std::process::id()
         ));
         let args = Args {

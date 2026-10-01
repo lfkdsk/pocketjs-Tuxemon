@@ -24,7 +24,7 @@ import { applyTerrain, writeTerrain } from "./importer/terrain.ts";
 const ROOT = resolve(process.env.G6_OUTPUT_ROOT ?? import.meta.dir);
 const DIST = join(ROOT, "dist");
 mkdirSync(DIST, { recursive: true });
-mkdirSync(join(ROOT, "findings"), { recursive: true });
+mkdirSync(join(ROOT, "reports"), { recursive: true });
 
 const terrain = writeTerrain({ outputRoot: ROOT });
 const imported = buildProject(availableMapIds(), G6_IMPORT_OPTIONS);
@@ -189,7 +189,7 @@ assertShellManifestFresh(JSON.parse(readFileSync(join(DIST, "project-shell.json"
 writeFileSync(join(DIST, "variable-enums.json"), jsonBytes(imported.variables));
 writeFileSync(join(DIST, "world-index.json"), jsonBytes(imported.worldIndex));
 writeFileSync(join(DIST, "import-report.json"), jsonBytes(imported.report));
-writeFileSync(join(ROOT, "findings/G1-coverage.md"), coverageMarkdown(imported.report));
+writeFileSync(join(ROOT, "reports/G1-coverage.md"), coverageMarkdown(imported.report));
 
 function gameAssetsSource(
   player: PlayerFrames,

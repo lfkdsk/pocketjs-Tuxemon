@@ -1,7 +1,6 @@
-// GP1 fix 1: GameAssets.animated used to bundle every map's animated-tile
-// placements as one eager object literal — 5,785 placements across 48 maps,
-// and (per findings/GP1.md "Fix 1") the single largest input in the desktop
-// bundle at ui/game-assets.ts. AnimatedTiles/OccludingUpperLayer only ever
+// GameAssets.animated used to bundle every map's animated-tile placements as
+// one eager object literal — 5,785 placements across 48 maps, the single
+// largest input in the desktop bundle at ui/game-assets.ts. AnimatedTiles/OccludingUpperLayer only ever
 // read `tiles[mapId]` for the currently-loaded map (one keyed property get,
 // never an enumeration), so this splits the table the same way
 // splitBattleRuntimeDb splits species/techniques: one canonical entry per

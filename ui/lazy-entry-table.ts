@@ -1,4 +1,4 @@
-// Shared Proxy-backed lazy table (findings/GP1.md "Fix 1"): resolves and
+// Shared Proxy-backed lazy table: resolves and
 // caches exactly the keys read through it from a pak/data.fs entry, at zero
 // parse cost for `has`/`in` and `Reflect.ownKeys`. Used by
 // ui/animated-repository.ts and ui/npc-src-repository.ts, which both split a

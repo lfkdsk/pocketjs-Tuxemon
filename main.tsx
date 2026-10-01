@@ -27,8 +27,8 @@ import { createAnimatedProvider } from "./ui/animated-repository.ts";
 import { createNpcSrcProvider } from "./ui/npc-src-repository.ts";
 import { createTerrainStreamProvider } from "./ui/terrain-stream-repository.ts";
 
-// ui/gp1-kit-stage.ts and ui/gp1-data-stage.ts are thin re-export wrappers
-// (findings/GP1.md "Fix 1"): each one's trailing gp1Mark() call fires right
+// ui/gp1-kit-stage.ts and ui/gp1-data-stage.ts are thin re-export wrappers:
+// each one's trailing gp1Mark() call fires right
 // after everything it imports has finished evaluating, so
 // tools/bench-g6-quickjs.sh can read globalThis.__gp1Marks after boot and
 // report which startup stage — engine/kit bundle, JSON literals/module

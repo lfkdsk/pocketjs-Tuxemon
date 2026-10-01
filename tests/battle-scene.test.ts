@@ -31,7 +31,7 @@ test("battle layout scales exactly at both target resolutions", () => {
 
 test("battle preview is byte-stable and HP fill pixels stop at the computed width", () => {
   const generated = renderGb4Battle(ROOT);
-  expect(generated).toEqual(new Uint8Array(readFileSync(join(ROOT, "findings/GB4-battle.png"))));
+  expect(generated).toEqual(new Uint8Array(readFileSync(join(ROOT, "tests/goldens/GB4-battle.png"))));
   const image = decodePng(generated, "GB4-battle.png");
   expect([image.width, image.height]).toEqual([GB4_BATTLE_WIDTH, GB4_BATTLE_HEIGHT]);
   for (const [bar, hp] of [[GB4_PLAYER_BAR, GB4_PLAYER_HP], [GB4_ENEMY_BAR, GB4_ENEMY_HP]] as const) {

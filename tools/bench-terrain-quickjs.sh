@@ -2,9 +2,10 @@
 set -euo pipefail
 
 root=$(cd "$(dirname "$0")/.." && pwd)
-scratch=/var/tmp/fleet/task-1806/quickjs-host
-target=/var/tmp/fleet/task-1806/quickjs-target
-dist=${G5_DIST:-/var/tmp/fleet/task-1806/dist}
+bench_root=${TERRAIN_BENCH_ROOT:-${TMPDIR:-/tmp}/pocket-tuxemon-terrain-bench}
+scratch="$bench_root/quickjs-host"
+target="$bench_root/quickjs-target"
+dist=${G5_DIST:-$bench_root/dist}
 pocketjs="$root/vendor/pocket-rpgkit/vendor/pocketjs"
 
 rm -rf "$scratch"

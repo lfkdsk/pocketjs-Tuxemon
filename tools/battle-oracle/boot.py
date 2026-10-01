@@ -11,6 +11,7 @@ import logging
 import os
 import random as _random
 import sys
+from pathlib import Path
 
 MASK = 0xFFFFFFFF
 
@@ -99,7 +100,9 @@ _random.sample = _sample
 
 os.environ.setdefault("SDL_VIDEODRIVER", "dummy")
 os.environ.setdefault("SDL_AUDIODRIVER", "dummy")
-TUXEMON_SRC = os.environ.get("TUXEMON_SRC", "/var/tmp/tuxemon-src")
+TUXEMON_SRC = os.environ.get(
+    "TUXEMON_SRC", str(Path(__file__).resolve().parents[2] / ".tuxemon-src")
+)
 sys.path.insert(0, TUXEMON_SRC)
 os.chdir(TUXEMON_SRC)
 logging.disable(logging.CRITICAL)

@@ -124,7 +124,7 @@ export function renderBattlePreview(root = ROOT): Uint8Array {
 }
 
 if (import.meta.main) {
-  const output = process.argv[2] ? resolve(process.argv[2]) : join(ROOT, "findings/GB1-preview.png");
+  const output = process.argv[2] ? resolve(process.argv[2]) : join(ROOT, "tests/goldens/GB1-preview.png");
   mkdirSync(dirname(output), { recursive: true });
   const png = renderBattlePreview(ROOT);
   writeFileSync(output, png);

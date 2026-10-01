@@ -133,7 +133,7 @@ export function renderGb4Battle(root = ROOT): Uint8Array {
 }
 
 if (import.meta.main) {
-  const output = process.argv[2] ? resolve(process.argv[2]) : join(ROOT, "findings/GB4-battle.png");
+  const output = process.argv[2] ? resolve(process.argv[2]) : join(ROOT, "tests/goldens/GB4-battle.png");
   mkdirSync(dirname(output), { recursive: true });
   const png = renderGb4Battle(ROOT);
   writeFileSync(output, png);

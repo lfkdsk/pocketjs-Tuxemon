@@ -214,7 +214,7 @@ export function writeImport(
     variables: resolve(outDir, "variable-enums.json"),
     world: resolve(outDir, "world-index.json"),
     report: resolve(outDir, "import-report.json"),
-    coverage: resolve(import.meta.dir, "../findings/G1-coverage.md"),
+    coverage: resolve(import.meta.dir, "../reports/G1-coverage.md"),
   };
   writeFileSync(paths.project, jsonBytes(result.project));
   writeFileSync(paths.variables, jsonBytes(result.variables));

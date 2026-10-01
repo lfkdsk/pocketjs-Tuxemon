@@ -4,6 +4,7 @@
 
 import { createHash } from "node:crypto";
 import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { join, relative, resolve } from "node:path";
 
 const ROOT = resolve(import.meta.dir, "..");
@@ -30,7 +31,7 @@ const GENERATED = [
   "dist/import-report.json",
   "dist/variable-enums.json",
   "dist/world-index.json",
-  "findings/G1-coverage.md",
+  "reports/G1-coverage.md",
   "images.json",
   "pak.json",
   "sprites.json",
@@ -87,7 +88,7 @@ function generate(outputRoot: string): void {
   if (proc.exitCode !== 0) throw new Error(`G6 determinism: generator exited ${proc.exitCode}`);
 }
 
-const scratchParent = resolve(process.env.G6_SCRATCH_ROOT ?? "/var/tmp/fleet/pocket-tuxemon");
+const scratchParent = resolve(process.env.G6_SCRATCH_ROOT ?? join(tmpdir(), "pocket-tuxemon"));
 mkdirSync(scratchParent, { recursive: true });
 const firstRoot = mkdtempSync(join(scratchParent, "g6-determinism-a-"));
 const secondRoot = mkdtempSync(join(scratchParent, "g6-determinism-b-"));

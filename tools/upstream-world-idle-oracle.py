@@ -528,7 +528,7 @@ def main() -> None:
     ]
     result = {
         "format": "tuxemon-upstream-world-idle-oracle/v1",
-        "source": str(SUPPORT.TUXEMON_SRC),
+        "source": f"https://github.com/Tuxemon/Tuxemon@{EXPECTED_REVISION}",
         "sourceRevision": source_revision,
         "seed": 1,
         "hz": 60,

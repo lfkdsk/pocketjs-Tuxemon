@@ -20,7 +20,11 @@ from pathlib import Path
 
 import yaml
 
-TUXEMON_SRC = Path(os.environ.get("TUXEMON_SRC", "/var/tmp/tuxemon-src"))
+TUXEMON_SRC = Path(
+    os.environ.get(
+        "TUXEMON_SRC", Path(__file__).resolve().parents[2] / ".tuxemon-src"
+    )
+)
 MAPS = TUXEMON_SRC / "mods" / "tuxemon" / "maps"
 
 

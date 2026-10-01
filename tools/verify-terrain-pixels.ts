@@ -1,15 +1,17 @@
 // Run the six-map/two-viewport G5 pixel matrix against references written by
-// tools/terrain-reference.py.  Runtime shots stay in /var/tmp; committed
-// comparison strips and the machine-readable report go below findings/.
+// tools/terrain-reference.py. References and runtime shots live outside the
+// repo (override with G5_REFERENCE / G5_RUNTIME_SHOTS); the comparison strips
+// and the machine-readable report go below reports/.
 
 import { mkdirSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 
 const ROOT = resolve(import.meta.dir, "..");
-const REFERENCE = process.env.G5_REFERENCE ?? "/var/tmp/fleet/task-1806/g5-reference";
-const RUNTIME = process.env.G5_RUNTIME_SHOTS ?? "/var/tmp/fleet/task-1806/runtime-shots";
-const COMPARE = join(ROOT, "findings/G5-shots");
-const REPORT = join(ROOT, "findings/G5-pixel-report.json");
+const REFERENCE = process.env.G5_REFERENCE ?? join(tmpdir(), "tuxemon-g5-reference");
+const RUNTIME = process.env.G5_RUNTIME_SHOTS ?? join(tmpdir(), "tuxemon-g5-runtime-shots");
+const COMPARE = join(ROOT, "reports/G5-shots");
+const REPORT = join(ROOT, "reports/G5-pixel-report.json");
 
 const cases = [
   { map: "taba_house1", at: [64, 48] },

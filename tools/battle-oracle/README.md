@@ -8,11 +8,13 @@ database and gzip trace; Python and pygame are generation-time dependencies.
 ## Python environment
 
 Use Tuxemon commit `9e6258ff` and Python 3.10 or newer. The default source
-location is `/var/tmp/tuxemon-src`; set `TUXEMON_SRC` to override it.
+location is the repo-local `.tuxemon-src` checkout created by
+`tools/fetch-tuxemon.sh`; set `TUXEMON_SRC` to point at an existing checkout
+instead.
 
 ```sh
-python3 -m venv /var/tmp/fleet/gb2-oracle-venv
-/var/tmp/fleet/gb2-oracle-venv/bin/pip install -r /var/tmp/tuxemon-src/requirements.txt
+python3 -m venv .venv
+.venv/bin/pip install -r .tuxemon-src/requirements.txt
 ```
 
 The pinned source requirements include pygame-ce, pydantic, and PyYAML. SDL's
@@ -24,14 +26,14 @@ device is needed.
 Run these commands from the repository root:
 
 ```sh
-mkdir -p /var/tmp/fleet/gb2-oracle
-/var/tmp/fleet/gb2-oracle-venv/bin/python tools/battle-oracle/extract_spyder_parties.py tools/battle-oracle/spyder-parties.json
-TUXEMON_SRC=/var/tmp/tuxemon-src /var/tmp/fleet/gb2-oracle-venv/bin/python tools/battle-oracle/export_data.py tools/battle-oracle/tuxemon-battle.json
-TUXEMON_SRC=/var/tmp/tuxemon-src /var/tmp/fleet/gb2-oracle-venv/bin/python tools/battle-oracle/generate_spyder.py tools/battle-oracle/spyder-parties.json tests/goldens/gb2-spyder-traces.ndjson.gz 20
-TUXEMON_SRC=/var/tmp/tuxemon-src /var/tmp/fleet/gb2-oracle-venv/bin/python tools/battle-oracle/generate_spawn.py data/battle-db.json tests/goldens/gb4-monster-spawns.json.gz
-TUXEMON_SRC=/var/tmp/tuxemon-src /var/tmp/fleet/gb2-oracle-venv/bin/python tools/battle-oracle/generate_gb3.py tests/goldens/gb3-rules.json.gz
-TUXEMON_SRC=/var/tmp/tuxemon-src /var/tmp/fleet/gb2-oracle-venv/bin/python tools/battle-oracle/generate_gb3_progression.py data/battle-db.json tests/goldens/gb3-progression.json.gz
-TUXEMON_SRC=/var/tmp/tuxemon-src /var/tmp/fleet/gb2-oracle-venv/bin/python tools/battle-oracle/generate_gb3_double.py tools/battle-oracle/spyder-parties.json tests/goldens/gb3-double-traces.ndjson.gz
+mkdir -p reports/oracle
+.venv/bin/python tools/battle-oracle/extract_spyder_parties.py tools/battle-oracle/spyder-parties.json
+TUXEMON_SRC=.tuxemon-src .venv/bin/python tools/battle-oracle/export_data.py tools/battle-oracle/tuxemon-battle.json
+TUXEMON_SRC=.tuxemon-src .venv/bin/python tools/battle-oracle/generate_spyder.py tools/battle-oracle/spyder-parties.json tests/goldens/gb2-spyder-traces.ndjson.gz 20
+TUXEMON_SRC=.tuxemon-src .venv/bin/python tools/battle-oracle/generate_spawn.py data/battle-db.json tests/goldens/gb4-monster-spawns.json.gz
+TUXEMON_SRC=.tuxemon-src .venv/bin/python tools/battle-oracle/generate_gb3.py tests/goldens/gb3-rules.json.gz
+TUXEMON_SRC=.tuxemon-src .venv/bin/python tools/battle-oracle/generate_gb3_progression.py data/battle-db.json tests/goldens/gb3-progression.json.gz
+TUXEMON_SRC=.tuxemon-src .venv/bin/python tools/battle-oracle/generate_gb3_double.py tools/battle-oracle/spyder-parties.json tests/goldens/gb3-double-traces.ndjson.gz
 bun tools/battle-oracle/compare-golden.ts tests/goldens/gb2-spyder-traces.ndjson.gz tools/battle-oracle/tuxemon-battle.json
 ```
 
@@ -70,7 +72,7 @@ two-opponent spread hits, whose per-target damage includes upstream's 0.75
 modifier.
 
 To verify determinism without replacing committed files, generate twice under
-`/var/tmp/fleet/gb2-oracle` and compare them with `cmp`. To run the checked-in
+`reports/oracle/` and compare them with `cmp`. To run the checked-in
 corpus without Python:
 
 ```sh
@@ -85,7 +87,7 @@ evaluate it in PocketJS's bare QuickJS `Guest` with a host-provided
 `globalThis.__benchNow()` monotonic clock:
 
 ```sh
-bun build tools/battle-oracle/bench-entry.ts --target=browser --format=iife --minify --outfile=/var/tmp/fleet/gb2-oracle/battle-bench.js
+bun build tools/battle-oracle/bench-entry.ts --target=browser --format=iife --minify --outfile=reports/oracle/battle-bench.js
 ```
 
 It reports round-settlement, active-frame, and complete-battle mean/p95/max

@@ -18,6 +18,7 @@ import struct
 import xml.etree.ElementTree as ET
 import zlib
 from dataclasses import dataclass
+from pathlib import Path
 
 import yaml
 
@@ -312,9 +313,9 @@ def verify_map(source_root: str, patch: dict, sheet: dict) -> dict[str, int]:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("map_ids", nargs="*", default=DEFAULT_MAPS)
-    parser.add_argument("--src", default=os.environ.get("TUXEMON_SRC", "/var/tmp/tuxemon-src"))
+    parser.add_argument("--src", default=os.environ.get("TUXEMON_SRC", str(Path(__file__).resolve().parents[1] / ".tuxemon-src")))
     parser.add_argument("--terrain", default="data/terrain.json")
-    parser.add_argument("--out", default="findings/G5-collision-report.json")
+    parser.add_argument("--out", default="reports/G5-collision-report.json")
     parser.add_argument("--all", action="store_true", help="verify every map in the terrain fragment")
     args = parser.parse_args()
     terrain = json.load(open(args.terrain, encoding="utf-8"))
