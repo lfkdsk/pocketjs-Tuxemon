@@ -25,6 +25,9 @@ import { join, resolve } from "node:path";
 
 import { tuxemonExtensionState } from "../battle/extension.ts";
 import { TUXEMON_BATTLE_DB, TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS } from "../battle/game.ts";
+// Thumbnails boot the built game at the same fixed 09:00 as the reducer
+// replay; without it the daylight tint follows the machine's wall clock.
+import { FIXED_TIME_HOST_GLOBALS } from "../battle/time-weather.ts";
 import { bootWorld } from "../vendor/pocket-rpgkit/vendor/pocketjs/hosts/sim/sim.ts";
 import { encodePNG } from "../vendor/pocket-rpgkit/vendor/pocketjs/tests/png.ts";
 import {
@@ -441,7 +444,7 @@ async function renderThumbnails(combined: readonly number[], captures: Map<strin
   // intro text are visible; the snapshot still belongs to frame 0.
   const first = ordered[0]!;
   if (first.frame === 0) {
-    const world = await bootWorld(BUNDLE, 60, undefined, undefined, { width: THUMB_W, height: THUMB_H });
+    const world = await bootWorld(BUNDLE, 60, FIXED_TIME_HOST_GLOBALS, undefined, { width: THUMB_W, height: THUMB_H });
     for (let i = 0; i < first.thumbnailIdle; i++) {
       world.frame(0);
       world.tick();
@@ -449,7 +452,7 @@ async function renderThumbnails(combined: readonly number[], captures: Map<strin
     capture(world, 0);
   }
 
-  const world = await bootWorld(BUNDLE, 60, undefined, undefined, { width: THUMB_W, height: THUMB_H });
+  const world = await bootWorld(BUNDLE, 60, FIXED_TIME_HOST_GLOBALS, undefined, { width: THUMB_W, height: THUMB_H });
   for (let frame = 1; frame <= combined.length && next < ordered.length; frame++) {
     world.frame(combined[frame - 1]!);
     world.tick();
