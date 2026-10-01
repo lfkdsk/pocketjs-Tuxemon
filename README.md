@@ -24,16 +24,18 @@ summary:
   NPC walkers, dialogue, cutscene routes and map transfers. The Spyder
   campaign plays from the bedroom through Paper Town, Cotton Town, City Park,
   the north end of Route 3, Route 4 and Flower City to the Captain's return
-  in the Mansion — 122,145 frames at 60 Hz for the full mainline, driven by
+  in the Mansion and on through Candy Town to the hospital cure — 172,060
+  frames at 60 Hz for the full mainline, driven by
   deterministic autoplay tapes — and every imported input lock is executed
   to its unlock.
 - **Battles (P2, complete):** the battle database and 578 battle
   textures are imported from Tuxemon's YAML, and `battle/` is a pure
   reducer whose results match Tuxemon's own Python engine on 8,560 recorded
   battles; monsters spawn draw-for-draw like Tuxemon's. The mainline is
-  played for real end to end: the autoplay tapes fight 117 real battles
-  (100 on the Route 3 mainline — 22 trainer + 78 wild — and 17 on the
-  Captain-return continuation — 10 trainer + 7 wild), and every trainer
+  played for real end to end: the autoplay tapes fight 173 real battles
+  (100 on the Route 3 mainline — 22 trainer + 78 wild — 17 on the
+  Captain-return continuation — 10 trainer + 7 wild — and 56 on the way to
+  the hospital cure — 50 trainer + 6 wild), and every trainer
   battle enters Battle Processing and ends `won` with its `battle_outcome`
   written back. The frozen 30-minute 60 Hz tape (109,983 frames / 30 min 33 s)
   replays byte-identical at 60, 30 and 20 Hz, and both failure paths are

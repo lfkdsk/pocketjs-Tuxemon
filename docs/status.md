@@ -98,7 +98,7 @@ Per-action numbers come from the import coverage report,
 | --- | --- | --- |
 | Bedroom → end of Route 3 | Done | 109,983 frames, 100 real battles. Replays byte-identical at 60, 30 and 20 Hz (`verify:gb6:mainline`) |
 | Route 3 → Captain's return | Done | Continues to 122,145 frames in total, with 17 more battles (`verify:j1:mainline`) |
-| Captain's return → hospital cure | Planned | In review |
+| Captain's return → hospital cure | Done | Continues to 172,060 frames in total, with 56 more battles (50 trainer, 6 wild), ending with the hospital cure in Candy Town (`verify:j2:mainline`) |
 
 ## Platforms and performance
 

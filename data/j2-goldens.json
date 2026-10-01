@@ -1,0 +1,334 @@
+{
+  "format": "pocket-tuxemon/j2-goldens/v1",
+  "baseFrames": 122145,
+  "segmentTapeSha256": "91f5a9091acfe42672975d094e65807eed2c85a7955d35698a156cdeb2eb126d",
+  "combinedTapeSha256": "8df62ff187a551eeedd4da504103555add983711dc9224df334070a39e24b062",
+  "frames": [
+    {
+      "name": "aardant-acquired",
+      "frame": 48537,
+      "mergedFrame": 170682,
+      "map": "spyder_greenwash",
+      "position": [
+        7,
+        31
+      ],
+      "width": 480,
+      "height": 272,
+      "file": "j2-aardant-acquired.480x272.png",
+      "rgbaFnv1a": "83179cdc",
+      "pngSha256": "993011d973caf514c665990a04df8f6866a8b04bd72bc3862111e410fcc2ec51",
+      "camera": [
+        0,
+        240
+      ],
+      "story": {
+        "captainReturns": 1,
+        "dojoMagician": 1,
+        "dojoThriMonster": 1,
+        "nimrodTruWon": true,
+        "seenTimber": 1,
+        "scoopLandrace": 1,
+        "seenCandy": 1,
+        "lootenWon": true,
+        "aardant": 1,
+        "passcodeColorReset": 0,
+        "passcodeNumberReset": 0,
+        "screenDown": 0,
+        "hospitalCure": 0,
+        "hospitalBillie": 0
+      },
+      "player": {
+        "tile": [
+          7,
+          31
+        ],
+        "pixel": [
+          112,
+          496
+        ],
+        "facing": 2,
+        "phase": 0,
+        "image": "assets/characters/player-adventurer-idle-2.png",
+        "height": 32
+      },
+      "actor": {
+        "id": "npc_spyder_greenwash_looten",
+        "tile": [
+          7,
+          30
+        ],
+        "pixel": [
+          112,
+          480
+        ],
+        "facing": 0,
+        "phase": 0,
+        "sprite": "npc.goth",
+        "image": "assets/characters/npc-npc-goth-idle-0.png",
+        "height": 32
+      }
+    },
+    {
+      "name": "hospital-password",
+      "frame": 49116,
+      "mergedFrame": 171261,
+      "map": "spyder_candy_hospital2",
+      "position": [
+        11,
+        15
+      ],
+      "width": 480,
+      "height": 272,
+      "file": "j2-hospital-password.480x272.png",
+      "rgbaFnv1a": "1141e2dd",
+      "pngSha256": "35affdfdff70eea2f9f11646c7da24dbff604b0761a2886afe055b25f61af7b6",
+      "camera": [
+        0,
+        48
+      ],
+      "story": {
+        "captainReturns": 1,
+        "dojoMagician": 1,
+        "dojoThriMonster": 1,
+        "nimrodTruWon": true,
+        "seenTimber": 1,
+        "scoopLandrace": 1,
+        "seenCandy": 1,
+        "lootenWon": true,
+        "aardant": 1,
+        "passcodeColorReset": 0,
+        "passcodeNumberReset": 0,
+        "screenDown": 0,
+        "hospitalCure": 0,
+        "hospitalBillie": 0
+      },
+      "player": {
+        "tile": [
+          11,
+          15
+        ],
+        "pixel": [
+          176,
+          240
+        ],
+        "facing": 2,
+        "phase": 0,
+        "image": "assets/characters/player-adventurer-idle-2.png",
+        "height": 32
+      }
+    },
+    {
+      "name": "hospital-cure",
+      "frame": 49914,
+      "mergedFrame": 172059,
+      "map": "spyder_candy_hospital3",
+      "position": [
+        5,
+        7
+      ],
+      "width": 480,
+      "height": 272,
+      "file": "j2-hospital-cure.480x272.png",
+      "rgbaFnv1a": "7a4a12ff",
+      "pngSha256": "dbb7ec17bf9738e8596aad46bf9679aac648ba284df5e2fb8b23a53304be0c4f",
+      "camera": [
+        0,
+        0
+      ],
+      "story": {
+        "captainReturns": 1,
+        "dojoMagician": 1,
+        "dojoThriMonster": 1,
+        "nimrodTruWon": true,
+        "seenTimber": 1,
+        "scoopLandrace": 1,
+        "seenCandy": 1,
+        "lootenWon": true,
+        "aardant": 1,
+        "passcodeColorReset": 0,
+        "passcodeNumberReset": 0,
+        "screenDown": 1,
+        "hospitalCure": 1,
+        "hospitalBillie": 0
+      },
+      "player": {
+        "tile": [
+          5,
+          7
+        ],
+        "pixel": [
+          80,
+          112
+        ],
+        "facing": 2,
+        "phase": 0,
+        "image": "assets/characters/player-adventurer-idle-2.png",
+        "height": 32
+      }
+    },
+    {
+      "name": "aardant-acquired",
+      "frame": 48537,
+      "mergedFrame": 170682,
+      "map": "spyder_greenwash",
+      "position": [
+        7,
+        31
+      ],
+      "width": 960,
+      "height": 544,
+      "file": "j2-aardant-acquired.960x544.png",
+      "rgbaFnv1a": "5b90d21c",
+      "pngSha256": "9727ed21417d11084d46b72f1d6d1dfe117d5b0a7cc154af5e0b07e458f0ed8f",
+      "camera": [
+        0,
+        0
+      ],
+      "story": {
+        "captainReturns": 1,
+        "dojoMagician": 1,
+        "dojoThriMonster": 1,
+        "nimrodTruWon": true,
+        "seenTimber": 1,
+        "scoopLandrace": 1,
+        "seenCandy": 1,
+        "lootenWon": true,
+        "aardant": 1,
+        "passcodeColorReset": 0,
+        "passcodeNumberReset": 0,
+        "screenDown": 0,
+        "hospitalCure": 0,
+        "hospitalBillie": 0
+      },
+      "player": {
+        "tile": [
+          7,
+          31
+        ],
+        "pixel": [
+          112,
+          496
+        ],
+        "facing": 2,
+        "phase": 0,
+        "image": "assets/characters/player-adventurer-idle-2.png",
+        "height": 32
+      },
+      "actor": {
+        "id": "npc_spyder_greenwash_looten",
+        "tile": [
+          7,
+          30
+        ],
+        "pixel": [
+          112,
+          480
+        ],
+        "facing": 0,
+        "phase": 0,
+        "sprite": "npc.goth",
+        "image": "assets/characters/npc-npc-goth-idle-0.png",
+        "height": 32
+      }
+    },
+    {
+      "name": "hospital-password",
+      "frame": 49116,
+      "mergedFrame": 171261,
+      "map": "spyder_candy_hospital2",
+      "position": [
+        11,
+        15
+      ],
+      "width": 960,
+      "height": 544,
+      "file": "j2-hospital-password.960x544.png",
+      "rgbaFnv1a": "73e0223d",
+      "pngSha256": "b6fa8d472f5efddee1a64bb48b8c6e86e0192e878f71a3c2bc42d442d753c452",
+      "camera": [
+        0,
+        0
+      ],
+      "story": {
+        "captainReturns": 1,
+        "dojoMagician": 1,
+        "dojoThriMonster": 1,
+        "nimrodTruWon": true,
+        "seenTimber": 1,
+        "scoopLandrace": 1,
+        "seenCandy": 1,
+        "lootenWon": true,
+        "aardant": 1,
+        "passcodeColorReset": 0,
+        "passcodeNumberReset": 0,
+        "screenDown": 0,
+        "hospitalCure": 0,
+        "hospitalBillie": 0
+      },
+      "player": {
+        "tile": [
+          11,
+          15
+        ],
+        "pixel": [
+          176,
+          240
+        ],
+        "facing": 2,
+        "phase": 0,
+        "image": "assets/characters/player-adventurer-idle-2.png",
+        "height": 32
+      }
+    },
+    {
+      "name": "hospital-cure",
+      "frame": 49914,
+      "mergedFrame": 172059,
+      "map": "spyder_candy_hospital3",
+      "position": [
+        5,
+        7
+      ],
+      "width": 960,
+      "height": 544,
+      "file": "j2-hospital-cure.960x544.png",
+      "rgbaFnv1a": "104397b7",
+      "pngSha256": "6f4b7a56d3e22b12a71519f99b328b69dd103650ce4928b1e6a1665218d3390e",
+      "camera": [
+        0,
+        0
+      ],
+      "story": {
+        "captainReturns": 1,
+        "dojoMagician": 1,
+        "dojoThriMonster": 1,
+        "nimrodTruWon": true,
+        "seenTimber": 1,
+        "scoopLandrace": 1,
+        "seenCandy": 1,
+        "lootenWon": true,
+        "aardant": 1,
+        "passcodeColorReset": 0,
+        "passcodeNumberReset": 0,
+        "screenDown": 1,
+        "hospitalCure": 1,
+        "hospitalBillie": 0
+      },
+      "player": {
+        "tile": [
+          5,
+          7
+        ],
+        "pixel": [
+          80,
+          112
+        ],
+        "facing": 2,
+        "phase": 0,
+        "image": "assets/characters/player-adventurer-idle-2.png",
+        "height": 32
+      }
+    }
+  ]
+}

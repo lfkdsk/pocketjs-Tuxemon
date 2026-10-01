@@ -21,6 +21,7 @@ where noted. Set `TUXEMON_SRC` first (or keep a repo-local `.tuxemon-src`).
 | `verify:gb6:mainline` | The 109,983-frame mainline tape replays at 60 Hz to the frozen terminal state, with every map checkpoint, all 100 battles (22 trainer, 78 wild) and the trainer win counts intact. | `data/gb6-mainline-journey.json` | ~72 s |
 | `verify:gb6:failures` | Both committed defeat tapes (the first loss against Billie, and the later Route 3 loss) replay with their visible recovery order: faint-point teleport, heal-before-leaving block, nurse recovery. | `data/gb6-first-loss-journey.json`, `data/gb6-later-loss-journey.json` | ~40 s |
 | `verify:j1:mainline` | The Captain-return continuation, concatenated with the GB6 tape and replayed from frame zero (122,145 frames), ends at the mansion with the captain's return and all 17 battles (10 trainer, 7 wild) intact. | `data/gb6-mainline-journey.json`, `data/j1-captainreturns-journey.json` | ~67 s |
+| `verify:j2:mainline` | The hospital-cure continuation, concatenated with GB6 and J1 and replayed from frame zero (172,060 frames), ends in the Candy Town hospital with the cure granted and all 56 battles (50 trainer, 6 wild) won. | `data/gb6-mainline-journey.json`, `data/j1-captainreturns-journey.json`, `data/j2-hospitalcure-journey.json` | ~130 s |
 
 Durations are wall-clock measured on a current developer machine; the CI
 machines fold the mainline tapes in about a minute each.
@@ -62,6 +63,7 @@ fail on any mismatch, so a silently corrupted tape is a red build.
 | `data/gb6-first-loss-journey.json` | 3,254 | the opening, deliberately losing the first Billie fight | 1 | `spyder_route1 @14,19` |
 | `data/gb6-later-loss-journey.json` | 65,515 | the mainline prefix to Wanda, a deliberate loss, then the recovery path | 1 loss + prefix | `spyder_leather_town @23,10` |
 | `data/j1-captainreturns-journey.json` | 12,162 (122,145 combined with GB6) | Wayfarer Inn -> Route 4 -> Flower City -> Route A -> Mansion -> basement -> the captain's return | 17 (10 trainer, 7 wild) | `spyder_mansion @1,13` |
+| `data/j2-hospitalcure-journey.json` | 49,915 (172,060 combined) | Mansion -> Candy Town -> Greenwash -> hospital password -> the cure | 56 (50 trainer, 6 wild) | `spyder_candy_hospital3 @5,7` |
 
 The terminal state hashes and the per-checkpoint expectations live in the
 verifiers (`tools/verify-gb6-mainline.ts`, `tools/verify-j1-mainline.ts`,
@@ -73,8 +75,9 @@ Tapes are recorded by driving the game with the same deterministic driver the
 verifiers use:
 
 ```sh
-# J1 continuation (the only recorder with an npm script)
+# J1 and J2 continuations
 bun run record:j1:mainline        # writes data/j1-captainreturns-journey.json
+bun run record:j2:mainline        # writes data/j2-hospitalcure-journey.json
 
 # GB6 mainline
 GB6_JOURNEY_OUT=data/gb6-mainline-journey.json bun tools/gb6-journey.ts
@@ -105,6 +108,7 @@ a single differing pixel fails.
 | `bun run goldens:gb5:battle` | The six battle scenes (menu, technique menu, hit, faint, level-up, capture shake) at both viewports, plus `data/gb5-battle-goldens.json` and the battle screenshot in `docs/`. |
 | `bun run goldens:gb6:route` | The four mainline route keyframes at both viewports and `data/gb6-route-goldens.json`. |
 | `bun run goldens:j1` | The three Captain-return keyframes at both viewports and `data/j1-goldens.json`. |
+| `bun run goldens:j2` | The hospital-cure keyframes (Aardant acquired, hospital password, the cure) at both viewports and `data/j2-goldens.json`. |
 
 Regenerate goldens only when the rendering change is intentional, and always
 open the regenerated PNGs and look at them. A hash pins the bytes; it cannot

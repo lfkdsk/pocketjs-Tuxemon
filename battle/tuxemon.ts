@@ -1450,7 +1450,7 @@ function makeRules(db: TuxemonBattleDb): BattleCoreRules<BattleMonster, TuxemonB
       user: uid,
       target: selected.target.uid,
       ref: checked.slug,
-      moveIndex: checked.moveIndex,
+      ...(checked.moveIndex === undefined ? {} : { moveIndex: checked.moveIndex }),
     };
   }
 

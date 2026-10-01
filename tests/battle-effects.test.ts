@@ -3,6 +3,7 @@ import { describe, expect, test } from "bun:test";
 import battleDb from "../data/battle-db.json";
 import { battleDbToTuxemonBattleDb } from "../battle/from-battle-db.ts";
 import {
+  applyStatus,
   createBattle,
   getMonster,
   makeRules,
@@ -53,6 +54,20 @@ function start(player: MonsterSnapshot, enemy: MonsterSnapshot): BattleStart {
 }
 
 describe("main-line technique effects outside the trainer corpus", () => {
+  test("status fallback actions omit an absent optional move index", () => {
+    const state = createBattle(DB, start(
+      snapshot("rockitten", ["struggle"], ["earth"]),
+      snapshot("nut", ["beam"], ["metal"]),
+    ));
+    applyStatus(DB, getMonster(state, 1), "noddingoff", null);
+
+    const action = makeRules(DB).playerAction(state, state.awaiting!.uid, 0);
+
+    expect(action).toMatchObject({ kind: "technique", ref: "empty" });
+    expect(Object.hasOwn(action, "moveIndex")).toBe(false);
+    expect(JSON.parse(JSON.stringify(action))).toEqual(action);
+  });
+
   test("prop_damage removes a proportion of base HP", () => {
     const state = createBattle(DB, start(
       snapshot("rockitten", ["panjandrum"], ["earth"]),
