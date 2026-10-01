@@ -75,7 +75,7 @@ current journey.
 
 ## Play it
 
-- **In a browser:** <https://lfkdsk.github.io/pocketjs-Tuxemon/pocket-tuxemon/>
+- **In a browser:** <https://lfkdsk.github.io/pocketjs-tuxemon/pocket-tuxemon/>
   (deployed from `main` after CI has played the whole journey on it).
 - **From a CI run:** every push builds the web version. Open the
   latest [CI run](../../actions/workflows/ci.yml), download the `web-site`
