@@ -31,6 +31,7 @@ const GENERATED = [
   "dist/import-report.json",
   "dist/variable-enums.json",
   "dist/world-index.json",
+  "dist/weather.json",
   "reports/G1-coverage.md",
   "images.json",
   "pak.json",

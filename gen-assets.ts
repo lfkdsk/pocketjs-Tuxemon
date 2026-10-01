@@ -78,7 +78,8 @@ writeFileSync(
 // give any event a walking sprite — so size the pool from event counts, not
 // sprite-bearing events. Upstream's isolated `test_*` maps are renderer
 // stress fixtures, not world destinations: in particular test_npcs has 501
-// events while the largest playable map has 205. Reserving that fixture's
+// events while the largest playable map has 207 (spyder_dryadsgrove,
+// including D1's materialized time_is events). Reserving that fixture's
 // pool on every playable map makes each battle transition tear down/recreate
 // hundreds of images. Keep the complete fixture imported, report its pressure
 // separately, and size the shipped world pool from maps that can actually be
@@ -187,6 +188,11 @@ assertShellManifestFresh(JSON.parse(readFileSync(join(DIST, "project-shell.json"
 writeFileSync(join(DIST, "variable-enums.json"), jsonBytes(imported.variables));
 writeFileSync(join(DIST, "world-index.json"), jsonBytes(imported.worldIndex));
 writeFileSync(join(DIST, "import-report.json"), jsonBytes(imported.report));
+writeFileSync(join(DIST, "weather.json"), jsonBytes({
+  format: "pocket-tuxemon/weather/v1",
+  source: imported.report.weather.source,
+  entries: imported.report.weather.entries,
+}));
 writeFileSync(join(ROOT, "reports/G1-coverage.md"), coverageMarkdown(imported.report));
 
 function gameAssetsSource(

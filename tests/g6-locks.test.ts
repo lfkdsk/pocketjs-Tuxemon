@@ -9,9 +9,11 @@ test("every G6 lockInput page dynamically releases or transfers", () => {
   const project = materializeShardedProject(ROOT);
   const report = verifyProjectLocks(project);
   expect(report.format).toBe("pocket-tuxemon/g6-lock-check/v2");
-  expect(report.lockCommands).toBe(333);
-  expect(report.dynamicChecks).toBe(333);
-  expect(report.pages).toBe(329);
+  // D1 materializes the maple_bedroom "Stop 27Apr" date event (previously
+  // dropped by the time_is date const-false fold), adding one lockInput page.
+  expect(report.lockCommands).toBe(334);
+  expect(report.dynamicChecks).toBe(334);
+  expect(report.pages).toBe(330);
   expect(report.outcomes).toMatchObject({ unresolved: 0, error: 0 });
   expect(report.failures).toEqual([]);
   expect(report.exceptions).toEqual([]);

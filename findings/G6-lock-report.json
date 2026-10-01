@@ -1,10 +1,10 @@
 {
   "format": "pocket-tuxemon/g6-lock-check/v2",
-  "pages": 329,
-  "lockCommands": 333,
-  "dynamicChecks": 333,
+  "pages": 330,
+  "lockCommands": 334,
+  "dynamicChecks": 334,
   "outcomes": {
-    "unlocked": 327,
+    "unlocked": 328,
     "transferred": 2,
     "unresolved": 0,
     "error": 0
@@ -300,7 +300,7 @@
     },
     {
       "map": "eclipse_lion_mountain_high",
-      "event": "e009_talk_alexander_r004",
+      "event": "e011_talk_alexander_r004",
       "name": "Talk Alexander",
       "page": 0,
       "trigger": "playerTouch",
@@ -322,7 +322,7 @@
     },
     {
       "map": "eclipse_lion_mountain_high",
-      "event": "e010_talk_arlene_r003",
+      "event": "e012_talk_arlene_r003",
       "name": "Talk Arlene",
       "page": 0,
       "trigger": "playerTouch",
@@ -344,7 +344,7 @@
     },
     {
       "map": "eclipse_lion_mountain_high",
-      "event": "e011_talk_conrad_r005",
+      "event": "e013_talk_conrad_r005",
       "name": "Talk Conrad",
       "page": 0,
       "trigger": "playerTouch",
@@ -366,7 +366,7 @@
     },
     {
       "map": "eclipse_lion_mountain_high",
-      "event": "e012_talk_david_r001",
+      "event": "e014_talk_david_r001",
       "name": "Talk David",
       "page": 0,
       "trigger": "playerTouch",
@@ -388,7 +388,7 @@
     },
     {
       "map": "eclipse_lion_mountain_high",
-      "event": "e013_talk_kurt_r007",
+      "event": "e015_talk_kurt_r007",
       "name": "Talk Kurt",
       "page": 0,
       "trigger": "playerTouch",
@@ -454,7 +454,7 @@
     },
     {
       "map": "eclipse_lion_mountain_low",
-      "event": "e007_talk_emilio_r007",
+      "event": "e008_talk_emilio_r007",
       "name": "Talk Emilio",
       "page": 0,
       "trigger": "playerTouch",
@@ -498,7 +498,7 @@
     },
     {
       "map": "eclipse_lion_mountain_middle",
-      "event": "e010_talk_adam_r008",
+      "event": "e011_talk_adam_r008",
       "name": "Talk Adam",
       "page": 0,
       "trigger": "playerTouch",
@@ -520,7 +520,7 @@
     },
     {
       "map": "eclipse_lion_mountain_middle",
-      "event": "e011_talk_chhurim_r007",
+      "event": "e012_talk_chhurim_r007",
       "name": "Talk Chhurim",
       "page": 0,
       "trigger": "playerTouch",
@@ -542,7 +542,7 @@
     },
     {
       "map": "eclipse_lion_mountain_middle",
-      "event": "e012_talk_jacques_r010",
+      "event": "e013_talk_jacques_r010",
       "name": "Talk Jacques",
       "page": 0,
       "trigger": "playerTouch",
@@ -564,7 +564,7 @@
     },
     {
       "map": "eclipse_lion_mountain_middle",
-      "event": "e013_talk_tom_r009",
+      "event": "e014_talk_tom_r009",
       "name": "Talk Tom",
       "page": 0,
       "trigger": "playerTouch",
@@ -858,7 +858,7 @@
     },
     {
       "map": "eclipse_route7",
-      "event": "e032_talk_arnaut_r009",
+      "event": "e033_talk_arnaut_r009",
       "name": "Talk Arnaut",
       "page": 0,
       "trigger": "playerTouch",
@@ -880,7 +880,7 @@
     },
     {
       "map": "eclipse_route7",
-      "event": "e033_talk_conrad_r004",
+      "event": "e034_talk_conrad_r004",
       "name": "Talk Conrad",
       "page": 0,
       "trigger": "playerTouch",
@@ -902,7 +902,7 @@
     },
     {
       "map": "eclipse_route7",
-      "event": "e034_talk_hugh_r003",
+      "event": "e035_talk_hugh_r003",
       "name": "Talk Hugh",
       "page": 0,
       "trigger": "playerTouch",
@@ -924,7 +924,7 @@
     },
     {
       "map": "eclipse_route7",
-      "event": "e035_talk_jacopo_r007",
+      "event": "e036_talk_jacopo_r007",
       "name": "Talk Jacopo",
       "page": 0,
       "trigger": "playerTouch",
@@ -946,7 +946,7 @@
     },
     {
       "map": "eclipse_route7",
-      "event": "e036_talk_manfred_r005",
+      "event": "e037_talk_manfred_r005",
       "name": "Talk Manfred",
       "page": 0,
       "trigger": "playerTouch",
@@ -968,7 +968,7 @@
     },
     {
       "map": "eclipse_route7",
-      "event": "e037_talk_nino_r011",
+      "event": "e038_talk_nino_r011",
       "name": "Talk Nino",
       "page": 0,
       "trigger": "playerTouch",
@@ -990,7 +990,7 @@
     },
     {
       "map": "eclipse_route7",
-      "event": "e038_talk_penitent_r006",
+      "event": "e039_talk_penitent_r006",
       "name": "Talk Penitent",
       "page": 0,
       "trigger": "playerTouch",
@@ -1012,7 +1012,7 @@
     },
     {
       "map": "eclipse_route7",
-      "event": "e039_talk_pia_r008",
+      "event": "e040_talk_pia_r008",
       "name": "Talk Pia",
       "page": 0,
       "trigger": "playerTouch",
@@ -1034,7 +1034,7 @@
     },
     {
       "map": "eclipse_route7",
-      "event": "e040_talk_sordello_r013",
+      "event": "e041_talk_sordello_r013",
       "name": "Talk Sordello",
       "page": 0,
       "trigger": "playerTouch",
@@ -1056,7 +1056,7 @@
     },
     {
       "map": "eclipse_route7",
-      "event": "e041_talk_statius_r015",
+      "event": "e042_talk_statius_r015",
       "name": "Talk Statius",
       "page": 0,
       "trigger": "playerTouch",
@@ -1078,7 +1078,7 @@
     },
     {
       "map": "maple_bedroom",
-      "event": "e004_stop_r002",
+      "event": "e005_stop_r002",
       "name": "Stop",
       "page": 0,
       "trigger": "playerTouch",
@@ -1094,6 +1094,28 @@
           "outcome": "unlocked",
           "lockedAt": 0,
           "resolvedAt": 259,
+          "finalMap": "maple_bedroom"
+        }
+      ]
+    },
+    {
+      "map": "maple_bedroom",
+      "event": "e006_stop_27apr_r003",
+      "name": "Stop 27Apr",
+      "page": 0,
+      "trigger": "playerTouch",
+      "locks": 1,
+      "outcome": "unlocked",
+      "lockedAt": 0,
+      "resolvedAt": 758,
+      "finalMap": "maple_bedroom",
+      "staticHint": "local-unlock",
+      "checks": [
+        {
+          "lock": 0,
+          "outcome": "unlocked",
+          "lockedAt": 0,
+          "resolvedAt": 758,
           "finalMap": "maple_bedroom"
         }
       ]
@@ -1698,7 +1720,7 @@
     },
     {
       "map": "spyder_candy_hospital1",
-      "event": "e020_talk_fring_r002",
+      "event": "e021_talk_fring_r002",
       "name": "Talk Fring",
       "page": 0,
       "trigger": "playerTouch",
@@ -1720,7 +1742,7 @@
     },
     {
       "map": "spyder_candy_hospital1",
-      "event": "e021_talk_walt_r001",
+      "event": "e022_talk_walt_r001",
       "name": "Talk Walt",
       "page": 0,
       "trigger": "playerTouch",
@@ -1742,7 +1764,7 @@
     },
     {
       "map": "spyder_candy_hospital2",
-      "event": "e012_talk_luzia_r003",
+      "event": "e013_talk_luzia_r003",
       "name": "Talk Luzia",
       "page": 0,
       "trigger": "playerTouch",
@@ -1764,7 +1786,7 @@
     },
     {
       "map": "spyder_candy_hospital2",
-      "event": "e014_talk_zekar_r005",
+      "event": "e015_talk_zekar_r005",
       "name": "Talk Zekar",
       "page": 0,
       "trigger": "playerTouch",
@@ -1786,7 +1808,7 @@
     },
     {
       "map": "spyder_candy_hospital2",
-      "event": "e017_talk_rakez_r004",
+      "event": "e018_talk_rakez_r004",
       "name": "Talk Rakez",
       "page": 0,
       "trigger": "playerTouch",
@@ -1808,7 +1830,7 @@
     },
     {
       "map": "spyder_candy_hospital2",
-      "event": "e019_talk_rhizome_r006",
+      "event": "e020_talk_rhizome_r006",
       "name": "Talk Rhizome",
       "page": 0,
       "trigger": "playerTouch",
@@ -1940,7 +1962,7 @@
     },
     {
       "map": "spyder_candy_town",
-      "event": "e039_dante_commiserates_r014",
+      "event": "e040_dante_commiserates_r014",
       "name": "Dante commiserates",
       "page": 0,
       "trigger": "playerTouch",
@@ -1962,7 +1984,7 @@
     },
     {
       "map": "spyder_candy_town",
-      "event": "e040_henrik_react_mons",
+      "event": "e041_henrik_react_mons",
       "name": "Henrik react - mons",
       "page": 0,
       "trigger": "parallel",
@@ -1984,7 +2006,7 @@
     },
     {
       "map": "spyder_candy_town",
-      "event": "e041_henrik_react_no_mons",
+      "event": "e042_henrik_react_no_mons",
       "name": "Henrik react - no mons",
       "page": 0,
       "trigger": "parallel",
@@ -2006,7 +2028,7 @@
     },
     {
       "map": "spyder_citypark",
-      "event": "e045_talk_bobette_r053",
+      "event": "e046_talk_bobette_r053",
       "name": "Talk Bobette + Track citypark",
       "page": 0,
       "trigger": "playerTouch",
@@ -2182,7 +2204,7 @@
     },
     {
       "map": "spyder_cotton_town",
-      "event": "e035_kernel_quest_r011",
+      "event": "e036_kernel_quest_r011",
       "name": "Kernel Quest",
       "page": 0,
       "trigger": "playerTouch",
@@ -2827,7 +2849,7 @@
     },
     {
       "map": "spyder_dryadsgrove",
-      "event": "e070_talk_aquemini_r113",
+      "event": "e071_talk_aquemini_r113",
       "name": "Talk Aquemini + Track dryadsgrove",
       "page": 0,
       "trigger": "playerTouch",
@@ -2849,7 +2871,7 @@
     },
     {
       "map": "spyder_dryadsgrove",
-      "event": "e070_talk_aquemini_r127",
+      "event": "e071_talk_aquemini_r127",
       "name": "Talk Aquemini + Track dryadsgrove",
       "page": 0,
       "trigger": "playerTouch",
@@ -2871,7 +2893,7 @@
     },
     {
       "map": "spyder_dryadsgrove",
-      "event": "e071_talk_ignatia_r077",
+      "event": "e072_talk_ignatia_r077",
       "name": "Talk Ignatia + Track dryadsgrove",
       "page": 0,
       "trigger": "playerTouch",
@@ -2893,7 +2915,7 @@
     },
     {
       "map": "spyder_dryadsgrove",
-      "event": "e072_talk_petra_r050",
+      "event": "e073_talk_petra_r050",
       "name": "Talk Petra + Track dryadsgrove",
       "page": 0,
       "trigger": "playerTouch",
@@ -2915,7 +2937,7 @@
     },
     {
       "map": "spyder_dryadsgrove",
-      "event": "e074_talk_ferris_r071",
+      "event": "e075_talk_ferris_r071",
       "name": "Talk Ferris + Track dryadsgrove",
       "page": 0,
       "trigger": "playerTouch",
@@ -3663,7 +3685,7 @@
     },
     {
       "map": "spyder_leather_town",
-      "event": "e047_flashback",
+      "event": "e048_flashback",
       "name": "Flashback",
       "page": 0,
       "trigger": "parallel",
@@ -4781,7 +4803,7 @@
     },
     {
       "map": "spyder_paper_town",
-      "event": "e036_stop_2_r014",
+      "event": "e037_stop_2_r014",
       "name": "Stop 2!",
       "page": 0,
       "trigger": "playerTouch",
@@ -4913,7 +4935,7 @@
     },
     {
       "map": "spyder_route2",
-      "event": "e044_talk_roddick_r013",
+      "event": "e045_talk_roddick_r013",
       "name": "Talk roddick + Track route2",
       "page": 0,
       "trigger": "playerTouch",
@@ -4935,7 +4957,7 @@
     },
     {
       "map": "spyder_route2",
-      "event": "e045_talk_marion_r047",
+      "event": "e046_talk_marion_r047",
       "name": "Talk marion + Track route2",
       "page": 0,
       "trigger": "playerTouch",
@@ -4957,7 +4979,7 @@
     },
     {
       "map": "spyder_route2",
-      "event": "e046_talk_graf_r016",
+      "event": "e047_talk_graf_r016",
       "name": "Talk graf + Track route2",
       "page": 0,
       "trigger": "playerTouch",
@@ -5001,7 +5023,7 @@
     },
     {
       "map": "spyder_route3",
-      "event": "e039_enforcer_talk_r042",
+      "event": "e040_enforcer_talk_r042",
       "name": "Enforcer Talk + encounter 3 + Track route3",
       "page": 0,
       "trigger": "playerTouch",
@@ -5023,7 +5045,7 @@
     },
     {
       "map": "spyder_route3",
-      "event": "e040_talk_twig_r047",
+      "event": "e041_talk_twig_r047",
       "name": "Talk Twig + encounter 3 + Track route3",
       "page": 0,
       "trigger": "playerTouch",
@@ -5045,7 +5067,7 @@
     },
     {
       "map": "spyder_route3",
-      "event": "e041_talk_wanda_r051",
+      "event": "e042_talk_wanda_r051",
       "name": "Talk Wanda + encounter 3 + Track route3",
       "page": 0,
       "trigger": "playerTouch",
@@ -5067,7 +5089,7 @@
     },
     {
       "map": "spyder_route3",
-      "event": "e042_novak_talk_r059",
+      "event": "e043_novak_talk_r059",
       "name": "Novak Talk + Track route3",
       "page": 0,
       "trigger": "playerTouch",
@@ -5111,7 +5133,7 @@
     },
     {
       "map": "spyder_route4",
-      "event": "e033_talk_marshall_r043",
+      "event": "e034_talk_marshall_r043",
       "name": "Talk Marshall + Track route4",
       "page": 0,
       "trigger": "playerTouch",
@@ -5133,7 +5155,7 @@
     },
     {
       "map": "spyder_route4",
-      "event": "e034_talk_beck_r029",
+      "event": "e035_talk_beck_r029",
       "name": "Talk Beck + Track route4",
       "page": 0,
       "trigger": "playerTouch",
@@ -5155,7 +5177,7 @@
     },
     {
       "map": "spyder_route4",
-      "event": "e035_talk_wulf_r019",
+      "event": "e036_talk_wulf_r019",
       "name": "Talk Wulf + Track route4",
       "page": 0,
       "trigger": "playerTouch",
@@ -5177,7 +5199,7 @@
     },
     {
       "map": "spyder_route4",
-      "event": "e037_billie_r016",
+      "event": "e038_billie_r016",
       "name": "Billie + Track route4",
       "page": 0,
       "trigger": "playerTouch",
@@ -5221,7 +5243,7 @@
     },
     {
       "map": "spyder_route5",
-      "event": "e030_talk_sara_r025",
+      "event": "e031_talk_sara_r025",
       "name": "Talk Sara + Track route5",
       "page": 0,
       "trigger": "playerTouch",
@@ -5243,7 +5265,7 @@
     },
     {
       "map": "spyder_route5",
-      "event": "e031_talk_cleo_or_patra_r020",
+      "event": "e032_talk_cleo_or_patra_r020",
       "name": "Talk Cleo or Patra + Track route5",
       "page": 0,
       "trigger": "playerTouch",
@@ -5265,7 +5287,7 @@
     },
     {
       "map": "spyder_route5",
-      "event": "e032_talk_tryphaena_or_marc_r019",
+      "event": "e033_talk_tryphaena_or_marc_r019",
       "name": "Talk Tryphaena or Marc + Track route5",
       "page": 0,
       "trigger": "playerTouch",
@@ -5287,7 +5309,7 @@
     },
     {
       "map": "spyder_route5",
-      "event": "e033_talk_edith_r047",
+      "event": "e034_talk_edith_r047",
       "name": "Talk Edith + Track route5",
       "page": 0,
       "trigger": "playerTouch",
@@ -5331,7 +5353,7 @@
     },
     {
       "map": "spyder_route6",
-      "event": "e033_talk_maxwell_r010",
+      "event": "e034_talk_maxwell_r010",
       "name": "Talk Maxwell + Track route6",
       "page": 0,
       "trigger": "playerTouch",
@@ -5353,7 +5375,7 @@
     },
     {
       "map": "spyder_route6",
-      "event": "e034_talk_orion_r003",
+      "event": "e035_talk_orion_r003",
       "name": "Talk Orion + Track route6",
       "page": 0,
       "trigger": "playerTouch",
@@ -5375,7 +5397,7 @@
     },
     {
       "map": "spyder_route6",
-      "event": "e035_talk_richard_r037",
+      "event": "e036_talk_richard_r037",
       "name": "Talk Richard + Track route6",
       "page": 0,
       "trigger": "playerTouch",
@@ -5397,7 +5419,7 @@
     },
     {
       "map": "spyder_route6",
-      "event": "e036_talk_blair_r026",
+      "event": "e037_talk_blair_r026",
       "name": "Talk Blair + Track route6",
       "page": 0,
       "trigger": "playerTouch",
@@ -5419,7 +5441,7 @@
     },
     {
       "map": "spyder_route6",
-      "event": "e037_talk_mungo_r006",
+      "event": "e038_talk_mungo_r006",
       "name": "Talk Mungo + Track route6",
       "page": 0,
       "trigger": "playerTouch",
@@ -5441,7 +5463,7 @@
     },
     {
       "map": "spyder_route6",
-      "event": "e038_billie1_r040",
+      "event": "e039_billie1_r040",
       "name": "Billie1 + Track route6",
       "page": 0,
       "trigger": "playerTouch",
@@ -5463,7 +5485,7 @@
     },
     {
       "map": "spyder_route6",
-      "event": "e041_billie2_r020",
+      "event": "e042_billie2_r020",
       "name": "Billie2 + Track route6",
       "page": 0,
       "trigger": "playerTouch",
@@ -5485,7 +5507,7 @@
     },
     {
       "map": "spyder_routea",
-      "event": "e013_billie_r019",
+      "event": "e014_billie_r019",
       "name": "Billie + Track routea",
       "page": 0,
       "trigger": "playerTouch",
@@ -5507,7 +5529,7 @@
     },
     {
       "map": "spyder_routea",
-      "event": "e016_talk_doris_r026",
+      "event": "e017_talk_doris_r026",
       "name": "Talk Doris + Track routea",
       "page": 0,
       "trigger": "playerTouch",
@@ -5529,7 +5551,7 @@
     },
     {
       "map": "spyder_routea",
-      "event": "e018_talk_dagger_r029",
+      "event": "e019_talk_dagger_r029",
       "name": "Talk Dagger + Track routea",
       "page": 0,
       "trigger": "playerTouch",
@@ -5551,7 +5573,7 @@
     },
     {
       "map": "spyder_routea",
-      "event": "e019_talk_doris_r023",
+      "event": "e020_talk_doris_r023",
       "name": "Talk Doris + Track routea",
       "page": 0,
       "trigger": "playerTouch",
@@ -5573,7 +5595,7 @@
     },
     {
       "map": "spyder_routea",
-      "event": "e021_talk_koan_r059",
+      "event": "e022_talk_koan_r059",
       "name": "Talk Koan + Track routea",
       "page": 0,
       "trigger": "playerTouch",
@@ -5595,7 +5617,7 @@
     },
     {
       "map": "spyder_routea",
-      "event": "e023_talk_lexi_r047",
+      "event": "e024_talk_lexi_r047",
       "name": "Talk Lexi + Track routea",
       "page": 0,
       "trigger": "playerTouch",
@@ -5617,7 +5639,7 @@
     },
     {
       "map": "spyder_routea",
-      "event": "e025_talk_lotu_r045",
+      "event": "e026_talk_lotu_r045",
       "name": "Talk Lotu + Track routea",
       "page": 0,
       "trigger": "playerTouch",
@@ -5639,7 +5661,7 @@
     },
     {
       "map": "spyder_routea",
-      "event": "e026_talk_connie_r035",
+      "event": "e027_talk_connie_r035",
       "name": "Talk Connie + Track routea",
       "page": 0,
       "trigger": "playerTouch",
@@ -5661,7 +5683,7 @@
     },
     {
       "map": "spyder_routea",
-      "event": "e029_talk_joe1_r055",
+      "event": "e030_talk_joe1_r055",
       "name": "Talk Joe1 + Track routea",
       "page": 0,
       "trigger": "playerTouch",
@@ -5683,7 +5705,7 @@
     },
     {
       "map": "spyder_routea",
-      "event": "e031_talk_rosy_r017",
+      "event": "e032_talk_rosy_r017",
       "name": "Talk Rosy + Track routea",
       "page": 0,
       "trigger": "playerTouch",
@@ -5837,7 +5859,7 @@
     },
     {
       "map": "spyder_routeb",
-      "event": "e016_billie_r020",
+      "event": "e017_billie_r020",
       "name": "Billie + Track routeb",
       "page": 0,
       "trigger": "playerTouch",
@@ -5859,7 +5881,7 @@
     },
     {
       "map": "spyder_routec",
-      "event": "e012_talk_rutherford_r021",
+      "event": "e013_talk_rutherford_r021",
       "name": "Talk Rutherford + Track routec",
       "page": 0,
       "trigger": "playerTouch",
@@ -5881,7 +5903,7 @@
     },
     {
       "map": "spyder_routec",
-      "event": "e013_talk_gil_r030",
+      "event": "e014_talk_gil_r030",
       "name": "Talk Gil + Track routec",
       "page": 0,
       "trigger": "playerTouch",
@@ -5903,7 +5925,7 @@
     },
     {
       "map": "spyder_routec",
-      "event": "e014_talk_sandy_r025",
+      "event": "e015_talk_sandy_r025",
       "name": "Talk Sandy + Track routec",
       "page": 0,
       "trigger": "playerTouch",
@@ -5925,7 +5947,7 @@
     },
     {
       "map": "spyder_routec",
-      "event": "e015_talk_more_r038",
+      "event": "e016_talk_more_r038",
       "name": "Talk More + Track routec",
       "page": 0,
       "trigger": "playerTouch",
@@ -5947,7 +5969,7 @@
     },
     {
       "map": "spyder_routee",
-      "event": "e009_battle_calliope_r013",
+      "event": "e010_battle_calliope_r013",
       "name": "Battle Calliope + Track routee",
       "page": 0,
       "trigger": "playerTouch",
@@ -5969,7 +5991,7 @@
     },
     {
       "map": "spyder_routee",
-      "event": "e010_talk_calliope_r011",
+      "event": "e011_talk_calliope_r011",
       "name": "Talk Calliope + Track routee",
       "page": 0,
       "trigger": "playerTouch",
@@ -5991,7 +6013,7 @@
     },
     {
       "map": "spyder_routee",
-      "event": "e012_talk_aiolos_r015",
+      "event": "e013_talk_aiolos_r015",
       "name": "Talk Aiolos + Track routee",
       "page": 0,
       "trigger": "playerTouch",
@@ -6299,7 +6321,7 @@
     },
     {
       "map": "spyder_test_map",
-      "event": "e006_ambush_cleo_r002",
+      "event": "e007_ambush_cleo_r002",
       "name": "Ambush Cleo",
       "page": 0,
       "trigger": "playerTouch",
@@ -6761,7 +6783,7 @@
     },
     {
       "map": "spyder_tunnel",
-      "event": "e019_landrace_blocks_r010",
+      "event": "e020_landrace_blocks_r010",
       "name": "Landrace blocks + Track tunnel",
       "page": 0,
       "trigger": "playerTouch",
@@ -6783,7 +6805,7 @@
     },
     {
       "map": "spyder_tunnel",
-      "event": "e021_landrace_blocks_r011",
+      "event": "e022_landrace_blocks_r011",
       "name": "Landrace blocks + Track tunnel",
       "page": 0,
       "trigger": "playerTouch",

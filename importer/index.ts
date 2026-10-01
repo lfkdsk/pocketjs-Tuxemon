@@ -81,7 +81,9 @@ Definitions:
 
 - **Native**: represented by current RPG Kit v1 commands without a gameplay loss.
 - **Degraded**: runs in v1 with a documented limitation or importer lowering.
-- **Placeholder**: deliberate P1 behavior for battle/monster state.
+- **Placeholder**: deliberate P1 behavior for battle/monster state and the
+  D1 time/weather/overlay ext shapes (\`time_is\`, \`update_time\`, \`set_layer\`)
+  whose runtime lands in D2 (clock/weather) and D3 (overlay visuals).
 - **Dropped**: no equivalent output, including rules inside an event that the
   converter proves cannot start or otherwise omits. Per-disposition reasons are
   retained in \`dist/import-report.json\`.
@@ -89,7 +91,9 @@ Definitions:
 ## P2 battle and monster placeholder audit
 
 There are ${placeholderUses} source-file uses across ${placeholderRows.length}
-battle/monster-related source types that still carry Placeholder disposition.
+source types that still carry Placeholder disposition: battle/monster behavior
+plus the D1 time/weather ext shapes (\`time_is\`, \`set_layer\`) whose runtime
+lands in D2 (clock/weather) and D3 (overlay visuals).
 Player-versus-trainer, double, scripted-wild, random-wild, battle-outcome,
 party-size, has-monster, evolution, environment, faint-transfer, and live-party
 defeat behavior are Native. The remaining non-native behavior is explicit:

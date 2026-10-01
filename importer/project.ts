@@ -24,6 +24,13 @@ import {
 } from "./coverage.ts";
 import { buildOutdoorWorldIndex, type WorldImportReport } from "./world.ts";
 import type { OutdoorWorldIndex } from "./world-schema.ts";
+import {
+  loadWeatherTable,
+  setLayerArg,
+  timeIsArgs,
+  updateTimeArgs,
+  type WeatherEntry,
+} from "./time-weather.ts";
 import { validateSchema } from "../vendor/pocket-rpgkit/src/engine/schema-validate.ts";
 import type {
   Command,
@@ -653,10 +660,13 @@ function clauses(c: Cond, m: TuxMap, options: ImportOptions): Clause[] | null {
       noteCondition(c, `${c.op} location_type`, "T1", "static map property, folded at import");
       return K(a[0]!.split(":").includes(m.props.map_type ?? "notype"));
     case "time_is":
-      noteCondition(c, `${c.op} time_is`, "T1-lowered", "no clock in P1: folded against fixed daytime");
-      if (a[0] === "stage_of_day") return K(a[1] === "equals" ? a[2] === "morning" : a[2] !== "morning");
-      if (a[0] === "daytime") return K(a[1] === "equals" ? a[2] === "true" : a[2] !== "true");
-      return K(false);
+      // D1: emit the tux.time_is ext condition instead of folding to a
+      // constant. The runtime handler is a D2 placeholder (fixed morning/
+      // daytime fold) so behavior is unchanged; D2 replaces it with the
+      // virtual clock comparison. Folding here used to drop every night/date
+      // event via the never-true guard below.
+      noteCondition(c, `${c.op} time_is`, "T3-placeholder", "tux.time_is ext condition; D2 clock runtime (placeholder folds to fixed morning/daytime)");
+      return [{ k: "ext", call: "tux.time_is", args: timeIsArgs(c) }];
     case "music_playing":
       noteCondition(c, `${c.op} music_playing`, "T4-dropped", "no music in P1");
       return K(false);
@@ -1553,6 +1563,21 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
       case "get_player_monster": case "set_bill": case "format_variable":
         noteAction(a, a.type, "T3-dropped", "monster/combat subsystem (P2)");
         break;
+      case "update_time":
+        // D1: emit the tux.update_time ext command. The runtime handler is a
+        // D2 placeholder no-op; D2 writes the eight upstream time variables
+        // from the virtual clock.
+        noteAction(a, a.type, "T3-placeholder", "tux.update_time ext command; D2 clock runtime (placeholder no-op)");
+        out.push({ op: "ext", call: "tux.update_time", args: updateTimeArgs(a) });
+        break;
+      case "set_layer":
+        // D1: emit the tux.set_layer ext command (clear / RGBA colour / PNG
+        // overlay). The runtime handler is a placeholder no-op until D3 draws
+        // the overlay; set_layer is a transparent overlay, not a map tile
+        // layer, so it is distinct from the kit's KV1 layer switching.
+        noteAction(a, a.type, "T3-placeholder", "tux.set_layer ext command; D2 runtime placeholder, D3 overlay visual (no-op)");
+        out.push({ op: "ext", call: "tux.set_layer", args: setLayerArg(a) });
+        break;
       default:
         noteAction(a, a.type, "T4-dropped", "presentation / meta");
     }
@@ -2123,6 +2148,11 @@ export interface ImportReport {
   };
   world: WorldImportReport;
   coverage: CoverageReport;
+  /** D1: the 10-entry weather table exported from mods/tuxemon/db/weather. */
+  weather: {
+    source: "mods/tuxemon/db/weather/weathers.yaml";
+    entries: WeatherEntry[];
+  };
 }
 
 export interface TransferRepair {
@@ -2219,32 +2249,37 @@ export function buildProject(
   if (!startId) throw new Error("at least one map must be selected");
   const startMap = mapDefs.find((m) => m.id === startId)!;
 
-  // start_tuxemon.yaml's Spyder branch, as a one-shot boot page.
-  const boot: Command[] = [
-    ["scenario_choice", "spyder_campaign"],
-    ["gender_choice", "gender_male"],
-    ["race_choice", "white_male"],
-    ["method_money", "conserved"],
-  ].map(([k, v]) => ({
-    op: "variable",
-    id: varId(k!),
-    set: { op: "set", value: code(k!, v!) },
-  }) as Command);
-  if (startId === "spyder_bedroom") startMap.events!.unshift({
-    id: "e000_boot",
-    name: "start_tuxemon (Spyder)",
-    x: 0,
-    y: 0,
-    pages: [{
-      trigger: "autorun",
-      condition: { variable: { id: "sys.boot", op: "==", value: 0 } },
-      sprite: null,
-      commands: [
-        ...boot,
-        { op: "variable", id: "sys.boot", set: { op: "set", value: 1 } },
-      ],
-    }],
-  });
+  // start_tuxemon.yaml's Spyder branch, as a one-shot boot page. Built
+  // lazily: the enum codes it references only exist when the real source
+  // (whose start_tuxemon event introduces them) is loaded, and the page is
+  // only emitted for spyder_bedroom starts.
+  if (startId === "spyder_bedroom") {
+    const boot: Command[] = [
+      ["scenario_choice", "spyder_campaign"],
+      ["gender_choice", "gender_male"],
+      ["race_choice", "white_male"],
+      ["method_money", "conserved"],
+    ].map(([k, v]) => ({
+      op: "variable",
+      id: varId(k!),
+      set: { op: "set", value: code(k!, v!) },
+    }) as Command);
+    startMap.events!.unshift({
+      id: "e000_boot",
+      name: "start_tuxemon (Spyder)",
+      x: 0,
+      y: 0,
+      pages: [{
+        trigger: "autorun",
+        condition: { variable: { id: "sys.boot", op: "==", value: 0 } },
+        sprite: null,
+        commands: [
+          ...boot,
+          { op: "variable", id: "sys.boot", set: { op: "set", value: 1 } },
+        ],
+      }],
+    });
+  }
 
   const built: Project = {
     format: "rpgkit-project/v1",
@@ -2345,6 +2380,10 @@ export function buildProject(
       },
       world: world.report,
       coverage: conversionCoverage.report(),
+      weather: {
+        source: "mods/tuxemon/db/weather/weathers.yaml",
+        entries: loadWeatherTable(),
+      },
     },
   };
 }

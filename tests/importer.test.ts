@@ -74,14 +74,14 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   expect(result.report.coverage.actions.summary).toMatchObject({
     types: 98,
     uses: 13_617,
-    native: 6_198,
-    degraded: 2_822,
-    placeholder: 440,
-    dropped: 4_157,
-    nativePercent: 45.5,
+    native: 6_225,
+    degraded: 2_832,
+    placeholder: 507,
+    dropped: 4_053,
+    nativePercent: 45.7,
     tier1: {
-      uses: 6_099,
-      percent: 44.79,
+      uses: 6_129,
+      percent: 45.01,
       requiredUses: 6_246,
       meetsBaseline: false,
     },
@@ -89,13 +89,13 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   expect(result.report.coverage.conditions.summary).toMatchObject({
     types: 64,
     uses: 8_663,
-    native: 3_539,
-    degraded: 1_234,
-    placeholder: 850,
-    dropped: 3_040,
+    native: 3_550,
+    degraded: 1_227,
+    placeholder: 867,
+    dropped: 3_019,
     tier1: {
-      uses: 3_535,
-      percent: 40.81,
+      uses: 3_546,
+      percent: 40.93,
       requiredUses: 4_591,
       meetsBaseline: false,
     },
@@ -108,8 +108,8 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   ];
   expect(coverageRows.find((row) => row.type === "char_face")).toMatchObject({
     native: 869,
-    degraded: 440,
-    dropped: 718,
+    degraded: 442,
+    dropped: 716,
   });
   expect(coverageRows.find((row) => row.type === "char_move")).toMatchObject({
     degraded: 9,
@@ -258,7 +258,7 @@ test("clamped transfers use the nearest deterministic walkable landing", () => {
   }
   expect(landings).toEqual([{ x: 38, y: 3 }, { x: 38, y: 3 }]);
 
-  const session = createSession(result.project);
+  const session = createSession(result.project, 60, { extensions: TUXEMON_EXTENSIONS });
   const flower = session.tables.get("flower_city")!;
   const exits = ([0, 1, 2, 3] as Dir4[]).filter((dir) =>
     canStepFrom(flower, repair!.emitted.x, repair!.emitted.y, dir)
@@ -271,8 +271,10 @@ test("default import output remains byte-pinned", () => {
   const bytes = jsonBytes(buildProject(maps, DEFAULT_IMPORT_OPTIONS));
   // This pins the complete ImportBuild: condition lowering, the stable source
   // inputs, the generated outdoor world index and its compact report summary.
+  // D1 time/weather: time_is/set_layer now emit tux.* ext shapes and the
+  // report carries the weather table, so the pinned bytes move again.
   expect(createHash("sha256").update(bytes).digest("hex")).toBe(
-    "03ceb6cecbfc329f80fa3e930366b29d2ec3bc45ab20a6cad14e752db6b0f77c",
+    "b8b18b0e2bf08c51211bb99f429ce016b5d391733ad58409ad2387979d698657",
   );
 });
 

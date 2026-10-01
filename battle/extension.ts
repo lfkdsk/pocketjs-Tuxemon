@@ -581,6 +581,17 @@ export function createTuxemonExtensions(source: BattleDbSource): ExtensionOption
         const current = currentExtensionState(context.ext);
         return { ext: json({ ...current, environment }) };
       },
+      "tux.update_time": () => {
+        // D1 placeholder: no-op. D2 writes the eight upstream time variables
+        // (hour, day_of_year, year, weekday, leap_year, daytime, stage_of_day,
+        // season) from the virtual clock.
+      },
+      "tux.set_layer": () => {
+        // D1 placeholder: no-op. D3 draws the overlay (clear / RGBA colour /
+        // PNG image); the command shape is fixed here so imports stop
+        // dropping set_layer. This is a transparent overlay, not a map tile
+        // layer, so it is distinct from the kit's KV1 layer switching.
+      },
       "tux.set_faint_point": (context, value) => {
         const args = argsRecord(value, "tux.set_faint_point");
         const character = args.character === undefined ? "player" : args.character;
@@ -631,6 +642,25 @@ export function createTuxemonExtensions(source: BattleDbSource): ExtensionOption
         if (!nonEmptyString(args.environment)) return false;
         const state = currentExtensionState(context.ext);
         return negate(state.environment === args.environment, args);
+      },
+      "tux.time_is": (context, value) => {
+        // D1 placeholder: fold against the fixed P1 morning/daytime so the
+        // imported events keep their current behavior. D2 replaces this with
+        // the virtual clock comparison (hour/date/stage/season/...).
+        const args = argsRecord(value, "tux.time_is");
+        const property = String(args.property ?? "");
+        const operation = String(args.operation ?? "equals");
+        const target = String(args.value ?? "");
+        const fixed = property === "stage_of_day" ? "morning"
+          : property === "daytime" ? "true"
+          : null;
+        if (fixed === null) return negate(false, args);
+        const result = operation === "equals" || operation === "=="
+          ? fixed === target
+          : operation === "not_equals" || operation === "!="
+            ? fixed !== target
+            : false;
+        return negate(result, args);
       },
       "tux.has_faint_point": (context, value) => {
         const args = argsRecord(value, "tux.has_faint_point");

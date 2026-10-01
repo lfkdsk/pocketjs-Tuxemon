@@ -25,7 +25,11 @@ describe("G6 generated game assets", () => {
       maps: 263,
       collisionBodies: 14,
       maxActors: 501,
-      runtimeMaxActors: 205,
+      // D1 materializes the previously folded time_is events (Environment
+      // Day/Night, Night Day Cycle) in spyder_dryadsgrove, the largest
+      // playable map: 205 -> 207 events. Runtime terminal hashes are
+      // unchanged (the ext commands are D2 no-op placeholders).
+      runtimeMaxActors: 207,
       excludedActorStressMaps: [{ id: "test_npcs", slots: 501 }],
       options: {
         areas: true,
@@ -48,7 +52,7 @@ describe("G6 generated game assets", () => {
       playerSheet: `sprites/${appearances[0]!.template.sprite_name}.png`,
     });
     expect(GAME_ASSETS.order).toHaveLength(263);
-    expect(GAME_ASSETS.maxActors).toBe(205);
+    expect(GAME_ASSETS.maxActors).toBe(207);
     expect(NPC_SRC_INDEX).toHaveLength(175);
     for (const { id, entry } of NPC_SRC_INDEX) {
       const art = JSON.parse(readFileSync(resolve(ROOT, "dist", entry), "utf8")) as NpcArt;

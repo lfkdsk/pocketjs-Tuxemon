@@ -282,12 +282,12 @@
  "schemaErrors": [],
  "byFate": {
   "T3-dropped": 3412,
-  "T1": 31162,
-  "T4-dropped": 3979,
-  "T1-lowered": 2508,
+  "T1": 31345,
+  "T4-dropped": 3823,
+  "T1-lowered": 1896,
   "T2-dropped": 619,
-  "T3-placeholder": 29,
-  "structural": 772
+  "T3-placeholder": 741,
+  "structural": 776
  },
  "rows": [
   {
@@ -401,13 +401,13 @@
   {
    "key": "act:char_face:T1",
    "fate": "T1",
-   "count": 531,
+   "count": 534,
    "note": "K2 moveRoute targets an arbitrary event"
   },
   {
    "key": "act:char_face:T1-lowered",
    "fate": "T1-lowered",
-   "count": 446,
+   "count": 448,
    "note": "spawn facing becomes the NPC page route"
   },
   {
@@ -449,7 +449,7 @@
   {
    "key": "act:char_stop:T1-lowered",
    "fate": "T1-lowered",
-   "count": 87,
+   "count": 88,
    "note": "blocking fibers already freeze the player (cross-event locks are T2)"
   },
   {
@@ -503,7 +503,7 @@
   {
    "key": "act:create_npc:T1",
    "fate": "T1",
-   "count": 1324,
+   "count": 1327,
    "note": "local.npc.<slug> = 1 plus K1 place"
   },
   {
@@ -557,7 +557,7 @@
   {
    "key": "act:lock_controls:T1",
    "fate": "T1",
-   "count": 325,
+   "count": 326,
    "note": "K1 cross-event input lock command"
   },
   {
@@ -605,7 +605,7 @@
   {
    "key": "act:pathfind:T1",
    "fate": "T1",
-   "count": 326,
+   "count": 332,
    "note": "K2 deterministic pathTo route"
   },
   {
@@ -677,7 +677,7 @@
   {
    "key": "act:remove_npc:T1",
    "fate": "T1",
-   "count": 219,
+   "count": 221,
    "note": "local.npc.<slug> = 0"
   },
   {
@@ -731,7 +731,7 @@
   {
    "key": "act:set_environment:T1",
    "fate": "T1",
-   "count": 118,
+   "count": 171,
    "note": "tux.set_environment updates the active battle backdrop"
   },
   {
@@ -741,10 +741,10 @@
    "note": "runtime pathfinding / other-event routes / NPC motion props"
   },
   {
-   "key": "act:set_layer:T4-dropped",
-   "fate": "T4-dropped",
-   "count": 68,
-   "note": "presentation / meta"
+   "key": "act:set_layer:T3-placeholder",
+   "fate": "T3-placeholder",
+   "count": 94,
+   "note": "tux.set_layer ext command; D2 runtime placeholder, D3 overlay visual (no-op)"
   },
   {
    "key": "act:set_mission:T4-dropped",
@@ -809,7 +809,7 @@
   {
    "key": "act:set_variable:T1",
    "fate": "T1",
-   "count": 1248,
+   "count": 1251,
    "note": "variable set enum code"
   },
   {
@@ -863,7 +863,7 @@
   {
    "key": "act:translated_dialog:T1",
    "fate": "T1",
-   "count": 2176,
+   "count": 2192,
    "note": "text boxes from en_US .po (layout args ignored)"
   },
   {
@@ -893,7 +893,7 @@
   {
    "key": "act:unlock_controls:T1",
    "fate": "T1",
-   "count": 330,
+   "count": 331,
    "note": "K1 cross-event input lock command"
   },
   {
@@ -917,7 +917,7 @@
   {
    "key": "act:wait:T1",
    "fate": "T1",
-   "count": 427,
+   "count": 435,
    "note": "wait seconds"
   },
   {
@@ -935,7 +935,7 @@
   {
    "key": "behav:talk:structural",
    "fate": "structural",
-   "count": 772,
+   "count": 776,
    "note": "talk -> NPC action page"
   },
   {
@@ -1179,10 +1179,10 @@
    "note": "monster/party/meta state unknown to P1: fixed answer"
   },
   {
-   "key": "cond:is time_is:T1-lowered",
-   "fate": "T1-lowered",
+   "key": "cond:is time_is:T3-placeholder",
+   "fate": "T3-placeholder",
    "count": 361,
-   "note": "no clock in P1: folded against fixed daytime"
+   "note": "tux.time_is ext condition; D2 clock runtime (placeholder folds to fixed morning/daytime)"
   },
   {
    "key": "cond:is variable_set:T1",
@@ -1335,10 +1335,10 @@
    "note": "monster/party/meta state unknown to P1: fixed answer"
   },
   {
-   "key": "cond:not time_is:T1-lowered",
-   "fate": "T1-lowered",
+   "key": "cond:not time_is:T3-placeholder",
+   "fate": "T3-placeholder",
    "count": 257,
-   "note": "no clock in P1: folded against fixed daytime"
+   "note": "tux.time_is ext condition; D2 clock runtime (placeholder folds to fixed morning/daytime)"
   },
   {
    "key": "cond:not tracker:T1",
@@ -1355,7 +1355,7 @@
   {
    "key": "trigger:action:facingTile(area):T1",
    "fate": "T1",
-   "count": 434,
+   "count": 437,
    "note": "K1 rectangular event area (overlaps partitioned after guard sampling)"
   },
   {
@@ -1373,7 +1373,7 @@
   {
    "key": "trigger:guard:T1",
    "fate": "T1",
-   "count": 1078,
+   "count": 1157,
    "note": "parallel"
   },
   {
@@ -1391,13 +1391,13 @@
   {
    "key": "trigger:never-true guard:T4-dropped",
    "fate": "T4-dropped",
-   "count": 2190,
+   "count": 2104,
    "note": "fixed-false guard prevents the source event from starting"
   },
   {
    "key": "trigger:no-op after conversion:T4-dropped",
    "fate": "T4-dropped",
-   "count": 630,
+   "count": 628,
    "note": "every action was removed, so no project event was emitted"
   },
   {
@@ -1409,19 +1409,19 @@
   {
    "key": "trigger:spawn:T1-lowered",
    "fate": "T1-lowered",
-   "count": 690,
+   "count": 691,
    "note": "parallel page: guard -> local.npc.<slug> = 1"
   },
   {
    "key": "trigger:stacked event areas:T1-lowered",
    "fate": "T1-lowered",
-   "count": 458,
+   "count": 460,
    "note": "partitioned: match flags then bodies"
   },
   {
    "key": "trigger:talk:T1",
    "fate": "T1",
-   "count": 772,
+   "count": 776,
    "note": "NPC event action page (if-chain over talk guards)"
   },
   {
@@ -1433,7 +1433,7 @@
   {
    "key": "trigger:touch:on(area):T1",
    "fate": "T1",
-   "count": 348,
+   "count": 349,
    "note": "K1 rectangular event area (overlaps partitioned after guard sampling)"
   },
   {
@@ -1912,15 +1912,15 @@
    "summary": {
     "types": 98,
     "uses": 13617,
-    "native": 11583,
-    "degraded": 639,
-    "placeholder": 19,
-    "dropped": 1376,
-    "nativePercent": 85.1,
-    "executablePercent": 89.9,
+    "native": 11679,
+    "degraded": 642,
+    "placeholder": 89,
+    "dropped": 1207,
+    "nativePercent": 85.8,
+    "executablePercent": 91.1,
     "tier1": {
-     "uses": 6123,
-     "percent": 44.97,
+     "uses": 6153,
+     "percent": 45.19,
      "requiredUses": 6246,
      "requiredPercent": 45.9,
      "meetsBaseline": false
@@ -2096,10 +2096,10 @@
     {
      "type": "char_face",
      "total": 2027,
-     "native": 1555,
-     "degraded": 441,
+     "native": 1558,
+     "degraded": 443,
      "placeholder": 0,
-     "dropped": 31,
+     "dropped": 26,
      "reasons": {
       "degraded": [
        "spawn facing becomes the NPC page route",
@@ -2196,15 +2196,12 @@
      "type": "char_stop",
      "total": 88,
      "native": 0,
-     "degraded": 87,
+     "degraded": 88,
      "placeholder": 0,
-     "dropped": 1,
+     "dropped": 0,
      "reasons": {
       "degraded": [
        "blocking fibers already freeze the player (cross-event locks are T2)"
-      ],
-      "dropped": [
-       "fixed-false guard prevents the source event from starting"
       ]
      }
     },
@@ -2309,10 +2306,10 @@
     {
      "type": "create_npc",
      "total": 1503,
-     "native": 1324,
+     "native": 1327,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 179,
+     "dropped": 176,
      "reasons": {
       "native": [
        "local.npc.<slug> = 1 plus K1 place"
@@ -2458,10 +2455,10 @@
     {
      "type": "lock_controls",
      "total": 323,
-     "native": 319,
+     "native": 320,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 4,
+     "dropped": 3,
      "reasons": {
       "native": [
        "K1 cross-event input lock command"
@@ -2574,10 +2571,10 @@
     {
      "type": "pathfind",
      "total": 336,
-     "native": 326,
+     "native": 332,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 10,
+     "dropped": 4,
      "reasons": {
       "native": [
        "K2 deterministic pathTo route"
@@ -2760,10 +2757,10 @@
     {
      "type": "remove_npc",
      "total": 224,
-     "native": 219,
+     "native": 221,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 5,
+     "dropped": 3,
      "reasons": {
       "native": [
        "local.npc.<slug> = 0"
@@ -2895,17 +2892,17 @@
     {
      "type": "set_environment",
      "total": 174,
-     "native": 118,
+     "native": 171,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 56,
+     "dropped": 3,
      "reasons": {
       "native": [
        "tux.set_environment updates the active battle backdrop"
       ],
       "dropped": [
-       "fixed-false guard prevents the source event from starting",
-       "source event is not materialized by any map"
+       "source event is not materialized by any map",
+       "fixed-false guard prevents the source event from starting"
       ]
      }
     },
@@ -2940,12 +2937,13 @@
      "total": 79,
      "native": 0,
      "degraded": 0,
-     "placeholder": 0,
-     "dropped": 79,
+     "placeholder": 70,
+     "dropped": 9,
      "reasons": {
+      "placeholder": [
+       "tux.set_layer ext command; D2 runtime placeholder, D3 overlay visual (no-op)"
+      ],
       "dropped": [
-       "presentation / meta",
-       "every action was removed, so no project event was emitted",
        "fixed-false guard prevents the source event from starting"
       ]
      }
@@ -3109,10 +3107,10 @@
     {
      "type": "set_variable",
      "total": 715,
-     "native": 694,
+     "native": 697,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 21,
+     "dropped": 18,
      "reasons": {
       "native": [
        "variable set enum code"
@@ -3212,10 +3210,10 @@
     {
      "type": "translated_dialog",
      "total": 2068,
-     "native": 2013,
+     "native": 2029,
      "degraded": 1,
      "placeholder": 0,
-     "dropped": 54,
+     "dropped": 38,
      "reasons": {
       "native": [
        "text boxes from en_US .po (layout args ignored)"
@@ -3263,10 +3261,10 @@
     {
      "type": "unlock_controls",
      "total": 330,
-     "native": 324,
+     "native": 325,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 6,
+     "dropped": 5,
      "reasons": {
       "native": [
        "K1 cross-event input lock command"
@@ -3320,10 +3318,10 @@
     {
      "type": "wait",
      "total": 441,
-     "native": 421,
+     "native": 429,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 20,
+     "dropped": 12,
      "reasons": {
       "native": [
        "wait seconds"
@@ -3354,15 +3352,15 @@
    "summary": {
     "types": 64,
     "uses": 8663,
-    "native": 7700,
-    "degraded": 61,
-    "placeholder": 1,
-    "dropped": 901,
-    "nativePercent": 88.9,
-    "executablePercent": 89.6,
+    "native": 7765,
+    "degraded": 0,
+    "placeholder": 124,
+    "dropped": 774,
+    "nativePercent": 89.6,
+    "executablePercent": 91.1,
     "tier1": {
-     "uses": 4459,
-     "percent": 51.47,
+     "uses": 4470,
+     "percent": 51.6,
      "requiredUses": 4591,
      "requiredPercent": 53,
      "meetsBaseline": false
@@ -3414,27 +3412,26 @@
     {
      "type": "is button_pressed",
      "total": 419,
-     "native": 399,
+     "native": 402,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 20,
+     "dropped": 17,
      "reasons": {
       "native": [
        "consumed by trigger selection"
       ],
       "dropped": [
-       "every action was removed, so no project event was emitted",
-       "fixed-false guard prevents the source event from starting"
+       "every action was removed, so no project event was emitted"
       ]
      }
     },
     {
      "type": "is char_at",
      "total": 1811,
-     "native": 1806,
+     "native": 1807,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 5,
+     "dropped": 4,
      "reasons": {
       "native": [
        "consumed by trigger selection"
@@ -3499,10 +3496,10 @@
     {
      "type": "is char_facing_tile",
      "total": 344,
-     "native": 320,
+     "native": 323,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 24,
+     "dropped": 21,
      "reasons": {
       "native": [
        "consumed by trigger selection"
@@ -3890,15 +3887,15 @@
      "type": "is time_is",
      "total": 67,
      "native": 0,
-     "degraded": 2,
-     "placeholder": 0,
-     "dropped": 65,
+     "degraded": 0,
+     "placeholder": 64,
+     "dropped": 3,
      "reasons": {
+      "placeholder": [
+       "tux.time_is ext condition; D2 clock runtime (placeholder folds to fixed morning/daytime)"
+      ],
       "dropped": [
        "fixed-false guard prevents the source event from starting"
-      ],
-      "degraded": [
-       "no clock in P1: folded against fixed daytime"
       ]
      }
     },
@@ -3981,10 +3978,10 @@
     {
      "type": "not char_exists",
      "total": 1400,
-     "native": 1223,
+     "native": 1224,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 177,
+     "dropped": 176,
      "reasons": {
       "native": [
        "local.npc.<slug> presence resets on map entry"
@@ -4092,17 +4089,17 @@
     {
      "type": "not environment_is",
      "total": 172,
-     "native": 116,
+     "native": 169,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 56,
+     "dropped": 3,
      "reasons": {
       "native": [
        "tux.environment_is reads the active battle backdrop"
       ],
       "dropped": [
-       "fixed-false guard prevents the source event from starting",
-       "source event is not materialized by any map"
+       "source event is not materialized by any map",
+       "fixed-false guard prevents the source event from starting"
       ]
      }
     },
@@ -4244,12 +4241,12 @@
      "type": "not time_is",
      "total": 61,
      "native": 0,
-     "degraded": 59,
-     "placeholder": 0,
+     "degraded": 0,
+     "placeholder": 59,
      "dropped": 2,
      "reasons": {
-      "degraded": [
-       "no clock in P1: folded against fixed daytime"
+      "placeholder": [
+       "tux.time_is ext condition; D2 clock runtime (placeholder folds to fixed morning/daytime)"
       ],
       "dropped": [
        "fixed-false guard prevents the source event from starting"
@@ -4272,22 +4269,97 @@
     {
      "type": "not variable_set",
      "total": 671,
-     "native": 640,
+     "native": 644,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 31,
+     "dropped": 27,
      "reasons": {
       "native": [
        "page/if variable compare on the enum code"
       ],
       "dropped": [
        "fixed-false guard prevents the source event from starting",
-       "every action was removed, so no project event was emitted",
-       "source event is not materialized by any map"
+       "source event is not materialized by any map",
+       "every action was removed, so no project event was emitted"
       ]
      }
     }
    ]
   }
+ },
+ "weather": {
+  "source": "mods/tuxemon/db/weather/weathers.yaml",
+  "entries": [
+   {
+    "slug": "cloudy",
+    "name": "weather_cloudy",
+    "temperature": "mild",
+    "wind": "breezy",
+    "modifiers": []
+   },
+   {
+    "slug": "foggy",
+    "name": "weather_foggy",
+    "temperature": "cold",
+    "wind": "calm",
+    "modifiers": []
+   },
+   {
+    "slug": "freezing",
+    "name": "weather_freezing",
+    "temperature": "freezing",
+    "wind": "breezy",
+    "modifiers": []
+   },
+   {
+    "slug": "hot",
+    "name": "weather_hot",
+    "temperature": "hot",
+    "wind": "calm",
+    "modifiers": []
+   },
+   {
+    "slug": "misty",
+    "name": "weather_misty",
+    "temperature": "mild",
+    "wind": "calm",
+    "modifiers": []
+   },
+   {
+    "slug": "rain",
+    "name": "weather_rain",
+    "temperature": "mild",
+    "wind": "gusty",
+    "modifiers": []
+   },
+   {
+    "slug": "snow",
+    "name": "weather_snow",
+    "temperature": "cold",
+    "wind": "breezy",
+    "modifiers": []
+   },
+   {
+    "slug": "sunny",
+    "name": "weather_sunny",
+    "temperature": "warm",
+    "wind": "calm",
+    "modifiers": []
+   },
+   {
+    "slug": "thunderstorm",
+    "name": "weather_thunderstorm",
+    "temperature": "warm",
+    "wind": "stormy",
+    "modifiers": []
+   },
+   {
+    "slug": "windy",
+    "name": "weather_windy",
+    "temperature": "mild",
+    "wind": "windy",
+    "modifiers": []
+   }
+  ]
  }
 }
