@@ -7,6 +7,7 @@ import type {
   BattlePhase,
   PendingBattleAction,
 } from "./core.ts";
+import type { WeatherRow } from "../importer/battle-schema.ts";
 
 export const STAT_NAMES = ["armour", "dodge", "hp", "melee", "ranged", "speed"] as const;
 export type StatName = (typeof STAT_NAMES)[number];
@@ -184,6 +185,9 @@ export interface TuxemonBattleDb {
   taste_order?: string[];
   shape: Record<string, { attributes: Stats }>;
   status: Record<string, DbStatus>;
+  /** The ten imported weather rows; empty modifier lists make every
+   *  weather a damage no-op until upstream populates them. */
+  weather: Record<string, WeatherRow>;
   capture: DbCaptureRules;
   capture_devices: {
     status_modifier: number;
@@ -354,6 +358,9 @@ export interface TuxemonBattleState extends BattleCoreState<BattleMonster> {
   policy: PlayerPolicy;
   inside: boolean;
   hour: number;
+  /** Overworld weather slug snapshotted at battle start. Null for battles
+   *  started without a weather stream (fixtures, oracle baselines). */
+  weather: string | null;
   fieldSize: 1 | 2;
   moneyMethod: "participant_scaled" | "conserved";
   rewards: RewardEvent[];
@@ -379,6 +386,8 @@ export interface BattleStart {
   enemy: MonsterSnapshot[];
   inside?: boolean;
   hour?: number;
+  /** Weather slug to snapshot into the battle; defaults to null. */
+  weather?: string | null;
   fieldSize?: 1 | 2;
   moneyMethod?: "participant_scaled" | "conserved";
   runAttempts?: number;

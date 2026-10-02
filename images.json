@@ -6085,5 +6085,17 @@
  },
  "assets/screen-layers/tux-overlay-image_gfx_ui_overlay_torchlight_png.png": {
   "psm": 3
+ },
+ "assets/weather/raindrop.png": {
+  "psm": 3
+ },
+ "assets/weather/snowflake.png": {
+  "psm": 3
+ },
+ "assets/weather/wind-streak.png": {
+  "psm": 3
+ },
+ "assets/weather/fog-veil.png": {
+  "psm": 3
  }
 }

@@ -304,10 +304,9 @@ interface EvolutionCase {
 const EVOLUTION_CASES: EvolutionCase[] = [
   {
     map: "spyder_route1",
-    // D1 time/date, GI-1a presentation and GM1 music mappings materialize
-    // three events ahead of this page, shifting its generated id by 3 from
-    // the pre-D1 baseline.
-    evolution: "e030_evolution_all",
+    // Pin the integrated deterministic ordering after time, presentation,
+    // moving-guard, world-layer and live player-name events materialize.
+    evolution: "e035_evolution_all",
     storyGate: "battle return (no authored story lock)",
     lockPages: [],
     battleStarts: [],
@@ -316,10 +315,9 @@ const EVOLUTION_CASES: EvolutionCase[] = [
   },
   {
     map: "spyder_paper_town",
-    // D1 time/date, GI-1a presentation and GM1 music mappings materialize
-    // three events ahead of this page, shifting its generated id by 3 from
-    // the pre-D1 baseline.
-    evolution: "e057_evolution_all",
+    // The First Fight ids remain explicit below; this pins the evolution page
+    // after the integrated world/time/name guard ordering is applied.
+    evolution: "e062_evolution_all",
     storyGate: "First Fight - Start / result event",
     lockPages: ["e024_first_fight_start"],
     battleStarts: ["e024_first_fight_start"],
@@ -328,7 +326,9 @@ const EVOLUTION_CASES: EvolutionCase[] = [
   },
   {
     map: "spyder_radiotower",
-    evolution: "e015_evolution_all",
+    // Pin the inside-map ordering after the world-layer reset, day-cycle and
+    // live player-name conditions materialize.
+    evolution: "e017_evolution_all",
     storyGate: "Stop!",
     lockPages: ["e007_stop_r002"],
     battleStarts: ["e007_stop_r002"],

@@ -139,7 +139,7 @@ function appearanceCommand(project: RawProject): RawCommand {
 }
 
 function mapAnimationCommand(project: RawProject): RawCommand {
-  const event = eventOf(mapOf(project, "spyder_route1"), "e007_encounters_r022");
+  const event = eventOf(mapOf(project, "spyder_route1"), "e007_encounters_r027");
   const command = commandOf(event, "mapAnim");
   if (
     command.anim !== "tux_grass_100000us" || command.target !== "player" ||

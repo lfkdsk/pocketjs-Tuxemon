@@ -26,17 +26,10 @@ describe("G6 generated game assets", () => {
       maps: 263,
       collisionBodies: 14,
       maxActors: 504,
-      // Runtime appearance materializes extra character slots; GM1 adds the
-      // previously-dropped play_music parallel event to 195 maps, D2 adds
-      // the saved-clock/daylight parallel event and the map-entry NPC party
-      // clear adds one more, so test_npcs (the actor stress map) gains slots
-      // and the runtime max gains actors. The largest playable map remains
-      // below the excluded test_npcs stress map. The scenario's three
-      // quarantine-box events (create/hide/show) add three more. Across the
-      // shared Spyder scenario, rejecting choice_surf plus four
-      // push_into_water pages and restoring cheat_code_apexplayer removes a
-      // net four event actors from the largest playable map.
-      runtimeMaxActors: 218,
+      // The integrated importer recomputes this bound from every reachable
+      // map after world/time/name guards and quarantine events materialize.
+      // The excluded test_npcs stress map remains the global maximum.
+      runtimeMaxActors: 225,
       excludedActorStressMaps: [{ id: "test_npcs", slots: 504 }],
       options: {
         areas: true,
@@ -68,7 +61,7 @@ describe("G6 generated game assets", () => {
       playerSheet: `sprites/${appearances[0]!.template.sprite_name}.png`,
     });
     expect(GAME_ASSETS.order).toHaveLength(263);
-    expect(GAME_ASSETS.maxActors).toBe(218);
+    expect(GAME_ASSETS.maxActors).toBe(225);
     expect(NPC_SRC_INDEX).toHaveLength(183);
     for (const { id, entry } of NPC_SRC_INDEX) {
       const art = JSON.parse(readFileSync(resolve(ROOT, "dist", entry), "utf8")) as NpcArt;

@@ -10,6 +10,7 @@ mod g6_quickjs_bench {
     use std::fmt::Write as _;
     use std::path::Path;
     use std::time::Duration;
+    use std::sync::atomic::{AtomicU64, Ordering};
     use std::time::Instant;
 
     const BENCH_APP_ID: &str = "dev.lfkdsk.pocket-tuxemon-bench";
@@ -48,6 +49,59 @@ mod g6_quickjs_bench {
                 Self::Idle => Guest::new_with_idle_gc(pocket_mod::IdleGcConfig::default()),
                 Self::Auto => Guest::new(),
             }
+        }
+    }
+
+    /// Cumulative QuickJS allocation counters. `malloc_count` in
+    /// JSMemoryUsage is the LIVE count (decremented on free), so it cannot
+    /// measure an allocation rate; this counting allocator wraps the stock
+    /// RustAllocator and counts every alloc/calloc/realloc event and the
+    /// requested bytes. Enabled with G6_COUNT_ALLOCS=1 so the journey and
+    /// map-first-visit tests keep the default allocator.
+    static ALLOC_COUNT: AtomicU64 = AtomicU64::new(0);
+    static ALLOC_BYTES: AtomicU64 = AtomicU64::new(0);
+
+    fn alloc_counts() -> (u64, u64) {
+        (
+            ALLOC_COUNT.load(Ordering::Relaxed),
+            ALLOC_BYTES.load(Ordering::Relaxed),
+        )
+    }
+
+    struct CountingAllocator {
+        inner: pocket_mod::qjs::allocator::RustAllocator,
+    }
+
+    impl CountingAllocator {
+        fn new() -> Self {
+            Self { inner: pocket_mod::qjs::allocator::RustAllocator }
+        }
+    }
+
+    unsafe impl pocket_mod::qjs::allocator::Allocator for CountingAllocator {
+        fn alloc(&mut self, size: usize) -> *mut u8 {
+            ALLOC_COUNT.fetch_add(1, Ordering::Relaxed);
+            ALLOC_BYTES.fetch_add(size as u64, Ordering::Relaxed);
+            self.inner.alloc(size)
+        }
+        fn calloc(&mut self, count: usize, size: usize) -> *mut u8 {
+            ALLOC_COUNT.fetch_add(1, Ordering::Relaxed);
+            ALLOC_BYTES.fetch_add(count as u64 * size as u64, Ordering::Relaxed);
+            self.inner.calloc(count, size)
+        }
+        unsafe fn dealloc(&mut self, ptr: *mut u8) {
+            self.inner.dealloc(ptr)
+        }
+        unsafe fn realloc(&mut self, ptr: *mut u8, new_size: usize) -> *mut u8 {
+            ALLOC_COUNT.fetch_add(1, Ordering::Relaxed);
+            ALLOC_BYTES.fetch_add(new_size as u64, Ordering::Relaxed);
+            self.inner.realloc(ptr, new_size)
+        }
+        unsafe fn usable_size(ptr: *mut u8) -> usize
+        where
+            Self: Sized,
+        {
+            pocket_mod::qjs::allocator::RustAllocator::usable_size(ptr)
         }
     }
 
@@ -327,8 +381,16 @@ mod g6_quickjs_bench {
             args.data_root.clone(),
             &audio_host,
         )?;
-        let gc_mode = GcMode::from_env();
-        let guest = gc_mode.guest()?;
+        let count_allocs = std::env::var("G6_COUNT_ALLOCS").is_ok();
+        // The diagnostic counting allocator predates the production idle-GC
+        // allocator and cannot be composed with it. Allocation probes run in
+        // explicit auto mode; ordinary benchmark runs exercise idle GC.
+        let gc_mode = if count_allocs { GcMode::Auto } else { GcMode::from_env() };
+        let guest = if count_allocs {
+            Guest::new_with_alloc(CountingAllocator::new())?
+        } else {
+            gc_mode.guest()?
+        };
         surface.mount(&guest)?;
         let offload = text_worker(pak);
         offload.mount(&guest)?;
@@ -344,6 +406,30 @@ mod g6_quickjs_bench {
             "g6-fixed-clock",
             "globalThis.__pocketTuxemonInitialCivilTime={year:2024,month:6,day:15,hour:9,minute:0};",
         )?;
+        // Optional weather override for particle-overlay cost measurement.
+        if let Ok(slug) = std::env::var("G6_WEATHER") {
+            guest.eval(
+                "g6-fixed-weather",
+                &format!("globalThis.__pocketTuxemonInitialWeather={{slug:{}}};", serde_json::to_string(&slug).unwrap()),
+            )?;
+        }
+        // Allocation-regression switch: skip mounting the weather overlay
+        // entirely so the mem walk can diff overlay on/off on one build.
+        if std::env::var("G6_WEATHER_OVERLAY_OFF").is_ok() {
+            guest.eval(
+                "g6-weather-overlay-off",
+                "globalThis.__pocketTuxemonWeatherOverlay=false;",
+            )?;
+        }
+        // Allocation-regression switch: mount the overlay but make its frame
+        // handler a no-op, so the mem walk diffs frame-handler cost without
+        // mount-time allocations changing the heap between runs.
+        if std::env::var("G6_WEATHER_OVERLAY_NO_FRAME").is_ok() {
+            guest.eval(
+                "g6-weather-overlay-no-frame",
+                "globalThis.__pocketTuxemonWeatherOverlayNoFrame=true;",
+            )?;
+        }
         let audio = audio::AudioSurface::new(audio_host.client(0));
         audio.mount(&guest)?;
         let host_init_ms = host_init_start.elapsed().as_secs_f64() * 1_000.0;
@@ -674,6 +760,31 @@ mod g6_quickjs_bench {
             let mut usage: pocket_mod::qjs::qjs::JSMemoryUsage = std::mem::zeroed();
             pocket_mod::qjs::qjs::JS_ComputeMemoryUsage(runtime, &mut usage);
             (usage.memory_used_size, usage.malloc_size, usage.obj_count)
+        })
+    }
+
+    /// Cumulative allocation count and current live malloc bytes. Both are
+    /// O(1) fields of JSMallocState (JS_ComputeMemoryUsage reads them
+    /// directly); the heap walk the same call performs for the other
+    /// JSMemoryUsage fields is harmless for a before/after probe.
+    fn qjs_malloc_stats(guest: &Guest) -> (i64, i64) {
+        guest.with(|ctx| unsafe {
+            let runtime = pocket_mod::qjs::qjs::JS_GetRuntime(ctx.as_raw().as_ptr());
+            let mut usage: pocket_mod::qjs::qjs::JSMemoryUsage = std::mem::zeroed();
+            pocket_mod::qjs::qjs::JS_ComputeMemoryUsage(runtime, &mut usage);
+            (usage.malloc_count, usage.malloc_size)
+        })
+    }
+
+    /// A threshold transition is a coarse GC signal, not an exact count:
+    /// JS_GetGCThreshold can stay flat across a JS_RunGC cycle (the fix-3
+    /// review's precise JS_RunGC counter observed a cycle GC with no
+    /// threshold change). QuickJS exposes no GC hook, so exact GC counting
+    /// requires instrumenting JS_RunGC in a temporary engine copy.
+    fn qjs_gc_threshold(guest: &Guest) -> u64 {
+        guest.with(|ctx| unsafe {
+            let runtime = pocket_mod::qjs::qjs::JS_GetRuntime(ctx.as_raw().as_ptr());
+            pocket_mod::qjs::qjs::JS_GetGCThreshold(runtime) as u64
         })
     }
 
@@ -1335,6 +1446,122 @@ mod g6_quickjs_bench {
             transfers,
             used as f64 / 1_048_576.0,
             malloc as f64 / 1_048_576.0,
+        );
+        let _ = std::fs::remove_dir_all(data);
+    }
+
+    /// Allocation probe: replay a tape segment of N frames (default 1,000)
+    /// and report QuickJS cumulative allocation count, live malloc bytes,
+    /// and GC-threshold transitions. Used to prove the weather overlay's
+    /// per-frame path is zero-allocation: the regression
+    /// (weather-alloc-regression.sh) runs the same bundle with the overlay's
+    /// frame handler active vs skipped (G6_WEATHER_OVERLAY_NO_FRAME, overlay
+    /// mounted identically in both) on the same tape window and diffs.
+    /// G6_MEM_START skips to a later tape position (warm-up replay) so the
+    /// probe can measure an outdoor segment where the overlay is active. The
+    /// measured window is [start, start+frames): warm-up replays
+    /// [0, start), and the first measured frame is `start` itself. With
+    /// G6_MEM_PER_FRAME set, the probe also prints one MEM_FRAME line per
+    /// measured frame with that frame's allocation count and bytes, so a
+    /// main-vs-branch run can diff the two bundles frame by frame (see
+    /// weather-alloc-main-diff.sh).
+    #[test]
+    #[ignore]
+    fn mem_walk() {
+        let dist = PathBuf::from(std::env::var("G6_DIST").expect("G6_DIST"));
+        let journey_path = PathBuf::from(std::env::var("G6_JOURNEY").expect("G6_JOURNEY"));
+        let journey: Journey =
+            serde_json::from_slice(&std::fs::read(journey_path).unwrap()).unwrap();
+        let width: u32 = std::env::var("G6_BENCH_W").unwrap().parse().unwrap();
+        let height: u32 = std::env::var("G6_BENCH_H").unwrap().parse().unwrap();
+        let viewport = format!("{width}x{height}");
+        let start: usize = std::env::var("G6_MEM_START")
+            .ok()
+            .and_then(|value| value.parse().ok())
+            .unwrap_or(0)
+            .min(journey.masks.len().saturating_sub(2));
+        let frames: usize = std::env::var("G6_MEM_FRAMES")
+            .ok()
+            .and_then(|value| value.parse().ok())
+            .unwrap_or(1_000)
+            .min(journey.masks.len().saturating_sub(1).saturating_sub(start));
+        let weather = std::env::var("G6_WEATHER").unwrap_or_else(|_| "sunny".into());
+        let bench_root = PathBuf::from(std::env::var("G6_BENCH_ROOT").expect("G6_BENCH_ROOT"));
+        let data = bench_root.join(format!("qjs-mem-{}-{width}x{height}", std::process::id()));
+        let maps = PathBuf::from(std::env::var("G6_MAPS").expect("G6_MAPS"));
+        seed_maps(&maps, &data);
+        let battle = PathBuf::from(std::env::var("G6_BATTLE").expect("G6_BATTLE"));
+        seed_battle(&battle, &data);
+        let animated = PathBuf::from(std::env::var("G6_ANIMATED").expect("G6_ANIMATED"));
+        seed_animated(&animated, &data);
+        let npc_src = PathBuf::from(std::env::var("G6_NPC_SRC").expect("G6_NPC_SRC"));
+        seed_npc_src(&npc_src, &data);
+        let terrain_stream = PathBuf::from(std::env::var("G6_TERRAIN_STREAM").expect("G6_TERRAIN_STREAM"));
+        seed_terrain_stream(&terrain_stream, &data);
+
+        let (runtime, _stages) =
+            boot_staged(args(&dist, "pocket-tuxemon", data.clone(), width, height)).unwrap();
+        // CountingAllocator cannot be composed with the production idle-GC
+        // allocator; boot_staged therefore forces this probe to auto mode.
+        let mut bench = Bench {
+            rt: runtime,
+            gc_mode: GcMode::Auto,
+            sample_structural: false,
+            hash_every: 1,
+            battle_buckets: false,
+        };
+        // Warm-up: replay up to `start` so the probe measures a specific
+        // outdoor segment (the G6 tape opens indoors in a bedroom).
+        for index in 0..start {
+            let _sample = bench.frame(index, journey.masks[index], None, false);
+        }
+        let (count_start, size_start) = qjs_malloc_stats(&bench.rt.guest);
+        let (alloc_start, bytes_start) = alloc_counts();
+        let mut threshold = qjs_gc_threshold(&bench.rt.guest);
+        let mut gc_threshold_transitions = 0u64;
+        let mut size_min = size_start;
+        let mut size_max = size_start;
+        let per_frame = std::env::var("G6_MEM_PER_FRAME").is_ok();
+        for offset in 0..frames {
+            let index = start + offset;
+            let mask = journey.masks[index];
+            let (alloc_before, bytes_before) = alloc_counts();
+            let _sample = bench.frame(index, mask, None, false);
+            if per_frame {
+                let (alloc_after, bytes_after) = alloc_counts();
+                println!(
+                    "MEM_FRAME frame={index} allocs={} bytes={}",
+                    alloc_after - alloc_before,
+                    bytes_after - bytes_before,
+                );
+            }
+            // Sample every frame: a cycle GC between two sampled frames
+            // would otherwise be invisible. This counts observed
+            // JS_GetGCThreshold transitions, not exact GC invocations —
+            // QuickJS exposes no GC hook, so the report must not claim a
+            // precise GC count.
+            let next_threshold = qjs_gc_threshold(&bench.rt.guest);
+            if next_threshold != threshold {
+                gc_threshold_transitions += 1;
+                threshold = next_threshold;
+            }
+            let (_, size) = qjs_malloc_stats(&bench.rt.guest);
+            size_min = size_min.min(size);
+            size_max = size_max.max(size);
+        }
+        let (count_end, size_end) = qjs_malloc_stats(&bench.rt.guest);
+        let (alloc_end, bytes_end) = alloc_counts();
+        println!(
+            "MEM_WALK viewport={viewport} weather={weather} overlay_off={} no_frame={} start={start} frames={frames} alloc_count_delta={} alloc_bytes_delta={} malloc_count_delta={} malloc_size_start={} malloc_size_end={} malloc_size_min={} malloc_size_max={} gc_threshold_transitions={gc_threshold_transitions}",
+            std::env::var("G6_WEATHER_OVERLAY_OFF").is_ok(),
+            std::env::var("G6_WEATHER_OVERLAY_NO_FRAME").is_ok(),
+            alloc_end - alloc_start,
+            bytes_end - bytes_start,
+            count_end - count_start,
+            size_start,
+            size_end,
+            size_min,
+            size_max,
         );
         let _ = std::fs::remove_dir_all(data);
     }

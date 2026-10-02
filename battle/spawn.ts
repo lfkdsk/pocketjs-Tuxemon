@@ -14,6 +14,51 @@ export interface SpawnMonsterOptions {
   moneyModifier?: number;
 }
 
+/** Event-time mutations a staged monster carries into its battle snapshot
+ *  (set_monster_attribute / add_tech / set_monster_health / set_monster_status
+ *  on a not-yet-spawned NPC party member). The spawn still draws gender and
+ *  the level move set from the deterministic RNG; the overrides win, exactly
+ *  like upstream's post-spawn setters. */
+export interface PendingOverrides {
+  gender?: string;
+  acquisition?: string;
+  nickname?: string;
+  moves?: string[];
+  /** Upstream set_monster_health: a full heal, a fraction of max HP, or a
+   *  flat point value, resolved against the spawned snapshot's max HP. */
+  health?: { kind: "full" | "fraction" | "points"; value: number };
+  /** Upstream set_monster_status: a status slug to apply, or null to clear. */
+  status?: string | null;
+}
+
+export function applyPendingOverrides(
+  snapshot: SpawnedMonsterSnapshot,
+  overrides: PendingOverrides,
+): SpawnedMonsterSnapshot {
+  if (overrides.gender !== undefined) snapshot.gender = overrides.gender;
+  if (overrides.acquisition !== undefined) snapshot.acquisition = overrides.acquisition;
+  if (overrides.nickname !== undefined) snapshot.nickname = overrides.nickname;
+  if (overrides.moves !== undefined && overrides.moves.length > 0) {
+    const known = new Set(snapshot.moves);
+    for (const move of overrides.moves) {
+      if (!known.has(move)) {
+        snapshot.moves.push(move);
+        known.add(move);
+      }
+    }
+  }
+  if (overrides.health !== undefined) {
+    const { kind, value } = overrides.health;
+    const wanted = kind === "full" ? snapshot.base.hp
+      : kind === "fraction" ? Math.trunc(snapshot.base.hp * value)
+      : Math.trunc(value);
+    snapshot.currentHp = Math.max(0, Math.min(snapshot.base.hp, wanted));
+    if (snapshot.currentHp === 0) snapshot.status = "faint";
+  }
+  if (overrides.status !== undefined) snapshot.status = overrides.status;
+  return snapshot;
+}
+
 type RandomSource = () => number;
 
 function weightedChoice(

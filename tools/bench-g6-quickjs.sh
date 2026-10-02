@@ -10,7 +10,19 @@ map_bundle="$bench_root/map-bundle"
 map_report=${G6_MAP_REPORT:-$root/reports/G7-map-first-visits.tsv}
 journey=${G6_JOURNEY:-$root/data/g6-journey.json}
 expected_map=${G6_EXPECTED_MAP:-spyder_route1}
-expected_state=${G6_STATE_SHA256:-340e842a567ccc365f514a78835230a125802fb2dde37e6da1a96facdc1e82ac}
+# The expected terminal state is the one the tape itself records, so a
+# re-pinned tape cannot leave a stale literal behind here. G6_STATE_SHA256
+# still overrides it (e.g. G6_WEATHER=rain runs, whose terminal state
+# intentionally differs from the sunny tape).
+terminal_sha256=$(bun -e '
+  const journey = JSON.parse(await Bun.file(process.argv[1]).text());
+  const value = journey.terminalStateSha256;
+  if (typeof value !== "string" || !/^[0-9a-f]{64}$/.test(value)) {
+    throw new Error("missing or malformed terminalStateSha256");
+  }
+  console.log(value);
+' "$journey")
+expected_state=${G6_STATE_SHA256:-$terminal_sha256}
 app_dist=${G6_DIST:-$root/dist/linux-app}
 app_js="$app_dist/pocket-tuxemon.js"
 app_pak="$app_dist/pocket-tuxemon.pak"

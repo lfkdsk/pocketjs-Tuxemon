@@ -121,6 +121,7 @@
  "battle_last_loser": [
   "2",
   "acolyte",
+  "cam",
   "classic_gym_leader_astra",
   "classic_gym_leader_bravion",
   "classic_gym_leader_ferrum",
@@ -240,6 +241,8 @@
   "spyder_hospital1_rhizome",
   "spyder_hospital1_walt",
   "spyder_hospital1_zekar",
+  "spyder_leathergym_brad",
+  "spyder_leathergym_chad",
   "spyder_mansion_gillette",
   "spyder_mansion_lucy",
   "spyder_mansion_lyle",
@@ -325,6 +328,7 @@
   "spyder_scoop_lanth",
   "spyder_scoop_orba",
   "spyder_scoop_paine",
+  "spyder_scoop_reese",
   "spyder_scoop_rubid",
   "spyder_scoop_taggart",
   "spyder_scoop_turner",
@@ -373,7 +377,8 @@
   "spyder_wayfarer1_nightshade",
   "spyder_wayfarer1_ratcher",
   "spyder_wayfarer1_victor",
-  "water_outskirts_dude"
+  "water_outskirts_dude",
+  "zeke"
  ],
  "battle_last_result": [
   "clear",
@@ -652,11 +657,13 @@
   "spyder_wayfarer1_ratcher",
   "spyder_wayfarer1_victor",
   "volcoli",
-  "water_outskirts_dude"
+  "water_outskirts_dude",
+  "zeke"
  ],
  "battle_last_winner": [
   "2",
   "acolyte",
+  "cam",
   "classic_gym_leader_astra",
   "classic_gym_leader_bravion",
   "classic_gym_leader_ferrum",
@@ -863,6 +870,7 @@
   "spyder_scoop_lanth",
   "spyder_scoop_orba",
   "spyder_scoop_paine",
+  "spyder_scoop_reese",
   "spyder_scoop_rubid",
   "spyder_scoop_taggart",
   "spyder_scoop_turner",
@@ -911,7 +919,8 @@
   "spyder_wayfarer1_nightshade",
   "spyder_wayfarer1_ratcher",
   "spyder_wayfarer1_victor",
-  "water_outskirts_dude"
+  "water_outskirts_dude",
+  "zeke"
  ],
  "battledone": [
   "redo",
@@ -1691,6 +1700,12 @@
  "lambertchosen": [
   "no",
   "yes"
+ ],
+ "layer_variant": [
+  "color_0_0_0_255",
+  "color_0_0_128_128",
+  "color_102_51_0_128",
+  "image_gfx_ui_overlay_torchlight_png"
  ],
  "leavemealone": [
   "yes"

@@ -9,11 +9,13 @@ test("every G6 lockInput page dynamically releases or transfers", () => {
   const project = materializeShardedProject(ROOT);
   const report = verifyProjectLocks(project);
   expect(report.format).toBe("pocket-tuxemon/g6-lock-check/v2");
-  // D1 materializes the maple_bedroom "Stop 27Apr" date event, and the
-  // restored Benden captured dialogue contributes one additional lock page.
-  expect(report.lockCommands).toBe(335);
-  expect(report.dynamicChecks).toBe(335);
-  expect(report.pages).toBe(330);
+  // D1 materializes the maple_bedroom "Stop 27Apr" date event (previously
+  // dropped by the time_is date const-false fold), adding one lockInput page.
+  // COV-B materializes the spyder_candy_town plague-confiscation event (its
+  // is party_infected ...,all guard used to fold false), adding one more.
+  expect(report.lockCommands).toBe(336);
+  expect(report.dynamicChecks).toBe(336);
+  expect(report.pages).toBe(331);
   expect(report.outcomes).toMatchObject({ unresolved: 0, error: 0 });
   expect(report.failures).toEqual([]);
   expect(report.exceptions).toEqual([]);

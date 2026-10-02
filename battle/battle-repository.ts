@@ -98,6 +98,7 @@ export function createTuxemonBattleDbProvider(
         tasteOrder: shell.tasteOrder,
         encounters: shell.encounters,
         environments: shell.environments,
+        weather: shell.weather,
         npcs: shell.npcs,
         ui: shell.ui,
         monsters: lazyShardTable(shell.monstersIndex, source, "monster") as BattleDb["monsters"],

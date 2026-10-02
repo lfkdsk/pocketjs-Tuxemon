@@ -23,7 +23,9 @@ const journey = JSON.parse(readFileSync(join(ROOT, "data/g6-journey.json"), "utf
 };
 // Same pinned terminal state the G7 map repository test and the QuickJS
 // bench check; GP1 changes only how the battle database is loaded.
-const EXPECTED_TERMINAL_STATE_SHA256 = "340e842a567ccc365f514a78835230a125802fb2dde37e6da1a96facdc1e82ac";
+// COV-B fix-2's per-domain battle_last_* enum codes shift the variable
+// values the player battles write, so the terminal hash moves.
+const EXPECTED_TERMINAL_STATE_SHA256 = "ce5b5706c70aa374553aa4f476f1cb73564ecc8e687c627c4e74312b5dc5064a";
 
 function input(mask: number, previous: number): SessionInput {
   const pressed = mask & ~previous;

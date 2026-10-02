@@ -13,6 +13,7 @@ import {
 } from "./core.ts";
 import { calculateDefeatExperience, giveExperience } from "./progression.ts";
 import { applyStatModifier, calculateBaseStats, combatStat, monsterFromSnapshot, pythonRound } from "./stats.ts";
+import { weatherDamageFactor } from "./weather-modifiers.ts";
 import {
   STAT_NAMES,
   type BattleMonster,
@@ -484,6 +485,7 @@ export function calculateDamage(
   move: { power: number },
   user: BattleMonster,
   target: BattleMonster,
+  weatherFactor = 1,
 ): readonly [number, number] {
   const range = RANGE_MAP[technique.range];
   if (!range) return [0, 0];
@@ -491,8 +493,11 @@ export function calculateDamage(
     ? 7 + user.level
     : combatStat(user, range[0]) * (7 + user.level);
   const resistance = Math.max(1, range[1] === "resist" ? 1 : combatStat(target, range[1]));
+  // The returned multiplier stays the type affinity alone (effectiveness
+  // messages and oracle element_multiplier traces); the weather factor is
+  // upstream's additional_factors product, applied to damage only.
   const multiplier = affinity(db, technique.types, target.types);
-  return [Math.trunc(strength * move.power * multiplier / resistance), multiplier];
+  return [Math.trunc(strength * move.power * multiplier * weatherFactor / resistance), multiplier];
 }
 
 function recordDamage(
@@ -971,6 +976,9 @@ function performTechnique(
       };
   const before = partyHp(state);
   const preStatus = user.status;
+  // One weather factor per technique use: the dealer is the modifier
+  // subject, so every damage effect of this technique shares it.
+  const weatherFactor = weatherDamageFactor(db, state, user);
   const result: TechniqueResult = {
     success: false,
     damage: 0,
@@ -1002,7 +1010,7 @@ function performTechnique(
         const enemySide = activeOnSide(state, getSide(state, target.uid));
         const spread = targets.filter((candidate) => enemySide.includes(candidate)).length > 1;
         for (const victim of targets) {
-          let [damage, multiplier] = calculateDamage(db, technique, move, user, victim);
+          let [damage, multiplier] = calculateDamage(db, technique, move, user, victim, weatherFactor);
           if (spread && enemySide.includes(victim)) damage = Math.trunc(damage * 0.75);
           victim.currentHp = Math.max(0, victim.currentHp - damage);
           if (victim.uid === target.uid) {
@@ -1028,7 +1036,7 @@ function performTechnique(
       }
       case "splash": {
         setHit(technique.accuracy >= hitRoll);
-        let [damage, multiplier] = calculateDamage(db, technique, move, user, target);
+        let [damage, multiplier] = calculateDamage(db, technique, move, user, target, weatherFactor);
         if (!result.hit) damage = Math.trunc(damage / Number(parameters[0]));
         const targets = techniqueTargets(state, technique, user, target);
         const enemySide = activeOnSide(state, getSide(state, target.uid));
@@ -1081,7 +1089,7 @@ function performTechnique(
           state.hitRolls[String(user.uid)] = nextRandom(state);
           if (technique.accuracy < state.hitRolls[String(user.uid)]!) break;
           hits++;
-          damage += calculateDamage(db, technique, move, user, target)[0];
+          damage += calculateDamage(db, technique, move, user, target, weatherFactor)[0];
         }
         if (hits > 0) target.currentHp = Math.max(0, target.currentHp - damage);
         result.damage += damage;
@@ -1207,7 +1215,7 @@ function performTechnique(
       }
       case "money": {
         setHit(technique.accuracy >= hitRoll);
-        const damage = calculateDamage(db, technique, move, user, target)[0];
+        const damage = calculateDamage(db, technique, move, user, target, weatherFactor)[0];
         if (result.hit) {
           if (getSide(state, user.uid) === 0) state.techniqueGold += damage;
         } else user.currentHp = Math.max(0, user.currentHp - damage);
@@ -1672,6 +1680,7 @@ export function createBattle(db: TuxemonBattleDb, start: BattleStart): TuxemonBa
     policy: start.policy ?? "first",
     inside: start.inside ?? false,
     hour: start.hour ?? 12,
+    weather: start.weather ?? null,
     fieldSize: start.fieldSize ?? 1,
     moneyMethod: start.moneyMethod ?? "conserved",
     rng: start.seed >>> 0,

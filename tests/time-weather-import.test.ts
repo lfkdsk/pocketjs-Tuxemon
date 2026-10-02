@@ -179,24 +179,28 @@ describe("time/weather coverage dispositions (all maps, G6)", () => {
   const row = (type: string) => rows.find((candidate) => candidate.type === type);
 
   test("time_is (128 source uses) is native wherever its event materializes", () => {
-    // S5 §5.1: 128 source uses = 67 `is` + 61 `not`.
+    // S5 §5.1: 128 source uses = 67 `is` + 61 `not`. The COV-B check_world
+    // layer-variant mirror materializes the two day-cycle events that the old
+    // const-false check_world guard used to drop, so all 128 are native.
     const isTime = row("is time_is")!;
     const notTime = row("not time_is")!;
     expect(isTime.total + notTime.total).toBe(128);
-    expect(isTime.native + notTime.native).toBe(126);
+    expect(isTime.native + notTime.native).toBe(128);
     expect(isTime.placeholder + notTime.placeholder).toBe(0);
-    expect(isTime.dropped + notTime.dropped).toBe(2);
+    expect(isTime.dropped + notTime.dropped).toBe(0);
     for (const candidate of [isTime, notTime]) {
       expect(candidate.reasons.native?.[0]).toContain("saved deterministic calendar");
     }
   });
 
   test("set_layer (79 source uses) is native when its source asset is available", () => {
+    // The two day-cycle set_layer calls dropped by the old check_world
+    // const-false guard now materialize (COV-B layer-variant mirror).
     const setLayer = row("set_layer")!;
     expect(setLayer.total).toBe(79);
-    expect(setLayer.native).toBe(77);
+    expect(setLayer.native).toBe(79);
     expect(setLayer.placeholder).toBe(0);
-    expect(setLayer.dropped).toBe(2);
+    expect(setLayer.dropped).toBe(0);
     expect(setLayer.reasons.native?.[0]).toContain("KV1");
   });
 

@@ -1117,6 +1117,10 @@
    "txmnId": 43,
    "shape": "varmint",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "aardorn"
+   ],
    "types": [
     "normal"
    ],
@@ -1247,6 +1251,8 @@
    "txmnId": 42,
    "shape": "varmint",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "normal"
    ],
@@ -1381,6 +1387,8 @@
    "txmnId": 99,
    "shape": "serpent",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "cosmic"
    ],
@@ -1520,6 +1528,10 @@
    "txmnId": 14,
    "shape": "dragon",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "agnite"
+   ],
    "types": [
     "fire"
    ],
@@ -1656,6 +1668,10 @@
    "txmnId": 15,
    "shape": "dragon",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "agnidon"
+   ],
    "types": [
     "fire",
     "shadow"
@@ -1794,6 +1810,8 @@
    "txmnId": 13,
    "shape": "dragon",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "fire"
    ],
@@ -1929,6 +1947,8 @@
    "txmnId": 0,
    "shape": "flier",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "fire",
     "water"
@@ -2060,6 +2080,10 @@
    "txmnId": 160,
    "shape": "dragon",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "wrougon"
+   ],
    "types": [
     "metal"
    ],
@@ -2204,6 +2228,10 @@
    "txmnId": 280,
    "shape": "brute",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "axolightl"
+   ],
    "types": [
     "lightning",
     "water"
@@ -2350,6 +2378,10 @@
    "txmnId": 263,
    "shape": "humanoid",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "waysprite"
+   ],
    "types": [
     "frost",
     "cosmic"
@@ -2484,6 +2516,10 @@
    "txmnId": 175,
    "shape": "blob",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "chromeye"
+   ],
    "types": [
     "metal",
     "cosmic"
@@ -2602,6 +2638,8 @@
    "txmnId": 65,
    "shape": "varmint",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "wood"
    ],
@@ -2739,6 +2777,8 @@
    "txmnId": 61,
    "shape": "varmint",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "cosmic"
    ],
@@ -2882,6 +2922,10 @@
    "txmnId": 197,
    "shape": "humanoid",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "tetrchimp"
+   ],
    "types": [
     "lightning",
     "cosmic"
@@ -3007,6 +3051,8 @@
    "txmnId": 100,
    "shape": "grub",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "venom"
    ],
@@ -3146,6 +3192,10 @@
    "txmnId": 6,
    "shape": "humanoid",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "bolt"
+   ],
    "types": [
     "lightning",
     "metal"
@@ -3278,6 +3328,10 @@
    "txmnId": 126,
    "shape": "flier",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "botbot"
+   ],
    "types": [
     "metal",
     "sky"
@@ -3394,6 +3448,8 @@
    "txmnId": 101,
    "shape": "polliwog",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "water"
    ],
@@ -3536,6 +3592,10 @@
    "txmnId": 130,
    "shape": "varmint",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "botbot"
+   ],
    "types": [
     "metal",
     "wood"
@@ -3652,6 +3712,10 @@
    "txmnId": 28,
    "shape": "sprite",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "budaye"
+   ],
    "types": [
     "wood",
     "heroic"
@@ -3789,6 +3853,10 @@
    "txmnId": 193,
    "shape": "landrace",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "baoby"
+   ],
    "types": [
     "wood"
    ],
@@ -3914,6 +3982,8 @@
    "txmnId": 192,
    "shape": "landrace",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "wood"
    ],
@@ -4039,6 +4109,8 @@
    "txmnId": 0,
    "shape": "brute",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "metal",
     "wood"
@@ -4170,6 +4242,10 @@
    "txmnId": 25,
    "shape": "leviathan",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "dollfin"
+   ],
    "types": [
     "water"
    ],
@@ -4301,6 +4377,10 @@
    "txmnId": 82,
    "shape": "flier",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "hatchling"
+   ],
    "types": [
     "sky"
    ],
@@ -4423,6 +4503,10 @@
    "txmnId": 373,
    "shape": "humanoid",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "pawsand"
+   ],
    "types": [
     "earth",
     "cosmic"
@@ -4551,6 +4635,10 @@
    "txmnId": 251,
    "shape": "sprite",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "woodoor"
+   ],
    "types": [
     "metal"
    ],
@@ -4683,6 +4771,10 @@
    "txmnId": 5,
    "shape": "blob",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "nut"
+   ],
    "types": [
     "metal"
    ],
@@ -4808,6 +4900,8 @@
    "txmnId": 194,
    "shape": "blob",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "metal"
    ],
@@ -4931,6 +5025,8 @@
    "txmnId": 125,
    "shape": "grub",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "metal"
    ],
@@ -5061,6 +5157,8 @@
    "txmnId": 295,
    "shape": "brute",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "heroic",
     "sky"
@@ -5200,6 +5298,10 @@
    "txmnId": 344,
    "shape": "flier",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "duggot"
+   ],
    "types": [
     "venom"
    ],
@@ -5326,6 +5428,8 @@
    "txmnId": 215,
    "shape": "varmint",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "water",
     "shadow"
@@ -5470,6 +5574,10 @@
    "txmnId": 260,
    "shape": "blob",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "imbrickcile"
+   ],
    "types": [
     "earth",
     "heroic"
@@ -5610,6 +5718,10 @@
    "txmnId": 261,
    "shape": "brute",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "bricgard"
+   ],
    "types": [
     "earth",
     "heroic"
@@ -5745,6 +5857,8 @@
    "txmnId": 27,
    "shape": "sprite",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "wood"
    ],
@@ -5883,6 +5997,10 @@
    "txmnId": 58,
    "shape": "brute",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "katacoon"
+   ],
    "types": [
     "metal",
     "venom"
@@ -6016,6 +6134,8 @@
    "txmnId": 83,
    "shape": "humanoid",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "fire",
     "cosmic"
@@ -6145,6 +6265,8 @@
    "txmnId": 71,
    "shape": "blob",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "normal"
    ],
@@ -6283,6 +6405,8 @@
    "txmnId": 275,
    "shape": "landrace",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "frost",
     "normal"
@@ -6416,6 +6540,10 @@
    "txmnId": 103,
    "shape": "humanoid",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "capiti"
+   ],
    "types": [
     "heroic"
    ],
@@ -6565,6 +6693,8 @@
    "txmnId": 102,
    "shape": "sprite",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "normal"
    ],
@@ -6719,6 +6849,8 @@
    "txmnId": 62,
    "shape": "flier",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "fire",
     "sky"
@@ -6863,6 +6995,10 @@
    "txmnId": 64,
    "shape": "flier",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "cardiwing"
+   ],
    "types": [
     "fire",
     "sky"
@@ -7003,6 +7139,10 @@
    "txmnId": 63,
    "shape": "flier",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "cardiling"
+   ],
    "types": [
     "fire",
     "sky"
@@ -7148,6 +7288,8 @@
    "txmnId": 33,
    "shape": "grub",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "metal",
     "venom"
@@ -7278,6 +7420,8 @@
    "txmnId": 235,
    "shape": "hunter",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "cosmic"
    ],
@@ -7412,6 +7556,8 @@
    "txmnId": 0,
    "shape": "humanoid",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "metal"
    ],
@@ -7542,6 +7688,8 @@
    "txmnId": 174,
    "shape": "blob",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "metal",
     "cosmic"
@@ -7685,6 +7833,10 @@
    "txmnId": 359,
    "shape": "humanoid",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "statursus"
+   ],
    "types": [
     "fire",
     "normal"
@@ -7802,6 +7954,8 @@
    "txmnId": 104,
    "shape": "varmint",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "normal"
    ],
@@ -7936,6 +8090,10 @@
    "txmnId": 333,
    "shape": "blob",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "stonifly"
+   ],
    "types": [
     "earth",
     "shadow"
@@ -8062,6 +8220,8 @@
    "txmnId": 105,
    "shape": "sprite",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "lightning",
     "wood"
@@ -8202,6 +8362,8 @@
    "txmnId": 106,
    "shape": "blob",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "wood",
     "frost"
@@ -8336,6 +8498,8 @@
    "txmnId": 148,
    "shape": "blob",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "wood"
    ],
@@ -8470,6 +8634,10 @@
    "txmnId": 377,
    "shape": "blob",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "helipi"
+   ],
    "types": [
     "wood",
     "sky"
@@ -8607,6 +8775,8 @@
    "txmnId": 173,
    "shape": "blob",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "earth"
    ],
@@ -8743,6 +8913,10 @@
    "txmnId": 157,
    "shape": "flier",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "flacono"
+   ],
    "types": [
     "sky"
    ],
@@ -8883,6 +9057,8 @@
    "txmnId": 107,
    "shape": "sprite",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "wood",
     "cosmic"
@@ -9023,6 +9199,10 @@
    "txmnId": 276,
    "shape": "landrace",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "caper"
+   ],
    "types": [
     "frost",
     "normal"
@@ -9153,6 +9333,10 @@
    "txmnId": 246,
    "shape": "hunter",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "pantherafira"
+   ],
    "types": [
     "fire",
     "normal"
@@ -9270,6 +9454,8 @@
    "txmnId": 73,
    "shape": "blob",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "wood"
    ],
@@ -9389,6 +9575,10 @@
    "txmnId": 74,
    "shape": "hunter",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "dandicub"
+   ],
    "types": [
     "wood"
    ],
@@ -9504,6 +9694,8 @@
    "txmnId": 0,
    "shape": "humanoid",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "metal"
    ],
@@ -9634,6 +9826,10 @@
    "txmnId": 24,
    "shape": "piscine",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "dollfin"
+   ],
    "types": [
     "water",
     "wood"
@@ -9774,6 +9970,8 @@
    "txmnId": 166,
    "shape": "dragon",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "earth"
    ],
@@ -9908,6 +10106,8 @@
    "txmnId": 108,
    "shape": "humanoid",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "fire",
     "shadow"
@@ -10051,6 +10251,8 @@
    "txmnId": 23,
    "shape": "leviathan",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "water"
    ],
@@ -10175,6 +10377,10 @@
    "txmnId": 37,
    "shape": "blob",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "vamporm"
+   ],
    "types": [
     "venom",
     "shadow"
@@ -10312,6 +10518,10 @@
    "txmnId": 142,
    "shape": "dragon",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "sapragon"
+   ],
    "types": [
     "wood",
     "cosmic"
@@ -10455,6 +10665,8 @@
    "txmnId": 185,
    "shape": "polliwog",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "wood"
    ],
@@ -10592,6 +10804,8 @@
    "txmnId": 145,
    "shape": "dragon",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "fire"
    ],
@@ -10732,6 +10946,8 @@
    "txmnId": 343,
    "shape": "varmint",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "wood",
     "venom"
@@ -10837,6 +11053,8 @@
    "txmnId": 109,
    "shape": "grub",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "normal"
    ],
@@ -10971,6 +11189,10 @@
    "txmnId": 60,
    "shape": "humanoid",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "katacoon"
+   ],
    "types": [
     "metal",
     "heroic"
@@ -11105,6 +11327,10 @@
    "txmnId": 9,
    "shape": "flier",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "heronquak"
+   ],
    "types": [
     "frost",
     "sky"
@@ -11246,6 +11472,8 @@
    "txmnId": 39,
    "shape": "flier",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "normal",
     "sky"
@@ -11384,6 +11612,10 @@
    "txmnId": 41,
    "shape": "flier",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "elowind"
+   ],
    "types": [
     "normal",
     "sky"
@@ -11518,6 +11750,10 @@
    "txmnId": 40,
    "shape": "flier",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "elofly"
+   ],
    "types": [
     "sky",
     "normal"
@@ -11657,6 +11893,10 @@
    "txmnId": 31,
    "shape": "serpent",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "ignibus"
+   ],
    "types": [
     "metal",
     "fire"
@@ -11779,6 +12019,8 @@
    "txmnId": 75,
    "shape": "blob",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "fire"
    ],
@@ -11917,6 +12159,8 @@
    "txmnId": 167,
    "shape": "brute",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "heroic"
    ],
@@ -12056,6 +12300,10 @@
    "txmnId": 32,
    "shape": "landrace",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "ignibus"
+   ],
    "types": [
     "earth",
     "fire"
@@ -12177,6 +12425,10 @@
    "txmnId": 347,
    "shape": "grub",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "chenipode"
+   ],
    "types": [
     "normal"
    ],
@@ -12291,6 +12543,10 @@
    "txmnId": 195,
    "shape": "dragon",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "boltnu"
+   ],
    "types": [
     "metal"
    ],
@@ -12413,6 +12669,8 @@
    "txmnId": 46,
    "shape": "serpent",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "cosmic"
    ],
@@ -12537,6 +12795,10 @@
    "txmnId": 47,
    "shape": "serpent",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "eyenemy"
+   ],
    "types": [
     "cosmic"
    ],
@@ -12656,6 +12918,8 @@
    "txmnId": 179,
    "shape": "sprite",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "lightning",
     "sky"
@@ -12774,6 +13038,10 @@
    "txmnId": 161,
    "shape": "dragon",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "allagon"
+   ],
    "types": [
     "metal"
    ],
@@ -12913,6 +13181,10 @@
    "txmnId": 210,
    "shape": "dragon",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "merlicun"
+   ],
    "types": [
     "metal",
     "cosmic"
@@ -13044,6 +13316,8 @@
    "txmnId": 156,
    "shape": "flier",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "sky"
    ],
@@ -13183,6 +13457,10 @@
    "txmnId": 84,
    "shape": "brute",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "bursa"
+   ],
    "types": [
     "fire",
     "cosmic"
@@ -13307,6 +13585,8 @@
    "txmnId": 238,
    "shape": "piscine",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "water",
     "sky"
@@ -13445,6 +13725,8 @@
    "txmnId": 329,
    "shape": "hunter",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "fire"
    ],
@@ -13575,6 +13857,10 @@
    "txmnId": 308,
    "shape": "sprite",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "flummby"
+   ],
    "types": [
     "cosmic"
    ],
@@ -13711,6 +13997,8 @@
    "txmnId": 307,
    "shape": "sprite",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "cosmic"
    ],
@@ -13855,6 +14143,8 @@
    "txmnId": 68,
    "shape": "piscine",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "lightning",
     "water"
@@ -13992,6 +14282,10 @@
    "txmnId": 38,
    "shape": "grub",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "dracune"
+   ],
    "types": [
     "sky",
     "shadow"
@@ -14124,6 +14418,8 @@
    "txmnId": 110,
    "shape": "varmint",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "normal"
    ],
@@ -14257,6 +14553,8 @@
    "txmnId": 87,
    "shape": "humanoid",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "cosmic"
    ],
@@ -14386,6 +14684,8 @@
    "txmnId": 149,
    "shape": "varmint",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "fire"
    ],
@@ -14526,6 +14826,8 @@
    "txmnId": 0,
    "shape": "serpent",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "fire",
     "wood"
@@ -14657,6 +14959,10 @@
    "txmnId": 29,
    "shape": "sprite",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "budaye"
+   ],
    "types": [
     "wood",
     "cosmic"
@@ -14793,6 +15099,8 @@
    "txmnId": 190,
    "shape": "humanoid",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "fire"
    ],
@@ -14911,6 +15219,10 @@
    "txmnId": 237,
    "shape": "blob",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "fuzzlet"
+   ],
    "types": [
     "cosmic",
     "normal"
@@ -15047,6 +15359,8 @@
    "txmnId": 236,
    "shape": "blob",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "cosmic",
     "normal"
@@ -15191,6 +15505,8 @@
    "txmnId": 168,
    "shape": "hunter",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "earth"
    ],
@@ -15327,6 +15643,10 @@
    "txmnId": 66,
    "shape": "humanoid",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "anoleaf"
+   ],
    "types": [
     "wood"
    ],
@@ -15464,6 +15784,8 @@
    "txmnId": 111,
    "shape": "blob",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "shadow"
    ],
@@ -15604,6 +15926,8 @@
    "txmnId": 302,
    "shape": "humanoid",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "normal"
    ],
@@ -15742,6 +16066,8 @@
    "txmnId": 93,
    "shape": "hunter",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "metal"
    ],
@@ -15866,6 +16192,10 @@
    "txmnId": 17,
    "shape": "brute",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "grintot"
+   ],
    "types": [
     "earth",
     "fire"
@@ -15984,6 +16314,8 @@
    "txmnId": 16,
    "shape": "brute",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "earth"
    ],
@@ -16099,6 +16431,10 @@
    "txmnId": 18,
    "shape": "brute",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "grintot"
+   ],
    "types": [
     "lightning",
     "earth"
@@ -16218,6 +16554,10 @@
    "txmnId": 158,
    "shape": "flier",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "corvix"
+   ],
    "types": [
     "sky"
    ],
@@ -16354,6 +16694,8 @@
    "txmnId": 358,
    "shape": "landrace",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "earth"
    ],
@@ -16489,6 +16831,10 @@
    "txmnId": 176,
    "shape": "blob",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "chromeye"
+   ],
    "types": [
     "metal",
     "cosmic"
@@ -16608,6 +16954,8 @@
    "txmnId": 81,
    "shape": "flier",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "sky"
    ],
@@ -16735,6 +17083,10 @@
    "txmnId": 271,
    "shape": "polliwog",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "squink"
+   ],
    "types": [
     "water"
    ],
@@ -16854,6 +17206,10 @@
    "txmnId": 8,
    "shape": "flier",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "tweesher"
+   ],
    "types": [
     "frost",
     "sky"
@@ -16994,6 +17350,8 @@
    "txmnId": 112,
    "shape": "humanoid",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "metal",
     "water"
@@ -17131,6 +17489,8 @@
    "txmnId": 30,
    "shape": "leviathan",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "fire"
    ],
@@ -17250,6 +17610,8 @@
    "txmnId": 259,
    "shape": "sprite",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "earth",
     "heroic"
@@ -17390,6 +17752,10 @@
    "txmnId": 69,
    "shape": "piscine",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "fluoresfin"
+   ],
    "types": [
     "lightning",
     "water"
@@ -17528,6 +17894,10 @@
    "txmnId": 3,
    "shape": "hunter",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "rockat"
+   ],
    "types": [
     "earth",
     "cosmic"
@@ -17669,6 +18039,10 @@
    "txmnId": 129,
    "shape": "hunter",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "botbot"
+   ],
    "types": [
     "metal",
     "heroic"
@@ -17785,6 +18159,10 @@
    "txmnId": 57,
    "shape": "grub",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "katapill"
+   ],
    "types": [
     "metal",
     "venom"
@@ -17920,6 +18298,8 @@
    "txmnId": 56,
    "shape": "grub",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "metal",
     "venom"
@@ -18032,6 +18412,8 @@
    "txmnId": 253,
    "shape": "sprite",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "lightning",
     "metal"
@@ -18170,6 +18552,10 @@
    "txmnId": 374,
    "shape": "humanoid",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "pawsand"
+   ],
    "types": [
     "earth",
     "heroic"
@@ -18298,6 +18684,10 @@
    "txmnId": 330,
    "shape": "hunter",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "flounce"
+   ],
    "types": [
     "fire"
    ],
@@ -18423,6 +18813,8 @@
    "txmnId": 92,
    "shape": "humanoid",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "normal"
    ],
@@ -18572,6 +18964,10 @@
    "txmnId": 297,
    "shape": "humanoid",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "komodraw"
+   ],
    "types": [
     "normal"
    ],
@@ -18716,6 +19112,8 @@
    "txmnId": 10,
    "shape": "sprite",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "wood"
    ],
@@ -18850,6 +19248,8 @@
    "txmnId": 113,
    "shape": "varmint",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "normal"
    ],
@@ -18984,6 +19384,10 @@
    "txmnId": 11,
    "shape": "serpent",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "lambert"
+   ],
    "types": [
     "wood"
    ],
@@ -19118,6 +19522,10 @@
    "txmnId": 70,
    "shape": "leviathan",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "incandesfin"
+   ],
    "types": [
     "lightning",
     "water"
@@ -19251,6 +19659,10 @@
    "txmnId": 163,
    "shape": "humanoid",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "seirein"
+   ],
    "types": [
     "fire",
     "shadow"
@@ -19373,6 +19785,8 @@
    "txmnId": 114,
    "shape": "polliwog",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "water",
     "venom"
@@ -19508,6 +19922,8 @@
    "txmnId": 115,
    "shape": "serpent",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "cosmic"
    ],
@@ -19642,6 +20058,10 @@
    "txmnId": 22,
    "shape": "humanoid",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "memnomnom"
+   ],
    "types": [
     "metal",
     "shadow"
@@ -19766,6 +20186,8 @@
    "txmnId": 345,
    "shape": "polliwog",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "lightning",
     "venom"
@@ -19904,6 +20326,8 @@
    "txmnId": 19,
    "shape": "hunter",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "normal"
    ],
@@ -20027,6 +20451,8 @@
    "txmnId": 202,
    "shape": "flier",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "earth",
     "fire"
@@ -20166,6 +20592,10 @@
    "txmnId": 20,
    "shape": "hunter",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "memnomnom"
+   ],
    "types": [
     "earth",
     "normal"
@@ -20289,6 +20719,8 @@
    "txmnId": 239,
    "shape": "dragon",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "fire",
     "sky"
@@ -20433,6 +20865,10 @@
    "txmnId": 0,
    "shape": "dragon",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "mk01_proto"
+   ],
    "types": [
     "metal"
    ],
@@ -20557,6 +20993,10 @@
    "txmnId": 0,
    "shape": "dragon",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "mk01_proto"
+   ],
    "types": [
     "metal"
    ],
@@ -20681,6 +21121,11 @@
    "txmnId": 0,
    "shape": "dragon",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "mk01_alpha",
+    "mk01_beta"
+   ],
    "types": [
     "metal"
    ],
@@ -20811,6 +21256,10 @@
    "txmnId": 0,
    "shape": "dragon",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "mk01_alpha"
+   ],
    "types": [
     "metal"
    ],
@@ -20941,6 +21390,10 @@
    "txmnId": 0,
    "shape": "dragon",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "mk01_beta"
+   ],
    "types": [
     "metal"
    ],
@@ -21071,6 +21524,8 @@
    "txmnId": 0,
    "shape": "dragon",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "metal"
    ],
@@ -21170,6 +21625,10 @@
    "txmnId": 12,
    "shape": "brute",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "legko"
+   ],
    "types": [
     "wood",
     "heroic"
@@ -21307,6 +21766,10 @@
    "txmnId": 128,
    "shape": "sprite",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "botbot"
+   ],
    "types": [
     "lightning",
     "metal"
@@ -21423,6 +21886,8 @@
    "txmnId": 223,
    "shape": "landrace",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "cosmic"
    ],
@@ -21560,6 +22025,10 @@
    "txmnId": 78,
    "shape": "blob",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "shybulb"
+   ],
    "types": [
     "wood"
    ],
@@ -21684,6 +22153,10 @@
    "txmnId": 177,
    "shape": "blob",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "chromeye"
+   ],
    "types": [
     "metal",
     "cosmic"
@@ -21802,6 +22275,10 @@
    "txmnId": 206,
    "shape": "humanoid",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "toxiris"
+   ],
    "types": [
     "wood",
     "venom"
@@ -21942,6 +22419,10 @@
    "txmnId": 51,
    "shape": "flier",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "noctula"
+   ],
    "types": [
     "sky",
     "shadow"
@@ -22061,6 +22542,8 @@
    "txmnId": 50,
    "shape": "flier",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "sky",
     "shadow"
@@ -22180,6 +22663,8 @@
    "txmnId": 152,
    "shape": "piscine",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "water"
    ],
@@ -22310,6 +22795,8 @@
    "txmnId": 54,
    "shape": "polliwog",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "water",
     "cosmic"
@@ -22429,6 +22916,8 @@
    "txmnId": 52,
    "shape": "polliwog",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "water",
     "venom"
@@ -22548,6 +23037,10 @@
    "txmnId": 53,
    "shape": "polliwog",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "nudiflot_male"
+   ],
    "types": [
     "water",
     "venom"
@@ -22667,6 +23160,10 @@
    "txmnId": 55,
    "shape": "polliwog",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "nudiflot_female"
+   ],
    "types": [
     "water",
     "cosmic"
@@ -22784,6 +23281,8 @@
    "txmnId": 4,
    "shape": "blob",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "metal"
    ],
@@ -22909,6 +23408,10 @@
    "txmnId": 184,
    "shape": "polliwog",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "skwib"
+   ],
    "types": [
     "earth",
     "normal"
@@ -23029,6 +23532,10 @@
    "txmnId": 90,
    "shape": "serpent",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "pythwire"
+   ],
    "types": [
     "lightning",
     "metal"
@@ -23144,6 +23651,10 @@
    "txmnId": 182,
    "shape": "flier",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "pairagrin"
+   ],
    "types": [
     "sky"
    ],
@@ -23267,6 +23778,8 @@
    "txmnId": 181,
    "shape": "flier",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "sky"
    ],
@@ -23392,6 +23905,8 @@
    "txmnId": 245,
    "shape": "hunter",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "fire",
     "normal"
@@ -23516,6 +24031,10 @@
    "txmnId": 378,
    "shape": "blob",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "coppi"
+   ],
    "types": [
     "wood",
     "sky"
@@ -23653,6 +24172,8 @@
    "txmnId": 372,
    "shape": "blob",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "earth"
    ],
@@ -23799,6 +24320,10 @@
    "txmnId": 362,
    "shape": "landrace",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "pharfan"
+   ],
    "types": [
     "water",
     "heroic"
@@ -23944,6 +24469,8 @@
    "txmnId": 151,
    "shape": "landrace",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "water"
    ],
@@ -24089,6 +24616,10 @@
    "txmnId": 127,
    "shape": "piscine",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "botbot"
+   ],
    "types": [
     "metal",
     "water"
@@ -24205,6 +24736,8 @@
    "txmnId": 116,
    "shape": "blob",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "metal",
     "normal"
@@ -24340,6 +24873,8 @@
    "txmnId": 48,
    "shape": "flier",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "sky",
     "normal"
@@ -24459,6 +24994,8 @@
    "txmnId": 117,
    "shape": "brute",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "earth",
     "heroic"
@@ -24595,6 +25132,10 @@
    "txmnId": 72,
    "shape": "blob",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "cairfrey"
+   ],
    "types": [
     "shadow"
    ],
@@ -24729,6 +25270,8 @@
    "txmnId": 257,
    "shape": "blob",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "earth",
     "shadow"
@@ -24864,6 +25407,10 @@
    "txmnId": 258,
    "shape": "blob",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "potturmeist"
+   ],
    "types": [
     "earth",
     "shadow"
@@ -24994,6 +25541,8 @@
    "txmnId": 118,
    "shape": "flier",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "normal",
     "sky"
@@ -25129,6 +25678,10 @@
    "txmnId": 88,
    "shape": "humanoid",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "forturtle"
+   ],
    "types": [
     "fire",
     "cosmic"
@@ -25255,6 +25808,10 @@
    "txmnId": 34,
    "shape": "blob",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "cataspike"
+   ],
    "types": [
     "metal",
     "venom"
@@ -25392,6 +25949,10 @@
    "txmnId": 21,
    "shape": "hunter",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "memnomnom"
+   ],
    "types": [
     "cosmic",
     "normal"
@@ -25515,6 +26076,8 @@
    "txmnId": 89,
    "shape": "serpent",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "lightning",
     "metal"
@@ -25628,6 +26191,10 @@
    "txmnId": 203,
    "shape": "flier",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "metesaur"
+   ],
    "types": [
     "earth",
     "fire"
@@ -25765,6 +26332,10 @@
    "txmnId": 45,
    "shape": "varmint",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "squabbit"
+   ],
    "types": [
     "heroic"
    ],
@@ -25890,6 +26461,8 @@
    "txmnId": 143,
    "shape": "flier",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "earth",
     "sky"
@@ -26030,6 +26603,8 @@
    "txmnId": 252,
    "shape": "piscine",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "water",
     "heroic"
@@ -26169,6 +26744,10 @@
    "txmnId": 2,
    "shape": "hunter",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "rockitten"
+   ],
    "types": [
     "earth"
    ],
@@ -26308,6 +26887,8 @@
    "txmnId": 1,
    "shape": "hunter",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "earth"
    ],
@@ -26447,6 +27028,8 @@
    "txmnId": 0,
    "shape": "brute",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "earth"
    ],
@@ -26577,6 +27160,10 @@
    "txmnId": 375,
    "shape": "blob",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "pawsand"
+   ],
    "types": [
     "earth"
    ],
@@ -26704,6 +27291,8 @@
    "txmnId": 204,
    "shape": "humanoid",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "wood"
    ],
@@ -26848,6 +27437,10 @@
    "txmnId": 334,
    "shape": "flier",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "cocrune"
+   ],
    "types": [
     "earth",
     "shadow"
@@ -26971,6 +27564,10 @@
    "txmnId": 76,
    "shape": "brute",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "embra"
+   ],
    "types": [
     "fire"
    ],
@@ -27104,6 +27701,10 @@
    "txmnId": 178,
    "shape": "blob",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "chromeye"
+   ],
    "types": [
     "metal",
     "cosmic"
@@ -27223,6 +27824,8 @@
    "txmnId": 97,
    "shape": "brute",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "heroic"
    ],
@@ -27359,6 +27962,8 @@
    "txmnId": 98,
    "shape": "humanoid",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "cosmic"
    ],
@@ -27494,6 +28099,10 @@
    "txmnId": 141,
    "shape": "dragon",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "chloragon"
+   ],
    "types": [
     "wood"
    ],
@@ -27641,6 +28250,10 @@
    "txmnId": 86,
    "shape": "brute",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "trapsnap"
+   ],
    "types": [
     "wood",
     "shadow"
@@ -27757,6 +28370,8 @@
    "txmnId": 119,
    "shape": "blob",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "wood"
    ],
@@ -27892,6 +28507,8 @@
    "txmnId": 162,
    "shape": "blob",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "fire",
     "shadow"
@@ -28024,6 +28641,8 @@
    "txmnId": 188,
    "shape": "grub",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "earth",
     "venom"
@@ -28145,6 +28764,10 @@
    "txmnId": 189,
    "shape": "grub",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "selket"
+   ],
    "types": [
     "earth",
     "venom"
@@ -28261,6 +28884,10 @@
    "txmnId": 266,
    "shape": "humanoid",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "angesnow"
+   ],
    "types": [
     "frost",
     "cosmic"
@@ -28391,6 +29018,8 @@
    "txmnId": 144,
    "shape": "hunter",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "earth"
    ],
@@ -28525,6 +29154,10 @@
    "txmnId": 26,
    "shape": "piscine",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "dollfin"
+   ],
    "types": [
     "water",
     "heroic"
@@ -28661,6 +29294,8 @@
    "txmnId": 285,
    "shape": "polliwog",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "water"
    ],
@@ -28778,6 +29413,10 @@
    "txmnId": 153,
    "shape": "piscine",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "nostray"
+   ],
    "types": [
     "water"
    ],
@@ -28903,6 +29542,10 @@
    "txmnId": 286,
    "shape": "polliwog",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "sheye"
+   ],
    "types": [
     "water"
    ],
@@ -29012,6 +29655,8 @@
    "txmnId": 77,
    "shape": "sprite",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "wood"
    ],
@@ -29130,6 +29775,8 @@
    "txmnId": 183,
    "shape": "polliwog",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "normal"
    ],
@@ -29253,6 +29900,8 @@
    "txmnId": 120,
    "shape": "landrace",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "earth",
     "wood"
@@ -29391,6 +30040,8 @@
    "txmnId": 227,
    "shape": "serpent",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "normal"
    ],
@@ -29515,6 +30166,10 @@
    "txmnId": 228,
    "shape": "serpent",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "snaki"
+   ],
    "types": [
     "normal"
    ],
@@ -29634,6 +30289,10 @@
    "txmnId": 91,
    "shape": "serpent",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "pythwire"
+   ],
    "types": [
     "lightning",
     "metal"
@@ -29749,6 +30408,8 @@
    "txmnId": 121,
    "shape": "grub",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "venom",
     "shadow"
@@ -29884,6 +30545,10 @@
    "txmnId": 164,
    "shape": "sprite",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "seirein"
+   ],
    "types": [
     "water",
     "sky"
@@ -30012,6 +30677,8 @@
    "txmnId": 222,
    "shape": "varmint",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "wood"
    ],
@@ -30147,6 +30814,8 @@
    "txmnId": 44,
    "shape": "varmint",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "heroic"
    ],
@@ -30272,6 +30941,8 @@
    "txmnId": 270,
    "shape": "polliwog",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "water"
    ],
@@ -30395,6 +31066,10 @@
    "txmnId": 191,
    "shape": "humanoid",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "furnursus"
+   ],
    "types": [
     "fire",
     "cosmic"
@@ -30515,6 +31190,10 @@
    "txmnId": 49,
    "shape": "flier",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "pipis"
+   ],
    "types": [
     "sky",
     "normal"
@@ -30634,6 +31313,10 @@
    "txmnId": 59,
    "shape": "brute",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "katacoon"
+   ],
    "types": [
     "metal",
     "heroic"
@@ -30766,6 +31449,8 @@
    "txmnId": 217,
    "shape": "grub",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "wood"
    ],
@@ -30891,6 +31576,8 @@
    "txmnId": 219,
    "shape": "varmint",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "water",
     "normal"
@@ -31025,6 +31712,8 @@
    "txmnId": 196,
    "shape": "humanoid",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "lightning",
     "cosmic"
@@ -31151,6 +31840,10 @@
    "txmnId": 94,
    "shape": "hunter",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "grimachin"
+   ],
    "types": [
     "metal"
    ],
@@ -31275,6 +31968,8 @@
    "txmnId": 79,
    "shape": "blob",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "wood",
     "fire"
@@ -31396,6 +32091,10 @@
    "txmnId": 80,
    "shape": "blob",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "tikoal"
+   ],
    "types": [
     "wood",
     "fire"
@@ -31517,6 +32216,10 @@
    "txmnId": 187,
    "shape": "dragon",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "tsushimi"
+   ],
    "types": [
     "wood"
    ],
@@ -31650,6 +32353,10 @@
    "txmnId": 165,
    "shape": "sprite",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "spirain"
+   ],
    "types": [
     "water",
     "sky"
@@ -31774,6 +32481,8 @@
    "txmnId": 122,
    "shape": "varmint",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "normal"
    ],
@@ -31907,6 +32616,8 @@
    "txmnId": 123,
    "shape": "humanoid",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "wood"
    ],
@@ -32042,6 +32753,10 @@
    "txmnId": 205,
    "shape": "humanoid",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "rosarin"
+   ],
    "types": [
     "wood",
     "venom"
@@ -32187,6 +32902,8 @@
    "txmnId": 85,
    "shape": "brute",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "wood",
     "shadow"
@@ -32311,6 +33028,10 @@
    "txmnId": 186,
    "shape": "dragon",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "drashimi"
+   ],
    "types": [
     "wood"
    ],
@@ -32449,6 +33170,10 @@
    "txmnId": 96,
    "shape": "flier",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "tumbleworm"
+   ],
    "types": [
     "venom"
    ],
@@ -32562,6 +33287,10 @@
    "txmnId": 221,
    "shape": "varmint",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "tumblequill"
+   ],
    "types": [
     "earth",
     "normal"
@@ -32698,6 +33427,8 @@
    "txmnId": 220,
    "shape": "varmint",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "earth",
     "normal"
@@ -32838,6 +33569,8 @@
    "txmnId": 95,
    "shape": "grub",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "venom"
    ],
@@ -32956,6 +33689,8 @@
    "txmnId": 7,
    "shape": "flier",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "frost"
    ],
@@ -33095,6 +33830,8 @@
    "txmnId": 243,
    "shape": "blob",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "earth",
     "venom"
@@ -33233,6 +33970,8 @@
    "txmnId": 216,
    "shape": "brute",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "shadow",
     "heroic"
@@ -33375,6 +34114,8 @@
    "txmnId": 36,
    "shape": "grub",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "venom",
     "shadow"
@@ -33511,6 +34252,10 @@
    "txmnId": 67,
    "shape": "humanoid",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "gectile"
+   ],
    "types": [
     "wood"
    ],
@@ -33644,6 +34389,10 @@
    "txmnId": 218,
    "shape": "brute",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "tarpeur"
+   ],
    "types": [
     "wood",
     "heroic"
@@ -33766,6 +34515,10 @@
    "txmnId": 133,
    "shape": "serpent",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "vivipere"
+   ],
    "types": [
     "fire"
    ],
@@ -33895,6 +34648,10 @@
    "txmnId": 138,
    "shape": "flier",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "vivipere"
+   ],
    "types": [
     "earth"
    ],
@@ -34023,6 +34780,8 @@
    "txmnId": 132,
    "shape": "serpent",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "normal"
    ],
@@ -34165,6 +34924,10 @@
    "txmnId": 134,
    "shape": "serpent",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "vivipere"
+   ],
    "types": [
     "wood"
    ],
@@ -34291,6 +35054,10 @@
    "txmnId": 139,
    "shape": "serpent",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "vivipere"
+   ],
    "types": [
     "water"
    ],
@@ -34416,6 +35183,10 @@
    "txmnId": 135,
    "shape": "serpent",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "vivipere"
+   ],
    "types": [
     "metal"
    ],
@@ -34545,6 +35316,10 @@
    "txmnId": 136,
    "shape": "serpent",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "vivipere"
+   ],
    "types": [
     "frost"
    ],
@@ -34667,6 +35442,10 @@
    "txmnId": 137,
    "shape": "serpent",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "vivipere"
+   ],
    "types": [
     "lightning"
    ],
@@ -34799,6 +35578,8 @@
    "txmnId": 124,
    "shape": "humanoid",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "wood",
     "cosmic"
@@ -34933,6 +35714,10 @@
    "txmnId": 299,
    "shape": "varmint",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "thumpurn"
+   ],
    "types": [
     "fire",
     "normal"
@@ -35043,6 +35828,10 @@
    "txmnId": 150,
    "shape": "hunter",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "foxfire"
+   ],
    "types": [
     "fire"
    ],
@@ -35181,6 +35970,10 @@
    "txmnId": 35,
    "shape": "grub",
    "stage": "stage2",
+   "randomly": true,
+   "evolvesFrom": [
+    "puparmor"
+   ],
    "types": [
     "metal",
     "sky"
@@ -35312,6 +36105,10 @@
    "txmnId": 180,
    "shape": "humanoid",
    "stage": "stage1",
+   "randomly": true,
+   "evolvesFrom": [
+    "fancair"
+   ],
    "types": [
     "lightning",
     "metal"
@@ -35430,6 +36227,8 @@
    "txmnId": 231,
    "shape": "hunter",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "wood",
     "frost"
@@ -35569,6 +36368,8 @@
    "txmnId": 250,
    "shape": "sprite",
    "stage": "basic",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "wood"
    ],
@@ -35707,6 +36508,8 @@
    "txmnId": 0,
    "shape": "humanoid",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "metal"
    ],
@@ -35837,6 +36640,8 @@
    "txmnId": 0,
    "shape": "humanoid",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "metal"
    ],
@@ -35967,6 +36772,8 @@
    "txmnId": 242,
    "shape": "varmint",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "earth",
     "normal"
@@ -36104,6 +36911,8 @@
    "txmnId": 131,
    "shape": "blob",
    "stage": "standalone",
+   "randomly": true,
+   "evolvesFrom": [],
    "types": [
     "normal"
    ],
@@ -65253,6 +66062,78 @@
      ]
     }
    }
+  }
+ },
+ "weather": {
+  "cloudy": {
+   "slug": "cloudy",
+   "name": "weather_cloudy",
+   "temperature": "mild",
+   "wind": "breezy",
+   "modifiers": []
+  },
+  "foggy": {
+   "slug": "foggy",
+   "name": "weather_foggy",
+   "temperature": "cold",
+   "wind": "calm",
+   "modifiers": []
+  },
+  "freezing": {
+   "slug": "freezing",
+   "name": "weather_freezing",
+   "temperature": "freezing",
+   "wind": "breezy",
+   "modifiers": []
+  },
+  "hot": {
+   "slug": "hot",
+   "name": "weather_hot",
+   "temperature": "hot",
+   "wind": "calm",
+   "modifiers": []
+  },
+  "misty": {
+   "slug": "misty",
+   "name": "weather_misty",
+   "temperature": "mild",
+   "wind": "calm",
+   "modifiers": []
+  },
+  "rain": {
+   "slug": "rain",
+   "name": "weather_rain",
+   "temperature": "mild",
+   "wind": "gusty",
+   "modifiers": []
+  },
+  "snow": {
+   "slug": "snow",
+   "name": "weather_snow",
+   "temperature": "cold",
+   "wind": "breezy",
+   "modifiers": []
+  },
+  "sunny": {
+   "slug": "sunny",
+   "name": "weather_sunny",
+   "temperature": "warm",
+   "wind": "calm",
+   "modifiers": []
+  },
+  "thunderstorm": {
+   "slug": "thunderstorm",
+   "name": "weather_thunderstorm",
+   "temperature": "warm",
+   "wind": "stormy",
+   "modifiers": []
+  },
+  "windy": {
+   "slug": "windy",
+   "name": "weather_windy",
+   "temperature": "mild",
+   "wind": "windy",
+   "modifiers": []
   }
  },
  "ui": {

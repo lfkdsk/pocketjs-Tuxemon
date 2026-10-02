@@ -134,6 +134,10 @@ export interface BattleDb {
     txmnId: number;
     shape: string;
     stage: string;
+    /** Upstream `randomly` flag (default true); excluded from random_monster pools when false. */
+    randomly: boolean;
+    /** Parent slugs from history.evolves_from, for the random_monster underleveled-form check. */
+    evolvesFrom: string[];
     types: string[];
     tags: string[];
     terrains: string[];
@@ -245,6 +249,14 @@ export interface BattleDb {
     hud: Record<string, BattleImageRef>;
     partyIcons: Record<string, BattleImageRef>;
   }>;
+  /**
+   * The ten rows of mods/tuxemon/db/weather/weathers.yaml. Upstream's
+   * `Weather.modifiers` is never consumed by combat code in the pinned
+   * revision (all shipped lists are empty), so the battle engine applies
+   * these through an upstream-shaped ModifiersHandler pipeline that stays
+   * dormant until the rows are populated. See battle/weather-modifiers.ts.
+   */
+  weather: Record<string, WeatherRow>;
   ui: {
     hpBar: BattleImageRef;
     expBar: BattleImageRef;
@@ -254,6 +266,28 @@ export interface BattleDb {
     speedIcons: Record<string, BattleImageRef>;
     trainerSheets: Record<string, BattleImageRef>;
   };
+}
+
+/** One modifier record of a weather row, with the same field semantics as
+ *  upstream's Modifier model (tuxemon/db.py): matched against the damage
+ *  dealer's types, resolved by priority/stacking/max_stacks. */
+export interface WeatherModifier {
+  attribute: string;
+  values: readonly string[];
+  multiplier: number;
+  priority: number;
+  stacking: "additive" | "multiplicative" | "override";
+  maxStacks: number | null;
+  conditionName: string | null;
+}
+
+export interface WeatherRow {
+  slug: string;
+  /** Translation msgid, e.g. "weather_rain". */
+  name: string;
+  temperature: string;
+  wind: string;
+  modifiers: readonly WeatherModifier[];
 }
 
 /** GP1: one sharded monster/technique/item/status pak entry. */
@@ -285,6 +319,7 @@ export interface BattleRuntimeShell {
   tasteOrder: string[];
   encounters: BattleDb["encounters"];
   environments: BattleDb["environments"];
+  weather: BattleDb["weather"];
   npcs: BattleDb["npcs"];
   ui: BattleDb["ui"];
   monstersIndex: JournalMonsterIndexEntry[];
@@ -349,7 +384,7 @@ export function validateBattleDb(value: unknown, pakKeys?: ReadonlySet<string>):
   assert(value.format === "pocket-tuxemon/battle-db/v1", "unsupported format");
   assert(value.scope === "spyder" || value.scope === "full", "scope must be spyder or full");
   const db = value as unknown as BattleDb;
-  for (const key of ["shapes", "elements", "tastes", "monsters", "techniques", "items", "statuses", "encounters", "npcs", "environments"] as const) {
+  for (const key of ["shapes", "elements", "tastes", "monsters", "techniques", "items", "statuses", "encounters", "npcs", "environments", "weather"] as const) {
     assert(isRecord(db[key]), `${key} must be an object`);
   }
   assert(Array.isArray(db.trainerParties), "trainerParties must be an array");

@@ -30,6 +30,7 @@ mkdir -p reports/oracle
 .venv/bin/python tools/battle-oracle/extract_spyder_parties.py tools/battle-oracle/spyder-parties.json
 TUXEMON_SRC=.tuxemon-src .venv/bin/python tools/battle-oracle/export_data.py tools/battle-oracle/tuxemon-battle.json
 TUXEMON_SRC=.tuxemon-src .venv/bin/python tools/battle-oracle/generate_spyder.py tools/battle-oracle/spyder-parties.json tests/goldens/gb2-spyder-traces.ndjson.gz 20
+TUXEMON_SRC=.tuxemon-src .venv/bin/python tools/battle-oracle/generate_spyder.py tools/battle-oracle/spyder-parties.json tests/goldens/gb5-weather-traces.ndjson.gz 1 weather
 TUXEMON_SRC=.tuxemon-src .venv/bin/python tools/battle-oracle/generate_spawn.py data/battle-db.json tests/goldens/gb4-monster-spawns.json.gz
 TUXEMON_SRC=.tuxemon-src .venv/bin/python tools/battle-oracle/generate_gb3.py tests/goldens/gb3-rules.json.gz
 TUXEMON_SRC=.tuxemon-src .venv/bin/python tools/battle-oracle/generate_gb3_progression.py data/battle-db.json tests/goldens/gb3-progression.json.gz
@@ -44,6 +45,15 @@ techniques is replaced with stable active-field order, and a true draw is a
 player defeat with a retained `draw` result instead of invoking Tuxemon's
 crashing draw handler. The generator writes sorted compact JSON into gzip with
 `mtime=0`, making repeated output byte-identical.
+
+The weather corpus (`gb5-weather-traces.ndjson.gz`) runs the same 214
+definitions with one seed and both policies under each of the ten weather
+slugs: 4,280 battles. The pinned engine has no weather combat effects (all
+`weathers.yaml` modifier lists are empty and no combat code reads weather),
+so each Python trace is identical to the no-weather battle; the slug rides in
+the BattleStart so the TypeScript replay (`tests/battle-weather-golden.test.ts`,
+run against the converted production database) proves its weather threading
+and modifier pipeline stay differential-neutral.
 
 The spawn corpus covers every imported trainer definition at three seeds and
 twelve representative wild species. It compares all persistent spawn fields

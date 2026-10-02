@@ -4053,5 +4053,6 @@
     "billie_won": true,
     "billie_lost": false
   },
-  "sha256": "7f14ee34f48dc50bbfaf63926407e2b7ba98e06a6fc67948208ccb0033f8e55e"
+  "terminalStateSha256": "ce5b5706c70aa374553aa4f476f1cb73564ecc8e687c627c4e74312b5dc5064a",
+  "sha256": "8d54ea602033b99a53e8085c0cb2c6811e018b481789c057448744d80d0b21cd"
 }

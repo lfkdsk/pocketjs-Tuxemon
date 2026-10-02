@@ -76,11 +76,11 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   expect(result.report.coverage.actions.summary).toMatchObject({
     types: 98,
     uses: 13_617,
-    native: 6_842,
-    degraded: 2_813,
+    native: 6_844,
+    degraded: 2_820,
     placeholder: 708,
-    dropped: 3_254,
-    nativePercent: 50.2,
+    dropped: 3_245,
+    nativePercent: 50.3,
     tier1: {
       uses: 6_316,
       percent: 46.38,
@@ -91,14 +91,14 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   expect(result.report.coverage.conditions.summary).toMatchObject({
     types: 64,
     uses: 8_663,
-    native: 4_347,
+    native: 4_356,
     degraded: 1_229,
     placeholder: 859,
-    dropped: 2_228,
-    nativePercent: 50.2,
+    dropped: 2_219,
+    nativePercent: 50.3,
     tier1: {
-      uses: 4_293,
-      percent: 49.56,
+      uses: 4_297,
+      percent: 49.6,
       requiredUses: 4_591,
       meetsBaseline: false,
     },
@@ -147,7 +147,7 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   }
   expect(new Set(result.report.rows.map((row) => row.key)).size).toBe(result.report.rows.length);
   expect(result.report.rows.some((row) => row.key === "trigger:touch:facing:T1-lowered")).toBeTrue();
-  expect(Object.keys(result.variables)).toHaveLength(498);
+  expect(Object.keys(result.variables)).toHaveLength(499);
   expect(Object.values(result.variables).filter((values) => values.length === 0)).toHaveLength(6);
   expect(
     result.report.coverage.actions.summary.native +
@@ -437,7 +437,7 @@ test("inert source events cannot freeze the Cotton Cafe", () => {
     y: 10,
     dir: "down",
   };
-  const session = createSession(result.project, 60);
+  const session = createSession(result.project, 60, { extensions: TUXEMON_EXTENSIONS, scenes: TUXEMON_SCENES });
   let state = startSession(result.project, session);
   for (let frame = 0; frame < 20; frame++) {
     state = stepSession(session, state, { buttons: 0 });
@@ -510,15 +510,21 @@ test("default import output remains byte-pinned", () => {
   const maps = ["spyder_downstairs", "spyder_paper_town"];
   const bytes = jsonBytes(buildProject(maps, DEFAULT_IMPORT_OPTIONS));
   // This pins the complete ImportBuild: condition lowering, the stable source
-  // inputs, the generated outdoor world index and its compact report summary.
+  // inputs, the generated outdoor world index and its compact report summary,
+  // its runtime WorldLayout projection, and the indoor-map list for the
+  // weather particle overlay.
   // The deterministic clock, native presentation/terrain mappings, GM1 audio
   // commands, sys.music_fading fadeout guard, GI scene lowering, and the
   // GI-1b movement/party lowering (choice_npc icon rows, dropped char_run,
   // get_party_monster iid slots, NPC-lifetime party clears), choice portrait
-  // metadata, the GI-2b storage/trade/shop dispositions, and imported item
-  // icon atlas metadata are all included in this combined pin.
+  // metadata, the GI-2b storage/trade/shop dispositions, imported item icon
+  // atlas metadata, the COV-B live NPC party staging and
+  // NPC-versus-NPC resolver, the moving-guard step triggers, the live-clock
+  // daytime filter, the map-entry layer reset, the runtime player-name
+  // condition and the per-domain NPC battle result codes are all in this
+  // combined pin.
   expect(createHash("sha256").update(bytes).digest("hex")).toBe(
-    "786d8f4bc3b537a575ff142bea4b82324fe3355b4891b1a5c0bc94d6cc96a49b",
+    "029d715d621b713268a62330ed2c7f4f1220af75e77158accb4c477ced9e965a",
   );
 });
 
@@ -881,15 +887,15 @@ test("get_party_monster becomes a tux.get_party_monsters ext command", () => {
   expect(calls.some((c) => c.args?.character === "spyder_nimrod_argon")).toBeTrue();
 });
 
-test("get_party_monster is Native only where the NPC's party exists when it runs", () => {
+test("get_party_monster is Native wherever the NPC's party is staged", () => {
   const result = buildProject(["spyder_nimrod_middle", "spyder_dojo2", "spyder_leather_gym"], G6_IMPORT_OPTIONS);
-  // Nimrod reads the defeated argon's party. The dojo calls precede their
-  // battle, whose add_monster calls fold into the battle setup; the gym calls
-  // name trainers that only fight skipped NPC-versus-NPC battles. The shared
-  // spyder.yaml cheat-code event reads the live player name and dumps the
-  // player's party before replacing it.
+  // NPC parties are staged live (not folded) when the event inspects them,
+  // and NPC-versus-NPC battles keep the parties in npcParties, so every
+  // get_party_monster writes iid_slot_*. The shared spyder.yaml cheat-code
+  // event now materializes too (its player-name check is a runtime
+  // condition, not a folded false guard).
   expect(result.report.coverage.actions.rows.find((row) => row.type === "get_party_monster"))
-    .toMatchObject({ total: 9, native: 2, degraded: 7, placeholder: 0, dropped: 0 });
+    .toMatchObject({ total: 9, native: 9, degraded: 0, placeholder: 0, dropped: 0 });
 });
 
 test("create_npc and remove_npc bound the NPC's party lifetime", () => {

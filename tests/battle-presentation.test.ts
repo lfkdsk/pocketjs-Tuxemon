@@ -56,6 +56,7 @@ function state(cursor: number, ticks: number, events: BattleEvent[] = EVENTS): R
       policy: "first",
       inside: false,
       hour: 12,
+      weather: null,
       fieldSize: 1,
       moneyMethod: "participant_scaled",
       parties: [[{

@@ -36,7 +36,10 @@ import {
   type BattleRuntimeShell,
   type BattleScope,
   type BattleStat,
+  type WeatherModifier,
+  type WeatherRow,
 } from "./battle-schema.ts";
+import { loadWeatherTable } from "./time-weather.ts";
 
 const DB_PAK_KEY = "game:battle-db";
 const PLAYER_NAMES = new Set(["", "player"]);
@@ -265,6 +268,61 @@ function number(value: unknown, fallback = 0): number {
 
 function optionalString(value: unknown): string | null {
   return typeof value === "string" && value.length > 0 ? value : null;
+}
+
+/** Parent slugs from the history entry matching this monster's slug. The
+ *  random_monster pool excludes a form when any parent evolves into it only
+ *  at a higher level than the requested one. */
+function parseEvolvesFrom(history: unknown, slug: string): string[] {
+  if (!Array.isArray(history)) return [];
+  for (const entry of history) {
+    if (!entry || typeof entry !== "object" || (entry as Raw).slug !== slug) continue;
+    const parents = (entry as Raw).evolves_from;
+    if (!Array.isArray(parents)) return [];
+    return [...new Set(parents.map(String).filter((parent) => parent.length > 0))].sort();
+  }
+  return [];
+}
+
+/** Normalize one weathers.yaml modifier record to the battle engine's
+ *  WeatherModifier shape, mirroring upstream's Modifier defaults
+ *  (multiplier 1.0, priority 0, multiplicative stacking, no stack cap, no
+ *  condition). The pinned campaign ships only empty lists, so this is
+ *  exercised by the importer's own tests with synthetic rows. */
+function weatherModifier(raw: unknown, slug: string, index: number): WeatherModifier {
+  const mod = object(raw);
+  const attribute = string(mod.attribute);
+  if (!attribute) throw new Error(`weather ${slug} modifier[${index}] missing attribute`);
+  const values = list<string>(mod.values).map(String);
+  const multiplier = number(mod.multiplier, 1);
+  if (!Number.isFinite(multiplier) || multiplier < 0 || multiplier > 2) {
+    throw new Error(`weather ${slug} modifier[${index}] multiplier must be in 0..2`);
+  }
+  const priority = Math.trunc(number(mod.priority, 0));
+  const stackingRaw = string(mod.stacking, "multiplicative");
+  if (stackingRaw !== "additive" && stackingRaw !== "multiplicative" && stackingRaw !== "override") {
+    throw new Error(`weather ${slug} modifier[${index}] unknown stacking '${stackingRaw}'`);
+  }
+  const maxStacks = mod.max_stacks === null || mod.max_stacks === undefined
+    ? null
+    : Math.trunc(number(mod.max_stacks));
+  if (maxStacks !== null && maxStacks < 1) {
+    throw new Error(`weather ${slug} modifier[${index}] max_stacks must be >= 1`);
+  }
+  const conditionName = optionalString(mod.condition_name);
+  return { attribute, values, multiplier, priority, stacking: stackingRaw, maxStacks, conditionName };
+}
+
+/** The ten imported weather rows as a battle-db table. */
+function weatherTable(): Record<string, WeatherRow> {
+  const rows = loadWeatherTable().map((entry) => ({
+    slug: entry.slug,
+    name: entry.name,
+    temperature: entry.temperature,
+    wind: entry.wind,
+    modifiers: entry.modifiers.map((modifier, index) => weatherModifier(modifier, entry.slug, index)),
+  }));
+  return Object.fromEntries(rows.map((row) => [row.slug, row]));
 }
 
 function sortedKeys<T>(values: Record<string, T>): string[] {
@@ -917,6 +975,8 @@ export function runtimeBattleDb(db: BattleDb): BattleDb {
     txmnId: monster.txmnId,
     shape: monster.shape,
     stage: monster.stage,
+    randomly: monster.randomly,
+    evolvesFrom: monster.evolvesFrom,
     types: monster.types,
     tags: monster.tags,
     terrains: monster.terrains,
@@ -998,6 +1058,7 @@ export function runtimeBattleDb(db: BattleDb): BattleDb {
       ...(npc.art ? { art: npc.art } : {}),
     }])),
     environments: db.environments,
+    weather: db.weather,
     ui: {
       hpBar: db.ui.hpBar,
       expBar: db.ui.expBar,
@@ -1066,6 +1127,7 @@ export function splitBattleRuntimeDb(db: BattleDb): SplitBattleRuntimeDb {
     tasteOrder: db.tasteOrder,
     encounters: db.encounters,
     environments: db.environments,
+    weather: db.weather,
     npcs: db.npcs,
     ui: db.ui,
     monstersIndex: monsters.index,
@@ -1147,6 +1209,8 @@ export function writeBattleArtifacts(options: BattleImportOptions): BattleBuild 
       txmnId: Math.trunc(number(raw.txmn_id)),
       shape: string(raw.shape),
       stage: string(raw.stage),
+      randomly: raw.randomly !== false,
+      evolvesFrom: parseEvolvesFrom(raw.history, slug),
       types: list<unknown>(raw.types).map(String),
       tags: list<unknown>(raw.tags).map(String),
       terrains: list<unknown>(raw.terrains).map(String),
@@ -1422,6 +1486,7 @@ export function writeBattleArtifacts(options: BattleImportOptions): BattleBuild 
     npcs,
     trainerParties,
     environments,
+    weather: weatherTable(),
     ui: {
       hpBar: cooker.staticImage("gfx/ui/monster/hp_bar.png", "ui"),
       expBar: cooker.staticImage("gfx/ui/monster/exp_bar.png", "ui"),

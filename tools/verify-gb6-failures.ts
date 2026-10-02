@@ -28,7 +28,10 @@ const ROOT = resolve(import.meta.dir, "..");
 const HEAL_BEFORE_LEAVE = "You should heal your monsters before heading off.";
 const FIRST_FIGHT_LOSE = "As expected! Old models can't compare to new ones!";
 const FIRST_FIGHT_AFTER = "I'll heal you up this time, but I'm not a charity. Rest up at home next time your monsters get worn out.";
-const FIRST_LOSS_STATE_SHA256 = "d47ae54fc22dc18e24d70e15f690d7e327cd5af0801d06c22ea8cbf27a4de796";
+// COV-B fix-2's per-domain battle_last_* enum codes shift the variable
+// values the Billie fight writes, so the first-loss terminal hash moves;
+// the tape and recovery order are unchanged.
+const FIRST_LOSS_STATE_SHA256 = "c8aeff904146a139260b9800905e2a6506d2f7189d9d90c7fad3d9420d95f57d";
 
 interface SeenText {
   frame: number;

@@ -104,8 +104,12 @@ defeat behavior are Native. The remaining non-native behavior is explicit:
 |---|---|---:|---|
 ${placeholderAudit}
 
-The five \`start_battle\` placeholders are NPC-versus-NPC scenes, for which the
-runtime shows a visible skip notice instead of inventing a player battle. The
+The five \`start_battle\` NPC-versus-NPC scenes auto-resolve through the
+game's battle rules with the saved deterministic RNG (both sides on the
+seeded AI policy); the player sees a name card and a decisive fight is
+recorded per upstream. A true draw is Degraded: upstream raises before
+either result variable is written, so this port writes the draw code and
+the fighter (challenger) trainer code as a deterministic fallback. The
 other rows are global or legacy content. \`get_player_monster\` has
 ${playerMonster?.native ?? 0} Native uses (the KC1 \`extChoice\` over the live
 party) and ${playerMonster?.degraded ?? 0} Degraded uses (the party picker that
@@ -115,21 +119,22 @@ appearance's front walker frame as an icon, beside the shared label and the
 option's own name. \`remove_monster\` deletes an iid
 from its owner. An NPC's party lives as long as the NPC, as upstream: it is
 cleared when the NPC is created afresh (every map entry) or removed, and
-battle-time monsters stay in it until then. Of the
+battle-time monsters stay in it until then. All
 ${(partyMonster?.native ?? 0) + (partyMonster?.degraded ?? 0)} executable
-\`get_party_monster\` uses, Native: ${partyMonster?.native ?? 0} (Nimrod's
-\`Zircon Back\` reads the defeated trainer's party; the ApexPlayer cheat reads
-the player's party); Degraded:
-${partyMonster?.degraded ?? 0}, which write no \`iid_slot_*\`: the dojo
-calls run before their battle, whose \`add_monster\` calls are folded into the
-battle setup, and the gym calls name trainers that only fight skipped
-NPC-versus-NPC battles. Scripted \`trading\` runs the \`tux.trade\` scene,
+\`get_party_monster\` uses are Native: NPC trainer parties are staged live
+(not folded into the battle setup) when an event inspects or mutates them,
+so \`iid_slot_*\` always has a party to read. Scripted \`trading\` runs the \`tux.trade\` scene,
 which replaces the sent monster in its party slot with a freshly spawned
 monster at the same level and records it as caught. \`access_pc\` opens the
 \`tux.pc\` storage scene (Degraded: monster boxes only, without the item
 locker); \`create_kennel\`, \`set_kennel_visible\`, \`kennel\` and
-\`has_kennel\` read and write the same saved boxes. \`quarantine\` stays
-Dropped with the plague system, and \`park_experience\` with the unreachable
+\`has_kennel\` read and write the same saved boxes. \`quarantine\` is Degraded
+(it moves infected monsters between the party and the hidden \`boxes.quarantine\`
+box, honouring the box's own capacity; unlike upstream it keeps an
+over-capacity monster inoculated in the party instead of renaming the full
+box into a successor, and a release to a full party plus kennel keeps the
+monster in the box instead of overflowing the Kennel past its capacity),
+and \`park_experience\` with the unreachable
 Eclipse park session. Plague-state rows stay deterministic without being
 claimed as full P2 behavior. The long-term target remains zero Placeholder
 uses.

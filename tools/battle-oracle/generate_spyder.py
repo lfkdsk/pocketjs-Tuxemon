@@ -8,8 +8,15 @@ choices over the 20 seeds (and through their evolved forms after level 20).
 The output is gzip-compressed NDJSON with mtime=0. The first line is metadata;
 each following line contains one replayable BattleStart and its oracle trace.
 
+Weather mode (fourth argument ``weather``) runs one seed per definition under
+each of the ten weather slugs (214 x 1 seed x 2 policies x 10 weathers =
+4,280 battles). The pinned engine has no weather combat effects, so the
+Python trace is identical to the no-weather battle; the slug rides in the
+BattleStart so the TypeScript side proves its weather threading and modifier
+pipeline stay differential-neutral.
+
 Usage:
-    python generate_spyder.py MANIFEST.json OUT.json.gz [seeds]
+    python generate_spyder.py MANIFEST.json OUT.json.gz [seeds] [weather]
 """
 
 from __future__ import annotations
@@ -39,6 +46,20 @@ from tuxemon.technique.technique import Technique
 
 BILLIE_BASE = ("budaye", "dollfin", "grintot", "ignibus", "memnomnom")
 BILLIE_EVOLVED = ("bamboon", "bigfin", "grintrock", "eruptibus", "miaownolith")
+
+# Sorted to match battle/time-weather.ts DEFAULT_WEATHER_SLUGS.
+WEATHER_SLUGS = (
+    "cloudy",
+    "foggy",
+    "freezing",
+    "hot",
+    "misty",
+    "rain",
+    "snow",
+    "sunny",
+    "thunderstorm",
+    "windy",
+)
 
 
 class Obj:
@@ -166,7 +187,7 @@ def stable_targets(self, technique, user, target):
     return result
 
 
-def run(definition: dict, definition_index: int, seed: int, policy: str) -> dict:
+def run(definition: dict, definition_index: int, seed: int, policy: str, weather: str | None = None) -> dict:
     create_seed = 0xC0FFEE + definition_index * 100 + seed
     RNG.seed(create_seed)
     resolved = [
@@ -198,6 +219,8 @@ def run(definition: dict, definition_index: int, seed: int, policy: str) -> dict
         "fieldSize": definition["fieldSize"],
         "moneyMethod": "conserved",
     }
+    if weather is not None:
+        start["weather"] = weather
 
     player = FakeNPC("player", True, player_monsters)
     opponent = FakeNPC(definition["opponent"], False, enemy_monsters)
@@ -408,7 +431,7 @@ def run(definition: dict, definition_index: int, seed: int, policy: str) -> dict
             f"{definition_index}:{seed}:{policy} ({definition['opponent']})"
         )
     return {
-        "id": f"{definition_index}:{seed}:{policy}",
+        "id": f"{definition_index}:{seed}:{policy}" if weather is None else f"{definition_index}:{seed}:{policy}:{weather}",
         "definition": definition_index,
         "seed": seed,
         "policy": policy,
@@ -422,7 +445,7 @@ def run(definition: dict, definition_index: int, seed: int, policy: str) -> dict
     }
 
 
-def main(manifest_path: str, output_path: str, seed_count: int) -> None:
+def main(manifest_path: str, output_path: str, seed_count: int, weather: bool) -> None:
     manifest_file = Path(manifest_path)
     output_file = Path(output_path)
     if not manifest_file.is_absolute():
@@ -431,7 +454,10 @@ def main(manifest_path: str, output_path: str, seed_count: int) -> None:
         output_file = CALLER_CWD / output_file
     manifest = json.loads(manifest_file.read_text(encoding="utf-8"))
     definitions = manifest["definitions"]
-    cases = len(definitions) * seed_count * 2
+    weathers = WEATHER_SLUGS if weather else (None,)
+    if weather:
+        seed_count = 1
+    cases = len(definitions) * seed_count * 2 * len(weathers)
     with open(output_file, "wb") as raw:
         with gzip.GzipFile(fileobj=raw, mode="wb", mtime=0) as zipped:
             header = {
@@ -446,20 +472,27 @@ def main(manifest_path: str, output_path: str, seed_count: int) -> None:
                     "stable-active-field-multitarget-order",
                 ],
             }
+            if weather:
+                header["mode"] = "weather"
+                header["weather"] = list(WEATHER_SLUGS)
             zipped.write((json.dumps(header, sort_keys=True, separators=(",", ":")) + "\n").encode())
             completed = 0
             for definition_index, definition in enumerate(definitions):
                 for seed in range(1, seed_count + 1):
                     for policy in ("first", "cycle"):
-                        case = run(definition, definition_index, seed, policy)
-                        zipped.write((json.dumps(case, sort_keys=True, separators=(",", ":")) + "\n").encode())
-                        completed += 1
+                        for slug in weathers:
+                            case = run(definition, definition_index, seed, policy, slug)
+                            zipped.write((json.dumps(case, sort_keys=True, separators=(",", ":")) + "\n").encode())
+                            completed += 1
                 if (definition_index + 1) % 10 == 0:
                     print(f"generated {completed}/{cases}", file=sys.stderr)
     print(json.dumps({"definitions": len(definitions), "cases": completed, "output": str(output_file)}, sort_keys=True))
 
 
 if __name__ == "__main__":
-    if len(sys.argv) not in (3, 4):
-        raise SystemExit("usage: generate_spyder.py MANIFEST.json OUT.json.gz [seeds]")
-    main(sys.argv[1], sys.argv[2], int(sys.argv[3]) if len(sys.argv) == 4 else 20)
+    if len(sys.argv) not in (3, 4, 5):
+        raise SystemExit("usage: generate_spyder.py MANIFEST.json OUT.json.gz [seeds] [weather]")
+    weather_mode = len(sys.argv) == 5 and sys.argv[4] == "weather"
+    if len(sys.argv) == 5 and not weather_mode:
+        raise SystemExit("fourth argument must be 'weather'")
+    main(sys.argv[1], sys.argv[2], int(sys.argv[3]) if len(sys.argv) >= 4 else 20, weather_mode)

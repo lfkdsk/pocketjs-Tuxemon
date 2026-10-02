@@ -9,92 +9,92 @@ export const DEMO_CHAPTER_INDEX = [
     "id": "bedroom",
     "title": "Bedroom (new game)",
     "frame": 0,
-    "suffixFrames": 173532,
+    "suffixFrames": 172964,
     "timelineFrame": 0
   },
   {
     "id": "paper-town",
     "title": "Paper Town",
     "frame": 1399,
-    "suffixFrames": 172133,
+    "suffixFrames": 171565,
     "timelineFrame": 1399
   },
   {
     "id": "before-billie",
     "title": "Before the first Billie battle",
     "frame": 1924,
-    "suffixFrames": 171608,
+    "suffixFrames": 171040,
     "timelineFrame": 1924
   },
   {
     "id": "starter",
     "title": "Starter chosen",
     "frame": 3692,
-    "suffixFrames": 169840,
+    "suffixFrames": 169272,
     "timelineFrame": 3692
   },
   {
     "id": "route-1",
     "title": "Route 1",
     "frame": 3990,
-    "suffixFrames": 169542,
+    "suffixFrames": 168974,
     "timelineFrame": 3990
   },
   {
     "id": "cotton-town",
     "title": "Cotton Town",
     "frame": 5402,
-    "suffixFrames": 168130,
+    "suffixFrames": 167562,
     "timelineFrame": 5402
   },
   {
     "id": "city-park",
     "title": "City Park",
     "frame": 45311,
-    "suffixFrames": 128221,
+    "suffixFrames": 127653,
     "timelineFrame": 45311
   },
   {
     "id": "route-3-north",
     "title": "Route 3 north end",
     "frame": 110866,
-    "suffixFrames": 62666,
+    "suffixFrames": 62098,
     "timelineFrame": 110866
   },
   {
     "id": "flower-city",
     "title": "Flower City",
     "frame": 115644,
-    "suffixFrames": 57888,
+    "suffixFrames": 57320,
     "timelineFrame": 115644
   },
   {
     "id": "captain-returns",
     "title": "Captain's return",
     "frame": 122416,
-    "suffixFrames": 51116,
+    "suffixFrames": 50548,
     "timelineFrame": 122416
   },
   {
     "id": "candy-town",
     "title": "Candy Town",
-    "frame": 165228,
-    "suffixFrames": 8304,
-    "timelineFrame": 165228
+    "frame": 165128,
+    "suffixFrames": 7836,
+    "timelineFrame": 165128
   },
   {
     "id": "greenwash-aardant",
     "title": "Greenwash (Aardant acquired)",
-    "frame": 172082,
+    "frame": 171514,
     "suffixFrames": 1450,
-    "timelineFrame": 172082
+    "timelineFrame": 171514
   },
   {
     "id": "hospital-cure",
     "title": "Hospital cure",
-    "frame": 173521,
+    "frame": 172953,
     "suffixFrames": 11,
-    "timelineFrame": 173521
+    "timelineFrame": 172953
   }
 ] as const;
 

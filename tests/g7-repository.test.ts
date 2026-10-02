@@ -37,7 +37,10 @@ const GAME_OPTIONS = { extensions: TUXEMON_EXTENSIONS, battle: TUXEMON_BATTLE_RU
 // Pin the complete post-Billie state, including the spawned Nut, battle
 // history, shared-session rewards, independent battle/weather RNG cursors,
 // saved clock, daylight marker/tint, shop stock, and scene/queue slots.
-const EXPECTED_TERMINAL_STATE_SHA256 = "340e842a567ccc365f514a78835230a125802fb2dde37e6da1a96facdc1e82ac";
+// COV-B fix-2's per-domain battle_last_* enum codes shift the variable
+// values the player battles write, so the terminal hash moves; the tape and
+// endpoint are unchanged (no newly materialized event fires on this path).
+const EXPECTED_TERMINAL_STATE_SHA256 = "ce5b5706c70aa374553aa4f476f1cb73564ecc8e687c627c4e74312b5dc5064a";
 
 function input(mask: number, previous: number): SessionInput {
   const pressed = mask & ~previous;

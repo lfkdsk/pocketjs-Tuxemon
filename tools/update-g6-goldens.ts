@@ -10,6 +10,7 @@ import { encodePNG } from "../vendor/pocket-rpgkit/vendor/pocketjs/tests/png.ts"
 import { walkPose } from "../vendor/pocket-rpgkit/src/engine/movement.ts";
 import type { CameraState, Project } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 import type { SessionState } from "../vendor/pocket-rpgkit/src/engine/session.ts";
+import { canonicalJson } from "../vendor/pocket-rpgkit/src/engine/save.ts";
 import { NPC_SRC_INDEX, PLAYER } from "../ui/game-assets.ts";
 import { FIXED_TIME_HOST_GLOBALS } from "../battle/time-weather.ts";
 import { createNpcSrcProvider } from "../ui/npc-src-repository.ts";
@@ -38,10 +39,6 @@ if (!existsSync(journeyPath)) {
 
 const journey = JSON.parse(readFileSync(journeyPath, "utf8")) as JourneyFile;
 const project = JSON.parse(readFileSync(join(ROOT, "dist/project.json"), "utf8")) as Project;
-writeFileSync(
-  join(ROOT, "data/g6-journey.json"),
-  JSON.stringify({ format: "pocket-tuxemon/g6-journey/v1", ...journey }, null, 2) + "\n",
-);
 const wanted = new Map(journey.checkpoints.map((mark) => [mark.frame, mark]));
 const dir = join(ROOT, "tests/goldens");
 mkdirSync(dir, { recursive: true });
@@ -118,6 +115,19 @@ for (let frame = 0; frame < journey.masks.length; frame++) {
 if (frames.length !== journey.checkpoints.length) {
   throw new Error(`G6 goldens: captured ${frames.length}/${journey.checkpoints.length} checkpoints`);
 }
+// Pin the terminal state hash into the tape so the QuickJS bench script reads
+// its expected value from here instead of a stale literal. canonicalJson
+// matches the desktop host's serde_json canonicalization (the GB6 tape's
+// hash is verified both ways).
+const terminalState = globalThis.__rpgSessionState as SessionState | undefined;
+if (!terminalState) throw new Error("G6 goldens: missing terminal session state");
+const terminalStateSha256 = createHash("sha256").update(canonicalJson(terminalState)).digest("hex");
+const { sha256: _legacySelfHash, ...journeyBody } = journey;
+const tape = { format: "pocket-tuxemon/g6-journey/v1", ...journeyBody, terminalStateSha256 };
+writeFileSync(
+  join(ROOT, "data/g6-journey.json"),
+  JSON.stringify({ ...tape, sha256: createHash("sha256").update(JSON.stringify(tape)).digest("hex") }, null, 2) + "\n",
+);
 writeFileSync(
   join(ROOT, "data/g6-goldens.json"),
   JSON.stringify({ format: "pocket-tuxemon/g6-goldens/v1", width: 480, height: 272, frames }, null, 2) + "\n",

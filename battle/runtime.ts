@@ -27,7 +27,7 @@ import {
   battleEventDuration,
   presentationEventSkippable,
 } from "./presentation.ts";
-import { spawnMonster } from "./spawn.ts";
+import { applyPendingOverrides, spawnMonster } from "./spawn.ts";
 import {
   canRun,
   canSwap,
@@ -291,11 +291,26 @@ function enemySnapshot(
   member: BattlePartyMemberSetup | PendingMonster,
 ): SpawnedMonsterSnapshot {
   const species = "species" in member ? member.species : member.slug;
-  return spawnMonster(db, rulesDb, rng, species, member.level, {
+  const snapshot = spawnMonster(db, rulesDb, rng, species, member.level, {
     iid: member.iid,
     experienceModifier: member.experienceModifier,
     moneyModifier: member.moneyModifier,
   });
+  // A staged NPC party member carries the event-time mutations upstream
+  // applies to the live monster (set_monster_attribute / add_tech /
+  // set_monster_health / set_monster_status).
+  if (!("species" in member)) {
+    const pending = member as PendingMonster;
+    applyPendingOverrides(snapshot, {
+      ...(pending.gender === undefined ? {} : { gender: pending.gender }),
+      ...(pending.acquisition === undefined ? {} : { acquisition: pending.acquisition }),
+      ...(pending.nickname === undefined ? {} : { nickname: pending.nickname }),
+      ...(pending.moves === undefined ? {} : { moves: pending.moves }),
+      ...(pending.health === undefined ? {} : { health: pending.health }),
+      ...(pending.status === undefined ? {} : { status: pending.status }),
+    });
+  }
+  return snapshot;
 }
 
 function encounterRows(
@@ -701,7 +716,7 @@ export function createTuxemonBattleRules(source: BattleDbSource, enums: Variable
       const { db, rulesDb } = resources();
       try {
         const ext = tuxemonExtensionState(extValue, db);
-        const setup = parseSetup(setupValue, db, ext.environment);
+        let setup = parseSetup(setupValue, db, ext.environment);
         if (setup === null || !legalParty(ext.party)) {
           release();
           return null;
@@ -769,7 +784,18 @@ export function createTuxemonBattleRules(source: BattleDbSource, enums: Variable
             release();
             return null;
           }
-          const row = weightedEncounter(rng, encounterRows(db, setup.table, setup.variables));
+          // Upstream filters encounter rows by the live clock's daytime
+          // (update_time: 6 <= hour < 18 is day). Resolve it from the saved
+          // calendar instead of the old hard-coded "true", so night-only rows
+          // are eligible at night. The battle hour follows the same clock.
+          const clockHour = Math.floor(ext.clock.minuteOfDay / 60);
+          const variables: Record<string, string | number | boolean> = {
+            ...(setup.variables ?? {}),
+          };
+          if (variables.daytime === undefined) {
+            variables.daytime = clockHour >= 6 && clockHour < 18 ? "true" : "false";
+          }
+          const row = weightedEncounter(rng, encounterRows(db, setup.table, variables));
           const chosenLevel = randomLevel(rng, row.level);
           opponent = `wild:${row.monster}`;
           kind = "wild";
@@ -779,6 +805,7 @@ export function createTuxemonBattleRules(source: BattleDbSource, enums: Variable
             experienceModifier: row.experienceModifier,
             moneyModifier: 0,
           })];
+          setup = { ...setup, hour: setup.hour ?? clockHour };
         }
         if (!legalParty(enemy)) {
           release();
@@ -793,6 +820,7 @@ export function createTuxemonBattleRules(source: BattleDbSource, enums: Variable
           enemy,
           inside: setup.inside,
           hour: setup.hour,
+          weather: ext.weather.slug,
           fieldSize: setup.kind === "trainer" ? setup.fieldSize ?? 1 : 1,
           moneyMethod: "conserved",
           inventory: context.items,

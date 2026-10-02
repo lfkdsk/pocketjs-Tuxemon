@@ -6,6 +6,17 @@ Tuxemon checkout by running `bun run import`. When an import is wrong, the
 fix goes into the importer (or into a missing engine capability), and the
 whole import is re-run.
 
+The importer also projects Tuxemon's `.world` topology into the project's
+optional `worldLayout`. It contains only corrected outdoor placements,
+evidence-approved seams and their per-portal safety classification, grouped
+into connected components; diagnostic gaps, rejected contacts and source
+text stay in `dist/world-index.json`. The source index `contentHash` becomes
+the layout's `topologyHash`. Because the splitter retains this project-level
+field in `project-shell.json`, it is covered by `mapManifestHash` without
+changing any map shard. Pocket RPG Kit provides an opt-in multi-map terrain
+renderer, but this game does not enable it yet; the transfer interpreter also
+does not perform seamless handoff yet.
+
 ## Source checkout
 
 `bun run fetch:tuxemon` checks out Tuxemon at the pinned commit
@@ -100,19 +111,23 @@ definitions below are the report's own:
 | `char_speed` | `moveControl` speed; tiles/s maps to the nearest MV exponential grade. |
 | `char_position` | a clamped `place` (out-of-map coordinates are clamped; upstream raises). |
 | `choice_npc` | static `extChoice` list; the shared label is extended with each option's translated name so the lines stay distinguishable (upstream tells options apart by per-option NPC portraits, which need kit option-image support). |
-| `get_party_monster` (dojo, gym) | the same `tux.get_party_monsters` call, but it finds no party and writes no `iid_slot_*`: the dojo calls run before their battle, whose `add_monster` calls are folded into the battle setup, and the gym calls sit on Points pages that wait for the winner of an NPC-versus-NPC battle, which runs as a skipped placeholder without a winner, so those pages never run. |
+| `get_party_monster` (dojo, gym) | `tux.get_party_monsters` dumps the party iids into `iid_slot_*`; NPC trainer parties are staged live (not folded) when an event inspects them, so the dojo and gym calls find a party. |
 | `load_yaml` | a gating variable; the referenced events are merged at import time and unlock when the action runs. |
 
-### Placeholder examples
+### Degraded battle examples
 
-The remaining stand-in behavior is explicit and reported by source type:
+The remaining non-native battle behavior is explicit and reported by source type (0 Placeholder uses remain):
 
 | Tuxemon | Stand-in |
 |---|---|
-| `start_battle` (NPC vs NPC, 5 uses) | a visible skip notice in the text box. |
-| `is party_infected` | constant (there is no plague system). |
+| `start_battle` (NPC vs NPC, 5 uses) | a name card, then a headless AI-vs-AI auto-resolution through the battle rules with the saved RNG (the battle seed continues from the post-spawn cursor); a decisive fight records `battle_last_winner`/`battle_last_loser`/`battle_last_trainer` per upstream, while a true draw writes the draw code and the fighter (challenger) trainer code as a deterministic fallback (upstream raises before either result variable is written). |
 
-`time_is` now reads the deterministic saved calendar in all 126 materialized
+`is party_infected` is a live extension condition over the per-monster plague
+state (all/some/none), not a constant: `char_plague` infects or inoculates a
+whole party and `quarantine` confiscates infected monsters into the hidden
+`boxes.quarantine` box.
+
+`time_is` now reads the deterministic saved calendar in all 128 materialized
 uses. `update_time` writes the eight upstream time variables; its three source
 uses sit in events dropped for other reasons, so the isolated importer fixture
 exercises that command shape directly.
@@ -162,8 +177,8 @@ Current coverage (G6 profile):
 
 | Kind | Types | Uses | Native | Degraded | Placeholder | Dropped | Executable |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Actions | 98 | 13,617 | 12,472 | 600 | 5 | 540 | 96.0% |
-| Conditions | 64 | 8,663 | 8,200 | 2 | 1 | 460 | 94.7% |
+| Actions | 98 | 13,617 | 12,155 | 1,091 | 0 | 371 | 97.3% |
+| Conditions | 64 | 8,663 | 8,340 | 40 | 0 | 283 | 96.7% |
 
 ## Adding or changing a mapping
 

@@ -553,6 +553,9 @@ describe("Tuxemon BattleRules adapter", () => {
   test("random encounter miss is null; hit preserves probability, row, level, and spawn draw order", () => {
     const rules = createTuxemonBattleRules(DB, ENUMS);
     const ext = extensionWith(monster("nut", 20, "txmn-player"));
+    // Pin the clock to noon so the live-clock daytime filter is "true" and the
+    // battle hour is 12, matching the row selection below.
+    ext.clock = { ...ext.clock, minuteOfDay: 12 * 60 };
     expect(startBattle(rules, ext, json({
       kind: "random",
       table: "spyder_route1",
@@ -569,7 +572,10 @@ describe("Tuxemon BattleRules adapter", () => {
 
     const rng: RngState = { rng: seed, rngDraws: 0 };
     nextRandom(rng); // uniform(0,100) encounter roll
-    const rows = DB.encounters.spyder_route1!.monsters;
+    // The runtime resolves daytime from the saved clock (noon -> "true"), so
+    // only daytime:"true" rows are eligible, matching upstream's row filter.
+    const rows = DB.encounters.spyder_route1!.monsters.filter((row) =>
+      row.variables.every(({ key, value }) => key === "daytime" ? value === "true" : true));
     const total = rows.reduce((sum, row) => sum + row.weight, 0);
     const target = nextRandom(rng) * total;
     let sum = 0;
@@ -588,6 +594,7 @@ describe("Tuxemon BattleRules adapter", () => {
       enemy: [enemy],
       inside: false,
       hour: 12,
+      weather: ext.weather.slug,
       fieldSize: 1,
       moneyMethod: "conserved",
     });

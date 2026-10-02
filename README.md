@@ -24,18 +24,18 @@ summary:
   NPC walkers, dialogue, cutscene routes and map transfers. The Spyder
   campaign plays from the bedroom through Paper Town, Cotton Town, City Park,
   the north end of Route 3, Route 4 and Flower City to the Captain's return
-  in the Mansion and on through Candy Town to the hospital cure — 173,532
+  in the Mansion and on through Candy Town to the hospital cure — 172,964
   frames at 60 Hz for the full mainline, driven by
   deterministic autoplay tapes — and every imported input lock is executed
   to its unlock.
-- **Battles (P2, complete):** the battle database and 578 battle
+- **Battles (P2, complete):** the battle database and 590 battle
   textures are imported from Tuxemon's YAML, and `battle/` is a pure
   reducer whose results match Tuxemon's own Python engine on 8,560 recorded
   battles; monsters spawn draw-for-draw like Tuxemon's. The mainline is
-  played for real end to end: the autoplay tapes fight 177 real battles
+  played for real end to end: the autoplay tapes fight 175 real battles
   (107 on the Route 3 mainline — 22 trainer + 85 wild — 14 on the
-  Captain-return continuation — 10 trainer + 4 wild — and 56 on the way to
-  the hospital cure — 50 trainer + 6 wild), and every trainer
+  Captain-return continuation — 10 trainer + 4 wild — and 54 on the way to
+  the hospital cure — 50 trainer + 4 wild), and every trainer
   battle enters Battle Processing and ends `won` with its `battle_outcome`
   written back. The frozen 31-minute 60 Hz tape (110,866 frames / 30 min 48 s)
   replays byte-identical at 60, 30 and 20 Hz, and both failure paths are
@@ -52,25 +52,23 @@ summary:
   saved, rewindable game scenes. Seen/caught status is persistent and monotonic;
   journal previews and the normal browser render monster details through the
   same indexed, lazily loaded battle-image shards as combat.
-- **Performance:** compact map shards use 4,699,994 B instead of 9,829,498 B
+- **Performance:** compact map shards use 4,957,030 B instead of 10,131,297 B
   of canonical JSON, and indexed battle art plus its lazy database occupies
-  3,501,504 B in the pak. The Web game pak is 47,940,160 B; before compact
+  3,516,960 B in the pak. The Web game pak is 48,248,176 B; before compact
   maps and indexed battle art it was 66,791,328 B, measured on the tree just
   before day and night were added. The all-image battle encoding is
   2,206,076 B on disk and 13,394,688 B if every PSM_T8 texture were decoded,
   but only the active battle working set is resident.
 
   On the desktop QuickJS host, the current 110,866-frame, 107-battle replay
-  matches the canonical terminal state. The release engine's two 960×544 runs
-  have 41.849 and 49.504 ms slowest CPU frames, while its 480×272 runs hit
-  cycle-GC pauses at 72.534 and 51.002 ms. With the pending engine-side
-  idle-GC change explicitly enabled, the 480×272 and 960×544 CPU-work maxima
-  are 33.251 and 26.543 ms (34.419 and 33.773 ms including boundary GC).
-  The QuickJS benches assert
-  a 250 ms startup budget and a 50 ms per-frame CPU budget, so the release
-  engine currently misses the frame gate at 480×272.
-- **Import coverage:** 91.6% of Tuxemon action uses and 94.7% of condition
-  uses map natively to kit commands; 96.0% / 94.7% are executable (native,
+  matches the canonical terminal state. Two production idle-GC runs at each
+  viewport have CPU-work maxima of 22.610/21.157 ms at 480×272 and
+  21.625/22.671 ms at 960×544; the corresponding boundary-inclusive maxima
+  are 29.593/24.142 ms and 25.951/32.505 ms. Every run stays below the 250 ms
+  startup and 50 ms per-frame budgets, with no in-tick collections or frames
+  over budget.
+- **Import coverage:** 89.3% of Tuxemon action uses and 96.3% of condition
+  uses map natively to kit commands; 97.3% / 96.7% are executable (native,
   degraded, or a deliberate placeholder). The full per-type breakdown is in
   [reports/G1-coverage.md](reports/G1-coverage.md).
 - **Day/night:** a saved, rewindable calendar drives Tuxemon's time conditions
@@ -186,8 +184,8 @@ bookmarked or shared:
 - `?autoplay=<id>&speed=<1|2|4>` — start a chapter on autoplay (e.g. `?autoplay=starter&speed=2`)
 
 An invalid id (e.g. `?chapter=missing`) is a visible `BAD DEMO LINK` error,
-not a crash. The chapter snapshots and the 174k-frame tape are packed into
-the pak (a nibble-dictionary tape binary, 87 KB) and read on demand, so the
+not a crash. The chapter snapshots and the 172,964-frame tape are packed into
+the pak (a nibble-dictionary tape binary, 86,510 B) and read on demand, so the
 JS bundle keeps only a tiny chapter index; the tape is decoded once, on the
 first chapter selection, and every chapter plays a window of it.
 `bun tools/verify-web-demo.ts` drives all of the above in headless Chrome,
@@ -289,3 +287,6 @@ contributor list in
 The imported music and sound effects carry their own upstream licenses
 (CC0, CC-BY, CC-BY-SA); the per-file credits are in
 [`licenses/AUDIO-ATTRIBUTIONS.md`](licenses/AUDIO-ATTRIBUTIONS.md).
+The weather particle textures are procedurally generated by this project
+(no upstream art); their provenance and license are recorded in
+[`licenses/WEATHER-TEXTURES.md`](licenses/WEATHER-TEXTURES.md).

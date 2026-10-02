@@ -76,6 +76,7 @@ const journey = JSON.parse(readFileSync(join(ROOT, "data/j2-hospitalcure-journey
   masks: number[];
   tapeSha256: string;
   combinedTapeSha256: string;
+  maps: { name: string; frame: number; map: string; position: [number, number] }[];
   story: {
     captainReturns: number;
     dojoMagician: number;
@@ -235,13 +236,30 @@ describe("J2 Greenwash and hospital location goldens", () => {
     expect(manifest.frames.map(({ name, map, frame, mergedFrame, width, height }) =>
       [name, map, frame, mergedFrame, width, height]
     )).toEqual([
-      ["aardant-acquired", "spyder_greenwash", 49_678, 172_094, 480, 272],
-      ["hospital-password", "spyder_candy_hospital2", 50_317, 172_733, 480, 272],
-      ["hospital-cure", "spyder_candy_hospital3", 51_115, 173_531, 480, 272],
-      ["aardant-acquired", "spyder_greenwash", 49_678, 172_094, 960, 544],
-      ["hospital-password", "spyder_candy_hospital2", 50_317, 172_733, 960, 544],
-      ["hospital-cure", "spyder_candy_hospital3", 51_115, 173_531, 960, 544],
+      ["aardant-acquired", "spyder_greenwash", 49_110, 171_526, 480, 272],
+      ["hospital-password", "spyder_candy_hospital2", 49_749, 172_165, 480, 272],
+      ["hospital-cure", "spyder_candy_hospital3", 50_547, 172_963, 480, 272],
+      ["aardant-acquired", "spyder_greenwash", 49_110, 171_526, 960, 544],
+      ["hospital-password", "spyder_candy_hospital2", 49_749, 172_165, 960, 544],
+      ["hospital-cure", "spyder_candy_hospital3", 50_547, 172_963, 960, 544],
     ]);
+  });
+
+  test("manifest checkpoint frames match the journey marks", () => {
+    // The golden manifest must track the re-recorded tape: every checkpoint
+    // frame equals the journey mark's frame, and the merged frame equals
+    // baseFrames + frame. This catches a tape re-record that forgot to move
+    // the goldens (the B5 regression where the manifest stayed eight frames
+    // early).
+    const baseFrames = gb6.frames + j1.frames;
+    for (const name of ["aardant-acquired", "hospital-password", "hospital-cure"] as const) {
+      const mark = journey.maps.find((candidate) => candidate.name === name);
+      expect(mark, `${name} journey mark`).toBeDefined();
+      for (const frame of manifest.frames.filter((candidate) => candidate.name === name)) {
+        expect(frame.frame, `${name} ${frame.width} frame`).toBe(mark!.frame);
+        expect(frame.mergedFrame, `${name} ${frame.width} mergedFrame`).toBe(baseFrames + mark!.frame);
+      }
+    }
   });
 
   test("PNG bytes, RGBA output, story stages, and player compositing are frozen", () => {

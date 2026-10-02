@@ -43,7 +43,8 @@ the vendored suites.
 - `animated.ts`, `npc-src.ts` — split generated placements into lazy shards.
 - `battle.ts` — imports the battle database, retains preview PNGs, and emits
   one CLUT8+PackBits TILESET entry per runtime battle image.
-- `world.ts`, `world-schema.ts` — the outdoor-world topology index.
+- `world.ts`, `world-schema.ts` — the diagnostic-rich outdoor-world topology index.
+- `world-layout.ts` — the validated, compact runtime projection of that index.
 - `time-weather.ts` — the game clock and weather state: versioned codec, the
   imported weather tables, and the argument shapes for the time/weather
   extension calls.

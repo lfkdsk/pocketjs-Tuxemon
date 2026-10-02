@@ -42,13 +42,20 @@ import { createTerrainStreamProvider } from "./ui/terrain-stream-repository.ts";
 import { ChoiceIconBox } from "./vendor/pocket-rpgkit/src/ui/ChoiceIconBox.tsx";
 import { createDemo } from "./vendor/pocket-rpgkit/src/ui/demo/index.ts";
 import { createDemoOptions } from "./ui/demo-tape.ts";
-import type { GameViewDemoConfig, GameViewDemoRuntime } from "./vendor/pocket-rpgkit/src/ui/demo-contract.ts";
+import type {
+  GameViewDemoConfig,
+  GameViewDemoRuntime,
+  GameViewOverlayConfig,
+} from "./vendor/pocket-rpgkit/src/ui/demo-contract.ts";
 import {
+  DEFAULT_TICKS_PER_GAME_MINUTE,
   timeWeatherAt,
   timeWeatherFromLocalDate,
   type CivilDateTime,
 } from "./battle/time-weather.ts";
-import { createAudioEffects } from "./vendor/pocket-rpgkit/src/ui/audio/index.ts";
+import { WeatherOverlay } from "./ui/weather-overlay.tsx";
+import { weatherOverlaySuspended } from "./ui/weather-overlay-policy.ts";
+import { createGameEffects } from "./ui/weather-effects.tsx";
 
 // ui/gp1-kit-stage.ts and ui/gp1-data-stage.ts are thin re-export wrappers:
 // each one's trailing gp1Mark() call fires right
@@ -70,9 +77,18 @@ const { repository, readEntry } = createGameMapRepository(project.mapIndex, fsHo
 const initialCivilTime = (globalThis as typeof globalThis & {
   __pocketTuxemonInitialCivilTime?: CivilDateTime;
 }).__pocketTuxemonInitialCivilTime;
+// Deterministic builds may also pin the opening weather (screenshots,
+// weather fixtures); production always starts sunny.
+const initialWeather = (globalThis as typeof globalThis & {
+  __pocketTuxemonInitialWeather?: { slug: string };
+}).__pocketTuxemonInitialWeather;
 const initialTimeWeather = initialCivilTime === undefined
   ? timeWeatherFromLocalDate(new Date())
-  : timeWeatherAt(initialCivilTime);
+  : timeWeatherAt(
+    initialCivilTime,
+    DEFAULT_TICKS_PER_GAME_MINUTE,
+    initialWeather?.slug ?? "sunny",
+  );
 const { extensions, rules, scenes, catalog } = createProductionTuxemonBattle(
   { read: readEntry },
   { initialTimeWeather },
@@ -95,6 +111,14 @@ const assets = {
     { read: readEntry },
   ),
 };
+const { Effects, bridge: weatherBridge } = createGameEffects(project.audio ?? {});
+
+// Allocation-regression switch: when false, the particle overlay is not
+// mounted at all, so the QuickJS mem-walk probe can diff overlay on/off on
+// the same tape window. Production builds leave the global unset.
+const weatherOverlayEnabled = (globalThis as typeof globalThis & {
+  __pocketTuxemonWeatherOverlay?: boolean;
+}).__pocketTuxemonWeatherOverlay !== false;
 
 // START opens the save/load menu. It is a GameView overlay: it reads and
 // replaces the live session through the overlay host, independent of the
@@ -107,32 +131,47 @@ const demo: GameViewDemoConfig = {
     return demoMenu;
   },
 };
-const saveMenu = createSaveMenu({ suspended: () => demoMenu?.isOpen() ?? false });
+let saveMenuRuntime: GameViewDemoRuntime | null = null;
+const saveMenuConfig = createSaveMenu({ suspended: () => demoMenu?.isOpen() ?? false });
+const saveMenu: GameViewOverlayConfig = {
+  create(host) {
+    saveMenuRuntime = saveMenuConfig.create(host);
+    return saveMenuRuntime;
+  },
+};
 
 mount(() => (
-  <GameView
-    immutableState
-    project={project}
-    maps={repository}
-    extensions={extensions}
-    battle={rules}
-    battleScene={TuxemonBattleScene}
-    scenes={scenes}
-    sceneViews={{
-      [NAME_INPUT_SCENE_ID]: NameInputScene,
-      [TUXEMON_JOURNAL_SCENE_ID]: createTuxemonJournalScene(catalog),
-      [TUXEMON_MONSTER_PICKER_SCENE_ID]: TuxemonMonsterPickerScene,
-      [TUXEMON_PC_SCENE_ID]: TuxemonPcScene,
-      [TUXEMON_TRADE_SCENE_ID]: createTuxemonTradeScene(catalog),
-      [TUXEMON_MONSTER_SHOP_SCENE_ID]: createTuxemonMonsterShopScene(catalog),
-      [TUXEMON_DAYCARE_SCENE_ID]: TuxemonDaycareScene,
-    }}
-    assets={assets}
-    choiceIcons={ChoiceIconBox}
-    demo={demo}
-    overlay={saveMenu}
-    effects={createAudioEffects(project.audio ?? {})}
-    theme={TUXEMON_UI_THEME}
-  />
+  <>
+    <GameView
+      immutableState
+      project={project}
+      maps={repository}
+      extensions={extensions}
+      battle={rules}
+      battleScene={TuxemonBattleScene}
+      scenes={scenes}
+      sceneViews={{
+        [NAME_INPUT_SCENE_ID]: NameInputScene,
+        [TUXEMON_JOURNAL_SCENE_ID]: createTuxemonJournalScene(catalog),
+        [TUXEMON_MONSTER_PICKER_SCENE_ID]: TuxemonMonsterPickerScene,
+        [TUXEMON_PC_SCENE_ID]: TuxemonPcScene,
+        [TUXEMON_TRADE_SCENE_ID]: createTuxemonTradeScene(catalog),
+        [TUXEMON_MONSTER_SHOP_SCENE_ID]: createTuxemonMonsterShopScene(catalog),
+        [TUXEMON_DAYCARE_SCENE_ID]: TuxemonDaycareScene,
+      }}
+      assets={assets}
+      choiceIcons={ChoiceIconBox}
+      demo={demo}
+      overlay={saveMenu}
+      effects={Effects}
+      theme={TUXEMON_UI_THEME}
+    />
+    {weatherOverlayEnabled && (
+      <WeatherOverlay
+        bridge={weatherBridge}
+        suspended={() => weatherOverlaySuspended(demoMenu, saveMenuRuntime)}
+      />
+    )}
+  </>
 ));
 gp1Mark("mount");

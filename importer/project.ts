@@ -24,6 +24,7 @@ import {
 } from "./coverage.ts";
 import { buildOutdoorWorldIndex, type WorldImportReport } from "./world.ts";
 import type { OutdoorWorldIndex } from "./world-schema.ts";
+import { projectOutdoorWorldLayout } from "./world-layout.ts";
 import {
   DAYLIGHT_STAGE_VARIABLE,
   DAYLIGHT_TARGET_VARIABLE,
@@ -189,15 +190,25 @@ const faintPointMaps = new Set(
     .filter((action) => action.type === "set_teleport_faint" && action.args[1])
     .map((action) => action.args[1]!.replace(/\.tmx$/, "")))),
 );
-// NPCs that some event fights against the player. Every other trainer only
-// appears in NPC-versus-NPC battles, which run as skipped placeholders that
-// write no battle_last_winner, so any page gated on such a battle's winner
-// (the leather gym's Points pages) never runs.
+// NPCs that some event fights against the player. NPC-versus-NPC battles are
+// resolved by a headless battle between both parties with the saved RNG and
+// record battle_last_winner, so the leather gym Points pages gated on the
+// winner run.
 const playerOpponents = new Set(
   [...allMaps.values()].flatMap((map) => map.events.flatMap((event) => event.acts
     .filter((action) => action.type === "start_battle" || action.type === "start_double_battle")
     .map((action) => playerOpponent(action.args))
     .filter((opponent): opponent is string => opponent !== null))),
+);
+// NPCs that fight only in NPC-versus-NPC battles. COV-B auto-resolves these
+// with the battle rules and saved RNG and records battle_last_winner, so the
+// winner slug must be a registered enum value.
+const npcBattleParticipants = new Set(
+  [...allMaps.values()].flatMap((map) => map.events.flatMap((event) => event.acts
+    .filter((action) => action.type === "start_battle" || action.type === "start_double_battle")
+    .filter((action) => playerOpponent(action.args) === null)
+    .flatMap((action) => [action.args[0], action.args[1]].filter((arg): arg is string =>
+      !!arg && arg !== "player")))),
 );
 const monsterSlugs = new Set(
   readdirSync(join(TUXEMON_SRC, "mods/tuxemon/db/monster"))
@@ -414,6 +425,21 @@ function ensureOverlay(raw: string): string | null {
   return variant;
 }
 
+/** Variable mirroring the current screen overlay variant so `check_world
+ *  layer` can compare it without engine-layer read access. Clear is 0. */
+const LAYER_VARIANT_VARIABLE = "v.layer_variant";
+
+/** Variant id for a color overlay, or null for an invalid/non-color value. */
+function overlayVariantFor(raw: string): string | null {
+  if (raw.endsWith(".png")) return null;
+  return parseSourceColor(raw) ? `color_${safeAssetId(raw)}` : null;
+}
+
+/** Enum code for a layer variant; registered by the pre-pass below. */
+function layerVariantCode(variant: string): number {
+  return code("layer_variant", variant);
+}
+
 function ensureAppearanceSprite(name: string): boolean {
   if (!/^[A-Za-z0-9_-]+$/.test(name)) return false;
   const src = `sprites/${name}.png`;
@@ -447,6 +473,15 @@ const NPC_PARTIES_CLEARED_VARIABLE = "local.tux.npc_parties_cleared";
 // map still holds the old map's NPCs. The per-map entry page below is the
 // catch-all for entries that are not imported transfers (a demo warp).
 const clearNpcParties = (): Command => ({ op: "ext", call: "tux.clear_npc_parties", args: { keep: [...PERSISTENT_NPCS] } });
+
+// Upstream clears the screen overlay on every change_map (transition.py), so
+// the layer_variant mirror must reset on every map entry too; otherwise a map
+// entered without its own set_layer sees the previous map's color.
+const resetLayerVariant = (): Command => ({
+  op: "variable",
+  id: LAYER_VARIANT_VARIABLE,
+  set: { op: "set", value: 0 },
+});
 
 interface EconomyEntry {
   slug: string;
@@ -760,6 +795,36 @@ for (const destroyItem of worldDestroyItems) {
 for (const v of ["won", "lost", "draw"]) addValue("battle_last_result", v);
 addValue("battle_last_winner", "player");
 addValue("battle_last_loser", "player");
+// An NPC-versus-NPC battle writes its winner into battle_last_winner, its
+// loser into battle_last_loser, and the loser into battle_last_trainer
+// (upstream's loser handling overwrites the winner's trainer write), so both
+// participants need codes in all three domains.
+for (const participant of npcBattleParticipants) {
+  addValue("battle_last_winner", participant);
+  addValue("battle_last_loser", participant);
+  addValue("battle_last_trainer", participant);
+}
+// Register every screen overlay variant used by set_layer / check_world so
+// the layer-variant mirror variable has enum codes to compare against.
+for (const map of allMaps.values()) {
+  for (const event of map.events) {
+    for (const action of event.acts) {
+      if (action.type === "set_layer" && action.args[0]) {
+        const variant = ensureOverlay(action.args[0]);
+        if (variant) addValue("layer_variant", variant);
+      }
+    }
+    for (const cond of event.conds) {
+      if (cond.type === "check_world" && cond.args[0] === "layer" && cond.args[1]) {
+        const variant = overlayVariantFor(cond.args[1]);
+        if (variant) {
+          ensureOverlay(cond.args[1]);
+          addValue("layer_variant", variant);
+        }
+      }
+    }
+  }
+}
 const enumTable = new Map([...enumValues.entries()].map(([k, s]) => [k, [...s].sort()]));
 const varId = (name: string) => `v.${name.replace(/[^A-Za-z0-9_.-]/g, "_")}`;
 function code(name: string, value: string): number {
@@ -919,6 +984,14 @@ function clauses(
     }
     case "check_char_parameter": {
       const [character, parameter, value] = a;
+      if (character === "player" && parameter === "moving") {
+        // Upstream's map-wide random-encounter guard is true while the player
+        // has velocity. triggerClass lowers it to one deterministic step
+        // trigger on the authored event cells.
+        noteCondition(c, `${c.op} ${c.type}`, "T1-lowered",
+          "moving guard lowered to a step trigger (map-wide in upstream)");
+        return null;
+      }
       if (options.battle && character === "player" && parameter === "name" && value !== undefined) {
         noteCondition(c, `${c.op} check_char_parameter(name)`, "T1", "live playerName exact comparison");
         return [{
@@ -1164,8 +1237,67 @@ function clauses(
       noteCondition(c, `${c.op} has_kennel`, "T3-dropped", options.battle ? "malformed box count: fixed answer" : "monster/party/meta state unknown to P1: fixed answer");
       return K(false);
     case "party_infected":
+      if (options.battle) {
+        noteCondition(c, `${c.op} party_infected`, "T1", "tux.party_infected counts infected party monsters (all/some/none)");
+        return [{ k: "ext", call: "tux.party_infected", args: {
+          character: a[0]!, plague: a[1]!, value: a[2]!, negate: not,
+        } }];
+      }
       noteCondition(c, `${c.op} party_infected`, "T3-placeholder", "no plague in P1: none=true");
       return K(a[2] === "none");
+    case "check_party_parameter":
+      if (options.battle) {
+        noteCondition(c, `${c.op} check_party_parameter`, "T1", "tux.check_party_parameter counts party members by attribute equality");
+        return [{ k: "ext", call: "tux.check_party_parameter", args: {
+          character: a[0]!, attribute: a[1]!, value: a[2]!, operator: a[3]!, times: Number(a[4]), negate: not,
+        } }];
+      }
+      noteCondition(c, `${c.op} ${c.type}`, "T3-dropped", "monster/party/meta state unknown to P1: fixed answer");
+      return K(false);
+    case "check_max_tech":
+      if (options.battle) {
+        // Upstream also stores the matching monster list in
+        // event_data["check_max_tech"], but its only reader is
+        // get_pending_moves (the combat-menu move-replacement flow), which
+        // is not modelled, and both corpus use sites are guarded by
+        // MainCombatMenuState (also unmodelled). The side effect is
+        // therefore provably unconsumed, so the boolean is Native.
+        noteCondition(c, `${c.op} check_max_tech`, "T1", "tux.check_max_tech flags a monster past its species move cap (matching-list side effect unconsumed: only reader is the unmodelled get_pending_moves combat-menu flow)");
+        return [{ k: "ext", call: "tux.check_max_tech", args: {
+          character: a[0] ?? "player", ...(a[1] ? { number: Number(a[1]) } : {}), negate: not,
+        } }];
+      }
+      noteCondition(c, `${c.op} ${c.type}`, "T3-dropped", "monster/party/meta state unknown to P1: fixed answer");
+      return K(false);
+    case "bill_is":
+      if (options.battle) {
+        noteCondition(c, `${c.op} bill_is`, "T1", "tux.bill_is compares a bill amount (missing/zero bill is false)");
+        return [{ k: "ext", call: "tux.bill_is", args: {
+          character: a[0]!, bill: a[1]!, operator: a[2]!, amount: Number(a[3]), negate: not,
+        } }];
+      }
+      noteCondition(c, `${c.op} ${c.type}`, "T3-dropped", "monster/party/meta state unknown to P1: fixed answer");
+      return K(false);
+    case "check_world": {
+      if (a[0] === "layer") {
+        if (a[1] === undefined) {
+          noteCondition(c, `${c.op} check_world`, "T1", "layer check with no value is always true upstream");
+          return K(true);
+        }
+        const variant = overlayVariantFor(a[1]);
+        if (!variant) {
+          noteCondition(c, `${c.op} check_world`, "T4-dropped", "layer color is invalid");
+          return K(false);
+        }
+        noteCondition(c, `${c.op} check_world`, "T1", "compares the tracked screen overlay variant");
+        return [cmpClause(LAYER_VARIANT_VARIABLE, "equals", layerVariantCode(variant), not)];
+      }
+      // bubble: the kit tracks balloons as transient visuals with no queryable
+      // state, and no corpus use exists; fold to the same answer a missing
+      // bubble would give upstream.
+      noteCondition(c, `${c.op} check_world(bubble)`, "T1-lowered", "no persistent bubble state to query; folded");
+      return K(not);
+    }
     default:
       noteCondition(c, `${c.op} ${c.type}`, "T3-dropped", "monster/party/meta state unknown to P1: fixed answer");
       return K(
@@ -1680,15 +1812,31 @@ function playerOpponent(args: readonly string[]): string | null {
   return null;
 }
 
+/** Commands that address a character's live monsters by iid or party slot.
+ *  When an event uses any of them, its NPC add_monster calls must stay live
+ *  (staged into npcParties by tux.add_monster) instead of being folded into
+ *  the battle setup, so the mutations reach the monsters the battle uses. */
+const LIVE_PARTY_COMMANDS = new Set([
+  "get_party_monster",
+  "set_monster_attribute",
+  "add_tech",
+  "char_plague",
+]);
+
 /** Fold literal NPC party construction into the next same-event trainer
  * battle. Variable-backed monsters stay as extension commands because they
- * must resolve against live story variables. */
+ * must resolve against live story variables. Events that inspect or mutate
+ * the live party (LIVE_PARTY_COMMANDS) are never folded: the staged party
+ * keeps every monster iid-addressable, matching upstream's live NPC party. */
 function foldedTrainerParties(acts: readonly Rule[]): {
   folded: Set<number>;
   parties: Map<number, InlineBattlePartyMember[]>;
 } {
   const folded = new Set<number>();
   const parties = new Map<number, InlineBattlePartyMember[]>();
+  if (acts.some((action) => LIVE_PARTY_COMMANDS.has(action.type))) {
+    return { folded, parties };
+  }
   const pending = new Map<string, { index: number; member: InlineBattlePartyMember }[]>();
   for (let index = 0; index < acts.length; index++) {
     const action = acts[index]!;
@@ -2011,6 +2159,7 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         if (!value || value.toLowerCase() === "none") {
           noteAction(a, a.type, "T1", "KV1 clears the map overlay layer");
           out.push({ op: "layer", layer: SCREEN_OVERLAY_LAYER, visible: null, variant: null });
+          out.push({ op: "variable", id: LAYER_VARIANT_VARIABLE, set: { op: "set", value: 0 } });
           break;
         }
         const variant = ensureOverlay(value);
@@ -2020,6 +2169,7 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         }
         noteAction(a, a.type, "T1", "KV1 selects a prepackaged map overlay");
         out.push({ op: "layer", layer: SCREEN_OVERLAY_LAYER, variant, visible: true });
+        out.push({ op: "variable", id: LAYER_VARIANT_VARIABLE, set: { op: "set", value: layerVariantCode(variant) } });
         break;
       }
       case "set_template": {
@@ -2250,6 +2400,7 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
           noteAction(a, a.type, "T1", "transfer (terminal; dir from trailing char_face)");
         }
         if (ctx.options.battle) out.push(clearNpcParties());
+        out.push(resetLayerVariant());
         out.push({ op: "transfer", map, x: emitted.x, y: emitted.y, dir, fade: Math.min(2, Number(g[4] ?? 0.3)) });
         return out;
       }
@@ -2294,9 +2445,32 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
             } as unknown as JsonValue,
           });
         } else if (ctx.options.battle) {
-          const reason = "NPC-versus-NPC battles are not supported yet; skipped";
-          noteAction(a, a.type, "T3-placeholder", reason);
-          out.push({ op: "text", lines: [`[BATTLE] ${npcName(opp)}`.slice(0, 52), `(${reason})`.slice(0, 52)] });
+          // NPC-versus-NPC: run a headless AI-vs-AI battle with the saved
+          // RNG. A decisive outcome is recorded the way upstream's
+          // CombatState does: battle_last_winner = winner, battle_last_loser
+          // = loser, and battle_last_trainer = the loser (upstream's loser
+          // handling overwrites the winner's trainer write). On a true draw
+          // upstream raises before writing either variable; this port writes
+          // the draw result and the challenger's trainer code instead, a
+          // deliberate deterministic fallback (Degraded in the coverage).
+          const fighter = g[0]!;
+          const foe = g[1]!;
+          noteAction(a, a.type, "T1-lowered", "NPC-versus-NPC battle auto-resolved with the battle rules and saved RNG; outcome recorded");
+          out.push({
+            op: "text",
+            lines: [`[BATTLE] ${npcName(fighter)} vs ${npcName(foe)}`.slice(0, 52), "(auto-resolved)".slice(0, 52)],
+          });
+          out.push({ op: "ext", call: "tux.npc_battle", args: {
+            fighter,
+            foe,
+            fighterWinnerCode: code("battle_last_winner", fighter),
+            foeWinnerCode: code("battle_last_winner", foe),
+            fighterLoserCode: code("battle_last_loser", fighter),
+            foeLoserCode: code("battle_last_loser", foe),
+            fighterTrainerCode: code("battle_last_trainer", fighter),
+            foeTrainerCode: code("battle_last_trainer", foe),
+            drawCode: code("battle_last_result", "draw"),
+          } });
         } else {
           noteAction(a, a.type, "T3-placeholder", "inline placeholder: text + outcome writes");
           out.push(...battlePlaceholder(opp));
@@ -2365,6 +2539,19 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         break;
       }
       case "random_monster":
+        if (ctx.options.battle) {
+          const character = g[1] || "player";
+          noteAction(a, a.type, "T1", character === "player"
+            ? "tux.random_monster draws a qualified species from the deterministic pool and spawns it"
+            : "tux.random_monster draws a qualified species and stages it for the NPC team");
+          out.push({ op: "ext", call: "tux.random_monster", args: {
+            level: Number(g[0]),
+            ...(character !== "player" ? { character } : {}),
+            ...(g[2] ? { experienceModifier: numeric(g[2], 1) } : {}),
+            ...(g[3] ? { moneyModifier: numeric(g[3], 0) } : {}),
+          } });
+          break;
+        }
         if (g[1]) {
           noteAction(a, "random_monster(npc)", "T3-dropped", "trainer teams are P2");
         } else {
@@ -2388,21 +2575,11 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         break;
       case "get_party_monster":
         if (ctx.options.battle) {
-          const character = g[0] || "player";
-          // The literal add_monster calls before this one are folded into the
-          // event's later battle, so the NPC's party is not staged yet here.
-          const foldedEarlier = character !== "player" && [...foldedParties.folded].some((index) =>
-            index < i && acts[index]!.args[2] === character);
-          if (foldedEarlier) {
-            noteAction(a, "get_party_monster(before folded battle)", "T1-lowered",
-              "the NPC's add_monster calls are folded into the later battle, so no iid_slot_* is written before it");
-          } else if (character !== "player" && !playerOpponents.has(character)) {
-            noteAction(a, "get_party_monster(after NPC-vs-NPC battle)", "T1-lowered",
-              "the page waits for the winner of an NPC-versus-NPC battle, which runs as a skipped placeholder without a winner, so it never runs and no iid_slot_* is written");
-          } else {
-            noteAction(a, a.type, "T1", "tux.get_party_monsters dumps the party iids into iid_slot_* variables (upstream opens no menu)");
-          }
-          out.push({ op: "ext", call: "tux.get_party_monsters", args: { character } });
+          // NPC parties are staged live (not folded) when the event inspects
+          // them, and NPC-versus-NPC battles keep the parties in npcParties,
+          // so the iid_slot_* writes always have a party to read.
+          noteAction(a, a.type, "T1", "tux.get_party_monsters dumps the party iids into iid_slot_* variables (upstream opens no menu)");
+          out.push({ op: "ext", call: "tux.get_party_monsters", args: { character: g[0] || "player" } });
         } else {
           noteAction(a, a.type, "T3-dropped", "monster/combat subsystem (P2)");
         }
@@ -2427,14 +2604,13 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         break;
       case "random_encounter":
         if (ctx.options.battle) {
-          noteAction(a, a.type, "T1", "Battle Processing with deterministic encounter-table sampling");
+          noteAction(a, a.type, "T1-lowered",
+            "deterministic encounter-table sampling with live-clock daytime; no repellent, scaling or held items (unused in corpus)");
           out.push({ op: "battle", setup: {
             kind: "random",
             table: g[0]!,
             probability: numeric(g[1], 1),
-            variables: { daytime: "true" },
             inside: ctx.m.props.inside === "true",
-            hour: 12,
           } });
         } else {
           noteAction(a, a.type, "T3-placeholder", "intentionally silent in P1");
@@ -2709,7 +2885,7 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
                   call: "tux.faint_point_is_map",
                   args: { character, map: ctx.m.slug, negate: true },
                 },
-                then: [clearNpcParties(), {
+                then: [clearNpcParties(), resetLayerVariant(), {
                   op: "transfer",
                   map: { variable: "tux.faint.map" },
                   x: { variable: "tux.faint.x" },
@@ -2808,6 +2984,56 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
           noteAction(a, a.type, "T3-dropped", "requires an adjacent get_player_monster picker");
         }
         break;
+      case "set_monster_attribute": {
+        if (!ctx.options.battle) {
+          noteAction(a, a.type, "T3-dropped", "monster/combat subsystem (P2)");
+          break;
+        }
+        const variable = g[0]!;
+        const attribute = g[1]!;
+        const value = g[2] ?? "";
+        if (!variable || !attribute) {
+          noteAction(a, a.type, "T4-dropped", "missing variable or attribute");
+          break;
+        }
+        noteAction(a, a.type, "T1", "tux.set_monster_attribute updates gender/acquisition/name on the iid-named monster");
+        out.push({ op: "ext", call: "tux.set_monster_attribute", args: { variable: varId(variable), attribute, value } });
+        break;
+      }
+      case "set_bill": {
+        if (!ctx.options.battle) {
+          noteAction(a, a.type, "T3-dropped", "monster/combat subsystem (P2)");
+          break;
+        }
+        const character = g[0] || "player";
+        const bill = g[1]!;
+        if (!bill) { noteAction(a, a.type, "T4-dropped", "missing bill slug"); break; }
+        noteAction(
+          a,
+          a.type,
+          "T1-lowered",
+          "tux.set_bill creates or replaces the amount; interest rate, late fee and battle-earnings share are not retained or applied",
+        );
+        out.push({ op: "ext", call: "tux.set_bill", args: {
+          character, bill, amount: numeric(g[2], 0),
+        } });
+        break;
+      }
+      case "modify_bill": {
+        if (!ctx.options.battle) {
+          noteAction(a, a.type, "T3-dropped", "monster/combat subsystem (P2)");
+          break;
+        }
+        const character = g[0] || "player";
+        const bill = g[1]!;
+        if (!bill) { noteAction(a, a.type, "T4-dropped", "missing bill slug"); break; }
+        const args: Record<string, JsonValue> = { character, bill };
+        if (g[2] !== undefined && g[2] !== "") args.amount = numeric(g[2], 0);
+        else if (g[3]) args.variable = varId(g[3]);
+        noteAction(a, a.type, "T1", "tux.modify_bill adds to or subtracts from a bill (deletes it at zero)");
+        out.push({ op: "ext", call: "tux.modify_bill", args });
+        break;
+      }
       case "variable_math":
         noteAction(
           a,
@@ -2877,9 +3103,6 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
           }) } as Command);
         } else noteAction(a, a.type, "T3-dropped", ctx.options.battle ? "monster-for-monster trades with another party are not modelled" : "monster/combat subsystem (P2)");
         break;
-      case "quarantine":
-        noteAction(a, a.type, "T3-dropped", "plague system: moves infected monsters into the hidden quarantine box");
-        break;
       case "daycare":
         if (ctx.options.battle && g[0] === "player") {
           noteAction(a, a.type, "T1", "tux.daycare two-slot storage, per-step training, deterministic breeding and newborn collection");
@@ -2893,14 +3116,58 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
       case "park_experience":
         noteAction(a, a.type, "T3-dropped", "Safari-park session (Eclipse park); not part of the Spyder campaign");
         break;
-      case "set_monster_attribute":
-      case "set_bill":
-        noteAction(a, a.type, "T3-dropped", "monster/combat subsystem (P2)");
-        break;
       case "update_time":
         noteAction(a, a.type, "T1", "tux.update_time writes eight variables from the saved deterministic calendar");
         out.push({ op: "ext", call: "tux.update_time", args: updateTimeArgs(a) });
         break;
+      case "add_tech": {
+        if (!ctx.options.battle) { noteAction(a, a.type, "T3-dropped", "monster/combat subsystem (P2)"); break; }
+        const variable = g[0]!;
+        const technique = g[1]!;
+        if (!variable || !technique) { noteAction(a, a.type, "T4-dropped", "missing variable or technique"); break; }
+        noteAction(a, a.type, "T1", "tux.add_tech teaches the iid-named monster a technique (deduped, no cap)");
+        out.push({ op: "ext", call: "tux.add_tech", args: { variable: varId(variable), technique } });
+        break;
+      }
+      case "char_plague": {
+        if (!ctx.options.battle) { noteAction(a, a.type, "T3-dropped", "plague is P2"); break; }
+        const plague = g[0]!;
+        if (!plague) { noteAction(a, a.type, "T4-dropped", "missing plague slug"); break; }
+        const condition = g[1] ? g[1]!.toLowerCase() : null;
+        if (condition !== null && condition !== "infected" && condition !== "inoculated") {
+          noteAction(a, a.type, "T4-dropped", `unsupported plague condition '${g[1]}'`);
+          break;
+        }
+        const character = g[2] || "player";
+        noteAction(a, a.type, "T1", condition === null
+          ? "tux.char_plague clears a plague on a character's party"
+          : `tux.char_plague marks a character's party ${condition}`);
+        out.push({ op: "ext", call: "tux.char_plague", args: { plague, condition, character } });
+        break;
+      }
+      case "quarantine": {
+        if (!ctx.options.battle) { noteAction(a, a.type, "T3-dropped", "plague is P2"); break; }
+        const character = g[0] || "player";
+        const plague = g[1]!;
+        const action = g[2]!;
+        if (!plague || (action !== "in" && action !== "out")) {
+          noteAction(a, a.type, "T4-dropped", "missing plague slug or invalid action");
+          break;
+        }
+        const args: Record<string, JsonValue> = { character, plague, action };
+        if (g[3] !== undefined && g[3] !== "") args.amount = Number(g[3]);
+        noteAction(a, a.type, "T1-lowered", "tux.quarantine transfers infected monsters to/from the hidden quarantine box, honouring its own capacity; a full box keeps the monster in the party and a full party+kennel release keeps it in the box (upstream renames a full box into a successor and overflows the Kennel past its capacity)");
+        out.push({ op: "ext", call: "tux.quarantine", args });
+        break;
+      }
+      case "change_bg_monster": {
+        const monster = g[1]!;
+        if (!monster) { noteAction(a, a.type, "T4-dropped", "missing monster slug"); break; }
+        const name = (po.get(monster) ?? monster.replaceAll("_", " ")).slice(0, 52);
+        noteAction(a, a.type, "T1-lowered", "starter portrait shown as a name card; the full-screen sprite scene is a future presentation upgrade");
+        out.push({ op: "text", lines: [name] });
+        break;
+      }
       default:
         noteAction(a, a.type, "T4-dropped", "presentation / meta");
     }
@@ -3447,6 +3714,7 @@ function convertMap(
         sprite: null,
         commands: [
           clearNpcParties(),
+          resetLayerVariant(),
           { op: "variable", id: NPC_PARTIES_CLEARED_VARIABLE, set: { op: "set", value: 1 } },
         ],
       }],
@@ -3660,6 +3928,8 @@ export interface ImportBuild {
   project: Project;
   variables: Record<string, string[]>;
   worldIndex: OutdoorWorldIndex;
+  /** Sorted map ids whose TMX declares inside=true; weather particles skip these. */
+  indoorMaps: string[];
   presentation: {
     backdrops: BackdropSource[];
     overlays: OverlaySource[];
@@ -3807,6 +4077,7 @@ export function buildProject(
     });
   }
 
+  const worldLayout = projectOutdoorWorldLayout(world.index, new Set(mapDefs.map((map) => map.id)));
   const built: Project = {
     format: "rpgkit-project/v1",
     title: "Pocket Tuxemon",
@@ -3835,6 +4106,7 @@ export function buildProject(
     } : {}),
     sprites,
     audio: audioTable(),
+    ...(worldLayout ? { worldLayout } : {}),
     maps: mapDefs,
   };
 
@@ -3880,6 +4152,10 @@ export function buildProject(
     project,
     variables,
     worldIndex: world.index,
+    indoorMaps: [...allMaps.values()]
+      .filter((m) => m.props.inside === "true")
+      .map((m) => m.slug)
+      .sort(),
     presentation: {
       backdrops: [...backdropSources.values()].sort((a, b) =>
         a.variant < b.variant ? -1 : a.variant > b.variant ? 1 : 0

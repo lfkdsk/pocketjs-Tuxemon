@@ -23,7 +23,7 @@ where noted. Set `TUXEMON_SRC` first (or keep a repo-local `.tuxemon-src`).
 | `verify:gb6:mainline` | The 110,866-frame mainline tape replays at 60 Hz to the frozen terminal state, with every map checkpoint, all 107 battles (22 trainer, 85 wild) and the trainer win counts intact. | `data/gb6-mainline-journey.json` | ~72 s |
 | `verify:gb6:failures` | Both committed defeat tapes (the first loss against Billie, and the later Route 3 loss) replay with their visible recovery order: faint-point teleport, heal-before-leaving block, nurse recovery. | `data/gb6-first-loss-journey.json`, `data/gb6-later-loss-journey.json` | ~40 s |
 | `verify:j1:mainline` | The Captain-return continuation, concatenated with the GB6 tape and replayed from frame zero (122,416 frames), ends at the mansion with the captain's return and all 14 battles (10 trainer, 4 wild) intact. | `data/gb6-mainline-journey.json`, `data/j1-captainreturns-journey.json` | ~67 s |
-| `verify:j2:mainline` | The hospital-cure continuation, concatenated with GB6 and J1 and replayed from frame zero (173,532 frames), ends in the Candy Town hospital with the cure granted and all 56 battles (50 trainer, 6 wild) won. | `data/gb6-mainline-journey.json`, `data/j1-captainreturns-journey.json`, `data/j2-hospitalcure-journey.json` | ~130 s |
+| `verify:j2:mainline` | The hospital-cure continuation, concatenated with GB6 and J1 and replayed from frame zero (172,964 frames), ends in the Candy Town hospital with the cure granted and all 54 battles (50 trainer, 4 wild) won. | `data/gb6-mainline-journey.json`, `data/j1-captainreturns-journey.json`, `data/j2-hospitalcure-journey.json` | ~130 s |
 | `verify:chapters` | The demo chapters re-bake byte-identical: each save envelope passes the kit's save validator (decode + map-aware restore), the 480×272 thumbnails re-render from the built game to the committed PNG hashes, and every envelope restored and resumed at its `timelineFrame` suffix-replays to the full-tape terminal state. Fails with the rebake command when the kit, the tape or the importer moves a checkpoint. | `data/chapters.json`, `docs/screenshots/chapters/`, built bundle | ~12 min |
 | `verify:save` | Five saves through the game's own save path (save-point check, slot store or save code, content identity, decode, restore): after a battle, after a map change and after a late battle in the 09:00 GB6 replay, and one minute before noon plus mid-tint-tween right after the daylight stage turns in an 11:52 replay. Each restored state equals the live state at its save frame (one frame later for the rebuilt NPC table), and each resumed replay ends at the uninterrupted terminal state hash. Only the host frame counter `SessionState.frame`, which the reducer never reads, is set back for hashing. Report in `reports/save-resume.json`. | GB6 tape, generated shards | ~4 min |
 
@@ -92,14 +92,13 @@ startup plus all-map first-visit measurements still contain wall-clock
 sensitivity on shared runners.
 
 The integrated production idle-GC path passes the 107-battle tape twice at
-each viewport. The 480×272 CPU-work maxima are 19.850 and 20.923 ms; the
-960×544 maxima are 21.139 and 21.433 ms. Including frame-boundary collection,
-the worst intervals are 29.075 and 29.352 ms respectively. All four runs make
-six idle collections, no forced or in-tick collections, and finish with zero
-frames over 50 ms. An interleaved `G6_GC_MODE=auto` control at 960×544 makes
-six in-tick collections and reaches 86.249 ms, reproducing the periodic-GC
-failure that the production lifecycle prevents. Every run reaches the same
-GB6 terminal SHA-256.
+each viewport. At 480×272 the two runs start in 180.512/164.172 ms, reach
+22.610/21.157 ms CPU-work maxima and 29.593/24.142 ms boundary-inclusive
+maxima. At 960×544 they start in 170.855/186.308 ms, reach 21.625/22.671 ms
+CPU-work maxima and 25.951/32.505 ms boundary-inclusive maxima. All four runs
+make five idle collections, no forced or in-tick collections, and finish with
+zero frames over 50 ms. `G6_GC_MODE=auto` remains available as a diagnostic
+control. Every run reaches the same GB6 terminal SHA-256.
 
 ## The tapes
 
@@ -115,7 +114,7 @@ fail on any mismatch, so a silently corrupted tape is a red build.
 | `data/gb6-first-loss-journey.json` | 3,325 | the opening, deliberately losing the first Billie fight | 1 | `spyder_route1 @14,19` |
 | `data/gb6-later-loss-journey.json` | 66,498 | the mainline prefix to Wanda, a deliberate loss, then the recovery path | 1 loss + prefix | `spyder_leather_town @23,10` |
 | `data/j1-captainreturns-journey.json` | 11,550 (122,416 combined with GB6) | Wayfarer Inn -> Route 4 -> Flower City -> Route A -> Mansion -> basement -> the captain's return | 14 (10 trainer, 4 wild) | `spyder_mansion @1,13` |
-| `data/j2-hospitalcure-journey.json` | 51,116 (173,532 combined) | Mansion -> Candy Town -> Greenwash -> hospital password -> the cure | 56 (50 trainer, 6 wild) | `spyder_candy_hospital3 @5,7` |
+| `data/j2-hospitalcure-journey.json` | 50,548 (172,964 combined) | Mansion -> Candy Town -> Greenwash -> hospital password -> the cure | 54 (50 trainer, 4 wild) | `spyder_candy_hospital3 @5,7` |
 
 Terminal state hashes and per-checkpoint expectations live in the tapes or
 their verifiers (`tools/verify-gb6-mainline.ts`, `tools/verify-j1-mainline.ts`,
