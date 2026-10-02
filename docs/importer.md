@@ -73,6 +73,10 @@ definitions below are the report's own:
 | `get_party_monster` (Nimrod `Zircon Back`) | `tux.get_party_monsters` writes the defeated trainer's iids into `iid_slot_*`, which the following `remove_monster` consumes. |
 | `get_player_monster`, `choice_monster` | `extChoice` over the live party or a static enum-coded list. |
 | `open_shop` (item economy) | the kit `shop` command with imported goods, prices and stock. |
+| `open_shop …,buy_monster` | the `tux.monsterShop` scene with the economy's monster rows (price, level, stock); purchases are saved per stock label. |
+| `access_pc player` | the `tux.pc` monster-storage scene (Degraded: no item locker). |
+| `trading <variable>,<species>` | the `tux.trade` scene, which replaces the monster whose iid the variable holds. |
+| `create_kennel` / `set_kennel_visible`, `is kennel` / `is has_kennel` | `tux.create_kennel` / `tux.set_kennel_visible` commands and `tux.kennel` / `tux.has_kennel` conditions over the saved player boxes. |
 | `play_music` | `playBgm`; the slug resolves through the `Project.audio` table to a committed QOA pak entry (eight mainline tracks) or stays silent (the other 13 used tracks). |
 | `fadeout_music` | `fadeoutBgm` (ms → seconds); `0` becomes `stopBgm`. |
 | `pause_music` / `unpause_music` | `pauseBgm` / `resumeBgm`. |
@@ -104,7 +108,6 @@ The remaining stand-in behavior is explicit and reported by source type:
 | Tuxemon | Stand-in |
 |---|---|
 | `start_battle` (NPC vs NPC, 5 uses) | a visible skip notice in the text box. |
-| `open_shop` (monster trading, 7 uses) | a visible menu listing the stock. |
 | `is party_infected` | constant (there is no plague system). |
 
 `time_is` now reads the deterministic saved calendar in all 126 materialized

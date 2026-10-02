@@ -284,20 +284,20 @@
  "schemaErrors": [],
  "audioQoaPending": [],
  "byFate": {
-  "T3-dropped": 2323,
-  "T1": 35282,
-  "T4-dropped": 2120,
-  "T1-lowered": 2342,
+  "T1-lowered": 2368,
+  "T3-dropped": 2021,
+  "T1": 36220,
+  "T4-dropped": 1685,
   "T2-dropped": 393,
-  "T3-placeholder": 15,
+  "T3-placeholder": 8,
   "structural": 776
  },
  "rows": [
   {
-   "key": "act:access_pc:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "act:access_pc:T1-lowered",
+   "fate": "T1-lowered",
    "count": 16,
-   "note": "monster/combat subsystem (P2)"
+   "note": "tux.pc monster storage (pick up, drop off, move, release); no item locker, email or multiplayer entries"
   },
   {
    "key": "act:add_item(npc):T3-dropped",
@@ -320,7 +320,7 @@
   {
    "key": "act:add_monster:T1",
    "fate": "T1",
-   "count": 90,
+   "count": 91,
    "note": "tux.add_monster spawns into the persistent party"
   },
   {
@@ -498,10 +498,10 @@
    "note": "variable set 0"
   },
   {
-   "key": "act:create_kennel:T4-dropped",
-   "fate": "T4-dropped",
+   "key": "act:create_kennel:T1",
+   "fate": "T1",
    "count": 99,
-   "note": "presentation / meta"
+   "note": "tux.create_kennel adds a saved player box (hidden flag, capacity)"
   },
   {
    "key": "act:create_npc:T1",
@@ -510,10 +510,10 @@
    "note": "local.npc.<slug> = 1 plus K1 place"
   },
   {
-   "key": "act:daycare:T4-dropped",
-   "fate": "T4-dropped",
+   "key": "act:daycare:T3-dropped",
+   "fate": "T3-dropped",
    "count": 2,
-   "note": "presentation / meta"
+   "note": "daycare storage, per-step training and breeding are not modelled"
   },
   {
    "key": "act:dojo_method:T4-dropped",
@@ -614,25 +614,19 @@
   {
    "key": "act:open_shop:T1",
    "fate": "T1",
-   "count": 21,
+   "count": 28,
    "note": "K4 shop with imported prices, buy-back prices, stock and variable conditions"
   },
   {
-   "key": "act:open_shop:T3-placeholder",
-   "fate": "T3-placeholder",
-   "count": 7,
-   "note": "monster trading remains a visible placeholder"
-  },
-  {
-   "key": "act:park_experience:T4-dropped",
-   "fate": "T4-dropped",
+   "key": "act:park_experience:T3-dropped",
+   "fate": "T3-dropped",
    "count": 5,
-   "note": "presentation / meta"
+   "note": "Safari-park session (Eclipse park); not part of the Spyder campaign"
   },
   {
    "key": "act:pathfind:T1",
    "fate": "T1",
-   "count": 332,
+   "count": 334,
    "note": "K2 deterministic pathTo route"
   },
   {
@@ -666,10 +660,10 @@
    "note": "KA1 map animation at a fixed tile"
   },
   {
-   "key": "act:quarantine:T4-dropped",
-   "fate": "T4-dropped",
+   "key": "act:quarantine:T3-dropped",
+   "fate": "T3-dropped",
    "count": 6,
-   "note": "presentation / meta"
+   "note": "plague system: moves infected monsters into the hidden quarantine box"
   },
   {
    "key": "act:random_encounter:T1",
@@ -704,7 +698,7 @@
   {
    "key": "act:remove_npc:T1",
    "fate": "T1",
-   "count": 221,
+   "count": 223,
    "note": "local.npc.<slug> = 0"
   },
   {
@@ -766,6 +760,12 @@
    "fate": "T1",
    "count": 2,
    "note": "KM1 moveControl facingMode"
+  },
+  {
+   "key": "act:set_kennel_visible:T1",
+   "fate": "T1",
+   "count": 198,
+   "note": "tux.set_kennel_visible toggles a saved player box"
   },
   {
    "key": "act:set_layer:T1",
@@ -842,7 +842,7 @@
   {
    "key": "act:set_variable:T1",
    "fate": "T1",
-   "count": 1350,
+   "count": 1352,
    "note": "variable set enum code"
   },
   {
@@ -870,10 +870,10 @@
    "note": "guarded variable transfer to the stored faint point"
   },
   {
-   "key": "act:trading:T4-dropped",
-   "fate": "T4-dropped",
+   "key": "act:trading:T1",
+   "fate": "T1",
    "count": 8,
-   "note": "presentation / meta"
+   "note": "tux.trade scene: scripted trade into the same party slot, caught entry, eight-second transition"
   },
   {
    "key": "act:transition_teleport(repaired):T1-lowered",
@@ -896,7 +896,7 @@
   {
    "key": "act:translated_dialog:T1",
    "fate": "T1",
-   "count": 2192,
+   "count": 2195,
    "note": "text boxes from en_US .po (layout args ignored)"
   },
   {
@@ -926,7 +926,7 @@
   {
    "key": "act:unlock_controls:T1",
    "fate": "T1",
-   "count": 331,
+   "count": 333,
    "note": "K1 cross-event input lock command"
   },
   {
@@ -1128,10 +1128,10 @@
    "note": "session item count >= n"
   },
   {
-   "key": "cond:is has_kennel:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "cond:is has_kennel:T1",
+   "fate": "T1",
    "count": 2,
-   "note": "monster/party/meta state unknown to P1: fixed answer"
+   "note": "tux.has_kennel counts one saved player box; a missing box fails both forms"
   },
   {
    "key": "cond:is has_monster:T1",
@@ -1146,10 +1146,10 @@
    "note": "monster/party/meta state unknown to P1: fixed answer"
   },
   {
-   "key": "cond:is kennel:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "cond:is kennel:T1",
+   "fate": "T1",
    "count": 198,
-   "note": "monster/party/meta state unknown to P1: fixed answer"
+   "note": "tux.kennel reads the saved player boxes"
   },
   {
    "key": "cond:is location_inside:T1",
@@ -1326,10 +1326,10 @@
    "note": "monster/party/meta state unknown to P1: fixed answer"
   },
   {
-   "key": "cond:not kennel:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "cond:not kennel:T1",
+   "fate": "T1",
    "count": 99,
-   "note": "monster/party/meta state unknown to P1: fixed answer"
+   "note": "tux.kennel reads the saved player boxes"
   },
   {
    "key": "cond:not location_inside:T1",
@@ -1400,7 +1400,7 @@
   {
    "key": "trigger:action:facingTile(area):T1",
    "fate": "T1",
-   "count": 442,
+   "count": 458,
    "note": "K1 rectangular event area (overlaps partitioned after guard sampling)"
   },
   {
@@ -1424,7 +1424,7 @@
   {
    "key": "trigger:guard:T1",
    "fate": "T1",
-   "count": 1695,
+   "count": 1994,
    "note": "parallel"
   },
   {
@@ -1448,13 +1448,13 @@
   {
    "key": "trigger:never-true guard:T4-dropped",
    "fate": "T4-dropped",
-   "count": 1570,
+   "count": 1370,
    "note": "fixed-false guard prevents the source event from starting"
   },
   {
    "key": "trigger:no-op after conversion:T4-dropped",
    "fate": "T4-dropped",
-   "count": 216,
+   "count": 101,
    "note": "every action was removed, so no project event was emitted"
   },
   {
@@ -1472,7 +1472,7 @@
   {
    "key": "trigger:stacked event areas:T1-lowered",
    "fate": "T1-lowered",
-   "count": 460,
+   "count": 470,
    "note": "partitioned: match flags then bodies"
   },
   {
@@ -1969,15 +1969,15 @@
    "summary": {
     "types": 98,
     "uses": 13617,
-    "native": 12437,
-    "degraded": 594,
-    "placeholder": 12,
-    "dropped": 574,
-    "nativePercent": 91.3,
-    "executablePercent": 95.8,
+    "native": 12467,
+    "degraded": 604,
+    "placeholder": 5,
+    "dropped": 541,
+    "nativePercent": 91.6,
+    "executablePercent": 96,
     "tier1": {
-     "uses": 6355,
-     "percent": 46.67,
+     "uses": 6362,
+     "percent": 46.72,
      "requiredUses": 6246,
      "requiredPercent": 45.9,
      "meetsBaseline": true
@@ -1988,12 +1988,12 @@
      "type": "access_pc",
      "total": 10,
      "native": 0,
-     "degraded": 0,
+     "degraded": 10,
      "placeholder": 0,
-     "dropped": 10,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "every action was removed, so no project event was emitted"
+      "degraded": [
+       "tux.pc monster storage (pick up, drop off, move, release); no item locker, email or multiplayer entries"
       ]
      }
     },
@@ -2017,10 +2017,10 @@
     {
      "type": "add_monster",
      "total": 792,
-     "native": 785,
+     "native": 786,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 7,
+     "dropped": 6,
      "reasons": {
       "native": [
        "tux.add_monster spawns into the persistent party",
@@ -2349,13 +2349,13 @@
     {
      "type": "create_kennel",
      "total": 1,
-     "native": 0,
+     "native": 1,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 1,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "every action was removed, so no project event was emitted"
+      "native": [
+       "tux.create_kennel adds a saved player box (hidden flag, capacity)"
       ]
      }
     },
@@ -2385,7 +2385,7 @@
      "dropped": 2,
      "reasons": {
       "dropped": [
-       "presentation / meta"
+       "daycare storage, per-step training and breeding are not modelled"
       ]
      }
     },
@@ -2605,16 +2605,14 @@
     {
      "type": "open_shop",
      "total": 28,
-     "native": 21,
+     "native": 28,
      "degraded": 0,
-     "placeholder": 7,
+     "placeholder": 0,
      "dropped": 0,
      "reasons": {
       "native": [
-       "K4 shop with imported prices, buy-back prices, stock and variable conditions"
-      ],
-      "placeholder": [
-       "monster trading remains a visible placeholder"
+       "K4 shop with imported prices, buy-back prices, stock and variable conditions",
+       "tux.monsterShop scene: imported price, level and saved per-economy stock; party then Kennel"
       ]
      }
     },
@@ -2627,7 +2625,7 @@
      "dropped": 8,
      "reasons": {
       "dropped": [
-       "presentation / meta",
+       "Safari-park session (Eclipse park); not part of the Spyder campaign",
        "fixed-false guard prevents the source event from starting"
       ]
      }
@@ -2635,10 +2633,10 @@
     {
      "type": "pathfind",
      "total": 336,
-     "native": 332,
+     "native": 334,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 4,
+     "dropped": 2,
      "reasons": {
       "native": [
        "K2 deterministic pathTo route"
@@ -2755,7 +2753,7 @@
      "dropped": 8,
      "reasons": {
       "dropped": [
-       "presentation / meta",
+       "plague system: moves infected monsters into the hidden quarantine box",
        "fixed-false guard prevents the source event from starting"
       ]
      }
@@ -2848,10 +2846,10 @@
     {
      "type": "remove_npc",
      "total": 224,
-     "native": 221,
+     "native": 223,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 3,
+     "dropped": 1,
      "reasons": {
       "native": [
        "local.npc.<slug> = 0"
@@ -3013,13 +3011,13 @@
     {
      "type": "set_kennel_visible",
      "total": 2,
-     "native": 0,
+     "native": 2,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 2,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "fixed-false guard prevents the source event from starting"
+      "native": [
+       "tux.set_kennel_visible toggles a saved player box"
       ]
      }
     },
@@ -3204,10 +3202,10 @@
     {
      "type": "set_variable",
      "total": 715,
-     "native": 698,
+     "native": 700,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 17,
+     "dropped": 15,
      "reasons": {
       "native": [
        "variable set enum code"
@@ -3273,13 +3271,13 @@
     {
      "type": "trading",
      "total": 8,
-     "native": 0,
+     "native": 8,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 8,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "presentation / meta"
+      "native": [
+       "tux.trade scene: scripted trade into the same party slot, caught entry, eight-second transition"
       ]
      }
     },
@@ -3307,10 +3305,10 @@
     {
      "type": "translated_dialog",
      "total": 2068,
-     "native": 2030,
+     "native": 2033,
      "degraded": 1,
      "placeholder": 0,
-     "dropped": 37,
+     "dropped": 34,
      "reasons": {
       "native": [
        "text boxes from en_US .po (layout args ignored)"
@@ -3358,10 +3356,10 @@
     {
      "type": "unlock_controls",
      "total": 330,
-     "native": 325,
+     "native": 327,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 5,
+     "dropped": 3,
      "reasons": {
       "native": [
        "K1 cross-event input lock command"
@@ -3449,15 +3447,15 @@
    "summary": {
     "types": 64,
     "uses": 8663,
-    "native": 8183,
+    "native": 8218,
     "degraded": 2,
     "placeholder": 1,
-    "dropped": 477,
-    "nativePercent": 94.5,
-    "executablePercent": 94.5,
+    "dropped": 442,
+    "nativePercent": 94.9,
+    "executablePercent": 94.9,
     "tier1": {
-     "uses": 4707,
-     "percent": 54.33,
+     "uses": 4737,
+     "percent": 54.68,
      "requiredUses": 4591,
      "requiredPercent": 53,
      "meetsBaseline": true
@@ -3509,10 +3507,10 @@
     {
      "type": "is button_pressed",
      "total": 419,
-     "native": 407,
+     "native": 417,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 12,
+     "dropped": 2,
      "reasons": {
       "native": [
        "consumed by trigger selection"
@@ -3587,10 +3585,10 @@
     {
      "type": "is char_facing_tile",
      "total": 344,
-     "native": 332,
+     "native": 342,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 12,
+     "dropped": 2,
      "reasons": {
       "native": [
        "consumed by trigger selection"
@@ -3795,13 +3793,13 @@
     {
      "type": "is has_kennel",
      "total": 2,
-     "native": 0,
+     "native": 2,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 2,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "fixed-false guard prevents the source event from starting"
+      "native": [
+       "tux.has_kennel counts one saved player box; a missing box fails both forms"
       ]
      }
     },
@@ -3834,13 +3832,13 @@
     {
      "type": "is kennel",
      "total": 2,
-     "native": 0,
+     "native": 2,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 2,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "fixed-false guard prevents the source event from starting"
+      "native": [
+       "tux.kennel reads the saved player boxes"
       ]
      }
     },
@@ -3991,10 +3989,10 @@
     {
      "type": "is variable_set",
      "total": 730,
-     "native": 709,
+     "native": 712,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 21,
+     "dropped": 18,
      "reasons": {
       "native": [
        "page/if variable compare on the enum code"
@@ -4233,13 +4231,13 @@
     {
      "type": "not kennel",
      "total": 1,
-     "native": 0,
+     "native": 1,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 1,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "every action was removed, so no project event was emitted"
+      "native": [
+       "tux.kennel reads the saved player boxes"
       ]
      }
     },
@@ -4359,18 +4357,17 @@
     {
      "type": "not variable_set",
      "total": 671,
-     "native": 645,
+     "native": 652,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 26,
+     "dropped": 19,
      "reasons": {
       "native": [
        "page/if variable compare on the enum code"
       ],
       "dropped": [
        "fixed-false guard prevents the source event from starting",
-       "source event is not materialized by any map",
-       "every action was removed, so no project event was emitted"
+       "source event is not materialized by any map"
       ]
      }
     }

@@ -8615,6 +8615,140 @@
     ]
    }
   },
+  "conileaf": {
+   "name": "Conileaf",
+   "description": "Foods placed in its pitcher are blended and pickled. They are used to store food without it going off.",
+   "species": "pitcher",
+   "txmnId": 148,
+   "shape": "blob",
+   "stage": "standalone",
+   "types": [
+    "wood"
+   ],
+   "tags": [
+    "plant",
+    "food"
+   ],
+   "terrains": [],
+   "height": 45,
+   "weight": 3,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 100,
+   "catchResistance": [
+    0.95,
+    1.05
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "solar_synthesis",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "pseudopod",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "overgrowth",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "assault",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "leaf_stab",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "sting",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "sylvan",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "leaf_barrage",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "all_in",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "chameleon",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "shadow_boxing",
+     "level": 37,
+     "method": "level_up"
+    },
+    {
+     "technique": "stabilo",
+     "level": 40,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:tile.battle/gfx/sprites/battle/conileaf-sheet#0",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "coppi": {
    "name": "Coppi",
    "description": "COPPI's flowers are surprisingly bitter and smelly, but they are useful in beer brewing and medicine.",
@@ -14531,6 +14665,146 @@
     ]
    }
   },
+  "foxfire": {
+   "name": "Foxfire",
+   "description": "FOXFIRE cubs are found in fires that burned out overnight. No one knows where they come from.",
+   "species": "smoke",
+   "txmnId": 149,
+   "shape": "varmint",
+   "stage": "basic",
+   "types": [
+    "fire"
+   ],
+   "tags": [
+    "flame",
+    "calamity",
+    "claws"
+   ],
+   "terrains": [],
+   "height": 41,
+   "weight": 2,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 100,
+   "catchResistance": [
+    0.95,
+    1.05
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "fire_ball",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "fume",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "fluff_up",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "breathe_fire",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "one_two",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "torch",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "lava",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "all_in",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "invictus",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "give_all",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "supernova",
+     "level": 37,
+     "method": "level_up"
+    },
+    {
+     "technique": "flamethrower",
+     "level": 40,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [
+    {
+     "at_level": 30,
+     "monster_slug": "vulpyre"
+    }
+   ],
+   "art": {
+    "sheet": {
+     "key": "ui:tile.battle/gfx/sprites/battle/foxfire-sheet#0",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "foxko": {
    "name": "Foxko",
    "description": "A fusion of two tuxemon.",
@@ -14879,6 +15153,286 @@
    "art": {
     "sheet": {
      "key": "ui:tile.battle/gfx/sprites/battle/furnursus-sheet#0",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "fuzzina": {
+   "name": "Fuzzina",
+   "description": "When the child that abandoned a FUZZLET needs it again, it becomes a FUZZINA, a brave protector and nurturer of the small and the weak.",
+   "species": "toy",
+   "txmnId": 237,
+   "shape": "blob",
+   "stage": "stage1",
+   "types": [
+    "cosmic",
+    "normal"
+   ],
+   "tags": [
+    "ghost",
+    "love",
+    "healing",
+    "soldier"
+   ],
+   "terrains": [],
+   "height": 50,
+   "weight": 1,
+   "genderWeights": {
+    "neuter": 1
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "stampede",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "sand_spray",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "surge",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "ruby",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "icicle_spear",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "crystal",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "stonehenge",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "thunderclap",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "electroplate",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "tsunami",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "greenstone",
+     "level": 37,
+     "method": "level_up"
+    },
+    {
+     "technique": "pit",
+     "level": 40,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:tile.battle/gfx/sprites/battle/fuzzina-sheet#0",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "fuzzlet": {
+   "name": "Fuzzlet",
+   "description": "When a child is no longer around to play with their toys, they sometimes come to life.",
+   "species": "toy",
+   "txmnId": 236,
+   "shape": "blob",
+   "stage": "basic",
+   "types": [
+    "cosmic",
+    "normal"
+   ],
+   "tags": [
+    "ghost",
+    "love",
+    "healing",
+    "soldier"
+   ],
+   "terrains": [],
+   "height": 33,
+   "weight": 0.5,
+   "genderWeights": {
+    "neuter": 1
+   },
+   "catchRate": 100,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "stampede",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "sand_spray",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "surge",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "ruby",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "icicle_spear",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "crystal",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "stonehenge",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "thunderclap",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "electroplate",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "tsunami",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "greenstone",
+     "level": 37,
+     "method": "level_up"
+    },
+    {
+     "technique": "pit",
+     "level": 40,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [
+    {
+     "monster_slug": "fuzzina",
+     "bond": {
+      "comparison": "greater_than",
+      "value": 80
+     }
+    }
+   ],
+   "art": {
+    "sheet": {
+     "key": "ui:tile.battle/gfx/sprites/battle/fuzzlet-sheet#0",
      "width": 128,
      "height": 128,
      "rect": [
@@ -16423,6 +16977,125 @@
    "art": {
     "sheet": {
      "key": "ui:tile.battle/gfx/sprites/battle/hatchling-sheet#0",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "hectapod": {
+   "name": "Hectapod",
+   "description": "When it inflates its dome, it floats to the top of oceans, or even through mist and clouds.",
+   "species": "sea_storm",
+   "txmnId": 271,
+   "shape": "polliwog",
+   "stage": "stage1",
+   "types": [
+    "water"
+   ],
+   "tags": [
+    "water",
+    "weather"
+   ],
+   "terrains": [],
+   "height": 120,
+   "weight": 45,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.95,
+    1.05
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "goad",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "flood",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "geyser",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "icicle_spear",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "flow",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "water_blast",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "starfall",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "tsunami",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "ice_storm",
+     "level": 37,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:tile.battle/gfx/sprites/battle/hectapod-sheet#0",
      "width": 128,
      "height": 128,
      "rect": [
@@ -24335,6 +25008,271 @@
     ]
    }
   },
+  "potturmeist": {
+   "name": "Potturmeist",
+   "description": "POTTURMEIST are spirits of the dead that take refuge in empty vessels. In ancient temples, acolytes must distract the monsters lest they interrupt important ceremonies.",
+   "species": "pottery",
+   "txmnId": 257,
+   "shape": "blob",
+   "stage": "basic",
+   "types": [
+    "earth",
+    "shadow"
+   ],
+   "tags": [
+    "ghost",
+    "shielded",
+    "shapeshifter"
+   ],
+   "terrains": [],
+   "height": 48,
+   "weight": 2.5,
+   "genderWeights": {
+    "neuter": 1
+   },
+   "catchRate": 100,
+   "catchResistance": [
+    0.95,
+    1.05
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "bullet",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "muddle",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "wall_of_steel",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "lineage",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "ruby",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "terror",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "crystal",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "phantasmal_force",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "perfect_cut",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "shrapnel",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "shadow_blast",
+     "level": 40,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [
+    {
+     "at_level": 18,
+     "monster_slug": "potturney"
+    }
+   ],
+   "art": {
+    "sheet": {
+     "key": "ui:tile.battle/gfx/sprites/battle/potturmeist-sheet#0",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "potturney": {
+   "name": "Potturney",
+   "description": "By the time a POTTURMEIST has reached its maturity, its protective urn has so changed shape that it resembles no pottery made by human hands. Some insist that the designs on a POTTURMEIST's urn are writings from the far future.",
+   "species": "pottery",
+   "txmnId": 258,
+   "shape": "blob",
+   "stage": "stage1",
+   "types": [
+    "earth",
+    "shadow"
+   ],
+   "tags": [
+    "ghost",
+    "shielded",
+    "shapeshifter"
+   ],
+   "terrains": [],
+   "height": 45,
+   "weight": 6,
+   "genderWeights": {
+    "neuter": 1
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.95,
+    1.05
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "bullet",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "muddle",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "wall_of_steel",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "lineage",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "ruby",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "terror",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "crystal",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "phantasmal_force",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "perfect_cut",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "shrapnel",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "shadow_blast",
+     "level": 40,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:tile.battle/gfx/sprites/battle/potturney-sheet#0",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "propellercat": {
    "name": "Propellercat",
    "description": "Is it a new species, or just the pet of an inventor?",
@@ -29613,6 +30551,129 @@
     ]
    }
   },
+  "squink": {
+   "name": "Squink",
+   "description": "It is named for the noise it makes when it is all out of ink.",
+   "species": "sea_spray",
+   "txmnId": 270,
+   "shape": "polliwog",
+   "stage": "basic",
+   "types": [
+    "water"
+   ],
+   "tags": [
+    "water"
+   ],
+   "terrains": [],
+   "height": 70,
+   "weight": 24,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 100,
+   "catchResistance": [
+    0.95,
+    1.05
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "goad",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "flood",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "geyser",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "icicle_spear",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "flow",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "water_blast",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "starfall",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "tsunami",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "ice_storm",
+     "level": 37,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [
+    {
+     "at_level": 20,
+     "monster_slug": "hectapod"
+    }
+   ],
+   "art": {
+    "sheet": {
+     "key": "ui:tile.battle/gfx/sprites/battle/squink-sheet#0",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "statursus": {
    "name": "Statursus",
    "description": "STATURSUS has learned to channel its emotions into a single pure flame. The mere sight of it sends others into a trance.",
@@ -30456,6 +31517,127 @@
    "art": {
     "sheet": {
      "key": "ui:tile.battle/gfx/sprites/battle/tigrock-sheet#0",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "tikoal": {
+   "name": "Tikoal",
+   "description": "The guardian of a forest-dwelling people, it keeps guard and resolves disputes.",
+   "species": "taboo",
+   "txmnId": 79,
+   "shape": "blob",
+   "stage": "basic",
+   "types": [
+    "wood",
+    "fire"
+   ],
+   "tags": [
+    "plant",
+    "flame",
+    "summoner"
+   ],
+   "terrains": [],
+   "height": 68,
+   "weight": 11,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 100,
+   "catchResistance": [
+    0.95,
+    1.25
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "fire_ball",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "blossom",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "saber",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "gust",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "petrify",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "rock",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "berserk",
+     "level": 37,
+     "method": "level_up"
+    },
+    {
+     "technique": "flamethrower",
+     "level": 40,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [
+    {
+     "at_level": 32,
+     "monster_slug": "tikorch"
+    }
+   ],
+   "art": {
+    "sheet": {
+     "key": "ui:tile.battle/gfx/sprites/battle/tikoal-sheet#0",
      "width": 128,
      "height": 128,
      "rect": [
@@ -34140,6 +35322,144 @@
     ]
    }
   },
+  "vulpyre": {
+   "name": "Vulpyre",
+   "description": "How it evolves and lives is very mysterious, but it is sometimes spotted near a volcano.",
+   "species": "firefox",
+   "txmnId": 150,
+   "shape": "hunter",
+   "stage": "stage1",
+   "types": [
+    "fire"
+   ],
+   "tags": [
+    "flame",
+    "calamity",
+    "claws"
+   ],
+   "terrains": [
+    "desert",
+    "grassland"
+   ],
+   "height": 100,
+   "weight": 50,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 70,
+   "catchResistance": [
+    0.95,
+    1.05
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "fire_ball",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "fume",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "fluff_up",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "breathe_fire",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "one_two",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "torch",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "lava",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "all_in",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "invictus",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "give_all",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "supernova",
+     "level": 37,
+     "method": "level_up"
+    },
+    {
+     "technique": "flamethrower",
+     "level": 40,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:tile.battle/gfx/sprites/battle/vulpyre-sheet#0",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "weavifly": {
    "name": "Weavifly",
    "description": "When it is heavy with egg, it becomes unable to fly.",
@@ -34528,6 +35848,144 @@
     ]
    }
   },
+  "woodoor": {
+   "name": "Woodoor",
+   "description": "When a haunted house burns to the ground, sometimes all that is left is the front door. It hops away to find its next home.",
+   "species": "portal",
+   "txmnId": 250,
+   "shape": "sprite",
+   "stage": "basic",
+   "types": [
+    "wood"
+   ],
+   "tags": [
+    "bite",
+    "plant",
+    "ghost",
+    "shielded"
+   ],
+   "terrains": [
+    "ruins",
+    "urban"
+   ],
+   "height": 204,
+   "weight": 46,
+   "genderWeights": {
+    "neuter": 1
+   },
+   "catchRate": 100,
+   "catchResistance": [
+    0.95,
+    1.05
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "strike",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "wall_of_steel",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "bullet",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "muddle",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "shrapnel",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "lineage",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "perfect_cut",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "terror",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "rust_bomb",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "crystal",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "shadow_blast",
+     "level": 40,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [
+    {
+     "at_level": 26,
+     "monster_slug": "blasdoor"
+    }
+   ],
+   "art": {
+    "sheet": {
+     "key": "ui:tile.battle/gfx/sprites/battle/woodoor-sheet#0",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
   "xeon": {
    "name": "Xeon",
    "description": "A hostile robot.",
@@ -34751,6 +36209,143 @@
    "art": {
     "sheet": {
      "key": "ui:tile.battle/gfx/sprites/battle/xeon_2-sheet#0",
+     "width": 128,
+     "height": 128,
+     "rect": [
+      0,
+      0,
+      128,
+      88
+     ]
+    },
+    "front": [
+     0,
+     0,
+     64,
+     64
+    ],
+    "back": [
+     64,
+     0,
+     64,
+     64
+    ],
+    "menu": [
+     [
+      0,
+      64,
+      24,
+      24
+     ],
+     [
+      24,
+      64,
+      24,
+      24
+     ]
+    ]
+   }
+  },
+  "ziggurat": {
+   "name": "Ziggurat",
+   "description": "No labyrinth can contain ZIGGURAT. It decorates its nests with carvings of all the mazes it has traversed over the years.",
+   "species": "mazerunner",
+   "txmnId": 242,
+   "shape": "varmint",
+   "stage": "standalone",
+   "types": [
+    "earth",
+    "normal"
+   ],
+   "tags": [
+    "ground",
+    "toxic",
+    "food",
+    "claws"
+   ],
+   "terrains": [],
+   "height": 30,
+   "weight": 1,
+   "genderWeights": {
+    "male": 0.5,
+    "female": 0.5
+   },
+   "catchRate": 100,
+   "catchResistance": [
+    0.9,
+    1.15
+   ],
+   "moveset": [
+    {
+     "technique": "struggle",
+     "level": 1,
+     "method": "fallback"
+    },
+    {
+     "technique": "ice_claw",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "ants",
+     "level": 1,
+     "method": "level_up"
+    },
+    {
+     "technique": "muck",
+     "level": 4,
+     "method": "level_up"
+    },
+    {
+     "technique": "hammerhead",
+     "level": 7,
+     "method": "level_up"
+    },
+    {
+     "technique": "infectious_bite",
+     "level": 13,
+     "method": "level_up"
+    },
+    {
+     "technique": "breath",
+     "level": 16,
+     "method": "level_up"
+    },
+    {
+     "technique": "grinding",
+     "level": 19,
+     "method": "level_up"
+    },
+    {
+     "technique": "gourmet",
+     "level": 25,
+     "method": "level_up"
+    },
+    {
+     "technique": "strangulation",
+     "level": 28,
+     "method": "level_up"
+    },
+    {
+     "technique": "cat_calling",
+     "level": 31,
+     "method": "level_up"
+    },
+    {
+     "technique": "burrow_blast",
+     "level": 37,
+     "method": "level_up"
+    },
+    {
+     "technique": "evasion",
+     "level": 40,
+     "method": "level_up"
+    }
+   ],
+   "evolutions": [],
+   "art": {
+    "sheet": {
+     "key": "ui:tile.battle/gfx/sprites/battle/ziggurat-sheet#0",
      "width": 128,
      "height": 128,
      "rect": [

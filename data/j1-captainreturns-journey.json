@@ -8,8 +8,8 @@
     "format": "pocket-tuxemon/gb6-mainline/v1",
     "frames": 108225,
     "tapeSha256": "68c9b72807502454e09a71ed282f69dca401e4b341a058a3fc860000fc8f1ba5",
-    "terminalStateSha256": "eb81c41685d4d1f3435677ced4a3bee8b449e00e30c2181c40c8bb43f8a66122",
-    "terminalSnapshotSha256": "7a98fa3a1ca1929fad8420c959360b5bffb32ff3a51b547993620a68b3391068",
+    "terminalStateSha256": "5beef46fed1fcd5bdf929176e7aaadb8dbd7376eac4a40ad40b0ceb7a2e29293",
+    "terminalSnapshotSha256": "e5c51ab71a707af19688b12e390e723b219724f7ab2bd5d69de21a30f76c4a16",
     "heldMask": 0,
     "timelineFrame": 108225,
     "map": "spyder_route3",
@@ -14229,8 +14229,8 @@
       "maxHp": 233
     }
   ],
-  "initialStateSha256": "3aafe1b1855b1b639b22c47afcf55b7aeb3c779fa835dd52b8e718fc33721131",
-  "terminalStateSha256": "6a47dd835356f60e33b956298002e5c1e491c00a9656d5c6985df84b1e2c1d89",
+  "initialStateSha256": "14ee5ea679005fee00cd50cf87514aab74480b7b884ec8b077f52eeb986675b3",
+  "terminalStateSha256": "85cad6f9e30598d982e6935ab7f2b77af2f5e377f993866af98c11fbd9fa5f76",
   "tapeSha256": "4857544fa75bfe48d16af58753bd7a8ad69231d8bc60b0a139f9bbb5290f1e5d",
   "combinedTapeSha256": "1584fe355247c95766bf25b7e3ee2634526af6a190f2a450d402ac166a88049b"
 }

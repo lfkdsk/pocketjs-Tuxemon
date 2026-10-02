@@ -513,10 +513,10 @@ test("default import output remains byte-pinned", () => {
   // The deterministic clock, native presentation/terrain mappings, GM1 audio
   // commands, sys.music_fading fadeout guard, GI scene lowering, and the
   // GI-1b movement/party lowering (choice_npc option names, dropped char_run,
-  // get_party_monster iid slots, NPC-lifetime party clears) are all included
-  // in this combined pin.
+  // get_party_monster iid slots, NPC-lifetime party clears) and the GI-2b
+  // storage/trade/shop dispositions are all included in this combined pin.
   expect(createHash("sha256").update(bytes).digest("hex")).toBe(
-    "28b1c602a9616cefe30bb3dd5ef6f0b8e9ebce5ef92fa0b20aba4713ad70a835",
+    "02f6d611af70cafb582a8238b442d1b8a3a6f78a931154319f8ff8c9242955d1",
   );
 });
 
@@ -895,10 +895,10 @@ test("create_npc and remove_npc bound the NPC's party lifetime", () => {
   expect(clears.length).toBeGreaterThan(guarded.length);
 });
 
-test("open_shop imports item economies and keeps monster buying visible", () => {
+test("open_shop imports item economies and monster shop scenes", () => {
   const result = buildProject(availableMapIds(), G6_IMPORT_OPTIONS);
   const row = result.report.coverage.actions.rows.find((candidate) => candidate.type === "open_shop");
-  expect(row).toMatchObject({ total: 28, native: 21, degraded: 0, placeholder: 7, dropped: 0 });
+  expect(row).toMatchObject({ total: 28, native: 28, degraded: 0, placeholder: 0, dropped: 0 });
   expect(result.report.coverage.actions.rows.find((candidate) => candidate.type === "set_economy"))
     .toMatchObject({ total: 16, native: 16, degraded: 0, placeholder: 0, dropped: 0 });
   expect(result.report.economy).toMatchObject({
@@ -944,9 +944,29 @@ test("open_shop imports item economies and keeps monster buying visible", () => 
   const shopLines = objectNodes(result.project)
     .filter((node) => node.op === "text" && Array.isArray(node.lines))
     .flatMap((node) => node.lines as string[]);
-  expect(shopLines.filter((line) => line.startsWith("[SHOP]"))).toHaveLength(7);
-  expect(shopLines.join("\n")).toContain("Buy monsters");
-  expect(shopLines.join("\n")).toContain("P1 placeholder; trading is unavailable.");
+  expect(shopLines.filter((line) => line.startsWith("[SHOP]"))).toHaveLength(0);
+
+  // Every buy_monster menu opens the monster shop with its economy's stock.
+  const monsterShops = objectNodes(result.project)
+    .filter((node) => node.op === "scene" && node.id === "tux.monsterShop");
+  expect(monsterShops).toHaveLength(7);
+  const byEconomy = new Map(monsterShops.map((node) => {
+    const args = node.args as { economy: string; entries: unknown[] };
+    return [args.economy, args.entries];
+  }));
+  expect([...byEconomy.keys()].sort()).toEqual([
+    "spyder_candy_tech",
+    "spyder_cotton_tech",
+    "spyder_flower_petshop",
+    "spyder_flower_tech",
+    "spyder_leather_tech",
+    "spyder_timber_tech",
+  ]);
+  expect(byEconomy.get("spyder_candy_tech")).toEqual([{ slug: "budaye", price: 4_000, level: 10, stock: 1 }]);
+  expect(byEconomy.get("spyder_flower_petshop")).toEqual(
+    ["squink", "potturmeist", "fuzzlet", "woodoor", "ziggurat"]
+      .map((slug) => ({ slug, price: 500, level: 10, stock: 1 })),
+  );
 });
 
 test("world destroy tools lower to held-item interactions for matching sprites", () => {

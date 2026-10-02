@@ -904,6 +904,10 @@
     "file": "dist/battle/monsters/conifrost.json"
   },
   {
+    "key": "battle/monsters/conileaf.json",
+    "file": "dist/battle/monsters/conileaf.json"
+  },
+  {
     "key": "battle/monsters/coppi.json",
     "file": "dist/battle/monsters/coppi.json"
   },
@@ -1084,6 +1088,10 @@
     "file": "dist/battle/monsters/forturtle.json"
   },
   {
+    "key": "battle/monsters/foxfire.json",
+    "file": "dist/battle/monsters/foxfire.json"
+  },
+  {
     "key": "battle/monsters/foxko.json",
     "file": "dist/battle/monsters/foxko.json"
   },
@@ -1094,6 +1102,14 @@
   {
     "key": "battle/monsters/furnursus.json",
     "file": "dist/battle/monsters/furnursus.json"
+  },
+  {
+    "key": "battle/monsters/fuzzina.json",
+    "file": "dist/battle/monsters/fuzzina.json"
+  },
+  {
+    "key": "battle/monsters/fuzzlet.json",
+    "file": "dist/battle/monsters/fuzzlet.json"
   },
   {
     "key": "battle/monsters/galnec.json",
@@ -1142,6 +1158,10 @@
   {
     "key": "battle/monsters/hatchling.json",
     "file": "dist/battle/monsters/hatchling.json"
+  },
+  {
+    "key": "battle/monsters/hectapod.json",
+    "file": "dist/battle/monsters/hectapod.json"
   },
   {
     "key": "battle/monsters/heronquak.json",
@@ -1388,6 +1408,14 @@
     "file": "dist/battle/monsters/possessun.json"
   },
   {
+    "key": "battle/monsters/potturmeist.json",
+    "file": "dist/battle/monsters/potturmeist.json"
+  },
+  {
+    "key": "battle/monsters/potturney.json",
+    "file": "dist/battle/monsters/potturney.json"
+  },
+  {
     "key": "battle/monsters/propellercat.json",
     "file": "dist/battle/monsters/propellercat.json"
   },
@@ -1552,6 +1580,10 @@
     "file": "dist/battle/monsters/squabbit.json"
   },
   {
+    "key": "battle/monsters/squink.json",
+    "file": "dist/battle/monsters/squink.json"
+  },
+  {
     "key": "battle/monsters/statursus.json",
     "file": "dist/battle/monsters/statursus.json"
   },
@@ -1578,6 +1610,10 @@
   {
     "key": "battle/monsters/tigrock.json",
     "file": "dist/battle/monsters/tigrock.json"
+  },
+  {
+    "key": "battle/monsters/tikoal.json",
+    "file": "dist/battle/monsters/tikoal.json"
   },
   {
     "key": "battle/monsters/tikorch.json",
@@ -1692,6 +1728,10 @@
     "file": "dist/battle/monsters/volconey.json"
   },
   {
+    "key": "battle/monsters/vulpyre.json",
+    "file": "dist/battle/monsters/vulpyre.json"
+  },
+  {
     "key": "battle/monsters/weavifly.json",
     "file": "dist/battle/monsters/weavifly.json"
   },
@@ -1704,12 +1744,20 @@
     "file": "dist/battle/monsters/wolffsky.json"
   },
   {
+    "key": "battle/monsters/woodoor.json",
+    "file": "dist/battle/monsters/woodoor.json"
+  },
+  {
     "key": "battle/monsters/xeon.json",
     "file": "dist/battle/monsters/xeon.json"
   },
   {
     "key": "battle/monsters/xeon_2.json",
     "file": "dist/battle/monsters/xeon_2.json"
+  },
+  {
+    "key": "battle/monsters/ziggurat.json",
+    "file": "dist/battle/monsters/ziggurat.json"
   },
   {
     "key": "battle/monsters/zunna.json",
@@ -7580,6 +7628,10 @@
     "file": "dist/battle-art/gfx/sprites/battle/conifrost-sheet.pkts"
   },
   {
+    "key": "ui:tile.battle/gfx/sprites/battle/conileaf-sheet",
+    "file": "dist/battle-art/gfx/sprites/battle/conileaf-sheet.pkts"
+  },
+  {
     "key": "ui:tile.battle/gfx/sprites/battle/coppi-sheet",
     "file": "dist/battle-art/gfx/sprites/battle/coppi-sheet.pkts"
   },
@@ -7760,6 +7812,10 @@
     "file": "dist/battle-art/gfx/sprites/battle/forturtle-sheet.pkts"
   },
   {
+    "key": "ui:tile.battle/gfx/sprites/battle/foxfire-sheet",
+    "file": "dist/battle-art/gfx/sprites/battle/foxfire-sheet.pkts"
+  },
+  {
     "key": "ui:tile.battle/gfx/sprites/battle/foxko-sheet",
     "file": "dist/battle-art/gfx/sprites/battle/foxko-sheet.pkts"
   },
@@ -7770,6 +7826,14 @@
   {
     "key": "ui:tile.battle/gfx/sprites/battle/furnursus-sheet",
     "file": "dist/battle-art/gfx/sprites/battle/furnursus-sheet.pkts"
+  },
+  {
+    "key": "ui:tile.battle/gfx/sprites/battle/fuzzina-sheet",
+    "file": "dist/battle-art/gfx/sprites/battle/fuzzina-sheet.pkts"
+  },
+  {
+    "key": "ui:tile.battle/gfx/sprites/battle/fuzzlet-sheet",
+    "file": "dist/battle-art/gfx/sprites/battle/fuzzlet-sheet.pkts"
   },
   {
     "key": "ui:tile.battle/gfx/sprites/battle/galnec-sheet",
@@ -7818,6 +7882,10 @@
   {
     "key": "ui:tile.battle/gfx/sprites/battle/hatchling-sheet",
     "file": "dist/battle-art/gfx/sprites/battle/hatchling-sheet.pkts"
+  },
+  {
+    "key": "ui:tile.battle/gfx/sprites/battle/hectapod-sheet",
+    "file": "dist/battle-art/gfx/sprites/battle/hectapod-sheet.pkts"
   },
   {
     "key": "ui:tile.battle/gfx/sprites/battle/heronquak-sheet",
@@ -8068,6 +8136,14 @@
     "file": "dist/battle-art/gfx/sprites/battle/possessun-sheet.pkts"
   },
   {
+    "key": "ui:tile.battle/gfx/sprites/battle/potturmeist-sheet",
+    "file": "dist/battle-art/gfx/sprites/battle/potturmeist-sheet.pkts"
+  },
+  {
+    "key": "ui:tile.battle/gfx/sprites/battle/potturney-sheet",
+    "file": "dist/battle-art/gfx/sprites/battle/potturney-sheet.pkts"
+  },
+  {
     "key": "ui:tile.battle/gfx/sprites/battle/propellercat-sheet",
     "file": "dist/battle-art/gfx/sprites/battle/propellercat-sheet.pkts"
   },
@@ -8232,6 +8308,10 @@
     "file": "dist/battle-art/gfx/sprites/battle/squabbit-sheet.pkts"
   },
   {
+    "key": "ui:tile.battle/gfx/sprites/battle/squink-sheet",
+    "file": "dist/battle-art/gfx/sprites/battle/squink-sheet.pkts"
+  },
+  {
     "key": "ui:tile.battle/gfx/sprites/battle/statursus-sheet",
     "file": "dist/battle-art/gfx/sprites/battle/statursus-sheet.pkts"
   },
@@ -8258,6 +8338,10 @@
   {
     "key": "ui:tile.battle/gfx/sprites/battle/tigrock-sheet",
     "file": "dist/battle-art/gfx/sprites/battle/tigrock-sheet.pkts"
+  },
+  {
+    "key": "ui:tile.battle/gfx/sprites/battle/tikoal-sheet",
+    "file": "dist/battle-art/gfx/sprites/battle/tikoal-sheet.pkts"
   },
   {
     "key": "ui:tile.battle/gfx/sprites/battle/tikorch-sheet",
@@ -8372,6 +8456,10 @@
     "file": "dist/battle-art/gfx/sprites/battle/volconey-sheet.pkts"
   },
   {
+    "key": "ui:tile.battle/gfx/sprites/battle/vulpyre-sheet",
+    "file": "dist/battle-art/gfx/sprites/battle/vulpyre-sheet.pkts"
+  },
+  {
     "key": "ui:tile.battle/gfx/sprites/battle/weavifly-sheet",
     "file": "dist/battle-art/gfx/sprites/battle/weavifly-sheet.pkts"
   },
@@ -8384,12 +8472,20 @@
     "file": "dist/battle-art/gfx/sprites/battle/wolffsky-sheet.pkts"
   },
   {
+    "key": "ui:tile.battle/gfx/sprites/battle/woodoor-sheet",
+    "file": "dist/battle-art/gfx/sprites/battle/woodoor-sheet.pkts"
+  },
+  {
     "key": "ui:tile.battle/gfx/sprites/battle/xeon-sheet",
     "file": "dist/battle-art/gfx/sprites/battle/xeon-sheet.pkts"
   },
   {
     "key": "ui:tile.battle/gfx/sprites/battle/xeon_2-sheet",
     "file": "dist/battle-art/gfx/sprites/battle/xeon_2-sheet.pkts"
+  },
+  {
+    "key": "ui:tile.battle/gfx/sprites/battle/ziggurat-sheet",
+    "file": "dist/battle-art/gfx/sprites/battle/ziggurat-sheet.pkts"
   },
   {
     "key": "ui:tile.battle/gfx/sprites/battle/zunna-sheet",

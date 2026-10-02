@@ -26,6 +26,12 @@ import {
   TUXEMON_UI_THEME,
   TuxemonBattleScene,
   TuxemonMonsterPickerScene,
+  createTuxemonMonsterShopScene,
+  createTuxemonTradeScene,
+  TuxemonPcScene,
+  TUXEMON_MONSTER_SHOP_SCENE_ID,
+  TUXEMON_PC_SCENE_ID,
+  TUXEMON_TRADE_SCENE_ID,
 } from "./ui/gp1-data-stage.ts";
 import { createAnimatedProvider } from "./ui/animated-repository.ts";
 import { createNpcSrcProvider } from "./ui/npc-src-repository.ts";
@@ -96,6 +102,9 @@ mount(() => (
       [NAME_INPUT_SCENE_ID]: NameInputScene,
       [TUXEMON_JOURNAL_SCENE_ID]: createTuxemonJournalScene(catalog),
       [TUXEMON_MONSTER_PICKER_SCENE_ID]: TuxemonMonsterPickerScene,
+      [TUXEMON_PC_SCENE_ID]: TuxemonPcScene,
+      [TUXEMON_TRADE_SCENE_ID]: createTuxemonTradeScene(catalog),
+      [TUXEMON_MONSTER_SHOP_SCENE_ID]: createTuxemonMonsterShopScene(catalog),
     }}
     assets={assets}
     effects={createAudioEffects(project.audio ?? {})}

@@ -466,10 +466,17 @@ function buildSelection(scope: BattleScope, tables: Tables, allMaps: TuxMap[], s
       } else if (action.type === "set_economy") {
         const economy = tables.economy[arg(action, 1)];
         for (const row of list<Raw>(economy?.items)) if (string(row.slug) in tables.item) items.add(string(row.slug));
+        // Monster shops spawn their stock at the economy's level.
+        for (const row of list<Raw>(economy?.monsters)) {
+          const slug = string(row.slug);
+          if (!(slug in tables.monster)) continue;
+          monsters.add(slug);
+          addLevel(maxLevel, slug, Math.trunc(number(row.level, 1)));
+        }
       } else if (action.type === "trading") {
-        // Trade rewards are intentionally outside the S4 214-monster battle
-        // core; they enter naturally in full scope.
-        if (scope === "full") for (const slug of resolve(arg(action, 1), tables.monster)) monsters.add(slug);
+        // A scripted trade spawns the received species at the sent
+        // monster's level, which is only known at runtime.
+        for (const slug of resolve(arg(action, 1), tables.monster)) monsters.add(slug);
       } else if (action.type === "open_journal" && arg(action, 0) in tables.monster) {
         monsters.add(arg(action, 0));
       } else if (action.type === "set_tuxepedia" && arg(action, 1) in tables.monster) {

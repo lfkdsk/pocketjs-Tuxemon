@@ -26,6 +26,16 @@ import {
   TUXEMON_JOURNAL_SCENE_ID,
   TUXEMON_MONSTER_PICKER_SCENE_ID,
 } from "../battle/scenes.ts";
+import {
+  createTuxemonMonsterShopScene,
+  createTuxemonTradeScene,
+  TuxemonPcScene,
+} from "./storage-scenes.tsx";
+import {
+  TUXEMON_MONSTER_SHOP_SCENE_ID,
+  TUXEMON_PC_SCENE_ID,
+  TUXEMON_TRADE_SCENE_ID,
+} from "../battle/storage-scenes.ts";
 import { gp1Mark } from "./gp1-marks.ts";
 
 export {
@@ -45,6 +55,12 @@ export {
   TuxemonMonsterPickerScene,
   TUXEMON_JOURNAL_SCENE_ID,
   TUXEMON_MONSTER_PICKER_SCENE_ID,
+  createTuxemonMonsterShopScene,
+  createTuxemonTradeScene,
+  TuxemonPcScene,
+  TUXEMON_MONSTER_SHOP_SCENE_ID,
+  TUXEMON_PC_SCENE_ID,
+  TUXEMON_TRADE_SCENE_ID,
 };
 
 gp1Mark("json-literals");

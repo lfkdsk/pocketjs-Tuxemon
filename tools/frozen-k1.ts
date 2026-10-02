@@ -38,6 +38,9 @@ const SCAN_OPTIONS = {
     "rpgkit.nameInput": SCAN_SCENE_RULES,
     "tux.journal": SCAN_SCENE_RULES,
     "tux.monsterPicker": SCAN_SCENE_RULES,
+    "tux.pc": SCAN_SCENE_RULES,
+    "tux.trade": SCAN_SCENE_RULES,
+    "tux.monsterShop": SCAN_SCENE_RULES,
   },
 } as const;
 

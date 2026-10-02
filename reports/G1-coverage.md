@@ -10,21 +10,21 @@ When conversion discards a whole event, every source rule in it is Dropped.
 
 | Kind | Kinds | Uses | Native | Degraded | Placeholder | Dropped | S1 T1 baseline |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Actions | 98 | 13617 | 12437 | 594 | 12 | 574 | 6355 / 6246 (46.67% / 45.9%) |
-| Conditions | 64 | 8663 | 8183 | 2 | 1 | 477 | 4707 / 4591 (54.33% / 53.0%) |
+| Actions | 98 | 13617 | 12467 | 604 | 5 | 541 | 6362 / 6246 (46.72% / 45.9%) |
+| Conditions | 64 | 8663 | 8218 | 2 | 1 | 442 | 4737 / 4591 (54.68% / 53.0%) |
 
 The S1 acceptance baselines are 6,246 action uses (45.9%) and 4,591
 condition uses (53.0%). Only T1 source types whose disposition is Native or
-Degraded count toward them. This import records 6355
-(46.67%) and 4707
-(54.33%), respectively: -109
-action uses and -116 condition uses below the S1 baselines. The old
+Degraded count toward them. This import records 6362
+(46.72%) and 4737
+(54.68%), respectively: -116
+action uses and -146 condition uses below the S1 baselines. The old
 type-table Native figure was 5,448 / 13,617 (40.0%); conversion-path accounting
-supersedes it with 12437 / 13617
-(91.3%). “Executable”
+supersedes it with 12467 / 13617
+(91.6%). “Executable”
 (native + degraded + deliberate P1 placeholder) is
-95.8% for actions and
-94.5% for conditions.
+96.0% for actions and
+94.9% for conditions.
 
 Definitions:
 
@@ -38,7 +38,7 @@ Definitions:
 
 ## P2 battle and monster placeholder audit
 
-There are 13 source-file uses across 3
+There are 6 source-file uses across 2
 source types that still carry Placeholder disposition: battle/monster behavior.
 Player-versus-trainer, double, scripted-wild, random-wild, battle-outcome,
 party-size, has-monster, evolution, environment, faint-transfer, and live-party
@@ -46,7 +46,6 @@ defeat behavior are Native. The remaining non-native behavior is explicit:
 
 | Kind | Source type | Placeholder uses | Reason |
 |---|---|---:|---|
-| Action | `open_shop` | 7 | monster trading remains a visible placeholder |
 | Action | `start_battle` | 5 | NPC-versus-NPC battles are not supported yet; skipped |
 | Condition | `is party_infected` | 1 | no plague in P1: none=true |
 
@@ -67,17 +66,26 @@ battle-time monsters stay in it until then. Of the
 7, which write no `iid_slot_*`: the dojo
 calls run before their battle, whose `add_monster` calls are folded into the
 battle setup, and the gym calls name trainers that only fight skipped
-NPC-versus-NPC battles. The remaining trading
-and plague-state rows stay visible or deterministic without being claimed as
-full P2 behavior. The long-term target remains zero Placeholder uses.
+NPC-versus-NPC battles. Scripted `trading` runs the `tux.trade` scene,
+which replaces the sent monster in its party slot with a freshly spawned
+monster at the same level and records it as caught. `access_pc` opens the
+`tux.pc` storage scene (Degraded: monster boxes only, without the item
+locker); `create_kennel`, `set_kennel_visible`, `kennel` and
+`has_kennel` read and write the same saved boxes. `quarantine` stays
+Dropped with the plague system, and `park_experience` with the unreachable
+Eclipse park session. Plague-state rows stay deterministic without being
+claimed as full P2 behavior. The long-term target remains zero Placeholder
+uses.
 
 ## Economy and item catalog
 
 The importer read 14 economies with
 75 item rows and 10 monster
 rows. Item shops changed from the prior 0 Native / 28 Placeholder baseline to
-21 Native / 7 Placeholder:
-the remaining placeholders are visible monster-purchase menus. The imported
+28 Native / 0 Placeholder.
+Monster purchases (`buy_monster`) open the `tux.monsterShop` scene with
+the economy's price, level and stock; sales are saved per
+`<economy>:<slug>` stock label. The imported
 item rows include 6 finite-stock goods and
 4 variable-conditioned goods.
 
@@ -142,9 +150,9 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 
 | Kind | Source type | Native | Degraded | Placeholder | Dropped | Total |
 |---|---|---:|---:|---:|---:|---:|
-| Action | `access_pc` | 0 | 0 | 0 | 10 | 10 |
+| Action | `access_pc` | 0 | 10 | 0 | 0 | 10 |
 | Action | `add_item` | 114 | 0 | 0 | 4 | 118 |
-| Action | `add_monster` | 785 | 0 | 0 | 7 | 792 |
+| Action | `add_monster` | 786 | 0 | 0 | 6 | 792 |
 | Action | `add_step_tracker` | 0 | 0 | 0 | 3 | 3 |
 | Action | `add_tech` | 0 | 0 | 0 | 12 | 12 |
 | Action | `add_tracker` | 0 | 24 | 0 | 0 | 24 |
@@ -167,7 +175,7 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `choice_npc` | 0 | 1 | 0 | 0 | 1 |
 | Action | `clear_variable` | 35 | 0 | 0 | 1 | 36 |
 | Action | `copy_variable` | 0 | 0 | 0 | 2 | 2 |
-| Action | `create_kennel` | 0 | 0 | 0 | 1 | 1 |
+| Action | `create_kennel` | 1 | 0 | 0 | 0 | 1 |
 | Action | `create_npc` | 1327 | 0 | 0 | 176 | 1503 |
 | Action | `daycare` | 0 | 0 | 0 | 2 | 2 |
 | Action | `dojo_method` | 0 | 0 | 0 | 3 | 3 |
@@ -185,9 +193,9 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `modify_monster_bond` | 0 | 0 | 0 | 1 | 1 |
 | Action | `not` | 0 | 0 | 0 | 1 | 1 |
 | Action | `open_journal` | 0 | 14 | 0 | 0 | 14 |
-| Action | `open_shop` | 21 | 0 | 7 | 0 | 28 |
+| Action | `open_shop` | 28 | 0 | 0 | 0 | 28 |
 | Action | `park_experience` | 0 | 0 | 0 | 8 | 8 |
-| Action | `pathfind` | 332 | 0 | 0 | 4 | 336 |
+| Action | `pathfind` | 334 | 0 | 0 | 2 | 336 |
 | Action | `pathfind_to_char` | 201 | 0 | 0 | 0 | 201 |
 | Action | `play_map_animation` | 276 | 0 | 0 | 0 | 276 |
 | Action | `play_music` | 199 | 0 | 0 | 1 | 200 |
@@ -200,7 +208,7 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `random_monster` | 0 | 0 | 0 | 39 | 39 |
 | Action | `remove_collision` | 5 | 0 | 0 | 0 | 5 |
 | Action | `remove_monster` | 4 | 0 | 0 | 1 | 5 |
-| Action | `remove_npc` | 221 | 0 | 0 | 3 | 224 |
+| Action | `remove_npc` | 223 | 0 | 0 | 1 | 224 |
 | Action | `remove_step_tracker` | 0 | 0 | 0 | 5 | 5 |
 | Action | `remove_tech` | 0 | 0 | 0 | 2 | 2 |
 | Action | `rename_monster` | 2 | 0 | 0 | 0 | 2 |
@@ -212,7 +220,7 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `set_economy` | 16 | 0 | 0 | 0 | 16 |
 | Action | `set_environment` | 173 | 0 | 0 | 1 | 174 |
 | Action | `set_facing_mode` | 2 | 0 | 0 | 0 | 2 |
-| Action | `set_kennel_visible` | 0 | 0 | 0 | 2 | 2 |
+| Action | `set_kennel_visible` | 2 | 0 | 0 | 0 | 2 |
 | Action | `set_layer` | 77 | 0 | 0 | 2 | 79 |
 | Action | `set_mission` | 0 | 0 | 0 | 6 | 6 |
 | Action | `set_monster_attribute` | 0 | 0 | 0 | 33 | 33 |
@@ -225,16 +233,16 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `set_teleport_faint` | 27 | 0 | 0 | 2 | 29 |
 | Action | `set_template` | 17 | 6 | 0 | 1 | 24 |
 | Action | `set_tuxepedia` | 0 | 6 | 0 | 0 | 6 |
-| Action | `set_variable` | 698 | 0 | 0 | 17 | 715 |
+| Action | `set_variable` | 700 | 0 | 0 | 15 | 715 |
 | Action | `start_battle` | 325 | 0 | 5 | 1 | 331 |
 | Action | `start_double_battle` | 8 | 0 | 0 | 0 | 8 |
 | Action | `teleport_faint` | 11 | 0 | 0 | 0 | 11 |
-| Action | `trading` | 0 | 0 | 0 | 8 | 8 |
+| Action | `trading` | 8 | 0 | 0 | 0 | 8 |
 | Action | `transition_teleport` | 1042 | 3 | 0 | 4 | 1049 |
-| Action | `translated_dialog` | 2030 | 1 | 0 | 37 | 2068 |
+| Action | `translated_dialog` | 2033 | 1 | 0 | 34 | 2068 |
 | Action | `translated_dialog_choice` | 134 | 10 | 0 | 5 | 149 |
 | Action | `tune_radio` | 0 | 0 | 0 | 2 | 2 |
-| Action | `unlock_controls` | 325 | 0 | 0 | 5 | 330 |
+| Action | `unlock_controls` | 327 | 0 | 0 | 3 | 330 |
 | Action | `update_tile_properties` | 2 | 0 | 0 | 0 | 2 |
 | Action | `update_time` | 0 | 0 | 0 | 3 | 3 |
 | Action | `variable_math` | 0 | 0 | 0 | 5 | 5 |
@@ -251,12 +259,12 @@ census.
 | Condition | `is battle_outcome` | 227 | 0 | 0 | 3 | 230 |
 | Condition | `is battle_outcome_count` | 2 | 0 | 0 | 0 | 2 |
 | Condition | `is bill_is` | 0 | 0 | 0 | 2 | 2 |
-| Condition | `is button_pressed` | 407 | 0 | 0 | 12 | 419 |
+| Condition | `is button_pressed` | 417 | 0 | 0 | 2 | 419 |
 | Condition | `is char_at` | 1810 | 0 | 0 | 1 | 1811 |
 | Condition | `is char_defeated` | 10 | 0 | 0 | 0 | 10 |
 | Condition | `is char_exists` | 3 | 0 | 0 | 6 | 9 |
 | Condition | `is char_facing` | 999 | 0 | 0 | 9 | 1008 |
-| Condition | `is char_facing_tile` | 332 | 0 | 0 | 12 | 344 |
+| Condition | `is char_facing_tile` | 342 | 0 | 0 | 2 | 344 |
 | Condition | `is char_gender` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `is char_healed` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `is char_in` | 0 | 0 | 0 | 1 | 1 |
@@ -271,10 +279,10 @@ census.
 | Condition | `is current_state` | 40 | 0 | 0 | 38 | 78 |
 | Condition | `is environment_is` | 0 | 0 | 0 | 28 | 28 |
 | Condition | `is has_item` | 52 | 0 | 0 | 1 | 53 |
-| Condition | `is has_kennel` | 0 | 0 | 0 | 2 | 2 |
+| Condition | `is has_kennel` | 2 | 0 | 0 | 0 | 2 |
 | Condition | `is has_monster` | 24 | 0 | 0 | 0 | 24 |
 | Condition | `is has_tuxepedia` | 0 | 0 | 0 | 1 | 1 |
-| Condition | `is kennel` | 0 | 0 | 0 | 2 | 2 |
+| Condition | `is kennel` | 2 | 0 | 0 | 0 | 2 |
 | Condition | `is location_inside` | 0 | 0 | 0 | 1 | 1 |
 | Condition | `is location_type` | 1 | 0 | 0 | 0 | 1 |
 | Condition | `is money_is` | 12 | 0 | 0 | 3 | 15 |
@@ -285,7 +293,7 @@ census.
 | Condition | `is step_tracker` | 0 | 0 | 0 | 7 | 7 |
 | Condition | `is tile_property_updated` | 4 | 0 | 0 | 0 | 4 |
 | Condition | `is time_is` | 66 | 0 | 0 | 1 | 67 |
-| Condition | `is variable_set` | 709 | 0 | 0 | 21 | 730 |
+| Condition | `is variable_set` | 712 | 0 | 0 | 18 | 730 |
 | Condition | `not battle_outcome` | 358 | 0 | 0 | 5 | 363 |
 | Condition | `not battle_outcome_count` | 9 | 0 | 0 | 0 | 9 |
 | Condition | `not bill_exists` | 0 | 0 | 0 | 1 | 1 |
@@ -302,7 +310,7 @@ census.
 | Condition | `not has_item` | 58 | 0 | 0 | 0 | 58 |
 | Condition | `not has_monster` | 11 | 0 | 0 | 0 | 11 |
 | Condition | `not has_tuxepedia` | 0 | 0 | 0 | 1 | 1 |
-| Condition | `not kennel` | 0 | 0 | 0 | 1 | 1 |
+| Condition | `not kennel` | 1 | 0 | 0 | 0 | 1 |
 | Condition | `not location_inside` | 1 | 0 | 0 | 1 | 2 |
 | Condition | `not location_type` | 1 | 0 | 0 | 0 | 1 |
 | Condition | `not money_is` | 6 | 0 | 0 | 3 | 9 |
@@ -311,4 +319,4 @@ census.
 | Condition | `not tile_property_updated` | 0 | 2 | 0 | 0 | 2 |
 | Condition | `not time_is` | 60 | 0 | 0 | 1 | 61 |
 | Condition | `not tracker` | 22 | 0 | 0 | 0 | 22 |
-| Condition | `not variable_set` | 645 | 0 | 0 | 26 | 671 |
+| Condition | `not variable_set` | 652 | 0 | 0 | 19 | 671 |

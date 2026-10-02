@@ -24,12 +24,12 @@ const BASE_WIDTH = 480;
 const BASE_HEIGHT = 272;
 const VISIBLE_ROWS = 8;
 
-const title = (slug: string): string => slug
+export const title = (slug: string): string => slug
   .split("_")
   .map((part) => part ? part[0]!.toUpperCase() + part.slice(1) : part)
   .join(" ");
 
-const imageSource = (ref: BattleImageRef): TileImageSource => ({
+export const imageSource = (ref: BattleImageRef): TileImageSource => ({
   kind: "tile",
   ref: ref.key,
   sourceWidth: ref.width,
@@ -45,7 +45,7 @@ function canvas(width: number, height: number) {
   };
 }
 
-function wrapped(text: string, columns: number, lines: number): string {
+export function wrapped(text: string, columns: number, lines: number): string {
   const output: string[] = [];
   for (const paragraph of text.split("\n")) {
     let current = "";
@@ -67,7 +67,7 @@ function wrapped(text: string, columns: number, lines: number): string {
   return output.join("\n");
 }
 
-function SceneCanvas(props: BattleSceneViewProps & { children: unknown; debugName: string }) {
+export function SceneCanvas(props: BattleSceneViewProps & { children: unknown; debugName: string }) {
   const layout = () => canvas(props.width, props.height);
   return (
     <View

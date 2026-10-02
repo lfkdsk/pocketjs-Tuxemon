@@ -448,6 +448,7 @@ interface EconomyEntry {
   price?: number;
   cost?: number;
   inventory?: number;
+  level?: number;
   variables?: { key: string; value: string }[];
 }
 interface EconomyRow {
@@ -1062,6 +1063,24 @@ function clauses(
       }
       noteCondition(c, `${c.op} environment_is`, "T3-dropped", "battle backdrop only");
       return K(false);
+    case "kennel":
+      if (options.battle && a[0] && a[1] && ["visible", "hidden", "exist"].includes(a[2] ?? "")) {
+        noteCondition(c, `${c.op} kennel`, "T1", "tux.kennel reads the saved player boxes");
+        return [{ k: "ext", call: "tux.kennel", args: {
+          character: a[0], kennel: a[1], option: a[2]!, negate: not,
+        } }];
+      }
+      noteCondition(c, `${c.op} kennel`, "T3-dropped", options.battle ? "unknown kennel option: fixed answer" : "monster/party/meta state unknown to P1: fixed answer");
+      return K(false);
+    case "has_kennel":
+      if (options.battle && a[0] && a[1] && a[2] && /^\d+$/.test(a[3] ?? "")) {
+        noteCondition(c, `${c.op} has_kennel`, "T1", "tux.has_kennel counts one saved player box; a missing box fails both forms");
+        return [{ k: "ext", call: "tux.has_kennel", args: {
+          character: a[0], kennel: a[1], operator: a[2], value: Number(a[3]), negate: not,
+        } }];
+      }
+      noteCondition(c, `${c.op} has_kennel`, "T3-dropped", options.battle ? "malformed box count: fixed answer" : "monster/party/meta state unknown to P1: fixed answer");
+      return K(false);
     case "party_infected":
       noteCondition(c, `${c.op} party_infected`, "T3-placeholder", "no plague in P1: none=true");
       return K(a[2] === "none");
@@ -1426,6 +1445,73 @@ function itemShop(economy: EconomyRow): Command {
     };
   });
   return { op: "shop", id: economy.slug, goods, sell: true, sellList: "hide" };
+}
+
+const poText = (key: string, fallback?: string): string | undefined => po.get(key)?.replaceAll("\\n", " ") ?? fallback;
+
+function labelArgs(entries: Record<string, string | undefined>): Record<string, JsonValue> {
+  const out: Record<string, JsonValue> = {};
+  for (const [key, value] of Object.entries(entries)) if (value !== undefined) out[key] = value;
+  return out;
+}
+
+/** Upstream `parse_flag`: true/1/yes (case-insensitive) is true. */
+const parseFlag = (value: string | undefined): boolean =>
+  value !== undefined && ["true", "1", "yes"].includes(value.trim().toLowerCase());
+
+/** Box display names come from the translated box id (upstream T.translate). */
+const STORAGE_BOX_IDS = ["Kennel", "quarantine"];
+
+function pcScene(): Command {
+  const boxNames: Record<string, JsonValue> = {};
+  for (const id of STORAGE_BOX_IDS) boxNames[id] = poText(id, id)!;
+  return {
+    op: "scene",
+    id: "tux.pc",
+    args: {
+      labels: labelArgs({
+        pickUp: poText("menu_storage"),
+        dropOff: poText("menu_dropoff"),
+        logOff: poText("log_off"),
+        pick: poText("pick_up"),
+        moveTo: poText("move_to_kennel"),
+        yes: poText("yes"),
+        no: poText("no"),
+        empty: poText("menu_storage_empty_kennel"),
+        full: poText("menu_storage_full_kennel"),
+        added: poText("menu_storage_take_monster"),
+        releaseConfirm: poText("release_confirmation"),
+        released: poText("tuxemon_released"),
+      }),
+      boxNames,
+    },
+  } as Command;
+}
+
+/** Monster stock of one economy; upstream defaults inventory to 1. Entries
+ *  gated by economy `variables` are not representable in the scene. */
+function monsterShopScene(economy: EconomyRow): Command | null {
+  const entries = economy.monsters ?? [];
+  if (entries.length === 0 || entries.some((entry) => (entry.variables?.length ?? 0) > 0
+    || !monsterSlugs.has(entry.slug) || typeof entry.price !== "number")) return null;
+  return {
+    op: "scene",
+    id: "tux.monsterShop",
+    args: {
+      economy: economy.slug,
+      entries: entries.map((entry) => ({
+        slug: entry.slug,
+        price: entry.price!,
+        level: entry.level ?? 1,
+        stock: typeof entry.inventory === "number" ? entry.inventory : 1,
+      })),
+      labels: labelArgs({
+        buy: poText("buy"),
+        tooExpensive: poText("shop_buy_too_expensive"),
+        soldOut: poText("shop_buy_soldout"),
+      }),
+    },
+  } as Command;
 }
 
 function battlePlaceholder(opp: string, reason = "P1 placeholder: the player wins"): Command[] {
@@ -2209,9 +2295,15 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
       case "open_shop": {
         const economySlug = ctx.economies.get(g[0]!);
         const economy = economySlug ? economyDb.get(economySlug) : undefined;
+        const monsterShop = g[1] === "buy_monster" && ctx.options.battle && economy
+          ? monsterShopScene(economy)
+          : null;
         if (g[1] === "both_item" && economy && (economy.items?.length ?? 0) > 0) {
           noteAction(a, a.type, "T1", "K4 shop with imported prices, buy-back prices, stock and variable conditions");
           out.push(itemShop(economy));
+        } else if (monsterShop) {
+          noteAction(a, a.type, "T1", "tux.monsterShop scene: imported price, level and saved per-economy stock; party then Kennel");
+          out.push(monsterShop);
         } else {
           noteAction(a, a.type, "T3-placeholder", g[1] === "buy_monster"
             ? "monster trading remains a visible placeholder"
@@ -2568,7 +2660,55 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
           noteAction(a, a.type, "T3-dropped", "requires an adjacent get_player_monster picker");
         }
         break;
-      case "set_monster_attribute": case "access_pc":
+      case "access_pc":
+        if (ctx.options.battle && g[0] === "player") {
+          noteAction(a, a.type, "T1-lowered", "tux.pc monster storage (pick up, drop off, move, release); no item locker, email or multiplayer entries");
+          out.push(pcScene());
+        } else noteAction(a, a.type, "T3-dropped", ctx.options.battle ? "PC storage is modelled for the player only" : "monster/combat subsystem (P2)");
+        break;
+      case "create_kennel":
+        if (ctx.options.battle && g[0] === "player" && g[1]
+          && (g[3] === undefined || /^[1-9]\d*$/.test(g[3]))) {
+          noteAction(a, a.type, "T1", "tux.create_kennel adds a saved player box (hidden flag, capacity)");
+          out.push({ op: "ext", call: "tux.create_kennel", args: {
+            character: "player",
+            kennel: g[1],
+            hidden: parseFlag(g[2]),
+            ...(g[3] === undefined ? {} : { capacity: Math.min(30, Number(g[3])) }),
+          } });
+        } else noteAction(a, a.type, "T3-dropped", ctx.options.battle ? "boxes are modelled for the player only" : "monster/combat subsystem (P2)");
+        break;
+      case "set_kennel_visible":
+        // Upstream raises for the main Kennel; that call can never succeed.
+        if (ctx.options.battle && g[0] === "player" && g[1] && g[1] !== "Kennel") {
+          noteAction(a, a.type, "T1", "tux.set_kennel_visible toggles a saved player box");
+          out.push({ op: "ext", call: "tux.set_kennel_visible", args: {
+            character: "player",
+            kennel: g[1],
+            visible: parseFlag(g[2]),
+          } });
+        } else noteAction(a, a.type, "T3-dropped", ctx.options.battle ? "boxes are modelled for the player only; the main Kennel cannot be hidden" : "monster/combat subsystem (P2)");
+        break;
+      case "trading":
+        if (ctx.options.battle && g[0] && g[1] && monsterSlugs.has(g[1])) {
+          noteAction(a, a.type, "T1", "tux.trade scene: scripted trade into the same party slot, caught entry, eight-second transition");
+          out.push({ op: "scene", id: "tux.trade", args: labelArgs({
+            variable: varId(g[0]),
+            species: g[1],
+            message: poText("trade_completed"),
+          }) } as Command);
+        } else noteAction(a, a.type, "T3-dropped", ctx.options.battle ? "monster-for-monster trades with another party are not modelled" : "monster/combat subsystem (P2)");
+        break;
+      case "quarantine":
+        noteAction(a, a.type, "T3-dropped", "plague system: moves infected monsters into the hidden quarantine box");
+        break;
+      case "daycare":
+        noteAction(a, a.type, "T3-dropped", "daycare storage, per-step training and breeding are not modelled");
+        break;
+      case "park_experience":
+        noteAction(a, a.type, "T3-dropped", "Safari-park session (Eclipse park); not part of the Spyder campaign");
+        break;
+      case "set_monster_attribute":
       case "set_bill": case "format_variable":
         noteAction(a, a.type, "T3-dropped", "monster/combat subsystem (P2)");
         break;

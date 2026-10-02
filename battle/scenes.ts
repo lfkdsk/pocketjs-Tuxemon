@@ -12,6 +12,7 @@ import {
   tuxemonExtensionState,
   type BattleDbSource,
 } from "./extension.ts";
+import { createStorageSceneRules } from "./storage-scenes.ts";
 
 export const TUXEMON_JOURNAL_SCENE_ID = "tux.journal";
 export const TUXEMON_MONSTER_PICKER_SCENE_ID = "tux.monsterPicker";
@@ -215,12 +216,14 @@ export function createTuxemonScenes(
       return resolveBattleDb(source).monsters[slug];
     },
   };
+  const names = new Map(index.map((entry) => [entry.id, entry.name]));
   return {
     catalog,
     rules: {
       [NAME_INPUT_SCENE_ID]: nameInputRules,
       [TUXEMON_JOURNAL_SCENE_ID]: journalRules(index),
       [TUXEMON_MONSTER_PICKER_SCENE_ID]: pickerRules(index),
+      ...createStorageSceneRules(source, (slug) => names.get(slug) ?? slug),
     },
   };
 }

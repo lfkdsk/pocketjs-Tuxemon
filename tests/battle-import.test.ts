@@ -82,7 +82,7 @@ describe("GB1 battle database", () => {
     expect(report.scope).toBe("spyder");
     expect(report.sourceRevision).toBe("9e6258ff726b786040a267e8bdbbf037b560285e");
     expect(report.counts).toEqual({
-      monsters: 257,
+      monsters: 269,
       techniques: 245,
       items: 113,
       elements: 13,
@@ -97,13 +97,13 @@ describe("GB1 battle database", () => {
       randomEncounterUses: 261,
       wildEncounterUses: 17,
     });
-    expect(report.art.categories["monster-sheets"].sourceFiles).toBe(257);
+    expect(report.art.categories["monster-sheets"].sourceFiles).toBe(269);
     expect(report.art.categories["technique-animations"].sourceFiles).toBe(130);
     expect(report.art.categories["capture-devices"].sourceFiles).toBe(27);
     expect(report.art.categories.backgrounds.sourceFiles).toBe(8);
     expect(report.art.categories.islands.sourceFiles).toBe(6);
     expect(report.art.categories["trainer-sheets"].sourceFiles).toBe(61);
-    expect(report.art.sourceBytes).toBe(1_889_960);
+    expect(report.art.sourceBytes).toBe(1_926_596);
   });
 
   test("retains the stat, move, capture, status, and encounter rule inputs", () => {

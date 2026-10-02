@@ -1,0 +1,85 @@
+{
+  "format": "pocket-tuxemon/gi2b-storage-goldens/v1",
+  "frames": [
+    {
+      "case": "pcBox",
+      "width": 480,
+      "height": 272,
+      "file": "gi2b-pc-box.480x272.png",
+      "rgbaFnv1a": "353f083b",
+      "pngSha256": "7bb1db1e89467450ec8ecbdd69a5232ccf48c49f26b597329ffaef1bf92dae37"
+    },
+    {
+      "case": "pcOptions",
+      "width": 480,
+      "height": 272,
+      "file": "gi2b-pc-options.480x272.png",
+      "rgbaFnv1a": "e7b7fe00",
+      "pngSha256": "f71cbecc3697c3d007de8c4f043e10e3509500c637ea2ac72519e026d19105b3"
+    },
+    {
+      "case": "tradeFlash",
+      "width": 480,
+      "height": 272,
+      "file": "gi2b-trade-flash.480x272.png",
+      "rgbaFnv1a": "33e01c05",
+      "pngSha256": "b411398734e39c6ec9115c73965b0c5207dd4f60ed8f86b6a7d8981f7c3374b8"
+    },
+    {
+      "case": "tradeDone",
+      "width": 480,
+      "height": 272,
+      "file": "gi2b-trade-done.480x272.png",
+      "rgbaFnv1a": "a15d4d5d",
+      "pngSha256": "58dd4528e4d926105be1c85c6298d5cb6f483835aaa76f58f5dca4cf398e5be9"
+    },
+    {
+      "case": "shop",
+      "width": 480,
+      "height": 272,
+      "file": "gi2b-shop.480x272.png",
+      "rgbaFnv1a": "47366102",
+      "pngSha256": "2c3d868f465a565c8a8c04a3640cc93550aa7dd888a838c1c847852c479c6faa"
+    },
+    {
+      "case": "pcBox",
+      "width": 960,
+      "height": 544,
+      "file": "gi2b-pc-box.960x544.png",
+      "rgbaFnv1a": "4e5c7474",
+      "pngSha256": "ae1e4bb071008e72826875828c2406060a26a49e6f5bd0700cc301cb2ae1cca7"
+    },
+    {
+      "case": "pcOptions",
+      "width": 960,
+      "height": 544,
+      "file": "gi2b-pc-options.960x544.png",
+      "rgbaFnv1a": "295dd3cc",
+      "pngSha256": "1818cfd5c533588095358e07b2cc4a877c6b84984b4b5c38806bc7b10c7979b1"
+    },
+    {
+      "case": "tradeFlash",
+      "width": 960,
+      "height": 544,
+      "file": "gi2b-trade-flash.960x544.png",
+      "rgbaFnv1a": "2661aac5",
+      "pngSha256": "5dc58e914ae7469c18bb849671555b5c5e5babd41d10e4cafd025e673d6d73e6"
+    },
+    {
+      "case": "tradeDone",
+      "width": 960,
+      "height": 544,
+      "file": "gi2b-trade-done.960x544.png",
+      "rgbaFnv1a": "7dc11d36",
+      "pngSha256": "4eb08c6f31bb623f7bdf0ff976d20a14a206f5158f61af05865abe387cbdcdd6"
+    },
+    {
+      "case": "shop",
+      "width": 960,
+      "height": 544,
+      "file": "gi2b-shop.960x544.png",
+      "rgbaFnv1a": "2aa0fc48",
+      "pngSha256": "b0aa05a4195f5c8e06a37ce2d736925768693c559282f33604a9ec8bd059f366"
+    }
+  ]
+}

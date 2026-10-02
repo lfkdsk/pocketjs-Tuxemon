@@ -53,6 +53,9 @@ const BENCH_SCENES: Record<string, SceneRules> = {
   "rpgkit.nameInput": BENCH_SCENE_RULES,
   "tux.journal": BENCH_SCENE_RULES,
   "tux.monsterPicker": BENCH_SCENE_RULES,
+  "tux.pc": BENCH_SCENE_RULES,
+  "tux.trade": BENCH_SCENE_RULES,
+  "tux.monsterShop": BENCH_SCENE_RULES,
 };
 
 function benchmarkSession(): Session {

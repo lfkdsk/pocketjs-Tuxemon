@@ -37,6 +37,9 @@ const GAME_OPTIONS = {
     "rpgkit.nameInput": LOCK_SCENE_RULES,
     "tux.journal": LOCK_SCENE_RULES,
     "tux.monsterPicker": LOCK_SCENE_RULES,
+    "tux.pc": LOCK_SCENE_RULES,
+    "tux.trade": LOCK_SCENE_RULES,
+    "tux.monsterShop": LOCK_SCENE_RULES,
   },
 } as const;
 

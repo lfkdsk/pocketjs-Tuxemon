@@ -605,6 +605,7 @@ function completedExtension(state: RuntimeBattleState): TuxemonExtensionState {
     ...ext,
     party,
     kennel,
+    ...(kennel.length > 0 ? { kennelBox: true as const } : {}),
     runAttempts: state.battle.runAttempts,
     history,
     nextMonsterId,

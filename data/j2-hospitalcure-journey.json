@@ -8,8 +8,8 @@
     "format": "pocket-tuxemon/j1-captainreturns/v1",
     "frames": 120854,
     "tapeSha256": "1584fe355247c95766bf25b7e3ee2634526af6a190f2a450d402ac166a88049b",
-    "terminalStateSha256": "6a47dd835356f60e33b956298002e5c1e491c00a9656d5c6985df84b1e2c1d89",
-    "terminalSnapshotSha256": "c83193fbe8cb11fbfbfd9f41301a444d2a172b0d81684eb73467fa404640c8dd",
+    "terminalStateSha256": "85cad6f9e30598d982e6935ab7f2b77af2f5e377f993866af98c11fbd9fa5f76",
+    "terminalSnapshotSha256": "a76e5a65be563f87271a760ac90c5e01afcfeac00891171a4e1ae8624a650a81",
     "heldMask": 0,
     "timelineFrame": 120854,
     "map": "spyder_mansion",
@@ -55674,8 +55674,8 @@
       "maxHp": 307
     }
   ],
-  "initialStateSha256": "dcaa0f60f76bb1f40b8ea6a8063d464da5ea20794c8bd8bd29f473f6bc8f4575",
-  "terminalStateSha256": "eec0900cf35c55873c5a01ddf7e7921b5ddfc07e6b84f5f858141c38956efdf8",
+  "initialStateSha256": "3bc24252c3845b87c19a612da07bd7e4e4d866cf6a7febd1d28e84a39a85c99c",
+  "terminalStateSha256": "ecb524cb2bb5a0b991990c668b3b2a7f46abeb44fa6a6dccb02aa5116f164cfe",
   "tapeSha256": "1c76303866ecc31bed89c6560728630242546538daea2eb8fd2154ad6576734a",
   "combinedTapeSha256": "19146fe14593454ad385c7df049288d9e344cef883b1701c23d43d920a93ccc1"
 }

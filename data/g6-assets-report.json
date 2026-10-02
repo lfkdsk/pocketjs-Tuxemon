@@ -5,7 +5,7 @@
   "maps": 263,
   "collisionBodies": 14,
   "maxActors": 504,
-  "runtimeMaxActors": 219,
+  "runtimeMaxActors": 222,
   "excludedActorStressMaps": [
    {
     "id": "test_npcs",
@@ -31,10 +31,10 @@
    "json": 0
   },
   "shellBytes": 83639,
-  "entryBytes": 4652929,
-  "canonicalJsonBytes": 9764875,
+  "entryBytes": 4776306,
+  "canonicalJsonBytes": 9914419,
   "entries": 263,
-  "manifestHash": "efe2300984538311cceac93c37465809af557ed85eeff4205420b31a3a483e4a",
+  "manifestHash": "47eb42c70b37acc689ff863d4ea1fc65cebf98fca462b5386d90a259f27f791e",
   "schemaHash": "0b9fff5b478b87e0dcae1f37044a444043c735339ca45245bdbbb9e2e36e7ab5"
  },
  "terrain": {
@@ -87,7 +87,7 @@
   "sourceRevision": "9e6258ff726b786040a267e8bdbbf037b560285e",
   "scope": "spyder",
   "counts": {
-   "monsters": 257,
+   "monsters": 269,
    "techniques": 245,
    "items": 113,
    "elements": 13,
@@ -103,19 +103,19 @@
    "wildEncounterUses": 17
   },
   "art": {
-   "sourceFiles": 578,
-   "files": 578,
-   "sourceBytes": 1889960,
-   "pngBytes": 1187501,
-   "textureBytes": 25192464,
-   "encodedBytes": 2158468,
-   "residentBytes": 13185792,
-   "pakBytes": 3427760,
+   "sourceFiles": 590,
+   "files": 590,
+   "sourceBytes": 1926596,
+   "pngBytes": 1210451,
+   "textureBytes": 25585776,
+   "encodedBytes": 2206076,
+   "residentBytes": 13394688,
+   "pakBytes": 3501504,
    "maxWidth": 512,
    "maxHeight": 512,
    "quantization": {
-    "sourceColours": 9831,
-    "paletteColours": 9831,
+    "sourceColours": 10070,
+    "paletteColours": 10070,
     "quantizedFiles": 0,
     "quantizedColours": 0,
     "remappedPixels": 0,
@@ -167,11 +167,11 @@
      "textureBytes": 196632
     },
     "monster-sheets": {
-     "sourceFiles": 257,
-     "files": 257,
-     "sourceBytes": 765467,
-     "pngBytes": 466086,
-     "textureBytes": 8423432
+     "sourceFiles": 269,
+     "files": 269,
+     "sourceBytes": 802103,
+     "pngBytes": 489036,
+     "textureBytes": 8816744
     },
     "range-speed-icons": {
      "sourceFiles": 13,
@@ -210,13 +210,13 @@
     }
    }
   },
-  "battleDbBytes": 1223012,
-  "runtimeDbBytes": 1074938,
+  "battleDbBytes": 1248224,
+  "runtimeDbBytes": 1100150,
   "pakKey": "game:battle-db",
   "battleRepository": {
-   "shellBytes": 198699,
-   "entries": 650,
-   "entryBytes": 814747
+   "shellBytes": 200063,
+   "entries": 662,
+   "entryBytes": 836618
   }
  }
 }

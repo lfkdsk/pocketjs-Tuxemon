@@ -118,17 +118,26 @@ ${(partyMonster?.native ?? 0) + (partyMonster?.degraded ?? 0)} executable
 ${partyMonster?.degraded ?? 0}, which write no \`iid_slot_*\`: the dojo
 calls run before their battle, whose \`add_monster\` calls are folded into the
 battle setup, and the gym calls name trainers that only fight skipped
-NPC-versus-NPC battles. The remaining trading
-and plague-state rows stay visible or deterministic without being claimed as
-full P2 behavior. The long-term target remains zero Placeholder uses.
+NPC-versus-NPC battles. Scripted \`trading\` runs the \`tux.trade\` scene,
+which replaces the sent monster in its party slot with a freshly spawned
+monster at the same level and records it as caught. \`access_pc\` opens the
+\`tux.pc\` storage scene (Degraded: monster boxes only, without the item
+locker); \`create_kennel\`, \`set_kennel_visible\`, \`kennel\` and
+\`has_kennel\` read and write the same saved boxes. \`quarantine\` stays
+Dropped with the plague system, and \`park_experience\` with the unreachable
+Eclipse park session. Plague-state rows stay deterministic without being
+claimed as full P2 behavior. The long-term target remains zero Placeholder
+uses.
 
 ## Economy and item catalog
 
 The importer read ${report.economy.sourceEconomies} economies with
 ${report.economy.itemGoods} item rows and ${report.economy.monsterGoods} monster
 rows. Item shops changed from the prior 0 Native / 28 Placeholder baseline to
-${openShop?.native ?? 0} Native / ${openShop?.placeholder ?? 0} Placeholder:
-the remaining placeholders are visible monster-purchase menus. The imported
+${openShop?.native ?? 0} Native / ${openShop?.placeholder ?? 0} Placeholder.
+Monster purchases (\`buy_monster\`) open the \`tux.monsterShop\` scene with
+the economy's price, level and stock; sales are saved per
+\`<economy>:<slug>\` stock label. The imported
 item rows include ${report.economy.finiteStockGoods} finite-stock goods and
 ${report.economy.conditionedGoods} variable-conditioned goods.
 

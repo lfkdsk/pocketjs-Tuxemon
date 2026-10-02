@@ -92,6 +92,29 @@ export interface TuxemonExtensionState {
   clock: ClockState;
   /** Saved weather stream, deliberately independent from the battle RNG. */
   weather: WeatherState;
+  /** Sparse: present once the player's main "Kennel" box exists. Upstream
+   *  creates it on the first PC visit or the first party overflow; its
+   *  monsters always live in `kennel`. */
+  kennelBox?: true;
+  /** Sparse named boxes other than the main Kennel, in creation order
+   *  (for example the story's hidden "quarantine" box). */
+  boxes?: Record<string, MonsterBox>;
+  /** Sparse monster-shop sales per `<economy>:<slug>` stock label. */
+  shopSold?: Record<string, number>;
+}
+
+export interface MonsterBox {
+  /** Hidden boxes are excluded from PC storage menus. */
+  hidden: boolean;
+  capacity: number;
+  monsters: SpawnedMonsterSnapshot[];
+}
+
+export const KENNEL_BOX = "Kennel";
+
+/** True when the player's main Kennel box exists (upstream `has_box`). */
+export function kennelExists(state: Readonly<TuxemonExtensionState>): boolean {
+  return state.kennelBox === true || state.kennel.length > 0;
 }
 
 export interface TuxemonExtensionRuntimeOptions {
@@ -324,7 +347,29 @@ function tuxemonStateProblem(
     return `kennel must contain at most ${KENNEL_LIMIT} monsters`;
   }
   const identities = new Set<string>();
-  for (const [group, values] of [["party", state.party], ["kennel", state.kennel]] as const) {
+  const groups: [string, unknown[]][] = [["party", state.party], ["kennel", state.kennel]];
+  if (state.kennelBox !== undefined && state.kennelBox !== true) return "kennelBox must be true when present";
+  if (state.boxes !== undefined) {
+    const boxes = record(state.boxes);
+    if (!boxes) return "boxes must be an object";
+    for (const [id, rawBox] of Object.entries(boxes)) {
+      const box = record(rawBox);
+      if (!nonEmptyString(id) || id === KENNEL_BOX || !box || typeof box.hidden !== "boolean"
+        || !safeInteger(box.capacity) || box.capacity < 1 || box.capacity > KENNEL_LIMIT
+        || !Array.isArray(box.monsters) || box.monsters.length > box.capacity) {
+        return `boxes.${id} is invalid`;
+      }
+      groups.push([`boxes.${id}`, box.monsters]);
+    }
+  }
+  if (state.shopSold !== undefined) {
+    const sold = record(state.shopSold);
+    if (!sold || !Object.entries(sold).every(([key, count]) =>
+      nonEmptyString(key) && safeInteger(count) && count > 0)) {
+      return "shopSold must map stock labels to positive integers";
+    }
+  }
+  for (const [group, values] of groups) {
     for (let index = 0; index < values.length; index++) {
       const problem = monsterProblem(values[index], `${group}[${index}]`, db);
       if (problem) return problem;
@@ -713,6 +758,7 @@ function addMonsterCommand(source: BattleDbSource) {
         ...current,
         party,
         kennel,
+        ...(kennel.length > 0 ? { kennelBox: true as const } : {}),
         nextMonsterId: followingId,
       }, slug)),
       writes: { "v.add_monster": iid },
@@ -1075,7 +1121,13 @@ function removeMonsterCommand() {
     }
     const kennel = current.kennel.filter((monster) => monster.iid !== iid);
     if (kennel.length !== current.kennel.length) {
-      return { ext: json({ ...current, kennel }) };
+      return { ext: json({ ...current, kennel, kennelBox: true }) };
+    }
+    for (const [id, box] of Object.entries(current.boxes ?? {})) {
+      const monsters = box.monsters.filter((monster) => monster.iid !== iid);
+      if (monsters.length !== box.monsters.length) {
+        return { ext: json({ ...current, boxes: { ...current.boxes, [id]: { ...box, monsters } } }) };
+      }
     }
     for (const [character, monsters] of Object.entries(current.npcParties)) {
       const next = monsters.filter((monster) => monster.iid !== iid);
@@ -1145,6 +1197,58 @@ function getPartyMonstersCommand() {
     });
     return { writes };
   };
+}
+
+/** create_kennel: player boxes only (no source map gives an NPC a box).
+ *  An existing box is left untouched, exactly like upstream. */
+function createKennelCommand() {
+  return (context: ExtensionCommandContext, value: JsonValue) => {
+    const args = argsRecord(value, "tux.create_kennel");
+    if (!nonEmptyString(args.character) || !nonEmptyString(args.kennel)) {
+      throw new Error("tux.create_kennel: character and kennel must be strings");
+    }
+    if (args.character !== "player") return;
+    const capacity = args.capacity === undefined ? KENNEL_LIMIT : args.capacity;
+    if (!safeInteger(capacity) || capacity < 1 || capacity > KENNEL_LIMIT) {
+      throw new Error(`tux.create_kennel: capacity must be 1..${KENNEL_LIMIT}`);
+    }
+    const current = currentExtensionState(context.ext);
+    if (args.kennel === KENNEL_BOX) {
+      return kennelExists(current) ? undefined : { ext: json({ ...current, kennelBox: true }) };
+    }
+    if (current.boxes?.[args.kennel]) return;
+    return { ext: json({
+      ...current,
+      boxes: { ...current.boxes, [args.kennel]: { hidden: args.hidden === true, capacity, monsters: [] } },
+    }) };
+  };
+}
+
+/** set_kennel_visible: a missing box is a silent no-op; the importer folds
+ *  the upstream ValueError for the main Kennel out of the event. */
+function setKennelVisibleCommand() {
+  return (context: ExtensionCommandContext, value: JsonValue) => {
+    const args = argsRecord(value, "tux.set_kennel_visible");
+    if (!nonEmptyString(args.character) || !nonEmptyString(args.kennel) || typeof args.visible !== "boolean") {
+      throw new Error("tux.set_kennel_visible: character, kennel and visible are required");
+    }
+    if (args.character !== "player" || args.kennel === KENNEL_BOX) return;
+    const current = currentExtensionState(context.ext);
+    const box = current.boxes?.[args.kennel];
+    if (!box || box.hidden === !args.visible) return;
+    return { ext: json({
+      ...current,
+      boxes: { ...current.boxes, [args.kennel]: { ...box, hidden: !args.visible } },
+    }) };
+  };
+}
+
+function boxOf(
+  state: Readonly<TuxemonExtensionState>,
+  id: string,
+): { hidden: boolean; monsters: readonly SpawnedMonsterSnapshot[] } | null {
+  if (id === KENNEL_BOX) return kennelExists(state) ? { hidden: false, monsters: state.kennel } : null;
+  return state.boxes?.[id] ?? null;
 }
 
 /** KC1: choice_monster/choice_npc. The importer bakes the static option list
@@ -1267,6 +1371,8 @@ export function createTuxemonExtensions(
       "tux.get_party_monsters": getPartyMonstersCommand(),
       "tux.clear_npc_party": clearNpcPartyCommand(),
       "tux.clear_npc_parties": clearNpcPartiesCommand(),
+      "tux.create_kennel": createKennelCommand(),
+      "tux.set_kennel_visible": setKennelVisibleCommand(),
       "tux.tick_time_weather": (context, value) => {
         const args = argsRecord(value, "tux.tick_time_weather");
         if (args.daylight !== undefined && typeof args.daylight !== "boolean") {
@@ -1424,6 +1530,32 @@ export function createTuxemonExtensions(
         return negate(count >= args.count, args);
       },
       "tux.party_match": partyMatchCondition(source),
+      // `kennel <character>,<box>,visible|hidden|exist`. A missing character
+      // or option tests false, so the negated form is true.
+      "tux.kennel": (context, value) => {
+        const args = argsRecord(value, "tux.kennel");
+        if (!nonEmptyString(args.character) || !nonEmptyString(args.kennel)) return negate(false, args);
+        const box = args.character === "player"
+          ? boxOf(currentExtensionState(context.ext), args.kennel)
+          : null;
+        const result = box !== null && (args.option === "exist"
+          || (args.option === "visible" && !box.hidden)
+          || (args.option === "hidden" && box.hidden));
+        return negate(result, args);
+      },
+      // `has_kennel <character>,<box>,<op>,<n>` counts one box. Upstream
+      // raises for a missing box and the evaluator then fails the condition
+      // for both `is` and `not`, so a missing box is false either way.
+      "tux.has_kennel": (context, value) => {
+        const args = argsRecord(value, "tux.has_kennel");
+        if (!nonEmptyString(args.character) || !nonEmptyString(args.kennel) || !safeInteger(args.value)) {
+          return false;
+        }
+        if (args.character !== "player") return false;
+        const box = boxOf(currentExtensionState(context.ext), args.kennel);
+        if (box === null) return false;
+        return negate(compare(args.operator, box.monsters.length, args.value), args);
+      },
     },
     choices: {
       "tux.party_monsters": partyMonstersChoice(source),

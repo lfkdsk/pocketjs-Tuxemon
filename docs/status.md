@@ -21,7 +21,7 @@ Per-action numbers come from the import coverage report,
 
 | Feature | Status | Notes |
 | --- | --- | --- |
-| Event import | Partial | 91.3% of action uses and 94.5% of condition uses are native; 95.8% and 94.5%, respectively, are executable. The rest is dropped or a visible placeholder, each with a reason; see [importer](importer.md) |
+| Event import | Partial | 91.6% of action uses and 94.9% of condition uses are native; 96.0% and 94.9%, respectively, are executable. The rest is dropped or a visible placeholder, each with a reason; see [importer](importer.md) |
 | Dialogue, choices, variables, items, NPC creation and removal | Done | Imported from the scenario YAML, TMX properties and the en_US `.po` strings |
 | Input locks | Done | Every imported input lock runs to its unlock (`verify:g6:locks`); the freeze scan finds no permanent lock or blocking fiber on any map (`verify:g6:frozen`) |
 | `WorldState` gating through the kit's `worldIdle` condition | Done | Compared against upstream Tuxemon runs |
@@ -67,7 +67,11 @@ Per-action numbers come from the import coverage report,
 | Appearance choice (`choice_npc`) | Partial | The six options are distinguished by their translated names; upstream shows per-option NPC portraits, which need kit option-image support |
 | Removing a monster (`remove_monster`, `get_party_monster`) | Partial | `remove_monster` deletes the monster whose iid a variable holds from its owner: the player's party, the kennel or an NPC's party. As upstream, an NPC's party lives as long as the NPC: every map change drops all NPC parties (no NPC in the data is persistent), and `create_npc`/`remove_npc` clear the NPC's party within a visit, so each battle uses only the monsters that visit added and a save holds only the current map's NPC parties. `get_party_monster` writes a party's iids into `iid_slot_*`; of its 8 executable uses only Nimrod's `Zircon Back` finds a party. The three dojo calls run before their battle, whose `add_monster` calls are folded into the battle setup, and the four gym calls sit on Points pages that wait for the winner of a skipped NPC-versus-NPC battle and so never run; those seven write nothing (Degraded) |
 | Renaming the player or a monster | Partial | All five authored player prompts and both monster prompts use saved, rewindable scenes. Player prompts omit upstream NPC targeting and random-name generation |
-| PC storage, trading, daycare and kennel | Planned | The game-scene host is available, but these systems are not wired yet |
+| PC storage and kennel boxes (`access_pc`, `kennel`, `has_kennel`, `create_kennel`, `set_kennel_visible`) | Partial | All 10 computers open the saved `tux.pc` scene: pick up, drop off (the last conscious monster stays), move between visible boxes and release with a confirmation, committed on Log Off. Opening a PC or a party overflow creates the Shelter box, so the Candy Café barmaid's `has_kennel` check works as upstream; the hidden story `quarantine` box is created, hidden and shown by the scenario. The item locker, email and multiplayer entries are absent and NPC-owned boxes are not modelled; see [the GI-2b report](../findings/GI2b.md) |
+| Scripted trading (`trading`) | Done | All 8 trades open the `tux.trade` scene after the slug-filtered party picker: the sent monster is replaced in its party slot by a freshly spawned monster at the same level (bond 10, full HP), recorded as caught, with upstream's eight-second transition and message. Cancelling the picker trades nothing, as upstream |
+| Daycare (`daycare`) | Planned | 2 uses (Granny Piper in Paper Town, the Cotton breeder) stay dropped: upstream trains stored monsters per step for money and breeds pairs |
+| Quarantine (`quarantine`) | Planned | Belongs to the plague system: it moves infected monsters into the story's hidden `quarantine` box, which already exists and toggles visibility |
+| Eclipse park sessions (`park_experience`) | Planned | A Safari-park mechanic outside the Spyder campaign (no transfer from Spyder maps reaches it) |
 | Tuxepedia and journal (`set_tuxepedia`, `open_journal`) | Partial | Persistent `seen`/`caught` state is monotonic, journal rows/details use indexed lazy battle art, and all 14 authored direct previews open without mutating discovery. A player-facing menu entry and NPC-owned journal counters/removal are not implemented; see [the GI-2a report](../findings/GI2a.md) |
 
 ## Shops
@@ -75,7 +79,7 @@ Per-action numbers come from the import coverage report,
 | Feature | Status | Notes |
 | --- | --- | --- |
 | Item shops | Done | Shops and battles share one inventory and one money balance |
-| Monster trading at shops | Partial | Shown as a visible placeholder |
+| Monster purchases at shops (`open_shop …,buy_monster`) | Done | All 7 menus open the `tux.monsterShop` scene with the economy's price and level; stock is saved per `<economy>:<slug>` label (one of each by default), money is charged, and a bought monster joins the party or, when it is full, the Shelter. As upstream, buying does not touch the Tuxepedia. Monster selling is not used by any map |
 
 ## Time, weather and environment
 

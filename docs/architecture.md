@@ -183,6 +183,10 @@ the registered handlers.
 | `tux.faint_point_is_map` | condition | The faint point is on the given map. |
 | `tux.party_size` | condition | Compares party size with an operator and value. |
 | `tux.has_monster` | condition | The party contains a species. |
+| `tux.create_kennel` | command | Creates a saved player box (hidden flag, capacity); an existing box is left as is. |
+| `tux.set_kennel_visible` | command | Shows or hides a named player box. |
+| `tux.kennel` | condition | A player box exists, is visible, or is hidden. |
+| `tux.has_kennel` | condition | Compares one box's monster count; a missing box fails both `is` and `not`. |
 | `tux.char_defeated` | condition | Every party monster is at 0 HP. |
 | `tux.battle_outcome` | condition | Battle history contains a fighter/opponent/outcome triple. |
 | `tux.battle_outcome_count` | condition | At least N matching battle-history entries. |

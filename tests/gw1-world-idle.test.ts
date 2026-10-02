@@ -307,7 +307,7 @@ const EVOLUTION_CASES: EvolutionCase[] = [
     // D1 time/date, GI-1a presentation and GM1 music mappings materialize
     // three events ahead of this page, shifting its generated id by 3 from
     // the pre-D1 baseline.
-    evolution: "e029_evolution_all",
+    evolution: "e030_evolution_all",
     storyGate: "battle return (no authored story lock)",
     lockPages: [],
     battleStarts: [],
@@ -319,7 +319,7 @@ const EVOLUTION_CASES: EvolutionCase[] = [
     // D1 time/date, GI-1a presentation and GM1 music mappings materialize
     // three events ahead of this page, shifting its generated id by 3 from
     // the pre-D1 baseline.
-    evolution: "e056_evolution_all",
+    evolution: "e057_evolution_all",
     storyGate: "First Fight - Start / result event",
     lockPages: ["e024_first_fight_start"],
     battleStarts: ["e024_first_fight_start"],
@@ -328,7 +328,7 @@ const EVOLUTION_CASES: EvolutionCase[] = [
   },
   {
     map: "spyder_radiotower",
-    evolution: "e014_evolution_all",
+    evolution: "e015_evolution_all",
     storyGate: "Stop!",
     lockPages: ["e007_stop_r002"],
     battleStarts: ["e007_stop_r002"],
