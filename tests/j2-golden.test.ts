@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
+import { DAYLIGHT_TINT_PROFILES } from "../battle/daylight.ts";
 import { decodePng } from "../importer/png.ts";
 import { fnv1a } from "../vendor/pocket-rpgkit/vendor/pocketjs/hosts/sim/sim.ts";
 
@@ -116,11 +117,13 @@ function countColour(rgba: Uint8Array, red: number, green: number, blue: number)
   return total;
 }
 
-// The merged J2 tape reaches these checkpoints during the afternoon stage.
-// ScreenEffectsLayer paints this tint after the map, actors, and imported
-// overlays. Keep the integer blend identical to PocketJS's RGBA rasterizer so
-// the semantic assertions below still identify the actual source art.
-const J2_DAYLIGHT_TINT = { r: 255, g: 216, b: 128, a: 12 } as const;
+// The goldens start the clock at the fixed 09:00 (FIXED_TIME_HOST_GLOBALS),
+// so the merged J2 tape reaches these checkpoints during the morning stage,
+// whose daylight profile is transparent. ScreenEffectsLayer paints the tint
+// after the map, actors, and imported overlays; the integer blend below is
+// kept identical to PocketJS's RGBA rasterizer so a different stage would
+// still identify the actual source art.
+const J2_DAYLIGHT_TINT = DAYLIGHT_TINT_PROFILES.find((profile) => profile.stage === "morning")!.color;
 
 function daylightColour(red: number, green: number, blue: number): [number, number, number] {
   const { r, g, b, a } = J2_DAYLIGHT_TINT;
@@ -232,12 +235,12 @@ describe("J2 Greenwash and hospital location goldens", () => {
     expect(manifest.frames.map(({ name, map, frame, mergedFrame, width, height }) =>
       [name, map, frame, mergedFrame, width, height]
     )).toEqual([
-      ["aardant-acquired", "spyder_greenwash", 48_381, 169_605, 480, 272],
-      ["hospital-password", "spyder_candy_hospital2", 48_960, 170_184, 480, 272],
-      ["hospital-cure", "spyder_candy_hospital3", 49_758, 170_982, 480, 272],
-      ["aardant-acquired", "spyder_greenwash", 48_381, 169_605, 960, 544],
-      ["hospital-password", "spyder_candy_hospital2", 48_960, 170_184, 960, 544],
-      ["hospital-cure", "spyder_candy_hospital3", 49_758, 170_982, 960, 544],
+      ["aardant-acquired", "spyder_greenwash", 48_576, 169_430, 480, 272],
+      ["hospital-password", "spyder_candy_hospital2", 49_215, 170_069, 480, 272],
+      ["hospital-cure", "spyder_candy_hospital3", 50_013, 170_867, 480, 272],
+      ["aardant-acquired", "spyder_greenwash", 48_576, 169_430, 960, 544],
+      ["hospital-password", "spyder_candy_hospital2", 49_215, 170_069, 960, 544],
+      ["hospital-cure", "spyder_candy_hospital3", 50_013, 170_867, 960, 544],
     ]);
   });
 

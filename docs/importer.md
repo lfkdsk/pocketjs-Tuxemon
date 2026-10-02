@@ -62,12 +62,16 @@ definitions below are the report's own:
 | `translated_dialog` | `text` boxes, translated from the en_US message catalog and word-wrapped. |
 | `set_variable` / `clear_variable` | `variable` commands; string values are enum-coded globally. |
 | `lock_controls` / `unlock_controls` | `lockInput` / `unlockInput`. |
-| `transition_teleport` (player, in bounds) | `transfer`; a trailing facing action folds into the transfer direction. |
+| `transition_teleport` (player, in bounds) | `transfer`; a trailing facing action folds into the transfer direction. With battles on, `tux.clear_npc_parties` runs right before every transfer (also `teleport_faint`'s), and each map has one entry page (`e000_npc_parties`) that runs it once per visit for entries that are not transfers: as upstream `change_map`, every map change drops all non-persistent NPCs' parties. |
 | `start_battle` (player vs trainer) | `battle` with a trainer setup; literal trainer parties are folded in. |
 | `random_encounter` / `wild_encounter` | `battle` with a random-table setup. |
-| `create_npc` | a presence variable plus a `place` command for the walker. |
+| `create_npc` / `remove_npc` | a presence variable plus a `place` command for the walker. With battles on, creating an NPC that is not on the map and removing one both clear its party (`tux.clear_npc_party`): as upstream, an NPC's party lasts only as long as the NPC. |
+| `char_stop` | `moveControl` stop, cancelling the active route and page patrol. |
+| `set_facing_mode` | `moveControl` facingMode (locked / followMovement). |
 | `is battle_outcome` | `tux.battle_outcome` extension condition reading live battle history. |
-| `add_monster`, `set_monster_health`, `set_monster_status`, `evolution` | the matching `tux.*` extension command. |
+| `add_monster`, `set_monster_health`, `set_monster_status`, `evolution`, `remove_monster` | the matching `tux.*` extension command; `remove_monster` resolves the iid globally and deletes from the player party, kennel, or an NPC party. A trainer's battle party stays in `npcParties` for the rest of the NPC's lifetime. |
+| `get_party_monster` (Nimrod `Zircon Back`) | `tux.get_party_monsters` writes the defeated trainer's iids into `iid_slot_*`, which the following `remove_monster` consumes. |
+| `get_player_monster`, `choice_monster` | `extChoice` over the live party or a static enum-coded list. |
 | `open_shop` (item economy) | the kit `shop` command with imported goods, prices and stock. |
 | `play_music` | `playBgm`; the slug resolves through the `Project.audio` table to a committed QOA pak entry (eight mainline tracks) or stays silent (the other 13 used tracks). |
 | `fadeout_music` | `fadeoutBgm` (ms → seconds); `0` becomes `stopBgm`. |
@@ -83,11 +87,14 @@ definitions below are the report's own:
 
 | Tuxemon | Lowering |
 |---|---|
-| `char_face player,<dir>` | one-step `moveRoute` (the kit has no face op). |
-| `char_stop` | no output: blocking fibers already freeze the player. |
+| `char_face player,<dir>` | one-step `moveRoute` (the kit has no face op); a `char_face` immediately after a `char_position` folds into the placement's `dir` instead. |
 | `add_tracker` | a `switch`; step counters are not modeled. |
 | `transition_teleport` with an out-of-range landing | coordinates clamped into the target map; an isolated landing is repaired to the nearest walkable cell by deterministic four-neighbour BFS. |
-| `char_wander` | an NPC page with random movement; frequency and bounds are omitted. |
+| `char_wander` | `moveControl` random wander with a deterministic seed, a seconds-to-MV frequency grade and optional bounds. |
+| `char_speed` | `moveControl` speed; tiles/s maps to the nearest MV exponential grade. |
+| `char_position` | a clamped `place` (out-of-map coordinates are clamped; upstream raises). |
+| `choice_npc` | static `extChoice` list; the shared label is extended with each option's translated name so the lines stay distinguishable (upstream tells options apart by per-option NPC portraits, which need kit option-image support). |
+| `get_party_monster` (dojo, gym) | the same `tux.get_party_monsters` call, but it finds no party and writes no `iid_slot_*`: the dojo calls run before their battle, whose `add_monster` calls are folded into the battle setup, and the gym calls sit on Points pages that wait for the winner of an NPC-versus-NPC battle, which runs as a skipped placeholder without a winner, so those pages never run. |
 | `load_yaml` | a gating variable; the referenced events are merged at import time and unlock when the action runs. |
 
 ### Placeholder examples
@@ -97,9 +104,7 @@ The remaining stand-in behavior is explicit and reported by source type:
 | Tuxemon | Stand-in |
 |---|---|
 | `start_battle` (NPC vs NPC, 5 uses) | a visible skip notice in the text box. |
-| `choice_monster` / `choice_npc` | enum-coded `choices`; every option is retained, but there is no party-selection UI. |
 | `open_shop` (monster trading, 7 uses) | a visible menu listing the stock. |
-| `remove_monster` | the party counter decreases by one. |
 | `is party_infected` | constant (there is no plague system). |
 
 `time_is` now reads the deterministic saved calendar in all 126 materialized
@@ -116,6 +121,7 @@ faint-point actions and environment checks are now native.
 
 | Tuxemon | Reason |
 |---|---|
+| `char_run` | upstream applies the absolute run rate only while the character is already moving and reverts on idle; the kit's run control is a persistent relative grade with no movement-scoped lifetime, so the action emits nothing. |
 | `is environment_is` (outside battle content) | environment is a battle backdrop; the condition is constant false there. |
 | `transition_teleport` targeting an NPC | only the player transfers. |
 | `modify_money` with a variable amount | only literal amounts are supported. |
@@ -146,7 +152,7 @@ Current coverage (G6 profile):
 
 | Kind | Types | Uses | Native | Degraded | Placeholder | Dropped | Executable |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Actions | 98 | 13,617 | 12,324 | 655 | 19 | 619 | 95.5% |
+| Actions | 98 | 13,617 | 12,437 | 594 | 12 | 574 | 95.8% |
 | Conditions | 64 | 8,663 | 8,183 | 2 | 1 | 477 | 94.5% |
 
 ## Adding or changing a mapping

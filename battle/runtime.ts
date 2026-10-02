@@ -9,6 +9,7 @@ import type { BattleAnimationRef, BattleDb, BattleImageRef } from "../importer/b
 import {
   initialTuxemonExtensionState,
   KENNEL_LIMIT,
+  nextMonsterIid,
   packTuxemonExtensionState,
   PARTY_LIMIT,
   registerCaughtMonster,
@@ -327,12 +328,6 @@ function weightedEncounter<T extends { weight: number }>(rng: RngState, rows: re
 
 function randomLevel(rng: RngState, range: readonly [number, number]): number {
   return range[0] + Math.floor(nextRandom(rng) * (range[1] - range[0] + 1));
-}
-
-function cloneExtWithoutNpcParty(ext: TuxemonExtensionState, opponent: string): TuxemonExtensionState {
-  const npcParties = { ...ext.npcParties };
-  delete npcParties[opponent];
-  return clone({ ...ext, npcParties });
 }
 
 function runtimeState(value: JsonValue): RuntimeBattleState {
@@ -726,15 +721,39 @@ export function createTuxemonBattleRules(source: BattleDbSource, enums: Variable
             release();
             return null;
           }
-          enemy = [
-            ...staged.map((member) => enemySnapshot(db, rulesDb, rng, member)),
-            ...inline.map((member) => enemySnapshot(db, rulesDb, rng, member)),
-          ];
+          // Upstream keeps an NPC's party for the NPC's lifetime: the
+          // monsters the event added (folded into setup.party) join the ones
+          // already staged for this NPC, capped at the party limit like
+          // upstream's add_monster, and the merged party stays in npcParties
+          // so later get_party_monster / remove_monster commands can address
+          // them. The importer clears every NPC party on a map change
+          // (tux.clear_npc_parties) and this NPC's when it is created afresh
+          // or removed (tux.clear_npc_party), so a later visit's battle
+          // starts from that visit's add_monster calls only.
+          let nextMonsterId = ext.nextMonsterId;
+          const persistedParty: PendingMonster[] = staged.map((member) => ({ ...member }));
+          for (const member of inline) {
+            if (persistedParty.length >= PARTY_LIMIT) break;
+            const [iid, following] = nextMonsterIid(nextMonsterId);
+            nextMonsterId = following;
+            persistedParty.push({
+              iid,
+              slug: member.species,
+              level: member.level,
+              experienceModifier: member.experienceModifier ?? 1,
+              moneyModifier: member.moneyModifier ?? 0,
+            });
+          }
+          enemy = persistedParty.map((member) => enemySnapshot(db, rulesDb, rng, member));
           if (setup.fieldSize === 2 && ext.party.length + enemy.length < 3) {
             release();
             return null;
           }
-          startedExt = cloneExtWithoutNpcParty(ext, opponent);
+          startedExt = clone({
+            ...ext,
+            npcParties: { ...ext.npcParties, [opponent]: persistedParty },
+            nextMonsterId,
+          });
         } else if (setup.kind === "wild") {
           opponent = `wild:${setup.species}`;
           kind = "wild";

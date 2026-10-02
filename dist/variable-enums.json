@@ -1001,7 +1001,10 @@
  "brad_points": [
   "0"
  ],
- "budaye": [],
+ "budaye": [
+  "no_choice",
+  "no_options"
+ ],
  "bumpintomom": [
   "yes"
  ],
@@ -1044,7 +1047,10 @@
   "no",
   "yes"
  ],
- "cateye": [],
+ "cateye": [
+  "no_choice",
+  "no_options"
+ ],
  "catgirl_candy_hastraded": [
   "yes"
  ],
@@ -1100,7 +1106,10 @@
  "check_vivitron_morph": [
   "yes"
  ],
- "chillimp": [],
+ "chillimp": [
+  "no_choice",
+  "no_options"
+ ],
  "choice_floor": [
   "0floor",
   "1floor",
@@ -1267,7 +1276,8 @@
  ],
  "dojo_notech": [],
  "dojo_stage": [
-  "no_choice"
+  "no_choice",
+  "no_options"
  ],
  "dojobillie": [
   "yes"
@@ -1574,7 +1584,10 @@
   "earth",
   "fire"
  ],
- "grintot": [],
+ "grintot": [
+  "no_choice",
+  "no_options"
+ ],
  "happy": [
   "no",
   "yes"
@@ -1615,7 +1628,10 @@
   "ohno",
   "yes"
  ],
- "ignibus": [],
+ "ignibus": [
+  "no_choice",
+  "no_options"
+ ],
  "incident_greenwash": [
   "done",
   "no",
@@ -1936,9 +1952,13 @@
   "yes"
  ],
  "potion_xiang": [
-  "no_choice"
+  "no_choice",
+  "no_options"
  ],
- "probably_agnite": [],
+ "probably_agnite": [
+  "no_choice",
+  "no_options"
+ ],
  "prof_candy_hastraded": [
   "yes"
  ],
@@ -2004,7 +2024,10 @@
   "finished",
   "please"
  ],
- "rename": [],
+ "rename": [
+  "no_choice",
+  "no_options"
+ ],
  "replaceomnigrunt4": [
   "yes"
  ],
@@ -2017,7 +2040,10 @@
   "null",
   "yes"
  ],
- "rhincus": [],
+ "rhincus": [
+  "no_choice",
+  "no_options"
+ ],
  "rhincus_choice": [
   "no",
   "yes"
@@ -2109,7 +2135,10 @@
   "proceed",
   "yes"
  ],
- "ruff_back": [],
+ "ruff_back": [
+  "no_choice",
+  "no_options"
+ ],
  "sadsong": [
   "no",
   "yes"
@@ -2209,7 +2238,10 @@
  "shaftscheme": [
   "yes"
  ],
- "shammer": [],
+ "shammer": [
+  "no_choice",
+  "no_options"
+ ],
  "shammer_choice": [
   "no",
   "yes"
@@ -2256,7 +2288,10 @@
  "snarlonmountain": [
   "yes"
  ],
- "sold": [],
+ "sold": [
+  "no_choice",
+  "no_options"
+ ],
  "soldier_on_mission": [
   "on"
  ],
@@ -2336,7 +2371,10 @@
   "pythock",
   "snarlon"
  ],
- "tasteful_zhu": [],
+ "tasteful_zhu": [
+  "no_choice",
+  "no_options"
+ ],
  "tealucy": [
   "yes"
  ],
@@ -2408,7 +2446,10 @@
   "rockitten",
   "welcome"
  ],
- "tweesher": [],
+ "tweesher": [
+  "no_choice",
+  "no_options"
+ ],
  "tweesherball": [
   "yes"
  ],

@@ -318,6 +318,13 @@ export function runJ2Journey(): J2JourneyResult {
   driver.goTo(30, 16);
   driver.interact(0);
   driver.expectWin("spyder_route6_gunner", gunnerWins + 1);
+  // Blair and Richard are sight-line trainers whose path the old tape crossed
+  // incidentally. The wandering Frances NPC reroutes the BFS around their
+  // sight lines, so fight both explicitly to keep the gauntlet deterministic.
+  // Richard first: the BFS detour around Frances otherwise crosses his sight
+  // line on the way to Blair, which would make his fight incidental.
+  driver.fightNpc("spyder_route6_richard");
+  driver.fightNpc("spyder_route6_blair");
   enterFromEdge(driver, 30, 19, BTN_BITS.DOWN, "spyder_candy_town");
   driver.expect("Candy Town visit was recorded", numeric(driver.state, "v.seencandy") !== 0);
 
@@ -354,6 +361,8 @@ export function runJ2Journey(): J2JourneyResult {
   driver.expect("Blue / 10 opened Hospital 2", driver.state.mapId === "spyder_candy_hospital2");
   driver.expect("accepted password was reset",
     numeric(driver.state, "v.passcode_color") === 0 && numeric(driver.state, "v.passcode_number") === 0);
+  // Let the entry fade finish so the golden captures a clear hospital room.
+  for (let i = 0; i < 60; i++) driver.tick();
   driver.markMap("hospital-password");
 
   // Reach the quarantined laboratory. Aardant fools the scanner; interact

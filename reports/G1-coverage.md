@@ -10,7 +10,7 @@ When conversion discards a whole event, every source rule in it is Dropped.
 
 | Kind | Kinds | Uses | Native | Degraded | Placeholder | Dropped | S1 T1 baseline |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Actions | 98 | 13617 | 12324 | 655 | 19 | 619 | 6355 / 6246 (46.67% / 45.9%) |
+| Actions | 98 | 13617 | 12437 | 594 | 12 | 574 | 6355 / 6246 (46.67% / 45.9%) |
 | Conditions | 64 | 8663 | 8183 | 2 | 1 | 477 | 4707 / 4591 (54.33% / 53.0%) |
 
 The S1 acceptance baselines are 6,246 action uses (45.9%) and 4,591
@@ -20,10 +20,10 @@ Degraded count toward them. This import records 6355
 (54.33%), respectively: -109
 action uses and -116 condition uses below the S1 baselines. The old
 type-table Native figure was 5,448 / 13,617 (40.0%); conversion-path accounting
-supersedes it with 12324 / 13617
-(90.5%). “Executable”
+supersedes it with 12437 / 13617
+(91.3%). “Executable”
 (native + degraded + deliberate P1 placeholder) is
-95.5% for actions and
+95.8% for actions and
 94.5% for conditions.
 
 Definitions:
@@ -38,7 +38,7 @@ Definitions:
 
 ## P2 battle and monster placeholder audit
 
-There are 20 source-file uses across 6
+There are 13 source-file uses across 3
 source types that still carry Placeholder disposition: battle/monster behavior.
 Player-versus-trainer, double, scripted-wild, random-wild, battle-outcome,
 party-size, has-monster, evolution, environment, faint-transfer, and live-party
@@ -46,21 +46,30 @@ defeat behavior are Native. The remaining non-native behavior is explicit:
 
 | Kind | Source type | Placeholder uses | Reason |
 |---|---|---:|---|
-| Action | `choice_monster` | 2 | choices -> enum code; nested choice pages retain every option |
-| Action | `choice_npc` | 1 | nested choice pages retain every option |
 | Action | `open_shop` | 7 | monster trading remains a visible placeholder |
-| Action | `remove_monster` | 4 | sys.party_size -= 1 when non-empty |
 | Action | `start_battle` | 5 | NPC-versus-NPC battles are not supported yet; skipped |
 | Condition | `is party_infected` | 1 | no plague in P1: none=true |
 
 The five `start_battle` placeholders are NPC-versus-NPC scenes, for which the
 runtime shows a visible skip notice instead of inventing a player battle. The
-other rows are global or legacy content. Where GB6 reaches a
-`choice_monster` starter prompt, its deterministic enum-choice lowering is
-exercised, but it is not claimed as a general party-selection UI. The remaining
-trading, removal, NPC selection, and plague-state rows stay visible or
-deterministic without being claimed as full P2 behavior. The long-term target
-remains zero Placeholder uses.
+other rows are global or legacy content. `get_player_monster` has
+15 Native uses (the KC1 `extChoice` over the live
+party) and 2 Degraded uses (the party picker that
+feeds an adjacent `rename_monster`); `choice_monster` is Native via the same
+party extension. `choice_npc` is Degraded (per-option names distinguish the
+lines; the kit choice box has no portraits). `remove_monster` deletes an iid
+from its owner. An NPC's party lives as long as the NPC, as upstream: it is
+cleared when the NPC is created afresh (every map entry) or removed, and
+battle-time monsters stay in it until then. Of the
+8 executable
+`get_party_monster` uses, Native: 1 (the Nimrod
+`Zircon Back` event, which reads the defeated trainer's party); Degraded:
+7, which write no `iid_slot_*`: the dojo
+calls run before their battle, whose `add_monster` calls are folded into the
+battle setup, and the gym calls name trainers that only fight skipped
+NPC-versus-NPC battles. The remaining trading
+and plague-state rows stay visible or deterministic without being claimed as
+full P2 behavior. The long-term target remains zero Placeholder uses.
 
 ## Economy and item catalog
 
@@ -145,17 +154,17 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `change_bg_char` | 4 | 0 | 0 | 0 | 4 |
 | Action | `change_bg_monster` | 0 | 0 | 0 | 7 | 7 |
 | Action | `change_taste` | 0 | 0 | 0 | 2 | 2 |
-| Action | `char_face` | 1558 | 444 | 0 | 25 | 2027 |
+| Action | `char_face` | 1559 | 443 | 0 | 25 | 2027 |
 | Action | `char_move` | 64 | 13 | 0 | 0 | 77 |
 | Action | `char_plague` | 0 | 0 | 0 | 13 | 13 |
-| Action | `char_position` | 0 | 0 | 0 | 1 | 1 |
+| Action | `char_position` | 0 | 1 | 0 | 0 | 1 |
 | Action | `char_run` | 0 | 0 | 0 | 2 | 2 |
-| Action | `char_speed` | 0 | 0 | 0 | 19 | 19 |
-| Action | `char_stop` | 0 | 88 | 0 | 0 | 88 |
+| Action | `char_speed` | 0 | 19 | 0 | 0 | 19 |
+| Action | `char_stop` | 88 | 0 | 0 | 0 | 88 |
 | Action | `char_talk` | 772 | 0 | 0 | 0 | 772 |
 | Action | `char_wander` | 0 | 32 | 0 | 1 | 33 |
-| Action | `choice_monster` | 0 | 0 | 2 | 0 | 2 |
-| Action | `choice_npc` | 0 | 0 | 1 | 0 | 1 |
+| Action | `choice_monster` | 2 | 0 | 0 | 0 | 2 |
+| Action | `choice_npc` | 0 | 1 | 0 | 0 | 1 |
 | Action | `clear_variable` | 35 | 0 | 0 | 1 | 36 |
 | Action | `copy_variable` | 0 | 0 | 0 | 2 | 2 |
 | Action | `create_kennel` | 0 | 0 | 0 | 1 | 1 |
@@ -165,9 +174,9 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `evolution` | 2 | 0 | 0 | 0 | 2 |
 | Action | `fadeout_music` | 1 | 0 | 0 | 0 | 1 |
 | Action | `format_variable` | 0 | 0 | 0 | 10 | 10 |
-| Action | `get_party_monster` | 0 | 0 | 0 | 9 | 9 |
+| Action | `get_party_monster` | 1 | 7 | 0 | 1 | 9 |
 | Action | `get_pending_moves` | 0 | 0 | 0 | 2 | 2 |
-| Action | `get_player_monster` | 0 | 2 | 0 | 15 | 17 |
+| Action | `get_player_monster` | 15 | 2 | 0 | 0 | 17 |
 | Action | `info` | 0 | 0 | 0 | 1 | 1 |
 | Action | `load_yaml` | 0 | 7 | 0 | 0 | 7 |
 | Action | `lock_controls` | 320 | 0 | 0 | 3 | 323 |
@@ -190,7 +199,7 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `random_integer` | 1 | 0 | 0 | 0 | 1 |
 | Action | `random_monster` | 0 | 0 | 0 | 39 | 39 |
 | Action | `remove_collision` | 5 | 0 | 0 | 0 | 5 |
-| Action | `remove_monster` | 0 | 0 | 4 | 1 | 5 |
+| Action | `remove_monster` | 4 | 0 | 0 | 1 | 5 |
 | Action | `remove_npc` | 221 | 0 | 0 | 3 | 224 |
 | Action | `remove_step_tracker` | 0 | 0 | 0 | 5 | 5 |
 | Action | `remove_tech` | 0 | 0 | 0 | 2 | 2 |
@@ -202,7 +211,7 @@ four-neighbour BFS with fixed tie-breaking selects the nearest walkable cell:
 | Action | `set_char_attribute` | 0 | 0 | 0 | 3 | 3 |
 | Action | `set_economy` | 16 | 0 | 0 | 0 | 16 |
 | Action | `set_environment` | 173 | 0 | 0 | 1 | 174 |
-| Action | `set_facing_mode` | 0 | 0 | 0 | 2 | 2 |
+| Action | `set_facing_mode` | 2 | 0 | 0 | 0 | 2 |
 | Action | `set_kennel_visible` | 0 | 0 | 0 | 2 | 2 |
 | Action | `set_layer` | 77 | 0 | 0 | 2 | 79 |
 | Action | `set_mission` | 0 | 0 | 0 | 6 | 6 |

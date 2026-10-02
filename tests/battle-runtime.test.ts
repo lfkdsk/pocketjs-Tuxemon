@@ -3,6 +3,7 @@ import battleDbJson from "../data/battle-db.json";
 
 import { nextRandom, type RngState } from "../battle/core.ts";
 import {
+  createTuxemonExtensions,
   initialTuxemonExtensionState,
   PARTY_LIMIT,
   tuxemonExtensionState,
@@ -202,7 +203,7 @@ describe("Tuxemon BattleRules adapter", () => {
     expect(rules.step(staleWild, { buttons: 0, confirmEdge: true }, 0)).toEqual(staleWild);
   });
 
-  test("wins a trainer battle, consumes its staged party, and writes persistent rewards", () => {
+  test("wins a trainer battle, keeps its staged party, and writes persistent rewards", () => {
     const ext = extensionWith(monster("nut", 50, "txmn-player", 91));
     ext.npcParties[OPPONENT] = [{
       iid: "txmn-enemy",
@@ -218,7 +219,15 @@ describe("Tuxemon BattleRules adapter", () => {
       environment: "grass",
     }), 101, {}, 100);
     expect(started).not.toBeNull();
-    expect(tuxemonExtensionState(started!.ext, DB).npcParties[OPPONENT]).toBeUndefined();
+    // Upstream keeps the NPC's party after the battle so get_party_monster /
+    // remove_monster can still address it; the staged monsters persist.
+    expect(tuxemonExtensionState(started!.ext, DB).npcParties[OPPONENT]).toEqual([{
+      iid: "txmn-enemy",
+      slug: "budaye",
+      level: 2,
+      experienceModifier: 5,
+      moneyModifier: 10,
+    }]);
 
     const presentation = tuxemonRuntimeBattleState(started!.state).visuals;
     expect(presentation.environment).toEqual(DB.environments.grass);
@@ -288,6 +297,89 @@ describe("Tuxemon BattleRules adapter", () => {
       [`bo.${OPPONENT}.won`]: true,
       [`defeated.${OPPONENT}`]: true,
     });
+  });
+
+  test("the Nimrod Zircon Back flow: a folded trainer party persists so get_party_monster writes its iid and remove_monster deletes it", () => {
+    // Real Talk Argon setup from the imported spyder_nimrod_middle map:
+    // add_monster chrome_robo,30 folded into the battle setup.party.
+    const ext = extensionWith(monster("nut", 50, "txmn-player", 91));
+    const rules = createTuxemonBattleRules(DB, ENUMS);
+    const started = startBattle(rules, ext, json({
+      kind: "trainer",
+      opponent: "spyder_nimrod_argon",
+      party: [{ species: "chrome_robo", level: 30, experienceModifier: 5, moneyModifier: 10 }],
+      environment: "grass",
+    }), 101, {}, 100);
+    expect(started).not.toBeNull();
+    const afterBattle = tuxemonExtensionState(started!.ext, DB);
+    // The folded chrome_robo persists in argon's NPC party with a real iid,
+    // matching upstream where the NPC keeps its monsters after the battle.
+    expect(afterBattle.npcParties.spyder_nimrod_argon).toEqual([{
+      iid: expect.any(String),
+      slug: "chrome_robo",
+      level: 30,
+      experienceModifier: 5,
+      moneyModifier: 10,
+    }]);
+    const iid = afterBattle.npcParties.spyder_nimrod_argon![0]!.iid;
+
+    // Zircon Back: get_party_monsters writes the iid, remove_monster deletes it.
+    const extensions = createTuxemonExtensions(DB);
+    const commandContext = (extValue: JsonValue, variables: Record<string, string | number> = {}) => ({
+      ext: extValue,
+      variables,
+      switches: {},
+      items: {},
+      gold: 0,
+      playerName: "Player",
+      random: () => 0,
+    });
+    const getParty = extensions.commands!["tux.get_party_monsters"]!;
+    const written = getParty(commandContext(started!.ext), { character: "spyder_nimrod_argon" });
+    expect(written?.writes).toEqual({ "v.iid_slot_0": iid });
+
+    const remove = extensions.commands!["tux.remove_monster"]!;
+    const removed = remove(commandContext(started!.ext, { "v.iid_slot_0": iid }), { variable: "v.iid_slot_0" });
+    expect(removed).not.toBeUndefined();
+    const afterRemoval = tuxemonExtensionState(removed!.ext!, DB);
+    expect(afterRemoval.npcParties.spyder_nimrod_argon).toEqual([]);
+  });
+
+  test("a trainer's party lasts for the NPC's lifetime and is cleared with it", () => {
+    // Within one NPC lifetime upstream add_monster appends to the NPC's
+    // party (capped at PARTY_LIMIT). The importer clears the party when the
+    // NPC is created afresh on a later map visit, or removed, so the next
+    // battle uses only that visit's monsters.
+    const ext = extensionWith(monster("nut", 50, "txmn-player", 91));
+    const rules = createTuxemonBattleRules(DB, ENUMS);
+    const party = (species: string) => ({ species, level: 25, experienceModifier: 5, moneyModifier: 10 });
+    const setup = json({
+      kind: "trainer", opponent: OPPONENT,
+      party: [party("nut"), party("budaye"), party("nut"), party("budaye")],
+    });
+    const first = startBattle(rules, ext, setup, 101, {}, 100);
+    expect(first).not.toBeNull();
+    const afterFirst = tuxemonExtensionState(first!.ext, DB);
+    expect(afterFirst.npcParties[OPPONENT]).toHaveLength(4);
+
+    const sameVisit = startBattle(rules, afterFirst, setup, 102, {}, 100);
+    expect(tuxemonExtensionState(sameVisit!.ext, DB).npcParties[OPPONENT]).toHaveLength(PARTY_LIMIT);
+
+    const clear = createTuxemonExtensions(DB).commands!["tux.clear_npc_party"]!;
+    const cleared = clear({
+      ext: json(afterFirst),
+      variables: {},
+      switches: {},
+      items: {},
+      gold: 0,
+      playerName: "Player",
+      random: () => 0,
+    }, { character: OPPONENT });
+    const afterClear = tuxemonExtensionState(cleared!.ext!, DB);
+    expect(afterClear.npcParties[OPPONENT]).toBeUndefined();
+    const nextVisit = startBattle(rules, afterClear, setup, 103, {}, 100);
+    expect(tuxemonRuntimeBattleState(nextVisit!.state).battle.parties[1]).toHaveLength(4);
+    expect(tuxemonExtensionState(nextVisit!.ext, DB).npcParties[OPPONENT]).toHaveLength(4);
   });
 
   test("persists battle inventory, escape attempts, and a captured wild monster", () => {

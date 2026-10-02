@@ -10,6 +10,7 @@ import { encodePNG } from "../vendor/pocket-rpgkit/vendor/pocketjs/tests/png.ts"
 import { walkPose } from "../vendor/pocket-rpgkit/src/engine/movement.ts";
 import { isSessionWorldIdle, type SessionState } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import type { CameraState, Project } from "../vendor/pocket-rpgkit/src/engine/types.ts";
+import { FIXED_TIME_HOST_GLOBALS } from "../battle/time-weather.ts";
 import { NPC_SRC_INDEX, PLAYER } from "../ui/game-assets.ts";
 import { createNpcSrcProvider } from "../ui/npc-src-repository.ts";
 import type { Gb6JourneyResult } from "./gb6-journey.ts";
@@ -71,7 +72,9 @@ for (const viewport of selectedViewports) {
   // Replay GB6, J1, and J2 from a fresh frame-zero world for each viewport.
   // This exercises production startup, camera bounds, and streamed terrain at
   // the exact same combined tape frames as the real host.
-  const world = await bootWorld(BUNDLE, 60, undefined, undefined, viewport);
+  // Start the clock at the fixed 09:00 like the other golden tools, so the
+  // daylight grade does not depend on the wall clock at regeneration time.
+  const world = await bootWorld(BUNDLE, 60, FIXED_TIME_HOST_GLOBALS, undefined, viewport);
   for (let frame = 0; frame <= checkpoints.at(-1)!.mergedFrame; frame++) {
     world.frame(combined[frame]!);
     world.tick();

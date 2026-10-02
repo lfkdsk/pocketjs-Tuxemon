@@ -21,9 +21,9 @@ Per-action numbers come from the import coverage report,
 
 | Feature | Status | Notes |
 | --- | --- | --- |
-| Event import | Partial | 90.5% of action uses and 94.5% of condition uses are native; 95.5% and 94.5%, respectively, are executable. The rest is dropped or a visible placeholder, each with a reason; see [importer](importer.md) |
+| Event import | Partial | 91.3% of action uses and 94.5% of condition uses are native; 95.8% and 94.5%, respectively, are executable. The rest is dropped or a visible placeholder, each with a reason; see [importer](importer.md) |
 | Dialogue, choices, variables, items, NPC creation and removal | Done | Imported from the scenario YAML, TMX properties and the en_US `.po` strings |
-| Input locks | Done | Every imported input lock runs to its unlock (`verify:g6:locks`); no map can freeze the player (`verify:g6:frozen`) |
+| Input locks | Done | Every imported input lock runs to its unlock (`verify:g6:locks`); the freeze scan finds no permanent lock or blocking fiber on any map (`verify:g6:frozen`) |
 | `WorldState` gating through the kit's `worldIdle` condition | Done | Compared against upstream Tuxemon runs |
 
 ## NPCs and movement
@@ -31,8 +31,10 @@ Per-action numbers come from the import coverage report,
 | Feature | Status | Notes |
 | --- | --- | --- |
 | Facing, scripted moves, pathfinding to a tile or a character | Done | |
-| Wandering and stopping NPCs (`char_wander`, `char_stop`) | Partial | Imported with simplifications (degraded). In progress: switching to the kit's run-time movement control |
-| Speed and run changes (`char_speed`, `char_run`) | Planned | In progress |
+| Wandering and stopping NPCs (`char_wander`, `char_stop`) | Partial | `char_stop` is native `moveControl` stop (88 uses). `char_wander` lowers to `moveControl` random wander with a deterministic seed (paths match at 60/30/20 Hz, across save/restore and L-rewind); the frequency is quantized to the nearest MV grade and one use is dropped |
+| Speed and facing-lock changes (`char_speed`, `set_facing_mode`) | Partial | `set_facing_mode` is native `moveControl` facingMode (2 uses). `char_speed` lowers to `moveControl` speed; tiles/s maps to the nearest MV exponential grade (19 uses) |
+| Run (`char_run`) | Planned | Both content uses are dropped: upstream applies the absolute run rate only while the character is already moving and reverts on idle; the kit has no movement-scoped speed, so emitting `moveControl` run would speed every later route |
+| Direct placement (`char_position`) | Partial | Lowered to a clamped `place` command (out-of-map coordinates are clamped; upstream raises); an immediately following `char_face` folds into the placement's `dir` |
 
 ## Presentation
 
@@ -61,8 +63,9 @@ Per-action numbers come from the import coverage report,
 | Feature | Status | Notes |
 | --- | --- | --- |
 | Adding monsters, party size and health changes | Done | |
-| Choosing a party monster (`get_player_monster`, `choice_monster`) | Partial | The starter prompt remains an ordinary choice. Two rename-form `get_player_monster` uses open the saved party picker and return a stable monster ID; the other 15 general uses remain dropped |
-| Removing a monster (`remove_monster`) | Partial | Only lowers the party size |
+| Choosing a party monster (`get_player_monster`, `choice_monster`) | Done | The 15 general `get_player_monster` uses and both `choice_monster` uses open the kit's `extChoice` over the live party: no matching monster writes the no-option code without a menu, and cancelling writes the no-choice code. The two `get_player_monster` uses that feed an adjacent `rename_monster` open the saved party-picker scene instead (counted as Degraded because the picker is specialized for renaming) |
+| Appearance choice (`choice_npc`) | Partial | The six options are distinguished by their translated names; upstream shows per-option NPC portraits, which need kit option-image support |
+| Removing a monster (`remove_monster`, `get_party_monster`) | Partial | `remove_monster` deletes the monster whose iid a variable holds from its owner: the player's party, the kennel or an NPC's party. As upstream, an NPC's party lives as long as the NPC: every map change drops all NPC parties (no NPC in the data is persistent), and `create_npc`/`remove_npc` clear the NPC's party within a visit, so each battle uses only the monsters that visit added and a save holds only the current map's NPC parties. `get_party_monster` writes a party's iids into `iid_slot_*`; of its 8 executable uses only Nimrod's `Zircon Back` finds a party. The three dojo calls run before their battle, whose `add_monster` calls are folded into the battle setup, and the four gym calls sit on Points pages that wait for the winner of a skipped NPC-versus-NPC battle and so never run; those seven write nothing (Degraded) |
 | Renaming the player or a monster | Partial | All five authored player prompts and both monster prompts use saved, rewindable scenes. Player prompts omit upstream NPC targeting and random-name generation |
 | PC storage, trading, daycare and kennel | Planned | The game-scene host is available, but these systems are not wired yet |
 | Tuxepedia and journal (`set_tuxepedia`, `open_journal`) | Partial | Persistent `seen`/`caught` state is monotonic, journal rows/details use indexed lazy battle art, and all 14 authored direct previews open without mutating discovery. A player-facing menu entry and NPC-owned journal counters/removal are not implemented; see [the GI-2a report](../findings/GI2a.md) |
@@ -101,9 +104,9 @@ Per-action numbers come from the import coverage report,
 
 | Segment | Status | Notes |
 | --- | --- | --- |
-| Bedroom → end of Route 3 | Done | 108,618 frames, 100 real battles. Replays byte-identical at 60, 30 and 20 Hz (`verify:gb6:mainline`) |
-| Route 3 → Captain's return | Done | Continues to 121,224 frames in total, with 17 more battles (`verify:j1:mainline`) |
-| Captain's return → hospital cure | Done | Continues to 170,983 frames in total, with 56 more battles (50 trainer, 6 wild), ending with the hospital cure in Candy Town (`verify:j2:mainline`) |
+| Bedroom → end of Route 3 | Done | 108,225 frames, 100 real battles. Replays byte-identical at 60, 30 and 20 Hz (`verify:gb6:mainline`) |
+| Route 3 → Captain's return | Done | Continues to 120,854 frames in total, with 17 more battles (`verify:j1:mainline`) |
+| Captain's return → hospital cure | Done | Continues to 170,868 frames in total, with 56 more battles (50 trainer, 6 wild), ending with the hospital cure in Candy Town (`verify:j2:mainline`) |
 
 ## Platforms and performance
 
@@ -111,8 +114,8 @@ Per-action numbers come from the import coverage report,
 | --- | --- | --- |
 | Web | Done | Deployed to GitHub Pages from `main` after CI passes. The game pak is 46,766,928 B including the committed mainline audio; it was 66.8 MB before compact maps and indexed battle art. The browser renders at 2× density: fonts use native physical samples while tiles and sprites stay nearest-neighbour; compare the [Paper Town dialog](screenshots/web-density-paper-dialog.png) and [battle menu](screenshots/web-density-battle-menu.png). CI plays the journey in headless Chrome |
 | Desktop (Linux, macOS) | Done | `bun run desktop`; the launcher enables ALSA when its development package is available and otherwise builds the silent host automatically |
-| PSP | Partial | `bun run build:psp` emits an EBOOT with a small boot pak and a seekable `assets.pak` sidecar containing all 263 maps, audio and battle art. The 3,342-frame opening journey reaches Route 1 and matches the production replay under PPSSPP; a 333 MHz firmware 6.61 hardware run reports 43–60 displayed fps. Map/texture-load stalls remain, emulator timing is not hardware evidence, and the full 100-battle mainline has not run on device. See the [PSP build instructions](../README.md#psp) |
-| Startup and frame time | Done | The desktop QuickJS benches enforce 250 ms startup and 50 ms frame budgets, reject a desktop bundle built from different map shards, and take the GB6 terminal hash from its tape. The 108,618-frame replay's slowest CPU frame is 37.663 ms at 480×272 and 43.475 ms at 960×544; both are below budget and match the canonical terminal state. See [verification](verification.md) and the dated measurements in the README |
+| PSP | Partial | `bun run build:psp` emits an EBOOT with a small boot pak and a seekable `assets.pak` sidecar containing all 263 maps, audio and battle art. The opening journey reaches Route 1 and matches the production replay under PPSSPP (checked on an earlier recording of the opening tape; not re-run on the current 3,369-frame tape); a 333 MHz firmware 6.61 hardware run reports 43–60 displayed fps. Map/texture-load stalls remain, emulator timing is not hardware evidence, and the full 100-battle mainline has not run on device. See the [PSP build instructions](../README.md#psp) |
+| Startup and frame time | Done | The desktop QuickJS benches enforce 250 ms startup and 50 ms frame budgets, reject a desktop bundle built from different map shards, and take the GB6 terminal hash from its tape. On the earlier 108,618-frame, 100-battle recording of the mainline tape, the replay's slowest CPU frame was 37.663 ms at 480×272 and 43.475 ms at 960×544; both were below budget and matched the canonical terminal state. See [verification](verification.md) and the dated measurements in the README |
 
 ## Verification and CI
 

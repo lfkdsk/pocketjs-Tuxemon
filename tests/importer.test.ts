@@ -147,7 +147,7 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   expect(new Set(result.report.rows.map((row) => row.key)).size).toBe(result.report.rows.length);
   expect(result.report.rows.some((row) => row.key === "trigger:touch:facing:T1-lowered")).toBeTrue();
   expect(Object.keys(result.variables)).toHaveLength(498);
-  expect(Object.values(result.variables).filter((values) => values.length === 0)).toHaveLength(19);
+  expect(Object.values(result.variables).filter((values) => values.length === 0)).toHaveLength(6);
   expect(
     result.report.coverage.actions.summary.native +
     result.report.coverage.actions.summary.degraded +
@@ -511,10 +511,12 @@ test("default import output remains byte-pinned", () => {
   // This pins the complete ImportBuild: condition lowering, the stable source
   // inputs, the generated outdoor world index and its compact report summary.
   // The deterministic clock, native presentation/terrain mappings, GM1 audio
-  // commands, sys.music_fading fadeout guard, and GI scene lowering are all
-  // included in this combined pin.
+  // commands, sys.music_fading fadeout guard, GI scene lowering, and the
+  // GI-1b movement/party lowering (choice_npc option names, dropped char_run,
+  // get_party_monster iid slots, NPC-lifetime party clears) are all included
+  // in this combined pin.
   expect(createHash("sha256").update(bytes).digest("hex")).toBe(
-    "89bc86b1d8f497e506da0998002d97152f410b1b7ad8d87a9d6f55b0c228e77b",
+    "28b1c602a9616cefe30bb3dd5ef6f0b8e9ebce5ef92fa0b20aba4713ad70a835",
   );
 });
 
@@ -692,6 +694,205 @@ test("ImportOptions.routes emits K2 arbitrary targets and path steps", () => {
     (node.route as { skippable?: boolean }).skippable === true
   )).toBeTrue();
   expect(result.report.options?.routes).toBeTrue();
+});
+
+test("ImportOptions.moveControl emits KM1 stop, run, speed and facing controls", () => {
+  const nodes = objectNodes(buildProject(["route1", "taba_town", "tuxe_mart_taba"], { moveControl: true }).project);
+  // char_stop player -> a stop control on the player
+  expect(nodes.some((node) =>
+    node.op === "moveControl" && node.target === "player" &&
+    (node.control as { kind?: string })?.kind === "stop"
+  )).toBeTrue();
+  // char_run christie emits nothing: upstream only applies the absolute run
+  // rate while the character is already moving and reverts on idle, so the
+  // call is a no-op for the idle christie; the kit's run control is a
+  // persistent relative grade and cannot express that lifetime.
+  expect(nodes.some((node) =>
+    node.op === "moveControl" && (node.control as { kind?: string })?.kind === "run"
+  )).toBeFalse();
+  // char_speed kay_wren,7 -> the nearest MV grade to 7 tiles/s is 5
+  expect(nodes.some((node) =>
+    node.op === "moveControl" && (node.control as { kind?: string; value?: number })?.kind === "speed" &&
+    (node.control as { value?: number })?.value === 5
+  )).toBeTrue();
+  // set_facing_mode callie_wren,locked -> facingMode locked
+  expect(nodes.some((node) =>
+    node.op === "moveControl" && (node.control as { kind?: string; value?: string })?.kind === "facingMode" &&
+    (node.control as { value?: string })?.value === "locked"
+  )).toBeTrue();
+  // and the follow_movement arm maps back to followMovement
+  expect(nodes.some((node) =>
+    node.op === "moveControl" && (node.control as { kind?: string; value?: string })?.kind === "facingMode" &&
+    (node.control as { value?: string })?.value === "followMovement"
+  )).toBeTrue();
+});
+
+test("char_position becomes a clamped place command under moveControl", () => {
+  const nodes = objectNodes(buildProject(["spyder_paper_rival_downstairs"], { moveControl: true }).project);
+  expect(nodes.some((node) =>
+    node.op === "place" && node.target === "player" && node.x === 6 && node.y === 8
+  )).toBeTrue();
+});
+
+test("char_position followed by char_face folds the facing into the placement", () => {
+  const result = buildProject(["spyder_paper_rival_downstairs"], { moveControl: true });
+  const nodes = objectNodes(result.project);
+  // the real "TV Yes" event places the player at (6,8) and immediately faces
+  // left; the adjacent char_face must fold into the placement dir instead of
+  // a separate route that the placement's stopPlayerRoute would swallow
+  const place = nodes.find((node) =>
+    node.op === "place" && node.target === "player" && node.x === 6 && node.y === 8
+  ) as { dir?: string } | undefined;
+  expect(place?.dir).toBe("left");
+
+  const session = createSession(result.project, 60, {
+    extensions: TUXEMON_EXTENSIONS,
+    battle: TUXEMON_BATTLE_RULES,
+  });
+  let state = startSession(result.project, session);
+  state.sw.variables["v.billie_tv"] = 2;
+  for (let frame = 0; frame < 10; frame++) {
+    state = stepSession(session, state, { buttons: 0 });
+  }
+  // the event placed the player at (6,8) facing left and the facing sticks
+  expect([state.move.tx, state.move.ty]).toEqual([6, 8]);
+  expect(state.move.facing).toBe(1);
+  state = stepSession(session, state, { buttons: 0 });
+  expect(state.move.facing).toBe(1);
+});
+
+test("spawn char_wander becomes a KM1 wander control and a page frequency grade", () => {
+  const result = buildProject(["spyder_leather_museum"], { moveControl: true });
+  const nodes = objectNodes(result.project);
+  // historian wanders at 0.8s -> the nearest MV grade is 3 (1s cadence)
+  expect(nodes.some((node) =>
+    node.op === "moveControl" && (node.control as { kind?: string; frequency?: number })?.kind === "wander" &&
+    (node.control as { frequency?: number })?.frequency === 3
+  )).toBeTrue();
+  // the NPC page keeps random movement as the fallback, at the same grade
+  expect(nodes.some((node) => node.moveType === "random" && node.moveFrequency === 3)).toBeTrue();
+  // a char_wander naming an NPC the spawn never creates is dropped, not emitted
+  const miner = nodes.filter((node) =>
+    node.op === "moveControl" && (node.control as { kind?: string })?.kind === "wander" &&
+    typeof node.target === "object" && node.target !== null &&
+    (node.target as { event?: string }).event === "npc_spyder_leathermuseum_miner"
+  );
+  expect(miner.length).toBe(0);
+});
+
+test("moveControl is off by default and the legacy lowerings stay byte-stable", () => {
+  const nodes = objectNodes(buildProject(["route1"], DEFAULT_IMPORT_OPTIONS).project);
+  expect(nodes.some((node) => node.op === "moveControl")).toBeFalse();
+});
+
+test("get_player_monster becomes a guarded KC1 extChoice over the live party", () => {
+  const nodes = objectNodes(buildProject(["spyder_dojo1"], { extChoice: true, battle: true }).project);
+  // the party_match guard wraps the extChoice
+  const match = nodes.filter((node) =>
+    node.op === "ext" || (node as { call?: string }).call === "tux.party_match"
+  );
+  expect(match.some((node) => (node as { call?: string }).call === "tux.party_match")).toBeTrue();
+  const choice = nodes.find((node) =>
+    node.op === "extChoice" && (node as { call?: string }).call === "tux.party_monsters"
+  ) as { args?: { variable?: string; cancelCode?: number; filters?: unknown[] }; cancel?: boolean } | undefined;
+  expect(choice).toBeDefined();
+  expect(choice?.args?.variable).toBe("v.dojo_stage");
+  expect(typeof choice?.args?.cancelCode).toBe("number");
+  // a filtered choice is cancellable (upstream lets the player back out)
+  expect(choice?.cancel).toBeTrue();
+  expect(choice?.args?.filters).toEqual([{ field: "evolution_stage", value: "stage2" }]);
+  // the empty-party arm writes the no_options enum code, not a menu
+  const noOptions = nodes.some((node) =>
+    node.op === "variable" && (node as { id?: string }).id === "v.dojo_stage"
+  );
+  expect(noOptions).toBeTrue();
+});
+
+test("an unfiltered get_player_monster is non-cancellable", () => {
+  const nodes = objectNodes(buildProject(["spyder_dojo1"], { extChoice: true, battle: true }).project);
+  const choices = nodes.filter((node) =>
+    node.op === "extChoice" && (node as { call?: string }).call === "tux.party_monsters"
+  ) as Array<{ args?: { filters?: unknown[] }; cancel?: boolean }>;
+  const unfiltered = choices.find((node) => (node.args?.filters ?? []).length === 0);
+  expect(unfiltered).toBeDefined();
+  expect(unfiltered?.cancel).toBeUndefined();
+});
+
+test("choice_monster becomes a KC1 static extChoice writing enum codes", () => {
+  const nodes = objectNodes(buildProject(["spyder_paper_scoop"], { extChoice: true, battle: true }).project);
+  const choice = nodes.find((node) =>
+    node.op === "extChoice" && (node as { call?: string }).call === "tux.enum_choice"
+  ) as { args?: { variable?: string; options?: Array<{ key: string; code: number }> } } | undefined;
+  expect(choice).toBeDefined();
+  expect(choice?.args?.variable).toBe("v.myintrochoice");
+  expect(choice?.args?.options?.map((o) => o.key)).toEqual(["budaye", "dollfin", "grintot", "ignibus", "memnomnom"]);
+  // every option carries a positive enum code for the variable_set conditions
+  expect(choice?.args?.options?.every((o) => o.code > 0)).toBeTrue();
+});
+
+test("choice_npc keeps every appearance option distinguishable", () => {
+  const nodes = objectNodes(buildProject(["start_tuxemon"], { extChoice: true, battle: true }).project);
+  const choice = nodes.find((node) =>
+    node.op === "extChoice" && (node as { call?: string }).call === "tux.enum_choice"
+  ) as { args?: { options?: Array<{ key: string; label: string }> } } | undefined;
+  expect(choice).toBeDefined();
+  expect(choice?.args?.options).toHaveLength(6);
+  const labels = choice?.args?.options?.map((o) => o.label) ?? [];
+  // Upstream distinguishes the six appearances by per-option NPC portrait.
+  // The kit choice box cannot draw option images, so every line must carry
+  // its own appearance name instead of the shared "Select" label.
+  expect(new Set(labels).size).toBe(6);
+  for (const name of ["White male", "Black male", "White female", "Black female", "Nonbinary", "Whatever"]) {
+    expect(labels.some((l) => l.includes(name))).toBeTrue();
+  }
+});
+
+test("remove_monster becomes a tux.remove_monster ext command", () => {
+  const nodes = objectNodes(buildProject(["spyder_dryadsgrove"], { extChoice: true, battle: true }).project);
+  expect(nodes.some((node) =>
+    node.op === "ext" && (node as { call?: string }).call === "tux.remove_monster" &&
+    (node as { args?: { variable?: string } }).args?.variable === "v.ruff_back"
+  )).toBeTrue();
+  // the old party_size placeholder is gone
+  expect(nodes.some((node) =>
+    node.op === "variable" && (node as { id?: string }).id === "sys.party_size"
+  )).toBeFalse();
+});
+
+test("get_party_monster becomes a tux.get_party_monsters ext command", () => {
+  const nodes = objectNodes(buildProject(["spyder_nimrod_middle"], { extChoice: true, battle: true }).project);
+  const calls = nodes.filter((node) =>
+    node.op === "ext" && (node as { call?: string }).call === "tux.get_party_monsters"
+  ) as Array<{ args?: { character?: string } }>;
+  // the Nimrod event dumps argon's party iids so remove_monster can delete
+  // her first monster by its owner
+  expect(calls.some((c) => c.args?.character === "spyder_nimrod_argon")).toBeTrue();
+});
+
+test("get_party_monster is Native only where the NPC's party exists when it runs", () => {
+  const result = buildProject(["spyder_nimrod_middle", "spyder_dojo2", "spyder_leather_gym"], G6_IMPORT_OPTIONS);
+  // Nimrod reads the defeated argon's party. The dojo calls precede their
+  // battle, whose add_monster calls fold into the battle setup; the gym calls
+  // name trainers that only fight skipped NPC-versus-NPC battles. The shared
+  // spyder.yaml cheat-code event can never start.
+  expect(result.report.coverage.actions.rows.find((row) => row.type === "get_party_monster"))
+    .toMatchObject({ total: 9, native: 1, degraded: 7, placeholder: 0, dropped: 1 });
+});
+
+test("create_npc and remove_npc bound the NPC's party lifetime", () => {
+  const nodes = objectNodes(buildProject(["spyder_route2"], G6_IMPORT_OPTIONS).project);
+  const clears = nodes.filter((node) =>
+    node.op === "ext" && (node as { call?: string }).call === "tux.clear_npc_party"
+    && (node as { args?: { character?: string } }).args?.character === "spyder_billie");
+  // A fresh create_npc clears the party only when the NPC is not on the map.
+  const guarded = nodes.filter((node) => {
+    const branch = node as { op?: string; if?: { kind?: string; id?: string; op?: string; value?: number }; then?: unknown[] };
+    return branch.op === "if" && branch.if?.kind === "variable" && branch.if.id === "local.npc.spyder_billie"
+      && branch.if.op === "==" && branch.if.value === 0
+      && (branch.then ?? []).some((command) => clears.includes(command as never));
+  });
+  expect(guarded.length).toBeGreaterThan(0);
+  expect(clears.length).toBeGreaterThan(guarded.length);
 });
 
 test("open_shop imports item economies and keeps monster buying visible", () => {

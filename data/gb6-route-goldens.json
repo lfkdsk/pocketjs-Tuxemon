@@ -3,7 +3,7 @@
   "frames": [
     {
       "name": "cotton-town",
-      "frame": 5700,
+      "frame": 5727,
       "map": "spyder_cotton_town",
       "position": [
         21,
@@ -12,8 +12,8 @@
       "width": 480,
       "height": 272,
       "file": "gb6-mainline-cotton-town.480x272.png",
-      "rgbaFnv1a": "c7fb24cc",
-      "pngSha256": "a6d52b605003cc879ea46fb866b6a04e916eff77f5792a080c2020dbe00839f3",
+      "rgbaFnv1a": "96c5e21c",
+      "pngSha256": "dc2b67934e3bba08ffaabfc4ad6753bc2e14aa9e5367f221ae724c1c7ebb1967",
       "camera": [
         104,
         368
@@ -33,7 +33,7 @@
     },
     {
       "name": "route-2",
-      "frame": 10230,
+      "frame": 10285,
       "map": "spyder_route2",
       "position": [
         0,
@@ -63,7 +63,7 @@
     },
     {
       "name": "city-park",
-      "frame": 43839,
+      "frame": 43446,
       "map": "spyder_citypark",
       "position": [
         10,
@@ -72,8 +72,8 @@
       "width": 480,
       "height": 272,
       "file": "gb6-mainline-city-park.480x272.png",
-      "rgbaFnv1a": "d07904ed",
-      "pngSha256": "0e09caca58f8c7fafd366b00d5fc668bed04debf2180452102b0ab3194eccae4",
+      "rgbaFnv1a": "b2c7c2cd",
+      "pngSha256": "2f224b5c69bfab82fa129e5b7aaa561639c61c0cc9995d0d25b0c336e393133e",
       "camera": [
         0,
         368
@@ -93,7 +93,7 @@
     },
     {
       "name": "route-3-end",
-      "frame": 108615,
+      "frame": 108222,
       "map": "spyder_route3",
       "position": [
         4,
@@ -123,7 +123,7 @@
     },
     {
       "name": "cotton-town",
-      "frame": 5700,
+      "frame": 5727,
       "map": "spyder_cotton_town",
       "position": [
         21,
@@ -132,8 +132,8 @@
       "width": 960,
       "height": 544,
       "file": "gb6-mainline-cotton-town.960x544.png",
-      "rgbaFnv1a": "b3222d47",
-      "pngSha256": "f218bf07b4f1f6a07571613af56262fbcb94565241cf4c47465870fd92d3d0b1",
+      "rgbaFnv1a": "2bb10d27",
+      "pngSha256": "14bc052d9f1d32f34aa951ac9bfdad51d35e627f8e8f72c28d07b953111bebb6",
       "camera": [
         0,
         96
@@ -153,7 +153,7 @@
     },
     {
       "name": "route-2",
-      "frame": 10230,
+      "frame": 10285,
       "map": "spyder_route2",
       "position": [
         0,
@@ -183,7 +183,7 @@
     },
     {
       "name": "city-park",
-      "frame": 43839,
+      "frame": 43446,
       "map": "spyder_citypark",
       "position": [
         10,
@@ -192,8 +192,8 @@
       "width": 960,
       "height": 544,
       "file": "gb6-mainline-city-park.960x544.png",
-      "rgbaFnv1a": "f4ae7e80",
-      "pngSha256": "cfb323073567867c37b189367cbaf8cc7155d7fe9b88a7d1cd6d45ebef99710f",
+      "rgbaFnv1a": "6abd1d60",
+      "pngSha256": "c4382b5af1b125e829be8ed1f2b87f70b375f7f2403d4d0175da90b44ab83e68",
       "camera": [
         0,
         96
@@ -213,7 +213,7 @@
     },
     {
       "name": "route-3-end",
-      "frame": 108615,
+      "frame": 108222,
       "map": "spyder_route3",
       "position": [
         4,
@@ -222,8 +222,8 @@
       "width": 960,
       "height": 544,
       "file": "gb6-mainline-route-3-end.960x544.png",
-      "rgbaFnv1a": "7ebdb4fc",
-      "pngSha256": "741688770c7aa5d052f689a34a941b5b771c28f3c6493a0de17015d871c192ad",
+      "rgbaFnv1a": "d92da53c",
+      "pngSha256": "3b761cd912a3861ce709d60665748cb769d91cd7919f8350d1c88107db678786",
       "camera": [
         0,
         0

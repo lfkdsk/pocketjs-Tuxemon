@@ -19,11 +19,11 @@ where noted. Set `TUXEMON_SRC` first (or keep a repo-local `.tuxemon-src`).
 | `verify:terrain:determinism` | The terrain corpus alone is byte-stable across two runs. | Tuxemon source | ~15 s |
 | `verify:terrain:collision` | Imported collision matches an independent Python oracle that mirrors Tuxemon's own movement code, cell by cell and direction by direction (default: 11 maps, 56,176 directed steps; `--all` for every map). | `data/terrain.json`, Tuxemon source, PyYAML | under a second for the default set; minutes for `--all` |
 | `verify:g6:locks` | Every imported `lockInput` page releases its lock, either through `unlockInput` or a map transfer (330 pages, 334 checks). | imported project | ~15 s |
-| `verify:g6:frozen` | No imported map can permanently freeze the player: every map is entered and driven for 12,000 frames, flagging held input locks, blocking fibers and interpreter errors. | imported project | ~65 s |
-| `verify:gb6:mainline` | The 108,618-frame mainline tape replays at 60 Hz to the frozen terminal state, with every map checkpoint, all 100 battles (22 trainer, 78 wild) and the trainer win counts intact. | `data/gb6-mainline-journey.json` | ~72 s |
+| `verify:g6:frozen` | The freeze scan finds no permanent input lock or blocking fiber on any imported map: every map is entered and driven for 12,000 frames, flagging held input locks, blocking fibers and interpreter errors. This is an interpreter-liveness result, not a proof that a wanderer can never spatially block the player. | imported project | ~65 s |
+| `verify:gb6:mainline` | The 108,225-frame mainline tape replays at 60 Hz to the frozen terminal state, with every map checkpoint, all 100 battles (22 trainer, 78 wild) and the trainer win counts intact. | `data/gb6-mainline-journey.json` | ~72 s |
 | `verify:gb6:failures` | Both committed defeat tapes (the first loss against Billie, and the later Route 3 loss) replay with their visible recovery order: faint-point teleport, heal-before-leaving block, nurse recovery. | `data/gb6-first-loss-journey.json`, `data/gb6-later-loss-journey.json` | ~40 s |
-| `verify:j1:mainline` | The Captain-return continuation, concatenated with the GB6 tape and replayed from frame zero (121,224 frames), ends at the mansion with the captain's return and all 17 battles (10 trainer, 7 wild) intact. | `data/gb6-mainline-journey.json`, `data/j1-captainreturns-journey.json` | ~67 s |
-| `verify:j2:mainline` | The hospital-cure continuation, concatenated with GB6 and J1 and replayed from frame zero (170,983 frames), ends in the Candy Town hospital with the cure granted and all 56 battles (50 trainer, 6 wild) won. | `data/gb6-mainline-journey.json`, `data/j1-captainreturns-journey.json`, `data/j2-hospitalcure-journey.json` | ~130 s |
+| `verify:j1:mainline` | The Captain-return continuation, concatenated with the GB6 tape and replayed from frame zero (120,854 frames), ends at the mansion with the captain's return and all 17 battles (10 trainer, 7 wild) intact. | `data/gb6-mainline-journey.json`, `data/j1-captainreturns-journey.json` | ~67 s |
+| `verify:j2:mainline` | The hospital-cure continuation, concatenated with GB6 and J1 and replayed from frame zero (170,868 frames), ends in the Candy Town hospital with the cure granted and all 56 battles (50 trainer, 6 wild) won. | `data/gb6-mainline-journey.json`, `data/j1-captainreturns-journey.json`, `data/j2-hospitalcure-journey.json` | ~130 s |
 | `verify:chapters` | The demo chapters re-bake byte-identical: each save envelope passes the kit's save validator (decode + map-aware restore), the 480×272 thumbnails re-render from the built game to the committed PNG hashes, and every envelope restored and resumed at its `timelineFrame` suffix-replays to the full-tape terminal state. Fails with the rebake command when the kit, the tape or the importer moves a checkpoint. | `data/chapters.json`, `docs/screenshots/chapters/`, built bundle | ~12 min |
 
 Durations are wall-clock measured on a current developer machine; the CI
@@ -67,9 +67,9 @@ bun run bench:g6:quickjs
 bun run bench:gb6:quickjs
 ```
 
-The short G6 benchmark replays 3,342 frames at 480×272 and 960×544, then
+The short G6 benchmark replays 3,369 frames at 480×272 and 960×544, then
 measures the first visit to all 263 maps. The long GB6 benchmark replays all
-108,618 frames and 100 battles; it defaults to 480×272, while
+108,225 frames and 100 battles; it defaults to 480×272, while
 `GB6_BENCH_VIEWPORT="960 544" bun run bench:gb6:quickjs` selects the larger
 viewport. A clean long run takes roughly 11 minutes per viewport on the
 reference workstation. GB6 reads its expected terminal SHA-256 from the tape,
@@ -90,12 +90,12 @@ fail on any mismatch, so a silently corrupted tape is a red build.
 
 | Tape | Frames | Route | Battles | Terminal |
 |---|---:|---|---:|---|
-| `data/g6-journey.json` | 3,342 | bedroom -> Paper Town -> first battle -> Route 1 | 1 | `spyder_route1 @14,19` |
-| `data/gb6-mainline-journey.json` | 108,618 | Route 1 -> Cotton Town -> Paper Town -> Route 2 -> City Park -> Leather Center -> Route 3 -> Wayfarer Inn -> back to Route 3 | 100 (22 trainer, 78 wild) | `spyder_route3 @4,6` |
-| `data/gb6-first-loss-journey.json` | 3,127 | the opening, deliberately losing the first Billie fight | 1 | `spyder_route1 @14,19` |
-| `data/gb6-later-loss-journey.json` | 65,004 | the mainline prefix to Wanda, a deliberate loss, then the recovery path | 1 loss + prefix | `spyder_leather_town @23,10` |
-| `data/j1-captainreturns-journey.json` | 12,606 (121,224 combined with GB6) | Wayfarer Inn -> Route 4 -> Flower City -> Route A -> Mansion -> basement -> the captain's return | 17 (10 trainer, 7 wild) | `spyder_mansion @1,13` |
-| `data/j2-hospitalcure-journey.json` | 49,759 (170,983 combined) | Mansion -> Candy Town -> Greenwash -> hospital password -> the cure | 56 (50 trainer, 6 wild) | `spyder_candy_hospital3 @5,7` |
+| `data/g6-journey.json` | 3,369 | bedroom -> Paper Town -> first battle -> Route 1 | 1 | `spyder_route1 @14,19` |
+| `data/gb6-mainline-journey.json` | 108,225 | Route 1 -> Cotton Town -> Paper Town -> Route 2 -> City Park -> Leather Center -> Route 3 -> Wayfarer Inn -> back to Route 3 | 100 (22 trainer, 78 wild) | `spyder_route3 @4,6` |
+| `data/gb6-first-loss-journey.json` | 3,154 | the opening, deliberately losing the first Billie fight | 1 | `spyder_route1 @14,19` |
+| `data/gb6-later-loss-journey.json` | 64,611 | the mainline prefix to Wanda, a deliberate loss, then the recovery path | 1 loss + prefix | `spyder_leather_town @23,10` |
+| `data/j1-captainreturns-journey.json` | 12,629 (120,854 combined with GB6) | Wayfarer Inn -> Route 4 -> Flower City -> Route A -> Mansion -> basement -> the captain's return | 17 (10 trainer, 7 wild) | `spyder_mansion @1,13` |
+| `data/j2-hospitalcure-journey.json` | 50,014 (170,868 combined) | Mansion -> Candy Town -> Greenwash -> hospital password -> the cure | 56 (50 trainer, 6 wild) | `spyder_candy_hospital3 @5,7` |
 
 Terminal state hashes and per-checkpoint expectations live in the tapes or
 their verifiers (`tools/verify-gb6-mainline.ts`, `tools/verify-j1-mainline.ts`,

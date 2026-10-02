@@ -605,8 +605,15 @@ function argsRecord(value: JsonValue, call: string): Record<string, unknown> {
 }
 
 function nextIid(state: TuxemonExtensionState): [string, number] {
-  if (!Number.isSafeInteger(state.nextMonsterId + 1)) throw new Error("tux.add_monster: monster id space exhausted");
-  return [`txmn-${state.nextMonsterId.toString(36).padStart(6, "0")}`, state.nextMonsterId + 1];
+  return nextMonsterIid(state.nextMonsterId);
+}
+
+/** Deterministic iid for a monster spawned outside tux.add_monster (for
+ *  example a trainer party folded into the battle setup), sharing the same
+ *  id space so persisted NPC parties stay addressable by iid. */
+export function nextMonsterIid(nextMonsterId: number): [string, number] {
+  if (!Number.isSafeInteger(nextMonsterId + 1)) throw new Error("monster id space exhausted");
+  return [`txmn-${nextMonsterId.toString(36).padStart(6, "0")}`, nextMonsterId + 1];
 }
 
 /** Register a sighting without weakening an existing caught entry. */
@@ -931,6 +938,271 @@ function compare(operator: unknown, left: number, right: number): boolean {
   }
 }
 
+/** Upstream get_player_monster filter, baked by the importer. String fields
+ *  compare equality; numeric fields carry an explicit operator. */
+interface PartyFilter {
+  field: string;
+  value: string | number;
+  op?: string;
+}
+
+const title = (slug: string): string => slug
+  .split("_")
+  .map((part) => part ? part[0]!.toUpperCase() + part.slice(1) : part)
+  .join(" ");
+
+function filterArgs(value: JsonValue, call: string): { variable?: string; cancelCode?: number; filters: PartyFilter[] } {
+  const args = record(value);
+  if (!args) throw new Error(`${call}: arguments must be an object`);
+  const out: { variable?: string; cancelCode?: number; filters: PartyFilter[] } = { filters: [] };
+  if (args.variable !== undefined) {
+    if (!nonEmptyString(args.variable)) throw new Error(`${call}: variable must be a non-empty string`);
+    out.variable = args.variable;
+  }
+  if (args.cancelCode !== undefined) {
+    if (!safeInteger(args.cancelCode)) throw new Error(`${call}: cancelCode must be a safe integer`);
+    out.cancelCode = args.cancelCode;
+  }
+  if (args.filters !== undefined) {
+    if (!Array.isArray(args.filters)) throw new Error(`${call}: filters must be an array`);
+    for (const [index, raw] of args.filters.entries()) {
+      const filter = record(raw);
+      if (!filter || !nonEmptyString(filter.field)) {
+        throw new Error(`${call}: filters[${index}] must be an object with a string field`);
+      }
+      const entry: PartyFilter = { field: filter.field, value: filter.value as string | number };
+      if (filter.op !== undefined) {
+        if (!nonEmptyString(filter.op)) throw new Error(`${call}: filters[${index}].op must be a string`);
+        entry.op = filter.op;
+      }
+      out.filters.push(entry);
+    }
+  }
+  return out;
+}
+
+function monsterMatches(
+  monster: SpawnedMonsterSnapshot,
+  db: BattleDb,
+  filter: PartyFilter,
+): boolean {
+  const { field, value } = filter;
+  switch (field) {
+    case "slug": return monster.slug === value;
+    case "gender": return monster.gender === value;
+    case "evolution_stage": return monster.stage === value;
+    case "element": return monster.types?.includes(String(value)) ?? false;
+    case "shape": return db.monsters[monster.slug]?.shape === value;
+    case "taste_warm": return monster.tasteWarm === value;
+    case "taste_cold": return monster.tasteCold === value;
+    case "level": return compare(filter.op, monster.level, Number(value));
+    case "weight": return compare(filter.op, Math.trunc(monster.weight), Number(value));
+    case "height": return compare(filter.op, Math.trunc(monster.height), Number(value));
+    case "max_hp": return compare(filter.op, monster.base.hp, Number(value));
+    case "current_hp": return compare(filter.op, monster.currentHp ?? 0, Number(value));
+    case "armour":
+    case "dodge":
+    case "melee":
+    case "ranged":
+    case "speed":
+      return compare(filter.op, monster.base[field], Number(value));
+    default: return false;
+  }
+}
+
+function matchingParty(
+  state: TuxemonExtensionState,
+  db: BattleDb,
+  filters: readonly PartyFilter[],
+): SpawnedMonsterSnapshot[] {
+  return state.party.filter((monster) => filters.every((filter) => monsterMatches(monster, db, filter)));
+}
+
+/** KC1: get_player_monster. The importer guards the empty case (upstream
+ *  writes "no_options" without opening a menu), so the modal only opens with
+ *  at least one row. Cancel writes the enum code for "no_choice"; a select
+ *  writes the monster iid, which remove_monster and the monster ext commands
+ *  read back. */
+function partyMonstersChoice(source: BattleDbSource): NonNullable<ExtensionOptions["choices"]>[string] {
+  return {
+    options(context, args) {
+      const parsed = filterArgs(args, "tux.party_monsters");
+      const db = resolveBattleDb(source);
+      const state = currentExtensionState(context.ext);
+      return matchingParty(state, db, parsed.filters).map((monster) => ({
+        key: monster.iid!,
+        label: title(monster.slug),
+        data: { slug: monster.slug, level: monster.level },
+      }));
+    },
+    resolve(context, args, result) {
+      const parsed = filterArgs(args, "tux.party_monsters");
+      if (!parsed.variable) throw new Error("tux.party_monsters: resolve requires a variable destination");
+      if (result.kind === "cancel") {
+        return { writes: { [parsed.variable]: parsed.cancelCode ?? "no_choice" } };
+      }
+      return { writes: { [parsed.variable]: result.key } };
+    },
+  };
+}
+
+/** KC1: the importer's empty-list guard for get_player_monster. True when at
+ *  least one party monster passes every baked filter. */
+function partyMatchCondition(source: BattleDbSource) {
+  return (context: ExtensionReadContext, value: JsonValue): boolean => {
+    const parsed = filterArgs(value, "tux.party_match");
+    const db = resolveBattleDb(source);
+    const state = currentExtensionState(context.ext);
+    return matchingParty(state, db, parsed.filters).length > 0;
+  };
+}
+
+/** KC1: remove_monster. The variable holds a monster iid (written by
+ *  get_player_monster's resolver, get_party_monsters or add_monster).
+ *  Upstream looks the iid up globally and removes it from its owner, which
+ *  may be an NPC: search the player party, then the kennel, then every NPC
+ *  party. A missing iid is a no-op, matching upstream's logged stop. */
+function removeMonsterCommand() {
+  return (context: ExtensionCommandContext, value: JsonValue) => {
+    const args = argsRecord(value, "tux.remove_monster");
+    if (!nonEmptyString(args.variable)) throw new Error("tux.remove_monster: variable must be a non-empty string");
+    const iid = context.variables[args.variable];
+    if (typeof iid !== "string" || iid.length === 0) return;
+    const current = currentExtensionState(context.ext);
+    const party = current.party.filter((monster) => monster.iid !== iid);
+    if (party.length !== current.party.length) {
+      return { ext: json({ ...current, party }) };
+    }
+    const kennel = current.kennel.filter((monster) => monster.iid !== iid);
+    if (kennel.length !== current.kennel.length) {
+      return { ext: json({ ...current, kennel }) };
+    }
+    for (const [character, monsters] of Object.entries(current.npcParties)) {
+      const next = monsters.filter((monster) => monster.iid !== iid);
+      if (next.length !== monsters.length) {
+        return { ext: json({ ...current, npcParties: { ...current.npcParties, [character]: next } }) };
+      }
+    }
+  };
+}
+
+/** An NPC's party lives as long as the NPC. Upstream builds a fresh NPC on
+ *  every `create_npc` (all non-persistent NPCs are dropped on each map
+ *  transition) and discards it on `remove_npc`; the importer calls this at
+ *  both points, and `tux.clear_npc_parties` drops every other NPC's party
+ *  on map entry, so a later visit never inherits an earlier visit's party. */
+function clearNpcPartyCommand() {
+  return (context: ExtensionCommandContext, value: JsonValue) => {
+    const args = argsRecord(value, "tux.clear_npc_party");
+    if (!nonEmptyString(args.character) || args.character === "player") {
+      throw new Error("tux.clear_npc_party: character must name an NPC");
+    }
+    const current = currentExtensionState(context.ext);
+    if (!Object.hasOwn(current.npcParties, args.character)) return;
+    const npcParties = { ...current.npcParties };
+    delete npcParties[args.character];
+    return { ext: json({ ...current, npcParties }) };
+  };
+}
+
+/** Upstream `change_map` calls `npc_manager.clear_npcs()`, which drops every
+ *  NPC without `persistence` (and with it the NPC's party). The importer runs
+ *  this once per map entry, before any other event on the new map, passing
+ *  the source's persistent NPC slugs in `keep`. */
+function clearNpcPartiesCommand() {
+  return (context: ExtensionCommandContext, value: JsonValue) => {
+    const args = argsRecord(value, "tux.clear_npc_parties");
+    const keep = args.keep ?? [];
+    if (!Array.isArray(keep) || !keep.every(nonEmptyString)) {
+      throw new Error("tux.clear_npc_parties: keep must list NPC slugs");
+    }
+    const current = currentExtensionState(context.ext);
+    const characters = Object.keys(current.npcParties);
+    if (characters.every((character) => keep.includes(character))) return;
+    const npcParties: typeof current.npcParties = {};
+    for (const character of characters) {
+      if (keep.includes(character)) npcParties[character] = current.npcParties[character]!;
+    }
+    return { ext: json({ ...current, npcParties }) };
+  };
+}
+
+/** KC1: get_party_monster. Upstream opens no menu: it writes each monster's
+ *  instance id into the player's `iid_slot_<index>` game variables. The
+ *  party is the named NPC's, or the player's when no name is given. */
+function getPartyMonstersCommand() {
+  return (context: ExtensionCommandContext, value: JsonValue) => {
+    const args = argsRecord(value, "tux.get_party_monsters");
+    const character = args.character === undefined || args.character === "" ? "player" : args.character;
+    if (!nonEmptyString(character)) {
+      throw new Error("tux.get_party_monsters: character must be a string");
+    }
+    const state = currentExtensionState(context.ext);
+    const monsters = character === "player" ? state.party : (state.npcParties[character] ?? []);
+    const writes: Record<string, string> = {};
+    monsters.forEach((monster, index) => {
+      writes[`v.iid_slot_${index}`] = monster.iid!;
+    });
+    return { writes };
+  };
+}
+
+/** KC1: choice_monster/choice_npc. The importer bakes the static option list
+ *  (key, translated label, enum code) so the resolver can write the same
+ *  enum code the variable_set conditions compare against. */
+interface EnumChoiceOption {
+  key: string;
+  label: string;
+  code: number;
+}
+
+function enumChoiceArgs(value: JsonValue): {
+  variable: string;
+  options: EnumChoiceOption[];
+  cancelCode?: number;
+} {
+  const args = record(value);
+  if (!args) throw new Error("tux.enum_choice: arguments must be an object");
+  if (!nonEmptyString(args.variable)) throw new Error("tux.enum_choice: variable must be a non-empty string");
+  if (!Array.isArray(args.options)) throw new Error("tux.enum_choice: options must be an array");
+  const options: EnumChoiceOption[] = [];
+  for (const [index, raw] of args.options.entries()) {
+    const option = record(raw);
+    if (!option || !nonEmptyString(option.key) || !nonEmptyString(option.label)
+      || !safeInteger(option.code)) {
+      throw new Error(`tux.enum_choice: options[${index}] must have string key/label and integer code`);
+    }
+    options.push({ key: option.key, label: option.label, code: option.code });
+  }
+  const out: { variable: string; options: EnumChoiceOption[]; cancelCode?: number } = {
+    variable: args.variable,
+    options,
+  };
+  if (args.cancelCode !== undefined) {
+    if (!safeInteger(args.cancelCode)) throw new Error("tux.enum_choice: cancelCode must be a safe integer");
+    out.cancelCode = args.cancelCode;
+  }
+  return out;
+}
+
+function enumChoiceHandler(): NonNullable<ExtensionOptions["choices"]>[string] {
+  return {
+    options(_context, args) {
+      return enumChoiceArgs(args).options;
+    },
+    resolve(_context, args, result) {
+      const parsed = enumChoiceArgs(args);
+      if (result.kind === "cancel") {
+        if (parsed.cancelCode === undefined) return;
+        return { writes: { [parsed.variable]: parsed.cancelCode } };
+      }
+      const option = parsed.options.find((candidate) => candidate.key === result.key);
+      if (!option) throw new Error(`tux.enum_choice: selected key '${result.key}' is not in the option list`);
+      return { writes: { [parsed.variable]: option.code } };
+    },
+  };
+}
+
 /** Pure game registration used by createSession, GameView and attract replay. */
 export function createTuxemonExtensions(
   source: BattleDbSource,
@@ -991,6 +1263,10 @@ export function createTuxemonExtensions(
         const current = currentExtensionState(context.ext);
         return { ext: json({ ...current, environment }) };
       },
+      "tux.remove_monster": removeMonsterCommand(),
+      "tux.get_party_monsters": getPartyMonstersCommand(),
+      "tux.clear_npc_party": clearNpcPartyCommand(),
+      "tux.clear_npc_parties": clearNpcPartiesCommand(),
       "tux.tick_time_weather": (context, value) => {
         const args = argsRecord(value, "tux.tick_time_weather");
         if (args.daylight !== undefined && typeof args.daylight !== "boolean") {
@@ -1147,6 +1423,11 @@ export function createTuxemonExtensions(
           && entry.opponent === args.opponent && entry.outcome === args.outcome).length;
         return negate(count >= args.count, args);
       },
+      "tux.party_match": partyMatchCondition(source),
+    },
+    choices: {
+      "tux.party_monsters": partyMonstersChoice(source),
+      "tux.enum_choice": enumChoiceHandler(),
     },
     codec: {
       encode: (value) => ({

@@ -4,12 +4,12 @@
  "project": {
   "maps": 263,
   "collisionBodies": 14,
-  "maxActors": 503,
-  "runtimeMaxActors": 218,
+  "maxActors": 504,
+  "runtimeMaxActors": 219,
   "excludedActorStressMaps": [
    {
     "id": "test_npcs",
-    "slots": 503
+    "slots": 504
    }
   ],
   "options": {
@@ -20,6 +20,8 @@
    "place": true,
    "inputLock": true,
    "routes": true,
+   "moveControl": true,
+   "extChoice": true,
    "battle": true
   }
  },
@@ -29,10 +31,10 @@
    "json": 0
   },
   "shellBytes": 83639,
-  "entryBytes": 4259041,
-  "canonicalJsonBytes": 9312231,
+  "entryBytes": 4652929,
+  "canonicalJsonBytes": 9764875,
   "entries": 263,
-  "manifestHash": "8cbe1ff12fcffe5b7baeec7783fa7b382abe573f361e6521a3a01ce697b216c0",
+  "manifestHash": "efe2300984538311cceac93c37465809af557ed85eeff4205420b31a3a483e4a",
   "schemaHash": "0b9fff5b478b87e0dcae1f37044a444043c735339ca45245bdbbb9e2e36e7ab5"
  },
  "terrain": {

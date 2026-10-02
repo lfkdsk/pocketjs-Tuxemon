@@ -24,7 +24,7 @@ summary:
   NPC walkers, dialogue, cutscene routes and map transfers. The Spyder
   campaign plays from the bedroom through Paper Town, Cotton Town, City Park,
   the north end of Route 3, Route 4 and Flower City to the Captain's return
-  in the Mansion and on through Candy Town to the hospital cure — 170,983
+  in the Mansion and on through Candy Town to the hospital cure — 170,868
   frames at 60 Hz for the full mainline, driven by
   deterministic autoplay tapes — and every imported input lock is executed
   to its unlock.
@@ -37,7 +37,7 @@ summary:
   Captain-return continuation — 10 trainer + 7 wild — and 56 on the way to
   the hospital cure — 50 trainer + 6 wild), and every trainer
   battle enters Battle Processing and ends `won` with its `battle_outcome`
-  written back. The frozen 30-minute 60 Hz tape (108,618 frames / 30 min 10 s)
+  written back. The frozen 30-minute 60 Hz tape (108,225 frames / 30 min 4 s)
   replays byte-identical at 60, 30 and 20 Hz, and both failure paths are
   verified — the first loss against Billie, and a later loss on Route 3
   with the faint-point teleport, the heal-before-leaving block and the
@@ -60,14 +60,15 @@ summary:
   2,158,468 B on disk and 13,185,792 B if every PSM_T8 texture were decoded,
   but only the active battle working set is resident.
 
-  On the desktop QuickJS host (measured 2026-10-01), the full 108,618-frame,
-  100-battle replay starts in 139.954 ms / 140.861 ms and its slowest CPU frame
-  is 37.663 ms / 43.475 ms (480×272 / 960×544). Battle entry peaks at
-  19.416 ms / 19.748 ms and exit at 4.546 ms / 4.875 ms. Both runs match the
+  On the desktop QuickJS host (measured 2026-10-01 on the earlier
+  108,618-frame, 100-battle recording of the mainline tape), the full replay
+  started in 139.954 ms / 140.861 ms and its slowest CPU frame
+  was 37.663 ms / 43.475 ms (480×272 / 960×544). Battle entry peaked at
+  19.416 ms / 19.748 ms and exit at 4.546 ms / 4.875 ms. Both runs matched the
   canonical terminal state. The QuickJS benches assert a 250 ms startup budget
   and a 50 ms per-frame CPU budget.
-- **Import coverage:** 90.5% of Tuxemon action uses and 94.5% of condition
-  uses map natively to kit commands; 95.5% / 94.5% are executable (native,
+- **Import coverage:** 91.3% of Tuxemon action uses and 94.5% of condition
+  uses map natively to kit commands; 95.8% / 94.5% are executable (native,
   degraded, or a deliberate placeholder). The full per-type breakdown is in
   [reports/G1-coverage.md](reports/G1-coverage.md).
 - **Day/night:** a saved, rewindable calendar drives Tuxemon's time conditions
@@ -125,7 +126,7 @@ properties from the decoded pixels as well as pinning the PNG bytes.
   `bun run desktop` for the desktop host.
 - **Keys:** arrows walk, `A`/`Z`/`Enter` talks and confirms, `B`/`Esc` goes back.
 
-CI also plays the 3,342-frame opening journey — bedroom, Paper Town, the
+CI also plays the 3,369-frame opening journey — bedroom, Paper Town, the
 first battle, Route 1 — in headless Chrome against the built site
 (`bun tools/verify-web-journey.ts`) and checks every checkpoint's state and
 pixels against the goldens.
@@ -187,9 +188,11 @@ compare the completed session with a fresh production replay:
 bun run verify:psp:journey -- path/to/profile.jsonl
 ```
 
-The 3,342-frame opening journey (bedroom through the Billie battle to Route 1)
-passes this check under PPSSPP, including its PSP double-ABI probe. A captured
-480×272 framebuffer was also checked for the bedroom and dialogue UI. Emulator
+The opening journey (bedroom through the Billie battle to Route 1) passed this
+check under PPSSPP on an earlier recording of the opening tape, including its
+PSP double-ABI probe; it has not been re-run on the current 3,369-frame tape.
+A captured 480×272 framebuffer was also checked for the bedroom and dialogue
+UI. Emulator
 timings are not hardware results: doodlewind's 333 MHz, firmware 6.61 device
 run reports 43–60 displayed fps, with map transitions and texture loads still
 causing stalls. The full 100-battle mainline has not been run on physical PSP.

@@ -28,7 +28,7 @@ const ROOT = resolve(import.meta.dir, "..");
 const HEAL_BEFORE_LEAVE = "You should heal your monsters before heading off.";
 const FIRST_FIGHT_LOSE = "As expected! Old models can't compare to new ones!";
 const FIRST_FIGHT_AFTER = "I'll heal you up this time, but I'm not a charity. Rest up at home next time your monsters get worn out.";
-const FIRST_LOSS_STATE_SHA256 = "106b7e03681c1defa71d9b5a381158ddf7cbf23c6c77ba8de4239eea2a72ead0";
+const FIRST_LOSS_STATE_SHA256 = "5bedca90a70c70a69ed14df8502fd7216a1234b2f776452e1c0172c140791c5c";
 
 interface SeenText {
   frame: number;
@@ -183,8 +183,9 @@ expect("first-loss after-dialog was not shown exactly once after the loss dialog
 expect("first loss took the Teleport Faint bedroom detour", !firstReplay.sawPostBattleBedroom);
 expect("first-loss faint notice was shown", firstReplay.texts.every((row) => !row.lines.includes(HEAL_BEFORE_LEAVE)));
 expect("First Fight - Lose did not heal the fainted party", firstReplay.sawHealedAfterFaint);
-expect("first-loss terminal state hash changed",
-  sha256(canonicalJson(firstReplay.state)) === FIRST_LOSS_STATE_SHA256);
+const firstLossStateSha256 = sha256(canonicalJson(firstReplay.state));
+expect(`first-loss terminal state hash changed (got ${firstLossStateSha256})`,
+  firstLossStateSha256 === FIRST_LOSS_STATE_SHA256);
 
 const later = JSON.parse(readFileSync(join(ROOT, "data/gb6-later-loss-journey.json"), "utf8")) as
   FrozenTape & {

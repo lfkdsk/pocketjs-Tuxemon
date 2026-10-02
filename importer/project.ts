@@ -47,17 +47,23 @@ import type {
   Command,
   Condition,
   Dir,
+  FacingMode,
   AnimationDef,
   GameEvent,
   Item,
   JsonValue,
   MapDef,
+  MoveControl,
+  MoveFrequency,
+  MoveSpeed,
   MoveStep,
   Page,
   PageCondition,
   Project,
+  RouteTarget,
   ShopGood,
   SpriteDef,
+  WanderBounds,
 } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 
 export const DEFAULT_MAPS = ["spyder_bedroom", "spyder_paper_scoop", "spyder_downstairs", "spyder_paper_town"];
@@ -81,6 +87,12 @@ export interface ImportOptions {
   inputLock: boolean;
   /** K2: target arbitrary events and emit turn/path/approach route steps. */
   routes: boolean;
+  /** KM1: emit moveControl commands for char_stop/wander/speed/run/facing
+   *  and place for char_position. */
+  moveControl: boolean;
+  /** KC1: emit extChoice commands for get_player_monster/choice_monster/
+   *  choice_npc, backed by the game's party extension. */
+  extChoice: boolean;
   /** P2: emit game-owned party commands, conditions and Battle Processing. */
   battle: boolean;
 }
@@ -93,6 +105,8 @@ export const DEFAULT_IMPORT_OPTIONS: Readonly<ImportOptions> = Object.freeze({
   place: false,
   inputLock: false,
   routes: false,
+  moveControl: false,
+  extChoice: false,
   battle: false,
 });
 
@@ -104,6 +118,8 @@ export const KIT_V2_IMPORT_OPTIONS: Readonly<ImportOptions> = Object.freeze({
   place: true,
   inputLock: true,
   routes: true,
+  moveControl: true,
+  extChoice: true,
   battle: true,
 });
 
@@ -116,6 +132,8 @@ export const K1_IMPORT_OPTIONS: Readonly<ImportOptions> = Object.freeze({
   place: true,
   inputLock: true,
   routes: false,
+  moveControl: false,
+  extChoice: false,
   battle: false,
 });
 
@@ -123,6 +141,8 @@ export const K1_IMPORT_OPTIONS: Readonly<ImportOptions> = Object.freeze({
 export const G6_IMPORT_OPTIONS: Readonly<ImportOptions> = Object.freeze({
   ...K1_IMPORT_OPTIONS,
   routes: true,
+  moveControl: true,
+  extChoice: true,
   battle: true,
 });
 
@@ -163,6 +183,16 @@ const faintPointMaps = new Set(
   [...allMaps.values()].flatMap((map) => map.events.flatMap((event) => event.acts
     .filter((action) => action.type === "set_teleport_faint" && action.args[1])
     .map((action) => action.args[1]!.replace(/\.tmx$/, "")))),
+);
+// NPCs that some event fights against the player. Every other trainer only
+// appears in NPC-versus-NPC battles, which run as skipped placeholders that
+// write no battle_last_winner, so any page gated on such a battle's winner
+// (the leather gym's Points pages) never runs.
+const playerOpponents = new Set(
+  [...allMaps.values()].flatMap((map) => map.events.flatMap((event) => event.acts
+    .filter((action) => action.type === "start_battle" || action.type === "start_double_battle")
+    .map((action) => playerOpponent(action.args))
+    .filter((opponent): opponent is string => opponent !== null))),
 );
 const monsterSlugs = new Set(
   readdirSync(join(TUXEMON_SRC, "mods/tuxemon/db/monster"))
@@ -397,12 +427,21 @@ interface NpcRow {
     combat_frame_height?: number;
   };
   speech?: { profile?: { default?: Record<string, string | string[] | undefined> } };
+  persistence?: boolean;
 }
 const npcDb = new Map<string, NpcRow>();
 for (const f of readdirSync(join(TUXEMON_SRC, "mods/tuxemon/db/npc")).sort()) {
   const doc = Bun.YAML.parse(readFileSync(join(TUXEMON_SRC, "mods/tuxemon/db/npc", f), "utf8")) as NpcRow | NpcRow[];
   for (const row of Array.isArray(doc) ? doc : [doc]) npcDb.set(row.slug, row);
 }
+// NPCs that survive a map change upstream (`persistence`, default false).
+const PERSISTENT_NPCS = [...npcDb.values()].filter((row) => row.persistence === true).map((row) => row.slug);
+const NPC_PARTIES_CLEARED_VARIABLE = "local.tux.npc_parties_cleared";
+// Emitted right before every imported transfer, so the parties go with the
+// map change itself (as change_map does) and no saveable frame on the new
+// map still holds the old map's NPCs. The per-map entry page below is the
+// catch-all for entries that are not imported transfers (a demo warp).
+const clearNpcParties = (): Command => ({ op: "ext", call: "tux.clear_npc_parties", args: { keep: [...PERSISTENT_NPCS] } });
 
 interface EconomyEntry {
   slug: string;
@@ -656,6 +695,12 @@ for (const ev of loadAllFileEvents()) {
       const index = DYNAMIC_VARIABLE_WRITERS[a.type]!;
       const name = a.args[index];
       if (name) valuesFor(name);
+      // get_player_monster writes a monster iid on select and the enum-coded
+      // "no_choice"/"no_options" sentinels on cancel/empty party.
+      if (a.type === "get_player_monster" && name) {
+        addValue(name, "no_choice");
+        addValue(name, "no_options");
+      }
     }
     if (a.type === "translated_dialog_choice" || a.type === "choice_monster" || a.type === "choice_npc") for (const o of a.args[0]!.split(":")) addValue(a.args[1]!, o);
     if (a.type === "start_battle" || a.type === "start_double_battle") {
@@ -1179,6 +1224,59 @@ function enumChoice(options: readonly string[], variable: string): Command {
 
 const npcName = (slug: string) => (po.get(slug) ?? slug).slice(0, 40);
 
+/** Upstream translates monster/NPC slugs through the .po catalog; fall back
+ *  to a titled slug for keys the catalog does not carry. */
+const titleCase = (slug: string) => slug
+  .split("_")
+  .map((part) => part ? part[0]!.toUpperCase() + part.slice(1) : part)
+  .join(" ");
+
+/** Resolve a Tuxemon character argument to a kit route target. Missing map
+ *  events are a runtime no-op in the kit, matching moveRoute resolution. */
+function charTarget(who: string, isSelf: boolean): RouteTarget {
+  if (who === "player") return "player";
+  if (isSelf) return "this";
+  return { event: `npc_${slug(who)}` };
+}
+
+/** Tuxemon moverate (tiles/sec, walkrate 3.75, run 7.35) -> the kit's MV
+ *  exponential speed grade 1..6 (grade 5 = 8 ticks/tile at 60 Hz). The
+ *  grade scale is 2x per step, so the nearest grade is picked in log space. */
+function speedGrade(rate: number): MoveSpeed {
+  const grade = Math.round(5 + Math.log2(rate / 7.5));
+  return Math.max(1, Math.min(6, grade)) as MoveSpeed;
+}
+
+/** Tuxemon wander cadence (seconds between decisions, default 1.0) -> the
+ *  kit's MV frequency grade 1..5 (grade n waits 30*(5-n) 60 Hz ticks). */
+function frequencyGrade(seconds: number): MoveFrequency {
+  const grade = Math.round(5 - 2 * seconds);
+  return Math.max(1, Math.min(5, grade)) as MoveFrequency;
+}
+
+/** Numeric monster fields get_player_monster filters with an operator. */
+const MONSTER_NUMERIC_FIELDS = new Set([
+  "level", "weight", "height", "max_hp", "current_hp",
+  "armour", "dodge", "melee", "ranged", "speed",
+]);
+
+/** Bake a get_player_monster filter into the extChoice/party_match args.
+ *  String fields compare equality; numeric fields carry an operator. */
+function partyFilter(g: readonly string[]): { field: string; value: string | number; op?: string }[] {
+  const field = g[1];
+  if (!field) return [];
+  if (MONSTER_NUMERIC_FIELDS.has(field)) {
+    const op = g[2];
+    const extra = g[3];
+    if (op !== undefined && extra !== undefined && extra !== "" && Number.isFinite(Number(extra))) {
+      return [{ field, op, value: Number(extra) }];
+    }
+    // Upstream skips the comparison and matches nothing without a value.
+    return [{ field: "__never__", value: "" }];
+  }
+  return [{ field, value: g[2] ?? "" }];
+}
+
 // ---------------------------------------------------------------------------
 // actions -> commands
 
@@ -1430,7 +1528,42 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         }
         break;
       case "translated_dialog_choice": case "choice_monster": case "choice_npc": {
-        const opts = g[0]!.split(":");
+        const opts = format(g[0]!, ctx.m).split(":");
+        if (a.type !== "translated_dialog_choice" && ctx.options.extChoice) {
+          // KC1: a static extChoice list. The resolver writes the enum code
+          // so variable_set conditions keep comparing codes. TextFormatter
+          // substitutions (${{...}}) are applied before splitting, like dialog.
+          const variable = g[1]!;
+          const commonLabel = a.type === "choice_npc" && g[2] ? po.get(g[2]) ?? g[2] : undefined;
+          const options = opts.map((option) => {
+            const own = po.get(option) ?? titleCase(option);
+            // Upstream choice_npc shares one label across buttons and tells
+            // options apart by per-option NPC portraits. The kit choice box
+            // cannot draw option images, so append the option's own name to
+            // keep every line distinguishable (Degraded: no portraits).
+            const label = commonLabel ? `${commonLabel} (${own})` : own;
+            return {
+              key: option,
+              label: label.slice(0, 24) || option.slice(0, 24),
+              code: code(variable, option),
+            };
+          });
+          noteAction(
+            a,
+            a.type,
+            a.type === "choice_npc" ? "T1-lowered" : "T1",
+            a.type === "choice_npc"
+              ? "shared label + per-option name (upstream portraits need kit option images)"
+              : "KC1 extChoice static list -> enum code via the resolver",
+          );
+          out.push(command({
+            op: "extChoice",
+            call: "tux.enum_choice",
+            args: { variable: varId(variable), options },
+            prompt: "",
+          }));
+          break;
+        }
         const fate: Fate = a.type === "translated_dialog_choice"
           ? (opts.length > 4 ? "T1-lowered" : "T1")
           : "T3-placeholder";
@@ -1752,6 +1885,15 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
             ? "local.npc.<slug> = 1 plus K1 place"
             : "local.npc.<slug> = 1 (spawn position other than the event's is T2 place)",
         );
+        if (ctx.options.battle) {
+          // Upstream create_npc is a no-op for an NPC already on the map;
+          // otherwise it builds a fresh NPC whose party starts empty.
+          out.push({
+            op: "if",
+            if: { kind: "variable", id: npcVar(g[0]!), op: "==", value: 0 },
+            then: [{ op: "ext", call: "tux.clear_npc_party", args: { character: g[0]! } }],
+          });
+        }
         out.push({ op: "variable", id: npcVar(g[0]!), set: { op: "set", value: 1 } });
         if (ctx.options.place) {
           out.push(command({
@@ -1765,6 +1907,7 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
       case "remove_npc":
         noteAction(a, a.type, ctx.options.localReset ? "T1" : "T1-lowered", "local.npc.<slug> = 0");
         out.push({ op: "variable", id: npcVar(g[0]!), set: { op: "set", value: 0 } });
+        if (ctx.options.battle) out.push({ op: "ext", call: "tux.clear_npc_party", args: { character: g[0]! } });
         break;
       case "lock_controls": case "unlock_controls":
         if (ctx.options.inputLock) {
@@ -1775,7 +1918,12 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         }
         break;
       case "char_stop":
-        noteAction(a, a.type, "T1-lowered", "blocking fibers already freeze the player (cross-event locks are T2)");
+        if (ctx.options.moveControl) {
+          noteAction(a, a.type, "T1", "KM1 moveControl stop (cancels the active route and page patrol)");
+          out.push(command({ op: "moveControl", target: charTarget(g[0]!, isSelf(g[0])), control: { kind: "stop" } }));
+        } else {
+          noteAction(a, a.type, "T1-lowered", "blocking fibers already freeze the player (cross-event locks are T2)");
+        }
         break;
       case "char_face": {
         const [who, dir] = [g[0]!, g[1]!];
@@ -1867,6 +2015,7 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         } else {
           noteAction(a, a.type, "T1", "transfer (terminal; dir from trailing char_face)");
         }
+        if (ctx.options.battle) out.push(clearNpcParties());
         out.push({ op: "transfer", map, x: emitted.x, y: emitted.y, dir, fade: Math.min(2, Number(g[4] ?? 0.3)) });
         return out;
       }
@@ -1991,12 +2140,38 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         }
         break;
       case "remove_monster":
-        noteAction(a, a.type, "T3-placeholder", "sys.party_size -= 1 when non-empty");
-        out.push({
-          op: "if",
-          if: { kind: "variable", id: "sys.party_size", op: ">=", value: 1 },
-          then: [{ op: "variable", id: "sys.party_size", set: { op: "sub", value: 1 } }],
-        });
+        if (ctx.options.battle) {
+          noteAction(a, a.type, "T1", "tux.remove_monster deletes the iid from its owner (player party/kennel or NPC party)");
+          out.push({ op: "ext", call: "tux.remove_monster", args: { variable: varId(g[0]!) } });
+        } else {
+          noteAction(a, a.type, "T3-placeholder", "sys.party_size -= 1 when non-empty");
+          out.push({
+            op: "if",
+            if: { kind: "variable", id: "sys.party_size", op: ">=", value: 1 },
+            then: [{ op: "variable", id: "sys.party_size", set: { op: "sub", value: 1 } }],
+          });
+        }
+        break;
+      case "get_party_monster":
+        if (ctx.options.battle) {
+          const character = g[0] || "player";
+          // The literal add_monster calls before this one are folded into the
+          // event's later battle, so the NPC's party is not staged yet here.
+          const foldedEarlier = character !== "player" && [...foldedParties.folded].some((index) =>
+            index < i && acts[index]!.args[2] === character);
+          if (foldedEarlier) {
+            noteAction(a, "get_party_monster(before folded battle)", "T1-lowered",
+              "the NPC's add_monster calls are folded into the later battle, so no iid_slot_* is written before it");
+          } else if (character !== "player" && !playerOpponents.has(character)) {
+            noteAction(a, "get_party_monster(after NPC-vs-NPC battle)", "T1-lowered",
+              "the page waits for the winner of an NPC-versus-NPC battle, which runs as a skipped placeholder without a winner, so it never runs and no iid_slot_* is written");
+          } else {
+            noteAction(a, a.type, "T1", "tux.get_party_monsters dumps the party iids into iid_slot_* variables (upstream opens no menu)");
+          }
+          out.push({ op: "ext", call: "tux.get_party_monsters", args: { character } });
+        } else {
+          noteAction(a, a.type, "T3-dropped", "monster/combat subsystem (P2)");
+        }
         break;
       case "wild_encounter":
         if (ctx.options.battle) {
@@ -2095,10 +2270,88 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         }));
         break;
       }
-      case "char_wander": case "char_speed": case "char_run":
-      case "set_facing_mode": case "char_position":
-        noteAction(a, a.type, "T2-dropped", "runtime pathfinding / other-event routes / NPC motion props");
+      case "char_wander": {
+        if (!ctx.options.moveControl) {
+          noteAction(a, a.type, "T2-dropped", "runtime pathfinding / other-event routes / NPC motion props");
+          break;
+        }
+        const who = g[0]!;
+        // Upstream: `self.frequency or DEFAULT_FREQUENCY` (None or 0 -> 1.0),
+        // clipped to [0.5, 5] by the action contract.
+        const freq = Math.max(0.5, Math.min(5, numeric(g[1], 1)));
+        const control: MoveControl = { kind: "wander", frequency: frequencyGrade(freq) };
+        const [tx, ty, bx, by] = [g[2], g[3], g[4], g[5]].map((v) => (v === undefined || v === "" ? NaN : Number(v)));
+        if ([tx, ty, bx, by].every(Number.isFinite) && bx >= tx && by >= ty) {
+          const bounds: WanderBounds = { x: tx, y: ty, width: bx - tx + 1, height: by - ty + 1 };
+          control.bounds = bounds;
+        }
+        noteAction(a, a.type, "T1-lowered", "KM1 moveControl wander (seeded RNG; seconds -> nearest MV frequency grade)");
+        out.push(command({ op: "moveControl", target: charTarget(who, isSelf(who)), control }));
         break;
+      }
+      case "char_speed": {
+        if (!ctx.options.moveControl) {
+          noteAction(a, a.type, "T2-dropped", "runtime pathfinding / other-event routes / NPC motion props");
+          break;
+        }
+        const rate = Number(g[1]);
+        if (!Number.isFinite(rate) || rate <= 0 || rate >= 20) {
+          noteAction(a, "char_speed(invalid)", "T2-dropped", `moverate ${g[1]} is outside the upstream (0, 20) range`);
+          break;
+        }
+        noteAction(a, a.type, "T1-lowered", "KM1 moveControl speed (tiles/sec -> nearest MV exponential grade)");
+        out.push(command({ op: "moveControl", target: charTarget(g[0]!, isSelf(g[0])), control: { kind: "speed", value: speedGrade(rate) } }));
+        break;
+      }
+      case "char_run":
+        // Upstream char_run sets the absolute run rate (7.35 tiles/s) only
+        // while the character is already moving, and the boost reverts to
+        // walk speed when movement stops. The kit's run control is a
+        // persistent relative +1 speed grade with no movement-scoped
+        // lifetime: emitting it would speed every later route (route1's
+        // idle christie would run her whole pathfind, where upstream is a
+        // no-op). Drop the action; the one wander use may lose a transient
+        // single-step boost.
+        noteAction(a, a.type, "T2-dropped", "upstream run rate applies only while moving and reverts on idle; the kit has no movement-scoped speed");
+        break;
+      case "set_facing_mode": {
+        const FACING: Record<string, FacingMode> = {
+          follow_movement: "followMovement",
+          locked: "locked",
+          scripted: "scripted",
+        };
+        const mode = FACING[(g[1] ?? "").trim().toLowerCase()];
+        if (ctx.options.moveControl && mode) {
+          noteAction(a, a.type, "T1", "KM1 moveControl facingMode");
+          out.push(command({ op: "moveControl", target: charTarget(g[0]!, isSelf(g[0])), control: { kind: "facingMode", value: mode } }));
+        } else {
+          noteAction(a, a.type, "T2-dropped", mode ? "runtime movement props are disabled" : `unknown facing mode '${g[1] ?? ""}'`);
+        }
+        break;
+      }
+      case "char_position": {
+        if (!ctx.options.moveControl) {
+          noteAction(a, a.type, "T2-dropped", "runtime pathfinding / other-event routes / NPC motion props");
+          break;
+        }
+        const x = Math.max(0, Math.min(ctx.m.width - 1, Number(g[1])));
+        const y = Math.max(0, Math.min(ctx.m.height - 1, Number(g[2])));
+        // Fold an immediately-following `char_face <same target>,<dir>` into
+        // the placement's dir. The kit installs pending routes before it
+        // applies placements, and a player placement stops the player route,
+        // so a separate face route would be swallowed. Upstream places and
+        // faces as two instants, so the fold is exact.
+        let dir: Dir | undefined;
+        const next = acts[i + 1];
+        if (next?.type === "char_face" && next.args[0] === g[0] && DIRS.has(next.args[1]!)) {
+          dir = next.args[1] as Dir;
+          noteAction(next, "char_face(after position)", "T1", "folded into placement dir");
+          i++;
+        }
+        noteAction(a, a.type, "T1-lowered", "place command (out-of-map coordinates are clamped; upstream raises)");
+        out.push(command({ op: "place", target: charTarget(g[0]!, isSelf(g[0])), x, y, ...(dir ? { dir } : {}) }));
+        break;
+      }
       case "play_music": {
         // G2/G3: fade-in and loop count have no KAU1 equivalent (no authored
         // use). G4/G5: same-song no-op and crossfade are covered by the
@@ -2216,7 +2469,7 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
                   call: "tux.faint_point_is_map",
                   args: { character, map: ctx.m.slug, negate: true },
                 },
-                then: [{
+                then: [clearNpcParties(), {
                   op: "transfer",
                   map: { variable: "tux.faint.map" },
                   x: { variable: "tux.faint.x" },
@@ -2279,8 +2532,31 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
               },
             ],
           });
+        } else if (ctx.options.extChoice && g[0]) {
+          const name = g[0]!;
+          const filters = partyFilter(g);
+          const args: Record<string, JsonValue> = {
+            variable: varId(name),
+            cancelCode: code(name, "no_choice"),
+            filters,
+          };
+          const choice = command({
+            op: "extChoice",
+            call: "tux.party_monsters",
+            args,
+            prompt: "Choose a monster",
+            ...(filters.length ? { cancel: true } : {}),
+          });
+          noteAction(a, a.type, "T1", "KC1 extChoice over the live party (empty party -> no_options; cancel -> no_choice)");
+          // Upstream opens no menu when no monster matches: write no_options.
+          out.push({
+            op: "if",
+            if: { kind: "ext", call: "tux.party_match", args: { filters } },
+            then: [choice],
+            else: [{ op: "variable", id: varId(name), set: { op: "set", value: code(name, "no_options") } }],
+          });
         } else {
-          noteAction(a, a.type, "T3-dropped", "only the adjacent rename picker form is implemented");
+          noteAction(a, a.type, "T3-dropped", "monster/combat subsystem (P2)");
         }
         break;
       }
@@ -2332,6 +2608,10 @@ interface NpcAgg {
   x: number;
   y: number;
   wander: boolean;
+  /** KM1 wander cadence grade, when a spawn-event char_wander named it. */
+  wanderFrequency?: MoveFrequency;
+  /** KM1 wander bounds, when a spawn-event char_wander supplied them. */
+  wanderBounds?: WanderBounds;
   face?: string;
   talks: { cls: Clause[]; cmds: Command[] }[];
 }
@@ -2416,6 +2696,7 @@ function convertMap(
 
       // spawn: guard + create_npc -> a parallel page flipping local.npc.<slug>
       if (k === "spawn") {
+        const wanderControls: { slug: string; control: MoveControl }[] = [];
         for (const a of e.acts) {
           if (a.type === "char_face") {
             if (npcs.has(a.args[0]!) && DIRS.has(a.args[1]!)) {
@@ -2427,8 +2708,25 @@ function convertMap(
           }
           if (a.type === "char_wander") {
             if (npcs.has(a.args[0]!)) {
-              npcOf(a.args[0]!).wander = true;
-              noteAction(a, a.type, "T1-lowered", "NPC page uses random movement; frequency/bounds are omitted");
+              const agg = npcOf(a.args[0]!);
+              agg.wander = true;
+              if (options.moveControl) {
+                // Upstream: `self.frequency or DEFAULT_FREQUENCY` (None or
+                // 0 -> 1.0s), clipped to [0.5, 5]s.
+                const freq = Math.max(0.5, Math.min(5, numeric(a.args[1], 1)));
+                agg.wanderFrequency = frequencyGrade(freq);
+                const [tx, ty, bx, by] = [a.args[2], a.args[3], a.args[4], a.args[5]]
+                  .map((v) => (v === undefined || v === "" ? NaN : Number(v)));
+                if ([tx, ty, bx, by].every(Number.isFinite) && bx >= tx && by >= ty) {
+                  agg.wanderBounds = { x: tx, y: ty, width: bx - tx + 1, height: by - ty + 1 };
+                }
+                const control: MoveControl = { kind: "wander", frequency: agg.wanderFrequency };
+                if (agg.wanderBounds) control.bounds = agg.wanderBounds;
+                wanderControls.push({ slug: agg.slug, control });
+                noteAction(a, a.type, "T1-lowered", "KM1 moveControl wander (seeded RNG, dialog-pausing; seconds -> nearest MV frequency grade)");
+              } else {
+                noteAction(a, a.type, "T1-lowered", "NPC page uses random movement; frequency/bounds are omitted");
+              }
             } else {
               noteAction(a, "char_wander(missing npc)", "T2-dropped", "spawn target is unavailable");
             }
@@ -2438,6 +2736,9 @@ function convertMap(
           e.acts.filter((a) => a.type !== "char_face" && a.type !== "char_wander"),
           { m, options, economies, surfaceLabels },
         );
+        for (const wander of wanderControls) {
+          cmds.push(command({ op: "moveControl", target: { event: `npc_${slug(wander.slug)}` }, control: wander.control }));
+        }
         const blocking = hasBlocking(cmds);
         const page = blocking
           // A blocking spawn usually writes the same local.npc variable its
@@ -2754,6 +3055,7 @@ function convertMap(
       sprite: spriteKey,
       blocks: true,
       moveType: agg.wander ? "random" : "static",
+      ...(agg.wanderFrequency ? { moveFrequency: agg.wanderFrequency } : {}),
       commands: chain,
     };
     if (!agg.wander && agg.face) {
@@ -2795,6 +3097,30 @@ function convertMap(
         ],
       });
     }
+  }
+
+  // Upstream change_map clears every non-persistent NPC on each transition,
+  // party included. Imported transfers clear just before they fire; any other
+  // map entry (a demo warp) is caught here. Map entry resets the `local.`
+  // bank, so one parallel page per map runs exactly once per visit.
+  // Parallels start in ascending id order before any blocking fiber, so the
+  // `e000_` id clears before any of this map's own events builds a party.
+  if (options.battle) {
+    events.push({
+      id: "e000_npc_parties",
+      name: "Map entry: clear non-persistent NPC parties",
+      x: 0,
+      y: 0,
+      pages: [{
+        trigger: "parallel",
+        condition: { variable: { id: NPC_PARTIES_CLEARED_VARIABLE, op: "==", value: 0 } },
+        sprite: null,
+        commands: [
+          clearNpcParties(),
+          { op: "variable", id: NPC_PARTIES_CLEARED_VARIABLE, set: { op: "set", value: 1 } },
+        ],
+      }],
+    });
   }
 
   // One invisible, terminal parallel page is restarted by the interpreter on

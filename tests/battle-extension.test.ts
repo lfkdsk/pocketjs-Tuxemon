@@ -461,3 +461,146 @@ describe("Tuxemon party extension", () => {
     expect(tuxemonExtensionState(rewound.state.ext, DB).party[0]?.iid).toBe("txmn-000001");
   });
 });
+
+describe("KC1 party choice and removal", () => {
+  const extensions = createTuxemonExtensions(DB);
+  const partyChoice = extensions.choices!["tux.party_monsters"]!;
+
+  function partyExt(entries: Array<{ species: string; level: number }>): JsonValue {
+    const { state } = run(entries.map((entry) => ({
+      op: "ext" as const,
+      call: "tux.add_monster",
+      args: { species: entry.species, level: entry.level },
+    })));
+    return state.ext;
+  }
+
+  function partyIids(ext: JsonValue): string[] {
+    return tuxemonExtensionState(ext, DB).party.map((monster) => monster.iid!);
+  }
+
+  const readContext = (ext: JsonValue, variables: Record<string, string | number> = {}) => ({
+    ext,
+    variables,
+    switches: {},
+    items: {},
+    gold: 0,
+    playerName: "Player",
+  });
+
+  const commandContext = (ext: JsonValue, variables: Record<string, string | number> = {}) => ({
+    ...readContext(ext, variables),
+    random: () => 0,
+  });
+
+  test("party_monsters lists the party with titled labels and stable iid keys", () => {
+    const ext = partyExt([{ species: "rockitten", level: 5 }, { species: "agnite", level: 6 }]);
+    const rows = partyChoice.options!(readContext(ext), { variable: "v.pick", filters: [] });
+    expect(rows.map((row) => row.key)).toEqual(partyIids(ext));
+    expect(rows.map((row) => row.label)).toEqual(["Rockitten", "Agnite"]);
+    expect(rows.every((row) => typeof row.data === "object" && row.data !== null)).toBe(true);
+  });
+
+  test("party_monsters applies slug and evolution_stage filters", () => {
+    const ext = partyExt([{ species: "rockitten", level: 5 }, { species: "agnite", level: 6 }]);
+    const bySlug = partyChoice.options!(readContext(ext), {
+      variable: "v.pick",
+      filters: [{ field: "slug", value: "rockitten" }],
+    });
+    expect(bySlug).toHaveLength(1);
+    expect(bySlug[0]!.key).toBe(partyIids(ext)[0]);
+    const stage = DB.monsters.rockitten!.stage;
+    const byStage = partyChoice.options!(readContext(ext), {
+      variable: "v.pick",
+      filters: [{ field: "evolution_stage", value: stage }],
+    });
+    expect(byStage.map((row) => row.key)).toContain(partyIids(ext)[0]);
+  });
+
+  test("the resolver writes the iid on select and the cancel code on cancel", () => {
+    const ext = partyExt([{ species: "rockitten", level: 5 }]);
+    const [iid] = partyIids(ext);
+    const args = { variable: "v.pick", cancelCode: 7, filters: [] };
+    const selected = partyChoice.resolve!(commandContext(ext), args, {
+      kind: "select", index: 0, key: iid!, data: null,
+    });
+    expect(selected?.writes).toEqual({ "v.pick": iid });
+    const cancelled = partyChoice.resolve!(commandContext(ext), args, { kind: "cancel" });
+    expect(cancelled?.writes).toEqual({ "v.pick": 7 });
+  });
+
+  test("party_match is true only when a party monster passes every filter", () => {
+    const ext = partyExt([{ species: "rockitten", level: 5 }]);
+    const match = extensions.conditions!["tux.party_match"]!;
+    expect(match(readContext(ext), { filters: [] })).toBe(true);
+    expect(match(readContext(ext), { filters: [{ field: "slug", value: "rockitten" }] })).toBe(true);
+    expect(match(readContext(ext), { filters: [{ field: "slug", value: "agnite" }] })).toBe(false);
+    expect(match(readContext(extensions.initial!), { filters: [] })).toBe(false);
+  });
+
+  test("remove_monster removes the iid from the party and is a no-op when absent", () => {
+    const ext = partyExt([{ species: "rockitten", level: 5 }, { species: "agnite", level: 6 }]);
+    const [iid] = partyIids(ext);
+    const remove = extensions.commands!["tux.remove_monster"]!;
+    const result = remove(commandContext(ext, { "v.pick": iid! }), { variable: "v.pick" });
+    const after = tuxemonExtensionState(result!.ext!, DB);
+    expect(after.party).toHaveLength(1);
+    expect(after.party[0]!.slug).toBe("agnite");
+    const again = remove(commandContext(result!.ext!, { "v.pick": iid! }), { variable: "v.pick" });
+    expect(again).toBeUndefined();
+  });
+
+  test("get_party_monsters dumps the party iids into iid_slot variables", () => {
+    const { state } = run([
+      { op: "ext" as const, call: "tux.add_monster", args: { species: "nut", level: 7, character: "spyder_nimrod_argon" } },
+      { op: "ext" as const, call: "tux.add_monster", args: { species: "agnite", level: 8, character: "spyder_nimrod_argon" } },
+      { op: "ext" as const, call: "tux.get_party_monsters", args: { character: "spyder_nimrod_argon" } },
+    ]);
+    expect(state.sw.variables["v.iid_slot_0"]).toBe("txmn-000001");
+    expect(state.sw.variables["v.iid_slot_1"]).toBe("txmn-000002");
+  });
+
+  test("get_party_monsters defaults to the player party", () => {
+    const { state } = run([
+      { op: "ext" as const, call: "tux.add_monster", args: { species: "rockitten", level: 5 } },
+      { op: "ext" as const, call: "tux.get_party_monsters", args: {} },
+    ]);
+    expect(state.sw.variables["v.iid_slot_0"]).toBe("txmn-000001");
+  });
+
+  test("remove_monster removes an NPC-owned monster by iid (the Nimrod flow)", () => {
+    const { state } = run([
+      { op: "ext" as const, call: "tux.add_monster", args: { species: "nut", level: 7, character: "spyder_nimrod_argon" } },
+      { op: "ext" as const, call: "tux.get_party_monsters", args: { character: "spyder_nimrod_argon" } },
+      { op: "ext" as const, call: "tux.remove_monster", args: { variable: "v.iid_slot_0" } },
+    ]);
+    const ext = tuxemonExtensionState(state.ext, DB);
+    expect(ext.npcParties.spyder_nimrod_argon).toEqual([]);
+    expect(ext.party).toHaveLength(0);
+  });
+
+  test("an empty party list opens through the displaced branch and cancel resolves", () => {
+    const source = project([{
+      op: "extChoice",
+      call: "tux.party_monsters",
+      args: { variable: "v.pick", cancelCode: 1, filters: [] },
+      prompt: "Choose",
+      cancel: true,
+    }]);
+    const session = createSession(source, 60, { extensions: createTuxemonExtensions(DB) });
+    let state = stepSession(session, startSession(source, session), { buttons: 0 });
+    const modal = state.interp.modal;
+    expect(modal?.kind).toBe("choices");
+    if (modal?.kind !== "choices") throw new Error("expected choices modal");
+    expect(modal.options).toEqual([]);
+    expect(modal.cancellable).toBe(true);
+    // The empty list is displaced: a confirm edge is ignored until a row is shown.
+    state = stepSession(session, state, { buttons: 0, confirmEdge: true });
+    expect(state.interp.modal?.kind).toBe("choices");
+    expect(state.sw.variables["v.pick"]).toBeUndefined();
+    // Cancel reaches the resolver and writes the sentinel code.
+    state = stepSession(session, state, { buttons: 0, cancelEdge: true });
+    expect(state.interp.modal).toBeNull();
+    expect(state.sw.variables["v.pick"]).toBe(1);
+  });
+});

@@ -46,6 +46,8 @@ export function coverageMarkdown(report: ImportReport): string {
     ).join("\n")
     : "- None.";
   const openShop = actions.rows.find((row) => row.type === "open_shop");
+  const partyMonster = actions.rows.find((row) => row.type === "get_party_monster");
+  const playerMonster = actions.rows.find((row) => row.type === "get_player_monster");
   const worldRows = report.world.worlds.map((world) =>
     `| ${world.worldId} | ${world.outdoorMaps} / ${world.sourceMembers} | ${world.bboxTiles.width}×${world.bboxTiles.height} | ${world.geometricContacts} | ${world.acceptedSeams} | ${world.coordinatePreservingSeams} / ${world.mixedHandoffSeams} / ${world.portalOnlySeams} / ${world.directionOnlySeams} | ${world.rejectedGeometricContacts} | ${world.rejectedGaps} | ${world.dimensionCorrections} | ${world.componentSizes.join(" + ")} |`
   ).join("\n");
@@ -101,12 +103,24 @@ ${placeholderAudit}
 
 The five \`start_battle\` placeholders are NPC-versus-NPC scenes, for which the
 runtime shows a visible skip notice instead of inventing a player battle. The
-other rows are global or legacy content. Where GB6 reaches a
-\`choice_monster\` starter prompt, its deterministic enum-choice lowering is
-exercised, but it is not claimed as a general party-selection UI. The remaining
-trading, removal, NPC selection, and plague-state rows stay visible or
-deterministic without being claimed as full P2 behavior. The long-term target
-remains zero Placeholder uses.
+other rows are global or legacy content. \`get_player_monster\` has
+${playerMonster?.native ?? 0} Native uses (the KC1 \`extChoice\` over the live
+party) and ${playerMonster?.degraded ?? 0} Degraded uses (the party picker that
+feeds an adjacent \`rename_monster\`); \`choice_monster\` is Native via the same
+party extension. \`choice_npc\` is Degraded (per-option names distinguish the
+lines; the kit choice box has no portraits). \`remove_monster\` deletes an iid
+from its owner. An NPC's party lives as long as the NPC, as upstream: it is
+cleared when the NPC is created afresh (every map entry) or removed, and
+battle-time monsters stay in it until then. Of the
+${(partyMonster?.native ?? 0) + (partyMonster?.degraded ?? 0)} executable
+\`get_party_monster\` uses, Native: ${partyMonster?.native ?? 0} (the Nimrod
+\`Zircon Back\` event, which reads the defeated trainer's party); Degraded:
+${partyMonster?.degraded ?? 0}, which write no \`iid_slot_*\`: the dojo
+calls run before their battle, whose \`add_monster\` calls are folded into the
+battle setup, and the gym calls name trainers that only fight skipped
+NPC-versus-NPC battles. The remaining trading
+and plague-state rows stay visible or deterministic without being claimed as
+full P2 behavior. The long-term target remains zero Placeholder uses.
 
 ## Economy and item catalog
 

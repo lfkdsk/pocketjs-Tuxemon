@@ -61,12 +61,12 @@ Seven parallel legs, one `bun run verify:*` script each:
 
 | Leg | Script | What it proves |
 |---|---|---|
-| Route 3 battle journey at 60 Hz | `verify:gb6:mainline` | the 108,618-frame mainline tape replays to the frozen terminal state with every map and battle checkpoint intact. |
+| Route 3 battle journey at 60 Hz | `verify:gb6:mainline` | the 108,225-frame mainline tape replays to the frozen terminal state with every map and battle checkpoint intact. |
 | Captain-return journey from frame zero at 60 Hz | `verify:j1:mainline` | the J1 continuation, concatenated with the GB6 tape and replayed from frame zero, ends at the Captain's return. |
-| Hospital-cure journey from frame zero at 60 Hz | `verify:j2:mainline` | the J2 continuation, concatenated with GB6 and J1 and replayed from frame zero (170,983 frames), ends with the hospital cure. |
+| Hospital-cure journey from frame zero at 60 Hz | `verify:j2:mainline` | the J2 continuation, concatenated with GB6 and J1 and replayed from frame zero (170,868 frames), ends with the hospital cure. |
 | Battle defeat and recovery journeys | `verify:gb6:failures` | both committed defeat tapes replay with their visible recovery order. |
 | Every imported input lock is executed to its unlock | `verify:g6:locks` | every `lockInput` page releases its lock. |
-| No map can freeze the player | `verify:g6:frozen` | a corpus-wide stuck/lock scan over all 263 maps. |
+| No permanent input lock or blocking fiber on any imported map | `verify:g6:frozen` | a corpus-wide stuck/lock scan over all 263 maps; an interpreter-liveness result, not a proof that a wanderer can never spatially block the player. |
 | Chapter snapshots and thumbnails | `verify:chapters` | the thirteen demo chapters re-bake byte-identical: save envelopes pass the kit's save validator, the 480×272 thumbnails match the committed PNGs, and every envelope restored and resumed at its timeline frame suffix-replays to the full-tape terminal state. |
 
 The full 60/30/20 Hz alignment, save/load and rewind checks stay in

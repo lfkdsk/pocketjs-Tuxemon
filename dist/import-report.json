@@ -12,6 +12,8 @@
   "place": true,
   "inputLock": true,
   "routes": true,
+  "moveControl": true,
+  "extChoice": true,
   "battle": true
  },
  "maps": [
@@ -282,12 +284,12 @@
  "schemaErrors": [],
  "audioQoaPending": [],
  "byFate": {
-  "T3-dropped": 2344,
-  "T1": 35157,
-  "T4-dropped": 2128,
-  "T1-lowered": 2402,
-  "T2-dropped": 415,
-  "T3-placeholder": 29,
+  "T3-dropped": 2323,
+  "T1": 35282,
+  "T4-dropped": 2120,
+  "T1-lowered": 2342,
+  "T2-dropped": 393,
+  "T3-placeholder": 15,
   "structural": 776
  },
  "rows": [
@@ -376,6 +378,12 @@
    "note": "presentation / meta"
   },
   {
+   "key": "act:char_face(after position):T1",
+   "fate": "T1",
+   "count": 1,
+   "note": "folded into placement dir"
+  },
+  {
    "key": "act:char_face(after teleport):T1",
    "fate": "T1",
    "count": 869,
@@ -408,7 +416,7 @@
   {
    "key": "act:char_face:T1-lowered",
    "fate": "T1-lowered",
-   "count": 448,
+   "count": 447,
    "note": "spawn facing becomes the NPC page route"
   },
   {
@@ -430,28 +438,28 @@
    "note": "presentation / meta"
   },
   {
-   "key": "act:char_position:T2-dropped",
-   "fate": "T2-dropped",
+   "key": "act:char_position:T1-lowered",
+   "fate": "T1-lowered",
    "count": 1,
-   "note": "runtime pathfinding / other-event routes / NPC motion props"
+   "note": "place command (out-of-map coordinates are clamped; upstream raises)"
   },
   {
    "key": "act:char_run:T2-dropped",
    "fate": "T2-dropped",
    "count": 2,
-   "note": "runtime pathfinding / other-event routes / NPC motion props"
+   "note": "upstream run rate applies only while moving and reverts on idle; the kit has no movement-scoped speed"
   },
   {
-   "key": "act:char_speed:T2-dropped",
-   "fate": "T2-dropped",
-   "count": 19,
-   "note": "runtime pathfinding / other-event routes / NPC motion props"
-  },
-  {
-   "key": "act:char_stop:T1-lowered",
+   "key": "act:char_speed:T1-lowered",
    "fate": "T1-lowered",
+   "count": 19,
+   "note": "KM1 moveControl speed (tiles/sec -> nearest MV exponential grade)"
+  },
+  {
+   "key": "act:char_stop:T1",
+   "fate": "T1",
    "count": 88,
-   "note": "blocking fibers already freeze the player (cross-event locks are T2)"
+   "note": "KM1 moveControl stop (cancels the active route and page patrol)"
   },
   {
    "key": "act:char_talk:T1",
@@ -469,25 +477,19 @@
    "key": "act:char_wander:T1-lowered",
    "fate": "T1-lowered",
    "count": 32,
-   "note": "NPC page uses random movement; frequency/bounds are omitted"
+   "note": "KM1 moveControl wander (seeded RNG, dialog-pausing; seconds -> nearest MV frequency grade)"
   },
   {
-   "key": "act:choice_monster(paginated):T3-placeholder",
-   "fate": "T3-placeholder",
-   "count": 1,
-   "note": "nested choice pages retain every option"
-  },
-  {
-   "key": "act:choice_monster:T3-placeholder",
-   "fate": "T3-placeholder",
-   "count": 1,
-   "note": "choices -> enum code"
-  },
-  {
-   "key": "act:choice_npc(paginated):T3-placeholder",
-   "fate": "T3-placeholder",
+   "key": "act:choice_monster:T1",
+   "fate": "T1",
    "count": 2,
-   "note": "nested choice pages retain every option"
+   "note": "KC1 extChoice static list -> enum code via the resolver"
+  },
+  {
+   "key": "act:choice_npc:T1-lowered",
+   "fate": "T1-lowered",
+   "count": 2,
+   "note": "shared label + per-option name (upstream portraits need kit option images)"
   },
   {
    "key": "act:clear_variable:T1",
@@ -538,10 +540,22 @@
    "note": "monster/combat subsystem (P2)"
   },
   {
-   "key": "act:get_party_monster:T4-dropped",
-   "fate": "T4-dropped",
-   "count": 8,
-   "note": "presentation / meta"
+   "key": "act:get_party_monster(after NPC-vs-NPC battle):T1-lowered",
+   "fate": "T1-lowered",
+   "count": 4,
+   "note": "the page waits for the winner of an NPC-versus-NPC battle, which runs as a skipped placeholder without a winner, so it never runs and no iid_slot_* is written"
+  },
+  {
+   "key": "act:get_party_monster(before folded battle):T1-lowered",
+   "fate": "T1-lowered",
+   "count": 3,
+   "note": "the NPC's add_monster calls are folded into the later battle, so no iid_slot_* is written before it"
+  },
+  {
+   "key": "act:get_party_monster:T1",
+   "fate": "T1",
+   "count": 1,
+   "note": "tux.get_party_monsters dumps the party iids into iid_slot_* variables (upstream opens no menu)"
   },
   {
    "key": "act:get_player_monster(rename):T1-lowered",
@@ -550,10 +564,10 @@
    "note": "party picker specialized for the adjacent rename action"
   },
   {
-   "key": "act:get_player_monster:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "act:get_player_monster:T1",
+   "fate": "T1",
    "count": 21,
-   "note": "only the adjacent rename picker form is implemented"
+   "note": "KC1 extChoice over the live party (empty party -> no_options; cancel -> no_choice)"
   },
   {
    "key": "act:info:T4-dropped",
@@ -682,10 +696,10 @@
    "note": "keyed collision becomes a variable-gated blocking event"
   },
   {
-   "key": "act:remove_monster:T3-placeholder",
-   "fate": "T3-placeholder",
+   "key": "act:remove_monster:T1",
+   "fate": "T1",
    "count": 10,
-   "note": "sys.party_size -= 1 when non-empty"
+   "note": "tux.remove_monster deletes the iid from its owner (player party/kennel or NPC party)"
   },
   {
    "key": "act:remove_npc:T1",
@@ -748,10 +762,10 @@
    "note": "tux.set_environment updates the active battle backdrop"
   },
   {
-   "key": "act:set_facing_mode:T2-dropped",
-   "fate": "T2-dropped",
+   "key": "act:set_facing_mode:T1",
+   "fate": "T1",
    "count": 2,
-   "note": "runtime pathfinding / other-event routes / NPC motion props"
+   "note": "KM1 moveControl facingMode"
   },
   {
    "key": "act:set_layer:T1",
@@ -1955,12 +1969,12 @@
    "summary": {
     "types": 98,
     "uses": 13617,
-    "native": 12324,
-    "degraded": 655,
-    "placeholder": 19,
-    "dropped": 619,
-    "nativePercent": 90.5,
-    "executablePercent": 95.5,
+    "native": 12437,
+    "degraded": 594,
+    "placeholder": 12,
+    "dropped": 574,
+    "nativePercent": 91.3,
+    "executablePercent": 95.8,
     "tier1": {
      "uses": 6355,
      "percent": 46.67,
@@ -2141,8 +2155,8 @@
     {
      "type": "char_face",
      "total": 2027,
-     "native": 1558,
-     "degraded": 444,
+     "native": 1559,
+     "degraded": 443,
      "placeholder": 0,
      "dropped": 25,
      "reasons": {
@@ -2161,7 +2175,8 @@
       "native": [
        "folded into transfer direction",
        "K2 moveRoute targets an arbitrary event",
-       "K2 arbitrary-target turn-toward route"
+       "K2 arbitrary-target turn-toward route",
+       "folded into placement dir"
       ]
      }
     },
@@ -2199,12 +2214,12 @@
      "type": "char_position",
      "total": 1,
      "native": 0,
-     "degraded": 0,
+     "degraded": 1,
      "placeholder": 0,
-     "dropped": 1,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "runtime pathfinding / other-event routes / NPC motion props"
+      "degraded": [
+       "place command (out-of-map coordinates are clamped; upstream raises)"
       ]
      }
     },
@@ -2217,7 +2232,7 @@
      "dropped": 2,
      "reasons": {
       "dropped": [
-       "runtime pathfinding / other-event routes / NPC motion props"
+       "upstream run rate applies only while moving and reverts on idle; the kit has no movement-scoped speed"
       ]
      }
     },
@@ -2225,25 +2240,25 @@
      "type": "char_speed",
      "total": 19,
      "native": 0,
-     "degraded": 0,
+     "degraded": 19,
      "placeholder": 0,
-     "dropped": 19,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "runtime pathfinding / other-event routes / NPC motion props"
+      "degraded": [
+       "KM1 moveControl speed (tiles/sec -> nearest MV exponential grade)"
       ]
      }
     },
     {
      "type": "char_stop",
      "total": 88,
-     "native": 0,
-     "degraded": 88,
+     "native": 88,
+     "degraded": 0,
      "placeholder": 0,
      "dropped": 0,
      "reasons": {
-      "degraded": [
-       "blocking fibers already freeze the player (cross-event locks are T2)"
+      "native": [
+       "KM1 moveControl stop (cancels the active route and page patrol)"
       ]
      }
     },
@@ -2269,7 +2284,7 @@
      "dropped": 1,
      "reasons": {
       "degraded": [
-       "NPC page uses random movement; frequency/bounds are omitted"
+       "KM1 moveControl wander (seeded RNG, dialog-pausing; seconds -> nearest MV frequency grade)"
       ],
       "dropped": [
        "spawn target is unavailable"
@@ -2279,14 +2294,13 @@
     {
      "type": "choice_monster",
      "total": 2,
-     "native": 0,
+     "native": 2,
      "degraded": 0,
-     "placeholder": 2,
+     "placeholder": 0,
      "dropped": 0,
      "reasons": {
-      "placeholder": [
-       "choices -> enum code",
-       "nested choice pages retain every option"
+      "native": [
+       "KC1 extChoice static list -> enum code via the resolver"
       ]
      }
     },
@@ -2294,12 +2308,12 @@
      "type": "choice_npc",
      "total": 1,
      "native": 0,
-     "degraded": 0,
-     "placeholder": 1,
+     "degraded": 1,
+     "placeholder": 0,
      "dropped": 0,
      "reasons": {
-      "placeholder": [
-       "nested choice pages retain every option"
+      "degraded": [
+       "shared label + per-option name (upstream portraits need kit option images)"
       ]
      }
     },
@@ -2431,13 +2445,19 @@
     {
      "type": "get_party_monster",
      "total": 9,
-     "native": 0,
-     "degraded": 0,
+     "native": 1,
+     "degraded": 7,
      "placeholder": 0,
-     "dropped": 9,
+     "dropped": 1,
      "reasons": {
+      "degraded": [
+       "the NPC's add_monster calls are folded into the later battle, so no iid_slot_* is written before it",
+       "the page waits for the winner of an NPC-versus-NPC battle, which runs as a skipped placeholder without a winner, so it never runs and no iid_slot_* is written"
+      ],
+      "native": [
+       "tux.get_party_monsters dumps the party iids into iid_slot_* variables (upstream opens no menu)"
+      ],
       "dropped": [
-       "presentation / meta",
        "fixed-false guard prevents the source event from starting"
       ]
      }
@@ -2458,16 +2478,16 @@
     {
      "type": "get_player_monster",
      "total": 17,
-     "native": 0,
+     "native": 15,
      "degraded": 2,
      "placeholder": 0,
-     "dropped": 15,
+     "dropped": 0,
      "reasons": {
       "degraded": [
        "party picker specialized for the adjacent rename action"
       ],
-      "dropped": [
-       "only the adjacent rename picker form is implemented"
+      "native": [
+       "KC1 extChoice over the live party (empty party -> no_options; cancel -> no_choice)"
       ]
      }
     },
@@ -2812,13 +2832,13 @@
     {
      "type": "remove_monster",
      "total": 5,
-     "native": 0,
+     "native": 4,
      "degraded": 0,
-     "placeholder": 4,
+     "placeholder": 0,
      "dropped": 1,
      "reasons": {
-      "placeholder": [
-       "sys.party_size -= 1 when non-empty"
+      "native": [
+       "tux.remove_monster deletes the iid from its owner (player party/kennel or NPC party)"
       ],
       "dropped": [
        "fixed-false guard prevents the source event from starting"
@@ -2980,13 +3000,13 @@
     {
      "type": "set_facing_mode",
      "total": 2,
-     "native": 0,
+     "native": 2,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 2,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "runtime pathfinding / other-event routes / NPC motion props"
+      "native": [
+       "KM1 moveControl facingMode"
       ]
      }
     },

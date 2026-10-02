@@ -37,7 +37,7 @@ const GAME_OPTIONS = { extensions: TUXEMON_EXTENSIONS, battle: TUXEMON_BATTLE_RU
 // Pin the complete post-Billie state, including the spawned Nut, battle
 // history, shared-session rewards, independent battle/weather RNG cursors,
 // saved clock, daylight marker/tint, shop stock, and scene/queue slots.
-const EXPECTED_TERMINAL_STATE_SHA256 = "6d84498eb06a590d7b89a0a1e5a618af2bce8bca1bdb62aa2704a92e2cbde3c8";
+const EXPECTED_TERMINAL_STATE_SHA256 = "4bc48ecf71ac6b2a162b0e515923531e7d331f6fb474228ecfffd16b8551275a";
 
 function input(mask: number, previous: number): SessionInput {
   const pressed = mask & ~previous;
