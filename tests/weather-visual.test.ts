@@ -6,7 +6,7 @@ import { join, resolve } from "node:path";
 import { decodePng } from "../importer/png.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
-const SHOTS = join(ROOT, "findings/wx1-shots");
+const SHOTS = join(ROOT, "docs/screenshots/weather");
 const manifestPath = join(SHOTS, "manifest.json");
 const canVerify = existsSync(manifestPath);
 if (!canVerify) console.warn("weather shots missing; run `bun tools/render-weather-shots.ts`");

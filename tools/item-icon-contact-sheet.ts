@@ -260,7 +260,7 @@ function main(): void {
       zoom = Number(args[2]);
       outPath = args[3];
     }
-    if (!outPath) throw new Error("--cell requires an output path, e.g. --cell repellent 12 findings/cell-repellent.png");
+    if (!outPath) throw new Error("--cell requires an output path, e.g. --cell repellent 12 dist/cell-repellent.png");
     if (!Number.isInteger(zoom) || zoom <= 0) throw new Error(`bad zoom: ${args[2]}`);
     const cell = new Uint8Array(ts.tileW * ts.tileH * 4);
     const ox = (ref.cell % ts.cols) * ts.tileW;
@@ -272,7 +272,7 @@ function main(): void {
     return;
   }
 
-  const outPath = args[0] ?? "findings/qag1-item-icons-contact.png";
+  const outPath = args[0] ?? "dist/item-icons-contact.png";
   const sheet = renderContactSheet(atlas, atlasW, atlasH, ZOOM);
   writeFileSync(outPath, encodePng(sheet, atlasW * ZOOM, atlasH * ZOOM));
   console.log(`${atlasW}x${atlasH} atlas -> ${outPath} (${atlasW * ZOOM}x${atlasH * ZOOM})`);

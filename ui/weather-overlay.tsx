@@ -9,7 +9,7 @@
 // sits above the tint layer; the kit
 // capability that would let them be veiled by the tint instead (a
 // game-injectable layer slot between the world frame and ScreenEffectsLayer)
-// is documented in findings/WX1.md.
+// is described in docs/status.md (weather particles).
 
 import { type Component } from "solid-js";
 import { onFrame } from "@pocketjs/framework/lifecycle";

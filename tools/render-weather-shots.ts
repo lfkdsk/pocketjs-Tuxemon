@@ -2,7 +2,7 @@
 // rain/snow/clear x indoor/outdoor x 480x272 and 960x544.
 //
 // Usage: bun tools/render-weather-shots.ts
-// Writes findings/wx1-shots/*.png and a manifest with per-shot pixel stats.
+// Writes docs/screenshots/weather/*.png and a manifest with per-shot pixel stats.
 
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
@@ -15,7 +15,7 @@ import type { SessionState } from "../vendor/pocket-rpgkit/src/engine/session.ts
 
 const ROOT = resolve(import.meta.dir, "..");
 const BUNDLE = join(ROOT, "dist/main");
-const OUT = join(ROOT, "findings/wx1-shots");
+const OUT = join(ROOT, "docs/screenshots/weather");
 const MANIFEST = join(OUT, "manifest.json");
 
 if (!existsSync(BUNDLE + ".js") || !existsSync(BUNDLE + ".pak")) {

@@ -1,0 +1,215 @@
+{
+ "format": "pocket-tuxemon/wx1-shots/v1",
+ "civil": {
+  "year": 2024,
+  "month": 6,
+  "day": 15,
+  "hour": 9,
+  "minute": 0
+ },
+ "nightCivil": {
+  "year": 2024,
+  "month": 6,
+  "day": 15,
+  "hour": 22,
+  "minute": 0
+ },
+ "checkpoints": {
+  "indoor": "bedroom",
+  "outdoor": "paper-town"
+ },
+ "shots": [
+  {
+   "file": "rain-indoor-480x272.png",
+   "sha256": "3e63b2f4c0e4ac5215d04834dfb41e8ba113400c1af001b1c87cad95ece12c67",
+   "meanLuminance": 21.393,
+   "blueBias": -6.429,
+   "blueStreak": 0.0012,
+   "brightWhite": 0.0099
+  },
+  {
+   "file": "snow-indoor-480x272.png",
+   "sha256": "3e63b2f4c0e4ac5215d04834dfb41e8ba113400c1af001b1c87cad95ece12c67",
+   "meanLuminance": 21.393,
+   "blueBias": -6.429,
+   "blueStreak": 0.0012,
+   "brightWhite": 0.0099
+  },
+  {
+   "file": "sunny-indoor-480x272.png",
+   "sha256": "3e63b2f4c0e4ac5215d04834dfb41e8ba113400c1af001b1c87cad95ece12c67",
+   "meanLuminance": 21.393,
+   "blueBias": -6.429,
+   "blueStreak": 0.0012,
+   "brightWhite": 0.0099
+  },
+  {
+   "file": "thunderstorm-indoor-480x272.png",
+   "sha256": "3e63b2f4c0e4ac5215d04834dfb41e8ba113400c1af001b1c87cad95ece12c67",
+   "meanLuminance": 21.393,
+   "blueBias": -6.429,
+   "blueStreak": 0.0012,
+   "brightWhite": 0.0099
+  },
+  {
+   "file": "foggy-indoor-480x272.png",
+   "sha256": "3e63b2f4c0e4ac5215d04834dfb41e8ba113400c1af001b1c87cad95ece12c67",
+   "meanLuminance": 21.393,
+   "blueBias": -6.429,
+   "blueStreak": 0.0012,
+   "brightWhite": 0.0099
+  },
+  {
+   "file": "rain-outdoor-480x272.png",
+   "sha256": "526002f85598189670a5718240df459fb283ea14d6182d4535693708497e66a2",
+   "meanLuminance": 140.935,
+   "blueBias": -9.983,
+   "blueStreak": 0.0781,
+   "brightWhite": 0.0162
+  },
+  {
+   "file": "snow-outdoor-480x272.png",
+   "sha256": "e899f97c602f383189dd8ae0bf78b12b7274314bbb3bd883c68352329beb11f2",
+   "meanLuminance": 140.637,
+   "blueBias": -10.288,
+   "blueStreak": 0.0775,
+   "brightWhite": 0.0168
+  },
+  {
+   "file": "sunny-outdoor-480x272.png",
+   "sha256": "e43e3ff1d9b1460ed3fcf754d9fa1e55679482fccb72ab78aac5772f829744cd",
+   "meanLuminance": 140.332,
+   "blueBias": -10.298,
+   "blueStreak": 0.0776,
+   "brightWhite": 0.0155
+  },
+  {
+   "file": "thunderstorm-outdoor-480x272.png",
+   "sha256": "e482f5349e90a757606b4d77ef1bd666b8abbc84cdf0164c1912bb08c583ef03",
+   "meanLuminance": 141.074,
+   "blueBias": -9.766,
+   "blueStreak": 0.0779,
+   "brightWhite": 0.0175
+  },
+  {
+   "file": "foggy-outdoor-480x272.png",
+   "sha256": "e31c03692a14c40087f25f5093bdb157158da5fe08709ee2fa2e1f8e7e2a2b7b",
+   "meanLuminance": 143.72,
+   "blueBias": -9.761,
+   "blueStreak": 0.0776,
+   "brightWhite": 0.016
+  },
+  {
+   "file": "rain-indoor-960x544.png",
+   "sha256": "3aaf509ab37999124afada682022626c46e82fbe708e2fa10ad46a5cf3a3d364",
+   "meanLuminance": 5.348,
+   "blueBias": -1.607,
+   "blueStreak": 0.0003,
+   "brightWhite": 0.0025
+  },
+  {
+   "file": "snow-indoor-960x544.png",
+   "sha256": "3aaf509ab37999124afada682022626c46e82fbe708e2fa10ad46a5cf3a3d364",
+   "meanLuminance": 5.348,
+   "blueBias": -1.607,
+   "blueStreak": 0.0003,
+   "brightWhite": 0.0025
+  },
+  {
+   "file": "sunny-indoor-960x544.png",
+   "sha256": "3aaf509ab37999124afada682022626c46e82fbe708e2fa10ad46a5cf3a3d364",
+   "meanLuminance": 5.348,
+   "blueBias": -1.607,
+   "blueStreak": 0.0003,
+   "brightWhite": 0.0025
+  },
+  {
+   "file": "thunderstorm-indoor-960x544.png",
+   "sha256": "3aaf509ab37999124afada682022626c46e82fbe708e2fa10ad46a5cf3a3d364",
+   "meanLuminance": 5.348,
+   "blueBias": -1.607,
+   "blueStreak": 0.0003,
+   "brightWhite": 0.0025
+  },
+  {
+   "file": "foggy-indoor-960x544.png",
+   "sha256": "3aaf509ab37999124afada682022626c46e82fbe708e2fa10ad46a5cf3a3d364",
+   "meanLuminance": 5.348,
+   "blueBias": -1.607,
+   "blueStreak": 0.0003,
+   "brightWhite": 0.0025
+  },
+  {
+   "file": "rain-outdoor-960x544.png",
+   "sha256": "af498d57178e1ac50b4f050f0721dd9dc21b7947236a758f57ea46dec31a7f1f",
+   "meanLuminance": 51.316,
+   "blueBias": -2.001,
+   "blueStreak": 0.0385,
+   "brightWhite": 0.0044
+  },
+  {
+   "file": "snow-outdoor-960x544.png",
+   "sha256": "28bf94f4c1d41c1fa769d7342e6b5b81ddd4dd6ecb568996d5273df0888a3e26",
+   "meanLuminance": 51.236,
+   "blueBias": -2.066,
+   "blueStreak": 0.0384,
+   "brightWhite": 0.0047
+  },
+  {
+   "file": "sunny-outdoor-960x544.png",
+   "sha256": "af74daa5b15fca6a0b56fd0cd58e56a2c9738a389c94c010c8713ee41bcd629e",
+   "meanLuminance": 51.159,
+   "blueBias": -2.069,
+   "blueStreak": 0.0384,
+   "brightWhite": 0.0044
+  },
+  {
+   "file": "thunderstorm-outdoor-960x544.png",
+   "sha256": "5136344a7f8d78eb21efe943915598c085814f20584b46a499df22a86d80dbac",
+   "meanLuminance": 51.387,
+   "blueBias": -1.966,
+   "blueStreak": 0.0385,
+   "brightWhite": 0.0046
+  },
+  {
+   "file": "foggy-outdoor-960x544.png",
+   "sha256": "75c95504fc85c7edd9b5328aad2dcdf2f2e3de10ac386814ebcad48cb5a8bb24",
+   "meanLuminance": 52.203,
+   "blueBias": -1.864,
+   "blueStreak": 0.0385,
+   "brightWhite": 0.0045
+  },
+  {
+   "file": "sunny-outdoor-night-480x272.png",
+   "sha256": "74bdbf68b27978e8b26c9234d4676cd9836916e3a1d13f2c7a9d14dfa21861ea",
+   "meanLuminance": 51.148,
+   "blueBias": 61.062,
+   "blueStreak": 0,
+   "brightWhite": 0
+  },
+  {
+   "file": "rain-outdoor-night-480x272.png",
+   "sha256": "fa838f47332b7bc863b5d6bc43fcbf76f791d3f9cdcd6e7436c77040438fdb51",
+   "meanLuminance": 51.679,
+   "blueBias": 60.999,
+   "blueStreak": 0.0024,
+   "brightWhite": 0
+  },
+  {
+   "file": "snow-outdoor-night-480x272.png",
+   "sha256": "d7777a23000503578279f2bece553618c2167cb662e4f10501a45b7178f1ad62",
+   "meanLuminance": 51.385,
+   "blueBias": 60.99,
+   "blueStreak": 0.0011,
+   "brightWhite": 0
+  },
+  {
+   "file": "foggy-outdoor-night-480x272.png",
+   "sha256": "b32866395a81af827e866f236a387f674d1f108ade35374ca2d9287bd317ab56",
+   "meanLuminance": 54.459,
+   "blueBias": 60.133,
+   "blueStreak": 0.0015,
+   "brightWhite": 0
+  }
+ ]
+}

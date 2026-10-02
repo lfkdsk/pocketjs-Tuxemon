@@ -26,7 +26,7 @@
 # A nonzero diff on a handful of event frames (button presses, map
 # transfers) is a one-time heap-layout perturbation from the branch's
 # boot-time footprint, not a per-frame steady-state cost; it is documented
-# in findings/WX1.md and kept. A diff that appears on ordinary background
+# as one-time event allocations and kept. A diff that appears on ordinary background
 # frames, or grows window over window, is a real regression.
 #
 # Args:
