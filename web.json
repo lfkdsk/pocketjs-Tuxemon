@@ -4,7 +4,7 @@
   "games": {
     "pocket-tuxemon": {
       "title": "Pocket Tuxemon",
-      "description": "Play the Spyder campaign from the new-game bedroom to the recovered hospital cure — 263 imported maps with NPCs, dialogue, shops and real battles. Use the chapter buttons to jump into any story beat, or warp to any map.",
+      "description": "Play the Spyder campaign from the new-game bedroom through the Omnichannel Radio Tower broadcast — 263 imported maps with NPCs, dialogue, shops and real battles. Use the chapter buttons to jump into any story beat, or warp to any map.",
       "controls": [
         {
           "button": "DPAD",
@@ -117,8 +117,22 @@
         {
           "id": "hospital-cure",
           "title": "Hospital cure",
-          "description": "The recovered cure at the hospital — the mainline's end.",
+          "description": "Recover the cure at the quarantined Candy Town hospital.",
           "preview": "docs/screenshots/chapters/hospital-cure-480x272.png",
+          "autoplay": true
+        },
+        {
+          "id": "omnichannel-open",
+          "title": "Omnichannel passage",
+          "description": "Open the first-floor passage and receive the Spyder pass.",
+          "preview": "docs/screenshots/chapters/omnichannel-open-480x272.png",
+          "autoplay": true
+        },
+        {
+          "id": "radio-broadcast",
+          "title": "Radio Tower broadcast",
+          "description": "Defeat Beaverbrook and make the Omnichannel broadcast.",
+          "preview": "docs/screenshots/chapters/radio-broadcast-480x272.png",
           "autoplay": true
         }
       ]

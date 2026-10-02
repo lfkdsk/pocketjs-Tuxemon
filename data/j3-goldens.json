@@ -1,0 +1,336 @@
+{
+  "format": "pocket-tuxemon/j3-goldens/v1",
+  "baseFrames": 172964,
+  "segmentTapeSha256": "25e8d4abaf4522efb517a348b90f99265b3d9857fda8e1773b156c380e793dc0",
+  "combinedTapeSha256": "1e46018e9d9c7cdc76d4a3e1410ce37aae00fbad615237b9efee169f1675606d",
+  "frames": [
+    {
+      "name": "omnichannel-wall",
+      "frame": 7809,
+      "mergedFrame": 180773,
+      "map": "spyder_omnichannel1",
+      "position": [
+        3,
+        17
+      ],
+      "width": 480,
+      "height": 272,
+      "file": "j3-omnichannel-wall.480x272.png",
+      "rgbaFnv1a": "031f6b5a",
+      "pngSha256": "9ad8b927ee7b876a17378881a9f982f5d69e6e7880afd81973b4a34343054f75",
+      "camera": [
+        0,
+        64
+      ],
+      "story": {
+        "hospitalCure": 1,
+        "hospitalBillie": 1,
+        "nurseSpyder": 1,
+        "spyderPass": 1,
+        "omnichannelReadyWall": 1,
+        "omnichannel1Wall": 1,
+        "beaverbrookWon": false,
+        "kernelQuest": 0,
+        "omnichannelRadioAnnounce": 0
+      },
+      "player": {
+        "tile": [
+          3,
+          17
+        ],
+        "pixel": [
+          48,
+          272
+        ],
+        "facing": 1,
+        "phase": 0,
+        "image": "assets/characters/player-adventurer-idle-1.png",
+        "height": 32
+      },
+      "actor": {
+        "id": "npc_spyder_omnichannel_danita",
+        "tile": [
+          2,
+          17
+        ],
+        "pixel": [
+          32,
+          272
+        ],
+        "facing": 3,
+        "phase": 0,
+        "sprite": "npc.nurse",
+        "image": "assets/characters/npc-npc-nurse-idle-3.png",
+        "height": 32
+      }
+    },
+    {
+      "name": "radio-tower-entry",
+      "frame": 11650,
+      "mergedFrame": 184614,
+      "map": "spyder_radiotower",
+      "position": [
+        2,
+        17
+      ],
+      "width": 480,
+      "height": 272,
+      "file": "j3-radio-tower-entry.480x272.png",
+      "rgbaFnv1a": "a7bc3d42",
+      "pngSha256": "3756d240add78fdb95ccd762bd748970336043f0325a2fe35f58314b45f2f6b3",
+      "camera": [
+        0,
+        64
+      ],
+      "story": {
+        "hospitalCure": 1,
+        "hospitalBillie": 1,
+        "nurseSpyder": 1,
+        "spyderPass": 1,
+        "omnichannelReadyWall": 1,
+        "omnichannel1Wall": 1,
+        "beaverbrookWon": false,
+        "kernelQuest": 0,
+        "omnichannelRadioAnnounce": 0
+      },
+      "player": {
+        "tile": [
+          2,
+          17
+        ],
+        "pixel": [
+          32,
+          272
+        ],
+        "facing": 2,
+        "phase": 0,
+        "image": "assets/characters/player-adventurer-idle-2.png",
+        "height": 32
+      },
+      "actor": {
+        "id": "npc_spyder_omnichannel_beaverbrook",
+        "tile": [
+          9,
+          12
+        ],
+        "pixel": [
+          144,
+          192
+        ],
+        "facing": 0,
+        "phase": 0,
+        "sprite": "npc.ceo",
+        "image": "assets/characters/npc-npc-ceo-idle-0.png",
+        "height": 32
+      }
+    },
+    {
+      "name": "radio-broadcast",
+      "frame": 12979,
+      "mergedFrame": 185943,
+      "map": "spyder_radiotower",
+      "position": [
+        9,
+        5
+      ],
+      "width": 480,
+      "height": 272,
+      "file": "j3-radio-broadcast.480x272.png",
+      "rgbaFnv1a": "188a8c3d",
+      "pngSha256": "dac4150374ed533f10865c45d319be32dd2c3db97afc34c9017f46179a57ffb1",
+      "camera": [
+        0,
+        0
+      ],
+      "story": {
+        "hospitalCure": 1,
+        "hospitalBillie": 1,
+        "nurseSpyder": 1,
+        "spyderPass": 1,
+        "omnichannelReadyWall": 1,
+        "omnichannel1Wall": 1,
+        "beaverbrookWon": true,
+        "kernelQuest": 2,
+        "omnichannelRadioAnnounce": 1
+      },
+      "player": {
+        "tile": [
+          9,
+          5
+        ],
+        "pixel": [
+          144,
+          80
+        ],
+        "facing": 2,
+        "phase": 0,
+        "image": "assets/characters/player-adventurer-idle-2.png",
+        "height": 32
+      }
+    },
+    {
+      "name": "omnichannel-wall",
+      "frame": 7809,
+      "mergedFrame": 180773,
+      "map": "spyder_omnichannel1",
+      "position": [
+        3,
+        17
+      ],
+      "width": 960,
+      "height": 544,
+      "file": "j3-omnichannel-wall.960x544.png",
+      "rgbaFnv1a": "a4485c58",
+      "pngSha256": "23b97549da17a2d93245db856130f555d21a9c9fe9ff35ee603f2ff7184093af",
+      "camera": [
+        0,
+        0
+      ],
+      "story": {
+        "hospitalCure": 1,
+        "hospitalBillie": 1,
+        "nurseSpyder": 1,
+        "spyderPass": 1,
+        "omnichannelReadyWall": 1,
+        "omnichannel1Wall": 1,
+        "beaverbrookWon": false,
+        "kernelQuest": 0,
+        "omnichannelRadioAnnounce": 0
+      },
+      "player": {
+        "tile": [
+          3,
+          17
+        ],
+        "pixel": [
+          48,
+          272
+        ],
+        "facing": 1,
+        "phase": 0,
+        "image": "assets/characters/player-adventurer-idle-1.png",
+        "height": 32
+      },
+      "actor": {
+        "id": "npc_spyder_omnichannel_danita",
+        "tile": [
+          2,
+          17
+        ],
+        "pixel": [
+          32,
+          272
+        ],
+        "facing": 3,
+        "phase": 0,
+        "sprite": "npc.nurse",
+        "image": "assets/characters/npc-npc-nurse-idle-3.png",
+        "height": 32
+      }
+    },
+    {
+      "name": "radio-tower-entry",
+      "frame": 11650,
+      "mergedFrame": 184614,
+      "map": "spyder_radiotower",
+      "position": [
+        2,
+        17
+      ],
+      "width": 960,
+      "height": 544,
+      "file": "j3-radio-tower-entry.960x544.png",
+      "rgbaFnv1a": "0df15ba4",
+      "pngSha256": "f44784b5031b5d9c7268380d043a8dd86c95e83f7458a254d005c3b9dc7c0975",
+      "camera": [
+        0,
+        0
+      ],
+      "story": {
+        "hospitalCure": 1,
+        "hospitalBillie": 1,
+        "nurseSpyder": 1,
+        "spyderPass": 1,
+        "omnichannelReadyWall": 1,
+        "omnichannel1Wall": 1,
+        "beaverbrookWon": false,
+        "kernelQuest": 0,
+        "omnichannelRadioAnnounce": 0
+      },
+      "player": {
+        "tile": [
+          2,
+          17
+        ],
+        "pixel": [
+          32,
+          272
+        ],
+        "facing": 2,
+        "phase": 0,
+        "image": "assets/characters/player-adventurer-idle-2.png",
+        "height": 32
+      },
+      "actor": {
+        "id": "npc_spyder_omnichannel_beaverbrook",
+        "tile": [
+          9,
+          12
+        ],
+        "pixel": [
+          144,
+          192
+        ],
+        "facing": 0,
+        "phase": 0,
+        "sprite": "npc.ceo",
+        "image": "assets/characters/npc-npc-ceo-idle-0.png",
+        "height": 32
+      }
+    },
+    {
+      "name": "radio-broadcast",
+      "frame": 12979,
+      "mergedFrame": 185943,
+      "map": "spyder_radiotower",
+      "position": [
+        9,
+        5
+      ],
+      "width": 960,
+      "height": 544,
+      "file": "j3-radio-broadcast.960x544.png",
+      "rgbaFnv1a": "1ac0a2e6",
+      "pngSha256": "d9c9d7310bf84e0fa60ef4b8e78ef2d2611aefb963980741c54a87ac5581d5a1",
+      "camera": [
+        0,
+        0
+      ],
+      "story": {
+        "hospitalCure": 1,
+        "hospitalBillie": 1,
+        "nurseSpyder": 1,
+        "spyderPass": 1,
+        "omnichannelReadyWall": 1,
+        "omnichannel1Wall": 1,
+        "beaverbrookWon": true,
+        "kernelQuest": 2,
+        "omnichannelRadioAnnounce": 1
+      },
+      "player": {
+        "tile": [
+          9,
+          5
+        ],
+        "pixel": [
+          144,
+          80
+        ],
+        "facing": 2,
+        "phase": 0,
+        "image": "assets/characters/player-adventurer-idle-2.png",
+        "height": 32
+      }
+    }
+  ]
+}

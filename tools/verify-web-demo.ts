@@ -1,7 +1,7 @@
 // tools/verify-web-demo.ts — drive the built web site's demo controls in
 // headless Chrome and prove every acceptance behavior:
 //
-//   1. HTML chapter buttons (>=3, including the final hospital-cure chapter)
+//   1. HTML chapter buttons (>=3, including the final radio-broadcast chapter)
 //      jump the running game in place — no page reload — and highlight.
 //   2. Deep links ?chapter=, ?map=&x=&y=, ?autoplay=&speed=2 each apply.
 //   3. An invalid chapter id is a visible error, not a crash or a reload.
@@ -73,12 +73,13 @@ function loadChapters(): { chapters: ChapterRef[]; combined: number[] } {
   const gb6 = JSON.parse(readFileSync(join(ROOT, "data/gb6-mainline-journey.json"), "utf8"));
   const j1 = JSON.parse(readFileSync(join(ROOT, "data/j1-captainreturns-journey.json"), "utf8"));
   const j2 = JSON.parse(readFileSync(join(ROOT, "data/j2-hospitalcure-journey.json"), "utf8"));
+  const j3 = JSON.parse(readFileSync(join(ROOT, "data/j3-omnichannelradioannounce-journey.json"), "utf8"));
   return {
     chapters: file.chapters.map((c: any) => ({
       id: c.id, map: c.map, frame: c.frame, timelineFrame: c.timelineFrame,
       held: c.held, suffixFrames: c.suffixFrames,
     })),
-    combined: [...gb6.masks, ...j1.masks, ...j2.masks],
+    combined: [...gb6.masks, ...j1.masks, ...j2.masks, ...j3.masks],
   };
 }
 
@@ -277,6 +278,7 @@ const chapterClicks: [string, string][] = [
   ["paper-town", "spyder_paper_town"],
   ["starter", "spyder_paper_town"],
   ["hospital-cure", "spyder_candy_hospital3"],
+  ["radio-broadcast", "spyder_radiotower"],
 ];
 for (const [chapterId, wantMap] of chapterClicks) {
   const before = await evaluate(`globalThis.__rpgSessionState.frame`);
@@ -301,6 +303,17 @@ for (const [chapterId, wantMap] of chapterClicks) {
       `bedroom palette ${pct(canvas.bedroomPalette)}${repeats ? `, same canvas as ${repeats[0]}` : ""}`);
   chapterCanvases.set(chapterId, canvas);
   await shot(`chapter-${chapterId}`);
+}
+
+{
+  const story = await evaluate(`({
+    announce: __rpgSessionState.sw.variables["v.omnichannelradioannounce"] || 0,
+    kernel: __rpgSessionState.sw.variables["v.kernelquest"] || 0,
+    won: __rpgSessionState.sw.switches["bo.spyder_omnichannel_beaverbrook.won"] === true
+  })`);
+  check("radio-broadcast chapter carries the J3 terminal story state",
+    story.announce === 1 && story.kernel === 2 && story.won === true,
+    `announce=${story.announce} kernel=${story.kernel} Beaverbrook=${story.won}`);
 }
 
 // --- 2. Deep links ----------------------------------------------------------

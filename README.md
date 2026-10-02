@@ -24,18 +24,20 @@ summary:
   NPC walkers, dialogue, cutscene routes and map transfers. The Spyder
   campaign plays from the bedroom through Paper Town, Cotton Town, City Park,
   the north end of Route 3, Route 4 and Flower City to the Captain's return
-  in the Mansion and on through Candy Town to the hospital cure — 172,964
-  frames at 60 Hz for the full mainline, driven by
+  in the Mansion and on through Candy Town, the hospital cure and Omnichannel
+  to the Radio Tower broadcast — 185,944 frames at 60 Hz for the full
+  mainline, driven by
   deterministic autoplay tapes — and every imported input lock is executed
   to its unlock.
 - **Battles (P2, complete):** the battle database and 590 battle
   textures are imported from Tuxemon's YAML, and `battle/` is a pure
   reducer whose results match Tuxemon's own Python engine on 8,560 recorded
   battles; monsters spawn draw-for-draw like Tuxemon's. The mainline is
-  played for real end to end: the autoplay tapes fight 175 real battles
+  played for real end to end: the autoplay tapes fight 188 real battles
   (107 on the Route 3 mainline — 22 trainer + 85 wild — 14 on the
   Captain-return continuation — 10 trainer + 4 wild — and 54 on the way to
-  the hospital cure — 50 trainer + 4 wild), and every trainer
+  the hospital cure — 50 trainer + 4 wild — and 13 more trainers through
+  Omnichannel and the Radio Tower), and every trainer
   battle enters Battle Processing and ends `won` with its `battle_outcome`
   written back. The frozen 31-minute 60 Hz tape (110,866 frames / 30 min 48 s)
   replays byte-identical at 60, 30 and 20 Hz, and both failure paths are
@@ -54,7 +56,7 @@ summary:
   same indexed, lazily loaded battle-image shards as combat.
 - **Performance:** compact map shards use 4,957,030 B instead of 10,131,297 B
   of canonical JSON, and indexed battle art plus its lazy database occupies
-  3,516,960 B in the pak. The Web game pak is 48,248,160 B; before compact
+  3,516,960 B in the pak. The Web game pak is 48,337,296 B; before compact
   maps and indexed battle art it was 66,791,328 B, measured on the tree just
   before day and night were added. The all-image battle encoding is
   2,206,076 B on disk and 13,394,688 B if every PSM_T8 texture were decoded,
@@ -66,7 +68,10 @@ summary:
   21.625/22.671 ms at 960×544; the corresponding boundary-inclusive maxima
   are 29.593/24.142 ms and 25.951/32.505 ms. Every run stays below the 250 ms
   startup and 50 ms per-frame budgets, with no in-tick collections or frames
-  over budget.
+  over budget. A production continuation benchmark restores the hospital-cure
+  chapter and replays the remaining 12,991 frames and 13 battles to the radio
+  broadcast; its worst core/sampled frames are 46.316/46.354 ms at 480×272
+  and 46.142/46.212 ms at 960×544.
 - **Import coverage:** 89.3% of Tuxemon action uses and 96.3% of condition
   uses map natively to kit commands; 97.3% / 96.7% are executable (native,
   degraded, or a deliberate placeholder). The full per-type breakdown is in
@@ -166,8 +171,8 @@ The game has an in-game demo menu (**SELECT**) with three pages. The web
 player's **Demo controls** panel below the game covers chapters and autoplay;
 map warp is in the in-game menu, or use a `?map=` link (below).
 
-- **Chapters** — thirteen buttons from the new-game bedroom to the recovered
-  hospital cure. Click one (or pick it in the menu) to restore that save and
+- **Chapters** — fifteen buttons from the new-game bedroom to the Radio Tower
+  broadcast. Click one (or pick it in the menu) to restore that save and
   keep playing from there, without reloading the page. The active chapter
   stays highlighted.
 - **Map warp** — jump to any of the 263 imported maps. Maps with a safe
@@ -179,13 +184,13 @@ map warp is in the in-game menu, or use a `?map=` link (below).
 The same actions are available as deep links, so a specific scene can be
 bookmarked or shared:
 
-- `?chapter=<id>` — restore a chapter for live play (e.g. `?chapter=hospital-cure`)
+- `?chapter=<id>` — restore a chapter for live play (e.g. `?chapter=radio-broadcast`)
 - `?map=<id>&x=<tile>&y=<tile>` — warp to a map (e.g. `?map=spyder_cotton_town&x=16&y=17`)
 - `?autoplay=<id>&speed=<1|2|4>` — start a chapter on autoplay (e.g. `?autoplay=starter&speed=2`)
 
 An invalid id (e.g. `?chapter=missing`) is a visible `BAD DEMO LINK` error,
-not a crash. The chapter snapshots and the 172,964-frame tape are packed into
-the pak (a nibble-dictionary tape binary, 86,510 B) and read on demand, so the
+not a crash. The chapter snapshots and the 185,944-frame tape are packed into
+the pak (a nibble-dictionary tape binary, 93,000 B) and read on demand, so the
 JS bundle keeps only a tiny chapter index; the tape is decoded once, on the
 first chapter selection, and every chapter plays a window of it.
 `bun tools/verify-web-demo.ts` drives all of the above in headless Chrome,
@@ -210,8 +215,10 @@ bun run verify:g6:determinism   # two imports are byte-identical
 bun run verify:gb6:mainline     # replay the Route 3 mainline tape
 bun run verify:j1:mainline      # replay the Captain-return tape
 bun run verify:j2:mainline      # replay the hospital-cure tape
+bun run verify:j3:mainline      # replay through the Radio Tower broadcast
 bun run bench:g6:quickjs        # short two-viewport QuickJS performance gate
 bun run bench:gb6:quickjs       # full 480x272 QuickJS journey gate
+bun run bench:j3:quickjs        # hospital chapter -> radio, both viewports
 bun run build:psp               # release EBOOT plus external asset pak
 ```
 

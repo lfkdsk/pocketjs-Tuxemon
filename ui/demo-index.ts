@@ -9,92 +9,106 @@ export const DEMO_CHAPTER_INDEX = [
     "id": "bedroom",
     "title": "Bedroom (new game)",
     "frame": 0,
-    "suffixFrames": 172964,
+    "suffixFrames": 185944,
     "timelineFrame": 0
   },
   {
     "id": "paper-town",
     "title": "Paper Town",
     "frame": 1399,
-    "suffixFrames": 171565,
+    "suffixFrames": 184545,
     "timelineFrame": 1399
   },
   {
     "id": "before-billie",
     "title": "Before the first Billie battle",
     "frame": 1924,
-    "suffixFrames": 171040,
+    "suffixFrames": 184020,
     "timelineFrame": 1924
   },
   {
     "id": "starter",
     "title": "Starter chosen",
     "frame": 3692,
-    "suffixFrames": 169272,
+    "suffixFrames": 182252,
     "timelineFrame": 3692
   },
   {
     "id": "route-1",
     "title": "Route 1",
     "frame": 3990,
-    "suffixFrames": 168974,
+    "suffixFrames": 181954,
     "timelineFrame": 3990
   },
   {
     "id": "cotton-town",
     "title": "Cotton Town",
     "frame": 5402,
-    "suffixFrames": 167562,
+    "suffixFrames": 180542,
     "timelineFrame": 5402
   },
   {
     "id": "city-park",
     "title": "City Park",
     "frame": 45311,
-    "suffixFrames": 127653,
+    "suffixFrames": 140633,
     "timelineFrame": 45311
   },
   {
     "id": "route-3-north",
     "title": "Route 3 north end",
     "frame": 110866,
-    "suffixFrames": 62098,
+    "suffixFrames": 75078,
     "timelineFrame": 110866
   },
   {
     "id": "flower-city",
     "title": "Flower City",
     "frame": 115644,
-    "suffixFrames": 57320,
+    "suffixFrames": 70300,
     "timelineFrame": 115644
   },
   {
     "id": "captain-returns",
     "title": "Captain's return",
     "frame": 122416,
-    "suffixFrames": 50548,
+    "suffixFrames": 63528,
     "timelineFrame": 122416
   },
   {
     "id": "candy-town",
     "title": "Candy Town",
     "frame": 165128,
-    "suffixFrames": 7836,
+    "suffixFrames": 20816,
     "timelineFrame": 165128
   },
   {
     "id": "greenwash-aardant",
     "title": "Greenwash (Aardant acquired)",
     "frame": 171514,
-    "suffixFrames": 1450,
+    "suffixFrames": 14430,
     "timelineFrame": 171514
   },
   {
     "id": "hospital-cure",
     "title": "Hospital cure",
     "frame": 172953,
-    "suffixFrames": 11,
+    "suffixFrames": 12991,
     "timelineFrame": 172953
+  },
+  {
+    "id": "omnichannel-open",
+    "title": "Omnichannel passage opened",
+    "frame": 180761,
+    "suffixFrames": 5183,
+    "timelineFrame": 180761
+  },
+  {
+    "id": "radio-broadcast",
+    "title": "Radio Tower broadcast",
+    "frame": 185921,
+    "suffixFrames": 23,
+    "timelineFrame": 185921
   }
 ] as const;
 

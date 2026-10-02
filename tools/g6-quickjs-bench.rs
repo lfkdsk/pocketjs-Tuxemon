@@ -1211,6 +1211,21 @@ mod g6_quickjs_bench {
         assert!(copied > 0, "benchmark must stage the sharded terrain-stream tables");
     }
 
+    /// Stages the packed chapter snapshots and input tape used by an optional
+    /// continuation start. Production desktop launchers copy these entries
+    /// into data.fs alongside the streamed repositories; the benchmark host
+    /// must mirror that layout before asking the public demo hook to jump.
+    fn seed_demo(source: &Path, data_root: &Path) {
+        let app_data = data_root.join(BENCH_APP_ID).join("data");
+        let destination = app_data.join("demo");
+        let _ = std::fs::remove_dir_all(&destination);
+        std::fs::create_dir_all(&destination).expect("create benchmark demo data directory");
+        for name in ["chapters.json", "tape.bin"] {
+            std::fs::copy(source.join(name), destination.join(name))
+                .unwrap_or_else(|error| panic!("copy demo entry {name}: {error}"));
+        }
+    }
+
     #[test]
     #[ignore]
     fn journey() {
@@ -1233,6 +1248,10 @@ mod g6_quickjs_bench {
         seed_npc_src(&npc_src, &data);
         let terrain_stream = PathBuf::from(std::env::var("G6_TERRAIN_STREAM").expect("G6_TERRAIN_STREAM"));
         seed_terrain_stream(&terrain_stream, &data);
+        if std::env::var("G6_START_CHAPTER").is_ok() {
+            let demo = PathBuf::from(std::env::var("G6_DEMO").expect("G6_DEMO"));
+            seed_demo(&demo, &data);
+        }
 
         let boot_start = Instant::now();
         let (runtime, stages) =
@@ -1256,6 +1275,43 @@ mod g6_quickjs_bench {
         if sample_structural {
             bench.install_structural_counter();
         }
+        // Continuation benches can restore a committed demo chapter before
+        // frame zero. The first idle frame remains the real startup-to-first-
+        // paint probe; a second unmeasured host frame applies the queued jump.
+        // Every sample below then belongs to the continuation tape. Without
+        // G6_START_CHAPTER this is exactly the original fresh-game path.
+        let chapter_startup = std::env::var("G6_START_CHAPTER").ok().map(|chapter| {
+            let first_paint = bench.frame(0, 0, None, true);
+            let first_paint_ms = boot_start.elapsed().as_secs_f64() * 1_000.0;
+            assert!(
+                bench.boolean("typeof globalThis.__rpgkitDemo?.jump === 'function'"),
+                "G6_START_CHAPTER requires the production demo hook",
+            );
+            bench.unit(&format!(
+                "globalThis.__rpgkitDemo.jump({})",
+                serde_json::to_string(&chapter).unwrap(),
+            ));
+            let _ = bench.frame(0, 0, None, true);
+            let expected = journey.maps.first().expect("continuation map checkpoint").map.as_str();
+            let actual = bench.state().0;
+            if actual != expected {
+                let text = bench.rt.surface.with_ui(|ui| {
+                    fn visit(ui: &pocketjs_core::Ui, id: i32, out: &mut Vec<String>) {
+                        if let Some(value) = ui.node_text(id).filter(|value| !value.is_empty()) {
+                            out.push(value.to_owned());
+                        }
+                        for child in ui.node_children(id).to_vec() {
+                            visit(ui, child, out);
+                        }
+                    }
+                    let mut out = Vec::new();
+                    visit(ui, pocketjs_core::spec::ROOT_ID, &mut out);
+                    out.join(" | ")
+                });
+                panic!("chapter {chapter:?} restored {actual:?}, expected {expected:?}; UI: {text}");
+            }
+            (first_paint, first_paint_ms)
+        });
         if sample_structural {
             assert!(journey.maps.is_empty() || journey.battles.is_empty(),
                 "short probe mode must classify live state rather than frozen metadata");
@@ -1299,13 +1355,16 @@ mod g6_quickjs_bench {
         }
         let replay_started = Instant::now();
         let first = bench.frame(0, journey.masks[0], frozen_at(0), forced_hashes.contains(&0));
-        let first_paint_ms = boot_start.elapsed().as_secs_f64() * 1_000.0;
+        let (first_paint, first_paint_ms) = chapter_startup.unwrap_or_else(|| {
+            let first_paint_ms = boot_start.elapsed().as_secs_f64() * 1_000.0;
+            (first.clone(), first_paint_ms)
+        });
         let (used, malloc, objects) = qjs_memory(&bench.rt.guest);
         println!(
             "BOOT viewport={viewport} gc_mode={} boot={boot_ms:.3}ms first_qjs={:.3}ms first_total={:.3}ms startup_to_first={first_paint_ms:.3}ms qjs_used={:.2}MiB qjs_malloc={:.2}MiB objects={objects}",
             bench.gc_mode.label(),
-            first.js_ms,
-            first.js_ms + first.core_ms + first.draw_ms,
+            first_paint.js_ms,
+            first_paint.js_ms + first_paint.core_ms + first_paint.draw_ms,
             used as f64 / 1_048_576.0,
             malloc as f64 / 1_048_576.0,
         );

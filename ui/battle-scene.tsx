@@ -21,9 +21,7 @@ import {
   LazyImage,
   ListMenu,
   MessageBand,
-  NO_EFFECT,
-  SpriteSlot,
-  StatBar,
+  barFillWidth,
   type CommandCell,
   type ListMenuRow,
   type TileImageSource,
@@ -119,6 +117,71 @@ function wrapMessage(message: string, columns: number): [string, string] {
 function hpColour(current: number, maximum: number): string {
   const ratio = maximum > 0 ? current / maximum : 0;
   return ratio > 0.5 ? "#49c96d" : ratio > 0.2 ? "#f2c94c" : "#ed5b5b";
+}
+
+/** Battle-local positioned stat bar. The generic kit StatBar needs an
+ * absolute wrapper at each of our three fixed canvas positions; folding that
+ * wrapper into the row saves one retained node per bar on the cold scene
+ * mount while preserving the exact bar/text geometry. */
+function BattleStatBar(props: {
+  x: number;
+  y: number;
+  current: number;
+  max: number;
+  width: number;
+  height: number;
+  fill: string;
+  track: string;
+  showNumbers?: boolean;
+  numbersWidth?: number;
+  debugName: string;
+}) {
+  const fillScale = createMemo(() => props.width > 0
+    ? barFillWidth(props.current, props.max, props.width) / props.width
+    : 0);
+  const numberOffset = () => props.showNumbers ? (14 - props.height) / 2 : 0;
+  return (
+    <View
+      class="absolute"
+      style={{
+        posType: 1,
+        insetL: props.x,
+        insetT: props.y + numberOffset(),
+        width: props.width,
+        height: props.height,
+        bgColor: props.track,
+      }}
+      debugName={props.debugName}
+    >
+      <View
+        style={{
+          width: props.width,
+          height: props.height,
+          bgColor: props.fill,
+          scaleX: fillScale(),
+          originX: -0.5,
+        }}
+        debugName={`${props.debugName}-fill`}
+      />
+      {props.showNumbers ? (
+        <Text
+          class="absolute text-xs"
+          style={{
+            posType: 1,
+            textColor: UI_THEME.ink,
+            lineHeight: 14,
+            height: 14,
+            insetL: props.width + 6,
+            insetT: -numberOffset(),
+            ...(props.numbersWidth === undefined ? {} : { width: props.numbersWidth }),
+          }}
+          debugName={`${props.debugName}-numbers`}
+        >
+          {`${Math.max(0, Math.round(props.current))} / ${Math.round(props.max)}`}
+        </Text>
+      ) : null}
+    </View>
+  );
 }
 
 function genderMark(gender: string): string {
@@ -351,38 +414,30 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
         class="absolute overflow-hidden"
         style={{
           posType: 1,
-          insetL: rect.x,
+          insetL: rect.x + (rect.width - 64 * sourceScale()) / 2,
           translateX: pose().offsetX,
           insetT: rect.y,
-          width: rect.width,
+          width: 64 * sourceScale(),
           height: rect.height,
           opacity: pose().opacity,
         }}
         debugName={`${side === 0 ? "player" : "enemy"}-trainer-clip`}
       >
-        <View
-          class="absolute overflow-hidden"
+        <LazyImage
+          src={activeImageSource(ref())}
+          cache={imageCache}
+          active={props.active}
+          class="absolute"
           style={{
             posType: 1,
-            insetL: (rect.width - 64 * sourceScale()) / 2,
+            insetL: 0,
             insetT: 0,
-            width: 64 * sourceScale(),
-            height: rect.height,
+            translateX: -sourceX() * sourceScale(),
+            width: ref().width * sourceScale(),
+            height: ref().height * sourceScale(),
           }}
-        >
-          <SpriteSlot
-            src={activeImageSource(ref())}
-            cache={imageCache}
-            active={props.active}
-            x={-sourceX() * sourceScale()}
-            y={0}
-            width={ref().width * sourceScale()}
-            height={ref().height * sourceScale()}
-            effect={NO_EFFECT}
-            nowTick={runtime().eventTicks}
-            debugName={`${side === 0 ? "player" : "enemy"}-trainer`}
-          />
-        </View>
+          debugName={`${side === 0 ? "player" : "enemy"}-trainer`}
+        />
       </View>
     );
   };
@@ -398,6 +453,10 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
   const animationPage = createMemo(() => animation().page ?? environment().partyIcons.icon_empty!);
   const animationRect = createMemo(() => runtime().battle.parties[0].some((monster) => monster.uid === animation().target)
     ? R.playerMonster : R.enemyMonster);
+
+  // Presentation visibility changes every few reference ticks. Keep these
+  // nodes mounted and switch only their opacity/image so steady battle frames
+  // never pay renderer lifecycle work.
 
   const island = (side: "player" | "enemy") => {
     const rect = side === "player" ? R.playerIsland : R.enemyIsland;
@@ -426,6 +485,7 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
     const hp = side === 0 ? R.playerHp : R.enemyHp;
     const status = side === 0 ? R.playerStatus : R.enemyStatus;
     const icon = createMemo(() => monster().status ? runtime().visuals.statusIcons[monster().status!.slug] : undefined);
+    const statusRef = createMemo(() => icon() ?? environment().partyIcons.icon_empty!);
     const label = createMemo(() => `${monsterName(monster())}  Lv${shownLevel()} ${genderMark(monster().gender)}`);
     return (
       <>
@@ -452,33 +512,34 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
         >
           {label()}
         </Text>
-        <View class="absolute" style={{ posType: 1, insetL: hp.x, insetT: hp.y }}>
-          <StatBar
-            current={shownHp()}
-            max={shownMaxHp()}
-            width={hp.width}
-            height={hp.height}
-            fill={hpColour(shownHp(), shownMaxHp())}
-            track="#263b43"
-            showNumbers={side === 0}
-            numbersWidth={BATTLE_BASE_WIDTH - hp.x - hp.width - 6}
-            theme={UI_THEME}
-            debugName={`${side === 0 ? "player" : "enemy"}-hp`}
-          />
-        </View>
-        <View
-          class="absolute overflow-hidden"
-          style={{ posType: 1, insetL: status.x, insetT: status.y, width: status.width, height: status.height, opacity: icon() ? 1 : 0 }}
-        >
-          <LazyImage
-            src={activeImageSource(icon() ?? environment().partyIcons.icon_empty!)}
-            cache={imageCache}
-            active={props.active}
-            class="absolute"
-            style={{ posType: 1, insetL: 0, insetT: 0, width: (icon() ?? environment().partyIcons.icon_empty!).width * 2, height: (icon() ?? environment().partyIcons.icon_empty!).height * 2 }}
-            debugName={`${side === 0 ? "player" : "enemy"}-status`}
-          />
-        </View>
+        <BattleStatBar
+          x={hp.x}
+          y={hp.y}
+          current={shownHp()}
+          max={shownMaxHp()}
+          width={hp.width}
+          height={hp.height}
+          fill={hpColour(shownHp(), shownMaxHp())}
+          track="#263b43"
+          showNumbers={side === 0}
+          numbersWidth={BATTLE_BASE_WIDTH - hp.x - hp.width - 6}
+          debugName={`${side === 0 ? "player" : "enemy"}-hp`}
+        />
+        <LazyImage
+          src={activeImageSource(statusRef())}
+          cache={imageCache}
+          active={props.active}
+          class="absolute"
+          style={{
+            posType: 1,
+            insetL: status.x,
+            insetT: status.y,
+            width: statusRef().width * 2,
+            height: statusRef().height * 2,
+            opacity: icon() ? 1 : 0,
+          }}
+          debugName={`${side === 0 ? "player" : "enemy"}-status`}
+        />
       </>
     );
   };
@@ -581,49 +642,36 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
             debugName="battle-animation"
           />
         </View>
-        <View
-          class="absolute overflow-hidden"
+        <LazyImage
+          src={activeImageSource(ballRef())}
+          cache={imageCache}
+          active={props.active}
+          class="absolute"
           style={{
             posType: 1,
-            insetL: 0,
-            insetT: 0,
-            translateX: ball().x + ball().shake,
-            translateY: ball().y,
+            insetL: ball().x + ball().shake,
+            insetT: ball().y,
             width: ballSize(),
             height: ballSize(),
             opacity: ball().opacity,
           }}
-          debugName="battle-ball-clip"
-        >
-          <SpriteSlot
-            src={activeImageSource(ballRef())}
-            cache={imageCache}
-            active={props.active}
-            x={0}
-            y={0}
-            width={ballSize()}
-            height={ballSize()}
-            effect={NO_EFFECT}
-            nowTick={runtime().eventTicks}
-            debugName="battle-ball"
-          />
-        </View>
+          debugName="battle-ball"
+        />
         {hud(1)}
         {hud(0)}
         {partyTray(1)}
         {partyTray(0)}
-        <View class="absolute" style={{ posType: 1, insetL: R.playerXp.x, insetT: R.playerXp.y }}>
-          <StatBar
-            current={playerXp().current}
-            max={playerXp().max}
-            width={R.playerXp.width}
-            height={R.playerXp.height}
-            fill="#4faee8"
-            track="#263b43"
-            theme={UI_THEME}
-            debugName="player-xp"
-          />
-        </View>
+        <BattleStatBar
+          x={R.playerXp.x}
+          y={R.playerXp.y}
+          current={playerXp().current}
+          max={playerXp().max}
+          width={R.playerXp.width}
+          height={R.playerXp.height}
+          fill="#4faee8"
+          track="#263b43"
+          debugName="player-xp"
+        />
         <MessageBand
           lines={bandLines()}
           legend={presenting() ? "OK" : " "}

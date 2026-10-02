@@ -3,8 +3,13 @@
 // and every chapter windows that one decoded tape.
 
 import { describe, expect, test } from "bun:test";
+import { readFileSync } from "node:fs";
 import { createDemoOptions } from "../ui/demo-tape.ts";
-import { DEMO_CHAPTER_INDEX, DEMO_TAPE_ENTRY } from "../ui/demo-index.ts";
+import {
+  DEMO_CHAPTER_INDEX,
+  DEMO_SNAPSHOTS_ENTRY,
+  DEMO_TAPE_ENTRY,
+} from "../ui/demo-index.ts";
 import { chapterTape, chapterTapeFrames } from "../vendor/pocket-rpgkit/src/ui/demo/runtime.ts";
 
 /** Raw-format tape (see decodeTape): frame i holds i & 0xffff. */
@@ -23,7 +28,7 @@ describe("demo chapter tapes", () => {
   const total = Math.max(...DEMO_CHAPTER_INDEX.map((entry) => entry.frame + entry.suffixFrames));
 
   test("one shared provider, read once, windowed without copies", () => {
-    expect(DEMO_CHAPTER_INDEX.length).toBe(13);
+    expect(DEMO_CHAPTER_INDEX.length as number).toBe(15);
     const reads: string[] = [];
     const options = createDemoOptions((entry) => {
       reads.push(entry);
@@ -50,5 +55,25 @@ describe("demo chapter tapes", () => {
     }
     options.chapters.forEach((chapter) => chapterTape(chapter));
     expect(reads).toEqual([DEMO_TAPE_ENTRY]);
+  });
+
+  test("chapter snapshots decode without browser TextDecoder globals", () => {
+    const authored = JSON.parse(readFileSync("data/chapters.json", "utf8")) as {
+      chapters: { id: string; snapshot: string }[];
+    };
+    const first = authored.chapters[0]!;
+    const bytes = Buffer.from(JSON.stringify({ snapshots: { [first.id]: first.snapshot } }));
+    const options = createDemoOptions((entry) => {
+      if (entry !== DEMO_SNAPSHOTS_ENTRY) throw new Error(`unexpected read ${entry}`);
+      return bytes;
+    });
+    const globals = globalThis as unknown as Record<string, unknown>;
+    const original = globals.TextDecoder;
+    try {
+      globals.TextDecoder = undefined;
+      expect((options.chapters[0]!.snapshot as { map: string }).map).toBe("spyder_bedroom");
+    } finally {
+      globals.TextDecoder = original;
+    }
   });
 });

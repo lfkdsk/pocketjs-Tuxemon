@@ -6,6 +6,7 @@
 // provider once and windows the decoded tape without copying it.
 
 import { decodeEnvelopeText, type SaveSnapshot } from "../vendor/pocket-rpgkit/src/engine/save.ts";
+import { utf8ToString } from "../vendor/pocket-rpgkit/vendor/pocketjs/framework/src/bytes.ts";
 import type { DemoChapter, DemoOptions, DemoSpawn } from "../vendor/pocket-rpgkit/src/ui/demo/types.ts";
 import {
   DEMO_CHAPTER_INDEX,
@@ -52,7 +53,7 @@ export function createDemoOptions(read: (entry: string) => Uint8Array): DemoOpti
   const tape = (): Uint16Array => decodeTape(read(DEMO_TAPE_ENTRY));
   const snapshots = (): Record<string, string> => {
     if (!snapshotsCache) {
-      const text = new TextDecoder().decode(read(DEMO_SNAPSHOTS_ENTRY));
+      const text = utf8ToString(read(DEMO_SNAPSHOTS_ENTRY));
       snapshotsCache = (JSON.parse(text) as { snapshots: Record<string, string> }).snapshots;
     }
     return snapshotsCache;

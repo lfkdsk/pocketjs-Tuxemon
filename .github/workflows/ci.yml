@@ -98,6 +98,10 @@ jobs:
           # `bun run verify:j2:full`.
           - name: Hospital-cure journey from frame zero at 60 Hz
             run: bun run verify:j2:mainline
+          # J3 adds its input-only continuation and replays all four segments
+          # from frame zero through the Omnichannel Radio Tower broadcast.
+          - name: Radio-broadcast journey from frame zero at 60 Hz
+            run: bun run verify:j3:mainline
           - name: Battle defeat and recovery journeys
             run: bun run verify:gb6:failures
           - name: Every imported input lock is executed to its unlock

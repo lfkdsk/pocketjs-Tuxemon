@@ -1,6 +1,6 @@
 // Bake chapter snapshots and thumbnails for the web demo menu.
 //
-// One reducer replay of the combined GB6+J1+J2 mainline tape picks named
+// One reducer replay of the combined GB6+J1+J2+J3 mainline tape picks named
 // checkpoints at safe points (canSave, no input lock, no fade). Each
 // checkpoint becomes a kit save envelope (validated through the same
 // decode/restore gate the game uses) plus the frame where its tape suffix
@@ -12,8 +12,9 @@
 //                                       # then suffix-replay every chapter
 //
 // The demo menu concatenates data/gb6-mainline-journey.json,
-// data/j1-captainreturns-journey.json and data/j2-hospitalcure-journey.json
-// masks and slices at `frame`: restore the envelope, set the global reducer
+// data/j1-captainreturns-journey.json, data/j2-hospitalcure-journey.json and
+// data/j3-omnichannelradioannounce-journey.json masks and slices at `frame`:
+// restore the envelope, set the global reducer
 // frame to `timelineFrame` (the envelope carries only the per-map
 // interpreter clock, not the global frame), then replay the suffix.
 // verifyChapterSuffixes() proves every committed chapter reaches the same
@@ -54,6 +55,7 @@ import {
 import type { Gb6JourneyResult } from "./gb6-journey.ts";
 import type { J1JourneyResult } from "./j1-journey.ts";
 import type { J2JourneyResult } from "./j2-journey.ts";
+import type { J3JourneyResult } from "./j3-journey.ts";
 import { readInlineProject } from "./generated-project.ts";
 
 export const ROOT = resolve(import.meta.dir, "..");
@@ -61,6 +63,7 @@ const BUNDLE = join(ROOT, "dist/main");
 const GB6_PATH = join(ROOT, "data/gb6-mainline-journey.json");
 const J1_PATH = join(ROOT, "data/j1-captainreturns-journey.json");
 const J2_PATH = join(ROOT, "data/j2-hospitalcure-journey.json");
+const J3_PATH = join(ROOT, "data/j3-omnichannelradioannounce-journey.json");
 export const CHAPTERS_PATH = join(ROOT, "data/chapters.json");
 export const THUMB_DIR = join(ROOT, "docs/screenshots/chapters");
 export const THUMB_REL = "docs/screenshots/chapters";
@@ -80,7 +83,7 @@ export interface ChapterRecord {
   map: string;
   position: [number, number];
   /** First mask of the tape suffix: the offset into the concatenated
-   *  GB6+J1 mask array the demo menu replays after restoring. */
+   *  GB6+J1+J2+J3 mask array the demo menu replays after restoring. */
   frame: number;
   /** Global reducer frame at the checkpoint. The envelope carries only
    *  the per-map interpreter clock (interp.frame), so the chapter resume
@@ -104,6 +107,7 @@ export interface ChaptersFile {
     gb6: { file: string; frames: number; tapeSha256: string };
     j1: { file: string; frames: number; tapeSha256: string };
     j2: { file: string; frames: number; tapeSha256: string };
+    j3: { file: string; frames: number; tapeSha256: string };
     frames: number;
     sha256: string;
   };
@@ -168,10 +172,17 @@ function partySize(state: SessionState): number {
   return tuxemonExtensionState(state.ext, TUXEMON_BATTLE_DB).party.length;
 }
 
-function loadTape(): { gb6: Gb6JourneyResult; j1: J1JourneyResult; j2: J2JourneyResult; combined: number[] } {
+function loadTape(): {
+  gb6: Gb6JourneyResult;
+  j1: J1JourneyResult;
+  j2: J2JourneyResult;
+  j3: J3JourneyResult;
+  combined: number[];
+} {
   const gb6 = JSON.parse(readFileSync(GB6_PATH, "utf8")) as Gb6JourneyResult;
   const j1 = JSON.parse(readFileSync(J1_PATH, "utf8")) as J1JourneyResult;
   const j2 = JSON.parse(readFileSync(J2_PATH, "utf8")) as J2JourneyResult;
+  const j3 = JSON.parse(readFileSync(J3_PATH, "utf8")) as J3JourneyResult;
   expect("wrong GB6 format", gb6.format === "pocket-tuxemon/gb6-mainline/v1");
   expect("GB6 is not 60 Hz", gb6.hz === 60);
   expect("GB6 frame count differs from masks", gb6.frames === gb6.masks.length);
@@ -187,12 +198,21 @@ function loadTape(): { gb6: Gb6JourneyResult; j1: J1JourneyResult; j2: J2Journey
   expect("J2 tape hash changed", sha256(JSON.stringify(j2.masks)) === j2.tapeSha256);
   expect("J2 base does not continue the J1 combined tape",
     j2.base.frames === j1.combinedFrames && j2.base.tapeSha256 === j1.combinedTapeSha256);
-  const combined = [...gb6.masks, ...j1.masks, ...j2.masks];
+  expect("wrong J3 format", j3.format === "pocket-tuxemon/j3-omnichannelradioannounce/v1");
+  expect("J3 is not 60 Hz", j3.hz === 60);
+  expect("J3 frame count differs from masks", j3.frames === j3.masks.length);
+  expect("J3 tape hash changed", sha256(JSON.stringify(j3.masks)) === j3.tapeSha256);
+  expect("J3 base does not continue the J2 combined tape",
+    j3.base.frames === j2.combinedFrames && j3.base.tapeSha256 === j2.combinedTapeSha256);
+  const j2Combined = [...gb6.masks, ...j1.masks, ...j2.masks];
+  const combined = [...j2Combined, ...j3.masks];
   expect("J1 combined frame count changed", j1.combinedFrames === gb6.frames + j1.frames);
   expect("J1 combined tape hash changed", sha256(JSON.stringify([...gb6.masks, ...j1.masks])) === j1.combinedTapeSha256);
-  expect("J2 combined frame count changed", j2.combinedFrames === combined.length);
-  expect("J2 combined tape hash changed", sha256(JSON.stringify(combined)) === j2.combinedTapeSha256);
-  return { gb6, j1, j2, combined };
+  expect("J2 combined frame count changed", j2.combinedFrames === j2Combined.length);
+  expect("J2 combined tape hash changed", sha256(JSON.stringify(j2Combined)) === j2.combinedTapeSha256);
+  expect("J3 combined frame count changed", j3.combinedFrames === combined.length);
+  expect("J3 combined tape hash changed", sha256(JSON.stringify(combined)) === j3.combinedTapeSha256);
+  return { gb6, j1, j2, j3, combined };
 }
 
 function defineCheckpoints(gb6: Gb6JourneyResult): Checkpoint[] {
@@ -294,6 +314,24 @@ function defineCheckpoints(gb6: Gb6JourneyResult): Checkpoint[] {
         state.mapId === "spyder_candy_hospital3"
         && (state.sw.variables["v.hospitalcure"] ?? 0) !== 0 && safe(state),
     },
+    // --- J3 continuation: Omnichannel and the Radio Tower ------------
+    {
+      id: "omnichannel-open",
+      title: "Omnichannel passage opened",
+      mode: "first",
+      select: (_frame, state) =>
+        state.mapId === "spyder_omnichannel1"
+        && (state.sw.variables["v.omnichannel1wall"] ?? 0) !== 0
+        && (state.sw.items.spyder_pass ?? 0) >= 1 && safe(state),
+    },
+    {
+      id: "radio-broadcast",
+      title: "Radio Tower broadcast",
+      mode: "first",
+      select: (_frame, state) =>
+        state.mapId === "spyder_radiotower"
+        && (state.sw.variables["v.omnichannelradioannounce"] ?? 0) !== 0 && safe(state),
+    },
   ];
 }
 
@@ -380,6 +418,7 @@ function buildChaptersFile(
   gb6: Gb6JourneyResult,
   j1: J1JourneyResult,
   j2: J2JourneyResult,
+  j3: J3JourneyResult,
   combined: readonly number[],
   captures: Map<string, Capture>,
 ): ChaptersFile {
@@ -421,6 +460,7 @@ function buildChaptersFile(
       gb6: { file: "data/gb6-mainline-journey.json", frames: gb6.frames, tapeSha256: gb6.tapeSha256 },
       j1: { file: "data/j1-captainreturns-journey.json", frames: j1.frames, tapeSha256: j1.tapeSha256 },
       j2: { file: "data/j2-hospitalcure-journey.json", frames: j2.frames, tapeSha256: j2.tapeSha256 },
+      j3: { file: "data/j3-omnichannelradioannounce-journey.json", frames: j3.frames, tapeSha256: j3.tapeSha256 },
       frames: combined.length,
       sha256: sha256(JSON.stringify(combined)),
     },
@@ -480,7 +520,7 @@ export interface BakeResult {
 
 export async function bakeChapters(root: string = ROOT): Promise<BakeResult> {
   const project = readInlineProject(root);
-  const { gb6, j1, j2, combined } = loadTape();
+  const { gb6, j1, j2, j3, combined } = loadTape();
   const checkpoints = defineCheckpoints(gb6);
   // The captain's return is the final frame of the GB6+J1 tape; the J2
   // continuation replays from the restored terminal snapshot.
@@ -490,7 +530,7 @@ export async function bakeChapters(root: string = ROOT): Promise<BakeResult> {
 
   const session = createSession(project, 60, GAME_OPTIONS);
   const captures = replayReducer(session, project, combined, checkpoints);
-  const chapters = buildChaptersFile(project, gb6, j1, j2, combined, captures);
+  const chapters = buildChaptersFile(project, gb6, j1, j2, j3, combined, captures);
   const thumbnails = await renderThumbnails(combined, captures);
   for (const chapter of chapters.chapters) {
     const png = thumbnails.get(chapter.id)!;
@@ -543,9 +583,9 @@ export function verifyChapterSuffixes(root: string = ROOT): ChapterSuffixResult[
     previous = mask;
   }
   const terminalHash = sha256(canonicalJson(terminal));
-  const j2 = JSON.parse(readFileSync(J2_PATH, "utf8")) as { terminalStateSha256?: string };
-  expect("full-replay terminal hash != the J2 journey pin",
-    typeof j2.terminalStateSha256 === "string" && terminalHash === j2.terminalStateSha256);
+  const j3 = JSON.parse(readFileSync(J3_PATH, "utf8")) as { terminalStateSha256?: string };
+  expect("full-replay terminal hash != the J3 journey pin",
+    typeof j3.terminalStateSha256 === "string" && terminalHash === j3.terminalStateSha256);
 
   const results: ChapterSuffixResult[] = [];
   for (const chapter of file.chapters) {
