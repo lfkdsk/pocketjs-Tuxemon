@@ -92,6 +92,13 @@ Per-action numbers come from the import coverage report,
 | Sound effects (`play_sound`) | Partial | The three used SFX (coinecho, temple bell, confirm) are transcoded to 22.05 kHz mono WAV, packed in the pak, and mapped to `playSe` with the authored volume. Silent until a host mounts the audio namespace |
 | Music (`play_music`, `music_playing`, `fadeout_music`) | Partial | The eight mainline tracks are transcoded to QOA and packed in the pak; `playBgm`/`fadeoutBgm`/`pauseBgm`/`resumeBgm` and the `bgmPlaying` condition are mapped, so the reducer tracks music state across maps, saves and rewinds. `fadeout_music` sets a `sys.music_fading` switch so `music_playing` is false immediately (matching upstream), while the audible fade runs to completion. The other 13 used tracks are declared but silent (no committed asset). Web playback depends on the kit's QOA streaming decoder; the desktop host has no audio module yet |
 
+## Localization
+
+| Feature | Status | Notes |
+| --- | --- | --- |
+| Simplified Chinese text data | Partial | All 5,370 en_US strings have a zh_CN translation: 2,009 entries from the upstream Tuxemon Weblate catalog plus 3,361 machine-translated supplements in `l10n/zh_CN/`, with a 1,000-entry glossary whose proper-noun renderings follow the upstream catalog (NPC name tags, map names, badges, corporations). `bun run check:l10n` enforces full coverage, placeholder/newline fidelity, terminology (case-insensitive, plural/possessive-aware), and no overlap with upstream; unit tests check that the supplement's gettext header parses and compiles |
+| Chinese text in game | Planned | The catalog is not wired into the runtime yet; the importer and UI still load en_US. Unifying upstream half-width punctuation with the supplement's full-width punctuation, and dialog line breaking, are deferred to the wiring task |
+
 ## Saving and demos
 
 | Feature | Status | Notes |

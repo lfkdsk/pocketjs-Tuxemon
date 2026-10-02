@@ -2208,6 +2208,15 @@ Translations
 * [Nhoya](https://github.com/Nhoya)
 * [Airon90](https://github.com/Airon90)
 
+### Chinese (Simplified) — Pocket Tuxemon supplement
+
+The upstream Simplified Chinese translation (from the Tuxemon Weblate
+community, 2023-09) covers only part of the game text. The remaining
+entries were machine-translated by the Pocket Tuxemon port project and
+are maintained by that project; they are **not** Tuxemon Weblate
+community translations. They are distributed under the same terms as the
+Tuxemon text they translate.
+
 
 Special Thanks
 ---------------

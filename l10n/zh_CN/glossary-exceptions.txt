@@ -1,0 +1,80 @@
+# Terminology-check exceptions: msgid<TAB>English term.
+# Each line documents a case where the glossary term legitimately does not
+# appear in the translation, grouped by reason. Keep this file short.
+
+# Element names vs. same-spelled item/level names (berry line, difficulty)
+earth_berry	Earth
+normal_berry	Normal
+normal_berry_description	Normal
+level_normal	Normal
+
+# Units/vocabulary collisions ("Imperial" units, "Journal" periodical,
+# "Kernel" the OS kernel vs. Kernel the monster)
+imperial_tea	Imperial
+spyder_mansion_lucy1	Imperial
+spyder_leather_note3	Journal
+spyder_pc_alert	Kernel
+spyder_datacenter_lagrange1	Kernel
+
+# Item names that are compounds of a glossary technique/element name
+sky_feather	Feather
+prismatic_crystal	Crystal
+eclipse_route7_fritz1	Crystal
+ox_stick	Stick
+refreshing_slice	Slice
+tm_all_in	All In
+tm_blade	Blade
+tm_shadow_boxing	Shadow Boxing
+tm_shadow_boxing	Shadow
+tm_frostbite	Frostbite
+tm_vorpal	Vorpal
+
+# Technique names containing a same-spelled different glossary term
+food_fight	Fight
+life_surge	Surge
+spiky_strike	Strike
+water_bullet	Bullet
+cat_cute_boulder	Boulder
+cat_precious_boulder	Boulder
+cat_sleek_boulder	Boulder
+cat_lightning_salamander	Salamander
+cat_proboscis	Proboscis
+
+# "Button Potion" is its own item name, not the Potion item
+spyder_dojo_fu3b	Potion
+spyder_dojo_fu3c	Potion
+spyder_dojo_fu3d	Potion
+spyder_dojo_fu_student1	Potion
+spyder_dojo_fu_student1c	Potion
+spyder_dojo_zhu3	Potion
+spyder_dojo_zhu3a	Potion
+spyder_dojo_xiang3	Potion
+spyder_dojo_xiang3a	Potion
+spyder_dojo_xiang3b	Potion
+spyder_dojo_xiang3c	Potion
+spyder_dojo_xiang3d	Potion
+
+# Dialogue uses the element word in a different sense / short menu labels
+spyder_dojo_orion2	Shadow
+menu_daycare_mode_empty	Empty
+
+# "Tuxemon" kept as Latin: game/mod proper name, not the creature generic
+water_campaign	Tuxemon
+water_ending4	Tuxemon
+
+# Case-insensitive matching (proper-noun categories): common-word senses
+# "pastry" the taste/texture word, not the Pastry item
+mille_feuille_description	Pastry
+pastry_description	Pastry
+taste_flakey_description	Pastry
+# "feather" the common word in food names, not the Feather item
+rub_chicken_description	Feather
+ten_thousand_feathers	Feather
+# "potion" the common word (dojo de-evolution potion is its own thing)
+spyder_omnichannel3_spyderrookie	Potion
+spyder_dojo_fu3	Potion
+spyder_dojo_fu3a	Potion
+# "kernel" the OS kernel, not the Kernel monster
+spyder_datacenter_bayliss1	Kernel
+spyder_datacenter_chomsky1	Kernel
+spyder_datacenter_lagrange2	Kernel
