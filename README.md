@@ -54,7 +54,7 @@ summary:
   same indexed, lazily loaded battle-image shards as combat.
 - **Performance:** compact map shards use 4,957,030 B instead of 10,131,297 B
   of canonical JSON, and indexed battle art plus its lazy database occupies
-  3,516,960 B in the pak. The Web game pak is 48,248,176 B; before compact
+  3,516,960 B in the pak. The Web game pak is 48,248,160 B; before compact
   maps and indexed battle art it was 66,791,328 B, measured on the tree just
   before day and night were added. The all-image battle encoding is
   2,206,076 B on disk and 13,394,688 B if every PSM_T8 texture were decoded,

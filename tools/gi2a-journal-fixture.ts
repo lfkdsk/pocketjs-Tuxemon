@@ -166,6 +166,7 @@ export async function captureGi2aJournal(
     rows: Math.ceil((charset.length + 3) / 10),
     maxLength: 15,
     title: "Name",
+    titleIsDefault: true,
     variable: "tux.rename.name",
     allowEmpty: false,
     phase: "edit",
