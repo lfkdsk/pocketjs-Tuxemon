@@ -139,12 +139,12 @@ describe("J1 captain-return location goldens", () => {
     expect(manifest.frames.map(({ name, map, frame, mergedFrame, width, height }) =>
       [name, map, frame, mergedFrame, width, height]
     )).toEqual([
-      ["wayfarer-guestbook", "spyder_wayfarer_inn1", 519, 108_744, 480, 272],
-      ["route-4-billie", "spyder_route4", 4_755, 112_980, 480, 272],
-      ["captain-found", "spyder_mansion_basement", 11_519, 119_744, 480, 272],
-      ["wayfarer-guestbook", "spyder_wayfarer_inn1", 519, 108_744, 960, 544],
-      ["route-4-billie", "spyder_route4", 4_755, 112_980, 960, 544],
-      ["captain-found", "spyder_mansion_basement", 11_519, 119_744, 960, 544],
+      ["wayfarer-guestbook", "spyder_wayfarer_inn1", 519, 111_385, 480, 272],
+      ["route-4-billie", "spyder_route4", 4_727, 115_593, 480, 272],
+      ["captain-found", "spyder_mansion_basement", 10_385, 121_251, 480, 272],
+      ["wayfarer-guestbook", "spyder_wayfarer_inn1", 519, 111_385, 960, 544],
+      ["route-4-billie", "spyder_route4", 4_727, 115_593, 960, 544],
+      ["captain-found", "spyder_mansion_basement", 10_385, 121_251, 960, 544],
     ]);
   });
 

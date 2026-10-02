@@ -32,10 +32,17 @@ import {
   TUXEMON_MONSTER_SHOP_SCENE_ID,
   TUXEMON_PC_SCENE_ID,
   TUXEMON_TRADE_SCENE_ID,
+  TUXEMON_DAYCARE_SCENE_ID,
+  TuxemonDaycareScene,
 } from "./ui/gp1-data-stage.ts";
 import { createAnimatedProvider } from "./ui/animated-repository.ts";
+import { createSaveMenu } from "./ui/save-menu.tsx";
 import { createNpcSrcProvider } from "./ui/npc-src-repository.ts";
 import { createTerrainStreamProvider } from "./ui/terrain-stream-repository.ts";
+import { ChoiceIconBox } from "./vendor/pocket-rpgkit/src/ui/ChoiceIconBox.tsx";
+import { createDemo } from "./vendor/pocket-rpgkit/src/ui/demo/index.ts";
+import { createDemoOptions } from "./ui/demo-tape.ts";
+import type { GameViewDemoConfig, GameViewDemoRuntime } from "./vendor/pocket-rpgkit/src/ui/demo-contract.ts";
 import {
   timeWeatherAt,
   timeWeatherFromLocalDate,
@@ -89,6 +96,19 @@ const assets = {
   ),
 };
 
+// START opens the save/load menu. It is a GameView overlay: it reads and
+// replaces the live session through the overlay host, independent of the
+// demo menu on SELECT, and START does nothing while the demo menu is open.
+let demoMenu: GameViewDemoRuntime | null = null;
+const demoConfig = createDemo(createDemoOptions(readEntry));
+const demo: GameViewDemoConfig = {
+  create(host) {
+    demoMenu = demoConfig.create(host);
+    return demoMenu;
+  },
+};
+const saveMenu = createSaveMenu({ suspended: () => demoMenu?.isOpen() ?? false });
+
 mount(() => (
   <GameView
     immutableState
@@ -105,8 +125,12 @@ mount(() => (
       [TUXEMON_PC_SCENE_ID]: TuxemonPcScene,
       [TUXEMON_TRADE_SCENE_ID]: createTuxemonTradeScene(catalog),
       [TUXEMON_MONSTER_SHOP_SCENE_ID]: createTuxemonMonsterShopScene(catalog),
+      [TUXEMON_DAYCARE_SCENE_ID]: TuxemonDaycareScene,
     }}
     assets={assets}
+    choiceIcons={ChoiceIconBox}
+    demo={demo}
+    overlay={saveMenu}
     effects={createAudioEffects(project.audio ?? {})}
     theme={TUXEMON_UI_THEME}
   />

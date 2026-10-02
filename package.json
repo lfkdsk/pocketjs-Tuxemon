@@ -28,6 +28,8 @@
     "record:j1:mainline": "J1_JOURNEY_OUT=data/j1-captainreturns-journey.json bun tools/j1-journey.ts",
     "verify:j1:mainline": "bun tools/verify-j1-mainline.ts",
     "verify:chapters": "bun tools/verify-chapters.ts",
+    "verify:save": "bun tools/verify-save-resume.ts",
+    "screens:save": "bun tools/render-save-screens.ts",
     "verify:j1:segment": "J1_VERIFY_MODE=segment bun tools/verify-j1-mainline.ts",
     "verify:j1:stateful": "J1_VERIFY_MODE=stateful bun tools/verify-j1-mainline.ts",
     "verify:j1:rates": "J1_VERIFY_MODE=rate-60 bun tools/verify-j1-mainline.ts && J1_VERIFY_MODE=rate-30 bun tools/verify-j1-mainline.ts && J1_VERIFY_MODE=rate-20 bun tools/verify-j1-mainline.ts",

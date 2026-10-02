@@ -5,7 +5,7 @@
   "maps": 263,
   "collisionBodies": 14,
   "maxActors": 504,
-  "runtimeMaxActors": 222,
+  "runtimeMaxActors": 218,
   "excludedActorStressMaps": [
    {
     "id": "test_npcs",
@@ -30,12 +30,12 @@
    "compact": 263,
    "json": 0
   },
-  "shellBytes": 83639,
-  "entryBytes": 4776306,
-  "canonicalJsonBytes": 9914419,
+  "shellBytes": 84444,
+  "entryBytes": 4699994,
+  "canonicalJsonBytes": 9829498,
   "entries": 263,
-  "manifestHash": "47eb42c70b37acc689ff863d4ea1fc65cebf98fca462b5386d90a259f27f791e",
-  "schemaHash": "0b9fff5b478b87e0dcae1f37044a444043c735339ca45245bdbbb9e2e36e7ab5"
+  "manifestHash": "87fcc05bf6c55bf3c6347f931440758e765150ff5ee548d1f5d1014989397e9b",
+  "schemaHash": "ff6b923750b1078d15a8d2443251d14a5b5b17055b88445515a9b34e38056611"
  },
  "terrain": {
   "entries": 430,
@@ -218,5 +218,21 @@
    "entries": 662,
    "entryBytes": 836618
   }
+ },
+ "itemIcons": {
+  "entries": 1,
+  "sheet": {
+   "id": "items",
+   "pak": "ui:tile.items",
+   "cols": 16,
+   "rows": 9
+  },
+  "uniqueIcons": 143,
+  "missing": [
+   "elianeoutput"
+  ],
+  "colors": 6038,
+  "quantized": true,
+  "pakBytes": 24752
  }
 }

@@ -106,6 +106,10 @@ jobs:
             run: bun run verify:g6:frozen
           - name: Chapter snapshots and thumbnails
             run: bun run verify:chapters
+          # Five saves along GB6 (two runs, one crossing noon) each load and
+          # finish the tape at the uninterrupted terminal state.
+          - name: Save mid-journey, load, finish the tape
+            run: bun run verify:save
     steps:
       - uses: actions/checkout@v7
         with:
@@ -127,6 +131,8 @@ jobs:
         run: bun run web
       - name: Play the journey in headless Chrome
         run: bun tools/verify-web-journey.ts
+      - name: Play the demo controls in headless Chrome
+        run: bun tools/verify-web-demo.ts
       - name: Keep the web site
         uses: actions/upload-artifact@v7
         with:
@@ -143,6 +149,14 @@ jobs:
         with:
           name: web-journey
           path: dist/web-journey/*.png
+          retention-days: 14
+          if-no-files-found: ignore
+      - name: Keep the demo screenshots
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: web-demo
+          path: dist/web-demo/*.png
           retention-days: 14
           if-no-files-found: ignore
 

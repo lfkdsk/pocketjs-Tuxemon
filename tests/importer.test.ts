@@ -16,16 +16,17 @@ import { jsonBytes } from "../importer/index.ts";
 import { loadAllFileEvents, TUXEMON_SRC } from "../importer/source.ts";
 import { applyTerrain, importTerrain } from "../importer/terrain.ts";
 import { TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS, TUXEMON_SCENES } from "../battle/game.ts";
+import { tuxemonExtensionState } from "../battle/extension.ts";
 import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
 import { canStepFrom, type Dir4 } from "../vendor/pocket-rpgkit/src/engine/passability.ts";
-import { createSwitchState } from "../vendor/pocket-rpgkit/src/engine/interpreter.ts";
+import { createSwitchState, evalCondition } from "../vendor/pocket-rpgkit/src/engine/interpreter.ts";
 import {
   createSession,
   startSession,
   stepSession,
   type SessionState,
 } from "../vendor/pocket-rpgkit/src/engine/session.ts";
-import type { Command } from "../vendor/pocket-rpgkit/src/engine/types.ts";
+import type { Command, Condition, JsonValue } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
 const BTN_CONFIRM = 0x2000;
@@ -75,14 +76,14 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   expect(result.report.coverage.actions.summary).toMatchObject({
     types: 98,
     uses: 13_617,
-    native: 6_857,
-    degraded: 2_817,
-    placeholder: 709,
-    dropped: 3_234,
-    nativePercent: 50.4,
+    native: 6_842,
+    degraded: 2_813,
+    placeholder: 708,
+    dropped: 3_254,
+    nativePercent: 50.2,
     tier1: {
-      uses: 6_330,
-      percent: 46.49,
+      uses: 6_316,
+      percent: 46.38,
       requiredUses: 6_246,
       meetsBaseline: true,
     },
@@ -90,14 +91,14 @@ test("all maps pass schema and reference valid transfer destinations", () => {
   expect(result.report.coverage.conditions.summary).toMatchObject({
     types: 64,
     uses: 8_663,
-    native: 4_376,
+    native: 4_347,
     degraded: 1_229,
     placeholder: 859,
-    dropped: 2_199,
-    nativePercent: 50.5,
+    dropped: 2_228,
+    nativePercent: 50.2,
     tier1: {
-      uses: 4_314,
-      percent: 49.8,
+      uses: 4_293,
+      percent: 49.56,
       requiredUses: 4_591,
       meetsBaseline: false,
     },
@@ -109,13 +110,13 @@ test("all maps pass schema and reference valid transfer destinations", () => {
     ...result.report.coverage.conditions.rows,
   ];
   expect(coverageRows.find((row) => row.type === "char_face")).toMatchObject({
-    native: 869,
+    native: 868,
     degraded: 442,
-    dropped: 716,
+    dropped: 717,
   });
   expect(coverageRows.find((row) => row.type === "char_move")).toMatchObject({
-    degraded: 13,
-    dropped: 64,
+    degraded: 9,
+    dropped: 68,
   });
   expect(coverageRows.find((row) => row.type === "is char_facing")).toMatchObject({
     native: 0,
@@ -512,11 +513,12 @@ test("default import output remains byte-pinned", () => {
   // inputs, the generated outdoor world index and its compact report summary.
   // The deterministic clock, native presentation/terrain mappings, GM1 audio
   // commands, sys.music_fading fadeout guard, GI scene lowering, and the
-  // GI-1b movement/party lowering (choice_npc option names, dropped char_run,
-  // get_party_monster iid slots, NPC-lifetime party clears) and the GI-2b
-  // storage/trade/shop dispositions are all included in this combined pin.
+  // GI-1b movement/party lowering (choice_npc icon rows, dropped char_run,
+  // get_party_monster iid slots, NPC-lifetime party clears), choice portrait
+  // metadata, the GI-2b storage/trade/shop dispositions, and imported item
+  // icon atlas metadata are all included in this combined pin.
   expect(createHash("sha256").update(bytes).digest("hex")).toBe(
-    "02f6d611af70cafb582a8238b442d1b8a3a6f78a931154319f8ff8c9242955d1",
+    "786d8f4bc3b537a575ff142bea4b82324fe3355b4891b1a5c0bc94d6cc96a49b",
   );
 });
 
@@ -830,21 +832,31 @@ test("choice_monster becomes a KC1 static extChoice writing enum codes", () => {
   expect(choice?.args?.options?.every((o) => o.code > 0)).toBeTrue();
 });
 
-test("choice_npc keeps every appearance option distinguishable", () => {
-  const nodes = objectNodes(buildProject(["start_tuxemon"], { extChoice: true, battle: true }).project);
+test("choice_npc shows each appearance with its walker icon", () => {
+  const { project } = buildProject(["start_tuxemon"], { extChoice: true, battle: true });
+  const nodes = objectNodes(project);
   const choice = nodes.find((node) =>
-    node.op === "extChoice" && (node as { call?: string }).call === "tux.enum_choice"
-  ) as { args?: { options?: Array<{ key: string; label: string }> } } | undefined;
+    node.op === "choices" && ((node as { options?: unknown[] }).options?.length ?? 0) === 6
+  ) as { options?: Array<{ text: string; icon?: { sprite: string }; commands: Array<Record<string, unknown>> }> } | undefined;
   expect(choice).toBeDefined();
-  expect(choice?.args?.options).toHaveLength(6);
-  const labels = choice?.args?.options?.map((o) => o.label) ?? [];
-  // Upstream distinguishes the six appearances by per-option NPC portrait.
-  // The kit choice box cannot draw option images, so every line must carry
-  // its own appearance name instead of the shared "Select" label.
+  const options = choice!.options!;
+  // Upstream tells the six appearances apart by each option NPC's picture;
+  // the icon is that NPC's walker (db/npc/appearance_options.yaml), and every
+  // line also carries the appearance name.
+  expect(options.map((o) => o.icon?.sprite)).toEqual([
+    "adventurer", "adventurerblack", "heroine", "brownheroine_brown", "enbyasian", "penguin",
+  ]);
+  for (const option of options) expect(project.sprites?.[option.icon!.sprite]).toBeDefined();
+  const labels = options.map((o) => o.text);
   expect(new Set(labels).size).toBe(6);
   for (const name of ["White male", "Black male", "White female", "Black female", "Nonbinary", "Whatever"]) {
     expect(labels.some((l) => l.includes(name))).toBeTrue();
   }
+  // Each row writes its enum code into race_choice, as tux.enum_choice did.
+  const codes = options.map((o) => (o.commands[0] as { id?: string; set?: { value?: number } }));
+  expect(codes.every((c) => c.id === "v.race_choice" && (c.set?.value ?? 0) > 0)).toBeTrue();
+  expect(new Set(codes.map((c) => c.set?.value)).size).toBe(6);
+  expect(nodes.some((node) => node.op === "extChoice" && (node as { args?: { variable?: string } }).args?.variable === "v.race_choice")).toBeFalse();
 });
 
 test("remove_monster becomes a tux.remove_monster ext command", () => {
@@ -874,9 +886,10 @@ test("get_party_monster is Native only where the NPC's party exists when it runs
   // Nimrod reads the defeated argon's party. The dojo calls precede their
   // battle, whose add_monster calls fold into the battle setup; the gym calls
   // name trainers that only fight skipped NPC-versus-NPC battles. The shared
-  // spyder.yaml cheat-code event can never start.
+  // spyder.yaml cheat-code event reads the live player name and dumps the
+  // player's party before replacing it.
   expect(result.report.coverage.actions.rows.find((row) => row.type === "get_party_monster"))
-    .toMatchObject({ total: 9, native: 1, degraded: 7, placeholder: 0, dropped: 1 });
+    .toMatchObject({ total: 9, native: 2, degraded: 7, placeholder: 0, dropped: 0 });
 });
 
 test("create_npc and remove_npc bound the NPC's party lifetime", () => {
@@ -915,7 +928,7 @@ test("open_shop imports item economies and monster shop scenes", () => {
   expect(result.project.items.find((item) => item.id === "potion")).toEqual({
     id: "potion",
     name: "Potion",
-    sprite: "tux.0",
+    sprite: "items.73",
     usable: true,
     price: 100,
     sellable: true,
@@ -1130,7 +1143,7 @@ test("faint recovery preserves its notice and yields to the first-loss cutscene"
   expect(objectNodes(firstLoss).some((node) => node.kind === "ext" && node.call === "tux.char_defeated")).toBeFalse();
 });
 
-test("current_state maps WorldState is/not to worldIdle and documents unreachable source states", () => {
+test("current_state maps WorldState and folds states while kit map fibers are suspended", () => {
   expect(lowerCurrentStateCondition("is", "WorldState")).toEqual({ kind: "worldIdle" });
   expect(lowerCurrentStateCondition("not", "WorldState")).toEqual({ kind: "worldIdle", negate: true });
   expect(lowerCurrentStateCondition("is", "MainCombatMenuState:WorldState")).toEqual({ kind: "worldIdle" });
@@ -1146,6 +1159,157 @@ test("current_state maps WorldState is/not to worldIdle and documents unreachabl
     key: "cond:is current_state:T1",
     note: "WorldState arm -> derived worldIdle condition; scene/menu alternatives freeze map fibers",
   }));
+});
+
+test("imports live player-name guards and rejects impossible legacy triggers", () => {
+  const result = buildProject([
+    "mansion",
+    "spyder_wayfarer_inn1",
+    "water_underwater",
+  ], G6_IMPORT_OPTIONS);
+  const nodes = objectNodes(result.project);
+  const nameConditions = nodes.filter((node) =>
+    node.kind === "ext" && node.call === "tux.player_name_is"
+  );
+  expect(nameConditions).toEqual(expect.arrayContaining([
+    expect.objectContaining({ args: { name: "ApexPlayer", negate: false } }),
+    expect.objectContaining({ args: { name: "ApexPlayer", negate: true } }),
+  ]));
+  expect(result.report.coverage.conditions.rows.find((row) =>
+    row.type === "is check_char_parameter"
+  )).toMatchObject({ total: 40, native: 2, dropped: 38 });
+  expect(result.report.coverage.conditions.rows.find((row) =>
+    row.type === "not check_char_parameter"
+  )).toMatchObject({ total: 1, native: 1, dropped: 0 });
+
+  const inn = result.project.maps.find((map) => map.id === "spyder_wayfarer_inn1")!;
+  expect(inn.events?.some((event) => event.name === "Talk Maniac - Got Botbot - Cheat")).toBeTrue();
+
+  // The pinned source stores Direction values as up/down/left/right. Its
+  // legacy `bottom` guard can never pass, so only the valid basement portals
+  // remain (the bad one was at x=1,y=16).
+  const mansion = result.project.maps.find((map) => map.id === "mansion")!;
+  expect(mansion.events?.some((event) =>
+    event.name === "Teleport to Basement" && event.x === 1 && event.y === 16
+  )).toBeFalse();
+
+  // K_RETURN is a pygame key name, not one of the intention names accepted
+  // by ButtonPressedCondition in this source revision.
+  const underwater = result.project.maps.find((map) => map.id === "water_underwater")!;
+  expect(underwater.events?.some((event) => event.name === "Water Gemuar Battle")).toBeFalse();
+
+  // These shared Spyder events require a terrain-label predicate that the
+  // runtime does not expose. They must not silently become unconditional
+  // dialogue, movement or appearance changes.
+  const spyder = buildProject(["spyder_dryadsgrove"], G6_IMPORT_OPTIONS).project.maps[0]!;
+  for (const name of [
+    "Choice Surf",
+    "Push Into Water Down",
+    "Push Into Water Left",
+    "Push Into Water Right",
+    "Push Into Water Up",
+    "Surfable",
+  ]) {
+    expect(spyder.events?.some((event) => event.name === name), name).toBeFalse();
+  }
+  const reset = spyder.events?.find((event) => event.name === "Not surfable");
+  expect(reset?.pages[0]?.condition).toEqual({
+    all: [{ kind: "appearance", target: "player", sprite: "swimmer" }],
+  });
+  expect(objectNodes(reset)).toContainEqual({ op: "appearance", target: "player", sprite: null });
+  expect(objectNodes(reset).some((node) =>
+    node.op === "appearance" && node.sprite === "swimmer"
+  )).toBeFalse();
+});
+
+test("real Benden and Dryad's Grove conversations follow caught and healed state", () => {
+  const result = buildProject([
+    "spyder_cotton_tunnel",
+    "spyder_dryadsgrove",
+  ], G6_IMPORT_OPTIONS);
+  const session = createSession(result.project, 60, {
+    extensions: TUXEMON_EXTENSIONS,
+    battle: TUXEMON_BATTLE_RULES,
+    scenes: TUXEMON_SCENES,
+  });
+  const switches = createSwitchState();
+  const event = (mapId: string, name: string) => {
+    const map = result.project.maps.find((candidate) => candidate.id === mapId)!;
+    const found = map.events?.find((candidate) => candidate.name === name);
+    expect(found, `${mapId}: ${name}`).toBeDefined();
+    return { map, event: found! };
+  };
+  const guardResults = (
+    mapId: string,
+    name: string,
+    call: string,
+    ext: JsonValue,
+  ) => {
+    const found = event(mapId, name);
+    const guards = objectNodes(found.event).filter((node) =>
+      node.kind === "ext" && node.call === call
+    ) as unknown as Condition[];
+    expect(guards).toHaveLength(2);
+    return guards.map((guard) => evalCondition(
+      guard,
+      switches,
+      `${found.map.id}/${found.event.id}`,
+      undefined,
+      { runtime: session.extensions, ext },
+    ));
+  };
+  const commandContext = (ext: JsonValue) => ({
+    ext,
+    switches: switches.switches,
+    variables: switches.variables,
+    items: switches.items,
+    gold: switches.gold,
+    playerName: switches.playerName,
+    random: () => 0.5,
+  });
+
+  const empty = TUXEMON_EXTENSIONS.initial!;
+  const benden = event("spyder_cotton_tunnel", "spyder_dragonscave_benden").event;
+  const bendenNodes = objectNodes(benden);
+  expect(bendenNodes.some((node) => Array.isArray(node.lines)
+    && node.lines.some((line) => String(line).includes("You captured it")))).toBeTrue();
+  expect(bendenNodes.some((node) => Array.isArray(node.lines)
+    && node.lines.some((line) => String(line).includes("It... escaped")))).toBeTrue();
+  expect(guardResults(
+    "spyder_cotton_tunnel", "spyder_dragonscave_benden", "tux.has_tuxepedia", empty,
+  )).toEqual([false, true]);
+  const caught = TUXEMON_EXTENSIONS.commands!["tux.set_tuxepedia"]!(commandContext(empty), {
+    character: "player", species: "drokoro", status: "caught",
+  })!.ext!;
+  expect(guardResults(
+    "spyder_cotton_tunnel", "spyder_dragonscave_benden", "tux.has_tuxepedia", caught,
+  )).toEqual([true, false]);
+
+  const boy = event("spyder_dryadsgrove", "spyder_dryadsgrove_boy").event;
+  const boyNodes = objectNodes(boy);
+  expect(boyNodes.some((node) => Array.isArray(node.lines)
+    && node.lines.some((line) => String(line).includes("really healthy")))).toBeTrue();
+  expect(boyNodes.some((node) => Array.isArray(node.lines)
+    && node.lines.some((line) => String(line).includes("rough shape")))).toBeTrue();
+  expect(guardResults(
+    "spyder_dryadsgrove", "spyder_dryadsgrove_boy", "tux.char_healed", empty,
+  )).toEqual([false, true]);
+  const healthy = TUXEMON_EXTENSIONS.commands!["tux.add_monster"]!(commandContext(empty), {
+    character: "player", species: "nut", level: 5,
+  })!.ext!;
+  expect(guardResults(
+    "spyder_dryadsgrove", "spyder_dryadsgrove_boy", "tux.char_healed", healthy,
+  )).toEqual([true, false]);
+  const decoded = tuxemonExtensionState(healthy);
+  const hurt = {
+    ...decoded,
+    party: decoded.party.map((monster, index) => index === 0
+      ? { ...monster, currentHp: monster.currentHp! - 1 }
+      : monster),
+  } as unknown as JsonValue;
+  expect(guardResults(
+    "spyder_dryadsgrove", "spyder_dryadsgrove_boy", "tux.char_healed", hurt,
+  )).toEqual([false, true]);
 });
 
 test("G6 imports item mutations and conditions through the shared session backpack", () => {

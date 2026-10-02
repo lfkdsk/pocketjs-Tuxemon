@@ -65,6 +65,116 @@ function run(commands: Command[], ext?: JsonValue, variables: Record<string, num
   return { session, initial, state: stepSession(session, initial, { buttons: 0 }) };
 }
 
+function readContext(ext: JsonValue, playerName = "Player") {
+  return {
+    ext,
+    switches: {},
+    variables: {},
+    items: {},
+    gold: 0,
+    playerName,
+  };
+}
+
+test("player-name conditions compare the live name exactly and support negation", () => {
+  const extensions = createTuxemonExtensions(DB);
+  const playerNameIs = extensions.conditions!["tux.player_name_is"]!;
+  const context = {
+    ext: extensions.initial!,
+    switches: {},
+    variables: {},
+    items: {},
+    gold: 0,
+    playerName: "ApexPlayer",
+  };
+
+  expect(playerNameIs(context, { name: "ApexPlayer", negate: false })).toBeTrue();
+  expect(playerNameIs(context, { name: "apexplayer", negate: false })).toBeFalse();
+  expect(playerNameIs(context, { name: "Red", negate: true })).toBeTrue();
+  expect(playerNameIs(context, { name: "ApexPlayer", negate: true })).toBeFalse();
+  expect(playerNameIs(context, { name: 7 })).toBeFalse();
+});
+
+test("Tuxepedia and healed-party conditions preserve upstream edge semantics", () => {
+  const extensions = createTuxemonExtensions(DB);
+  const hasTuxepedia = extensions.conditions!["tux.has_tuxepedia"]!;
+  const charHealed = extensions.conditions!["tux.char_healed"]!;
+  const setTuxepedia = extensions.commands!["tux.set_tuxepedia"]!;
+  const empty = extensions.initial!;
+
+  expect(hasTuxepedia(readContext(empty), {
+    character: "player", species: "rockitten", status: "caught", negate: false,
+  })).toBeFalse();
+  expect(hasTuxepedia(readContext(empty), {
+    character: "player", species: "rockitten", status: "caught", negate: true,
+  })).toBeTrue();
+  expect(hasTuxepedia(readContext(empty), {
+    character: "player", species: "rockitten", status: "invalid", negate: true,
+  })).toBeFalse();
+  expect(hasTuxepedia(readContext(empty), {
+    character: "npc_maple", species: "rockitten", status: "caught", negate: true,
+  })).toBeFalse();
+
+  const commandContext = (ext: JsonValue) => ({
+    ...readContext(ext),
+    random: () => { throw new Error("Tuxepedia writes must not consume RNG"); },
+  });
+  const seen = setTuxepedia(commandContext(empty), {
+    character: "player", species: "rockitten", status: "seen",
+  })!.ext!;
+  expect(hasTuxepedia(readContext(seen), {
+    character: "player", species: "rockitten", status: "seen", negate: false,
+  })).toBeTrue();
+  expect(hasTuxepedia(readContext(seen), {
+    character: "player", species: "rockitten", status: "caught", negate: false,
+  })).toBeFalse();
+
+  const caught = setTuxepedia(commandContext(seen), {
+    character: "player", species: "rockitten", status: "caught",
+  })!.ext!;
+  expect(hasTuxepedia(readContext(caught), {
+    character: "player", species: "rockitten", status: "caught", negate: false,
+  })).toBeTrue();
+  expect(hasTuxepedia(readContext(caught), {
+    character: "player", species: "rockitten", status: "seen", negate: false,
+  })).toBeFalse();
+
+  expect(charHealed(readContext(empty), { character: "player", negate: false })).toBeFalse();
+  expect(charHealed(readContext(empty), { character: "player", negate: true })).toBeTrue();
+
+  const added = run([{ op: "ext", call: "tux.add_monster", args: { species: "nut", level: 5 } }]);
+  const healthy = tuxemonExtensionState(added.state.ext, DB);
+  expect(charHealed(readContext(healthy as unknown as JsonValue), {
+    character: "player", negate: false,
+  })).toBeTrue();
+  expect(charHealed(readContext(healthy as unknown as JsonValue), {
+    character: "player", negate: true,
+  })).toBeFalse();
+
+  const poisoned = {
+    ...healthy,
+    party: healthy.party.map((monster, index) => index === 0
+      ? { ...monster, status: "poison" }
+      : monster),
+  };
+  expect(charHealed(readContext(poisoned as unknown as JsonValue), {
+    character: "player", negate: false,
+  })).toBeTrue();
+
+  const hurt = {
+    ...healthy,
+    party: healthy.party.map((monster, index) => index === 0
+      ? { ...monster, currentHp: monster.currentHp! - 1 }
+      : monster),
+  };
+  expect(charHealed(readContext(hurt as unknown as JsonValue), {
+    character: "player", negate: false,
+  })).toBeFalse();
+  expect(charHealed(readContext(hurt as unknown as JsonValue), {
+    character: "player", negate: true,
+  })).toBeTrue();
+});
+
 describe("Tuxemon party extension", () => {
   test("uses the built-in item bank without a mirrored extension inventory", () => {
     const { state } = run([

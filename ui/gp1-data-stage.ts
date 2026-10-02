@@ -36,6 +36,8 @@ import {
   TUXEMON_PC_SCENE_ID,
   TUXEMON_TRADE_SCENE_ID,
 } from "../battle/storage-scenes.ts";
+import { TUXEMON_DAYCARE_SCENE_ID } from "../battle/daycare-scenes.ts";
+import { TuxemonDaycareScene } from "./daycare-scene.tsx";
 import { gp1Mark } from "./gp1-marks.ts";
 
 export {
@@ -61,6 +63,8 @@ export {
   TUXEMON_MONSTER_SHOP_SCENE_ID,
   TUXEMON_PC_SCENE_ID,
   TUXEMON_TRADE_SCENE_ID,
+  TUXEMON_DAYCARE_SCENE_ID,
+  TuxemonDaycareScene,
 };
 
 gp1Mark("json-literals");

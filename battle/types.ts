@@ -289,6 +289,10 @@ export interface MonsterSnapshot {
   acquisition?: string;
   captureDevice?: string;
   waitingToEvolve?: boolean;
+  /** Breeding lineage written by the daycare newborn pipeline. */
+  motherIid?: string;
+  /** Breeding lineage written by the daycare newborn pipeline. */
+  fatherIid?: string;
 }
 
 /** Complete persistent snapshot produced by the Tuxemon spawn pipeline. */
@@ -301,6 +305,21 @@ export interface SpawnedMonsterSnapshot extends MonsterSnapshot {
   weight: number;
   individualValues: Stats;
   birthdate: [number, number];
+}
+
+/** Sparse player daycare payload. It is absent until a monster is deposited
+ *  and removed again after the last parent is withdrawn. */
+export interface DaycareExtensionState {
+  /** Upstream has exactly two slots and withdraws both at once. */
+  parents: SpawnedMonsterSnapshot[];
+  /** Breeding-only completed tile steps. */
+  progressSteps: number;
+  /** Fractional training EXP, in exact quarter-point increments. */
+  pendingExperience: number;
+  /** Settled EXP per training parent since the latest deposit. */
+  lastTrainingExp: number;
+  /** Money charged since the latest deposit. */
+  lastTrainingCost: number;
 }
 
 export type PlayerPolicy = "first" | "cycle";

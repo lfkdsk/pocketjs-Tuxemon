@@ -109,12 +109,10 @@ const REQUIRED_TRAINERS: Readonly<Record<string, number>> = {
   spyder_tunnelb_meitner: 1,
 };
 const REQUIRED_WILDS: Readonly<Record<string, number>> = {
-  "wild:dracune": 1,
+  "wild:cateye": 2,
   "wild:foofle": 1,
-  "wild:katapill": 1,
-  "wild:sclairus": 1,
   "wild:sludgehog": 1,
-  "wild:vamporm": 1,
+  "wild:vamporm": 2,
 };
 
 interface SavedPoint {

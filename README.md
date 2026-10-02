@@ -24,7 +24,7 @@ summary:
   NPC walkers, dialogue, cutscene routes and map transfers. The Spyder
   campaign plays from the bedroom through Paper Town, Cotton Town, City Park,
   the north end of Route 3, Route 4 and Flower City to the Captain's return
-  in the Mansion and on through Candy Town to the hospital cure — 170,868
+  in the Mansion and on through Candy Town to the hospital cure — 173,532
   frames at 60 Hz for the full mainline, driven by
   deterministic autoplay tapes — and every imported input lock is executed
   to its unlock.
@@ -32,12 +32,12 @@ summary:
   textures are imported from Tuxemon's YAML, and `battle/` is a pure
   reducer whose results match Tuxemon's own Python engine on 8,560 recorded
   battles; monsters spawn draw-for-draw like Tuxemon's. The mainline is
-  played for real end to end: the autoplay tapes fight 173 real battles
-  (100 on the Route 3 mainline — 22 trainer + 78 wild — 17 on the
-  Captain-return continuation — 10 trainer + 7 wild — and 56 on the way to
+  played for real end to end: the autoplay tapes fight 177 real battles
+  (107 on the Route 3 mainline — 22 trainer + 85 wild — 14 on the
+  Captain-return continuation — 10 trainer + 4 wild — and 56 on the way to
   the hospital cure — 50 trainer + 6 wild), and every trainer
   battle enters Battle Processing and ends `won` with its `battle_outcome`
-  written back. The frozen 30-minute 60 Hz tape (108,225 frames / 30 min 4 s)
+  written back. The frozen 31-minute 60 Hz tape (110,866 frames / 30 min 48 s)
   replays byte-identical at 60, 30 and 20 Hz, and both failure paths are
   verified — the first loss against Billie, and a later loss on Route 3
   with the faint-point teleport, the heal-before-leaving block and the
@@ -46,29 +46,31 @@ summary:
   islands, trainers, monsters, HUD frames, status/party icons and
   technique strips; every slide, hit, HP/XP tween, faint and capture shake
   is driven by the reducer's rewindable reference tick rather than a wall
-  clock. The 578 images are indexed single-tile entries, loaded on demand
+  clock. The 590 images are indexed single-tile entries, loaded on demand
   through one battle cache and detached/freed on exit.
 - **Names and Tuxepedia:** the authored player- and monster-name prompts use
   saved, rewindable game scenes. Seen/caught status is persistent and monotonic;
   journal previews and the normal browser render monster details through the
   same indexed, lazily loaded battle-image shards as combat.
-- **Performance:** compact map shards use 4,259,041 B instead of 9,312,231 B
+- **Performance:** compact map shards use 4,699,994 B instead of 9,829,498 B
   of canonical JSON, and indexed battle art plus its lazy database occupies
-  3,427,760 B in the pak. The Web game pak is 46,766,928 B; before compact
+  3,501,504 B in the pak. The Web game pak is 47,940,160 B; before compact
   maps and indexed battle art it was 66,791,328 B, measured on the tree just
   before day and night were added. The all-image battle encoding is
-  2,158,468 B on disk and 13,185,792 B if every PSM_T8 texture were decoded,
+  2,206,076 B on disk and 13,394,688 B if every PSM_T8 texture were decoded,
   but only the active battle working set is resident.
 
-  On the desktop QuickJS host (measured 2026-10-01 on the earlier
-  108,618-frame, 100-battle recording of the mainline tape), the full replay
-  started in 139.954 ms / 140.861 ms and its slowest CPU frame
-  was 37.663 ms / 43.475 ms (480×272 / 960×544). Battle entry peaked at
-  19.416 ms / 19.748 ms and exit at 4.546 ms / 4.875 ms. Both runs matched the
-  canonical terminal state. The QuickJS benches assert a 250 ms startup budget
-  and a 50 ms per-frame CPU budget.
-- **Import coverage:** 91.3% of Tuxemon action uses and 94.5% of condition
-  uses map natively to kit commands; 95.8% / 94.5% are executable (native,
+  On the desktop QuickJS host, the current 110,866-frame, 107-battle replay
+  matches the canonical terminal state. The release engine's two 960×544 runs
+  have 41.849 and 49.504 ms slowest CPU frames, while its 480×272 runs hit
+  cycle-GC pauses at 72.534 and 51.002 ms. With the pending engine-side
+  idle-GC change explicitly enabled, the 480×272 and 960×544 CPU-work maxima
+  are 33.251 and 26.543 ms (34.419 and 33.773 ms including boundary GC).
+  The QuickJS benches assert
+  a 250 ms startup budget and a 50 ms per-frame CPU budget, so the release
+  engine currently misses the frame gate at 480×272.
+- **Import coverage:** 91.6% of Tuxemon action uses and 94.7% of condition
+  uses map natively to kit commands; 96.0% / 94.7% are executable (native,
   degraded, or a deliberate placeholder). The full per-type breakdown is in
   [reports/G1-coverage.md](reports/G1-coverage.md).
 - **Day/night:** a saved, rewindable calendar drives Tuxemon's time conditions
@@ -124,12 +126,74 @@ properties from the decoded pixels as well as pinning the PNG bytes.
   <http://localhost:8000/pocket-tuxemon/>.
 - **Locally:** `bun run web`, then serve `dist/web` the same way; or
   `bun run desktop` for the desktop host.
-- **Keys:** arrows walk, `A`/`Z`/`Enter` talks and confirms, `B`/`Esc` goes back.
+- **Keys:** arrows walk, `A`/`Z`/`Enter` talks and confirms, `B`/`Esc` goes back,
+  `Space` (START) opens the save menu, `L`/`Q` rewinds three seconds.
 
-CI also plays the 3,369-frame opening journey — bedroom, Paper Town, the
+### Saving and loading
+
+Press START (`Space` in the browser and on desktop) to open the save menu. The
+world is paused while the menu is open.
+
+- **Save to slot / Load from slot:** three slots. The desktop build writes
+  `save/slot-1.json` … `save/slot-3.json` in the app's data folder. The browser
+  build keeps them in the page's local storage.
+- **Save code (export) / Load code (import):** the same save as URL-safe text,
+  paged on screen. Hosts with no file system or browser storage (PSP) have only
+  these two rows. Codes are compressed, but still a few thousand characters
+  (3,100–5,300 at the `verify:save` points), so they suit copying between
+  tools more than typing on the on-screen keyboard.
+
+You can save only when nothing is in progress. During dialogue, a battle, a
+scripted scene, a map change or a step, the menu says why it can't save.
+Damaged saves, saves from another build of the game and empty slots show an
+error and leave the game as it was. A load picks up exactly where the save was
+made; `bun run verify:save` checks this at five points along the GB6 mainline.
+
+Screens: [menu](docs/screenshots/save/save-menu.480x272.png),
+[saved](docs/screenshots/save/save-done.480x272.png),
+[refused](docs/screenshots/save/save-refused.480x272.png),
+[loaded](docs/screenshots/save/save-loaded.480x272.png),
+[save code](docs/screenshots/save/save-code-export.480x272.png)
+(960×544 versions alongside; `bun run screens:save` re-renders them from the
+built game).
+
+CI also plays the 3,990-frame opening journey — bedroom, Paper Town, the
 first battle, Route 1 — in headless Chrome against the built site
 (`bun tools/verify-web-journey.ts`) and checks every checkpoint's state and
 pixels against the goldens.
+
+## Web demo controls
+
+The game has an in-game demo menu (**SELECT**) with three pages. The web
+player's **Demo controls** panel below the game covers chapters and autoplay;
+map warp is in the in-game menu, or use a `?map=` link (below).
+
+- **Chapters** — thirteen buttons from the new-game bedroom to the recovered
+  hospital cure. Click one (or pick it in the menu) to restore that save and
+  keep playing from there, without reloading the page. The active chapter
+  stays highlighted.
+- **Map warp** — jump to any of the 263 imported maps. Maps with a safe
+  spawn (245 of them) land on a standable, event-free cell; the eighteen
+  maps with no such cell are listed but show a visible error if picked.
+- **Autoplay** — play the chapter's tape suffix automatically at 1×, 2× or
+  4×. Any button takes over live play; **L** rewinds three seconds.
+
+The same actions are available as deep links, so a specific scene can be
+bookmarked or shared:
+
+- `?chapter=<id>` — restore a chapter for live play (e.g. `?chapter=hospital-cure`)
+- `?map=<id>&x=<tile>&y=<tile>` — warp to a map (e.g. `?map=spyder_cotton_town&x=16&y=17`)
+- `?autoplay=<id>&speed=<1|2|4>` — start a chapter on autoplay (e.g. `?autoplay=starter&speed=2`)
+
+An invalid id (e.g. `?chapter=missing`) is a visible `BAD DEMO LINK` error,
+not a crash. The chapter snapshots and the 174k-frame tape are packed into
+the pak (a nibble-dictionary tape binary, 87 KB) and read on demand, so the
+JS bundle keeps only a tiny chapter index; the tape is decoded once, on the
+first chapter selection, and every chapter plays a window of it.
+`bun tools/verify-web-demo.ts` drives all of the above in headless Chrome,
+including a 600-frame autoplay that must reach a state byte-identical to a
+reducer-level suffix replay, and checks that each chapter click repaints the
+canvas with the new scene.
 
 ## Running
 
@@ -190,12 +254,12 @@ bun run verify:psp:journey -- path/to/profile.jsonl
 
 The opening journey (bedroom through the Billie battle to Route 1) passed this
 check under PPSSPP on an earlier recording of the opening tape, including its
-PSP double-ABI probe; it has not been re-run on the current 3,369-frame tape.
+PSP double-ABI probe; it has not been re-run on the current 3,990-frame tape.
 A captured 480×272 framebuffer was also checked for the bedroom and dialogue
 UI. Emulator
 timings are not hardware results: doodlewind's 333 MHz, firmware 6.61 device
 run reports 43–60 displayed fps, with map transitions and texture loads still
-causing stalls. The full 100-battle mainline has not been run on physical PSP.
+causing stalls. The full 107-battle mainline has not been run on physical PSP.
 
 ## Documentation
 

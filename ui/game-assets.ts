@@ -959,7 +959,7 @@ export const GAME_ASSETS: Omit<GameAssets, "npcSrc" | "animated" | "stream"> = {
   upper: {},
   chunkColumns: {},
   maxChunks: 1,
-  maxActors: 222,
+  maxActors: 218,
   world: TERRAIN_WORLD,
   order: TERRAIN_ORDER,
   player: PLAYER,

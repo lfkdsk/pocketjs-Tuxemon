@@ -6,6 +6,7 @@ import { describe, expect, test } from "bun:test";
 import {
   animationPresentation,
   ballPresentation,
+  presentationActiveMonster,
   presentationHp,
   presentationMaxHp,
 } from "../battle/presentation.ts";
@@ -132,7 +133,10 @@ describe("GB5 real battle scene goldens", () => {
       // Images, panels, bars, and layout coordinates are exact 2x blocks.
       // PocketJS intentionally rasterises glyph/alpha edges at the target
       // viewport, so those few edge blocks may differ by blend rounding.
-      expect(similarity.exactRatio, name).toBeGreaterThan(0.97);
+      // The ratio moves with the glyph count: the technique menu sits at
+      // 0.9696 with Nut at 109 / 109 HP (0.9701 at 101 / 101), all of the
+      // extra blocks inside the HP numbers.
+      expect(similarity.exactRatio, name).toBeGreaterThan(0.965);
       expect(similarity.meanChannelError, name).toBeLessThan(0.6);
     }
   }, 60_000);
@@ -171,6 +175,14 @@ describe("GB5 real battle scene goldens", () => {
     const dim = [0x53, 0x7b, 0x80] as const;
     const mainFrame = small.frames["main-menu"];
     const main = mainFrame.rgba;
+    const player = presentationActiveMonster(mainFrame.state, 0);
+    expect([presentationHp(mainFrame.state, player.uid), presentationMaxHp(mainFrame.state, player.uid)])
+      .toEqual([109, 109]);
+    const ink = [0x10, 0x2b, 0x3a] as const;
+    // The last 9 has opaque ink in this cell, followed by clear HUD paper.
+    // With the former 100 px bar, the final digit instead ran into x=480.
+    expect(countColour(main, 480, { x: 454, y: 125, width: 12, height: 14 }, ink)).toBeGreaterThan(1);
+    expect(countColour(main, 480, { x: 468, y: 125, width: 8, height: 14 }, ink)).toBe(0);
     const commandCells = [
       { x: 246, y: 222, width: 112, height: 20 },
       { x: 362, y: 222, width: 112, height: 20 },

@@ -30,10 +30,10 @@ const journey = JSON.parse(readFileSync(JOURNEY, "utf8")) as JourneyFile;
 if (journey.hz !== 60) throw new Error(`GB6 route goldens: expected 60 Hz tape, got ${journey.hz}`);
 
 const checkpoints = [
-  { name: "cotton-town", frame: 5_727, map: "spyder_cotton_town", position: [21, 39] },
-  { name: "route-2", frame: 10_285, map: "spyder_route2", position: [0, 8] },
-  { name: "city-park", frame: 43_446, map: "spyder_citypark", position: [10, 39] },
-  { name: "route-3-end", frame: 108_222, map: "spyder_route3", position: [4, 6] },
+  { name: "cotton-town", frame: 5_408, map: "spyder_cotton_town", position: [21, 39] },
+  { name: "route-2", frame: 10_614, map: "spyder_route2", position: [0, 8] },
+  { name: "city-park", frame: 45_315, map: "spyder_citypark", position: [10, 39] },
+  { name: "route-3-end", frame: 110_863, map: "spyder_route3", position: [4, 6] },
 ] as const;
 const viewports = [
   { width: 480, height: 272 },

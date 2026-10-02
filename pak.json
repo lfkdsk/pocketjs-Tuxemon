@@ -2884,6 +2884,14 @@
     "file": "dist/battle/techniques/woodsmash.json"
   },
   {
+    "key": "demo/chapters.json",
+    "file": "dist/demo/chapters.json"
+  },
+  {
+    "key": "demo/tape.bin",
+    "file": "dist/demo/tape.bin"
+  },
+  {
     "key": "game:battle-db",
     "file": "data/battle-db.json"
   },
@@ -9134,6 +9142,10 @@
   {
     "key": "ui:tile.battle/gfx/ui/monster/hp_bar",
     "file": "dist/battle-art/gfx/ui/monster/hp_bar.pkts"
+  },
+  {
+    "key": "ui:tile.items",
+    "file": "assets/icons/items.pkts"
   },
   {
     "key": "ui:tile.tuxemon-37707_tower-ground-0",

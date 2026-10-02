@@ -12,6 +12,7 @@ import {
   TUXEMON_TRADE_SCENE_ID,
   type PcSceneState,
 } from "../battle/storage-scenes.ts";
+import { TUXEMON_DAYCARE_SCENE_ID } from "../battle/daycare-scenes.ts";
 
 const BTN_CONFIRM = 0x2000;
 const BTN_CANCEL = 0x4000;
@@ -47,6 +48,7 @@ export function utilitySceneAutoplayMask(scene: Readonly<ActiveGameScene>): numb
     return state.menuCursor === pcMenuItems(state).length - 1 ? BTN_CONFIRM : BTN_BITS.UP;
   }
   if (scene.id === TUXEMON_MONSTER_SHOP_SCENE_ID) return BTN_CANCEL;
+  if (scene.id === TUXEMON_DAYCARE_SCENE_ID) return BTN_CANCEL;
   if (scene.id === TUXEMON_TRADE_SCENE_ID) return BTN_CONFIRM;
   throw new Error(`journey: no autoplay policy for scene ${JSON.stringify(scene.id)}`);
 }

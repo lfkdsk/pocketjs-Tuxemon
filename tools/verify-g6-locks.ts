@@ -40,6 +40,7 @@ const GAME_OPTIONS = {
     "tux.pc": LOCK_SCENE_RULES,
     "tux.trade": LOCK_SCENE_RULES,
     "tux.monsterShop": LOCK_SCENE_RULES,
+    "tux.daycare": LOCK_SCENE_RULES,
   },
 } as const;
 

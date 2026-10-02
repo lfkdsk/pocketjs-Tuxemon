@@ -797,6 +797,10 @@ Character created by Leo (from Discord) and released under the CC-BY-SA 4.0+ lic
 
 ### Items
 
+Pocket Tuxemon bakes the item icon atlas (`assets/icons/items.pkts`, sheet
+`items`) from Tuxemon's `mods/tuxemon/gfx/items/` PNGs, each 24x24 and
+area-averaged to 16x16. The upstream attributions below cover those files.
+
 * ["Backpack RPG Icons"](http://opengameart.org/content/rpg-icons) by
 [DitzyDM](http://ditzydm.deviantart.com/)
 is licensed under [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)

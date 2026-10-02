@@ -32,8 +32,11 @@ describe("G6 generated game assets", () => {
       // clear adds one more, so test_npcs (the actor stress map) gains slots
       // and the runtime max gains actors. The largest playable map remains
       // below the excluded test_npcs stress map. The scenario's three
-      // quarantine-box events (create/hide/show) add three more.
-      runtimeMaxActors: 222,
+      // quarantine-box events (create/hide/show) add three more. Across the
+      // shared Spyder scenario, rejecting choice_surf plus four
+      // push_into_water pages and restoring cheat_code_apexplayer removes a
+      // net four event actors from the largest playable map.
+      runtimeMaxActors: 218,
       excludedActorStressMaps: [{ id: "test_npcs", slots: 504 }],
       options: {
         areas: true,
@@ -43,6 +46,8 @@ describe("G6 generated game assets", () => {
         place: true,
         inputLock: true,
         routes: true,
+        moveControl: true,
+        extChoice: true,
         battle: true,
       },
     });
@@ -63,7 +68,7 @@ describe("G6 generated game assets", () => {
       playerSheet: `sprites/${appearances[0]!.template.sprite_name}.png`,
     });
     expect(GAME_ASSETS.order).toHaveLength(263);
-    expect(GAME_ASSETS.maxActors).toBe(222);
+    expect(GAME_ASSETS.maxActors).toBe(218);
     expect(NPC_SRC_INDEX).toHaveLength(183);
     for (const { id, entry } of NPC_SRC_INDEX) {
       const art = JSON.parse(readFileSync(resolve(ROOT, "dist", entry), "utf8")) as NpcArt;

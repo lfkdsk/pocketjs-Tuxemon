@@ -4,7 +4,7 @@
   "games": {
     "pocket-tuxemon": {
       "title": "Pocket Tuxemon",
-      "description": "Walk from Spyder's bedroom through Paper Town to Route 1 — imported maps, NPCs, dialogue, shops and real battles (the first fight against Billie included).",
+      "description": "Play the Spyder campaign from the new-game bedroom to the recovered hospital cure — 263 imported maps with NPCs, dialogue, shops and real battles. Use the chapter buttons to jump into any story beat, or warp to any map.",
       "controls": [
         {
           "button": "DPAD",
@@ -17,10 +17,111 @@
         {
           "button": "CROSS",
           "action": "Back / cancel"
+        },
+        {
+          "button": "SELECT",
+          "action": "Open the demo menu (chapters, map warp, autoplay)"
+        },
+        {
+          "button": "START",
+          "action": "Save / load menu"
         }
       ],
       "preview": "docs/screenshots/paper-town-overview.png",
-      "rasterDensity": 2
+      "rasterDensity": 2,
+      "chapters": [
+        {
+          "id": "bedroom",
+          "title": "Bedroom",
+          "description": "Wake up in Spyder's bedroom and step into the world.",
+          "preview": "docs/screenshots/chapters/bedroom-480x272.png",
+          "autoplay": true
+        },
+        {
+          "id": "paper-town",
+          "title": "Paper Town",
+          "description": "Reach Paper Town and talk to the locals.",
+          "preview": "docs/screenshots/chapters/paper-town-480x272.png",
+          "autoplay": true
+        },
+        {
+          "id": "before-billie",
+          "title": "Before Billie",
+          "description": "The moment before the first battle against Billie.",
+          "preview": "docs/screenshots/chapters/before-billie-480x272.png",
+          "autoplay": true
+        },
+        {
+          "id": "starter",
+          "title": "Starter chosen",
+          "description": "Your first Tuxemon, chosen after the rival battle.",
+          "preview": "docs/screenshots/chapters/starter-480x272.png",
+          "autoplay": true
+        },
+        {
+          "id": "route-1",
+          "title": "Route 1",
+          "description": "Set out along Route 1.",
+          "preview": "docs/screenshots/chapters/route-1-480x272.png",
+          "autoplay": true
+        },
+        {
+          "id": "cotton-town",
+          "title": "Cotton Town",
+          "description": "Arrive in Cotton Town.",
+          "preview": "docs/screenshots/chapters/cotton-town-480x272.png",
+          "autoplay": true
+        },
+        {
+          "id": "city-park",
+          "title": "City Park",
+          "description": "Stroll through City Park.",
+          "preview": "docs/screenshots/chapters/city-park-480x272.png",
+          "autoplay": true
+        },
+        {
+          "id": "route-3-north",
+          "title": "Route 3 north",
+          "description": "The north end of Route 3.",
+          "preview": "docs/screenshots/chapters/route-3-north-480x272.png",
+          "autoplay": true
+        },
+        {
+          "id": "flower-city",
+          "title": "Flower City",
+          "description": "Reach Flower City.",
+          "preview": "docs/screenshots/chapters/flower-city-480x272.png",
+          "autoplay": true
+        },
+        {
+          "id": "captain-returns",
+          "title": "Captain's return",
+          "description": "The Captain returns at the mansion.",
+          "preview": "docs/screenshots/chapters/captain-returns-480x272.png",
+          "autoplay": true
+        },
+        {
+          "id": "candy-town",
+          "title": "Candy Town",
+          "description": "Candy Town, on the way to the hospital.",
+          "preview": "docs/screenshots/chapters/candy-town-480x272.png",
+          "autoplay": true
+        },
+        {
+          "id": "greenwash-aardant",
+          "title": "Greenwash",
+          "description": "Greenwash, with the story-critical Aardant acquired.",
+          "preview": "docs/screenshots/chapters/greenwash-aardant-480x272.png",
+          "autoplay": true
+        },
+        {
+          "id": "hospital-cure",
+          "title": "Hospital cure",
+          "description": "The recovered cure at the hospital — the mainline's end.",
+          "preview": "docs/screenshots/chapters/hospital-cure-480x272.png",
+          "autoplay": true
+        }
+      ]
     }
   }
 }

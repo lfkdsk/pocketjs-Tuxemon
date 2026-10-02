@@ -7,6 +7,7 @@ import type {
   BattleRuntimeShell,
   JournalMonsterIndexEntry,
 } from "../importer/battle-schema.ts";
+import { createDaycareSceneRules, TUXEMON_DAYCARE_SCENE_ID } from "./daycare-scenes.ts";
 import {
   resolveBattleDb,
   tuxemonExtensionState,
@@ -223,6 +224,7 @@ export function createTuxemonScenes(
       [NAME_INPUT_SCENE_ID]: nameInputRules,
       [TUXEMON_JOURNAL_SCENE_ID]: journalRules(index),
       [TUXEMON_MONSTER_PICKER_SCENE_ID]: pickerRules(index),
+      [TUXEMON_DAYCARE_SCENE_ID]: createDaycareSceneRules(source, (slug) => names.get(slug) ?? slug),
       ...createStorageSceneRules(source, (slug) => names.get(slug) ?? slug),
     },
   };

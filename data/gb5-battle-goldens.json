@@ -6,26 +6,26 @@
       "width": 480,
       "height": 272,
       "file": "gb5-battle-main-menu.480x272.png",
-      "hostFrame": 2247,
+      "hostFrame": 2243,
       "event": null,
       "eventCursor": 4,
       "eventTicks": 0,
       "menuMode": "root",
-      "rgbaFnv1a": "76c8fb21",
-      "pngSha256": "9c083afd3f027e349cb76e21c177fc3bfb6d44937941005def4d8f554cba54bf"
+      "rgbaFnv1a": "b3e592c1",
+      "pngSha256": "e4643f2ef6842514dff7dbeb8e9eb8dc4ad954353272007e351f68abc9bf332d"
     },
     {
       "name": "technique-menu",
       "width": 480,
       "height": 272,
       "file": "gb5-battle-technique-menu.480x272.png",
-      "hostFrame": 2249,
+      "hostFrame": 2245,
       "event": null,
       "eventCursor": 4,
       "eventTicks": 0,
       "menuMode": "technique",
-      "rgbaFnv1a": "b7d51292",
-      "pngSha256": "b139400d28d33847dfce8d52c9f44e4d7fd181380c934206bdd82aef53b5fdc9"
+      "rgbaFnv1a": "65e93fb2",
+      "pngSha256": "166e0ab3d07df32e876f51a3b3f92698d3a0bca17f00bf73ef08ddf4382a1188"
     },
     {
       "name": "hit",
@@ -37,73 +37,73 @@
       "eventCursor": 6,
       "eventTicks": 24,
       "menuMode": "root",
-      "rgbaFnv1a": "6c136d4b",
-      "pngSha256": "4be455d66f5ccc0397c88f9b0ad44de58245c79954e606852518c5ec9abddbdd"
+      "rgbaFnv1a": "1aa3ac1e",
+      "pngSha256": "fdfaa01415d4d383f4f1c3cc53ccb13541753682f74249f75ae19e56753a6d51"
     },
     {
       "name": "faint",
       "width": 480,
       "height": 272,
       "file": "gb5-battle-faint.480x272.png",
-      "hostFrame": 2750,
+      "hostFrame": 3454,
       "event": "faint",
-      "eventCursor": 23,
+      "eventCursor": 55,
       "eventTicks": 24,
       "menuMode": "root",
-      "rgbaFnv1a": "5ab9ab8b",
-      "pngSha256": "42185b383892510c351f0ba12b38ca8e46ac892fcec69e8d4f67f36b5b4f74cc"
+      "rgbaFnv1a": "52ded518",
+      "pngSha256": "548e22ddb3bf1bba59701b2a8a25b9ac2298967a99a4991ad0ce2578351da23f"
     },
     {
       "name": "capture-shake",
       "width": 480,
       "height": 272,
       "file": "gb5-battle-capture-shake.480x272.png",
-      "hostFrame": 2781,
+      "hostFrame": 3485,
       "event": "capture",
       "eventCursor": 2,
       "eventTicks": 21,
       "menuMode": "root",
-      "rgbaFnv1a": "78311dcf",
-      "pngSha256": "3ad86d086c748a6b06ccdfd93edbaaab31d0cc7e9ac3272ef501c2cb3bcd8c6b"
+      "rgbaFnv1a": "9cb80957",
+      "pngSha256": "ae331e492a5991022ec48103fa2a4764c4f1fc0e36ed5748800e9a780de601ed"
     },
     {
       "name": "level-up",
       "width": 480,
       "height": 272,
       "file": "gb5-battle-level-up.480x272.png",
-      "hostFrame": 2780,
+      "hostFrame": 3484,
       "event": "faint",
-      "eventCursor": 23,
+      "eventCursor": 55,
       "eventTicks": 54,
       "menuMode": "root",
-      "rgbaFnv1a": "682aa96c",
-      "pngSha256": "614bfd4829c5acbc26336d3018e562f67f17b98af24efc413fd8d2abfd017b94"
+      "rgbaFnv1a": "123c785b",
+      "pngSha256": "69dc8cc2f14f74efe7cef8ff03b16201625c40851d11bd8805e1abf85406bea4"
     },
     {
       "name": "main-menu",
       "width": 960,
       "height": 544,
       "file": "gb5-battle-main-menu.960x544.png",
-      "hostFrame": 2247,
+      "hostFrame": 2243,
       "event": null,
       "eventCursor": 4,
       "eventTicks": 0,
       "menuMode": "root",
-      "rgbaFnv1a": "277d3cca",
-      "pngSha256": "deaf37519d3d38fe117623a85811eeb73895f66ba23aa50a28ac644417c7ad4e"
+      "rgbaFnv1a": "44cb81a5",
+      "pngSha256": "e51fff83a6526608ab30f0ee1e03ff34c8870b1b1b6614b5c37006c14c9b8606"
     },
     {
       "name": "technique-menu",
       "width": 960,
       "height": 544,
       "file": "gb5-battle-technique-menu.960x544.png",
-      "hostFrame": 2249,
+      "hostFrame": 2245,
       "event": null,
       "eventCursor": 4,
       "eventTicks": 0,
       "menuMode": "technique",
-      "rgbaFnv1a": "0c3dd761",
-      "pngSha256": "3b953918db8f3816b4ae3b6b0ce75038bdd3ce686a30ef1f22f31f32641452ec"
+      "rgbaFnv1a": "f0d89ccd",
+      "pngSha256": "0c4fb8adaa839e052853af9b723d8668e19f7d789659e2f454e66473fe527833"
     },
     {
       "name": "hit",
@@ -115,47 +115,47 @@
       "eventCursor": 6,
       "eventTicks": 24,
       "menuMode": "root",
-      "rgbaFnv1a": "f6d2643e",
-      "pngSha256": "6e58641e5393ee0866c38591fce9927fb878e6f1abaf3f59800e23efd2ae1bb8"
+      "rgbaFnv1a": "04dd08b8",
+      "pngSha256": "6ff265cc11bd20b44f487ab2d0a2826242af6208a0b7402c92f9a5365caf9b3b"
     },
     {
       "name": "faint",
       "width": 960,
       "height": 544,
       "file": "gb5-battle-faint.960x544.png",
-      "hostFrame": 2750,
+      "hostFrame": 3454,
       "event": "faint",
-      "eventCursor": 23,
+      "eventCursor": 55,
       "eventTicks": 24,
       "menuMode": "root",
-      "rgbaFnv1a": "fa5851c1",
-      "pngSha256": "8f2b9b644eaf8c081eb960a9e4d52593becc61efb270ba015b7276a13a89b3a3"
+      "rgbaFnv1a": "bc5bbc6c",
+      "pngSha256": "5c2985d9baf8443123126a4f58e664952803554750de11b97091cf475b21d363"
     },
     {
       "name": "capture-shake",
       "width": 960,
       "height": 544,
       "file": "gb5-battle-capture-shake.960x544.png",
-      "hostFrame": 2781,
+      "hostFrame": 3485,
       "event": "capture",
       "eventCursor": 2,
       "eventTicks": 21,
       "menuMode": "root",
-      "rgbaFnv1a": "b90471a4",
-      "pngSha256": "fb10932fc923f3d6ead70f5952c7349657d0321d05b07b214c292e5b14eb06d3"
+      "rgbaFnv1a": "13e0c028",
+      "pngSha256": "6958ace3b30ccaa66469a0544ba946a9e4687022c8b9f2088ffe82e636a8e0e9"
     },
     {
       "name": "level-up",
       "width": 960,
       "height": 544,
       "file": "gb5-battle-level-up.960x544.png",
-      "hostFrame": 2780,
+      "hostFrame": 3484,
       "event": "faint",
-      "eventCursor": 23,
+      "eventCursor": 55,
       "eventTicks": 54,
       "menuMode": "root",
-      "rgbaFnv1a": "d8828761",
-      "pngSha256": "d57ba5b3f664d47971f988b28ae0bb0aae143b03b9c5d5a81b0a2c699b4e042f"
+      "rgbaFnv1a": "4f6b0b71",
+      "pngSha256": "c958372d017c54558305d79d8f368ce62a7dd1da99d2c06ecf8faeee033a7d9f"
     }
   ]
 }

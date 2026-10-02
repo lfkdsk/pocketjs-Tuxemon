@@ -56,6 +56,7 @@ const BENCH_SCENES: Record<string, SceneRules> = {
   "tux.pc": BENCH_SCENE_RULES,
   "tux.trade": BENCH_SCENE_RULES,
   "tux.monsterShop": BENCH_SCENE_RULES,
+  "tux.daycare": BENCH_SCENE_RULES,
 };
 
 function benchmarkSession(): Session {

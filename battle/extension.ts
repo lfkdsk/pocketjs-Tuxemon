@@ -10,6 +10,7 @@ import {
   DAYLIGHT_TARGET_VARIABLE,
   DAYLIGHT_TINT_PROFILES,
 } from "./daylight.ts";
+import { advanceDaycareStep } from "./daycare.ts";
 import { battleDbToTuxemonBattleDb } from "./from-battle-db.ts";
 import { evolveMonsterSnapshot } from "./progression.ts";
 import { spawnMonsterWithRandom } from "./spawn.ts";
@@ -28,7 +29,7 @@ import {
   type WeatherSchedule,
   type WeatherState,
 } from "./time-weather.ts";
-import type { SpawnedMonsterSnapshot, Stats } from "./types.ts";
+import type { DaycareExtensionState, SpawnedMonsterSnapshot, Stats } from "./types.ts";
 import { STAT_NAMES } from "./types.ts";
 
 export const PARTY_LIMIT = 6;
@@ -101,6 +102,8 @@ export interface TuxemonExtensionState {
   boxes?: Record<string, MonsterBox>;
   /** Sparse monster-shop sales per `<economy>:<slug>` stock label. */
   shopSold?: Record<string, number>;
+  /** Sparse two-slot daycare, created on first deposit. */
+  daycare?: DaycareExtensionState;
 }
 
 export interface MonsterBox {
@@ -204,6 +207,11 @@ function monsterProblem(value: unknown, label: string, db?: BattleDb): string | 
   if (!safeInteger(monster.level) || monster.level < 1) return `${label}.level must be a positive safe integer`;
   for (const field of ["stage", "gender", "tasteCold", "tasteWarm"] as const) {
     if (!nonEmptyString(monster[field])) return `${label}.${field} must be a non-empty string`;
+  }
+  for (const field of ["motherIid", "fatherIid"] as const) {
+    if (monster[field] !== undefined && !nonEmptyString(monster[field])) {
+      return `${label}.${field} must be a non-empty string when present`;
+    }
   }
   for (const field of ["height", "weight", "experienceModifier", "moneyModifier", "bond"] as const) {
     if (!finite(monster[field])) return `${label}.${field} must be finite`;
@@ -368,6 +376,26 @@ function tuxemonStateProblem(
       nonEmptyString(key) && safeInteger(count) && count > 0)) {
       return "shopSold must map stock labels to positive integers";
     }
+  }
+  if (state.daycare !== undefined) {
+    const daycare = record(state.daycare);
+    if (!daycare || !Array.isArray(daycare.parents) || daycare.parents.length < 1
+      || daycare.parents.length > 2) {
+      return "daycare.parents must contain 1..2 monsters";
+    }
+    if (!safeInteger(daycare.progressSteps) || daycare.progressSteps < 0) {
+      return "daycare.progressSteps must be a non-negative safe integer";
+    }
+    if (!finite(daycare.pendingExperience) || daycare.pendingExperience < 0
+      || !safeInteger(daycare.pendingExperience * 4)) {
+      return "daycare.pendingExperience must be a non-negative quarter increment";
+    }
+    for (const field of ["lastTrainingExp", "lastTrainingCost"] as const) {
+      if (!safeInteger(daycare[field]) || daycare[field] < 0) {
+        return `daycare.${field} must be a non-negative safe integer`;
+      }
+    }
+    groups.push(["daycare.parents", daycare.parents]);
   }
   for (const [group, values] of groups) {
     for (let index = 0; index < values.length; index++) {
@@ -1243,6 +1271,28 @@ function setKennelVisibleCommand() {
   };
 }
 
+/** One invocation represents one completed player tile. The engine hook does
+ * not mutate unused saves: without a sparse daycare payload this returns no
+ * result at all. */
+function daycareStepCommand(source: BattleDbSource) {
+  let cachedSource: BattleDb | null = null;
+  let cachedRules: ReturnType<typeof battleDbToTuxemonBattleDb> | null = null;
+  return (context: ExtensionCommandContext) => {
+    const current = currentExtensionState(context.ext);
+    if (!current.daycare) return;
+    const db = resolveBattleDb(source);
+    if (db !== cachedSource || cachedRules === null) {
+      cachedSource = db;
+      cachedRules = battleDbToTuxemonBattleDb(db);
+    }
+    const result = advanceDaycareStep(current.daycare, context.gold, cachedRules);
+    return {
+      ext: json({ ...current, daycare: result.daycare }),
+      ...(result.gold === context.gold ? {} : { gold: result.gold }),
+    };
+  };
+}
+
 function boxOf(
   state: Readonly<TuxemonExtensionState>,
   id: string,
@@ -1307,6 +1357,10 @@ function enumChoiceHandler(): NonNullable<ExtensionOptions["choices"]>[string] {
   };
 }
 
+/** ui/save-game.ts LEGACY_SAVE_EXT_FORMAT, repeated here so the battle
+ * module stays free of UI imports. */
+const GAME_SAVE_EXT_FORMAT = "pocket-tuxemon/save-ext/v1";
+
 /** Pure game registration used by createSession, GameView and attract replay. */
 export function createTuxemonExtensions(
   source: BattleDbSource,
@@ -1341,6 +1395,7 @@ export function createTuxemonExtensions(
     initial,
     immutableConditions: true,
     deterministicConditions: true,
+    playerStep: { call: "tux.daycare_step", args: {} },
     commands: {
       "tux.add_monster": addMonsterCommand(source),
       "tux.set_monster_health": healthCommand(),
@@ -1373,6 +1428,7 @@ export function createTuxemonExtensions(
       "tux.clear_npc_parties": clearNpcPartiesCommand(),
       "tux.create_kennel": createKennelCommand(),
       "tux.set_kennel_visible": setKennelVisibleCommand(),
+      "tux.daycare_step": daycareStepCommand(source),
       "tux.tick_time_weather": (context, value) => {
         const args = argsRecord(value, "tux.tick_time_weather");
         if (args.daylight !== undefined && typeof args.daylight !== "boolean") {
@@ -1457,6 +1513,30 @@ export function createTuxemonExtensions(
         if (!nonEmptyString(args.environment)) return false;
         const state = currentExtensionState(context.ext);
         return negate(state.environment === args.environment, args);
+      },
+      "tux.player_name_is": (context, value) => {
+        const args = argsRecord(value, "tux.player_name_is");
+        if (typeof args.name !== "string") return false;
+        return negate(context.playerName === args.name, args);
+      },
+      "tux.has_tuxepedia": (context, value) => {
+        const args = argsRecord(value, "tux.has_tuxepedia");
+        if (args.character !== "player" || !nonEmptyString(args.species)
+          || (args.status !== "seen" && args.status !== "caught")) return false;
+        const state = currentExtensionState(context.ext);
+        const registered = args.status === "seen"
+          ? state.seen.includes(args.species)
+          : state.caught.includes(args.species);
+        return negate(registered, args);
+      },
+      "tux.char_healed": (context, value) => {
+        const args = argsRecord(value, "tux.char_healed");
+        if (args.character !== "player") return false;
+        const party = currentExtensionState(context.ext).party;
+        const healed = party.length > 0 && party.every((monster) =>
+          monster.base.hp > 0 && monster.currentHp === monster.base.hp
+        );
+        return negate(healed, args);
       },
       "tux.time_is": (context, value) => {
         const args = argsRecord(value, "tux.time_is");
@@ -1568,7 +1648,15 @@ export function createTuxemonExtensions(
       }),
       decode: (value) => {
         if (value === null) return initial;
-        const saved = record(value);
+        let saved = record(value);
+        // Saves written before the kit stored map runtime wrapped this state
+        // together with the character table (ui/save-game.ts). restoreSave()
+        // migrates them; a generic kit restore reaches here with the wrapper
+        // and loads the extension state alone.
+        if (saved?.format === GAME_SAVE_EXT_FORMAT && saved.ext !== undefined) {
+          value = saved.ext as JsonValue;
+          saved = record(value);
+        }
         if (saved?.format === TUXEMON_EXT_SAVE_FORMAT && saved.state !== undefined) {
           const migrated = migrateV1(saved.state as JsonValue);
           return json(tuxemonExtensionState(migrated, resolveBattleDb(source), weatherSlugs));

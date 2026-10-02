@@ -50,8 +50,7 @@ definitions below are the report's own:
 - **Native** — represented by current kit commands without gameplay loss.
 - **Degraded** — runs in the kit with a documented limitation or importer
   lowering.
-- **Placeholder** — deliberate stand-in behavior for legacy content and the
-  fixed clock/weather runtime.
+- **Placeholder** — deliberate visible or deterministic stand-in behavior.
 - **Dropped** — no equivalent output, including rules inside events the
   converter proves cannot start.
 
@@ -69,8 +68,11 @@ definitions below are the report's own:
 | `char_stop` | `moveControl` stop, cancelling the active route and page patrol. |
 | `set_facing_mode` | `moveControl` facingMode (locked / followMovement). |
 | `is battle_outcome` | `tux.battle_outcome` extension condition reading live battle history. |
+| `is/not check_char_parameter player,name,<value>` | `tux.player_name_is` compares the live saved player name exactly and case-sensitively. |
+| `is/not has_tuxepedia player,<species>,seen/caught` | `tux.has_tuxepedia` reads the exact saved player Tuxepedia status; caught does not also count as seen. |
+| `is/not char_healed player` | `tux.char_healed` requires a non-empty party whose members are all at full HP; status ailments do not change the answer. |
 | `add_monster`, `set_monster_health`, `set_monster_status`, `evolution`, `remove_monster` | the matching `tux.*` extension command; `remove_monster` resolves the iid globally and deletes from the player party, kennel, or an NPC party. A trainer's battle party stays in `npcParties` for the rest of the NPC's lifetime. |
-| `get_party_monster` (Nimrod `Zircon Back`) | `tux.get_party_monsters` writes the defeated trainer's iids into `iid_slot_*`, which the following `remove_monster` consumes. |
+| `get_party_monster` (Nimrod `Zircon Back`, ApexPlayer cheat) | `tux.get_party_monsters` writes the selected trainer's or player's iids into `iid_slot_*`, which the following `remove_monster` consumes. |
 | `get_player_monster`, `choice_monster` | `extChoice` over the live party or a static enum-coded list. |
 | `open_shop` (item economy) | the kit `shop` command with imported goods, prices and stock. |
 | `open_shop …,buy_monster` | the `tux.monsterShop` scene with the economy's monster rows (price, level, stock); purchases are saved per stock label. |
@@ -125,7 +127,12 @@ faint-point actions and environment checks are now native.
 | Tuxemon | Reason |
 |---|---|
 | `char_run` | upstream applies the absolute run rate only while the character is already moving and reverts on idle; the kit's run control is a persistent relative grade with no movement-scoped lifetime, so the action emits nothing. |
-| `is environment_is` (outside battle content) | environment is a battle backdrop; the condition is constant false there. |
+| `check_char_parameter player,moving`, `char_in`, `char_facing_tile player,<surface>` | these read live movement or the player's current/facing terrain label; that state is not available to map conditions. The unlabelled facing-tile trigger remains native. Consequently the imported game cannot use its surfboard to begin or sustain surfing yet. |
+| `char_facing player,top/bottom`, `button_pressed K_RETURN` | these legacy source arguments are invalid in the pinned Tuxemon runtime: directions are `up/down/left/right`, and `K_RETURN` is not an intention constant. The guards are fixed false instead of being reported as native triggers. |
+| step-tracker actions and conditions | Tuxemon owns a saved per-character counter, milestone state and movement-step updates; the kit currently exposes none of those pieces. |
+| `variable_math`, `format_variable` | Tuxemon accepts absent variables, floats and runtime type coercion. Kit story variables are safe integers and string story values are enum-coded, so a partial numeric lowering would silently change semantics. |
+| `set_mission` | mission definitions, prerequisite graphs, per-step conditions and status are not imported. |
+| `autosave` | a pure reducer event cannot request that the host persist autosave slot 0. |
 | `transition_teleport` targeting an NPC | only the player transfers. |
 | `modify_money` with a variable amount | only literal amounts are supported. |
 | rules inside structurally discarded events | the event never starts (inert, zero-size, fixed-false guard, trigger area outside the map, or over the 64-cell area cap), or it is not materialized by any map. |
@@ -155,8 +162,8 @@ Current coverage (G6 profile):
 
 | Kind | Types | Uses | Native | Degraded | Placeholder | Dropped | Executable |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Actions | 98 | 13,617 | 12,437 | 594 | 12 | 574 | 95.8% |
-| Conditions | 64 | 8,663 | 8,183 | 2 | 1 | 477 | 94.5% |
+| Actions | 98 | 13,617 | 12,472 | 600 | 5 | 540 | 96.0% |
+| Conditions | 64 | 8,663 | 8,200 | 2 | 1 | 460 | 94.7% |
 
 ## Adding or changing a mapping
 

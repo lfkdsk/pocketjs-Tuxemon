@@ -211,7 +211,9 @@ describe("time/weather coverage dispositions (all maps, G6)", () => {
     expect(updateTime.placeholder).toBe(0);
     expect(updateTime.dropped).toBe(3);
     const reasons = updateTime.reasons.dropped ?? [];
-    expect(reasons).toContain("fixed-false guard prevents the source event from starting");
+    expect(reasons).toContain(
+      "fixed-false guard (is current_state: combat/menu/teleporter states do not run map fibers in the kit) prevents the source event from starting",
+    );
     expect(reasons).toContain("source event is not materialized by any map");
   });
 

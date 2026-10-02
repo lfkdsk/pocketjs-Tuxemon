@@ -1,13 +1,13 @@
 {
   "format": "pocket-tuxemon/j1-goldens/v1",
-  "baseFrames": 108225,
-  "segmentTapeSha256": "4857544fa75bfe48d16af58753bd7a8ad69231d8bc60b0a139f9bbb5290f1e5d",
-  "combinedTapeSha256": "1584fe355247c95766bf25b7e3ee2634526af6a190f2a450d402ac166a88049b",
+  "baseFrames": 110866,
+  "segmentTapeSha256": "8afdd265b098a6300f32afd198061531ba21f53c3ab4f880846f8bebbafd0aae",
+  "combinedTapeSha256": "a3150d1c12ef6e42677cc215226d74db5119803c837e36f6c2e4e446f3f2ae1c",
   "frames": [
     {
       "name": "wayfarer-guestbook",
       "frame": 519,
-      "mergedFrame": 108744,
+      "mergedFrame": 111385,
       "map": "spyder_wayfarer_inn1",
       "position": [
         9,
@@ -46,8 +46,8 @@
     },
     {
       "name": "route-4-billie",
-      "frame": 4755,
-      "mergedFrame": 112980,
+      "frame": 4727,
+      "mergedFrame": 115593,
       "map": "spyder_route4",
       "position": [
         2,
@@ -56,8 +56,8 @@
       "width": 480,
       "height": 272,
       "file": "j1-route-4-billie.480x272.png",
-      "rgbaFnv1a": "3ef2a3d7",
-      "pngSha256": "81ed6b25e71c98be0cf6591217890d0d1be3461c9589ce603003d0ade19a1d3e",
+      "rgbaFnv1a": "5e41934b",
+      "pngSha256": "93050657e60f60e3661a3cdf773ab0139d11237af9bc0493576373f17570c208",
       "camera": [
         0,
         0
@@ -86,8 +86,8 @@
     },
     {
       "name": "captain-found",
-      "frame": 11519,
-      "mergedFrame": 119744,
+      "frame": 10385,
+      "mergedFrame": 121251,
       "map": "spyder_mansion_basement",
       "position": [
         3,
@@ -143,7 +143,7 @@
     {
       "name": "wayfarer-guestbook",
       "frame": 519,
-      "mergedFrame": 108744,
+      "mergedFrame": 111385,
       "map": "spyder_wayfarer_inn1",
       "position": [
         9,
@@ -182,8 +182,8 @@
     },
     {
       "name": "route-4-billie",
-      "frame": 4755,
-      "mergedFrame": 112980,
+      "frame": 4727,
+      "mergedFrame": 115593,
       "map": "spyder_route4",
       "position": [
         2,
@@ -192,8 +192,8 @@
       "width": 960,
       "height": 544,
       "file": "j1-route-4-billie.960x544.png",
-      "rgbaFnv1a": "dd82e1f2",
-      "pngSha256": "62b3501ae2963b042ff648f37688b9b4876a65bea9552f21e1ba671ddc57f450",
+      "rgbaFnv1a": "7c6df013",
+      "pngSha256": "c4823d4a3b26ce90f5a466f72fab48cec723abc13484e936210abc5829098b0b",
       "camera": [
         0,
         0
@@ -222,8 +222,8 @@
     },
     {
       "name": "captain-found",
-      "frame": 11519,
-      "mergedFrame": 119744,
+      "frame": 10385,
+      "mergedFrame": 121251,
       "map": "spyder_mansion_basement",
       "position": [
         3,

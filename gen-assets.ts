@@ -1,19 +1,20 @@
 // One-command deterministic G6 cook: K1 events + streamed terrain + R2 art.
 // Usage: TUXEMON_SRC=/path/to/Tuxemon bun gen-assets.ts
 
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { encodePNG } from "./vendor/pocket-rpgkit/vendor/pocketjs/tests/png.ts";
 import { cookAnimationAtlases } from "./vendor/pocket-rpgkit/tools/lib/animated.ts";
 import { loadAnimationSheet } from "./vendor/pocket-rpgkit/tools/lib/anim-sheet.ts";
 import { splitProjectMaps } from "./vendor/pocket-rpgkit/tools/lib/map-project.ts";
-import { pakManifest, type PakManifestEntry } from "./vendor/pocket-rpgkit/tools/lib/stream.ts";
+import { pakManifest, streamEntryFile, type PakManifestEntry } from "./vendor/pocket-rpgkit/tools/lib/stream.ts";
 import { assertShellManifestFresh } from "./vendor/pocket-rpgkit/src/engine/map-repository.ts";
 import type { GameAssets, GameScreenLayerAssets } from "./vendor/pocket-rpgkit/src/ui/game-assets.ts";
 import type { PlayerFrames } from "./vendor/pocket-rpgkit/src/ui/PlayerSprite.tsx";
 import type { Project } from "./vendor/pocket-rpgkit/src/engine/types.ts";
 import { splitAnimatedTiles, type AnimatedIndexEntry } from "./importer/animated.ts";
 import { collectNpcSrcAssetPaths, splitNpcSrc, type NpcSrcIndexEntry } from "./importer/npc-src.ts";
+import { bakeItemIcons, ITEM_ICON_PAK_KEY } from "./importer/item-icons.ts";
 import { cookCharacters } from "./importer/characters.ts";
 import { appendBattleDbPakEntry, writeBattleArtifacts } from "./importer/battle.ts";
 import { coverageMarkdown, jsonBytes } from "./importer/index.ts";
@@ -21,6 +22,7 @@ import { decodePng } from "./importer/png.ts";
 import { availableMapIds, buildProject, G6_IMPORT_OPTIONS } from "./importer/project.ts";
 import { applyTerrain, DEFAULT_TUXEMON_SRC, writeTerrain } from "./importer/terrain.ts";
 import { buildWarpIndex } from "./importer/warp.ts";
+import { buildDemoData, demoIndexSource } from "./importer/demo-data.ts";
 
 // Tests and determinism checks can cook into a disposable root without
 // touching the maintained project tree. Source modules still come from this
@@ -47,6 +49,15 @@ project = {
 
 const characters = await cookCharacters(project, { outputRoot: ROOT });
 project = characters.project;
+
+// Item icons: the importer plans one declared sheet (16x16 cells) with a
+// cell per upstream icon file plus one shared placeholder. Cook the same
+// plan into a TILESET pak entry so item sprites resolve to real art.
+const itemIcons = bakeItemIcons(imported.report.itemIcons);
+const itemIconFile = streamEntryFile(ITEM_ICON_PAK_KEY, "assets/icons");
+mkdirSync(dirname(join(ROOT, itemIconFile)), { recursive: true });
+writeFileSync(join(ROOT, itemIconFile), itemIcons.blob);
+const itemIconPakEntry: PakManifestEntry = { key: ITEM_ICON_PAK_KEY, file: itemIconFile };
 
 function nextPowerOfTwo(value: number): number {
   let result = 1;
@@ -357,6 +368,26 @@ const mapPakEntries: PakManifestEntry[] = split.entries.map((entry) => ({
   key: entry.meta.entry,
   file: `dist/${entry.path}`,
 }));
+// Demo menu data: the 172k-frame mainline tape (nibble-packed) and the 13
+// chapter snapshots become pak entries read on demand; only the tiny chapter
+// index is inline in the bundle (ui/demo-index.ts). The baked chapter data
+// only exists in the maintained tree, so an isolated cook (determinism
+// checks) emits an empty index and no demo pak entries.
+const warpIndex = buildWarpIndex(project);
+const demoData = existsSync(join(ROOT, "data/chapters.json"))
+  ? buildDemoData(ROOT, warpIndex)
+  : null;
+if (demoData) {
+  const demoDir = join(DIST, "demo");
+  rmSync(demoDir, { recursive: true, force: true });
+  mkdirSync(demoDir, { recursive: true });
+  writeFileSync(join(demoDir, "tape.bin"), demoData.tapeBytes);
+  writeFileSync(join(demoDir, "chapters.json"), demoData.snapshotsJson);
+  writeFileSync(join(ROOT, "ui/demo-index.ts"), demoIndexSource(demoData.index, demoData.spawns));
+} else {
+  writeFileSync(join(ROOT, "ui/demo-index.ts"), demoIndexSource([], []));
+}
+
 // GM1: the committed transcoded audio (eight mainline QOA music tracks and
 // three SFX WAVs) ships as raw pak entries under the keys the audio manifest
 // declares; Project.audio maps logical ids to those keys. Hosts without an
@@ -378,7 +409,9 @@ const pakEntries = [
   ...npcSrcPakEntries,
   ...terrain.streamPakEntries,
   ...audioPakEntries,
+  itemIconPakEntry,
   { key: "world-index.json", file: "dist/world-index.json" },
+  ...(demoData?.pakEntries ?? []),
 ].sort((a, b) => a.key < b.key ? -1 : a.key > b.key ? 1 : 0);
 
 writeFileSync(join(ROOT, "sprites.json"), jsonBytes(cooked.spritesJson));
@@ -408,7 +441,7 @@ writeFileSync(join(DIST, "weather.json"), jsonBytes({
 }));
 // One spawn per map for the demo menu's map jump list: a transfer landing
 // when one exists, else the first standable cell outside every event area.
-writeFileSync(join(ROOT, "data/warp.json"), jsonBytes(buildWarpIndex(project)));
+writeFileSync(join(ROOT, "data/warp.json"), jsonBytes(warpIndex));
 writeFileSync(join(ROOT, "reports/G1-coverage.md"), coverageMarkdown(imported.report));
 
 function gameAssetsSource(
@@ -526,6 +559,15 @@ const assetReport = {
   },
   characters: characters.report,
   battle: battle.report,
+  itemIcons: {
+    entries: 1,
+    sheet: imported.report.itemIcons.sheet,
+    uniqueIcons: imported.report.itemIcons.uniqueIcons,
+    missing: imported.report.itemIcons.missing,
+    colors: itemIcons.report.colors,
+    quantized: itemIcons.report.quantized,
+    pakBytes: itemIcons.report.bytes,
+  },
 };
 writeFileSync(join(ROOT, "data/g6-assets-report.json"), jsonBytes(assetReport));
 

@@ -1,0 +1,21 @@
+{
+  "format": "pocket-tuxemon/daycare-goldens/v1",
+  "frames": [
+    {
+      "case": "ready",
+      "width": 480,
+      "height": 272,
+      "file": "daycare-ready.480x272.png",
+      "rgbaFnv1a": "be8409e7",
+      "pngSha256": "eb9ba3d51c2900742318fc08722227ab274cd5904cf81ccb77c4624c6f13c40b"
+    },
+    {
+      "case": "party",
+      "width": 480,
+      "height": 272,
+      "file": "daycare-party.480x272.png",
+      "rgbaFnv1a": "1188c3fc",
+      "pngSha256": "19c761a6153ca73c67ca09931f4daa4b19c6a7ea5ee77dbe3e5b4b89e9862080"
+    }
+  ]
+}

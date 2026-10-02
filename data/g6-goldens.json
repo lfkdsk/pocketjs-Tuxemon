@@ -35,15 +35,15 @@
     },
     {
       "name": "downstairs-mom",
-      "frame": 1416,
+      "frame": 1371,
       "map": "spyder_downstairs",
       "position": [
         3,
         6
       ],
-      "file": "g6-downstairs-mom.1416.png",
-      "rgbaFnv1a": "92d29690",
-      "pngSha256": "be9bdb564f9bce9503006fb26b14fb45ae3efded0917937091298143a953e9d2",
+      "file": "g6-downstairs-mom.1371.png",
+      "rgbaFnv1a": "fc6f434d",
+      "pngSha256": "2e97ca5ba45793d4d5c3c0d3a4bd0f45fa1477dba02bfcabf881eddf4c5697ad",
       "camera": [
         0,
         0
@@ -66,30 +66,30 @@
         "id": "npc_spyder_papertown_mom",
         "tile": [
           6,
-          6
+          5
         ],
         "pixel": [
           96,
-          96
+          80
         ],
-        "facing": 3,
+        "facing": 1,
         "phase": 0,
         "sprite": "npc.homemaker",
-        "image": "assets/characters/npc-npc-homemaker-idle-3.png",
+        "image": "assets/characters/npc-npc-homemaker-idle-1.png",
         "height": 32
       }
     },
     {
       "name": "paper-town",
-      "frame": 1451,
+      "frame": 1406,
       "map": "spyder_paper_town",
       "position": [
         10,
         8
       ],
-      "file": "g6-paper-town.1451.png",
-      "rgbaFnv1a": "54d762ac",
-      "pngSha256": "e43e3ff1d9b1460ed3fcf754d9fa1e55679482fccb72ab78aac5772f829744cd",
+      "file": "g6-paper-town.1406.png",
+      "rgbaFnv1a": "1d3796ac",
+      "pngSha256": "75faf53025be227188e1c256b4cd0ea06000a803ea42bc7d228ecf9b9f98f5d4",
       "camera": [
         0,
         0
@@ -111,15 +111,15 @@
     },
     {
       "name": "route-1",
-      "frame": 3368,
+      "frame": 3989,
       "map": "spyder_route1",
       "position": [
         14,
         19
       ],
-      "file": "g6-route-1.3368.png",
-      "rgbaFnv1a": "d41ad8c7",
-      "pngSha256": "cb3875b823dbea8a7bcda1e74ae62200fba7b6bc7206f59f31aa5b84041024e6",
+      "file": "g6-route-1.3989.png",
+      "rgbaFnv1a": "aa358549",
+      "pngSha256": "a089d5b5ba2fadd051766f308308cd573cc011f9a6466619b1add230d5042da6",
       "camera": [
         0,
         48

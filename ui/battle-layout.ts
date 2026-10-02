@@ -8,7 +8,10 @@ export const BATTLE_BASE_WIDTH = 480;
 export const BATTLE_BASE_HEIGHT = 272;
 export const BATTLE_SCENE_HEIGHT = 216;
 export const BATTLE_SCENE_CROP_X = 16;
-export const BATTLE_PLAYER_HP_WIDTH = 100;
+// Leave a 64 px number cell at 480x272. The largest imported early-game
+// readout ("109 / 109") is wider than the former 54 px cell and lost its
+// final digit against the right edge of the battle canvas.
+export const BATTLE_PLAYER_HP_WIDTH = 90;
 export const BATTLE_ENEMY_HP_WIDTH = 140;
 export const BATTLE_XP_WIDTH = 140;
 // Compatibility width used by the GB3/GB4 software-preview helpers. The live

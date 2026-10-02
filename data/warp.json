@@ -606,14 +606,14 @@
   {
    "id": "mansion",
    "name": "Mansion",
-   "x": 1,
+   "x": 2,
    "y": 15,
    "from": "transfer"
   },
   {
    "id": "mansion_basement",
    "name": "mansion_basement",
-   "x": 6,
+   "x": 7,
    "y": 20,
    "from": "transfer"
   },
@@ -718,8 +718,8 @@
   {
    "id": "route3",
    "name": "Route 3",
-   "x": 35,
-   "y": 5,
+   "x": 30,
+   "y": 39,
    "from": "transfer"
   },
   {
@@ -1824,8 +1824,8 @@
   {
    "id": "wayfarer_inn1",
    "name": "wayfarer_inn1",
-   "x": 12,
-   "y": 2,
+   "x": 11,
+   "y": 10,
    "from": "transfer"
   },
   {

@@ -36,6 +36,11 @@ import {
   type TerrainSurfaceLabels,
 } from "./terrain.ts";
 import {
+  ITEM_ICON_SHEET_ID,
+  planItemIcons,
+  type ItemIconPlan,
+} from "./item-icons.ts";
+import {
   loadWeatherTable,
   timeIsArgs,
   updateTimeArgs,
@@ -465,6 +470,8 @@ for (const f of readdirSync(join(TUXEMON_SRC, "mods/tuxemon/db/economy")).sort()
 interface ItemRow {
   slug: string;
   cost?: number | null;
+  /** Upstream art path relative to the mod root (e.g. `gfx/items/potion.png`). */
+  sprite?: string;
   usable_in?: string[];
   conditions?: { type?: string; parameters?: unknown[]; operator?: string }[];
   effects?: { type?: string; parameters?: unknown[] }[];
@@ -775,7 +782,7 @@ type Clause =
   | { k: "bgmPlaying"; id: string; negate: boolean }
   | { k: "native"; condition: Condition; negate: boolean }
   | { k: "ext"; call: string; args: JsonValue }
-  | { k: "const"; value: boolean };
+  | { k: "const"; value: boolean; reason?: string };
 
 export function lowerCurrentStateCondition(
   op: Cond["op"],
@@ -827,12 +834,38 @@ function clauses(
 ): Clause[] | null {
   const a = c.args;
   const not = c.op === "not";
-  const K = (value: boolean): Clause[] => [{ k: "const", value: not ? !value : value }];
+  const K = (value: boolean, reason?: string): Clause[] => [{
+    k: "const",
+    value: not ? !value : value,
+    ...(reason ? { reason } : {}),
+  }];
   if (TRIGGER_CONDS.has(c.type)) {
     if (c.type === "char_facing" && options.facing && c.op === "is" &&
         c.args[0] === "player" && DIRS.has(c.args[1]!)) {
       noteCondition(c, `${c.op} ${c.type}`, "T1", "K1 facing page condition");
       return [{ k: "facing", dir: c.args[1] as Dir }];
+    }
+    if (c.type === "char_facing" && c.op === "is" && c.args[0] === "player" &&
+        DIRS.has(c.args[1]!)) {
+      noteCondition(c, `${c.op} ${c.type}`, "T2-dropped", "trigger predicate unavailable in v1");
+      return null;
+    }
+    if (c.type === "char_facing") {
+      const reason = c.args[0] === "player" && !DIRS.has(c.args[1]!)
+        ? `source direction '${c.args[1] ?? ""}' is not up/down/left/right and can never equal Tuxemon's Direction`
+        : "live facing for this character/operator is unavailable in v1";
+      noteCondition(c, `${c.op} ${c.type}`, "T2-dropped", reason);
+      return K(false, `${c.op} char_facing: ${reason}`);
+    }
+    if (c.type === "button_pressed" && (c.op !== "is" || c.args[0] !== "INTERACT")) {
+      const reason = `source button '${c.args[0] ?? ""}' is not a supported Tuxemon intention`;
+      noteCondition(c, `${c.op} ${c.type}`, "T4-dropped", reason);
+      return K(false, `${c.op} button_pressed: ${reason}`);
+    }
+    if (c.type === "char_facing_tile" && c.args[1]) {
+      const reason = "surface-labelled facing tiles need a live player-cell terrain predicate";
+      noteCondition(c, `${c.op} ${c.type}`, "T2-dropped", reason);
+      return K(false, `${c.op} char_facing_tile: ${reason}`);
     }
     const native = c.type === "button_pressed" || c.type === "char_at" ||
       c.type === "char_moved" || c.type === "char_facing_tile";
@@ -883,6 +916,32 @@ function clauses(
         },
         negate: not,
       }];
+    }
+    case "check_char_parameter": {
+      const [character, parameter, value] = a;
+      if (options.battle && character === "player" && parameter === "name" && value !== undefined) {
+        noteCondition(c, `${c.op} check_char_parameter(name)`, "T1", "live playerName exact comparison");
+        return [{
+          k: "ext",
+          call: "tux.player_name_is",
+          args: { name: value, negate: not },
+        }];
+      }
+      const reason = character === "player" && parameter === "moving"
+        ? "the extension condition context has no live player movement state"
+        : `character parameter '${parameter ?? ""}' is unavailable to map conditions`;
+      noteCondition(c, `${c.op} check_char_parameter`, "T2-dropped", reason);
+      return K(false, `${c.op} check_char_parameter: ${reason}`);
+    }
+    case "char_in": {
+      const reason = "the condition context has no live player cell or terrain-surface label";
+      noteCondition(c, `${c.op} char_in`, "T2-dropped", reason);
+      return K(false, `${c.op} char_in: ${reason}`);
+    }
+    case "step_tracker": {
+      const reason = "the runtime exposes neither a saved step counter nor a movement-step update hook";
+      noteCondition(c, `${c.op} step_tracker`, "T2-dropped", reason);
+      return K(false, `${c.op} step_tracker: ${reason}`);
     }
     case "tile_property_updated": {
       const label = a[0];
@@ -975,6 +1034,25 @@ function clauses(
       }
       noteCondition(c, `${c.op} has_monster`, "T3-placeholder", "switch mon.<slug> set by add_monster");
       return [{ k: "sw", id: `mon.${a[1]}`, on: !not }];
+    case "has_tuxepedia":
+      if (options.battle && a[0] === "player" && a[1]
+        && (a[2] === "seen" || a[2] === "caught")) {
+        noteCondition(c, `${c.op} has_tuxepedia`, "T1", "tux.has_tuxepedia reads saved player seen/caught state");
+        return [{ k: "ext", call: "tux.has_tuxepedia", args: {
+          character: "player", species: a[1], status: a[2], negate: not,
+        } }];
+      }
+      noteCondition(c, `${c.op} has_tuxepedia`, "T2-dropped", "only the player's seen/caught Tuxepedia state is imported");
+      return K(false, `${c.op} has_tuxepedia: only the player's seen/caught Tuxepedia state is imported`);
+    case "char_healed":
+      if (options.battle && a[0] === "player") {
+        noteCondition(c, `${c.op} char_healed`, "T1", "tux.char_healed reads every saved player monster's current/max HP");
+        return [{ k: "ext", call: "tux.char_healed", args: {
+          character: "player", negate: not,
+        } }];
+      }
+      noteCondition(c, `${c.op} char_healed`, "T2-dropped", "only the player's full HP snapshots are imported");
+      return K(false, `${c.op} char_healed: only the player's full HP snapshots are imported`);
     case "has_item": {
       if (a[0] !== "player") {
         noteCondition(c, `${c.op} has_item(npc)`, "T3-dropped", "NPC inventory is combat-only");
@@ -1016,7 +1094,11 @@ function clauses(
           "T2-dropped",
           "combat/menu/teleporter states do not run map fibers in the kit; folded to their unreachable result",
         );
-        return [{ k: "const", value: lowered }];
+        return [{
+          k: "const",
+          value: lowered,
+          reason: `${c.op} current_state: combat/menu/teleporter states do not run map fibers in the kit`,
+        }];
       }
       noteCondition(
         c,
@@ -1086,7 +1168,10 @@ function clauses(
       return K(a[2] === "none");
     default:
       noteCondition(c, `${c.op} ${c.type}`, "T3-dropped", "monster/party/meta state unknown to P1: fixed answer");
-      return K(["cooldown_days"].includes(c.type));
+      return K(
+        ["cooldown_days"].includes(c.type),
+        `${c.op} ${c.type}: no imported runtime state or predicate`,
+      );
   }
 }
 
@@ -1323,6 +1408,7 @@ function importedItem(id: string): Item {
   return {
     id,
     name: (po.get(id) ?? id).slice(0, 24),
+    // Replaced by the item-icon plan below once the full catalog is known.
     sprite: "tux.0",
     usable: row?.usable_in?.includes("WorldState") ?? false,
     price,
@@ -1488,6 +1574,57 @@ function pcScene(): Command {
   } as Command;
 }
 
+function daycareScene(): Command {
+  return {
+    op: "scene",
+    id: "tux.daycare",
+    args: {
+      labels: labelArgs({
+        summary: poText("menu_daycare_summary"),
+        parents: poText("menu_daycare_parents"),
+        empty: poText("menu_daycare_empty"),
+        mode: poText("menu_daycare_mode"),
+        thanks: poText("menu_daycare_thanks"),
+        add: poText("menu_daycare_add"),
+        withdraw: poText("menu_daycare_withdraw"),
+        collect: poText("menu_daycare_collect"),
+        modeTraining: poText("menu_daycare_mode_training"),
+        modeBreeding: poText("menu_daycare_mode_breeding"),
+        modeIncompatible: poText("menu_daycare_mode_incompatible"),
+        modeEmpty: poText("menu_daycare_mode_empty"),
+        training: poText("menu_daycare_training"),
+        expTotal: poText("menu_daycare_exp_total"),
+        costTotal: poText("menu_daycare_cost_total"),
+        expPerStep: poText("menu_daycare_exp_per_step"),
+        costPerStep: poText("menu_daycare_cost_per_step"),
+        expPerStepTotal: poText("menu_daycare_exp_per_step_total"),
+        costPerStepTotal: poText("menu_daycare_cost_per_step_total"),
+        trainingSingle: poText("menu_daycare_training_active_single"),
+        trainingDouble: poText("menu_daycare_training_active_double"),
+        trainingInactive: poText("menu_daycare_training_inactive"),
+        breeding: poText("menu_daycare_breeding"),
+        progress: poText("menu_daycare_progress"),
+        ready: poText("menu_daycare_ready"),
+        halfway: poText("menu_daycare_halfway"),
+        notReady: poText("menu_daycare_not_ready"),
+        noBreeding: poText("menu_daycare_no_breeding"),
+        full: poText("menu_storage_full_kennel"),
+        select: poText("menu_select"),
+        back: poText("menu_back"),
+        upKey: poText("menu_up_key"),
+        downKey: poText("menu_down_key"),
+        leftKey: poText("menu_left_key"),
+        rightKey: poText("menu_right_key"),
+        primaryKey: poText("menu_primary_select_key"),
+        secondaryKey: poText("menu_secondary_select_key"),
+        male: poText("gender_male"),
+        female: poText("gender_female"),
+        neuter: poText("gender_neuter"),
+      }),
+    },
+  } as Command;
+}
+
 /** Monster stock of one economy; upstream defaults inventory to 1. Entries
  *  gated by economy `variables` are not representable in the scene. */
 function monsterShopScene(economy: EconomyRow): Command | null {
@@ -1624,9 +1761,8 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
           const options = opts.map((option) => {
             const own = po.get(option) ?? titleCase(option);
             // Upstream choice_npc shares one label across buttons and tells
-            // options apart by per-option NPC portraits. The kit choice box
-            // cannot draw option images, so append the option's own name to
-            // keep every line distinguishable (Degraded: no portraits).
+            // options apart by per-option NPC pictures; the option's own
+            // name is appended as well so every line reads on its own.
             const label = commonLabel ? `${commonLabel} (${own})` : own;
             return {
               key: option,
@@ -1634,14 +1770,26 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
               code: code(variable, option),
             };
           });
-          noteAction(
-            a,
-            a.type,
-            a.type === "choice_npc" ? "T1-lowered" : "T1",
-            a.type === "choice_npc"
-              ? "shared label + per-option name (upstream portraits need kit option images)"
-              : "KC1 extChoice static list -> enum code via the resolver",
-          );
+          if (a.type === "choice_npc") {
+            // Each option is an NPC entry (db/npc/appearance_options.yaml);
+            // its walker's front idle frame is the option icon, the small
+            // form of upstream's front combat sheet.
+            noteAction(a, a.type, "T1", "choices with each option NPC's front walker frame as its icon");
+            out.push({
+              op: "choices",
+              prompt: "",
+              options: options.map((option) => {
+                const sprite = npcDb.get(option.key)?.template.sprite_name;
+                return {
+                  text: option.label,
+                  ...(sprite && ensureAppearanceSprite(sprite) ? { icon: { sprite } } : {}),
+                  commands: [{ op: "variable" as const, id: varId(variable), set: { op: "set" as const, value: option.code } }],
+                };
+              }),
+            });
+            break;
+          }
+          noteAction(a, a.type, "T1", "KC1 extChoice static list -> enum code via the resolver");
           out.push(command({
             op: "extChoice",
             call: "tux.enum_choice",
@@ -2660,6 +2808,36 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
           noteAction(a, a.type, "T3-dropped", "requires an adjacent get_player_monster picker");
         }
         break;
+      case "variable_math":
+        noteAction(
+          a,
+          a.type,
+          "T2-dropped",
+          "source operands may be floating-point or absent; the kit variable bank stores only safe integers and has no presence bit",
+        );
+        break;
+      case "format_variable":
+        noteAction(
+          a,
+          a.type,
+          "T2-dropped",
+          "source int/float coercion needs raw numeric variables; story values are enum-coded and kit numeric writes floor fractions",
+        );
+        break;
+      case "add_step_tracker": case "remove_step_tracker": case "set_step_tracker_milestone_shown":
+        noteAction(
+          a,
+          a.type,
+          "T2-dropped",
+          "the runtime exposes neither a saved step-counter state machine nor a movement-step update hook",
+        );
+        break;
+      case "set_mission":
+        noteAction(a, a.type, "T3-dropped", "mission definitions, prerequisite graph, and per-step status are not imported");
+        break;
+      case "autosave":
+        noteAction(a, a.type, "T4-dropped", "pure reducer event commands cannot request the host to persist save slot 0");
+        break;
       case "access_pc":
         if (ctx.options.battle && g[0] === "player") {
           noteAction(a, a.type, "T1-lowered", "tux.pc monster storage (pick up, drop off, move, release); no item locker, email or multiplayer entries");
@@ -2703,13 +2881,20 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         noteAction(a, a.type, "T3-dropped", "plague system: moves infected monsters into the hidden quarantine box");
         break;
       case "daycare":
-        noteAction(a, a.type, "T3-dropped", "daycare storage, per-step training and breeding are not modelled");
+        if (ctx.options.battle && g[0] === "player") {
+          noteAction(a, a.type, "T1", "tux.daycare two-slot storage, per-step training, deterministic breeding and newborn collection");
+          out.push(daycareScene());
+        } else {
+          noteAction(a, a.type, "T3-dropped", ctx.options.battle
+            ? "daycare is modelled for the player only"
+            : "monster/combat subsystem (P2)");
+        }
         break;
       case "park_experience":
         noteAction(a, a.type, "T3-dropped", "Safari-park session (Eclipse park); not part of the Spyder campaign");
         break;
       case "set_monster_attribute":
-      case "set_bill": case "format_variable":
+      case "set_bill":
         noteAction(a, a.type, "T3-dropped", "monster/combat subsystem (P2)");
         break;
       case "update_time":
@@ -2824,8 +3009,11 @@ function convertMap(
         surfaceLabels,
       ));
       const cls: Clause[] = cls0.filter((x): x is Clause[] => x !== null).flat();
-      if (cls.some((c) => c.k === "const" && !c.value)) {
-        const reason = "fixed-false guard prevents the source event from starting";
+      const fixedFalse = cls.find((clause) => clause.k === "const" && !clause.value);
+      if (fixedFalse?.k === "const") {
+        const reason = fixedFalse.reason
+          ? `fixed-false guard (${fixedFalse.reason}) prevents the source event from starting`
+          : "fixed-false guard prevents the source event from starting";
         eventCoverage.dropAll(reason);
         note("trigger", "never-true guard", "T4-dropped", reason);
         continue;
@@ -3120,7 +3308,8 @@ function convertMap(
     const first = list[0]!;
     if (list.length === 1) {
       const { cond, rest } = pageCondition(first.cls, options);
-      events.push({ id: first.id, name: first.name, x: first.x, y: first.y, pages: [{ trigger: first.trigger, condition: cond, sprite: null, commands: guard(rest, first.cmds) }] });
+      const commands = guard(rest, first.cmds);
+      events.push({ id: first.id, name: first.name, x: first.x, y: first.y, pages: [{ trigger: first.trigger, condition: cond, sprite: null, commands }] });
       continue;
     }
     const flag = (i: number) => `local.cell.${m.slug}.${first.id}.${i}`;
@@ -3130,6 +3319,7 @@ function convertMap(
     events.push({ id: first.id, name: list.map((p) => p.name).join(" + "), x: first.x, y: first.y, pages: [{ trigger: first.trigger, sprite: null, commands }] });
     note("trigger", "stacked events on one cell", "T1-lowered", "merged: match flags then bodies");
   }
+
   events.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
 
   // NPC events: page 0 absent; page 1 present while local.npc.<slug> == 1
@@ -3430,6 +3620,16 @@ export interface ImportReport {
       itemDescription: { disposition: "degraded"; reason: string };
     };
   };
+  /** Item icon atlas plan; gen-assets cooks the binary TILESET entry. */
+  itemIcons: {
+    sheet: { id: string; pak: string; cols: number; rows: number };
+    /** Cell index -> upstream art path relative to the mod root. */
+    cells: { cell: number; file: string }[];
+    placeholderCell: number;
+    /** Item slugs whose DB row names no existing art (placeholder cell). */
+    missing: string[];
+    uniqueIcons: number;
+  };
   world: WorldImportReport;
   coverage: CoverageReport;
   /** D1: the 10-entry weather table exported from mods/tuxemon/db/weather. */
@@ -3559,6 +3759,18 @@ export function buildProject(
     a < b ? -1 : a > b ? 1 : 0
   )));
 
+  // Assign every item its atlas cell once the full catalog is known (event
+  // conversion can introduce items absent from the DB, e.g. elianeoutput).
+  // The binary atlas itself is cooked by gen-assets from this same plan.
+  const itemIconPlan = planItemIcons(
+    [...items.keys()],
+    (slug) => itemDb.get(slug)?.sprite,
+    TUXEMON_SRC,
+  );
+  for (const [slug, sprite] of Object.entries(itemIconPlan.sprites)) {
+    items.get(slug)!.sprite = sprite;
+  }
+
   const startId = want.includes("spyder_bedroom") ? "spyder_bedroom" : want[0];
   if (!startId) throw new Error("at least one map must be selected");
   const startMap = mapDefs.find((m) => m.id === startId)!;
@@ -3616,7 +3828,7 @@ export function buildProject(
       cols: 1,
       rows: 1,
       defaultPassage: "pass",
-    }],
+    }, itemIconPlan.sheet],
     items: [...items.values()].sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0),
     ...(animationDefs.size ? {
       animations: [...animationDefs.values()].sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0),
@@ -3713,6 +3925,13 @@ export function buildProject(
             reason: "Descriptions are retained in this import report because rpgkit-project/v1 Item has no description field.",
           },
         },
+      },
+      itemIcons: {
+        sheet: { id: itemIconPlan.sheet.id, pak: itemIconPlan.sheet.pak!, cols: itemIconPlan.sheet.cols, rows: itemIconPlan.sheet.rows },
+        cells: itemIconPlan.cells,
+        placeholderCell: itemIconPlan.placeholderCell,
+        missing: itemIconPlan.missing,
+        uniqueIcons: itemIconPlan.uniqueIcons,
       },
       world: world.report,
       coverage: conversionCoverage.report(),

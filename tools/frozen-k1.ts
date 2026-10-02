@@ -41,6 +41,7 @@ const SCAN_OPTIONS = {
     "tux.pc": SCAN_SCENE_RULES,
     "tux.trade": SCAN_SCENE_RULES,
     "tux.monsterShop": SCAN_SCENE_RULES,
+    "tux.daycare": SCAN_SCENE_RULES,
   },
 } as const;
 

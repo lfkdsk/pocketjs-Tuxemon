@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
 import { decodePng } from "../importer/png.ts";
-import { battleSceneLayout, hpBarWidth } from "../ui/battle-layout.ts";
+import { BATTLE_BASE_WIDTH, BATTLE_RECTS, battleSceneLayout, hpBarWidth } from "../ui/battle-layout.ts";
 import {
   GB4_BATTLE_HEIGHT,
   GB4_BATTLE_WIDTH,
@@ -22,11 +22,12 @@ test("battle layout scales exactly at both target resolutions", () => {
   const player = { currentHp: 31, base: { hp: 62 } as any };
   const enemy = { currentHp: 17, base: { hp: 40 } as any };
   expect(battleSceneLayout(480, 272, player, enemy)).toEqual({
-    scale: 1, left: 0, top: 0, playerHpWidth: 50, enemyHpWidth: 60,
+    scale: 1, left: 0, top: 0, playerHpWidth: 45, enemyHpWidth: 60,
   });
   expect(battleSceneLayout(960, 544, player, enemy)).toEqual({
-    scale: 2, left: 0, top: 0, playerHpWidth: 50, enemyHpWidth: 60,
+    scale: 2, left: 0, top: 0, playerHpWidth: 45, enemyHpWidth: 60,
   });
+  expect(BATTLE_BASE_WIDTH - BATTLE_RECTS.playerHp.x - BATTLE_RECTS.playerHp.width - 6).toBeGreaterThanOrEqual(64);
 });
 
 test("battle preview is byte-stable and HP fill pixels stop at the computed width", () => {

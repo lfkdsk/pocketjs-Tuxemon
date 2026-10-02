@@ -9,9 +9,47 @@ mod g6_quickjs_bench {
     use std::ffi::CString;
     use std::fmt::Write as _;
     use std::path::Path;
+    use std::time::Duration;
     use std::time::Instant;
 
     const BENCH_APP_ID: &str = "dev.lfkdsk.pocket-tuxemon-bench";
+    const BENCH_TICK: Duration = Duration::from_nanos(1_000_000_000 / 60);
+
+    /// GC policy exercised by the benchmark. The normal command follows the
+    /// production desktop host; G6_GC_MODE=auto restores QuickJS's default
+    /// allocation-triggered collector for an explicit comparison run.
+    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    enum GcMode {
+        Idle,
+        Auto,
+    }
+
+    impl GcMode {
+        fn from_env() -> Self {
+            match std::env::var("G6_GC_MODE").as_deref() {
+                Err(std::env::VarError::NotPresent) | Ok("") | Ok("idle") => Self::Idle,
+                Ok("auto") => Self::Auto,
+                Ok(value) => panic!(
+                    "G6_GC_MODE must be 'idle' (production default) or 'auto', got {value:?}"
+                ),
+                Err(error) => panic!("G6_GC_MODE is not valid Unicode: {error}"),
+            }
+        }
+
+        fn label(self) -> &'static str {
+            match self {
+                Self::Idle => "idle",
+                Self::Auto => "auto",
+            }
+        }
+
+        fn guest(self) -> Result<Guest> {
+            match self {
+                Self::Idle => Guest::new_with_idle_gc(pocket_mod::IdleGcConfig::default()),
+                Self::Auto => Guest::new(),
+            }
+        }
+    }
 
     /// Per-frame timing source.  The 50 ms frame budget asserts on THREAD CPU
     /// time, not wall clock: on a shared host the bench thread is routinely
@@ -289,13 +327,16 @@ mod g6_quickjs_bench {
             args.data_root.clone(),
             &audio_host,
         )?;
-        let guest = Guest::new()?;
+        let gc_mode = GcMode::from_env();
+        let guest = gc_mode.guest()?;
         surface.mount(&guest)?;
         let offload = text_worker(pak);
         offload.mount(&guest)?;
         let app_id = args.app_id.clone().unwrap_or_else(|| args.app.clone());
         let fs_roots = fs::data_roots(args.data_root.as_deref(), &app_id)?;
         let fs_mount = fs::mount_fs(&guest, &fs_roots)?;
+        let audio = audio::AudioSurface::new(audio_host.client(0));
+        audio.mount(&guest)?;
         // Journey and performance fixtures must not inherit the machine wall
         // clock. Install the same fixed civil time used by the Bun and web
         // harnesses before the application bundle is evaluated.
@@ -312,6 +353,11 @@ mod g6_quickjs_bench {
         let host_finish_start = Instant::now();
         if !guest.has_frame() {
             return Err(anyhow!("bundle installed no frame handler"));
+        }
+        // Match Runtime::boot exactly: bundle evaluation is unbounded, then
+        // the hard cap is based on the fully booted heap before frame zero.
+        if gc_mode == GcMode::Idle && !guest.arm_idle_gc() {
+            return Err(anyhow!("idle-GC guest was not armed after bundle evaluation"));
         }
         surface.svc_push(
             json!({"t":"hello","w":args.viewport.0,"h":args.viewport.1,"epoch":epoch_ms()})
@@ -400,6 +446,12 @@ mod g6_quickjs_bench {
         core_cpu_ms: f64,
         draw_cpu_ms: f64,
         draw_sampled: bool,
+        /// Boundary collection after this tick. It is outside js/core/draw.
+        gc_ms: f64,
+        /// True when QuickJS changed its threshold during the product turn.
+        in_tick_gc: bool,
+        /// Constant-time counting-allocator size in idle mode; zero in auto.
+        heap_bytes: usize,
         structural: StructuralOps,
         // G6_BATTLE_BUCKETS: per-frame battle shape for the p95 explanation.
         player_party: u8,
@@ -409,6 +461,7 @@ mod g6_quickjs_bench {
 
     struct Bench {
         rt: Runtime,
+        gc_mode: GcMode,
         sample_structural: bool,
         hash_every: usize,
         battle_buckets: bool,
@@ -509,10 +562,15 @@ mod g6_quickjs_bench {
             if self.sample_structural {
                 self.reset_structural_counter();
             }
+            // The desktop host's boundary budget starts before all per-tick
+            // audio/offload work, so keep a separate whole-tick timestamp
+            // while preserving the existing js/core segment timings.
+            let work_start = Instant::now();
             self.rt.buttons = mask;
             self.rt._audio_host.begin_tick();
             self.rt.audio.begin_tick();
             self.rt.offload.begin_frame();
+            let threshold_before = gc_threshold(&self.rt.guest);
             let a = Instant::now();
             let a_cpu = thread_cpu::now_ms();
             // Injection point: inside the measured region so the burned CPU
@@ -545,6 +603,18 @@ mod g6_quickjs_bench {
             }
             let d = Instant::now();
             let d_cpu = thread_cpu::now_ms();
+            let in_tick_gc = gc_threshold(&self.rt.guest) != threshold_before;
+            // The idle guest exposes this in O(1); auto mode deliberately
+            // avoids JS_ComputeMemoryUsage in the hot path.
+            let heap_bytes = self.rt.guest.heap_bytes().unwrap_or(0);
+            let budget = pocket_mod::IdleBudget {
+                remaining: BENCH_TICK.saturating_sub(d.duration_since(work_start)),
+                period: BENCH_TICK,
+            };
+            let gc_ms = match self.rt.guest.idle_gc(Some(budget)) {
+                pocket_mod::IdleGcOutcome::Collected(pause) => pause.as_secs_f64() * 1_000.0,
+                _ => 0.0,
+            };
             let (map, moving, fade, battle, battle_event, player_party, enemy_party, menu_mode) = if self.battle_buckets {
                 let rich = self.state_rich();
                 match frozen {
@@ -579,12 +649,23 @@ mod g6_quickjs_bench {
                 core_cpu_ms: c_cpu - b_cpu,
                 draw_cpu_ms: d_cpu - c_cpu,
                 draw_sampled,
+                gc_ms,
+                in_tick_gc,
+                heap_bytes,
                 structural,
                 player_party,
                 enemy_party,
                 menu_mode,
             }
         }
+    }
+
+    fn gc_threshold(guest: &Guest) -> usize {
+        guest.with(|ctx| unsafe {
+            pocket_mod::qjs::qjs::JS_GetGCThreshold(pocket_mod::qjs::qjs::JS_GetRuntime(
+                ctx.as_raw().as_ptr(),
+            )) as usize
+        })
     }
 
     fn qjs_memory(guest: &Guest) -> (i64, i64, i64) {
@@ -598,6 +679,70 @@ mod g6_quickjs_bench {
 
     fn percentile(sorted: &[f64], fraction: f64) -> f64 {
         sorted[((sorted.len() as f64 - 1.0) * fraction).ceil() as usize]
+    }
+
+    /// One line per viewport for the production boundary-GC contract. CPU
+    /// work remains the 50 ms gate; wall work + boundary pause is reported
+    /// separately so the collector never disappears from the evidence.
+    fn idle_gc_summary(viewport: &str, bench: &Bench, samples: &[Sample]) {
+        assert!(!samples.is_empty(), "GC summary requires at least one frame");
+        let mut cpu_work: Vec<f64> = samples
+            .iter()
+            .map(|sample| sample.js_cpu_ms + sample.core_cpu_ms)
+            .collect();
+        let mut work: Vec<f64> = samples
+            .iter()
+            .map(|sample| sample.js_ms + sample.core_ms)
+            .collect();
+        let mut combined: Vec<f64> = samples
+            .iter()
+            .map(|sample| sample.js_ms + sample.core_ms + sample.gc_ms)
+            .collect();
+        cpu_work.sort_by(|a, b| a.partial_cmp(b).unwrap());
+        work.sort_by(|a, b| a.partial_cmp(b).unwrap());
+        combined.sort_by(|a, b| a.partial_cmp(b).unwrap());
+        let mean = |values: &[f64]| values.iter().sum::<f64>() / values.len() as f64;
+        let over = |values: &[f64], ms: f64| values.iter().filter(|value| **value > ms).count();
+        let in_tick = samples.iter().filter(|sample| sample.in_tick_gc).count();
+        let in_tick_cpu_max = samples
+            .iter()
+            .filter(|sample| sample.in_tick_gc)
+            .map(|sample| sample.js_cpu_ms + sample.core_cpu_ms)
+            .fold(0.0, f64::max);
+        let stats = bench.rt.guest.idle_gc_stats().unwrap_or_default();
+        let peak = samples
+            .iter()
+            .map(|sample| sample.heap_bytes)
+            .max()
+            .unwrap_or(0)
+            .max(stats.peak_bytes);
+        println!(
+            "IDLEGC_CPU viewport={viewport} mode={} n={} cpu_work_mean={:.3}ms cpu_work_p99={:.3}ms cpu_work_max={:.3}ms cpu_over25={} cpu_over50={} in_tick_gc={in_tick} in_tick_gc_cpu_max={in_tick_cpu_max:.3}ms",
+            bench.gc_mode.label(),
+            samples.len(),
+            mean(&cpu_work),
+            percentile(&cpu_work, 0.99),
+            cpu_work[cpu_work.len() - 1],
+            over(&cpu_work, 25.0),
+            over(&cpu_work, 50.0),
+        );
+        println!(
+            "IDLEGC viewport={viewport} mode={} n={} work_mean={:.3}ms work_p99={:.3}ms work_max={:.3}ms combined_p99={:.3}ms combined_max={:.3}ms combined_over50={} idle_collections={} forced={} deferred={} pause_max={:.3}ms pause_total={:.3}ms peak_heap={:.2}MiB",
+            bench.gc_mode.label(),
+            samples.len(),
+            mean(&work),
+            percentile(&work, 0.99),
+            work[work.len() - 1],
+            percentile(&combined, 0.99),
+            combined[combined.len() - 1],
+            over(&combined, 50.0),
+            stats.idle_collections,
+            stats.forced_collections,
+            stats.deferred_boundaries,
+            stats.max_pause.as_secs_f64() * 1_000.0,
+            stats.total_pause.as_secs_f64() * 1_000.0,
+            peak as f64 / 1_048_576.0,
+        );
     }
 
     fn report(viewport: &str, label: &str, samples: &[Sample]) {
@@ -784,6 +929,13 @@ mod g6_quickjs_bench {
     }
 
     fn assert_frame_budget(label: &str, samples: &[Sample], limit_ms: f64) {
+        // Comparison runs may lift the hard stop so the summary still records
+        // a known-over-budget auto-GC spike. The normal command leaves this
+        // unset and therefore enforces the production 50 ms gate.
+        let limit_ms = std::env::var("G6_BUDGET_MS")
+            .ok()
+            .and_then(|value| value.parse().ok())
+            .unwrap_or(limit_ms);
         assert!(!samples.is_empty(), "journey must contain at least one {label} frame");
         // The budget asserts on THREAD CPU time (js_cpu + core_cpu), which is
         // immune to host descheduling: a frame the scheduler parks for 100 ms
@@ -982,7 +1134,13 @@ mod g6_quickjs_bench {
             .and_then(|value| value.parse().ok())
             .unwrap_or(1usize)
             .max(1);
-        let mut bench = Bench { rt: runtime, sample_structural, hash_every, battle_buckets };
+        let mut bench = Bench {
+            rt: runtime,
+            gc_mode: GcMode::from_env(),
+            sample_structural,
+            hash_every,
+            battle_buckets,
+        };
         report_startup_stages(&viewport, &bench, boot_ms, &stages);
         if sample_structural {
             bench.install_structural_counter();
@@ -1033,20 +1191,25 @@ mod g6_quickjs_bench {
         let first_paint_ms = boot_start.elapsed().as_secs_f64() * 1_000.0;
         let (used, malloc, objects) = qjs_memory(&bench.rt.guest);
         println!(
-            "BOOT viewport={viewport} boot={boot_ms:.3}ms first_qjs={:.3}ms first_total={:.3}ms startup_to_first={first_paint_ms:.3}ms qjs_used={:.2}MiB qjs_malloc={:.2}MiB objects={objects}",
+            "BOOT viewport={viewport} gc_mode={} boot={boot_ms:.3}ms first_qjs={:.3}ms first_total={:.3}ms startup_to_first={first_paint_ms:.3}ms qjs_used={:.2}MiB qjs_malloc={:.2}MiB objects={objects}",
+            bench.gc_mode.label(),
             first.js_ms,
             first.js_ms + first.core_ms + first.draw_ms,
             used as f64 / 1_048_576.0,
             malloc as f64 / 1_048_576.0,
         );
+        let startup_limit_ms = std::env::var("G6_STARTUP_MS")
+            .ok()
+            .and_then(|value| value.parse().ok())
+            .unwrap_or(250.0);
         assert!(
-            first_paint_ms <= 250.0,
-            "startup viewport={viewport} exceeded the 250 ms startup-to-first-paint budget: {:.3} ms",
-            first_paint_ms,
+            first_paint_ms <= startup_limit_ms,
+            "startup viewport={viewport} exceeded the {startup_limit_ms:.3} ms startup-to-first-paint budget: {first_paint_ms:.3} ms",
         );
 
         let mut walking = Vec::new();
-        let mut all_frames = Vec::with_capacity(journey.masks.len().saturating_sub(1));
+        let mut all_frames = Vec::with_capacity(journey.masks.len());
+        all_frames.push(first.clone());
         let mut walking_before_battle = Vec::new();
         let mut walking_after_battle = Vec::new();
         let mut switches = Vec::new();
@@ -1146,18 +1309,19 @@ mod g6_quickjs_bench {
             report_buckets(&viewport, "battle-steady", &battle_steady);
         }
         report(&viewport, "all", &all_frames);
+        idle_gc_summary(&viewport, &bench, &all_frames);
         assert_frame_budget("all", &all_frames, 50.0);
-        let measured_qjs_core_ms = first.js_ms + first.core_ms + all_frames
+        let measured_qjs_core_ms = all_frames
             .iter()
             .map(|sample| sample.js_ms + sample.core_ms)
             .sum::<f64>();
-        let sampled_draw_ms = std::iter::once(&first)
-            .chain(all_frames.iter())
+        let sampled_draw_ms = all_frames
+            .iter()
             .filter(|sample| sample.draw_sampled)
             .map(|sample| sample.draw_ms)
             .sum::<f64>();
-        let sampled_draw_frames = std::iter::once(&first)
-            .chain(all_frames.iter())
+        let sampled_draw_frames = all_frames
+            .iter()
             .filter(|sample| sample.draw_sampled)
             .count();
         println!(
@@ -1198,7 +1362,13 @@ mod g6_quickjs_bench {
         seed_maps(&maps, &data);
         let runtime =
             Runtime::boot(args(&dist, "map-benchmark-entry", data.clone(), 480, 272)).unwrap();
-        let bench = Bench { rt: runtime, sample_structural: false, hash_every: 1, battle_buckets: false };
+        let bench = Bench {
+            rt: runtime,
+            gc_mode: GcMode::from_env(),
+            sample_structural: false,
+            hash_every: 1,
+            battle_buckets: false,
+        };
         let metadata: Vec<MapMeta> = serde_json::from_str(
             &bench.string("JSON.stringify(globalThis.__rpgMapBenchmark.maps)"),
         )

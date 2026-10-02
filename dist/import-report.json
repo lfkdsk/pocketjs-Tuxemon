@@ -284,13 +284,13 @@
  "schemaErrors": [],
  "audioQoaPending": [],
  "byFate": {
-  "T1-lowered": 2368,
-  "T3-dropped": 2021,
-  "T1": 36220,
-  "T4-dropped": 1685,
-  "T2-dropped": 393,
+  "T1-lowered": 1970,
+  "T3-dropped": 864,
+  "T1": 36024,
+  "T2-dropped": 2055,
+  "T4-dropped": 2064,
   "T3-placeholder": 8,
-  "structural": 776
+  "structural": 778
  },
  "rows": [
   {
@@ -320,14 +320,14 @@
   {
    "key": "act:add_monster:T1",
    "fate": "T1",
-   "count": 91,
+   "count": 587,
    "note": "tux.add_monster spawns into the persistent party"
   },
   {
-   "key": "act:add_step_tracker:T4-dropped",
-   "fate": "T4-dropped",
+   "key": "act:add_step_tracker:T2-dropped",
+   "fate": "T2-dropped",
    "count": 100,
-   "note": "presentation / meta"
+   "note": "the runtime exposes neither a saved step-counter state machine nor a movement-step update hook"
   },
   {
    "key": "act:add_tech:T4-dropped",
@@ -345,7 +345,7 @@
    "key": "act:autosave:T4-dropped",
    "fate": "T4-dropped",
    "count": 6,
-   "note": "presentation / meta"
+   "note": "pure reducer event commands cannot request the host to persist save slot 0"
   },
   {
    "key": "act:camera_position:T1",
@@ -386,13 +386,13 @@
   {
    "key": "act:char_face(after teleport):T1",
    "fate": "T1",
-   "count": 869,
+   "count": 868,
    "note": "folded into transfer direction"
   },
   {
    "key": "act:char_face(after teleport):T4-dropped",
    "fate": "T4-dropped",
-   "count": 11,
+   "count": 4,
    "note": "runs on the old map during the fade"
   },
   {
@@ -428,13 +428,13 @@
   {
    "key": "act:char_move:T1-lowered",
    "fate": "T1-lowered",
-   "count": 405,
+   "count": 9,
    "note": "moveRoute steps"
   },
   {
    "key": "act:char_plague:T4-dropped",
    "fate": "T4-dropped",
-   "count": 12,
+   "count": 111,
    "note": "presentation / meta"
   },
   {
@@ -486,10 +486,10 @@
    "note": "KC1 extChoice static list -> enum code via the resolver"
   },
   {
-   "key": "act:choice_npc:T1-lowered",
-   "fate": "T1-lowered",
+   "key": "act:choice_npc:T1",
+   "fate": "T1",
    "count": 2,
-   "note": "shared label + per-option name (upstream portraits need kit option images)"
+   "note": "choices with each option NPC's front walker frame as its icon"
   },
   {
    "key": "act:clear_variable:T1",
@@ -510,10 +510,10 @@
    "note": "local.npc.<slug> = 1 plus K1 place"
   },
   {
-   "key": "act:daycare:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "act:daycare:T1",
+   "fate": "T1",
    "count": 2,
-   "note": "daycare storage, per-step training and breeding are not modelled"
+   "note": "tux.daycare two-slot storage, per-step training, deterministic breeding and newborn collection"
   },
   {
    "key": "act:dojo_method:T4-dropped",
@@ -534,10 +534,10 @@
    "note": "fadeoutBgm 1.000s + fading flag"
   },
   {
-   "key": "act:format_variable:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "act:format_variable:T2-dropped",
+   "fate": "T2-dropped",
    "count": 221,
-   "note": "monster/combat subsystem (P2)"
+   "note": "source int/float coercion needs raw numeric variables; story values are enum-coded and kit numeric writes floor fractions"
   },
   {
    "key": "act:get_party_monster(after NPC-vs-NPC battle):T1-lowered",
@@ -554,7 +554,7 @@
   {
    "key": "act:get_party_monster:T1",
    "fate": "T1",
-   "count": 1,
+   "count": 100,
    "note": "tux.get_party_monsters dumps the party iids into iid_slot_* variables (upstream opens no menu)"
   },
   {
@@ -584,7 +584,7 @@
   {
    "key": "act:lock_controls:T1",
    "fate": "T1",
-   "count": 326,
+   "count": 327,
    "note": "K1 cross-event input lock command"
   },
   {
@@ -626,7 +626,7 @@
   {
    "key": "act:pathfind:T1",
    "fate": "T1",
-   "count": 334,
+   "count": 335,
    "note": "K2 deterministic pathTo route"
   },
   {
@@ -692,20 +692,20 @@
   {
    "key": "act:remove_monster:T1",
    "fate": "T1",
-   "count": 10,
+   "count": 109,
    "note": "tux.remove_monster deletes the iid from its owner (player party/kennel or NPC party)"
   },
   {
    "key": "act:remove_npc:T1",
    "fate": "T1",
-   "count": 223,
+   "count": 224,
    "note": "local.npc.<slug> = 0"
   },
   {
-   "key": "act:remove_step_tracker:T4-dropped",
-   "fate": "T4-dropped",
+   "key": "act:remove_step_tracker:T2-dropped",
+   "fate": "T2-dropped",
    "count": 1,
-   "note": "presentation / meta"
+   "note": "the runtime exposes neither a saved step-counter state machine nor a movement-step update hook"
   },
   {
    "key": "act:rename_monster:T1",
@@ -774,15 +774,15 @@
    "note": "KV1 selects a prepackaged map overlay"
   },
   {
-   "key": "act:set_mission:T4-dropped",
-   "fate": "T4-dropped",
+   "key": "act:set_mission:T3-dropped",
+   "fate": "T3-dropped",
    "count": 6,
-   "note": "presentation / meta"
+   "note": "mission definitions, prerequisite graph, and per-step status are not imported"
   },
   {
    "key": "act:set_monster_attribute:T3-dropped",
    "fate": "T3-dropped",
-   "count": 32,
+   "count": 33,
    "note": "monster/combat subsystem (P2)"
   },
   {
@@ -842,7 +842,7 @@
   {
    "key": "act:set_variable:T1",
    "fate": "T1",
-   "count": 1352,
+   "count": 1452,
    "note": "variable set enum code"
   },
   {
@@ -884,7 +884,7 @@
   {
    "key": "act:transition_teleport:T1",
    "fate": "T1",
-   "count": 1045,
+   "count": 1037,
    "note": "transfer (terminal; dir from trailing char_face)"
   },
   {
@@ -896,7 +896,7 @@
   {
    "key": "act:translated_dialog:T1",
    "fate": "T1",
-   "count": 2195,
+   "count": 2098,
    "note": "text boxes from en_US .po (layout args ignored)"
   },
   {
@@ -914,7 +914,7 @@
   {
    "key": "act:translated_dialog_choice:T1",
    "fate": "T1",
-   "count": 246,
+   "count": 148,
    "note": "choices -> enum code"
   },
   {
@@ -926,7 +926,7 @@
   {
    "key": "act:unlock_controls:T1",
    "fate": "T1",
-   "count": 333,
+   "count": 334,
    "note": "K1 cross-event input lock command"
   },
   {
@@ -936,10 +936,10 @@
    "note": "KV1 expands the source surface label to exact per-map passage overrides"
   },
   {
-   "key": "act:variable_math:T4-dropped",
-   "fate": "T4-dropped",
+   "key": "act:variable_math:T2-dropped",
+   "fate": "T2-dropped",
    "count": 9,
-   "note": "presentation / meta"
+   "note": "source operands may be floating-point or absent; the kit variable bank stores only safe integers and has no presence bit"
   },
   {
    "key": "act:wait(after teleport):T4-dropped",
@@ -956,7 +956,7 @@
   {
    "key": "act:wild_encounter:T1",
    "fate": "T1",
-   "count": 20,
+   "count": 19,
    "note": "Battle Processing with a scripted wild monster"
   },
   {
@@ -968,7 +968,7 @@
   {
    "key": "behav:talk:structural",
    "fate": "structural",
-   "count": 776,
+   "count": 778,
    "note": "talk -> NPC action page"
   },
   {
@@ -998,8 +998,14 @@
   {
    "key": "cond:is button_pressed:T1",
    "fate": "T1",
-   "count": 541,
+   "count": 540,
    "note": "consumed by trigger selection"
+  },
+  {
+   "key": "cond:is button_pressed:T4-dropped",
+   "fate": "T4-dropped",
+   "count": 1,
+   "note": "source button 'K_RETURN' is not a supported Tuxemon intention"
   },
   {
    "key": "cond:is char_at:T1",
@@ -1029,13 +1035,19 @@
    "key": "cond:is char_facing:T2-dropped",
    "fate": "T2-dropped",
    "count": 8,
-   "note": "trigger predicate unavailable in v1"
+   "note": "source direction 'bottom' is not up/down/left/right and can never equal Tuxemon's Direction"
   },
   {
    "key": "cond:is char_facing_tile:T1",
    "fate": "T1",
-   "count": 858,
+   "count": 363,
    "note": "consumed by trigger selection"
+  },
+  {
+   "key": "cond:is char_facing_tile:T2-dropped",
+   "fate": "T2-dropped",
+   "count": 495,
+   "note": "surface-labelled facing tiles need a live player-cell terrain predicate"
   },
   {
    "key": "cond:is char_gender:T3-dropped",
@@ -1044,16 +1056,16 @@
    "note": "monster/party/meta state unknown to P1: fixed answer"
   },
   {
-   "key": "cond:is char_healed:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "cond:is char_healed:T1",
+   "fate": "T1",
    "count": 1,
-   "note": "monster/party/meta state unknown to P1: fixed answer"
+   "note": "tux.char_healed reads every saved player monster's current/max HP"
   },
   {
-   "key": "cond:is char_in:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "cond:is char_in:T2-dropped",
+   "fate": "T2-dropped",
    "count": 99,
-   "note": "monster/party/meta state unknown to P1: fixed answer"
+   "note": "the condition context has no live player cell or terrain-surface label"
   },
   {
    "key": "cond:is char_moved:T1",
@@ -1068,10 +1080,16 @@
    "note": "KV1 effective walking appearance condition"
   },
   {
-   "key": "cond:is check_char_parameter:T3-dropped",
-   "fate": "T3-dropped",
-   "count": 138,
-   "note": "monster/party/meta state unknown to P1: fixed answer"
+   "key": "cond:is check_char_parameter(name):T1",
+   "fate": "T1",
+   "count": 100,
+   "note": "live playerName exact comparison"
+  },
+  {
+   "key": "cond:is check_char_parameter:T2-dropped",
+   "fate": "T2-dropped",
+   "count": 38,
+   "note": "the extension condition context has no live player movement state"
   },
   {
    "key": "cond:is check_evolution:T1",
@@ -1140,10 +1158,10 @@
    "note": "tux.has_monster reads the persistent party"
   },
   {
-   "key": "cond:is has_tuxepedia:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "cond:is has_tuxepedia:T1",
+   "fate": "T1",
    "count": 1,
-   "note": "monster/party/meta state unknown to P1: fixed answer"
+   "note": "tux.has_tuxepedia reads saved player seen/caught state"
   },
   {
    "key": "cond:is kennel:T1",
@@ -1200,10 +1218,10 @@
    "note": "trigger predicate unavailable in v1"
   },
   {
-   "key": "cond:is step_tracker:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "cond:is step_tracker:T2-dropped",
+   "fate": "T2-dropped",
    "count": 105,
-   "note": "monster/party/meta state unknown to P1: fixed answer"
+   "note": "the runtime exposes neither a saved step counter nor a movement-step update hook"
   },
   {
    "key": "cond:is tile_property_updated:T1",
@@ -1266,16 +1284,16 @@
    "note": "monster/party/meta state unknown to P1: fixed answer"
   },
   {
-   "key": "cond:not char_healed:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "cond:not char_healed:T1",
+   "fate": "T1",
    "count": 1,
-   "note": "monster/party/meta state unknown to P1: fixed answer"
+   "note": "tux.char_healed reads every saved player monster's current/max HP"
   },
   {
-   "key": "cond:not char_in:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "cond:not char_in:T2-dropped",
+   "fate": "T2-dropped",
    "count": 594,
-   "note": "monster/party/meta state unknown to P1: fixed answer"
+   "note": "the condition context has no live player cell or terrain-surface label"
   },
   {
    "key": "cond:not char_sprite:T1",
@@ -1284,10 +1302,10 @@
    "note": "KV1 effective walking appearance condition"
   },
   {
-   "key": "cond:not check_char_parameter:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "cond:not check_char_parameter(name):T1",
+   "fate": "T1",
    "count": 1,
-   "note": "monster/party/meta state unknown to P1: fixed answer"
+   "note": "live playerName exact comparison"
   },
   {
    "key": "cond:not check_party_parameter:T3-dropped",
@@ -1320,10 +1338,10 @@
    "note": "tux.has_monster reads the persistent party"
   },
   {
-   "key": "cond:not has_tuxepedia:T3-dropped",
-   "fate": "T3-dropped",
+   "key": "cond:not has_tuxepedia:T1",
+   "fate": "T1",
    "count": 1,
-   "note": "monster/party/meta state unknown to P1: fixed answer"
+   "note": "tux.has_tuxepedia reads saved player seen/caught state"
   },
   {
    "key": "cond:not kennel:T1",
@@ -1400,13 +1418,7 @@
   {
    "key": "trigger:action:facingTile(area):T1",
    "fate": "T1",
-   "count": 458,
-   "note": "K1 rectangular event area (overlaps partitioned after guard sampling)"
-  },
-  {
-   "key": "trigger:action:other(area):T1",
-   "fate": "T1",
-   "count": 1,
+   "count": 359,
    "note": "K1 rectangular event area (overlaps partitioned after guard sampling)"
   },
   {
@@ -1416,15 +1428,9 @@
    "note": "K1 rectangular event area (overlaps partitioned after guard sampling)"
   },
   {
-   "key": "trigger:facingTile:noButton:T1",
-   "fate": "T1",
-   "count": 396,
-   "note": "parallel automatic fiber (blocking commands arbitrate their own UI)"
-  },
-  {
    "key": "trigger:guard:T1",
    "fate": "T1",
-   "count": 1994,
+   "count": 2094,
    "note": "parallel"
   },
   {
@@ -1448,8 +1454,8 @@
   {
    "key": "trigger:never-true guard:T4-dropped",
    "fate": "T4-dropped",
-   "count": 1370,
-   "note": "fixed-false guard prevents the source event from starting"
+   "count": 1772,
+   "note": "fixed-false guard (is check_max_tech: no imported runtime state or predicate) prevents the source event from starting"
   },
   {
    "key": "trigger:no-op after conversion:T4-dropped",
@@ -1478,13 +1484,13 @@
   {
    "key": "trigger:talk:T1",
    "fate": "T1",
-   "count": 776,
+   "count": 778,
    "note": "NPC event action page (if-chain over talk guards)"
   },
   {
    "key": "trigger:touch:facing(area):T1",
    "fate": "T1",
-   "count": 936,
+   "count": 928,
    "note": "K1 rectangular event area (overlaps partitioned after guard sampling)"
   },
   {
@@ -1798,6 +1804,593 @@
    }
   }
  },
+ "itemIcons": {
+  "sheet": {
+   "id": "items",
+   "pak": "ui:tile.items",
+   "cols": 16,
+   "rows": 9
+  },
+  "cells": [
+   {
+    "cell": 0,
+    "file": "gfx/items/aardant.png"
+   },
+   {
+    "cell": 1,
+    "file": "gfx/items/ancient_egg.png"
+   },
+   {
+    "cell": 2,
+    "file": "gfx/items/ancient_tea.png"
+   },
+   {
+    "cell": 3,
+    "file": "gfx/items/antidote-grapes.png"
+   },
+   {
+    "cell": 4,
+    "file": "gfx/items/app_banking.png"
+   },
+   {
+    "cell": 5,
+    "file": "gfx/items/app_contacts.png"
+   },
+   {
+    "cell": 6,
+    "file": "gfx/items/app_map.png"
+   },
+   {
+    "cell": 7,
+    "file": "gfx/items/app_radio.png"
+   },
+   {
+    "cell": 8,
+    "file": "gfx/items/app_renaming.png"
+   },
+   {
+    "cell": 9,
+    "file": "gfx/items/app_tuxepedia.png"
+   },
+   {
+    "cell": 10,
+    "file": "gfx/items/apple.png"
+   },
+   {
+    "cell": 11,
+    "file": "gfx/items/bivouac.png"
+   },
+   {
+    "cell": 12,
+    "file": "gfx/items/book_wishes.png"
+   },
+   {
+    "cell": 13,
+    "file": "gfx/items/boost_armour.png"
+   },
+   {
+    "cell": 14,
+    "file": "gfx/items/boost_dodge.png"
+   },
+   {
+    "cell": 15,
+    "file": "gfx/items/boost_melee.png"
+   },
+   {
+    "cell": 16,
+    "file": "gfx/items/boost_ranged.png"
+   },
+   {
+    "cell": 17,
+    "file": "gfx/items/boost_speed.png"
+   },
+   {
+    "cell": 18,
+    "file": "gfx/items/booster_tech.png"
+   },
+   {
+    "cell": 19,
+    "file": "gfx/items/box.png"
+   },
+   {
+    "cell": 20,
+    "file": "gfx/items/cosmic_berry.png"
+   },
+   {
+    "cell": 21,
+    "file": "gfx/items/cure-festering.png"
+   },
+   {
+    "cell": 22,
+    "file": "gfx/items/die.png"
+   },
+   {
+    "cell": 23,
+    "file": "gfx/items/dojo_pass.png"
+   },
+   {
+    "cell": 24,
+    "file": "gfx/items/drone.png"
+   },
+   {
+    "cell": 25,
+    "file": "gfx/items/earth_berry.png"
+   },
+   {
+    "cell": 26,
+    "file": "gfx/items/earth_booster.png"
+   },
+   {
+    "cell": 27,
+    "file": "gfx/items/earthmover_key.png"
+   },
+   {
+    "cell": 28,
+    "file": "gfx/items/elixir_of_life.png"
+   },
+   {
+    "cell": 29,
+    "file": "gfx/items/escape_key.png"
+   },
+   {
+    "cell": 30,
+    "file": "gfx/items/feather.png"
+   },
+   {
+    "cell": 31,
+    "file": "gfx/items/fire_berry.png"
+   },
+   {
+    "cell": 32,
+    "file": "gfx/items/fire_booster.png"
+   },
+   {
+    "cell": 33,
+    "file": "gfx/items/fishing_rod.png"
+   },
+   {
+    "cell": 34,
+    "file": "gfx/items/flintstone.png"
+   },
+   {
+    "cell": 35,
+    "file": "gfx/items/flute.png"
+   },
+   {
+    "cell": 36,
+    "file": "gfx/items/friendship_scroll.png"
+   },
+   {
+    "cell": 37,
+    "file": "gfx/items/frost_berry.png"
+   },
+   {
+    "cell": 38,
+    "file": "gfx/items/gold_pass.png"
+   },
+   {
+    "cell": 39,
+    "file": "gfx/items/good_penny.png"
+   },
+   {
+    "cell": 40,
+    "file": "gfx/items/greenwash_badge.png"
+   },
+   {
+    "cell": 41,
+    "file": "gfx/items/hatchet.png"
+   },
+   {
+    "cell": 42,
+    "file": "gfx/items/heroic_berry.png"
+   },
+   {
+    "cell": 43,
+    "file": "gfx/items/horseshoe.png"
+   },
+   {
+    "cell": 44,
+    "file": "gfx/items/imperial_potion.png"
+   },
+   {
+    "cell": 45,
+    "file": "gfx/items/imperial_tea.png"
+   },
+   {
+    "cell": 46,
+    "file": "gfx/items/key-card.png"
+   },
+   {
+    "cell": 47,
+    "file": "gfx/items/lightning_berry.png"
+   },
+   {
+    "cell": 48,
+    "file": "gfx/items/lima_pie.png"
+   },
+   {
+    "cell": 49,
+    "file": "gfx/items/lucky_bamboo.png"
+   },
+   {
+    "cell": 50,
+    "file": "gfx/items/marble.png"
+   },
+   {
+    "cell": 51,
+    "file": "gfx/items/mega_potion.png"
+   },
+   {
+    "cell": 52,
+    "file": "gfx/items/metal_berry.png"
+   },
+   {
+    "cell": 53,
+    "file": "gfx/items/metal_booster.png"
+   },
+   {
+    "cell": 54,
+    "file": "gfx/items/miaow_milk.png"
+   },
+   {
+    "cell": 55,
+    "file": "gfx/items/mm_earth.png"
+   },
+   {
+    "cell": 56,
+    "file": "gfx/items/mm_fire.png"
+   },
+   {
+    "cell": 57,
+    "file": "gfx/items/mm_metal.png"
+   },
+   {
+    "cell": 58,
+    "file": "gfx/items/mm_water.png"
+   },
+   {
+    "cell": 59,
+    "file": "gfx/items/mm_wood.png"
+   },
+   {
+    "cell": 60,
+    "file": "gfx/items/monsters_eyes.png"
+   },
+   {
+    "cell": 61,
+    "file": "gfx/items/mystery_tea.png"
+   },
+   {
+    "cell": 62,
+    "file": "gfx/items/neptune.png"
+   },
+   {
+    "cell": 63,
+    "file": "gfx/items/nimrod_badge.png"
+   },
+   {
+    "cell": 64,
+    "file": "gfx/items/normal_berry.png"
+   },
+   {
+    "cell": 65,
+    "file": "gfx/items/nu_phone.png"
+   },
+   {
+    "cell": 66,
+    "file": "gfx/items/omnichannel_badge.png"
+   },
+   {
+    "cell": 67,
+    "file": "gfx/items/open-hand.png"
+   },
+   {
+    "cell": 68,
+    "file": "gfx/items/orange.png"
+   },
+   {
+    "cell": 69,
+    "file": "gfx/items/ox_stick.png"
+   },
+   {
+    "cell": 70,
+    "file": "gfx/items/peace_lily.png"
+   },
+   {
+    "cell": 71,
+    "file": "gfx/items/petrified_dung.png"
+   },
+   {
+    "cell": 72,
+    "file": "gfx/items/poseidon.png"
+   },
+   {
+    "cell": 73,
+    "file": "gfx/items/potion.png"
+   },
+   {
+    "cell": 74,
+    "file": "gfx/items/pyramidion.png"
+   },
+   {
+    "cell": 75,
+    "file": "gfx/items/raise_armour.png"
+   },
+   {
+    "cell": 76,
+    "file": "gfx/items/raise_dodge.png"
+   },
+   {
+    "cell": 77,
+    "file": "gfx/items/raise_hp.png"
+   },
+   {
+    "cell": 78,
+    "file": "gfx/items/raise_melee.png"
+   },
+   {
+    "cell": 79,
+    "file": "gfx/items/raise_ranged.png"
+   },
+   {
+    "cell": 80,
+    "file": "gfx/items/raise_speed.png"
+   },
+   {
+    "cell": 81,
+    "file": "gfx/items/refreshing-slice.png"
+   },
+   {
+    "cell": 82,
+    "file": "gfx/items/revive.png"
+   },
+   {
+    "cell": 83,
+    "file": "gfx/items/rhincus_fossil.png"
+   },
+   {
+    "cell": 84,
+    "file": "gfx/items/scoop_badge.png"
+   },
+   {
+    "cell": 85,
+    "file": "gfx/items/sea_girdle.png"
+   },
+   {
+    "cell": 86,
+    "file": "gfx/items/shadow_berry.png"
+   },
+   {
+    "cell": 87,
+    "file": "gfx/items/shaft_badge.png"
+   },
+   {
+    "cell": 88,
+    "file": "gfx/items/shammer_fossil.png"
+   },
+   {
+    "cell": 89,
+    "file": "gfx/items/sky_berry.png"
+   },
+   {
+    "cell": 90,
+    "file": "gfx/items/sledgehammer.png"
+   },
+   {
+    "cell": 91,
+    "file": "gfx/items/spyder_pass.png"
+   },
+   {
+    "cell": 92,
+    "file": "gfx/items/starry_night.png"
+   },
+   {
+    "cell": 93,
+    "file": "gfx/items/stovepipe.png"
+   },
+   {
+    "cell": 94,
+    "file": "gfx/items/super_potion.png"
+   },
+   {
+    "cell": 95,
+    "file": "gfx/items/surfboard.png"
+   },
+   {
+    "cell": 96,
+    "file": "gfx/items/sweet_sand.png"
+   },
+   {
+    "cell": 97,
+    "file": "gfx/items/tea.png"
+   },
+   {
+    "cell": 98,
+    "file": "gfx/items/tectonic_drill.png"
+   },
+   {
+    "cell": 99,
+    "file": "gfx/items/thunderstone.png"
+   },
+   {
+    "cell": 100,
+    "file": "gfx/items/tm_earth.png"
+   },
+   {
+    "cell": 101,
+    "file": "gfx/items/tm_fire.png"
+   },
+   {
+    "cell": 102,
+    "file": "gfx/items/tm_generic.png"
+   },
+   {
+    "cell": 103,
+    "file": "gfx/items/tm_metal.png"
+   },
+   {
+    "cell": 104,
+    "file": "gfx/items/tm_water.png"
+   },
+   {
+    "cell": 105,
+    "file": "gfx/items/tm_wood.png"
+   },
+   {
+    "cell": 106,
+    "file": "gfx/items/toy-bear.png"
+   },
+   {
+    "cell": 107,
+    "file": "gfx/items/trepidation.png"
+   },
+   {
+    "cell": 108,
+    "file": "gfx/items/tuxeball.png"
+   },
+   {
+    "cell": 109,
+    "file": "gfx/items/tuxeball_ancient.png"
+   },
+   {
+    "cell": 110,
+    "file": "gfx/items/tuxeball_candy.png"
+   },
+   {
+    "cell": 111,
+    "file": "gfx/items/tuxeball_crusher.png"
+   },
+   {
+    "cell": 112,
+    "file": "gfx/items/tuxeball_diurnal.png"
+   },
+   {
+    "cell": 113,
+    "file": "gfx/items/tuxeball_earth.png"
+   },
+   {
+    "cell": 114,
+    "file": "gfx/items/tuxeball_female.png"
+   },
+   {
+    "cell": 115,
+    "file": "gfx/items/tuxeball_fire.png"
+   },
+   {
+    "cell": 116,
+    "file": "gfx/items/tuxeball_gambler.png"
+   },
+   {
+    "cell": 117,
+    "file": "gfx/items/tuxeball_grand.png"
+   },
+   {
+    "cell": 118,
+    "file": "gfx/items/tuxeball_hardened.png"
+   },
+   {
+    "cell": 119,
+    "file": "gfx/items/tuxeball_hearty.png"
+   },
+   {
+    "cell": 120,
+    "file": "gfx/items/tuxeball_lavish.png"
+   },
+   {
+    "cell": 121,
+    "file": "gfx/items/tuxeball_majestic.png"
+   },
+   {
+    "cell": 122,
+    "file": "gfx/items/tuxeball_male.png"
+   },
+   {
+    "cell": 123,
+    "file": "gfx/items/tuxeball_metal.png"
+   },
+   {
+    "cell": 124,
+    "file": "gfx/items/tuxeball_neuter.png"
+   },
+   {
+    "cell": 125,
+    "file": "gfx/items/tuxeball_noble.png"
+   },
+   {
+    "cell": 126,
+    "file": "gfx/items/tuxeball_nocturnal.png"
+   },
+   {
+    "cell": 127,
+    "file": "gfx/items/tuxeball_omni.png"
+   },
+   {
+    "cell": 128,
+    "file": "gfx/items/tuxeball_park.png"
+   },
+   {
+    "cell": 129,
+    "file": "gfx/items/tuxeball_peppy.png"
+   },
+   {
+    "cell": 130,
+    "file": "gfx/items/tuxeball_refined.png"
+   },
+   {
+    "cell": 131,
+    "file": "gfx/items/tuxeball_salty.png"
+   },
+   {
+    "cell": 132,
+    "file": "gfx/items/tuxeball_water.png"
+   },
+   {
+    "cell": 133,
+    "file": "gfx/items/tuxeball_wood.png"
+   },
+   {
+    "cell": 134,
+    "file": "gfx/items/tuxeball_xero.png"
+   },
+   {
+    "cell": 135,
+    "file": "gfx/items/tuxeball_zesty.png"
+   },
+   {
+    "cell": 136,
+    "file": "gfx/items/venom_berry.png"
+   },
+   {
+    "cell": 137,
+    "file": "gfx/items/water_berry.png"
+   },
+   {
+    "cell": 138,
+    "file": "gfx/items/water_booster.png"
+   },
+   {
+    "cell": 139,
+    "file": "gfx/items/wood_berry.png"
+   },
+   {
+    "cell": 140,
+    "file": "gfx/items/wood_booster.png"
+   },
+   {
+    "cell": 141,
+    "file": "gfx/items/xp-feeder.png"
+   },
+   {
+    "cell": 142,
+    "file": "gfx/items/xp_transmitter.png"
+   }
+  ],
+  "placeholderCell": 143,
+  "missing": [
+   "elianeoutput"
+  ],
+  "uniqueIcons": 143
+ },
  "world": {
   "format": "pocket-tuxemon/world-import-report/v1",
   "artifact": "dist/world-index.json",
@@ -1969,15 +2562,15 @@
    "summary": {
     "types": 98,
     "uses": 13617,
-    "native": 12467,
-    "degraded": 604,
+    "native": 12475,
+    "degraded": 599,
     "placeholder": 5,
-    "dropped": 541,
+    "dropped": 538,
     "nativePercent": 91.6,
     "executablePercent": 96,
     "tier1": {
-     "uses": 6362,
-     "percent": 46.72,
+     "uses": 6359,
+     "percent": 46.7,
      "requiredUses": 6246,
      "requiredPercent": 45.9,
      "meetsBaseline": true
@@ -2010,25 +2603,22 @@
       ],
       "dropped": [
        "NPC bags are combat-only",
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is step_tracker: the runtime exposes neither a saved step counter nor a movement-step update hook) prevents the source event from starting"
       ]
      }
     },
     {
      "type": "add_monster",
      "total": 792,
-     "native": 786,
+     "native": 792,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 6,
+     "dropped": 0,
      "reasons": {
       "native": [
        "tux.add_monster spawns into the persistent party",
        "literal trainer monster folded into Battle Processing setup",
        "tux.add_monster stages a live-variable or cross-event trainer monster"
-      ],
-      "dropped": [
-       "fixed-false guard prevents the source event from starting"
       ]
      }
     },
@@ -2041,8 +2631,8 @@
      "dropped": 3,
      "reasons": {
       "dropped": [
-       "presentation / meta",
-       "fixed-false guard prevents the source event from starting"
+       "the runtime exposes neither a saved step-counter state machine nor a movement-step update hook",
+       "fixed-false guard (is step_tracker: the runtime exposes neither a saved step counter nor a movement-step update hook) prevents the source event from starting"
       ]
      }
     },
@@ -2081,7 +2671,7 @@
      "dropped": 6,
      "reasons": {
       "dropped": [
-       "presentation / meta"
+       "pure reducer event commands cannot request the host to persist save slot 0"
       ]
      }
     },
@@ -2155,10 +2745,10 @@
     {
      "type": "char_face",
      "total": 2027,
-     "native": 1559,
+     "native": 1558,
      "degraded": 443,
      "placeholder": 0,
-     "dropped": 25,
+     "dropped": 26,
      "reasons": {
       "degraded": [
        "spawn facing becomes the NPC page route",
@@ -2167,10 +2757,14 @@
       ],
       "dropped": [
        "runs on the old map during the fade",
+       "fixed-false guard (is char_facing: source direction 'bottom' is not up/down/left/right and can never equal Tuxemon's Direction) prevents the source event from starting",
+       "fixed-false guard (is char_facing: source direction 'top' is not up/down/left/right and can never equal Tuxemon's Direction) prevents the source event from starting",
        "fixed-false guard prevents the source event from starting",
        "Tuxemon never starts an event without source conditions or behavior",
        "spawn target or direction is unavailable",
-       "Tuxemon's integer tile boundary never contains a point for a zero-size TMX event"
+       "Tuxemon's integer tile boundary never contains a point for a zero-size TMX event",
+       "fixed-false guard (is step_tracker: the runtime exposes neither a saved step counter nor a movement-step update hook) prevents the source event from starting",
+       "fixed-false guard (is bill_is: no imported runtime state or predicate) prevents the source event from starting"
       ],
       "native": [
        "folded into transfer direction",
@@ -2184,15 +2778,18 @@
      "type": "char_move",
      "total": 77,
      "native": 64,
-     "degraded": 13,
+     "degraded": 9,
      "placeholder": 0,
-     "dropped": 0,
+     "dropped": 4,
      "reasons": {
       "degraded": [
        "moveRoute steps"
       ],
       "native": [
        "moveRoute steps"
+      ],
+      "dropped": [
+       "fixed-false guard (is char_facing_tile: surface-labelled facing tiles need a live player-cell terrain predicate) prevents the source event from starting"
       ]
      }
     },
@@ -2205,8 +2802,7 @@
      "dropped": 13,
      "reasons": {
       "dropped": [
-       "presentation / meta",
-       "fixed-false guard prevents the source event from starting"
+       "presentation / meta"
       ]
      }
     },
@@ -2307,13 +2903,13 @@
     {
      "type": "choice_npc",
      "total": 1,
-     "native": 0,
-     "degraded": 1,
+     "native": 1,
+     "degraded": 0,
      "placeholder": 0,
      "dropped": 0,
      "reasons": {
-      "degraded": [
-       "shared label + per-option name (upstream portraits need kit option images)"
+      "native": [
+       "choices with each option NPC's front walker frame as its icon"
       ]
      }
     },
@@ -2329,7 +2925,7 @@
        "variable set 0"
       ],
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is step_tracker: the runtime exposes neither a saved step counter nor a movement-step update hook) prevents the source event from starting"
       ]
      }
     },
@@ -2372,20 +2968,20 @@
       ],
       "dropped": [
        "source event is not materialized by any map",
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is bill_is: no imported runtime state or predicate) prevents the source event from starting"
       ]
      }
     },
     {
      "type": "daycare",
      "total": 2,
-     "native": 0,
+     "native": 2,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 2,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "daycare storage, per-step training and breeding are not modelled"
+      "native": [
+       "tux.daycare two-slot storage, per-step training, deterministic breeding and newborn collection"
       ]
      }
     },
@@ -2437,7 +3033,7 @@
      "dropped": 10,
      "reasons": {
       "dropped": [
-       "monster/combat subsystem (P2)",
+       "source int/float coercion needs raw numeric variables; story values are enum-coded and kit numeric writes floor fractions",
        "fixed-false guard prevents the source event from starting"
       ]
      }
@@ -2445,10 +3041,10 @@
     {
      "type": "get_party_monster",
      "total": 9,
-     "native": 1,
+     "native": 2,
      "degraded": 7,
      "placeholder": 0,
-     "dropped": 1,
+     "dropped": 0,
      "reasons": {
       "degraded": [
        "the NPC's add_monster calls are folded into the later battle, so no iid_slot_* is written before it",
@@ -2456,9 +3052,6 @@
       ],
       "native": [
        "tux.get_party_monsters dumps the party iids into iid_slot_* variables (upstream opens no menu)"
-      ],
-      "dropped": [
-       "fixed-false guard prevents the source event from starting"
       ]
      }
     },
@@ -2471,7 +3064,7 @@
      "dropped": 2,
      "reasons": {
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is check_max_tech: no imported runtime state or predicate) prevents the source event from starting"
       ]
      }
     },
@@ -2520,10 +3113,10 @@
     {
      "type": "lock_controls",
      "total": 323,
-     "native": 320,
+     "native": 321,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 3,
+     "dropped": 2,
      "reasons": {
       "native": [
        "K1 cross-event input lock command"
@@ -2572,7 +3165,7 @@
      "dropped": 1,
      "reasons": {
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is step_tracker: the runtime exposes neither a saved step counter nor a movement-step update hook) prevents the source event from starting"
       ]
      }
     },
@@ -2626,17 +3219,17 @@
      "reasons": {
       "dropped": [
        "Safari-park session (Eclipse park); not part of the Spyder campaign",
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is step_tracker: the runtime exposes neither a saved step counter nor a movement-step update hook) prevents the source event from starting"
       ]
      }
     },
     {
      "type": "pathfind",
      "total": 336,
-     "native": 334,
+     "native": 335,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 2,
+     "dropped": 1,
      "reasons": {
       "native": [
        "K2 deterministic pathTo route"
@@ -2783,7 +3376,7 @@
        "Battle Processing with deterministic encounter-table sampling"
       ],
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is check_char_parameter: the extension condition context has no live player movement state) prevents the source event from starting"
       ]
      }
     },
@@ -2830,32 +3423,26 @@
     {
      "type": "remove_monster",
      "total": 5,
-     "native": 4,
+     "native": 5,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 1,
+     "dropped": 0,
      "reasons": {
       "native": [
        "tux.remove_monster deletes the iid from its owner (player party/kennel or NPC party)"
-      ],
-      "dropped": [
-       "fixed-false guard prevents the source event from starting"
       ]
      }
     },
     {
      "type": "remove_npc",
      "total": 224,
-     "native": 223,
+     "native": 224,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 1,
+     "dropped": 0,
      "reasons": {
       "native": [
        "local.npc.<slug> = 0"
-      ],
-      "dropped": [
-       "fixed-false guard prevents the source event from starting"
       ]
      }
     },
@@ -2868,8 +3455,8 @@
      "dropped": 5,
      "reasons": {
       "dropped": [
-       "presentation / meta",
-       "fixed-false guard prevents the source event from starting"
+       "the runtime exposes neither a saved step-counter state machine nor a movement-step update hook",
+       "fixed-false guard (is step_tracker: the runtime exposes neither a saved step counter nor a movement-step update hook) prevents the source event from starting"
       ]
      }
     },
@@ -2882,7 +3469,7 @@
      "dropped": 2,
      "reasons": {
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is check_max_tech: no imported runtime state or predicate) prevents the source event from starting"
       ]
      }
     },
@@ -3034,7 +3621,8 @@
        "KV1 selects a prepackaged map overlay"
       ],
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard prevents the source event from starting",
+       "fixed-false guard (is check_world: no imported runtime state or predicate) prevents the source event from starting"
       ]
      }
     },
@@ -3047,7 +3635,7 @@
      "dropped": 6,
      "reasons": {
       "dropped": [
-       "presentation / meta"
+       "mission definitions, prerequisite graph, and per-step status are not imported"
       ]
      }
     },
@@ -3060,8 +3648,7 @@
      "dropped": 33,
      "reasons": {
       "dropped": [
-       "monster/combat subsystem (P2)",
-       "fixed-false guard prevents the source event from starting"
+       "monster/combat subsystem (P2)"
       ]
      }
     },
@@ -3119,7 +3706,7 @@
      "dropped": 2,
      "reasons": {
       "dropped": [
-       "fixed-false guard prevents the source event from starting",
+       "fixed-false guard (is current_state: combat/menu/teleporter states do not run map fibers in the kit) prevents the source event from starting",
        "presentation / meta"
       ]
      }
@@ -3146,7 +3733,7 @@
      "dropped": 3,
      "reasons": {
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is step_tracker: the runtime exposes neither a saved step counter nor a movement-step update hook) prevents the source event from starting"
       ]
      }
     },
@@ -3179,7 +3766,7 @@
        "KV1 selects a runtime walking appearance"
       ],
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is char_in: the condition context has no live player cell or terrain-surface label) prevents the source event from starting"
       ],
       "degraded": [
        "KV1 saves the race walking baseline; its combat-sheet choice remains battle-owned"
@@ -3202,16 +3789,17 @@
     {
      "type": "set_variable",
      "total": 715,
-     "native": 700,
+     "native": 702,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 15,
+     "dropped": 13,
      "reasons": {
       "native": [
        "variable set enum code"
       ],
       "dropped": [
        "fixed-false guard prevents the source event from starting",
+       "fixed-false guard (is button_pressed: source button 'K_RETURN' is not a supported Tuxemon intention) prevents the source event from starting",
        "source event is not materialized by any map"
       ]
      }
@@ -3284,10 +3872,10 @@
     {
      "type": "transition_teleport",
      "total": 1049,
-     "native": 1042,
+     "native": 1034,
      "degraded": 3,
      "placeholder": 0,
-     "dropped": 4,
+     "dropped": 12,
      "reasons": {
       "native": [
        "transfer (terminal; dir from trailing char_face)"
@@ -3297,24 +3885,33 @@
        "upstream landing point clamped into target bounds"
       ],
       "dropped": [
+       "fixed-false guard (is char_facing: source direction 'bottom' is not up/down/left/right and can never equal Tuxemon's Direction) prevents the source event from starting",
+       "fixed-false guard (is char_facing: source direction 'top' is not up/down/left/right and can never equal Tuxemon's Direction) prevents the source event from starting",
        "Tuxemon's integer tile boundary never contains a point for a zero-size TMX event",
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is step_tracker: the runtime exposes neither a saved step counter nor a movement-step update hook) prevents the source event from starting"
       ]
      }
     },
     {
      "type": "translated_dialog",
      "total": 2068,
-     "native": 2033,
+     "native": 2034,
      "degraded": 1,
      "placeholder": 0,
-     "dropped": 34,
+     "dropped": 33,
      "reasons": {
       "native": [
        "text boxes from en_US .po (layout args ignored)"
       ],
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is char_gender: no imported runtime state or predicate) prevents the source event from starting",
+       "fixed-false guard prevents the source event from starting",
+       "fixed-false guard (is button_pressed: source button 'K_RETURN' is not a supported Tuxemon intention) prevents the source event from starting",
+       "fixed-false guard (is step_tracker: the runtime exposes neither a saved step counter nor a movement-step update hook) prevents the source event from starting",
+       "fixed-false guard (is check_max_tech: no imported runtime state or predicate) prevents the source event from starting",
+       "fixed-false guard (is char_facing_tile: surface-labelled facing tiles need a live player-cell terrain predicate) prevents the source event from starting",
+       "fixed-false guard (is bill_is: no imported runtime state or predicate) prevents the source event from starting",
+       "fixed-false guard (is check_party_parameter: no imported runtime state or predicate) prevents the source event from starting"
       ],
       "degraded": [
        "post-transfer faint notice runs on the destination map"
@@ -3333,7 +3930,10 @@
        "choices -> enum code"
       ],
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is char_gender: no imported runtime state or predicate) prevents the source event from starting",
+       "fixed-false guard (is char_facing_tile: surface-labelled facing tiles need a live player-cell terrain predicate) prevents the source event from starting",
+       "fixed-false guard (is bill_is: no imported runtime state or predicate) prevents the source event from starting",
+       "fixed-false guard (is check_party_parameter: no imported runtime state or predicate) prevents the source event from starting"
       ],
       "degraded": [
        "nested choice pages retain every option"
@@ -3356,10 +3956,10 @@
     {
      "type": "unlock_controls",
      "total": 330,
-     "native": 327,
+     "native": 328,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 3,
+     "dropped": 2,
      "reasons": {
       "native": [
        "K1 cross-event input lock command"
@@ -3392,7 +3992,7 @@
      "reasons": {
       "dropped": [
        "source event is not materialized by any map",
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is current_state: combat/menu/teleporter states do not run map fibers in the kit) prevents the source event from starting"
       ]
      }
     },
@@ -3406,7 +4006,7 @@
      "reasons": {
       "dropped": [
        "fixed-false guard prevents the source event from starting",
-       "presentation / meta"
+       "source operands may be floating-point or absent; the kit variable bank stores only safe integers and has no presence bit"
       ]
      }
     },
@@ -3431,13 +4031,16 @@
     {
      "type": "wild_encounter",
      "total": 20,
-     "native": 20,
+     "native": 19,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 0,
+     "dropped": 1,
      "reasons": {
       "native": [
        "Battle Processing with a scripted wild monster"
+      ],
+      "dropped": [
+       "fixed-false guard (is button_pressed: source button 'K_RETURN' is not a supported Tuxemon intention) prevents the source event from starting"
       ]
      }
     }
@@ -3447,15 +4050,15 @@
    "summary": {
     "types": 64,
     "uses": 8663,
-    "native": 8218,
+    "native": 8200,
     "degraded": 2,
     "placeholder": 1,
-    "dropped": 442,
-    "nativePercent": 94.9,
-    "executablePercent": 94.9,
+    "dropped": 460,
+    "nativePercent": 94.7,
+    "executablePercent": 94.7,
     "tier1": {
-     "uses": 4737,
-     "percent": 54.68,
+     "uses": 4722,
+     "percent": 54.51,
      "requiredUses": 4591,
      "requiredPercent": 53,
      "meetsBaseline": true
@@ -3500,38 +4103,42 @@
      "dropped": 2,
      "reasons": {
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is bill_is: no imported runtime state or predicate) prevents the source event from starting"
       ]
      }
     },
     {
      "type": "is button_pressed",
      "total": 419,
-     "native": 417,
+     "native": 415,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 2,
+     "dropped": 4,
      "reasons": {
       "native": [
        "consumed by trigger selection"
       ],
       "dropped": [
-       "every action was removed, so no project event was emitted"
+       "every action was removed, so no project event was emitted",
+       "fixed-false guard (is button_pressed: source button 'K_RETURN' is not a supported Tuxemon intention) prevents the source event from starting",
+       "fixed-false guard (is char_facing_tile: surface-labelled facing tiles need a live player-cell terrain predicate) prevents the source event from starting"
       ]
      }
     },
     {
      "type": "is char_at",
      "total": 1811,
-     "native": 1810,
+     "native": 1802,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 1,
+     "dropped": 9,
      "reasons": {
       "native": [
        "consumed by trigger selection"
       ],
       "dropped": [
+       "fixed-false guard (is char_facing: source direction 'bottom' is not up/down/left/right and can never equal Tuxemon's Direction) prevents the source event from starting",
+       "fixed-false guard (is char_facing: source direction 'top' is not up/down/left/right and can never equal Tuxemon's Direction) prevents the source event from starting",
        "Tuxemon's integer tile boundary never contains a point for a zero-size TMX event"
       ]
      }
@@ -3568,33 +4175,36 @@
     {
      "type": "is char_facing",
      "total": 1008,
-     "native": 999,
+     "native": 995,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 9,
+     "dropped": 13,
      "reasons": {
       "native": [
        "K1 facing page condition"
       ],
       "dropped": [
-       "trigger predicate unavailable in v1",
-       "Tuxemon's integer tile boundary never contains a point for a zero-size TMX event"
+       "fixed-false guard (is char_facing: source direction 'bottom' is not up/down/left/right and can never equal Tuxemon's Direction) prevents the source event from starting",
+       "fixed-false guard (is char_facing: source direction 'top' is not up/down/left/right and can never equal Tuxemon's Direction) prevents the source event from starting",
+       "Tuxemon's integer tile boundary never contains a point for a zero-size TMX event",
+       "fixed-false guard (is char_facing_tile: surface-labelled facing tiles need a live player-cell terrain predicate) prevents the source event from starting"
       ]
      }
     },
     {
      "type": "is char_facing_tile",
      "total": 344,
-     "native": 342,
+     "native": 337,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 2,
+     "dropped": 7,
      "reasons": {
       "native": [
        "consumed by trigger selection"
       ],
       "dropped": [
-       "every action was removed, so no project event was emitted"
+       "every action was removed, so no project event was emitted",
+       "fixed-false guard (is char_facing_tile: surface-labelled facing tiles need a live player-cell terrain predicate) prevents the source event from starting"
       ]
      }
     },
@@ -3607,20 +4217,20 @@
      "dropped": 1,
      "reasons": {
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is char_gender: no imported runtime state or predicate) prevents the source event from starting"
       ]
      }
     },
     {
      "type": "is char_healed",
      "total": 1,
-     "native": 0,
+     "native": 1,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 1,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "fixed-false guard prevents the source event from starting"
+      "native": [
+       "tux.char_healed reads every saved player monster's current/max HP"
       ]
      }
     },
@@ -3633,7 +4243,7 @@
      "dropped": 1,
      "reasons": {
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is char_in: the condition context has no live player cell or terrain-surface label) prevents the source event from starting"
       ]
      }
     },
@@ -3659,7 +4269,7 @@
      "dropped": 28,
      "reasons": {
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is check_char_parameter: the extension condition context has no live player movement state) prevents the source event from starting"
       ],
       "native": [
        "KV1 effective walking appearance condition"
@@ -3669,13 +4279,16 @@
     {
      "type": "is check_char_parameter",
      "total": 40,
-     "native": 0,
+     "native": 2,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 40,
+     "dropped": 38,
      "reasons": {
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is check_char_parameter: the extension condition context has no live player movement state) prevents the source event from starting"
+      ],
+      "native": [
+       "live playerName exact comparison"
       ]
      }
     },
@@ -3701,7 +4314,7 @@
      "dropped": 2,
      "reasons": {
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is check_max_tech: no imported runtime state or predicate) prevents the source event from starting"
       ]
      }
     },
@@ -3714,7 +4327,7 @@
      "dropped": 8,
      "reasons": {
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is check_party_parameter: no imported runtime state or predicate) prevents the source event from starting"
       ]
      }
     },
@@ -3727,7 +4340,8 @@
      "dropped": 2,
      "reasons": {
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard prevents the source event from starting",
+       "fixed-false guard (is check_world: no imported runtime state or predicate) prevents the source event from starting"
       ]
      }
     },
@@ -3747,14 +4361,17 @@
     {
      "type": "is current_state",
      "total": 78,
-     "native": 40,
+     "native": 37,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 38,
+     "dropped": 41,
      "reasons": {
       "dropped": [
-       "fixed-false guard prevents the source event from starting",
-       "source event is not materialized by any map"
+       "fixed-false guard (is check_char_parameter: the extension condition context has no live player movement state) prevents the source event from starting",
+       "source event is not materialized by any map",
+       "fixed-false guard (is check_max_tech: no imported runtime state or predicate) prevents the source event from starting",
+       "fixed-false guard (is char_facing_tile: surface-labelled facing tiles need a live player-cell terrain predicate) prevents the source event from starting",
+       "fixed-false guard (is current_state: combat/menu/teleporter states do not run map fibers in the kit) prevents the source event from starting"
       ],
       "native": [
        "WorldState arm -> derived worldIdle condition; scene/menu alternatives freeze map fibers"
@@ -3770,23 +4387,24 @@
      "dropped": 28,
      "reasons": {
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is check_char_parameter: the extension condition context has no live player movement state) prevents the source event from starting"
       ]
      }
     },
     {
      "type": "is has_item",
      "total": 53,
-     "native": 52,
+     "native": 51,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 1,
+     "dropped": 2,
      "reasons": {
       "native": [
        "session item count >= n"
       ],
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is step_tracker: the runtime exposes neither a saved step counter nor a movement-step update hook) prevents the source event from starting",
+       "fixed-false guard (is char_facing_tile: surface-labelled facing tiles need a live player-cell terrain predicate) prevents the source event from starting"
       ]
      }
     },
@@ -3819,13 +4437,13 @@
     {
      "type": "is has_tuxepedia",
      "total": 1,
-     "native": 0,
+     "native": 1,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 1,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "fixed-false guard prevents the source event from starting"
+      "native": [
+       "tux.has_tuxepedia reads saved player seen/caught state"
       ]
      }
     },
@@ -3851,7 +4469,7 @@
      "dropped": 1,
      "reasons": {
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is check_world: no imported runtime state or predicate) prevents the source event from starting"
       ]
      }
     },
@@ -3881,7 +4499,7 @@
       ],
       "dropped": [
        "gold comparison uses a variable operand",
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is check_party_parameter: no imported runtime state or predicate) prevents the source event from starting"
       ]
      }
     },
@@ -3917,17 +4535,18 @@
     {
      "type": "is party_size",
      "total": 50,
-     "native": 45,
+     "native": 46,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 5,
+     "dropped": 4,
      "reasons": {
       "native": [
        "tux.party_size reads the persistent party"
       ],
       "dropped": [
        "source event is not materialized by any map",
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is current_state: combat/menu/teleporter states do not run map fibers in the kit) prevents the source event from starting",
+       "fixed-false guard (is bill_is: no imported runtime state or predicate) prevents the source event from starting"
       ]
      }
     },
@@ -3940,7 +4559,7 @@
      "dropped": 1,
      "reasons": {
       "dropped": [
-       "trigger predicate unavailable in v1"
+       "fixed-false guard (is button_pressed: source button 'K_RETURN' is not a supported Tuxemon intention) prevents the source event from starting"
       ]
      }
     },
@@ -3953,20 +4572,20 @@
      "dropped": 7,
      "reasons": {
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is step_tracker: the runtime exposes neither a saved step counter nor a movement-step update hook) prevents the source event from starting"
       ]
      }
     },
     {
      "type": "is tile_property_updated",
      "total": 4,
-     "native": 4,
+     "native": 0,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 0,
+     "dropped": 4,
      "reasons": {
-      "native": [
-       "empty source label keeps all([]) truth semantics"
+      "dropped": [
+       "fixed-false guard (is char_facing_tile: surface-labelled facing tiles need a live player-cell terrain predicate) prevents the source event from starting"
       ]
      }
     },
@@ -3982,24 +4601,28 @@
        "tux.time_is reads the saved deterministic calendar"
       ],
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is check_world: no imported runtime state or predicate) prevents the source event from starting"
       ]
      }
     },
     {
      "type": "is variable_set",
      "total": 730,
-     "native": 712,
+     "native": 710,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 18,
+     "dropped": 20,
      "reasons": {
       "native": [
        "page/if variable compare on the enum code"
       ],
       "dropped": [
        "fixed-false guard prevents the source event from starting",
-       "source event is not materialized by any map"
+       "fixed-false guard (is check_char_parameter: the extension condition context has no live player movement state) prevents the source event from starting",
+       "source event is not materialized by any map",
+       "fixed-false guard (is step_tracker: the runtime exposes neither a saved step counter nor a movement-step update hook) prevents the source event from starting",
+       "fixed-false guard (is char_facing_tile: surface-labelled facing tiles need a live player-cell terrain predicate) prevents the source event from starting",
+       "fixed-false guard (is check_party_parameter: no imported runtime state or predicate) prevents the source event from starting"
       ]
      }
     },
@@ -4015,7 +4638,7 @@
        "tux.battle_outcome extension condition"
       ],
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is check_char_parameter: the extension condition context has no live player movement state) prevents the source event from starting"
       ]
      }
     },
@@ -4074,7 +4697,7 @@
       ],
       "dropped": [
        "source event is not materialized by any map",
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is bill_is: no imported runtime state or predicate) prevents the source event from starting"
       ]
      }
     },
@@ -4094,13 +4717,13 @@
     {
      "type": "not char_healed",
      "total": 1,
-     "native": 0,
+     "native": 1,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 1,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "monster/party/meta state unknown to P1: fixed answer"
+      "native": [
+       "tux.char_healed reads every saved player monster's current/max HP"
       ]
      }
     },
@@ -4113,7 +4736,8 @@
      "dropped": 6,
      "reasons": {
       "dropped": [
-       "monster/party/meta state unknown to P1: fixed answer"
+       "fixed-false guard (is char_facing_tile: surface-labelled facing tiles need a live player-cell terrain predicate) prevents the source event from starting",
+       "the condition context has no live player cell or terrain-surface label"
       ]
      }
     },
@@ -4129,20 +4753,20 @@
        "KV1 effective walking appearance condition"
       ],
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is char_in: the condition context has no live player cell or terrain-surface label) prevents the source event from starting"
       ]
      }
     },
     {
      "type": "not check_char_parameter",
      "total": 1,
-     "native": 0,
+     "native": 1,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 1,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "monster/party/meta state unknown to P1: fixed answer"
+      "native": [
+       "live playerName exact comparison"
       ]
      }
     },
@@ -4156,7 +4780,7 @@
      "reasons": {
       "dropped": [
        "monster/party/meta state unknown to P1: fixed answer",
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard (is check_party_parameter: no imported runtime state or predicate) prevents the source event from starting"
       ]
      }
     },
@@ -4218,13 +4842,13 @@
     {
      "type": "not has_tuxepedia",
      "total": 1,
-     "native": 0,
+     "native": 1,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 1,
+     "dropped": 0,
      "reasons": {
-      "dropped": [
-       "monster/party/meta state unknown to P1: fixed answer"
+      "native": [
+       "tux.has_tuxepedia reads saved player seen/caught state"
       ]
      }
     },
@@ -4282,7 +4906,8 @@
        "gold >= n"
       ],
       "dropped": [
-       "fixed-false guard prevents the source event from starting"
+       "fixed-false guard prevents the source event from starting",
+       "fixed-false guard (is check_party_parameter: no imported runtime state or predicate) prevents the source event from starting"
       ]
      }
     },
@@ -4357,17 +4982,22 @@
     {
      "type": "not variable_set",
      "total": 671,
-     "native": 652,
+     "native": 655,
      "degraded": 0,
      "placeholder": 0,
-     "dropped": 19,
+     "dropped": 16,
      "reasons": {
       "native": [
        "page/if variable compare on the enum code"
       ],
       "dropped": [
+       "fixed-false guard (is char_gender: no imported runtime state or predicate) prevents the source event from starting",
        "fixed-false guard prevents the source event from starting",
-       "source event is not materialized by any map"
+       "fixed-false guard (is check_char_parameter: the extension condition context has no live player movement state) prevents the source event from starting",
+       "fixed-false guard (is button_pressed: source button 'K_RETURN' is not a supported Tuxemon intention) prevents the source event from starting",
+       "source event is not materialized by any map",
+       "fixed-false guard (is check_world: no imported runtime state or predicate) prevents the source event from starting",
+       "fixed-false guard (is check_party_parameter: no imported runtime state or predicate) prevents the source event from starting"
       ]
      }
     }
