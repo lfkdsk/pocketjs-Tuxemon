@@ -23,11 +23,10 @@
 #   steady     [1500, 2000)   spyder_paper_town, overlay active, no transfer
 #   activation [1430, 1490)   downstairs -> paper_town transfer, first activation
 #
-# A nonzero diff on a handful of event frames (button presses, map
-# transfers) is a one-time heap-layout perturbation from the branch's
-# boot-time footprint, not a per-frame steady-state cost; it is documented
-# as one-time event allocations and kept. A diff that appears on ordinary background
-# frames, or grows window over window, is a real regression.
+# A small nonzero diff on a few event frames (for example the frame an
+# add_monster event runs) is a one-time event allocation, not a per-frame
+# steady-state cost, and is accepted. A diff that appears on ordinary
+# background frames, or grows window over window, is a real regression.
 #
 # Args:
 #   --weather <slug>   initial weather for both runs (default: sunny)
