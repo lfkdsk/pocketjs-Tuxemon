@@ -1,0 +1,235 @@
+{
+  "format": "pocket-tuxemon/world-seam-goldens/v1",
+  "frames": [
+    {
+      "name": "east-west",
+      "viewport": {
+        "width": 480,
+        "height": 272
+      },
+      "frame": 1406,
+      "activeMap": "spyder_paper_town",
+      "neighbourMap": "spyder_routec",
+      "file": "world-seam-east-west.480x272.png",
+      "camera": [
+        1528,
+        2880
+      ],
+      "sample": {
+        "world": [
+          1576,
+          2944
+        ],
+        "screen": [
+          48,
+          64
+        ],
+        "rgba": [
+          64,
+          176,
+          128,
+          255
+        ]
+      },
+      "activeRect": [
+        1600,
+        2880,
+        640,
+        320
+      ],
+      "neighbourRect": [
+        960,
+        2560,
+        640,
+        640
+      ],
+      "visibleMaps": [
+        "spyder_paper_town",
+        "spyder_route1",
+        "spyder_routec"
+      ],
+      "terrain": {
+        "textures": 8,
+        "resident": 8,
+        "pooled": 0,
+        "created": 8,
+        "pending": 0
+      },
+      "rgbaFnv1a": "5adc8b47",
+      "pngSha256": "2ce0bde1fa82a17d32ece15eddf3a67eacf5d1cf4e61a5c05e3fea109f69fffc"
+    },
+    {
+      "name": "north-south",
+      "viewport": {
+        "width": 480,
+        "height": 272
+      },
+      "frame": 3989,
+      "activeMap": "spyder_route1",
+      "neighbourMap": "spyder_paper_town",
+      "file": "world-seam-north-south.480x272.png",
+      "camera": [
+        1592,
+        2736
+      ],
+      "sample": {
+        "world": [
+          2000,
+          2904
+        ],
+        "screen": [
+          408,
+          168
+        ],
+        "rgba": [
+          216,
+          200,
+          128,
+          255
+        ]
+      },
+      "activeRect": [
+        1600,
+        2560,
+        640,
+        320
+      ],
+      "neighbourRect": [
+        1600,
+        2880,
+        640,
+        320
+      ],
+      "visibleMaps": [
+        "spyder_paper_town",
+        "spyder_route1",
+        "spyder_routec"
+      ],
+      "terrain": {
+        "textures": 13,
+        "resident": 13,
+        "pooled": 0,
+        "created": 13,
+        "pending": 0
+      },
+      "rgbaFnv1a": "184cb9c7",
+      "pngSha256": "21aa3a4ca040496a71f61b5127d69892b95f468d2541449baaf7aa9e2b16e535"
+    },
+    {
+      "name": "east-west",
+      "viewport": {
+        "width": 960,
+        "height": 544
+      },
+      "frame": 1406,
+      "activeMap": "spyder_paper_town",
+      "neighbourMap": "spyder_routec",
+      "file": "world-seam-east-west.960x544.png",
+      "camera": [
+        1288,
+        2656
+      ],
+      "sample": {
+        "world": [
+          1576,
+          2944
+        ],
+        "screen": [
+          288,
+          288
+        ],
+        "rgba": [
+          64,
+          176,
+          128,
+          255
+        ]
+      },
+      "activeRect": [
+        1600,
+        2880,
+        640,
+        320
+      ],
+      "neighbourRect": [
+        960,
+        2560,
+        640,
+        640
+      ],
+      "visibleMaps": [
+        "spyder_brideswood",
+        "spyder_paper_town",
+        "spyder_route1",
+        "spyder_routec"
+      ],
+      "terrain": {
+        "textures": 21,
+        "resident": 21,
+        "pooled": 0,
+        "created": 21,
+        "pending": 0
+      },
+      "rgbaFnv1a": "e51b076e",
+      "pngSha256": "e820c66b3431470d27f83a5e59b738b3c93a6648ecb7933f5db44f0d8a3d585f"
+    },
+    {
+      "name": "north-south",
+      "viewport": {
+        "width": 960,
+        "height": 544
+      },
+      "frame": 3989,
+      "activeMap": "spyder_route1",
+      "neighbourMap": "spyder_paper_town",
+      "file": "world-seam-north-south.960x544.png",
+      "camera": [
+        1352,
+        2600
+      ],
+      "sample": {
+        "world": [
+          2000,
+          2904
+        ],
+        "screen": [
+          648,
+          304
+        ],
+        "rgba": [
+          216,
+          200,
+          128,
+          255
+        ]
+      },
+      "activeRect": [
+        1600,
+        2560,
+        640,
+        320
+      ],
+      "neighbourRect": [
+        1600,
+        2880,
+        640,
+        320
+      ],
+      "visibleMaps": [
+        "spyder_brideswood",
+        "spyder_paper_town",
+        "spyder_route1",
+        "spyder_routec"
+      ],
+      "terrain": {
+        "textures": 24,
+        "resident": 24,
+        "pooled": 0,
+        "created": 24,
+        "pending": 0
+      },
+      "rgbaFnv1a": "18929c55",
+      "pngSha256": "4a539611313dabb5d3287603a222ba4cd343dc219021bd438d299e7632ab344e"
+    }
+  ]
+}

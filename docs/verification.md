@@ -78,6 +78,8 @@ bun tools/desktop.ts --build-only
 bun run bench:g6:quickjs
 bun run bench:gb6:quickjs
 bun run bench:j3:quickjs
+bun run bench:indoor-fast-path
+bun run verify:world-cache
 ```
 
 The short G6 benchmark replays 3,990 frames at 480×272 and 960×544, then
@@ -95,6 +97,18 @@ then replays the 11 remaining J2 masks plus all 12,980 J3 masks. It exercises
 13 battles including Beaverbrook and checks the Radio Tower terminal hash at
 both 480×272 and 960×544. This also keeps chapter restore honest in the
 QuickJS guest, where browser-only globals such as `TextDecoder` do not exist.
+
+The world-cache gate boots the same production bundle and session path at
+480×272 and 960×544. It follows bidirectional authored openings through every
+connected component, visits all 67 placed outdoor maps twice, and asserts
+bounded parsed/compiled maps, provider shards, native nodes, textures and
+post-GC QuickJS heap as well as a 50 ms cross-map frame budget.
+
+The indoor fast-path probe replays the production tape into
+`spyder_downstairs`, verifies that world diagnostics are disabled, then times
+4,000 neutral frames at both viewports. `INDOOR_BENCH_APP_ROOT` can point it
+at an already-built comparison checkout; increase `G6_INDOOR_FRAMES` for a
+lower-noise release comparison.
 
 These are manual release and performance gates, not CI jobs. Their Rust host
 build and long replay are too expensive for the normal push pipeline, and

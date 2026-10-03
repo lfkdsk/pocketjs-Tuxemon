@@ -27,14 +27,14 @@
  },
  "mapRepository": {
   "encodings": {
-   "compact": 263,
-   "json": 0
+   "compact": 260,
+   "json": 3
   },
-  "shellBytes": 200320,
-  "entryBytes": 4957030,
+  "shellBytes": 200323,
+  "entryBytes": 5225836,
   "canonicalJsonBytes": 10131297,
   "entries": 263,
-  "manifestHash": "20f606b4d3606a93f2f9d68943a2c198f05ef3f3506c04e71da0336e9e541bdc",
+  "manifestHash": "d854b46bc72598afbcb6b5f95b40570f55f2c9722cf122e9909872ac4776b2c9",
   "schemaHash": "49d96a259da5a5bae6f15eb0c3e7184e8f874de1b0f13a8ba161586f4c0149a1"
  },
  "terrain": {

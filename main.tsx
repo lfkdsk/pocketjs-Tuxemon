@@ -39,8 +39,16 @@ import { createAnimatedProvider } from "./ui/animated-repository.ts";
 import { createSaveMenu } from "./ui/save-menu.tsx";
 import { createNpcSrcProvider } from "./ui/npc-src-repository.ts";
 import { createTerrainStreamProvider } from "./ui/terrain-stream-repository.ts";
+import { createGameWorldAssetCache } from "./ui/world-cache.ts";
+import {
+  type PocketTuxemonWorldDiagnostics,
+  withWorldDiagnostics,
+} from "./ui/world-diagnostics.ts";
+import { createGameWorldRenderer } from "./ui/world-renderer.tsx";
 import { ChoiceIconBox } from "./vendor/pocket-rpgkit/src/ui/ChoiceIconBox.tsx";
 import { createDemo } from "./vendor/pocket-rpgkit/src/ui/demo/index.ts";
+import { createWorldCacheDriver } from "./vendor/pocket-rpgkit/src/ui/world-cache-driver.ts";
+import type { WorldStreamedTerrainStats } from "./vendor/pocket-rpgkit/src/ui/WorldStreamedTerrain.tsx";
 import { createDemoOptions } from "./ui/demo-tape.ts";
 import type {
   GameViewDemoConfig,
@@ -100,17 +108,47 @@ gp1Mark("battle-registration");
 void NPC_SRC_ASSET_PATHS;
 // Same reason: ANIMATED's atlas names now live in dist/animated shards.
 void ANIMATED_ATLAS_NAMES;
+const animated = createAnimatedProvider(ANIMATED_INDEX, { read: readEntry });
+const npcSrc = createNpcSrcProvider(NPC_SRC_INDEX, { read: readEntry });
+const stream = createTerrainStreamProvider(
+  TERRAIN_STREAM_META,
+  TERRAIN_STREAM_GROUND_INDEX,
+  TERRAIN_STREAM_UPPER_INDEX,
+  { read: readEntry },
+);
 const assets = {
   ...GAME_ASSETS,
-  animated: createAnimatedProvider(ANIMATED_INDEX, { read: readEntry }),
-  npcSrc: createNpcSrcProvider(NPC_SRC_INDEX, { read: readEntry }),
-  stream: createTerrainStreamProvider(
-    TERRAIN_STREAM_META,
-    TERRAIN_STREAM_GROUND_INDEX,
-    TERRAIN_STREAM_UPPER_INDEX,
-    { read: readEntry },
-  ),
+  animated,
+  npcSrc,
+  stream,
 };
+const worldDiagnostics: PocketTuxemonWorldDiagnostics | undefined =
+  globalThis.__pocketTuxemonWorldDiagnostics;
+if (worldDiagnostics) {
+  worldDiagnostics.maps = project.worldLayout!.components.flatMap((component) =>
+    component.placements.map((placement) => placement.mapId)
+  );
+  const links: Record<string, string[]> = Object.fromEntries(
+    worldDiagnostics.maps.map((mapId) => [mapId, []]),
+  );
+  for (const component of project.worldLayout!.components) {
+    for (const opening of component.openings) {
+      links[opening.source.mapId]!.push(opening.target.mapId);
+    }
+  }
+  for (const values of Object.values(links)) {
+    values.splice(0, values.length, ...new Set(values));
+    values.sort();
+  }
+  worldDiagnostics.links = links;
+}
+const worldAssetCache = createGameWorldAssetCache(project.worldLayout!, {
+  stream,
+  animated,
+  npcSrc,
+}, worldDiagnostics
+  ? (stats) => { worldDiagnostics.cache = stats; }
+  : undefined);
 const { Effects, bridge: weatherBridge } = createGameEffects(project.audio ?? {});
 
 // Allocation-regression switch: when false, the particle overlay is not
@@ -133,12 +171,15 @@ const demo: GameViewDemoConfig = {
 };
 let saveMenuRuntime: GameViewDemoRuntime | null = null;
 const saveMenuConfig = createSaveMenu({ suspended: () => demoMenu?.isOpen() ?? false });
-const saveMenu: GameViewOverlayConfig = {
+const baseSaveMenu: GameViewOverlayConfig = {
   create(host) {
     saveMenuRuntime = saveMenuConfig.create(host);
     return saveMenuRuntime;
   },
 };
+const saveMenu = worldDiagnostics
+  ? withWorldDiagnostics(baseSaveMenu, worldDiagnostics)
+  : baseSaveMenu;
 
 mount(() => (
   <>
@@ -160,6 +201,24 @@ mount(() => (
         [TUXEMON_DAYCARE_SCENE_ID]: TuxemonDaycareScene,
       }}
       assets={assets}
+      world={createGameWorldRenderer()}
+      createWorldCacheDriver={(session, layout) => createWorldCacheDriver(session, layout, {
+        onStats: worldAssetCache.onWorldCacheStats,
+      })}
+      onMapChange={worldAssetCache.onMapChange}
+      onStreamStats={(_layer, stats) => {
+        const worldStats = stats as WorldStreamedTerrainStats;
+        if (worldDiagnostics) {
+          const byLayer = worldDiagnostics.stream ?? (worldDiagnostics.stream = {});
+          byLayer[_layer] = worldStats;
+        }
+        if (worldStats.visibleMaps) worldAssetCache.onVisibleMaps(worldStats.visibleMaps);
+      }}
+      onAnimatedStats={(layer, stats) => {
+        if (!worldDiagnostics) return;
+        const byLayer = worldDiagnostics.animated ?? (worldDiagnostics.animated = {});
+        byLayer[layer] = stats;
+      }}
       choiceIcons={ChoiceIconBox}
       demo={demo}
       overlay={saveMenu}

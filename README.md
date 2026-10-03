@@ -28,7 +28,11 @@ summary:
   to the Radio Tower broadcast — 185,944 frames at 60 Hz for the full
   mainline, driven by
   deterministic autoplay tapes — and every imported input lock is executed
-  to its unlock.
+  to its unlock. On the 67 placed outdoor maps, the streamed renderer paints
+  neighbouring ground, upper layers and animated tiles across authored seams,
+  with map, texture-shard and NPC-art caches bounded to the current world
+  working set. Player transfer still uses the legacy transition; seamless
+  handoff is planned separately.
 - **Battles (P2, complete):** the battle database and 590 battle
   textures are imported from Tuxemon's YAML, and `battle/` is a pure
   reducer whose results match Tuxemon's own Python engine on 8,560 recorded
@@ -54,9 +58,12 @@ summary:
   saved, rewindable game scenes. Seen/caught status is persistent and monotonic;
   journal previews and the normal browser render monster details through the
   same indexed, lazily loaded battle-image shards as combat.
-- **Performance:** compact map shards use 4,957,030 B instead of 10,131,297 B
-  of canonical JSON, and indexed battle art plus its lazy database occupies
-  3,516,960 B in the pak. The Web game pak is 48,337,296 B; before compact
+- **Performance:** 260 compact map shards plus 3 canonical JSON shards use
+  5,225,836 B instead of 10,131,297 B for all-canonical JSON. The three
+  event-heavy maps cross a 128 KiB compact-decode cap, trading a small amount
+  of storage for bounded first-visit latency on QuickJS. Indexed battle art
+  plus its lazy database occupies 3,516,960 B in the pak. The Web game pak is
+  48,606,096 B; before compact
   maps and indexed battle art it was 66,791,328 B, measured on the tree just
   before day and night were added. The all-image battle encoding is
   2,206,076 B on disk and 13,394,688 B if every PSM_T8 texture were decoded,
@@ -219,6 +226,8 @@ bun run verify:j3:mainline      # replay through the Radio Tower broadcast
 bun run bench:g6:quickjs        # short two-viewport QuickJS performance gate
 bun run bench:gb6:quickjs       # full 480x272 QuickJS journey gate
 bun run bench:j3:quickjs        # hospital chapter -> radio, both viewports
+bun run bench:indoor-fast-path  # production-entry indoor single-map probe
+bun run verify:world-cache      # visit all 67 outdoor maps twice at both viewports
 bun run build:psp               # release EBOOT plus external asset pak
 ```
 

@@ -5,7 +5,7 @@
 mod g6_quickjs_bench {
     use super::*;
     use serde::Deserialize;
-    use std::collections::HashSet;
+    use std::collections::{HashMap, HashSet};
     use std::ffi::CString;
     use std::fmt::Write as _;
     use std::path::Path;
@@ -90,18 +90,18 @@ mod g6_quickjs_bench {
             self.inner.calloc(count, size)
         }
         unsafe fn dealloc(&mut self, ptr: *mut u8) {
-            self.inner.dealloc(ptr)
+            unsafe { self.inner.dealloc(ptr) }
         }
         unsafe fn realloc(&mut self, ptr: *mut u8, new_size: usize) -> *mut u8 {
             ALLOC_COUNT.fetch_add(1, Ordering::Relaxed);
             ALLOC_BYTES.fetch_add(new_size as u64, Ordering::Relaxed);
-            self.inner.realloc(ptr, new_size)
+            unsafe { self.inner.realloc(ptr, new_size) }
         }
         unsafe fn usable_size(ptr: *mut u8) -> usize
         where
             Self: Sized,
         {
-            pocket_mod::qjs::allocator::RustAllocator::usable_size(ptr)
+            unsafe { pocket_mod::qjs::allocator::RustAllocator::usable_size(ptr) }
         }
     }
 
@@ -406,6 +406,15 @@ mod g6_quickjs_bench {
             "g6-fixed-clock",
             "globalThis.__pocketTuxemonInitialCivilTime={year:2024,month:6,day:15,hour:9,minute:0};",
         )?;
+        // The world-cache stress test opts into the game's default-off
+        // production diagnostics hook before bundle evaluation. Ordinary
+        // journey and release launches do not create the object or callbacks.
+        if std::env::var("G6_WORLD_CACHE_STRESS").is_ok() {
+            guest.eval(
+                "g6-world-cache-diagnostics",
+                "globalThis.__pocketTuxemonWorldDiagnostics={};",
+            )?;
+        }
         // Optional weather override for particle-overlay cost measurement.
         if let Ok(slug) = std::env::var("G6_WEATHER") {
             guest.eval(
@@ -1625,6 +1634,90 @@ mod g6_quickjs_bench {
         let _ = std::fs::remove_dir_all(data);
     }
 
+    /// Production-entry indoor fast-path probe. The real campaign tape is
+    /// replayed into the downstairs interior before a neutral-input window
+    /// is measured. World diagnostics stay disabled, just as they do in a
+    /// release launch, so this can compare a feature branch with a built
+    /// baseline without exercising the opt-in outdoor renderer.
+    #[test]
+    #[ignore]
+    fn indoor_fast_path() {
+        let dist = PathBuf::from(std::env::var("G6_DIST").expect("G6_DIST"));
+        let journey_path = PathBuf::from(std::env::var("G6_JOURNEY").expect("G6_JOURNEY"));
+        let journey: Journey =
+            serde_json::from_slice(&std::fs::read(journey_path).unwrap()).unwrap();
+        let width: u32 = std::env::var("G6_BENCH_W").unwrap().parse().unwrap();
+        let height: u32 = std::env::var("G6_BENCH_H").unwrap().parse().unwrap();
+        let viewport = format!("{width}x{height}");
+        let start: usize = std::env::var("G6_INDOOR_START")
+            .ok()
+            .and_then(|value| value.parse().ok())
+            .unwrap_or(1_200);
+        let warmup: usize = std::env::var("G6_INDOOR_WARMUP")
+            .ok()
+            .and_then(|value| value.parse().ok())
+            .unwrap_or(300);
+        let frames: usize = std::env::var("G6_INDOOR_FRAMES")
+            .ok()
+            .and_then(|value| value.parse().ok())
+            .unwrap_or(4_000);
+        let expected_map = std::env::var("G6_INDOOR_MAP")
+            .unwrap_or_else(|_| "spyder_downstairs".into());
+        assert!(start < journey.masks.len(), "indoor start lies beyond the journey");
+
+        let bench_root = PathBuf::from(std::env::var("G6_BENCH_ROOT").expect("G6_BENCH_ROOT"));
+        let data = bench_root.join(format!(
+            "qjs-indoor-{}-{width}x{height}",
+            std::process::id(),
+        ));
+        let maps = PathBuf::from(std::env::var("G6_MAPS").expect("G6_MAPS"));
+        seed_maps(&maps, &data);
+        let battle = PathBuf::from(std::env::var("G6_BATTLE").expect("G6_BATTLE"));
+        seed_battle(&battle, &data);
+        let animated = PathBuf::from(std::env::var("G6_ANIMATED").expect("G6_ANIMATED"));
+        seed_animated(&animated, &data);
+        let npc_src = PathBuf::from(std::env::var("G6_NPC_SRC").expect("G6_NPC_SRC"));
+        seed_npc_src(&npc_src, &data);
+        let terrain_stream =
+            PathBuf::from(std::env::var("G6_TERRAIN_STREAM").expect("G6_TERRAIN_STREAM"));
+        seed_terrain_stream(&terrain_stream, &data);
+
+        let (runtime, _stages) =
+            boot_staged(args(&dist, "pocket-tuxemon", data, width, height)).unwrap();
+        let mut bench = Bench {
+            rt: runtime,
+            gc_mode: GcMode::from_env(),
+            sample_structural: false,
+            hash_every: 10,
+            battle_buckets: false,
+        };
+        assert!(
+            !bench.boolean("typeof globalThis.__pocketTuxemonWorldDiagnostics !== 'undefined'"),
+            "indoor fast-path probe must not enable world diagnostics",
+        );
+        for index in 0..=start {
+            let _sample = bench.frame(index, journey.masks[index], None, false);
+        }
+        assert_eq!(bench.state().0, expected_map, "tape did not reach the indoor fixture");
+        for offset in 0..warmup {
+            let _sample = bench.frame(start + 1 + offset, 0, None, false);
+        }
+
+        let samples: Vec<Sample> = (0..frames)
+            .map(|offset| bench.frame(start + 1 + warmup + offset, 0, None, false))
+            .collect();
+        assert!(
+            samples.iter().all(|sample| sample.map == expected_map && !sample.battle),
+            "indoor fixture left the single-map world path",
+        );
+        report(&viewport, "indoor-fast-path", &samples);
+        assert_frame_budget("indoor-fast-path", &samples, 50.0);
+        println!(
+            "INDOOR_FAST_PATH viewport={viewport} map={expected_map} replay_frames={} warmup_frames={warmup} measured_frames={frames} world_diagnostics=false",
+            start + 1,
+        );
+    }
+
     fn timed_bool(bench: &Bench, source: &str) -> (bool, f64) {
         let started = Instant::now();
         let result = bench.boolean(source);
@@ -1776,6 +1869,505 @@ mod g6_quickjs_bench {
             "map {} exceeded the 50 ms staged first-visit limit: {:.3} ms",
             worst_non_exempt_map.meta.id,
             worst_non_exempt_ms,
+        );
+        let _ = std::fs::remove_dir_all(data);
+    }
+
+    #[derive(Clone, Debug, Deserialize)]
+    #[serde(rename_all = "camelCase")]
+    struct WorldStressDiagnostics {
+        acknowledged: Option<usize>,
+        #[serde(default)]
+        maps: Vec<String>,
+        #[serde(default)]
+        links: HashMap<String, Vec<String>>,
+        cache: Option<WorldStressCache>,
+        stream: Option<WorldStressStreamBands>,
+        animated: Option<WorldStressAnimatedBands>,
+    }
+
+    #[derive(Clone, Debug, Deserialize)]
+    #[serde(rename_all = "camelCase")]
+    struct WorldStressCache {
+        driver: WorldStressDriver,
+        visual_keep: Vec<String>,
+        npc_keep: Vec<String>,
+        assets: WorldStressAssets,
+    }
+
+    #[derive(Clone, Debug, Deserialize)]
+    #[serde(rename_all = "camelCase")]
+    struct WorldStressDriver {
+        active: String,
+        visible: Vec<String>,
+        parsed_keep: Vec<String>,
+        compiled_keep: Vec<String>,
+        maps: usize,
+        worlds: usize,
+        tables: usize,
+        staged: usize,
+        pending: usize,
+        preparing: usize,
+        runtime: usize,
+        repo_cached: usize,
+        failures: serde_json::Value,
+    }
+
+    #[derive(Clone, Debug, Deserialize)]
+    struct WorldStressAssets {
+        ground: WorldStressLazy,
+        upper: WorldStressLazy,
+        animated: WorldStressLazy,
+        #[serde(rename = "npcSrc")]
+        npc_src: WorldStressLazy,
+    }
+
+    #[derive(Clone, Debug, Deserialize)]
+    struct WorldStressLazy {
+        resident: usize,
+        loads: usize,
+        evictions: usize,
+        missing: usize,
+    }
+
+    #[derive(Clone, Debug, Deserialize)]
+    struct WorldStressStreamBands {
+        ground: Option<WorldStressStream>,
+        upper: Option<WorldStressStream>,
+    }
+
+    #[derive(Clone, Debug, Deserialize)]
+    #[serde(rename_all = "camelCase")]
+    struct WorldStressStream {
+        map_id: String,
+        #[serde(default)]
+        visible_maps: Vec<String>,
+        resident: usize,
+        textures: usize,
+        pooled: usize,
+        created: usize,
+        pending: usize,
+    }
+
+    #[derive(Clone, Debug, Deserialize)]
+    struct WorldStressAnimatedBands {
+        below: Option<WorldStressAnimated>,
+        above: Option<WorldStressAnimated>,
+    }
+
+    #[derive(Clone, Debug, Deserialize)]
+    struct WorldStressAnimated {
+        mounted: usize,
+        created: usize,
+        pooled: usize,
+    }
+
+    #[derive(Clone, Debug, Default)]
+    struct WorldStressPeak {
+        maps: usize,
+        worlds: usize,
+        tables: usize,
+        repo_cached: usize,
+        ground_shards: usize,
+        upper_shards: usize,
+        animated_shards: usize,
+        npc_refs: usize,
+        stream_textures: usize,
+        terrain_nodes: usize,
+        animated_nodes: usize,
+        native_nodes: usize,
+        live_textures: usize,
+        texture_slots: usize,
+        heap_bytes: usize,
+    }
+
+    impl WorldStressPeak {
+        fn observe(
+            &mut self,
+            diagnostic: &WorldStressDiagnostics,
+            surface: &UiSurface,
+            heap_bytes: usize,
+        ) {
+            let Some(cache) = &diagnostic.cache else { return };
+            self.maps = self.maps.max(cache.driver.maps);
+            self.worlds = self.worlds.max(cache.driver.worlds);
+            self.tables = self.tables.max(cache.driver.tables);
+            self.repo_cached = self.repo_cached.max(cache.driver.repo_cached);
+            self.ground_shards = self.ground_shards.max(cache.assets.ground.resident);
+            self.upper_shards = self.upper_shards.max(cache.assets.upper.resident);
+            self.animated_shards = self.animated_shards.max(cache.assets.animated.resident);
+            self.npc_refs = self.npc_refs.max(cache.assets.npc_src.resident);
+            if let Some(stream) = &diagnostic.stream {
+                let ground = stream.ground.as_ref();
+                let upper = stream.upper.as_ref();
+                self.stream_textures = self.stream_textures.max(
+                    ground.map_or(0, |value| value.textures) +
+                    upper.map_or(0, |value| value.textures),
+                );
+                self.terrain_nodes = self.terrain_nodes.max(
+                    ground.map_or(0, |value| value.created) +
+                    upper.map_or(0, |value| value.created),
+                );
+            }
+            if let Some(animated) = &diagnostic.animated {
+                self.animated_nodes = self.animated_nodes.max(
+                    animated.below.as_ref().map_or(0, |value| value.created) +
+                    animated.above.as_ref().map_or(0, |value| value.created),
+                );
+            }
+            let (nodes, live_textures, texture_slots) = surface_counts(surface);
+            self.native_nodes = self.native_nodes.max(nodes);
+            self.live_textures = self.live_textures.max(live_textures);
+            self.texture_slots = self.texture_slots.max(texture_slots);
+            self.heap_bytes = self.heap_bytes.max(heap_bytes);
+        }
+    }
+
+    fn world_stress_diagnostics(bench: &Bench) -> WorldStressDiagnostics {
+        serde_json::from_str(&bench.string(
+            "JSON.stringify(globalThis.__pocketTuxemonWorldDiagnostics)",
+        ))
+        .expect("world-cache diagnostics JSON")
+    }
+
+    fn surface_counts(surface: &UiSurface) -> (usize, usize, usize) {
+        surface.with_ui(|ui| {
+            let mut nodes = 0usize;
+            let mut stack = vec![1i32];
+            while let Some(id) = stack.pop() {
+                if !ui.node_exists(id) {
+                    continue;
+                }
+                nodes += 1;
+                stack.extend_from_slice(ui.node_children(id));
+            }
+            let slots = ui.texture_slot_count();
+            let live = (0..slots)
+                .filter(|slot| ui.texture_at(*slot as u32).is_some())
+                .count();
+            (nodes, live, slots)
+        })
+    }
+
+    fn force_qjs_gc(guest: &Guest) {
+        guest.with(|ctx| unsafe {
+            let runtime = pocket_mod::qjs::qjs::JS_GetRuntime(ctx.as_raw().as_ptr());
+            pocket_mod::qjs::qjs::JS_RunGC(runtime);
+        });
+    }
+
+    fn world_stress_settled(
+        diagnostic: &WorldStressDiagnostics,
+        seq: usize,
+        map_id: &str,
+    ) -> bool {
+        let Some(cache) = &diagnostic.cache else { return false };
+        let Some(stream) = &diagnostic.stream else { return false };
+        let (Some(ground), Some(upper)) = (&stream.ground, &stream.upper) else { return false };
+        diagnostic.acknowledged == Some(seq)
+            && cache.driver.active == map_id
+            && ground.map_id == map_id
+            && upper.map_id == map_id
+            && ground.visible_maps.iter().any(|id| id == map_id)
+            && upper.visible_maps.iter().any(|id| id == map_id)
+            && cache.visual_keep.iter().any(|id| id == map_id)
+            && ground.pending == 0
+            && upper.pending == 0
+            && cache.driver.pending == 0
+    }
+
+    fn assert_world_stress_contract(diagnostic: &WorldStressDiagnostics, map_id: &str) {
+        let cache = diagnostic.cache.as_ref().expect("settled cache diagnostics");
+        let stream = diagnostic.stream.as_ref().expect("settled stream diagnostics");
+        let ground = stream.ground.as_ref().expect("settled ground diagnostics");
+        let upper = stream.upper.as_ref().expect("settled upper diagnostics");
+        let animated = diagnostic.animated.as_ref().expect("settled animated diagnostics");
+        let driver = &cache.driver;
+
+        assert_eq!(driver.active, map_id, "active map must follow the requested entry");
+        assert!(driver.visible.iter().any(|id| id == map_id), "active map must be visible");
+        assert!(driver.parsed_keep.iter().any(|id| id == map_id), "active map must be parsed");
+        assert!(driver.compiled_keep.iter().any(|id| id == map_id), "active map must be compiled");
+        assert!(
+            driver.visible.iter().all(|id| driver.parsed_keep.contains(id)),
+            "visible maps must be retained in the parsed working set",
+        );
+        assert!(driver.maps <= driver.parsed_keep.len(), "parsed map cache exceeded its keep-set");
+        assert!(driver.repo_cached <= driver.parsed_keep.len(), "repository cache exceeded its keep-set");
+        assert!(driver.worlds <= driver.compiled_keep.len(), "compiled world cache exceeded its keep-set");
+        assert!(driver.tables <= driver.compiled_keep.len(), "passage cache exceeded its keep-set");
+        assert!(driver.runtime <= 1, "mutable passage cache must remain active-map-only");
+        assert_eq!(driver.pending, 0, "settled route still has pending prefetch work");
+        assert_eq!(driver.preparing, driver.staged, "all remaining preparations must be complete");
+        assert!(driver.failures.as_object().is_some_and(|value| value.is_empty()), "world prefetch failed");
+
+        assert_eq!(ground.visible_maps, cache.visual_keep, "ground/provider visible set drift");
+        assert_eq!(upper.visible_maps, cache.visual_keep, "upper/provider visible set drift");
+        assert!(cache.assets.ground.resident <= cache.visual_keep.len(),
+            "{map_id}: ground shards {} exceeded visual keep-set {:?}", cache.assets.ground.resident, cache.visual_keep);
+        assert!(cache.assets.upper.resident <= cache.visual_keep.len(),
+            "{map_id}: upper shards {} exceeded visual keep-set {:?}", cache.assets.upper.resident, cache.visual_keep);
+        assert!(cache.assets.animated.resident <= cache.visual_keep.len(),
+            "{map_id}: animated shards {} exceeded visual keep-set {:?}", cache.assets.animated.resident, cache.visual_keep);
+        assert!(cache.assets.npc_src.resident <= cache.npc_keep.len(),
+            "{map_id}: NPC refs {} exceeded active-map keep-set {:?}", cache.assets.npc_src.resident, cache.npc_keep);
+        for (name, stats) in [
+            ("ground", &cache.assets.ground),
+            ("upper", &cache.assets.upper),
+            ("npc", &cache.assets.npc_src),
+        ] {
+            assert_eq!(stats.missing, 0, "{name} provider reported missing entries");
+            assert!(stats.loads >= stats.resident, "{name} provider load counter regressed");
+            assert!(stats.loads >= stats.evictions, "{name} provider eviction counter exceeded loads");
+        }
+        // Most maps intentionally have no authored animation shard, so a
+        // lookup miss is the provider's normal `tiles[id] ?? []` path.
+        assert!(cache.assets.animated.loads >= cache.assets.animated.resident);
+        assert!(cache.assets.animated.loads >= cache.assets.animated.evictions);
+        for (name, stats) in [("ground", ground), ("upper", upper)] {
+            assert_eq!(stats.pending, 0, "{name} terrain still pending");
+            assert_eq!(stats.resident + stats.pooled, stats.created, "{name} terrain node pool leaked");
+            assert_eq!(stats.textures, stats.resident, "{name} terrain texture residency drifted");
+        }
+        for (name, stats) in [
+            ("below", animated.below.as_ref().expect("below animation diagnostics")),
+            ("above", animated.above.as_ref().expect("above animation diagnostics")),
+        ] {
+            assert_eq!(stats.mounted + stats.pooled, stats.created, "{name} animation node pool leaked");
+        }
+    }
+
+    fn assert_peak_not_greater(label: &str, revisit: usize, first: usize) {
+        assert!(
+            revisit <= first,
+            "revisit grew {label}: first-pass maximum {first}, second-pass maximum {revisit}",
+        );
+    }
+
+    fn append_world_walk(
+        map_id: &str,
+        links: &HashMap<String, Vec<String>>,
+        visited: &mut HashSet<String>,
+        route: &mut Vec<(String, bool)>,
+    ) {
+        visited.insert(map_id.to_owned());
+        let mut targets = links.get(map_id).cloned().unwrap_or_default();
+        targets.sort();
+        for target in targets {
+            let can_return = links
+                .get(&target)
+                .is_some_and(|back| back.iter().any(|candidate| candidate == map_id));
+            if visited.contains(&target) || !can_return {
+                continue;
+            }
+            route.push((target.clone(), true));
+            append_world_walk(&target, links, visited, route);
+            route.push((map_id.to_owned(), true));
+        }
+    }
+
+    /** A deterministic forest walk. `true` means the step follows a
+     * bidirectional authored opening, so W3 must have staged its target. */
+    fn world_stress_route(diagnostic: &WorldStressDiagnostics) -> Vec<(String, bool)> {
+        let mut visited = HashSet::new();
+        let mut route = Vec::new();
+        for map_id in &diagnostic.maps {
+            if visited.contains(map_id) {
+                continue;
+            }
+            route.push((map_id.clone(), false));
+            append_world_walk(map_id, &diagnostic.links, &mut visited, &mut route);
+        }
+        assert_eq!(visited.len(), diagnostic.maps.len(), "world walk omitted an outdoor map");
+        route
+    }
+
+    /// Production-entry, production-bundle traversal of every outdoor map.
+    /// A diagnostics-only overlay asks the ordinary GameView to reconstruct
+    /// each fresh map entry; rendering, provider reads, working-set policy,
+    /// native texture allocation and GC all remain the shipped code paths.
+    #[test]
+    #[ignore]
+    fn world_cache_stress() {
+        assert!(
+            std::env::var("G6_WORLD_CACHE_STRESS").is_ok(),
+            "world_cache_stress requires G6_WORLD_CACHE_STRESS=1 before bundle eval",
+        );
+        let dist = PathBuf::from(std::env::var("G6_DIST").expect("G6_DIST"));
+        let width: u32 = std::env::var("G6_BENCH_W").unwrap().parse().unwrap();
+        let height: u32 = std::env::var("G6_BENCH_H").unwrap().parse().unwrap();
+        let viewport = format!("{width}x{height}");
+        let bench_root = PathBuf::from(std::env::var("G6_BENCH_ROOT").expect("G6_BENCH_ROOT"));
+        let data = bench_root.join(format!("qjs-world-{}-{width}x{height}", std::process::id()));
+        seed_maps(&PathBuf::from(std::env::var("G6_MAPS").expect("G6_MAPS")), &data);
+        seed_battle(&PathBuf::from(std::env::var("G6_BATTLE").expect("G6_BATTLE")), &data);
+        seed_animated(&PathBuf::from(std::env::var("G6_ANIMATED").expect("G6_ANIMATED")), &data);
+        seed_npc_src(&PathBuf::from(std::env::var("G6_NPC_SRC").expect("G6_NPC_SRC")), &data);
+        seed_terrain_stream(
+            &PathBuf::from(std::env::var("G6_TERRAIN_STREAM").expect("G6_TERRAIN_STREAM")),
+            &data,
+        );
+
+        let (runtime, _) =
+            boot_staged(args(&dist, "pocket-tuxemon", data.clone(), width, height)).unwrap();
+        let mut bench = Bench {
+            rt: runtime,
+            gc_mode: GcMode::from_env(),
+            sample_structural: false,
+            hash_every: 1,
+            battle_buckets: false,
+        };
+        let initial_diagnostics = world_stress_diagnostics(&bench);
+        let maps = initial_diagnostics.maps.clone();
+        assert_eq!(maps.len(), 67, "world-cache route must cover all 67 outdoor placements");
+        assert_eq!(maps.iter().collect::<HashSet<_>>().len(), 67, "world-cache route contains duplicate maps");
+        let route = world_stress_route(&initial_diagnostics);
+
+        let mut timed_frames = Vec::new();
+        let mut cross_map_frames = Vec::new();
+        let mut direct_entry_frames = Vec::new();
+        let mut prefetched_crossings = 0usize;
+        let mut peaks = Vec::new();
+        let mut heap_after_gc = Vec::new();
+        let mut frame = 0usize;
+        let mut seq = 0usize;
+        for pass in 1..=2 {
+            let mut peak = WorldStressPeak::default();
+            let mut unique = HashSet::new();
+            for (map_id, authored_edge) in &route {
+                unique.insert(map_id);
+                let before = world_stress_diagnostics(&bench);
+                let prefetched = before.cache.as_ref().is_some_and(|cache|
+                    cache.driver.active != *map_id &&
+                    cache.driver.compiled_keep.iter().any(|candidate| candidate == map_id) &&
+                    cache.driver.pending == 0
+                );
+                if *authored_edge {
+                    assert!(prefetched, "authored edge to {map_id} was not staged by W3");
+                }
+                if prefetched {
+                    prefetched_crossings += 1;
+                }
+                seq += 1;
+                let map_json = serde_json::to_string(map_id).unwrap();
+                bench.unit(&format!(
+                    "globalThis.__pocketTuxemonWorldDiagnostics.request={{seq:{seq},mapId:{map_json}}}"
+                ));
+                let mut settled_frames = 0usize;
+                let mut settled = false;
+                let mut entry_presented = false;
+                let mut sampled_cross_frame = false;
+                for attempt in 0..32 {
+                    let sample = bench.frame(frame, 0, None, true);
+                    let sample_cpu = sample.js_cpu_ms + sample.core_cpu_ms + sample.draw_cpu_ms;
+                    if attempt == 0 {
+                        // The diagnostics overlay performs startSession in
+                        // this control frame. It is not a gameplay transfer;
+                        // time the first ordinary production frame after the
+                        // replacement as the cross-map rendering frame.
+                        direct_entry_frames.push(sample.clone());
+                    } else {
+                        timed_frames.push(sample.clone());
+                        if entry_presented && !sampled_cross_frame {
+                            cross_map_frames.push(sample.clone());
+                            sampled_cross_frame = true;
+                        }
+                    }
+                    let diagnostic = world_stress_diagnostics(&bench);
+                    if sample_cpu > 45.0 {
+                        let cache = diagnostic.cache.as_ref().expect("slow-frame cache diagnostics");
+                        let stream = diagnostic.stream.as_ref().expect("slow-frame stream diagnostics");
+                        let ground_pending = stream.ground.as_ref().map_or(0, |value| value.pending);
+                        let upper_pending = stream.upper.as_ref().map_or(0, |value| value.pending);
+                        println!(
+                            "WORLD_SLOW viewport={viewport} pass={pass} map={map_id} attempt={attempt} prefetched={prefetched} cpu={sample_cpu:.3}ms js={:.3}ms core={:.3}ms draw={:.3}ms driver_pending={} driver_staged={} driver_preparing={} stream_pending={}/{}",
+                            sample.js_cpu_ms,
+                            sample.core_cpu_ms,
+                            sample.draw_cpu_ms,
+                            cache.driver.pending,
+                            cache.driver.staged,
+                            cache.driver.preparing,
+                            ground_pending,
+                            upper_pending,
+                        );
+                    }
+                    peak.observe(&diagnostic, &bench.rt.surface, sample.heap_bytes);
+                    frame += 1;
+                    if diagnostic.acknowledged == Some(seq) {
+                        entry_presented = true;
+                    }
+                    if world_stress_settled(&diagnostic, seq, map_id) {
+                        assert_world_stress_contract(&diagnostic, map_id);
+                        settled_frames += 1;
+                        if settled_frames == 2 {
+                            settled = true;
+                            break;
+                        }
+                    } else {
+                        settled_frames = 0;
+                    }
+                }
+                assert!(settled, "map {map_id} did not settle within 32 production frames");
+            }
+            force_qjs_gc(&bench.rt.guest);
+            let (used, _, _) = qjs_memory(&bench.rt.guest);
+            heap_after_gc.push(used.max(0) as usize);
+            println!(
+                "WORLD_PASS viewport={viewport} pass={pass} unique_maps={} route_entries={} maps={} worlds={} tables={} repo={} shards={}/{}/{} npc={} stream_textures={} terrain_nodes={} animated_nodes={} native_nodes={} live_textures={} texture_slots={} heap_peak={} heap_after_gc={}",
+                unique.len(), route.len(), peak.maps, peak.worlds, peak.tables, peak.repo_cached,
+                peak.ground_shards, peak.upper_shards, peak.animated_shards, peak.npc_refs,
+                peak.stream_textures, peak.terrain_nodes, peak.animated_nodes, peak.native_nodes,
+                peak.live_textures, peak.texture_slots, peak.heap_bytes,
+                heap_after_gc.last().unwrap(),
+            );
+            peaks.push(peak);
+        }
+
+        report(&viewport, "world-stress-cross-map", &cross_map_frames);
+        report(&viewport, "world-stress-render", &timed_frames);
+        report(&viewport, "world-stress-direct-control", &direct_entry_frames);
+        assert_frame_budget("world-stress-cross-map", &cross_map_frames, 50.0);
+        assert_frame_budget("world-stress-render", &timed_frames, 50.0);
+        let first = &peaks[0];
+        let revisit = &peaks[1];
+        for (label, second, initial) in [
+            ("parsed maps", revisit.maps, first.maps),
+            ("compiled worlds", revisit.worlds, first.worlds),
+            ("passage tables", revisit.tables, first.tables),
+            ("repository entries", revisit.repo_cached, first.repo_cached),
+            ("ground shards", revisit.ground_shards, first.ground_shards),
+            ("upper shards", revisit.upper_shards, first.upper_shards),
+            ("animated shards", revisit.animated_shards, first.animated_shards),
+            ("NPC refs", revisit.npc_refs, first.npc_refs),
+            ("stream textures", revisit.stream_textures, first.stream_textures),
+            ("terrain nodes", revisit.terrain_nodes, first.terrain_nodes),
+            ("animated nodes", revisit.animated_nodes, first.animated_nodes),
+            ("native nodes", revisit.native_nodes, first.native_nodes),
+            ("live textures", revisit.live_textures, first.live_textures),
+            ("texture slots", revisit.texture_slots, first.texture_slots),
+        ] {
+            assert_peak_not_greater(label, second, initial);
+        }
+        let heap_slack = std::env::var("G6_WORLD_HEAP_SLACK")
+            .ok()
+            .and_then(|value| value.parse().ok())
+            .unwrap_or(131_072usize);
+        assert!(
+            heap_after_gc[1] <= heap_after_gc[0] + heap_slack,
+            "revisit QuickJS heap grew beyond plateau slack: first={} second={} slack={heap_slack}",
+            heap_after_gc[0], heap_after_gc[1],
+        );
+        println!(
+            "WORLD_PLATEAU viewport={viewport} unique_visits={} route_entries={} prefetched_crossings={} diagnostic_control_entries={} revisit_growth nodes={} textures={} ground={} upper={} animated={} npc={} heap={}B slack={}B",
+            maps.len() * 2, route.len() * 2, prefetched_crossings, direct_entry_frames.len(),
+            revisit.native_nodes.saturating_sub(first.native_nodes),
+            revisit.texture_slots.saturating_sub(first.texture_slots),
+            revisit.ground_shards.saturating_sub(first.ground_shards),
+            revisit.upper_shards.saturating_sub(first.upper_shards),
+            revisit.animated_shards.saturating_sub(first.animated_shards),
+            revisit.npc_refs.saturating_sub(first.npc_refs),
+            heap_after_gc[1] as i64 - heap_after_gc[0] as i64,
+            heap_slack,
         );
         let _ = std::fs::remove_dir_all(data);
     }

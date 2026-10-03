@@ -23,6 +23,7 @@ import { availableMapIds, buildProject, G6_IMPORT_OPTIONS } from "./importer/pro
 import { applyTerrain, DEFAULT_TUXEMON_SRC, writeTerrain } from "./importer/terrain.ts";
 import { buildWarpIndex } from "./importer/warp.ts";
 import { buildDemoData, demoIndexSource } from "./importer/demo-data.ts";
+import { splitGameProjectMaps } from "./importer/map-shards.ts";
 
 // Tests and determinism checks can cook into a disposable root without
 // touching the maintained project tree. Source modules still come from this
@@ -402,13 +403,10 @@ writeFileSync(
 
 // Keep the inline document as an out-of-bundle parity oracle, while the game
 // imports only the compact shell. Prefer the reversible rpgkit-map/1
-// transport whenever it is smaller (all current maps qualify), while keeping
-// a safe JSON fallback for future maps. Entries are addressed by the exact
-// path in shell.mapIndex.
-const split = splitProjectMaps(project, {
-  shellEntry: "project-shell.json",
-  entryEncoding: "auto",
-});
+// transport whenever its decoder remains a bounded QuickJS preparation
+// stage. Very large compact entries use canonical JSON to avoid a decode
+// spike; entries are addressed by the exact path in shell.mapIndex.
+const split = splitGameProjectMaps(project);
 const canonicalMapBytes = splitProjectMaps(project, {
   shellEntry: "project-shell.json",
   entryEncoding: "json",

@@ -3500,8 +3500,8 @@
     "file": "dist/maps/spyder_dragonscave.rkm"
   },
   {
-    "key": "maps/spyder_dryadsgrove.rkm",
-    "file": "dist/maps/spyder_dryadsgrove.rkm"
+    "key": "maps/spyder_dryadsgrove.json",
+    "file": "dist/maps/spyder_dryadsgrove.json"
   },
   {
     "key": "maps/spyder_flower_center.rkm",
@@ -3692,8 +3692,8 @@
     "file": "dist/maps/spyder_routeb.rkm"
   },
   {
-    "key": "maps/spyder_routec.rkm",
-    "file": "dist/maps/spyder_routec.rkm"
+    "key": "maps/spyder_routec.json",
+    "file": "dist/maps/spyder_routec.json"
   },
   {
     "key": "maps/spyder_routed.rkm",
@@ -3860,8 +3860,8 @@
     "file": "dist/maps/tabathas.rkm"
   },
   {
-    "key": "maps/test_npcs.rkm",
-    "file": "dist/maps/test_npcs.rkm"
+    "key": "maps/test_npcs.json",
+    "file": "dist/maps/test_npcs.json"
   },
   {
     "key": "maps/timber_town.rkm",

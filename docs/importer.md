@@ -13,9 +13,12 @@ into connected components; diagnostic gaps, rejected contacts and source
 text stay in `dist/world-index.json`. The source index `contentHash` becomes
 the layout's `topologyHash`. Because the splitter retains this project-level
 field in `project-shell.json`, it is covered by `mapManifestHash` without
-changing any map shard. Pocket RPG Kit provides an opt-in multi-map terrain
-renderer, but this game does not enable it yet; the transfer interpreter also
-does not perform seamless handoff yet.
+changing any map shard. Placed outdoor maps opt into Pocket RPG Kit's
+component-bounded terrain renderer: neighbouring ground, upper layers and
+animated tiles can be visible across a seam, while its working-set driver
+bounds parsed and compiled maps and the game evicts terrain and NPC-art
+provider entries outside the corresponding visible/active sets. The transfer
+interpreter still does not perform seamless handoff.
 
 ## Source checkout
 

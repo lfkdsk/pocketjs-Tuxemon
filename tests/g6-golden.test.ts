@@ -41,6 +41,12 @@ const manifest = JSON.parse(readFileSync(join(ROOT, "data/g6-goldens.json"), "ut
 };
 const project = JSON.parse(readFileSync(join(ROOT, "dist/project.json"), "utf8")) as {
   maps: { id: string; width: number; height: number }[];
+  worldLayout?: {
+    components: Array<{
+      bounds: { minTileX: number; minTileY: number; maxTileX: number; maxTileY: number };
+      placements: Array<{ mapId: string; originTileX: number; originTileY: number }>;
+    }>;
+  };
 };
 
 function load(name: string) {
@@ -75,10 +81,18 @@ function matchingOpaquePixels(frame: GoldenFrame, mark: PaintMark): { opaque: nu
   const target = load(frame.name).image;
   const sprite = decodePng(new Uint8Array(readFileSync(join(ROOT, mark.image))), mark.image);
   const map = project.maps.find((candidate) => candidate.id === frame.map)!;
-  const offsetX = Math.max(0, Math.floor((manifest.width - map.width * 16) / 2));
-  const offsetY = Math.max(0, Math.floor((manifest.height - map.height * 16) / 2));
-  const x0 = offsetX + mark.pixel[0] - frame.camera[0];
-  const y0 = offsetY + mark.pixel[1] - frame.camera[1] + 16 - mark.height;
+  const component = project.worldLayout?.components.find((candidate) =>
+    candidate.placements.some((placement) => placement.mapId === frame.map)
+  );
+  const placement = component?.placements.find((candidate) => candidate.mapId === frame.map);
+  const componentW = component ? (component.bounds.maxTileX - component.bounds.minTileX) * 16 : map.width * 16;
+  const componentH = component ? (component.bounds.maxTileY - component.bounds.minTileY) * 16 : map.height * 16;
+  const offsetX = Math.max(0, Math.floor((manifest.width - componentW) / 2));
+  const offsetY = Math.max(0, Math.floor((manifest.height - componentH) / 2));
+  const worldX = mark.pixel[0] + (placement?.originTileX ?? 0) * 16;
+  const worldY = mark.pixel[1] + (placement?.originTileY ?? 0) * 16;
+  const x0 = offsetX + worldX - frame.camera[0];
+  const y0 = offsetY + worldY - frame.camera[1] + 16 - mark.height;
   let opaque = 0;
   let matching = 0;
   for (let y = 0; y < sprite.height; y++) for (let x = 0; x < sprite.width; x++) {
@@ -132,8 +146,8 @@ describe("G6 maintained keyframes", () => {
 
   test("Paper Town shows grass, roads, forest, the blue mart, and a visible player", () => {
     const { entry, image } = load("paper-town");
-    expect(count(image.rgba, image.width, 0, 0, 480, 272, exact(64, 176, 128))).toBeGreaterThan(40_000);
-    expect(count(image.rgba, image.width, 0, 0, 480, 272, exact(216, 200, 128))).toBeGreaterThan(20_000);
+    expect(count(image.rgba, image.width, 0, 0, 480, 272, exact(64, 176, 128))).toBeGreaterThan(35_000);
+    expect(count(image.rgba, image.width, 0, 0, 480, 272, exact(216, 200, 128))).toBeGreaterThan(18_000);
     expect(count(image.rgba, image.width, 250, 115, 420, 240, exact(0, 107, 219))).toBeGreaterThan(1_500);
     expect(count(image.rgba, image.width, 0, 0, 110, 220, exact(48, 96, 56))).toBeGreaterThan(1_000);
     const pixels = matchingOpaquePixels(entry, entry.player);
@@ -143,10 +157,13 @@ describe("G6 maintained keyframes", () => {
 
   test("Route 1 shows water, crop rows, forest, and the 16x32 player", () => {
     const { image } = load("route-1");
-    expect(count(image.rgba, image.width, 0, 0, 480, 272, exact(64, 176, 128))).toBeGreaterThan(55_000);
-    expect(count(image.rgba, image.width, 0, 0, 90, 180, exact(61, 106, 179))).toBeGreaterThan(6_000);
-    expect(count(image.rgba, image.width, 80, 0, 400, 230, exact(56, 80, 0))).toBeGreaterThan(6_000);
-    expect(count(image.rgba, image.width, 216, 232, 248, 272, PLAYER_BLUE)).toBeGreaterThan(80);
+    expect(count(image.rgba, image.width, 0, 0, 480, 272, exact(64, 176, 128))).toBeGreaterThan(45_000);
+    expect(count(image.rgba, image.width, 0, 0, 90, 180, exact(61, 106, 179))).toBeGreaterThan(3_000);
+    expect(count(image.rgba, image.width, 80, 0, 440, 160, exact(56, 80, 0))).toBeGreaterThan(3_900);
+    const frame = manifest.frames.find((candidate) => candidate.name === "route-1")!;
+    const pixels = matchingOpaquePixels(frame, frame.player);
+    expect(pixels.opaque).toBeGreaterThan(80);
+    expect(pixels.matching).toBe(pixels.opaque);
   });
 });
 

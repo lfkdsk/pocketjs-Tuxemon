@@ -81,7 +81,7 @@ terrain chunks + project conversion + characters + battle data + sharding
    |
    +--> committed: data/*.json, assets/**, ui/*-assets.ts,
    |                pak.json, images.json, sprites.json, reports/G1-coverage.md
-   +--> gitignored: dist/project-shell.json, dist/maps/*.rkm,
+   +--> gitignored: dist/project-shell.json, dist/maps/*.{rkm,json},
                     dist/battle-art/*.pkts, dist/battle/*,
                     dist/animated/*, dist/npc-src/*, dist/import-report.json
    |
@@ -95,8 +95,9 @@ The import runs in this order: terrain, project conversion (all 263 maps,
 events, NPCs, dialogue, shops, world index), terrain merge into the project,
 character cook, battle data and art, NPC-src sharding, animated atlases, map
 sharding, manifests, dist reports, and finally the coverage report and the
-asset report. The map splitter chooses canonical JSON or `rpgkit-map/1` per
-entry, whichever is smaller (the current 263 maps all choose compact). Battle
+asset report. The game keeps `rpgkit-map/1` entries up to 128 KiB and uses
+canonical JSON above that QuickJS decode-latency cap (currently 260 compact
+and 3 canonical entries). Battle
 images are normalized to the existing RGBA4444 display precision, then stored
 as deterministic single-tile CLUT8+PackBits entries; the PNG copies are not
 registered as eager runtime images. Two full imports into isolated roots must
