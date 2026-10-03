@@ -20,6 +20,7 @@ import type {
   GameViewDemoStepResult,
   GameViewSessionHost,
 } from "../vendor/pocket-rpgkit/src/ui/demo-contract.ts";
+import { langSwitchMechanism, type Lang } from "./language.ts";
 import {
   describeLoadError,
   detectSlotStore,
@@ -27,9 +28,12 @@ import {
   importSaveCode,
   listSlots,
   loadSlot,
+  peekSaveCode,
+  peekSlot,
   restoreSave,
   SaveRefused,
   saveSlot,
+  snapshotLang,
   takeSaveSnapshot,
   type SlotListing,
   type SlotStore,
@@ -48,6 +52,9 @@ export interface SaveMenuOptions {
   /** True while another menu (the demo menu) owns the screen; the open
    * button is ignored then. */
   suspended?: () => boolean;
+  /** Active content language. A save written in the other language is
+   * refused with a clear message instead of silently mixing content. */
+  lang?: Lang;
 }
 
 /** Test and tooling handle: the live menu publishes itself here. */
@@ -68,6 +75,25 @@ declare global {
 
 function message(title: string, body: string, back: MenuState): MenuState {
   return { kind: "message", title, body, back };
+}
+
+/** The prompt shown when a save was written in the other language build.
+ *  Says which language the save is in and how to switch to it. */
+function languageMismatchMessage(saveLang: Lang, back: MenuState): MenuState {
+  const otherEn = saveLang === "zh_CN" ? "Chinese (中文)" : "English";
+  const otherZh = saveLang === "zh_CN" ? "中文" : "英文";
+  const otherLabel = saveLang === "zh_CN" ? "中文" : "English";
+  const howEn = langSwitchMechanism() === "reload"
+    ? `Press R, pick ${otherLabel}, then load it again.`
+    : `Switch the language to ${otherLabel} and restart the game, then load it again.`;
+  const howZh = langSwitchMechanism() === "reload"
+    ? `按 R 选择${otherLabel}后重新读取。`
+    : `切换到${otherLabel}并重启游戏后重新读取。`;
+  return message(
+    "LANGUAGE MISMATCH / 语言不匹配",
+    `That save is from the ${otherEn} build. ${howEn} / 该存档来自${otherZh}版，${howZh}`,
+    back,
+  );
 }
 
 export function channelTitle(slots: SlotStore | null): string {
@@ -122,7 +148,7 @@ export function createSaveMenuRuntime(
   let keyboardClosed = false;
 
   const refreshSlots = (): void => {
-    setSlotInfo(listSlots(slots, content));
+    setSlotInfo(listSlots(slots, content, options.lang ?? "en_US"));
   };
   const showToast = (text: string): void => {
     setToast(text);
@@ -135,6 +161,11 @@ export function createSaveMenuRuntime(
 
   /** Restore and present a decoded save; false while its map is loading. */
   const load = (snapshot: SaveSnapshot, label: string, back: MenuState): boolean => {
+    const saveLang = snapshotLang(snapshot);
+    if (options.lang && saveLang !== options.lang) {
+      setMenu(languageMismatchMessage(saveLang, back));
+      return false;
+    }
     try {
       const restored = restoreSave(host.session, snapshot);
       host.replaceState(restored, snapshot.held);
@@ -176,6 +207,19 @@ export function createSaveMenuRuntime(
     onCommit(text) {
       keyboardClosed = true;
       const back: MenuState = { kind: "root", index: hasSlots ? 3 : 1 };
+      // Same language pre-check as the slot path: a foreign-language save
+      // code has a different map manifest and must show the mismatch prompt
+      // instead of the "another build" refusal.
+      try {
+        const peeked = peekSaveCode(text);
+        if (options.lang && snapshotLang(peeked) !== options.lang) {
+          setMenu(languageMismatchMessage(snapshotLang(peeked), back));
+          return;
+        }
+      } catch (error) {
+        setMenu(message("CAN'T LOAD THAT CODE", describeLoadError(error), back));
+        return;
+      }
       try {
         const snapshot = importSaveCode(host.session, text);
         // replaceState outside a step: GameView presents it next frame.
@@ -211,6 +255,19 @@ export function createSaveMenuRuntime(
       }
       case "load-slot": {
         const back: MenuState = { kind: "slots-load", index: command.slot - 1 };
+        // Peek at the save's language before the content check: a save from
+        // the other language build has a different map manifest and would
+        // otherwise be refused as "another build" before the prompt.
+        try {
+          const peeked = peekSlot(slots!, command.slot);
+          if (options.lang && snapshotLang(peeked) !== options.lang) {
+            setMenu(languageMismatchMessage(snapshotLang(peeked), back));
+            return false;
+          }
+        } catch (error) {
+          setMenu(message(`CAN'T LOAD SLOT ${command.slot}`, describeLoadError(error), back));
+          return false;
+        }
         let snapshot: SaveSnapshot;
         try {
           snapshot = loadSlot(slots!, command.slot, content);

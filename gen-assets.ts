@@ -19,7 +19,7 @@ import { cookCharacters } from "./importer/characters.ts";
 import { appendBattleDbPakEntry, writeBattleArtifacts } from "./importer/battle.ts";
 import { coverageMarkdown, jsonBytes } from "./importer/index.ts";
 import { decodePng } from "./importer/png.ts";
-import { availableMapIds, buildProject, G6_IMPORT_OPTIONS } from "./importer/project.ts";
+import { availableMapIds, buildProject, categorizeMissingKeys, G6_IMPORT_OPTIONS, importL10nGaps, setImportLang } from "./importer/project.ts";
 import { applyTerrain, DEFAULT_TUXEMON_SRC, writeTerrain } from "./importer/terrain.ts";
 import { buildWarpIndex } from "./importer/warp.ts";
 import { buildDemoData, demoIndexSource } from "./importer/demo-data.ts";
@@ -238,6 +238,9 @@ const screenLayers: Record<string, GameScreenLayerAssets> = {
 };
 const battleScope = process.env.BATTLE_DB_SCOPE === "full" ? "full" : "spyder";
 const battle = writeBattleArtifacts({ outputRoot: ROOT, scope: battleScope });
+// zh_CN battle data: names and descriptions from the merged Chinese catalog.
+// Art cooking is language-neutral and shared (rewritten byte-identically).
+const battleZh = writeBattleArtifacts({ outputRoot: ROOT, scope: battleScope, lang: "zh_CN" });
 
 // WX1: procedural weather particle textures. Deterministic by construction;
 // committed under assets/weather/ like the other baked art. The path literals
@@ -424,6 +427,77 @@ const mapPakEntries: PakManifestEntry[] = split.entries.map((entry) => ({
   key: entry.meta.entry,
   file: `dist/${entry.path}`,
 }));
+
+// ---------------------------------------------------------------------------
+// zh_CN variant: the same world with the merged Chinese catalog (upstream
+// zh_CN + the project supplement + en_US fallback). Only text-bearing
+// artifacts differ — project shell, map shards, battle shell and battle
+// shards. Terrain, sprites, audio and animations are the en build's.
+setImportLang("zh_CN");
+const zhImported = buildProject(
+  availableMapIds(),
+  G6_IMPORT_OPTIONS,
+  Object.fromEntries(terrain.fragment.maps.map((map) => [map.id, map.surfaceLabels])),
+);
+let zhProject = applyTerrain(zhImported.project, terrain.fragment);
+zhProject = {
+  ...zhProject,
+  sheets: zhProject.sheets.filter((sheet) => sheet.id !== "tux"),
+  maps: zhProject.maps.map((map) => ({ ...map, sheets: map.sheets?.filter((sheet) => sheet !== "tux") })),
+};
+const zhCharacters = await cookCharacters(zhProject, { outputRoot: ROOT });
+zhProject = zhCharacters.project;
+const zhSplit = splitProjectMaps(zhProject, {
+  shellEntry: "project-shell.zh_CN.json",
+  entryEncoding: "auto",
+  mapEntry: (id) => `maps-zh/${id}.rkm`,
+});
+const mapsZhDir = join(DIST, "maps-zh");
+rmSync(mapsZhDir, { recursive: true, force: true });
+mkdirSync(mapsZhDir, { recursive: true });
+for (const entry of zhSplit.entries) {
+  const path = join(DIST, entry.path);
+  mkdirSync(dirname(path), { recursive: true });
+  writeFileSync(path, entry.bytes);
+}
+const mapZhPakEntries: PakManifestEntry[] = zhSplit.entries.map((entry) => ({
+  key: entry.meta.entry,
+  file: `dist/${entry.path}`,
+}));
+writeFileSync(join(DIST, "project-shell.zh_CN.json"), zhSplit.shellText);
+assertShellManifestFresh(JSON.parse(readFileSync(join(DIST, "project-shell.zh_CN.json"), "utf8")));
+writeFileSync(join(DIST, "project.zh_CN.json"), jsonBytes(zhProject));
+writeFileSync(join(DIST, "import-report.zh_CN.json"), jsonBytes(zhImported.report));
+// The CJK subset baker scans this file for every character the zh build
+// displays (map and battle shards are not imported by the bundle, so the
+// baker's module scan does not see them).
+const zhTextParts: string[] = [
+  zhSplit.shellText,
+  ...zhSplit.entries.map((entry) => new TextDecoder().decode(entry.bytes)),
+  readFileSync(join(DIST, "battle-runtime-shell.zh_CN.json"), "utf8"),
+];
+for (const entry of battleZh.battleRepository.pakEntries) {
+  zhTextParts.push(readFileSync(join(ROOT, entry.file), "utf8"));
+}
+writeFileSync(join(DIST, "zh-text.txt"), zhTextParts.join("\n"));
+// Merged fallback accounting: project lookups plus battle name/description
+// lookups that fell back to en_US or missed every catalog. Missing keys are
+// categorized by where they were looked up (real dialog / choice value /
+// name lookup); none of them exist in en_US either, so the English build
+// shows the raw key for the same lines.
+const zhGaps = (() => {
+  const project = importL10nGaps();
+  const battle = battleZh.l10nGaps ?? { fallbackKeys: [], missingKeys: [] };
+  const missingKeys = [...new Set([...project.missingKeys, ...battle.missingKeys])].sort();
+  return {
+    fallbackKeys: [...new Set([...project.fallbackKeys, ...battle.fallbackKeys])].sort(),
+    missingKeys,
+    missingKeyCategories: categorizeMissingKeys(missingKeys),
+  };
+})();
+writeFileSync(join(DIST, "zh-fallbacks.json"), jsonBytes(zhGaps));
+writeFileSync(join(ROOT, "reports/G1-coverage.zh_CN.md"), coverageMarkdown(zhImported.report));
+setImportLang("en_US");
 // Demo menu data: the 172k-frame mainline tape (nibble-packed) and the 13
 // chapter snapshots become pak entries read on demand; only the tiny chapter
 // index is inline in the bundle (ui/demo-index.ts). The baked chapter data
@@ -459,8 +533,10 @@ const audioBytes = Object.values(audioManifest.files).reduce((sum, f) => sum + f
 const pakEntries = [
   ...pakManifest(terrain.entries),
   ...mapPakEntries,
+  ...mapZhPakEntries,
   ...battle.rawPakEntries,
   ...battle.battleRepository.pakEntries,
+  ...battleZh.battleRepository.pakEntries,
   ...animatedPakEntries,
   ...npcSrcPakEntries,
   ...terrain.streamPakEntries,
@@ -479,7 +555,13 @@ const allImages = {
   ...weatherImages,
 };
 writeFileSync(join(ROOT, "images.json"), jsonBytes(allImages));
-const allPakEntries = appendBattleDbPakEntry(pakEntries)
+// The CJK subset's OFL license ships inside the pak (the cjk-font baker adds
+// the same row; keep it here so an import rewrite does not drop it). Present
+// only once fonts/ has been baked and committed.
+const cjkLicenseEntries: PakManifestEntry[] = existsSync(join(ROOT, "fonts/LICENSE-NotoSansCJK.txt"))
+  ? [{ key: "license:NotoSansCJK.txt", file: "fonts/LICENSE-NotoSansCJK.txt" }]
+  : [];
+const allPakEntries = appendBattleDbPakEntry([...pakEntries, ...cjkLicenseEntries])
   .sort((a, b) => a.key < b.key ? -1 : a.key > b.key ? 1 : 0);
 writeFileSync(join(ROOT, "pak.json"), JSON.stringify(allPakEntries, null, 2) + "\n");
 writeFileSync(join(DIST, "project.json"), jsonBytes(project));

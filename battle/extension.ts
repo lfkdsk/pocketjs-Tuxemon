@@ -149,7 +149,14 @@ export interface TuxemonExtensionRuntimeOptions {
   /** Imported weather slugs and deterministic duration bounds. */
   weatherSchedule?: WeatherSchedule;
   hemisphere?: Hemisphere;
+  /** Content language the save is written with; recorded in the encoded ext
+   *  so a load in the other language can be refused with a clear message. */
+  lang?: GameLang;
 }
+
+/** The game's content languages. Kept in the battle layer so the save codec
+ *  and the runtime share one type without a UI dependency. */
+export type GameLang = "en_US" | "zh_CN";
 
 export interface BattleDbProvider {
   load(): BattleDb;
@@ -2574,6 +2581,7 @@ export function createTuxemonExtensions(
       encode: (value) => ({
         format: TUXEMON_EXT_SAVE_FORMAT,
         state: tuxemonExtensionState(value, resolveBattleDb(source), weatherSlugs) as unknown as JsonValue,
+        ...(options.lang ? { lang: options.lang } : {}),
       }),
       decode: (value) => {
         if (value === null) return initial;

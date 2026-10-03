@@ -5,8 +5,10 @@ import { tmpdir } from "node:os";
 import {
   GLOSSARY_TSV,
   GLOSSARY_CATEGORIES,
+  OVERRIDES_PO,
   SUPPLEMENT_PO,
   loadGlossary,
+  loadOverrideAnnotations,
   countEscapedNewlines,
   extractPlaceholders,
   samePlaceholderSet,
@@ -23,9 +25,12 @@ import {
   checkCoverage,
   checkEmpty,
   checkNoOverlap,
+  checkOverrides,
+  checkReviewManifest,
   checkPlaceholders,
   checkResidualEnglish,
   checkTerminology,
+  checkExceptionReasons,
   checkUpstreamConsistency,
   englishWhitelist,
   isEnforceableTerm,
@@ -39,13 +44,35 @@ function fixture(
   glossary: GlossaryEntry[] = [],
   upstream: Record<string, string> = {},
   exceptions: string[] = [],
+  overrides: Record<string, string> = {},
 ): L10nData {
+  const enMap = new Map(Object.entries(en));
+  const upstreamMap = new Map(Object.entries(upstream));
+  const supplementMap = new Map(Object.entries(supplement));
+  const overrideMap = new Map(Object.entries(overrides));
+  const annotations = new Map(Object.keys(overrides).map((id) => [id, {
+    category: "mistranslation",
+    reason: "fixture correction",
+    en: en[id],
+    line: 1,
+    duplicateFields: [],
+  }]));
   return {
-    en: new Map(Object.entries(en)),
-    zhUpstream: new Map(Object.entries(upstream)),
-    supplement: new Map(Object.entries(supplement)),
+    en: enMap,
+    zhUpstream: upstreamMap,
+    overrides: overrideMap,
+    supplement: supplementMap,
+    merged: new Map([...supplementMap, ...upstreamMap, ...overrideMap]),
+    overrideAnnotations: { entries: annotations, duplicateIds: [] },
+    review: {
+      entries: new Map([...upstreamMap.keys()].map((id) => [id, overrideMap.has(id)
+        ? { msgid: id, category: "mistranslation" as const, action: "override" as const, reason: "fixture", translation: overrideMap.get(id) }
+        : { msgid: id, category: "ok" as const, action: "keep" as const }])),
+      duplicateIds: [],
+      parseErrors: [],
+    },
     glossary: glossary.map((g) => ({ ...g })),
-    exceptions: new Set(exceptions),
+    exceptions: new Map(exceptions.map((key) => [key, "fixture reason"])),
   };
 }
 
@@ -194,6 +221,42 @@ describe("check: no-overlap", () => {
   });
 });
 
+describe("check: overrides", () => {
+  test("an annotated upstream correction passes", () => {
+    const d = fixture({ a: "Current" }, {}, [], { a: "旧译" }, [], { a: "新译" });
+    expect(checkOverrides(d).ok).toBe(true);
+  });
+  test("a key absent from upstream fails", () => {
+    const d = fixture({ a: "Current" }, {}, [], {}, [], { a: "新译" });
+    const result = checkOverrides(d);
+    expect(result.ok).toBe(false);
+    expect(result.details.join()).toContain("absent from upstream");
+  });
+  test("a stale English snapshot fails", () => {
+    const d = fixture({ a: "Current" }, {}, [], { a: "旧译" }, [], { a: "新译" });
+    const annotations = new Map(d.overrideAnnotations.entries);
+    annotations.set("a", { ...annotations.get("a")!, en: "Older source" });
+    const changed = { ...d, overrideAnnotations: { entries: annotations, duplicateIds: [] } };
+    expect(checkOverrides(changed).ok).toBe(false);
+    expect(checkOverrides(changed).details.join()).toContain("snapshot is stale");
+  });
+});
+
+describe("check: exhaustive upstream review", () => {
+  test("every upstream entry is represented and override rows agree", () => {
+    const d = fixture({ a: "A", b: "B" }, {}, [], { a: "甲", b: "乙" }, [], { b: "新乙" });
+    expect(checkReviewManifest(d).ok).toBe(true);
+  });
+  test("missing rows and unfixed mistranslations fail", () => {
+    const d = fixture({ a: "A" }, {}, [], { a: "甲" });
+    const entries = new Map(d.review.entries);
+    entries.set("a", { msgid: "a", category: "mistranslation", action: "keep", reason: "wrong" });
+    expect(checkReviewManifest({ ...d, review: { ...d.review, entries } }).ok).toBe(false);
+    entries.delete("a");
+    expect(checkReviewManifest({ ...d, review: { ...d.review, entries } }).details.join()).toContain("missing review row");
+  });
+});
+
 describe("check: no-empty", () => {
   test("empty msgstr fails", () => {
     const d = fixture({ a: "A", b: "B" }, { a: "甲", b: "  " });
@@ -265,6 +328,10 @@ describe("check: terminology", () => {
     const d = fixture({ a: "Welcome to Cotton Town" }, { a: "欢迎来到暖棉镇" }, [...GLOSS]);
     expect(checkTerminology(d).ok).toBe(true);
   });
+  test("compares against the punctuation-normalized glossary rendering", () => {
+    const gloss = [{ en: "TM: Avalanche", zh: "招式学习器:雪崩", category: "item", source: "upstream" }] as GlossaryEntry[];
+    expect(checkTerminology(fixture({ a: "TM: Avalanche" }, { a: "招式学习器：雪崩" }, gloss)).ok).toBe(true);
+  });
   test("case-sensitive: lowercase common word is not the term", () => {
     const d = fixture({ a: "a bomb scare" }, { a: "一场惊吓" }, [...GLOSS]);
     expect(checkTerminology(d).ok).toBe(true);
@@ -285,6 +352,33 @@ describe("check: terminology", () => {
     const r = checkTerminology(fixture(en, { a: "从超市给我带些捕捉器回来" }, gloss));
     expect(r.ok).toBe(false);
     expect(r.details.join()).toContain("Tuxeball");
+  });
+  test("checks the final merged value, including an override of upstream", () => {
+    const en = { a: "Welcome to Cotton Town" };
+    const bad = fixture(en, {}, [...GLOSS], { a: "欢迎来到棉花镇" });
+    expect(checkTerminology(bad).ok).toBe(false);
+    const fixed = fixture(en, {}, [...GLOSS], { a: "欢迎来到棉花镇" }, [], { a: "欢迎来到暖棉镇" });
+    expect(checkTerminology(fixed).ok).toBe(true);
+  });
+  test("a longer glossary phrase suppresses a conflicting nested term", () => {
+    const gloss = [
+      { en: "Imperial", zh: "英制", category: "menu", source: "upstream" },
+      { en: "Imperial Potion", zh: "皇室治疗药水", category: "item", source: "upstream" },
+    ] as GlossaryEntry[];
+    expect(checkTerminology(fixture(
+      { a: "Imperial Potion" },
+      { a: "皇室治疗药水" },
+      gloss,
+    )).ok).toBe(true);
+  });
+});
+
+describe("check: exception reasons", () => {
+  test("an explicit reason passes and a blank reason fails", () => {
+    const d = fixture({ a: "Spyder is here" }, { a: "有人来了" }, [...GLOSS], {}, ["a\tSpyder"]);
+    expect(checkExceptionReasons(d).ok).toBe(true);
+    d.exceptions.set("a\tSpyder", "");
+    expect(checkExceptionReasons(d).ok).toBe(false);
   });
 });
 
@@ -481,6 +575,19 @@ describe("gettext header", () => {
     // provenance/license live in "#" comments, not in a broken X-Comment field
     expect(comments.length).toBeGreaterThan(0);
     expect(comments.join("\n")).toContain("NOT the Tuxemon");
+  });
+
+  test("overrides.po has standard metadata and per-entry annotations", () => {
+    const { fields } = strictParseHeader(OVERRIDES_PO);
+    expect(fields["Language"]).toBe("zh_CN");
+    const parsed = loadOverrideAnnotations();
+    expect(parsed.duplicateIds).toEqual([]);
+    expect(parsed.entries.size).toBe(parsePo(OVERRIDES_PO).size);
+    for (const meta of parsed.entries.values()) {
+      expect(meta.category).toBeTruthy();
+      expect(meta.reason).toBeTruthy();
+      expect(meta.en).toBeDefined();
+    }
   });
 
   test("writePo emits \\n-terminated fields and # comments", () => {

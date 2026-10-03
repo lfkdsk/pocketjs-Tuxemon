@@ -17,9 +17,11 @@ import {
   resolveBattleDb,
   tuxemonExtensionState,
   type BattleDbSource,
+  type GameLang,
   type TuxemonExtensionState,
 } from "./extension.ts";
 import { battleDbToTuxemonBattleDb } from "./from-battle-db.ts";
+import { DAYCARE_LABELS_ZH } from "./scene-labels-zh.ts";
 import { civilFromEpochDay } from "./time-weather.ts";
 import type { DaycareExtensionState, SpawnedMonsterSnapshot, TuxemonBattleDb } from "./types.ts";
 
@@ -143,9 +145,9 @@ const DAYCARE_LABELS: DaycareLabels = {
   neuter: "Neuter",
 };
 
-function labels(raw: JsonValue | undefined): DaycareLabels {
+function labels(raw: JsonValue | undefined, lang: GameLang = "en_US"): DaycareLabels {
   const source = record(raw);
-  const result = { ...DAYCARE_LABELS };
+  const result = { ...(lang === "zh_CN" ? DAYCARE_LABELS_ZH : DAYCARE_LABELS) };
   for (const key of Object.keys(result) as Array<keyof DaycareLabels>) {
     result[key] = text(source[key], result[key]);
   }
@@ -385,7 +387,7 @@ function commit(state: Readonly<DaycareSceneState>): JsonValue {
   return packTuxemonExtensionState(next);
 }
 
-export function createDaycareSceneRules(source: BattleDbSource, names: Names): SceneRules {
+export function createDaycareSceneRules(source: BattleDbSource, names: Names, lang: GameLang = "en_US"): SceneRules {
   // A production repository returns the same lazy database object for its
   // lifetime. Convert it once per registered scene rule, never per input.
   let cachedSource: ReturnType<typeof resolveBattleDb> | null = null;
@@ -404,7 +406,7 @@ export function createDaycareSceneRules(source: BattleDbSource, names: Names): S
       const state: DaycareSceneState = {
         kind: "daycare",
         base: ext,
-        labels: labels(record(rawArgs).labels),
+        labels: labels(record(rawArgs).labels, lang),
         party: [...current.party],
         kennel: [...current.kennel],
         ...(current.daycare === undefined ? {} : { daycare: structuredClone(current.daycare) }),

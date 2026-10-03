@@ -19,10 +19,12 @@ import {
   resolveBattleDb,
   tuxemonExtensionState,
   type BattleDbSource,
+  type GameLang,
   type MonsterBox,
   type TuxemonExtensionState,
 } from "./extension.ts";
 import { battleDbToTuxemonBattleDb } from "./from-battle-db.ts";
+import { MONSTER_SHOP_LABELS_ZH, PC_LABELS_ZH, TRADE_MESSAGE_ZH } from "./scene-labels-zh.ts";
 import { spawnMonsterWithRandom } from "./spawn.ts";
 import type { SpawnedMonsterSnapshot } from "./types.ts";
 
@@ -231,9 +233,9 @@ export function pcPartyEntryLocked(state: Readonly<PcSceneState>, iid: string): 
   return conscious.length === 1 && conscious[0] === iid;
 }
 
-function pcLabels(raw: JsonValue | undefined): PcLabels {
+function pcLabels(raw: JsonValue | undefined, lang: GameLang = "en_US"): PcLabels {
   const source = record(raw);
-  const labels = { ...PC_LABELS };
+  const labels = { ...(lang === "zh_CN" ? PC_LABELS_ZH : PC_LABELS) };
   for (const key of Object.keys(labels) as (keyof PcLabels)[]) {
     labels[key] = text(source[key], labels[key]);
   }
@@ -440,11 +442,11 @@ function pcCommit(state: Readonly<PcSceneState>): JsonValue {
   return packTuxemonExtensionState(next);
 }
 
-function pcRules(names: Names): SceneRules {
+function pcRules(names: Names, lang: GameLang = "en_US"): SceneRules {
   return {
     start(ext, rawArgs) {
       const args = record(rawArgs);
-      const labels = pcLabels(args.labels);
+      const labels = pcLabels(args.labels, lang);
       const boxNames = record(args.boxNames);
       const current = tuxemonExtensionState(ext);
       // Opening a PC creates the main Kennel box (upstream PCState.__init__).
@@ -514,7 +516,7 @@ export interface TradeSceneState {
   phase: "animate" | "message" | "done";
 }
 
-function tradeRules(source: BattleDbSource, names: Names): SceneRules {
+function tradeRules(source: BattleDbSource, names: Names, lang: GameLang = "en_US"): SceneRules {
   return {
     start(ext, rawArgs, seed, context: ExtensionReadContext) {
       const args = record(rawArgs);
@@ -548,7 +550,7 @@ function tradeRules(source: BattleDbSource, names: Names): SceneRules {
         kind: "trade",
         sent: sent.slug,
         received: args.species,
-        message: format(text(args.message, "You traded {sent} and received {received}!"), {
+        message: format(text(args.message, lang === "zh_CN" ? TRADE_MESSAGE_ZH : "You traded {sent} and received {received}!"), {
           sent: names(sent.slug),
           received: names(args.species),
         }),
@@ -627,9 +629,9 @@ export interface MonsterShopSceneState {
   message: string | null;
 }
 
-function shopLabels(raw: JsonValue | undefined): MonsterShopLabels {
+function shopLabels(raw: JsonValue | undefined, lang: GameLang = "en_US"): MonsterShopLabels {
   const source = record(raw);
-  const labels = { ...MONSTER_SHOP_LABELS };
+  const labels = { ...(lang === "zh_CN" ? MONSTER_SHOP_LABELS_ZH : MONSTER_SHOP_LABELS) };
   for (const key of Object.keys(labels) as (keyof MonsterShopLabels)[]) {
     labels[key] = text(source[key], labels[key]);
   }
@@ -643,7 +645,7 @@ function positiveInteger(value: JsonValue | undefined, label: string): number {
   return value;
 }
 
-function monsterShopRules(source: BattleDbSource, names: Names): SceneRules {
+function monsterShopRules(source: BattleDbSource, names: Names, lang: GameLang = "en_US"): SceneRules {
   return {
     start(ext, rawArgs, seed, context: ExtensionReadContext) {
       const args = record(rawArgs);
@@ -669,7 +671,7 @@ function monsterShopRules(source: BattleDbSource, names: Names): SceneRules {
         });
       }
       rows.sort((a, b) => a.label < b.label ? -1 : a.label > b.label ? 1 : 0);
-      const labels = shopLabels(args.labels);
+      const labels = shopLabels(args.labels, lang);
       const state: MonsterShopSceneState = {
         kind: "monsterShop",
         base: ext,
@@ -769,10 +771,11 @@ function monsterShopRules(source: BattleDbSource, names: Names): SceneRules {
 export function createStorageSceneRules(
   source: BattleDbSource,
   names: Names,
+  lang: GameLang = "en_US",
 ): Record<string, SceneRules> {
   return {
-    [TUXEMON_PC_SCENE_ID]: pcRules(names),
-    [TUXEMON_TRADE_SCENE_ID]: tradeRules(source, names),
-    [TUXEMON_MONSTER_SHOP_SCENE_ID]: monsterShopRules(source, names),
+    [TUXEMON_PC_SCENE_ID]: pcRules(names, lang),
+    [TUXEMON_TRADE_SCENE_ID]: tradeRules(source, names, lang),
+    [TUXEMON_MONSTER_SHOP_SCENE_ID]: monsterShopRules(source, names, lang),
   };
 }

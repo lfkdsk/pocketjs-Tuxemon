@@ -16,8 +16,123 @@ export const ZH_UPSTREAM_PO = join(TUXEMON_SRC, "mods/tuxemon/l18n/zh_CN/LC_MESS
 export const L10N_DIR = join(REPO_ROOT, "l10n/zh_CN");
 export const GLOSSARY_TSV = join(L10N_DIR, "glossary.tsv");
 export const SUPPLEMENT_PO = join(L10N_DIR, "supplement.po");
+export const OVERRIDES_PO = join(L10N_DIR, "overrides.po");
+export const UPSTREAM_REVIEW_JSONL = join(L10N_DIR, "upstream-review.jsonl");
 
 export { parsePo };
+
+export const OVERRIDE_CATEGORIES = [
+  "drift",
+  "mistranslation",
+  "omission",
+  "glossary",
+  "style",
+] as const;
+export type OverrideCategory = (typeof OVERRIDE_CATEGORIES)[number];
+export const REVIEW_CATEGORIES = ["ok", ...OVERRIDE_CATEGORIES] as const;
+export type ReviewCategory = (typeof REVIEW_CATEGORIES)[number];
+
+export interface UpstreamReviewEntry {
+  readonly msgid: string;
+  readonly category: ReviewCategory;
+  readonly action: "keep" | "override";
+  readonly reason?: string;
+  readonly translation?: string;
+  readonly orphan?: boolean;
+}
+
+export interface UpstreamReview {
+  readonly entries: ReadonlyMap<string, UpstreamReviewEntry>;
+  readonly duplicateIds: readonly string[];
+  readonly parseErrors: readonly string[];
+}
+
+export function loadUpstreamReview(path: string = UPSTREAM_REVIEW_JSONL): UpstreamReview {
+  const entries = new Map<string, UpstreamReviewEntry>();
+  const duplicateIds: string[] = [];
+  const parseErrors: string[] = [];
+  if (!existsSync(path)) return { entries, duplicateIds, parseErrors };
+  for (const [index, raw] of readFileSync(path, "utf8").split("\n").entries()) {
+    if (!raw.trim()) continue;
+    try {
+      const value = JSON.parse(raw) as UpstreamReviewEntry;
+      if (!value || typeof value !== "object" || typeof value.msgid !== "string") {
+        parseErrors.push(`line ${index + 1}: expected an object with string msgid`);
+      } else if (entries.has(value.msgid)) {
+        duplicateIds.push(value.msgid);
+      } else {
+        entries.set(value.msgid, value);
+      }
+    } catch (error) {
+      parseErrors.push(`line ${index + 1}: ${error instanceof Error ? error.message : String(error)}`);
+    }
+  }
+  return { entries, duplicateIds, parseErrors };
+}
+
+export interface OverrideAnnotation {
+  readonly category?: string;
+  readonly reason?: string;
+  readonly en?: string;
+  readonly line: number;
+  readonly duplicateFields: readonly string[];
+}
+
+export interface OverrideAnnotations {
+  readonly entries: ReadonlyMap<string, OverrideAnnotation>;
+  readonly duplicateIds: readonly string[];
+}
+
+/** Parse the three required extracted comments attached to each override.
+ * Keeping this independent of parsePo lets the checker report malformed or
+ * duplicated metadata instead of silently accepting the last value. */
+export function loadOverrideAnnotations(path: string = OVERRIDES_PO): OverrideAnnotations {
+  const entries = new Map<string, OverrideAnnotation>();
+  const duplicateIds: string[] = [];
+  if (!existsSync(path)) return { entries, duplicateIds };
+  const blocks = readFileSync(path, "utf8").split(/\n{2,}/);
+  let line = 1;
+  for (const block of blocks) {
+    const lines = block.split("\n");
+    const idLine = lines.find((value) => value.startsWith('msgid "') && value !== 'msgid ""');
+    if (!idLine) {
+      line += lines.length + 1;
+      continue;
+    }
+    const id = idLine.slice(7, -1);
+    const fields = new Map<string, string>();
+    const duplicateFields: string[] = [];
+    for (const entryLine of lines) {
+      const match = entryLine.match(/^#\. (category|reason|en): ?(.*)$/);
+      if (!match) continue;
+      const [, name, value] = match;
+      if (fields.has(name!)) duplicateFields.push(name!);
+      else fields.set(name!, value!);
+    }
+    const enField = fields.get("en");
+    let enSnapshot = enField;
+    if (enField?.startsWith('"')) {
+      try {
+        const decoded = JSON.parse(enField);
+        if (typeof decoded === "string") enSnapshot = decoded;
+      } catch {
+        // Leave the raw value in place; the contract check reports it stale.
+      }
+    }
+    if (entries.has(id)) duplicateIds.push(id);
+    else {
+      entries.set(id, {
+        category: fields.get("category"),
+        reason: fields.get("reason"),
+        en: enSnapshot,
+        line,
+        duplicateFields,
+      });
+    }
+    line += lines.length + 1;
+  }
+  return { entries, duplicateIds };
+}
 
 // ---------------------------------------------------------------------------
 // Placeholders
@@ -172,7 +287,7 @@ export const ALLOWED_ENGLISH_TOKENS = new Set([
   // intentional Latin kept in a few translations (file names, kernel trace
   // tokens, a creator's handle, a Greek etymon)
   "r", "b", "jas", "keri", "bit", "xenos", "swapper", "cut", "intro",
-  "el6", "x86",
+  "el6", "x86", "https", "org", "python", "pygame", "unboundlocalerror", "recovery",
 ]);
 
 export interface EnglishRun {
@@ -197,5 +312,6 @@ export function isSuspiciousRun(run: EnglishRun): boolean {
 }
 
 export function runWhitelisted(run: EnglishRun, whitelist: Set<string>): boolean {
+  if (/^(?:[A-Za-z]-){2,}[A-Za-z]$/.test(run.text)) return true;
   return run.words.every((w) => /^\d+$/.test(w) || whitelist.has(w.toLowerCase()));
 }

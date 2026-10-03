@@ -26,6 +26,7 @@
 import {
   canSave,
   createSessionSnapshot,
+  decodeEnvelopeText,
   decodeSaveCode,
   encodeSaveCode,
   loadFromStore,
@@ -202,9 +203,29 @@ export function loadSlot(slots: SlotStore, slot: number, content: MapContentIden
   return loadFromStore(slots.store, slot, content);
 }
 
+/** Decode a slot skipping content identity. The load path peeks at the
+ *  save's language here first, so a save from the other language build is
+ *  reported as a language mismatch instead of failing the content check. */
+export function peekSlot(slots: SlotStore, slot: number): SaveSnapshot {
+  return loadFromStore(slots.store, slot, null);
+}
+
+/** Decode a save code skipping content identity, for the same language
+ *  pre-check as peekSlot. */
+export function peekSaveCode(code: string): SaveSnapshot {
+  return decodeSaveCode(code, null);
+}
+
 /** Menu summaries of the three slots. Each file runs the full load
- * validation, so a damaged or foreign save lists as an error, not a slot. */
-export function listSlots(slots: SlotStore | null, content: MapContentIdentity | null): SlotListing {
+ *  validation, so a damaged or foreign save lists as an error, not a slot.
+ *  A save from the other language build is intact but foreign: it lists
+ *  with its real summary (selecting it shows the language mismatch prompt)
+ *  instead of a raw content-manifest error. */
+export function listSlots(
+  slots: SlotStore | null,
+  content: MapContentIdentity | null,
+  lang: "en_US" | "zh_CN" = "en_US",
+): SlotListing {
   const out: SlotListing = [];
   for (let slot = 1; slot <= SAVE_SLOTS; slot++) {
     if (!slots) {
@@ -225,15 +246,34 @@ export function listSlots(slots: SlotStore | null, content: MapContentIdentity |
     try {
       out.push(summarizeEnvelope(slot, text, content));
     } catch (error) {
+      if (error instanceof SaveError && error.code === "content") {
+        // Same bytes, other language build: list the real summary so the
+        // player can pick the slot and get the mismatch prompt.
+        try {
+          const peeked = decodeEnvelopeText(text, null);
+          if (snapshotLang(peeked) !== lang) {
+            out.push(summarizeEnvelope(slot, text, null));
+            continue;
+          }
+        } catch { /* not a language mismatch: fall through to the error */ }
+      }
       out.push({ slot, error: error instanceof Error ? error.message : String(error) });
     }
   }
   return out;
 }
 
+/** The language a save was written with, read from its encoded extension
+ *  envelope. Saves written before the language was recorded default to
+ *  en_US (the game was English-only then). */
+export function snapshotLang(snapshot: SaveSnapshot): "en_US" | "zh_CN" {
+  const ext = snapshot.ext as { format?: unknown; lang?: unknown } | null;
+  const lang = ext && typeof ext === "object" ? ext.lang : undefined;
+  return lang === "zh_CN" ? "zh_CN" : "en_US";
+}
+
 /** One-line, player-facing explanation of a failed load. */
-export function describeLoadError(error: unknown): string {
-  if (error instanceof SaveError) {
+export function describeLoadError(error: unknown): string {  if (error instanceof SaveError) {
     switch (error.code) {
       case "content":
         return "That save is from another build of the game.";

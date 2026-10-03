@@ -407,7 +407,7 @@ msgid "book_wishes_description"
 msgstr "成就狂人列出的成就清单，等你来挑战。"
 
 msgid "nu_phone"
-msgstr "新手机"
+msgstr "Nu 手机"
 
 msgid "nu_phone_description"
 msgstr "它的用处可多了，比如给家里打电话。"
@@ -6176,7 +6176,7 @@ msgid "cotton_underground_stop"
 msgstr "抱歉，我奉命不让任何人通过。"
 
 msgid "cotton_breeder0"
-msgstr "你好，欢迎来到培育屋！我在这里照看精灵。\n把伙伴交给我，你冒险时我可以帮你训练——只要你带够了钱。\n而且如果你留下一雄一雌、进化完全的两只，它们说不定还会生下小宝宝！\n告诉我你想怎么做吧。"
+msgstr "你好，欢迎来到寄养中心！我在这里照看精灵。\n把伙伴交给我，你冒险时我可以帮你训练——只要你带够了钱。\n而且如果你留下一雄一雌、进化完全的两只，它们说不定还会生下小宝宝！\n告诉我你想怎么做吧。"
 
 msgid "cotton_breeder1"
 msgstr "你想把精灵寄放在我这儿吗？我可以训练一只，或者照看一对，如果你想让它们试试繁殖的话。"
@@ -9515,10 +9515,10 @@ msgid "menu_park_alert"
 msgstr "{user}突然停下，察觉到附近有什么。"
 
 msgid "menu_daycare_summary"
-msgstr "寄养屋摘要"
+msgstr "寄养中心概况"
 
 msgid "menu_daycare_parents"
-msgstr "寄养父母"
+msgstr "寄养中心里的亲本"
 
 msgid "menu_daycare_empty"
 msgstr "没有寄存精灵。"
@@ -9527,7 +9527,7 @@ msgid "menu_daycare_mode"
 msgstr "模式"
 
 msgid "menu_daycare_thanks"
-msgstr "感谢使用寄养屋！"
+msgstr "感谢使用寄养中心！"
 
 msgid "menu_daycare_add"
 msgstr "寄存精灵"
@@ -9602,7 +9602,7 @@ msgid "buddha_welcome"
 msgstr "欢迎来到佛陀山！"
 
 msgid "old_sphalian_house01"
-msgstr "你和心爱的Lv ${{monster_0_level}} ${{monster_0_name}}一起看了会儿电视。,0"
+msgstr "你和心爱的Lv ${{monster_0_level}} ${{monster_0_name}}一起看了会儿电视。"
 
 msgid "old_sphalian_house02"
 msgstr "甜蜜的家"

@@ -1,0 +1,3213 @@
+# Pocket Tuxemon zh_CN corrections to the upstream Weblate catalog
+# Each entry records why it differs and snapshots the reviewed en_US source.
+# License: same terms as the Tuxemon text it translates.
+msgid ""
+msgstr ""
+"Project-Id-Version: Pocket Tuxemon zh_CN upstream overrides\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2026-10-02 00:00+0000\n"
+"Last-Translator: Pocket Tuxemon project\n"
+"Language-Team: Pocket Tuxemon\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Pocket Tuxemon upstream review\n"
+
+#. category: glossary
+#. reason: the glossary specifies MK01 阿尔法
+#. en: "Mk01 Alpha"
+msgid "_mk01alpha"
+msgstr "MK01 阿尔法"
+
+#. category: glossary
+#. reason: the glossary specifies Mk01测试版
+#. en: "Mk01 Beta"
+msgid "_mk01beta"
+msgstr "Mk01测试版"
+
+#. category: style
+#. reason: the upstream translation inserts an extra literal newline and uses several stiff or ambiguous technical phrases
+#. en: "Developer console: This is intended for Tuxemon developers only, for testing an experimental data loading system.\\nThe variable for the new loader will now be enabled. Please report any issues you find at https://tuxemon.org\\nDeveloper note 1: This suppresses crashes for missing maps. The system may attempt to load invalid data!\\nDeveloper note 2: Do NOT save your game with this enabled, it may result in data corruption.\\nDeveloper note 3: As of switching to Python 3, data seems to be aggregated and combined in a very unusual manner. Please debug this!"
+msgid "37707_computer"
+msgstr "开发者控制台：此功能仅供 Tuxemon 开发者测试实验性数据加载系统。\n现在将启用新加载器变量。请把发现的问题报告至 https://tuxemon.org\n开发者说明 1：这会防止缺少地图时游戏崩溃。系统可能会尝试加载无效数据！\n开发者说明 2：启用此功能时请勿保存游戏，否则可能导致数据损坏。\n开发者说明 3：自切换至 Python 3 后，数据似乎以一种非常反常的方式聚合并合并。请调试此问题！"
+
+#. category: style
+#. reason: the upstream translation adds two literal line breaks inside sentences and reads mechanically
+#. en: "<recovery_module>: GREETINGS ${{name}}. PLEASE UNDERSTAND THIS AREA NEVER EXISTED. YOU HAVE EXPERIENCED A SYSTEM ERROR.\\n<recovery_module>: THE GLITCH HAS NOW BEEN PATCHED. YOU MAY CONTINUE THE GAME NORMALLY FROM HERE ON. DO NOT ATTEMPT TO RETURN HERE.\\n<recovery_module>: WAKE UP. FORGET ALL. ALL IS BUT A DREAM..."
+msgid "37707_exit_missing"
+msgstr "<recovery_module>：你好，${{name}}。请理解，这个区域从未存在过。你遇到了系统错误。\n<recovery_module>：故障现已修复。你可以从这里继续正常游戏。不要试图回到这里。\n<recovery_module>：醒来。忘掉一切。一切不过是一场梦……"
+
+#. category: style
+#. reason: the upstream translation inserts a literal newline into a one-line source sentence
+#. en: "You sense a warm energy emanating from this flower. It's the only thing in this town your Tuxemon seem to enjoy."
+msgid "37707_flower"
+msgstr "你感觉到这朵花散发出一股温暖的能量。这是镇上唯一让你的精灵感到愉快的东西。"
+
+#. category: style
+#. reason: the current word order is awkward and weakens the warning
+#. en: "Get out while you still can..."
+msgid "37707_sign_hidden"
+msgstr "趁你还能离开，快出去……"
+
+#. category: omission
+#. reason: the instruction to notify the developers is left in English
+#. en: "PyGame - UnboundLocalError: Local variable 'map_id' referenced before assignment\\nError 404: **** resources not found. Please notify tHe dEvEl0p#r$ @b0%t t#1# ##### ###########\\n01010010 01100101 01101101 01100101 01101101 01100010 01100101 01110010 00100000 01101101 01100101 00101110"
+msgid "37707_sign_missing_foreign"
+msgstr "PyGame - UnboundLocalError：局部变量 'map_id' 在赋值前被引用\n错误 404：**** 资源未找到。请将此问题告知开发者。\n01010010 01100101 01101101 01100101 01101101 01100010 01100101 01110010 00100000 01101101 01100101 00101110"
+
+#. category: mistranslation
+#. reason: READ is translated as ‘saw’, losing the sign's direct warning
+#. en: "W3 KN0W Y0U R3@D TH1$: Y0U H@D 833N W@RN3D."
+msgid "37707_sign_missing_hidden_read"
+msgstr "我们知道你读了这个：我们已经警告过你了。"
+
+#. category: mistranslation
+#. reason: ‘too late’ is mistranslated as ‘too far/off-center’
+#. en: "1T i$ t00 L8 N0W"
+msgid "37707_sign_missing_hidden_unread"
+msgstr "现在已经太迟了"
+
+#. category: style
+#. reason: the speaker name is rendered four different ways and four extra literal newlines break the dialogue
+#. en: "Wish: Oh... a newcomer! How did you get here? We haven't seen anyone new in... oh, never mind.\\nWish: Welcome! Welcome to... oh my: We never got around to giving our town a name! Just call us whatever you'd like I guess.\\nWish: Please make yourself at home. Usually there are more people around... it depends on the seed, maybe it's a bad omen today.\\nWish: Let me know if you need anything that exists here. Just don't make the same mistake as the others: We don't want you to leave us too."
+msgid "37707_villager_female_1"
+msgstr "薇希：哦……一个新来的人！你是怎么到这里的？我们已经很久没见过新人了……哦，算了。\n薇希：欢迎！欢迎来到……哦，天哪：我们一直没顾上给小镇取名字！我想，你愿意叫我们什么就叫什么吧。\n薇希：请把这里当成自己家。平时周围的人会多一些……这取决于随机种子，也许今天是不祥之兆。\n薇希：如果你需要这里确实存在的任何东西，就告诉我。千万别犯其他人犯过的错误：我们不希望你也离开我们。"
+
+#. category: mistranslation
+#. reason: the speaker name Wish is mistranscribed and the plea is punctuated unnaturally
+#. en: "Wish: Please: Do not enter the tower. It hasn't been built yet."
+msgid "37707_villager_female_2"
+msgstr "薇希：求你了：不要进入那座塔。它还没有建好。"
+
+#. category: mistranslation
+#. reason: the speaker name is mistranscribed and the final question is duplicated
+#. en: "Wish: No, no, no: Stop doing this! Do you not understand it's not there?"
+msgid "37707_villager_female_3"
+msgstr "薇希：不，不，不：别再这样了！你不明白那里根本不存在吗？"
+
+#. category: mistranslation
+#. reason: the final corrupted warning is replaced by an unrelated sentence, and the translation adds two literal newlines
+#. en: "@*!^: 0H... @ n3wc0m3r! H0vv p1d y0v g3t he7e? <NONE> h3llen\"T $33N %^&one new 1n... ()h, never n3ver m3V3t N3W37 MIIIIIIIIND\\n@*!^: WElcoME! W3lcome t0... 0H N/A: We never g0t ar0und to gi^ing 0ur town {<1} We never g00000000 {<2} W3 neVer Bu1lt 0uR t0wN\\nTH S D ES N T EX ST Y U AR  C NNE  ED TO TH  V ID YO  M ST LEA E N W"
+msgid "37707_villager_female_missing"
+msgstr "@*!^：哦……一个新人！你是怎么到这里的？<NONE> 已经很久没见过%^&新人了……哦，永远、永远、永远别————介意\n@*!^：欢迎！欢迎来到……哦 N/A：我们一直没顾上给小镇取{<1}。我们从来没有{<2}。我们从未建造过这座小镇\n这 里 根 本 不 存 在 你 已 连 接 至 虚 空 你 必 须 马 上 离 开"
+
+#. category: style
+#. reason: three extra literal newlines split sentences and the speaker label/punctuation is inconsistent
+#. en: "Blank: Hmph. Hi. Sorry: We're usually weary of outsiders. We only get visited... sometimes.\\nBlank: But since you're here, maybe you can do me a favor. It might sound strange of me to ask you this, yet I must know...\\nBlank: Do you know who I am? Have you... ever seen me? I'm curious: My name, do I have a...\\nBlank: No. Sorry: I have made a mistake. Please don't tell anyhone what I asked you. Carry on, enjoy your trip here."
+msgid "37707_villager_male_1"
+msgstr "无名者：哼。你好。抱歉：我们通常对外来者心存戒备。只是偶尔……才会有人来访。\n无名者：不过既然你来了，也许能帮我一个忙。这样问可能很奇怪，但我必须知道……\n无名者：你知道我是谁吗？你……以前见过我吗？我很好奇：我的名字，我有没有一个……\n无名者：不。抱歉：我弄错了。请不要把我问过你的事告诉任何人。继续吧，祝你在这里旅途愉快。"
+
+#. category: mistranslation
+#. reason: ‘doom us all’ is weakened to merely putting the group in difficulty
+#. en: "Blank: You... you will doom us all over again. Go back and never return!"
+msgid "37707_villager_male_3"
+msgstr "无名者：你……你会让我们再次万劫不复。回去，永远别再回来！"
+
+#. category: style
+#. reason: an extra literal newline breaks the first sentence and several phrases are stiff or ambiguous
+#. en: "I have been observing you for a while now, I'm glad my followers managed to grab you without harm.\\nOh, where are my manners! \\nI am Misa, Premier of the Xero Institute for Tuxemon Research and Advancement.\\nWhat was your name again? \\n....  .....  ....\\n${{name}}?\\nNot much of a name for someone who illegally owns a Tuxemon."
+msgid "a_serious_discussion"
+msgstr "我已经观察你一段时间了，很高兴我的追随者毫发无伤地把你抓了过来。\n哦，我的礼貌哪去了！\n我是米萨，Xero 精灵研究与发展研究所的首席负责人。\n你叫什么名字来着？\n……  ……  ……\n${{name}}？\n对一个非法拥有精灵的人来说，这名字可不怎么样。"
+
+#. category: mistranslation
+#. reason: ‘eat its way out’ is rendered as simply continuing to eat, omitting the escape
+#. en: "When born it is placed in an anthill and left to eat its way out."
+msgid "aardorn_description"
+msgstr "出生后，它会被放进蚁丘，靠一路啃食自己钻出来。"
+
+#. category: mistranslation
+#. reason: ‘keep its fire in check’ is mistranslated as controlling cooking heat
+#. en: "It is playful, but must be taught early on to keep its fire in check."
+msgid "agnite_description"
+msgstr "它很贪玩，但必须从小教会它控制火焰。"
+
+#. category: style
+#. reason: ‘will be violent to retrieve them’ is rendered with an unnatural verb-object construction
+#. en: "ALLAGON are drawn to relics made from the metals left behind by their ancestors, and will be violent to retrieve them."
+msgid "allagon_description"
+msgstr "祖先遗留的金属所制成的遗物会吸引阿拉贡；为了夺回这些遗物，它们会不惜使用暴力。"
+
+#. category: glossary
+#. reason: Cotton Town and Omnichannel must be 暖棉镇 and 全能公司
+#. en: "Room 31, Block 2, Omnichannel Tower, Cotton Town\\n\\nThere's a kiss mark next to the address"
+msgid "allies_address_description"
+msgstr "暖棉镇全能公司大厦 2 栋 31 室\n\n地址旁边有一个吻痕"
+
+#. category: glossary
+#. reason: ALTIE must use its glossary rendering 阿尔蒂 rather than remain untranslated
+#. en: "ALTIE floated down to earth in a bubble. Now its bubble has popped, it cannot float more than a few meters in the air."
+msgid "altie_description"
+msgstr "阿尔蒂乘着气泡飘落到地面。如今气泡已经破裂，它最多只能在离地几米的空中漂浮。"
+
+#. category: glossary
+#. reason: Fondent Region must be 方登地区
+#. en: "HELLO CITIZENS OF THE FONDENT REGION!\\nTHANK YOU FOR TUNING IN TO THIS MANDATORY ANNOUNCEMENT."
+msgid "announcement1"
+msgstr "方登地区的公民们，你们好！\n感谢各位收听这则强制公告。"
+
+#. category: omission
+#. reason: the addressee Able/Aeble is omitted
+#. en: "WE LOVE YOU ABLE!"
+msgid "announcement2"
+msgstr "我们爱你，艾布尔！"
+
+#. category: glossary
+#. reason: Fondent Region and Aeble conflict with glossary renderings, and an extra literal newline breaks the sentence
+#. en: "To ALL the citizens of the Fondent Region and beyond who are tuning in, I welcome you.\\nMy name is Aeble, spelled A-E-B-L-E for those who wonder, and I am the CEO of Omnichannel!"
+msgid "announcement4"
+msgstr "欢迎方登地区内外所有正在收听的公民。\n我叫艾布尔，想知道拼法的人请注意，是 A-E-B-L-E；我是全能公司的首席执行官！"
+
+#. category: glossary
+#. reason: Fondent Region and the final Omnichannel slogan conflict with glossary renderings
+#. en: "It has been a long, hard road to the peace and tranquility that now  reigns in the Fondent region.\\nHowever, it is my pleasure to announce, on this day, the 25th Anniversary of the founding of Omnichannel...\\nTUXEMON ARE CONTROLLED!\\n*deafening screaming*\\nQuiet Down! Quiet Down! Your enthusiasm is infectious I must say!\\nIn conjunction with the Xero institute, we have stripped away their will to attack!\\nDue to this, we are confident that releasing Tuxemon into the wild is safe.\\nHowever, curfews must still be enforced, we are not a lawless region after all.\\nAfter all... WE ARE SAFETY, WE ARE ORDER, WE ARE OMNICHANNEL!"
+msgid "announcement5"
+msgstr "方登地区能迎来如今的和平与安宁，经历了一段漫长而艰苦的历程。\n然而，我很荣幸在今天——全能公司成立二十五周年纪念日——宣布……\n精灵已经得到控制！\n*震耳欲聋的尖叫声*\n安静！安静！不得不说，你们的热情真有感染力！\n通过与 Xero 研究所合作，我们已经消除了它们的攻击意愿！\n因此，我们有信心把精灵放归野外是安全的。\n不过，宵禁仍须执行，毕竟我们不是一个无法无天的地区。\n毕竟……我们就是安全，我们就是秩序，我们就是全能公司！"
+
+#. category: drift
+#. reason: the Chinese text still mentions sufficient signal and repeats access-anywhere wording absent from the current English
+#. en: "Access your funds here whenever you're in a town."
+msgid "app_banking_description"
+msgstr "只要身处城镇，就可以在这里存取资金。"
+
+#. category: mistranslation
+#. reason: battle damage is mistranslated as destruction
+#. en: "The attack did extra damage!"
+msgid "attack_effective"
+msgstr "这次攻击造成了额外伤害！"
+
+#. category: style
+#. reason: the passive phrase 被抵抗了 is unnatural battle UI Chinese
+#. en: "The attack was resisted!"
+msgid "attack_resisted"
+msgstr "这次攻击遭到了抵抗！"
+
+#. category: mistranslation
+#. reason: battle damage is mistranslated as destruction
+#. en: "The attack did a lot of extra damage!"
+msgid "attack_very_effective"
+msgstr "这次攻击造成了大量额外伤害！"
+
+#. category: mistranslation
+#. reason: the translation says ‘something for when you need to be bitten’ rather than making a robot bite something
+#. en: "It is designed for all those times you need something to be bitten by a robot."
+msgid "b_ver_1_description"
+msgstr "它专为那些需要让某样东西被机器人咬上一口的场合而设计。"
+
+#. category: glossary
+#. reason: Omnichannel and Spyder are rendered inconsistently instead of 全能公司 and 斯派德
+#. en: "About thirty years ago, a group called Omnichannel started controlling the media.\\nSoon after, freedom  of expression became nearly impossible.\\nSo people decided to use Tuxemon as messengers and to settle disputes. \\nAbout ten years ago, the crackdown on Tuxemon was initiated.\\nNow, only approved persons can own and raise Tuxemon. \\nMy group uses Tuxemon for research, that's why we all have them. \\nYou are unusual, you are not approved by Omnichannel. \\nYou might be the trainer we have been waiting for.\\nOmnichannel, as ruthless as they are, are not the only threat we have here. \\nThere is another organization called Spyder.\\nYou shouldn't have to worry too much about them, they aren't too active around here. \\nNow, we'll send you back on your journey. \\nBut only if you agree to help us against Omnichannel.\\nOtherwise, we will report you to Omnichannel ourselves. \\nAnd you will lose everything. \\nWe are always watching."
+msgid "backstory"
+msgstr "大约三十年前，一个名为全能公司的团体开始控制媒体。\n不久之后，言论自由几乎不复存在。\n于是，人们开始用精灵传递消息、解决争端。\n大约十年前，对精灵的镇压开始了。\n如今，只有获得许可的人才能拥有和饲养精灵。\n我的团体使用精灵进行研究，所以我们每个人都有精灵。\n你很特别，因为你没有得到全能公司的许可。\n你也许就是我们一直在等待的训练师。\n全能公司固然冷酷无情，却不是我们在这里面临的唯一威胁。\n还有一个名叫斯派德的组织。\n你不必太担心他们，他们在这一带并不活跃。\n现在，我们会送你回去继续旅程。\n但前提是你同意帮助我们对抗全能公司。\n否则，我们会亲自向全能公司举报你。\n而你将失去一切。\n我们一直在注视着你。"
+
+#. category: glossary
+#. reason: the explicit BAOBY name is reduced to a pronoun instead of the glossary rendering 小粽树鹿
+#. en: "They travel from river to river in search of water to drink and store. The leafy ossicones on its head conceal movable points that act similar to a dowsing rod. Many creatures follow BAOBY in droughts."
+msgid "baoby_description"
+msgstr "它们从一条河走到另一条河，寻找可供饮用和储存的水。它头顶叶片般的角里藏着能够活动的尖端，作用类似探水杖。干旱时，许多生物都会跟随小粽树鹿。"
+
+#. category: mistranslation
+#. reason: the combat status means physically blinded, not deceived or hoodwinked
+#. en: "Blinded"
+msgid "blinded"
+msgstr "失明"
+
+#. category: glossary
+#. reason: NUT must be 螺母兽, not the generic 螺母
+#. en: "The presence of a BOLT makes a NUT clamp down harder and spark more energy."
+msgid "bolt_description"
+msgstr "螺栓兽在场时，会让螺母兽咬合得更紧，并迸发出更多能量。"
+
+#. category: mistranslation
+#. reason: ground is changed to grassland, and the sentence remains mechanically structured
+#. en: "It spends most of its time digging burrows into the ground, it remains dizzy from the constant vibrations and movement caused by them digging into the soil."
+msgid "boltnu_description"
+msgstr "它大部分时间都在地里挖洞；钻入土壤时持续不断的震动和运动，总让它晕头转向。"
+
+#. category: glossary
+#. reason: Omnichannel is shortened to 全能 and an extra literal newline splits ‘the entire region’
+#. en: "Please, miss omnichannel ma'am, ${{name}}'s Mother wanted them to join the Trial to see the entire region\\n${{name}} isn't doing it for the job, they're doing it for the experience."
+msgid "brokethegasp3"
+msgstr "求您了，全能公司的女士，${{name}}的母亲希望他们参加试炼，借此走遍整个地区\n${{name}}不是为了工作，而是为了这段经历。"
+
+#. category: mistranslation
+#. reason: encouraging waves/gestures are mistranslated as splashes
+#. en: "It can convince any group to cooperate for the common good with some encouraging mewls and waves."
+msgid "budaye_description"
+msgstr "只要发出鼓励的喵叫、挥一挥爪子，它就能说服任何群体为共同利益合作。"
+
+#. category: glossary
+#. reason: the explicit BUMBULUS name is omitted instead of using 邦布勒斯
+#. en: "BUMBULUS is a flying being that produces a cloud of smoke to disguise itself as a cloud. No one has ever seen its true body."
+msgid "bumbulus_description"
+msgstr "邦布勒斯是一种会飞的生物，能制造烟云，把自己伪装成一朵云。没有人见过它真正的身体。"
+
+#. category: mistranslation
+#. reason: ‘rejects fire as basic’ is parsed as ‘basically rejects fire’, changing the meaning
+#. en: "It rejects fire as basic, and produces only the fire of the mind."
+msgid "bursa_description"
+msgstr "它认为普通火焰太过基础，只会产生心灵之火。"
+
+#. category: glossary
+#. reason: Candy Town must be the complete place name 甜饴镇
+#. en: "Candy Town"
+msgid "candy_town"
+msgstr "甜饴镇"
+
+#. category: omission
+#. reason: the slogan is replaced by the generic label ‘Candy Town slogan’
+#. en: "Pushing the bounds of possibility - with biology!"
+msgid "candy_town_description"
+msgstr "用生物学突破可能性的边界！"
+
+#. category: mistranslation
+#. reason: the translation omits that this is the party's only Tuxemon
+#. en: "Can't release only Tuxemon in party."
+msgid "cant_release"
+msgstr "不能释放队伍中唯一的精灵。"
+
+#. category: omission
+#. reason: ‘But the capture failed’ is omitted
+#. en: "So close! But the capture failed."
+msgid "captured_failed_4"
+msgstr "就差一点！但捕捉还是失败了。"
+
+#. category: style
+#. reason: Charged Up and Charging are both 充电, obscuring that this status is already fully charged
+#. en: "Charged Up"
+msgid "chargedup"
+msgstr "蓄能完毕"
+
+#. category: style
+#. reason: Charged Up and Charging are both 充电, obscuring that this status is still charging
+#. en: "Charging"
+msgid "charging"
+msgstr "蓄能中"
+
+#. category: glossary
+#. reason: the final CHLORAGON is mistranscribed as 氯边形 instead of 氯龙
+#. en: "It hatches when an ancient egg is planted in fertile soil. When the eggs run out, there will be no more CHLORAGON."
+msgid "chloragon_description"
+msgstr "把一枚远古蛋种进肥沃的土壤，它就会孵化。等这些蛋耗尽后，世上便再也不会有氯龙。"
+
+#. category: style
+#. reason: an extra literal newline splits the first sentence block
+#. en: "An interesting choice, it speaks to the spark inside of you. Cardiling is a Fire-type Tuxemon known for stealing food from friends and enemies alike.\\nDo you want to choose Cardiling?"
+msgid "chooseyerfateCardiling"
+msgstr "很有意思的选择，它呼应了你内心的火花。红火鸟是火系精灵，以从朋友和敌人那里偷食物而闻名。\n你想选择红火鸟吗？"
+
+#. category: style
+#. reason: an extra literal newline splits the first sentence block and the breeding sentence is grammatically awkward
+#. en: "A solid choice! Rockitten is an Earth-type Tuxemon. In medieval times, they bred Rockittens to sit by the door and look cute.\\nDo you want to choose Rockitten?"
+msgid "chooseyerfateRockitten"
+msgstr "很稳妥的选择！小岩猫是土系精灵。中世纪时，人们培育小岩猫，让它们坐在门边卖萌。\n你想选择小岩猫吗？"
+
+#. category: style
+#. reason: ‘a great choice’ is translated too literally and the evolution sentence is stiff
+#. en: "A great choice! Tweesher is a Water-type Tuxemon. It's evolution Eagleace is one of the fastest Tuxemon\\nDo you want to choose Tweesher?"
+msgid "chooseyerfateTweesher"
+msgstr "选得好！镊鹭是水系精灵。它的进化形态冰川鹰是速度最快的精灵之一。\n你想选择镊鹭吗？"
+
+#. category: style
+#. reason: ‘quick battle’ is translated literally as a fast battle and the dialogue is stiff
+#. en: "First though, let's test your battle prowess with a quick Tuxemon battle.\\n Let's see... I'll choose Tweesher."
+msgid "choseCardiling2"
+msgstr "不过首先，来一场简短的精灵对战，测试一下你的战斗本领。\n让我想想……我选镊鹭。"
+
+#. category: mistranslation
+#. reason: the conjunction ‘And...’ is mistranslated as ‘also/more’
+#. en: "And... LET'S FIGHT!"
+msgid "chosefight"
+msgstr "那么……开战吧！"
+
+#. category: style
+#. reason: ‘quick battle’ is translated literally as a fast battle and the dialogue is stiff
+#. en: "First though, let's test your battle prowess with a quick Tuxemon battle.\\n Let's see... I'll choose Cardiling."
+msgid "choseRockitten2"
+msgstr "不过首先，来一场简短的精灵对战，测试一下你的战斗本领。\n让我想想……我选红火鸟。"
+
+#. category: style
+#. reason: ‘quick battle’ is translated literally as a fast battle and the dialogue is stiff
+#. en: "First though, let's test your battle prowess with a quick Tuxemon battle.\\n Let's see... I'll choose Rockitten."
+msgid "choseTweesher2"
+msgstr "不过首先，来一场简短的精灵对战，测试一下你的战斗本领。\n让我想想……我选小岩猫。"
+
+#. category: style
+#. reason: ‘得了失忆’ is unnatural status-message Chinese
+#. en: "{user} has gotten amnesia."
+msgid "combat_amnesia_get"
+msgstr "{user}陷入了失忆状态。"
+
+#. category: drift
+#. reason: the Chinese still says ‘your opponent’ and lacks the current {name} placeholder
+#. en: "{name} has been defeated!"
+msgid "combat_defeat"
+msgstr "{name}被击败了！"
+
+#. category: style
+#. reason: 成功的 uses the wrong particle and adds an unnecessary success qualifier
+#. en: "You ran away!"
+msgid "combat_player_run"
+msgstr "你逃走了！"
+
+#. category: style
+#. reason: the second line uses an unnatural bare copula for a combat status
+#. en: "Can't escape.\\n{monster} is {status}!"
+msgid "combat_player_run_status"
+msgstr "无法逃跑。\n{monster}正处于{status}状态！"
+
+#. category: style
+#. reason: the first line contains doubled punctuation and the second line uses an unnatural bare copula
+#. en: "Can't switch monsters.\\n{monster} is {status}!"
+msgid "combat_player_swap_status"
+msgstr "无法更换精灵。\n{monster}正处于{status}状态！"
+
+#. category: style
+#. reason: ‘is blind’ is rendered as a stiff permanent trait rather than a newly applied status
+#. en: "{target} is blinded."
+msgid "combat_state_blinded_get"
+msgstr "{target}失明了。"
+
+#. category: style
+#. reason: 被混淆 is unnatural for a creature entering a confused state
+#. en: "{target} is confused."
+msgid "combat_state_confused_get"
+msgstr "{target}陷入了混乱。"
+
+#. category: mistranslation
+#. reason: exhausted is mistranslated as ‘used up/depleted’
+#. en: "{target} is exhausted."
+msgid "combat_state_exhausted_get"
+msgstr "{target}筋疲力尽了。"
+
+#. category: mistranslation
+#. reason: ‘is focused’ is mistranslated as becoming the center of attention
+#. en: "{target} is focused."
+msgid "combat_state_focused_get"
+msgstr "{target}集中精神了。"
+
+#. category: drift
+#. reason: the Chinese uses an obsolete extra {user} placeholder and changes the current passive message
+#. en: "{target}'s lifeforce is being leeched."
+msgid "combat_state_lifeleech_get"
+msgstr "{target}的生命力正在被吸取。"
+
+#. category: mistranslation
+#. reason: ‘backs away’ is mistranslated as needing to aim
+#. en: "{target} backs away."
+msgid "combat_state_sniping_get"
+msgstr "{target}向后退去。"
+
+#. category: mistranslation
+#. reason: the translation reverses who takes the status damage
+#. en: "{name} took {status} damage!"
+msgid "combat_status_damage"
+msgstr "{name}受到了{status}伤害！"
+
+#. category: style
+#. reason: the word order is an ungrammatical calque of ‘used X on Y’
+#. en: "{user} used {name} on {target}!"
+msgid "combat_used_x_on_y"
+msgstr "{user}对{target}使用了{name}！"
+
+#. category: drift
+#. reason: the Chinese says ‘you won’ and omits the current {name} placeholder
+#. en: "{name} has won!"
+msgid "combat_victory"
+msgstr "{name}获胜了！"
+
+#. category: drift
+#. reason: the Chinese reflects an older two-line player-addressed message rather than the current named winner sentence
+#. en: "{name} has won and received {prize}!"
+msgid "combat_victory_trainer"
+msgstr "{name}获胜并获得了{prize}！"
+
+#. category: mistranslation
+#. reason: the pronoun is attached to the food, producing the nonsensical claim that food is used to store food
+#. en: "Foods placed in its pitcher are blended and pickled. They are used to store food without it going off."
+msgid "conileaf_description"
+msgstr "放进它的捕虫囊里的食物会被搅碎并腌制。人们会利用这些捕虫囊保存食物，防止变质。"
+
+#. category: glossary
+#. reason: Scoop must be 斯考普, not the literal 勺子
+#. en: "Get the scoop at the Scoop Store!"
+msgid "Cotton_Mart"
+msgstr "来斯考普商店，掌握独家消息！"
+
+#. category: glossary
+#. reason: Cotton Town must be the complete place name 暖棉镇
+#. en: "Cotton Town"
+msgid "cotton_town"
+msgstr "暖棉镇"
+
+#. category: style
+#. reason: 药用增强剂 is a mechanical and unclear rendering of a medicinal enhancement
+#. en: "Some people dry it out and eat it as a medicinal enhancement."
+msgid "cowpignon_description"
+msgstr "有些人会把它晒干，当作滋补药材食用。"
+
+#. category: style
+#. reason: the stammer in ‘Y-Yes’ is omitted
+#. en: "Y-Yes ma'am?"
+msgid "darnitjohn4"
+msgstr "是、是的，女士？"
+
+#. category: mistranslation
+#. reason: IMBECILE is mistranslated as ‘liar’
+#. en: "YOU IMBECILE!\\nI will say this once and only once:\\nGO. SEARCH. THE. HOUSES."
+msgid "darnitjohn9"
+msgstr "你这个蠢货！\n我只说一遍，就一遍：\n去。搜。房。子。"
+
+#. category: glossary
+#. reason: the explicit DINOFLOP name is omitted instead of using 迪诺浮普
+#. en: "DINOFLOP delights in quickly turning away from its attackers so their blows land on its shielded and spiny back."
+msgid "dinoflop_description"
+msgstr "迪诺浮普喜欢迅速转身背对攻击者，让对方的攻击落在自己带有护甲和尖刺的背上。"
+
+#. category: mistranslation
+#. reason: a decrease in dodge is mistranslated as successfully dodging
+#. en: "{user}'s dodge fell."
+msgid "dodge_fell"
+msgstr "{user}的闪避下降了。"
+
+#. category: mistranslation
+#. reason: the named Trial is reduced to a generic audit/review
+#. en: "You know, you don't have to go in. Just go through the standard training program, skip the Trial."
+msgid "dowehavetogoin"
+msgstr "你知道吗，你不一定非得进去。参加标准训练项目就好，跳过试炼吧。"
+
+#. category: style
+#. reason: an extra literal newline splits ‘rank’, and Trial is inconsistently rendered as a generic review
+#. en: "No, you don't understand. The only way I can get my family out of prison is if I reach a high enough rank in Omnichannel.\\nFinishing the Trial would set me up in a position just below the CEO. I'd be able to change things.\\nIf I finish this, I can save my family..."
+msgid "dowehavetogoin2"
+msgstr "不，你不明白。要让我的家人出狱，唯一的办法就是在全能公司里升到足够高的级别。\n完成试炼后，我的职位将仅次于首席执行官。那样我就能改变现状。\n只要完成它，我就能救出家人……"
+
+#. category: style
+#. reason: the status label is a bare transitive verb rather than an eliminated state
+#. en: "Eliminated"
+msgid "eliminated"
+msgstr "已淘汰"
+
+#. category: glossary
+#. reason: RUPTION must use the glossary rendering 火球兽 rather than 火焰兽
+#. en: "It eats everything it can to grow big enough to become a RUPTION."
+msgid "embra_description"
+msgstr "它什么都吃，好让自己长得足够大，变成火球兽。"
+
+#. category: mistranslation
+#. reason: ‘does not pull its blows’ is translated literally as not pulling attacks, and the ENDUROS name is omitted
+#. en: "ENDUROS is an aggressive brawler that does not pull its blows. Out of the ring, it is quite sociable."
+msgid "enduros_description"
+msgstr "负重运动是个咄咄逼人的斗士，出拳从不留情；离开擂台后，它却很合群。"
+
+#. category: glossary
+#. reason: Berserk must use the glossary technique rendering 狂怒
+#. en: "Berserk"
+msgid "enraged"
+msgstr "狂怒"
+
+#. category: mistranslation
+#. reason: smiths is mistaken for the personal name Smith
+#. en: "Smiths work with it, heating up metals in its caldera."
+msgid "eruptibus_description"
+msgstr "铁匠会与它合作，在它的火山口中加热金属。"
+
+#. category: drift
+#. reason: the Chinese still uses obsolete {evolve} instead of the current {target} placeholder
+#. en: "{name} is trying to evolve into {target}."
+msgid "evolution_confirmation"
+msgstr "{name}正试图进化成{target}。"
+
+#. category: mistranslation
+#. reason: caterpillar tires means crawler tracks, not literal caterpillar tires, and the last sentence is awkward
+#. en: "Often seen on construction sites, they can use their huge hands and tail to scoop up dirt and rubble. Underneath the Tuxemon are caterpillar tires, giving them a better balance and grip while climbing heaps of rubble."
+msgid "exclawvate_description"
+msgstr "它们常见于建筑工地，能用巨大的双手和尾巴铲起泥土与瓦砾。这些精灵身下装有履带，攀爬瓦砾堆时能保持更好的平衡和抓地力。"
+
+#. category: mistranslation
+#. reason: the status adjective is mistranslated as ‘used up’
+#. en: "Exhausted"
+msgid "exhausted"
+msgstr "筋疲力尽"
+
+#. category: glossary
+#. reason: Adamantine must be 金刚合金, not 金刚砂, and mithril is also mistranslated
+#. en: "Once, the FERRICRAN were covered all over with adamantine scales, and had wings of mithril."
+msgid "ferricran_description"
+msgstr "曾经，费里科兰全身覆盖着金刚合金鳞片，还长着秘银翅膀。"
+
+#. category: drift
+#. reason: the Chinese contains an alphabet song unrelated to the current whip/nae nae lyrics
+#. en: "♪ Watch me whip ♪\\n♪ Watch me nae nae ♪\\nThis song is pretty great right?"
+msgid "firsts"
+msgstr "♪ 看我挥鞭 ♪\n♪ 看我跳舞 ♪\n这首歌很棒，对吧？"
+
+#. category: style
+#. reason: ‘enemy of any size’ is rendered as an enemy of any ‘scale’, which is unnatural for body size
+#. en: "It is totally unafraid of adversaries, and will attack an enemy of any size without hesitation."
+msgid "flacono_description"
+msgstr "它完全不怕对手，无论敌人体型大小，都会毫不犹豫地发起攻击。"
+
+#. category: glossary
+#. reason: Flower City must be the complete place name 彩花城
+#. en: "Flower City"
+msgid "flower_city"
+msgstr "彩花城"
+
+#. category: mistranslation
+#. reason: the translation replaces the subject ‘uniforms’ with guards
+#. en: "Uniforms that guard you while you sleep!"
+msgid "flower_city_description"
+msgstr "连你睡觉时都能保护你的制服！"
+
+#. category: style
+#. reason: ‘一个巨大的刺眼的光’ has stacked attributives that impede readability
+#. en: "When threatened, it huddles together with other FLUORESFIN to create a large blinding light to disorientate predators."
+msgid "fluoresfin_description"
+msgstr "受到威胁时，它会和其他荧光鱼聚在一起，发出一大片刺眼强光，扰乱捕食者。"
+
+#. category: style
+#. reason: the status label 集中 is a verb; 专注 is the natural state adjective
+#. en: "Focused"
+msgid "focused"
+msgstr "专注"
+
+#. category: mistranslation
+#. reason: ‘when one [Foofle] is in danger’ is mistranslated as ‘when a person is in danger’
+#. en: "When one is in danger, all FOOFLE hear its cries, wherever they are."
+msgid "foofle_description"
+msgstr "当一只福夫勒遇到危险时，无论其他福夫勒身在何处，都能听见它的呼救声。"
+
+#. category: mistranslation
+#. reason: fires that burned out are mistranslated as destructive fires that burned things down
+#. en: "FOXFIRE cubs are found in fires that burned out overnight. No one knows where they come from."
+msgid "foxfire_description"
+msgstr "人们会在一夜间熄灭的火堆中发现火狐幼崽。没人知道它们来自哪里。"
+
+#. category: mistranslation
+#. reason: prehensile tail is mistranslated as a sessile/stalkless tail
+#. en: "It can do anything with its prehensile tail, even shake hands and pick fruit."
+msgid "frondly_description"
+msgstr "它能用灵活的卷握尾巴做任何事，甚至能握手和摘水果。"
+
+#. category: glossary
+#. reason: the explicit FRUITERA name is omitted instead of using 弗朗索拉
+#. en: "FRUITERA is greedy for fruit, and carries as much as it can. When startled, it drops all its fruit, gathers it all up again, and only then runs away."
+msgid "fruitera_description"
+msgstr "弗朗索拉很贪吃水果，能带多少就带多少。受到惊吓时，它会把所有水果都扔下，重新一一捡起，然后才逃跑。"
+
+#. category: mistranslation
+#. reason: Criminal becomes a detached question, Trial is rendered as a trainer camp, and ‘a use for you’ is reduced to a job
+#. en: "What are you doing here with this... Criminal?\\n... .... ....\\n... ... ...\\nJoining the trial? You'd really subject yourself to that nonsense?\\nIf all you want is a job at Omnichannel, you could have just asked me.\\nI'm sure I can find a... use for you... if you're interested."
+msgid "gasp2"
+msgstr "你和这个……罪犯在这里做什么？\n……  ……  ……\n……  ……  ……\n参加试炼？你真要让自己去受那种荒唐事的折磨？\n如果你只想在全能公司找份工作，直接来问我就好了。\n只要你有兴趣，我肯定能给你找到一个……用处……"
+
+#. category: style
+#. reason: ‘there's more to you’ is translated with an incomplete comparative construction
+#. en: "If that's true, there's more to you than I realized..."
+msgid "gasp3"
+msgstr "如果这是真的，那我还真是小看你了……"
+
+#. category: style
+#. reason: ‘For now’ is rendered literally as ‘as far as right now is concerned’
+#. en: "Fine, I'll let your registration papers stay intact. For now.\\nJohn, Grant, take the so-called Tuxemon Professor to his new home."
+msgid "gasp4"
+msgstr "好吧，我暂且保留你的注册文件。\n约翰、格兰特，把这位所谓的精灵教授带去他的新家。"
+
+#. category: style
+#. reason: the generic UI message is literal and lacks the source exclamation
+#. en: "It failed!"
+msgid "generic_failure"
+msgstr "失败了！"
+
+#. category: mistranslation
+#. reason: ‘It worked’ is translated as an object performing labor
+#. en: "It worked!"
+msgid "generic_success"
+msgstr "成功了！"
+
+#. category: mistranslation
+#. reason: the named competition Trial is mistranslated as a judicial trial
+#. en: "Don't let the Trial prevent you from coming to see me. In fact... Maybe I'll find you first."
+msgid "goodbye"
+msgstr "别因为试炼就不来看我。事实上……也许我会先找到你。"
+
+#. category: mistranslation
+#. reason: the named competition Trial is mistranslated as a judicial trial
+#. en: "So long ${{name}}! And good luck in the Trial, you'll need it."
+msgid "goodbye2"
+msgstr "再见，${{name}}！祝你在试炼中好运——你会需要的。"
+
+#. category: mistranslation
+#. reason: in the capture sequence, Gotcha means catching the creature, not ‘understood’
+#. en: "Gotcha!"
+msgid "gotcha"
+msgstr "抓到你了！"
+
+#. category: mistranslation
+#. reason: ‘got’ is rendered as merely currently possessing rather than receiving the items
+#. en: "You got 5 Tuxeballs!"
+msgid "gotfivetuxeballs"
+msgstr "你获得了 5 个精灵球！"
+
+#. category: style
+#. reason: the status label is an active verb rather than the state ‘being grabbed’
+#. en: "Grabbed"
+msgid "grabbed"
+msgstr "被抓住"
+
+#. category: style
+#. reason: the translation uses the human pronoun 他们 for creatures and reads mechanically
+#. en: "GRAFFIKI are as at home in cities as they are in the jungle, tagging their territory with elaborate paintings."
+msgid "graffiki_description"
+msgstr "格拉非基无论在城市还是丛林里都自在如家，会用精美的绘画标记自己的领地。"
+
+#. category: glossary
+#. reason: 徽章名称应与 Greenwash 专名“格林沃什”保持一致
+#. en: "Badge: Greenwash"
+msgid "greenwash_badge"
+msgstr "徽章：格林沃什"
+
+#. category: glossary
+#. reason: Greenwash must be the proper name 格林沃什
+#. en: "Tuxemon purchased from Greenwash require this badge to morph."
+msgid "greenwash_badge_description"
+msgstr "从格林沃什购买的精灵需要这枚徽章才能变形。"
+
+#. category: glossary
+#. reason: 把 GRINTROCK 和 GRINFLARE 错译成普通物件“石板/石膏板”，违反精灵名词表
+#. en: "It is a GRINTROCK or GRINFLARE that has experienced erosion."
+msgid "grintot_description"
+msgstr "它是经历过侵蚀的格林特洛克或格林弗拉尔。"
+
+#. category: glossary
+#. reason: 遗漏精灵名 GRUMPI，且句式不通顺
+#. en: "Once grabbed by a GRUMPI, its sticky tacky body is impossible to escape from."
+msgid "grumpi_description"
+msgstr "一旦被格鲁姆比抓住，就再也无法从它黏糊糊的身体中挣脱。"
+
+#. category: glossary
+#. reason: 把 RINOCEREED 错译成“裂缝”，违反精灵名词表
+#. en: "It nibbles on RINOCEREED, clearing away dead skin, moss and weeds."
+msgid "hampotamos_description"
+msgstr "它会啃食芦犀身上的死皮、苔藓和杂草，将它们清理干净。"
+
+#. category: glossary
+#. reason: Fondent Region 应按名词表译为“方登地区”
+#. en: "Are you really the only people in this town? There's no one here! This has GOT to be the smallest town in the Fondent Region."
+msgid "hellolovelypeople3"
+msgstr "这个镇上真的只有你们这些人吗？这里根本没人！这肯定是方登地区最小的镇子。"
+
+#. category: glossary
+#. reason: Cotton Town 必须译为“暖棉镇”
+#. en: "I'm pretty sure there are houses in Cotton Town larger than this..."
+msgid "hellolovelypeople4"
+msgstr "我敢肯定，暖棉镇有些房子都比这里大……"
+
+#. category: glossary
+#. reason: Fondent Region 违反名词表，且“精灵繁殖者”不自然
+#. en: "No... Wait... We are missing one person... \\nThe lone Tuxemon breeder left in the Fondent region. The one that calls himself the Tuxemon Professor"
+msgid "hellolovelypeople5"
+msgstr "不……等等……还少了一个人……\n方登地区仅存的那位精灵培育师，那个自称“精灵教授”的人。"
+
+#. category: drift
+#. reason: 中文擅自插入英文没有的换行
+#. en: "Miss, we already told you. Under section 2 of article 3, Omnichannel reserves the right to close down and maintain areas as needed."
+msgid "heystop2"
+msgstr "小姐，我们已经告诉过你了。根据第三条第二款，全能公司有权视需要关闭并维护相关区域。"
+
+#. category: mistranslation
+#. reason: without asking 被错译成“不问自明”
+#. en: "But... But... they dug up our flowers. Without a second thought, without asking."
+msgid "heystop5"
+msgstr "可是……可是……他们把我们的花挖走了。想都没想，也没问过我们。"
+
+#. category: drift
+#. reason: 中文擅自插入英文没有的换行
+#. en: "I know, but we can plant new flowers somewhere else. They'll still be special, because we'll plant them together."
+msgid "heystop6"
+msgstr "我知道，但我们可以在别的地方种些新花。它们仍然会很特别，因为我们会一起把它们种下。"
+
+#. category: mistranslation
+#. reason: grunts 在此指喽啰而非步兵，后句也较生硬
+#. en: "These grunts don't even get proper training, so they were no match for me. You didn't do too bad either it looks like."
+msgid "higrunts"
+msgstr "这些喽啰连像样的训练都没受过，当然不是我的对手。看起来你表现得也不差。"
+
+#. category: style
+#. reason: “在这里，我将治愈”明显不符合自然对话
+#. en: "Here, I'll heal your Tuxemon."
+msgid "higrunts2"
+msgstr "来，我给你的精灵治疗一下。"
+
+#. category: mistranslation
+#. reason: overwhelm 在此指让对方应接不暇，并非“淹没”
+#. en: "Whoa there Christie, don't overwhelm them."
+msgid "hiperson2"
+msgstr "慢点，克里斯蒂，别一下子问得人家应接不暇。"
+
+#. category: drift
+#. reason: 中文擅自插入英文没有的换行
+#. en: "Max, as much as you may want one, we've established this. They are not making, and will not make, a water park."
+msgid "hmmm5"
+msgstr "麦克斯，不管你有多想要，我们都已经说清楚了：他们没有在建水上乐园，也不会建。"
+
+#. category: style
+#. reason: 现译重复使用“它”且“急剧降温”衔接生硬，明显影响阅读
+#. en: "When threatened it retreats into its shell and cools down dramatically by venting steam. It could be mistaken for a rock."
+msgid "ignibus_description"
+msgstr "受到威胁时，它会缩进壳里，通过喷出蒸汽迅速降温。这样一来，它看上去就像一块岩石。"
+
+#. category: drift
+#. reason: 中文在“困难”一词中擅自插入换行，且多处句式生硬
+#. en: "I have a little stored away that needs to be put to good use and Omnichannel owes me a favor.\\nI'm positive something could be arranged.Getting the qualification papers is the easy part. Getting your first Tuxemon is a little more difficult...\\nLuckily, I happen to know someone who has access to multiple different Tuxemon...\\nMe!\\nNow, I know it's a lot to process, so I'll be in my lab waiting for your decision."
+msgid "ihaveyourmoney2"
+msgstr "我有一笔积蓄，需要把它用在刀刃上，而且全能公司还欠我一个人情。\n我敢肯定能想办法安排好。拿到资格文件不难，难的是得到你的第一只精灵……\n幸运的是，我碰巧认识一个能接触到多种精灵的人……\n就是我！\n我知道这一下子很难消化，所以我会在实验室等你做出决定。"
+
+#. category: style
+#. reason: 现译倒装关系不自然，像是在说听见公告后才顺便问候
+#. en: "Hello Callie, hello ${{name}}, just stopped by to say hi when I overheard you talking about the announcement."
+msgid "iknowyou"
+msgstr "你好，凯莉；你好，${{name}}。我只是顺路来打个招呼，恰好听见你们在讨论那份公告。"
+
+#. category: drift
+#. reason: 英文当前数值为 500 HP，中文仍写 350
+#. en: "Heals a monster by 500 HP."
+msgid "imperial_potion_description"
+msgstr "为一只精灵恢复 500 点生命值。"
+
+#. category: style
+#. reason: “整个身体的大小已经大量增长”是明显不自然的直译
+#. en: "Its entire body has massively grown in size. However, its light is still the exact same."
+msgid "incandesfin_description"
+msgstr "它的身体大幅长大了，但发出的光依旧和以前一模一样。"
+
+#. category: glossary
+#. reason: Cotton Town 必须译为“暖棉镇”，且 aura 译作“光环”不合语境
+#. en: "Hmm, now that I actually look at you, you have a rather mysterious aura.\\n...   ...   ...   ...\\nWe should talk sometime. Maybe see me in Cotton Town?"
+msgid "itsmyaurababe2"
+msgstr "嗯，现在仔细看看，你身上有种颇为神秘的气场。\n...   ...   ...   ...\n我们改天聊聊吧。要不到暖棉镇来找我？"
+
+#. category: mistranslation
+#. reason: 现译把宝石种类与出生地的关系译成“出生时发现”，意思不清
+#. en: "The gems on its back are the type found when it was born. There are extensive ROCKITTEN breeding facilities over diamond veins."
+msgid "jemuar_description"
+msgstr "它背上的宝石与其出生地出产的种类相同。钻石矿脉上方建有大规模的小岩猫繁育场。"
+
+#. category: mistranslation
+#. reason: jab 指突刺攻击而非“刺杀”，且蛹期关系被译乱
+#. en: "It stays in a meditative pose for its chrysalis, moving only to jab enemies."
+msgid "katacoon_description"
+msgstr "它在蛹期始终保持冥想姿势，只有在突刺敌人时才会动。"
+
+#. category: mistranslation
+#. reason: eggshell 被错译成“墓壳”
+#. en: "It is born fighting. It has to punch out of its eggshell or be trapped."
+msgid "katapill_description"
+msgstr "它生来便要战斗，必须打破蛋壳冲出来，否则就会被困住。"
+
+#. category: mistranslation
+#. reason: Shelter is mistranslated as a warehouse
+#. en: "Shelter"
+msgid "Kennel"
+msgstr "收容所"
+
+#. category: style
+#. reason: “为什么你来到这里并同我交谈”不符合口语表达
+#. en: "Why don't you come over here and talk to me?"
+msgid "kmere"
+msgstr "你不过来跟我聊聊吗？"
+
+#. category: drift
+#. reason: 中文多出一处强制换行，且误解 And that's saying something
+#. en: "Sorry about that, Kyle is one of my least favorite people at Omnichannel. And that's saying something!\\nWe were in the same cohort at The Academy and he's been nothing but trouble since. That's probably why Omnichannel recruited him actually.\\nLuckily, I don't have to listen to his grating voice every day like some poor souls have to."
+msgid "kylekindasucks"
+msgstr "抱歉。凯尔是我在全能公司最讨厌的人之一——这已经很能说明问题了！\n我们在学院时是同一届的，从那以后他就只会惹麻烦。说真的，这大概正是全能公司招募他的原因。\n幸好我不用像某些可怜人那样，每天听他那刺耳的声音。"
+
+#. category: style
+#. reason: On a different note 是转换话题，并非“从另一个角度看”
+#. en: "On a different note, it looks like Kyle was here to open the path. It seems like the Battle Area is open now."
+msgid "kylekindasucks2"
+msgstr "换个话题，看来凯尔是来打通道路的。现在对战区似乎已经开放了。"
+
+#. category: drift
+#. reason: 中文在“监视着一切”中擅自插入换行，且 Trial 被误作审判
+#. en: "I know you're going through the Trial and all, but watch your back. Omnichannel is everywhere, watching everything.\\nThey have no issue... disposing of troublesome individuals."
+msgid "kylekindasucks3"
+msgstr "我知道你正在参加试炼之类的，但一定要当心。全能公司无处不在，监视着一切。\n他们对……处理掉麻烦人物可从不手软。"
+
+#. category: style
+#. reason: 强调断句和“florist”称呼被译得生硬
+#. en: "You four, head home. Remember, YOU. SAW. NOTHING.\\nUnderstand?\\nOh, and florist? Come find me at some point. My address is on the card I gave you. "
+msgid "kylekindasucks8"
+msgstr "你们四个，回家去。记住，你。们。什。么。都。没。看。见。\n明白吗？\n哦，还有你，花匠？有空来找我。我的地址就在我给你的卡片上。"
+
+#. category: style
+#. reason: Speck 人名与同段其他译文不一致，并可改善口语节奏
+#. en: "Well, Speck, if it's any consolation, I was the one that gave the order to attack."
+msgid "kylereallysucks"
+msgstr "好吧，斯佩克，要是这能让你好受点：下令攻击的人是我。"
+
+#. category: style
+#. reason: Speck 人名译法不一致
+#. en: "Oh, and Speck? I enjoyed the screams"
+msgid "kylereallysucks3"
+msgstr "哦，对了，斯佩克？我很享受那些尖叫声。"
+
+#. category: mistranslation
+#. reason: Lifeleech 是“汲取生命”，并非“死气沉沉”
+#. en: "Lifeleech"
+msgid "lifeleech"
+msgstr "生命汲取"
+
+#. category: style
+#. reason: “注销”容易被理解为销毁账户，菜单动作应为退出登录
+#. en: "Log Off"
+msgid "log_off"
+msgstr "退出登录"
+
+#. category: mistranslation
+#. reason: leave it 在此指别没收电脑，不是“离开它”
+#. en: "Nah, leave it. These people obviously have terrible taste and despise usefulness and simplicity...\\nCheck the lab now Grant. I'll wait for John."
+msgid "maamiexist4"
+msgstr "不，别动它。这些人显然品味糟糕，而且鄙视实用与简洁……\n格兰特，现在去检查实验室。我在这里等约翰。"
+
+#. category: mistranslation
+#. reason: having a moment 被错译成“迟到了”
+#. en: "Darn it John! We were having a moment!\\nWhat do you want?"
+msgid "maamnothing2"
+msgstr "该死的，约翰！我们刚才气氛正好呢！\n你想干什么？"
+
+#. category: mistranslation
+#. reason: contemplating 是思索，并非注视
+#. en: "It floats across the tops of cities, contemplating sharks."
+msgid "manosting_description"
+msgstr "它漂浮在城市上空，思索着鲨鱼的事。"
+
+#. category: omission
+#. reason: 漏译末句 Swim safely
+#. en: "Tend to stay away from shore and known to be aggressive to people. Stingers are used to stun its prey. Swim safely."
+msgid "medushock_description"
+msgstr "它们往往远离海岸，而且以攻击人类著称。它们用刺针击晕猎物。游泳时请注意安全。"
+
+#. category: mistranslation
+#. reason: dive into the ground 是向地面俯冲，不是潜入地下；后句也误作判断撞击本身
+#. en: "This Tuxemon would enjoy diving into the ground and leaving marks. Sometimes, the Tuxemon would misjudge the hit and land in trees, starting huge and dangerous forest fires."
+msgid "metesaur_description"
+msgstr "这种精灵喜欢俯冲地面并留下痕迹。有时，它会误判撞击位置，落进树林，引发规模巨大且十分危险的森林火灾。"
+
+#. category: mistranslation
+#. reason: Julius 被错译成另一个名字“朱利安”
+#. en: "Matt, Julius, let's head out. "
+msgid "misaisleavingfornow"
+msgstr "马特、尤利乌斯，我们走吧。"
+
+#. category: style
+#. reason: “不要问我们怎么做”不像对既成融合体的自然说明
+#. en: "A killer robot fused with a dragon. Don't ask us how."
+msgid "mk01_alpha_description"
+msgstr "杀手机器人与龙的融合体。别问我们是怎么做到的。"
+
+#. category: style
+#. reason: “不要问我们怎么做”不像对既成融合体的自然说明
+#. en: "A killer robot fused with a dragon. Don't ask us how."
+msgid "mk01_beta_description"
+msgstr "杀手机器人与龙的融合体。别问我们是怎么做到的。"
+
+#. category: style
+#. reason: “不要问我们如何”句子残缺
+#. en: "A killer robot fused with a dragon. Don't ask us how."
+msgid "mk01_delta_description"
+msgstr "杀手机器人与龙的融合体。别问我们是怎么做到的。"
+
+#. category: style
+#. reason: “不要问我们怎么做”不像对既成融合体的自然说明
+#. en: "A killer robot fused with a dragon. Don't ask us how."
+msgid "mk01_gamma_description"
+msgstr "杀手机器人与龙的融合体。别问我们是怎么做到的。"
+
+#. category: style
+#. reason: “不要问我们怎么做”不像对既成融合体的自然说明
+#. en: "A killer robot fused with a dragon. Don't ask us how."
+msgid "mk01_omega_description"
+msgstr "杀手机器人与龙的融合体。别问我们是怎么做到的。"
+
+#. category: style
+#. reason: “不要问我们怎么做”不像对既成融合体的自然说明
+#. en: "A killer robot fused with a dragon. Don't ask us how."
+msgid "mk01_proto_description"
+msgstr "杀手机器人与龙的融合体。别问我们是怎么做到的。"
+
+#. category: glossary
+#. reason: Fondent Region 应按名词表译为“方登地区”
+#. en: "ATTENTION, ALL CITIZENS OF THE FONDENT REGION!"
+msgid "moreannouncement"
+msgstr "方登地区的全体公民请注意！"
+
+#. category: glossary
+#. reason: Fondent Region、Cotton Town 未遵循名词表，且中文多出七处硬换行并有多处误译漏译
+#. en: "I am sorry to give you such late notice about this address, but I believed it important before the media leaked it...\\nWell... Heh. We own the media, so I guess it wouldn't matter, but I wanted to share it all the same.\\nAfter consulting with my advisors, we have decided that the best way to become more comfortable with Tuxemon, is to use them.\\nNow, it will be some time before we can integrate them into the workforce, but in the meantime, as I said before, we will be releasing them into the wild.\\nI realize this is a shock for everyone, plus I understand that some of you may even be afraid. We all know what happened before...\\nThis is not the time to be afraid though, as Omnichannel will be sponsoring the revival of the ancient tradition known as The Trial!\\nNow, for you who are less versed in Fondent region history, a hundred years ago there was a tradition where young men and women would catch and raise Tuxemon.\\nThey would then use these Tuxemon to battle others and ascend rank in their town, with the best Tuxemon Trainers gaining status and power.\\nWe will be creating a version of this for the modern day. We will be forming battle areas in multiple cities across Fondent.\\nEach Battle Area will need to be completed in order and the most promising trainer, or trainers, will be able to attempt the Championship.\\nThe Championship will be held on top of Omnichannel Tower in Cotton Town, but only once a Tuxemon Trainer has made it through every Battle Area.\\nThe Trial is designed as a way to slowly introduce public life to Tuxemon and to encourage travel throughout the region.\\nWho better to demonstrate this than our youth?\\nEach Match will be broadcast live on Omnichannel-T, the newest television station devoted exclusively to Tuxemon-related programming!\\nDon't worry, the addition will be reflected in your bill.\\nOh, and one more thing, all Tuxemon Trainers will be exempt from the curfew.\\nBefore this of course, you will need a Tuxemon! Now, not everyone can be allowed to become a Tuxemon Trainer. That would be pure chaos!\\nFirst, you'll have to register your name with your local Omnichannel representative and if you're selected, you'll be sent to Omnichannel training.\\nAfter successful completion of your training, you will be provided with a Tuxemon and can start participating in The Trial!\\nI look forward to meeting you all! Let's create a new world together!\\nAfter all... WE ARE SAFETY, WE ARE ORDER, WE ARE OMNICHANNEL! And now,\\nWE \\nARE \\nTHE \\nFUTURE!"
+msgid "moreannouncement2"
+msgstr "很抱歉直到这么晚才通知各位我要发表这次讲话，但我认为有必要赶在媒体泄露消息之前向大家说明……\n不过……呵。媒体归我们所有，所以泄不泄露似乎也无所谓，但我还是想把这一切告诉大家。\n在与顾问商议后，我们认为，要让大家更习惯与精灵相处，最好的办法就是使用它们。\n当然，要把它们纳入劳动队伍还需要一段时间；不过在此期间，正如我先前所说，我们会将它们放归野外。\n我知道这会让所有人震惊，也明白你们中有些人甚至会害怕。我们都知道以前发生过什么……\n但现在不是害怕的时候，因为全能公司将出资复兴名为“试炼”的古老传统！\n对不太了解方登地区历史的人来说，一百年前曾有一项传统：年轻男女会捕捉并培育精灵。\n他们会用这些精灵与别人对战，在各自的城镇提升等级；最优秀的精灵训练师能够获得地位与权力。\n我们会为现代社会重塑这项传统，在方登地区的多个城市设立对战区。\n每个对战区都必须依次通过，最有前途的一名或多名训练师将有资格挑战冠军赛。\n冠军赛将在暖棉镇的全能公司塔顶举行，但要等到有精灵训练师通过所有对战区之后才会开赛。\n试炼旨在让精灵逐步融入公共生活，并鼓励大家游历整个地区。\n还有谁比我们的年轻人更适合展示这一切呢？\n每场对战都会在全能公司-T 现场直播；这是专门播放精灵相关节目的最新电视台！\n别担心，新增费用会体现在你们的账单上。\n哦，还有一件事：所有精灵训练师都不受宵禁限制。\n当然，在此之前，你得先有一只精灵！但不是所有人都能成为精灵训练师，否则就彻底乱套了！\n首先，你要向当地的全能公司代表登记姓名；如果获选，就会被送去接受全能公司的训练。\n顺利完成训练后，你会获赠一只精灵，并可以开始参加试炼！\n我期待与各位见面！让我们携手创造一个新世界！\n毕竟……我们代表安全，我们代表秩序，我们就是全能公司！而现在，\n我\n们\n就\n是未来！"
+
+#. category: style
+#. reason: 英文是命令/菜单动作，现译误用完成时“移动到了”
+#. en: "Move to {box}"
+msgid "move_to_kennel"
+msgstr "移至{box}"
+
+#. category: style
+#. reason: 末句“I believe”在中文里主语所信内容悬空
+#. en: "C'mon Rocky! You can move! I believe!"
+msgid "moverocky"
+msgstr "加油，洛基！你能动起来的！我相信你能行！"
+
+#. category: style
+#. reason: “被用于精细的运动技能”是生硬且不合搭配的直译
+#. en: "These cheeky robots are used for their fine motor skills, but they love pranks."
+msgid "mrmoswitch_description"
+msgstr "这些调皮的机器人因精细操作能力而受到重用，但它们特别爱恶作剧。"
+
+#. category: mistranslation
+#. reason: hosting 指正在作为游戏主机，非“举办”
+#. en: "Already hosting!"
+msgid "multiplayer_already_hosting"
+msgstr "已经在创建游戏房间了！"
+
+#. category: style
+#. reason: Duel 应体现一对一决斗含义
+#. en: "{name} would like to Duel!"
+msgid "multiplayer_duel"
+msgstr "{name}想和你决斗！"
+
+#. category: mistranslation
+#. reason: Host Game 是创建/主持游戏的动作，不是名词“主机游戏”
+#. en: "Host Game"
+msgid "multiplayer_host_game"
+msgstr "创建游戏"
+
+#. category: mistranslation
+#. reason: Browse Available Servers 被错译成“扫描游戏”，丢失服务器含义
+#. en: "Browse Available Servers"
+msgid "multiplayer_scan_games"
+msgstr "浏览可用服务器"
+
+#. category: glossary
+#. reason: Omnichannel 未译为“全能公司”，中文还多出一处硬换行并夹有乱码标点
+#. en: "???: What do you want? ... ... ... Well too bad. You're not getting in here even though if you meet the dresscode.\\nI'm Allie by the way.\\nAllie: Yes, this is the Omnichannel, I'm just a lowly guard though. Who are you?\\n${{name}}...\\nHmm. A strong name. My house is not too far, maybe... after work... you could show me your strength?\\n... ... No! what do you mean no? Unless... ... You're Jess's new boyfriend aren't you! She played me this whole time!"
+msgid "mwah"
+msgstr "？？？：你想干什么？…… …… …… 真遗憾。就算符合着装要求，你也休想进去。\n顺便说一句，我叫艾莉。\n艾莉：对，这里就是全能公司，不过我只是个小小的警卫。你是谁？\n${{name}}……\n嗯，真是个有力的名字。我家离这里不远，也许……下班后……你可以让我见识一下你的实力？\n…… …… 不！什么叫“不”？除非…… …… 你是杰西的新男朋友，对吧！她一直都在耍我！"
+
+#. category: glossary
+#. reason: Nimrod 应按名词表译为“尼姆罗德”
+#. en: "Badge: Nimrod"
+msgid "nimrod_badge"
+msgstr "徽章：尼姆罗德"
+
+#. category: glossary
+#. reason: Nimrod 应按名词表译为“尼姆罗德”
+#. en: "Tuxemon purchased from Nimrod require this badge to morph."
+msgid "nimrod_badge_description"
+msgstr "从尼姆罗德购买的精灵需要这枚徽章才能变形。"
+
+#. category: style
+#. reason: “{operation}不可能”不像自然的操作失败提示
+#. en: "{operation} not possible!"
+msgid "no_money_operation"
+msgstr "无法执行{operation}！"
+
+#. category: style
+#. reason: keep your secrets 被机械译作“保持你的秘密”
+#. en: "Fine! Keep your secrets!"
+msgid "nobody2"
+msgstr "好吧！那你就守着你的秘密吧！"
+
+#. category: mistranslation
+#. reason: 把两种精灵的食物完全对调：英文是本体吃水果、PIPIS 吃虫
+#. en: "It eats fruit and PIPIS eat bugs, so despite living in close proximity they do not compete."
+msgid "noctula_description"
+msgstr "它吃水果，皮斯蝠吃虫子，因此尽管生活区域相近，它们也不会争夺食物。"
+
+#. category: mistranslation
+#. reason: Nodding Off 是打瞌睡，不是“点头离开”
+#. en: "Nodding Off"
+msgid "noddingoff"
+msgstr "打瞌睡"
+
+#. category: mistranslation
+#. reason: insensitive 指不体谅人，直译成“不敏感”不合语境
+#. en: "How insensitive of you! Too bad, you'll have to listen to me anyway!"
+msgid "notalk"
+msgstr "你也太不近人情了！可惜，不管怎样你都得听我说！"
+
+#. category: mistranslation
+#. reason: female 条目误用了雄性符号
+#. en: "Nudiflot"
+msgid "nudiflot_female"
+msgstr "浮蛞蝓♀"
+
+#. category: mistranslation
+#. reason: male 条目误用了雌性符号
+#. en: "Nudiflot"
+msgid "nudiflot_male"
+msgstr "浮蛞蝓♂"
+
+#. category: style
+#. reason: 生物的 antenna 应译作触角而非“天线”
+#. en: "Its feathery antennas snap off if it is attacked, confusing the predator."
+msgid "nudiflot_male_description"
+msgstr "受到攻击时，它羽毛状的触角会折断，以此迷惑捕食者。"
+
+#. category: glossary
+#. reason: Xero 按名词表应保留英文，不应音译为“谢罗”
+#. en: "I heard that some Xero thug was beating up my men, but I didn't think it'd be you Misa!"
+msgid "ohaimisa2"
+msgstr "我听说有个 Xero 暴徒在揍我的手下，但没想到会是你，米萨！"
+
+#. category: drift
+#. reason: 中文擅自在句中插入换行，末尾 and all 也被误译
+#. en: "Why am I here? Why, I'm the head of this project! Building the model Battle Area for the entire region is an honor!\\nAlthough, I can see why you wouldn't have heard the news, frolicking about with your new plaything and all"
+msgid "ohaimisa4"
+msgstr "我为什么在这里？我可是这个项目的负责人！为整个地区打造示范对战区是一项荣誉！\n不过，看你正忙着和新玩物四处嬉闹，没听说这消息也不奇怪。"
+
+#. category: omission
+#. reason: 漏译结尾 Toodles，导致英文的一处换行也消失
+#. en: "Ah, doesn't matter. I have more important things to attend to anyways. Have fun you two, AND STOP HURTING MY MEN!\\nToodles!"
+msgid "ohaimisa6"
+msgstr "啊，算了。反正我还有更重要的事要处理。你们两个玩得开心点，还有别再伤害我的手下了！\n回头见！"
+
+#. category: glossary
+#. reason: 剧情明确指 Potion 道具，应统一译为“治疗药水”
+#. en: "Now that that's over...we still need potions from the Tuxemart.\\nMake sure you're back before curfew though!"
+msgid "ohnoes2"
+msgstr "这件事总算解决了……我们还得去精灵商店买治疗药水。\n不过一定要在宵禁前回来！"
+
+#. category: omission
+#. reason: 漏译 Have a wonderful day，并错添“他们在这里”，同时丢失换行
+#. en: "Well, it looks like your Tuxemon are all better now!\\nHave a wonderful day!"
+msgid "okaythen2"
+msgstr "好了，看来你的精灵已经全都康复了！\n祝你度过愉快的一天！"
+
+#. category: glossary
+#. reason: 品牌名 Omnichannel 应保留名词表中的“全能公司”译法
+#. en: "Omnichannel Mobile 4G"
+msgid "omnichannel_mobile"
+msgstr "全能公司移动通信 4G"
+
+#. category: glossary
+#. reason: Paper Town 必须完整译为“方絮镇”
+#. en: "Paper Town"
+msgid "paper_town"
+msgstr "方絮镇"
+
+#. category: glossary
+#. reason: Fondent 应依照 Fondent Region 术语译为“方登地区”
+#. en: "The gateway to Fondent!"
+msgid "paper_town_description"
+msgstr "通往方登地区的门户！"
+
+#. category: style
+#. reason: hardy 描述植物耐养，并非人格意义上的“坚韧”
+#. en: "A hardy indoor plant for someone special."
+msgid "peace_lily_description"
+msgstr "送给特别之人的耐养室内植物。"
+
+#. category: glossary
+#. reason: RINOCEREED 与 HAMPOTAMOS 均未使用名词表译名
+#. en: "At the watering hole it keeps its friends RINOCEREED and HAMPOTAMOS well watered."
+msgid "pharfan_description"
+msgstr "在水潭边，它会让朋友芦犀和罕博塔摩斯都喝足水。"
+
+#. category: mistranslation
+#. reason: “回复生命”是错字，应为恢复
+#. en: "Heals a monster by 50 HP."
+msgid "potion_description"
+msgstr "为一只精灵恢复 50 点生命值。"
+
+#. category: style
+#. reason: 药水量词用“个”不自然
+#. en: "Received 2 potions!"
+msgid "potions2"
+msgstr "收到了 2 瓶治疗药水！"
+
+#. category: glossary
+#. reason: 剧情明确购买 Potion 道具，应统一译为“治疗药水”
+#. en: "I'll take 12 potions please."
+msgid "professorexists"
+msgstr "请给我 12 瓶治疗药水。"
+
+#. category: mistranslation
+#. reason: Why hello there 是热情问候，并非询问“为什么”
+#. en: "Why hello there!"
+msgid "professorexists1.5"
+msgstr "哎呀，你好啊！"
+
+#. category: mistranslation
+#. reason: on the house 指免费赠送，被错译成“在我家里”
+#. en: "You must be Callie's kid! I've heard so much about you from your mom.\\nWhat brings you in here for?\\n.... .... ....\\nPotions? Of course, you always need those!\\nHere, have a few on the house, courtesy of me."
+msgid "professorexists2"
+msgstr "你一定是凯莉的孩子！你妈妈跟我说过很多你的事。\n是什么风把你吹来了？\n.... .... ....\n药水？当然，那可是随时都用得上的！\n来，免费送你几瓶，算我请客。"
+
+#. category: glossary
+#. reason: Fondent Region 应按名词表译为“方登地区”
+#. en: "Oh! Excuse my manners, I can't believe I never introduced myself!\\nMy name is Kay Wren, better known as the Tuxemon Professor.\\nFor years now I've been the only person in the Fondent Region allowed to research Tuxemon."
+msgid "professorexists3"
+msgstr "哦！真是失礼，我竟然一直没做自我介绍！\n我叫凯·雷恩，人们更熟悉的称呼是精灵教授。\n多年来，我一直是方登地区唯一获准研究精灵的人。"
+
+#. category: style
+#. reason: see coming 是预料到，并非真的“看到”某个东西
+#. en: "Its heavenly fire is something foes rarely see coming."
+msgid "prophetoise_description"
+msgstr "敌人很难预料到它的天火。"
+
+#. category: style
+#. reason: “有一个盔甲蛹掉在他们身上”明显生硬且代词指向含混
+#. en: "Its cocoon is so hard, people are knocked out if a PUPARMOR is dropped on them. They were once loaded into cannons and catapults."
+msgid "puparmor_description"
+msgstr "它的茧硬得惊人，要是盔甲蛹掉到人身上，能把人当场砸晕。过去，人们还曾把它们装进大炮和投石机。"
+
+#. category: mistranslation
+#. reason: celestial power 是天界/苍穹之力，不是“天人合一”
+#. en: "A golden triangle that hums with celestial power."
+msgid "pyramidion_description"
+msgstr "一个嗡嗡作响、充满苍穹之力的金色三角体。"
+
+#. category: style
+#. reason: 把 shadow puppets 反复译成表演形式“皮影戏”，句式也严重重复
+#. en: "Using its shadow puppets, it can use them to fight its opponent with great accuracy and speed. They are much more confident, and will sometimes even use their shadow puppets to entertain small children at puppet shows."
+msgid "pythock_description"
+msgstr "它能以极高的精准度和速度操纵影偶攻击对手。它们更加自信，有时甚至会在木偶戏中用影偶逗小孩子开心。"
+
+#. category: glossary
+#. reason: 两处 Tuxemon 均被错译成“胥吏”，违反固定译名，且中文多出换行
+#. en: "This Tuxemon would dive into groups of other dinosaur Tuxemon and burn them. They also enjoy setting forests alight and dropping their ashes into water to spoil its purity."
+msgid "qetzlrokilus_description"
+msgstr "这种精灵会俯冲进其他恐龙精灵群中，将它们焚烧。它们还喜欢点燃森林，再把灰烬撒进水里，破坏水质。"
+
+#. category: glossary
+#. reason: Omnichannel 应译为“全能公司”，且 you'll have to do 被误译
+#. en: "I don't have much time left. Omnichannel is coming...\\nI was supposed to meet a contact, but you'll have to do. They're coming."
+msgid "quicklyknight"
+msgstr "我时间不多了。全能公司的人要来了……\n我本来该和一个联络人见面，但现在只能由你顶上。他们来了。"
+
+#. category: glossary
+#. reason: Omnichannel 应译为“全能公司”
+#. en: "Two people control Omnichannel. The board is a joke."
+msgid "quicklyknight2"
+msgstr "两个人控制着全能公司。董事会不过是个笑话。"
+
+#. category: mistranslation
+#. reason: The Trial 被误译成泛化的“训练师大赛”，packet 也不是“一袋”
+#. en: "A packet of registration papers for The Trial"
+msgid "reg_papers_description"
+msgstr "一套用于试炼的注册文件。"
+
+#. category: glossary
+#. reason: Release 在精灵菜单中应按名词表译为“放生”
+#. en: "Are you sure you would like to release {name}?"
+msgid "release_confirmation"
+msgstr "确定要放生{name}吗？"
+
+#. category: drift
+#. reason: 当前英文为恢复一半 HP，中文仍写固定 20 点
+#. en: "Revives knocked out Tuxemon and restores half HP."
+msgid "revive_description"
+msgstr "复活倒下的精灵，并恢复一半生命值。"
+
+#. category: drift
+#. reason: 中文擅自在残缺碑文中插入换行
+#. en: "The grave says:\\nHere lies Jimmy. A friend, a knight, and ... bad person overall. However, ... never ... ... Help! ...\\nThe rest is weathered away."
+msgid "ripjimmy"
+msgstr "墓碑上写着：\n吉米长眠于此。他是一位朋友、一名骑士，也是个……总体而言的坏人。不过，……从未…… ……救命！……\n其余文字已经风化了。"
+
+#. category: glossary
+#. reason: Cotton Town 必须译为“暖棉镇”
+#. en: "Wait, Rocky, don't stop here! We made it so far already!\\nI know you like the grass, but we need to make it to Cotton Town!"
+msgid "rockywhy"
+msgstr "等等，洛基，别停在这里！我们都已经走了这么远！\n我知道你喜欢草地，但我们得赶到暖棉镇！"
+
+#. category: style
+#. reason: “要求一些感情”不符合中文搭配
+#. en: "ROSARIN's love is incredible, he's only asking some affection."
+msgid "rosarin_description"
+msgstr "罗萨林有着无比深厚的爱，它所求的只是一点关爱。"
+
+#. category: glossary
+#. reason: Timber Town 应按名词表译为“粽木镇”
+#. en: "The memorial passage to Timber Town!"
+msgid "route5_description"
+msgstr "通往粽木镇的纪念通道！"
+
+#. category: style
+#. reason: 末尾“在这个过程中基本上取代了它”指代不清
+#. en: "Once EMBRA's flame becomes hot enough, it engulfs its entire body, essentially replacing it in the process."
+msgid "ruption_description"
+msgstr "一旦火球兽的火焰变得足够炽热，便会吞没全身，实质上取代它的身体。"
+
+#. category: mistranslation
+#. reason: violent 指暴戾/暴力，不只是“暴躁”
+#. en: "A scientist took a drug that made him clever by day and violent by night."
+msgid "sampsage_description"
+msgstr "一位科学家服下一种药后，白天变得聪慧，夜晚却变得暴戾。"
+
+#. category: style
+#. reason: 原译“存档有问题”含义含混，不如直接说明保存操作失败
+#. en: "There was a problem saving!"
+msgid "save_failure"
+msgstr "保存时出了问题！"
+
+#. category: mistranslation
+#. reason: 把说话者 Shady Guy 改成了功能性称呼“更名者”
+#. en: "Shady Guy: Hey. If you have some... 'trouble' attached to your name I can fix it for you..."
+msgid "shady_guy_dialog"
+msgstr "可疑人物：嘿。如果你的名字惹上了些……“麻烦”，我可以替你摆平……"
+
+#. category: mistranslation
+#. reason: 把说话者 Shady Guy 改成了“改名者”
+#. en: "Shady Guy: Good luck with your new name, friend..."
+msgid "shady_rename"
+msgstr "可疑人物：祝你和新名字好运，朋友……"
+
+#. category: glossary
+#. reason: 徽章名称应与 Shaft 专名“沙夫特”保持一致
+#. en: "Badge: Shaft"
+msgid "shaft_badge"
+msgstr "徽章：沙夫特"
+
+#. category: glossary
+#. reason: Shaft 和 Tuxemon 均未采用规定译名
+#. en: "Tuxemon purchased from Shaft require this badge to morph."
+msgid "shaft_badge_description"
+msgstr "从沙夫特购买的精灵需要这枚徽章才能变形。"
+
+#. category: glossary
+#. reason: Rhincus 未按术语表译为“飞犀牛”
+#. en: "In ancient times it hunted RHINCUS beneath ashen skies."
+msgid "shammer_description"
+msgstr "在古代，犀牛兽曾在灰暗的天空下猎捕飞犀牛。"
+
+#. category: mistranslation
+#. reason: trusting prey 指毫无戒心的猎物，不是它所信任的猎物
+#. en: "SHNARK wears its last meal's flesh as a disguise so it can get close to its trusting prey."
+msgid "shnark_description"
+msgstr "什纳基把上一顿猎物的肉披在身上作为伪装，好接近毫无戒心的猎物。"
+
+#. category: style
+#. reason: “担心自己的生命”生硬，未自然表达 fear for its life
+#. en: "The SKWIB contentedly floats through the ocean, examining potential shell-homes. It has to fear for its life before it will finally make a choice."
+msgid "skwib_description"
+msgstr "鱿鱼兽心满意足地漂游在海中，打量着可作新家的贝壳。只有到了性命攸关的时刻，它才会终于作出选择。"
+
+#. category: mistranslation
+#. reason: heads 误作“首脑”，且代词把精灵人格化成多人
+#. en: "The two heads of SNOKARI each hold great wisdom, but they never agree."
+msgid "snokari_description"
+msgstr "斯诺卡里的两个脑袋各自拥有非凡的智慧，但它们从来无法达成一致。"
+
+#. category: mistranslation
+#. reason: tag 是追逐游戏，不是捉迷藏
+#. en: "It delights in playing tag with skiers on desolate slopes."
+msgid "snowrilla_description"
+msgstr "它喜欢在荒凉的山坡上和滑雪者玩追逐游戏。"
+
+#. category: glossary
+#. reason: 漏掉了按术语表应译为“索克瑟普”的主语名，并遗漏 otherwise formidable
+#. en: "An otherwise formidable enemy, SOCKESERP is easily dispatched if it gets tangled up."
+msgid "sockeserp_description"
+msgstr "索克瑟普本来是个难缠的敌人，但一旦被缠住，就很容易解决。"
+
+#. category: mistranslation
+#. reason: 把句末对众人的称呼 everyone 误译成“每个人都是如此”
+#. en: "Well it looks like we finally found a florist everyone."
+msgid "soiwashearing"
+msgstr "看来我们终于找到花商了，各位。"
+
+#. category: mistranslation
+#. reason: be addressed correctly 指得到正确称呼，不是得到正确处理
+#. en: "I expect to be addressed CORRECTLY."
+msgid "soiwashearing10"
+msgstr "我希望你们正确称呼我。"
+
+#. category: mistranslation
+#. reason: move 是让开位置，不是跟随说话者
+#. en: "Good, now move so I can talk to these so called \"knights.\""
+msgid "soiwashearing11"
+msgstr "很好，现在让开，我要跟这些所谓的“骑士”谈谈。"
+
+#. category: mistranslation
+#. reason: 原译把“你正在和总理说话”误成“你所说的总理”
+#. en: "How dare you...\\nThis is the Premier you're talking to! Have some respect!"
+msgid "soiwashearing4"
+msgstr "你好大的胆子……\n你面对的可是总理！放尊重点！"
+
+#. category: mistranslation
+#. reason: poor thing 是对人的怜惜称呼，不是“可怜的东西”
+#. en: "She looks scared, the poor thing."
+msgid "soiwashearing7"
+msgstr "她看起来吓坏了，真可怜。"
+
+#. category: glossary
+#. reason: Flower City 未按术语表译为“彩花城”
+#. en: "Not to mention that the prisons are already overflowing with the... Flower City incident."
+msgid "soiwashearing8"
+msgstr "更不用说监狱已经因为……彩花城事件而人满为患了。"
+
+#. category: mistranslation
+#. reason: 原译把“自己不会被偷袭”误成“不能偷袭自己”
+#. en: "It's not fair that something so good at sneaking up on people, can't be snuck up on itself."
+msgid "spighter_description"
+msgstr "这么擅长偷袭别人的家伙，自己却从来不会被偷袭，真不公平。"
+
+#. category: style
+#. reason: 译文有多余硬换行且后半句直译生硬
+#. en: "You know that I am the leader of the Xero institute and that I recruited you to fight them. But you don't know something else.\\nAllie, who you met before... What? I told you we would be watching, you don't have to be surprised by it."
+msgid "spillit"
+msgstr "你知道我是 Xero 研究所的领导，也是我招募了你去对抗他们。但还有一件事你不知道。\n你之前见过的艾莉……怎么了？我说过我们会一直监视，你不用这么惊讶。"
+
+#. category: mistranslation
+#. reason: destroyed me 误作“我被摧毁”，并多出一个字面换行
+#. en: "Whatever... Allie is my sister and means the world to me, so it destroyed me when I found out he had taken her to HQ."
+msgid "spillit3"
+msgstr "算了……艾莉是我的妹妹，对我来说她就是整个世界。所以当我发现他把她带到总部时，我心都碎了。"
+
+#. category: mistranslation
+#. reason: recruits 被误译为“饼干”
+#. en: "It may not seem like a bad thing, but it is. Do you know what they do to their recruits? DO YOU!?"
+msgid "spillit4"
+msgstr "这看起来或许不是坏事，但其实是。你知道他们会怎样对待新成员吗？你知道吗？！"
+
+#. category: glossary
+#. reason: Omnichannel 未按术语表译为“全能公司”
+#. en: "Anyways... it doesn't concern you. All that matters is bringing down Omnichannel."
+msgid "spillit6"
+msgstr "总之……这与你无关。重要的是打倒全能公司。"
+
+#. category: mistranslation
+#. reason: the unsuspecting 指毫无戒心的对象，不是“没有期待的人”
+#. en: "SPOILURM disguise themselves as apples, and wait in trees to eat the unsuspecting."
+msgid "spoilurm_description"
+msgstr "苹果兽把自己伪装成苹果，在树上等着吃掉毫无戒心的猎物。"
+
+#. category: style
+#. reason: 条件从句和费用成分错位，中文难以顺畅理解
+#. en: "Plus a ${{currency}}${{var:cathedral_fee}} call-out fee if we had to send the ambulance to collect you."
+msgid "spyder_billing_cathedral3"
+msgstr "如果我们不得不派救护车去接你，还要加收 ${{currency}}${{var:cathedral_fee}} 的出车费。"
+
+#. category: glossary
+#. reason: 标题中的 Tuxemon 未按规定译为“精灵”
+#. en: "Tuxemon: Spyder and the Cathedral"
+msgid "spyder_campaign"
+msgstr "精灵：斯派德与大教堂"
+
+#. category: drift
+#. reason: 译文无依据地多出“关闭”
+#. en: "Achievement Maniac's House"
+msgid "spyder_citypark_achievement"
+msgstr "成就狂人之家"
+
+#. category: style
+#. reason: “有一个观点”是生硬直译
+#. en: "Hmm, you may have a point."
+msgid "spyder_citypark_edith2"
+msgstr "嗯，你说得或许有道理。"
+
+#. category: style
+#. reason: Leather Town 在同批文本中统一作“皮革城”，此处误作“皮革镇”
+#. en: "We'll walk back to Leather Town after a little rest."
+msgid "spyder_citypark_granny"
+msgstr "稍微休息一下后，我们就走回皮革城。"
+
+#. category: mistranslation
+#. reason: pooped 指累坏了，不是大腹便便
+#. en: "Phew, we're pooped!"
+msgid "spyder_citypark_maniac"
+msgstr "呼，我们累坏了！"
+
+#. category: mistranslation
+#. reason: under the weather 是状态不佳，不是“风雨飘摇”；译文还多出字面换行
+#. en: "The flowers look okay, don't they? ... Ever since the mining began in Leather Town, the flowers have been under the weather!"
+msgid "spyder_citypark2_florist"
+msgstr "这些花看起来还好，不是吗？……自从皮革城开始采矿后，它们就一直没精打采的！"
+
+#. category: omission
+#. reason: 漏译 heals（免费治疗）
+#. en: "Don't look at me. I'm just here for the free canapes and heals."
+msgid "spyder_cotton_cafegoth"
+msgstr "别看我。我只是来蹭免费小吃和治疗的。"
+
+#. category: drift
+#. reason: 译文重复一句并把菜单入口改成了自动安装到手机，且多出字面换行
+#. en: "Currently, the only reliable information about tuxemon is from the expensive and incomplete Encyclopaedia Tuxemon! \\n That's not cool; information should be freely available. That's why we're introducing Tuxepedia. \\n It's open source, it's free, it's available for everyone to read, write and edit. How cool is that? \\n You can open Tuxepedia from the menu. "
+msgid "spyder_cotton_tuxepediaintro"
+msgstr "目前，关于精灵的可靠信息只有昂贵且内容不全的《精灵百科全书》！\n 这可不行；信息应该免费公开。因此，我们推出了精灵百科。\n 它是开源的、免费的，任何人都可以阅读、撰写和编辑。很酷吧？\n 你可以从菜单中打开精灵百科。 "
+
+#. category: style
+#. reason: get into it 误直译为“进入它”，影响阅读
+#. en: "It's so cool that you came. There's still so many tuxemon to be added - over a hundred, I think. \\n You could really get into it, and make a difference to the world. "
+msgid "spyder_cotton_tuxepediaintro4"
+msgstr "你能来真是太好了。还有很多精灵有待收录——我想有一百多种。\n 你可以真正投入其中，为世界带来改变。 "
+
+#. category: style
+#. reason: 译文有多余硬换行，画名和销售话术也过度直译
+#. en: "Do you like my set? \\n They capture my early days as a professional tuxemon trainer, before I retired on my winnings. \\n  I call them: 'Monsters' Eyes Meet', 'Starry, Starry, Starry Night' and 'Trepidation'. They're for sale! \\n Get them while they're hot! Just 1,000 each."
+msgid "spyder_cottonart_barmaid"
+msgstr "你喜欢我的这组画吗？\n 它们记录了我作为职业精灵训练师的早年时光，那时我还没靠比赛奖金退休。\n 我给它们取名为《怪物目光交汇》《星光灿烂之夜》和《忐忑》。都出售！\n 趁早下手！每幅只要 1,000。"
+
+#. category: glossary
+#. reason: Cotton Town 未按规定译为“暖棉镇”，且 currency 占位符少了一层花括号
+#. en: "Welcome to the Cotton Town Art Gallery. Ah - I mean Art Shop! \\n Ever since they cut our funding, we've had to sell the artworks instead of just displaying them. \\n Entry is ${{currency}}50. It goes toward the company's annual dividend."
+msgid "spyder_cottonart_shopkeeper"
+msgstr "欢迎来到暖棉镇美术馆。啊——我是说美术商店！\n 自从经费被削减，我们不得不把艺术品卖掉，而不能只供展览。\n 门票为 ${{currency}}50，收入会用于公司的年度分红。"
+
+#. category: drift
+#. reason: 译文重复“互相照顾”并有两个多余字面换行
+#. en: "We call ourselves Team Bazaar. Maybe that's a little pretentious. \\n We're a group of rogues and scoundrels who like to get together to drink coffee, discuss philosophy and defy our corporate overlords! \\n We try to look out for each other. For example, unlike the Cathedral we don't charge for you to heal your tuxemon! \\n Would you like me to heal them now?"
+msgid "spyder_cottoncafe_barmaidintro"
+msgstr "我们自称芭莎团队，或许有点自命不凡。\n 我们是一群喜欢聚在一起喝咖啡、讨论哲学、反抗企业霸主的无赖和恶棍！\n 我们会互相照应。比如说，不同于大教堂，我们不会收取治疗精灵的费用！\n 要我现在给它们治疗吗？"
+
+#. category: mistranslation
+#. reason: conditions 是状态，replace 是取代；原译误成属性相克
+#. en: "Some conditions replace one another. \\n Learning how conditions interact is key to becoming a master of tuxemon fighting."
+msgid "spyder_cottonhouse2_magician"
+msgstr "有些状态会取代另一些状态。\n 了解各种状态如何相互作用，是成为精灵对战大师的关键。"
+
+#. category: mistranslation
+#. reason: come after my job 指抢工作，不是打扰工作
+#. en: "I don't have a problem with people from other regions. \\n Just don't come after my job, alright?"
+msgid "spyder_cottonhouse2_shopkeeper"
+msgstr "我对其他地区的人没意见。\n 只要别来抢我的饭碗，明白吗？"
+
+#. category: mistranslation
+#. reason: servants 被软化成“伙伴”，且译文多出一个字面换行
+#. en: "Tuxeballs allow you to capture tuxemon and keep them as servants. \\n They're most effective when used on injured and low-level tuxemon. Select them during battle from your Item menu. \\n Thank you for listening. Here's five Tuxeballs as a free sample. "
+msgid "spyder_cottonscoop_deviceexplan2"
+msgstr "精灵球能让你捕捉精灵并把它们当作仆从。\n 对受伤或等级较低的精灵使用时最有效。战斗中可从“物品”菜单选择精灵球。\n 感谢聆听。这五个精灵球是免费样品。 "
+
+#. category: glossary
+#. reason: Tuxeballs 未按术语表译为“精灵球”
+#. en: "     Okay, well here's five as a free sample. \\n If you have any questions about how Tuxeballs work, just ask my assistant!"
+msgid "spyder_cottonscoop_devicenoexplan"
+msgstr "     好吧，这里有五个免费样品。\n 如果你对精灵球的用法有任何疑问，问我的助手就行！"
+
+#. category: mistranslation
+#. reason: servants 被软化成“伙伴”
+#. en: "Tuxeballs allow you to capture tuxemon and keep them as servants. \\n They're most effective when used on injured and low-level tuxemon. \\n Select them during battle from your Item menu."
+msgid "spyder_cottonscoop_shopassistant"
+msgstr "精灵球能让你捕捉精灵并把它们当作仆从。\n 对受伤或等级较低的精灵使用时最有效。\n 战斗中可从“物品”菜单选择精灵球。"
+
+#. category: mistranslation
+#. reason: poke them in the eye 误作“戳眼镜”，并少了一个字面换行
+#. en: "Hey, cool tuxemon! Can I see the receipt? \\n ... \\n Just kidding, I had a feeling you hadn't picked it up using, ah, official channels. \\n For years, the Five Pillars have controlled the strongest tuxemon. \\n Do you think it'd be cool to poke them in the eye? \\n ... \\n Good! I have a project for you. Meet me in the Cafe!"
+msgid "spyder_cottontown_hackerintro"
+msgstr "嘿，精灵不错！能让我看看收据吗？\n ……\n 开个玩笑，我就觉得你不是通过，呃，官方渠道得到它的。\n 多年来，五大支柱一直控制着最强的精灵。\n 你觉得戳他们的眼睛会不会很酷？\n ……\n 好！我有个项目交给你。到咖啡馆来找我！"
+
+#. category: drift
+#. reason: 译文混入三段当前英文没有的旧对话，并违反 Nu Phone 固定译名和换行数
+#. en: " But do call home more often. I want someone to tell about my inventions. \\n ... Oh, I forget, you haven't got a phone yet. Here's one I invented. I call it the Nu Phone! \\n You can install all sorts of apps on it. It already has the Map App, so you'll never get lost!"
+msgid "spyder_cottontown_mom"
+msgstr " 不过一定要多给家里打电话。我想找个人讲讲我的发明。\n ……哦，我忘了，你还没有手机。这是我发明的，我把它叫作 Nu 手机！\n 你可以在上面安装各种应用。它已经装好了手机地图，你永远不会迷路！"
+
+#. category: style
+#. reason: “在首饰上有很好的表现”过度直译，且译文多出一个字面换行
+#. en: "Famously the hardest gemstone in the world, diamonds are great on necklaces, engagement rings and earrings! \\n If your fiance doesn't buy a Shaft diamond ring for you, he doesn't love you! \\n Feed diamonds to your tuxemon to harden their skin, making them better able to resist physical blows."
+msgid "spyder_diamond_plaque"
+msgstr "钻石是举世闻名的最坚硬宝石，很适合镶在项链、订婚戒指和耳环上！\n 如果你的未婚夫不给你买沙夫特钻戒，他就不爱你！\n 把钻石喂给精灵能使其皮肤硬化，更好地抵挡物理打击。"
+
+#. category: glossary
+#. reason: Omnichannel HQ 未按术语表译出“全能公司”
+#. en: "Wait, if we're all here - who's guarding Omnichannel HQ?"
+msgid "spyder_dragonscave_concernedbrute1"
+msgstr "等等，如果我们都在这里——谁在看守全能公司总部？"
+
+#. category: mistranslation
+#. reason: Benden 与同批角色名“本登”不一致
+#. en: "You may have bested me, but you'll never best Benden."
+msgid "spyder_dragonscave_daenny2"
+msgstr "你也许胜过了我，但你永远胜不过本登。"
+
+#. category: mistranslation
+#. reason: Rawr 是咆哮声，不是表示不满的“哼”
+#. en: "Rawr!"
+msgid "spyder_dragonscave_drokoro1"
+msgstr "嗷！"
+
+#. category: style
+#. reason: 译文人为插入字面换行，且句式生硬
+#. en: "We stand guard over this, the last dragon. We don't know where it came from or why it hatched. We thought all dragons had hatched long ago."
+msgid "spyder_dragonscave_lessa1"
+msgstr "我们守护着这最后一条龙。我们不知道它从何而来，也不知道它为何会孵化。我们原以为所有的龙早在很久以前就已孵化。"
+
+#. category: mistranslation
+#. reason: Lucille 被误写成带空格且不完整的“卢 克”
+#. en: "Lucille"
+msgid "spyder_dragonscave_lucille"
+msgstr "露西尔"
+
+#. category: style
+#. reason: 译文多出三个字面换行，且多处句法生硬或关系错置
+#. en: "The Drokoro is ours! \\n We got Shaft to dig it up from beneath Route 3, and we would have kept it if that infuriating kid hadn't interrupted our plans. \\n It is time for the Pillars to combine their strength and rule this region outright! \\n Too long have we let the Cathedral and the public tell us what can and cannot be done with Tuxemon. \\n When we use Greenwash's fusion technology to combine this Drokoro with the killer robots built by Nimrod, we will be unstoppable! \\n And the best part is, Omnichannel will tell the public that this is all in their best interests - and the public will believe them!"
+msgid "spyder_dragonscave_mallory3"
+msgstr "德罗科罗是我们的！\n 我们让沙夫特从 3 号公路地下把它挖了出来；要不是那个可恶的孩子破坏了计划，它早就落到我们手里了。\n 现在正是五大支柱合力彻底统治这个地区的时候！\n 长久以来，我们一直任由大教堂和公众告诉我们，能对精灵做什么、不能做什么。\n 等我们用格林沃什的融合技术，把这只德罗科罗与尼姆罗德制造的杀手机器人融合起来，我们就无人能挡了！\n 最妙的是，全能公司会告诉公众这一切都是为了他们好——而公众也会相信！"
+
+#. category: style
+#. reason: 译文多出一个字面换行并把 Once 直译成“有一次”
+#. en: "Once we each rode a dragon. That was long ago. But just recently a new-born dragon appeared above this island, and crawled into this cave."
+msgid "spyder_dragonscave_tomas1"
+msgstr "我们曾经每人都骑着一条龙。那是很久以前的事了。但就在最近，一条刚出生的龙出现在这座岛上空，随后爬进了这个洞穴。"
+
+#. category: mistranslation
+#. reason: 末句误成阻止他们返回总部，原意是无法阻止总部里的那些人
+#. en: "Whatever. We already took the DNA sample. \\n We just wanted to capture Drokoro as a backup. \\n You'll never stop them back at Omnichannel HQ."
+msgid "spyder_dragonscave_tru2"
+msgstr "随便吧……我们已经取到了 DNA 样本。\n 我们只是想把德罗科罗也抓走，以备不时之需。\n 你永远阻止不了全能公司总部里的那些人。"
+
+#. category: mistranslation
+#. reason: more than we appear 指并非表面看起来那么简单，不是比外表更重要
+#. en: "We are more than we appear."
+msgid "spyder_dryadsgrove_ignatia1"
+msgstr "我们远不止表面看起来那样。"
+
+#. category: mistranslation
+#. reason: more than you appear 指内在超出外表，不是比外表更重要
+#. en: "You are more than you appear."
+msgid "spyder_dryadsgrove_ignatia2"
+msgstr "你也远不止表面看起来那样。"
+
+#. category: mistranslation
+#. reason: molds 在此指塑造生命的模具，不是霉菌
+#. en: "Crack nature's molds!"
+msgid "spyder_dryadsgrove_petra1"
+msgstr "打破自然的定式！"
+
+#. category: style
+#. reason: 译文多出一个字面换行，后句主谓和列举关系生硬
+#. en: "An emerald is a green variety of beryl. Beryl that is blue is called aquamarine instead. \\n A one-carat emerald is larger but less dense than a one-carat diamond. \\n Tuxemon that eat emeralds have their sight and intuition heighten, making their ranged attacks like shots, sprays and blasts more potent."
+msgid "spyder_emerald_plaque"
+msgstr "祖母绿是绿色的绿柱石；蓝色的绿柱石则称为海蓝宝石。\n 一克拉的祖母绿体积比一克拉的钻石大，但密度更低。\n 精灵吃下祖母绿后，视力和直觉会增强，让射击、喷射和爆破等远程攻击威力更强。"
+
+#. category: style
+#. reason: “剪报开始了”是生硬误译，无法自然引出引文
+#. en: "A newspaper clipping is on the wall. It begins: \\n \"The famous art critic has put away his poison pen and picked up the paint brush. \\n After years of tearing down artists, can he do any better himself?\""
+msgid "spyder_flower_artist_clipping"
+msgstr "墙上贴着一张剪报，开头写着：\n “这位著名艺术评论家收起毒笔，拿起了画笔。\n 多年来一直贬低艺术家的他，亲自作画又能好到哪里去？”"
+
+#. category: mistranslation
+#. reason: pedestrian theme 指平庸的主题，不是行人主题
+#. en: "Simplistic and clumsy brushstrokes and a pedestrian theme. Bah! Another ruined canvas."
+msgid "spyder_flower_artist1"
+msgstr "笔触粗陋又笨拙，主题也平庸。呸！又毁了一块画布。"
+
+#. category: glossary
+#. reason: Hampotamos 未按术语表译为“罕博塔摩斯”
+#. en: "Oh I'd just love to have a souvenier to take back home with me. \\n I just adore those sweet little Grintot. Could you get me one? \\n I could give you my Hampotamos in exchange?"
+msgid "spyder_flower_cady1"
+msgstr "哦，我真想带件纪念品回家。\n 我特别喜欢那些可爱的小格林托特。你能替我弄一只吗？\n 我可以拿我的罕博塔摩斯交换。"
+
+#. category: mistranslation
+#. reason: Master 是动词“掌握”，原译误作主人
+#. en: "Dojo of the Elements: Master Tuxemon Battle"
+msgid "spyder_flower_dojo_sign"
+msgstr "五行道场：掌握精灵对战"
+
+#. category: mistranslation
+#. reason: Here you go 是“给你”，不是“干得好”
+#. en: "Well, great! Here you go."
+msgid "spyder_flower_fez_willtrade"
+msgstr "嗯，太好了！给你。"
+
+#. category: style
+#. reason: up and down the river 误直译为“在河上和河下航行”
+#. en: "There used to be a riverboat captain here who could take you up and down the river. \\n But I haven't seen him for a few days. "
+msgid "spyder_flower_florist"
+msgstr "以前这里有位内河船长，能载你沿河往返。\n 但我已经好几天没见到他了。 "
+
+#. category: mistranslation
+#. reason: 女性名 Mieke 被误译成男性名“迈克尔”
+#. en: "Mieke"
+msgid "spyder_flower_mieke"
+msgstr "米克"
+
+#. category: style
+#. reason: 译文把“精灵”二字用字面换行拆开，导致换行数不符且影响术语显示
+#. en: "It's exciting for us to visit the region of Fondant! You have such unique tuxemon here ... \\n Hey, do you want to trade? My Conileaf for a creature that we don't have back home ... \\n How about Budaye?"
+msgid "spyder_flower_mieke1"
+msgstr "能来芳登地区旅行真让我们兴奋！你们这里有这么多独特的精灵……\n 嘿，想交换吗？我想用圆锥叶换一只家乡没有的生物……\n 友友猫怎么样？"
+
+#. category: omission
+#. reason: currency 占位符少了一层花括号
+#. en: "What? You have a painting. Oooh - would you let me buy it? I have ${{currency}}2,000."
+msgid "spyder_flower_muse2"
+msgstr "什么？你有一幅画。哦——能让我买下它吗？我有 ${{currency}}2,000。"
+
+#. category: drift
+#. reason: 译文无依据地添加问候和“我们是宠物店男孩”
+#. en: "Are you interested in buying a tuxemon?"
+msgid "spyder_flower_petshopassistant"
+msgstr "你有兴趣买一只精灵吗？"
+
+#. category: glossary
+#. reason: 字面换行把规定术语“精灵”从中间拆开
+#. en: "I found these eggs in the bough of a tree, and hatched them! \\n They appear to be a previously unknown tuxemon. \\n I call them Vivipere! I wonder what they morph into."
+msgid "spyder_flower_petshopkeeper1"
+msgstr "我在树枝上发现这些蛋，并把它们孵化了！\n 它们似乎是此前无人知晓的精灵。\n 我把它们叫作维维帕雷！不知道它们会变形成什么样。"
+
+#. category: mistranslation
+#. reason: ever morphs 指将来有朝一日变形，原译误作过去的“曾经变形”
+#. en: "You got it to morph? \\n ... \\n And you did it in that particular way? \\n I see. Hmmm, I don't really like the look of that morph. \\n If I give you another Vivipere, can you bring it back if it ever morphs into something different?"
+msgid "spyder_flower_petshopkeeper4"
+msgstr "你让它变形了？\n ……\n 而且是用那种特殊的方法？\n 明白了。嗯，我不太喜欢这种形态的样子。\n 如果我再给你一只维维帕雷，它以后变形成不同的形态时，你能带回来吗？"
+
+#. category: style
+#. reason: 人名 Sandy 中间误插空格，且与同目录译名不一致
+#. en: "Sandy"
+msgid "spyder_flower_sandy"
+msgstr "珊迪"
+
+#. category: glossary
+#. reason: Scoop 被按普通名词误译为“勺子公司”
+#. en: "Scoop has managed to cut the price of beef yet again! I don't know how they do it. "
+msgid "spyder_flowerhouse1_granny"
+msgstr "斯考普又一次成功压低了牛肉价格！真不知道他们怎么办到的。 "
+
+#. category: mistranslation
+#. reason: 原译漏掉对 Budaye 的直接称呼，并改变了说话者关系
+#. en: "Two mons are having a fight. \"I'm not your friend, Budaye\", one says."
+msgid "spyder_flowerhouse1_tv"
+msgstr "两只精灵正在打斗。一个说：“友友猫，我不是你的朋友。”"
+
+#. category: mistranslation
+#. reason: call it how they see it 指直言所见，不是报道所有看到的事
+#. en: "Radio FUD wakes me up every morning. \\n Not sure I care for their politics, but at least they call it how they see it!"
+msgid "spyder_flowerhouse2_scientist"
+msgstr "FUD 电台每天早晨叫我起床。\n 我不太认同他们的政治立场，但至少他们总是有话直说！"
+
+#. category: style
+#. reason: Not that 和并列短句被逐词直译，中文不自然
+#. en: "I worked for Nimrod during the war. \\n Not that I got a medal. Or a parade. \\n They don't hand those out to mercenaries."
+msgid "spyder_flowerhouse2_soldier"
+msgstr "战争期间我为尼姆罗德工作。\n 但我既没拿到勋章，也没人列队欢迎。\n 他们不会给雇佣兵这些待遇。"
+
+#. category: mistranslation
+#. reason: 角色名 Chip 被误作普通名词“芯片”
+#. en: "Chip"
+msgid "spyder_greenwash_chip"
+msgstr "奇普"
+
+#. category: mistranslation
+#. reason: computing power 是计算能力，不是一台计算机
+#. en: "I have developed unmatched computing power!"
+msgid "spyder_greenwash_chip1"
+msgstr "我已经开发出了无与伦比的算力！"
+
+#. category: glossary
+#. reason: CATEYE 未按术语表译为“眼猫”，现译还混入字母 C
+#. en: "I spend all day watching my CATEYE - I'm going to catch it blinking!"
+msgid "spyder_greenwash_gregor1"
+msgstr "我整天都盯着我的眼猫——我一定要逮到它眨眼的瞬间！"
+
+#. category: drift
+#. reason: 整句译成了下一条英文的内容
+#. en: "Prepare to face the power of my fusion tuxemon!"
+msgid "spyder_greenwash_looten1"
+msgstr "准备面对我的融合精灵的力量吧！"
+
+#. category: drift
+#. reason: 译文是另一段不在当前英文中的旧文本
+#. en: "Well, I guess fusion technology isn't quite there yet.\\n We've been working on it for years!"
+msgid "spyder_greenwash_looten2"
+msgstr "好吧，看来融合技术还没有完全成熟。\n 我们已经研究它好多年了！"
+
+#. category: mistranslation
+#. reason: 生物融合实验被误译成核聚变实验
+#. en: "The fusion experiment blew up!"
+msgid "spyder_greenwash_moreau2"
+msgstr "融合实验爆炸了！"
+
+#. category: style
+#. reason: “插手已经变得太多”是明显生硬的逐词翻译
+#. en: "${{name}}, your meddling has become too much! Just let the authorities do their jobs!"
+msgid "spyder_hospital_billie1"
+msgstr "${{name}}，你的干预已经太过分了！让当局做好自己的工作吧！"
+
+#. category: glossary
+#. reason: Spyder Bite 未采用术语表中的专名“斯皮德咬合”
+#. en: "It's the cure to the Spyder Bite infection! \\n With this, you can cure your own and others' tuxemon."
+msgid "spyder_hospital_cure1"
+msgstr "这是治疗斯皮德咬合感染的药！\n 有了它，你就能治好自己和别人的精灵。"
+
+#. category: mistranslation
+#. reason: encoded with DNA 被误成“编码为 DNA”
+#. en: "The screen is set up to detect and reject humans and tuxemon. \\n It has been encoded with the DNA of all known tuxemon! "
+msgid "spyder_hospital_nurse1"
+msgstr "这道屏障会检测并拒绝人类和精灵。\n 其中编码了所有已知精灵的 DNA！ "
+
+#. category: glossary
+#. reason: Aardant 未按术语表译为“阿尔丹特”，且 Shutting down 误成门关闭
+#. en: "\"Aardant\" is not a recognized lifeform. \\n Shutting down."
+msgid "spyder_hospital_warning2"
+msgstr "“阿尔丹特”不是已识别的生命体。\n 正在关闭。"
+
+#. category: omission
+#. reason: 漏译“Please go home now”，并少一个字面换行
+#. en: "I'm sorry, you are not a Gold member. This offer is for Gold members only.\\nPlease go home now."
+msgid "spyder_intro_shopkeeper4"
+msgstr "抱歉，你不是金卡会员。这项优惠只面向金卡会员。\n请回家吧。"
+
+#. category: mistranslation
+#. reason: 把主人让精灵战斗误成主人和精灵争斗，并把 improved on nature 误成改善环境
+#. en: "Tuxemon are the animals that inhabit this world.\\nThey love to be captured so their masters can battle them for fun and profit.\\nThe strongest win, just like in the world of business.\\nMost monsters are found in the wild. They morph into more advanced forms when they gain experience.\\nBut the five Pillars that make up the Cathedral, that is, the five allied companies that operate in this region,\\nhave improved on nature. This season, we offer five deluxe Tuxemon!"
+msgid "spyder_intro01"
+msgstr "精灵是栖息在这个世界上的动物。\n它们喜欢被捕捉，好让主人驱使它们战斗，从中取乐牟利。\n强者获胜，商界也是如此。\n大多数精灵生活在野外。获得经验后，它们会变形成更高级的形态。\n不过，组成大教堂的五大支柱——也就是在本地区经营的五家联合公司——\n已经改良了自然。本季我们推出五款豪华精灵！"
+
+#. category: drift
+#. reason: 译文重复一次“走出外壳”，增加当前英文没有的句子
+#. en: "How is your adventure so far? \\n ... \\n Wow, so talkative! You are really coming out of your shell."
+msgid "spyder_leather_maniac"
+msgstr "目前为止，你的冒险怎么样？\n ……\n 哇，真健谈！你真的开始敞开心扉了。"
+
+#. category: glossary
+#. reason: Omnichannel 误译为“全能频道”而非“全能公司”
+#. en: "There used to be several TV and radio stations operating, but Omnichannel ran them out of business. \\n Now we don't have to worry about different journalists contradicting each other."
+msgid "spyder_leatherhouse1_florist"
+msgstr "以前有好几家电视台和广播电台，但全能公司把它们都挤垮了。\n 这样我们就不用担心不同记者的报道互相矛盾了。"
+
+#. category: glossary
+#. reason: 歌名中的 Possessuns 未按 Possessun 术语译为“凯尔魂”
+#. en: "An R&B song is playing. It's called \"Possessuns, Part II\"."
+msgid "spyder_leatherhouse1_radio_afternoon"
+msgstr "正在播放一首 R&B 歌曲，名叫《凯尔魂，第二部》。"
+
+#. category: drift
+#. reason: 译文变成与当前英文完全不同的技能属性问题
+#. en: "Is Grinflare an Earth element tuxemon or a Fire element tuxemon?"
+msgid "spyder_leatherhouse1_tennisplayer1"
+msgstr "格林弗拉尔是土系精灵，还是火系精灵？"
+
+#. category: style
+#. reason: artisan mining 误直译为“工匠采矿”，转折句也不自然
+#. en: "In Fondent alone there are about a dozen locations where illegal or artisan mining is going on\\nbut Shaft is viewed as evil."
+msgid "spyder_leathershaft1_beryll1"
+msgstr "仅在丰登特，就有大约十几个地点正在进行非法或手工采矿，\n可沙夫特却被视为邪恶的一方。"
+
+#. category: style
+#. reason: 从句关系断裂，现译难以理解
+#. en: "It is important to protect indigenous people, land... but we cannot criminalize the miners\\nwho are looking for a living to survive. What matters is that the miners are protected!"
+msgid "spyder_leathershaft1_miner1"
+msgstr "保护原住民和土地很重要……但我们不能把为了生存而谋生的矿工定罪。\n重要的是，矿工必须得到保护！"
+
+#. category: style
+#. reason: 字面换行切断介词结构，末句也缺少自然宾语
+#. en: "Some islands in the archipelago are completely taken over by mining. It is not possible to differentiate\\nbetween an indigenous community and a mining area. There is not even water to drink. Shaft is against!"
+msgid "spyder_leathershaft1_roxby1"
+msgstr "群岛中的一些岛屿已被采矿业完全占据，甚至无法区分原住民社区和矿区。\n那里连饮用水都没有。沙夫特反对这种做法！"
+
+#. category: omission
+#. reason: 漏译 It shows quality，并把后一句主语关系译乱
+#. en: "Shaft leader is a thinker and doer. She is not a talker. She has met twice with the miners. It shows quality.\\nIt shows her plans for Fondent. Our leader has been consistent when it comes to climate change."
+msgid "spyder_leathershaft1_rutherford1"
+msgstr "沙夫特的领导者既善思考又重行动，不爱空谈。她已经两次会见矿工。这体现了她的素质。\n这也展现了她对丰登特的规划。谈到气候变化，我们的领导者始终立场一致。"
+
+#. category: style
+#. reason: 后半句误接到“人”，导致整个句子不通
+#. en: "Shaft is is one of the largest mining companies in the region,\\nespecially those that contribute to the communities."
+msgid "spyder_leathershaft2_dude"
+msgstr "沙夫特是本地区最大的矿业公司之一，\n也是对社区贡献最大的公司之一。"
+
+#. category: mistranslation
+#. reason: Fondent's people 被误译为“基金会人民”
+#. en: "This leaflet from the Shaft aims to gain the trust of the Fondent's people."
+msgid "spyder_leathershaft2_papers"
+msgstr "这份沙夫特的传单旨在赢得丰登特民众的信任。"
+
+#. category: style
+#. reason: 末句重复“有史以来”且语序破碎，严重影响阅读
+#. en: "I don't trust Shaft. My geologist friend joined a team to explore the river basin\\nto determine the impact of deforestation and mining on the river and water quality.\\nThis will mark the first ever evaluation of carbon and mercury production in mining ponds,\\nand their subsequent impact on water flowpaths, ever conducted in Fondent."
+msgid "spyder_leathershaft2_skeptic"
+msgstr "我不信任沙夫特。我的地质学家朋友加入了一个考察河流流域的团队，\n研究森林砍伐和采矿对河流及水质的影响。\n这将是丰登特首次评估矿坑水塘中的碳与汞产生量，\n以及它们随后对水流路径造成的影响。"
+
+#. category: mistranslation
+#. reason: wandered off 指走失，不是喝酒时走神
+#. en: "Ahoy there! Thank you for finding me! \\n I wandered off during last night's drinking session and fell down here. \\n Hey, can you find the exit? Just shout out when you do."
+msgid "spyder_mansion_captain1"
+msgstr "哟呵！谢谢你找到我！\n 我昨晚喝酒时走丢了，掉到这里。\n 嘿，你能找到出口吗？找到了就喊我一声。"
+
+#. category: glossary
+#. reason: Drinking Buddy 未按术语表译为“酒友”
+#. en: "Drinking Buddy B"
+msgid "spyder_mansion_drinkingbuddyb"
+msgstr "酒友 B"
+
+#. category: mistranslation
+#. reason: sea shanty 被误译为成语“海誓山盟”
+#. en: "We started singing an old sea shanty, and by the time we'd done the Captain was missing!"
+msgid "spyder_mansion_drinkingbuddyb1"
+msgstr "我们唱起了一首古老的船歌，唱完才发现船长不见了！"
+
+#. category: style
+#. reason: 译文插入多余字面换行，且“免费但取决于捐赠”直译生硬
+#. en: "Welcome to the museum of natural history! It's free, but depends on your generous donations. Would you consider a donation of ${{currency}}50?"
+msgid "spyder_museum_entrance1"
+msgstr "欢迎来到自然历史博物馆！这里免费开放，但有赖于大家慷慨捐助。你愿意捐出 ${{currency}}50 吗？"
+
+#. category: style
+#. reason: “阅读赞助商”搭配错误，未自然表达 read about
+#. en: "Please explore our five sections, and make sure to read about our five sponsors."
+msgid "spyder_museum_entrance2"
+msgstr "请参观我们的五个展区，并务必了解五家赞助商。"
+
+#. category: omission
+#. reason: 漏掉 ${{currency}} 占位符
+#. en: "Unfortunately we now need to charge for tickets. ${{currency}}100 please."
+msgid "spyder_museum_entrance3"
+msgstr "很遗憾，我们现在必须收门票了。请支付 ${{currency}}100。"
+
+#. category: glossary
+#. reason: Nimrod 未按术语表译为“尼姆罗德”
+#. en: "There used to be a whole section here on the history of our world! \\n But when Nimrod became the sponsor, they replaced it with just military history! \\n Now everyone is just inventing their own theories of world history!"
+msgid "spyder_museum_miner1"
+msgstr "这里曾经有整整一个展区介绍我们的世界史！\n 但尼姆罗德成为赞助商后，把它换成了纯粹的军事史！\n 现在人人都在杜撰自己的世界史理论！"
+
+#. category: mistranslation
+#. reason: 此处是生物融合技术，不是核聚变技术
+#. en: "How's the fusion technology coming along? We ... Wait, you're not from Greenwash!"
+msgid "spyder_nimrod_archer1"
+msgstr "融合技术进展得怎么样？我们……等等，你不是格林沃什的人！"
+
+#. category: glossary
+#. reason: NPC Argon 未按术语表译为“阿贡”
+#. en: "Argon"
+msgid "spyder_nimrod_argon"
+msgstr "阿贡"
+
+#. category: style
+#. reason: great buy 被生硬地译成证券术语“一个很好的买点”
+#. en: "Are you here for the investor presentation? \\n Nimrod shares are a great buy - armies always need weapons!"
+msgid "spyder_nimrod_dirk1"
+msgstr "你是来参加投资者说明会的吗？\n 尼姆罗德的股票很值得买——军队总是需要武器！"
+
+#. category: style
+#. reason: play music 被译成“一起玩音乐”，不合中文习惯
+#. en: "I wish I knew someone I could play music with."
+msgid "spyder_nimrod_maverick2"
+msgstr "真希望我认识能和我一起演奏音乐的人。"
+
+#. category: mistranslation
+#. reason: send you for a shipment 指派来取货，不是派去买货
+#. en: "Did the Cathedral send you for that new shipment of ... \\n No? \\n Oh."
+msgid "spyder_nimrod_rebel1"
+msgstr "大教堂派你来取那批新到的……\n 不是？\n 哦。"
+
+#. category: style
+#. reason: 拟声感叹词未翻译，后句逐词直译生硬
+#. en: "Woo-wee. Look at that. Those protesters won't know what hit them."
+msgid "spyder_nimrod_thatcher1"
+msgstr "哇哦，看看这个。那些抗议者根本不知道是什么打中了他们。"
+
+#. category: mistranslation
+#. reason: No comment 的固定说法应为“无可奉告”
+#. en: "No comment. "
+msgid "spyder_nimrod_thatcher2"
+msgstr "无可奉告。 "
+
+#. category: mistranslation
+#. reason: 机器人语音 burr 被误作名词“毛刺”，target acquired 语序也错误
+#. en: "Whoo ... burr ... target acquired"
+msgid "spyder_nimrod_xeon1"
+msgstr "呜……嗞……已锁定目标。"
+
+#. category: style
+#. reason: 歌曲引文被逐词译成“给我你的答案，做”
+#. en: "... Daisy, Daisy, give me your answer do ..."
+msgid "spyder_nimrod_xeon2"
+msgstr "……黛西，黛西，请给我你的答复……"
+
+#. category: glossary
+#. reason: NPC Zircon 未按术语表译为“泽康”
+#. en: "Zircon"
+msgid "spyder_nimrod_zircon"
+msgstr "泽康"
+
+#. category: glossary
+#. reason: Wolffsky 未按术语表译为“狼天”
+#. en: "Tuxemon are powerful weapons that have fought alongside humans for as long as there has been war. \\n Rock paintings found in caves show prehistoric humans training saber-toothed Rockats to fight wild Wolffsky."
+msgid "spyder_nimrod2_plaque"
+msgstr "精灵是强大的武器，自战争出现以来就一直与人类并肩作战。\n 洞穴中的岩画显示，史前人类曾训练剑齿鸡脚猫与野生狼天战斗。"
+
+#. category: glossary
+#. reason: Eaglace 和 Agnidon 均未采用术语表译名，且多一个字面换行
+#. en: "The symbol of an ancient empire was the Eaglace, because when the empire invaded from the icy north their generals and scouts rode on Eaglace. \\n Today, medic teams in our mighty republic are training with Agnidon for protection and transport. "
+msgid "spyder_nimrod3_plaque"
+msgstr "古代某帝国以冰川鹰为象征，因为帝国从冰封的北方入侵时，将领和斥候都骑乘冰川鹰。\n 如今，我们强大共和国的医疗队正训练炎鬣蜥，用于护卫和运输。 "
+
+#. category: glossary
+#. reason: 首个 Nimrod 未按术语表译名保留一致
+#. en: "But soon, tuxemon and humans may be rendered obsolete. \\n Our corporate sponsors Nimrod are developing robot technology that could make war a bloodless affair. \\n In the meantime, sign up for the Nimrod Enforcers for good pay, free education and a life of adventure."
+msgid "spyder_nimrod4_plaque"
+msgstr "但不久之后，精灵和人类或许都会被淘汰。\n 我们的企业赞助商尼姆罗德正在开发机器人技术，有望让战争不再流血。\n 与此同时，加入尼姆罗德执法队吧：高薪、免费教育，还有充满冒险的人生。"
+
+#. category: glossary
+#. reason: Nimrod 未按术语表译为“尼姆罗德”
+#. en: "Aha, it's too late for you! \\n Just out of the birthing pit ... the perfect monsters! \\n The genes of Drokoro incubated in dragon eggs dug up by Shaft \\n ... and fused with three killer robos designed by Nimrod. \\n The power of teamwork ... and it's in my hands. "
+msgid "spyder_omnichannel_beaverbrook1"
+msgstr "啊哈，你已经来不及了！\n 刚从孕育池诞生的……完美怪物！\n 德罗科罗的基因在沙夫特挖出的龙蛋中孵化，\n ……再与尼姆罗德设计的三台杀手机器人融合。\n 团队合作的力量……如今掌握在我手里。 "
+
+#. category: mistranslation
+#. reason: off-brand 指杂牌，不是非法；creations 也不是“创作”
+#. en: "No. It's not possible. \\n Two upstarts, one with off-brand tuxemon, defeating my perfect creations. \\n If I can just make it to my live radio interview, I'll command my enforcers to complete the takeover."
+msgid "spyder_omnichannel_beaverbrook2"
+msgstr "不，这不可能。\n 两个暴发户，其中一个还带着杂牌精灵，竟然打败了我的完美造物。\n 只要赶上电台直播采访，我就能命令执法者完成接管。"
+
+#. category: drift
+#. reason: 整段仍是旧稿，当前五句内容大部缺失，姓名占位符也被写死成 NAME
+#. en: "Hey ${{name}}, hold up!\\n I've been thinking a lot about what you did for my tuxemon, and I have to admit, it got me thinking about my own priorities.\\n I realized I've been too focused on my own goals, and I haven't been doing enough to help others.\\n That's why I'm coming with you to take down those tuxemon thieves.\\n We owe it to ourselves, our tuxemon, and the entire community to put a stop to their nefarious plans."
+msgid "spyder_omnichannel_billie1"
+msgstr "嘿，${{name}}，等等！\n 我一直在想你为我的精灵所做的事，不得不承认，这让我开始反思自己的优先选择。\n 我意识到自己太专注于个人目标，却没有尽力帮助别人。\n 所以我要和你一起去打倒那些偷精灵的家伙。\n 为了我们自己、我们的精灵和整个社区，我们必须阻止他们的邪恶计划。"
+
+#. category: glossary
+#. reason: Scoop 被误译为普通名词“勺子”
+#. en: "Back again? I should have fed you into the meat grinder back at Scoop HQ."
+msgid "spyder_omnichannel_donald1"
+msgstr "又回来了？我早该在斯考普总部把你塞进绞肉机。"
+
+#. category: drift
+#. reason: 英文已是角色名 Marciano，译文仍为职业称谓“执法者”
+#. en: "Marciano"
+msgid "spyder_omnichannel_enforcer"
+msgstr "马西亚诺"
+
+#. category: style
+#. reason: 第二句的介词结构直译后不通顺
+#. en: "Haha, suckers - you'll never find me. \\n It's on the Omnichannel CEO's letterhead."
+msgid "spyder_omnichannel_note"
+msgstr "哈哈，傻瓜——你们永远找不到我。\n 这句话写在印有全能公司首席执行官抬头的信纸上。"
+
+#. category: glossary
+#. reason: 长段落中 Greenwash、Nimrod、Scoop 等多个术语错误，且多出三个字面换行
+#. en: "This is FUD Radio, DJ Worm here and my co-host, \"The Duke of Dead Air\", broadcasting live from the Omnichannel Radio Studios. \\n We've got a full hour of lolly-pop, soft rock and accessible hip hop for you - but first, an interview with the head of Omnichannel! \\n Ah, it looks like Sir Beaverbrook couldn't make it, but in his place has sent a small child. Well, small child, what do you have to say? \\n ... \\n Speak up! You're on live radio! \\n ... \\n Huh, a conspiracy, you say? \\n ... \\n The Pillars were going to use Greenwash fusion technology, Nimrod killer robos and dragons dug up by Shaft ... \\n And they were going to use those fusions to take control of the entire region? \\n ... \\n And they deliberately spread the Virus to everyone's tuxemon using food from Scoop? \\n ... \\n And the Enforcers are in on it? \\n ... \\n And Omnichannel was behind the whole thing, using the media to keep people confused and distracted? \\n ... \\n You know we work for Omnichannel, right? Doc, please tell me you stopped broadcasting. Doc?! \\n ... \\n Ouch! Man I really wish Radio FUD didn't go out live. \\n I don't think people are going to be very happy with us."
+msgid "spyder_omnichannel_radioannounce"
+msgstr "这里是 FUD 电台，我是 DJ 沃姆，与共同主持人“冷场公爵”从全能公司广播室为您现场直播。\n 我们接下来有整整一小时的流行甜歌、轻摇滚和通俗嘻哈——但首先，请听对全能公司负责人的采访！\n 啊，看来比弗布鲁克爵士没能到场，而是派了个小孩代替他。那么，小朋友，你有什么要说的？\n ……\n 大声点！这可是电台直播！\n ……\n 哦，你说有个阴谋？\n ……\n 五大支柱打算利用格林沃什的融合技术、尼姆罗德的杀手机器人，还有沙夫特挖出来的龙……\n 再用这些融合体控制整个地区？\n ……\n 他们还故意利用斯考普的食物，把病毒传播给所有人的精灵？\n ……\n 执法者也参与其中？\n ……\n 而全能公司才是幕后黑手，利用媒体让大家迷惑、分心？\n ……\n 你知道我们是为全能公司工作的吧？博士，请告诉我你已经停播了。博士？！\n ……\n 糟糕！天啊，我真希望 FUD 电台不是现场直播。\n 我看大家不会对我们太满意。"
+
+#. category: style
+#. reason: “握很多手”是英文搭配的逐词翻译
+#. en: "I have to shake a lot of hands in my line of work."
+msgid "spyder_omnichannel_strauss1"
+msgstr "干我们这行，得和很多人握手。"
+
+#. category: mistranslation
+#. reason: 这是击掌落空的固定戏谑语，不能按方位直译
+#. en: "Down low. Too slow!"
+msgid "spyder_omnichannel_strauss2"
+msgstr "下面击掌——太慢啦！"
+
+#. category: style
+#. reason: dead air 指广播冷场，“死气沉沉”未体现双关
+#. en: "The Duke of Dead Air"
+msgid "spyder_omnichannel_thedukeofdeadair"
+msgstr "冷场公爵"
+
+#. category: mistranslation
+#. reason: 角色名 Worm 被误作普通名词“虫子”
+#. en: "Worm"
+msgid "spyder_omnichannel_worm"
+msgstr "沃姆"
+
+#. category: style
+#. reason: 译文多出一个字面换行，末句重复“能”且层次不清
+#. en: "Opals show flashes of colored light. \\n They form in fissues and dips in rock when water evaporates leaving behind silica. \\n Tuxemon that eat opals benefit from its magical warding are better able to escape magical distant attacks like blasts, sprays and rays."
+msgid "spyder_opal_plaque"
+msgstr "蛋白石会闪烁出彩色光芒。\n 水分蒸发并留下二氧化硅时，它们会在岩石的裂隙和凹处形成。\n 精灵吃下蛋白石后会获得其魔法防护，更容易躲避爆破、喷射和射线等远程魔法攻击。"
+
+#. category: omission
+#. reason: 漏译 Oh, it's just you
+#. en: "I'm working, boss, I'm working! \\n Oh, it's just you. You know, we throw out so much of our stock. It's such a terrible waste. \\n It all goes into the bins behind the back of the Store."
+msgid "spyder_papertown_danteresting"
+msgstr "我在工作，老板，我在工作！\n 哦，原来是你。你知道吗，我们扔掉了太多库存，实在太浪费了。\n 它们全被扔进了商店后面的垃圾桶。"
+
+#. category: glossary
+#. reason: Daycare Center 未按规定译为“寄养中心”
+#. en: "Daycare Center: Under construction."
+msgid "spyder_papertown_daycare1"
+msgstr "寄养中心：正在施工。"
+
+#. category: glossary
+#. reason: Daycare Center 未按规定译为“寄养中心”
+#. en: "Daycare Center: Open now!"
+msgid "spyder_papertown_daycare2"
+msgstr "寄养中心：现已开业！"
+
+#. category: style
+#. reason: 把 perfectly good 两次直译成“完美”很生硬，影响对白语气
+#. en: "Hey, what are you doing rummaging in bins? That's gross - and it's against the rules! \\n ... \\n What, they were throwing out perfectly good tuxemon? \\n ... \\n Well, if they were perfectly good, they wouldn't throw them out, would they? \\n They must be inferior to the new models. Here, I'll show you! "
+msgid "spyder_papertown_firstfight"
+msgstr "嘿，你翻垃圾桶干什么？真恶心——而且还违反规定！ \n …… \n 什么，他们把完全好好的精灵扔掉？ \n …… \n 要是真那么好，怎么会被扔掉呢？ \n 它们肯定比新型号差。我这就让你见识一下！ "
+
+#. category: mistranslation
+#. reason: I'll heal you up 的对象是玩家的精灵，不是治愈玩家本人
+#. en: "I'll heal you up this time, but I'm not a charity. Rest up at home next time your monsters get worn out."
+msgid "spyder_papertown_firstfight_after"
+msgstr "这次我会给你的精灵治疗，但我可不是慈善机构。下次精灵累坏了，就回家休息。"
+
+#. category: glossary
+#. reason: Daycare Center 未按规定译为“寄养中心”，姓名占位符也少一层花括号
+#. en: "Oh hello ${{name}}, I didn't see you there among all this hustle and debris! \\n I can't wait till the Daycare Center is installed!"
+msgid "spyder_papertown_grannypiper1"
+msgstr "哦，你好，${{name}}，这么一片忙乱和瓦砾，我都没看见你！\n 我等不及寄养中心建好了！"
+
+#. category: glossary
+#. reason: Pipers 和 daycare 未采用规定译名，且无依据重复“你知道吗”
+#. en: "You know, the Pipers made our fortune in the daycare business! \\n I've been retired for ten years and I'm getting bored. I want to get back into it!"
+msgid "spyder_papertown_grannypiper2"
+msgstr "你知道吗，派珀家族就是靠经营寄养中心发家的！\n 我已经退休十年，正觉得无聊。我想重操旧业！"
+
+#. category: omission
+#. reason: 姓名占位符 ${{name}} 少了一层花括号
+#. en: "How are you, ${{name}}? \\n Quiet and solemn as always, I see."
+msgid "spyder_papertown_homemaker1"
+msgstr "你好吗，${{name}}？\n 看来你还是一如既往地安静、严肃。"
+
+#. category: style
+#. reason: Good morning sunshine 是亲昵称呼，原译成“温暖的晨曦”生硬
+#. en: "Good morning sunshine! Rest here any time you like. \\n Why am I saying that? You live here!"
+msgid "spyder_papertown_mom1"
+msgstr "早安，小太阳！随时都可以在这里休息。\n 我为什么这么说？你就住在这里！"
+
+#. category: style
+#. reason: 译文多出一个字面换行，且加入原文没有的“不好意思”
+#. en: "Hello dear. I should get on with my inventing. \\n Can't you occupy yourself? \\n Back in my day, we could amuse ourselves with anything - a stick, a rock, rubbish we found in bins ... "
+msgid "spyder_papertown_mom2"
+msgstr "你好，亲爱的。我得继续搞发明了。\n 你不能自己找点事做吗？\n 我小时候，随便什么都能拿来玩——棍子、石头、垃圾桶里找到的破烂…… "
+
+#. category: style
+#. reason: “为什么你不去”是明显英语句式，影响母亲对白的自然度
+#. en: "Oh, you found yourself a tuxemon. Congratulations! \\n Why don't you head over to the next town and explore?"
+msgid "spyder_papertown_mom3"
+msgstr "哦，你找到了一只精灵。恭喜！ \n 何不去下一个城镇探索一番？"
+
+#. category: glossary
+#. reason: Piper 和 Daycare Center 均未采用规定译名
+#. en: "You know, Granny Piper next door has opened up her Daycare Center. \\n Well, not everyone can be an inventor, I guess. "
+msgid "spyder_papertown_mom5"
+msgstr "你知道吗，隔壁的派珀奶奶已经开了寄养中心。\n 唉，我想不是每个人都能成为发明家。 "
+
+#. category: style
+#. reason: “拿下了这些公司”生硬，也丢失句末 I think 的犹疑语气
+#. en: "Congratulations! You took down the corporations! \\n Of course, now lots of people don't have a job ... but you did the right thing. I think."
+msgid "spyder_papertown_mom6"
+msgstr "恭喜！你打垮了那些大公司！ \n 当然，现在很多人失业了……但你做的是对的。大概吧。"
+
+#. category: style
+#. reason: 末句漏出宾语，中文读来不完整
+#. en: "Hey, you came! That's great.\\n When the fancy new tuxemon come through from the Cathedral, we just threw all our old ones in the bin!\\n It seems like such a waste, especially when kids like you don't have any!"
+msgid "spyder_papertown_myfirstmon"
+msgstr "嘿，你来了！太好了。\n 大教堂送来那些花哨的新精灵时，我们就把所有旧精灵都扔进了垃圾桶！\n 太浪费了，尤其是还有像你这样一个精灵都没有的孩子！"
+
+#. category: glossary
+#. reason: Gold Pass 未按规定译为“黄金通行证”
+#. en: "I recognize you, you're the kid who hasn't got a Gold Pass. \\n You know, I might be able to help you out. \\n When the fancy new tuxemon come through from the Cathedral, we just threw all our old ones in the bin!\\n It seems like such a waste, especially when kids like you don't have any!"
+msgid "spyder_papertown_myfirstmon_notmet"
+msgstr "我认得你，你就是那个没有黄金通行证的孩子。\n 你知道吗，我或许能帮你。\n 大教堂送来那些花哨的新精灵时，我们就把所有旧精灵都扔进了垃圾桶！\n 太浪费了，尤其是还有像你这样一个精灵都没有的孩子！"
+
+#. category: drift
+#. reason: 整段译成了询问选择五只精灵的旧文本，且少一个字面换行
+#. en: "Here we go, looks like there's monsters in most of these bins. \\n Sounds like my boss is calling. Good luck!"
+msgid "spyder_papertown_myfirstmon2"
+msgstr "好了，看来这些垃圾桶大多都有精灵。\n 好像是老板在叫我。祝你好运！"
+
+#. category: style
+#. reason: “你以为你在做什么”是生硬直译，三句对白都可更自然
+#. en: "Hey! What do you think you're doing?\\n It's not safe to go into the wilds unless you have a tuxemon.\\n Come buy one from our shop."
+msgid "spyder_papertown_stopthere"
+msgstr "嘿！你在干什么？\n 没有精灵，进入荒野很危险。\n 来我们店里买一只吧。"
+
+#. category: mistranslation
+#. reason: Sunnyside Manor 被误成带“城”的“阳光城庄园”
+#. en: "Sunnyside Manor: If we are not home leave a message with our housekeeper."
+msgid "spyder_papertown_sunnyside"
+msgstr "阳光庄园：如果我们不在家，请给管家留言。"
+
+#. category: style
+#. reason: 译文多出一个字面换行，末句代词与搭配生硬
+#. en: "Quartz is one of the most abundant minerals on the planet. \\n Some quartz varieties - like onyx, amethyst and carnelian - are rarer and more precious. \\n Quartz is used in clocks to keep very precise time. \\n Tuxemon that eat quartz have their fortitude and vitality increased, making them able to endure more attacks before being knocked out. "
+msgid "spyder_quartz_plaque"
+msgstr "石英是地球上最丰富的矿物之一。\n 有些石英品种——如缟玛瑙、紫水晶和红玉髓——更稀有、更珍贵。\n 石英用于钟表，以保持极其精确的计时。\n 精灵吃下石英后，坚韧与活力会提升，使它们在被击倒前承受更多攻击。 "
+
+#. category: mistranslation
+#. reason: Anthem 被误写成“焚歌”
+#. en: "Afternoon: A Rock song is playing. It's called \"Rise to Dominate: The Ultimate Trainer's Anthem\"."
+msgid "spyder_rivalbedroom_radio_afternoon"
+msgstr "下午：正在播放一首摇滚歌曲，名叫《崛起称霸：终极训练师颂歌》。"
+
+#. category: mistranslation
+#. reason: Enforcer 被误译为形容词“坚强”
+#. en: "Dusk: A Country song is playing. It's called \"Breaking Chains, Finding Strength: From Fear to Enforcer\"."
+msgid "spyder_rivalbedroom_radio_dusk"
+msgstr "黄昏：正在播放一首乡村歌曲，名叫《挣脱枷锁，寻找力量：从恐惧到执法者》。"
+
+#. category: glossary
+#. reason: Botbots 未按术语表中的 Botbot 译名“布布”处理
+#. en: "Night: A Techno song is playing. It's called \"Bot Revolution: Rise of the Botbots\"."
+msgid "spyder_rivalbedroom_radio_night"
+msgstr "夜晚：正在播放一首电子乐，名叫《机器人革命：布布崛起》。"
+
+#. category: style
+#. reason: 航海招呼 Ahoy 被误成询问“你在吗”
+#. en: "Ahoy there! Where would you like to go?"
+msgid "spyder_river_captain2"
+msgstr "哟呵！你想去哪里？"
+
+#. category: mistranslation
+#. reason: 漏掉网球语境的 served 双关，误成“被招待”
+#. en: "I got served."
+msgid "spyder_route2_graf2"
+msgstr "我被一记发球击败了。"
+
+#. category: style
+#. reason: “对于我的阿尔多恩，我的意思是”逐词直译，中文不通顺
+#. en: "So many tasty ants around! ... For my Aardorn, I mean."
+msgid "spyder_route2_marion1"
+msgstr "周围有这么多美味的蚂蚁！……我是说，给我的阿尔多恩吃。"
+
+#. category: mistranslation
+#. reason: dunny 是厕所，不是地牢
+#. en: "When I was ambushed on the dunny by SPIGHTER I was pretty creeped out."
+msgid "spyder_route2_roddick1"
+msgstr "我在厕所里遭到战斗蜘蛛伏击时，真是吓坏了。"
+
+#. category: omission
+#. reason: 除首行外的说话者标签全部漏译，严重影响对白归属
+#. en: "AGENT: What happened to the excavation? \\n SHAFT BOSS ZOOLANDER: We got ... interrupted. By ... a kid. \\n AGENT: A kid?! \\n ZOOLANDER: But we did manage to recover one ... \\n AGENT: Hush! You know that's top secret. Alright, hand it over and scram! \\n ZOOLANDER: Okay, here ... uh!"
+msgid "spyder_route3_drag1"
+msgstr "特工：挖掘现场出了什么事？\n 沙夫特老板祖兰德：我们……被打断了。被……一个孩子。\n 特工：一个孩子？！\n 祖兰德：但我们确实找到了一个……\n 特工：嘘！你知道那是最高机密。好了，把它交出来，然后快滚！\n 祖兰德：好，给你……呃！"
+
+#. category: style
+#. reason: Agent 误作代理，且“向总部解释这个问题”措辞生硬
+#. en: "AGENT: What the?! Come with me, you can explain this to HQ!"
+msgid "spyder_route3_drag2"
+msgstr "特工：什么？！跟我来，你可以到总部解释！"
+
+#. category: style
+#. reason: 人名 Novak 中间误插空格
+#. en: "Novak"
+msgid "spyder_route3_novak"
+msgstr "诺瓦克"
+
+#. category: drift
+#. reason: 上游译文重复追加了同一句内容，并多出一个字面换行
+#. en: "I'll reveal nothing about our plot! In fact, forget I said anything about a plot!"
+msgid "spyder_route3_qqq2"
+msgstr "我不会透露我们的阴谋！实际上，忘了我提过什么阴谋吧！"
+
+#. category: mistranslation
+#. reason: 道路修复语境中的 rehabilitation 被误译为康复
+#. en: "Rehabilitation will begin as soon as possible. \\n Please stop nagging us."
+msgid "spyder_route3_sign"
+msgstr "修复工作会尽快开始。\n请别再催我们了。"
+
+#. category: glossary
+#. reason: 将泛称 tuxemon 误译为虎皮猫，违反固定术语
+#. en: " They call it the \"dark artery\" - the fossilized blood and bone of ancient tuxemon beneath the soil. \\n And we get to dig it up!"
+msgid "spyder_route3_surat1"
+msgstr "他们称它为“黑暗动脉”——埋藏在土壤下的远古精灵的血肉与骨骼化石。\n而我们能把它挖出来！"
+
+#. category: mistranslation
+#. reason: belongs in a museum 被误译成属于博物馆
+#. en: "Some of the stuff we're digging up belongs in a museum! \\n Wait, you don't work here. "
+msgid "spyder_route3_twig1"
+msgstr "我们挖出来的一些东西都该送进博物馆！\n等等，你不是这里的员工。"
+
+#. category: style
+#. reason: 句式生硬，明显影响对白流畅度
+#. en: "I will train more and become as strong as our Boss. \\n She worked so hard to become the leader, I wanna be like her someday."
+msgid "spyder_route3_twig3"
+msgstr "我要更加努力训练，变得像我们的老板一样强。\n她付出了许多努力才当上首领，我希望有一天能成为她那样的人。"
+
+#. category: glossary
+#. reason: Nudiflot 未采用 glossary.tsv 固定译名
+#. en: "All I ever seem to catch is boring Nudiflot!"
+msgid "spyder_route3_wanda1"
+msgstr "我好像只钓得到无聊的浮蛞蝓♂！"
+
+#. category: glossary
+#. reason: Flower City 未采用 glossary.tsv 固定译名
+#. en: "The fishing's good in Flower City - but who wants to walk that far? \\n Here, you can have my Fishing Rod."
+msgid "spyder_route3_wanda2"
+msgstr "彩花城很适合钓鱼——但谁愿意走那么远呢？\n来，这根鱼竿送给你。"
+
+#. category: style
+#. reason: 对白缺少中文网球语境所需的谓语
+#. en: "Your serve!"
+msgid "spyder_route4_beck1"
+msgstr "该你发球了！"
+
+#. category: mistranslation
+#. reason: 网球用语 game, set, match 被按普通名词逐字误译
+#. en: "Game, set, match."
+msgid "spyder_route4_beck2"
+msgstr "胜局、胜盘，比赛结束。"
+
+#. category: style
+#. reason: Finally 表示终于，现译为最后使语气不自然
+#. en: "Finally, a use for K9!"
+msgid "spyder_route4_rincewind1"
+msgstr "终于，科久有用武之地了！"
+
+#. category: mistranslation
+#. reason: best served cold 的习语含义被误译为冷处理
+#. en: "Revenge is best served cold. "
+msgid "spyder_route4_rosamund2"
+msgstr "复仇这道菜，凉着上才最好。"
+
+#. category: mistranslation
+#. reason: emasculated 在此为受挫并失去男子气概，并非字面阉割
+#. en: "Ooh, I feel so emasculated!"
+msgid "spyder_route4_wulf2"
+msgstr "哦，我觉得自己一点男子气概都没有了！"
+
+#. category: omission
+#. reason: 漏译 Patra
+#. en: "Cleo and Patra"
+msgid "spyder_route5_cleo"
+msgstr "克莱奥与帕特拉"
+
+#. category: mistranslation
+#. reason: we 与复数 ancestors 被误写成单数人称
+#. en: "Oh ancestors, we've failed you!"
+msgid "spyder_route5_cleo2"
+msgstr "祖先啊，我们辜负你们了！"
+
+#. category: style
+#. reason: 客栈名与句式直译生硬，影响对白自然度
+#. en: "Hey, aren't you that meddlesome kid from the Wayfarer Inn?"
+msgid "spyder_route5_goliath1"
+msgstr "嘿，你不就是在旅人旅馆多管闲事的那个小鬼吗？"
+
+#. category: glossary
+#. reason: Nimrod 与 Flower City 均未采用 glossary.tsv 固定译名，且 salubrious 语义有误
+#. en: "This park is much more salubrious with the Nimrod construction keeping the Flower City riff-raff out. "
+msgid "spyder_route5_granny"
+msgstr "有尼姆罗德的施工把彩花城那些闲杂人等挡在外面，这座公园健康宜人多了。"
+
+#. category: mistranslation
+#. reason: takes a lot 指很费力，不是需要很多东西
+#. en: "It takes a lot to hold a team together."
+msgid "spyder_route5_hunter1"
+msgstr "要维系好一支队伍可不容易。"
+
+#. category: style
+#. reason: 将精灵长大写成成为成年人，中文语境突兀
+#. en: "My Capiti looks cute and all, but I can't wait until it grows into an adult!"
+msgid "spyder_route5_sara1"
+msgstr "我的卡皮蒂看起来很可爱，但我已经等不及它长大了！"
+
+#. category: mistranslation
+#. reason: not today 被误译为今天不说了
+#. en: "Oh well, not today!"
+msgid "spyder_route5_sara2"
+msgstr "唉，看来今天不行！"
+
+#. category: omission
+#. reason: 漏译 Marc
+#. en: "Tryphaena and Marc"
+msgid "spyder_route5_tryphaena"
+msgstr "特里芬纳与马克"
+
+#. category: mistranslation
+#. reason: descended from 被反向译成后裔是
+#. en: "You know, we're descended from ... You've already heard it? Oh."
+msgid "spyder_route5_tryphaena1"
+msgstr "你知道，我们的祖先可是……你已经听说了？哦。"
+
+#. category: style
+#. reason: keep a garden 被机械直译为保持花园，明显不自然
+#. en: "My Narcileaf keeps the finest garden in all the land."
+msgid "spyder_route6_frances1"
+msgstr "我的守叶人打理着这片土地上最漂亮的花园。"
+
+#. category: mistranslation
+#. reason: put down 在此指安乐死，不是放下
+#. en: "I just hope they don't decide its safest to put down the tuxemon we fused!"
+msgid "spyder_route6_maxwell2"
+msgstr "我只希望他们别认为，把我们融合出的精灵安乐死才最安全！"
+
+#. category: glossary
+#. reason: Greenwash 未采用 glossary.tsv 固定译名
+#. en: "I can't believe they locked us out of Greenwash HQ. I was getting so close to a cure for the virus!"
+msgid "spyder_route6_mungo1"
+msgstr "真不敢相信他们把我们关在格林沃什总部外面。我马上就要找到病毒的治疗方法了！"
+
+#. category: style
+#. reason: developments 译为发展使对白生硬且指向不清
+#. en: "I guess the bosses got spooked by the latest Fusion developments."
+msgid "spyder_route6_mungo2"
+msgstr "我猜，老板们被融合技术的最新进展吓坏了。"
+
+#. category: glossary
+#. reason: Orion 未采用 glossary.tsv 固定 NPC 译名
+#. en: "Orion"
+msgid "spyder_route6_orion"
+msgstr "奥赖恩"
+
+#. category: mistranslation
+#. reason: experiment melts down 指实验发生熔毁或失控，不是实验融化
+#. en: "I hope I get back before my experiment melts down!"
+msgid "spyder_route6_orion2"
+msgstr "希望我能在实验发生熔毁前赶回去！"
+
+#. category: glossary
+#. reason: Candy Town 未采用固定译名甜饴镇
+#. en: "Psst, have you heard? The enforcers are confiscating tuxemon from everyone in Candy Town."
+msgid "spyder_route6_ping1"
+msgstr "嘘，听说了吗？执法者正在没收甜饴镇所有人的精灵。"
+
+#. category: drift
+#. reason: 上游译文凭空增加了“这是我的错”，且误解 the one day 的强调
+#. en: "Man, the one day I leave the computer and go for a walk, this happens!"
+msgid "spyder_route6_richard1"
+msgstr "真是的，偏偏就在我离开电脑出门散步的这一天，出了这种事！"
+
+#. category: mistranslation
+#. reason: Worst 被反向误译为最好
+#. en: "Worst. Day. Ever."
+msgid "spyder_route6_richard2"
+msgstr "最。糟。糕。的。一。天。"
+
+#. category: style
+#. reason: 上游人为断词导致字面换行数多于英文，影响显示与阅读
+#. en: "Ruby is just the term for any corundum that is red! \\n When corundum comes in other colors like blue, pink and clear, it is called a sapphire. \\n When tuxemon eat rubies, they become passionate and vigorous, making them better at physical attacks like slaps, claws and bites."
+msgid "spyder_ruby_plaque"
+msgstr "红宝石其实只是红色刚玉的称呼！\n刚玉呈现蓝色、粉色或透明等其他颜色时，就称为蓝宝石。\n精灵吃下红宝石后会变得热情而有活力，更擅长拍打、抓挠和撕咬等物理攻击。"
+
+#. category: mistranslation
+#. reason: 人名 Arachne 被误译为生物分类蛛形纲
+#. en: "Arachne"
+msgid "spyder_scoop_arachne"
+msgstr "阿拉克涅"
+
+#. category: style
+#. reason: 反派对白直译生硬
+#. en: "Oi! Can't you see we're in the middle of a villainous scheme?"
+msgid "spyder_scoop_arachne1"
+msgstr "喂！没看见我们正在实施邪恶计划吗？"
+
+#. category: style
+#. reason: Extreme Restraints 被直译成极端约束，作为器具名称生硬
+#. en: "It's too late! I have the Extreme Restraints and there's nothing you can do about it. "
+msgid "spyder_scoop_arachne2"
+msgstr "太迟了！终极镣铐已经到手，你对此无能为力。"
+
+#. category: mistranslation
+#. reason: Why yes 被误译为为什么是，且多处句法生硬
+#. en: "Why yes, I am the inventor of the Extreme Restraints. \\n What are they, I hear you ask? \\n Only a set of manacles so powerful that even a dragon could not escape them. \\n They are being used in the containment unit to make sure none of the infected tuxemon escape."
+msgid "spyder_scoop_asta1"
+msgstr "没错，我就是终极镣铐的发明者。\n你问那是什么？\n不过是一副威力强大到连龙都挣脱不了的镣铐。\n它们被用在隔离区，确保受感染的精灵无法逃走。"
+
+#. category: glossary
+#. reason: Scoop 未采用 glossary.tsv 固定译名
+#. en: "Scoop did not release the disease! I promise you. "
+msgid "spyder_scoop_berys2"
+msgstr "不是斯考普让疾病扩散的！我向你保证。"
+
+#. category: style
+#. reason: 动物叫声被写成说明文字，影响对白表现
+#. en: "Oink! Oink! "
+msgid "spyder_scoop_cochini1"
+msgstr "哼！哼！"
+
+#. category: style
+#. reason: 动物叫声被写成说明文字，影响对白表现
+#. en: "Oink."
+msgid "spyder_scoop_cochini2"
+msgstr "哼。"
+
+#. category: omission
+#. reason: 漏译名称后缀 A
+#. en: "CochiniA"
+msgid "spyder_scoop_cochinia"
+msgstr "胭脂虫A"
+
+#. category: mistranslation
+#. reason: beyond 被误解为储藏室之外，且人为增加字面换行
+#. en: "The sick tuxemon we were keeping here in quarantine got out and broke into the storeroom beyond! How will we secure the storeroom?"
+msgid "spyder_scoop_donald1"
+msgstr "我们隔离在这里的病精灵逃了出去，还闯进了里面的储藏室！这下要怎么封锁储藏室？"
+
+#. category: style
+#. reason: might just be strong enough 被机械直译，明显影响对白流畅度
+#. en: "You might just be strong enough to contain the escaped tuxemon. Please - do it for us. "
+msgid "spyder_scoop_donald2"
+msgstr "你的实力或许足以制服逃跑的精灵。求你了——帮帮我们吧。"
+
+#. category: omission
+#. reason: 整句漏译出口与收拢逃散精灵的后半段，且缺少英文中的字面换行
+#. en: "I chased the people who stole the Restraints into this room. But then the sick tuxemon got in, and now we're all stuck!\\n If you can make a way through to the exit, I'll be able to round up any loose monsters."
+msgid "spyder_scoop_haf1"
+msgstr "我把偷走镣铐的人追进了这个房间。可后来那些生病的精灵也进来了，现在我们全被困住了！\n要是你能开出一条通往出口的路，我就能把四处乱跑的精灵都赶回去。"
+
+#. category: style
+#. reason: 吼叫声被音译成人名般的文字
+#. en: "Graar!"
+msgid "spyder_scoop_landrace1"
+msgstr "嗷！"
+
+#. category: style
+#. reason: 叹气声被音译成人名般的文字
+#. en: "Ufff."
+msgid "spyder_scoop_landrace2"
+msgstr "呼。"
+
+#. category: style
+#. reason: 器具名称不统一，且 brute 译为畜生语气失准
+#. en: "Thanks for getting rid of that brute that was blocking the way! \\n Now we can escape with the Extreme Restraints! "
+msgid "spyder_scoop_landrace3"
+msgstr "多谢你解决了那个堵路的大家伙！\n现在我们可以带着终极镣铐逃走了！"
+
+#. category: style
+#. reason: activist troublemaker 逐词拼接，中文明显不自然
+#. en: "Typical activist troublemaker. "
+msgid "spyder_scoop_lanth2"
+msgstr "果然是个爱闹事的激进分子。"
+
+#. category: style
+#. reason: 拟声词音译生硬
+#. en: "Mhm ah!"
+msgid "spyder_scoop_lapinou2"
+msgstr "嗯啊！"
+
+#. category: mistranslation
+#. reason: for that matter 被误译为就这一点而言
+#. en: "What am I doing here, for that matter?"
+msgid "spyder_scoop_orba2"
+msgstr "话说回来，我又为什么会在这里？"
+
+#. category: mistranslation
+#. reason: feel terrible that 指内疚难过，不是觉得疾病可怕
+#. en: "I feel so terrible that the disease got out. "
+msgid "spyder_scoop_paine1"
+msgstr "疾病传播出去让我非常难过。"
+
+#. category: glossary
+#. reason: Scoop 未采用 glossary.tsv 固定译名
+#. en: "Scoop HQ: Almost good enough to eat!"
+msgid "spyder_scoop_sign"
+msgstr "斯考普总部：好吃到让人想咬一口！"
+
+#. category: style
+#. reason: 器具名称直译生硬且上下文用词不统一
+#. en: "Someone stole the Extreme Restraints we invented to keep tuxemon in the containment unit! Was it you?"
+msgid "spyder_scoop_taggart1"
+msgstr "有人偷走了我们为了把精灵关在隔离区而发明的终极镣铐！是你干的吗？"
+
+#. category: style
+#. reason: 器具名称与相邻对白不统一
+#. en: "If you didn't steal the Extreme Restraints, who did? "
+msgid "spyder_scoop_taggart2"
+msgstr "如果终极镣铐不是你偷的，那是谁？"
+
+#. category: mistranslation
+#. reason: Restraints 是镣铐而非束缚带，且代词指向不清
+#. en: "I would never have taken the Restraints off those coughing tuxemon if I knew they'd chase us in here!"
+msgid "spyder_scoop_weaver1"
+msgstr "要是我早知道那些咳嗽的精灵会把我们追到这里来，我绝不会解开它们的镣铐！"
+
+#. category: mistranslation
+#. reason: crime doesn't pay 被反向误译为犯罪不需要代价
+#. en: "Yikes! It turns out crime doesn't pay!"
+msgid "spyder_scoop_weaver2"
+msgstr "呀！看来犯罪果然没有好下场！"
+
+#. category: style
+#. reason: keep my head above water 的字面结构不符合中文表达
+#. en: "I couldn't keep my head above water."
+msgid "spyder_searoutec_carstair2"
+msgstr "我没能让头露出水面。"
+
+#. category: mistranslation
+#. reason: shellfish/selfish 双关被译成无意义的贝壳鱼
+#. en: "Let me win - don't be _shellfish_!"
+msgid "spyder_searoutec_leek1"
+msgstr "让我赢吧——别这么“贝”私！"
+
+#. category: mistranslation
+#. reason: porpoise 被残留为未翻译英文，整句不可读
+#. en: "I lost on _porpoise_."
+msgid "spyder_searoutec_leek2"
+msgstr "我可是故意输的。"
+
+#. category: drift
+#. reason: 上游译文重复整段内容并凭空增加字面换行
+#. en: "This is Dragon's Cave! I'm standing outside because ... uh, because I'm guarding it."
+msgid "spyder_searoutec_nigel1"
+msgstr "这是龙穴！我站在外面是因为……呃，因为我在守卫这里。"
+
+#. category: glossary
+#. reason: Spyder Bite 未采用 glossary.tsv 固定译名
+#. en: "Sorry, I cannot permit entrance to the sacred cave while the Spyder Bite infection is still at loose."
+msgid "spyder_searoutec_nigel3"
+msgstr "抱歉，只要“斯皮德咬合”感染仍在传播，我就不能允许任何人进入神圣洞穴。"
+
+#. category: glossary
+#. reason: 漏掉 Manosting 名称且 Tuxeball 未采用固定译名，并多出字面换行
+#. en: "Manosting was wrapped around me ... I couldn't swim ... My last hope ... The Tuxeball I stashed in my swimming costume!"
+msgid "spyder_searoutec_river1"
+msgstr "粉紫水母缠住了我……我游不动了……我最后的希望……就是藏在泳衣里的精灵球！"
+
+#. category: glossary
+#. reason: Sharpfin 未采用 glossary.tsv 固定译名
+#. en: "Sharpfin are great! But don't give one a bath ..."
+msgid "spyder_searoutec_sandy1"
+msgstr "锋利鳍豚很棒！不过可别给它洗澡……"
+
+#. category: mistranslation
+#. reason: took the bait 是上当的双关，不是接受诱饵
+#. en: "I took the bait."
+msgid "spyder_searoutec_sandy2"
+msgstr "我上钩了。"
+
+#. category: style
+#. reason: hold onto your hats 被机械直译，中文对白不自然
+#. en: "I'm the world-record holder for holding your breath! Hold onto your hats ..."
+msgid "spyder_searoutec_wade1"
+msgstr "我是憋气世界纪录保持者！你可看好了……"
+
+#. category: mistranslation
+#. reason: splutter 是呛水后的咳喷声，不是溅射
+#. en: "*splutter*"
+msgid "spyder_searoutec_wade2"
+msgstr "*噗咳*"
+
+#. category: mistranslation
+#. reason: We dig it 的宣传双关被逐字误译
+#. en: "Sponsored by Shaft. \"We dig it!\""
+msgid "spyder_shaft_plaque"
+msgstr "由沙夫特赞助。“我们就爱挖！”"
+
+#. category: glossary
+#. reason: Shaft 未采用 glossary.tsv 固定译名
+#. en: "Shaft Headquarters: Mining Division"
+msgid "spyder_shaft1_sign"
+msgstr "沙夫特总部：采矿部"
+
+#. category: glossary
+#. reason: Hatchet 未采用 glossary.tsv 固定译名
+#. en: "Your mighty hatchet slices the log in two."
+msgid "spyder_successful_log"
+msgstr "你的威猛短斧把原木劈成了两半。"
+
+#. category: style
+#. reason: 上游换行错位并少一个字面换行，严重影响对白排版
+#. en: "Hey buddy! \\n Are you planning to break into these HQ? Cool! \\n Make sure you're well prepared before you do, because it's difficult to get out once you're inside! \\n"
+msgid "spyder_timber_dante2"
+msgstr "嘿，伙计！\n你打算闯进这座总部吗？真酷！\n动手前一定要做好充分准备，因为进去之后很难出来！\n"
+
+#. category: mistranslation
+#. reason: places please 是要求各就各位，不是请去哪里
+#. en: "Be gone. Tourbidi, places please!"
+msgid "spyder_tunnelb_iris2"
+msgstr "走开。图尔比迪，各就各位！"
+
+#. category: glossary
+#. reason: Masknake 未采用 glossary.tsv 固定译名
+#. en: "Masknake is great fun. Just give it a poke and its tail puts on a light show!"
+msgid "spyder_tunnelb_meitner1"
+msgstr "面具蛇非常有趣。只要戳它一下，它的尾巴就会献上一场灯光秀！"
+
+#. category: mistranslation
+#. reason: put me off my game 指影响发挥，不是失去比赛动力
+#. en: "My hunger put me off of my game!"
+msgid "spyder_tunnelb_tommy2"
+msgstr "我饿得发挥失常了！"
+
+#. category: drift
+#. reason: 上游凭空增加“我不知道该怎么办”并多出字面换行
+#. en: "I can't explain it ... one moment my Cairfrey was healthy, the next it was sick! \\n At least the Enforcers arrived so soon. "
+msgid "spyder_wayfarer_granny"
+msgstr "我解释不了……刚才我的凯尔弗雷还好好的，转眼就病了！\n至少执法者很快就赶到了。"
+
+#. category: drift
+#. reason: 首句被重复，且人为断词造成字面换行数严重超出英文
+#. en: "My tuxemon aren't sick! This is just an excuse to sell us medicine we don't need. \\n When I was your age, we didn't have medicine. We swam in mountain streams and if you got a sniffle, well, tough! \\n And anyway, I saw the Enforcers coming down Route 4 before anyone so much as sniffled, so how could ... \\n ah ah achoo! \\n ... \\n That doesn't mean anything. I have an itchy nose."
+msgid "spyder_wayfarer_maniac"
+msgstr "我的精灵没生病！这只是想卖给我们不需要的药的借口。\n我像你这么大时，根本没有药。我们就在山间溪流里游泳，得了点小感冒也只能硬扛！\n而且，早在任何人打喷嚏之前，我就看到执法者沿着4号公路过来了，所以怎么可能……\n啊、啊、阿嚏！\n……\n这说明不了什么。我只是鼻子痒。"
+
+#. category: glossary
+#. reason: 泛称 tuxemon 多次译为小精灵而非固定译名精灵，且人为增加字面换行
+#. en: "Sorry mate, no rooms available. \\n The Enforcers say a rare disease has broken out among some guests' tuxemon, so we're under quarantine. \\n I can heal your tuxemon for you, though?"
+msgid "spyder_wayfarer_shopkeeper"
+msgstr "抱歉，朋友，没空房了。\n执法者说一些客人的精灵中暴发了一种罕见疾病，所以我们正在隔离。\n不过，我可以帮你治疗精灵，怎么样？"
+
+#. category: glossary
+#. reason: Scoop 未采用 glossary.tsv 固定译名
+#. en: "I hope this isn't related to those sick tuxemon at Scoop Farms!"
+msgid "spyder_wayfarer1_bismuth1"
+msgstr "希望这和斯考普农场那些生病的精灵无关！"
+
+#. category: style
+#. reason: Bummer 被译成连接词“遗憾的是”，不符合独立感叹句
+#. en: "Bummer!"
+msgid "spyder_wayfarer1_bismuth2"
+msgstr "真倒霉！"
+
+#. category: style
+#. reason: 品牌标语被拆成两个突兀短句，影响广告式语气
+#. en: "This enforcement action is sponsored by Omnichannel: The Only News You Need. "
+msgid "spyder_wayfarer1_bravo1"
+msgstr "此次执法行动由全能公司——您唯一需要的新闻——赞助。"
+
+#. category: omission
+#. reason: 漏译品牌标语 The Only News You Need
+#. en: "Please do not let my battling performance affect your opinion of Omnichannel: The Only News You Need. "
+msgid "spyder_wayfarer1_bravo2"
+msgstr "请不要让我的战斗表现影响你对全能公司——您唯一需要的新闻——的看法。"
+
+#. category: mistranslation
+#. reason: see my lose 指看到我落败，不是看到损失
+#. en: "I'm glad Jessie didn't see my lose like that!"
+msgid "spyder_wayfarer1_james2"
+msgstr "还好杰西没看到我输得这么惨！"
+
+#. category: drift
+#. reason: 上游凭空追加一整句和字面换行，且 Botbot 译名错误
+#. en: "Hey, buddy, do you want my Botbot?"
+msgid "spyder_wayfarer1_maniac"
+msgstr "嘿，伙计，你想要我的布布吗？"
+
+#. category: style
+#. reason: 后置“关于精灵的护理”明显是翻译腔
+#. en: "I guess we have a lot to learn about tuxemon care."
+msgid "spyder_wayfarer1_nightshade2"
+msgstr "看来我们在精灵护理方面还有很多要学。"
+
+#. category: style
+#. reason: Stop right there 被逐字译成“就在那里停下”，对白生硬
+#. en: "Stop right there! Or, um ..."
+msgid "spyder_wayfarer1_victor2"
+msgstr "站住！或者，呃……"
+
+#. category: style
+#. reason: 客栈名保留英文，中文标牌阅读不连贯
+#. en: "Welcome to the Wayfarer Inn! "
+msgid "spyder_wayfarerinn_sign"
+msgstr "欢迎来到旅人旅馆！"
+
+#. category: mistranslation
+#. reason: Fine 在勉强同意语境中是好吧，不是很好
+#. en: ".... Fine."
+msgid "stahp2"
+msgstr "……好吧。"
+
+#. category: drift
+#. reason: 同一语义被重复两遍并凭空增加字面换行
+#. en: "But don't think you're avoiding this conversation! I'll get the deets out of you soon enough!"
+msgid "stahp3"
+msgstr "但别以为你能躲过这场谈话！我很快就会从你嘴里套出细节！"
+
+#. category: style
+#. reason: 人为断词多出字面换行，且第二句句式生硬
+#. en: "STATURSUS has learned to channel its emotions into a single pure flame. The mere sight of it sends others into a trance."
+msgid "statursus_description"
+msgstr "雕像熊已经学会把情绪汇聚成一团纯粹的火焰。别人只要看它一眼，就会陷入恍惚。"
+
+#. category: style
+#. reason: Handling 被译为处理，物品描述明显翻译腔
+#. en: "A long iron pipe. Handling it leaves your hands sooty and ashen."
+msgid "stovepipe_description"
+msgstr "一根长长的铁管。拿过之后，双手会沾满黑灰。"
+
+#. category: style
+#. reason: convince bugs 逐字译为说服虫子，不符合诱饵语境
+#. en: "Its tails are lures to convince bugs to bite them and be trapped."
+msgid "strella_description"
+msgstr "它的尾巴是诱饵，会引诱虫子咬上去并落入陷阱。"
+
+#. category: mistranslation
+#. reason: 该选项回应是否愿意倾听，现译为“我当然知道”答非所问
+#. en: "Sure I do."
+msgid "sure_i_do"
+msgstr "我当然愿意听。"
+
+#. category: mistranslation
+#. reason: sudsy 指能起泡，被误译为带泥土
+#. en: "In parts of the world, people clean themselves with this fragrant, sudsy sand."
+msgid "sweet_sand_description"
+msgstr "在世界上的一些地方，人们会用这种芳香、能搓出泡沫的沙子清洁身体。"
+
+#. category: style
+#. reason: Jaime 未本地化且接待员对白多处直译生硬
+#. en: "Greeter Jaime: Hey there ${{name}}! Heard you got a Tuxemon, congrats! If you wanna grow your party, you'll need Tuxeballs."
+msgid "taba_greeting1"
+msgstr "接待员杰米：嘿，${{name}}！听说你获得了一只精灵，恭喜！要壮大队伍，你会需要精灵球。"
+
+#. category: style
+#. reason: 人为断词多出字面换行，且“这里有一些让你开始”不可读
+#. en: "The shop is doing a promo, here's some to get you started. You use them to capture Tuxemon. It's easier if they're weakend first though!"
+msgid "taba_greeting2a"
+msgstr "商店正在促销，先送你几个用来起步。你可以用它们捕捉精灵，不过先把对方削弱会更容易！"
+
+#. category: mistranslation
+#. reason: a good head on your shoulders 指头脑清醒，被误译为有一个很好的开头，且多出字面换行
+#. en: "Ah! I see you've already got some. You've got a good head on your shoulders ${{name}}, I'm sure you'll be a champ in no time."
+msgid "taba_greeting2b"
+msgstr "啊！看来你已经有一些了。${{name}}，你很有头脑，我相信你很快就能成为冠军。"
+
+#. category: omission
+#. reason: 漏掉 ${{name}} 占位符，且漏译 Tuxemart 名称
+#. en: "Good luck in your adventures ${{name}}, and remember to shop at Tuxemart for all your adventuring needs!\\n...\\nSorry about the sales pitch, it's my job."
+msgid "taba_greeting3"
+msgstr "祝你冒险顺利，${{name}}。记得前往精灵商店，购买冒险所需的一切！\n……\n抱歉说了推销词，这是我的工作。"
+
+#. category: omission
+#. reason: 漏译开头的 Tuxemon 感叹
+#. en: "Tuxemon! I was among the most skilled trainer!"
+msgid "taba_house1_husband1"
+msgstr "精灵！我当年可是最优秀的训练师之一！"
+
+#. category: style
+#. reason: “记录片”和后半句残句明显影响阅读
+#. en: "It's a documentary about the strangest and most wonderful Tuxemon in the region,\\n as well as the strange behaviors they have adopted."
+msgid "taba_house1_watching"
+msgstr "这是一部关于本地区最奇异、最奇妙的精灵的纪录片，\n也介绍了它们养成的古怪习性。"
+
+#. category: mistranslation
+#. reason: general works 被误译为一般工程，且学科名称不够准确
+#. en: "000 - Computer science, information and general works, 100 - Philosophy and psychology\\n200 - Religion, 300 - Social sciences, 400 - Language, 500 - Pure Science, 600 - Technology\\n700 - Arts and recreation, 800 - Literature, 900 - History and geography"
+msgid "taba_house2_books"
+msgstr "000 - 计算机科学、信息与综合类，100 - 哲学与心理学\n200 - 宗教，300 - 社会科学，400 - 语言，500 - 自然科学，600 - 技术\n700 - 艺术与娱乐，800 - 文学，900 - 历史与地理"
+
+#. category: style
+#. reason: Legacy Library 直译为遗留图书馆，中文馆名生硬
+#. en: "Welcome to the Legacy Library! Feel free to look around, but quiet please."
+msgid "taba_house2_owner1"
+msgstr "欢迎来到传承图书馆！请随意参观，但请保持安静。"
+
+#. category: drift
+#. reason: 上游凭空追加作者英文原名括注
+#. en: "The book is Raised By Dreams by Louis Etrergo."
+msgid "taba_house2_reading2"
+msgstr "这本书是路易斯·埃特雷戈所著的《梦中养成》。"
+
+#. category: style
+#. reason: 作者名未本地化，与同组书目格式不一致
+#. en: "The book is Children Without Honor by Leslie Greninza."
+msgid "taba_house2_reading3"
+msgstr "这本书是莱斯利·格雷宁扎所著的《失去荣誉的孩子》。"
+
+#. category: style
+#. reason: Legacy Library 直译为遗留图书馆，中文馆名生硬
+#. en: "Legacy Library"
+msgid "taba_house2_sign"
+msgstr "传承图书馆"
+
+#. category: style
+#. reason: 旅馆名称完全保留英文，中文对白阅读不连贯
+#. en: "Welcome to The Thoughtful Leaf Inn!"
+msgid "taba_house3_owner1"
+msgstr "欢迎来到思叶旅馆！"
+
+#. category: style
+#. reason: 旅馆名“周到的叶子”逐词直译生硬
+#. en: "The Thoughtful Leaf Inn"
+msgid "taba_house3_sign"
+msgstr "思叶旅馆"
+
+#. category: style
+#. reason: empty stomach 被译成空虚的肚子，中文搭配不自然
+#. en: "Eh? Just filling up an empty stomach."
+msgid "taba_house4_client2a"
+msgstr "嗯？不过是填填空肚子罢了。"
+
+#. category: style
+#. reason: dense 描写食物质地，译为浓密不自然
+#. en: "It's brown, dense, but it doesn't look like pudding..."
+msgid "taba_house4_dish1"
+msgstr "它是棕色的，很厚实，但看起来不像布丁……"
+
+#. category: style
+#. reason: 非人称生物使用“他们”，且句式重复生硬
+#. en: "They rest and grow. They also grow and rest. Rarely, they rest without growing or grow without resting."
+msgid "tarpeur_description"
+msgstr "它们休息、生长，再生长、休息。它们很少只休息而不生长，或只生长而不休息。"
+
+#. category: style
+#. reason: 人为断词多出字面换行，影响描述显示
+#. en: "Upon their birth, a TAUPYPUS' eyes are burst by its mother. That way, their eyes will never sting when they dive into the water."
+msgid "taupypus_description"
+msgstr "鸭嘴兽出生时，母亲会刺破它的眼睛。这样，它们潜入水中时眼睛就永远不会刺痛。"
+
+#. category: mistranslation
+#. reason: earth 在钻探语境中指大地，不是地球
+#. en: "A big click-clack machine used to drill into the earth."
+msgid "tectonic_drill_description"
+msgstr "一台用来钻入大地、会发出咔嗒声的大机器。"
+
+#. category: style
+#. reason: 单数精灵与复数人称混用，指代不清
+#. en: "TEDDISUN worships the sun - they're always seen carrying their sun toy."
+msgid "teddisun_description"
+msgstr "特迪桑崇拜太阳——人们总能看到它带着自己的太阳玩具。"
+
+#. category: style
+#. reason: 人为断词多出字面换行，且句式累赘
+#. en: "They absorb any information they come across. Their constant chatter communicates everything they have learned in order."
+msgid "tetrchimp_description"
+msgstr "它们会吸收遇到的任何信息，并通过没完没了的喋喋不休，按顺序把学到的一切传达出去。"
+
+#. category: mistranslation
+#. reason: Splendid 在此是太好了，不是精彩，且现译搭配生硬
+#. en: "Oh, Splendid! I knew from the beginning it had to be you\\nDon't worry, I won't tell anyone."
+msgid "thatsmeknight"
+msgstr "哦，太好了！我从一开始就知道一定是你。\n别担心，我不会告诉任何人。"
+
+#. category: style
+#. reason: 省略号过长且“能量”用于人物精力不自然
+#. en: "The energy of that man is boundless..."
+msgid "theenergy"
+msgstr "那个人的精力真是无穷无尽……"
+
+#. category: omission
+#. reason: 漏译 Gage Paludal Lamina 等关键信息，多个专名违反 glossary，并有三处额外字面换行
+#. en: "I'm sorry about that scene, Allie is sometimes hard to deal with, unlike my daughter Jess.\\nOh! Where are my manners. My name is Ae... You know what? I'll just write it.\\nAeble\\nIt's pronounced ahbluh, but everyone just calls me Able. You can call me that, I guess...\\nAeble: I'm the CEO here at the Omnichannel, every broadcast you see, gets approved by me.\\nNow, I'm not the only one that does their part. Omnichannel has a board that helps administrate the various districts.\\nAnd what do you know...the board keeps getting reelected every year!\\nOmnichannel's goal is to open up the world to all. The only way to do that though, to make everyone equal,\\nWas to restrict Tuxemon.\\nWe started with confiscation, but most Tuxemon managed to escape. So we were forced to resort to extreme measures.\\nOur sister organization Spyder developed a drug that could change Tuxemon.\\nIt isolated a portion of the brain that every Tuxemon mysteriously has and overloaded it.\\nOnce the Gage Paludal Lamina was overloaded with electricity, their will to resist faded and they became docile.\\nBecause of some unexpected and tragic side effects, sadly, a few species are now effectively extinct,\\nRockitten, Fruitera, and Hydrone specifically.\\nNow, outside of a few stragglers in the wild, this generation only interacts with Tuxemon when they work for us.\\nThe birthrate is at an all time high, and approval of the Omnichannel has not fallen since the year before the restrictions.\\nWild Tuxemon were a pervasive curse, threatening to destroying humanity. Omnichannel has fixed that and imposed order.\\nUnchecked, Tuxemon are a force of destruction and anyone who says otherwise is lying. Sorry, I must head to work."
+msgid "theinfo"
+msgstr "刚才那一幕真抱歉，艾莉有时很难相处，不像我的女儿杰丝。\n哦！瞧我这礼数。我的名字是艾……这样吧，我直接写下来。\n艾布尔\n读作“阿布勒”，不过大家都叫我艾布尔。你也这么叫我吧……\n艾布尔：我是全能公司的首席执行官，你看到的每一条广播都要经过我批准。\n当然，并不是只有我在尽职。全能公司还有一个董事会，协助管理各个地区。\n说来也巧……董事会每年都能再次当选！\n全能公司的目标是向所有人开放世界。而要做到这一点、让人人平等，唯一的办法\n就是限制精灵。\n我们一开始采取没收措施，但大多数精灵都设法逃走了。因此，我们只好诉诸极端手段。\n我们的姊妹组织斯派德研制出了一种能够改变精灵的药物。\n它会分离出每只精灵都神秘拥有的一部分大脑区域，并使其过载。\n盖奇沼泽板层一旦被电流过载，它们的反抗意志就会消退，变得温顺。\n遗憾的是，由于一些出乎意料的悲惨副作用，有几个物种如今实际上已经灭绝，\n尤其是小岩猫、弗朗索拉和水龙。\n如今，除了野外零星残存的个体，这一代人只会在精灵为我们工作时与它们接触。\n出生率达到历史新高，而全能公司的支持率自实施限制前一年以来从未下降。\n野生精灵曾是无处不在的祸害，甚至威胁要毁灭人类。全能公司解决了问题并建立了秩序。\n若不受约束，精灵就是毁灭性的力量；任何否认这一点的人都在撒谎。抱歉，我得去工作了。"
+
+#. category: glossary
+#. reason: Omnichannel 被误译为全渠道，未采用 glossary.tsv 固定译名
+#. en: "Honey, wait. I turned on the TV and an Omnichannel press conference came on.\\nWe should watch it."
+msgid "thetvbescreamin"
+msgstr "亲爱的，等等。我打开电视，正好播出全能公司的新闻发布会。\n我们看看吧。"
+
+#. category: style
+#. reason: invent itself 被逐字译成发明自己，描述不自然
+#. en: "It is said that it had to invent itself because an evolution was not designed."
+msgid "tigrock_description"
+msgstr "据说，因为没有人为它设计进化形态，它只好自行塑造了自己。"
+
+#. category: glossary
+#. reason: Timber Town 漏掉 glossary.tsv 固定译名中的“镇”
+#. en: "Timber Town"
+msgid "timber_town"
+msgstr "粽木镇"
+
+#. category: style
+#. reason: Finally 与 You're back 连续直译造成语义重复
+#. en: "${{name}}! Finally! You're back! I was afraid you would miss the announcement!"
+msgid "timeforround2"
+msgstr "${{name}}！终于！你回来了！我还担心你会错过公告！"
+
+#. category: glossary
+#. reason: 剧情明确指此前购买的 Potion 道具，应统一译为“治疗药水”
+#. en: "Oh! You did get the potions! Good! Now we really need to get back."
+msgid "timeforround22"
+msgstr "哦！你真的拿到治疗药水了！太好了！现在我们真得赶回去了。"
+
+#. category: drift
+#. reason: 上游凭空增加只教水或土系精灵的限制
+#. en: "Technique Manual that teaches the Avalanche technique."
+msgid "tm_avalanche_description"
+msgstr "教授“雪崩”招式的招式学习器。"
+
+#. category: drift
+#. reason: 上游凭空增加只教木系精灵的限制
+#. en: "Technique Manual that teaches the Blossom technique."
+msgid "tm_blossom_description"
+msgstr "教授“绽放”招式的招式学习器。"
+
+#. category: mistranslation
+#. reason: 告别语 Toodles 被误译为贫民
+#. en: "Toodles!"
+msgid "toodles"
+msgstr "回头见！"
+
+#. category: style
+#. reason: coated in soft snow 被逐字译为涂着软雪，中文不自然
+#. en: "It appears to be a fluffy insect, but it is actually a reptile coated in soft snow."
+msgid "toufigel_description"
+msgstr "它看起来像毛茸茸的昆虫，其实是身披松软积雪的爬行动物。"
+
+#. category: glossary
+#. reason: 将 Tumblebee 错写成另一只精灵风滚虫，违反 glossary.tsv
+#. en: "It builds hives that are perfect spheres, with the TUMBLEBEE inside just rolling about and buzzing with laughter."
+msgid "tumblebee_description"
+msgstr "它筑出的蜂巢是完美的球体，不倒蜂就在里面不停滚动，开心地嗡嗡作响。"
+
+#. category: mistranslation
+#. reason: outgrown their honeycomb eggs 被误译成超过蜂巢，语义不成立
+#. en: "When they have outgrown their honeycomb eggs, they drop to the ground face first."
+msgid "tumbleworm_description"
+msgstr "当它们长得再也待不下蜂巢状的卵时，就会脸朝下掉到地上。"
+
+#. category: glossary
+#. reason: Turnipper 被误写成土拨鼠而未采用固定译名萝卜兽，且主客体关系译反
+#. en: "When a field is abandoned to the crows, locusts and mice, a TURNIPPER will sometimes dig itself out of the ground to defend the crops."
+msgid "turnipper_description"
+msgstr "当一片田地任由乌鸦、蝗虫和老鼠糟蹋时，萝卜兽有时会从地下钻出来保护庄稼。"
+
+#. category: style
+#. reason: 精灵系统语境中“被释放”生硬，应使用放生
+#. en: "{name} has been released."
+msgid "tuxemon_released"
+msgstr "已放生{name}。"
+
+#. category: mistranslation
+#. reason: Trial 是活动名“试炼”，不是司法审判
+#. en: "I take it this means you've decided to join the Trial?"
+msgid "tuxemontime1.5"
+msgstr "看来这意味着，你已经决定参加试炼了？"
+
+#. category: mistranslation
+#. reason: There we go 表示完成后的“好了”，不是“我们走吧”
+#. en: "There we go!"
+msgid "tuxemontime3"
+msgstr "好了！"
+
+#. category: style
+#. reason: Battle Area 译为战区易产生军事歧义，且长句明显直译
+#. en: "Here are your registration papers, the first Battle Area will require you to present them in exchange for a Trainer badge.\\nYou won't need the papers after that."
+msgid "tuxemontime3.1"
+msgstr "这是你的注册文件。第一个对战区会要求你出示文件，换取一枚训练师徽章。\n之后就用不到这些文件了。"
+
+#. category: style
+#. reason: 人为断词多出字面换行，且专名列表标点错误
+#. en: "Now for the most important part! Choosing your Tuxemon!\\nUnfortunately, my source of funding has become... hesitant as of late. This leaves you with only three choices of Tuxemon, sorry about that.\\nThe three choices are Rockitten, Cardiling, and Tweesher."
+msgid "tuxemontime4"
+msgstr "现在到了最重要的部分！选择你的精灵！\n遗憾的是，我的资金来源最近变得……有些犹豫。因此你只能从三只精灵中选择，实在抱歉。\n三个选择分别是小岩猫、红火鸟和镊鹭。"
+
+#. category: mistranslation
+#. reason: Splendid 是太棒了，不是形容色彩的灿烂
+#. en: "Splendid!"
+msgid "tuxemontimechoiceyes"
+msgstr "太棒了！"
+
+#. category: glossary
+#. reason: Furnursus 未采用 glossary.tsv 固定译名炉子熊
+#. en: "When a FURNURSUS is born without the fire inside, it is abandoned in the forests as an URCINE."
+msgid "urcine_description"
+msgstr "炉子熊出生时若体内没有火焰，就会被遗弃在森林里，成为小棕熊。"
+
+#. category: style
+#. reason: “跑过子弹”搭配生硬，影响图鉴描述自然度
+#. en: "It can outrun a bullet, but only when it has warmed up."
+msgid "velocitile_description"
+msgstr "它热身之后，甚至能跑得比子弹还快。"
+
+#. category: glossary
+#. reason: Tarpeur 未采用 glossary.tsv 固定译名，且人为增加字面换行
+#. en: "VIGUEUR compete to see who can lift the heaviest rocks. When they lift one that is too heavy, it squashes them and scatters TARPEUR seeds."
+msgid "vigueur_description"
+msgstr "维格会比赛谁能举起最重的石头。要是举起的石头太重，它们就会被压扁，塔波尔的种子也会四散开来。"
+
+#. category: style
+#. reason: “寿命的其余部分”逐字直译，明显不自然
+#. en: "It hatches in great numbers in the summer, but the rest of its lifespan is a mystery."
+msgid "vivipere_description"
+msgstr "它会在夏季大量孵化，但余生如何仍是个谜。"
+
+#. category: mistranslation
+#. reason: spring 在此指泉水，被误译成季节春天
+#. en: "The spring it chooses for its home always has a peculiar oniony taste."
+msgid "vivisource_description"
+msgstr "它选作家园的泉水总会带着一股奇特的洋葱味。"
+
+#. category: mistranslation
+#. reason: shell 指外壳，被误译成炮弹
+#. en: "It takes the armor of a fallen warrior and repurposes it for a shell."
+msgid "viviteel_description"
+msgstr "它会取走阵亡战士的铠甲，把它改造成自己的外壳。"
+
+#. category: mistranslation
+#. reason: keen edge 是思维敏锐的比喻，现译成“集中到边缘”语义不成立
+#. en: "The cold focuses VIVITRANS' mind to a keen edge."
+msgid "vivitrans_description"
+msgstr "寒冷让维维特兰的思维变得无比敏锐。"
+
+#. category: style
+#. reason: spirit of a forest 直译为森林的精灵，容易与物种泛称混淆
+#. en: "It is the spirit of a forest. Its hair changes with the seasons."
+msgid "volcoli_description"
+msgstr "它是森林之灵，毛发会随季节变化。"
+
+#. category: mistranslation
+#. reason: Trial 被误译为训练师，且人为增加字面换行
+#. en: "You have a Tuxemon?\\nWhy is that?\\n... .... ... ... \\n... ... .... ... \\nTrial eh? Well, hopefully you're good in a fight! I'll heal your Tuxemon real quick and then we'll see how good you really are."
+msgid "waityouhaveone"
+msgstr "你有精灵？\n为什么？\n…… …… …… ……\n…… …… …… ……\n试炼是吗？好吧，希望你很能打！我先马上治好你的精灵，再看看你究竟有多厉害。"
+
+#. category: mistranslation
+#. reason: What are you doing 被改成为什么进城，且 curfew 句式错误
+#. en: "What are you doing? Don't you know there's an early curfew?\\n... ... ... ...\\n... ... ... ...\\nYou don't seem like a threat, so you can head on to town...\\nJust don't tell any of those Omnichannel thugs I let you past, M'kay?"
+msgid "watchmewatchme"
+msgstr "你在干什么？不知道现在提前宵禁了吗？\n…… …… …… ……\n…… …… …… ……\n你看起来不像威胁，可以进城……\n不过别告诉全能公司的那些恶棍，是我放你过去的，好吗？"
+
+#. category: style
+#. reason: heavy with egg 被逐字译为被蛋压得很重，图鉴描述生硬
+#. en: "When it is heavy with egg, it becomes unable to fly."
+msgid "weavifly_description"
+msgstr "它怀卵太多时，就会无法飞行。"
+
+#. category: style
+#. reason: 开头混入多余书名号，直接影响地点提示显示
+#. en: "Welcome to ${{map_name}}: ${{map_desc}}\\nNorth: ${{north}} / South: ${{south}} / West: ${{west}} / East: ${{east}}"
+msgid "welcome_location_route"
+msgstr "欢迎来到${{map_name}}：${{map_desc}}\n北：${{north}} / 南：${{south}} / 西：${{west}} / 东：${{east}}"
+
+#. category: glossary
+#. reason: Fondent Region 未采用 glossary.tsv 固定译名，且后半句语序生硬
+#. en: "However, this still doesn't explain the lack of enthusiasm. This is a big honor!\\nBoth of you and Misa's plaything over there represent the best and brightest of the Fondent Region's youth!"
+msgid "welcometotaba10"
+msgstr "不过，这还是解释不了你们为什么毫无热情。这可是莫大的荣誉！\n你们两个，还有那边米萨的玩物，都代表着方登地区最优秀、最有前途的年轻人！"
+
+#. category: mistranslation
+#. reason: Trial 被误译为审核，且人为增加字面换行
+#. en: "Sorry sir, but how is this an honor? I was forced into this. I didn't choose to be a part of the Trial."
+msgid "welcometotaba11"
+msgstr "抱歉，先生，但这算什么荣誉？我是被逼来的，根本没选择参加试炼。"
+
+#. category: mistranslation
+#. reason: Trial training 被误译为训练师培训，且人为增加字面换行
+#. en: "Admittedly, we did take some promising Omnichannel recruits and sent them into Trial training, so I apologize if that's the case."
+msgid "welcometotaba12"
+msgstr "诚然，我们确实挑选了一些有前途的全能公司新兵，送他们参加试炼训练；如果你属于这种情况，我很抱歉。"
+
+#. category: mistranslation
+#. reason: Trial 被误译为训练师阵营并造成后句语义错误
+#. en: "No sir, you imprisoned my family and forced me and my brother to join the Trial.\\nSo forgive me if I \"lack enthusiasm\" when you're talking about the Trial."
+msgid "welcometotaba13"
+msgstr "不，先生。你囚禁了我的家人，强迫我和哥哥参加试炼。\n所以当你谈起试炼时，请原谅我“缺乏热情”。"
+
+#. category: glossary
+#. reason: Flower City 未采用 glossary.tsv 固定译名
+#. en: "Ahh, you're the Flower City kid I've heard so much about. \"The Future of Omnichannel.\" What's your name?"
+msgid "welcometotaba14"
+msgstr "啊，你就是那个久闻其名的彩花城小子。“全能公司的未来。”你叫什么名字？"
+
+#. category: omission
+#. reason: 两处漏译 Omnichannel，且 Trial 被误译为普通试验
+#. en: "Congratulations on passing the strict Omnichannel evaluation!\\nYour lucky group has been designated by Omnichannel to be the first contestants in the Trial!"
+msgid "welcometotaba2"
+msgstr "恭喜你们通过全能公司的严格评估！\n你们这个幸运的小组已被全能公司指定为首批试炼参赛者！"
+
+#. category: glossary
+#. reason: Fondent Region 未采用 glossary.tsv 固定译名，且 Trial 被误译为比赛
+#. en: "Regardless, my name is Kyle and I am the lead architect behind the Battle Areas.\\nI am here to inaugurate the first Fondent Region Battle Area and declare that...\\nTHE TRIAL HAS BEGUN!"
+msgid "welcometotaba5"
+msgstr "不管怎样，我叫凯尔，是对战区的首席设计师。\n我来此为方登地区的第一个对战区揭幕，并宣布……\n试炼正式开始！"
+
+#. category: mistranslation
+#. reason: Trial Members 被误译成普通训练师，丢失活动成员身份
+#. en: "I'm not going to lie, I expected more enthusiasm from the first Trial Members."
+msgid "welcometotaba7"
+msgstr "说实话，我原以为第一批试炼成员会更热情。"
+
+#. category: style
+#. reason: attached to 被生硬译成附身，且人为增加字面换行
+#. en: "You're that thing that Misa was attached to. How'd you even get here? Did she falsify your papers to get you in?\\n... .... ... ...\\nAllie signed off on your papers? Interesting..."
+msgid "welcometotaba8"
+msgstr "你就是米萨一直黏着的那个家伙。你究竟怎么进来的？她伪造了你的证件吗？\n…… …… …… ……\n艾莉批准了你的证件？有意思……"
+
+#. category: mistranslation
+#. reason: papers in order 指证件有效，不是文件排列有条理
+#. en: "Your papers seem to be in order. For now."
+msgid "welcometotaba9"
+msgstr "你的证件看起来没问题。暂时如此。"
+
+#. category: mistranslation
+#. reason: take on the Trial 指挑战试炼，不是胜任训练师工作
+#. en: "Wow, that was a good fight!\\nLet me heal your Tuxemon real quick...\\nAnd... There! All set!\\nWith a little more practice and maybe a few more Tuxemon, you'll definitely be able to take on the Trial."
+msgid "wewnicefight"
+msgstr "哇，打得真不错！\n让我马上治好你的精灵……\n然后……好了！全部搞定！\n再多练习一下，也许再多收几只精灵，你肯定就能挑战试炼了。"
+
+#. category: style
+#. reason: 节目式标题被译成普通疑问句，语气不符
+#. en: "Name That Tuxemon"
+msgid "who_is_that"
+msgstr "猜猜这只精灵"
+
+#. category: style
+#. reason: plants itself 被逐字译成种植自己，明显影响图鉴阅读
+#. en: "Like a mighty tree, WINDEYE plants itself on the top of hills to soak in the sun and wind. Recharged, it then leaves to find another place under the sky."
+msgid "windeye_description"
+msgstr "立扇兽像一棵大树一样扎在山顶，吸收阳光和风。充满能量后，它又会离开，寻找天空下的另一处栖身地。"
+
+#. category: mistranslation
+#. reason: 上游凭空将 Tuxemon 译成“自由小精灵”
+#. en: "Tuxemon: Xero"
+msgid "xero_campaign"
+msgstr "精灵：Xero"
+
+#. category: glossary
+#. reason: Tuxemon 未采用固定泛称精灵，且机构名语序不可读
+#. en: "Xero Institute for Tuxemon Research and Advancement ahead."
+msgid "xero_hideout1"
+msgstr "前方是 Xero 精灵研究与发展研究所。"
+
+#. category: glossary
+#. reason: 上游把队员编号和 Team 的语序拼错，统一为 Xero 队员加罗马数字
+#. en: "Team Xero Grunt I"
+msgid "xerogrund1"
+msgstr "Xero 队员 I"
+
+#. category: glossary
+#. reason: 上游把所有队员都误标为 I，统一保留正确编号
+#. en: "Team Xero Grunt II"
+msgid "xerogrund2"
+msgstr "Xero 队员 II"
+
+#. category: glossary
+#. reason: 上游把所有队员都误标为 I，统一保留正确编号
+#. en: "Team Xero Grunt X"
+msgid "xerogrunt10"
+msgstr "Xero 队员 X"
+
+#. category: glossary
+#. reason: 上游把所有队员都误标为 I，统一保留正确编号
+#. en: "Team Xero Grunt II"
+msgid "xerogrunt2"
+msgstr "Xero 队员 II"
+
+#. category: glossary
+#. reason: 上游把所有队员都误标为 I，统一保留正确编号
+#. en: "Team Xero Grunt III"
+msgid "xerogrunt3"
+msgstr "Xero 队员 III"
+
+#. category: glossary
+#. reason: 上游把所有队员都误标为 I，统一保留正确编号
+#. en: "Team Xero Grunt IV"
+msgid "xerogrunt4"
+msgstr "Xero 队员 IV"
+
+#. category: glossary
+#. reason: 上游把所有队员都误标为 I，统一保留正确编号
+#. en: "Team Xero Grunt V"
+msgid "xerogrunt5"
+msgstr "Xero 队员 V"
+
+#. category: glossary
+#. reason: 上游把所有队员都误标为 I，统一保留正确编号
+#. en: "Team Xero Grunt VI"
+msgid "xerogrunt6"
+msgstr "Xero 队员 VI"
+
+#. category: glossary
+#. reason: 上游把所有队员都误标为 I，统一保留正确编号
+#. en: "Team Xero Grunt VII"
+msgid "xerogrunt7"
+msgstr "Xero 队员 VII"
+
+#. category: glossary
+#. reason: 上游把所有队员都误标为 I，统一保留正确编号
+#. en: "Team Xero Grunt VIII"
+msgid "xerogrunt8"
+msgstr "Xero 队员 VIII"
+
+#. category: glossary
+#. reason: 上游把所有队员都误标为 I，统一保留正确编号
+#. en: "Team Xero Grunt IX"
+msgid "xerogrunt9"
+msgstr "Xero 队员 IX"
+
+#. category: style
+#. reason: 多处逐句直译影响关键剧情对白的自然度
+#. en: "But.. I know you've been eager to see the region, and this is your best shot.\\nI know you have the drive in yourself to become the very best, like no one ever was.\\nI just don't know if we can afford the fees\\n\\nWe'll make something work... Somehow."
+msgid "youneedtodothis2"
+msgstr "但是……我知道你一直渴望看看这个地区，而这是你最好的机会。\n我知道你有决心成为前无古人的最强者。\n我只是不知道我们是否负担得起那些费用。\n\n我们会想出办法的……总会有办法。"

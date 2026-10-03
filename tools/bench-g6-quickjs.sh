@@ -80,6 +80,7 @@ for viewport in "${viewports[@]}"; do
   state="$bench_root/state-${width}x${height}.json"
   G6_DIST="$app_dist" G6_JOURNEY="$journey" \
     G6_MAPS="$root/dist/maps" G6_BATTLE="$root/dist/battle" \
+    G6_MAPS_ZH="$root/dist/maps-zh" G6_BATTLE_ZH="$root/dist/battle-zh" \
     G6_ANIMATED="$root/dist/animated" G6_NPC_SRC="$root/dist/npc-src" \
     G6_TERRAIN_STREAM="$root/dist/terrain-stream" G6_DEMO="$root/dist/demo" \
     G6_BENCH_ROOT="$bench_root" \

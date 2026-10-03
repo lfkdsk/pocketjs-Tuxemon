@@ -236,6 +236,2654 @@
     "file": "assets/audio/sounds/sound_confirm.wav"
   },
   {
+    "key": "battle-zh/items/aardant.json",
+    "file": "dist/battle-zh/items/aardant.json"
+  },
+  {
+    "key": "battle-zh/items/ancient_egg.json",
+    "file": "dist/battle-zh/items/ancient_egg.json"
+  },
+  {
+    "key": "battle-zh/items/antidote_grapes.json",
+    "file": "dist/battle-zh/items/antidote_grapes.json"
+  },
+  {
+    "key": "battle-zh/items/app_map.json",
+    "file": "dist/battle-zh/items/app_map.json"
+  },
+  {
+    "key": "battle-zh/items/app_tuxepedia.json",
+    "file": "dist/battle-zh/items/app_tuxepedia.json"
+  },
+  {
+    "key": "battle-zh/items/book_wishes.json",
+    "file": "dist/battle-zh/items/book_wishes.json"
+  },
+  {
+    "key": "battle-zh/items/boost_armour.json",
+    "file": "dist/battle-zh/items/boost_armour.json"
+  },
+  {
+    "key": "battle-zh/items/boost_dodge.json",
+    "file": "dist/battle-zh/items/boost_dodge.json"
+  },
+  {
+    "key": "battle-zh/items/boost_melee.json",
+    "file": "dist/battle-zh/items/boost_melee.json"
+  },
+  {
+    "key": "battle-zh/items/boost_ranged.json",
+    "file": "dist/battle-zh/items/boost_ranged.json"
+  },
+  {
+    "key": "battle-zh/items/boost_speed.json",
+    "file": "dist/battle-zh/items/boost_speed.json"
+  },
+  {
+    "key": "battle-zh/items/cosmic_berry.json",
+    "file": "dist/battle-zh/items/cosmic_berry.json"
+  },
+  {
+    "key": "battle-zh/items/cure_festering.json",
+    "file": "dist/battle-zh/items/cure_festering.json"
+  },
+  {
+    "key": "battle-zh/items/cureall.json",
+    "file": "dist/battle-zh/items/cureall.json"
+  },
+  {
+    "key": "battle-zh/items/dojo_pass.json",
+    "file": "dist/battle-zh/items/dojo_pass.json"
+  },
+  {
+    "key": "battle-zh/items/earth_berry.json",
+    "file": "dist/battle-zh/items/earth_berry.json"
+  },
+  {
+    "key": "battle-zh/items/escape_key.json",
+    "file": "dist/battle-zh/items/escape_key.json"
+  },
+  {
+    "key": "battle-zh/items/fire_berry.json",
+    "file": "dist/battle-zh/items/fire_berry.json"
+  },
+  {
+    "key": "battle-zh/items/fishing_rod.json",
+    "file": "dist/battle-zh/items/fishing_rod.json"
+  },
+  {
+    "key": "battle-zh/items/flintstone.json",
+    "file": "dist/battle-zh/items/flintstone.json"
+  },
+  {
+    "key": "battle-zh/items/friendship_scroll.json",
+    "file": "dist/battle-zh/items/friendship_scroll.json"
+  },
+  {
+    "key": "battle-zh/items/frost_berry.json",
+    "file": "dist/battle-zh/items/frost_berry.json"
+  },
+  {
+    "key": "battle-zh/items/gold_pass.json",
+    "file": "dist/battle-zh/items/gold_pass.json"
+  },
+  {
+    "key": "battle-zh/items/heroic_berry.json",
+    "file": "dist/battle-zh/items/heroic_berry.json"
+  },
+  {
+    "key": "battle-zh/items/imperial_potion.json",
+    "file": "dist/battle-zh/items/imperial_potion.json"
+  },
+  {
+    "key": "battle-zh/items/imperial_tea.json",
+    "file": "dist/battle-zh/items/imperial_tea.json"
+  },
+  {
+    "key": "battle-zh/items/lightning_berry.json",
+    "file": "dist/battle-zh/items/lightning_berry.json"
+  },
+  {
+    "key": "battle-zh/items/lucky_bamboo.json",
+    "file": "dist/battle-zh/items/lucky_bamboo.json"
+  },
+  {
+    "key": "battle-zh/items/mega_potion.json",
+    "file": "dist/battle-zh/items/mega_potion.json"
+  },
+  {
+    "key": "battle-zh/items/metal_berry.json",
+    "file": "dist/battle-zh/items/metal_berry.json"
+  },
+  {
+    "key": "battle-zh/items/miaow_milk.json",
+    "file": "dist/battle-zh/items/miaow_milk.json"
+  },
+  {
+    "key": "battle-zh/items/mystery_tea.json",
+    "file": "dist/battle-zh/items/mystery_tea.json"
+  },
+  {
+    "key": "battle-zh/items/normal_berry.json",
+    "file": "dist/battle-zh/items/normal_berry.json"
+  },
+  {
+    "key": "battle-zh/items/nu_phone.json",
+    "file": "dist/battle-zh/items/nu_phone.json"
+  },
+  {
+    "key": "battle-zh/items/ox_stick.json",
+    "file": "dist/battle-zh/items/ox_stick.json"
+  },
+  {
+    "key": "battle-zh/items/p_monsters_eyes.json",
+    "file": "dist/battle-zh/items/p_monsters_eyes.json"
+  },
+  {
+    "key": "battle-zh/items/p_starry_night.json",
+    "file": "dist/battle-zh/items/p_starry_night.json"
+  },
+  {
+    "key": "battle-zh/items/p_trepidation.json",
+    "file": "dist/battle-zh/items/p_trepidation.json"
+  },
+  {
+    "key": "battle-zh/items/peace_lily.json",
+    "file": "dist/battle-zh/items/peace_lily.json"
+  },
+  {
+    "key": "battle-zh/items/petrified_dung.json",
+    "file": "dist/battle-zh/items/petrified_dung.json"
+  },
+  {
+    "key": "battle-zh/items/potion.json",
+    "file": "dist/battle-zh/items/potion.json"
+  },
+  {
+    "key": "battle-zh/items/pyramidion.json",
+    "file": "dist/battle-zh/items/pyramidion.json"
+  },
+  {
+    "key": "battle-zh/items/raise_armour.json",
+    "file": "dist/battle-zh/items/raise_armour.json"
+  },
+  {
+    "key": "battle-zh/items/raise_dodge.json",
+    "file": "dist/battle-zh/items/raise_dodge.json"
+  },
+  {
+    "key": "battle-zh/items/raise_hp.json",
+    "file": "dist/battle-zh/items/raise_hp.json"
+  },
+  {
+    "key": "battle-zh/items/raise_melee.json",
+    "file": "dist/battle-zh/items/raise_melee.json"
+  },
+  {
+    "key": "battle-zh/items/raise_ranged.json",
+    "file": "dist/battle-zh/items/raise_ranged.json"
+  },
+  {
+    "key": "battle-zh/items/raise_speed.json",
+    "file": "dist/battle-zh/items/raise_speed.json"
+  },
+  {
+    "key": "battle-zh/items/refreshing_slice.json",
+    "file": "dist/battle-zh/items/refreshing_slice.json"
+  },
+  {
+    "key": "battle-zh/items/repellent.json",
+    "file": "dist/battle-zh/items/repellent.json"
+  },
+  {
+    "key": "battle-zh/items/restoration.json",
+    "file": "dist/battle-zh/items/restoration.json"
+  },
+  {
+    "key": "battle-zh/items/revive.json",
+    "file": "dist/battle-zh/items/revive.json"
+  },
+  {
+    "key": "battle-zh/items/rhincus_fossil.json",
+    "file": "dist/battle-zh/items/rhincus_fossil.json"
+  },
+  {
+    "key": "battle-zh/items/sea_girdle.json",
+    "file": "dist/battle-zh/items/sea_girdle.json"
+  },
+  {
+    "key": "battle-zh/items/shadow_berry.json",
+    "file": "dist/battle-zh/items/shadow_berry.json"
+  },
+  {
+    "key": "battle-zh/items/shammer_fossil.json",
+    "file": "dist/battle-zh/items/shammer_fossil.json"
+  },
+  {
+    "key": "battle-zh/items/sky_berry.json",
+    "file": "dist/battle-zh/items/sky_berry.json"
+  },
+  {
+    "key": "battle-zh/items/sledgehammer.json",
+    "file": "dist/battle-zh/items/sledgehammer.json"
+  },
+  {
+    "key": "battle-zh/items/spyder_pass.json",
+    "file": "dist/battle-zh/items/spyder_pass.json"
+  },
+  {
+    "key": "battle-zh/items/stovepipe.json",
+    "file": "dist/battle-zh/items/stovepipe.json"
+  },
+  {
+    "key": "battle-zh/items/super_potion.json",
+    "file": "dist/battle-zh/items/super_potion.json"
+  },
+  {
+    "key": "battle-zh/items/surfboard.json",
+    "file": "dist/battle-zh/items/surfboard.json"
+  },
+  {
+    "key": "battle-zh/items/sweet_sand.json",
+    "file": "dist/battle-zh/items/sweet_sand.json"
+  },
+  {
+    "key": "battle-zh/items/tea.json",
+    "file": "dist/battle-zh/items/tea.json"
+  },
+  {
+    "key": "battle-zh/items/tectonic_drill.json",
+    "file": "dist/battle-zh/items/tectonic_drill.json"
+  },
+  {
+    "key": "battle-zh/items/thunderstone.json",
+    "file": "dist/battle-zh/items/thunderstone.json"
+  },
+  {
+    "key": "battle-zh/items/tm_acid.json",
+    "file": "dist/battle-zh/items/tm_acid.json"
+  },
+  {
+    "key": "battle-zh/items/tm_all_in.json",
+    "file": "dist/battle-zh/items/tm_all_in.json"
+  },
+  {
+    "key": "battle-zh/items/tm_altitude.json",
+    "file": "dist/battle-zh/items/tm_altitude.json"
+  },
+  {
+    "key": "battle-zh/items/tm_avalanche.json",
+    "file": "dist/battle-zh/items/tm_avalanche.json"
+  },
+  {
+    "key": "battle-zh/items/tm_blade.json",
+    "file": "dist/battle-zh/items/tm_blade.json"
+  },
+  {
+    "key": "battle-zh/items/tm_blossom.json",
+    "file": "dist/battle-zh/items/tm_blossom.json"
+  },
+  {
+    "key": "battle-zh/items/tm_frostbite.json",
+    "file": "dist/battle-zh/items/tm_frostbite.json"
+  },
+  {
+    "key": "battle-zh/items/tm_ice_shield.json",
+    "file": "dist/battle-zh/items/tm_ice_shield.json"
+  },
+  {
+    "key": "battle-zh/items/tm_leaf_barrage.json",
+    "file": "dist/battle-zh/items/tm_leaf_barrage.json"
+  },
+  {
+    "key": "battle-zh/items/tm_panjandrum.json",
+    "file": "dist/battle-zh/items/tm_panjandrum.json"
+  },
+  {
+    "key": "battle-zh/items/tm_scope.json",
+    "file": "dist/battle-zh/items/tm_scope.json"
+  },
+  {
+    "key": "battle-zh/items/tm_shadow_boxing.json",
+    "file": "dist/battle-zh/items/tm_shadow_boxing.json"
+  },
+  {
+    "key": "battle-zh/items/tm_supernova.json",
+    "file": "dist/battle-zh/items/tm_supernova.json"
+  },
+  {
+    "key": "battle-zh/items/tm_ubuntu.json",
+    "file": "dist/battle-zh/items/tm_ubuntu.json"
+  },
+  {
+    "key": "battle-zh/items/tm_vorpal.json",
+    "file": "dist/battle-zh/items/tm_vorpal.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball.json",
+    "file": "dist/battle-zh/items/tuxeball.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_ancient.json",
+    "file": "dist/battle-zh/items/tuxeball_ancient.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_candy.json",
+    "file": "dist/battle-zh/items/tuxeball_candy.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_crusher.json",
+    "file": "dist/battle-zh/items/tuxeball_crusher.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_diurnal.json",
+    "file": "dist/battle-zh/items/tuxeball_diurnal.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_earth.json",
+    "file": "dist/battle-zh/items/tuxeball_earth.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_female.json",
+    "file": "dist/battle-zh/items/tuxeball_female.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_fire.json",
+    "file": "dist/battle-zh/items/tuxeball_fire.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_gambler.json",
+    "file": "dist/battle-zh/items/tuxeball_gambler.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_grand.json",
+    "file": "dist/battle-zh/items/tuxeball_grand.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_hardened.json",
+    "file": "dist/battle-zh/items/tuxeball_hardened.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_hearty.json",
+    "file": "dist/battle-zh/items/tuxeball_hearty.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_lavish.json",
+    "file": "dist/battle-zh/items/tuxeball_lavish.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_majestic.json",
+    "file": "dist/battle-zh/items/tuxeball_majestic.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_male.json",
+    "file": "dist/battle-zh/items/tuxeball_male.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_metal.json",
+    "file": "dist/battle-zh/items/tuxeball_metal.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_neuter.json",
+    "file": "dist/battle-zh/items/tuxeball_neuter.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_noble.json",
+    "file": "dist/battle-zh/items/tuxeball_noble.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_nocturnal.json",
+    "file": "dist/battle-zh/items/tuxeball_nocturnal.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_omni.json",
+    "file": "dist/battle-zh/items/tuxeball_omni.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_peppy.json",
+    "file": "dist/battle-zh/items/tuxeball_peppy.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_refined.json",
+    "file": "dist/battle-zh/items/tuxeball_refined.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_salty.json",
+    "file": "dist/battle-zh/items/tuxeball_salty.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_water.json",
+    "file": "dist/battle-zh/items/tuxeball_water.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_wood.json",
+    "file": "dist/battle-zh/items/tuxeball_wood.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_xero.json",
+    "file": "dist/battle-zh/items/tuxeball_xero.json"
+  },
+  {
+    "key": "battle-zh/items/tuxeball_zesty.json",
+    "file": "dist/battle-zh/items/tuxeball_zesty.json"
+  },
+  {
+    "key": "battle-zh/items/venom_berry.json",
+    "file": "dist/battle-zh/items/venom_berry.json"
+  },
+  {
+    "key": "battle-zh/items/water_berry.json",
+    "file": "dist/battle-zh/items/water_berry.json"
+  },
+  {
+    "key": "battle-zh/items/wood_berry.json",
+    "file": "dist/battle-zh/items/wood_berry.json"
+  },
+  {
+    "key": "battle-zh/items/xp_feeder.json",
+    "file": "dist/battle-zh/items/xp_feeder.json"
+  },
+  {
+    "key": "battle-zh/items/xp_transmitter.json",
+    "file": "dist/battle-zh/items/xp_transmitter.json"
+  },
+  {
+    "key": "battle-zh/monsters/aardart.json",
+    "file": "dist/battle-zh/monsters/aardart.json"
+  },
+  {
+    "key": "battle-zh/monsters/aardorn.json",
+    "file": "dist/battle-zh/monsters/aardorn.json"
+  },
+  {
+    "key": "battle-zh/monsters/abesnaki.json",
+    "file": "dist/battle-zh/monsters/abesnaki.json"
+  },
+  {
+    "key": "battle-zh/monsters/agnidon.json",
+    "file": "dist/battle-zh/monsters/agnidon.json"
+  },
+  {
+    "key": "battle-zh/monsters/agnigon.json",
+    "file": "dist/battle-zh/monsters/agnigon.json"
+  },
+  {
+    "key": "battle-zh/monsters/agnite.json",
+    "file": "dist/battle-zh/monsters/agnite.json"
+  },
+  {
+    "key": "battle-zh/monsters/agnsher.json",
+    "file": "dist/battle-zh/monsters/agnsher.json"
+  },
+  {
+    "key": "battle-zh/monsters/allagon.json",
+    "file": "dist/battle-zh/monsters/allagon.json"
+  },
+  {
+    "key": "battle-zh/monsters/ampystoma.json",
+    "file": "dist/battle-zh/monsters/ampystoma.json"
+  },
+  {
+    "key": "battle-zh/monsters/angesnow.json",
+    "file": "dist/battle-zh/monsters/angesnow.json"
+  },
+  {
+    "key": "battle-zh/monsters/angrito.json",
+    "file": "dist/battle-zh/monsters/angrito.json"
+  },
+  {
+    "key": "battle-zh/monsters/anoleaf.json",
+    "file": "dist/battle-zh/monsters/anoleaf.json"
+  },
+  {
+    "key": "battle-zh/monsters/anu.json",
+    "file": "dist/battle-zh/monsters/anu.json"
+  },
+  {
+    "key": "battle-zh/monsters/apeoro.json",
+    "file": "dist/battle-zh/monsters/apeoro.json"
+  },
+  {
+    "key": "battle-zh/monsters/araignee.json",
+    "file": "dist/battle-zh/monsters/araignee.json"
+  },
+  {
+    "key": "battle-zh/monsters/arthrobolt.json",
+    "file": "dist/battle-zh/monsters/arthrobolt.json"
+  },
+  {
+    "key": "battle-zh/monsters/av8r.json",
+    "file": "dist/battle-zh/monsters/av8r.json"
+  },
+  {
+    "key": "battle-zh/monsters/axolightl.json",
+    "file": "dist/battle-zh/monsters/axolightl.json"
+  },
+  {
+    "key": "battle-zh/monsters/b_ver_1.json",
+    "file": "dist/battle-zh/monsters/b_ver_1.json"
+  },
+  {
+    "key": "battle-zh/monsters/bamboon.json",
+    "file": "dist/battle-zh/monsters/bamboon.json"
+  },
+  {
+    "key": "battle-zh/monsters/baobaraffe.json",
+    "file": "dist/battle-zh/monsters/baobaraffe.json"
+  },
+  {
+    "key": "battle-zh/monsters/baoby.json",
+    "file": "dist/battle-zh/monsters/baoby.json"
+  },
+  {
+    "key": "battle-zh/monsters/bearloch.json",
+    "file": "dist/battle-zh/monsters/bearloch.json"
+  },
+  {
+    "key": "battle-zh/monsters/bigfin.json",
+    "file": "dist/battle-zh/monsters/bigfin.json"
+  },
+  {
+    "key": "battle-zh/monsters/birdling.json",
+    "file": "dist/battle-zh/monsters/birdling.json"
+  },
+  {
+    "key": "battle-zh/monsters/bishosand.json",
+    "file": "dist/battle-zh/monsters/bishosand.json"
+  },
+  {
+    "key": "battle-zh/monsters/blasdoor.json",
+    "file": "dist/battle-zh/monsters/blasdoor.json"
+  },
+  {
+    "key": "battle-zh/monsters/bolt.json",
+    "file": "dist/battle-zh/monsters/bolt.json"
+  },
+  {
+    "key": "battle-zh/monsters/boltnu.json",
+    "file": "dist/battle-zh/monsters/boltnu.json"
+  },
+  {
+    "key": "battle-zh/monsters/botbot.json",
+    "file": "dist/battle-zh/monsters/botbot.json"
+  },
+  {
+    "key": "battle-zh/monsters/boxali.json",
+    "file": "dist/battle-zh/monsters/boxali.json"
+  },
+  {
+    "key": "battle-zh/monsters/breem.json",
+    "file": "dist/battle-zh/monsters/breem.json"
+  },
+  {
+    "key": "battle-zh/monsters/brewdin.json",
+    "file": "dist/battle-zh/monsters/brewdin.json"
+  },
+  {
+    "key": "battle-zh/monsters/bricgard.json",
+    "file": "dist/battle-zh/monsters/bricgard.json"
+  },
+  {
+    "key": "battle-zh/monsters/brickhemoth.json",
+    "file": "dist/battle-zh/monsters/brickhemoth.json"
+  },
+  {
+    "key": "battle-zh/monsters/budaye.json",
+    "file": "dist/battle-zh/monsters/budaye.json"
+  },
+  {
+    "key": "battle-zh/monsters/bugnin.json",
+    "file": "dist/battle-zh/monsters/bugnin.json"
+  },
+  {
+    "key": "battle-zh/monsters/bursa.json",
+    "file": "dist/battle-zh/monsters/bursa.json"
+  },
+  {
+    "key": "battle-zh/monsters/cairfrey.json",
+    "file": "dist/battle-zh/monsters/cairfrey.json"
+  },
+  {
+    "key": "battle-zh/monsters/caper.json",
+    "file": "dist/battle-zh/monsters/caper.json"
+  },
+  {
+    "key": "battle-zh/monsters/capinyah.json",
+    "file": "dist/battle-zh/monsters/capinyah.json"
+  },
+  {
+    "key": "battle-zh/monsters/capiti.json",
+    "file": "dist/battle-zh/monsters/capiti.json"
+  },
+  {
+    "key": "battle-zh/monsters/cardiling.json",
+    "file": "dist/battle-zh/monsters/cardiling.json"
+  },
+  {
+    "key": "battle-zh/monsters/cardinale.json",
+    "file": "dist/battle-zh/monsters/cardinale.json"
+  },
+  {
+    "key": "battle-zh/monsters/cardiwing.json",
+    "file": "dist/battle-zh/monsters/cardiwing.json"
+  },
+  {
+    "key": "battle-zh/monsters/cataspike.json",
+    "file": "dist/battle-zh/monsters/cataspike.json"
+  },
+  {
+    "key": "battle-zh/monsters/cateye.json",
+    "file": "dist/battle-zh/monsters/cateye.json"
+  },
+  {
+    "key": "battle-zh/monsters/chrome_robo.json",
+    "file": "dist/battle-zh/monsters/chrome_robo.json"
+  },
+  {
+    "key": "battle-zh/monsters/chromeye.json",
+    "file": "dist/battle-zh/monsters/chromeye.json"
+  },
+  {
+    "key": "battle-zh/monsters/coaldiak.json",
+    "file": "dist/battle-zh/monsters/coaldiak.json"
+  },
+  {
+    "key": "battle-zh/monsters/cochini.json",
+    "file": "dist/battle-zh/monsters/cochini.json"
+  },
+  {
+    "key": "battle-zh/monsters/cocrune.json",
+    "file": "dist/battle-zh/monsters/cocrune.json"
+  },
+  {
+    "key": "battle-zh/monsters/coleorus.json",
+    "file": "dist/battle-zh/monsters/coleorus.json"
+  },
+  {
+    "key": "battle-zh/monsters/conifrost.json",
+    "file": "dist/battle-zh/monsters/conifrost.json"
+  },
+  {
+    "key": "battle-zh/monsters/conileaf.json",
+    "file": "dist/battle-zh/monsters/conileaf.json"
+  },
+  {
+    "key": "battle-zh/monsters/coppi.json",
+    "file": "dist/battle-zh/monsters/coppi.json"
+  },
+  {
+    "key": "battle-zh/monsters/coproblight.json",
+    "file": "dist/battle-zh/monsters/coproblight.json"
+  },
+  {
+    "key": "battle-zh/monsters/corvix.json",
+    "file": "dist/battle-zh/monsters/corvix.json"
+  },
+  {
+    "key": "battle-zh/monsters/cowpignon.json",
+    "file": "dist/battle-zh/monsters/cowpignon.json"
+  },
+  {
+    "key": "battle-zh/monsters/crankus.json",
+    "file": "dist/battle-zh/monsters/crankus.json"
+  },
+  {
+    "key": "battle-zh/monsters/criniotherme.json",
+    "file": "dist/battle-zh/monsters/criniotherme.json"
+  },
+  {
+    "key": "battle-zh/monsters/dandicub.json",
+    "file": "dist/battle-zh/monsters/dandicub.json"
+  },
+  {
+    "key": "battle-zh/monsters/dandylion.json",
+    "file": "dist/battle-zh/monsters/dandylion.json"
+  },
+  {
+    "key": "battle-zh/monsters/dark_robo.json",
+    "file": "dist/battle-zh/monsters/dark_robo.json"
+  },
+  {
+    "key": "battle-zh/monsters/delfeco.json",
+    "file": "dist/battle-zh/monsters/delfeco.json"
+  },
+  {
+    "key": "battle-zh/monsters/dinoflop.json",
+    "file": "dist/battle-zh/monsters/dinoflop.json"
+  },
+  {
+    "key": "battle-zh/monsters/djinnbo.json",
+    "file": "dist/battle-zh/monsters/djinnbo.json"
+  },
+  {
+    "key": "battle-zh/monsters/dollfin.json",
+    "file": "dist/battle-zh/monsters/dollfin.json"
+  },
+  {
+    "key": "battle-zh/monsters/dracune.json",
+    "file": "dist/battle-zh/monsters/dracune.json"
+  },
+  {
+    "key": "battle-zh/monsters/dragarbor.json",
+    "file": "dist/battle-zh/monsters/dragarbor.json"
+  },
+  {
+    "key": "battle-zh/monsters/drashimi.json",
+    "file": "dist/battle-zh/monsters/drashimi.json"
+  },
+  {
+    "key": "battle-zh/monsters/drokoro.json",
+    "file": "dist/battle-zh/monsters/drokoro.json"
+  },
+  {
+    "key": "battle-zh/monsters/duggot.json",
+    "file": "dist/battle-zh/monsters/duggot.json"
+  },
+  {
+    "key": "battle-zh/monsters/dune_pincher.json",
+    "file": "dist/battle-zh/monsters/dune_pincher.json"
+  },
+  {
+    "key": "battle-zh/monsters/dynastor.json",
+    "file": "dist/battle-zh/monsters/dynastor.json"
+  },
+  {
+    "key": "battle-zh/monsters/eaglace.json",
+    "file": "dist/battle-zh/monsters/eaglace.json"
+  },
+  {
+    "key": "battle-zh/monsters/elofly.json",
+    "file": "dist/battle-zh/monsters/elofly.json"
+  },
+  {
+    "key": "battle-zh/monsters/elostorm.json",
+    "file": "dist/battle-zh/monsters/elostorm.json"
+  },
+  {
+    "key": "battle-zh/monsters/elowind.json",
+    "file": "dist/battle-zh/monsters/elowind.json"
+  },
+  {
+    "key": "battle-zh/monsters/embazook.json",
+    "file": "dist/battle-zh/monsters/embazook.json"
+  },
+  {
+    "key": "battle-zh/monsters/embra.json",
+    "file": "dist/battle-zh/monsters/embra.json"
+  },
+  {
+    "key": "battle-zh/monsters/enduros.json",
+    "file": "dist/battle-zh/monsters/enduros.json"
+  },
+  {
+    "key": "battle-zh/monsters/eruptibus.json",
+    "file": "dist/battle-zh/monsters/eruptibus.json"
+  },
+  {
+    "key": "battle-zh/monsters/exapode.json",
+    "file": "dist/battle-zh/monsters/exapode.json"
+  },
+  {
+    "key": "battle-zh/monsters/exclawvate.json",
+    "file": "dist/battle-zh/monsters/exclawvate.json"
+  },
+  {
+    "key": "battle-zh/monsters/eyenemy.json",
+    "file": "dist/battle-zh/monsters/eyenemy.json"
+  },
+  {
+    "key": "battle-zh/monsters/eyesore.json",
+    "file": "dist/battle-zh/monsters/eyesore.json"
+  },
+  {
+    "key": "battle-zh/monsters/fancair.json",
+    "file": "dist/battle-zh/monsters/fancair.json"
+  },
+  {
+    "key": "battle-zh/monsters/ferricran.json",
+    "file": "dist/battle-zh/monsters/ferricran.json"
+  },
+  {
+    "key": "battle-zh/monsters/firomenis.json",
+    "file": "dist/battle-zh/monsters/firomenis.json"
+  },
+  {
+    "key": "battle-zh/monsters/flacono.json",
+    "file": "dist/battle-zh/monsters/flacono.json"
+  },
+  {
+    "key": "battle-zh/monsters/flambear.json",
+    "file": "dist/battle-zh/monsters/flambear.json"
+  },
+  {
+    "key": "battle-zh/monsters/flisces.json",
+    "file": "dist/battle-zh/monsters/flisces.json"
+  },
+  {
+    "key": "battle-zh/monsters/flounce.json",
+    "file": "dist/battle-zh/monsters/flounce.json"
+  },
+  {
+    "key": "battle-zh/monsters/flummack.json",
+    "file": "dist/battle-zh/monsters/flummack.json"
+  },
+  {
+    "key": "battle-zh/monsters/flummby.json",
+    "file": "dist/battle-zh/monsters/flummby.json"
+  },
+  {
+    "key": "battle-zh/monsters/fluoresfin.json",
+    "file": "dist/battle-zh/monsters/fluoresfin.json"
+  },
+  {
+    "key": "battle-zh/monsters/fluttaflap.json",
+    "file": "dist/battle-zh/monsters/fluttaflap.json"
+  },
+  {
+    "key": "battle-zh/monsters/foofle.json",
+    "file": "dist/battle-zh/monsters/foofle.json"
+  },
+  {
+    "key": "battle-zh/monsters/forturtle.json",
+    "file": "dist/battle-zh/monsters/forturtle.json"
+  },
+  {
+    "key": "battle-zh/monsters/foxfire.json",
+    "file": "dist/battle-zh/monsters/foxfire.json"
+  },
+  {
+    "key": "battle-zh/monsters/foxko.json",
+    "file": "dist/battle-zh/monsters/foxko.json"
+  },
+  {
+    "key": "battle-zh/monsters/frondly.json",
+    "file": "dist/battle-zh/monsters/frondly.json"
+  },
+  {
+    "key": "battle-zh/monsters/furnursus.json",
+    "file": "dist/battle-zh/monsters/furnursus.json"
+  },
+  {
+    "key": "battle-zh/monsters/fuzzina.json",
+    "file": "dist/battle-zh/monsters/fuzzina.json"
+  },
+  {
+    "key": "battle-zh/monsters/fuzzlet.json",
+    "file": "dist/battle-zh/monsters/fuzzlet.json"
+  },
+  {
+    "key": "battle-zh/monsters/galnec.json",
+    "file": "dist/battle-zh/monsters/galnec.json"
+  },
+  {
+    "key": "battle-zh/monsters/gectile.json",
+    "file": "dist/battle-zh/monsters/gectile.json"
+  },
+  {
+    "key": "battle-zh/monsters/ghosteeth.json",
+    "file": "dist/battle-zh/monsters/ghosteeth.json"
+  },
+  {
+    "key": "battle-zh/monsters/graffiki.json",
+    "file": "dist/battle-zh/monsters/graffiki.json"
+  },
+  {
+    "key": "battle-zh/monsters/grimachin.json",
+    "file": "dist/battle-zh/monsters/grimachin.json"
+  },
+  {
+    "key": "battle-zh/monsters/grinflare.json",
+    "file": "dist/battle-zh/monsters/grinflare.json"
+  },
+  {
+    "key": "battle-zh/monsters/grintot.json",
+    "file": "dist/battle-zh/monsters/grintot.json"
+  },
+  {
+    "key": "battle-zh/monsters/grintrock.json",
+    "file": "dist/battle-zh/monsters/grintrock.json"
+  },
+  {
+    "key": "battle-zh/monsters/gryfix.json",
+    "file": "dist/battle-zh/monsters/gryfix.json"
+  },
+  {
+    "key": "battle-zh/monsters/hampotamos.json",
+    "file": "dist/battle-zh/monsters/hampotamos.json"
+  },
+  {
+    "key": "battle-zh/monsters/happito.json",
+    "file": "dist/battle-zh/monsters/happito.json"
+  },
+  {
+    "key": "battle-zh/monsters/hatchling.json",
+    "file": "dist/battle-zh/monsters/hatchling.json"
+  },
+  {
+    "key": "battle-zh/monsters/hectapod.json",
+    "file": "dist/battle-zh/monsters/hectapod.json"
+  },
+  {
+    "key": "battle-zh/monsters/heronquak.json",
+    "file": "dist/battle-zh/monsters/heronquak.json"
+  },
+  {
+    "key": "battle-zh/monsters/hydrone.json",
+    "file": "dist/battle-zh/monsters/hydrone.json"
+  },
+  {
+    "key": "battle-zh/monsters/ignibus.json",
+    "file": "dist/battle-zh/monsters/ignibus.json"
+  },
+  {
+    "key": "battle-zh/monsters/imbrickcile.json",
+    "file": "dist/battle-zh/monsters/imbrickcile.json"
+  },
+  {
+    "key": "battle-zh/monsters/incandesfin.json",
+    "file": "dist/battle-zh/monsters/incandesfin.json"
+  },
+  {
+    "key": "battle-zh/monsters/jemuar.json",
+    "file": "dist/battle-zh/monsters/jemuar.json"
+  },
+  {
+    "key": "battle-zh/monsters/k9.json",
+    "file": "dist/battle-zh/monsters/k9.json"
+  },
+  {
+    "key": "battle-zh/monsters/katacoon.json",
+    "file": "dist/battle-zh/monsters/katacoon.json"
+  },
+  {
+    "key": "battle-zh/monsters/katapill.json",
+    "file": "dist/battle-zh/monsters/katapill.json"
+  },
+  {
+    "key": "battle-zh/monsters/kernel.json",
+    "file": "dist/battle-zh/monsters/kernel.json"
+  },
+  {
+    "key": "battle-zh/monsters/knightsand.json",
+    "file": "dist/battle-zh/monsters/knightsand.json"
+  },
+  {
+    "key": "battle-zh/monsters/knindling.json",
+    "file": "dist/battle-zh/monsters/knindling.json"
+  },
+  {
+    "key": "battle-zh/monsters/komodraw.json",
+    "file": "dist/battle-zh/monsters/komodraw.json"
+  },
+  {
+    "key": "battle-zh/monsters/komoduel.json",
+    "file": "dist/battle-zh/monsters/komoduel.json"
+  },
+  {
+    "key": "battle-zh/monsters/lambert.json",
+    "file": "dist/battle-zh/monsters/lambert.json"
+  },
+  {
+    "key": "battle-zh/monsters/lapinou.json",
+    "file": "dist/battle-zh/monsters/lapinou.json"
+  },
+  {
+    "key": "battle-zh/monsters/legko.json",
+    "file": "dist/battle-zh/monsters/legko.json"
+  },
+  {
+    "key": "battle-zh/monsters/lightmare.json",
+    "file": "dist/battle-zh/monsters/lightmare.json"
+  },
+  {
+    "key": "battle-zh/monsters/loliferno.json",
+    "file": "dist/battle-zh/monsters/loliferno.json"
+  },
+  {
+    "key": "battle-zh/monsters/manosting.json",
+    "file": "dist/battle-zh/monsters/manosting.json"
+  },
+  {
+    "key": "battle-zh/monsters/masknake.json",
+    "file": "dist/battle-zh/monsters/masknake.json"
+  },
+  {
+    "key": "battle-zh/monsters/mauai.json",
+    "file": "dist/battle-zh/monsters/mauai.json"
+  },
+  {
+    "key": "battle-zh/monsters/medushock.json",
+    "file": "dist/battle-zh/monsters/medushock.json"
+  },
+  {
+    "key": "battle-zh/monsters/memnomnom.json",
+    "file": "dist/battle-zh/monsters/memnomnom.json"
+  },
+  {
+    "key": "battle-zh/monsters/metesaur.json",
+    "file": "dist/battle-zh/monsters/metesaur.json"
+  },
+  {
+    "key": "battle-zh/monsters/miaownolith.json",
+    "file": "dist/battle-zh/monsters/miaownolith.json"
+  },
+  {
+    "key": "battle-zh/monsters/mingdyn.json",
+    "file": "dist/battle-zh/monsters/mingdyn.json"
+  },
+  {
+    "key": "battle-zh/monsters/mk01_alpha.json",
+    "file": "dist/battle-zh/monsters/mk01_alpha.json"
+  },
+  {
+    "key": "battle-zh/monsters/mk01_beta.json",
+    "file": "dist/battle-zh/monsters/mk01_beta.json"
+  },
+  {
+    "key": "battle-zh/monsters/mk01_delta.json",
+    "file": "dist/battle-zh/monsters/mk01_delta.json"
+  },
+  {
+    "key": "battle-zh/monsters/mk01_gamma.json",
+    "file": "dist/battle-zh/monsters/mk01_gamma.json"
+  },
+  {
+    "key": "battle-zh/monsters/mk01_omega.json",
+    "file": "dist/battle-zh/monsters/mk01_omega.json"
+  },
+  {
+    "key": "battle-zh/monsters/mk01_proto.json",
+    "file": "dist/battle-zh/monsters/mk01_proto.json"
+  },
+  {
+    "key": "battle-zh/monsters/moloch.json",
+    "file": "dist/battle-zh/monsters/moloch.json"
+  },
+  {
+    "key": "battle-zh/monsters/mrmoswitch.json",
+    "file": "dist/battle-zh/monsters/mrmoswitch.json"
+  },
+  {
+    "key": "battle-zh/monsters/mystikapi.json",
+    "file": "dist/battle-zh/monsters/mystikapi.json"
+  },
+  {
+    "key": "battle-zh/monsters/narcileaf.json",
+    "file": "dist/battle-zh/monsters/narcileaf.json"
+  },
+  {
+    "key": "battle-zh/monsters/neutrito.json",
+    "file": "dist/battle-zh/monsters/neutrito.json"
+  },
+  {
+    "key": "battle-zh/monsters/ninjasmine.json",
+    "file": "dist/battle-zh/monsters/ninjasmine.json"
+  },
+  {
+    "key": "battle-zh/monsters/noctalo.json",
+    "file": "dist/battle-zh/monsters/noctalo.json"
+  },
+  {
+    "key": "battle-zh/monsters/noctula.json",
+    "file": "dist/battle-zh/monsters/noctula.json"
+  },
+  {
+    "key": "battle-zh/monsters/nostray.json",
+    "file": "dist/battle-zh/monsters/nostray.json"
+  },
+  {
+    "key": "battle-zh/monsters/nudiflot_female.json",
+    "file": "dist/battle-zh/monsters/nudiflot_female.json"
+  },
+  {
+    "key": "battle-zh/monsters/nudiflot_male.json",
+    "file": "dist/battle-zh/monsters/nudiflot_male.json"
+  },
+  {
+    "key": "battle-zh/monsters/nudikill.json",
+    "file": "dist/battle-zh/monsters/nudikill.json"
+  },
+  {
+    "key": "battle-zh/monsters/nudimind.json",
+    "file": "dist/battle-zh/monsters/nudimind.json"
+  },
+  {
+    "key": "battle-zh/monsters/nut.json",
+    "file": "dist/battle-zh/monsters/nut.json"
+  },
+  {
+    "key": "battle-zh/monsters/octabode.json",
+    "file": "dist/battle-zh/monsters/octabode.json"
+  },
+  {
+    "key": "battle-zh/monsters/ouroboutlet.json",
+    "file": "dist/battle-zh/monsters/ouroboutlet.json"
+  },
+  {
+    "key": "battle-zh/monsters/pairagrim.json",
+    "file": "dist/battle-zh/monsters/pairagrim.json"
+  },
+  {
+    "key": "battle-zh/monsters/pairagrin.json",
+    "file": "dist/battle-zh/monsters/pairagrin.json"
+  },
+  {
+    "key": "battle-zh/monsters/pantherafira.json",
+    "file": "dist/battle-zh/monsters/pantherafira.json"
+  },
+  {
+    "key": "battle-zh/monsters/parappi.json",
+    "file": "dist/battle-zh/monsters/parappi.json"
+  },
+  {
+    "key": "battle-zh/monsters/pawsand.json",
+    "file": "dist/battle-zh/monsters/pawsand.json"
+  },
+  {
+    "key": "battle-zh/monsters/pharavion.json",
+    "file": "dist/battle-zh/monsters/pharavion.json"
+  },
+  {
+    "key": "battle-zh/monsters/pharfan.json",
+    "file": "dist/battle-zh/monsters/pharfan.json"
+  },
+  {
+    "key": "battle-zh/monsters/picc.json",
+    "file": "dist/battle-zh/monsters/picc.json"
+  },
+  {
+    "key": "battle-zh/monsters/pigabyte.json",
+    "file": "dist/battle-zh/monsters/pigabyte.json"
+  },
+  {
+    "key": "battle-zh/monsters/pipis.json",
+    "file": "dist/battle-zh/monsters/pipis.json"
+  },
+  {
+    "key": "battle-zh/monsters/polyrock.json",
+    "file": "dist/battle-zh/monsters/polyrock.json"
+  },
+  {
+    "key": "battle-zh/monsters/possessun.json",
+    "file": "dist/battle-zh/monsters/possessun.json"
+  },
+  {
+    "key": "battle-zh/monsters/potturmeist.json",
+    "file": "dist/battle-zh/monsters/potturmeist.json"
+  },
+  {
+    "key": "battle-zh/monsters/potturney.json",
+    "file": "dist/battle-zh/monsters/potturney.json"
+  },
+  {
+    "key": "battle-zh/monsters/propellercat.json",
+    "file": "dist/battle-zh/monsters/propellercat.json"
+  },
+  {
+    "key": "battle-zh/monsters/prophetoise.json",
+    "file": "dist/battle-zh/monsters/prophetoise.json"
+  },
+  {
+    "key": "battle-zh/monsters/puparmor.json",
+    "file": "dist/battle-zh/monsters/puparmor.json"
+  },
+  {
+    "key": "battle-zh/monsters/pyraminx.json",
+    "file": "dist/battle-zh/monsters/pyraminx.json"
+  },
+  {
+    "key": "battle-zh/monsters/pythwire.json",
+    "file": "dist/battle-zh/monsters/pythwire.json"
+  },
+  {
+    "key": "battle-zh/monsters/qetzlrokilus.json",
+    "file": "dist/battle-zh/monsters/qetzlrokilus.json"
+  },
+  {
+    "key": "battle-zh/monsters/rabbitosaur.json",
+    "file": "dist/battle-zh/monsters/rabbitosaur.json"
+  },
+  {
+    "key": "battle-zh/monsters/rhincus.json",
+    "file": "dist/battle-zh/monsters/rhincus.json"
+  },
+  {
+    "key": "battle-zh/monsters/rhinocarpe.json",
+    "file": "dist/battle-zh/monsters/rhinocarpe.json"
+  },
+  {
+    "key": "battle-zh/monsters/rockat.json",
+    "file": "dist/battle-zh/monsters/rockat.json"
+  },
+  {
+    "key": "battle-zh/monsters/rockitten.json",
+    "file": "dist/battle-zh/monsters/rockitten.json"
+  },
+  {
+    "key": "battle-zh/monsters/rocktot.json",
+    "file": "dist/battle-zh/monsters/rocktot.json"
+  },
+  {
+    "key": "battle-zh/monsters/rooksand.json",
+    "file": "dist/battle-zh/monsters/rooksand.json"
+  },
+  {
+    "key": "battle-zh/monsters/rosarin.json",
+    "file": "dist/battle-zh/monsters/rosarin.json"
+  },
+  {
+    "key": "battle-zh/monsters/runesquito.json",
+    "file": "dist/battle-zh/monsters/runesquito.json"
+  },
+  {
+    "key": "battle-zh/monsters/ruption.json",
+    "file": "dist/battle-zh/monsters/ruption.json"
+  },
+  {
+    "key": "battle-zh/monsters/sadito.json",
+    "file": "dist/battle-zh/monsters/sadito.json"
+  },
+  {
+    "key": "battle-zh/monsters/sampsack.json",
+    "file": "dist/battle-zh/monsters/sampsack.json"
+  },
+  {
+    "key": "battle-zh/monsters/sampsage.json",
+    "file": "dist/battle-zh/monsters/sampsage.json"
+  },
+  {
+    "key": "battle-zh/monsters/sapragon.json",
+    "file": "dist/battle-zh/monsters/sapragon.json"
+  },
+  {
+    "key": "battle-zh/monsters/sapsnap.json",
+    "file": "dist/battle-zh/monsters/sapsnap.json"
+  },
+  {
+    "key": "battle-zh/monsters/sclairus.json",
+    "file": "dist/battle-zh/monsters/sclairus.json"
+  },
+  {
+    "key": "battle-zh/monsters/seirein.json",
+    "file": "dist/battle-zh/monsters/seirein.json"
+  },
+  {
+    "key": "battle-zh/monsters/selket.json",
+    "file": "dist/battle-zh/monsters/selket.json"
+  },
+  {
+    "key": "battle-zh/monsters/selmatek.json",
+    "file": "dist/battle-zh/monsters/selmatek.json"
+  },
+  {
+    "key": "battle-zh/monsters/seraphice.json",
+    "file": "dist/battle-zh/monsters/seraphice.json"
+  },
+  {
+    "key": "battle-zh/monsters/shammer.json",
+    "file": "dist/battle-zh/monsters/shammer.json"
+  },
+  {
+    "key": "battle-zh/monsters/sharpfin.json",
+    "file": "dist/battle-zh/monsters/sharpfin.json"
+  },
+  {
+    "key": "battle-zh/monsters/sheye.json",
+    "file": "dist/battle-zh/monsters/sheye.json"
+  },
+  {
+    "key": "battle-zh/monsters/shnark.json",
+    "file": "dist/battle-zh/monsters/shnark.json"
+  },
+  {
+    "key": "battle-zh/monsters/shrab.json",
+    "file": "dist/battle-zh/monsters/shrab.json"
+  },
+  {
+    "key": "battle-zh/monsters/shybulb.json",
+    "file": "dist/battle-zh/monsters/shybulb.json"
+  },
+  {
+    "key": "battle-zh/monsters/skwib.json",
+    "file": "dist/battle-zh/monsters/skwib.json"
+  },
+  {
+    "key": "battle-zh/monsters/sludgehog.json",
+    "file": "dist/battle-zh/monsters/sludgehog.json"
+  },
+  {
+    "key": "battle-zh/monsters/snaki.json",
+    "file": "dist/battle-zh/monsters/snaki.json"
+  },
+  {
+    "key": "battle-zh/monsters/snokari.json",
+    "file": "dist/battle-zh/monsters/snokari.json"
+  },
+  {
+    "key": "battle-zh/monsters/sockeserp.json",
+    "file": "dist/battle-zh/monsters/sockeserp.json"
+  },
+  {
+    "key": "battle-zh/monsters/spighter.json",
+    "file": "dist/battle-zh/monsters/spighter.json"
+  },
+  {
+    "key": "battle-zh/monsters/spirain.json",
+    "file": "dist/battle-zh/monsters/spirain.json"
+  },
+  {
+    "key": "battle-zh/monsters/spycozeus.json",
+    "file": "dist/battle-zh/monsters/spycozeus.json"
+  },
+  {
+    "key": "battle-zh/monsters/squabbit.json",
+    "file": "dist/battle-zh/monsters/squabbit.json"
+  },
+  {
+    "key": "battle-zh/monsters/squink.json",
+    "file": "dist/battle-zh/monsters/squink.json"
+  },
+  {
+    "key": "battle-zh/monsters/statursus.json",
+    "file": "dist/battle-zh/monsters/statursus.json"
+  },
+  {
+    "key": "battle-zh/monsters/strella.json",
+    "file": "dist/battle-zh/monsters/strella.json"
+  },
+  {
+    "key": "battle-zh/monsters/sumchon.json",
+    "file": "dist/battle-zh/monsters/sumchon.json"
+  },
+  {
+    "key": "battle-zh/monsters/tarpeur.json",
+    "file": "dist/battle-zh/monsters/tarpeur.json"
+  },
+  {
+    "key": "battle-zh/monsters/taupypus.json",
+    "file": "dist/battle-zh/monsters/taupypus.json"
+  },
+  {
+    "key": "battle-zh/monsters/tetrchimp.json",
+    "file": "dist/battle-zh/monsters/tetrchimp.json"
+  },
+  {
+    "key": "battle-zh/monsters/tigrock.json",
+    "file": "dist/battle-zh/monsters/tigrock.json"
+  },
+  {
+    "key": "battle-zh/monsters/tikoal.json",
+    "file": "dist/battle-zh/monsters/tikoal.json"
+  },
+  {
+    "key": "battle-zh/monsters/tikorch.json",
+    "file": "dist/battle-zh/monsters/tikorch.json"
+  },
+  {
+    "key": "battle-zh/monsters/tobishimi.json",
+    "file": "dist/battle-zh/monsters/tobishimi.json"
+  },
+  {
+    "key": "battle-zh/monsters/tornicane.json",
+    "file": "dist/battle-zh/monsters/tornicane.json"
+  },
+  {
+    "key": "battle-zh/monsters/toufigel.json",
+    "file": "dist/battle-zh/monsters/toufigel.json"
+  },
+  {
+    "key": "battle-zh/monsters/tourbidi.json",
+    "file": "dist/battle-zh/monsters/tourbidi.json"
+  },
+  {
+    "key": "battle-zh/monsters/toxiris.json",
+    "file": "dist/battle-zh/monsters/toxiris.json"
+  },
+  {
+    "key": "battle-zh/monsters/trapsnap.json",
+    "file": "dist/battle-zh/monsters/trapsnap.json"
+  },
+  {
+    "key": "battle-zh/monsters/tsushimi.json",
+    "file": "dist/battle-zh/monsters/tsushimi.json"
+  },
+  {
+    "key": "battle-zh/monsters/tumblebee.json",
+    "file": "dist/battle-zh/monsters/tumblebee.json"
+  },
+  {
+    "key": "battle-zh/monsters/tumbledillo.json",
+    "file": "dist/battle-zh/monsters/tumbledillo.json"
+  },
+  {
+    "key": "battle-zh/monsters/tumblequill.json",
+    "file": "dist/battle-zh/monsters/tumblequill.json"
+  },
+  {
+    "key": "battle-zh/monsters/tumbleworm.json",
+    "file": "dist/battle-zh/monsters/tumbleworm.json"
+  },
+  {
+    "key": "battle-zh/monsters/tweesher.json",
+    "file": "dist/battle-zh/monsters/tweesher.json"
+  },
+  {
+    "key": "battle-zh/monsters/urcheedle.json",
+    "file": "dist/battle-zh/monsters/urcheedle.json"
+  },
+  {
+    "key": "battle-zh/monsters/urcine.json",
+    "file": "dist/battle-zh/monsters/urcine.json"
+  },
+  {
+    "key": "battle-zh/monsters/vamporm.json",
+    "file": "dist/battle-zh/monsters/vamporm.json"
+  },
+  {
+    "key": "battle-zh/monsters/velocitile.json",
+    "file": "dist/battle-zh/monsters/velocitile.json"
+  },
+  {
+    "key": "battle-zh/monsters/vigueur.json",
+    "file": "dist/battle-zh/monsters/vigueur.json"
+  },
+  {
+    "key": "battle-zh/monsters/vivicinder.json",
+    "file": "dist/battle-zh/monsters/vivicinder.json"
+  },
+  {
+    "key": "battle-zh/monsters/vividactil.json",
+    "file": "dist/battle-zh/monsters/vividactil.json"
+  },
+  {
+    "key": "battle-zh/monsters/vivipere.json",
+    "file": "dist/battle-zh/monsters/vivipere.json"
+  },
+  {
+    "key": "battle-zh/monsters/viviphyta.json",
+    "file": "dist/battle-zh/monsters/viviphyta.json"
+  },
+  {
+    "key": "battle-zh/monsters/vivisource.json",
+    "file": "dist/battle-zh/monsters/vivisource.json"
+  },
+  {
+    "key": "battle-zh/monsters/viviteel.json",
+    "file": "dist/battle-zh/monsters/viviteel.json"
+  },
+  {
+    "key": "battle-zh/monsters/vivitrans.json",
+    "file": "dist/battle-zh/monsters/vivitrans.json"
+  },
+  {
+    "key": "battle-zh/monsters/vivitron.json",
+    "file": "dist/battle-zh/monsters/vivitron.json"
+  },
+  {
+    "key": "battle-zh/monsters/volcoli.json",
+    "file": "dist/battle-zh/monsters/volcoli.json"
+  },
+  {
+    "key": "battle-zh/monsters/volconey.json",
+    "file": "dist/battle-zh/monsters/volconey.json"
+  },
+  {
+    "key": "battle-zh/monsters/vulpyre.json",
+    "file": "dist/battle-zh/monsters/vulpyre.json"
+  },
+  {
+    "key": "battle-zh/monsters/weavifly.json",
+    "file": "dist/battle-zh/monsters/weavifly.json"
+  },
+  {
+    "key": "battle-zh/monsters/windeye.json",
+    "file": "dist/battle-zh/monsters/windeye.json"
+  },
+  {
+    "key": "battle-zh/monsters/wolffsky.json",
+    "file": "dist/battle-zh/monsters/wolffsky.json"
+  },
+  {
+    "key": "battle-zh/monsters/woodoor.json",
+    "file": "dist/battle-zh/monsters/woodoor.json"
+  },
+  {
+    "key": "battle-zh/monsters/xeon.json",
+    "file": "dist/battle-zh/monsters/xeon.json"
+  },
+  {
+    "key": "battle-zh/monsters/xeon_2.json",
+    "file": "dist/battle-zh/monsters/xeon_2.json"
+  },
+  {
+    "key": "battle-zh/monsters/ziggurat.json",
+    "file": "dist/battle-zh/monsters/ziggurat.json"
+  },
+  {
+    "key": "battle-zh/monsters/zunna.json",
+    "file": "dist/battle-zh/monsters/zunna.json"
+  },
+  {
+    "key": "battle-zh/statuses/blinded.json",
+    "file": "dist/battle-zh/statuses/blinded.json"
+  },
+  {
+    "key": "battle-zh/statuses/burn.json",
+    "file": "dist/battle-zh/statuses/burn.json"
+  },
+  {
+    "key": "battle-zh/statuses/chargedup.json",
+    "file": "dist/battle-zh/statuses/chargedup.json"
+  },
+  {
+    "key": "battle-zh/statuses/charging.json",
+    "file": "dist/battle-zh/statuses/charging.json"
+  },
+  {
+    "key": "battle-zh/statuses/charmed.json",
+    "file": "dist/battle-zh/statuses/charmed.json"
+  },
+  {
+    "key": "battle-zh/statuses/confused.json",
+    "file": "dist/battle-zh/statuses/confused.json"
+  },
+  {
+    "key": "battle-zh/statuses/diehard.json",
+    "file": "dist/battle-zh/statuses/diehard.json"
+  },
+  {
+    "key": "battle-zh/statuses/elementalshield.json",
+    "file": "dist/battle-zh/statuses/elementalshield.json"
+  },
+  {
+    "key": "battle-zh/statuses/eliminated.json",
+    "file": "dist/battle-zh/statuses/eliminated.json"
+  },
+  {
+    "key": "battle-zh/statuses/enraged.json",
+    "file": "dist/battle-zh/statuses/enraged.json"
+  },
+  {
+    "key": "battle-zh/statuses/exhausted.json",
+    "file": "dist/battle-zh/statuses/exhausted.json"
+  },
+  {
+    "key": "battle-zh/statuses/faint.json",
+    "file": "dist/battle-zh/statuses/faint.json"
+  },
+  {
+    "key": "battle-zh/statuses/feedback.json",
+    "file": "dist/battle-zh/statuses/feedback.json"
+  },
+  {
+    "key": "battle-zh/statuses/festering.json",
+    "file": "dist/battle-zh/statuses/festering.json"
+  },
+  {
+    "key": "battle-zh/statuses/flinching.json",
+    "file": "dist/battle-zh/statuses/flinching.json"
+  },
+  {
+    "key": "battle-zh/statuses/focused.json",
+    "file": "dist/battle-zh/statuses/focused.json"
+  },
+  {
+    "key": "battle-zh/statuses/grabbed.json",
+    "file": "dist/battle-zh/statuses/grabbed.json"
+  },
+  {
+    "key": "battle-zh/statuses/hardshell.json",
+    "file": "dist/battle-zh/statuses/hardshell.json"
+  },
+  {
+    "key": "battle-zh/statuses/harpooned.json",
+    "file": "dist/battle-zh/statuses/harpooned.json"
+  },
+  {
+    "key": "battle-zh/statuses/lifegift.json",
+    "file": "dist/battle-zh/statuses/lifegift.json"
+  },
+  {
+    "key": "battle-zh/statuses/lifeleech.json",
+    "file": "dist/battle-zh/statuses/lifeleech.json"
+  },
+  {
+    "key": "battle-zh/statuses/lockdown.json",
+    "file": "dist/battle-zh/statuses/lockdown.json"
+  },
+  {
+    "key": "battle-zh/statuses/noddingoff.json",
+    "file": "dist/battle-zh/statuses/noddingoff.json"
+  },
+  {
+    "key": "battle-zh/statuses/poison.json",
+    "file": "dist/battle-zh/statuses/poison.json"
+  },
+  {
+    "key": "battle-zh/statuses/prickly.json",
+    "file": "dist/battle-zh/statuses/prickly.json"
+  },
+  {
+    "key": "battle-zh/statuses/recover.json",
+    "file": "dist/battle-zh/statuses/recover.json"
+  },
+  {
+    "key": "battle-zh/statuses/retaliate.json",
+    "file": "dist/battle-zh/statuses/retaliate.json"
+  },
+  {
+    "key": "battle-zh/statuses/revenge.json",
+    "file": "dist/battle-zh/statuses/revenge.json"
+  },
+  {
+    "key": "battle-zh/statuses/slow.json",
+    "file": "dist/battle-zh/statuses/slow.json"
+  },
+  {
+    "key": "battle-zh/statuses/sniping.json",
+    "file": "dist/battle-zh/statuses/sniping.json"
+  },
+  {
+    "key": "battle-zh/statuses/softened.json",
+    "file": "dist/battle-zh/statuses/softened.json"
+  },
+  {
+    "key": "battle-zh/statuses/spiky.json",
+    "file": "dist/battle-zh/statuses/spiky.json"
+  },
+  {
+    "key": "battle-zh/statuses/stuck.json",
+    "file": "dist/battle-zh/statuses/stuck.json"
+  },
+  {
+    "key": "battle-zh/statuses/wasting.json",
+    "file": "dist/battle-zh/statuses/wasting.json"
+  },
+  {
+    "key": "battle-zh/statuses/wild.json",
+    "file": "dist/battle-zh/statuses/wild.json"
+  },
+  {
+    "key": "battle-zh/techniques/acid.json",
+    "file": "dist/battle-zh/techniques/acid.json"
+  },
+  {
+    "key": "battle-zh/techniques/adamantine.json",
+    "file": "dist/battle-zh/techniques/adamantine.json"
+  },
+  {
+    "key": "battle-zh/techniques/air_chain.json",
+    "file": "dist/battle-zh/techniques/air_chain.json"
+  },
+  {
+    "key": "battle-zh/techniques/all_in.json",
+    "file": "dist/battle-zh/techniques/all_in.json"
+  },
+  {
+    "key": "battle-zh/techniques/altitude.json",
+    "file": "dist/battle-zh/techniques/altitude.json"
+  },
+  {
+    "key": "battle-zh/techniques/amnesia.json",
+    "file": "dist/battle-zh/techniques/amnesia.json"
+  },
+  {
+    "key": "battle-zh/techniques/ants.json",
+    "file": "dist/battle-zh/techniques/ants.json"
+  },
+  {
+    "key": "battle-zh/techniques/arcane_eye.json",
+    "file": "dist/battle-zh/techniques/arcane_eye.json"
+  },
+  {
+    "key": "battle-zh/techniques/assault.json",
+    "file": "dist/battle-zh/techniques/assault.json"
+  },
+  {
+    "key": "battle-zh/techniques/avalanche.json",
+    "file": "dist/battle-zh/techniques/avalanche.json"
+  },
+  {
+    "key": "battle-zh/techniques/barking.json",
+    "file": "dist/battle-zh/techniques/barking.json"
+  },
+  {
+    "key": "battle-zh/techniques/battery_acid.json",
+    "file": "dist/battle-zh/techniques/battery_acid.json"
+  },
+  {
+    "key": "battle-zh/techniques/battery_discharge.json",
+    "file": "dist/battle-zh/techniques/battery_discharge.json"
+  },
+  {
+    "key": "battle-zh/techniques/beam.json",
+    "file": "dist/battle-zh/techniques/beam.json"
+  },
+  {
+    "key": "battle-zh/techniques/berserk.json",
+    "file": "dist/battle-zh/techniques/berserk.json"
+  },
+  {
+    "key": "battle-zh/techniques/biting_winds.json",
+    "file": "dist/battle-zh/techniques/biting_winds.json"
+  },
+  {
+    "key": "battle-zh/techniques/blade.json",
+    "file": "dist/battle-zh/techniques/blade.json"
+  },
+  {
+    "key": "battle-zh/techniques/blood_bond.json",
+    "file": "dist/battle-zh/techniques/blood_bond.json"
+  },
+  {
+    "key": "battle-zh/techniques/blood_nets.json",
+    "file": "dist/battle-zh/techniques/blood_nets.json"
+  },
+  {
+    "key": "battle-zh/techniques/blossom.json",
+    "file": "dist/battle-zh/techniques/blossom.json"
+  },
+  {
+    "key": "battle-zh/techniques/boulder.json",
+    "file": "dist/battle-zh/techniques/boulder.json"
+  },
+  {
+    "key": "battle-zh/techniques/breath.json",
+    "file": "dist/battle-zh/techniques/breath.json"
+  },
+  {
+    "key": "battle-zh/techniques/breathe_fire.json",
+    "file": "dist/battle-zh/techniques/breathe_fire.json"
+  },
+  {
+    "key": "battle-zh/techniques/bubble_trap.json",
+    "file": "dist/battle-zh/techniques/bubble_trap.json"
+  },
+  {
+    "key": "battle-zh/techniques/bullet.json",
+    "file": "dist/battle-zh/techniques/bullet.json"
+  },
+  {
+    "key": "battle-zh/techniques/burrow_blast.json",
+    "file": "dist/battle-zh/techniques/burrow_blast.json"
+  },
+  {
+    "key": "battle-zh/techniques/buzz.json",
+    "file": "dist/battle-zh/techniques/buzz.json"
+  },
+  {
+    "key": "battle-zh/techniques/canine.json",
+    "file": "dist/battle-zh/techniques/canine.json"
+  },
+  {
+    "key": "battle-zh/techniques/cat_calling.json",
+    "file": "dist/battle-zh/techniques/cat_calling.json"
+  },
+  {
+    "key": "battle-zh/techniques/caustic_spray.json",
+    "file": "dist/battle-zh/techniques/caustic_spray.json"
+  },
+  {
+    "key": "battle-zh/techniques/chameleon.json",
+    "file": "dist/battle-zh/techniques/chameleon.json"
+  },
+  {
+    "key": "battle-zh/techniques/changeling.json",
+    "file": "dist/battle-zh/techniques/changeling.json"
+  },
+  {
+    "key": "battle-zh/techniques/chill_mist.json",
+    "file": "dist/battle-zh/techniques/chill_mist.json"
+  },
+  {
+    "key": "battle-zh/techniques/clairaudience.json",
+    "file": "dist/battle-zh/techniques/clairaudience.json"
+  },
+  {
+    "key": "battle-zh/techniques/clamp_on.json",
+    "file": "dist/battle-zh/techniques/clamp_on.json"
+  },
+  {
+    "key": "battle-zh/techniques/cloud_aether.json",
+    "file": "dist/battle-zh/techniques/cloud_aether.json"
+  },
+  {
+    "key": "battle-zh/techniques/combat_clone.json",
+    "file": "dist/battle-zh/techniques/combat_clone.json"
+  },
+  {
+    "key": "battle-zh/techniques/conjurer.json",
+    "file": "dist/battle-zh/techniques/conjurer.json"
+  },
+  {
+    "key": "battle-zh/techniques/constrict.json",
+    "file": "dist/battle-zh/techniques/constrict.json"
+  },
+  {
+    "key": "battle-zh/techniques/crushing_bite.json",
+    "file": "dist/battle-zh/techniques/crushing_bite.json"
+  },
+  {
+    "key": "battle-zh/techniques/crystal.json",
+    "file": "dist/battle-zh/techniques/crystal.json"
+  },
+  {
+    "key": "battle-zh/techniques/cutting_leaves.json",
+    "file": "dist/battle-zh/techniques/cutting_leaves.json"
+  },
+  {
+    "key": "battle-zh/techniques/damage_division.json",
+    "file": "dist/battle-zh/techniques/damage_division.json"
+  },
+  {
+    "key": "battle-zh/techniques/demiurge.json",
+    "file": "dist/battle-zh/techniques/demiurge.json"
+  },
+  {
+    "key": "battle-zh/techniques/depth_charge.json",
+    "file": "dist/battle-zh/techniques/depth_charge.json"
+  },
+  {
+    "key": "battle-zh/techniques/diet.json",
+    "file": "dist/battle-zh/techniques/diet.json"
+  },
+  {
+    "key": "battle-zh/techniques/divinity_beam.json",
+    "file": "dist/battle-zh/techniques/divinity_beam.json"
+  },
+  {
+    "key": "battle-zh/techniques/dreamwalk.json",
+    "file": "dist/battle-zh/techniques/dreamwalk.json"
+  },
+  {
+    "key": "battle-zh/techniques/earthquake.json",
+    "file": "dist/battle-zh/techniques/earthquake.json"
+  },
+  {
+    "key": "battle-zh/techniques/egg_smash.json",
+    "file": "dist/battle-zh/techniques/egg_smash.json"
+  },
+  {
+    "key": "battle-zh/techniques/electric_multibite.json",
+    "file": "dist/battle-zh/techniques/electric_multibite.json"
+  },
+  {
+    "key": "battle-zh/techniques/electrical_storm.json",
+    "file": "dist/battle-zh/techniques/electrical_storm.json"
+  },
+  {
+    "key": "battle-zh/techniques/electroplate.json",
+    "file": "dist/battle-zh/techniques/electroplate.json"
+  },
+  {
+    "key": "battle-zh/techniques/empty.json",
+    "file": "dist/battle-zh/techniques/empty.json"
+  },
+  {
+    "key": "battle-zh/techniques/energy_beam.json",
+    "file": "dist/battle-zh/techniques/energy_beam.json"
+  },
+  {
+    "key": "battle-zh/techniques/energy_claws.json",
+    "file": "dist/battle-zh/techniques/energy_claws.json"
+  },
+  {
+    "key": "battle-zh/techniques/energy_field.json",
+    "file": "dist/battle-zh/techniques/energy_field.json"
+  },
+  {
+    "key": "battle-zh/techniques/entomb.json",
+    "file": "dist/battle-zh/techniques/entomb.json"
+  },
+  {
+    "key": "battle-zh/techniques/evasion.json",
+    "file": "dist/battle-zh/techniques/evasion.json"
+  },
+  {
+    "key": "battle-zh/techniques/eyebite.json",
+    "file": "dist/battle-zh/techniques/eyebite.json"
+  },
+  {
+    "key": "battle-zh/techniques/feint.json",
+    "file": "dist/battle-zh/techniques/feint.json"
+  },
+  {
+    "key": "battle-zh/techniques/fester.json",
+    "file": "dist/battle-zh/techniques/fester.json"
+  },
+  {
+    "key": "battle-zh/techniques/fiery.json",
+    "file": "dist/battle-zh/techniques/fiery.json"
+  },
+  {
+    "key": "battle-zh/techniques/fire_ball.json",
+    "file": "dist/battle-zh/techniques/fire_ball.json"
+  },
+  {
+    "key": "battle-zh/techniques/fire_claw.json",
+    "file": "dist/battle-zh/techniques/fire_claw.json"
+  },
+  {
+    "key": "battle-zh/techniques/fire_shield.json",
+    "file": "dist/battle-zh/techniques/fire_shield.json"
+  },
+  {
+    "key": "battle-zh/techniques/firestorm.json",
+    "file": "dist/battle-zh/techniques/firestorm.json"
+  },
+  {
+    "key": "battle-zh/techniques/flamethrower.json",
+    "file": "dist/battle-zh/techniques/flamethrower.json"
+  },
+  {
+    "key": "battle-zh/techniques/fledgling.json",
+    "file": "dist/battle-zh/techniques/fledgling.json"
+  },
+  {
+    "key": "battle-zh/techniques/flood.json",
+    "file": "dist/battle-zh/techniques/flood.json"
+  },
+  {
+    "key": "battle-zh/techniques/flow.json",
+    "file": "dist/battle-zh/techniques/flow.json"
+  },
+  {
+    "key": "battle-zh/techniques/flower_armor.json",
+    "file": "dist/battle-zh/techniques/flower_armor.json"
+  },
+  {
+    "key": "battle-zh/techniques/flower_bloom.json",
+    "file": "dist/battle-zh/techniques/flower_bloom.json"
+  },
+  {
+    "key": "battle-zh/techniques/fluff_up.json",
+    "file": "dist/battle-zh/techniques/fluff_up.json"
+  },
+  {
+    "key": "battle-zh/techniques/font.json",
+    "file": "dist/battle-zh/techniques/font.json"
+  },
+  {
+    "key": "battle-zh/techniques/food_fight.json",
+    "file": "dist/battle-zh/techniques/food_fight.json"
+  },
+  {
+    "key": "battle-zh/techniques/frighten.json",
+    "file": "dist/battle-zh/techniques/frighten.json"
+  },
+  {
+    "key": "battle-zh/techniques/frostbite.json",
+    "file": "dist/battle-zh/techniques/frostbite.json"
+  },
+  {
+    "key": "battle-zh/techniques/fume.json",
+    "file": "dist/battle-zh/techniques/fume.json"
+  },
+  {
+    "key": "battle-zh/techniques/fungal_spore.json",
+    "file": "dist/battle-zh/techniques/fungal_spore.json"
+  },
+  {
+    "key": "battle-zh/techniques/geyser.json",
+    "file": "dist/battle-zh/techniques/geyser.json"
+  },
+  {
+    "key": "battle-zh/techniques/give_all.json",
+    "file": "dist/battle-zh/techniques/give_all.json"
+  },
+  {
+    "key": "battle-zh/techniques/glower.json",
+    "file": "dist/battle-zh/techniques/glower.json"
+  },
+  {
+    "key": "battle-zh/techniques/gnaw.json",
+    "file": "dist/battle-zh/techniques/gnaw.json"
+  },
+  {
+    "key": "battle-zh/techniques/goad.json",
+    "file": "dist/battle-zh/techniques/goad.json"
+  },
+  {
+    "key": "battle-zh/techniques/gold_digger.json",
+    "file": "dist/battle-zh/techniques/gold_digger.json"
+  },
+  {
+    "key": "battle-zh/techniques/gourmet.json",
+    "file": "dist/battle-zh/techniques/gourmet.json"
+  },
+  {
+    "key": "battle-zh/techniques/greenstone.json",
+    "file": "dist/battle-zh/techniques/greenstone.json"
+  },
+  {
+    "key": "battle-zh/techniques/grinding.json",
+    "file": "dist/battle-zh/techniques/grinding.json"
+  },
+  {
+    "key": "battle-zh/techniques/gust.json",
+    "file": "dist/battle-zh/techniques/gust.json"
+  },
+  {
+    "key": "battle-zh/techniques/hallucinogen_spore.json",
+    "file": "dist/battle-zh/techniques/hallucinogen_spore.json"
+  },
+  {
+    "key": "battle-zh/techniques/hammerhead.json",
+    "file": "dist/battle-zh/techniques/hammerhead.json"
+  },
+  {
+    "key": "battle-zh/techniques/hawk.json",
+    "file": "dist/battle-zh/techniques/hawk.json"
+  },
+  {
+    "key": "battle-zh/techniques/heavenly_desserts.json",
+    "file": "dist/battle-zh/techniques/heavenly_desserts.json"
+  },
+  {
+    "key": "battle-zh/techniques/hibernate.json",
+    "file": "dist/battle-zh/techniques/hibernate.json"
+  },
+  {
+    "key": "battle-zh/techniques/hook.json",
+    "file": "dist/battle-zh/techniques/hook.json"
+  },
+  {
+    "key": "battle-zh/techniques/horn.json",
+    "file": "dist/battle-zh/techniques/horn.json"
+  },
+  {
+    "key": "battle-zh/techniques/ice_claw.json",
+    "file": "dist/battle-zh/techniques/ice_claw.json"
+  },
+  {
+    "key": "battle-zh/techniques/ice_shield.json",
+    "file": "dist/battle-zh/techniques/ice_shield.json"
+  },
+  {
+    "key": "battle-zh/techniques/ice_storm.json",
+    "file": "dist/battle-zh/techniques/ice_storm.json"
+  },
+  {
+    "key": "battle-zh/techniques/icicle_spear.json",
+    "file": "dist/battle-zh/techniques/icicle_spear.json"
+  },
+  {
+    "key": "battle-zh/techniques/infectious_bite.json",
+    "file": "dist/battle-zh/techniques/infectious_bite.json"
+  },
+  {
+    "key": "battle-zh/techniques/insanity.json",
+    "file": "dist/battle-zh/techniques/insanity.json"
+  },
+  {
+    "key": "battle-zh/techniques/invictus.json",
+    "file": "dist/battle-zh/techniques/invictus.json"
+  },
+  {
+    "key": "battle-zh/techniques/just_desserts.json",
+    "file": "dist/battle-zh/techniques/just_desserts.json"
+  },
+  {
+    "key": "battle-zh/techniques/kindling_flame.json",
+    "file": "dist/battle-zh/techniques/kindling_flame.json"
+  },
+  {
+    "key": "battle-zh/techniques/kraken.json",
+    "file": "dist/battle-zh/techniques/kraken.json"
+  },
+  {
+    "key": "battle-zh/techniques/lantern.json",
+    "file": "dist/battle-zh/techniques/lantern.json"
+  },
+  {
+    "key": "battle-zh/techniques/laser_beam.json",
+    "file": "dist/battle-zh/techniques/laser_beam.json"
+  },
+  {
+    "key": "battle-zh/techniques/lava.json",
+    "file": "dist/battle-zh/techniques/lava.json"
+  },
+  {
+    "key": "battle-zh/techniques/leaf_barrage.json",
+    "file": "dist/battle-zh/techniques/leaf_barrage.json"
+  },
+  {
+    "key": "battle-zh/techniques/leaf_stab.json",
+    "file": "dist/battle-zh/techniques/leaf_stab.json"
+  },
+  {
+    "key": "battle-zh/techniques/levitate.json",
+    "file": "dist/battle-zh/techniques/levitate.json"
+  },
+  {
+    "key": "battle-zh/techniques/lick_lash.json",
+    "file": "dist/battle-zh/techniques/lick_lash.json"
+  },
+  {
+    "key": "battle-zh/techniques/life_surge.json",
+    "file": "dist/battle-zh/techniques/life_surge.json"
+  },
+  {
+    "key": "battle-zh/techniques/lightning_spheres.json",
+    "file": "dist/battle-zh/techniques/lightning_spheres.json"
+  },
+  {
+    "key": "battle-zh/techniques/lineage.json",
+    "file": "dist/battle-zh/techniques/lineage.json"
+  },
+  {
+    "key": "battle-zh/techniques/lock_horns.json",
+    "file": "dist/battle-zh/techniques/lock_horns.json"
+  },
+  {
+    "key": "battle-zh/techniques/lust.json",
+    "file": "dist/battle-zh/techniques/lust.json"
+  },
+  {
+    "key": "battle-zh/techniques/magma.json",
+    "file": "dist/battle-zh/techniques/magma.json"
+  },
+  {
+    "key": "battle-zh/techniques/magnetic_body.json",
+    "file": "dist/battle-zh/techniques/magnetic_body.json"
+  },
+  {
+    "key": "battle-zh/techniques/meltdown.json",
+    "file": "dist/battle-zh/techniques/meltdown.json"
+  },
+  {
+    "key": "battle-zh/techniques/mending.json",
+    "file": "dist/battle-zh/techniques/mending.json"
+  },
+  {
+    "key": "battle-zh/techniques/midnight_mantle.json",
+    "file": "dist/battle-zh/techniques/midnight_mantle.json"
+  },
+  {
+    "key": "battle-zh/techniques/mind_explosion.json",
+    "file": "dist/battle-zh/techniques/mind_explosion.json"
+  },
+  {
+    "key": "battle-zh/techniques/mind_vise.json",
+    "file": "dist/battle-zh/techniques/mind_vise.json"
+  },
+  {
+    "key": "battle-zh/techniques/mobbing.json",
+    "file": "dist/battle-zh/techniques/mobbing.json"
+  },
+  {
+    "key": "battle-zh/techniques/muck.json",
+    "file": "dist/battle-zh/techniques/muck.json"
+  },
+  {
+    "key": "battle-zh/techniques/muddle.json",
+    "file": "dist/battle-zh/techniques/muddle.json"
+  },
+  {
+    "key": "battle-zh/techniques/mudslide.json",
+    "file": "dist/battle-zh/techniques/mudslide.json"
+  },
+  {
+    "key": "battle-zh/techniques/mystic_blending.json",
+    "file": "dist/battle-zh/techniques/mystic_blending.json"
+  },
+  {
+    "key": "battle-zh/techniques/needle.json",
+    "file": "dist/battle-zh/techniques/needle.json"
+  },
+  {
+    "key": "battle-zh/techniques/negation.json",
+    "file": "dist/battle-zh/techniques/negation.json"
+  },
+  {
+    "key": "battle-zh/techniques/nest.json",
+    "file": "dist/battle-zh/techniques/nest.json"
+  },
+  {
+    "key": "battle-zh/techniques/neutralize.json",
+    "file": "dist/battle-zh/techniques/neutralize.json"
+  },
+  {
+    "key": "battle-zh/techniques/oedipus.json",
+    "file": "dist/battle-zh/techniques/oedipus.json"
+  },
+  {
+    "key": "battle-zh/techniques/one_million_talons.json",
+    "file": "dist/battle-zh/techniques/one_million_talons.json"
+  },
+  {
+    "key": "battle-zh/techniques/one_two.json",
+    "file": "dist/battle-zh/techniques/one_two.json"
+  },
+  {
+    "key": "battle-zh/techniques/orbs.json",
+    "file": "dist/battle-zh/techniques/orbs.json"
+  },
+  {
+    "key": "battle-zh/techniques/oven.json",
+    "file": "dist/battle-zh/techniques/oven.json"
+  },
+  {
+    "key": "battle-zh/techniques/overfeed.json",
+    "file": "dist/battle-zh/techniques/overfeed.json"
+  },
+  {
+    "key": "battle-zh/techniques/overgrowth.json",
+    "file": "dist/battle-zh/techniques/overgrowth.json"
+  },
+  {
+    "key": "battle-zh/techniques/panjandrum.json",
+    "file": "dist/battle-zh/techniques/panjandrum.json"
+  },
+  {
+    "key": "battle-zh/techniques/peck.json",
+    "file": "dist/battle-zh/techniques/peck.json"
+  },
+  {
+    "key": "battle-zh/techniques/peregrine.json",
+    "file": "dist/battle-zh/techniques/peregrine.json"
+  },
+  {
+    "key": "battle-zh/techniques/perfect_cut.json",
+    "file": "dist/battle-zh/techniques/perfect_cut.json"
+  },
+  {
+    "key": "battle-zh/techniques/petrify.json",
+    "file": "dist/battle-zh/techniques/petrify.json"
+  },
+  {
+    "key": "battle-zh/techniques/phantasmal_force.json",
+    "file": "dist/battle-zh/techniques/phantasmal_force.json"
+  },
+  {
+    "key": "battle-zh/techniques/piece_of_cake.json",
+    "file": "dist/battle-zh/techniques/piece_of_cake.json"
+  },
+  {
+    "key": "battle-zh/techniques/pit.json",
+    "file": "dist/battle-zh/techniques/pit.json"
+  },
+  {
+    "key": "battle-zh/techniques/platinum.json",
+    "file": "dist/battle-zh/techniques/platinum.json"
+  },
+  {
+    "key": "battle-zh/techniques/poison_courtship.json",
+    "file": "dist/battle-zh/techniques/poison_courtship.json"
+  },
+  {
+    "key": "battle-zh/techniques/pollen_blast.json",
+    "file": "dist/battle-zh/techniques/pollen_blast.json"
+  },
+  {
+    "key": "battle-zh/techniques/potluck.json",
+    "file": "dist/battle-zh/techniques/potluck.json"
+  },
+  {
+    "key": "battle-zh/techniques/pouch.json",
+    "file": "dist/battle-zh/techniques/pouch.json"
+  },
+  {
+    "key": "battle-zh/techniques/proboscis.json",
+    "file": "dist/battle-zh/techniques/proboscis.json"
+  },
+  {
+    "key": "battle-zh/techniques/pseudopod.json",
+    "file": "dist/battle-zh/techniques/pseudopod.json"
+  },
+  {
+    "key": "battle-zh/techniques/punch.json",
+    "file": "dist/battle-zh/techniques/punch.json"
+  },
+  {
+    "key": "battle-zh/techniques/pyrokinesis.json",
+    "file": "dist/battle-zh/techniques/pyrokinesis.json"
+  },
+  {
+    "key": "battle-zh/techniques/quicksand.json",
+    "file": "dist/battle-zh/techniques/quicksand.json"
+  },
+  {
+    "key": "battle-zh/techniques/radiance.json",
+    "file": "dist/battle-zh/techniques/radiance.json"
+  },
+  {
+    "key": "battle-zh/techniques/ram.json",
+    "file": "dist/battle-zh/techniques/ram.json"
+  },
+  {
+    "key": "battle-zh/techniques/refresh.json",
+    "file": "dist/battle-zh/techniques/refresh.json"
+  },
+  {
+    "key": "battle-zh/techniques/revenge_stance.json",
+    "file": "dist/battle-zh/techniques/revenge_stance.json"
+  },
+  {
+    "key": "battle-zh/techniques/rift_dash.json",
+    "file": "dist/battle-zh/techniques/rift_dash.json"
+  },
+  {
+    "key": "battle-zh/techniques/ring.json",
+    "file": "dist/battle-zh/techniques/ring.json"
+  },
+  {
+    "key": "battle-zh/techniques/riposte.json",
+    "file": "dist/battle-zh/techniques/riposte.json"
+  },
+  {
+    "key": "battle-zh/techniques/rock.json",
+    "file": "dist/battle-zh/techniques/rock.json"
+  },
+  {
+    "key": "battle-zh/techniques/rocky_barrage.json",
+    "file": "dist/battle-zh/techniques/rocky_barrage.json"
+  },
+  {
+    "key": "battle-zh/techniques/roll.json",
+    "file": "dist/battle-zh/techniques/roll.json"
+  },
+  {
+    "key": "battle-zh/techniques/rot.json",
+    "file": "dist/battle-zh/techniques/rot.json"
+  },
+  {
+    "key": "battle-zh/techniques/ruby.json",
+    "file": "dist/battle-zh/techniques/ruby.json"
+  },
+  {
+    "key": "battle-zh/techniques/rust_bomb.json",
+    "file": "dist/battle-zh/techniques/rust_bomb.json"
+  },
+  {
+    "key": "battle-zh/techniques/saber.json",
+    "file": "dist/battle-zh/techniques/saber.json"
+  },
+  {
+    "key": "battle-zh/techniques/salamander.json",
+    "file": "dist/battle-zh/techniques/salamander.json"
+  },
+  {
+    "key": "battle-zh/techniques/sand_spray.json",
+    "file": "dist/battle-zh/techniques/sand_spray.json"
+  },
+  {
+    "key": "battle-zh/techniques/sands_of_time.json",
+    "file": "dist/battle-zh/techniques/sands_of_time.json"
+  },
+  {
+    "key": "battle-zh/techniques/scope.json",
+    "file": "dist/battle-zh/techniques/scope.json"
+  },
+  {
+    "key": "battle-zh/techniques/shadow_blast.json",
+    "file": "dist/battle-zh/techniques/shadow_blast.json"
+  },
+  {
+    "key": "battle-zh/techniques/shadow_boxing.json",
+    "file": "dist/battle-zh/techniques/shadow_boxing.json"
+  },
+  {
+    "key": "battle-zh/techniques/shapechange.json",
+    "file": "dist/battle-zh/techniques/shapechange.json"
+  },
+  {
+    "key": "battle-zh/techniques/shrapnel.json",
+    "file": "dist/battle-zh/techniques/shrapnel.json"
+  },
+  {
+    "key": "battle-zh/techniques/shuriken.json",
+    "file": "dist/battle-zh/techniques/shuriken.json"
+  },
+  {
+    "key": "battle-zh/techniques/sleep_bomb.json",
+    "file": "dist/battle-zh/techniques/sleep_bomb.json"
+  },
+  {
+    "key": "battle-zh/techniques/sleeping_powder.json",
+    "file": "dist/battle-zh/techniques/sleeping_powder.json"
+  },
+  {
+    "key": "battle-zh/techniques/slice.json",
+    "file": "dist/battle-zh/techniques/slice.json"
+  },
+  {
+    "key": "battle-zh/techniques/slime.json",
+    "file": "dist/battle-zh/techniques/slime.json"
+  },
+  {
+    "key": "battle-zh/techniques/snowball.json",
+    "file": "dist/battle-zh/techniques/snowball.json"
+  },
+  {
+    "key": "battle-zh/techniques/snowstorm.json",
+    "file": "dist/battle-zh/techniques/snowstorm.json"
+  },
+  {
+    "key": "battle-zh/techniques/solar_synthesis.json",
+    "file": "dist/battle-zh/techniques/solar_synthesis.json"
+  },
+  {
+    "key": "battle-zh/techniques/spiky_strike.json",
+    "file": "dist/battle-zh/techniques/spiky_strike.json"
+  },
+  {
+    "key": "battle-zh/techniques/spit_poison.json",
+    "file": "dist/battle-zh/techniques/spit_poison.json"
+  },
+  {
+    "key": "battle-zh/techniques/splinter.json",
+    "file": "dist/battle-zh/techniques/splinter.json"
+  },
+  {
+    "key": "battle-zh/techniques/stabilo.json",
+    "file": "dist/battle-zh/techniques/stabilo.json"
+  },
+  {
+    "key": "battle-zh/techniques/staff_smash.json",
+    "file": "dist/battle-zh/techniques/staff_smash.json"
+  },
+  {
+    "key": "battle-zh/techniques/stampede.json",
+    "file": "dist/battle-zh/techniques/stampede.json"
+  },
+  {
+    "key": "battle-zh/techniques/starfall.json",
+    "file": "dist/battle-zh/techniques/starfall.json"
+  },
+  {
+    "key": "battle-zh/techniques/static_field.json",
+    "file": "dist/battle-zh/techniques/static_field.json"
+  },
+  {
+    "key": "battle-zh/techniques/steel_jaws.json",
+    "file": "dist/battle-zh/techniques/steel_jaws.json"
+  },
+  {
+    "key": "battle-zh/techniques/stick.json",
+    "file": "dist/battle-zh/techniques/stick.json"
+  },
+  {
+    "key": "battle-zh/techniques/sting.json",
+    "file": "dist/battle-zh/techniques/sting.json"
+  },
+  {
+    "key": "battle-zh/techniques/stone_rot.json",
+    "file": "dist/battle-zh/techniques/stone_rot.json"
+  },
+  {
+    "key": "battle-zh/techniques/stonehenge.json",
+    "file": "dist/battle-zh/techniques/stonehenge.json"
+  },
+  {
+    "key": "battle-zh/techniques/strangulation.json",
+    "file": "dist/battle-zh/techniques/strangulation.json"
+  },
+  {
+    "key": "battle-zh/techniques/strike.json",
+    "file": "dist/battle-zh/techniques/strike.json"
+  },
+  {
+    "key": "battle-zh/techniques/struggle.json",
+    "file": "dist/battle-zh/techniques/struggle.json"
+  },
+  {
+    "key": "battle-zh/techniques/suck_poison.json",
+    "file": "dist/battle-zh/techniques/suck_poison.json"
+  },
+  {
+    "key": "battle-zh/techniques/sudden_glow.json",
+    "file": "dist/battle-zh/techniques/sudden_glow.json"
+  },
+  {
+    "key": "battle-zh/techniques/sunburst.json",
+    "file": "dist/battle-zh/techniques/sunburst.json"
+  },
+  {
+    "key": "battle-zh/techniques/supernova.json",
+    "file": "dist/battle-zh/techniques/supernova.json"
+  },
+  {
+    "key": "battle-zh/techniques/suplex.json",
+    "file": "dist/battle-zh/techniques/suplex.json"
+  },
+  {
+    "key": "battle-zh/techniques/surge.json",
+    "file": "dist/battle-zh/techniques/surge.json"
+  },
+  {
+    "key": "battle-zh/techniques/sylvan.json",
+    "file": "dist/battle-zh/techniques/sylvan.json"
+  },
+  {
+    "key": "battle-zh/techniques/tail_lash.json",
+    "file": "dist/battle-zh/techniques/tail_lash.json"
+  },
+  {
+    "key": "battle-zh/techniques/take_cover.json",
+    "file": "dist/battle-zh/techniques/take_cover.json"
+  },
+  {
+    "key": "battle-zh/techniques/ten_thousand_feathers.json",
+    "file": "dist/battle-zh/techniques/ten_thousand_feathers.json"
+  },
+  {
+    "key": "battle-zh/techniques/terror.json",
+    "file": "dist/battle-zh/techniques/terror.json"
+  },
+  {
+    "key": "battle-zh/techniques/thorn_burst.json",
+    "file": "dist/battle-zh/techniques/thorn_burst.json"
+  },
+  {
+    "key": "battle-zh/techniques/thunderball.json",
+    "file": "dist/battle-zh/techniques/thunderball.json"
+  },
+  {
+    "key": "battle-zh/techniques/thunderclap.json",
+    "file": "dist/battle-zh/techniques/thunderclap.json"
+  },
+  {
+    "key": "battle-zh/techniques/time_crisis.json",
+    "file": "dist/battle-zh/techniques/time_crisis.json"
+  },
+  {
+    "key": "battle-zh/techniques/tinder.json",
+    "file": "dist/battle-zh/techniques/tinder.json"
+  },
+  {
+    "key": "battle-zh/techniques/tip.json",
+    "file": "dist/battle-zh/techniques/tip.json"
+  },
+  {
+    "key": "battle-zh/techniques/tonguespear.json",
+    "file": "dist/battle-zh/techniques/tonguespear.json"
+  },
+  {
+    "key": "battle-zh/techniques/tooth_for_tooth.json",
+    "file": "dist/battle-zh/techniques/tooth_for_tooth.json"
+  },
+  {
+    "key": "battle-zh/techniques/torch.json",
+    "file": "dist/battle-zh/techniques/torch.json"
+  },
+  {
+    "key": "battle-zh/techniques/tornado.json",
+    "file": "dist/battle-zh/techniques/tornado.json"
+  },
+  {
+    "key": "battle-zh/techniques/trample.json",
+    "file": "dist/battle-zh/techniques/trample.json"
+  },
+  {
+    "key": "battle-zh/techniques/tsunami.json",
+    "file": "dist/battle-zh/techniques/tsunami.json"
+  },
+  {
+    "key": "battle-zh/techniques/ubuntu.json",
+    "file": "dist/battle-zh/techniques/ubuntu.json"
+  },
+  {
+    "key": "battle-zh/techniques/undertaker.json",
+    "file": "dist/battle-zh/techniques/undertaker.json"
+  },
+  {
+    "key": "battle-zh/techniques/venomous_tentacle.json",
+    "file": "dist/battle-zh/techniques/venomous_tentacle.json"
+  },
+  {
+    "key": "battle-zh/techniques/viper.json",
+    "file": "dist/battle-zh/techniques/viper.json"
+  },
+  {
+    "key": "battle-zh/techniques/vorpal.json",
+    "file": "dist/battle-zh/techniques/vorpal.json"
+  },
+  {
+    "key": "battle-zh/techniques/wall_fire.json",
+    "file": "dist/battle-zh/techniques/wall_fire.json"
+  },
+  {
+    "key": "battle-zh/techniques/wall_of_steel.json",
+    "file": "dist/battle-zh/techniques/wall_of_steel.json"
+  },
+  {
+    "key": "battle-zh/techniques/wallow.json",
+    "file": "dist/battle-zh/techniques/wallow.json"
+  },
+  {
+    "key": "battle-zh/techniques/walls.json",
+    "file": "dist/battle-zh/techniques/walls.json"
+  },
+  {
+    "key": "battle-zh/techniques/water_blast.json",
+    "file": "dist/battle-zh/techniques/water_blast.json"
+  },
+  {
+    "key": "battle-zh/techniques/water_bullet.json",
+    "file": "dist/battle-zh/techniques/water_bullet.json"
+  },
+  {
+    "key": "battle-zh/techniques/web.json",
+    "file": "dist/battle-zh/techniques/web.json"
+  },
+  {
+    "key": "battle-zh/techniques/webs_wind.json",
+    "file": "dist/battle-zh/techniques/webs_wind.json"
+  },
+  {
+    "key": "battle-zh/techniques/whirlwind.json",
+    "file": "dist/battle-zh/techniques/whirlwind.json"
+  },
+  {
+    "key": "battle-zh/techniques/wing_tip.json",
+    "file": "dist/battle-zh/techniques/wing_tip.json"
+  },
+  {
+    "key": "battle-zh/techniques/woodsmash.json",
+    "file": "dist/battle-zh/techniques/woodsmash.json"
+  },
+  {
     "key": "battle/items/aardant.json",
     "file": "dist/battle/items/aardant.json"
   },
@@ -2894,6 +5542,1062 @@
   {
     "key": "game:battle-db",
     "file": "data/battle-db.json"
+  },
+  {
+    "key": "license:NotoSansCJK.txt",
+    "file": "fonts/LICENSE-NotoSansCJK.txt"
+  },
+  {
+    "key": "maps-zh/37707_tower.rkm",
+    "file": "dist/maps-zh/37707_tower.rkm"
+  },
+  {
+    "key": "maps-zh/37707_town.rkm",
+    "file": "dist/maps-zh/37707_town.rkm"
+  },
+  {
+    "key": "maps-zh/37707_town_missing.rkm",
+    "file": "dist/maps-zh/37707_town_missing.rkm"
+  },
+  {
+    "key": "maps-zh/azure_town.rkm",
+    "file": "dist/maps-zh/azure_town.rkm"
+  },
+  {
+    "key": "maps-zh/azure_town_hall.rkm",
+    "file": "dist/maps-zh/azure_town_hall.rkm"
+  },
+  {
+    "key": "maps-zh/bedroom_test.rkm",
+    "file": "dist/maps-zh/bedroom_test.rkm"
+  },
+  {
+    "key": "maps-zh/buddha_mountain.rkm",
+    "file": "dist/maps-zh/buddha_mountain.rkm"
+  },
+  {
+    "key": "maps-zh/candy_town.rkm",
+    "file": "dist/maps-zh/candy_town.rkm"
+  },
+  {
+    "key": "maps-zh/city1_mart_junkyard.rkm",
+    "file": "dist/maps-zh/city1_mart_junkyard.rkm"
+  },
+  {
+    "key": "maps-zh/citypark.rkm",
+    "file": "dist/maps-zh/citypark.rkm"
+  },
+  {
+    "key": "maps-zh/citypark_house1.rkm",
+    "file": "dist/maps-zh/citypark_house1.rkm"
+  },
+  {
+    "key": "maps-zh/classic_aerolume_city.rkm",
+    "file": "dist/maps-zh/classic_aerolume_city.rkm"
+  },
+  {
+    "key": "maps-zh/classic_gym_astra.rkm",
+    "file": "dist/maps-zh/classic_gym_astra.rkm"
+  },
+  {
+    "key": "maps-zh/classic_gym_bravion.rkm",
+    "file": "dist/maps-zh/classic_gym_bravion.rkm"
+  },
+  {
+    "key": "maps-zh/classic_gym_ferrum.rkm",
+    "file": "dist/maps-zh/classic_gym_ferrum.rkm"
+  },
+  {
+    "key": "maps-zh/classic_gym_granite.rkm",
+    "file": "dist/maps-zh/classic_gym_granite.rkm"
+  },
+  {
+    "key": "maps-zh/classic_gym_marin.rkm",
+    "file": "dist/maps-zh/classic_gym_marin.rkm"
+  },
+  {
+    "key": "maps-zh/classic_gym_mila.rkm",
+    "file": "dist/maps-zh/classic_gym_mila.rkm"
+  },
+  {
+    "key": "maps-zh/classic_gym_orion.rkm",
+    "file": "dist/maps-zh/classic_gym_orion.rkm"
+  },
+  {
+    "key": "maps-zh/classic_gym_pyra.rkm",
+    "file": "dist/maps-zh/classic_gym_pyra.rkm"
+  },
+  {
+    "key": "maps-zh/classic_gym_shade.rkm",
+    "file": "dist/maps-zh/classic_gym_shade.rkm"
+  },
+  {
+    "key": "maps-zh/classic_gym_sylva.rkm",
+    "file": "dist/maps-zh/classic_gym_sylva.rkm"
+  },
+  {
+    "key": "maps-zh/classic_gym_voltessa.rkm",
+    "file": "dist/maps-zh/classic_gym_voltessa.rkm"
+  },
+  {
+    "key": "maps-zh/classic_gym_vyre.rkm",
+    "file": "dist/maps-zh/classic_gym_vyre.rkm"
+  },
+  {
+    "key": "maps-zh/classic_gym_zephra.rkm",
+    "file": "dist/maps-zh/classic_gym_zephra.rkm"
+  },
+  {
+    "key": "maps-zh/classic_hearthrock_city.rkm",
+    "file": "dist/maps-zh/classic_hearthrock_city.rkm"
+  },
+  {
+    "key": "maps-zh/classic_route_1.rkm",
+    "file": "dist/maps-zh/classic_route_1.rkm"
+  },
+  {
+    "key": "maps-zh/classic_route_2.rkm",
+    "file": "dist/maps-zh/classic_route_2.rkm"
+  },
+  {
+    "key": "maps-zh/classic_route_3.rkm",
+    "file": "dist/maps-zh/classic_route_3.rkm"
+  },
+  {
+    "key": "maps-zh/classic_route_4.rkm",
+    "file": "dist/maps-zh/classic_route_4.rkm"
+  },
+  {
+    "key": "maps-zh/classic_route_5.rkm",
+    "file": "dist/maps-zh/classic_route_5.rkm"
+  },
+  {
+    "key": "maps-zh/classic_route_6.rkm",
+    "file": "dist/maps-zh/classic_route_6.rkm"
+  },
+  {
+    "key": "maps-zh/classic_route_7.rkm",
+    "file": "dist/maps-zh/classic_route_7.rkm"
+  },
+  {
+    "key": "maps-zh/classic_route_8.rkm",
+    "file": "dist/maps-zh/classic_route_8.rkm"
+  },
+  {
+    "key": "maps-zh/classic_steamshore_city.rkm",
+    "file": "dist/maps-zh/classic_steamshore_city.rkm"
+  },
+  {
+    "key": "maps-zh/classic_stormpeak_city.rkm",
+    "file": "dist/maps-zh/classic_stormpeak_city.rkm"
+  },
+  {
+    "key": "maps-zh/classic_thornwood_city.rkm",
+    "file": "dist/maps-zh/classic_thornwood_city.rkm"
+  },
+  {
+    "key": "maps-zh/classic_umbrastar_city.rkm",
+    "file": "dist/maps-zh/classic_umbrastar_city.rkm"
+  },
+  {
+    "key": "maps-zh/classic_valorhold_city.rkm",
+    "file": "dist/maps-zh/classic_valorhold_city.rkm"
+  },
+  {
+    "key": "maps-zh/cotton_cafe.rkm",
+    "file": "dist/maps-zh/cotton_cafe.rkm"
+  },
+  {
+    "key": "maps-zh/cotton_cafe_basement.rkm",
+    "file": "dist/maps-zh/cotton_cafe_basement.rkm"
+  },
+  {
+    "key": "maps-zh/cotton_cathedral.rkm",
+    "file": "dist/maps-zh/cotton_cathedral.rkm"
+  },
+  {
+    "key": "maps-zh/cotton_daycare.rkm",
+    "file": "dist/maps-zh/cotton_daycare.rkm"
+  },
+  {
+    "key": "maps-zh/cotton_misa_house.rkm",
+    "file": "dist/maps-zh/cotton_misa_house.rkm"
+  },
+  {
+    "key": "maps-zh/cotton_misa_house_upstairs.rkm",
+    "file": "dist/maps-zh/cotton_misa_house_upstairs.rkm"
+  },
+  {
+    "key": "maps-zh/cotton_scoop.rkm",
+    "file": "dist/maps-zh/cotton_scoop.rkm"
+  },
+  {
+    "key": "maps-zh/cotton_town.rkm",
+    "file": "dist/maps-zh/cotton_town.rkm"
+  },
+  {
+    "key": "maps-zh/cotton_underground.rkm",
+    "file": "dist/maps-zh/cotton_underground.rkm"
+  },
+  {
+    "key": "maps-zh/dojo1.rkm",
+    "file": "dist/maps-zh/dojo1.rkm"
+  },
+  {
+    "key": "maps-zh/dojo2.rkm",
+    "file": "dist/maps-zh/dojo2.rkm"
+  },
+  {
+    "key": "maps-zh/dojo3.rkm",
+    "file": "dist/maps-zh/dojo3.rkm"
+  },
+  {
+    "key": "maps-zh/downstairs_test.rkm",
+    "file": "dist/maps-zh/downstairs_test.rkm"
+  },
+  {
+    "key": "maps-zh/dragonscave.rkm",
+    "file": "dist/maps-zh/dragonscave.rkm"
+  },
+  {
+    "key": "maps-zh/dryadsgrove.rkm",
+    "file": "dist/maps-zh/dryadsgrove.rkm"
+  },
+  {
+    "key": "maps-zh/eclipse_crystal_bank1.rkm",
+    "file": "dist/maps-zh/eclipse_crystal_bank1.rkm"
+  },
+  {
+    "key": "maps-zh/eclipse_crystal_bank2.rkm",
+    "file": "dist/maps-zh/eclipse_crystal_bank2.rkm"
+  },
+  {
+    "key": "maps-zh/eclipse_crystal_bank3.rkm",
+    "file": "dist/maps-zh/eclipse_crystal_bank3.rkm"
+  },
+  {
+    "key": "maps-zh/eclipse_crystal_center.rkm",
+    "file": "dist/maps-zh/eclipse_crystal_center.rkm"
+  },
+  {
+    "key": "maps-zh/eclipse_crystal_town.rkm",
+    "file": "dist/maps-zh/eclipse_crystal_town.rkm"
+  },
+  {
+    "key": "maps-zh/eclipse_crystal_town_cafe.rkm",
+    "file": "dist/maps-zh/eclipse_crystal_town_cafe.rkm"
+  },
+  {
+    "key": "maps-zh/eclipse_crystal_town_house.rkm",
+    "file": "dist/maps-zh/eclipse_crystal_town_house.rkm"
+  },
+  {
+    "key": "maps-zh/eclipse_lion_mountain_high.rkm",
+    "file": "dist/maps-zh/eclipse_lion_mountain_high.rkm"
+  },
+  {
+    "key": "maps-zh/eclipse_lion_mountain_low.rkm",
+    "file": "dist/maps-zh/eclipse_lion_mountain_low.rkm"
+  },
+  {
+    "key": "maps-zh/eclipse_lion_mountain_middle.rkm",
+    "file": "dist/maps-zh/eclipse_lion_mountain_middle.rkm"
+  },
+  {
+    "key": "maps-zh/eclipse_obsidian_center.rkm",
+    "file": "dist/maps-zh/eclipse_obsidian_center.rkm"
+  },
+  {
+    "key": "maps-zh/eclipse_obsidian_town.rkm",
+    "file": "dist/maps-zh/eclipse_obsidian_town.rkm"
+  },
+  {
+    "key": "maps-zh/eclipse_obsidian_town_house.rkm",
+    "file": "dist/maps-zh/eclipse_obsidian_town_house.rkm"
+  },
+  {
+    "key": "maps-zh/eclipse_park.rkm",
+    "file": "dist/maps-zh/eclipse_park.rkm"
+  },
+  {
+    "key": "maps-zh/eclipse_park_cabin.rkm",
+    "file": "dist/maps-zh/eclipse_park_cabin.rkm"
+  },
+  {
+    "key": "maps-zh/eclipse_park_cave.rkm",
+    "file": "dist/maps-zh/eclipse_park_cave.rkm"
+  },
+  {
+    "key": "maps-zh/eclipse_park_entrance.rkm",
+    "file": "dist/maps-zh/eclipse_park_entrance.rkm"
+  },
+  {
+    "key": "maps-zh/eclipse_park_south.rkm",
+    "file": "dist/maps-zh/eclipse_park_south.rkm"
+  },
+  {
+    "key": "maps-zh/eclipse_route7.rkm",
+    "file": "dist/maps-zh/eclipse_route7.rkm"
+  },
+  {
+    "key": "maps-zh/eclipse_routef.rkm",
+    "file": "dist/maps-zh/eclipse_routef.rkm"
+  },
+  {
+    "key": "maps-zh/eclipse_routeg.rkm",
+    "file": "dist/maps-zh/eclipse_routeg.rkm"
+  },
+  {
+    "key": "maps-zh/eclipse_routeh.rkm",
+    "file": "dist/maps-zh/eclipse_routeh.rkm"
+  },
+  {
+    "key": "maps-zh/eclipse_routei.rkm",
+    "file": "dist/maps-zh/eclipse_routei.rkm"
+  },
+  {
+    "key": "maps-zh/flower_city.rkm",
+    "file": "dist/maps-zh/flower_city.rkm"
+  },
+  {
+    "key": "maps-zh/gadget_store1.rkm",
+    "file": "dist/maps-zh/gadget_store1.rkm"
+  },
+  {
+    "key": "maps-zh/gaming_hall.rkm",
+    "file": "dist/maps-zh/gaming_hall.rkm"
+  },
+  {
+    "key": "maps-zh/healing_center.rkm",
+    "file": "dist/maps-zh/healing_center.rkm"
+  },
+  {
+    "key": "maps-zh/leather_scoop.rkm",
+    "file": "dist/maps-zh/leather_scoop.rkm"
+  },
+  {
+    "key": "maps-zh/leather_shaft1.rkm",
+    "file": "dist/maps-zh/leather_shaft1.rkm"
+  },
+  {
+    "key": "maps-zh/leather_shaft2.rkm",
+    "file": "dist/maps-zh/leather_shaft2.rkm"
+  },
+  {
+    "key": "maps-zh/leather_town.rkm",
+    "file": "dist/maps-zh/leather_town.rkm"
+  },
+  {
+    "key": "maps-zh/manhattan_beach.rkm",
+    "file": "dist/maps-zh/manhattan_beach.rkm"
+  },
+  {
+    "key": "maps-zh/mansion.rkm",
+    "file": "dist/maps-zh/mansion.rkm"
+  },
+  {
+    "key": "maps-zh/mansion_basement.rkm",
+    "file": "dist/maps-zh/mansion_basement.rkm"
+  },
+  {
+    "key": "maps-zh/mansion_top.rkm",
+    "file": "dist/maps-zh/mansion_top.rkm"
+  },
+  {
+    "key": "maps-zh/maple_bedroom.rkm",
+    "file": "dist/maps-zh/maple_bedroom.rkm"
+  },
+  {
+    "key": "maps-zh/maple_house.rkm",
+    "file": "dist/maps-zh/maple_house.rkm"
+  },
+  {
+    "key": "maps-zh/omnichannel0.rkm",
+    "file": "dist/maps-zh/omnichannel0.rkm"
+  },
+  {
+    "key": "maps-zh/omnichannel1.rkm",
+    "file": "dist/maps-zh/omnichannel1.rkm"
+  },
+  {
+    "key": "maps-zh/omnichannel2.rkm",
+    "file": "dist/maps-zh/omnichannel2.rkm"
+  },
+  {
+    "key": "maps-zh/omnichannel3.rkm",
+    "file": "dist/maps-zh/omnichannel3.rkm"
+  },
+  {
+    "key": "maps-zh/omnichannel4.rkm",
+    "file": "dist/maps-zh/omnichannel4.rkm"
+  },
+  {
+    "key": "maps-zh/player_house_bedroom.rkm",
+    "file": "dist/maps-zh/player_house_bedroom.rkm"
+  },
+  {
+    "key": "maps-zh/player_house_downstairs.rkm",
+    "file": "dist/maps-zh/player_house_downstairs.rkm"
+  },
+  {
+    "key": "maps-zh/professor_lab.rkm",
+    "file": "dist/maps-zh/professor_lab.rkm"
+  },
+  {
+    "key": "maps-zh/route1.rkm",
+    "file": "dist/maps-zh/route1.rkm"
+  },
+  {
+    "key": "maps-zh/route1_sanglorian.rkm",
+    "file": "dist/maps-zh/route1_sanglorian.rkm"
+  },
+  {
+    "key": "maps-zh/route2.rkm",
+    "file": "dist/maps-zh/route2.rkm"
+  },
+  {
+    "key": "maps-zh/route3.rkm",
+    "file": "dist/maps-zh/route3.rkm"
+  },
+  {
+    "key": "maps-zh/route4.rkm",
+    "file": "dist/maps-zh/route4.rkm"
+  },
+  {
+    "key": "maps-zh/route5.rkm",
+    "file": "dist/maps-zh/route5.rkm"
+  },
+  {
+    "key": "maps-zh/route6.rkm",
+    "file": "dist/maps-zh/route6.rkm"
+  },
+  {
+    "key": "maps-zh/routea.rkm",
+    "file": "dist/maps-zh/routea.rkm"
+  },
+  {
+    "key": "maps-zh/routec.rkm",
+    "file": "dist/maps-zh/routec.rkm"
+  },
+  {
+    "key": "maps-zh/rubberduck_cave_01.rkm",
+    "file": "dist/maps-zh/rubberduck_cave_01.rkm"
+  },
+  {
+    "key": "maps-zh/rubberduck_city_01.rkm",
+    "file": "dist/maps-zh/rubberduck_city_01.rkm"
+  },
+  {
+    "key": "maps-zh/rubberduck_route_01.rkm",
+    "file": "dist/maps-zh/rubberduck_route_01.rkm"
+  },
+  {
+    "key": "maps-zh/russell_practice_1.rkm",
+    "file": "dist/maps-zh/russell_practice_1.rkm"
+  },
+  {
+    "key": "maps-zh/scoop1.rkm",
+    "file": "dist/maps-zh/scoop1.rkm"
+  },
+  {
+    "key": "maps-zh/scoop2.rkm",
+    "file": "dist/maps-zh/scoop2.rkm"
+  },
+  {
+    "key": "maps-zh/scoop3.rkm",
+    "file": "dist/maps-zh/scoop3.rkm"
+  },
+  {
+    "key": "maps-zh/scoop4.rkm",
+    "file": "dist/maps-zh/scoop4.rkm"
+  },
+  {
+    "key": "maps-zh/sphalian_center.rkm",
+    "file": "dist/maps-zh/sphalian_center.rkm"
+  },
+  {
+    "key": "maps-zh/sphalian_town.rkm",
+    "file": "dist/maps-zh/sphalian_town.rkm"
+  },
+  {
+    "key": "maps-zh/sphalian_town_house.rkm",
+    "file": "dist/maps-zh/sphalian_town_house.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_bedroom.rkm",
+    "file": "dist/maps-zh/spyder_bedroom.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_brideswood.rkm",
+    "file": "dist/maps-zh/spyder_brideswood.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_candy_cafe.rkm",
+    "file": "dist/maps-zh/spyder_candy_cafe.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_candy_center.rkm",
+    "file": "dist/maps-zh/spyder_candy_center.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_candy_hospital1.rkm",
+    "file": "dist/maps-zh/spyder_candy_hospital1.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_candy_hospital2.rkm",
+    "file": "dist/maps-zh/spyder_candy_hospital2.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_candy_hospital3.rkm",
+    "file": "dist/maps-zh/spyder_candy_hospital3.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_candy_house1.rkm",
+    "file": "dist/maps-zh/spyder_candy_house1.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_candy_house2.rkm",
+    "file": "dist/maps-zh/spyder_candy_house2.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_candy_house3.rkm",
+    "file": "dist/maps-zh/spyder_candy_house3.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_candy_inn1.rkm",
+    "file": "dist/maps-zh/spyder_candy_inn1.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_candy_inn2.rkm",
+    "file": "dist/maps-zh/spyder_candy_inn2.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_candy_port.rkm",
+    "file": "dist/maps-zh/spyder_candy_port.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_candy_scoop.rkm",
+    "file": "dist/maps-zh/spyder_candy_scoop.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_candy_town.rkm",
+    "file": "dist/maps-zh/spyder_candy_town.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_citypark.rkm",
+    "file": "dist/maps-zh/spyder_citypark.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_citypark_house1.rkm",
+    "file": "dist/maps-zh/spyder_citypark_house1.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_cotton_artshop.rkm",
+    "file": "dist/maps-zh/spyder_cotton_artshop.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_cotton_cafe.rkm",
+    "file": "dist/maps-zh/spyder_cotton_cafe.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_cotton_house1.rkm",
+    "file": "dist/maps-zh/spyder_cotton_house1.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_cotton_house2.rkm",
+    "file": "dist/maps-zh/spyder_cotton_house2.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_cotton_scoop.rkm",
+    "file": "dist/maps-zh/spyder_cotton_scoop.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_cotton_town.rkm",
+    "file": "dist/maps-zh/spyder_cotton_town.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_cotton_tunnel.rkm",
+    "file": "dist/maps-zh/spyder_cotton_tunnel.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_datacenter.rkm",
+    "file": "dist/maps-zh/spyder_datacenter.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_diamond_hill.rkm",
+    "file": "dist/maps-zh/spyder_diamond_hill.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_dojo1.rkm",
+    "file": "dist/maps-zh/spyder_dojo1.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_dojo2.rkm",
+    "file": "dist/maps-zh/spyder_dojo2.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_dojo3.rkm",
+    "file": "dist/maps-zh/spyder_dojo3.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_dojo4.rkm",
+    "file": "dist/maps-zh/spyder_dojo4.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_downstairs.rkm",
+    "file": "dist/maps-zh/spyder_downstairs.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_dragonscave.rkm",
+    "file": "dist/maps-zh/spyder_dragonscave.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_dryadsgrove.rkm",
+    "file": "dist/maps-zh/spyder_dryadsgrove.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_flower_center.rkm",
+    "file": "dist/maps-zh/spyder_flower_center.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_flower_city.rkm",
+    "file": "dist/maps-zh/spyder_flower_city.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_flower_house1.rkm",
+    "file": "dist/maps-zh/spyder_flower_house1.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_flower_house2.rkm",
+    "file": "dist/maps-zh/spyder_flower_house2.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_flower_petshop.rkm",
+    "file": "dist/maps-zh/spyder_flower_petshop.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_flower_scoop.rkm",
+    "file": "dist/maps-zh/spyder_flower_scoop.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_greenwash.rkm",
+    "file": "dist/maps-zh/spyder_greenwash.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_greenwash_greenhouse.rkm",
+    "file": "dist/maps-zh/spyder_greenwash_greenhouse.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_greenwash_level2.rkm",
+    "file": "dist/maps-zh/spyder_greenwash_level2.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_greenwash_level3.rkm",
+    "file": "dist/maps-zh/spyder_greenwash_level3.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_healing_center.rkm",
+    "file": "dist/maps-zh/spyder_healing_center.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_leather_center.rkm",
+    "file": "dist/maps-zh/spyder_leather_center.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_leather_gym.rkm",
+    "file": "dist/maps-zh/spyder_leather_gym.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_leather_house1.rkm",
+    "file": "dist/maps-zh/spyder_leather_house1.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_leather_house2.rkm",
+    "file": "dist/maps-zh/spyder_leather_house2.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_leather_museum.rkm",
+    "file": "dist/maps-zh/spyder_leather_museum.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_leather_scoop.rkm",
+    "file": "dist/maps-zh/spyder_leather_scoop.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_leather_shaft1.rkm",
+    "file": "dist/maps-zh/spyder_leather_shaft1.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_leather_shaft2.rkm",
+    "file": "dist/maps-zh/spyder_leather_shaft2.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_leather_town.rkm",
+    "file": "dist/maps-zh/spyder_leather_town.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_mansion.rkm",
+    "file": "dist/maps-zh/spyder_mansion.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_mansion_basement.rkm",
+    "file": "dist/maps-zh/spyder_mansion_basement.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_mansion_top.rkm",
+    "file": "dist/maps-zh/spyder_mansion_top.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_nimrod_bottom.rkm",
+    "file": "dist/maps-zh/spyder_nimrod_bottom.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_nimrod_middle.rkm",
+    "file": "dist/maps-zh/spyder_nimrod_middle.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_nimrod_room.rkm",
+    "file": "dist/maps-zh/spyder_nimrod_room.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_nimrod_top.rkm",
+    "file": "dist/maps-zh/spyder_nimrod_top.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_omnichannel1.rkm",
+    "file": "dist/maps-zh/spyder_omnichannel1.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_omnichannel2.rkm",
+    "file": "dist/maps-zh/spyder_omnichannel2.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_omnichannel3.rkm",
+    "file": "dist/maps-zh/spyder_omnichannel3.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_omnichannel4.rkm",
+    "file": "dist/maps-zh/spyder_omnichannel4.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_paper_daycare.rkm",
+    "file": "dist/maps-zh/spyder_paper_daycare.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_paper_manor.rkm",
+    "file": "dist/maps-zh/spyder_paper_manor.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_paper_rival_bedroom.rkm",
+    "file": "dist/maps-zh/spyder_paper_rival_bedroom.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_paper_rival_downstairs.rkm",
+    "file": "dist/maps-zh/spyder_paper_rival_downstairs.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_paper_rival_office.rkm",
+    "file": "dist/maps-zh/spyder_paper_rival_office.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_paper_scoop.rkm",
+    "file": "dist/maps-zh/spyder_paper_scoop.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_paper_town.rkm",
+    "file": "dist/maps-zh/spyder_paper_town.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_radiotower.rkm",
+    "file": "dist/maps-zh/spyder_radiotower.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_route1.rkm",
+    "file": "dist/maps-zh/spyder_route1.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_route2.rkm",
+    "file": "dist/maps-zh/spyder_route2.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_route3.rkm",
+    "file": "dist/maps-zh/spyder_route3.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_route4.rkm",
+    "file": "dist/maps-zh/spyder_route4.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_route5.rkm",
+    "file": "dist/maps-zh/spyder_route5.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_route6.rkm",
+    "file": "dist/maps-zh/spyder_route6.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_routea.rkm",
+    "file": "dist/maps-zh/spyder_routea.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_routeb.rkm",
+    "file": "dist/maps-zh/spyder_routeb.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_routec.rkm",
+    "file": "dist/maps-zh/spyder_routec.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_routed.rkm",
+    "file": "dist/maps-zh/spyder_routed.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_routee.rkm",
+    "file": "dist/maps-zh/spyder_routee.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_scoop1.rkm",
+    "file": "dist/maps-zh/spyder_scoop1.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_scoop2.rkm",
+    "file": "dist/maps-zh/spyder_scoop2.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_scoop3.rkm",
+    "file": "dist/maps-zh/spyder_scoop3.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_scoop4.rkm",
+    "file": "dist/maps-zh/spyder_scoop4.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_test_map.rkm",
+    "file": "dist/maps-zh/spyder_test_map.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_timber_cafe.rkm",
+    "file": "dist/maps-zh/spyder_timber_cafe.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_timber_center.rkm",
+    "file": "dist/maps-zh/spyder_timber_center.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_timber_house.rkm",
+    "file": "dist/maps-zh/spyder_timber_house.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_timber_scoop.rkm",
+    "file": "dist/maps-zh/spyder_timber_scoop.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_timber_town.rkm",
+    "file": "dist/maps-zh/spyder_timber_town.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_timber_walledgarden1.rkm",
+    "file": "dist/maps-zh/spyder_timber_walledgarden1.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_timber_walledgarden2.rkm",
+    "file": "dist/maps-zh/spyder_timber_walledgarden2.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_tunnel.rkm",
+    "file": "dist/maps-zh/spyder_tunnel.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_tunnel_below.rkm",
+    "file": "dist/maps-zh/spyder_tunnel_below.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_wayfarer_inn1.rkm",
+    "file": "dist/maps-zh/spyder_wayfarer_inn1.rkm"
+  },
+  {
+    "key": "maps-zh/spyder_wayfarer_inn2.rkm",
+    "file": "dist/maps-zh/spyder_wayfarer_inn2.rkm"
+  },
+  {
+    "key": "maps-zh/start_tuxemon.rkm",
+    "file": "dist/maps-zh/start_tuxemon.rkm"
+  },
+  {
+    "key": "maps-zh/taba_ba_br_1.rkm",
+    "file": "dist/maps-zh/taba_ba_br_1.rkm"
+  },
+  {
+    "key": "maps-zh/taba_ba_br_2.rkm",
+    "file": "dist/maps-zh/taba_ba_br_2.rkm"
+  },
+  {
+    "key": "maps-zh/taba_ba_br_3.rkm",
+    "file": "dist/maps-zh/taba_ba_br_3.rkm"
+  },
+  {
+    "key": "maps-zh/taba_ba_br_4.rkm",
+    "file": "dist/maps-zh/taba_ba_br_4.rkm"
+  },
+  {
+    "key": "maps-zh/taba_ba_br_master.rkm",
+    "file": "dist/maps-zh/taba_ba_br_master.rkm"
+  },
+  {
+    "key": "maps-zh/taba_ba_br_master_foyer.rkm",
+    "file": "dist/maps-zh/taba_ba_br_master_foyer.rkm"
+  },
+  {
+    "key": "maps-zh/taba_ba_foyer.rkm",
+    "file": "dist/maps-zh/taba_ba_foyer.rkm"
+  },
+  {
+    "key": "maps-zh/taba_ba_main.rkm",
+    "file": "dist/maps-zh/taba_ba_main.rkm"
+  },
+  {
+    "key": "maps-zh/taba_ba_passageway_1.rkm",
+    "file": "dist/maps-zh/taba_ba_passageway_1.rkm"
+  },
+  {
+    "key": "maps-zh/taba_ba_passageway_2.rkm",
+    "file": "dist/maps-zh/taba_ba_passageway_2.rkm"
+  },
+  {
+    "key": "maps-zh/taba_ba_passageway_3.rkm",
+    "file": "dist/maps-zh/taba_ba_passageway_3.rkm"
+  },
+  {
+    "key": "maps-zh/taba_ba_passageway_4.rkm",
+    "file": "dist/maps-zh/taba_ba_passageway_4.rkm"
+  },
+  {
+    "key": "maps-zh/taba_ba_stairwell_1.rkm",
+    "file": "dist/maps-zh/taba_ba_stairwell_1.rkm"
+  },
+  {
+    "key": "maps-zh/taba_ba_stairwell_2.rkm",
+    "file": "dist/maps-zh/taba_ba_stairwell_2.rkm"
+  },
+  {
+    "key": "maps-zh/taba_house1.rkm",
+    "file": "dist/maps-zh/taba_house1.rkm"
+  },
+  {
+    "key": "maps-zh/taba_house2.rkm",
+    "file": "dist/maps-zh/taba_house2.rkm"
+  },
+  {
+    "key": "maps-zh/taba_house2_upstairs.rkm",
+    "file": "dist/maps-zh/taba_house2_upstairs.rkm"
+  },
+  {
+    "key": "maps-zh/taba_house3.rkm",
+    "file": "dist/maps-zh/taba_house3.rkm"
+  },
+  {
+    "key": "maps-zh/taba_house3_upstairs.rkm",
+    "file": "dist/maps-zh/taba_house3_upstairs.rkm"
+  },
+  {
+    "key": "maps-zh/taba_house4.rkm",
+    "file": "dist/maps-zh/taba_house4.rkm"
+  },
+  {
+    "key": "maps-zh/taba_town.rkm",
+    "file": "dist/maps-zh/taba_town.rkm"
+  },
+  {
+    "key": "maps-zh/tabathas.rkm",
+    "file": "dist/maps-zh/tabathas.rkm"
+  },
+  {
+    "key": "maps-zh/test_npcs.rkm",
+    "file": "dist/maps-zh/test_npcs.rkm"
+  },
+  {
+    "key": "maps-zh/timber_town.rkm",
+    "file": "dist/maps-zh/timber_town.rkm"
+  },
+  {
+    "key": "maps-zh/tt_forest_route1.rkm",
+    "file": "dist/maps-zh/tt_forest_route1.rkm"
+  },
+  {
+    "key": "maps-zh/tt_paper_town.rkm",
+    "file": "dist/maps-zh/tt_paper_town.rkm"
+  },
+  {
+    "key": "maps-zh/tt_searoute1.rkm",
+    "file": "dist/maps-zh/tt_searoute1.rkm"
+  },
+  {
+    "key": "maps-zh/tunnel.rkm",
+    "file": "dist/maps-zh/tunnel.rkm"
+  },
+  {
+    "key": "maps-zh/tunnel_below.rkm",
+    "file": "dist/maps-zh/tunnel_below.rkm"
+  },
+  {
+    "key": "maps-zh/tuxe_mart_taba.rkm",
+    "file": "dist/maps-zh/tuxe_mart_taba.rkm"
+  },
+  {
+    "key": "maps-zh/water_cathedral.rkm",
+    "file": "dist/maps-zh/water_cathedral.rkm"
+  },
+  {
+    "key": "maps-zh/water_end_of_desert.rkm",
+    "file": "dist/maps-zh/water_end_of_desert.rkm"
+  },
+  {
+    "key": "maps-zh/water_lower_village.rkm",
+    "file": "dist/maps-zh/water_lower_village.rkm"
+  },
+  {
+    "key": "maps-zh/water_outskirts.rkm",
+    "file": "dist/maps-zh/water_outskirts.rkm"
+  },
+  {
+    "key": "maps-zh/water_river_village.rkm",
+    "file": "dist/maps-zh/water_river_village.rkm"
+  },
+  {
+    "key": "maps-zh/water_route_grass.rkm",
+    "file": "dist/maps-zh/water_route_grass.rkm"
+  },
+  {
+    "key": "maps-zh/water_route_ice.rkm",
+    "file": "dist/maps-zh/water_route_ice.rkm"
+  },
+  {
+    "key": "maps-zh/water_snow_village.rkm",
+    "file": "dist/maps-zh/water_snow_village.rkm"
+  },
+  {
+    "key": "maps-zh/water_underwater.rkm",
+    "file": "dist/maps-zh/water_underwater.rkm"
+  },
+  {
+    "key": "maps-zh/water_volcano_path.rkm",
+    "file": "dist/maps-zh/water_volcano_path.rkm"
+  },
+  {
+    "key": "maps-zh/water_volcano_village.rkm",
+    "file": "dist/maps-zh/water_volcano_village.rkm"
+  },
+  {
+    "key": "maps-zh/wayfarer_inn1.rkm",
+    "file": "dist/maps-zh/wayfarer_inn1.rkm"
+  },
+  {
+    "key": "maps-zh/wayfarer_inn2.rkm",
+    "file": "dist/maps-zh/wayfarer_inn2.rkm"
+  },
+  {
+    "key": "maps-zh/witcher_route_7.rkm",
+    "file": "dist/maps-zh/witcher_route_7.rkm"
   },
   {
     "key": "maps/37707_tower.rkm",

@@ -1,80 +1,88 @@
-# Terminology-check exceptions: msgid<TAB>English term.
-# Each line documents a case where the glossary term legitimately does not
-# appear in the translation, grouped by reason. Keep this file short.
+# Terminology-check exceptions: msgid<TAB>English term<TAB>reason.
+# Every exception states why the glossary rendering is wrong in this context.
 
 # Element names vs. same-spelled item/level names (berry line, difficulty)
-earth_berry	Earth
-normal_berry	Normal
-normal_berry_description	Normal
-level_normal	Normal
+earth_berry	Earth	“Earth Berry”是完整道具名，并非元素名的独立用法。
+normal_berry	Normal	“Normal Berry”是完整道具名，并非元素名的独立用法。
+normal_berry_description	Normal	此处描述浆果效果，使用“普通系”而非菜单中的元素专名。
+level_normal	Normal	此处是难度等级“普通”，并非元素名。
 
 # Units/vocabulary collisions ("Imperial" units, "Journal" periodical,
 # "Kernel" the OS kernel vs. Kernel the monster)
-imperial_tea	Imperial
-spyder_mansion_lucy1	Imperial
-spyder_leather_note3	Journal
-spyder_pc_alert	Kernel
-spyder_datacenter_lagrange1	Kernel
+imperial_tea	Imperial	“Imperial Tea”是完整道具名，不使用计量制“英制”的译法。
+spyder_mansion_lucy1	Imperial	此处指英制计量单位，不是同名道具。
+spyder_leather_note3	Journal	此处是报刊/期刊，不是玩家菜单“日志”。
+spyder_pc_alert	Kernel	此处是操作系统内核，不是同名精灵。
+spyder_datacenter_lagrange1	Kernel	此处是操作系统内核，不是同名精灵。
 
 # Item names that are compounds of a glossary technique/element name
-sky_feather	Feather
-prismatic_crystal	Crystal
-eclipse_route7_fritz1	Crystal
-ox_stick	Stick
-refreshing_slice	Slice
-tm_all_in	All In
-tm_blade	Blade
-tm_shadow_boxing	Shadow Boxing
-tm_shadow_boxing	Shadow
-tm_frostbite	Frostbite
-tm_vorpal	Vorpal
+sky_feather	Feather	“Sky Feather”是独立道具名，不是招式 Feather。
+prismatic_crystal	Crystal	“Prismatic Crystal”是独立道具名，不是招式 Crystal。
+eclipse_route7_fritz1	Crystal	对白指 Prismatic Crystal 道具，不是招式 Crystal。
+ox_stick	Stick	“Ox Stick”是独立道具名，不是招式 Stick。
+refreshing_slice	Slice	“Refreshing Slice”是独立道具名，不是招式 Slice。
+tm_all_in	All In	此处是招式学习器道具名，译名带“招式学习器”前缀。
+tm_blade	Blade	此处是招式学习器道具名，译名带“招式学习器”前缀。
+tm_shadow_boxing	Shadow Boxing	此处是招式学习器道具名，译名带“招式学习器”前缀。
+tm_shadow_boxing	Shadow	此处 Shadow 属于完整招式名 Shadow Boxing。
+tm_frostbite	Frostbite	此处是招式学习器道具名，译名带“招式学习器”前缀。
+tm_vorpal	Vorpal	此处是招式学习器道具名，译名带“招式学习器”前缀。
 
 # Technique names containing a same-spelled different glossary term
-food_fight	Fight
-life_surge	Surge
-spiky_strike	Strike
-water_bullet	Bullet
-cat_cute_boulder	Boulder
-cat_precious_boulder	Boulder
-cat_sleek_boulder	Boulder
-cat_lightning_salamander	Salamander
-cat_proboscis	Proboscis
+food_fight	Fight	Fight 是招式 Food Fight 的组成词，不是同名独立招式。
+life_surge	Surge	Surge 是招式 Life Surge 的组成词，不是同名独立招式。
+spiky_strike	Strike	Strike 是招式 Spiky Strike 的组成词，不是同名独立招式。
+water_bullet	Bullet	Bullet 是招式 Water Bullet 的组成词，不是同名独立招式。
+cat_cute_boulder	Boulder	Boulder 是分类标签，不是同名招式。
+cat_precious_boulder	Boulder	Boulder 是分类标签，不是同名招式。
+cat_sleek_boulder	Boulder	Boulder 是分类标签，不是同名招式。
+cat_lightning_salamander	Salamander	Salamander 是分类标签，不是同名精灵。
+cat_proboscis	Proboscis	Proboscis 是分类标签，不是同名招式。
 
 # "Button Potion" is its own item name, not the Potion item
-spyder_dojo_fu3b	Potion
-spyder_dojo_fu3c	Potion
-spyder_dojo_fu3d	Potion
-spyder_dojo_fu_student1	Potion
-spyder_dojo_fu_student1c	Potion
-spyder_dojo_zhu3	Potion
-spyder_dojo_zhu3a	Potion
-spyder_dojo_xiang3	Potion
-spyder_dojo_xiang3a	Potion
-spyder_dojo_xiang3b	Potion
-spyder_dojo_xiang3c	Potion
-spyder_dojo_xiang3d	Potion
+spyder_dojo_fu3b	Potion	Button Potion 是剧情药剂名，不是普通 Potion 道具。
+spyder_dojo_fu3c	Potion	Button Potion 是剧情药剂名，不是普通 Potion 道具。
+spyder_dojo_fu3d	Potion	Button Potion 是剧情药剂名，不是普通 Potion 道具。
+spyder_dojo_fu_student1	Potion	Button Potion 是剧情药剂名，不是普通 Potion 道具。
+spyder_dojo_fu_student1c	Potion	Button Potion 是剧情药剂名，不是普通 Potion 道具。
+spyder_dojo_zhu3	Potion	Button Potion 是剧情药剂名，不是普通 Potion 道具。
+spyder_dojo_zhu3a	Potion	Button Potion 是剧情药剂名，不是普通 Potion 道具。
+spyder_dojo_xiang3	Potion	Button Potion 是剧情药剂名，不是普通 Potion 道具。
+spyder_dojo_xiang3a	Potion	Button Potion 是剧情药剂名，不是普通 Potion 道具。
+spyder_dojo_xiang3b	Potion	Button Potion 是剧情药剂名，不是普通 Potion 道具。
+spyder_dojo_xiang3c	Potion	Button Potion 是剧情药剂名，不是普通 Potion 道具。
+spyder_dojo_xiang3d	Potion	Button Potion 是剧情药剂名，不是普通 Potion 道具。
 
 # Dialogue uses the element word in a different sense / short menu labels
-spyder_dojo_orion2	Shadow
-menu_daycare_mode_empty	Empty
+spyder_dojo_orion2	Shadow	此处 shadow 是普通名词“阴影”，不是元素专名。
+menu_daycare_mode_empty	Empty	此处是空栏状态标签，不是同名菜单命令。
+empty_slot	Empty	此处 empty 是“空卡槽”的状态形容词，不是同名招式。
+exclawvate_description	Scoop	此处 scoop 是“铲起”的普通动词，不是公司专名。
+vividactil_description	Restoration	此处 restoration 是“恢复权威”的普通名词，不是道具名。
+potions_in_shop	Potion	此处泛指陈列柜里的各种药水，不特指 Potion 道具。
+maamiexist3	Ubuntu	此处 Ubuntu 是电脑操作系统，不是同名招式。
+spyder_dragonscave_tomas2	Hatchling	此处 hatchling dragon 是“幼龙”，不是同名精灵。
+spyder_leathershaft1_sign	Earth	此处 Earth 指地球，不是元素名。
+revive_description	Revive	此处 Revives 是“复活”的动词，不是 Revive 道具名。
+37707_computer	Tuxemon	此处 Tuxemon 是开发者项目名称，不是精灵泛称。
 
 # "Tuxemon" kept as Latin: game/mod proper name, not the creature generic
-water_campaign	Tuxemon
-water_ending4	Tuxemon
+water_campaign	Tuxemon	此处保留游戏作品名 Tuxemon，不指精灵泛称。
+water_ending4	Tuxemon	此处保留游戏作品名 Tuxemon，不指精灵泛称。
 
 # Case-insensitive matching (proper-noun categories): common-word senses
 # "pastry" the taste/texture word, not the Pastry item
-mille_feuille_description	Pastry
-pastry_description	Pastry
-taste_flakey_description	Pastry
+mille_feuille_description	Pastry	此处 pastry 是糕点类别，不是 Pastry 道具名。
+pastry_description	Pastry	此处 pastry 是糕点类别，不是 Pastry 道具名。
+taste_flakey_description	Pastry	此处 pastry 描述口感，不是 Pastry 道具名。
 # "feather" the common word in food names, not the Feather item
-rub_chicken_description	Feather
-ten_thousand_feathers	Feather
+rub_chicken_description	Feather	此处 feather 是食材描述，不是 Feather 道具名。
+ten_thousand_feathers	Feather	此处 feather 属于完整菜名，不是 Feather 道具名。
 # "potion" the common word (dojo de-evolution potion is its own thing)
-spyder_omnichannel3_spyderrookie	Potion
-spyder_dojo_fu3	Potion
-spyder_dojo_fu3a	Potion
+spyder_omnichannel3_spyderrookie	Potion	对白泛指药剂，不是 Potion 道具名。
+spyder_dojo_fu3	Potion	Button Potion 是剧情药剂名，不是普通 Potion 道具。
+spyder_dojo_fu3a	Potion	Button Potion 是剧情药剂名，不是普通 Potion 道具。
 # "kernel" the OS kernel, not the Kernel monster
-spyder_datacenter_bayliss1	Kernel
-spyder_datacenter_chomsky1	Kernel
-spyder_datacenter_lagrange2	Kernel
+spyder_datacenter_bayliss1	Kernel	此处是操作系统内核，不是同名精灵。
+spyder_datacenter_chomsky1	Kernel	此处是操作系统内核，不是同名精灵。
+spyder_datacenter_lagrange2	Kernel	此处是操作系统内核，不是同名精灵。

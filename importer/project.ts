@@ -6,7 +6,6 @@ import {
   loadAllFileEvents,
   loadAllMaps,
   MAPS_DIR,
-  parsePo,
   readCollisionCells,
   readCollisionRegions,
   TUXEMON_SRC,
@@ -181,7 +180,80 @@ const gameEvent = (value: FutureGameEvent): GameEvent => value;
 // ---------------------------------------------------------------------------
 // sources
 
-const po = parsePo(join(MAPS_DIR, "../l18n/en_US/LC_MESSAGES/base.po"));
+import {
+  IMPORT_UI,
+  createTextCatalog,
+  type ImportLang,
+  type TextCatalog,
+} from "./l10n.ts";
+
+// The active text catalog. en_US keeps the historical behavior; setImportLang
+// swaps in the merged zh_CN catalog (upstream zh + supplement + en fallback).
+let po: TextCatalog = createTextCatalog("en_US");
+let activeLang: ImportLang = "en_US";
+
+// Player-visible lines for the headless NPC-versus-NPC auto battle. Kept
+// local to the importer instead of IMPORT_UI so the zh_CN catalog merge in
+// importer/l10n.ts stays the single owner of translated content.
+const NPC_BATTLE_TEXT: Record<ImportLang, { label: (fighter: string, foe: string) => string; resolved: string }> = {
+  en_US: { label: (fighter, foe) => `[BATTLE] ${fighter} vs ${foe}`, resolved: "(auto-resolved)" },
+  zh_CN: { label: (fighter, foe) => `【对战】${fighter} 对 ${foe}`, resolved: "（自动结算）" },
+};
+
+// Lookup-context recording for the zh_CN fallback report. The catalog only
+// records which keys missed; these sets record where each key was looked up
+// so the report can say whether a missing key is real dialog, a choice
+// value, or a name lookup. Language-independent (the same events run in
+// both builds), so they accumulate across the en and zh builds.
+const dialogLookupKeys = new Set<string>();
+const choiceLookupKeys = new Set<string>();
+
+/** Swap the text catalog for a whole-project build. buildProject is
+ *  re-entrant, so a second build with another language follows in the same
+ *  process. */
+export function setImportLang(lang: ImportLang): void {
+  activeLang = lang;
+  po = createTextCatalog(lang);
+}
+
+export function importLang(): ImportLang {
+  return activeLang;
+}
+
+/** zh_CN builds only: keys that fell back to en_US, and keys absent from
+ *  every catalog (sorted). */
+export function importL10nGaps(): { fallbackKeys: string[]; missingKeys: string[] } {
+  return {
+    fallbackKeys: [...po.fallbackKeys].sort(),
+    missingKeys: [...po.missingKeys].sort(),
+  };
+}
+
+/** How a key absent from every catalog was used, for the fallback report. */
+export type MissingKeyCategory = "dialog" | "choice" | "name";
+
+/** Categorize a missing key by where it was looked up: real dialog
+ *  (translated_dialog/char_talk), a choice option value, or a name lookup
+ *  (map/NPC/monster/item names and descriptions). Battle-layer lookups are
+ *  always name lookups. A key used in several contexts is reported by its
+ *  most specific one (dialog > choice > name). */
+export function categorizeMissingKey(key: string): MissingKeyCategory {
+  if (dialogLookupKeys.has(key)) return "dialog";
+  if (choiceLookupKeys.has(key)) return "choice";
+  return "name";
+}
+
+/** Categorize a batch of missing keys, sorted by key. */
+export function categorizeMissingKeys(keys: readonly string[]): { key: string; category: MissingKeyCategory }[] {
+  return [...keys].sort().map((key) => ({ key, category: categorizeMissingKey(key) }));
+}
+
+/** The zh_CN l10n section of the import report: gaps plus per-key
+ *  categories so the coverage report can say what each missing key is. */
+function l10nReportSection() {
+  const gaps = importL10nGaps();
+  return { ...gaps, missingKeyCategories: categorizeMissingKeys(gaps.missingKeys) };
+}
 const allMaps = new Map(loadAllMaps().map((m) => [m.slug, m]));
 const FAINT_NOTICE_SWITCH = "sys.faint_notice";
 // GM1 fix 1: set by fadeout_music, cleared by play_music. Upstream clears
@@ -554,7 +626,7 @@ const worldDestroyItems: readonly WorldDestroyItem[] = [...itemDb.values()]
     return [{
       item: row.slug,
       targetSprite,
-      success: po.get(row.use_success ?? "") ?? row.use_success ?? `${row.slug} removed ${targetSprite}.`,
+      success: po.get(row.use_success ?? "") ?? row.use_success ?? IMPORT_UI[activeLang].itemRemoved(row.slug, targetSprite),
     }];
   })
   .sort((a, b) => a.item < b.item ? -1 : a.item > b.item ? 1 : 0);
@@ -1433,6 +1505,7 @@ function format(s: string, m: TuxMap): string {
  *  paginator), each page word-wrapped to 52 columns and cut into <=4-line
  *  boxes (the kit's text command limits). */
 function dialog(key: string, m: TuxMap): Command[] {
+  dialogLookupKeys.add(key);
   const raw = po.get(key);
   if (raw === undefined) { note("act", "translated_dialog(missing key)", "T4-dropped", "msgid absent from en_US"); return [{ op: "text", lines: [key.slice(0, 52)] }]; }
   const out: Command[] = [];
@@ -1447,7 +1520,7 @@ function enumChoice(options: readonly string[], variable: string): Command {
   const make = (remaining: readonly string[]): Command => {
     const take = remaining.length <= 4 ? remaining.length : 3;
     const page: { text: string; commands: Command[] }[] = remaining.slice(0, take).map((option) => ({
-      text: (po.get(option) ?? option).slice(0, 24) || option.slice(0, 24),
+      text: (choiceLookupKeys.add(option), po.get(option) ?? option).slice(0, 24) || option.slice(0, 24),
       commands: [{
         op: "variable" as const,
         id: varId(variable),
@@ -1455,7 +1528,7 @@ function enumChoice(options: readonly string[], variable: string): Command {
       }],
     }));
     if (take < remaining.length) {
-      page.push({ text: "Next >", commands: [make(remaining.slice(take))] });
+      page.push({ text: IMPORT_UI[activeLang].nextPage, commands: [make(remaining.slice(take))] });
     }
     return { op: "choices", prompt: "", options: page };
   };
@@ -1624,6 +1697,7 @@ function portalIdForAction(ctx: Readonly<Ctx>, action: Rule): string | null {
 }
 
 function shopPlaceholder(npc: string, menu: string, economySlug: string | undefined): Command[] {
+  const ui = IMPORT_UI[activeLang];
   const economy = economySlug ? economyDb.get(economySlug) : undefined;
   const wantsMonsters = menu.includes("monster");
   const stock = wantsMonsters ? economy?.monsters : economy?.items;
@@ -1633,22 +1707,12 @@ function shopPlaceholder(npc: string, menu: string, economySlug: string | undefi
   });
   const remainder = Math.max(0, (stock?.length ?? 0) - shown.length);
   const summary = shown.length
-    ? `Stock: ${shown.join(", ")}${remainder ? `, +${remainder} more` : ""}`
-    : `Stock: ${economy ? "none" : "economy unavailable"}`;
-  const menuLabel: Record<string, string> = {
-    buy_item: "Buy items",
-    sell_item: "Sell items",
-    both_item: "Buy/sell items",
-    buy_monster: "Buy monsters",
-    sell_monster: "Sell monsters",
-    both_monster: "Buy/sell monsters",
-    train_monster: "Train monsters",
-    heal_monster: "Heal monsters",
-  };
+    ? ui.shopStock(shown.join(", ") + (remainder ? ui.shopMore(remainder) : ""))
+    : economy ? ui.shopEmpty : ui.shopStock(ui.shopEconomyUnavailable);
   const lines = [
-    `[SHOP] ${npcName(npc)} — ${menuLabel[menu] ?? menu}`,
+    `${ui.shopLabel(npcName(npc))} — ${ui.shopMenu[menu] ?? menu}`,
     summary,
-    "(P1 placeholder; trading is unavailable.)",
+    ui.shopPlaceholderNote,
   ].flatMap((line) => wrap(line));
   const commands: Command[] = [];
   for (let i = 0; i < lines.length; i += 4) commands.push({ op: "text", lines: lines.slice(i, i + 4) });
@@ -1800,9 +1864,10 @@ function monsterShopScene(economy: EconomyRow): Command | null {
   } as Command;
 }
 
-function battlePlaceholder(opp: string, reason = "P1 placeholder: the player wins"): Command[] {
+function battlePlaceholder(opp: string, reason: string = IMPORT_UI[activeLang].battlePlaceholderReason): Command[] {
+  const ui = IMPORT_UI[activeLang];
   const body: Command[] = [
-    { op: "text", lines: [`[BATTLE] ${npcName(opp)}`.slice(0, 52), `(${reason})`.slice(0, 52)] },
+    { op: "text", lines: [ui.battleLabel(npcName(opp)).slice(0, 52), ui.paren(reason).slice(0, 52)] },
     { op: "switch", id: `bo.${opp}.won`, value: true },
     { op: "switch", id: `defeated.${opp}`, value: true },
     { op: "variable", id: `boc.${opp}.won`, set: { op: "add", value: 1 } },
@@ -1924,6 +1989,7 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
           const variable = g[1]!;
           const commonLabel = a.type === "choice_npc" && g[2] ? po.get(g[2]) ?? g[2] : undefined;
           const options = opts.map((option) => {
+            choiceLookupKeys.add(option);
             const own = po.get(option) ?? titleCase(option);
             // Upstream choice_npc shares one label across buttons and tells
             // options apart by per-option NPC pictures; the option's own
@@ -2484,9 +2550,10 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
           const fighter = g[0]!;
           const foe = g[1]!;
           noteAction(a, a.type, "T1-lowered", "NPC-versus-NPC battle auto-resolved with the battle rules and saved RNG; outcome recorded");
+          const npcBattleText = NPC_BATTLE_TEXT[activeLang];
           out.push({
             op: "text",
-            lines: [`[BATTLE] ${npcName(fighter)} vs ${npcName(foe)}`.slice(0, 52), "(auto-resolved)".slice(0, 52)],
+            lines: [npcBattleText.label(npcName(fighter), npcName(foe)).slice(0, 52), npcBattleText.resolved.slice(0, 52)],
           });
           out.push({ op: "ext", call: "tux.npc_battle", args: {
             fighter,
@@ -3889,7 +3956,14 @@ export interface ImportReport {
   format: "pocket-tuxemon/import-report/v1";
   source: {
     maps: "mods/tuxemon/maps";
-    locale: "en_US";
+    locale: ImportLang;
+  };
+  /** zh_CN builds only: catalog keys that fell back to en_US, and keys
+   *  absent from every catalog. */
+  l10n?: {
+    fallbackKeys: string[];
+    missingKeys: string[];
+    missingKeyCategories: { key: string; category: MissingKeyCategory }[];
   };
   options?: ImportOptions;
   maps: string[];
@@ -4380,7 +4454,8 @@ export function buildProject(
     },
     report: {
       format: "pocket-tuxemon/import-report/v1",
-      source: { maps: "mods/tuxemon/maps", locale: "en_US" },
+      source: { maps: "mods/tuxemon/maps", locale: activeLang },
+      ...(activeLang === "zh_CN" ? { l10n: l10nReportSection() } : {}),
       ...(Object.values(options).some(Boolean) ? { options } : {}),
       maps: [...want],
       schemaErrors,

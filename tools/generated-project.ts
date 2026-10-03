@@ -23,10 +23,11 @@ export function readInlineProject(root: string): Project {
   return JSON.parse(readFileSync(join(resolve(root), "dist/project.json"), "utf8")) as Project;
 }
 
-export function readShardedProject(root: string): GeneratedShardedProject {
+export function readShardedProject(root: string, lang: "en_US" | "zh_CN" = "en_US"): GeneratedShardedProject {
   const absolute = resolve(root);
+  const suffix = lang === "zh_CN" ? ".zh_CN" : "";
   const project = JSON.parse(
-    readFileSync(join(absolute, "dist/project-shell.json"), "utf8"),
+    readFileSync(join(absolute, `dist/project-shell${suffix}.json`), "utf8"),
   ) as ProjectShell;
   // The runtime trusts the shell's declared mapManifestHash, so every
   // tool/test that feeds a disk-read shell to the runtime verifies the

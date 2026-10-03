@@ -261,6 +261,38 @@ census.
 | Kind | Source type | Native | Degraded | Placeholder | Dropped | Total |
 |---|---|---:|---:|---:|---:|---:|
 ${rows("Condition", conditions.rows)}
+${l10nSection(report)}`;
+}
+
+/** zh_CN builds only: the catalog fallback accounting. */
+function l10nSection(report: ImportReport): string {
+  if (!report.l10n) return "";
+  const { fallbackKeys, missingKeys, missingKeyCategories } = report.l10n;
+  const list = (keys: readonly string[]): string => keys.length
+    ? keys.map((key) => `\`${key}\``).join(", ")
+    : "_None._";
+  const byCategory = (category: string): string[] =>
+    missingKeyCategories.filter((entry) => entry.category === category).map((entry) => entry.key);
+  const categoryLine = (label: string, category: string): string => {
+    const keys = byCategory(category);
+    return `  - ${label} (${keys.length}): ${list(keys)}`;
+  };
+  return `
+## zh_CN catalog
+
+Text source priority: upstream zh_CN community catalog → project supplement
+(\`l10n/zh_CN/supplement.po\`) → en_US fallback. Punctuation of upstream
+translations is normalized to Chinese convention next to CJK text; template
+tokens are untouched.
+
+- **${fallbackKeys.length} keys fell back to en_US** (untranslated): ${list(fallbackKeys)}
+- **${missingKeys.length} keys are absent from every catalog** (the importer
+  shows the raw key as fallback text). These keys do not exist in en_US
+  either, so the English build shows the raw key for the same lines; they
+  are upstream content gaps, not translation gaps:
+${categoryLine("real dialog (translated_dialog/char_talk)", "dialog")}
+${categoryLine("choice option values / passwords", "choice")}
+${categoryLine("map / NPC / monster / item name lookups", "name")}
 `;
 }
 

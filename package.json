@@ -75,7 +75,11 @@
     "tsc": "bunx tsc --noEmit",
     "build:psp": "bun tools/psp.ts",
     "verify:psp:journey": "bun tools/verify-psp-journey.ts",
-    "check:l10n": "bun tools/check-l10n.ts"
+    "check:l10n": "bun tools/check-l10n.ts",
+    "update:l10n-overrides": "bun tools/build-zh-overrides.ts",
+    "verify:web:zh": "bun tools/verify-web-zh.ts",
+    "font:cjk": "bun vendor/pocket-rpgkit/tools/cjk-font.ts --app=. --scan=dist/zh-text.txt",
+    "check:cjk": "bun vendor/pocket-rpgkit/tools/cjk-font.ts --app=. --scan=dist/zh-text.txt --check"
   },
   "devDependencies": {
     "@types/bun": "^1.2.0",

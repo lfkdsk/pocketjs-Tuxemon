@@ -12,6 +12,7 @@ import {
   resolveBattleDb,
   tuxemonExtensionState,
   type BattleDbSource,
+  type GameLang,
 } from "./extension.ts";
 import { createStorageSceneRules } from "./storage-scenes.ts";
 
@@ -209,6 +210,7 @@ function eagerIndex(source: BattleDb): JournalMonsterIndexEntry[] {
 export function createTuxemonScenes(
   source: BattleDbSource,
   suppliedIndex?: readonly JournalMonsterIndexEntry[],
+  lang: GameLang = "en_US",
 ): TuxemonSceneBundle {
   const index = suppliedIndex ? [...suppliedIndex] : eagerIndex(resolveBattleDb(source));
   const catalog: TuxemonSceneCatalog = {
@@ -224,8 +226,8 @@ export function createTuxemonScenes(
       [NAME_INPUT_SCENE_ID]: nameInputRules,
       [TUXEMON_JOURNAL_SCENE_ID]: journalRules(index),
       [TUXEMON_MONSTER_PICKER_SCENE_ID]: pickerRules(index),
-      [TUXEMON_DAYCARE_SCENE_ID]: createDaycareSceneRules(source, (slug) => names.get(slug) ?? slug),
-      ...createStorageSceneRules(source, (slug) => names.get(slug) ?? slug),
+      [TUXEMON_DAYCARE_SCENE_ID]: createDaycareSceneRules(source, (slug) => names.get(slug) ?? slug, lang),
+      ...createStorageSceneRules(source, (slug) => names.get(slug) ?? slug, lang),
     },
   };
 }

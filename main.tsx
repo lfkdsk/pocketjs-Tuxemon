@@ -1,5 +1,6 @@
 // @title Pocket Tuxemon — the imported Tuxemon world on Pocket RPG Kit
 import { gp1Mark } from "./ui/gp1-marks.ts";
+import { zhData } from "./ui/zh-data.ts";
 import {
   mount,
   fsHost,
@@ -34,9 +35,14 @@ import {
   TUXEMON_TRADE_SCENE_ID,
   TUXEMON_DAYCARE_SCENE_ID,
   TuxemonDaycareScene,
+  rawProjectZh,
 } from "./ui/gp1-data-stage.ts";
+import { canSwitchLang, detectLang } from "./ui/language.ts";
+import { setBattleSceneLang } from "./ui/battle-scene-locale.ts";
 import { createAnimatedProvider } from "./ui/animated-repository.ts";
 import { createSaveMenu } from "./ui/save-menu.tsx";
+import { createLangMenu } from "./ui/lang-menu.tsx";
+import { createCompositeOverlay } from "./ui/game-overlay.tsx";
 import { createNpcSrcProvider } from "./ui/npc-src-repository.ts";
 import { createTerrainStreamProvider } from "./ui/terrain-stream-repository.ts";
 import { createGameWorldAssetCache } from "./ui/world-cache.ts";
@@ -71,7 +77,13 @@ import { createGameEffects } from "./ui/weather-effects.tsx";
 // tools/bench-g6-quickjs.sh can read globalThis.__gp1Marks after boot and
 // report which startup stage — engine/kit bundle, JSON literals/module
 // init, battle-rule registration, or GameView mount — actually costs time.
-const project = rawProject as unknown as ProjectShell;
+// Both content languages ship in one bundle; the boot language (URL ?lang=,
+// the desktop lang.json, or localStorage) picks the shell and its shards.
+// A build without the zh_CN data (the English-only PSP package) boots in
+// English whatever the stored or requested language says.
+const lang = zhData.project ? detectLang() : "en_US";
+setBattleSceneLang(lang);
+const project = (lang === "zh_CN" ? rawProjectZh : rawProject) as unknown as ProjectShell;
 // splitProjectMaps/splitBattleRuntimeDb/splitAnimatedTiles/splitNpcSrc/
 // splitStreamRefs emit ASCII JSON. Desktop reads map entries through the
 // optional native UTF-8 text channel (KP2) and every other shard through
@@ -100,6 +112,7 @@ const initialTimeWeather = initialCivilTime === undefined
 const { extensions, rules, scenes, catalog } = createProductionTuxemonBattle(
   { read: readEntry },
   { initialTimeWeather },
+  lang,
 );
 gp1Mark("battle-registration");
 // Same reason: NPC_SRC's sprite-frame paths now live in dist/npc-src shards
@@ -161,16 +174,25 @@ const weatherOverlayEnabled = (globalThis as typeof globalThis & {
 // START opens the save/load menu. It is a GameView overlay: it reads and
 // replaces the live session through the overlay host, independent of the
 // demo menu on SELECT, and START does nothing while the demo menu is open.
+// The demo menu replays the English mainline tape; the Chinese build has no
+// recorded tape yet, so SELECT is dormant there.
 let demoMenu: GameViewDemoRuntime | null = null;
 const demoConfig = createDemo(createDemoOptions(readEntry));
-const demo: GameViewDemoConfig = {
+const demo: GameViewDemoConfig | undefined = lang === "en_US" ? {
   create(host) {
     demoMenu = demoConfig.create(host);
     return demoMenu;
   },
-};
+} : undefined;
+// The save/load menu (START) and the language switcher (R) share one
+// GameView overlay slot through the composite overlay. Each config wrapper
+// also captures its runtime so the weather overlay can suspend while either
+// menu is open. The language switcher is hidden on targets that cannot
+// persist a choice (PSP: no localStorage, no data.fs — the PSP build is
+// English-only).
+const langSwitchable = canSwitchLang();
 let saveMenuRuntime: GameViewDemoRuntime | null = null;
-const saveMenuConfig = createSaveMenu({ suspended: () => demoMenu?.isOpen() ?? false });
+const saveMenuConfig = createSaveMenu({ suspended: () => demoMenu?.isOpen() ?? false, lang });
 const baseSaveMenu: GameViewOverlayConfig = {
   create(host) {
     saveMenuRuntime = saveMenuConfig.create(host);
@@ -180,6 +202,15 @@ const baseSaveMenu: GameViewOverlayConfig = {
 const saveMenu = worldDiagnostics
   ? withWorldDiagnostics(baseSaveMenu, worldDiagnostics)
   : baseSaveMenu;
+let langMenuRuntime: GameViewDemoRuntime | null = null;
+const langMenuConfig = createLangMenu(lang);
+const langMenu: GameViewOverlayConfig = {
+  create(host) {
+    langMenuRuntime = langMenuConfig.create(host);
+    return langMenuRuntime;
+  },
+};
+const overlay = langSwitchable ? createCompositeOverlay(saveMenu, langMenu) : saveMenu;
 
 mount(() => (
   <>
@@ -221,14 +252,16 @@ mount(() => (
       }}
       choiceIcons={ChoiceIconBox}
       demo={demo}
-      overlay={saveMenu}
+      overlay={overlay}
       effects={Effects}
       theme={TUXEMON_UI_THEME}
     />
     {weatherOverlayEnabled && (
       <WeatherOverlay
         bridge={weatherBridge}
-        suspended={() => weatherOverlaySuspended(demoMenu, saveMenuRuntime)}
+        suspended={() =>
+          weatherOverlaySuspended(demoMenu, saveMenuRuntime)
+          || (langMenuRuntime?.isOpen() ?? false)}
       />
     )}
   </>

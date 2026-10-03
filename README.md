@@ -183,6 +183,73 @@ first battle, Route 1 — in headless Chrome against the built site
 (`bun tools/verify-web-journey.ts`) and checks every checkpoint's state and
 pixels against the goldens.
 
+## Chinese version (中文版)
+
+The game ships with a Simplified Chinese (zh_CN) build alongside English.
+Text is resolved from the reviewed corrections in
+`l10n/zh_CN/overrides.po`, then the upstream Tuxemon zh_CN community catalog,
+the project's machine-translated supplement (`l10n/zh_CN/supplement.po`), two
+importer labels, and finally the English source. Every one of the 5,370 English
+strings has a Chinese rendering. The complete 2,098-entry upstream review is
+recorded in `l10n/zh_CN/upstream-review.jsonl`; corrections retain their review
+category, reason and the exact English source snapshot. Punctuation is
+normalized to Chinese convention next to CJK text. The Noto Sans CJK subset
+covering exactly the characters the Chinese build uses is baked into the font
+atlases at build time.
+
+- **Web:** open the player with `?lang=zh`
+  (<https://lfkdsk.github.io/pocketjs-tuxemon/pocket-tuxemon/?lang=zh>), or
+  press **R** in the game to open the language switcher. The choice is
+  remembered in the browser, and the page reloads without the `lang`
+  parameter so the stored choice wins on the next boot (priority: URL
+  parameter > stored choice > English).
+- **Desktop:** `bun run desktop -- --lang zh` (or `--lang en`). The in-game
+  **R** switcher writes the choice to the app's data folder and asks for a
+  restart.
+- **Default:** English. The kit's own UI strings (save menu, on-screen
+  keyboard, demo controls) stay English for now; the Chinese build covers
+  game content — dialogue, choices, items, monsters, moves, battle menus,
+  storage/daycare/shop scenes.
+
+Saves record the language they were written with. Loading a save from the
+other language shows a bilingual "LANGUAGE MISMATCH / 语言不匹配" prompt
+(which language the save is in, how to switch) before any content check,
+instead of an "another build" error. The demo menu (SELECT) is
+English-only: its tape was recorded against the English opening. The
+Chinese opening has its own short smoke tape (`data/zh-smoke-journey.json`),
+replayed in headless Chrome by `bun run verify:web:zh`, which renders the
+expected text from the baked font atlas and matches its glyph mask against
+the screenshot (dialog lines, battle prompt and command labels), asserts
+strict catalog-exact pagination, and runs a mutation suite
+(`tools/verify-web-zh-mutants.ts`) proving each assertion catches the
+regression it targets.
+`bun run check:l10n` validates every catalog layer, correction annotation,
+placeholder and escaped newline, and enforces the glossary against the final
+merged text (with reasoned, key-specific exceptions). `bun run check:cjk`
+verifies glyph subset coverage.
+
+Known limitations:
+- Some dynamic text (dates, variables, monster names, and other
+  `${{...}}` templates) renders as `???` — the importer fills a handful of
+  templates (name, currency, map name, directions) and leaves the rest as
+  placeholders. This affects English and Chinese identically: 44 of the 46
+  `???` occurrences are such dynamic-template placeholders, compared per
+  entry (same event, same command position, same count) by
+  `tests/placeholder-parity.test.ts`. The other 2 are upstream's own literal
+  anonymous-speaker lines (`???: ...` in cotton_town), which the Chinese
+  build renders with full-width punctuation.
+- The battle menu is localized: root commands (Fight/Item/Forfeit/…), the
+  technique/item/party submenus, monster names, and the battle narration all
+  render in Chinese from the generated `data/battle-names.zh_CN.json` table.
+  Map names on the welcome sign fall back to their slug when the catalog has
+  no entry.
+- **PSP is English-only.** The PSP package does not include the CJK font
+  subset (the six baked font blobs would add ~4.4 MB of residency on top of
+  the Latin set, and the PSP allocator's power-of-two size classes push the
+  real cost to ~10.9 MB) or the zh_CN shards, and the language switcher is
+  hidden (PSP has no localStorage or data.fs to persist a choice). A Chinese
+  PSP build is deferred until the font residency is measured on device.
+
 ## Web demo controls
 
 The game has an in-game demo menu (**SELECT**) with three pages. The web

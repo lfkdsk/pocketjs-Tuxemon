@@ -22,7 +22,8 @@ import {
 import { pack, type PakBlob } from "../vendor/pocket-rpgkit/vendor/pocketjs/framework/compiler/pak.ts";
 import { PAK_DTYPE } from "../vendor/pocket-rpgkit/vendor/pocketjs/contracts/spec/spec.ts";
 import { decodePng } from "./png.ts";
-import { loadAllMaps, parsePo, TUXEMON_SRC, type Rule, type TuxEvent, type TuxMap } from "./source.ts";
+import { loadAllMaps, TUXEMON_SRC, type Rule, type TuxEvent, type TuxMap } from "./source.ts";
+import { createTextCatalog, type ImportLang, type TextCatalog } from "./l10n.ts";
 import {
   collectBattleArtRefs,
   validateBattleDb,
@@ -241,12 +242,19 @@ export interface BattleBuild {
   battleRepository: {
     pakEntries: Array<{ key: string; file: string }>;
   };
+  /** zh_CN builds only: catalog keys that fell back to en_US or are absent
+   *  from every catalog, across the battle name/description lookups. */
+  l10nGaps?: { fallbackKeys: string[]; missingKeys: string[] };
 }
 
 export interface BattleImportOptions {
   outputRoot: string;
   sourceRoot?: string;
   scope?: BattleScope;
+  /** Build the zh_CN variant: shards under dist/battle-zh/, shell named
+   *  battle-runtime-shell.zh_CN.json, names/descriptions from the merged
+   *  zh catalog. Art cooking is language-neutral and shared. */
+  lang?: ImportLang;
 }
 
 function object(value: unknown): Raw {
@@ -1088,7 +1096,7 @@ export interface SplitBattleRuntimeDb {
  * shell.json`) and resolves each shard entry from the pak/data.fs on first
  * use, so a played battle parses only the species/techniques it touches
  * instead of the whole database. */
-export function splitBattleRuntimeDb(db: BattleDb): SplitBattleRuntimeDb {
+export function splitBattleRuntimeDb(db: BattleDb, entryPrefix = "battle"): SplitBattleRuntimeDb {
   const tableEntries = <T>(
     table: Record<string, T>,
     prefix: string,
@@ -1096,7 +1104,7 @@ export function splitBattleRuntimeDb(db: BattleDb): SplitBattleRuntimeDb {
     const index: BattleRuntimeIndexEntry[] = [];
     const entries: SplitBattleRuntimeEntry[] = [];
     for (const slug of Object.keys(table).sort()) {
-      const path = `battle/${prefix}/${slug}.json`;
+      const path = `${entryPrefix}/${prefix}/${slug}.json`;
       const meta: BattleRuntimeIndexEntry = { id: slug, entry: path };
       index.push(meta);
       entries.push({ path, bytes: jsonBytes(table[slug]), meta });
@@ -1151,7 +1159,8 @@ export function writeBattleArtifacts(options: BattleImportOptions): BattleBuild 
     throw new Error(`battle importer: sourceRoot ${sourceRoot} must match TUXEMON_SRC ${normalize(TUXEMON_SRC)}`);
   }
   const tables = loadTables(sourceRoot);
-  const po = parsePo(join(sourceRoot, "mods/tuxemon/l18n/en_US/LC_MESSAGES/base.po"));
+  const lang: ImportLang = options.lang ?? "en_US";
+  const po: TextCatalog = createTextCatalog(lang);
   const selection = buildSelection(scope, tables, loadAllMaps(), sourceRoot);
   const battleDir = join(outputRoot, "assets/battle");
   const battlePakDir = join(outputRoot, "dist/battle-art");
@@ -1504,7 +1513,8 @@ export function writeBattleArtifacts(options: BattleImportOptions): BattleBuild 
   const dbData = jsonBytes(db);
   const runtimeDb = runtimeBattleDb(db);
   const runtimeDbData = jsonBytes(runtimeDb);
-  const split = splitBattleRuntimeDb(runtimeDb);
+  const zh = lang === "zh_CN";
+  const split = splitBattleRuntimeDb(runtimeDb, zh ? "battle-zh" : "battle");
   const blobs: PakBlob[] = cookedAssets.map((asset) => ({
     key: asset.pakKey,
     dtype: PAK_DTYPE.u8,
@@ -1547,23 +1557,33 @@ export function writeBattleArtifacts(options: BattleImportOptions): BattleBuild 
 
   mkdirSync(join(outputRoot, "data"), { recursive: true });
   mkdirSync(join(outputRoot, "ui"), { recursive: true });
-  writeFileSync(join(outputRoot, "data/battle-db.json"), dbData);
-  writeFileSync(join(outputRoot, "data/battle-runtime-db.json"), runtimeDbData);
-  writeFileSync(join(outputRoot, "data/battle-assets-report.json"), jsonBytes(report));
+  const suffix = zh ? ".zh_CN" : "";
+  writeFileSync(join(outputRoot, `data/battle-db${suffix}.json`), dbData);
+  writeFileSync(join(outputRoot, `data/battle-runtime-db${suffix}.json`), runtimeDbData);
+  writeFileSync(join(outputRoot, `data/battle-assets-report${suffix}.json`), jsonBytes(report));
+  // Localized display names for the battle scene's menus and narration,
+  // keyed by slug. Monster names come from the validated db; technique and
+  // item names resolve through the same catalog the dialogs use.
+  const battleNames = {
+    monsters: Object.fromEntries(Object.keys(db.monsters).sort().map((slug) => [slug, db.monsters[slug]!.name])),
+    techniques: Object.fromEntries(Object.keys(db.techniques).sort().map((slug) => [slug, po.get(slug) ?? slug])),
+    items: Object.fromEntries(Object.keys(db.items).sort().map((slug) => [slug, po.get(slug) ?? slug])),
+  };
+  writeFileSync(join(outputRoot, `data/battle-names${suffix}.json`), jsonBytes(battleNames));
   for (const asset of cookedAssets) {
     const path = join(outputRoot, asset.pakFile);
     mkdirSync(dirname(path), { recursive: true });
     writeFileSync(path, asset.encoded);
   }
   const dist = join(outputRoot, "dist");
-  const battleShardDir = join(dist, "battle");
+  const battleShardDir = join(dist, zh ? "battle-zh" : "battle");
   rmSync(battleShardDir, { recursive: true, force: true });
   for (const entry of split.entries) {
     const path = join(dist, entry.path);
     mkdirSync(dirname(path), { recursive: true });
     writeFileSync(path, entry.bytes);
   }
-  writeFileSync(join(dist, "battle-runtime-shell.json"), split.shellText);
+  writeFileSync(join(dist, zh ? "battle-runtime-shell.zh_CN.json" : "battle-runtime-shell.json"), split.shellText);
   const paths = [...cooker.assets.keys()].sort();
   const source = "// AUTO-GENERATED by gen-assets.ts — do not edit.\n" +
     "// Battle PNGs are preview/golden inputs only; runtime art is supplied as raw TILESET pak entries.\n" +
@@ -1578,6 +1598,12 @@ export function writeBattleArtifacts(options: BattleImportOptions): BattleBuild 
     battleRepository: {
       pakEntries: split.entries.map((entry) => ({ key: entry.meta.entry, file: `dist/${entry.path}` })),
     },
+    ...(zh ? {
+      l10nGaps: {
+        fallbackKeys: [...po.fallbackKeys].sort(),
+        missingKeys: [...po.missingKeys].sort(),
+      },
+    } : {}),
   };
 }
 

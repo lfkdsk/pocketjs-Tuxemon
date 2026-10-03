@@ -42,6 +42,10 @@ jobs:
         run: bunx tsc --noEmit
       - name: Two isolated imports are byte-identical
         run: bun run verify:g6:determinism
+      - name: zh_CN translation supplement checks
+        run: bun run check:l10n
+      - name: CJK subset covers every zh_CN character
+        run: bun run check:cjk
 
   test:
     name: Tests (${{ matrix.name }})
@@ -135,6 +139,8 @@ jobs:
         run: bun run web
       - name: Play the journey in headless Chrome
         run: bun tools/verify-web-journey.ts
+      - name: Play the zh_CN opening in headless Chrome
+        run: bun tools/verify-web-zh.ts
       - name: Play the demo controls in headless Chrome
         run: bun tools/verify-web-demo.ts
       - name: Keep the web site

@@ -20,6 +20,7 @@ import {
   pack,
   unpack,
 } from "../vendor/pocket-rpgkit/vendor/pocketjs/framework/compiler/pak.ts";
+import { checkExternalPak } from "./psp-external-check.ts";
 
 const args = new Set(process.argv.slice(2));
 const allowed = new Set(["--skip-assets", "--bench", "--journey", "--capture", "--help"]);
@@ -100,24 +101,58 @@ async function run(command: string[], env: Record<string, string> = {}): Promise
     stdout: "inherit",
     stderr: "inherit",
   });
-  if (await child.exited !== 0) process.exit(1);
+  // Throw (not process.exit) so the caller's finally block restores any
+  // swapped files (fonts.json, ui/zh-data.ts) before the process ends.
+  if (await child.exited !== 0) throw new Error(`psp build step failed: ${command.join(" ")}`);
 }
 
 if (!args.has("--skip-assets")) await run([join(root, "gen-assets.ts")]);
-await run([
-  join(framework, "tools/pocket.ts"),
-  "compile",
-  "--target",
-  "psp",
-  "--outdir",
-  out,
-]);
+
+// The PSP package is English-only: bake fonts without the CJK fallback (the
+// subset's ~4.4 MiB of glyphs would not fit the PSP's residency budget) and
+// drop the zh_CN shards from the external pak. Swap fonts.json AND the
+// zh_CN data module around the compile so the desktop/web builds keep their
+// CJK coverage and their zh_CN content.
+const fontsJsonPath = join(root, "fonts.json");
+const savedFontsJson = readFileSync(fontsJsonPath, "utf8");
+const englishOnlyFonts = JSON.stringify({ fallback: [], characterFiles: [] }, null, 2) + "\n";
+writeFileSync(fontsJsonPath, englishOnlyFonts);
+// The three zh_CN JSON blobs (project shell ~206 KB, battle runtime shell
+// ~259 KB, battle names ~20 KB) are statically imported through ui/zh-data.ts;
+// swapping it for the English-only stub keeps them out of the PSP JS bundle.
+const zhDataPath = join(root, "ui", "zh-data.ts");
+const savedZhData = readFileSync(zhDataPath, "utf8");
+const stubZhData = readFileSync(join(root, "tools", "psp-stubs", "zh-data.ts"), "utf8");
+writeFileSync(zhDataPath, stubZhData);
+try {
+  await run([
+    join(framework, "tools/pocket.ts"),
+    "compile",
+    "--target",
+    "psp",
+    "--outdir",
+    out,
+  ]);
+} finally {
+  writeFileSync(fontsJsonPath, savedFontsJson);
+  writeFileSync(zhDataPath, savedZhData);
+}
 
 const pakPath = join(out, "pocket-tuxemon.pak");
 const fullPak = readFileSync(pakPath);
-copyFileSync(pakPath, join(out, "assets.pak"));
-const dataOffset = fullPak.readUInt32LE(20);
-if (dataOffset <= 24 || dataOffset > fullPak.length) {
+// The external assets.pak carries everything the embedded boot pak does not;
+// strip the zh_CN shards so the PSP download stays English-only.
+const externalEntries = unpack(fullPak).filter((entry) =>
+  !entry.key.includes("zh_CN") && !entry.key.startsWith("battle-zh/") && !entry.key.startsWith("maps-zh/")
+  && !entry.key.startsWith("license:NotoSansCJK")
+);
+// The sidecar and its embedded index MUST be built from the SAME filtered
+// entry list: the PSP host (pak_external.rs) rejects a sidecar whose length
+// or byte-for-byte index prefix does not match the embedded directory.
+const externalPak = pack(externalEntries);
+writeFileSync(join(out, "assets.pak"), externalPak);
+const dataOffset = new DataView(externalPak.buffer, externalPak.byteOffset, externalPak.byteLength).getUint32(20, true);
+if (dataOffset <= 24 || dataOffset > externalPak.length) {
   throw new Error(`PSP external pak has an invalid data offset: ${dataOffset}`);
 }
 const bootEntries = unpack(fullPak).filter((entry) =>
@@ -127,12 +162,18 @@ if (bootEntries.length === 0) throw new Error("PSP external pak contains no boot
 bootEntries.push({
   key: "pocket:external-index",
   dtype: 0,
-  data: fullPak.subarray(0, dataOffset),
+  data: externalPak.subarray(0, dataOffset),
 });
 writeFileSync(pakPath, pack(bootEntries));
 console.log(
-  `PSP: ${fullPak.length} bytes external, ${readFileSync(pakPath).length} bytes embedded`,
+  `PSP: ${externalPak.length} bytes external, ${readFileSync(pakPath).length} bytes embedded`,
 );
+
+// Self-check: the embedded index must satisfy the PSP host's acceptance rules
+// (declared length == sidecar length; index is a byte-for-byte prefix of the
+// sidecar), and one map, one audio and one battle entry must be readable
+// through the host's binary-search + read_at path.
+checkExternalPak(out);
 
 let journeyBuildId: string | undefined;
 if (args.has("--journey")) {

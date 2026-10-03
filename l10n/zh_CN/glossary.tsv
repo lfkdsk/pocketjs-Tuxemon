@@ -251,7 +251,7 @@ Noctalo	诺克塔洛	monster	upstream
 Noctula	夜图拉	monster	upstream
 Nostray	灵鼻兽	monster	upstream
 Novaquarius	新水瓶	monster	supplement
-Nudiflot	浮蛞蝓♂	monster	upstream
+Nudiflot	浮蛞蝓	monster	upstream
 Nudikill	努迪基尔	monster	upstream
 Nudimind	思蛞蝓	monster	upstream
 Nuenflu	纽恩菲	monster	upstream
@@ -695,11 +695,11 @@ Ancient Tea	远古茶	item	supplement
 Ancient Tuxeball	远古精灵球	item	supplement
 Antidote Grapes	解毒葡萄	item	supplement
 Archeologist's Sensor	考古学家传感器	item	supplement
-Badge: Greenwash	徽章：漂绿	item	upstream
-Badge: Nimrod	徽章：宁录	item	upstream
+Badge: Greenwash	徽章：格林沃什	item	supplement
+Badge: Nimrod	徽章：尼姆罗德	item	supplement
 Badge: Omnichannel	徽章：全能公司	item	upstream
 Badge: Scoop	徽章：斯考普	item	upstream
-Badge: Shaft	徽章：沙弗特	item	upstream
+Badge: Shaft	徽章：沙夫特	item	supplement
 Bank App	手机银行	item	upstream
 Beastmoss	兽苔	item	supplement
 Bio-Sample	生物样本	item	supplement
@@ -800,7 +800,7 @@ Neuter Tuxeball	中性精灵球	item	supplement
 Noble Tuxeball	高贵精灵球	item	supplement
 Nocturnal Tuxeball	夜行精灵球	item	supplement
 Normal Berry	普通浆果	item	supplement
-Nu Phone	新手机	item	supplement
+Nu Phone	Nu 手机	item	supplement
 Omni Tuxeball	全能精灵球	item	supplement
 Open Hand	开掌	item	supplement
 Ox Stick	牛杖	item	supplement
@@ -933,16 +933,16 @@ Prof. Kay Wren	凯·雷恩	npc	upstream
 Professor	教授	npc	upstream
 Red	小赤	npc	upstream
 Taba Nurse	塔巴护士	npc	upstream
-Team Xero Grunt I	Xero Grunt I团队	npc	upstream
-Team Xero Grunt II	Xero Grunt I团队	npc	upstream
-Team Xero Grunt III	Xero Grunt I团队	npc	upstream
-Team Xero Grunt IV	Xero Grunt I团队	npc	upstream
-Team Xero Grunt IX	Xero Grunt I团队	npc	upstream
-Team Xero Grunt V	Xero Grunt I团队	npc	upstream
-Team Xero Grunt VI	Xero Grunt I团队	npc	upstream
-Team Xero Grunt VII	Xero Grunt I团队	npc	upstream
-Team Xero Grunt VIII	Xero Grunt I团队	npc	upstream
-Team Xero Grunt X	Xero Grunt I团队	npc	upstream
+Team Xero Grunt I	Xero 队员 I	npc	supplement
+Team Xero Grunt II	Xero 队员 II	npc	supplement
+Team Xero Grunt III	Xero 队员 III	npc	supplement
+Team Xero Grunt IV	Xero 队员 IV	npc	supplement
+Team Xero Grunt IX	Xero 队员 IX	npc	supplement
+Team Xero Grunt V	Xero 队员 V	npc	supplement
+Team Xero Grunt VI	Xero 队员 VI	npc	supplement
+Team Xero Grunt VII	Xero 队员 VII	npc	supplement
+Team Xero Grunt VIII	Xero 队员 VIII	npc	supplement
+Team Xero Grunt X	Xero 队员 X	npc	supplement
 Timmy	蒂米	npc	supplement
 Tuxemart Shopkeeper	Tuxemart 店主	npc	upstream
 Zircon	泽康	npc	supplement
@@ -1011,3 +1011,5 @@ Tuxemon	精灵	other	upstream
 Rutherford	卢瑟福	npc	upstream
 Team Bazaar	芭莎团队	other	upstream
 Orion	奥赖恩	npc	supplement
+Daycare	寄养中心	other	supplement
+Piper	派珀	npc	supplement

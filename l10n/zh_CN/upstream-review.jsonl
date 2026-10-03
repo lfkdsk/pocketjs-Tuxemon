@@ -1,0 +1,2098 @@
+{"msgid":"37707_computer","category":"style","action":"override","reason":"the upstream translation inserts an extra literal newline and uses several stiff or ambiguous technical phrases","translation":"开发者控制台：此功能仅供 Tuxemon 开发者测试实验性数据加载系统。\\n现在将启用新加载器变量。请把发现的问题报告至 https://tuxemon.org\\n开发者说明 1：这会防止缺少地图时游戏崩溃。系统可能会尝试加载无效数据！\\n开发者说明 2：启用此功能时请勿保存游戏，否则可能导致数据损坏。\\n开发者说明 3：自切换至 Python 3 后，数据似乎以一种非常反常的方式聚合并合并。请调试此问题！"}
+{"msgid":"37707_exit_missing","category":"style","action":"override","reason":"the upstream translation adds two literal line breaks inside sentences and reads mechanically","translation":"<recovery_module>：你好，${{name}}。请理解，这个区域从未存在过。你遇到了系统错误。\\n<recovery_module>：故障现已修复。你可以从这里继续正常游戏。不要试图回到这里。\\n<recovery_module>：醒来。忘掉一切。一切不过是一场梦……"}
+{"msgid":"37707_flower","category":"style","action":"override","reason":"the upstream translation inserts a literal newline into a one-line source sentence","translation":"你感觉到这朵花散发出一股温暖的能量。这是镇上唯一让你的精灵感到愉快的东西。"}
+{"msgid":"37707_flower_missing","category":"ok","action":"keep"}
+{"msgid":"37707_house","category":"ok","action":"keep"}
+{"msgid":"37707_house_missing","category":"ok","action":"keep"}
+{"msgid":"37707_mail","category":"ok","action":"keep"}
+{"msgid":"37707_mail_missing","category":"ok","action":"keep"}
+{"msgid":"37707_sign_foreign","category":"style","action":"keep","reason":"‘sign’ is rendered as the generic 标志 rather than a natural in-world notice, but the meaning remains clear"}
+{"msgid":"37707_sign_hidden","category":"style","action":"override","reason":"the current word order is awkward and weakens the warning","translation":"趁你还能离开，快出去……"}
+{"msgid":"37707_sign_missing_foreign","category":"omission","action":"override","reason":"the instruction to notify the developers is left in English","translation":"PyGame - UnboundLocalError：局部变量 'map_id' 在赋值前被引用\\n错误 404：**** 资源未找到。请将此问题告知开发者。\\n01010010 01100101 01101101 01100101 01101101 01100010 01100101 01110010 00100000 01101101 01100101 00101110"}
+{"msgid":"37707_sign_missing_hidden_read","category":"mistranslation","action":"override","reason":"READ is translated as ‘saw’, losing the sign's direct warning","translation":"我们知道你读了这个：我们已经警告过你了。"}
+{"msgid":"37707_sign_missing_hidden_unread","category":"mistranslation","action":"override","reason":"‘too late’ is mistranslated as ‘too far/off-center’","translation":"现在已经太迟了"}
+{"msgid":"37707_sign_missing_tower","category":"ok","action":"keep"}
+{"msgid":"37707_sign_missing_welcome","category":"ok","action":"keep"}
+{"msgid":"37707_sign_tower","category":"ok","action":"keep"}
+{"msgid":"37707_sign_welcome","category":"ok","action":"keep"}
+{"msgid":"37707_tower_missing","category":"ok","action":"keep"}
+{"msgid":"37707_villager_female_1","category":"style","action":"override","reason":"the speaker name is rendered four different ways and four extra literal newlines break the dialogue","translation":"薇希：哦……一个新来的人！你是怎么到这里的？我们已经很久没见过新人了……哦，算了。\\n薇希：欢迎！欢迎来到……哦，天哪：我们一直没顾上给小镇取名字！我想，你愿意叫我们什么就叫什么吧。\\n薇希：请把这里当成自己家。平时周围的人会多一些……这取决于随机种子，也许今天是不祥之兆。\\n薇希：如果你需要这里确实存在的任何东西，就告诉我。千万别犯其他人犯过的错误：我们不希望你也离开我们。"}
+{"msgid":"37707_villager_female_2","category":"mistranslation","action":"override","reason":"the speaker name Wish is mistranscribed and the plea is punctuated unnaturally","translation":"薇希：求你了：不要进入那座塔。它还没有建好。"}
+{"msgid":"37707_villager_female_3","category":"mistranslation","action":"override","reason":"the speaker name is mistranscribed and the final question is duplicated","translation":"薇希：不，不，不：别再这样了！你不明白那里根本不存在吗？"}
+{"msgid":"37707_villager_female_missing","category":"mistranslation","action":"override","reason":"the final corrupted warning is replaced by an unrelated sentence, and the translation adds two literal newlines","translation":"@*!^：哦……一个新人！你是怎么到这里的？<NONE> 已经很久没见过%^&新人了……哦，永远、永远、永远别————介意\\n@*!^：欢迎！欢迎来到……哦 N/A：我们一直没顾上给小镇取{<1}。我们从来没有{<2}。我们从未建造过这座小镇\\n这 里 根 本 不 存 在 你 已 连 接 至 虚 空 你 必 须 马 上 离 开"}
+{"msgid":"37707_villager_male_1","category":"style","action":"override","reason":"three extra literal newlines split sentences and the speaker label/punctuation is inconsistent","translation":"无名者：哼。你好。抱歉：我们通常对外来者心存戒备。只是偶尔……才会有人来访。\\n无名者：不过既然你来了，也许能帮我一个忙。这样问可能很奇怪，但我必须知道……\\n无名者：你知道我是谁吗？你……以前见过我吗？我很好奇：我的名字，我有没有一个……\\n无名者：不。抱歉：我弄错了。请不要把我问过你的事告诉任何人。继续吧，祝你在这里旅途愉快。"}
+{"msgid":"37707_villager_male_2","category":"ok","action":"keep"}
+{"msgid":"37707_villager_male_3","category":"mistranslation","action":"override","reason":"‘doom us all’ is weakened to merely putting the group in difficulty","translation":"无名者：你……你会让我们再次万劫不复。回去，永远别再回来！"}
+{"msgid":"37707_villager_male_missing","category":"ok","action":"keep"}
+{"msgid":"Cathedral_Center","category":"ok","action":"keep"}
+{"msgid":"Cotton_Mart","category":"glossary","action":"override","reason":"Scoop must be 斯考普, not the literal 勺子","translation":"来斯考普商店，掌握独家消息！"}
+{"msgid":"Kennel","category":"mistranslation","action":"override","reason":"Shelter is mistranslated as a warehouse","translation":"收容所"}
+{"msgid":"_birbrobo","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"_chromerobo","category":"ok","action":"keep"}
+{"msgid":"_darkrobo","category":"ok","action":"keep"}
+{"msgid":"_mk01alpha","category":"glossary","action":"override","reason":"the glossary specifies MK01 阿尔法","translation":"MK01 阿尔法"}
+{"msgid":"_mk01beta","category":"glossary","action":"override","reason":"the glossary specifies Mk01测试版","translation":"Mk01测试版"}
+{"msgid":"_xeon","category":"ok","action":"keep"}
+{"msgid":"_xeon-2","category":"ok","action":"keep"}
+{"msgid":"a_serious_discussion","category":"style","action":"override","reason":"an extra literal newline breaks the first sentence and several phrases are stiff or ambiguous","translation":"我已经观察你一段时间了，很高兴我的追随者毫发无伤地把你抓了过来。\\n哦，我的礼貌哪去了！\\n我是米萨，Xero 精灵研究与发展研究所的首席负责人。\\n你叫什么名字来着？\\n……  ……  ……\\n${{name}}？\\n对一个非法拥有精灵的人来说，这名字可不怎么样。"}
+{"msgid":"aardart","category":"ok","action":"keep"}
+{"msgid":"aardart_description","category":"ok","action":"keep"}
+{"msgid":"aardorn","category":"ok","action":"keep"}
+{"msgid":"aardorn_description","category":"mistranslation","action":"override","reason":"‘eat its way out’ is rendered as simply continuing to eat, omitting the escape","translation":"出生后，它会被放进蚁丘，靠一路啃食自己钻出来。"}
+{"msgid":"abesnaki","category":"ok","action":"keep"}
+{"msgid":"abesnaki_description","category":"style","action":"keep","reason":"‘dead language’ is rendered literally as 死亡语言 rather than an extinct language"}
+{"msgid":"acid","category":"ok","action":"keep"}
+{"msgid":"action_call","category":"ok","action":"keep"}
+{"msgid":"adamantine","category":"ok","action":"keep"}
+{"msgid":"aeble","category":"ok","action":"keep"}
+{"msgid":"aether","category":"ok","action":"keep"}
+{"msgid":"agnidon","category":"ok","action":"keep"}
+{"msgid":"agnidon_description","category":"ok","action":"keep"}
+{"msgid":"agnigon","category":"ok","action":"keep"}
+{"msgid":"agnigon_description","category":"style","action":"keep","reason":"‘line of ancient reptiles’ is translated mechanically as a ‘series’"}
+{"msgid":"agnite","category":"ok","action":"keep"}
+{"msgid":"agnite_description","category":"mistranslation","action":"override","reason":"‘keep its fire in check’ is mistranslated as controlling cooking heat","translation":"它很贪玩，但必须从小教会它控制火焰。"}
+{"msgid":"air_chain","category":"ok","action":"keep"}
+{"msgid":"alert_text","category":"ok","action":"keep"}
+{"msgid":"all_in","category":"ok","action":"keep"}
+{"msgid":"allagon","category":"ok","action":"keep"}
+{"msgid":"allagon_description","category":"style","action":"override","reason":"‘will be violent to retrieve them’ is rendered with an unnatural verb-object construction","translation":"祖先遗留的金属所制成的遗物会吸引阿拉贡；为了夺回这些遗物，它们会不惜使用暴力。"}
+{"msgid":"allie","category":"ok","action":"keep"}
+{"msgid":"allies_address","category":"ok","action":"keep"}
+{"msgid":"allies_address_description","category":"glossary","action":"override","reason":"Cotton Town and Omnichannel must be 暖棉镇 and 全能公司","translation":"暖棉镇全能公司大厦 2 栋 31 室\\n\\n地址旁边有一个吻痕"}
+{"msgid":"allofyounow","category":"ok","action":"keep"}
+{"msgid":"allow_evolution","category":"ok","action":"keep"}
+{"msgid":"altie","category":"ok","action":"keep"}
+{"msgid":"altie_description","category":"glossary","action":"override","reason":"ALTIE must use its glossary rendering 阿尔蒂 rather than remain untranslated","translation":"阿尔蒂乘着气泡飘落到地面。如今气泡已经破裂，它最多只能在离地几米的空中漂浮。"}
+{"msgid":"amnesia","category":"ok","action":"keep"}
+{"msgid":"angrito","category":"ok","action":"keep"}
+{"msgid":"angrito_description","category":"ok","action":"keep"}
+{"msgid":"announcement1","category":"glossary","action":"override","reason":"Fondent Region must be 方登地区","translation":"方登地区的公民们，你们好！\\n感谢各位收听这则强制公告。"}
+{"msgid":"announcement2","category":"omission","action":"override","reason":"the addressee Able/Aeble is omitted","translation":"我们爱你，艾布尔！"}
+{"msgid":"announcement3","category":"style","action":"keep","reason":"the first sentence lacks closing punctuation before the literal newline, making the two beats run together"}
+{"msgid":"announcement4","category":"glossary","action":"override","reason":"Fondent Region and Aeble conflict with glossary renderings, and an extra literal newline breaks the sentence","translation":"欢迎方登地区内外所有正在收听的公民。\\n我叫艾布尔，想知道拼法的人请注意，是 A-E-B-L-E；我是全能公司的首席执行官！"}
+{"msgid":"announcement5","category":"glossary","action":"override","reason":"Fondent Region and the final Omnichannel slogan conflict with glossary renderings","translation":"方登地区能迎来如今的和平与安宁，经历了一段漫长而艰苦的历程。\\n然而，我很荣幸在今天——全能公司成立二十五周年纪念日——宣布……\\n精灵已经得到控制！\\n*震耳欲聋的尖叫声*\\n安静！安静！不得不说，你们的热情真有感染力！\\n通过与 Xero 研究所合作，我们已经消除了它们的攻击意愿！\\n因此，我们有信心把精灵放归野外是安全的。\\n不过，宵禁仍须执行，毕竟我们不是一个无法无天的地区。\\n毕竟……我们就是安全，我们就是秩序，我们就是全能公司！"}
+{"msgid":"anoleaf","category":"ok","action":"keep"}
+{"msgid":"anoleaf_description","category":"ok","action":"keep"}
+{"msgid":"anteater","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"ants","category":"ok","action":"keep"}
+{"msgid":"anu","category":"ok","action":"keep"}
+{"msgid":"anu_description","category":"ok","action":"keep"}
+{"msgid":"apeoro","category":"ok","action":"keep"}
+{"msgid":"apeoro_description","category":"style","action":"keep","reason":"‘live on’ is translated literally as ‘continue living’, producing stiff prose"}
+{"msgid":"app_banking","category":"ok","action":"keep"}
+{"msgid":"app_banking_description","category":"drift","action":"override","reason":"the Chinese text still mentions sufficient signal and repeats access-anywhere wording absent from the current English","translation":"只要身处城镇，就可以在这里存取资金。"}
+{"msgid":"app_contacts","category":"ok","action":"keep"}
+{"msgid":"app_contacts_description","category":"ok","action":"keep"}
+{"msgid":"app_map","category":"ok","action":"keep"}
+{"msgid":"app_map_description","category":"ok","action":"keep"}
+{"msgid":"app_tuxepedia","category":"ok","action":"keep"}
+{"msgid":"app_tuxepedia_description","category":"ok","action":"keep"}
+{"msgid":"apple","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"apple_description","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"araignee","category":"ok","action":"keep"}
+{"msgid":"araignee_description","category":"style","action":"keep","reason":"‘pedants’ is softened to generic scholars, losing the teasing tone"}
+{"msgid":"arcane_eye","category":"ok","action":"keep"}
+{"msgid":"arthrobolt","category":"ok","action":"keep"}
+{"msgid":"arthrobolt_description","category":"ok","action":"keep"}
+{"msgid":"assault","category":"ok","action":"keep"}
+{"msgid":"attack_effective","category":"mistranslation","action":"override","reason":"battle damage is mistranslated as destruction","translation":"这次攻击造成了额外伤害！"}
+{"msgid":"attack_resisted","category":"style","action":"override","reason":"the passive phrase 被抵抗了 is unnatural battle UI Chinese","translation":"这次攻击遭到了抵抗！"}
+{"msgid":"attack_very_effective","category":"mistranslation","action":"override","reason":"battle damage is mistranslated as destruction","translation":"这次攻击造成了大量额外伤害！"}
+{"msgid":"attack_weak","category":"ok","action":"keep"}
+{"msgid":"attacks_rose","category":"ok","action":"keep"}
+{"msgid":"attempting_capture","category":"ok","action":"keep"}
+{"msgid":"av8r","category":"ok","action":"keep"}
+{"msgid":"av8r_description","category":"ok","action":"keep"}
+{"msgid":"avalanche","category":"ok","action":"keep"}
+{"msgid":"axolightl","category":"ok","action":"keep"}
+{"msgid":"axolightl_description","category":"ok","action":"keep"}
+{"msgid":"b_ver_1","category":"ok","action":"keep"}
+{"msgid":"b_ver_1_description","category":"mistranslation","action":"override","reason":"the translation says ‘something for when you need to be bitten’ rather than making a robot bite something","translation":"它专为那些需要让某样东西被机器人咬上一口的场合而设计。"}
+{"msgid":"backstory","category":"glossary","action":"override","reason":"Omnichannel and Spyder are rendered inconsistently instead of 全能公司 and 斯派德","translation":"大约三十年前，一个名为全能公司的团体开始控制媒体。\\n不久之后，言论自由几乎不复存在。\\n于是，人们开始用精灵传递消息、解决争端。\\n大约十年前，对精灵的镇压开始了。\\n如今，只有获得许可的人才能拥有和饲养精灵。\\n我的团体使用精灵进行研究，所以我们每个人都有精灵。\\n你很特别，因为你没有得到全能公司的许可。\\n你也许就是我们一直在等待的训练师。\\n全能公司固然冷酷无情，却不是我们在这里面临的唯一威胁。\\n还有一个名叫斯派德的组织。\\n你不必太担心他们，他们在这一带并不活跃。\\n现在，我们会送你回去继续旅程。\\n但前提是你同意帮助我们对抗全能公司。\\n否则，我们会亲自向全能公司举报你。\\n而你将失去一切。\\n我们一直在注视着你。"}
+{"msgid":"backstory9","category":"ok","action":"keep"}
+{"msgid":"bamboon","category":"ok","action":"keep"}
+{"msgid":"bamboon_description","category":"ok","action":"keep"}
+{"msgid":"bank","category":"ok","action":"keep"}
+{"msgid":"banling","category":"ok","action":"keep"}
+{"msgid":"banling_description","category":"ok","action":"keep"}
+{"msgid":"baobaraffe","category":"ok","action":"keep"}
+{"msgid":"baobaraffe_description","category":"style","action":"keep","reason":"the closing phrase 当它没有水储存时 is mechanically ordered"}
+{"msgid":"baoby","category":"ok","action":"keep"}
+{"msgid":"baoby_description","category":"glossary","action":"override","reason":"the explicit BAOBY name is reduced to a pronoun instead of the glossary rendering 小粽树鹿","translation":"它们从一条河走到另一条河，寻找可供饮用和储存的水。它头顶叶片般的角里藏着能够活动的尖端，作用类似探水杖。干旱时，许多生物都会跟随小粽树鹿。"}
+{"msgid":"barking","category":"ok","action":"keep"}
+{"msgid":"battery_acid","category":"ok","action":"keep"}
+{"msgid":"battery_discharge","category":"ok","action":"keep"}
+{"msgid":"beam","category":"ok","action":"keep"}
+{"msgid":"beenstalker","category":"ok","action":"keep"}
+{"msgid":"beenstalker_description","category":"style","action":"keep","reason":"‘lacks in sense’ is translated as lacking sanity, which is stronger and less natural in context"}
+{"msgid":"berry","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"berry_description","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"berserk","category":"ok","action":"keep"}
+{"msgid":"bigfin","category":"ok","action":"keep"}
+{"msgid":"bigfin_description","category":"style","action":"keep","reason":"‘go underwater’ is rendered mechanically as walking toward underwater"}
+{"msgid":"birdling","category":"ok","action":"keep"}
+{"msgid":"birdling_description","category":"style","action":"keep","reason":"the final pronoun makes it unclear what the guarded egg is more important than"}
+{"msgid":"biting_winds","category":"ok","action":"keep"}
+{"msgid":"black_female","category":"ok","action":"keep"}
+{"msgid":"black_male","category":"ok","action":"keep"}
+{"msgid":"blade","category":"ok","action":"keep"}
+{"msgid":"blinded","category":"mistranslation","action":"override","reason":"the combat status means physically blinded, not deceived or hoodwinked","translation":"失明"}
+{"msgid":"blood_bond","category":"ok","action":"keep"}
+{"msgid":"blood_nets","category":"ok","action":"keep"}
+{"msgid":"blossom","category":"ok","action":"keep"}
+{"msgid":"bobtalk","category":"ok","action":"keep"}
+{"msgid":"bolt","category":"ok","action":"keep"}
+{"msgid":"bolt_description","category":"glossary","action":"override","reason":"NUT must be 螺母兽, not the generic 螺母","translation":"螺栓兽在场时，会让螺母兽咬合得更紧，并迸发出更多能量。"}
+{"msgid":"boltnu","category":"ok","action":"keep"}
+{"msgid":"boltnu_description","category":"mistranslation","action":"override","reason":"ground is changed to grassland, and the sentence remains mechanically structured","translation":"它大部分时间都在地里挖洞；钻入土壤时持续不断的震动和运动，总让它晕头转向。"}
+{"msgid":"booster_tech","category":"ok","action":"keep"}
+{"msgid":"booster_tech_description","category":"ok","action":"keep"}
+{"msgid":"botbot","category":"ok","action":"keep"}
+{"msgid":"botbot_description","category":"ok","action":"keep"}
+{"msgid":"bothofyou","category":"ok","action":"keep"}
+{"msgid":"boulder","category":"ok","action":"keep"}
+{"msgid":"boxali","category":"ok","action":"keep"}
+{"msgid":"boxali_description","category":"ok","action":"keep"}
+{"msgid":"breath","category":"ok","action":"keep"}
+{"msgid":"breathe_fire","category":"ok","action":"keep"}
+{"msgid":"brewdin","category":"ok","action":"keep"}
+{"msgid":"brewdin_description","category":"ok","action":"keep"}
+{"msgid":"brideswood","category":"ok","action":"keep"}
+{"msgid":"brokethegasp","category":"ok","action":"keep"}
+{"msgid":"brokethegasp2","category":"ok","action":"keep"}
+{"msgid":"brokethegasp3","category":"glossary","action":"override","reason":"Omnichannel is shortened to 全能 and an extra literal newline splits ‘the entire region’","translation":"求您了，全能公司的女士，${{name}}的母亲希望他们参加试炼，借此走遍整个地区\\n${{name}}不是为了工作，而是为了这段经历。"}
+{"msgid":"bubble_trap","category":"ok","action":"keep"}
+{"msgid":"budaye","category":"ok","action":"keep"}
+{"msgid":"budaye_description","category":"mistranslation","action":"override","reason":"encouraging waves/gestures are mistranslated as splashes","translation":"只要发出鼓励的喵叫、挥一挥爪子，它就能说服任何群体为共同利益合作。"}
+{"msgid":"bugnin","category":"ok","action":"keep"}
+{"msgid":"bugnin_description","category":"style","action":"keep","reason":"the antenna's growing and being snapped off are joined in an awkward literal construction"}
+{"msgid":"bullet","category":"ok","action":"keep"}
+{"msgid":"bumbulus","category":"ok","action":"keep"}
+{"msgid":"bumbulus_description","category":"glossary","action":"override","reason":"the explicit BUMBULUS name is omitted instead of using 邦布勒斯","translation":"邦布勒斯是一种会飞的生物，能制造烟云，把自己伪装成一朵云。没有人见过它真正的身体。"}
+{"msgid":"bursa","category":"ok","action":"keep"}
+{"msgid":"bursa_description","category":"mistranslation","action":"override","reason":"‘rejects fire as basic’ is parsed as ‘basically rejects fire’, changing the meaning","translation":"它认为普通火焰太过基础，只会产生心灵之火。"}
+{"msgid":"buy","category":"ok","action":"keep"}
+{"msgid":"cairfrey","category":"ok","action":"keep"}
+{"msgid":"cairfrey_description","category":"ok","action":"keep"}
+{"msgid":"candy_town","category":"glossary","action":"override","reason":"Candy Town must be the complete place name 甜饴镇","translation":"甜饴镇"}
+{"msgid":"candy_town_description","category":"omission","action":"override","reason":"the slogan is replaced by the generic label ‘Candy Town slogan’","translation":"用生物学突破可能性的边界！"}
+{"msgid":"canine","category":"ok","action":"keep"}
+{"msgid":"cannot_use_tech_monster","category":"ok","action":"keep"}
+{"msgid":"cant_release","category":"mistranslation","action":"override","reason":"the translation omits that this is the party's only Tuxemon","translation":"不能释放队伍中唯一的精灵。"}
+{"msgid":"capiti","category":"ok","action":"keep"}
+{"msgid":"capiti_description","category":"ok","action":"keep"}
+{"msgid":"capture_device","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"capture_device_description","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"capture_devices_in_shop","category":"ok","action":"keep"}
+{"msgid":"captured_failed_1","category":"ok","action":"keep"}
+{"msgid":"captured_failed_2","category":"ok","action":"keep"}
+{"msgid":"captured_failed_3","category":"ok","action":"keep"}
+{"msgid":"captured_failed_4","category":"omission","action":"override","reason":"‘But the capture failed’ is omitted","translation":"就差一点！但捕捉还是失败了。"}
+{"msgid":"cardiling","category":"ok","action":"keep"}
+{"msgid":"cardiling!","category":"ok","action":"keep"}
+{"msgid":"cardiling_description","category":"ok","action":"keep"}
+{"msgid":"cardinale","category":"ok","action":"keep"}
+{"msgid":"cardinale_description","category":"ok","action":"keep"}
+{"msgid":"cardiwing","category":"ok","action":"keep"}
+{"msgid":"cardiwing_description","category":"ok","action":"keep"}
+{"msgid":"cash_register","category":"ok","action":"keep"}
+{"msgid":"cat_calling","category":"ok","action":"keep"}
+{"msgid":"cataspike","category":"ok","action":"keep"}
+{"msgid":"cataspike_description","category":"ok","action":"keep"}
+{"msgid":"cateye","category":"ok","action":"keep"}
+{"msgid":"cateye_description","category":"ok","action":"keep"}
+{"msgid":"cavity","category":"ok","action":"keep"}
+{"msgid":"center","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"chameleon","category":"ok","action":"keep"}
+{"msgid":"chargedup","category":"style","action":"override","reason":"Charged Up and Charging are both 充电, obscuring that this status is already fully charged","translation":"蓄能完毕"}
+{"msgid":"charging","category":"style","action":"override","reason":"Charged Up and Charging are both 充电, obscuring that this status is still charging","translation":"蓄能中"}
+{"msgid":"chenipode","category":"ok","action":"keep"}
+{"msgid":"chenipode_description","category":"ok","action":"keep"}
+{"msgid":"cherry","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"cherry_description","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"cherry_found","category":"ok","action":"keep"}
+{"msgid":"chibiro","category":"ok","action":"keep"}
+{"msgid":"chibiro_description","category":"ok","action":"keep"}
+{"msgid":"chill_mist","category":"ok","action":"keep"}
+{"msgid":"chillimp","category":"ok","action":"keep"}
+{"msgid":"chillimp_description","category":"ok","action":"keep"}
+{"msgid":"chloragon","category":"ok","action":"keep"}
+{"msgid":"chloragon_description","category":"glossary","action":"override","reason":"the final CHLORAGON is mistranscribed as 氯边形 instead of 氯龙","translation":"把一枚远古蛋种进肥沃的土壤，它就会孵化。等这些蛋耗尽后，世上便再也不会有氯龙。"}
+{"msgid":"chooseyerfate","category":"ok","action":"keep"}
+{"msgid":"chooseyerfateCardiling","category":"style","action":"override","reason":"an extra literal newline splits the first sentence block","translation":"很有意思的选择，它呼应了你内心的火花。红火鸟是火系精灵，以从朋友和敌人那里偷食物而闻名。\\n你想选择红火鸟吗？"}
+{"msgid":"chooseyerfateRockitten","category":"style","action":"override","reason":"an extra literal newline splits the first sentence block and the breeding sentence is grammatically awkward","translation":"很稳妥的选择！小岩猫是土系精灵。中世纪时，人们培育小岩猫，让它们坐在门边卖萌。\\n你想选择小岩猫吗？"}
+{"msgid":"chooseyerfateTweesher","category":"style","action":"override","reason":"‘a great choice’ is translated too literally and the evolution sentence is stiff","translation":"选得好！镊鹭是水系精灵。它的进化形态冰川鹰是速度最快的精灵之一。\\n你想选择镊鹭吗？"}
+{"msgid":"choseCardiling","category":"style","action":"keep","reason":"‘go on great adventures’ is translated with an unnatural verb-object pairing"}
+{"msgid":"choseCardiling2","category":"style","action":"override","reason":"‘quick battle’ is translated literally as a fast battle and the dialogue is stiff","translation":"不过首先，来一场简短的精灵对战，测试一下你的战斗本领。\\n让我想想……我选镊鹭。"}
+{"msgid":"choseRockitten","category":"style","action":"keep","reason":"‘go on great adventures’ is translated with an unnatural verb-object pairing"}
+{"msgid":"choseRockitten2","category":"style","action":"override","reason":"‘quick battle’ is translated literally as a fast battle and the dialogue is stiff","translation":"不过首先，来一场简短的精灵对战，测试一下你的战斗本领。\\n让我想想……我选红火鸟。"}
+{"msgid":"choseTweesher","category":"style","action":"keep","reason":"‘go on great adventures’ is translated with an unnatural verb-object pairing"}
+{"msgid":"choseTweesher2","category":"style","action":"override","reason":"‘quick battle’ is translated literally as a fast battle and the dialogue is stiff","translation":"不过首先，来一场简短的精灵对战，测试一下你的战斗本领。\\n让我想想……我选小岩猫。"}
+{"msgid":"chosefight","category":"mistranslation","action":"override","reason":"the conjunction ‘And...’ is mistranslated as ‘also/more’","translation":"那么……开战吧！"}
+{"msgid":"chrome_robo","category":"ok","action":"keep"}
+{"msgid":"chrome_robo_description","category":"ok","action":"keep"}
+{"msgid":"chromeye","category":"ok","action":"keep"}
+{"msgid":"chromeye_description","category":"ok","action":"keep"}
+{"msgid":"cirrus","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"citypark","category":"ok","action":"keep"}
+{"msgid":"citypark_description","category":"ok","action":"keep"}
+{"msgid":"clairaudience","category":"ok","action":"keep"}
+{"msgid":"clamp_on","category":"ok","action":"keep"}
+{"msgid":"climbing","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"cloaked","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"clock","category":"ok","action":"keep"}
+{"msgid":"clot","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"cloud_aether","category":"ok","action":"keep"}
+{"msgid":"cochini","category":"ok","action":"keep"}
+{"msgid":"cochini_description","category":"ok","action":"keep"}
+{"msgid":"coleorus","category":"ok","action":"keep"}
+{"msgid":"coleorus_description","category":"ok","action":"keep"}
+{"msgid":"column1","category":"style","action":"keep","reason":"the classifier in ‘一个寺庙’ is unnatural for a temple"}
+{"msgid":"column2","category":"ok","action":"keep"}
+{"msgid":"combat_amnesia_get","category":"style","action":"override","reason":"‘得了失忆’ is unnatural status-message Chinese","translation":"{user}陷入了失忆状态。"}
+{"msgid":"combat_call_tuxemon","category":"ok","action":"keep"}
+{"msgid":"combat_can't_run_from_trainer","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"combat_capturing_fail","category":"ok","action":"keep"}
+{"msgid":"combat_capturing_success","category":"ok","action":"keep"}
+{"msgid":"combat_defeat","category":"drift","action":"override","reason":"the Chinese still says ‘your opponent’ and lacks the current {name} placeholder","translation":"{name}被击败了！"}
+{"msgid":"combat_draw","category":"ok","action":"keep"}
+{"msgid":"combat_fainted","category":"ok","action":"keep"}
+{"msgid":"combat_forfeit","category":"ok","action":"keep"}
+{"msgid":"combat_gain_exp","category":"ok","action":"keep"}
+{"msgid":"combat_isactive","category":"ok","action":"keep"}
+{"msgid":"combat_levitate_get","category":"ok","action":"keep"}
+{"msgid":"combat_miss","category":"ok","action":"keep"}
+{"msgid":"combat_monster_choice","category":"ok","action":"keep"}
+{"msgid":"combat_opponent_call_tuxemon","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"combat_player_run","category":"style","action":"override","reason":"成功的 uses the wrong particle and adds an unnecessary success qualifier","translation":"你逃走了！"}
+{"msgid":"combat_player_run_status","category":"style","action":"override","reason":"the second line uses an unnatural bare copula for a combat status","translation":"无法逃跑。\\n{monster}正处于{status}状态！"}
+{"msgid":"combat_player_swap_status","category":"style","action":"override","reason":"the first line contains doubled punctuation and the second line uses an unnatural bare copula","translation":"无法更换精灵。\\n{monster}正处于{status}状态！"}
+{"msgid":"combat_replacement","category":"ok","action":"keep"}
+{"msgid":"combat_replacement_is_fainted","category":"ok","action":"keep"}
+{"msgid":"combat_run","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"combat_skip","category":"ok","action":"keep"}
+{"msgid":"combat_state_blinded_get","category":"style","action":"override","reason":"‘is blind’ is rendered as a stiff permanent trait rather than a newly applied status","translation":"{target}失明了。"}
+{"msgid":"combat_state_chargedup_get","category":"ok","action":"keep"}
+{"msgid":"combat_state_charging_get","category":"ok","action":"keep"}
+{"msgid":"combat_state_confused_get","category":"style","action":"override","reason":"被混淆 is unnatural for a creature entering a confused state","translation":"{target}陷入了混乱。"}
+{"msgid":"combat_state_diehard_get","category":"ok","action":"keep"}
+{"msgid":"combat_state_dozing_get","category":"ok","action":"keep"}
+{"msgid":"combat_state_enraged_get","category":"ok","action":"keep"}
+{"msgid":"combat_state_exhausted_get","category":"mistranslation","action":"override","reason":"exhausted is mistranslated as ‘used up/depleted’","translation":"{target}筋疲力尽了。"}
+{"msgid":"combat_state_festering_get","category":"ok","action":"keep"}
+{"msgid":"combat_state_focused_get","category":"mistranslation","action":"override","reason":"‘is focused’ is mistranslated as becoming the center of attention","translation":"{target}集中精神了。"}
+{"msgid":"combat_state_grabbed_get","category":"ok","action":"keep"}
+{"msgid":"combat_state_hardshell_get","category":"ok","action":"keep"}
+{"msgid":"combat_state_lifeleech_failure","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"combat_state_lifeleech_get","category":"drift","action":"override","reason":"the Chinese uses an obsolete extra {user} placeholder and changes the current passive message","translation":"{target}的生命力正在被吸取。"}
+{"msgid":"combat_state_lifeleech_success","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"combat_state_noddingoff_get","category":"ok","action":"keep"}
+{"msgid":"combat_state_overfeed_get","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"combat_state_poison_damage","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"combat_state_poison_get","category":"ok","action":"keep"}
+{"msgid":"combat_state_recover_failure","category":"ok","action":"keep"}
+{"msgid":"combat_state_recover_get","category":"ok","action":"keep"}
+{"msgid":"combat_state_recover_success","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"combat_state_sniping_get","category":"mistranslation","action":"override","reason":"‘backs away’ is mistranslated as needing to aim","translation":"{target}向后退去。"}
+{"msgid":"combat_state_softened_get","category":"ok","action":"keep"}
+{"msgid":"combat_state_spyderbite_get","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"combat_state_stuck_get","category":"ok","action":"keep"}
+{"msgid":"combat_state_tired_get","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"combat_status_damage","category":"mistranslation","action":"override","reason":"the translation reverses who takes the status damage","translation":"{name}受到了{status}伤害！"}
+{"msgid":"combat_swap","category":"ok","action":"keep"}
+{"msgid":"combat_target_itself","category":"ok","action":"keep"}
+{"msgid":"combat_trainer_appeared","category":"ok","action":"keep"}
+{"msgid":"combat_used_x","category":"ok","action":"keep"}
+{"msgid":"combat_used_x_on_y","category":"style","action":"override","reason":"the word order is an ungrammatical calque of ‘used X on Y’","translation":"{user}对{target}使用了{name}！"}
+{"msgid":"combat_victory","category":"drift","action":"override","reason":"the Chinese says ‘you won’ and omits the current {name} placeholder","translation":"{name}获胜了！"}
+{"msgid":"combat_victory_trainer","category":"drift","action":"override","reason":"the Chinese reflects an older two-line player-addressed message rather than the current named winner sentence","translation":"{name}获胜并获得了{prize}！"}
+{"msgid":"combat_wild_appeared","category":"ok","action":"keep"}
+{"msgid":"cometomepls","category":"ok","action":"keep"}
+{"msgid":"confused","category":"ok","action":"keep"}
+{"msgid":"conifrost","category":"ok","action":"keep"}
+{"msgid":"conifrost_description","category":"ok","action":"keep"}
+{"msgid":"conileaf","category":"ok","action":"keep"}
+{"msgid":"conileaf_description","category":"mistranslation","action":"override","reason":"the pronoun is attached to the food, producing the nonsensical claim that food is used to store food","translation":"放进它的捕虫囊里的食物会被搅碎并腌制。人们会利用这些捕虫囊保存食物，防止变质。"}
+{"msgid":"conjurer","category":"ok","action":"keep"}
+{"msgid":"constrict","category":"ok","action":"keep"}
+{"msgid":"coproblight","category":"ok","action":"keep"}
+{"msgid":"coproblight_description","category":"ok","action":"keep"}
+{"msgid":"corvix","category":"ok","action":"keep"}
+{"msgid":"corvix_description","category":"ok","action":"keep"}
+{"msgid":"cotton_town","category":"glossary","action":"override","reason":"Cotton Town must be the complete place name 暖棉镇","translation":"暖棉镇"}
+{"msgid":"cotton_town_description","category":"ok","action":"keep"}
+{"msgid":"cotton_town_fountain","category":"ok","action":"keep"}
+{"msgid":"cowpignon","category":"ok","action":"keep"}
+{"msgid":"cowpignon_description","category":"style","action":"override","reason":"药用增强剂 is a mechanical and unclear rendering of a medicinal enhancement","translation":"有些人会把它晒干，当作滋补药材食用。"}
+{"msgid":"crested","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"criniotherme","category":"ok","action":"keep"}
+{"msgid":"criniotherme_description","category":"ok","action":"keep"}
+{"msgid":"crystal","category":"ok","action":"keep"}
+{"msgid":"dandicub","category":"ok","action":"keep"}
+{"msgid":"dandicub_description","category":"ok","action":"keep"}
+{"msgid":"dandylion","category":"ok","action":"keep"}
+{"msgid":"dandylion_description","category":"ok","action":"keep"}
+{"msgid":"dark_robo","category":"ok","action":"keep"}
+{"msgid":"dark_robo_description","category":"ok","action":"keep"}
+{"msgid":"darnitjohn","category":"ok","action":"keep"}
+{"msgid":"darnitjohn10","category":"ok","action":"keep"}
+{"msgid":"darnitjohn2","category":"ok","action":"keep"}
+{"msgid":"darnitjohn3","category":"ok","action":"keep"}
+{"msgid":"darnitjohn4","category":"style","action":"override","reason":"the stammer in ‘Y-Yes’ is omitted","translation":"是、是的，女士？"}
+{"msgid":"darnitjohn5","category":"ok","action":"keep"}
+{"msgid":"darnitjohn6","category":"ok","action":"keep"}
+{"msgid":"darnitjohn7","category":"ok","action":"keep"}
+{"msgid":"darnitjohn8","category":"ok","action":"keep"}
+{"msgid":"darnitjohn9","category":"mistranslation","action":"override","reason":"IMBECILE is mistranslated as ‘liar’","translation":"你这个蠢货！\\n我只说一遍，就一遍：\\n去。搜。房。子。"}
+{"msgid":"demiurge","category":"ok","action":"keep"}
+{"msgid":"deposit","category":"ok","action":"keep"}
+{"msgid":"depressedmom","category":"ok","action":"keep"}
+{"msgid":"devil","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"diehard","category":"ok","action":"keep"}
+{"msgid":"dinoflop","category":"ok","action":"keep"}
+{"msgid":"dinoflop_description","category":"glossary","action":"override","reason":"the explicit DINOFLOP name is omitted instead of using 迪诺浮普","translation":"迪诺浮普喜欢迅速转身背对攻击者，让对方的攻击落在自己带有护甲和尖刺的背上。"}
+{"msgid":"disable","category":"ok","action":"keep"}
+{"msgid":"discovered_a_person","category":"ok","action":"keep"}
+{"msgid":"djinnbo","category":"ok","action":"keep"}
+{"msgid":"djinnbo_description","category":"ok","action":"keep"}
+{"msgid":"dodge_fell","category":"mistranslation","action":"override","reason":"a decrease in dodge is mistranslated as successfully dodging","translation":"{user}的闪避下降了。"}
+{"msgid":"dodge_increased","category":"ok","action":"keep"}
+{"msgid":"dollfin","category":"ok","action":"keep"}
+{"msgid":"dollfin_description","category":"ok","action":"keep"}
+{"msgid":"door_problems","category":"ok","action":"keep"}
+{"msgid":"dowehavetogoin","category":"mistranslation","action":"override","reason":"the named Trial is reduced to a generic audit/review","translation":"你知道吗，你不一定非得进去。参加标准训练项目就好，跳过试炼吧。"}
+{"msgid":"dowehavetogoin2","category":"style","action":"override","reason":"an extra literal newline splits ‘rank’, and Trial is inconsistently rendered as a generic review","translation":"不，你不明白。要让我的家人出狱，唯一的办法就是在全能公司里升到足够高的级别。\\n完成试炼后，我的职位将仅次于首席执行官。那样我就能改变现状。\\n只要完成它，我就能救出家人……"}
+{"msgid":"dowehavetogoin3","category":"ok","action":"keep"}
+{"msgid":"dowehavetogoin4","category":"ok","action":"keep"}
+{"msgid":"dowehavetogoin5","category":"ok","action":"keep"}
+{"msgid":"dozing","category":"ok","action":"keep"}
+{"msgid":"dracune","category":"ok","action":"keep"}
+{"msgid":"dracune_description","category":"ok","action":"keep"}
+{"msgid":"dragarbor","category":"ok","action":"keep"}
+{"msgid":"dragarbor_description","category":"ok","action":"keep"}
+{"msgid":"dragon","category":"ok","action":"keep"}
+{"msgid":"drashimi","category":"ok","action":"keep"}
+{"msgid":"drokoro","category":"ok","action":"keep"}
+{"msgid":"drokoro_description","category":"ok","action":"keep"}
+{"msgid":"dryadsgrove","category":"ok","action":"keep"}
+{"msgid":"dune_pincher","category":"ok","action":"keep"}
+{"msgid":"dune_pincher_description","category":"ok","action":"keep"}
+{"msgid":"dungeon","category":"ok","action":"keep"}
+{"msgid":"eaglace","category":"ok","action":"keep"}
+{"msgid":"eaglace_description","category":"ok","action":"keep"}
+{"msgid":"earth","category":"ok","action":"keep"}
+{"msgid":"earth_booster","category":"ok","action":"keep"}
+{"msgid":"earth_booster_description","category":"ok","action":"keep"}
+{"msgid":"earth_fire","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"earthmover_key","category":"ok","action":"keep"}
+{"msgid":"earthmover_key_description","category":"ok","action":"keep"}
+{"msgid":"earthquake","category":"ok","action":"keep"}
+{"msgid":"electrical_storm","category":"ok","action":"keep"}
+{"msgid":"eliminated","category":"style","action":"override","reason":"the status label is a bare transitive verb rather than an eliminated state","translation":"已淘汰"}
+{"msgid":"elofly","category":"ok","action":"keep"}
+{"msgid":"elofly_description","category":"ok","action":"keep"}
+{"msgid":"elostorm","category":"ok","action":"keep"}
+{"msgid":"elostorm_description","category":"ok","action":"keep"}
+{"msgid":"elowind","category":"ok","action":"keep"}
+{"msgid":"elowind_description","category":"ok","action":"keep"}
+{"msgid":"embazook","category":"ok","action":"keep"}
+{"msgid":"embazook_description","category":"ok","action":"keep"}
+{"msgid":"embra","category":"ok","action":"keep"}
+{"msgid":"embra_description","category":"glossary","action":"override","reason":"RUPTION must use the glossary rendering 火球兽 rather than 火焰兽","translation":"它什么都吃，好让自己长得足够大，变成火球兽。"}
+{"msgid":"empty_pot","category":"ok","action":"keep"}
+{"msgid":"empty_slot","category":"ok","action":"keep"}
+{"msgid":"enable","category":"ok","action":"keep"}
+{"msgid":"enduros","category":"ok","action":"keep"}
+{"msgid":"enduros_description","category":"mistranslation","action":"override","reason":"‘does not pull its blows’ is translated literally as not pulling attacks, and the ENDUROS name is omitted","translation":"负重运动是个咄咄逼人的斗士，出拳从不留情；离开擂台后，它却很合群。"}
+{"msgid":"energy_claws","category":"ok","action":"keep"}
+{"msgid":"energy_field","category":"ok","action":"keep"}
+{"msgid":"enraged","category":"glossary","action":"override","reason":"Berserk must use the glossary technique rendering 狂怒","translation":"狂怒"}
+{"msgid":"eruptibus","category":"ok","action":"keep"}
+{"msgid":"eruptibus_description","category":"mistranslation","action":"override","reason":"smiths is mistaken for the personal name Smith","translation":"铁匠会与它合作，在它的火山口中加热金属。"}
+{"msgid":"evasion","category":"ok","action":"keep"}
+{"msgid":"evolution_confirmation","category":"drift","action":"override","reason":"the Chinese still uses obsolete {evolve} instead of the current {target} placeholder","translation":"{name}正试图进化成{target}。"}
+{"msgid":"ex_machina","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"exapode","category":"ok","action":"keep"}
+{"msgid":"exapode_description","category":"ok","action":"keep"}
+{"msgid":"exclawvate","category":"ok","action":"keep"}
+{"msgid":"exclawvate_description","category":"mistranslation","action":"override","reason":"caterpillar tires means crawler tracks, not literal caterpillar tires, and the last sentence is awkward","translation":"它们常见于建筑工地，能用巨大的双手和尾巴铲起泥土与瓦砾。这些精灵身下装有履带，攀爬瓦砾堆时能保持更好的平衡和抓地力。"}
+{"msgid":"exhausted","category":"mistranslation","action":"override","reason":"the status adjective is mistranslated as ‘used up’","translation":"筋疲力尽"}
+{"msgid":"exit","category":"ok","action":"keep"}
+{"msgid":"eyebite","category":"ok","action":"keep"}
+{"msgid":"eyenemy","category":"ok","action":"keep"}
+{"msgid":"eyenemy_description","category":"ok","action":"keep"}
+{"msgid":"eyesore","category":"ok","action":"keep"}
+{"msgid":"eyesore_description","category":"ok","action":"keep"}
+{"msgid":"faint","category":"ok","action":"keep"}
+{"msgid":"false_dragon","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"famous_statue","category":"ok","action":"keep"}
+{"msgid":"famous_statue2","category":"ok","action":"keep"}
+{"msgid":"fancair","category":"ok","action":"keep"}
+{"msgid":"fancair_description","category":"ok","action":"keep"}
+{"msgid":"feint","category":"ok","action":"keep"}
+{"msgid":"feline","category":"ok","action":"keep"}
+{"msgid":"ferricran","category":"ok","action":"keep"}
+{"msgid":"ferricran_description","category":"glossary","action":"override","reason":"Adamantine must be 金刚合金, not 金刚砂, and mithril is also mistranslated","translation":"曾经，费里科兰全身覆盖着金刚合金鳞片，还长着秘银翅膀。"}
+{"msgid":"fester","category":"ok","action":"keep"}
+{"msgid":"festering","category":"ok","action":"keep"}
+{"msgid":"fiery","category":"ok","action":"keep"}
+{"msgid":"fire","category":"ok","action":"keep"}
+{"msgid":"fire_ball","category":"ok","action":"keep"}
+{"msgid":"fire_booster","category":"ok","action":"keep"}
+{"msgid":"fire_booster_description","category":"ok","action":"keep"}
+{"msgid":"fire_claw","category":"ok","action":"keep"}
+{"msgid":"fire_shield","category":"ok","action":"keep"}
+{"msgid":"firebird","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"firestorm","category":"ok","action":"keep"}
+{"msgid":"firomenis","category":"ok","action":"keep"}
+{"msgid":"firsts","category":"drift","action":"override","reason":"the Chinese contains an alphabet song unrelated to the current whip/nae nae lyrics","translation":"♪ 看我挥鞭 ♪\\n♪ 看我跳舞 ♪\\n这首歌很棒，对吧？"}
+{"msgid":"fishing_rod","category":"ok","action":"keep"}
+{"msgid":"fishing_rod_description","category":"ok","action":"keep"}
+{"msgid":"flacono","category":"ok","action":"keep"}
+{"msgid":"flacono_description","category":"style","action":"override","reason":"‘enemy of any size’ is rendered as an enemy of any ‘scale’, which is unnatural for body size","translation":"它完全不怕对手，无论敌人体型大小，都会毫不犹豫地发起攻击。"}
+{"msgid":"flambear","category":"ok","action":"keep"}
+{"msgid":"flambear_description","category":"ok","action":"keep"}
+{"msgid":"flamethrower","category":"ok","action":"keep"}
+{"msgid":"fledgling","category":"ok","action":"keep"}
+{"msgid":"flintstone","category":"ok","action":"keep"}
+{"msgid":"flintstone_description","category":"ok","action":"keep"}
+{"msgid":"flood","category":"ok","action":"keep"}
+{"msgid":"flopped","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"flow","category":"ok","action":"keep"}
+{"msgid":"flower_city","category":"glossary","action":"override","reason":"Flower City must be the complete place name 彩花城","translation":"彩花城"}
+{"msgid":"flower_city_description","category":"mistranslation","action":"override","reason":"the translation replaces the subject ‘uniforms’ with guards","translation":"连你睡觉时都能保护你的制服！"}
+{"msgid":"fluff_up","category":"ok","action":"keep"}
+{"msgid":"fluoresfin","category":"ok","action":"keep"}
+{"msgid":"fluoresfin_description","category":"style","action":"override","reason":"‘一个巨大的刺眼的光’ has stacked attributives that impede readability","translation":"受到威胁时，它会和其他荧光鱼聚在一起，发出一大片刺眼强光，扰乱捕食者。"}
+{"msgid":"fluttaflap","category":"ok","action":"keep"}
+{"msgid":"fluttaflap_description","category":"ok","action":"keep"}
+{"msgid":"focused","category":"style","action":"override","reason":"the status label 集中 is a verb; 专注 is the natural state adjective","translation":"专注"}
+{"msgid":"font","category":"ok","action":"keep"}
+{"msgid":"foofle","category":"ok","action":"keep"}
+{"msgid":"foofle_description","category":"mistranslation","action":"override","reason":"‘when one [Foofle] is in danger’ is mistranslated as ‘when a person is in danger’","translation":"当一只福夫勒遇到危险时，无论其他福夫勒身在何处，都能听见它的呼救声。"}
+{"msgid":"fordin","category":"ok","action":"keep"}
+{"msgid":"fordin_description","category":"ok","action":"keep"}
+{"msgid":"forturtle","category":"ok","action":"keep"}
+{"msgid":"forturtle_description","category":"ok","action":"keep"}
+{"msgid":"foxfire","category":"ok","action":"keep"}
+{"msgid":"foxfire_description","category":"mistranslation","action":"override","reason":"fires that burned out are mistranslated as destructive fires that burned things down","translation":"人们会在一夜间熄灭的火堆中发现火狐幼崽。没人知道它们来自哪里。"}
+{"msgid":"frondly","category":"ok","action":"keep"}
+{"msgid":"frondly_description","category":"mistranslation","action":"override","reason":"prehensile tail is mistranslated as a sessile/stalkless tail","translation":"它能用灵活的卷握尾巴做任何事，甚至能握手和摘水果。"}
+{"msgid":"frost_ape","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"frostbite","category":"ok","action":"keep"}
+{"msgid":"frowntime","category":"ok","action":"keep"}
+{"msgid":"fruitera","category":"ok","action":"keep"}
+{"msgid":"fruitera_description","category":"glossary","action":"override","reason":"the explicit FRUITERA name is omitted instead of using 弗朗索拉","translation":"弗朗索拉很贪吃水果，能带多少就带多少。受到惊吓时，它会把所有水果都扔下，重新一一捡起，然后才逃跑。"}
+{"msgid":"fume","category":"ok","action":"keep"}
+{"msgid":"furnursus","category":"ok","action":"keep"}
+{"msgid":"furnursus_description","category":"ok","action":"keep"}
+{"msgid":"galnec","category":"ok","action":"keep"}
+{"msgid":"galnec_description","category":"ok","action":"keep"}
+{"msgid":"gasp","category":"ok","action":"keep"}
+{"msgid":"gasp2","category":"mistranslation","action":"override","reason":"Criminal becomes a detached question, Trial is rendered as a trainer camp, and ‘a use for you’ is reduced to a job","translation":"你和这个……罪犯在这里做什么？\\n……  ……  ……\\n……  ……  ……\\n参加试炼？你真要让自己去受那种荒唐事的折磨？\\n如果你只想在全能公司找份工作，直接来问我就好了。\\n只要你有兴趣，我肯定能给你找到一个……用处……"}
+{"msgid":"gasp3","category":"style","action":"override","reason":"‘there's more to you’ is translated with an incomplete comparative construction","translation":"如果这是真的，那我还真是小看你了……"}
+{"msgid":"gasp4","category":"style","action":"override","reason":"‘For now’ is rendered literally as ‘as far as right now is concerned’","translation":"好吧，我暂且保留你的注册文件。\\n约翰、格兰特，把这位所谓的精灵教授带去他的新家。"}
+{"msgid":"gectile","category":"ok","action":"keep"}
+{"msgid":"gectile_description","category":"ok","action":"keep"}
+{"msgid":"gender_enby","category":"ok","action":"keep"}
+{"msgid":"gender_female","category":"ok","action":"keep"}
+{"msgid":"gender_male","category":"ok","action":"keep"}
+{"msgid":"gender_whatever","category":"ok","action":"keep"}
+{"msgid":"generic_failure","category":"style","action":"override","reason":"the generic UI message is literal and lacks the source exclamation","translation":"失败了！"}
+{"msgid":"generic_success","category":"mistranslation","action":"override","reason":"‘It worked’ is translated as an object performing labor","translation":"成功了！"}
+{"msgid":"generic_wrong","category":"ok","action":"keep"}
+{"msgid":"geyser","category":"ok","action":"keep"}
+{"msgid":"ghosteeth","category":"ok","action":"keep"}
+{"msgid":"ghosteeth_description","category":"ok","action":"keep"}
+{"msgid":"give_all","category":"ok","action":"keep"}
+{"msgid":"glitch","category":"ok","action":"keep"}
+{"msgid":"glower","category":"ok","action":"keep"}
+{"msgid":"goad","category":"ok","action":"keep"}
+{"msgid":"gold_digger","category":"ok","action":"keep"}
+{"msgid":"goodbye","category":"mistranslation","action":"override","reason":"the named competition Trial is mistranslated as a judicial trial","translation":"别因为试炼就不来看我。事实上……也许我会先找到你。"}
+{"msgid":"goodbye2","category":"mistranslation","action":"override","reason":"the named competition Trial is mistranslated as a judicial trial","translation":"再见，${{name}}！祝你在试炼中好运——你会需要的。"}
+{"msgid":"got_new_tuxemon","category":"ok","action":"keep"}
+{"msgid":"gotcha","category":"mistranslation","action":"override","reason":"in the capture sequence, Gotcha means catching the creature, not ‘understood’","translation":"抓到你了！"}
+{"msgid":"gotfivetuxeballs","category":"mistranslation","action":"override","reason":"‘got’ is rendered as merely currently possessing rather than receiving the items","translation":"你获得了 5 个精灵球！"}
+{"msgid":"grabbed","category":"style","action":"override","reason":"the status label is an active verb rather than the state ‘being grabbed’","translation":"被抓住"}
+{"msgid":"graffiki","category":"ok","action":"keep"}
+{"msgid":"graffiki_description","category":"style","action":"override","reason":"the translation uses the human pronoun 他们 for creatures and reads mechanically","translation":"格拉非基无论在城市还是丛林里都自在如家，会用精美的绘画标记自己的领地。"}
+{"msgid":"greenwash_badge","category":"glossary","action":"override","reason":"徽章名称应与 Greenwash 专名“格林沃什”保持一致","translation":"徽章：格林沃什"}
+{"msgid":"greenwash_badge_description","category":"glossary","action":"override","reason":"Greenwash must be the proper name 格林沃什","translation":"从格林沃什购买的精灵需要这枚徽章才能变形。"}
+{"msgid":"grimachin","category":"ok","action":"keep"}
+{"msgid":"grimachin_description","category":"ok","action":"keep"}
+{"msgid":"grinding","category":"ok","action":"keep"}
+{"msgid":"grinflare","category":"ok","action":"keep"}
+{"msgid":"grinflare_description","category":"style","action":"keep","reason":"“火山行走的心脏”略显生硬，但意象和含义清楚"}
+{"msgid":"grintot","category":"ok","action":"keep"}
+{"msgid":"grintot_description","category":"glossary","action":"override","reason":"把 GRINTROCK 和 GRINFLARE 错译成普通物件“石板/石膏板”，违反精灵名词表","translation":"它是经历过侵蚀的格林特洛克或格林弗拉尔。"}
+{"msgid":"grintrock","category":"ok","action":"keep"}
+{"msgid":"grintrock_description","category":"ok","action":"keep"}
+{"msgid":"grumble","category":"ok","action":"keep"}
+{"msgid":"grumpi","category":"ok","action":"keep"}
+{"msgid":"grumpi_description","category":"glossary","action":"override","reason":"遗漏精灵名 GRUMPI，且句式不通顺","translation":"一旦被格鲁姆比抓住，就再也无法从它黏糊糊的身体中挣脱。"}
+{"msgid":"gryfix","category":"ok","action":"keep"}
+{"msgid":"gumnut","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"gust","category":"ok","action":"keep"}
+{"msgid":"hampotamos","category":"ok","action":"keep"}
+{"msgid":"hampotamos_description","category":"glossary","action":"override","reason":"把 RINOCEREED 错译成“裂缝”，违反精灵名词表","translation":"它会啃食芦犀身上的死皮、苔藓和杂草，将它们清理干净。"}
+{"msgid":"happito","category":"ok","action":"keep"}
+{"msgid":"happito_description","category":"ok","action":"keep"}
+{"msgid":"happy_guy_dialog","category":"ok","action":"keep"}
+{"msgid":"happy_rename","category":"ok","action":"keep"}
+{"msgid":"hardshell","category":"ok","action":"keep"}
+{"msgid":"hatchling","category":"ok","action":"keep"}
+{"msgid":"hatchling_description","category":"style","action":"keep","reason":"生命周期描述略显直译，但意思完整可懂"}
+{"msgid":"haveagoodday","category":"ok","action":"keep"}
+{"msgid":"hawk","category":"ok","action":"keep"}
+{"msgid":"hebenice","category":"ok","action":"keep"}
+{"msgid":"hellolovelypeople","category":"ok","action":"keep"}
+{"msgid":"hellolovelypeople2","category":"ok","action":"keep"}
+{"msgid":"hellolovelypeople3","category":"glossary","action":"override","reason":"Fondent Region 应按名词表译为“方登地区”","translation":"这个镇上真的只有你们这些人吗？这里根本没人！这肯定是方登地区最小的镇子。"}
+{"msgid":"hellolovelypeople4","category":"glossary","action":"override","reason":"Cotton Town 必须译为“暖棉镇”","translation":"我敢肯定，暖棉镇有些房子都比这里大……"}
+{"msgid":"hellolovelypeople5","category":"glossary","action":"override","reason":"Fondent Region 违反名词表，且“精灵繁殖者”不自然","translation":"不……等等……还少了一个人……\\n方登地区仅存的那位精灵培育师，那个自称“精灵教授”的人。"}
+{"msgid":"hellothere","category":"ok","action":"keep"}
+{"msgid":"here_to_east","category":"ok","action":"keep"}
+{"msgid":"here_to_north","category":"ok","action":"keep"}
+{"msgid":"here_to_south","category":"ok","action":"keep"}
+{"msgid":"here_to_west","category":"ok","action":"keep"}
+{"msgid":"heronquak","category":"ok","action":"keep"}
+{"msgid":"heronquak_description","category":"ok","action":"keep"}
+{"msgid":"hey","category":"ok","action":"keep"}
+{"msgid":"heystop","category":"ok","action":"keep"}
+{"msgid":"heystop2","category":"drift","action":"override","reason":"中文擅自插入英文没有的换行","translation":"小姐，我们已经告诉过你了。根据第三条第二款，全能公司有权视需要关闭并维护相关区域。"}
+{"msgid":"heystop3","category":"ok","action":"keep"}
+{"msgid":"heystop4","category":"ok","action":"keep"}
+{"msgid":"heystop5","category":"mistranslation","action":"override","reason":"without asking 被错译成“不问自明”","translation":"可是……可是……他们把我们的花挖走了。想都没想，也没问过我们。"}
+{"msgid":"heystop6","category":"drift","action":"override","reason":"中文擅自插入英文没有的换行","translation":"我知道，但我们可以在别的地方种些新花。它们仍然会很特别，因为我们会一起把它们种下。"}
+{"msgid":"heystop7","category":"ok","action":"keep"}
+{"msgid":"hibernate","category":"ok","action":"keep"}
+{"msgid":"hichristie","category":"ok","action":"keep"}
+{"msgid":"hichristie2","category":"ok","action":"keep"}
+{"msgid":"higrunts","category":"mistranslation","action":"override","reason":"grunts 在此指喽啰而非步兵，后句也较生硬","translation":"这些喽啰连像样的训练都没受过，当然不是我的对手。看起来你表现得也不差。"}
+{"msgid":"higrunts2","category":"style","action":"override","reason":"“在这里，我将治愈”明显不符合自然对话","translation":"来，我给你的精灵治疗一下。"}
+{"msgid":"hiperson","category":"ok","action":"keep"}
+{"msgid":"hiperson2","category":"mistranslation","action":"override","reason":"overwhelm 在此指让对方应接不暇，并非“淹没”","translation":"慢点，克里斯蒂，别一下子问得人家应接不暇。"}
+{"msgid":"hiperson3","category":"ok","action":"keep"}
+{"msgid":"hiperson4","category":"style","action":"keep","reason":"“我们从名字和你的家乡开始”略显直译，但不影响理解"}
+{"msgid":"hiperson5","category":"ok","action":"keep"}
+{"msgid":"hiperson6","category":"ok","action":"keep"}
+{"msgid":"hmmm","category":"ok","action":"keep"}
+{"msgid":"hmmm2","category":"ok","action":"keep"}
+{"msgid":"hmmm3","category":"ok","action":"keep"}
+{"msgid":"hmmm4","category":"ok","action":"keep"}
+{"msgid":"hmmm5","category":"drift","action":"override","reason":"中文擅自插入英文没有的换行","translation":"麦克斯，不管你有多想要，我们都已经说清楚了：他们没有在建水上乐园，也不会建。"}
+{"msgid":"hmmm6","category":"ok","action":"keep"}
+{"msgid":"hmmm7","category":"ok","action":"keep"}
+{"msgid":"horned_raptor","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"host","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"hot_rock","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"hp_restored","category":"ok","action":"keep"}
+{"msgid":"hydrone","category":"ok","action":"keep"}
+{"msgid":"hydrone_description","category":"ok","action":"keep"}
+{"msgid":"iamknight","category":"ok","action":"keep"}
+{"msgid":"iamknight2","category":"ok","action":"keep"}
+{"msgid":"ice_claw","category":"ok","action":"keep"}
+{"msgid":"ice_storm","category":"ok","action":"keep"}
+{"msgid":"icicle_spear","category":"ok","action":"keep"}
+{"msgid":"ignibus","category":"ok","action":"keep"}
+{"msgid":"ignibus_description","category":"style","action":"override","reason":"现译重复使用“它”且“急剧降温”衔接生硬，明显影响阅读","translation":"受到威胁时，它会缩进壳里，通过喷出蒸汽迅速降温。这样一来，它看上去就像一块岩石。"}
+{"msgid":"ihaveyourmoney","category":"ok","action":"keep"}
+{"msgid":"ihaveyourmoney2","category":"drift","action":"override","reason":"中文在“困难”一词中擅自插入换行，且多处句式生硬","translation":"我有一笔积蓄，需要把它用在刀刃上，而且全能公司还欠我一个人情。\\n我敢肯定能想办法安排好。拿到资格文件不难，难的是得到你的第一只精灵……\\n幸运的是，我碰巧认识一个能接触到多种精灵的人……\\n就是我！\\n我知道这一下子很难消化，所以我会在实验室等你做出决定。"}
+{"msgid":"iknowyou","category":"style","action":"override","reason":"现译倒装关系不自然，像是在说听见公告后才顺便问候","translation":"你好，凯莉；你好，${{name}}。我只是顺路来打个招呼，恰好听见你们在讨论那份公告。"}
+{"msgid":"imherenow","category":"ok","action":"keep"}
+{"msgid":"imperial_potion","category":"ok","action":"keep"}
+{"msgid":"imperial_potion_description","category":"drift","action":"override","reason":"英文当前数值为 500 HP，中文仍写 350","translation":"为一只精灵恢复 500 点生命值。"}
+{"msgid":"incandesfin","category":"ok","action":"keep"}
+{"msgid":"incandesfin_description","category":"style","action":"override","reason":"“整个身体的大小已经大量增长”是明显不自然的直译","translation":"它的身体大幅长大了，但发出的光依旧和以前一模一样。"}
+{"msgid":"inchoate","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"input_monster_name","category":"ok","action":"keep"}
+{"msgid":"input_name","category":"ok","action":"keep"}
+{"msgid":"insanity","category":"ok","action":"keep"}
+{"msgid":"inside","category":"ok","action":"keep"}
+{"msgid":"invictus","category":"ok","action":"keep"}
+{"msgid":"ipausedit","category":"ok","action":"keep"}
+{"msgid":"island","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"item_cannot_use_here","category":"ok","action":"keep"}
+{"msgid":"item_confirm_cancel","category":"ok","action":"keep"}
+{"msgid":"item_confirm_use","category":"ok","action":"keep"}
+{"msgid":"item_failure","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"item_no_available_target","category":"ok","action":"keep"}
+{"msgid":"item_success","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"item_used_wrong_location_inside","category":"ok","action":"keep"}
+{"msgid":"item_used_wrong_location_type","category":"ok","action":"keep"}
+{"msgid":"itslockedboi","category":"ok","action":"keep"}
+{"msgid":"itsmyaurababe","category":"ok","action":"keep"}
+{"msgid":"itsmyaurababe2","category":"glossary","action":"override","reason":"Cotton Town 必须译为“暖棉镇”，且 aura 译作“光环”不合语境","translation":"嗯，现在仔细看看，你身上有种颇为神秘的气场。\\n...   ...   ...   ...\\n我们改天聊聊吧。要不到暖棉镇来找我？"}
+{"msgid":"itsmyaurababe3","category":"ok","action":"keep"}
+{"msgid":"itsmyduhduhduh","category":"ok","action":"keep"}
+{"msgid":"jelillow","category":"ok","action":"keep"}
+{"msgid":"jelillow_description","category":"style","action":"keep","reason":"末句被动表达略显机械，但语义完整"}
+{"msgid":"jemuar","category":"ok","action":"keep"}
+{"msgid":"jemuar_description","category":"mistranslation","action":"override","reason":"现译把宝石种类与出生地的关系译成“出生时发现”，意思不清","translation":"它背上的宝石与其出生地出产的种类相同。钻石矿脉上方建有大规模的小岩猫繁育场。"}
+{"msgid":"johnissorry","category":"ok","action":"keep"}
+{"msgid":"joyful","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"k9","category":"ok","action":"keep"}
+{"msgid":"k9_description","category":"style","action":"keep","reason":"“拉动一吨的重量”略显冗余，但含义正确"}
+{"msgid":"karrianna","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"karrianna_dialog1","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"karrianna_dialog2","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"katacoon","category":"ok","action":"keep"}
+{"msgid":"katacoon_description","category":"mistranslation","action":"override","reason":"jab 指突刺攻击而非“刺杀”，且蛹期关系被译乱","translation":"它在蛹期始终保持冥想姿势，只有在突刺敌人时才会动。"}
+{"msgid":"katapill","category":"ok","action":"keep"}
+{"msgid":"katapill_description","category":"mistranslation","action":"override","reason":"eggshell 被错译成“墓壳”","translation":"它生来便要战斗，必须打破蛋壳冲出来，否则就会被困住。"}
+{"msgid":"kennel_label","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"kindling_flame","category":"ok","action":"keep"}
+{"msgid":"kmere","category":"style","action":"override","reason":"“为什么你来到这里并同我交谈”不符合口语表达","translation":"你不过来跟我聊聊吗？"}
+{"msgid":"knight1","category":"ok","action":"keep"}
+{"msgid":"knight2","category":"ok","action":"keep"}
+{"msgid":"knight4ispoor","category":"ok","action":"keep"}
+{"msgid":"komodraw","category":"ok","action":"keep"}
+{"msgid":"komodraw_description","category":"ok","action":"keep"}
+{"msgid":"kraken","category":"ok","action":"keep"}
+{"msgid":"kylekindasucks","category":"drift","action":"override","reason":"中文多出一处强制换行，且误解 And that's saying something","translation":"抱歉。凯尔是我在全能公司最讨厌的人之一——这已经很能说明问题了！\\n我们在学院时是同一届的，从那以后他就只会惹麻烦。说真的，这大概正是全能公司招募他的原因。\\n幸好我不用像某些可怜人那样，每天听他那刺耳的声音。"}
+{"msgid":"kylekindasucks2","category":"style","action":"override","reason":"On a different note 是转换话题，并非“从另一个角度看”","translation":"换个话题，看来凯尔是来打通道路的。现在对战区似乎已经开放了。"}
+{"msgid":"kylekindasucks3","category":"drift","action":"override","reason":"中文在“监视着一切”中擅自插入换行，且 Trial 被误作审判","translation":"我知道你正在参加试炼之类的，但一定要当心。全能公司无处不在，监视着一切。\\n他们对……处理掉麻烦人物可从不手软。"}
+{"msgid":"kylekindasucks4","category":"ok","action":"keep"}
+{"msgid":"kylekindasucks5","category":"ok","action":"keep"}
+{"msgid":"kylekindasucks6","category":"ok","action":"keep"}
+{"msgid":"kylekindasucks7","category":"ok","action":"keep"}
+{"msgid":"kylekindasucks8","category":"style","action":"override","reason":"强调断句和“florist”称呼被译得生硬","translation":"你们四个，回家去。记住，你。们。什。么。都。没。看。见。\\n明白吗？\\n哦，还有你，花匠？有空来找我。我的地址就在我给你的卡片上。"}
+{"msgid":"kylereallysucks","category":"style","action":"override","reason":"Speck 人名与同段其他译文不一致，并可改善口语节奏","translation":"好吧，斯佩克，要是这能让你好受点：下令攻击的人是我。"}
+{"msgid":"kylereallysucks2","category":"ok","action":"keep"}
+{"msgid":"kylereallysucks3","category":"style","action":"override","reason":"Speck 人名译法不一致","translation":"哦，对了，斯佩克？我很享受那些尖叫声。"}
+{"msgid":"lambert","category":"ok","action":"keep"}
+{"msgid":"lambert_description","category":"style","action":"keep","reason":"连续重复“父母”略显生硬，但意思完整"}
+{"msgid":"lantern","category":"ok","action":"keep"}
+{"msgid":"lapinou","category":"ok","action":"keep"}
+{"msgid":"lapinou_description","category":"ok","action":"keep"}
+{"msgid":"lava","category":"ok","action":"keep"}
+{"msgid":"leather_town","category":"ok","action":"keep"}
+{"msgid":"leather_town_description","category":"ok","action":"keep"}
+{"msgid":"leather_town_open_air","category":"ok","action":"keep"}
+{"msgid":"leavemealone","category":"ok","action":"keep"}
+{"msgid":"legko","category":"ok","action":"keep"}
+{"msgid":"legko_description","category":"ok","action":"keep"}
+{"msgid":"levitate","category":"ok","action":"keep"}
+{"msgid":"liela","category":"ok","action":"keep"}
+{"msgid":"liela_goes_to_battle","category":"ok","action":"keep"}
+{"msgid":"lifeleech","category":"mistranslation","action":"override","reason":"Lifeleech 是“汲取生命”，并非“死气沉沉”","translation":"生命汲取"}
+{"msgid":"lightmare","category":"ok","action":"keep"}
+{"msgid":"lightmare_description","category":"ok","action":"keep"}
+{"msgid":"lightning_spheres","category":"ok","action":"keep"}
+{"msgid":"lineage","category":"ok","action":"keep"}
+{"msgid":"lions_tooth","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"lizard","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"log_off","category":"style","action":"override","reason":"“注销”容易被理解为销毁账户，菜单动作应为退出登录","translation":"退出登录"}
+{"msgid":"loliferno","category":"ok","action":"keep"}
+{"msgid":"lucky_bamboo","category":"ok","action":"keep"}
+{"msgid":"lucky_bamboo_description","category":"ok","action":"keep"}
+{"msgid":"lunight","category":"ok","action":"keep"}
+{"msgid":"lust","category":"ok","action":"keep"}
+{"msgid":"maamiexist","category":"ok","action":"keep"}
+{"msgid":"maamiexist2","category":"style","action":"keep","reason":"“有什么感兴趣的东西吗”略显直译，但可理解为询问发现"}
+{"msgid":"maamiexist3","category":"style","action":"keep","reason":"Ubuntu/Gnome 未本地化且中英文间缺空格，但不妨碍理解"}
+{"msgid":"maamiexist4","category":"mistranslation","action":"override","reason":"leave it 在此指别没收电脑，不是“离开它”","translation":"不，别动它。这些人显然品味糟糕，而且鄙视实用与简洁……\\n格兰特，现在去检查实验室。我在这里等约翰。"}
+{"msgid":"maamnothing","category":"ok","action":"keep"}
+{"msgid":"maamnothing2","category":"mistranslation","action":"override","reason":"having a moment 被错译成“迟到了”","translation":"该死的，约翰！我们刚才气氛正好呢！\\n你想干什么？"}
+{"msgid":"maamnothing3","category":"ok","action":"keep"}
+{"msgid":"maamnothing4","category":"ok","action":"keep"}
+{"msgid":"maamnothing5","category":"ok","action":"keep"}
+{"msgid":"maamnothing6","category":"ok","action":"keep"}
+{"msgid":"magma","category":"ok","action":"keep"}
+{"msgid":"magmaturtle","category":"ok","action":"keep"}
+{"msgid":"manosting","category":"ok","action":"keep"}
+{"msgid":"manosting_description","category":"mistranslation","action":"override","reason":"contemplating 是思索，并非注视","translation":"它漂浮在城市上空，思索着鲨鱼的事。"}
+{"msgid":"maple_bedroom_sign","category":"ok","action":"keep"}
+{"msgid":"maple_wren","category":"ok","action":"keep"}
+{"msgid":"masknake","category":"ok","action":"keep"}
+{"msgid":"masknake_description","category":"ok","action":"keep"}
+{"msgid":"medushock","category":"ok","action":"keep"}
+{"msgid":"medushock_description","category":"omission","action":"override","reason":"漏译末句 Swim safely","translation":"它们往往远离海岸，而且以攻击人类著称。它们用刺针击晕猎物。游泳时请注意安全。"}
+{"msgid":"meltdown","category":"ok","action":"keep"}
+{"msgid":"memnomnom","category":"ok","action":"keep"}
+{"msgid":"memnomnom_description","category":"style","action":"keep","reason":"多个“的”连续嵌套略显累赘，但意义准确"}
+{"msgid":"mending","category":"ok","action":"keep"}
+{"msgid":"menu_alphabet","category":"ok","action":"keep"}
+{"msgid":"menu_back_key","category":"ok","action":"keep"}
+{"msgid":"menu_bag","category":"ok","action":"keep"}
+{"msgid":"menu_down_key","category":"ok","action":"keep"}
+{"msgid":"menu_dropoff","category":"ok","action":"keep"}
+{"msgid":"menu_dropoff_no_monsters","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"menu_fight","category":"ok","action":"keep"}
+{"msgid":"menu_forfeit","category":"ok","action":"keep"}
+{"msgid":"menu_hemisphere","category":"ok","action":"keep"}
+{"msgid":"menu_hemisphere_north","category":"ok","action":"keep"}
+{"msgid":"menu_hemisphere_south","category":"ok","action":"keep"}
+{"msgid":"menu_item","category":"ok","action":"keep"}
+{"msgid":"menu_item_dropoff","category":"ok","action":"keep"}
+{"msgid":"menu_item_storage","category":"ok","action":"keep"}
+{"msgid":"menu_items","category":"ok","action":"keep"}
+{"msgid":"menu_journal","category":"ok","action":"keep"}
+{"msgid":"menu_left_key","category":"ok","action":"keep"}
+{"msgid":"menu_load","category":"ok","action":"keep"}
+{"msgid":"menu_minigame","category":"ok","action":"keep"}
+{"msgid":"menu_monster","category":"ok","action":"keep"}
+{"msgid":"menu_monsters","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"menu_multiplayer","category":"ok","action":"keep"}
+{"msgid":"menu_music_daynight","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"menu_music_volume","category":"ok","action":"keep"}
+{"msgid":"menu_new_game","category":"ok","action":"keep"}
+{"msgid":"menu_options","category":"ok","action":"keep"}
+{"msgid":"menu_player","category":"ok","action":"keep"}
+{"msgid":"menu_primary_select_key","category":"ok","action":"keep"}
+{"msgid":"menu_right_key","category":"ok","action":"keep"}
+{"msgid":"menu_run","category":"ok","action":"keep"}
+{"msgid":"menu_save","category":"ok","action":"keep"}
+{"msgid":"menu_secondary_select_key","category":"ok","action":"keep"}
+{"msgid":"menu_sound_volume","category":"ok","action":"keep"}
+{"msgid":"menu_storage","category":"ok","action":"keep"}
+{"msgid":"menu_storage_empty_kennel","category":"ok","action":"keep"}
+{"msgid":"menu_storage_take_monster","category":"ok","action":"keep"}
+{"msgid":"menu_tuxepedia","category":"ok","action":"keep"}
+{"msgid":"menu_units","category":"ok","action":"keep"}
+{"msgid":"menu_units_imperial","category":"ok","action":"keep"}
+{"msgid":"menu_units_metric","category":"ok","action":"keep"}
+{"msgid":"menu_up_key","category":"ok","action":"keep"}
+{"msgid":"merlicun","category":"ok","action":"keep"}
+{"msgid":"metal","category":"ok","action":"keep"}
+{"msgid":"metal_booster","category":"ok","action":"keep"}
+{"msgid":"metal_booster_description","category":"ok","action":"keep"}
+{"msgid":"metal_water","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"metesaur","category":"ok","action":"keep"}
+{"msgid":"metesaur_description","category":"mistranslation","action":"override","reason":"dive into the ground 是向地面俯冲，不是潜入地下；后句也误作判断撞击本身","translation":"这种精灵喜欢俯冲地面并留下痕迹。有时，它会误判撞击位置，落进树林，引发规模巨大且十分危险的森林火灾。"}
+{"msgid":"miaow_milk","category":"ok","action":"keep"}
+{"msgid":"miaow_milk_description","category":"ok","action":"keep"}
+{"msgid":"miaownolith","category":"ok","action":"keep"}
+{"msgid":"miaownolith_description","category":"ok","action":"keep"}
+{"msgid":"midnight_mantle","category":"ok","action":"keep"}
+{"msgid":"misa","category":"ok","action":"keep"}
+{"msgid":"misaisleavingfornow","category":"mistranslation","action":"override","reason":"Julius 被错译成另一个名字“朱利安”","translation":"马特、尤利乌斯，我们走吧。"}
+{"msgid":"misaisleavingfornow2","category":"ok","action":"keep"}
+{"msgid":"mistaken","category":"ok","action":"keep"}
+{"msgid":"mistakenknight","category":"ok","action":"keep"}
+{"msgid":"mk01_alpha","category":"ok","action":"keep"}
+{"msgid":"mk01_alpha_description","category":"style","action":"override","reason":"“不要问我们怎么做”不像对既成融合体的自然说明","translation":"杀手机器人与龙的融合体。别问我们是怎么做到的。"}
+{"msgid":"mk01_beta","category":"ok","action":"keep"}
+{"msgid":"mk01_beta_description","category":"style","action":"override","reason":"“不要问我们怎么做”不像对既成融合体的自然说明","translation":"杀手机器人与龙的融合体。别问我们是怎么做到的。"}
+{"msgid":"mk01_delta","category":"ok","action":"keep"}
+{"msgid":"mk01_delta_description","category":"style","action":"override","reason":"“不要问我们如何”句子残缺","translation":"杀手机器人与龙的融合体。别问我们是怎么做到的。"}
+{"msgid":"mk01_gamma","category":"ok","action":"keep"}
+{"msgid":"mk01_gamma_description","category":"style","action":"override","reason":"“不要问我们怎么做”不像对既成融合体的自然说明","translation":"杀手机器人与龙的融合体。别问我们是怎么做到的。"}
+{"msgid":"mk01_omega","category":"ok","action":"keep"}
+{"msgid":"mk01_omega_description","category":"style","action":"override","reason":"“不要问我们怎么做”不像对既成融合体的自然说明","translation":"杀手机器人与龙的融合体。别问我们是怎么做到的。"}
+{"msgid":"mk01_proto","category":"ok","action":"keep"}
+{"msgid":"mk01_proto_description","category":"style","action":"override","reason":"“不要问我们怎么做”不像对既成融合体的自然说明","translation":"杀手机器人与龙的融合体。别问我们是怎么做到的。"}
+{"msgid":"mobbing","category":"ok","action":"keep"}
+{"msgid":"moloch","category":"ok","action":"keep"}
+{"msgid":"moloch_description","category":"ok","action":"keep"}
+{"msgid":"monster_menu_desc","category":"ok","action":"keep"}
+{"msgid":"monster_menu_info","category":"ok","action":"keep"}
+{"msgid":"monster_menu_move","category":"ok","action":"keep"}
+{"msgid":"monster_menu_release","category":"ok","action":"keep"}
+{"msgid":"monster_menu_shape","category":"ok","action":"keep"}
+{"msgid":"monster_menu_species","category":"ok","action":"keep"}
+{"msgid":"monster_menu_tech","category":"ok","action":"keep"}
+{"msgid":"monster_menu_type","category":"ok","action":"keep"}
+{"msgid":"moreannouncement","category":"glossary","action":"override","reason":"Fondent Region 应按名词表译为“方登地区”","translation":"方登地区的全体公民请注意！"}
+{"msgid":"moreannouncement2","category":"glossary","action":"override","reason":"Fondent Region、Cotton Town 未遵循名词表，且中文多出七处硬换行并有多处误译漏译","translation":"很抱歉直到这么晚才通知各位我要发表这次讲话，但我认为有必要赶在媒体泄露消息之前向大家说明……\\n不过……呵。媒体归我们所有，所以泄不泄露似乎也无所谓，但我还是想把这一切告诉大家。\\n在与顾问商议后，我们认为，要让大家更习惯与精灵相处，最好的办法就是使用它们。\\n当然，要把它们纳入劳动队伍还需要一段时间；不过在此期间，正如我先前所说，我们会将它们放归野外。\\n我知道这会让所有人震惊，也明白你们中有些人甚至会害怕。我们都知道以前发生过什么……\\n但现在不是害怕的时候，因为全能公司将出资复兴名为“试炼”的古老传统！\\n对不太了解方登地区历史的人来说，一百年前曾有一项传统：年轻男女会捕捉并培育精灵。\\n他们会用这些精灵与别人对战，在各自的城镇提升等级；最优秀的精灵训练师能够获得地位与权力。\\n我们会为现代社会重塑这项传统，在方登地区的多个城市设立对战区。\\n每个对战区都必须依次通过，最有前途的一名或多名训练师将有资格挑战冠军赛。\\n冠军赛将在暖棉镇的全能公司塔顶举行，但要等到有精灵训练师通过所有对战区之后才会开赛。\\n试炼旨在让精灵逐步融入公共生活，并鼓励大家游历整个地区。\\n还有谁比我们的年轻人更适合展示这一切呢？\\n每场对战都会在全能公司-T 现场直播；这是专门播放精灵相关节目的最新电视台！\\n别担心，新增费用会体现在你们的账单上。\\n哦，还有一件事：所有精灵训练师都不受宵禁限制。\\n当然，在此之前，你得先有一只精灵！但不是所有人都能成为精灵训练师，否则就彻底乱套了！\\n首先，你要向当地的全能公司代表登记姓名；如果获选，就会被送去接受全能公司的训练。\\n顺利完成训练后，你会获赠一只精灵，并可以开始参加试炼！\\n我期待与各位见面！让我们携手创造一个新世界！\\n毕竟……我们代表安全，我们代表秩序，我们就是全能公司！而现在，\\n我\\n们\\n就\\n是未来！"}
+{"msgid":"move_to_kennel","category":"style","action":"override","reason":"英文是命令/菜单动作，现译误用完成时“移动到了”","translation":"移至{box}"}
+{"msgid":"moverocky","category":"style","action":"override","reason":"末句“I believe”在中文里主语所信内容悬空","translation":"加油，洛基！你能动起来的！我相信你能行！"}
+{"msgid":"moverocky2","category":"ok","action":"keep"}
+{"msgid":"mrmoswitch","category":"ok","action":"keep"}
+{"msgid":"mrmoswitch_description","category":"style","action":"override","reason":"“被用于精细的运动技能”是生硬且不合搭配的直译","translation":"这些调皮的机器人因精细操作能力而受到重用，但它们特别爱恶作剧。"}
+{"msgid":"muck","category":"ok","action":"keep"}
+{"msgid":"muddle","category":"ok","action":"keep"}
+{"msgid":"mudslide","category":"ok","action":"keep"}
+{"msgid":"multiplayer_accept","category":"ok","action":"keep"}
+{"msgid":"multiplayer_already_hosting","category":"mistranslation","action":"override","reason":"hosting 指正在作为游戏主机，非“举办”","translation":"已经在创建游戏房间了！"}
+{"msgid":"multiplayer_decline","category":"ok","action":"keep"}
+{"msgid":"multiplayer_duel","category":"style","action":"override","reason":"Duel 应体现一对一决斗含义","translation":"{name}想和你决斗！"}
+{"msgid":"multiplayer_host_game","category":"mistranslation","action":"override","reason":"Host Game 是创建/主持游戏的动作，不是名词“主机游戏”","translation":"创建游戏"}
+{"msgid":"multiplayer_hosting_ready","category":"ok","action":"keep"}
+{"msgid":"multiplayer_join_game","category":"ok","action":"keep"}
+{"msgid":"multiplayer_join_prompt","category":"ok","action":"keep"}
+{"msgid":"multiplayer_no_servers","category":"ok","action":"keep"}
+{"msgid":"multiplayer_scan_games","category":"mistranslation","action":"override","reason":"Browse Available Servers 被错译成“扫描游戏”，丢失服务器含义","translation":"浏览可用服务器"}
+{"msgid":"mwah","category":"glossary","action":"override","reason":"Omnichannel 未译为“全能公司”，中文还多出一处硬换行并夹有乱码标点","translation":"？？？：你想干什么？…… …… …… 真遗憾。就算符合着装要求，你也休想进去。\\n顺便说一句，我叫艾莉。\\n艾莉：对，这里就是全能公司，不过我只是个小小的警卫。你是谁？\\n${{name}}……\\n嗯，真是个有力的名字。我家离这里不远，也许……下班后……你可以让我见识一下你的实力？\\n…… …… 不！什么叫“不”？除非…… …… 你是杰西的新男朋友，对吧！她一直都在耍我！"}
+{"msgid":"mwah2","category":"ok","action":"keep"}
+{"msgid":"mystic_blending","category":"ok","action":"keep"}
+{"msgid":"mystikapi","category":"ok","action":"keep"}
+{"msgid":"mystikapi_description","category":"ok","action":"keep"}
+{"msgid":"narcileaf","category":"ok","action":"keep"}
+{"msgid":"narcileaf_description","category":"style","action":"keep","reason":"“将花园恢复到荣耀”略显直译，但含义可辨"}
+{"msgid":"negation","category":"ok","action":"keep"}
+{"msgid":"nest","category":"ok","action":"keep"}
+{"msgid":"neutrito","category":"ok","action":"keep"}
+{"msgid":"neutrito_description","category":"ok","action":"keep"}
+{"msgid":"nightcrawler","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"nimrod_badge","category":"glossary","action":"override","reason":"Nimrod 应按名词表译为“尼姆罗德”","translation":"徽章：尼姆罗德"}
+{"msgid":"nimrod_badge_description","category":"glossary","action":"override","reason":"Nimrod 应按名词表译为“尼姆罗德”","translation":"从尼姆罗德购买的精灵需要这枚徽章才能变形。"}
+{"msgid":"no","category":"ok","action":"keep"}
+{"msgid":"no_evolution","category":"ok","action":"keep"}
+{"msgid":"no_money_operation","category":"style","action":"override","reason":"“{operation}不可能”不像自然的操作失败提示","translation":"无法执行{operation}！"}
+{"msgid":"no_signal","category":"ok","action":"keep"}
+{"msgid":"no_type","category":"ok","action":"keep"}
+{"msgid":"nobody","category":"ok","action":"keep"}
+{"msgid":"nobody2","category":"style","action":"override","reason":"keep your secrets 被机械译作“保持你的秘密”","translation":"好吧！那你就守着你的秘密吧！"}
+{"msgid":"nobodygetsthrough","category":"ok","action":"keep"}
+{"msgid":"nochoiceTuxemon","category":"ok","action":"keep"}
+{"msgid":"noctalo","category":"ok","action":"keep"}
+{"msgid":"noctalo_description","category":"ok","action":"keep"}
+{"msgid":"noctula","category":"ok","action":"keep"}
+{"msgid":"noctula_description","category":"mistranslation","action":"override","reason":"把两种精灵的食物完全对调：英文是本体吃水果、PIPIS 吃虫","translation":"它吃水果，皮斯蝠吃虫子，因此尽管生活区域相近，它们也不会争夺食物。"}
+{"msgid":"noddingoff","category":"mistranslation","action":"override","reason":"Nodding Off 是打瞌睡，不是“点头离开”","translation":"打瞌睡"}
+{"msgid":"nodrink","category":"ok","action":"keep"}
+{"msgid":"nopenotyet","category":"ok","action":"keep"}
+{"msgid":"normal","category":"ok","action":"keep"}
+{"msgid":"nostray","category":"ok","action":"keep"}
+{"msgid":"nostray_description","category":"ok","action":"keep"}
+{"msgid":"not_implemented","category":"ok","action":"keep"}
+{"msgid":"not_really","category":"ok","action":"keep"}
+{"msgid":"notalk","category":"mistranslation","action":"override","reason":"insensitive 指不体谅人，直译成“不敏感”不合语境","translation":"你也太不近人情了！可惜，不管怎样你都得听我说！"}
+{"msgid":"npc_red","category":"ok","action":"keep"}
+{"msgid":"nudiflot_female","category":"mistranslation","action":"override","reason":"female 条目误用了雄性符号","translation":"浮蛞蝓♀"}
+{"msgid":"nudiflot_female_description","category":"ok","action":"keep"}
+{"msgid":"nudiflot_male","category":"mistranslation","action":"override","reason":"male 条目误用了雌性符号","translation":"浮蛞蝓♂"}
+{"msgid":"nudiflot_male_description","category":"style","action":"override","reason":"生物的 antenna 应译作触角而非“天线”","translation":"受到攻击时，它羽毛状的触角会折断，以此迷惑捕食者。"}
+{"msgid":"nudikill","category":"ok","action":"keep"}
+{"msgid":"nudikill_description","category":"style","action":"keep","reason":"用“他们”指代精灵不够自然，但不影响含义"}
+{"msgid":"nudimind","category":"ok","action":"keep"}
+{"msgid":"nudimind_description","category":"ok","action":"keep"}
+{"msgid":"nuenflu","category":"ok","action":"keep"}
+{"msgid":"nuenflu_description","category":"style","action":"keep","reason":"“依偎在家中”搭配略显生硬，但能表达其冬季入户传播疾病"}
+{"msgid":"nut","category":"ok","action":"keep"}
+{"msgid":"nut_description","category":"ok","action":"keep"}
+{"msgid":"obtainedpapers","category":"ok","action":"keep"}
+{"msgid":"octabode","category":"ok","action":"keep"}
+{"msgid":"octabode_description","category":"style","action":"keep","reason":"末尾多层定语略显冗长，但语义完整"}
+{"msgid":"oedipus","category":"ok","action":"keep"}
+{"msgid":"ohaimisa","category":"ok","action":"keep"}
+{"msgid":"ohaimisa2","category":"glossary","action":"override","reason":"Xero 按名词表应保留英文，不应音译为“谢罗”","translation":"我听说有个 Xero 暴徒在揍我的手下，但没想到会是你，米萨！"}
+{"msgid":"ohaimisa3","category":"ok","action":"keep"}
+{"msgid":"ohaimisa4","category":"drift","action":"override","reason":"中文擅自在句中插入换行，末尾 and all 也被误译","translation":"我为什么在这里？我可是这个项目的负责人！为整个地区打造示范对战区是一项荣誉！\\n不过，看你正忙着和新玩物四处嬉闹，没听说这消息也不奇怪。"}
+{"msgid":"ohaimisa5","category":"ok","action":"keep"}
+{"msgid":"ohaimisa6","category":"omission","action":"override","reason":"漏译结尾 Toodles，导致英文的一处换行也消失","translation":"啊，算了。反正我还有更重要的事要处理。你们两个玩得开心点，还有别再伤害我的手下了！\\n回头见！"}
+{"msgid":"ohaimisa7","category":"ok","action":"keep"}
+{"msgid":"ohnoes","category":"ok","action":"keep"}
+{"msgid":"ohnoes2","category":"glossary","action":"override","reason":"剧情明确指 Potion 道具，应统一译为“治疗药水”","translation":"这件事总算解决了……我们还得去精灵商店买治疗药水。\\n不过一定要在宵禁前回来！"}
+{"msgid":"oimate","category":"ok","action":"keep"}
+{"msgid":"okaythen","category":"ok","action":"keep"}
+{"msgid":"okaythen2","category":"omission","action":"override","reason":"漏译 Have a wonderful day，并错添“他们在这里”，同时丢失换行","translation":"好了，看来你的精灵已经全都康复了！\\n祝你度过愉快的一天！"}
+{"msgid":"omnichannel_badge","category":"ok","action":"keep"}
+{"msgid":"omnichannel_badge_description","category":"ok","action":"keep"}
+{"msgid":"omnichannel_mobile","category":"glossary","action":"override","reason":"品牌名 Omnichannel 应保留名词表中的“全能公司”译法","translation":"全能公司移动通信 4G"}
+{"msgid":"omnichannelarrives","category":"ok","action":"keep"}
+{"msgid":"one_two","category":"ok","action":"keep"}
+{"msgid":"oops","category":"ok","action":"keep"}
+{"msgid":"oopsie","category":"ok","action":"keep"}
+{"msgid":"oopsie2","category":"ok","action":"keep"}
+{"msgid":"options_new_input_key0","category":"ok","action":"keep"}
+{"msgid":"options_new_input_key1","category":"ok","action":"keep"}
+{"msgid":"orange","category":"ok","action":"keep"}
+{"msgid":"orange_description","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"orange_flowers","category":"ok","action":"keep"}
+{"msgid":"orbs","category":"ok","action":"keep"}
+{"msgid":"ouroboutlet","category":"ok","action":"keep"}
+{"msgid":"ouroboutlet_description","category":"ok","action":"keep"}
+{"msgid":"ourstuffisours","category":"ok","action":"keep"}
+{"msgid":"outside","category":"ok","action":"keep"}
+{"msgid":"overfeed","category":"ok","action":"keep"}
+{"msgid":"overgrowth","category":"ok","action":"keep"}
+{"msgid":"page_tuxepedia","category":"ok","action":"keep"}
+{"msgid":"pairagrim","category":"ok","action":"keep"}
+{"msgid":"pairagrim_description","category":"ok","action":"keep"}
+{"msgid":"pairagrin","category":"ok","action":"keep"}
+{"msgid":"pairagrin_description","category":"ok","action":"keep"}
+{"msgid":"pantherafira","category":"ok","action":"keep"}
+{"msgid":"pantherafira_description","category":"style","action":"keep","reason":"“力量就会被分享”略显被动生硬，但意思准确"}
+{"msgid":"paper_town","category":"glossary","action":"override","reason":"Paper Town 必须完整译为“方絮镇”","translation":"方絮镇"}
+{"msgid":"paper_town_description","category":"glossary","action":"override","reason":"Fondent 应依照 Fondent Region 术语译为“方登地区”","translation":"通往方登地区的门户！"}
+{"msgid":"peace_lily","category":"ok","action":"keep"}
+{"msgid":"peace_lily_description","category":"style","action":"override","reason":"hardy 描述植物耐养，并非人格意义上的“坚韧”","translation":"送给特别之人的耐养室内植物。"}
+{"msgid":"peck","category":"ok","action":"keep"}
+{"msgid":"peregrine","category":"ok","action":"keep"}
+{"msgid":"perfect_cut","category":"ok","action":"keep"}
+{"msgid":"petrified_dung","category":"ok","action":"keep"}
+{"msgid":"petrified_dung_description","category":"ok","action":"keep"}
+{"msgid":"petrify","category":"ok","action":"keep"}
+{"msgid":"phantasmal_force","category":"ok","action":"keep"}
+{"msgid":"pharfan","category":"ok","action":"keep"}
+{"msgid":"pharfan_description","category":"glossary","action":"override","reason":"RINOCEREED 与 HAMPOTAMOS 均未使用名词表译名","translation":"在水潭边，它会让朋友芦犀和罕博塔摩斯都喝足水。"}
+{"msgid":"phone_no_answer","category":"ok","action":"keep"}
+{"msgid":"picc","category":"ok","action":"keep"}
+{"msgid":"picc_description","category":"ok","action":"keep"}
+{"msgid":"pick_up","category":"ok","action":"keep"}
+{"msgid":"pigabyte","category":"ok","action":"keep"}
+{"msgid":"pigabyte_description","category":"ok","action":"keep"}
+{"msgid":"pilthropus","category":"ok","action":"keep"}
+{"msgid":"pilthropus_description","category":"ok","action":"keep"}
+{"msgid":"pipis","category":"ok","action":"keep"}
+{"msgid":"pipis_description","category":"style","action":"keep","reason":"精灵叫声译成“哭声”略显不自然，但主要含义未变"}
+{"msgid":"pit","category":"ok","action":"keep"}
+{"msgid":"platinum","category":"ok","action":"keep"}
+{"msgid":"player_battles","category":"ok","action":"keep"}
+{"msgid":"player_walked","category":"ok","action":"keep"}
+{"msgid":"player_wallet","category":"ok","action":"keep"}
+{"msgid":"poinchin","category":"ok","action":"keep"}
+{"msgid":"poinchin_description","category":"ok","action":"keep"}
+{"msgid":"poison","category":"ok","action":"keep"}
+{"msgid":"poison_courtship","category":"ok","action":"keep"}
+{"msgid":"polyrock","category":"ok","action":"keep"}
+{"msgid":"polyrock_description","category":"ok","action":"keep"}
+{"msgid":"possessun","category":"ok","action":"keep"}
+{"msgid":"possessun_description","category":"ok","action":"keep"}
+{"msgid":"potion","category":"ok","action":"keep"}
+{"msgid":"potion_description","category":"mistranslation","action":"override","reason":"“回复生命”是错字，应为恢复","translation":"为一只精灵恢复 50 点生命值。"}
+{"msgid":"potions2","category":"style","action":"override","reason":"药水量词用“个”不自然","translation":"收到了 2 瓶治疗药水！"}
+{"msgid":"potions_in_shop","category":"ok","action":"keep"}
+{"msgid":"prehensile","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"proboscis","category":"ok","action":"keep"}
+{"msgid":"professor","category":"ok","action":"keep"}
+{"msgid":"professor-cardiling","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"professor-rockitten","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"professor-tweesher","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"professorexists","category":"glossary","action":"override","reason":"剧情明确购买 Potion 道具，应统一译为“治疗药水”","translation":"请给我 12 瓶治疗药水。"}
+{"msgid":"professorexists1","category":"ok","action":"keep"}
+{"msgid":"professorexists1.5","category":"mistranslation","action":"override","reason":"Why hello there 是热情问候，并非询问“为什么”","translation":"哎呀，你好啊！"}
+{"msgid":"professorexists2","category":"mistranslation","action":"override","reason":"on the house 指免费赠送，被错译成“在我家里”","translation":"你一定是凯莉的孩子！你妈妈跟我说过很多你的事。\\n是什么风把你吹来了？\\n.... .... ....\\n药水？当然，那可是随时都用得上的！\\n来，免费送你几瓶，算我请客。"}
+{"msgid":"professorexists3","category":"glossary","action":"override","reason":"Fondent Region 应按名词表译为“方登地区”","translation":"哦！真是失礼，我竟然一直没做自我介绍！\\n我叫凯·雷恩，人们更熟悉的称呼是精灵教授。\\n多年来，我一直是方登地区唯一获准研究精灵的人。"}
+{"msgid":"professorexists4","category":"ok","action":"keep"}
+{"msgid":"professorswife","category":"ok","action":"keep"}
+{"msgid":"propellercat","category":"ok","action":"keep"}
+{"msgid":"propellercat_description","category":"ok","action":"keep"}
+{"msgid":"prophetoise","category":"ok","action":"keep"}
+{"msgid":"prophetoise_description","category":"style","action":"override","reason":"see coming 是预料到，并非真的“看到”某个东西","translation":"敌人很难预料到它的天火。"}
+{"msgid":"pseudopod","category":"ok","action":"keep"}
+{"msgid":"puparmor","category":"ok","action":"keep"}
+{"msgid":"puparmor_description","category":"style","action":"override","reason":"“有一个盔甲蛹掉在他们身上”明显生硬且代词指向含混","translation":"它的茧硬得惊人，要是盔甲蛹掉到人身上，能把人当场砸晕。过去，人们还曾把它们装进大炮和投石机。"}
+{"msgid":"pupil","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"purple_flowers","category":"ok","action":"keep"}
+{"msgid":"pyramidion","category":"ok","action":"keep"}
+{"msgid":"pyramidion_description","category":"mistranslation","action":"override","reason":"celestial power 是天界/苍穹之力，不是“天人合一”","translation":"一个嗡嗡作响、充满苍穹之力的金色三角体。"}
+{"msgid":"pyraminx","category":"ok","action":"keep"}
+{"msgid":"pyraminx_description","category":"style","action":"keep","reason":"连续重复“坟墓”略显累赘，但含义准确"}
+{"msgid":"pythock","category":"ok","action":"keep"}
+{"msgid":"pythock_description","category":"style","action":"override","reason":"把 shadow puppets 反复译成表演形式“皮影戏”，句式也严重重复","translation":"它能以极高的精准度和速度操纵影偶攻击对手。它们更加自信，有时甚至会在木偶戏中用影偶逗小孩子开心。"}
+{"msgid":"pythwire","category":"ok","action":"keep"}
+{"msgid":"pythwire_description","category":"ok","action":"keep"}
+{"msgid":"qetzlrokilus","category":"ok","action":"keep"}
+{"msgid":"qetzlrokilus_description","category":"glossary","action":"override","reason":"两处 Tuxemon 均被错译成“胥吏”，违反固定译名，且中文多出换行","translation":"这种精灵会俯冲进其他恐龙精灵群中，将它们焚烧。它们还喜欢点燃森林，再把灰烬撒进水里，破坏水质。"}
+{"msgid":"quicklyknight","category":"glossary","action":"override","reason":"Omnichannel 应译为“全能公司”，且 you'll have to do 被误译","translation":"我时间不多了。全能公司的人要来了……\\n我本来该和一个联络人见面，但现在只能由你顶上。他们来了。"}
+{"msgid":"quicklyknight2","category":"glossary","action":"override","reason":"Omnichannel 应译为“全能公司”","translation":"两个人控制着全能公司。董事会不过是个笑话。"}
+{"msgid":"quicklyknight3","category":"ok","action":"keep"}
+{"msgid":"quicklyknight4","category":"ok","action":"keep"}
+{"msgid":"quicksand","category":"ok","action":"keep"}
+{"msgid":"rabbitosaur","category":"ok","action":"keep"}
+{"msgid":"rabbitosaur_description","category":"ok","action":"keep"}
+{"msgid":"radiance","category":"ok","action":"keep"}
+{"msgid":"ram","category":"ok","action":"keep"}
+{"msgid":"random","category":"ok","action":"keep"}
+{"msgid":"receive_happiness","category":"ok","action":"keep"}
+{"msgid":"received_x","category":"ok","action":"keep"}
+{"msgid":"recover","category":"ok","action":"keep"}
+{"msgid":"refresh","category":"ok","action":"keep"}
+{"msgid":"reg_papers","category":"ok","action":"keep"}
+{"msgid":"reg_papers_description","category":"mistranslation","action":"override","reason":"The Trial 被误译成泛化的“训练师大赛”，packet 也不是“一袋”","translation":"一套用于试炼的注册文件。"}
+{"msgid":"release_confirmation","category":"glossary","action":"override","reason":"Release 在精灵菜单中应按名词表译为“放生”","translation":"确定要放生{name}吗？"}
+{"msgid":"restless","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"revive","category":"ok","action":"keep"}
+{"msgid":"revive_description","category":"drift","action":"override","reason":"当前英文为恢复一半 HP，中文仍写固定 20 点","translation":"复活倒下的精灵，并恢复一半生命值。"}
+{"msgid":"rhincus","category":"ok","action":"keep"}
+{"msgid":"rhincus_description","category":"ok","action":"keep"}
+{"msgid":"rhincus_fossil","category":"ok","action":"keep"}
+{"msgid":"rhincus_fossil_description","category":"ok","action":"keep"}
+{"msgid":"ring","category":"ok","action":"keep"}
+{"msgid":"rip","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"ripjimmy","category":"drift","action":"override","reason":"中文擅自在残缺碑文中插入换行","translation":"墓碑上写着：\\n吉米长眠于此。他是一位朋友、一名骑士，也是个……总体而言的坏人。不过，……从未…… ……救命！……\\n其余文字已经风化了。"}
+{"msgid":"rock","category":"ok","action":"keep"}
+{"msgid":"rockat","category":"ok","action":"keep"}
+{"msgid":"rockat_description","category":"style","action":"keep","reason":"“有相当大的重量”略显直译，但不影响理解"}
+{"msgid":"rockitten","category":"ok","action":"keep"}
+{"msgid":"rockitten!","category":"ok","action":"keep"}
+{"msgid":"rockitten_description","category":"style","action":"keep","reason":"译文补出“主人”，虽属轻微增译但不影响核心含义"}
+{"msgid":"rockywhy","category":"glossary","action":"override","reason":"Cotton Town 必须译为“暖棉镇”","translation":"等等，洛基，别停在这里！我们都已经走了这么远！\\n我知道你喜欢草地，但我们得赶到暖棉镇！"}
+{"msgid":"rosarin","category":"ok","action":"keep"}
+{"msgid":"rosarin_description","category":"style","action":"override","reason":"“要求一些感情”不符合中文搭配","translation":"罗萨林有着无比深厚的爱，它所求的只是一点关爱。"}
+{"msgid":"rot","category":"ok","action":"keep"}
+{"msgid":"route","category":"ok","action":"keep"}
+{"msgid":"route1","category":"ok","action":"keep"}
+{"msgid":"route1_description","category":"ok","action":"keep"}
+{"msgid":"route1_sanglorian","category":"ok","action":"keep"}
+{"msgid":"route2","category":"ok","action":"keep"}
+{"msgid":"route2_description","category":"ok","action":"keep"}
+{"msgid":"route2speech","category":"ok","action":"keep"}
+{"msgid":"route2speech2","category":"ok","action":"keep"}
+{"msgid":"route2speech3","category":"ok","action":"keep"}
+{"msgid":"route3","category":"ok","action":"keep"}
+{"msgid":"route4","category":"ok","action":"keep"}
+{"msgid":"route5","category":"ok","action":"keep"}
+{"msgid":"route5_description","category":"glossary","action":"override","reason":"Timber Town 应按名词表译为“粽木镇”","translation":"通往粽木镇的纪念通道！"}
+{"msgid":"route6","category":"ok","action":"keep"}
+{"msgid":"routea","category":"ok","action":"keep"}
+{"msgid":"routec","category":"ok","action":"keep"}
+{"msgid":"routed","category":"ok","action":"keep"}
+{"msgid":"routee","category":"ok","action":"keep"}
+{"msgid":"ruby","category":"ok","action":"keep"}
+{"msgid":"ruption","category":"ok","action":"keep"}
+{"msgid":"ruption_description","category":"style","action":"override","reason":"末尾“在这个过程中基本上取代了它”指代不清","translation":"一旦火球兽的火焰变得足够炽热，便会吞没全身，实质上取代它的身体。"}
+{"msgid":"rust_bomb","category":"ok","action":"keep"}
+{"msgid":"saber","category":"ok","action":"keep"}
+{"msgid":"sadito","category":"ok","action":"keep"}
+{"msgid":"sadito_description","category":"ok","action":"keep"}
+{"msgid":"salamander","category":"ok","action":"keep"}
+{"msgid":"sampsack","category":"ok","action":"keep"}
+{"msgid":"sampsack_description","category":"style","action":"keep","reason":"“分裂了他的身体”略显直译，但核心反转完整"}
+{"msgid":"sampsage","category":"ok","action":"keep"}
+{"msgid":"sampsage_description","category":"mistranslation","action":"override","reason":"violent 指暴戾/暴力，不只是“暴躁”","translation":"一位科学家服下一种药后，白天变得聪慧，夜晚却变得暴戾。"}
+{"msgid":"sand_spray","category":"ok","action":"keep"}
+{"msgid":"sanguine","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"sapragon","category":"ok","action":"keep"}
+{"msgid":"sapragon_description","category":"ok","action":"keep"}
+{"msgid":"sapsnap","category":"ok","action":"keep"}
+{"msgid":"sapsnap_description","category":"ok","action":"keep"}
+{"msgid":"saurchin","category":"ok","action":"keep"}
+{"msgid":"saurchin_description","category":"ok","action":"keep"}
+{"msgid":"save_failure","category":"style","action":"override","reason":"原译“存档有问题”含义含混，不如直接说明保存操作失败","translation":"保存时出了问题！"}
+{"msgid":"save_keep","category":"ok","action":"keep"}
+{"msgid":"save_overwrite","category":"ok","action":"keep"}
+{"msgid":"save_success","category":"ok","action":"keep"}
+{"msgid":"sclairus","category":"ok","action":"keep"}
+{"msgid":"sclairus_description","category":"ok","action":"keep"}
+{"msgid":"scoop_badge","category":"ok","action":"keep"}
+{"msgid":"scoop_badge_description","category":"ok","action":"keep"}
+{"msgid":"sea_girdle","category":"ok","action":"keep"}
+{"msgid":"sea_girdle_description","category":"ok","action":"keep"}
+{"msgid":"seeme","category":"ok","action":"keep"}
+{"msgid":"seirein","category":"ok","action":"keep"}
+{"msgid":"seirein_description","category":"ok","action":"keep"}
+{"msgid":"selket","category":"ok","action":"keep"}
+{"msgid":"selket_description","category":"ok","action":"keep"}
+{"msgid":"sell","category":"ok","action":"keep"}
+{"msgid":"selmatek","category":"ok","action":"keep"}
+{"msgid":"selmatek_description","category":"ok","action":"keep"}
+{"msgid":"shadow_boxing","category":"ok","action":"keep"}
+{"msgid":"shady_guy_dialog","category":"mistranslation","action":"override","reason":"把说话者 Shady Guy 改成了功能性称呼“更名者”","translation":"可疑人物：嘿。如果你的名字惹上了些……“麻烦”，我可以替你摆平……"}
+{"msgid":"shady_rename","category":"mistranslation","action":"override","reason":"把说话者 Shady Guy 改成了“改名者”","translation":"可疑人物：祝你和新名字好运，朋友……"}
+{"msgid":"shaft_badge","category":"glossary","action":"override","reason":"徽章名称应与 Shaft 专名“沙夫特”保持一致","translation":"徽章：沙夫特"}
+{"msgid":"shaft_badge_description","category":"glossary","action":"override","reason":"Shaft 和 Tuxemon 均未采用规定译名","translation":"从沙夫特购买的精灵需要这枚徽章才能变形。"}
+{"msgid":"shammer","category":"ok","action":"keep"}
+{"msgid":"shammer_description","category":"glossary","action":"override","reason":"Rhincus 未按术语表译为“飞犀牛”","translation":"在古代，犀牛兽曾在灰暗的天空下猎捕飞犀牛。"}
+{"msgid":"shammer_fossil","category":"ok","action":"keep"}
+{"msgid":"shammer_fossil_description","category":"ok","action":"keep"}
+{"msgid":"shapechange","category":"ok","action":"keep"}
+{"msgid":"sharpfin","category":"ok","action":"keep"}
+{"msgid":"sharpfin_description","category":"ok","action":"keep"}
+{"msgid":"shelagu","category":"ok","action":"keep"}
+{"msgid":"shnark","category":"ok","action":"keep"}
+{"msgid":"shnark_description","category":"mistranslation","action":"override","reason":"trusting prey 指毫无戒心的猎物，不是它所信任的猎物","translation":"什纳基把上一顿猎物的肉披在身上作为伪装，好接近毫无戒心的猎物。"}
+{"msgid":"shop","category":"ok","action":"keep"}
+{"msgid":"shop_buy_free","category":"ok","action":"keep"}
+{"msgid":"shrapnel","category":"ok","action":"keep"}
+{"msgid":"shuriken","category":"ok","action":"keep"}
+{"msgid":"shybulb","category":"ok","action":"keep"}
+{"msgid":"shybulb_description","category":"ok","action":"keep"}
+{"msgid":"skip","category":"ok","action":"keep"}
+{"msgid":"skwib","category":"ok","action":"keep"}
+{"msgid":"skwib_description","category":"style","action":"override","reason":"“担心自己的生命”生硬，未自然表达 fear for its life","translation":"鱿鱼兽心满意足地漂游在海中，打量着可作新家的贝壳。只有到了性命攸关的时刻，它才会终于作出选择。"}
+{"msgid":"sledgehammer","category":"ok","action":"keep"}
+{"msgid":"sledgehammer_description","category":"ok","action":"keep"}
+{"msgid":"sleep_bomb","category":"ok","action":"keep"}
+{"msgid":"sleeping_powder","category":"ok","action":"keep"}
+{"msgid":"slime","category":"ok","action":"keep"}
+{"msgid":"slot","category":"ok","action":"keep"}
+{"msgid":"sludgehog","category":"ok","action":"keep"}
+{"msgid":"sludgehog_description","category":"ok","action":"keep"}
+{"msgid":"slurpy","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"snaki","category":"ok","action":"keep"}
+{"msgid":"snaki_description","category":"ok","action":"keep"}
+{"msgid":"snarlon","category":"ok","action":"keep"}
+{"msgid":"snarlon_description","category":"ok","action":"keep"}
+{"msgid":"sniping","category":"ok","action":"keep"}
+{"msgid":"snock","category":"ok","action":"keep"}
+{"msgid":"snock_description","category":"ok","action":"keep"}
+{"msgid":"snokari","category":"ok","action":"keep"}
+{"msgid":"snokari_description","category":"mistranslation","action":"override","reason":"heads 误作“首脑”，且代词把精灵人格化成多人","translation":"斯诺卡里的两个脑袋各自拥有非凡的智慧，但它们从来无法达成一致。"}
+{"msgid":"snout","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"snowrilla","category":"ok","action":"keep"}
+{"msgid":"snowrilla_description","category":"mistranslation","action":"override","reason":"tag 是追逐游戏，不是捉迷藏","translation":"它喜欢在荒凉的山坡上和滑雪者玩追逐游戏。"}
+{"msgid":"snowstorm","category":"ok","action":"keep"}
+{"msgid":"sockeserp","category":"ok","action":"keep"}
+{"msgid":"sockeserp_description","category":"glossary","action":"override","reason":"漏掉了按术语表应译为“索克瑟普”的主语名，并遗漏 otherwise formidable","translation":"索克瑟普本来是个难缠的敌人，但一旦被缠住，就很容易解决。"}
+{"msgid":"softened","category":"ok","action":"keep"}
+{"msgid":"soiwashearing","category":"mistranslation","action":"override","reason":"把句末对众人的称呼 everyone 误译成“每个人都是如此”","translation":"看来我们终于找到花商了，各位。"}
+{"msgid":"soiwashearing10","category":"mistranslation","action":"override","reason":"be addressed correctly 指得到正确称呼，不是得到正确处理","translation":"我希望你们正确称呼我。"}
+{"msgid":"soiwashearing11","category":"mistranslation","action":"override","reason":"move 是让开位置，不是跟随说话者","translation":"很好，现在让开，我要跟这些所谓的“骑士”谈谈。"}
+{"msgid":"soiwashearing2","category":"ok","action":"keep"}
+{"msgid":"soiwashearing3","category":"ok","action":"keep"}
+{"msgid":"soiwashearing4","category":"mistranslation","action":"override","reason":"原译把“你正在和总理说话”误成“你所说的总理”","translation":"你好大的胆子……\\n你面对的可是总理！放尊重点！"}
+{"msgid":"soiwashearing5","category":"ok","action":"keep"}
+{"msgid":"soiwashearing6","category":"ok","action":"keep"}
+{"msgid":"soiwashearing7","category":"mistranslation","action":"override","reason":"poor thing 是对人的怜惜称呼，不是“可怜的东西”","translation":"她看起来吓坏了，真可怜。"}
+{"msgid":"soiwashearing7.5","category":"ok","action":"keep"}
+{"msgid":"soiwashearing8","category":"glossary","action":"override","reason":"Flower City 未按术语表译为“彩花城”","translation":"更不用说监狱已经因为……彩花城事件而人满为患了。"}
+{"msgid":"soiwashearing9","category":"ok","action":"keep"}
+{"msgid":"solight","category":"ok","action":"keep"}
+{"msgid":"solight_description","category":"ok","action":"keep"}
+{"msgid":"solongjohn","category":"ok","action":"keep"}
+{"msgid":"solongjohn2","category":"ok","action":"keep"}
+{"msgid":"some_category_here","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"somebody","category":"ok","action":"keep"}
+{"msgid":"somebody2","category":"ok","action":"keep"}
+{"msgid":"sorryfurthis","category":"ok","action":"keep"}
+{"msgid":"speed_halved","category":"ok","action":"keep"}
+{"msgid":"spighter","category":"ok","action":"keep"}
+{"msgid":"spighter_description","category":"mistranslation","action":"override","reason":"原译把“自己不会被偷袭”误成“不能偷袭自己”","translation":"这么擅长偷袭别人的家伙，自己却从来不会被偷袭，真不公平。"}
+{"msgid":"spillit","category":"style","action":"override","reason":"译文有多余硬换行且后半句直译生硬","translation":"你知道我是 Xero 研究所的领导，也是我招募了你去对抗他们。但还有一件事你不知道。\\n你之前见过的艾莉……怎么了？我说过我们会一直监视，你不用这么惊讶。"}
+{"msgid":"spillit3","category":"mistranslation","action":"override","reason":"destroyed me 误作“我被摧毁”，并多出一个字面换行","translation":"算了……艾莉是我的妹妹，对我来说她就是整个世界。所以当我发现他把她带到总部时，我心都碎了。"}
+{"msgid":"spillit4","category":"mistranslation","action":"override","reason":"recruits 被误译为“饼干”","translation":"这看起来或许不是坏事，但其实是。你知道他们会怎样对待新成员吗？你知道吗？！"}
+{"msgid":"spillit5","category":"ok","action":"keep"}
+{"msgid":"spillit6","category":"glossary","action":"override","reason":"Omnichannel 未按术语表译为“全能公司”","translation":"总之……这与你无关。重要的是打倒全能公司。"}
+{"msgid":"spillit7","category":"ok","action":"keep"}
+{"msgid":"spit_poison","category":"ok","action":"keep"}
+{"msgid":"splinter","category":"ok","action":"keep"}
+{"msgid":"spoilurm","category":"ok","action":"keep"}
+{"msgid":"spoilurm_description","category":"mistranslation","action":"override","reason":"the unsuspecting 指毫无戒心的对象，不是“没有期待的人”","translation":"苹果兽把自己伪装成苹果，在树上等着吃掉毫无戒心的猎物。"}
+{"msgid":"sprout","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"spycozeus","category":"ok","action":"keep"}
+{"msgid":"spycozeus_description","category":"ok","action":"keep"}
+{"msgid":"spyder_agate_plaque","category":"ok","action":"keep"}
+{"msgid":"spyder_billie","category":"ok","action":"keep"}
+{"msgid":"spyder_billing_cathedral1","category":"ok","action":"keep"}
+{"msgid":"spyder_billing_cathedral2","category":"ok","action":"keep"}
+{"msgid":"spyder_billing_cathedral3","category":"style","action":"override","reason":"条件从句和费用成分错位，中文难以顺畅理解","translation":"如果我们不得不派救护车去接你，还要加收 ${{currency}}${{var:cathedral_fee}} 的出车费。"}
+{"msgid":"spyder_billing_cathedral4","category":"ok","action":"keep"}
+{"msgid":"spyder_billing_cathedral5","category":"ok","action":"keep"}
+{"msgid":"spyder_billing_cathedral6","category":"ok","action":"keep"}
+{"msgid":"spyder_campaign","category":"glossary","action":"override","reason":"标题中的 Tuxemon 未按规定译为“精灵”","translation":"精灵：斯派德与大教堂"}
+{"msgid":"spyder_citypark2_florist","category":"mistranslation","action":"override","reason":"under the weather 是状态不佳，不是“风雨飘摇”；译文还多出字面换行","translation":"这些花看起来还好，不是吗？……自从皮革城开始采矿后，它们就一直没精打采的！"}
+{"msgid":"spyder_citypark_achievement","category":"drift","action":"override","reason":"译文无依据地多出“关闭”","translation":"成就狂人之家"}
+{"msgid":"spyder_citypark_bobette","category":"ok","action":"keep"}
+{"msgid":"spyder_citypark_bobette1","category":"ok","action":"keep"}
+{"msgid":"spyder_citypark_bobette2","category":"ok","action":"keep"}
+{"msgid":"spyder_citypark_edith","category":"ok","action":"keep"}
+{"msgid":"spyder_citypark_edith1","category":"ok","action":"keep"}
+{"msgid":"spyder_citypark_edith2","category":"style","action":"override","reason":"“有一个观点”是生硬直译","translation":"嗯，你说得或许有道理。"}
+{"msgid":"spyder_citypark_florist","category":"ok","action":"keep"}
+{"msgid":"spyder_citypark_frances","category":"ok","action":"keep"}
+{"msgid":"spyder_citypark_frances1","category":"ok","action":"keep"}
+{"msgid":"spyder_citypark_frances2","category":"ok","action":"keep"}
+{"msgid":"spyder_citypark_granny","category":"style","action":"override","reason":"Leather Town 在同批文本中统一作“皮革城”，此处误作“皮革镇”","translation":"稍微休息一下后，我们就走回皮革城。"}
+{"msgid":"spyder_citypark_maniac","category":"mistranslation","action":"override","reason":"pooped 指累坏了，不是大腹便便","translation":"呼，我们累坏了！"}
+{"msgid":"spyder_column1_sign","category":"ok","action":"keep"}
+{"msgid":"spyder_column2_sign","category":"ok","action":"keep"}
+{"msgid":"spyder_cotton_cafeassistant","category":"ok","action":"keep"}
+{"msgid":"spyder_cotton_cafeflorist1","category":"ok","action":"keep"}
+{"msgid":"spyder_cotton_cafeflorist2","category":"ok","action":"keep"}
+{"msgid":"spyder_cotton_cafegoth","category":"omission","action":"override","reason":"漏译 heals（免费治疗）","translation":"别看我。我只是来蹭免费小吃和治疗的。"}
+{"msgid":"spyder_cotton_cafegranny","category":"ok","action":"keep"}
+{"msgid":"spyder_cotton_homemaker1","category":"ok","action":"keep"}
+{"msgid":"spyder_cotton_homemaker2","category":"ok","action":"keep"}
+{"msgid":"spyder_cotton_lazybrute","category":"ok","action":"keep"}
+{"msgid":"spyder_cotton_nurse1","category":"ok","action":"keep"}
+{"msgid":"spyder_cotton_tuxepediaintro","category":"drift","action":"override","reason":"译文重复一句并把菜单入口改成了自动安装到手机，且多出字面换行","translation":"目前，关于精灵的可靠信息只有昂贵且内容不全的《精灵百科全书》！\\n 这可不行；信息应该免费公开。因此，我们推出了精灵百科。\\n 它是开源的、免费的，任何人都可以阅读、撰写和编辑。很酷吧？\\n 你可以从菜单中打开精灵百科。 "}
+{"msgid":"spyder_cotton_tuxepediaintro2","category":"ok","action":"keep"}
+{"msgid":"spyder_cotton_tuxepediaintro3","category":"ok","action":"keep"}
+{"msgid":"spyder_cotton_tuxepediaintro4","category":"style","action":"override","reason":"get into it 误直译为“进入它”，影响阅读","translation":"你能来真是太好了。还有很多精灵有待收录——我想有一百多种。\\n 你可以真正投入其中，为世界带来改变。 "}
+{"msgid":"spyder_cottonart_barmaid","category":"style","action":"override","reason":"译文有多余硬换行，画名和销售话术也过度直译","translation":"你喜欢我的这组画吗？\\n 它们记录了我作为职业精灵训练师的早年时光，那时我还没靠比赛奖金退休。\\n 我给它们取名为《怪物目光交汇》《星光灿烂之夜》和《忐忑》。都出售！\\n 趁早下手！每幅只要 1,000。"}
+{"msgid":"spyder_cottonart_barmaid_painting_sold_billie","category":"ok","action":"keep"}
+{"msgid":"spyder_cottonart_billie","category":"ok","action":"keep"}
+{"msgid":"spyder_cottonart_florist","category":"ok","action":"keep"}
+{"msgid":"spyder_cottonart_goth","category":"ok","action":"keep"}
+{"msgid":"spyder_cottonart_granny","category":"ok","action":"keep"}
+{"msgid":"spyder_cottonart_shopkeeper","category":"glossary","action":"override","reason":"Cotton Town 未按规定译为“暖棉镇”，且 currency 占位符少了一层花括号","translation":"欢迎来到暖棉镇美术馆。啊——我是说美术商店！\\n 自从经费被削减，我们不得不把艺术品卖掉，而不能只供展览。\\n 门票为 ${{currency}}50，收入会用于公司的年度分红。"}
+{"msgid":"spyder_cottoncafe_barmaid","category":"ok","action":"keep"}
+{"msgid":"spyder_cottoncafe_barmaidintro","category":"drift","action":"override","reason":"译文重复“互相照顾”并有两个多余字面换行","translation":"我们自称芭莎团队，或许有点自命不凡。\\n 我们是一群喜欢聚在一起喝咖啡、讨论哲学、反抗企业霸主的无赖和恶棍！\\n 我们会互相照应。比如说，不同于大教堂，我们不会收取治疗精灵的费用！\\n 要我现在给它们治疗吗？"}
+{"msgid":"spyder_cottoncafe_hackerchat","category":"ok","action":"keep"}
+{"msgid":"spyder_cottonhouse1_firefighter","category":"ok","action":"keep"}
+{"msgid":"spyder_cottonhouse1_homemaker","category":"ok","action":"keep"}
+{"msgid":"spyder_cottonhouse1_tvwatch","category":"ok","action":"keep"}
+{"msgid":"spyder_cottonhouse2_catgirl","category":"ok","action":"keep"}
+{"msgid":"spyder_cottonhouse2_magician","category":"mistranslation","action":"override","reason":"conditions 是状态，replace 是取代；原译误成属性相克","translation":"有些状态会取代另一些状态。\\n 了解各种状态如何相互作用，是成为精灵对战大师的关键。"}
+{"msgid":"spyder_cottonhouse2_shopkeeper","category":"mistranslation","action":"override","reason":"come after my job 指抢工作，不是打扰工作","translation":"我对其他地区的人没意见。\\n 只要别来抢我的饭碗，明白吗？"}
+{"msgid":"spyder_cottonscoop_deviceexplan","category":"ok","action":"keep"}
+{"msgid":"spyder_cottonscoop_deviceexplan2","category":"mistranslation","action":"override","reason":"servants 被软化成“伙伴”，且译文多出一个字面换行","translation":"精灵球能让你捕捉精灵并把它们当作仆从。\\n 对受伤或等级较低的精灵使用时最有效。战斗中可从“物品”菜单选择精灵球。\\n 感谢聆听。这五个精灵球是免费样品。 "}
+{"msgid":"spyder_cottonscoop_devicenoexplan","category":"glossary","action":"override","reason":"Tuxeballs 未按术语表译为“精灵球”","translation":"     好吧，这里有五个免费样品。\\n 如果你对精灵球的用法有任何疑问，问我的助手就行！"}
+{"msgid":"spyder_cottonscoop_deviceoffer","category":"ok","action":"keep"}
+{"msgid":"spyder_cottonscoop_shopassistant","category":"mistranslation","action":"override","reason":"servants 被软化成“伙伴”","translation":"精灵球能让你捕捉精灵并把它们当作仆从。\\n 对受伤或等级较低的精灵使用时最有效。\\n 战斗中可从“物品”菜单选择精灵球。"}
+{"msgid":"spyder_cottontown_barmaid","category":"ok","action":"keep"}
+{"msgid":"spyder_cottontown_enforcer","category":"ok","action":"keep"}
+{"msgid":"spyder_cottontown_followme","category":"ok","action":"keep"}
+{"msgid":"spyder_cottontown_hacker","category":"ok","action":"keep"}
+{"msgid":"spyder_cottontown_hackerintro","category":"mistranslation","action":"override","reason":"poke them in the eye 误作“戳眼镜”，并少了一个字面换行","translation":"嘿，精灵不错！能让我看看收据吗？\\n ……\\n 开个玩笑，我就觉得你不是通过，呃，官方渠道得到它的。\\n 多年来，五大支柱一直控制着最强的精灵。\\n 你觉得戳他们的眼睛会不会很酷？\\n ……\\n 好！我有个项目交给你。到咖啡馆来找我！"}
+{"msgid":"spyder_cottontown_mom","category":"drift","action":"override","reason":"译文混入三段当前英文没有的旧对话，并违反 Nu Phone 固定译名和换行数","translation":" 不过一定要多给家里打电话。我想找个人讲讲我的发明。\\n ……哦，我忘了，你还没有手机。这是我发明的，我把它叫作 Nu 手机！\\n 你可以在上面安装各种应用。它已经装好了手机地图，你永远不会迷路！"}
+{"msgid":"spyder_cottontown_monk","category":"ok","action":"keep"}
+{"msgid":"spyder_cottontown_stopthere","category":"ok","action":"keep"}
+{"msgid":"spyder_dante","category":"ok","action":"keep"}
+{"msgid":"spyder_diamond_plaque","category":"style","action":"override","reason":"“在首饰上有很好的表现”过度直译，且译文多出一个字面换行","translation":"钻石是举世闻名的最坚硬宝石，很适合镶在项链、订婚戒指和耳环上！\\n 如果你的未婚夫不给你买沙夫特钻戒，他就不爱你！\\n 把钻石喂给精灵能使其皮肤硬化，更好地抵挡物理打击。"}
+{"msgid":"spyder_door_locked","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_angrybrute","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_angrybrute1","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_benden","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_benden1","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_benden2","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_benden3","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_benden4","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_blocked","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_cailin","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_cailin1","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_cailin2","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_concernedbrute","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_concernedbrute1","category":"glossary","action":"override","reason":"Omnichannel HQ 未按术语表译出“全能公司”","translation":"等等，如果我们都在这里——谁在看守全能公司总部？"}
+{"msgid":"spyder_dragonscave_daenny","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_daenny1","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_daenny2","category":"mistranslation","action":"override","reason":"Benden 与同批角色名“本登”不一致","translation":"你也许胜过了我，但你永远胜不过本登。"}
+{"msgid":"spyder_dragonscave_drokoro1","category":"mistranslation","action":"override","reason":"Rawr 是咆哮声，不是表示不满的“哼”","translation":"嗷！"}
+{"msgid":"spyder_dragonscave_griffin","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_griffin1","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_griffin2","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_lazybrute","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_lazybrute1","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_lessa","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_lessa1","category":"style","action":"override","reason":"译文人为插入字面换行，且句式生硬","translation":"我们守护着这最后一条龙。我们不知道它从何而来，也不知道它为何会孵化。我们原以为所有的龙早在很久以前就已孵化。"}
+{"msgid":"spyder_dragonscave_lessa2","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_lucille","category":"mistranslation","action":"override","reason":"Lucille 被误写成带空格且不完整的“卢 克”","translation":"露西尔"}
+{"msgid":"spyder_dragonscave_lucille1","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_lucille2","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_mal","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_mal1","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_mal2","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_mallory3","category":"style","action":"override","reason":"译文多出三个字面换行，且多处句法生硬或关系错置","translation":"德罗科罗是我们的！\\n 我们让沙夫特从 3 号公路地下把它挖了出来；要不是那个可恶的孩子破坏了计划，它早就落到我们手里了。\\n 现在正是五大支柱合力彻底统治这个地区的时候！\\n 长久以来，我们一直任由大教堂和公众告诉我们，能对精灵做什么、不能做什么。\\n 等我们用格林沃什的融合技术，把这只德罗科罗与尼姆罗德制造的杀手机器人融合起来，我们就无人能挡了！\\n 最妙的是，全能公司会告诉公众这一切都是为了他们好——而公众也会相信！"}
+{"msgid":"spyder_dragonscave_ray","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_ray1","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_ray2","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_tomas","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_tomas1","category":"style","action":"override","reason":"译文多出一个字面换行并把 Once 直译成“有一次”","translation":"我们曾经每人都骑着一条龙。那是很久以前的事了。但就在最近，一条刚出生的龙出现在这座岛上空，随后爬进了这个洞穴。"}
+{"msgid":"spyder_dragonscave_tomas2","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_tru1","category":"ok","action":"keep"}
+{"msgid":"spyder_dragonscave_tru2","category":"mistranslation","action":"override","reason":"末句误成阻止他们返回总部，原意是无法阻止总部里的那些人","translation":"随便吧……我们已经取到了 DNA 样本。\\n 我们只是想把德罗科罗也抓走，以备不时之需。\\n 你永远阻止不了全能公司总部里的那些人。"}
+{"msgid":"spyder_dryadsgrove_aquemini","category":"ok","action":"keep"}
+{"msgid":"spyder_dryadsgrove_aquemini1","category":"ok","action":"keep"}
+{"msgid":"spyder_dryadsgrove_aquemini2","category":"ok","action":"keep"}
+{"msgid":"spyder_dryadsgrove_ferris","category":"ok","action":"keep"}
+{"msgid":"spyder_dryadsgrove_ferris1","category":"ok","action":"keep"}
+{"msgid":"spyder_dryadsgrove_ferris2","category":"ok","action":"keep"}
+{"msgid":"spyder_dryadsgrove_ignatia","category":"ok","action":"keep"}
+{"msgid":"spyder_dryadsgrove_ignatia1","category":"mistranslation","action":"override","reason":"more than we appear 指并非表面看起来那么简单，不是比外表更重要","translation":"我们远不止表面看起来那样。"}
+{"msgid":"spyder_dryadsgrove_ignatia2","category":"mistranslation","action":"override","reason":"more than you appear 指内在超出外表，不是比外表更重要","translation":"你也远不止表面看起来那样。"}
+{"msgid":"spyder_dryadsgrove_petra","category":"ok","action":"keep"}
+{"msgid":"spyder_dryadsgrove_petra1","category":"mistranslation","action":"override","reason":"molds 在此指塑造生命的模具，不是霉菌","translation":"打破自然的定式！"}
+{"msgid":"spyder_dryadsgrove_petra2","category":"ok","action":"keep"}
+{"msgid":"spyder_dryadsgrove_sylvia","category":"ok","action":"keep"}
+{"msgid":"spyder_dryadsgrove_sylvia1","category":"ok","action":"keep"}
+{"msgid":"spyder_dryadsgrove_sylvia2","category":"ok","action":"keep"}
+{"msgid":"spyder_dryadsgrove_volcoli","category":"ok","action":"keep"}
+{"msgid":"spyder_dryadsgrove_volcoli1","category":"ok","action":"keep"}
+{"msgid":"spyder_emerald_plaque","category":"style","action":"override","reason":"译文多出一个字面换行，后句主谓和列举关系生硬","translation":"祖母绿是绿色的绿柱石；蓝色的绿柱石则称为海蓝宝石。\\n 一克拉的祖母绿体积比一克拉的钻石大，但密度更低。\\n 精灵吃下祖母绿后，视力和直觉会增强，让射击、喷射和爆破等远程攻击威力更强。"}
+{"msgid":"spyder_florist","category":"ok","action":"keep"}
+{"msgid":"spyder_flower_artist1","category":"mistranslation","action":"override","reason":"pedestrian theme 指平庸的主题，不是行人主题","translation":"笔触粗陋又笨拙，主题也平庸。呸！又毁了一块画布。"}
+{"msgid":"spyder_flower_artist2","category":"ok","action":"keep"}
+{"msgid":"spyder_flower_artist_clipping","category":"style","action":"override","reason":"“剪报开始了”是生硬误译，无法自然引出引文","translation":"墙上贴着一张剪报，开头写着：\\n “这位著名艺术评论家收起毒笔，拿起了画笔。\\n 多年来一直贬低艺术家的他，亲自作画又能好到哪里去？”"}
+{"msgid":"spyder_flower_cady","category":"ok","action":"keep"}
+{"msgid":"spyder_flower_cady1","category":"glossary","action":"override","reason":"Hampotamos 未按术语表译为“罕博塔摩斯”","translation":"哦，我真想带件纪念品回家。\\n 我特别喜欢那些可爱的小格林托特。你能替我弄一只吗？\\n 我可以拿我的罕博塔摩斯交换。"}
+{"msgid":"spyder_flower_cady_nogrintot","category":"ok","action":"keep"}
+{"msgid":"spyder_flower_cady_willtrade","category":"ok","action":"keep"}
+{"msgid":"spyder_flower_dojo_sign","category":"mistranslation","action":"override","reason":"Master 是动词“掌握”，原译误作主人","translation":"五行道场：掌握精灵对战"}
+{"msgid":"spyder_flower_fez1","category":"ok","action":"keep"}
+{"msgid":"spyder_flower_fez_noignibus","category":"ok","action":"keep"}
+{"msgid":"spyder_flower_fez_willtrade","category":"mistranslation","action":"override","reason":"Here you go 是“给你”，不是“干得好”","translation":"嗯，太好了！给你。"}
+{"msgid":"spyder_flower_florist","category":"style","action":"override","reason":"up and down the river 误直译为“在河上和河下航行”","translation":"以前这里有位内河船长，能载你沿河往返。\\n 但我已经好几天没见到他了。 "}
+{"msgid":"spyder_flower_mieke","category":"mistranslation","action":"override","reason":"女性名 Mieke 被误译成男性名“迈克尔”","translation":"米克"}
+{"msgid":"spyder_flower_mieke1","category":"style","action":"override","reason":"译文把“精灵”二字用字面换行拆开，导致换行数不符且影响术语显示","translation":"能来芳登地区旅行真让我们兴奋！你们这里有这么多独特的精灵……\\n 嘿，想交换吗？我想用圆锥叶换一只家乡没有的生物……\\n 友友猫怎么样？"}
+{"msgid":"spyder_flower_mieke_nobudaye","category":"ok","action":"keep"}
+{"msgid":"spyder_flower_mieke_willtrade","category":"ok","action":"keep"}
+{"msgid":"spyder_flower_muse1","category":"ok","action":"keep"}
+{"msgid":"spyder_flower_muse2","category":"omission","action":"override","reason":"currency 占位符少了一层花括号","translation":"什么？你有一幅画。哦——能让我买下它吗？我有 ${{currency}}2,000。"}
+{"msgid":"spyder_flower_muse3","category":"ok","action":"keep"}
+{"msgid":"spyder_flower_petshopassistant","category":"drift","action":"override","reason":"译文无依据地添加问候和“我们是宠物店男孩”","translation":"你有兴趣买一只精灵吗？"}
+{"msgid":"spyder_flower_petshopkeeper1","category":"glossary","action":"override","reason":"字面换行把规定术语“精灵”从中间拆开","translation":"我在树枝上发现这些蛋，并把它们孵化了！\\n 它们似乎是此前无人知晓的精灵。\\n 我把它们叫作维维帕雷！不知道它们会变形成什么样。"}
+{"msgid":"spyder_flower_petshopkeeper2","category":"ok","action":"keep"}
+{"msgid":"spyder_flower_petshopkeeper3","category":"ok","action":"keep"}
+{"msgid":"spyder_flower_petshopkeeper4","category":"mistranslation","action":"override","reason":"ever morphs 指将来有朝一日变形，原译误作过去的“曾经变形”","translation":"你让它变形了？\\n ……\\n 而且是用那种特殊的方法？\\n 明白了。嗯，我不太喜欢这种形态的样子。\\n 如果我再给你一只维维帕雷，它以后变形成不同的形态时，你能带回来吗？"}
+{"msgid":"spyder_flower_sandy","category":"style","action":"override","reason":"人名 Sandy 中间误插空格，且与同目录译名不一致","translation":"珊迪"}
+{"msgid":"spyder_flower_sandy1","category":"ok","action":"keep"}
+{"msgid":"spyder_flower_sandy_notweesher","category":"ok","action":"keep"}
+{"msgid":"spyder_flower_teach","category":"ok","action":"keep"}
+{"msgid":"spyder_flower_teach1","category":"ok","action":"keep"}
+{"msgid":"spyder_flowerhouse1_firefighter","category":"ok","action":"keep"}
+{"msgid":"spyder_flowerhouse1_granny","category":"glossary","action":"override","reason":"Scoop 被按普通名词误译为“勺子公司”","translation":"斯考普又一次成功压低了牛肉价格！真不知道他们怎么办到的。 "}
+{"msgid":"spyder_flowerhouse1_tv","category":"mistranslation","action":"override","reason":"原译漏掉对 Budaye 的直接称呼，并改变了说话者关系","translation":"两只精灵正在打斗。一个说：“友友猫，我不是你的朋友。”"}
+{"msgid":"spyder_flowerhouse2_scientist","category":"mistranslation","action":"override","reason":"call it how they see it 指直言所见，不是报道所有看到的事","translation":"FUD 电台每天早晨叫我起床。\\n 我不太认同他们的政治立场，但至少他们总是有话直说！"}
+{"msgid":"spyder_flowerhouse2_soldier","category":"style","action":"override","reason":"Not that 和并列短句被逐词直译，中文不自然","translation":"战争期间我为尼姆罗德工作。\\n 但我既没拿到勋章，也没人列队欢迎。\\n 他们不会给雇佣兵这些待遇。"}
+{"msgid":"spyder_frolicking_conileaf","category":"ok","action":"keep"}
+{"msgid":"spyder_frolicking_rockitten","category":"ok","action":"keep"}
+{"msgid":"spyder_granny","category":"ok","action":"keep"}
+{"msgid":"spyder_greenwash_aissa","category":"ok","action":"keep"}
+{"msgid":"spyder_greenwash_aissa1","category":"ok","action":"keep"}
+{"msgid":"spyder_greenwash_aissa2","category":"ok","action":"keep"}
+{"msgid":"spyder_greenwash_chip","category":"mistranslation","action":"override","reason":"角色名 Chip 被误作普通名词“芯片”","translation":"奇普"}
+{"msgid":"spyder_greenwash_chip1","category":"mistranslation","action":"override","reason":"computing power 是计算能力，不是一台计算机","translation":"我已经开发出了无与伦比的算力！"}
+{"msgid":"spyder_greenwash_chip2","category":"ok","action":"keep"}
+{"msgid":"spyder_greenwash_clarence","category":"ok","action":"keep"}
+{"msgid":"spyder_greenwash_clarence1","category":"ok","action":"keep"}
+{"msgid":"spyder_greenwash_clarence2","category":"ok","action":"keep"}
+{"msgid":"spyder_greenwash_dippel","category":"ok","action":"keep"}
+{"msgid":"spyder_greenwash_dippel1","category":"ok","action":"keep"}
+{"msgid":"spyder_greenwash_dippel2","category":"ok","action":"keep"}
+{"msgid":"spyder_greenwash_gregor","category":"ok","action":"keep"}
+{"msgid":"spyder_greenwash_gregor1","category":"glossary","action":"override","reason":"CATEYE 未按术语表译为“眼猫”，现译还混入字母 C","translation":"我整天都盯着我的眼猫——我一定要逮到它眨眼的瞬间！"}
+{"msgid":"spyder_greenwash_gregor2","category":"ok","action":"keep"}
+{"msgid":"spyder_greenwash_guard","category":"ok","action":"keep"}
+{"msgid":"spyder_greenwash_looten","category":"ok","action":"keep"}
+{"msgid":"spyder_greenwash_looten1","category":"drift","action":"override","reason":"整句译成了下一条英文的内容","translation":"准备面对我的融合精灵的力量吧！"}
+{"msgid":"spyder_greenwash_looten2","category":"drift","action":"override","reason":"译文是另一段不在当前英文中的旧文本","translation":"好吧，看来融合技术还没有完全成熟。\\n 我们已经研究它好多年了！"}
+{"msgid":"spyder_greenwash_louis","category":"ok","action":"keep"}
+{"msgid":"spyder_greenwash_louis1","category":"ok","action":"keep"}
+{"msgid":"spyder_greenwash_louis2","category":"ok","action":"keep"}
+{"msgid":"spyder_greenwash_moreau","category":"ok","action":"keep"}
+{"msgid":"spyder_greenwash_moreau1","category":"ok","action":"keep"}
+{"msgid":"spyder_greenwash_moreau2","category":"mistranslation","action":"override","reason":"生物融合实验被误译成核聚变实验","translation":"融合实验爆炸了！"}
+{"msgid":"spyder_hospital_billie1","category":"style","action":"override","reason":"“插手已经变得太多”是明显生硬的逐词翻译","translation":"${{name}}，你的干预已经太过分了！让当局做好自己的工作吧！"}
+{"msgid":"spyder_hospital_billie2","category":"ok","action":"keep"}
+{"msgid":"spyder_hospital_cure1","category":"glossary","action":"override","reason":"Spyder Bite 未采用术语表中的专名“斯皮德咬合”","translation":"这是治疗斯皮德咬合感染的药！\\n 有了它，你就能治好自己和别人的精灵。"}
+{"msgid":"spyder_hospital_nurse1","category":"mistranslation","action":"override","reason":"encoded with DNA 被误成“编码为 DNA”","translation":"这道屏障会检测并拒绝人类和精灵。\\n 其中编码了所有已知精灵的 DNA！ "}
+{"msgid":"spyder_hospital_warning1","category":"ok","action":"keep"}
+{"msgid":"spyder_hospital_warning2","category":"glossary","action":"override","reason":"Aardant 未按术语表译为“阿尔丹特”，且 Shutting down 误成门关闭","translation":"“阿尔丹特”不是已识别的生命体。\\n 正在关闭。"}
+{"msgid":"spyder_intro00","category":"ok","action":"keep"}
+{"msgid":"spyder_intro01","category":"mistranslation","action":"override","reason":"把主人让精灵战斗误成主人和精灵争斗，并把 improved on nature 误成改善环境","translation":"精灵是栖息在这个世界上的动物。\\n它们喜欢被捕捉，好让主人驱使它们战斗，从中取乐牟利。\\n强者获胜，商界也是如此。\\n大多数精灵生活在野外。获得经验后，它们会变形成更高级的形态。\\n不过，组成大教堂的五大支柱——也就是在本地区经营的五家联合公司——\\n已经改良了自然。本季我们推出五款豪华精灵！"}
+{"msgid":"spyder_intro02","category":"ok","action":"keep"}
+{"msgid":"spyder_intro03","category":"ok","action":"keep"}
+{"msgid":"spyder_intro_question","category":"ok","action":"keep"}
+{"msgid":"spyder_intro_question_name","category":"ok","action":"keep"}
+{"msgid":"spyder_intro_shopkeeper1","category":"ok","action":"keep"}
+{"msgid":"spyder_intro_shopkeeper2","category":"ok","action":"keep"}
+{"msgid":"spyder_intro_shopkeeper3","category":"ok","action":"keep"}
+{"msgid":"spyder_intro_shopkeeper4","category":"omission","action":"override","reason":"漏译“Please go home now”，并少一个字面换行","translation":"抱歉，你不是金卡会员。这项优惠只面向金卡会员。\\n请回家吧。"}
+{"msgid":"spyder_leather_maniac","category":"drift","action":"override","reason":"译文重复一次“走出外壳”，增加当前英文没有的句子","translation":"目前为止，你的冒险怎么样？\\n ……\\n 哇，真健谈！你真的开始敞开心扉了。"}
+{"msgid":"spyder_leathercafe_sign","category":"ok","action":"keep"}
+{"msgid":"spyder_leathercbd_sign","category":"ok","action":"keep"}
+{"msgid":"spyder_leathergym_board","category":"ok","action":"keep"}
+{"msgid":"spyder_leathergym_brad1","category":"ok","action":"keep"}
+{"msgid":"spyder_leathergym_bradfort1","category":"ok","action":"keep"}
+{"msgid":"spyder_leathergym_chad1","category":"ok","action":"keep"}
+{"msgid":"spyder_leathergym_chadfort1","category":"ok","action":"keep"}
+{"msgid":"spyder_leathergym_chadine1","category":"ok","action":"keep"}
+{"msgid":"spyder_leathergym_gigachad1","category":"ok","action":"keep"}
+{"msgid":"spyder_leathergym_virgin1","category":"ok","action":"keep"}
+{"msgid":"spyder_leatherhouse1_florist","category":"glossary","action":"override","reason":"Omnichannel 误译为“全能频道”而非“全能公司”","translation":"以前有好几家电视台和广播电台，但全能公司把它们都挤垮了。\\n 这样我们就不用担心不同记者的报道互相矛盾了。"}
+{"msgid":"spyder_leatherhouse1_radio_afternoon","category":"glossary","action":"override","reason":"歌名中的 Possessuns 未按 Possessun 术语译为“凯尔魂”","translation":"正在播放一首 R&B 歌曲，名叫《凯尔魂，第二部》。"}
+{"msgid":"spyder_leatherhouse1_tennisplayer1","category":"drift","action":"override","reason":"译文变成与当前英文完全不同的技能属性问题","translation":"格林弗拉尔是土系精灵，还是火系精灵？"}
+{"msgid":"spyder_leatherhouse1_tennisplayer2","category":"ok","action":"keep"}
+{"msgid":"spyder_leatherhouse2_miner","category":"ok","action":"keep"}
+{"msgid":"spyder_leatherhouse2_scientist","category":"ok","action":"keep"}
+{"msgid":"spyder_leatherhouse2_snugglepot","category":"ok","action":"keep"}
+{"msgid":"spyder_leatherhouse2_tv","category":"ok","action":"keep"}
+{"msgid":"spyder_leathershaft1_beryll1","category":"style","action":"override","reason":"artisan mining 误直译为“工匠采矿”，转折句也不自然","translation":"仅在丰登特，就有大约十几个地点正在进行非法或手工采矿，\\n可沙夫特却被视为邪恶的一方。"}
+{"msgid":"spyder_leathershaft1_miner1","category":"style","action":"override","reason":"从句关系断裂，现译难以理解","translation":"保护原住民和土地很重要……但我们不能把为了生存而谋生的矿工定罪。\\n重要的是，矿工必须得到保护！"}
+{"msgid":"spyder_leathershaft1_roxby1","category":"style","action":"override","reason":"字面换行切断介词结构，末句也缺少自然宾语","translation":"群岛中的一些岛屿已被采矿业完全占据，甚至无法区分原住民社区和矿区。\\n那里连饮用水都没有。沙夫特反对这种做法！"}
+{"msgid":"spyder_leathershaft1_rutherford1","category":"omission","action":"override","reason":"漏译 It shows quality，并把后一句主语关系译乱","translation":"沙夫特的领导者既善思考又重行动，不爱空谈。她已经两次会见矿工。这体现了她的素质。\\n这也展现了她对丰登特的规划。谈到气候变化，我们的领导者始终立场一致。"}
+{"msgid":"spyder_leathershaft1_sign","category":"ok","action":"keep"}
+{"msgid":"spyder_leathershaft1_surat1","category":"ok","action":"keep"}
+{"msgid":"spyder_leathershaft2_achievement","category":"ok","action":"keep"}
+{"msgid":"spyder_leathershaft2_dude","category":"style","action":"override","reason":"后半句误接到“人”，导致整个句子不通","translation":"沙夫特是本地区最大的矿业公司之一，\\n也是对社区贡献最大的公司之一。"}
+{"msgid":"spyder_leathershaft2_papers","category":"mistranslation","action":"override","reason":"Fondent's people 被误译为“基金会人民”","translation":"这份沙夫特的传单旨在赢得丰登特民众的信任。"}
+{"msgid":"spyder_leathershaft2_pc","category":"ok","action":"keep"}
+{"msgid":"spyder_leathershaft2_skeptic","category":"style","action":"override","reason":"末句重复“有史以来”且语序破碎，严重影响阅读","translation":"我不信任沙夫特。我的地质学家朋友加入了一个考察河流流域的团队，\\n研究森林砍伐和采矿对河流及水质的影响。\\n这将是丰登特首次评估矿坑水塘中的碳与汞产生量，\\n以及它们随后对水流路径造成的影响。"}
+{"msgid":"spyder_mansion_captain1","category":"mistranslation","action":"override","reason":"wandered off 指走失，不是喝酒时走神","translation":"哟呵！谢谢你找到我！\\n 我昨晚喝酒时走丢了，掉到这里。\\n 嘿，你能找到出口吗？找到了就喊我一声。"}
+{"msgid":"spyder_mansion_drinkingbuddya","category":"ok","action":"keep"}
+{"msgid":"spyder_mansion_drinkingbuddya1","category":"ok","action":"keep"}
+{"msgid":"spyder_mansion_drinkingbuddya2","category":"ok","action":"keep"}
+{"msgid":"spyder_mansion_drinkingbuddyb","category":"glossary","action":"override","reason":"Drinking Buddy 未按术语表译为“酒友”","translation":"酒友 B"}
+{"msgid":"spyder_mansion_drinkingbuddyb1","category":"mistranslation","action":"override","reason":"sea shanty 被误译为成语“海誓山盟”","translation":"我们唱起了一首古老的船歌，唱完才发现船长不见了！"}
+{"msgid":"spyder_miner","category":"ok","action":"keep"}
+{"msgid":"spyder_multi_martsign","category":"ok","action":"keep"}
+{"msgid":"spyder_multi_underrepairs","category":"ok","action":"keep"}
+{"msgid":"spyder_museum_entrance1","category":"style","action":"override","reason":"译文插入多余字面换行，且“免费但取决于捐赠”直译生硬","translation":"欢迎来到自然历史博物馆！这里免费开放，但有赖于大家慷慨捐助。你愿意捐出 ${{currency}}50 吗？"}
+{"msgid":"spyder_museum_entrance2","category":"style","action":"override","reason":"“阅读赞助商”搭配错误，未自然表达 read about","translation":"请参观我们的五个展区，并务必了解五家赞助商。"}
+{"msgid":"spyder_museum_entrance3","category":"omission","action":"override","reason":"漏掉 ${{currency}} 占位符","translation":"很遗憾，我们现在必须收门票了。请支付 ${{currency}}100。"}
+{"msgid":"spyder_museum_miner1","category":"glossary","action":"override","reason":"Nimrod 未按术语表译为“尼姆罗德”","translation":"这里曾经有整整一个展区介绍我们的世界史！\\n 但尼姆罗德成为赞助商后，把它换成了纯粹的军事史！\\n 现在人人都在杜撰自己的世界史理论！"}
+{"msgid":"spyder_museum_postboy1","category":"ok","action":"keep"}
+{"msgid":"spyder_museum_shopkeeper_chat","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod2_plaque","category":"glossary","action":"override","reason":"Wolffsky 未按术语表译为“狼天”","translation":"精灵是强大的武器，自战争出现以来就一直与人类并肩作战。\\n 洞穴中的岩画显示，史前人类曾训练剑齿鸡脚猫与野生狼天战斗。"}
+{"msgid":"spyder_nimrod3_plaque","category":"glossary","action":"override","reason":"Eaglace 和 Agnidon 均未采用术语表译名，且多一个字面换行","translation":"古代某帝国以冰川鹰为象征，因为帝国从冰封的北方入侵时，将领和斥候都骑乘冰川鹰。\\n 如今，我们强大共和国的医疗队正训练炎鬣蜥，用于护卫和运输。 "}
+{"msgid":"spyder_nimrod4_plaque","category":"glossary","action":"override","reason":"首个 Nimrod 未按术语表译名保留一致","translation":"但不久之后，精灵和人类或许都会被淘汰。\\n 我们的企业赞助商尼姆罗德正在开发机器人技术，有望让战争不再流血。\\n 与此同时，加入尼姆罗德执法队吧：高薪、免费教育，还有充满冒险的人生。"}
+{"msgid":"spyder_nimrod_antimony","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_antimony1","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_antimony2","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_archer","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_archer1","category":"mistranslation","action":"override","reason":"此处是生物融合技术，不是核聚变技术","translation":"融合技术进展得怎么样？我们……等等，你不是格林沃什的人！"}
+{"msgid":"spyder_nimrod_archer2","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_argon","category":"glossary","action":"override","reason":"NPC Argon 未按术语表译为“阿贡”","translation":"阿贡"}
+{"msgid":"spyder_nimrod_argon1","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_argon2","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_berke","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_berke1","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_birbrobo","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"spyder_nimrod_birbrobo1","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"spyder_nimrod_birbrobo2","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"spyder_nimrod_bowie","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_bowie1","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_bowie2","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_chromerobo","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_chromerobo1","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_chromerobo2","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_dirk","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_dirk1","category":"style","action":"override","reason":"great buy 被生硬地译成证券术语“一个很好的买点”","translation":"你是来参加投资者说明会的吗？\\n 尼姆罗德的股票很值得买——军队总是需要武器！"}
+{"msgid":"spyder_nimrod_guard","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_guard1","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_honour","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_honour1","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_honour2","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_justice","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_justice1","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_justice2","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_mace","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_mace1","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_mace2","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_maverick","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_maverick1","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_maverick2","category":"style","action":"override","reason":"play music 被译成“一起玩音乐”，不合中文习惯","translation":"真希望我认识能和我一起演奏音乐的人。"}
+{"msgid":"spyder_nimrod_plaque","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_rebel","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_rebel1","category":"mistranslation","action":"override","reason":"send you for a shipment 指派来取货，不是派去买货","translation":"大教堂派你来取那批新到的……\\n 不是？\\n 哦。"}
+{"msgid":"spyder_nimrod_rebel2","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_thatcher","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_thatcher1","category":"style","action":"override","reason":"拟声感叹词未翻译，后句逐词直译生硬","translation":"哇哦，看看这个。那些抗议者根本不知道是什么打中了他们。"}
+{"msgid":"spyder_nimrod_thatcher2","category":"mistranslation","action":"override","reason":"No comment 的固定说法应为“无可奉告”","translation":"无可奉告。 "}
+{"msgid":"spyder_nimrod_tru","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_tru1","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_tru2","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_tru3","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_xeon","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_xeon1","category":"mistranslation","action":"override","reason":"机器人语音 burr 被误作名词“毛刺”，target acquired 语序也错误","translation":"呜……嗞……已锁定目标。"}
+{"msgid":"spyder_nimrod_xeon2","category":"style","action":"override","reason":"歌曲引文被逐词译成“给我你的答案，做”","translation":"……黛西，黛西，请给我你的答复……"}
+{"msgid":"spyder_nimrod_zircon","category":"glossary","action":"override","reason":"NPC Zircon 未按术语表译为“泽康”","translation":"泽康"}
+{"msgid":"spyder_nimrod_zircon1","category":"ok","action":"keep"}
+{"msgid":"spyder_nimrod_zircon2","category":"ok","action":"keep"}
+{"msgid":"spyder_omnichannel_beaverbrook","category":"ok","action":"keep"}
+{"msgid":"spyder_omnichannel_beaverbrook1","category":"glossary","action":"override","reason":"Nimrod 未按术语表译为“尼姆罗德”","translation":"啊哈，你已经来不及了！\\n 刚从孕育池诞生的……完美怪物！\\n 德罗科罗的基因在沙夫特挖出的龙蛋中孵化，\\n ……再与尼姆罗德设计的三台杀手机器人融合。\\n 团队合作的力量……如今掌握在我手里。 "}
+{"msgid":"spyder_omnichannel_beaverbrook2","category":"mistranslation","action":"override","reason":"off-brand 指杂牌，不是非法；creations 也不是“创作”","translation":"不，这不可能。\\n 两个暴发户，其中一个还带着杂牌精灵，竟然打败了我的完美造物。\\n 只要赶上电台直播采访，我就能命令执法者完成接管。"}
+{"msgid":"spyder_omnichannel_billie1","category":"drift","action":"override","reason":"整段仍是旧稿，当前五句内容大部缺失，姓名占位符也被写死成 NAME","translation":"嘿，${{name}}，等等！\\n 我一直在想你为我的精灵所做的事，不得不承认，这让我开始反思自己的优先选择。\\n 我意识到自己太专注于个人目标，却没有尽力帮助别人。\\n 所以我要和你一起去打倒那些偷精灵的家伙。\\n 为了我们自己、我们的精灵和整个社区，我们必须阻止他们的邪恶计划。"}
+{"msgid":"spyder_omnichannel_byrne","category":"ok","action":"keep"}
+{"msgid":"spyder_omnichannel_byrne1","category":"ok","action":"keep"}
+{"msgid":"spyder_omnichannel_byrne2","category":"ok","action":"keep"}
+{"msgid":"spyder_omnichannel_carnegie","category":"ok","action":"keep"}
+{"msgid":"spyder_omnichannel_carnegie1","category":"ok","action":"keep"}
+{"msgid":"spyder_omnichannel_carnegie2","category":"ok","action":"keep"}
+{"msgid":"spyder_omnichannel_donald1","category":"glossary","action":"override","reason":"Scoop 被误译为普通名词“勺子”","translation":"又回来了？我早该在斯考普总部把你塞进绞肉机。"}
+{"msgid":"spyder_omnichannel_enforcer","category":"drift","action":"override","reason":"英文已是角色名 Marciano，译文仍为职业称谓“执法者”","translation":"马西亚诺"}
+{"msgid":"spyder_omnichannel_note","category":"style","action":"override","reason":"第二句的介词结构直译后不通顺","translation":"哈哈，傻瓜——你们永远找不到我。\\n 这句话写在印有全能公司首席执行官抬头的信纸上。"}
+{"msgid":"spyder_omnichannel_radioannounce","category":"glossary","action":"override","reason":"长段落中 Greenwash、Nimrod、Scoop 等多个术语错误，且多出三个字面换行","translation":"这里是 FUD 电台，我是 DJ 沃姆，与共同主持人“冷场公爵”从全能公司广播室为您现场直播。\\n 我们接下来有整整一小时的流行甜歌、轻摇滚和通俗嘻哈——但首先，请听对全能公司负责人的采访！\\n 啊，看来比弗布鲁克爵士没能到场，而是派了个小孩代替他。那么，小朋友，你有什么要说的？\\n ……\\n 大声点！这可是电台直播！\\n ……\\n 哦，你说有个阴谋？\\n ……\\n 五大支柱打算利用格林沃什的融合技术、尼姆罗德的杀手机器人，还有沙夫特挖出来的龙……\\n 再用这些融合体控制整个地区？\\n ……\\n 他们还故意利用斯考普的食物，把病毒传播给所有人的精灵？\\n ……\\n 执法者也参与其中？\\n ……\\n 而全能公司才是幕后黑手，利用媒体让大家迷惑、分心？\\n ……\\n 你知道我们是为全能公司工作的吧？博士，请告诉我你已经停播了。博士？！\\n ……\\n 糟糕！天啊，我真希望 FUD 电台不是现场直播。\\n 我看大家不会对我们太满意。"}
+{"msgid":"spyder_omnichannel_sign","category":"ok","action":"keep"}
+{"msgid":"spyder_omnichannel_strauss","category":"ok","action":"keep"}
+{"msgid":"spyder_omnichannel_strauss1","category":"style","action":"override","reason":"“握很多手”是英文搭配的逐词翻译","translation":"干我们这行，得和很多人握手。"}
+{"msgid":"spyder_omnichannel_strauss2","category":"mistranslation","action":"override","reason":"这是击掌落空的固定戏谑语，不能按方位直译","translation":"下面击掌——太慢啦！"}
+{"msgid":"spyder_omnichannel_thedukeofdeadair","category":"style","action":"override","reason":"dead air 指广播冷场，“死气沉沉”未体现双关","translation":"冷场公爵"}
+{"msgid":"spyder_omnichannel_william","category":"ok","action":"keep"}
+{"msgid":"spyder_omnichannel_william1","category":"ok","action":"keep"}
+{"msgid":"spyder_omnichannel_william2","category":"ok","action":"keep"}
+{"msgid":"spyder_omnichannel_worm","category":"mistranslation","action":"override","reason":"角色名 Worm 被误作普通名词“虫子”","translation":"沃姆"}
+{"msgid":"spyder_omnichannel_zoolander1","category":"ok","action":"keep"}
+{"msgid":"spyder_opal_plaque","category":"style","action":"override","reason":"译文多出一个字面换行，末句重复“能”且层次不清","translation":"蛋白石会闪烁出彩色光芒。\\n 水分蒸发并留下二氧化硅时，它们会在岩石的裂隙和凹处形成。\\n 精灵吃下蛋白石后会获得其魔法防护，更容易躲避爆破、喷射和射线等远程魔法攻击。"}
+{"msgid":"spyder_papermanor_oldman","category":"ok","action":"keep"}
+{"msgid":"spyder_papertown_agnite","category":"ok","action":"keep"}
+{"msgid":"spyder_papertown_agnitechosen","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"spyder_papertown_danteresting","category":"omission","action":"override","reason":"漏译 Oh, it's just you","translation":"我在工作，老板，我在工作！\\n 哦，原来是你。你知道吗，我们扔掉了太多库存，实在太浪费了。\\n 它们全被扔进了商店后面的垃圾桶。"}
+{"msgid":"spyder_papertown_daycare1","category":"glossary","action":"override","reason":"Daycare Center 未按规定译为“寄养中心”","translation":"寄养中心：正在施工。"}
+{"msgid":"spyder_papertown_daycare2","category":"glossary","action":"override","reason":"Daycare Center 未按规定译为“寄养中心”","translation":"寄养中心：现已开业！"}
+{"msgid":"spyder_papertown_firstfight","category":"style","action":"override","reason":"把 perfectly good 两次直译成“完美”很生硬，影响对白语气","translation":"嘿，你翻垃圾桶干什么？真恶心——而且还违反规定！ \\n …… \\n 什么，他们把完全好好的精灵扔掉？ \\n …… \\n 要是真那么好，怎么会被扔掉呢？ \\n 它们肯定比新型号差。我这就让你见识一下！ "}
+{"msgid":"spyder_papertown_firstfight_after","category":"mistranslation","action":"override","reason":"I'll heal you up 的对象是玩家的精灵，不是治愈玩家本人","translation":"这次我会给你的精灵治疗，但我可不是慈善机构。下次精灵累坏了，就回家休息。"}
+{"msgid":"spyder_papertown_firstfight_lose","category":"ok","action":"keep"}
+{"msgid":"spyder_papertown_firstfight_win","category":"ok","action":"keep"}
+{"msgid":"spyder_papertown_grannypiper","category":"ok","action":"keep"}
+{"msgid":"spyder_papertown_grannypiper1","category":"glossary","action":"override","reason":"Daycare Center 未按规定译为“寄养中心”，姓名占位符也少一层花括号","translation":"哦，你好，${{name}}，这么一片忙乱和瓦砾，我都没看见你！\\n 我等不及寄养中心建好了！"}
+{"msgid":"spyder_papertown_grannypiper2","category":"glossary","action":"override","reason":"Pipers 和 daycare 未采用规定译名，且无依据重复“你知道吗”","translation":"你知道吗，派珀家族就是靠经营寄养中心发家的！\\n 我已经退休十年，正觉得无聊。我想重操旧业！"}
+{"msgid":"spyder_papertown_home","category":"ok","action":"keep"}
+{"msgid":"spyder_papertown_homemaker","category":"ok","action":"keep"}
+{"msgid":"spyder_papertown_homemaker1","category":"omission","action":"override","reason":"姓名占位符 ${{name}} 少了一层花括号","translation":"你好吗，${{name}}？\\n 看来你还是一如既往地安静、严肃。"}
+{"msgid":"spyder_papertown_lambert","category":"ok","action":"keep"}
+{"msgid":"spyder_papertown_lambertchosen","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"spyder_papertown_mom","category":"ok","action":"keep"}
+{"msgid":"spyder_papertown_mom1","category":"style","action":"override","reason":"Good morning sunshine 是亲昵称呼，原译成“温暖的晨曦”生硬","translation":"早安，小太阳！随时都可以在这里休息。\\n 我为什么这么说？你就住在这里！"}
+{"msgid":"spyder_papertown_mom2","category":"style","action":"override","reason":"译文多出一个字面换行，且加入原文没有的“不好意思”","translation":"你好，亲爱的。我得继续搞发明了。\\n 你不能自己找点事做吗？\\n 我小时候，随便什么都能拿来玩——棍子、石头、垃圾桶里找到的破烂…… "}
+{"msgid":"spyder_papertown_mom3","category":"style","action":"override","reason":"“为什么你不去”是明显英语句式，影响母亲对白的自然度","translation":"哦，你找到了一只精灵。恭喜！ \\n 何不去下一个城镇探索一番？"}
+{"msgid":"spyder_papertown_mom4","category":"ok","action":"keep"}
+{"msgid":"spyder_papertown_mom5","category":"glossary","action":"override","reason":"Piper 和 Daycare Center 均未采用规定译名","translation":"你知道吗，隔壁的派珀奶奶已经开了寄养中心。\\n 唉，我想不是每个人都能成为发明家。 "}
+{"msgid":"spyder_papertown_mom6","category":"style","action":"override","reason":"“拿下了这些公司”生硬，也丢失句末 I think 的犹疑语气","translation":"恭喜！你打垮了那些大公司！ \\n 当然，现在很多人失业了……但你做的是对的。大概吧。"}
+{"msgid":"spyder_papertown_myfirstmon","category":"style","action":"override","reason":"末句漏出宾语，中文读来不完整","translation":"嘿，你来了！太好了。\\n 大教堂送来那些花哨的新精灵时，我们就把所有旧精灵都扔进了垃圾桶！\\n 太浪费了，尤其是还有像你这样一个精灵都没有的孩子！"}
+{"msgid":"spyder_papertown_myfirstmon1","category":"ok","action":"keep"}
+{"msgid":"spyder_papertown_myfirstmon2","category":"drift","action":"override","reason":"整段译成了询问选择五只精灵的旧文本，且少一个字面换行","translation":"好了，看来这些垃圾桶大多都有精灵。\\n 好像是老板在叫我。祝你好运！"}
+{"msgid":"spyder_papertown_myfirstmon_notmet","category":"glossary","action":"override","reason":"Gold Pass 未按规定译为“黄金通行证”","translation":"我认得你，你就是那个没有黄金通行证的孩子。\\n 你知道吗，我或许能帮你。\\n 大教堂送来那些花哨的新精灵时，我们就把所有旧精灵都扔进了垃圾桶！\\n 太浪费了，尤其是还有像你这样一个精灵都没有的孩子！"}
+{"msgid":"spyder_papertown_nut","category":"ok","action":"keep"}
+{"msgid":"spyder_papertown_nutchosen","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"spyder_papertown_restinbed","category":"ok","action":"keep"}
+{"msgid":"spyder_papertown_rival","category":"ok","action":"keep"}
+{"msgid":"spyder_papertown_riverboatcaptain","category":"ok","action":"keep"}
+{"msgid":"spyder_papertown_rockitten","category":"ok","action":"keep"}
+{"msgid":"spyder_papertown_rockittenchosen","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"spyder_papertown_shopkeeper","category":"ok","action":"keep"}
+{"msgid":"spyder_papertown_stopthere","category":"style","action":"override","reason":"“你以为你在做什么”是生硬直译，三句对白都可更自然","translation":"嘿！你在干什么？\\n 没有精灵，进入荒野很危险。\\n 来我们店里买一只吧。"}
+{"msgid":"spyder_papertown_sunnyside","category":"mistranslation","action":"override","reason":"Sunnyside Manor 被误成带“城”的“阳光城庄园”","translation":"阳光庄园：如果我们不在家，请给管家留言。"}
+{"msgid":"spyder_papertown_thereis","category":"ok","action":"keep"}
+{"msgid":"spyder_papertown_trash","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"spyder_papertown_tvwatch","category":"ok","action":"keep"}
+{"msgid":"spyder_papertown_tweesher","category":"ok","action":"keep"}
+{"msgid":"spyder_papertown_tweesherchosen","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"spyder_papertown_wrapup","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"spyder_postboy","category":"ok","action":"keep"}
+{"msgid":"spyder_quartz_plaque","category":"style","action":"override","reason":"译文多出一个字面换行，末句代词与搭配生硬","translation":"石英是地球上最丰富的矿物之一。\\n 有些石英品种——如缟玛瑙、紫水晶和红玉髓——更稀有、更珍贵。\\n 石英用于钟表，以保持极其精确的计时。\\n 精灵吃下石英后，坚韧与活力会提升，使它们在被击倒前承受更多攻击。 "}
+{"msgid":"spyder_rivalbedroom_radio_afternoon","category":"mistranslation","action":"override","reason":"Anthem 被误写成“焚歌”","translation":"下午：正在播放一首摇滚歌曲，名叫《崛起称霸：终极训练师颂歌》。"}
+{"msgid":"spyder_rivalbedroom_radio_dawn","category":"ok","action":"keep"}
+{"msgid":"spyder_rivalbedroom_radio_dusk","category":"mistranslation","action":"override","reason":"Enforcer 被误译为形容词“坚强”","translation":"黄昏：正在播放一首乡村歌曲，名叫《挣脱枷锁，寻找力量：从恐惧到执法者》。"}
+{"msgid":"spyder_rivalbedroom_radio_morning","category":"ok","action":"keep"}
+{"msgid":"spyder_rivalbedroom_radio_night","category":"glossary","action":"override","reason":"Botbots 未按术语表中的 Botbot 译名“布布”处理","translation":"夜晚：正在播放一首电子乐，名叫《机器人革命：布布崛起》。"}
+{"msgid":"spyder_rivaldownstairs_tv","category":"ok","action":"keep"}
+{"msgid":"spyder_river_captain2","category":"style","action":"override","reason":"航海招呼 Ahoy 被误成询问“你在吗”","translation":"哟呵！你想去哪里？"}
+{"msgid":"spyder_riverboatcaptain","category":"ok","action":"keep"}
+{"msgid":"spyder_rookie","category":"ok","action":"keep"}
+{"msgid":"spyder_route1_beachcomber","category":"ok","action":"keep"}
+{"msgid":"spyder_route1_routesign","category":"ok","action":"keep"}
+{"msgid":"spyder_route2_billie1","category":"ok","action":"keep"}
+{"msgid":"spyder_route2_billie2","category":"ok","action":"keep"}
+{"msgid":"spyder_route2_graf","category":"ok","action":"keep"}
+{"msgid":"spyder_route2_graf1","category":"ok","action":"keep"}
+{"msgid":"spyder_route2_graf2","category":"mistranslation","action":"override","reason":"漏掉网球语境的 served 双关，误成“被招待”","translation":"我被一记发球击败了。"}
+{"msgid":"spyder_route2_marion","category":"ok","action":"keep"}
+{"msgid":"spyder_route2_marion1","category":"style","action":"override","reason":"“对于我的阿尔多恩，我的意思是”逐词直译，中文不通顺","translation":"周围有这么多美味的蚂蚁！……我是说，给我的阿尔多恩吃。"}
+{"msgid":"spyder_route2_marion2","category":"ok","action":"keep"}
+{"msgid":"spyder_route2_roddick","category":"ok","action":"keep"}
+{"msgid":"spyder_route2_roddick1","category":"mistranslation","action":"override","reason":"dunny 是厕所，不是地牢","translation":"我在厕所里遭到战斗蜘蛛伏击时，真是吓坏了。"}
+{"msgid":"spyder_route2_roddick2","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_connor","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_connor1","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_connor2","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_curie","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_curie1","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_curie2","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_drag1","category":"omission","action":"override","reason":"除首行外的说话者标签全部漏译，严重影响对白归属","translation":"特工：挖掘现场出了什么事？\\n 沙夫特老板祖兰德：我们……被打断了。被……一个孩子。\\n 特工：一个孩子？！\\n 祖兰德：但我们确实找到了一个……\\n 特工：嘘！你知道那是最高机密。好了，把它交出来，然后快滚！\\n 祖兰德：好，给你……呃！"}
+{"msgid":"spyder_route3_drag2","category":"style","action":"override","reason":"Agent 误作代理，且“向总部解释这个问题”措辞生硬","translation":"特工：什么？！跟我来，你可以到总部解释！"}
+{"msgid":"spyder_route3_novak","category":"style","action":"override","reason":"人名 Novak 中间误插空格","translation":"诺瓦克"}
+{"msgid":"spyder_route3_novak1","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_novak2","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_qqq","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_qqq1","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_qqq2","category":"drift","action":"override","reason":"上游译文重复追加了同一句内容，并多出一个字面换行","translation":"我不会透露我们的阴谋！实际上，忘了我提过什么阴谋吧！"}
+{"msgid":"spyder_route3_roxby","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_roxby1","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_roxby2","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_roxby3","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_sign","category":"mistranslation","action":"override","reason":"道路修复语境中的 rehabilitation 被误译为康复","translation":"修复工作会尽快开始。\\n请别再催我们了。"}
+{"msgid":"spyder_route3_surat","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_surat1","category":"glossary","action":"override","reason":"将泛称 tuxemon 误译为虎皮猫，违反固定术语","translation":"他们称它为“黑暗动脉”——埋藏在土壤下的远古精灵的血肉与骨骼化石。\\n而我们能把它挖出来！"}
+{"msgid":"spyder_route3_surat2","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_surat3","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_twig","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_twig1","category":"mistranslation","action":"override","reason":"belongs in a museum 被误译成属于博物馆","translation":"我们挖出来的一些东西都该送进博物馆！\\n等等，你不是这里的员工。"}
+{"msgid":"spyder_route3_twig2","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_twig3","category":"style","action":"override","reason":"句式生硬，明显影响对白流畅度","translation":"我要更加努力训练，变得像我们的老板一样强。\\n她付出了许多努力才当上首领，我希望有一天能成为她那样的人。"}
+{"msgid":"spyder_route3_wanda","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_wanda1","category":"glossary","action":"override","reason":"Nudiflot 未采用 glossary.tsv 固定译名","translation":"我好像只钓得到无聊的浮蛞蝓♂！"}
+{"msgid":"spyder_route3_wanda2","category":"glossary","action":"override","reason":"Flower City 未采用 glossary.tsv 固定译名","translation":"彩花城很适合钓鱼——但谁愿意走那么远呢？\\n来，这根鱼竿送给你。"}
+{"msgid":"spyder_route3_weaver","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_weaver1","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_weaver2","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_zoolander","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_zoolander1","category":"ok","action":"keep"}
+{"msgid":"spyder_route3_zoolander2","category":"ok","action":"keep"}
+{"msgid":"spyder_route4_beck","category":"ok","action":"keep"}
+{"msgid":"spyder_route4_beck1","category":"style","action":"override","reason":"对白缺少中文网球语境所需的谓语","translation":"该你发球了！"}
+{"msgid":"spyder_route4_beck2","category":"mistranslation","action":"override","reason":"网球用语 game, set, match 被按普通名词逐字误译","translation":"胜局、胜盘，比赛结束。"}
+{"msgid":"spyder_route4_marshall","category":"ok","action":"keep"}
+{"msgid":"spyder_route4_marshall1","category":"ok","action":"keep"}
+{"msgid":"spyder_route4_marshall2","category":"style","action":"keep","reason":"措辞略直译，但意思清楚且不影响理解"}
+{"msgid":"spyder_route4_rincewind","category":"ok","action":"keep"}
+{"msgid":"spyder_route4_rincewind1","category":"style","action":"override","reason":"Finally 表示终于，现译为最后使语气不自然","translation":"终于，科久有用武之地了！"}
+{"msgid":"spyder_route4_rincewind2","category":"ok","action":"keep"}
+{"msgid":"spyder_route4_roger","category":"ok","action":"keep"}
+{"msgid":"spyder_route4_roger1","category":"ok","action":"keep"}
+{"msgid":"spyder_route4_roger2","category":"ok","action":"keep"}
+{"msgid":"spyder_route4_rosamund","category":"ok","action":"keep"}
+{"msgid":"spyder_route4_rosamund1","category":"ok","action":"keep"}
+{"msgid":"spyder_route4_rosamund2","category":"mistranslation","action":"override","reason":"best served cold 的习语含义被误译为冷处理","translation":"复仇这道菜，凉着上才最好。"}
+{"msgid":"spyder_route4_wulf","category":"ok","action":"keep"}
+{"msgid":"spyder_route4_wulf1","category":"ok","action":"keep"}
+{"msgid":"spyder_route4_wulf2","category":"mistranslation","action":"override","reason":"emasculated 在此为受挫并失去男子气概，并非字面阉割","translation":"哦，我觉得自己一点男子气概都没有了！"}
+{"msgid":"spyder_route5_cleo","category":"omission","action":"override","reason":"漏译 Patra","translation":"克莱奥与帕特拉"}
+{"msgid":"spyder_route5_cleo1","category":"ok","action":"keep"}
+{"msgid":"spyder_route5_cleo2","category":"mistranslation","action":"override","reason":"we 与复数 ancestors 被误写成单数人称","translation":"祖先啊，我们辜负你们了！"}
+{"msgid":"spyder_route5_edith","category":"ok","action":"keep"}
+{"msgid":"spyder_route5_edith1","category":"ok","action":"keep"}
+{"msgid":"spyder_route5_edith2","category":"ok","action":"keep"}
+{"msgid":"spyder_route5_goliath","category":"ok","action":"keep"}
+{"msgid":"spyder_route5_goliath1","category":"style","action":"override","reason":"客栈名与句式直译生硬，影响对白自然度","translation":"嘿，你不就是在旅人旅馆多管闲事的那个小鬼吗？"}
+{"msgid":"spyder_route5_goliath2","category":"ok","action":"keep"}
+{"msgid":"spyder_route5_granny","category":"glossary","action":"override","reason":"Nimrod 与 Flower City 均未采用 glossary.tsv 固定译名，且 salubrious 语义有误","translation":"有尼姆罗德的施工把彩花城那些闲杂人等挡在外面，这座公园健康宜人多了。"}
+{"msgid":"spyder_route5_hunter","category":"ok","action":"keep"}
+{"msgid":"spyder_route5_hunter1","category":"mistranslation","action":"override","reason":"takes a lot 指很费力，不是需要很多东西","translation":"要维系好一支队伍可不容易。"}
+{"msgid":"spyder_route5_hunter2","category":"ok","action":"keep"}
+{"msgid":"spyder_route5_sara","category":"ok","action":"keep"}
+{"msgid":"spyder_route5_sara1","category":"style","action":"override","reason":"将精灵长大写成成为成年人，中文语境突兀","translation":"我的卡皮蒂看起来很可爱，但我已经等不及它长大了！"}
+{"msgid":"spyder_route5_sara2","category":"mistranslation","action":"override","reason":"not today 被误译为今天不说了","translation":"唉，看来今天不行！"}
+{"msgid":"spyder_route5_tryphaena","category":"omission","action":"override","reason":"漏译 Marc","translation":"特里芬纳与马克"}
+{"msgid":"spyder_route5_tryphaena1","category":"mistranslation","action":"override","reason":"descended from 被反向译成后裔是","translation":"你知道，我们的祖先可是……你已经听说了？哦。"}
+{"msgid":"spyder_route5_tryphaena2","category":"ok","action":"keep"}
+{"msgid":"spyder_route6_blair","category":"ok","action":"keep"}
+{"msgid":"spyder_route6_blair1","category":"style","action":"keep","reason":"措辞略显重复，但习语含义清楚"}
+{"msgid":"spyder_route6_blair2","category":"ok","action":"keep"}
+{"msgid":"spyder_route6_frances","category":"ok","action":"keep"}
+{"msgid":"spyder_route6_frances1","category":"style","action":"override","reason":"keep a garden 被机械直译为保持花园，明显不自然","translation":"我的守叶人打理着这片土地上最漂亮的花园。"}
+{"msgid":"spyder_route6_frances2","category":"ok","action":"keep"}
+{"msgid":"spyder_route6_gunner","category":"ok","action":"keep"}
+{"msgid":"spyder_route6_gunner1","category":"ok","action":"keep"}
+{"msgid":"spyder_route6_gunner2","category":"ok","action":"keep"}
+{"msgid":"spyder_route6_maxwell","category":"ok","action":"keep"}
+{"msgid":"spyder_route6_maxwell1","category":"ok","action":"keep"}
+{"msgid":"spyder_route6_maxwell2","category":"mistranslation","action":"override","reason":"put down 在此指安乐死，不是放下","translation":"我只希望他们别认为，把我们融合出的精灵安乐死才最安全！"}
+{"msgid":"spyder_route6_mungo","category":"ok","action":"keep"}
+{"msgid":"spyder_route6_mungo1","category":"glossary","action":"override","reason":"Greenwash 未采用 glossary.tsv 固定译名","translation":"真不敢相信他们把我们关在格林沃什总部外面。我马上就要找到病毒的治疗方法了！"}
+{"msgid":"spyder_route6_mungo2","category":"style","action":"override","reason":"developments 译为发展使对白生硬且指向不清","translation":"我猜，老板们被融合技术的最新进展吓坏了。"}
+{"msgid":"spyder_route6_orion","category":"glossary","action":"override","reason":"Orion 未采用 glossary.tsv 固定 NPC 译名","translation":"奥赖恩"}
+{"msgid":"spyder_route6_orion1","category":"ok","action":"keep"}
+{"msgid":"spyder_route6_orion2","category":"mistranslation","action":"override","reason":"experiment melts down 指实验发生熔毁或失控，不是实验融化","translation":"希望我能在实验发生熔毁前赶回去！"}
+{"msgid":"spyder_route6_ping","category":"ok","action":"keep"}
+{"msgid":"spyder_route6_ping1","category":"glossary","action":"override","reason":"Candy Town 未采用固定译名甜饴镇","translation":"嘘，听说了吗？执法者正在没收甜饴镇所有人的精灵。"}
+{"msgid":"spyder_route6_ping2","category":"style","action":"keep","reason":"get away with it 的处理略直译，但上下文仍可理解"}
+{"msgid":"spyder_route6_richard","category":"ok","action":"keep"}
+{"msgid":"spyder_route6_richard1","category":"drift","action":"override","reason":"上游译文凭空增加了“这是我的错”，且误解 the one day 的强调","translation":"真是的，偏偏就在我离开电脑出门散步的这一天，出了这种事！"}
+{"msgid":"spyder_route6_richard2","category":"mistranslation","action":"override","reason":"Worst 被反向误译为最好","translation":"最。糟。糕。的。一。天。"}
+{"msgid":"spyder_route6_rigel","category":"ok","action":"keep"}
+{"msgid":"spyder_route6_rigel1","category":"ok","action":"keep"}
+{"msgid":"spyder_route6_rigel2","category":"ok","action":"keep"}
+{"msgid":"spyder_ruby_plaque","category":"style","action":"override","reason":"上游人为断词导致字面换行数多于英文，影响显示与阅读","translation":"红宝石其实只是红色刚玉的称呼！\\n刚玉呈现蓝色、粉色或透明等其他颜色时，就称为蓝宝石。\\n精灵吃下红宝石后会变得热情而有活力，更擅长拍打、抓挠和撕咬等物理攻击。"}
+{"msgid":"spyder_scoop_alyssa","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_alyssa1","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_alyssa2","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_arachne","category":"mistranslation","action":"override","reason":"人名 Arachne 被误译为生物分类蛛形纲","translation":"阿拉克涅"}
+{"msgid":"spyder_scoop_arachne1","category":"style","action":"override","reason":"反派对白直译生硬","translation":"喂！没看见我们正在实施邪恶计划吗？"}
+{"msgid":"spyder_scoop_arachne2","category":"style","action":"override","reason":"Extreme Restraints 被直译成极端约束，作为器具名称生硬","translation":"太迟了！终极镣铐已经到手，你对此无能为力。"}
+{"msgid":"spyder_scoop_asta","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_asta1","category":"mistranslation","action":"override","reason":"Why yes 被误译为为什么是，且多处句法生硬","translation":"没错，我就是终极镣铐的发明者。\\n你问那是什么？\\n不过是一副威力强大到连龙都挣脱不了的镣铐。\\n它们被用在隔离区，确保受感染的精灵无法逃走。"}
+{"msgid":"spyder_scoop_berys","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_berys1","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_berys2","category":"glossary","action":"override","reason":"Scoop 未采用 glossary.tsv 固定译名","translation":"不是斯考普让疾病扩散的！我向你保证。"}
+{"msgid":"spyder_scoop_cochini1","category":"style","action":"override","reason":"动物叫声被写成说明文字，影响对白表现","translation":"哼！哼！"}
+{"msgid":"spyder_scoop_cochini2","category":"style","action":"override","reason":"动物叫声被写成说明文字，影响对白表现","translation":"哼。"}
+{"msgid":"spyder_scoop_cochinia","category":"omission","action":"override","reason":"漏译名称后缀 A","translation":"胭脂虫A"}
+{"msgid":"spyder_scoop_cochinib","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_cochinic","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_donald","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_donald1","category":"mistranslation","action":"override","reason":"beyond 被误解为储藏室之外，且人为增加字面换行","translation":"我们隔离在这里的病精灵逃了出去，还闯进了里面的储藏室！这下要怎么封锁储藏室？"}
+{"msgid":"spyder_scoop_donald2","category":"style","action":"override","reason":"might just be strong enough 被机械直译，明显影响对白流畅度","translation":"你的实力或许足以制服逃跑的精灵。求你了——帮帮我们吧。"}
+{"msgid":"spyder_scoop_haf","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_haf1","category":"omission","action":"override","reason":"整句漏译出口与收拢逃散精灵的后半段，且缺少英文中的字面换行","translation":"我把偷走镣铐的人追进了这个房间。可后来那些生病的精灵也进来了，现在我们全被困住了！\\n要是你能开出一条通往出口的路，我就能把四处乱跑的精灵都赶回去。"}
+{"msgid":"spyder_scoop_landrace","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_landrace1","category":"style","action":"override","reason":"吼叫声被音译成人名般的文字","translation":"嗷！"}
+{"msgid":"spyder_scoop_landrace2","category":"style","action":"override","reason":"叹气声被音译成人名般的文字","translation":"呼。"}
+{"msgid":"spyder_scoop_landrace3","category":"style","action":"override","reason":"器具名称不统一，且 brute 译为畜生语气失准","translation":"多谢你解决了那个堵路的大家伙！\\n现在我们可以带着终极镣铐逃走了！"}
+{"msgid":"spyder_scoop_lanth","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_lanth1","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_lanth2","category":"style","action":"override","reason":"activist troublemaker 逐词拼接，中文明显不自然","translation":"果然是个爱闹事的激进分子。"}
+{"msgid":"spyder_scoop_lapinou1","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_lapinou2","category":"style","action":"override","reason":"拟声词音译生硬","translation":"嗯啊！"}
+{"msgid":"spyder_scoop_orba","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_orba1","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_orba2","category":"mistranslation","action":"override","reason":"for that matter 被误译为就这一点而言","translation":"话说回来，我又为什么会在这里？"}
+{"msgid":"spyder_scoop_paine","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_paine1","category":"mistranslation","action":"override","reason":"feel terrible that 指内疚难过，不是觉得疾病可怕","translation":"疾病传播出去让我非常难过。"}
+{"msgid":"spyder_scoop_paine2","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_rubid","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_rubid1","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_rubid2","category":"style","action":"keep","reason":"living in these conditions 的表达略直译，但意思清楚"}
+{"msgid":"spyder_scoop_sign","category":"glossary","action":"override","reason":"Scoop 未采用 glossary.tsv 固定译名","translation":"斯考普总部：好吃到让人想咬一口！"}
+{"msgid":"spyder_scoop_taggart","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_taggart1","category":"style","action":"override","reason":"器具名称直译生硬且上下文用词不统一","translation":"有人偷走了我们为了把精灵关在隔离区而发明的终极镣铐！是你干的吗？"}
+{"msgid":"spyder_scoop_taggart2","category":"style","action":"override","reason":"器具名称与相邻对白不统一","translation":"如果终极镣铐不是你偷的，那是谁？"}
+{"msgid":"spyder_scoop_turner","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_turner1","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_turner2","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_weaver","category":"ok","action":"keep"}
+{"msgid":"spyder_scoop_weaver1","category":"mistranslation","action":"override","reason":"Restraints 是镣铐而非束缚带，且代词指向不清","translation":"要是我早知道那些咳嗽的精灵会把我们追到这里来，我绝不会解开它们的镣铐！"}
+{"msgid":"spyder_scoop_weaver2","category":"mistranslation","action":"override","reason":"crime doesn't pay 被反向误译为犯罪不需要代价","translation":"呀！看来犯罪果然没有好下场！"}
+{"msgid":"spyder_scoop_welcome","category":"ok","action":"keep"}
+{"msgid":"spyder_searoutec_beech","category":"ok","action":"keep"}
+{"msgid":"spyder_searoutec_beech1","category":"ok","action":"keep"}
+{"msgid":"spyder_searoutec_beech2","category":"ok","action":"keep"}
+{"msgid":"spyder_searoutec_carstair","category":"ok","action":"keep"}
+{"msgid":"spyder_searoutec_carstair1","category":"ok","action":"keep"}
+{"msgid":"spyder_searoutec_carstair2","category":"style","action":"override","reason":"keep my head above water 的字面结构不符合中文表达","translation":"我没能让头露出水面。"}
+{"msgid":"spyder_searoutec_gil","category":"ok","action":"keep"}
+{"msgid":"spyder_searoutec_gil1","category":"ok","action":"keep"}
+{"msgid":"spyder_searoutec_gil2","category":"ok","action":"keep"}
+{"msgid":"spyder_searoutec_leek","category":"ok","action":"keep"}
+{"msgid":"spyder_searoutec_leek1","category":"mistranslation","action":"override","reason":"shellfish/selfish 双关被译成无意义的贝壳鱼","translation":"让我赢吧——别这么“贝”私！"}
+{"msgid":"spyder_searoutec_leek2","category":"mistranslation","action":"override","reason":"porpoise 被残留为未翻译英文，整句不可读","translation":"我可是故意输的。"}
+{"msgid":"spyder_searoutec_nigel","category":"ok","action":"keep"}
+{"msgid":"spyder_searoutec_nigel1","category":"drift","action":"override","reason":"上游译文重复整段内容并凭空增加字面换行","translation":"这是龙穴！我站在外面是因为……呃，因为我在守卫这里。"}
+{"msgid":"spyder_searoutec_nigel2","category":"ok","action":"keep"}
+{"msgid":"spyder_searoutec_nigel3","category":"glossary","action":"override","reason":"Spyder Bite 未采用 glossary.tsv 固定译名","translation":"抱歉，只要“斯皮德咬合”感染仍在传播，我就不能允许任何人进入神圣洞穴。"}
+{"msgid":"spyder_searoutec_river","category":"ok","action":"keep"}
+{"msgid":"spyder_searoutec_river1","category":"glossary","action":"override","reason":"漏掉 Manosting 名称且 Tuxeball 未采用固定译名，并多出字面换行","translation":"粉紫水母缠住了我……我游不动了……我最后的希望……就是藏在泳衣里的精灵球！"}
+{"msgid":"spyder_searoutec_river2","category":"ok","action":"keep"}
+{"msgid":"spyder_searoutec_rutherford","category":"ok","action":"keep"}
+{"msgid":"spyder_searoutec_rutherford1","category":"style","action":"keep","reason":"略去原句重复形成的引语节奏，但核心意思完整"}
+{"msgid":"spyder_searoutec_rutherford2","category":"ok","action":"keep"}
+{"msgid":"spyder_searoutec_sandy","category":"ok","action":"keep"}
+{"msgid":"spyder_searoutec_sandy1","category":"glossary","action":"override","reason":"Sharpfin 未采用 glossary.tsv 固定译名","translation":"锋利鳍豚很棒！不过可别给它洗澡……"}
+{"msgid":"spyder_searoutec_sandy2","category":"mistranslation","action":"override","reason":"took the bait 是上当的双关，不是接受诱饵","translation":"我上钩了。"}
+{"msgid":"spyder_searoutec_wade","category":"ok","action":"keep"}
+{"msgid":"spyder_searoutec_wade1","category":"style","action":"override","reason":"hold onto your hats 被机械直译，中文对白不自然","translation":"我是憋气世界纪录保持者！你可看好了……"}
+{"msgid":"spyder_searoutec_wade2","category":"mistranslation","action":"override","reason":"splutter 是呛水后的咳喷声，不是溅射","translation":"*噗咳*"}
+{"msgid":"spyder_shaft1_sign","category":"glossary","action":"override","reason":"Shaft 未采用 glossary.tsv 固定译名","translation":"沙夫特总部：采矿部"}
+{"msgid":"spyder_shaft2_sign","category":"ok","action":"keep"}
+{"msgid":"spyder_shaft_plaque","category":"mistranslation","action":"override","reason":"We dig it 的宣传双关被逐字误译","translation":"由沙夫特赞助。“我们就爱挖！”"}
+{"msgid":"spyder_shopassistant","category":"ok","action":"keep"}
+{"msgid":"spyder_shopkeeper","category":"ok","action":"keep"}
+{"msgid":"spyder_successful_boulder","category":"ok","action":"keep"}
+{"msgid":"spyder_successful_log","category":"glossary","action":"override","reason":"Hatchet 未采用 glossary.tsv 固定译名","translation":"你的威猛短斧把原木劈成了两半。"}
+{"msgid":"spyder_timber_dante1","category":"ok","action":"keep"}
+{"msgid":"spyder_timber_dante2","category":"style","action":"override","reason":"上游换行错位并少一个字面换行，严重影响对白排版","translation":"嘿，伙计！\\n你打算闯进这座总部吗？真酷！\\n动手前一定要做好充分准备，因为进去之后很难出来！\\n"}
+{"msgid":"spyder_tunnelb_beryll","category":"ok","action":"keep"}
+{"msgid":"spyder_tunnelb_beryll1","category":"ok","action":"keep"}
+{"msgid":"spyder_tunnelb_beryll2","category":"ok","action":"keep"}
+{"msgid":"spyder_tunnelb_greta","category":"ok","action":"keep"}
+{"msgid":"spyder_tunnelb_greta1","category":"ok","action":"keep"}
+{"msgid":"spyder_tunnelb_greta2","category":"ok","action":"keep"}
+{"msgid":"spyder_tunnelb_iris","category":"ok","action":"keep"}
+{"msgid":"spyder_tunnelb_iris1","category":"ok","action":"keep"}
+{"msgid":"spyder_tunnelb_iris2","category":"mistranslation","action":"override","reason":"places please 是要求各就各位，不是请去哪里","translation":"走开。图尔比迪，各就各位！"}
+{"msgid":"spyder_tunnelb_lute","category":"ok","action":"keep"}
+{"msgid":"spyder_tunnelb_lute1","category":"ok","action":"keep"}
+{"msgid":"spyder_tunnelb_lute2","category":"ok","action":"keep"}
+{"msgid":"spyder_tunnelb_meitner","category":"ok","action":"keep"}
+{"msgid":"spyder_tunnelb_meitner1","category":"glossary","action":"override","reason":"Masknake 未采用 glossary.tsv 固定译名","translation":"面具蛇非常有趣。只要戳它一下，它的尾巴就会献上一场灯光秀！"}
+{"msgid":"spyder_tunnelb_meitner2","category":"ok","action":"keep"}
+{"msgid":"spyder_tunnelb_tommy","category":"ok","action":"keep"}
+{"msgid":"spyder_tunnelb_tommy1","category":"ok","action":"keep"}
+{"msgid":"spyder_tunnelb_tommy2","category":"mistranslation","action":"override","reason":"put me off my game 指影响发挥，不是失去比赛动力","translation":"我饿得发挥失常了！"}
+{"msgid":"spyder_wayfarer1_bismuth","category":"ok","action":"keep"}
+{"msgid":"spyder_wayfarer1_bismuth1","category":"glossary","action":"override","reason":"Scoop 未采用 glossary.tsv 固定译名","translation":"希望这和斯考普农场那些生病的精灵无关！"}
+{"msgid":"spyder_wayfarer1_bismuth2","category":"style","action":"override","reason":"Bummer 被译成连接词“遗憾的是”，不符合独立感叹句","translation":"真倒霉！"}
+{"msgid":"spyder_wayfarer1_bravo","category":"ok","action":"keep"}
+{"msgid":"spyder_wayfarer1_bravo1","category":"style","action":"override","reason":"品牌标语被拆成两个突兀短句，影响广告式语气","translation":"此次执法行动由全能公司——您唯一需要的新闻——赞助。"}
+{"msgid":"spyder_wayfarer1_bravo2","category":"omission","action":"override","reason":"漏译品牌标语 The Only News You Need","translation":"请不要让我的战斗表现影响你对全能公司——您唯一需要的新闻——的看法。"}
+{"msgid":"spyder_wayfarer1_james","category":"ok","action":"keep"}
+{"msgid":"spyder_wayfarer1_james1","category":"style","action":"keep","reason":"混用问号和叹号略显突兀，但语义完整"}
+{"msgid":"spyder_wayfarer1_james2","category":"mistranslation","action":"override","reason":"see my lose 指看到我落败，不是看到损失","translation":"还好杰西没看到我输得这么惨！"}
+{"msgid":"spyder_wayfarer1_jessie","category":"ok","action":"keep"}
+{"msgid":"spyder_wayfarer1_jessie1","category":"ok","action":"keep"}
+{"msgid":"spyder_wayfarer1_jessie2","category":"ok","action":"keep"}
+{"msgid":"spyder_wayfarer1_maniac","category":"drift","action":"override","reason":"上游凭空追加一整句和字面换行，且 Botbot 译名错误","translation":"嘿，伙计，你想要我的布布吗？"}
+{"msgid":"spyder_wayfarer1_maniac2","category":"ok","action":"keep"}
+{"msgid":"spyder_wayfarer1_morningstar","category":"ok","action":"keep"}
+{"msgid":"spyder_wayfarer1_morningstar1","category":"ok","action":"keep"}
+{"msgid":"spyder_wayfarer1_morningstar2","category":"ok","action":"keep"}
+{"msgid":"spyder_wayfarer1_morton","category":"ok","action":"keep"}
+{"msgid":"spyder_wayfarer1_morton1","category":"ok","action":"keep"}
+{"msgid":"spyder_wayfarer1_morton2","category":"ok","action":"keep"}
+{"msgid":"spyder_wayfarer1_nightshade","category":"ok","action":"keep"}
+{"msgid":"spyder_wayfarer1_nightshade1","category":"ok","action":"keep"}
+{"msgid":"spyder_wayfarer1_nightshade2","category":"style","action":"override","reason":"后置“关于精灵的护理”明显是翻译腔","translation":"看来我们在精灵护理方面还有很多要学。"}
+{"msgid":"spyder_wayfarer1_ratcher","category":"ok","action":"keep"}
+{"msgid":"spyder_wayfarer1_ratcher1","category":"ok","action":"keep"}
+{"msgid":"spyder_wayfarer1_ratcher2","category":"ok","action":"keep"}
+{"msgid":"spyder_wayfarer1_victor","category":"ok","action":"keep"}
+{"msgid":"spyder_wayfarer1_victor1","category":"ok","action":"keep"}
+{"msgid":"spyder_wayfarer1_victor2","category":"style","action":"override","reason":"Stop right there 被逐字译成“就在那里停下”，对白生硬","translation":"站住！或者，呃……"}
+{"msgid":"spyder_wayfarer_granny","category":"drift","action":"override","reason":"上游凭空增加“我不知道该怎么办”并多出字面换行","translation":"我解释不了……刚才我的凯尔弗雷还好好的，转眼就病了！\\n至少执法者很快就赶到了。"}
+{"msgid":"spyder_wayfarer_maniac","category":"drift","action":"override","reason":"首句被重复，且人为断词造成字面换行数严重超出英文","translation":"我的精灵没生病！这只是想卖给我们不需要的药的借口。\\n我像你这么大时，根本没有药。我们就在山间溪流里游泳，得了点小感冒也只能硬扛！\\n而且，早在任何人打喷嚏之前，我就看到执法者沿着4号公路过来了，所以怎么可能……\\n啊、啊、阿嚏！\\n……\\n这说明不了什么。我只是鼻子痒。"}
+{"msgid":"spyder_wayfarer_nurse","category":"ok","action":"keep"}
+{"msgid":"spyder_wayfarer_shopkeeper","category":"glossary","action":"override","reason":"泛称 tuxemon 多次译为小精灵而非固定译名精灵，且人为增加字面换行","translation":"抱歉，朋友，没空房了。\\n执法者说一些客人的精灵中暴发了一种罕见疾病，所以我们正在隔离。\\n不过，我可以帮你治疗精灵，怎么样？"}
+{"msgid":"spyder_wayfarerinn_sign","category":"style","action":"override","reason":"客栈名保留英文，中文标牌阅读不连贯","translation":"欢迎来到旅人旅馆！"}
+{"msgid":"spyder_wayfarerinn_tv1","category":"ok","action":"keep"}
+{"msgid":"spyderbite","category":"ok","action":"keep"}
+{"msgid":"squabbit","category":"ok","action":"keep"}
+{"msgid":"squabbit_description","category":"ok","action":"keep"}
+{"msgid":"stabilo","category":"ok","action":"keep"}
+{"msgid":"stahp","category":"ok","action":"keep"}
+{"msgid":"stahp2","category":"mistranslation","action":"override","reason":"Fine 在勉强同意语境中是好吧，不是很好","translation":"……好吧。"}
+{"msgid":"stahp3","category":"drift","action":"override","reason":"同一语义被重复两遍并凭空增加字面换行","translation":"但别以为你能躲过这场谈话！我很快就会从你嘴里套出细节！"}
+{"msgid":"stahp4","category":"ok","action":"keep"}
+{"msgid":"stahp5","category":"ok","action":"keep"}
+{"msgid":"stampede","category":"ok","action":"keep"}
+{"msgid":"stance","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"staples","category":"style","action":"keep","reason":"时态被弱化，但中文仍自然且意思完整"}
+{"msgid":"starfall","category":"ok","action":"keep"}
+{"msgid":"static_field","category":"ok","action":"keep"}
+{"msgid":"statursus","category":"ok","action":"keep"}
+{"msgid":"statursus_description","category":"style","action":"override","reason":"人为断词多出字面换行，且第二句句式生硬","translation":"雕像熊已经学会把情绪汇聚成一团纯粹的火焰。别人只要看它一眼，就会陷入恍惚。"}
+{"msgid":"sting","category":"ok","action":"keep"}
+{"msgid":"stone_rot","category":"ok","action":"keep"}
+{"msgid":"stonehenge","category":"ok","action":"keep"}
+{"msgid":"stovepipe","category":"ok","action":"keep"}
+{"msgid":"stovepipe_description","category":"style","action":"override","reason":"Handling 被译为处理，物品描述明显翻译腔","translation":"一根长长的铁管。拿过之后，双手会沾满黑灰。"}
+{"msgid":"strangulation","category":"ok","action":"keep"}
+{"msgid":"strella","category":"ok","action":"keep"}
+{"msgid":"strella_description","category":"style","action":"override","reason":"convince bugs 逐字译为说服虫子，不符合诱饵语境","translation":"它的尾巴是诱饵，会引诱虫子咬上去并落入陷阱。"}
+{"msgid":"strike","category":"ok","action":"keep"}
+{"msgid":"stuck","category":"ok","action":"keep"}
+{"msgid":"suck_poison","category":"ok","action":"keep"}
+{"msgid":"sudden_glow","category":"ok","action":"keep"}
+{"msgid":"sumchon","category":"ok","action":"keep"}
+{"msgid":"sumchon_description","category":"style","action":"keep","reason":"密度比较的措辞略直译，但含义清楚"}
+{"msgid":"sunburst","category":"ok","action":"keep"}
+{"msgid":"super_potion","category":"ok","action":"keep"}
+{"msgid":"super_potion_description","category":"ok","action":"keep"}
+{"msgid":"supernova","category":"ok","action":"keep"}
+{"msgid":"sure_i_do","category":"mistranslation","action":"override","reason":"该选项回应是否愿意倾听，现译为“我当然知道”答非所问","translation":"我当然愿意听。"}
+{"msgid":"surge","category":"ok","action":"keep"}
+{"msgid":"swap","category":"ok","action":"keep"}
+{"msgid":"sweet_sand","category":"ok","action":"keep"}
+{"msgid":"sweet_sand_description","category":"mistranslation","action":"override","reason":"sudsy 指能起泡，被误译为带泥土","translation":"在世界上的一些地方，人们会用这种芳香、能搓出泡沫的沙子清洁身体。"}
+{"msgid":"sylvan","category":"ok","action":"keep"}
+{"msgid":"taba_greeting1","category":"style","action":"override","reason":"Jaime 未本地化且接待员对白多处直译生硬","translation":"接待员杰米：嘿，${{name}}！听说你获得了一只精灵，恭喜！要壮大队伍，你会需要精灵球。"}
+{"msgid":"taba_greeting2a","category":"style","action":"override","reason":"人为断词多出字面换行，且“这里有一些让你开始”不可读","translation":"商店正在促销，先送你几个用来起步。你可以用它们捕捉精灵，不过先把对方削弱会更容易！"}
+{"msgid":"taba_greeting2b","category":"mistranslation","action":"override","reason":"a good head on your shoulders 指头脑清醒，被误译为有一个很好的开头，且多出字面换行","translation":"啊！看来你已经有一些了。${{name}}，你很有头脑，我相信你很快就能成为冠军。"}
+{"msgid":"taba_greeting3","category":"omission","action":"override","reason":"漏掉 ${{name}} 占位符，且漏译 Tuxemart 名称","translation":"祝你冒险顺利，${{name}}。记得前往精灵商店，购买冒险所需的一切！\\n……\\n抱歉说了推销词，这是我的工作。"}
+{"msgid":"taba_house1_calendar","category":"ok","action":"keep"}
+{"msgid":"taba_house1_husband1","category":"omission","action":"override","reason":"漏译开头的 Tuxemon 感叹","translation":"精灵！我当年可是最优秀的训练师之一！"}
+{"msgid":"taba_house1_reading","category":"ok","action":"keep"}
+{"msgid":"taba_house1_sign","category":"ok","action":"keep"}
+{"msgid":"taba_house1_watching","category":"style","action":"override","reason":"“记录片”和后半句残句明显影响阅读","translation":"这是一部关于本地区最奇异、最奇妙的精灵的纪录片，\\n也介绍了它们养成的古怪习性。"}
+{"msgid":"taba_house1_wife1","category":"ok","action":"keep"}
+{"msgid":"taba_house2_books","category":"mistranslation","action":"override","reason":"general works 被误译为一般工程，且学科名称不够准确","translation":"000 - 计算机科学、信息与综合类，100 - 哲学与心理学\\n200 - 宗教，300 - 社会科学，400 - 语言，500 - 自然科学，600 - 技术\\n700 - 艺术与娱乐，800 - 文学，900 - 历史与地理"}
+{"msgid":"taba_house2_owner1","category":"style","action":"override","reason":"Legacy Library 直译为遗留图书馆，中文馆名生硬","translation":"欢迎来到传承图书馆！请随意参观，但请保持安静。"}
+{"msgid":"taba_house2_reader1a","category":"ok","action":"keep"}
+{"msgid":"taba_house2_reader2a","category":"ok","action":"keep"}
+{"msgid":"taba_house2_reader3a","category":"ok","action":"keep"}
+{"msgid":"taba_house2_reader4a","category":"ok","action":"keep"}
+{"msgid":"taba_house2_reading1","category":"ok","action":"keep"}
+{"msgid":"taba_house2_reading2","category":"drift","action":"override","reason":"上游凭空追加作者英文原名括注","translation":"这本书是路易斯·埃特雷戈所著的《梦中养成》。"}
+{"msgid":"taba_house2_reading3","category":"style","action":"override","reason":"作者名未本地化，与同组书目格式不一致","translation":"这本书是莱斯利·格雷宁扎所著的《失去荣誉的孩子》。"}
+{"msgid":"taba_house2_reading4","category":"ok","action":"keep"}
+{"msgid":"taba_house2_sign","category":"style","action":"override","reason":"Legacy Library 直译为遗留图书馆，中文馆名生硬","translation":"传承图书馆"}
+{"msgid":"taba_house3_client1a","category":"ok","action":"keep"}
+{"msgid":"taba_house3_client2a","category":"ok","action":"keep"}
+{"msgid":"taba_house3_client3a","category":"ok","action":"keep"}
+{"msgid":"taba_house3_owner1","category":"style","action":"override","reason":"旅馆名称完全保留英文，中文对白阅读不连贯","translation":"欢迎来到思叶旅馆！"}
+{"msgid":"taba_house3_sign","category":"style","action":"override","reason":"旅馆名“周到的叶子”逐词直译生硬","translation":"思叶旅馆"}
+{"msgid":"taba_house4_client1a","category":"ok","action":"keep"}
+{"msgid":"taba_house4_client2a","category":"style","action":"override","reason":"empty stomach 被译成空虚的肚子，中文搭配不自然","translation":"嗯？不过是填填空肚子罢了。"}
+{"msgid":"taba_house4_client3a","category":"ok","action":"keep"}
+{"msgid":"taba_house4_dish1","category":"style","action":"override","reason":"dense 描写食物质地，译为浓密不自然","translation":"它是棕色的，很厚实，但看起来不像布丁……"}
+{"msgid":"taba_house4_owner1","category":"ok","action":"keep"}
+{"msgid":"taba_house4_sign","category":"ok","action":"keep"}
+{"msgid":"taba_town","category":"ok","action":"keep"}
+{"msgid":"taba_town_description","category":"ok","action":"keep"}
+{"msgid":"taba_town_homeplace","category":"ok","action":"keep"}
+{"msgid":"taba_town_sign_profhouse","category":"ok","action":"keep"}
+{"msgid":"taba_town_sign_proflab","category":"ok","action":"keep"}
+{"msgid":"taba_town_sign_tuxecenter","category":"ok","action":"keep"}
+{"msgid":"taba_town_sign_tuxemart","category":"ok","action":"keep"}
+{"msgid":"tabanurse","category":"ok","action":"keep"}
+{"msgid":"tabanurse_dialog","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"tabatownbattlearea","category":"ok","action":"keep"}
+{"msgid":"taiga","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"take_cover","category":"ok","action":"keep"}
+{"msgid":"taketheleft","category":"ok","action":"keep"}
+{"msgid":"taketheleft2","category":"ok","action":"keep"}
+{"msgid":"tarpeur","category":"ok","action":"keep"}
+{"msgid":"tarpeur_description","category":"style","action":"override","reason":"非人称生物使用“他们”，且句式重复生硬","translation":"它们休息、生长，再生长、休息。它们很少只休息而不生长，或只生长而不休息。"}
+{"msgid":"taupypus","category":"ok","action":"keep"}
+{"msgid":"taupypus_description","category":"style","action":"override","reason":"人为断词多出字面换行，影响描述显示","translation":"鸭嘴兽出生时，母亲会刺破它的眼睛。这样，它们潜入水中时眼睛就永远不会刺痛。"}
+{"msgid":"tectonic_drill","category":"ok","action":"keep"}
+{"msgid":"tectonic_drill_description","category":"mistranslation","action":"override","reason":"earth 在钻探语境中指大地，不是地球","translation":"一台用来钻入大地、会发出咔嗒声的大机器。"}
+{"msgid":"teddisun","category":"ok","action":"keep"}
+{"msgid":"teddisun_description","category":"style","action":"override","reason":"单数精灵与复数人称混用，指代不清","translation":"特迪桑崇拜太阳——人们总能看到它带着自己的太阳玩具。"}
+{"msgid":"template","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"template_description","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"terror","category":"ok","action":"keep"}
+{"msgid":"tetrchimp","category":"ok","action":"keep"}
+{"msgid":"tetrchimp_description","category":"style","action":"override","reason":"人为断词多出字面换行，且句式累赘","translation":"它们会吸收遇到的任何信息，并通过没完没了的喋喋不休，按顺序把学到的一切传达出去。"}
+{"msgid":"thats_me","category":"ok","action":"keep"}
+{"msgid":"thatsmeknight","category":"mistranslation","action":"override","reason":"Splendid 在此是太好了，不是精彩，且现译搭配生硬","translation":"哦，太好了！我从一开始就知道一定是你。\\n别担心，我不会告诉任何人。"}
+{"msgid":"theanthemishere","category":"ok","action":"keep"}
+{"msgid":"theenergy","category":"style","action":"override","reason":"省略号过长且“能量”用于人物精力不自然","translation":"那个人的精力真是无穷无尽……"}
+{"msgid":"theinfo","category":"omission","action":"override","reason":"漏译 Gage Paludal Lamina 等关键信息，多个专名违反 glossary，并有三处额外字面换行","translation":"刚才那一幕真抱歉，艾莉有时很难相处，不像我的女儿杰丝。\\n哦！瞧我这礼数。我的名字是艾……这样吧，我直接写下来。\\n艾布尔\\n读作“阿布勒”，不过大家都叫我艾布尔。你也这么叫我吧……\\n艾布尔：我是全能公司的首席执行官，你看到的每一条广播都要经过我批准。\\n当然，并不是只有我在尽职。全能公司还有一个董事会，协助管理各个地区。\\n说来也巧……董事会每年都能再次当选！\\n全能公司的目标是向所有人开放世界。而要做到这一点、让人人平等，唯一的办法\\n就是限制精灵。\\n我们一开始采取没收措施，但大多数精灵都设法逃走了。因此，我们只好诉诸极端手段。\\n我们的姊妹组织斯派德研制出了一种能够改变精灵的药物。\\n它会分离出每只精灵都神秘拥有的一部分大脑区域，并使其过载。\\n盖奇沼泽板层一旦被电流过载，它们的反抗意志就会消退，变得温顺。\\n遗憾的是，由于一些出乎意料的悲惨副作用，有几个物种如今实际上已经灭绝，\\n尤其是小岩猫、弗朗索拉和水龙。\\n如今，除了野外零星残存的个体，这一代人只会在精灵为我们工作时与它们接触。\\n出生率达到历史新高，而全能公司的支持率自实施限制前一年以来从未下降。\\n野生精灵曾是无处不在的祸害，甚至威胁要毁灭人类。全能公司解决了问题并建立了秩序。\\n若不受约束，精灵就是毁灭性的力量；任何否认这一点的人都在撒谎。抱歉，我得去工作了。"}
+{"msgid":"thetvbescreamin","category":"glossary","action":"override","reason":"Omnichannel 被误译为全渠道，未采用 glossary.tsv 固定译名","translation":"亲爱的，等等。我打开电视，正好播出全能公司的新闻发布会。\\n我们看看吧。"}
+{"msgid":"thunderball","category":"ok","action":"keep"}
+{"msgid":"thunderclap","category":"ok","action":"keep"}
+{"msgid":"thunderstone","category":"ok","action":"keep"}
+{"msgid":"thunderstone_description","category":"ok","action":"keep"}
+{"msgid":"tigrock","category":"ok","action":"keep"}
+{"msgid":"tigrock_description","category":"style","action":"override","reason":"invent itself 被逐字译成发明自己，描述不自然","translation":"据说，因为没有人为它设计进化形态，它只好自行塑造了自己。"}
+{"msgid":"tikoal","category":"ok","action":"keep"}
+{"msgid":"tikoal_description","category":"ok","action":"keep"}
+{"msgid":"tikorch","category":"ok","action":"keep"}
+{"msgid":"tikorch_description","category":"ok","action":"keep"}
+{"msgid":"timber_town","category":"glossary","action":"override","reason":"Timber Town 漏掉 glossary.tsv 固定译名中的“镇”","translation":"粽木镇"}
+{"msgid":"timber_town_description","category":"ok","action":"keep"}
+{"msgid":"time_crisis","category":"ok","action":"keep"}
+{"msgid":"timeforround2","category":"style","action":"override","reason":"Finally 与 You're back 连续直译造成语义重复","translation":"${{name}}！终于！你回来了！我还担心你会错过公告！"}
+{"msgid":"timeforround22","category":"glossary","action":"override","reason":"剧情明确指此前购买的 Potion 道具，应统一译为“治疗药水”","translation":"哦！你真的拿到治疗药水了！太好了！现在我们真得赶回去了。"}
+{"msgid":"tip","category":"ok","action":"keep"}
+{"msgid":"tired","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"tm_avalanche","category":"ok","action":"keep"}
+{"msgid":"tm_avalanche_description","category":"drift","action":"override","reason":"上游凭空增加只教水或土系精灵的限制","translation":"教授“雪崩”招式的招式学习器。"}
+{"msgid":"tm_blossom","category":"ok","action":"keep"}
+{"msgid":"tm_blossom_description","category":"drift","action":"override","reason":"上游凭空增加只教木系精灵的限制","translation":"教授“绽放”招式的招式学习器。"}
+{"msgid":"tobishimi","category":"ok","action":"keep"}
+{"msgid":"tonguespear","category":"ok","action":"keep"}
+{"msgid":"toodles","category":"mistranslation","action":"override","reason":"告别语 Toodles 被误译为贫民","translation":"回头见！"}
+{"msgid":"torch","category":"ok","action":"keep"}
+{"msgid":"touch","category":"ok","action":"keep"}
+{"msgid":"toufigel","category":"ok","action":"keep"}
+{"msgid":"toufigel_description","category":"style","action":"override","reason":"coated in soft snow 被逐字译为涂着软雪，中文不自然","translation":"它看起来像毛茸茸的昆虫，其实是身披松软积雪的爬行动物。"}
+{"msgid":"tourbidi","category":"ok","action":"keep"}
+{"msgid":"tourbidi_description","category":"ok","action":"keep"}
+{"msgid":"town","category":"ok","action":"keep"}
+{"msgid":"trapsnap","category":"ok","action":"keep"}
+{"msgid":"trapsnap_description","category":"ok","action":"keep"}
+{"msgid":"tree","category":"ok","action":"keep"}
+{"msgid":"tsunami","category":"ok","action":"keep"}
+{"msgid":"tsushimi","category":"ok","action":"keep"}
+{"msgid":"tumblebee","category":"ok","action":"keep"}
+{"msgid":"tumblebee_description","category":"glossary","action":"override","reason":"将 Tumblebee 错写成另一只精灵风滚虫，违反 glossary.tsv","translation":"它筑出的蜂巢是完美的球体，不倒蜂就在里面不停滚动，开心地嗡嗡作响。"}
+{"msgid":"tumblequill","category":"ok","action":"keep"}
+{"msgid":"tumbleworm","category":"ok","action":"keep"}
+{"msgid":"tumbleworm_description","category":"mistranslation","action":"override","reason":"outgrown their honeycomb eggs 被误译成超过蜂巢，语义不成立","translation":"当它们长得再也待不下蜂巢状的卵时，就会脸朝下掉到地上。"}
+{"msgid":"tunnel","category":"ok","action":"keep"}
+{"msgid":"turnipper","category":"ok","action":"keep"}
+{"msgid":"turnipper_description","category":"glossary","action":"override","reason":"Turnipper 被误写成土拨鼠而未采用固定译名萝卜兽，且主客体关系译反","translation":"当一片田地任由乌鸦、蝗虫和老鼠糟蹋时，萝卜兽有时会从地下钻出来保护庄稼。"}
+{"msgid":"tux","category":"ok","action":"keep"}
+{"msgid":"tux_attack","category":"ok","action":"keep"}
+{"msgid":"tuxeball","category":"ok","action":"keep"}
+{"msgid":"tuxeball_description","category":"ok","action":"keep"}
+{"msgid":"tuxemart_aide","category":"ok","action":"keep"}
+{"msgid":"tuxemart_keeper","category":"ok","action":"keep"}
+{"msgid":"tuxemon_released","category":"style","action":"override","reason":"精灵系统语境中“被释放”生硬，应使用放生","translation":"已放生{name}。"}
+{"msgid":"tuxemon_stat1","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"tuxemon_stat2","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"tuxemontime","category":"ok","action":"keep"}
+{"msgid":"tuxemontime1.5","category":"mistranslation","action":"override","reason":"Trial 是活动名“试炼”，不是司法审判","translation":"看来这意味着，你已经决定参加试炼了？"}
+{"msgid":"tuxemontime2","category":"ok","action":"keep"}
+{"msgid":"tuxemontime3","category":"mistranslation","action":"override","reason":"There we go 表示完成后的“好了”，不是“我们走吧”","translation":"好了！"}
+{"msgid":"tuxemontime3.1","category":"style","action":"override","reason":"Battle Area 译为战区易产生军事歧义，且长句明显直译","translation":"这是你的注册文件。第一个对战区会要求你出示文件，换取一枚训练师徽章。\\n之后就用不到这些文件了。"}
+{"msgid":"tuxemontime4","category":"style","action":"override","reason":"人为断词多出字面换行，且专名列表标点错误","translation":"现在到了最重要的部分！选择你的精灵！\\n遗憾的是，我的资金来源最近变得……有些犹豫。因此你只能从三只精灵中选择，实在抱歉。\\n三个选择分别是小岩猫、红火鸟和镊鹭。"}
+{"msgid":"tuxemontimechoiceno","category":"ok","action":"keep"}
+{"msgid":"tuxemontimechoiceyes","category":"mistranslation","action":"override","reason":"Splendid 是太棒了，不是形容色彩的灿烂","translation":"太棒了！"}
+{"msgid":"tuxepedia_data_caught","category":"ok","action":"keep"}
+{"msgid":"tuxepedia_data_seen","category":"ok","action":"keep"}
+{"msgid":"tuxepedia_exp","category":"ok","action":"keep"}
+{"msgid":"tuxepedia_progress","category":"ok","action":"keep"}
+{"msgid":"tweesher","category":"ok","action":"keep"}
+{"msgid":"tweesher!","category":"ok","action":"keep"}
+{"msgid":"tweesher_description","category":"ok","action":"keep"}
+{"msgid":"ubuntu","category":"ok","action":"keep"}
+{"msgid":"understand?","category":"ok","action":"keep"}
+{"msgid":"undertaker","category":"ok","action":"keep"}
+{"msgid":"urcine","category":"ok","action":"keep"}
+{"msgid":"urcine_description","category":"glossary","action":"override","reason":"Furnursus 未采用 glossary.tsv 固定译名炉子熊","translation":"炉子熊出生时若体内没有火焰，就会被遗弃在森林里，成为小棕熊。"}
+{"msgid":"uselessnes","category":"ok","action":"keep"}
+{"msgid":"vamporm","category":"ok","action":"keep"}
+{"msgid":"vamporm_description","category":"ok","action":"keep"}
+{"msgid":"velocitile","category":"ok","action":"keep"}
+{"msgid":"velocitile_description","category":"style","action":"override","reason":"“跑过子弹”搭配生硬，影响图鉴描述自然度","translation":"它热身之后，甚至能跑得比子弹还快。"}
+{"msgid":"vengeance","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"venom","category":"ok","action":"keep"}
+{"msgid":"venomous_tentacle","category":"ok","action":"keep"}
+{"msgid":"vigueur","category":"ok","action":"keep"}
+{"msgid":"vigueur_description","category":"glossary","action":"override","reason":"Tarpeur 未采用 glossary.tsv 固定译名，且人为增加字面换行","translation":"维格会比赛谁能举起最重的石头。要是举起的石头太重，它们就会被压扁，塔波尔的种子也会四散开来。"}
+{"msgid":"viper","category":"ok","action":"keep"}
+{"msgid":"visitor","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"vivicinder","category":"ok","action":"keep"}
+{"msgid":"vivicinder_description","category":"ok","action":"keep"}
+{"msgid":"vividactil","category":"ok","action":"keep"}
+{"msgid":"vividactil_description","category":"ok","action":"keep"}
+{"msgid":"vivipere","category":"ok","action":"keep"}
+{"msgid":"vivipere_description","category":"style","action":"override","reason":"“寿命的其余部分”逐字直译，明显不自然","translation":"它会在夏季大量孵化，但余生如何仍是个谜。"}
+{"msgid":"viviphyta","category":"ok","action":"keep"}
+{"msgid":"viviphyta_description","category":"ok","action":"keep"}
+{"msgid":"vivisource","category":"ok","action":"keep"}
+{"msgid":"vivisource_description","category":"mistranslation","action":"override","reason":"spring 在此指泉水，被误译成季节春天","translation":"它选作家园的泉水总会带着一股奇特的洋葱味。"}
+{"msgid":"viviteel","category":"ok","action":"keep"}
+{"msgid":"viviteel_description","category":"mistranslation","action":"override","reason":"shell 指外壳，被误译成炮弹","translation":"它会取走阵亡战士的铠甲，把它改造成自己的外壳。"}
+{"msgid":"vivitrans","category":"ok","action":"keep"}
+{"msgid":"vivitrans_description","category":"mistranslation","action":"override","reason":"keen edge 是思维敏锐的比喻，现译成“集中到边缘”语义不成立","translation":"寒冷让维维特兰的思维变得无比敏锐。"}
+{"msgid":"vivitron","category":"ok","action":"keep"}
+{"msgid":"vivitron_description","category":"ok","action":"keep"}
+{"msgid":"volcoli","category":"ok","action":"keep"}
+{"msgid":"volcoli_description","category":"style","action":"override","reason":"spirit of a forest 直译为森林的精灵，容易与物种泛称混淆","translation":"它是森林之灵，毛发会随季节变化。"}
+{"msgid":"vorpal","category":"ok","action":"keep"}
+{"msgid":"waitdontgo","category":"ok","action":"keep"}
+{"msgid":"waithere","category":"ok","action":"keep"}
+{"msgid":"waithere2","category":"ok","action":"keep"}
+{"msgid":"waityouhaveone","category":"mistranslation","action":"override","reason":"Trial 被误译为训练师，且人为增加字面换行","translation":"你有精灵？\\n为什么？\\n…… …… …… ……\\n…… …… …… ……\\n试炼是吗？好吧，希望你很能打！我先马上治好你的精灵，再看看你究竟有多厉害。"}
+{"msgid":"wall_fire","category":"ok","action":"keep"}
+{"msgid":"wall_ice","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"wall_of_steel","category":"ok","action":"keep"}
+{"msgid":"wallet","category":"ok","action":"keep"}
+{"msgid":"wallow","category":"ok","action":"keep"}
+{"msgid":"walls","category":"ok","action":"keep"}
+{"msgid":"watchmewatchme","category":"mistranslation","action":"override","reason":"What are you doing 被改成为什么进城，且 curfew 句式错误","translation":"你在干什么？不知道现在提前宵禁了吗？\\n…… …… …… ……\\n…… …… …… ……\\n你看起来不像威胁，可以进城……\\n不过别告诉全能公司的那些恶棍，是我放你过去的，好吗？"}
+{"msgid":"water","category":"ok","action":"keep"}
+{"msgid":"water_booster","category":"ok","action":"keep"}
+{"msgid":"water_booster_description","category":"ok","action":"keep"}
+{"msgid":"waterwater","category":"ok","action":"keep"}
+{"msgid":"weavifly","category":"ok","action":"keep"}
+{"msgid":"weavifly_description","category":"style","action":"override","reason":"heavy with egg 被逐字译为被蛋压得很重，图鉴描述生硬","translation":"它怀卵太多时，就会无法飞行。"}
+{"msgid":"web","category":"ok","action":"keep"}
+{"msgid":"webs_wind","category":"ok","action":"keep"}
+{"msgid":"welcome_location_city","category":"ok","action":"keep"}
+{"msgid":"welcome_location_route","category":"style","action":"override","reason":"开头混入多余书名号，直接影响地点提示显示","translation":"欢迎来到${{map_name}}：${{map_desc}}\\n北：${{north}} / 南：${{south}} / 西：${{west}} / 东：${{east}}"}
+{"msgid":"welcome_location_town","category":"ok","action":"keep"}
+{"msgid":"welcometotaba","category":"ok","action":"keep"}
+{"msgid":"welcometotaba10","category":"glossary","action":"override","reason":"Fondent Region 未采用 glossary.tsv 固定译名，且后半句语序生硬","translation":"不过，这还是解释不了你们为什么毫无热情。这可是莫大的荣誉！\\n你们两个，还有那边米萨的玩物，都代表着方登地区最优秀、最有前途的年轻人！"}
+{"msgid":"welcometotaba11","category":"mistranslation","action":"override","reason":"Trial 被误译为审核，且人为增加字面换行","translation":"抱歉，先生，但这算什么荣誉？我是被逼来的，根本没选择参加试炼。"}
+{"msgid":"welcometotaba12","category":"mistranslation","action":"override","reason":"Trial training 被误译为训练师培训，且人为增加字面换行","translation":"诚然，我们确实挑选了一些有前途的全能公司新兵，送他们参加试炼训练；如果你属于这种情况，我很抱歉。"}
+{"msgid":"welcometotaba13","category":"mistranslation","action":"override","reason":"Trial 被误译为训练师阵营并造成后句语义错误","translation":"不，先生。你囚禁了我的家人，强迫我和哥哥参加试炼。\\n所以当你谈起试炼时，请原谅我“缺乏热情”。"}
+{"msgid":"welcometotaba14","category":"glossary","action":"override","reason":"Flower City 未采用 glossary.tsv 固定译名","translation":"啊，你就是那个久闻其名的彩花城小子。“全能公司的未来。”你叫什么名字？"}
+{"msgid":"welcometotaba15","category":"ok","action":"keep"}
+{"msgid":"welcometotaba2","category":"omission","action":"override","reason":"两处漏译 Omnichannel，且 Trial 被误译为普通试验","translation":"恭喜你们通过全能公司的严格评估！\\n你们这个幸运的小组已被全能公司指定为首批试炼参赛者！"}
+{"msgid":"welcometotaba3","category":"ok","action":"keep"}
+{"msgid":"welcometotaba4","category":"ok","action":"keep"}
+{"msgid":"welcometotaba5","category":"glossary","action":"override","reason":"Fondent Region 未采用 glossary.tsv 固定译名，且 Trial 被误译为比赛","translation":"不管怎样，我叫凯尔，是对战区的首席设计师。\\n我来此为方登地区的第一个对战区揭幕，并宣布……\\n试炼正式开始！"}
+{"msgid":"welcometotaba6","category":"ok","action":"keep"}
+{"msgid":"welcometotaba7","category":"mistranslation","action":"override","reason":"Trial Members 被误译成普通训练师，丢失活动成员身份","translation":"说实话，我原以为第一批试炼成员会更热情。"}
+{"msgid":"welcometotaba8","category":"style","action":"override","reason":"attached to 被生硬译成附身，且人为增加字面换行","translation":"你就是米萨一直黏着的那个家伙。你究竟怎么进来的？她伪造了你的证件吗？\\n…… …… …… ……\\n艾莉批准了你的证件？有意思……"}
+{"msgid":"welcometotaba9","category":"mistranslation","action":"override","reason":"papers in order 指证件有效，不是文件排列有条理","translation":"你的证件看起来没问题。暂时如此。"}
+{"msgid":"wewnicefight","category":"mistranslation","action":"override","reason":"take on the Trial 指挑战试炼，不是胜任训练师工作","translation":"哇，打得真不错！\\n让我马上治好你的精灵……\\n然后……好了！全部搞定！\\n再多练习一下，也许再多收几只精灵，你肯定就能挑战试炼了。"}
+{"msgid":"whereismyhairbrush","category":"ok","action":"keep"}
+{"msgid":"wherewasshe","category":"ok","action":"keep"}
+{"msgid":"whirlwind","category":"ok","action":"keep"}
+{"msgid":"white_female","category":"ok","action":"keep"}
+{"msgid":"white_male","category":"ok","action":"keep"}
+{"msgid":"who_is_that","category":"style","action":"override","reason":"节目式标题被译成普通疑问句，语气不符","translation":"猜猜这只精灵"}
+{"msgid":"whythecheering","category":"style","action":"keep","reason":"“欢呼得很厉害”略生硬，但意思清楚"}
+{"msgid":"windeye","category":"ok","action":"keep"}
+{"msgid":"windeye_description","category":"style","action":"override","reason":"plants itself 被逐字译成种植自己，明显影响图鉴阅读","translation":"立扇兽像一棵大树一样扎在山顶，吸收阳光和风。充满能量后，它又会离开，寻找天空下的另一处栖身地。"}
+{"msgid":"wing_tip","category":"ok","action":"keep"}
+{"msgid":"withdraw","category":"ok","action":"keep"}
+{"msgid":"wood","category":"ok","action":"keep"}
+{"msgid":"wood_booster","category":"ok","action":"keep"}
+{"msgid":"wood_booster_description","category":"ok","action":"keep"}
+{"msgid":"woodwose","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"wrougon","category":"ok","action":"keep"}
+{"msgid":"wrougon_description","category":"ok","action":"keep"}
+{"msgid":"xeon","category":"ok","action":"keep"}
+{"msgid":"xeon_2","category":"ok","action":"keep"}
+{"msgid":"xeon_2_description","category":"ok","action":"keep"}
+{"msgid":"xeon_description","category":"ok","action":"keep"}
+{"msgid":"xero_campaign","category":"mistranslation","action":"override","reason":"上游凭空将 Tuxemon 译成“自由小精灵”","translation":"精灵：Xero"}
+{"msgid":"xero_hideout1","category":"glossary","action":"override","reason":"Tuxemon 未采用固定泛称精灵，且机构名语序不可读","translation":"前方是 Xero 精灵研究与发展研究所。"}
+{"msgid":"xerogrund1","category":"glossary","action":"override","reason":"上游把队员编号和 Team 的语序拼错，统一为 Xero 队员加罗马数字","translation":"Xero 队员 I"}
+{"msgid":"xerogrund2","category":"glossary","action":"override","reason":"上游把所有队员都误标为 I，统一保留正确编号","translation":"Xero 队员 II"}
+{"msgid":"xerogrunt10","category":"glossary","action":"override","reason":"上游把所有队员都误标为 I，统一保留正确编号","translation":"Xero 队员 X"}
+{"msgid":"xerogrunt2","category":"glossary","action":"override","reason":"上游把所有队员都误标为 I，统一保留正确编号","translation":"Xero 队员 II"}
+{"msgid":"xerogrunt3","category":"glossary","action":"override","reason":"上游把所有队员都误标为 I，统一保留正确编号","translation":"Xero 队员 III"}
+{"msgid":"xerogrunt4","category":"glossary","action":"override","reason":"上游把所有队员都误标为 I，统一保留正确编号","translation":"Xero 队员 IV"}
+{"msgid":"xerogrunt5","category":"glossary","action":"override","reason":"上游把所有队员都误标为 I，统一保留正确编号","translation":"Xero 队员 V"}
+{"msgid":"xerogrunt6","category":"glossary","action":"override","reason":"上游把所有队员都误标为 I，统一保留正确编号","translation":"Xero 队员 VI"}
+{"msgid":"xerogrunt7","category":"glossary","action":"override","reason":"上游把所有队员都误标为 I，统一保留正确编号","translation":"Xero 队员 VII"}
+{"msgid":"xerogrunt8","category":"glossary","action":"override","reason":"上游把所有队员都误标为 I，统一保留正确编号","translation":"Xero 队员 VIII"}
+{"msgid":"xerogrunt9","category":"glossary","action":"override","reason":"上游把所有队员都误标为 I，统一保留正确编号","translation":"Xero 队员 IX"}
+{"msgid":"y-yes","category":"ok","action":"keep"}
+{"msgid":"yahaha","category":"ok","action":"keep"}
+{"msgid":"yes","category":"ok","action":"keep"}
+{"msgid":"yes_evolution","category":"ok","action":"keep"}
+{"msgid":"yes_evolutions","category":"ok","action":"keep"}
+{"msgid":"yesmaam","category":"ok","action":"keep"}
+{"msgid":"yestalk","category":"ok","action":"keep"}
+{"msgid":"yeti","category":"ok","action":"keep","orphan":true,"reason":"absent from current en_US; not player-visible"}
+{"msgid":"yiinaang","category":"ok","action":"keep"}
+{"msgid":"yiinaang_description","category":"ok","action":"keep"}
+{"msgid":"youcantleave","category":"style","action":"keep","reason":"问句措辞略显生硬，但语义完整"}
+{"msgid":"youneedtodothis","category":"ok","action":"keep"}
+{"msgid":"youneedtodothis2","category":"style","action":"override","reason":"多处逐句直译影响关键剧情对白的自然度","translation":"但是……我知道你一直渴望看看这个地区，而这是你最好的机会。\\n我知道你有决心成为前无古人的最强者。\\n我只是不知道我们是否负担得起那些费用。\\n\\n我们会想出办法的……总会有办法。"}
+{"msgid":"zunna","category":"ok","action":"keep"}
+{"msgid":"zunna_description","category":"ok","action":"keep"}

@@ -1,6 +1,6 @@
 // Build and launch Pocket Tuxemon in PocketJS's portable desktop host.
 
-import { cpSync, mkdirSync, rmSync } from "node:fs";
+import { cpSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { $ } from "bun";
 import { desktopHostFeatures } from "../vendor/pocket-rpgkit/tools/lib/desktop.ts";
@@ -11,7 +11,21 @@ const pocketjs = join(root, "vendor", "pocket-rpgkit", "vendor", "pocketjs");
 const target = process.platform === "darwin" ? "macos-app" : "linux-app";
 const argv = process.argv.slice(2);
 const buildOnly = argv.includes("--build-only");
-const passthrough = argv.filter((arg) => arg !== "--build-only" && arg !== "--");
+// --lang zh (or --lang=zh) selects the Chinese content: it is staged as
+// data.fs lang.json (the bundle reads it at boot) and stripped from the
+// passthrough so the host's flag parser never sees it.
+let lang: string | undefined;
+const passthrough: string[] = [];
+for (let i = 0; i < argv.length; i++) {
+  const arg = argv[i]!;
+  if (arg === "--build-only" || arg === "--") continue;
+  if (arg === "--lang") { lang = argv[++i]; continue; }
+  if (arg.startsWith("--lang=")) { lang = arg.slice("--lang=".length); continue; }
+  passthrough.push(arg);
+}
+if (lang !== undefined && lang !== "zh" && lang !== "zh_CN" && lang !== "en" && lang !== "en_US") {
+  throw new Error(`desktop: unsupported --lang '${lang}' (use zh or en)`);
+}
 
 await $`bun ${join(root, "gen-assets.ts")}`.cwd(root);
 const manifest = await Bun.file(join(root, "pocket.json")).json();
@@ -54,6 +68,21 @@ const terrainStreamData = join(dataRoot, plan.app.id, "data", "terrain-stream");
 rmSync(terrainStreamData, { recursive: true, force: true });
 mkdirSync(resolve(terrainStreamData, ".."), { recursive: true });
 cpSync(join(root, "dist", "terrain-stream"), terrainStreamData, { recursive: true });
+// zh_CN content: the map and battle shards the Chinese build reads, staged
+// alongside the English ones so the in-game language switcher works.
+const mapsZhData = join(dataRoot, plan.app.id, "data", "maps-zh");
+rmSync(mapsZhData, { recursive: true, force: true });
+mkdirSync(resolve(mapsZhData, ".."), { recursive: true });
+cpSync(join(root, "dist", "maps-zh"), mapsZhData, { recursive: true });
+const battleZhData = join(dataRoot, plan.app.id, "data", "battle-zh");
+rmSync(battleZhData, { recursive: true, force: true });
+mkdirSync(resolve(battleZhData, ".."), { recursive: true });
+cpSync(join(root, "dist", "battle-zh"), battleZhData, { recursive: true });
+// --lang stages the boot language the bundle reads from data.fs.
+if (lang !== undefined) {
+  const normalized = lang === "zh" ? "zh_CN" : lang === "en" ? "en_US" : lang;
+  writeFileSync(join(dataRoot, plan.app.id, "data", "lang.json"), JSON.stringify({ lang: normalized }) + "\n");
+}
 const planPath = join(root, ".pocket", target, `${plan.app.output}.plan.json`);
 mkdirSync(resolve(planPath, ".."), { recursive: true });
 await Bun.write(planPath, JSON.stringify(plan, null, 2) + "\n");
