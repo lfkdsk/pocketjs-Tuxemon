@@ -15,6 +15,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { parsePo, TUXEMON_SRC } from "./source.ts";
+import type { UiTextTable } from "../vendor/pocket-rpgkit/src/engine/ui-text.ts";
 
 export type ImportLang = "en_US" | "zh_CN";
 
@@ -24,6 +25,8 @@ const EN_PO = join(TUXEMON_SRC, "mods/tuxemon/l18n/en_US/LC_MESSAGES/base.po");
 const ZH_UPSTREAM_PO = join(TUXEMON_SRC, "mods/tuxemon/l18n/zh_CN/LC_MESSAGES/base.po");
 const ZH_SUPPLEMENT_PO = join(import.meta.dir, "../l10n/zh_CN/supplement.po");
 const ZH_OVERRIDES_PO = join(import.meta.dir, "../l10n/zh_CN/overrides.po");
+const ZH_UI_TEXT_JSON = join(import.meta.dir, "../l10n/zh_CN/ui-text.json");
+const KIT_SCHEMA_JSON = new URL("../vendor/pocket-rpgkit/src/data/schema.json", import.meta.url);
 
 const isCjk = (ch: string): boolean => {
   const code = ch.codePointAt(0) ?? 0;
@@ -195,6 +198,48 @@ export function buildZhCatalog(): Map<string, string> {
 export function createTextCatalog(lang: ImportLang): TextCatalog {
   if (lang === "en_US") return new Catalog(lang, enCatalog(), undefined);
   return new Catalog(lang, buildZhCatalog(), enCatalog());
+}
+
+let zhUiTextCache: Readonly<UiTextTable> | undefined;
+
+/**
+ * Read the game's reviewable translation of every key in the pinned kit's
+ * UiTextTable. The kit schema is the runtime source of truth for the key set:
+ * an added, missing, or misspelled key makes the import fail instead of
+ * silently falling back to English in the Chinese project.
+ */
+export function loadZhUiText(): Readonly<UiTextTable> {
+  if (zhUiTextCache) return zhUiTextCache;
+  const value = JSON.parse(readFileSync(ZH_UI_TEXT_JSON, "utf8")) as unknown;
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    throw new Error("l10n/zh_CN/ui-text.json must contain one object");
+  }
+  const table = value as Record<string, unknown>;
+  const schema = JSON.parse(readFileSync(KIT_SCHEMA_JSON, "utf8")) as {
+    properties?: { uiText?: { properties?: Record<string, { maxLength?: number }> } };
+  };
+  const properties = schema.properties?.uiText?.properties;
+  if (!properties) throw new Error("pinned kit schema has no uiText key table");
+  const wanted = Object.keys(properties).sort();
+  const actual = Object.keys(table).sort();
+  const missing = wanted.filter((key) => !(key in table));
+  const unknown = actual.filter((key) => !(key in properties));
+  if (missing.length || unknown.length) {
+    throw new Error(
+      `l10n/zh_CN/ui-text.json does not match the pinned UiTextTable` +
+      `${missing.length ? `; missing: ${missing.join(", ")}` : ""}` +
+      `${unknown.length ? `; unknown: ${unknown.join(", ")}` : ""}`,
+    );
+  }
+  for (const key of wanted) {
+    const text = table[key];
+    const limit = properties[key]?.maxLength ?? 200;
+    if (typeof text !== "string" || text.length === 0 || text.length > limit) {
+      throw new Error(`l10n/zh_CN/ui-text.json: ${key} must be a non-empty string of at most ${limit} characters`);
+    }
+  }
+  zhUiTextCache = Object.freeze(table) as unknown as Readonly<UiTextTable>;
+  return zhUiTextCache;
 }
 
 /** Per-language variants of the importer's own hardcoded English strings

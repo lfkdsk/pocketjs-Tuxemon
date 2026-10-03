@@ -17,6 +17,8 @@ import { tuxemonRuntimeBattleState } from "../battle/runtime.ts";
 import type { BattleEvent, BattleMonster } from "../battle/types.ts";
 import type { BattleImageRef } from "../importer/battle-schema.ts";
 import type { BattleSceneViewProps } from "../vendor/pocket-rpgkit/src/ui/GameView.tsx";
+import { formatUiText } from "../vendor/pocket-rpgkit/src/engine/ui-text.ts";
+import { STAT_BAR_UI_TEXT } from "../vendor/pocket-rpgkit/src/ui/battle/text.ts";
 import {
   CommandGrid,
   createBattleImageCache,
@@ -138,12 +140,17 @@ function BattleStatBar(props: {
   track: string;
   showNumbers?: boolean;
   numbersWidth?: number;
+  valueTemplate?: string;
   debugName: string;
 }) {
   const fillScale = createMemo(() => props.width > 0
     ? barFillWidth(props.current, props.max, props.width) / props.width
     : 0);
   const numberOffset = () => props.showNumbers ? (14 - props.height) / 2 : 0;
+  const readout = createMemo(() => formatUiText(
+    props.valueTemplate ?? STAT_BAR_UI_TEXT["battle.statValue"],
+    { current: Math.max(0, Math.round(props.current)), max: Math.round(props.max) },
+  ));
   return (
     <View
       class="absolute"
@@ -181,7 +188,7 @@ function BattleStatBar(props: {
           }}
           debugName={`${props.debugName}-numbers`}
         >
-          {`${Math.max(0, Math.round(props.current))} / ${Math.round(props.max)}`}
+          {readout()}
         </Text>
       ) : null}
     </View>
@@ -536,6 +543,7 @@ export const TuxemonBattleScene: Component<BattleSceneViewProps> = (props) => {
           track="#263b43"
           showNumbers={side === 0}
           numbersWidth={BATTLE_BASE_WIDTH - hp.x - hp.width - 6}
+          valueTemplate={props.uiText?.["battle.statValue"]}
           debugName={`${side === 0 ? "player" : "enemy"}-hp`}
         />
         <LazyImage

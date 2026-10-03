@@ -206,17 +206,22 @@ atlases at build time.
 - **Desktop:** `bun run desktop -- --lang zh` (or `--lang en`). The in-game
   **R** switcher writes the choice to the app's data folder and asks for a
   restart.
-- **Default:** English. The kit's own UI strings (save menu, on-screen
-  keyboard, demo controls) stay English for now; the Chinese build covers
-  game content — dialogue, choices, items, monsters, moves, battle menus,
-  storage/daycare/shop scenes.
+- **Default:** English. The Chinese project supplies all 57 kit-owned
+  interface strings: button hints, shop chrome, save pages, name input and
+  its on-screen keyboard actions, demo chrome and errors, the event-error
+  screen, and battle HP values. Missing future kit keys fail the importer
+  instead of silently falling back to English. Game content — dialogue,
+  choices, items, monsters, moves, battle menus, storage and daycare scenes
+  — uses the separate Chinese catalog described above.
 
 Saves record the language they were written with. Loading a save from the
 other language shows a bilingual "LANGUAGE MISMATCH / 语言不匹配" prompt
 (which language the save is in, how to switch) before any content check,
-instead of an "another build" error. The demo menu (SELECT) is
-English-only: its tape was recorded against the English opening. The
-Chinese opening has its own short smoke tape (`data/zh-smoke-journey.json`),
+instead of an "another build" error. The demo menu (SELECT) remains disabled
+in ordinary Chinese launches because its journey tape and chapter-row titles
+were authored in English. Its kit-owned menu chrome is translated and covered
+by the production visual fixture, ready for a future Chinese tape. The Chinese
+opening has its own short smoke tape (`data/zh-smoke-journey.json`),
 replayed in headless Chrome by `bun run verify:web:zh`, which renders the
 expected text from the baked font atlas and matches its glyph mask against
 the screenshot (dialog lines, battle prompt and command labels), asserts
@@ -226,7 +231,12 @@ regression it targets.
 `bun run check:l10n` validates every catalog layer, correction annotation,
 placeholder and escaped newline, and enforces the glossary against the final
 merged text (with reasoned, key-specific exceptions). `bun run check:cjk`
-verifies glyph subset coverage.
+verifies glyph subset coverage. `bun test tests/ui-text-zh-visual.test.ts`
+boots the production bundle and pins save, keyboard, demo, shop, button-hint,
+event-error and battle-status frames at 480×272 and 960×544, including Chinese
+glyph-mask checks. The game-owned save footer (`o: select`, `x: back`,
+`START: close`) and the English demo chapter-row titles are outside
+`UiTextTable`; these are the remaining English words in those captures.
 
 Known limitations:
 - Some dynamic text (dates, variables, monster names, and other

@@ -178,7 +178,10 @@ const weatherOverlayEnabled = (globalThis as typeof globalThis & {
 // recorded tape yet, so SELECT is dormant there.
 let demoMenu: GameViewDemoRuntime | null = null;
 const demoConfig = createDemo(createDemoOptions(readEntry));
-const demo: GameViewDemoConfig | undefined = lang === "en_US" ? {
+// A production-bundle visual test may opt the controller into a zh_CN boot
+// through the existing diagnostics object. It opens only the menu and never
+// loads the English snapshots/tape; ordinary Chinese launches remain inert.
+const demo: GameViewDemoConfig | undefined = lang === "en_US" || worldDiagnostics?.enableZhDemo === true ? {
   create(host) {
     demoMenu = demoConfig.create(host);
     return demoMenu;

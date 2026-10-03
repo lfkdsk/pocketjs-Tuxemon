@@ -6,8 +6,25 @@ import {
   IMPORT_UI,
   buildZhCatalog,
   createTextCatalog,
+  loadZhUiText,
   normalizeZhPunctuation,
 } from "../importer/l10n.ts";
+import { KIT_UI_TEXT, type UiTextTable } from "../vendor/pocket-rpgkit/src/engine/ui-text.ts";
+import { SAVE_MENU_UI_TEXT } from "../vendor/pocket-rpgkit/src/engine/save-menu.ts";
+import { NAME_INPUT_UI_TEXT } from "../vendor/pocket-rpgkit/src/engine/name-input.ts";
+import { DEMO_MENU_UI_TEXT } from "../vendor/pocket-rpgkit/src/ui/demo/text.ts";
+import { STAT_BAR_UI_TEXT } from "../vendor/pocket-rpgkit/src/ui/battle/text.ts";
+
+const EN_UI_TEXT: UiTextTable = {
+  ...KIT_UI_TEXT,
+  ...SAVE_MENU_UI_TEXT,
+  ...NAME_INPUT_UI_TEXT,
+  ...DEMO_MENU_UI_TEXT,
+  ...STAT_BAR_UI_TEXT,
+};
+
+const placeholders = (text: string): string[] =>
+  [...text.matchAll(/\{([A-Za-z][A-Za-z0-9]*)\}/g)].map((match) => match[1]!).sort();
 
 describe("normalizeZhPunctuation", () => {
   test("half-width punctuation next to CJK becomes full-width", () => {
@@ -89,5 +106,28 @@ describe("IMPORT_UI", () => {
   test("zh placeholder strings use CJK brackets", () => {
     expect(IMPORT_UI.zh_CN.battleLabel("X")).toBe("【战斗】X");
     expect(IMPORT_UI.zh_CN.shopLabel("Y")).toContain("【商店】");
+  });
+});
+
+describe("zh_CN component uiText", () => {
+  const zh = loadZhUiText();
+
+  test("covers every pinned UiTextTable key and only those keys", () => {
+    expect(Object.keys(zh).sort()).toEqual(Object.keys(EN_UI_TEXT).sort());
+    expect(Object.keys(zh)).toHaveLength(57);
+  });
+
+  test("preserves every named template parameter", () => {
+    for (const key of Object.keys(EN_UI_TEXT) as (keyof UiTextTable)[]) {
+      expect(placeholders(zh[key]), key).toEqual(placeholders(EN_UI_TEXT[key]));
+    }
+  });
+
+  test("uses the game's menu terminology without authored truncation", () => {
+    expect(zh["save.toSlot"]).toContain("保存");
+    expect(zh["save.fromSlot"]).toContain("加载");
+    expect(zh["shop.rowSell"]).toContain("道具");
+    expect(zh["nameInput.back"]).toBe("删除");
+    expect(Object.values(zh).some((text) => text.includes("…"))).toBeFalse();
   });
 });

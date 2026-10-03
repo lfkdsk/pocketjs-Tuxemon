@@ -43,7 +43,12 @@ import {
   type OverrideAnnotations,
   type UpstreamReview,
 } from "./l10n-lib.ts";
-import { buildZhCatalog, normalizeZhPunctuation, ZH_BUILTIN_STRINGS } from "../importer/l10n.ts";
+import { buildZhCatalog, loadZhUiText, normalizeZhPunctuation, ZH_BUILTIN_STRINGS } from "../importer/l10n.ts";
+import { KIT_UI_TEXT, type UiTextTable } from "../vendor/pocket-rpgkit/src/engine/ui-text.ts";
+import { SAVE_MENU_UI_TEXT } from "../vendor/pocket-rpgkit/src/engine/save-menu.ts";
+import { NAME_INPUT_UI_TEXT } from "../vendor/pocket-rpgkit/src/engine/name-input.ts";
+import { DEMO_MENU_UI_TEXT } from "../vendor/pocket-rpgkit/src/ui/demo/text.ts";
+import { STAT_BAR_UI_TEXT } from "../vendor/pocket-rpgkit/src/ui/battle/text.ts";
 
 const EXCEPTIONS_FILE = GLOSSARY_TSV.replace("glossary.tsv", "glossary-exceptions.txt");
 const MAX_FAILURES = 20;
@@ -426,6 +431,43 @@ export function checkUpstreamConsistency(d: L10nData): CheckResult {
   return { name: "upstream-consistency", ok: bad.length === 0, details };
 }
 
+// --- 10. component interface words -----------------------------------------
+
+const UI_TEXT_DEFAULTS: UiTextTable = {
+  ...KIT_UI_TEXT,
+  ...SAVE_MENU_UI_TEXT,
+  ...NAME_INPUT_UI_TEXT,
+  ...DEMO_MENU_UI_TEXT,
+  ...STAT_BAR_UI_TEXT,
+};
+
+/** The zh_CN project must replace every key in the pinned kit, preserving
+ * each named template parameter exactly. The loader also checks the source
+ * against the kit schema, so this fails closed when the component adds a key. */
+export function checkUiText(): CheckResult {
+  const details: string[] = [];
+  const bad: string[] = [];
+  const translated = loadZhUiText();
+  const keys = Object.keys(UI_TEXT_DEFAULTS) as (keyof UiTextTable)[];
+  for (const key of keys) {
+    const en = UI_TEXT_DEFAULTS[key];
+    const zh = translated[key];
+    if (!samePlaceholderSet(en, zh)) {
+      bad.push(`${key}: en=[${extractList(en)}] zh=[${extractList(zh)}]`);
+    }
+  }
+  // These menu terms have exact glossary renderings in this project.
+  if (!translated["save.toSlot"].includes("保存")) bad.push("save.toSlot: glossary term Save -> 保存 is absent");
+  if (!translated["save.fromSlot"].includes("加载")) bad.push("save.fromSlot: glossary term Load -> 加载 is absent");
+  if (Object.values(translated).some((value) => value.includes("…"))) {
+    bad.push("source contains an ellipsis; bounded components must expose wrapping/marquee rather than authored truncation");
+  }
+  details.push(`complete uiText entries: ${keys.length}/${keys.length}`);
+  details.push("named placeholders preserved; Save/Load follow glossary terminology");
+  if (bad.length) details.push(`FAILURES ${bad.length}:\n  ${bad.slice(0, MAX_FAILURES).join("\n  ")}`);
+  return { name: "ui-text", ok: bad.length === 0, details };
+}
+
 // --- driver -----------------------------------------------------------------
 
 export function runAllChecks(d: L10nData): CheckResult[] {
@@ -440,6 +482,7 @@ export function runAllChecks(d: L10nData): CheckResult[] {
     checkTerminology(d),
     checkExceptionReasons(d),
     checkUpstreamConsistency(d),
+    checkUiText(),
   ];
 }
 

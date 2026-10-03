@@ -15,6 +15,7 @@ import type { CreateOskOptions, OskController } from "@pocketjs/framework/osk";
 import { MapNotReadyError } from "../vendor/pocket-rpgkit/src/engine/map-repository.ts";
 import { menuStep, type MenuAction, type MenuState } from "../vendor/pocket-rpgkit/src/engine/save-menu.ts";
 import type { SaveSnapshot } from "../vendor/pocket-rpgkit/src/engine/save.ts";
+import type { UiTextOverrides } from "../vendor/pocket-rpgkit/src/engine/ui-text.ts";
 import type {
   GameViewDemoRuntime,
   GameViewDemoStepResult,
@@ -125,6 +126,7 @@ export function createSaveMenuRuntime(
   options: SaveMenuOptions,
   host: GameViewSessionHost,
   createOsk: (options: CreateOskOptions) => OskController,
+  uiText: () => UiTextOverrides | undefined = () => undefined,
 ): SaveMenuRuntime {
   const openButton = options.openButton ?? BTN.START;
   const slots = options.slots === undefined ? detectSlotStore() : options.slots;
@@ -348,6 +350,7 @@ export function createSaveMenuRuntime(
         hasFs: hasSlots,
         slotNonEmpty: slotInfo().map((slot) => slot !== null),
         codePages: Math.max(1, Math.ceil(saveCode().length / CODE_PAGE_CHARS)),
+        text: uiText(),
       });
       if (result.state.kind === "closed") {
         close();

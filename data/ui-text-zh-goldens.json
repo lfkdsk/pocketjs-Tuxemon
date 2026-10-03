@@ -1,0 +1,117 @@
+{
+  "format": "pocket-tuxemon/ui-text-zh-goldens/v1",
+  "frames": [
+    {
+      "case": "save-menu",
+      "width": 480,
+      "height": 272,
+      "file": "ui-text-zh-save-menu.480x272.png",
+      "rgbaFnv1a": "38f67a70",
+      "pngSha256": "cbe8b6118f5d2bd9f4c725286e8914e510a664ac61f2d16532158c84a700da7a"
+    },
+    {
+      "case": "name-input",
+      "width": 480,
+      "height": 272,
+      "file": "ui-text-zh-name-input.480x272.png",
+      "rgbaFnv1a": "d61a89b2",
+      "pngSha256": "df0311c8e9f85280c1f86346450c57f6c842ff38d1ed18c11dc1df4180130466"
+    },
+    {
+      "case": "demo-menu",
+      "width": 480,
+      "height": 272,
+      "file": "ui-text-zh-demo-menu.480x272.png",
+      "rgbaFnv1a": "e078d880",
+      "pngSha256": "079eb9485fd5b8b470f9016f385e12c16ebb2291b9e031e387e2125056c1d35b"
+    },
+    {
+      "case": "shop",
+      "width": 480,
+      "height": 272,
+      "file": "ui-text-zh-shop.480x272.png",
+      "rgbaFnv1a": "73d74845",
+      "pngSha256": "791177567f77b5d29b4e0da5b7f6f4116fdb86f45ddbef3bde52f35677c3b4dc"
+    },
+    {
+      "case": "button-hints",
+      "width": 480,
+      "height": 272,
+      "file": "ui-text-zh-button-hints.480x272.png",
+      "rgbaFnv1a": "55bfbdb1",
+      "pngSha256": "267af3d1f62067774b26d4959e528f11961f5daecca6f45702d30331c75542ca"
+    },
+    {
+      "case": "event-error",
+      "width": 480,
+      "height": 272,
+      "file": "ui-text-zh-event-error.480x272.png",
+      "rgbaFnv1a": "91cfd81a",
+      "pngSha256": "db574be232a471385f9ef38f2ead2c72af2029cf0f414e6591499d94ad28a8ef"
+    },
+    {
+      "case": "battle-status",
+      "width": 480,
+      "height": 272,
+      "file": "ui-text-zh-battle-status.480x272.png",
+      "rgbaFnv1a": "d5647f45",
+      "pngSha256": "ad880cf6a1e69f3aa324e8fcc1e087e98621ee4a2fe51acfdd0003b1200fa90f"
+    },
+    {
+      "case": "save-menu",
+      "width": 960,
+      "height": 544,
+      "file": "ui-text-zh-save-menu.960x544.png",
+      "rgbaFnv1a": "a7e0dfb0",
+      "pngSha256": "2c092deab6ace5fb3de032a364d638d985bd2765a934473b81ffd39a28dde8bc"
+    },
+    {
+      "case": "name-input",
+      "width": 960,
+      "height": 544,
+      "file": "ui-text-zh-name-input.960x544.png",
+      "rgbaFnv1a": "b2df2e96",
+      "pngSha256": "1ed8897fc93a6abaac28af97ea95fb072bc8e69112767baa83e70cd280755cc2"
+    },
+    {
+      "case": "demo-menu",
+      "width": 960,
+      "height": 544,
+      "file": "ui-text-zh-demo-menu.960x544.png",
+      "rgbaFnv1a": "a20abb40",
+      "pngSha256": "92722377f7436b4e4002ad51aa88e8972e8d734a3883584f738698f889bb9d99"
+    },
+    {
+      "case": "shop",
+      "width": 960,
+      "height": 544,
+      "file": "ui-text-zh-shop.960x544.png",
+      "rgbaFnv1a": "d8f25c5b",
+      "pngSha256": "d2f078d62ca9a9237dfad166aa95f9c3687b9bcfae51455d43893618017e3e00"
+    },
+    {
+      "case": "button-hints",
+      "width": 960,
+      "height": 544,
+      "file": "ui-text-zh-button-hints.960x544.png",
+      "rgbaFnv1a": "b894320b",
+      "pngSha256": "7f610485b6652325f09f69bf188e111f2af22cab8b48beab9fc4bd7bf8ed6164"
+    },
+    {
+      "case": "event-error",
+      "width": 960,
+      "height": 544,
+      "file": "ui-text-zh-event-error.960x544.png",
+      "rgbaFnv1a": "674ea31a",
+      "pngSha256": "f90081c05345e2b6fd6af73cfd5738553807a39cba4f1bb857ac431495c45406"
+    },
+    {
+      "case": "battle-status",
+      "width": 960,
+      "height": 544,
+      "file": "ui-text-zh-battle-status.960x544.png",
+      "rgbaFnv1a": "47f33ea4",
+      "pngSha256": "633364f79b37894a793a1e989a103706497ee779b732bbc0e7c0bcf035ab4cdc"
+    }
+  ]
+}

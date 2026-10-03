@@ -15,6 +15,10 @@ export interface WorldVisitRequest {
  * the production bundle evaluates. Normal launches leave it undefined, so
  * GameView receives none of the diagnostic callbacks or overlay wrapper. */
 export interface PocketTuxemonWorldDiagnostics {
+  /** Visual-test-only: mount the ordinary demo controller in a zh_CN boot
+   *  so its translated chrome can be inspected without making the English
+   *  journey tape available to Chinese players. */
+  enableZhDemo?: boolean;
   request?: WorldVisitRequest;
   acknowledged?: number;
   maps?: readonly string[];

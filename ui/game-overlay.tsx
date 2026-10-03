@@ -9,6 +9,7 @@ import type {
   GameViewSessionHost,
 } from "../vendor/pocket-rpgkit/src/ui/demo-contract.ts";
 import type { UiTheme } from "../vendor/pocket-rpgkit/src/ui/theme.ts";
+import type { UiTextOverrides } from "../vendor/pocket-rpgkit/src/engine/ui-text.ts";
 
 export function createCompositeOverlay(
   saveMenu: GameViewOverlayConfig,
@@ -28,11 +29,11 @@ export function createCompositeOverlay(
           return lang.step(buttons, pressed);
         },
         isOpen: () => save.isOpen() || lang.isOpen(),
-        render(theme?: Partial<UiTheme>): JSX.Element {
+        render(theme?: Partial<UiTheme>, uiText?: UiTextOverrides): JSX.Element {
           return (
             <>
-              {save.render(theme)}
-              {lang.render(theme)}
+              {save.render(theme, uiText)}
+              {lang.render(theme, uiText)}
             </>
           );
         },

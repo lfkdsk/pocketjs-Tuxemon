@@ -59,6 +59,7 @@
     "goldens:j3": "bun tools/update-j3-goldens.ts",
     "goldens:world": "bun tools/update-world-seam-goldens.ts",
     "goldens:daylight": "bun tools/update-daylight-goldens.ts",
+    "goldens:ui-text:zh": "bun tools/update-ui-text-zh-goldens.ts",
     "bench:g6:quickjs": "bash tools/bench-g6-quickjs.sh",
     "bench:gb6:quickjs": "bash tools/bench-gb6-quickjs.sh",
     "bench:j3:quickjs": "bash tools/bench-j3-quickjs.sh",

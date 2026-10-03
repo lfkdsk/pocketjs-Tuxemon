@@ -183,6 +183,7 @@ const gameEvent = (value: FutureGameEvent): GameEvent => value;
 import {
   IMPORT_UI,
   createTextCatalog,
+  loadZhUiText,
   type ImportLang,
   type TextCatalog,
 } from "./l10n.ts";
@@ -4381,6 +4382,7 @@ export function buildProject(
     },
     initialGold: 500,
     playerName: PLAYER_NAME,
+    ...(activeLang === "zh_CN" ? { uiText: loadZhUiText() } : {}),
     sheets: [{
       id: "tux",
       pak: "placeholder",

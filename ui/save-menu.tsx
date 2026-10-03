@@ -9,6 +9,7 @@ import { createOsk } from "@pocketjs/framework/osk";
 import type { GameViewOverlayConfig } from "../vendor/pocket-rpgkit/src/ui/demo-contract.ts";
 import { Panel } from "../vendor/pocket-rpgkit/src/ui/Panel.tsx";
 import { SaveMenu } from "../vendor/pocket-rpgkit/src/ui/SaveMenu.tsx";
+import type { UiTextOverrides } from "../vendor/pocket-rpgkit/src/engine/ui-text.ts";
 import { resolveUiTheme, type UiTheme } from "../vendor/pocket-rpgkit/src/ui/theme.ts";
 import { createSaveMenuRuntime, validateOpenButton, type SaveMenuOptions } from "./save-menu-runtime.ts";
 
@@ -32,11 +33,13 @@ export function createSaveMenu(options: SaveMenuOptions = {}): GameViewOverlayCo
   validateOpenButton(options.openButton ?? BTN.START);
   return {
     create(host) {
-      const menu = createSaveMenuRuntime(options, host, createOsk);
+      let activeUiText: UiTextOverrides | undefined;
+      const menu = createSaveMenuRuntime(options, host, createOsk, () => activeUiText);
       return {
         step: menu.step,
         isOpen: menu.isOpen,
-        render(theme?: Partial<UiTheme>) {
+        render(theme?: Partial<UiTheme>, uiText?: UiTextOverrides) {
+          activeUiText = uiText;
           return (
             <>
               <SaveMenu
@@ -47,7 +50,8 @@ export function createSaveMenu(options: SaveMenuOptions = {}): GameViewOverlayCo
                 osk={menu.osk}
                 legend={menu.legend}
                 theme={theme}
-                title={menu.title}
+                title={uiText?.["save.title"] ?? menu.title}
+                uiText={uiText}
               />
               <SaveToast text={menu.toast} theme={theme} />
             </>
