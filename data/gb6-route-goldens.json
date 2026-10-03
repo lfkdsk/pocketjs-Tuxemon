@@ -12,11 +12,11 @@
       "width": 480,
       "height": 272,
       "file": "gb6-mainline-cotton-town.480x272.png",
-      "rgbaFnv1a": "a5366e3a",
-      "pngSha256": "30b8d1bce23cdd030fc568baa613e4b9b4c3c6b196f6c7c1d996da2eace05d41",
+      "rgbaFnv1a": "ae9c8920",
+      "pngSha256": "305670b8cf7bab40668a92fbc0974bf7dd49048dfe00872b89e9e4b2dd06deb2",
       "camera": [
-        104,
-        368
+        1704,
+        2416
       ],
       "player": {
         "tile": [
@@ -42,11 +42,11 @@
       "width": 480,
       "height": 272,
       "file": "gb6-mainline-route-2.480x272.png",
-      "rgbaFnv1a": "478676f4",
-      "pngSha256": "2e15025b7f97f1dfbe0ce209bfd6941d3503963895702f4cf98c28c20fd143da",
+      "rgbaFnv1a": "6cc33293",
+      "pngSha256": "2878aa0de1b192e627d2d9b3aaa9c66f4cb3bcce51c45660d25184a4d67637b8",
       "camera": [
-        0,
-        0
+        2008,
+        2240
       ],
       "player": {
         "tile": [
@@ -72,11 +72,11 @@
       "width": 480,
       "height": 272,
       "file": "gb6-mainline-city-park.480x272.png",
-      "rgbaFnv1a": "d07904ed",
-      "pngSha256": "0e09caca58f8c7fafd366b00d5fc668bed04debf2180452102b0ab3194eccae4",
+      "rgbaFnv1a": "88549b95",
+      "pngSha256": "aaacbac5fe0b9749349c35706587a637f559ca1e3518f20fd139256842882c8b",
       "camera": [
-        0,
-        368
+        2168,
+        2096
       ],
       "player": {
         "tile": [
@@ -102,11 +102,11 @@
       "width": 480,
       "height": 272,
       "file": "gb6-mainline-route-3-end.480x272.png",
-      "rgbaFnv1a": "b263caca",
-      "pngSha256": "3286862a9c8746155937f64c0297cad46b12b3d5ec72ee41c3711952f6cf6213",
+      "rgbaFnv1a": "d21899cb",
+      "pngSha256": "d7e1392064b08e12e1c1d2e48c372fdac1ba5978c6695900c8039e6c27b91f3e",
       "camera": [
-        0,
-        0
+        1432,
+        608
       ],
       "player": {
         "tile": [
@@ -132,11 +132,11 @@
       "width": 960,
       "height": 544,
       "file": "gb6-mainline-cotton-town.960x544.png",
-      "rgbaFnv1a": "2b1c0061",
-      "pngSha256": "39edcf01110b96db9e02972a1c3f33e1c031d23f7949a7a4dc5d71accb236320",
+      "rgbaFnv1a": "45fa58af",
+      "pngSha256": "98c9d1e2d8d2dd28a90a42958020db3c179358f3648dcc78bbd53ebb9b3a365d",
       "camera": [
-        0,
-        96
+        1464,
+        2280
       ],
       "player": {
         "tile": [
@@ -162,11 +162,11 @@
       "width": 960,
       "height": 544,
       "file": "gb6-mainline-route-2.960x544.png",
-      "rgbaFnv1a": "9bd24acb",
-      "pngSha256": "37dce2032933742b542ea988214fd85c1139c6b086b6dd92e92bff0832fa02e2",
+      "rgbaFnv1a": "d3463258",
+      "pngSha256": "781dd75ba8ab42b55e83a06cddd182fde1c7e3d28fc43525f947edd6087865fb",
       "camera": [
-        0,
-        0
+        1768,
+        2104
       ],
       "player": {
         "tile": [
@@ -192,11 +192,11 @@
       "width": 960,
       "height": 544,
       "file": "gb6-mainline-city-park.960x544.png",
-      "rgbaFnv1a": "f4ae7e80",
-      "pngSha256": "cfb323073567867c37b189367cbaf8cc7155d7fe9b88a7d1cd6d45ebef99710f",
+      "rgbaFnv1a": "c01b882c",
+      "pngSha256": "f8292deb9c7658f20bdd239f6ed47bd5b3ba50960db2719732b353db9848883f",
       "camera": [
-        0,
-        96
+        1920,
+        1960
       ],
       "player": {
         "tile": [
@@ -222,11 +222,11 @@
       "width": 960,
       "height": 544,
       "file": "gb6-mainline-route-3-end.960x544.png",
-      "rgbaFnv1a": "10c2adfc",
-      "pngSha256": "24b587c49476274ef2ca789abd19968306fbdc33bc4e5b576ac5a66e458664c0",
+      "rgbaFnv1a": "356e00ec",
+      "pngSha256": "6bdf48306d94b1d1f8b1628faf3ee57a68892eb0c83465e151433929ca4e5b74",
       "camera": [
-        0,
-        0
+        1192,
+        472
       ],
       "player": {
         "tile": [

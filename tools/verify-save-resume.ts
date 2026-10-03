@@ -71,13 +71,13 @@ const morning = only === "noon" ? null : verifySaveResume(tape.masks, [
   afterBattle("after-battle", Math.floor(n * 0.25)),
   afterMapChange("after-map-change", Math.floor(n * 0.5)),
   afterBattle("after-late-battle", Math.floor(n * 0.8)),
-]);
+], undefined, tape.worldTraversal);
 if (morning) check("09:00", morning, tape.terminalStateSha256);
 
 const noon = only === "morning" ? null : verifySaveResume(tape.masks, [
   lastMinuteBeforeNoon("before-noon"),
   afterDaylightChange("daylight-change"),
-], NOON_START);
+], NOON_START, tape.worldTraversal);
 if (noon) {
   check("11:52", noon);
   const before = noon.points.find((p) => p.id === "before-noon")!;

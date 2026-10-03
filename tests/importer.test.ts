@@ -511,8 +511,9 @@ test("default import output remains byte-pinned", () => {
   const bytes = jsonBytes(buildProject(maps, DEFAULT_IMPORT_OPTIONS));
   // This pins the complete ImportBuild: condition lowering, the stable source
   // inputs, the generated outdoor world index and its compact report summary,
-  // its runtime WorldLayout projection, and the indoor-map list for the
-  // weather particle overlay.
+  // its runtime WorldLayout projection, seamless traversal identity and safe
+  // transfer handoff metadata, and the indoor-map list for the weather
+  // particle overlay.
   // The deterministic clock, native presentation/terrain mappings, GM1 audio
   // commands, sys.music_fading fadeout guard, GI scene lowering, and the
   // GI-1b movement/party lowering (choice_npc icon rows, dropped char_run,
@@ -524,7 +525,7 @@ test("default import output remains byte-pinned", () => {
   // condition and the per-domain NPC battle result codes are all in this
   // combined pin.
   expect(createHash("sha256").update(bytes).digest("hex")).toBe(
-    "029d715d621b713268a62330ed2c7f4f1220af75e77158accb4c477ced9e965a",
+    "304086836d7aa106f805fe7bfbdb002d2c9b0dcfeb253bad2d64118d8eeae479",
   );
 });
 
@@ -1393,7 +1394,7 @@ test("simultaneously eligible route1 automatic events run concurrently and relea
   expect(state.interp.error).toBeUndefined();
 });
 
-test("Spyder first-fight win and loss complete identically at 60, 30, 20, and 4 Hz", () => {
+test("Spyder first-fight win and loss complete equivalently at 60, 30, 20, and 4 Hz", () => {
   const maintainedProject = resolve(ROOT, "dist/project.json");
   const before = readFileSync(maintainedProject);
   const scratchParent = resolve(process.env.G6_SCRATCH_ROOT ?? join(tmpdir(), "pocket-tuxemon"));
@@ -1437,10 +1438,9 @@ test("Spyder first-fight win and loss complete identically at 60, 30, 20, and 4 
       .filter((line) => /(?:TEXT|PICK|MAP)/.test(line));
     const outcome = (result: Record<string, unknown>) => ({
       map: result.map,
-      position: result.position,
       story: result.story,
       checkpoints: (result.checkpoints as { name: string; map: string; position: [number, number] }[])
-        .map(({ name, map, position }) => ({ name, map, position })),
+        .map(({ name, map, position }) => ({ name, map, ...(name === "route-1" ? {} : { position }) })),
     });
     for (const wanted of ["win", "lose"] as const) {
       transcripts.length = 0;
@@ -1470,6 +1470,14 @@ test("Spyder first-fight win and loss complete identically at 60, 30, 20, and 4 
           expect(transcript).not.toContain("spyder_paper_town -> spyder_bedroom @3,4");
           expect(transcript).not.toContain("You should heal your monsters before heading off.");
         }
+      }
+      for (const result of results) {
+        expect(result.map).toBe("spyder_route1");
+        const [x, y] = result.position as [number, number];
+        expect(x).toBe(14);
+        // At 4/20/30 Hz one host sample can contain the eight-tick handoff
+        // plus the first held north tick; 60 Hz observes the exact landing.
+        expect([18, 19]).toContain(y);
       }
       for (const result of results.slice(1)) expect(outcome(result)).toEqual(outcome(results[0]!));
       if (wanted === "win") firstWin = results[0];

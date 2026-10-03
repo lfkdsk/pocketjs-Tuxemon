@@ -4,7 +4,8 @@
 
 import { describe, expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
-import { createDemoOptions } from "../ui/demo-tape.ts";
+import { encodeTape } from "../importer/demo-data.ts";
+import { createDemoOptions, decodeDemoTape } from "../ui/demo-tape.ts";
 import {
   DEMO_CHAPTER_INDEX,
   DEMO_SNAPSHOTS_ENTRY,
@@ -13,12 +14,16 @@ import {
 import { chapterTape, chapterTapeFrames } from "../vendor/pocket-rpgkit/src/ui/demo/runtime.ts";
 
 /** Raw-format tape (see decodeTape): frame i holds i & 0xffff. */
-function rawTape(frames: number): Uint8Array {
+function rawTape(
+  frames: number,
+  worldTraversal: "legacy-transfer" | "seamless-v1" = "legacy-transfer",
+): Uint8Array {
   const bytes = new Uint8Array(8 + frames * 2);
   const view = new DataView(bytes.buffer);
   bytes[0] = 0x54;
-  bytes[1] = 1;
+  bytes[1] = worldTraversal === "seamless-v1" ? 2 : 1;
   bytes[2] = 2;
+  if (worldTraversal === "seamless-v1") bytes[3] = 1 << 5;
   view.setUint32(4, frames, true);
   for (let i = 0; i < frames; i++) view.setUint16(8 + i * 2, i & 0xffff, true);
   return bytes;
@@ -26,6 +31,8 @@ function rawTape(frames: number): Uint8Array {
 
 describe("demo chapter tapes", () => {
   const total = Math.max(...DEMO_CHAPTER_INDEX.map((entry) => entry.frame + entry.suffixFrames));
+  const authoredTraversal = ((DEMO_CHAPTER_INDEX[0] as { worldTraversal?: "legacy-transfer" | "seamless-v1" })
+    .worldTraversal ?? "legacy-transfer");
 
   test("one shared provider, read once, windowed without copies", () => {
     expect(DEMO_CHAPTER_INDEX.length as number).toBe(15);
@@ -33,8 +40,8 @@ describe("demo chapter tapes", () => {
     const options = createDemoOptions((entry) => {
       reads.push(entry);
       if (entry !== DEMO_TAPE_ENTRY) throw new Error(`unexpected read ${entry}`);
-      return rawTape(total);
-    });
+      return rawTape(total, authoredTraversal);
+    }, authoredTraversal);
     expect(reads).toEqual([]);
     const providers = new Set(options.chapters.map((chapter) => chapter.tape));
     expect(providers.size).toBe(1);
@@ -62,11 +69,14 @@ describe("demo chapter tapes", () => {
       chapters: { id: string; snapshot: string }[];
     };
     const first = authored.chapters[0]!;
-    const bytes = Buffer.from(JSON.stringify({ snapshots: { [first.id]: first.snapshot } }));
+    const bytes = Buffer.from(JSON.stringify({
+      worldTraversal: authoredTraversal,
+      snapshots: { [first.id]: first.snapshot },
+    }));
     const options = createDemoOptions((entry) => {
       if (entry !== DEMO_SNAPSHOTS_ENTRY) throw new Error(`unexpected read ${entry}`);
       return bytes;
-    });
+    }, authoredTraversal);
     const globals = globalThis as unknown as Record<string, unknown>;
     const original = globals.TextDecoder;
     try {
@@ -75,5 +85,27 @@ describe("demo chapter tapes", () => {
     } finally {
       globals.TextDecoder = original;
     }
+  });
+
+  test("binary traversal identity is explicit and old v1 tapes stay legacy", () => {
+    expect(decodeDemoTape(rawTape(3)).worldTraversal).toBe("legacy-transfer");
+
+    const nibble = decodeDemoTape(encodeTape([0, 0x10, 0x2000], "seamless-v1"));
+    expect(nibble.worldTraversal).toBe("seamless-v1");
+    expect([...nibble.masks]).toEqual([0, 0x10, 0x2000]);
+
+    const rawMasks = Array.from({ length: 17 }, (_, value) => value);
+    const raw = decodeDemoTape(encodeTape(rawMasks, "seamless-v1"));
+    expect(raw.worldTraversal).toBe("seamless-v1");
+    expect([...raw.masks]).toEqual(rawMasks);
+  });
+
+  test("the game adapter rejects a binary from another traversal timeline", () => {
+    const other = authoredTraversal === "seamless-v1" ? "legacy-transfer" : "seamless-v1";
+    const options = createDemoOptions((entry) => {
+      if (entry !== DEMO_TAPE_ENTRY) throw new Error(`unexpected read ${entry}`);
+      return encodeTape([0], other);
+    }, authoredTraversal);
+    expect(() => chapterTape(options.chapters[0]!)).toThrow(/worldTraversal .* != expected/);
   });
 });

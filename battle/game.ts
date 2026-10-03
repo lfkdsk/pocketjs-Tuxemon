@@ -5,6 +5,9 @@ import { validateBattleDb } from "../importer/battle-schema.ts";
 import { createTuxemonExtensions } from "./extension.ts";
 import { createTuxemonBattleRules, type VariableEnums } from "./runtime.ts";
 import { createTuxemonScenes } from "./scenes.ts";
+import type { SessionOptions } from "../vendor/pocket-rpgkit/src/engine/session.ts";
+import type { ProjectSource, WorldTraversalMode } from "../vendor/pocket-rpgkit/src/engine/types.ts";
+import { createWorldHandoffResolver } from "../vendor/pocket-rpgkit/src/engine/world-handoff.ts";
 
 /** Shared production registration used by GameView and headless journeys. */
 export const TUXEMON_BATTLE_DB = validateBattleDb(battleDbJson);
@@ -22,3 +25,31 @@ export const TUXEMON_SESSION_OPTIONS = Object.freeze({
   battle: TUXEMON_BATTLE_RULES,
   scenes: TUXEMON_SCENES,
 });
+
+/** Build the complete game session wiring for a concrete generated project.
+ * Headless recorders and verifiers must use this instead of the static
+ * registration bundle: seamless traversal needs a resolver bound to the
+ * project's own topology hash. Passing an explicit legacy identity keeps old
+ * tapes on their original timeline. */
+export function createTuxemonSessionOptions(
+  project: Pick<ProjectSource, "worldTraversal" | "worldLayout">,
+  worldTraversal: WorldTraversalMode = project.worldTraversal ?? "legacy-transfer",
+  overrides: SessionOptions = {},
+): SessionOptions {
+  const base: SessionOptions = {
+    ...TUXEMON_SESSION_OPTIONS,
+    ...overrides,
+    worldTraversal,
+  };
+  if (worldTraversal === "legacy-transfer") {
+    delete base.handoff;
+    return base;
+  }
+  if (project.worldTraversal !== "seamless-v1" || !project.worldLayout) {
+    throw new Error("seamless-v1 session requires a seamless project with WorldLayout");
+  }
+  return {
+    ...base,
+    handoff: createWorldHandoffResolver(project.worldLayout),
+  };
+}

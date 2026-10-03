@@ -26,21 +26,33 @@ import {
 import { AttractController } from "../vendor/pocket-rpgkit/src/engine/attract.ts";
 import type { ProjectShell } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 import { readInlineProject, readShardedProject } from "../tools/generated-project.ts";
-import { TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS, TUXEMON_SCENES } from "../battle/game.ts";
+import {
+  createTuxemonSessionOptions,
+  TUXEMON_BATTLE_RULES,
+  TUXEMON_EXTENSIONS,
+  TUXEMON_SCENES,
+} from "../battle/game.ts";
+import { journeyWorldTraversal } from "../tools/gb6-journey.ts";
+import {
+  restoreSave,
+  saveBlockReason,
+  takeSaveSnapshot,
+} from "../ui/save-game.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
 const journey = JSON.parse(readFileSync(join(ROOT, "data/g6-journey.json"), "utf8")) as {
+  worldTraversal?: unknown;
   masks: number[];
   checkpoints: Array<{ name: string; frame: number }>;
+  terminalStateSha256: string;
 };
+const worldTraversal = journeyWorldTraversal(journey, "G7 maintained journey");
 const GAME_OPTIONS = { extensions: TUXEMON_EXTENSIONS, battle: TUXEMON_BATTLE_RULES, scenes: TUXEMON_SCENES } as const;
-// Pin the complete post-Billie state, including the spawned Nut, battle
-// history, shared-session rewards, independent battle/weather RNG cursors,
-// saved clock, daylight marker/tint, shop stock, and scene/queue slots.
-// COV-B fix-2's per-domain battle_last_* enum codes shift the variable
-// values the player battles write, so the terminal hash moves; the tape and
-// endpoint are unchanged (no newly materialized event fires on this path).
-const EXPECTED_TERMINAL_STATE_SHA256 = "ce5b5706c70aa374553aa4f476f1cb73564ecc8e687c627c4e74312b5dc5064a";
+const LEGACY_TERMINAL_STATE_SHA256 = "ce5b5706c70aa374553aa4f476f1cb73564ecc8e687c627c4e74312b5dc5064a";
+const BEFORE_HANDOFF_FRAME = 3_964;
+const MID_HANDOFF_FRAME = 3_976;
+const AFTER_HANDOFF_FRAME = 3_980;
+const BTN_LTRIGGER = 0x0100;
 
 function input(mask: number, previous: number): SessionInput {
   const pressed = mask & ~previous;
@@ -59,8 +71,10 @@ describe("G6 production map repository", () => {
   test("the maintained journey is byte-identical to inline on every frame", () => {
     const inlineProject = readInlineProject(ROOT);
     const sharded = readShardedProject(ROOT);
-    const inlineSession = createSession(inlineProject, 60, GAME_OPTIONS);
-    const shardedSession = createSession(sharded.project, 60, { maps: sharded.repository, ...GAME_OPTIONS });
+    const inlineSession = createSession(inlineProject, 60,
+      createTuxemonSessionOptions(inlineProject, worldTraversal, GAME_OPTIONS));
+    const shardedSession = createSession(sharded.project, 60,
+      createTuxemonSessionOptions(sharded.project, worldTraversal, { maps: sharded.repository, ...GAME_OPTIONS }));
     let inlineState = startSession(inlineProject, inlineSession);
     let shardedState = startSession(sharded.project, shardedSession);
     let previous = 0;
@@ -72,15 +86,16 @@ describe("G6 production map repository", () => {
       inlineState = stepSession(inlineSession, inlineState, frameInput);
       shardedState = stepSession(shardedSession, shardedState, frameInput);
       expect(canonicalJson(shardedState), `frame ${frame}`).toBe(canonicalJson(inlineState));
-      expect([...shardedSession.maps.keys()], `resident maps at frame ${frame}`)
-        .toEqual([shardedState.mapId]);
+      const resident = [...shardedSession.maps.keys()];
+      expect(resident, `current map resident at frame ${frame}`).toContain(shardedState.mapId);
+      expect(resident.length, `bounded seam residents at frame ${frame}`).toBeLessThanOrEqual(2);
       previous = mask;
     }
 
     expect([shardedState.mapId, shardedState.move.tx, shardedState.move.ty])
       .toEqual(["spyder_route1", 14, 19]);
     expect(createHash("sha256").update(canonicalJson(shardedState)).digest("hex"))
-      .toBe(EXPECTED_TERMINAL_STATE_SHA256);
+      .toBe(journey.terminalStateSha256);
   }, 60_000);
 
   test("attract replay stays byte-identical at 60, 30, 20, and 4 Hz", () => {
@@ -88,38 +103,156 @@ describe("G6 production map repository", () => {
     const terminalHashes: string[] = [];
     for (const hz of [60, 30, 20, 4]) {
       const sharded = readShardedProject(ROOT);
-      const inline = new AttractController(inlineProject, journey.masks, { hz, ...GAME_OPTIONS });
+      const inline = new AttractController(inlineProject, journey.masks,
+        { hz, ...createTuxemonSessionOptions(inlineProject, worldTraversal, GAME_OPTIONS) });
       const lazy = new AttractController(sharded.project, journey.masks, {
         hz,
-        maps: sharded.repository,
-        ...GAME_OPTIONS,
+        ...createTuxemonSessionOptions(sharded.project, worldTraversal, {
+          maps: sharded.repository,
+          ...GAME_OPTIONS,
+        }),
       });
       inline.startAttract();
       lazy.startAttract();
       let hostFrame = 0;
+      let sawHandoff = false;
       for (; hostFrame < 20_000; hostFrame++) {
         const expected = inline.step(0);
         const actual = lazy.step(0);
         if (canonicalJson(actual.state) !== canonicalJson(expected.state)) {
           throw new Error(`attract SessionState mismatch at ${hz} Hz host frame ${hostFrame}`);
         }
+        if (actual.state.handoff) {
+          sawHandoff = true;
+          expect(actual.state.fade, `${hz} Hz handoff must not fade`).toBeNull();
+          expect(actual.state.handoff.sourceMapId).toBe("spyder_paper_town");
+          expect(actual.state.handoff.targetMapId).toBe("spyder_route1");
+        }
         if (actual.status.demoFrame === journey.masks.length) break;
       }
       expect(lazy.status().demoFrame, `${hz} Hz tape completion`).toBe(journey.masks.length);
+      if (hz >= 20) expect(sawHandoff, `${hz} Hz did not expose the seamless crossing`).toBeTrue();
       expect([lazy.state.mapId, lazy.state.move.tx, lazy.state.move.ty])
         .toEqual(["spyder_route1", 14, 19]);
       terminalHashes.push(
         createHash("sha256").update(canonicalJson(lazy.state)).digest("hex"),
       );
     }
-    expect(new Set(terminalHashes)).toEqual(new Set([EXPECTED_TERMINAL_STATE_SHA256]));
+    expect(new Set(terminalHashes)).toEqual(new Set([journey.terminalStateSha256]));
+  }, 60_000);
+
+  test("saves immediately around the handoff restore and replay the same suffix", () => {
+    const project = readInlineProject(ROOT);
+    const makeSession = () => createSession(project, 60,
+      createTuxemonSessionOptions(project, worldTraversal, GAME_OPTIONS));
+    const baselineSession = makeSession();
+    let state = startSession(project, baselineSession);
+    let previous = 0;
+    let before: ReturnType<typeof takeSaveSnapshot> | undefined;
+    let after: ReturnType<typeof takeSaveSnapshot> | undefined;
+
+    for (let frame = 0; frame < journey.masks.length; frame++) {
+      const mask = journey.masks[frame]!;
+      state = stepSession(baselineSession, state, input(mask, previous));
+      previous = mask;
+      const folded = frame + 1;
+      if (folded === BEFORE_HANDOFF_FRAME) {
+        expect([state.mapId, state.move.tx, state.move.ty]).toEqual(["spyder_paper_town", 14, 1]);
+        expect(saveBlockReason(state)).toBeNull();
+        before = takeSaveSnapshot(baselineSession, state, mask);
+      } else if (folded === MID_HANDOFF_FRAME) {
+        expect(state.handoff?.phase).toBe(4);
+        expect(saveBlockReason(state)).toBe("Wait until the scene is over.");
+        expect(() => takeSaveSnapshot(baselineSession, state, mask)).toThrow(/Wait until the scene is over/);
+      } else if (folded === AFTER_HANDOFF_FRAME) {
+        expect([state.mapId, state.move.tx, state.move.ty]).toEqual(["spyder_route1", 14, 19]);
+        expect(state.handoff).toBeUndefined();
+        expect(saveBlockReason(state)).toBeNull();
+        after = takeSaveSnapshot(baselineSession, state, mask);
+      }
+    }
+
+    expect(before).toBeDefined();
+    expect(after).toBeDefined();
+    expect(createHash("sha256").update(canonicalJson(state)).digest("hex"))
+      .toBe(journey.terminalStateSha256);
+
+    const replaySuffix = (snapshot: NonNullable<typeof before>, from: number) => {
+      const session = makeSession();
+      let restored = restoreSave(session, snapshot);
+      let held = snapshot.held;
+      for (let frame = from; frame < journey.masks.length; frame++) {
+        const mask = journey.masks[frame]!;
+        restored = stepSession(session, restored, input(mask, held));
+        held = mask;
+      }
+      return restored;
+    };
+
+    for (const [snapshot, from] of [
+      [before!, BEFORE_HANDOFF_FRAME],
+      [after!, AFTER_HANDOFF_FRAME],
+    ] as const) {
+      const resumed = replaySuffix(snapshot, from);
+      // Save restore derives the host-only counter from interp.frame. The
+      // reducer never reads it; fixing that one field must recover the exact
+      // uninterrupted terminal state, including map-entry and handoff state.
+      expect(canonicalJson({ ...resumed, frame: state.frame })).toBe(canonicalJson(state));
+      expect(createHash("sha256").update(canonicalJson({ ...resumed, frame: state.frame })).digest("hex"))
+        .toBe(journey.terminalStateSha256);
+    }
+  }, 60_000);
+
+  test("rewinding from handoff phase 4 refolds the crossing byte-for-byte", () => {
+    const project = readInlineProject(ROOT);
+    const options = {
+      hz: 60,
+      rewindSeconds: 5 / 60,
+      ...createTuxemonSessionOptions(project, worldTraversal, GAME_OPTIONS),
+    };
+    const reference = new AttractController(project, journey.masks, options);
+    const states = new Map<number, string>([[0, canonicalJson(reference.state)]]);
+    reference.startAttract();
+    let phaseFourTimeline = -1;
+    for (let guard = 0; guard < 20_000 && reference.status().demoFrame < journey.masks.length; guard++) {
+      reference.step(0);
+      states.set(reference.length, canonicalJson(reference.state));
+      if (reference.state.handoff?.phase === 4) phaseFourTimeline = reference.length;
+    }
+    expect(phaseFourTimeline).toBeGreaterThan(5);
+    expect(createHash("sha256").update(canonicalJson(reference.state)).digest("hex"))
+      .toBe(journey.terminalStateSha256);
+
+    const rewound = new AttractController(project, journey.masks, options);
+    rewound.startAttract();
+    for (let guard = 0; guard < 20_000 && rewound.state.handoff?.phase !== 4; guard++) rewound.step(0);
+    expect(rewound.state.handoff?.phase).toBe(4);
+    expect(rewound.length).toBe(phaseFourTimeline);
+    const target = phaseFourTimeline - 5;
+    const result = rewound.step(BTN_LTRIGGER);
+    expect(result.status.rewound).toBeTrue();
+    expect(rewound.length).toBe(target);
+    const expected = states.get(target);
+    expect(expected).toBeDefined();
+    expect(canonicalJson(rewound.state)).toBe(expected!);
+    expect(rewound.state.handoff).toBeUndefined();
+
+    rewound.step(0); // release L, then continue the restored tape prefix
+    for (let guard = 0; guard < 20_000 && rewound.status().demoFrame < journey.masks.length; guard++) {
+      rewound.step(0);
+    }
+    expect(rewound.status().demoFrame).toBe(journey.masks.length);
+    expect(createHash("sha256").update(canonicalJson(rewound.state)).digest("hex"))
+      .toBe(journey.terminalStateSha256);
   }, 60_000);
 
   test("a cross-map save restores an evicted map and rejects another content build", () => {
     const inlineProject = readInlineProject(ROOT);
     const sharded = readShardedProject(ROOT);
-    const inlineSession = createSession(inlineProject, 60, GAME_OPTIONS);
-    const shardedSession = createSession(sharded.project, 60, { maps: sharded.repository, ...GAME_OPTIONS });
+    const inlineSession = createSession(inlineProject, 60,
+      createTuxemonSessionOptions(inlineProject, worldTraversal, GAME_OPTIONS));
+    const shardedSession = createSession(sharded.project, 60,
+      createTuxemonSessionOptions(sharded.project, worldTraversal, { maps: sharded.repository, ...GAME_OPTIONS }));
     let inlineState: SessionState = startSession(inlineProject, inlineSession);
     let shardedState: SessionState = startSession(sharded.project, shardedSession);
     let previous = 0;
@@ -176,9 +309,25 @@ describe("G6 production map repository", () => {
         return new Uint8Array(readFileSync(join(ROOT, "dist", entry)));
       },
     });
-    const mismatchedSession = createSession(mismatched, 60, { maps: repository, ...GAME_OPTIONS });
+    const mismatchedSession = createSession(mismatched, 60,
+      createTuxemonSessionOptions(mismatched, worldTraversal, { maps: repository, ...GAME_OPTIONS }));
     expect(reads).toBe(1);
     expect(() => restoreSessionEnvelope(mismatchedSession, shardedEnvelope)).toThrow(/manifest hash/);
     expect(reads).toBe(1);
+  });
+
+  test("the preserved masks still replay on the explicit legacy timeline", () => {
+    const project = readInlineProject(ROOT);
+    const session = createSession(project, 60,
+      createTuxemonSessionOptions(project, "legacy-transfer", GAME_OPTIONS));
+    let state = startSession(project, session);
+    let previous = 0;
+    for (const mask of journey.masks) {
+      state = stepSession(session, state, input(mask, previous));
+      previous = mask;
+    }
+    expect([state.mapId, state.move.tx, state.move.ty]).toEqual(["spyder_route1", 14, 19]);
+    expect(createHash("sha256").update(canonicalJson(state)).digest("hex"))
+      .toBe(LEGACY_TERMINAL_STATE_SHA256);
   });
 });

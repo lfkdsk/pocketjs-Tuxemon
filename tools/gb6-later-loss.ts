@@ -9,16 +9,15 @@ import { join, resolve } from "node:path";
 import { expectedTechniqueDamage } from "../battle/autoplay.ts";
 import { tuxemonExtensionState } from "../battle/extension.ts";
 import { battleDbToTuxemonBattleDb } from "../battle/from-battle-db.ts";
-import { TUXEMON_BATTLE_DB } from "../battle/game.ts";
+import { createTuxemonSessionOptions, TUXEMON_BATTLE_DB } from "../battle/game.ts";
 import { battleMenuEntries, tuxemonRuntimeBattleState, type RuntimeBattleState } from "../battle/runtime.ts";
 import type { BattleInput } from "../vendor/pocket-rpgkit/src/engine/battle.ts";
 import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
 import { canonicalJson } from "../vendor/pocket-rpgkit/src/engine/save.ts";
 import type { Gb6JourneyResult } from "./gb6-journey.ts";
-import { Driver } from "./gb6-journey.ts";
+import { Driver, journeyWorldTraversal, recordingWorldTraversal } from "./gb6-journey.ts";
 import { readInlineProject } from "./generated-project.ts";
 import { createSession, startSession } from "../vendor/pocket-rpgkit/src/engine/session.ts";
-import { TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS, TUXEMON_SCENES } from "../battle/game.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
 const MAINLINE = resolve(process.env.GB6_JOURNEY ?? join(ROOT, "data/gb6-mainline-journey.json"));
@@ -127,11 +126,13 @@ const journey = JSON.parse(readFileSync(MAINLINE, "utf8")) as Gb6JourneyResult;
 const target = journey.battles.find((row) => row.opponent === "spyder_route3_wanda");
 expect("mainline has no Wanda checkpoint", target !== undefined);
 const project = readInlineProject(ROOT);
-const session = createSession(project, 60, {
-  extensions: TUXEMON_EXTENSIONS,
-  battle: TUXEMON_BATTLE_RULES,
-  scenes: TUXEMON_SCENES,
-});
+const worldTraversal = recordingWorldTraversal(project, "GB6 later-loss journey");
+const mainlineTraversal = journeyWorldTraversal(journey, "GB6 later-loss mainline tape");
+expect(
+  `mainline traversal ${mainlineTraversal} does not match project ${worldTraversal}; regenerate the mainline first`,
+  mainlineTraversal === worldTraversal,
+);
+const session = createSession(project, 60, createTuxemonSessionOptions(project, mainlineTraversal));
 const driver = new Driver(session, 60, startSession(project, session));
 for (let frame = 0; frame <= target.startFrame; frame++) driver.tick(journey.masks[frame]!);
 expect("prefix did not enter Wanda's trainer battle", driver.state.scene !== null &&
@@ -192,6 +193,7 @@ expect(`healed player could not leave the clinic (${driver.where()})`, String(dr
 
 const result = {
   format: "pocket-tuxemon/gb6-later-loss/v1",
+  worldTraversal,
   hz: 60,
   frames: driver.masks.length,
   prefixFrames: target.startFrame + 1,

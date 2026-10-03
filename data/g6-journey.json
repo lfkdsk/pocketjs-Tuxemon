@@ -1,5 +1,6 @@
 {
   "format": "pocket-tuxemon/g6-journey/v1",
+  "worldTraversal": "seamless-v1",
   "hz": 60,
   "frames": 3990,
   "map": "spyder_route1",
@@ -4053,6 +4054,6 @@
     "billie_won": true,
     "billie_lost": false
   },
-  "terminalStateSha256": "ce5b5706c70aa374553aa4f476f1cb73564ecc8e687c627c4e74312b5dc5064a",
-  "sha256": "8d54ea602033b99a53e8085c0cb2c6811e018b481789c057448744d80d0b21cd"
+  "terminalStateSha256": "fb0da89c308bfeb0061057cb86d1870d6afea245d6a92c0941e20d99baa2a40f",
+  "sha256": "01138818671d95ef68e058bcf1c42c9473868f041f4b538e15cca23d29f481c1"
 }

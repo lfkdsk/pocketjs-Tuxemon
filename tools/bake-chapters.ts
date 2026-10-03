@@ -7,6 +7,7 @@
 // starts. A second replay through the built game bundle renders one
 // 480x272 thumbnail per chapter.
 //
+//   bun tools/bake-chapters.ts --metadata-only # bootstrap a changed tape identity before rebuilding
 //   bun tools/bake-chapters.ts          # rewrite data/chapters.json + docs/screenshots/chapters
 //   bun tools/verify-chapters.ts        # re-bake in memory and byte-diff both,
 //                                       # then suffix-replay every chapter
@@ -26,10 +27,8 @@ import { join, resolve } from "node:path";
 
 import { tuxemonExtensionState } from "../battle/extension.ts";
 import {
+  createTuxemonSessionOptions,
   TUXEMON_BATTLE_DB,
-  TUXEMON_BATTLE_RULES,
-  TUXEMON_EXTENSIONS,
-  TUXEMON_SCENES,
 } from "../battle/game.ts";
 // Thumbnails boot the built game at the same fixed 09:00 as the reducer
 // replay; without it the daylight tint follows the machine's wall clock.
@@ -52,7 +51,8 @@ import {
   type SessionInput,
   type SessionState,
 } from "../vendor/pocket-rpgkit/src/engine/session.ts";
-import type { Gb6JourneyResult } from "./gb6-journey.ts";
+import type { WorldTraversalMode } from "../vendor/pocket-rpgkit/src/engine/types.ts";
+import { journeyWorldTraversal, type Gb6JourneyResult } from "./gb6-journey.ts";
 import type { J1JourneyResult } from "./j1-journey.ts";
 import type { J2JourneyResult } from "./j2-journey.ts";
 import type { J3JourneyResult } from "./j3-journey.ts";
@@ -70,12 +70,9 @@ export const THUMB_REL = "docs/screenshots/chapters";
 export const THUMB_W = 480;
 export const THUMB_H = 272;
 
-const GAME_OPTIONS = {
-  extensions: TUXEMON_EXTENSIONS,
-  battle: TUXEMON_BATTLE_RULES,
-  scenes: TUXEMON_SCENES,
-} as const;
 const DEBUG = process.env.CHAPTERS_DEBUG === "1";
+
+const NEW_CHAPTER_WORLD_TRAVERSAL = "seamless-v1" as const;
 
 export interface ChapterRecord {
   id: string;
@@ -102,12 +99,13 @@ export interface ChapterRecord {
 
 export interface ChaptersFile {
   format: "pocket-tuxemon/chapters/v1";
+  worldTraversal: WorldTraversalMode;
   hz: 60;
   tape: {
-    gb6: { file: string; frames: number; tapeSha256: string };
-    j1: { file: string; frames: number; tapeSha256: string };
-    j2: { file: string; frames: number; tapeSha256: string };
-    j3: { file: string; frames: number; tapeSha256: string };
+    gb6: { file: string; frames: number; tapeSha256: string; worldTraversal: WorldTraversalMode };
+    j1: { file: string; frames: number; tapeSha256: string; worldTraversal: WorldTraversalMode };
+    j2: { file: string; frames: number; tapeSha256: string; worldTraversal: WorldTraversalMode };
+    j3: { file: string; frames: number; tapeSha256: string; worldTraversal: WorldTraversalMode };
     frames: number;
     sha256: string;
   };
@@ -146,6 +144,25 @@ function sha256(value: string): string {
   return createHash("sha256").update(value).digest("hex");
 }
 
+/** Older chapter manifests had no traversal identity and are therefore
+ * legacy artifacts. Once any identity is present, every segment must agree
+ * with the manifest: mixing timelines would make the concatenated masks
+ * meaningless. */
+export function chapterWorldTraversal(
+  file: { worldTraversal?: unknown; tape?: Partial<Record<"gb6" | "j1" | "j2" | "j3", { worldTraversal?: unknown }>> },
+  label = "chapters file",
+): WorldTraversalMode {
+  const worldTraversal = journeyWorldTraversal(file, label);
+  for (const segment of ["gb6", "j1", "j2", "j3"] as const) {
+    const metadata = file.tape?.[segment];
+    expect(`${label}: missing ${segment} tape metadata`, metadata !== undefined);
+    const segmentTraversal = journeyWorldTraversal(metadata!, `${label} ${segment} segment`);
+    expect(`${label}: ${segment} segment traversal ${segmentTraversal} != manifest ${worldTraversal}`,
+      segmentTraversal === worldTraversal);
+  }
+  return worldTraversal;
+}
+
 function input(mask: number, previous: number): SessionInput {
   const pressed = mask & ~previous;
   return {
@@ -178,6 +195,7 @@ function loadTape(): {
   j2: J2JourneyResult;
   j3: J3JourneyResult;
   combined: number[];
+  worldTraversal: WorldTraversalMode;
 } {
   const gb6 = JSON.parse(readFileSync(GB6_PATH, "utf8")) as Gb6JourneyResult;
   const j1 = JSON.parse(readFileSync(J1_PATH, "utf8")) as J1JourneyResult;
@@ -212,7 +230,26 @@ function loadTape(): {
   expect("J2 combined tape hash changed", sha256(JSON.stringify(j2Combined)) === j2.combinedTapeSha256);
   expect("J3 combined frame count changed", j3.combinedFrames === combined.length);
   expect("J3 combined tape hash changed", sha256(JSON.stringify(combined)) === j3.combinedTapeSha256);
-  return { gb6, j1, j2, j3, combined };
+  const worldTraversal = journeyWorldTraversal(gb6, "GB6 journey");
+  const j1Traversal = journeyWorldTraversal(j1, "J1 journey");
+  const j2Traversal = journeyWorldTraversal(j2, "J2 journey");
+  const j3Traversal = journeyWorldTraversal(j3, "J3 journey");
+  const j1BaseTraversal = journeyWorldTraversal(j1.base, "J1 base");
+  const j2BaseTraversal = journeyWorldTraversal(j2.base, "J2 base");
+  const j3BaseTraversal = journeyWorldTraversal(j3.base, "J3 base");
+  expect(`J1 traversal ${j1Traversal} != GB6 traversal ${worldTraversal}`,
+    j1Traversal === worldTraversal);
+  expect(`J1 base traversal ${j1BaseTraversal} != GB6 traversal ${worldTraversal}`,
+    j1BaseTraversal === worldTraversal);
+  expect(`J2 traversal ${j2Traversal} != J1 traversal ${j1Traversal}`,
+    j2Traversal === j1Traversal);
+  expect(`J2 base traversal ${j2BaseTraversal} != J1 traversal ${j1Traversal}`,
+    j2BaseTraversal === j1Traversal);
+  expect(`J3 traversal ${j3Traversal} != J2 traversal ${j2Traversal}`,
+    j3Traversal === j2Traversal);
+  expect(`J3 base traversal ${j3BaseTraversal} != J2 traversal ${j2Traversal}`,
+    j3BaseTraversal === j2Traversal);
+  return { gb6, j1, j2, j3, combined, worldTraversal };
 }
 
 function defineCheckpoints(gb6: Gb6JourneyResult): Checkpoint[] {
@@ -421,8 +458,9 @@ function buildChaptersFile(
   j3: J3JourneyResult,
   combined: readonly number[],
   captures: Map<string, Capture>,
+  worldTraversal: WorldTraversalMode,
 ): ChaptersFile {
-  const session = createSession(project, 60, GAME_OPTIONS);
+  const session = createSession(project, 60, createTuxemonSessionOptions(project, worldTraversal));
   const chapters: ChapterRecord[] = [];
   const ordered = [...captures.values()].sort((a, b) => a.frame - b.frame);
   for (const cap of ordered) {
@@ -455,12 +493,13 @@ function buildChaptersFile(
   }
   return {
     format: "pocket-tuxemon/chapters/v1",
+    worldTraversal,
     hz: 60,
     tape: {
-      gb6: { file: "data/gb6-mainline-journey.json", frames: gb6.frames, tapeSha256: gb6.tapeSha256 },
-      j1: { file: "data/j1-captainreturns-journey.json", frames: j1.frames, tapeSha256: j1.tapeSha256 },
-      j2: { file: "data/j2-hospitalcure-journey.json", frames: j2.frames, tapeSha256: j2.tapeSha256 },
-      j3: { file: "data/j3-omnichannelradioannounce-journey.json", frames: j3.frames, tapeSha256: j3.tapeSha256 },
+      gb6: { file: "data/gb6-mainline-journey.json", frames: gb6.frames, tapeSha256: gb6.tapeSha256, worldTraversal },
+      j1: { file: "data/j1-captainreturns-journey.json", frames: j1.frames, tapeSha256: j1.tapeSha256, worldTraversal },
+      j2: { file: "data/j2-hospitalcure-journey.json", frames: j2.frames, tapeSha256: j2.tapeSha256, worldTraversal },
+      j3: { file: "data/j3-omnichannelradioannounce-journey.json", frames: j3.frames, tapeSha256: j3.tapeSha256, worldTraversal },
       frames: combined.length,
       sha256: sha256(JSON.stringify(combined)),
     },
@@ -518,9 +557,16 @@ export interface BakeResult {
   thumbnails: Map<string, Uint8Array>;
 }
 
-export async function bakeChapters(root: string = ROOT): Promise<BakeResult> {
+export async function bakeChapters(
+  root: string = ROOT,
+  options: { renderThumbnails?: boolean } = {},
+): Promise<BakeResult> {
   const project = readInlineProject(root);
-  const { gb6, j1, j2, j3, combined } = loadTape();
+  expect(`new chapter bake requires ${NEW_CHAPTER_WORLD_TRAVERSAL} project traversal`,
+    project.worldTraversal === NEW_CHAPTER_WORLD_TRAVERSAL && project.worldLayout !== undefined);
+  const { gb6, j1, j2, j3, combined, worldTraversal } = loadTape();
+  expect(`new chapter bake requires ${NEW_CHAPTER_WORLD_TRAVERSAL} journey traversal, got ${worldTraversal}`,
+    worldTraversal === NEW_CHAPTER_WORLD_TRAVERSAL);
   const checkpoints = defineCheckpoints(gb6);
   // The captain's return is the final frame of the GB6+J1 tape; the J2
   // continuation replays from the restored terminal snapshot.
@@ -528,14 +574,16 @@ export async function bakeChapters(root: string = ROOT): Promise<BakeResult> {
   last.at = j1.combinedFrames;
   last.select = (frame, state) => frame === j1.combinedFrames && state.mapId === "spyder_mansion" && safe(state);
 
-  const session = createSession(project, 60, GAME_OPTIONS);
+  const session = createSession(project, 60, createTuxemonSessionOptions(project, worldTraversal));
   const captures = replayReducer(session, project, combined, checkpoints);
-  const chapters = buildChaptersFile(project, gb6, j1, j2, j3, combined, captures);
-  const thumbnails = await renderThumbnails(combined, captures);
+  const chapters = buildChaptersFile(project, gb6, j1, j2, j3, combined, captures, worldTraversal);
+  const thumbnails = options.renderThumbnails === false
+    ? new Map<string, Uint8Array>()
+    : await renderThumbnails(combined, captures);
   for (const chapter of chapters.chapters) {
-    const png = thumbnails.get(chapter.id)!;
     chapter.thumbnail = `${THUMB_REL}/${chapter.id}-${THUMB_W}x${THUMB_H}.png`;
-    chapter.thumbnailSha256 = createHash("sha256").update(png).digest("hex");
+    const png = thumbnails.get(chapter.id);
+    if (png) chapter.thumbnailSha256 = createHash("sha256").update(png).digest("hex");
   }
   return { chapters, thumbnails };
 }
@@ -569,10 +617,16 @@ export interface ChapterSuffixResult {
  *  save/restore round-trip. */
 export function verifyChapterSuffixes(root: string = ROOT): ChapterSuffixResult[] {
   const project = readInlineProject(root);
-  const { combined } = loadTape();
   const file = JSON.parse(readFileSync(CHAPTERS_PATH, "utf8")) as ChaptersFile;
   expect("chapters file format changed", file.format === "pocket-tuxemon/chapters/v1");
-  const session = createSession(project, 60, GAME_OPTIONS);
+  const worldTraversal = chapterWorldTraversal(file);
+  expect(`chapters traversal ${worldTraversal} != project traversal ${project.worldTraversal ?? "legacy-transfer"}`,
+    worldTraversal === (project.worldTraversal ?? "legacy-transfer"));
+  const tape = loadTape();
+  expect(`chapters traversal ${worldTraversal} != journey traversal ${tape.worldTraversal}`,
+    worldTraversal === tape.worldTraversal);
+  const { combined } = tape;
+  const session = createSession(project, 60, createTuxemonSessionOptions(project, worldTraversal));
 
   // One full replay: the terminal state every suffix must reach.
   let terminal = startSession(project, session);
@@ -618,13 +672,15 @@ export function verifyChapterSuffixes(root: string = ROOT): ChapterSuffixResult[
 }
 
 if (import.meta.main) {
-  const { chapters, thumbnails } = await bakeChapters();
+  const metadataOnly = process.argv.includes("--metadata-only");
+  const { chapters, thumbnails } = await bakeChapters(ROOT, { renderThumbnails: !metadataOnly });
   mkdirSync(THUMB_DIR, { recursive: true });
   for (const [id, png] of thumbnails) {
     writeFileSync(join(THUMB_DIR, `${id}-${THUMB_W}x${THUMB_H}.png`), png);
   }
   writeFileSync(CHAPTERS_PATH, chaptersJson(chapters));
-  console.log(`CHAPTERS BAKED ${chapters.chapters.length} chapters, ${thumbnails.size} thumbnails`);
+  console.log(`CHAPTERS BAKED ${chapters.chapters.length} chapters, ${thumbnails.size} thumbnails` +
+    (metadataOnly ? " (metadata only)" : ""));
   for (const chapter of chapters.chapters) {
     console.log(`  ${chapter.id} f${chapter.frame} ${chapter.map}@${chapter.position.join(",")} `
       + `suffix=${chapter.suffixFrames} thumb=${chapter.thumbnailSha256.slice(0, 12)}`);

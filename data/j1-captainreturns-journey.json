@@ -1,15 +1,17 @@
 {
   "format": "pocket-tuxemon/j1-captainreturns/v1",
+  "worldTraversal": "seamless-v1",
   "hz": 60,
-  "frames": 11550,
-  "combinedFrames": 122416,
-  "durationSeconds": 192.5,
+  "frames": 11520,
+  "combinedFrames": 122386,
+  "durationSeconds": 192,
   "base": {
     "format": "pocket-tuxemon/gb6-mainline/v1",
+    "worldTraversal": "seamless-v1",
     "frames": 110866,
     "tapeSha256": "3e754f6bc872878e9194dff5061f80ce854c8d9e42bbeabf9e97850d582263aa",
-    "terminalStateSha256": "f1b71f16a39805454183f16bfa9f262e0614d1db6c0567ea96a9eaa12bba49df",
-    "terminalSnapshotSha256": "7075b8be98e5cb06c1c7fddf3514360eb622ec56a540344ca0a6e270795ccfb1",
+    "terminalStateSha256": "177d808d17c5e2ef406709e955cf460730e4fe9371058610e61f61f383392e0d",
+    "terminalSnapshotSha256": "24b93d803c28119007877cfc1aa9e34f33f02297ff0543c2cf1c8124e9dde305",
     "heldMask": 0,
     "timelineFrame": 110866,
     "map": "spyder_route3",
@@ -1071,16 +1073,6 @@
     0,
     0,
     0,
-    128,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
     0,
     0,
     0,
@@ -4784,16 +4776,6 @@
     0,
     0,
     0,
-    128,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
     0,
     0,
     0,
@@ -4934,16 +4916,6 @@
     0,
     0,
     16,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    16,
-    0,
-    0,
     0,
     0,
     0,
@@ -9236,7 +9208,7 @@
     0,
     0,
     0,
-    16,
+    0,
     0,
     0,
     0,
@@ -11650,7 +11622,7 @@
     },
     {
       "name": "route4",
-      "frame": 1055,
+      "frame": 1054,
       "map": "spyder_route4",
       "position": [
         19,
@@ -11659,7 +11631,7 @@
     },
     {
       "name": "route-4-billie",
-      "frame": 4727,
+      "frame": 4717,
       "map": "spyder_route4",
       "position": [
         2,
@@ -11668,7 +11640,7 @@
     },
     {
       "name": "flower_city",
-      "frame": 4768,
+      "frame": 4757,
       "map": "spyder_flower_city",
       "position": [
         39,
@@ -11677,7 +11649,7 @@
     },
     {
       "name": "routea",
-      "frame": 4925,
+      "frame": 4904,
       "map": "spyder_routea",
       "position": [
         7,
@@ -11686,7 +11658,7 @@
     },
     {
       "name": "route-a-billie",
-      "frame": 8261,
+      "frame": 8231,
       "map": "spyder_routea",
       "position": [
         16,
@@ -11695,7 +11667,7 @@
     },
     {
       "name": "mansion",
-      "frame": 9220,
+      "frame": 9190,
       "map": "spyder_mansion",
       "position": [
         10,
@@ -11704,7 +11676,7 @@
     },
     {
       "name": "mansion_basement",
-      "frame": 10105,
+      "frame": 10075,
       "map": "spyder_mansion_basement",
       "position": [
         13,
@@ -11713,7 +11685,7 @@
     },
     {
       "name": "captain-found",
-      "frame": 10385,
+      "frame": 10355,
       "map": "spyder_mansion_basement",
       "position": [
         3,
@@ -11722,7 +11694,7 @@
     },
     {
       "name": "mansion",
-      "frame": 11293,
+      "frame": 11263,
       "map": "spyder_mansion",
       "position": [
         1,
@@ -11731,7 +11703,7 @@
     },
     {
       "name": "captainreturns",
-      "frame": 11549,
+      "frame": 11519,
       "map": "spyder_mansion",
       "position": [
         1,
@@ -11743,7 +11715,7 @@
     {
       "opponent": "wild:katapill",
       "kind": "wild",
-      "startFrame": 1556,
+      "startFrame": 1546,
       "before": [
         {
           "slug": "arthrobolt",
@@ -11788,7 +11760,7 @@
           "level": 13
         }
       ],
-      "endFrame": 1807,
+      "endFrame": 1797,
       "turns": 1,
       "outcome": "won",
       "after": [
@@ -11833,7 +11805,7 @@
     {
       "opponent": "wild:katapill",
       "kind": "wild",
-      "startFrame": 2001,
+      "startFrame": 1991,
       "before": [
         {
           "slug": "arthrobolt",
@@ -11878,7 +11850,7 @@
           "level": 14
         }
       ],
-      "endFrame": 2252,
+      "endFrame": 2242,
       "turns": 1,
       "outcome": "won",
       "after": [
@@ -11923,7 +11895,7 @@
     {
       "opponent": "spyder_route4_rosamund",
       "kind": "trainer",
-      "startFrame": 2319,
+      "startFrame": 2309,
       "before": [
         {
           "slug": "arthrobolt",
@@ -11968,7 +11940,7 @@
           "level": 18
         }
       ],
-      "endFrame": 2565,
+      "endFrame": 2555,
       "turns": 1,
       "outcome": "won",
       "after": [
@@ -12013,7 +11985,7 @@
     {
       "opponent": "spyder_route4_marshall",
       "kind": "trainer",
-      "startFrame": 2678,
+      "startFrame": 2668,
       "before": [
         {
           "slug": "arthrobolt",
@@ -12062,7 +12034,7 @@
           "level": 16
         }
       ],
-      "endFrame": 3094,
+      "endFrame": 3084,
       "turns": 2,
       "outcome": "won",
       "after": [
@@ -12107,7 +12079,7 @@
     {
       "opponent": "spyder_route4_beck",
       "kind": "trainer",
-      "startFrame": 3194,
+      "startFrame": 3184,
       "before": [
         {
           "slug": "arthrobolt",
@@ -12160,7 +12132,7 @@
           "level": 12
         }
       ],
-      "endFrame": 3788,
+      "endFrame": 3778,
       "turns": 3,
       "outcome": "won",
       "after": [
@@ -12205,7 +12177,7 @@
     {
       "opponent": "spyder_billie",
       "kind": "trainer",
-      "startFrame": 3959,
+      "startFrame": 3949,
       "before": [
         {
           "slug": "arthrobolt",
@@ -12258,7 +12230,7 @@
           "level": 16
         }
       ],
-      "endFrame": 4677,
+      "endFrame": 4667,
       "turns": 4,
       "outcome": "won",
       "after": [
@@ -12303,7 +12275,7 @@
     {
       "opponent": "spyder_routea_koan",
       "kind": "trainer",
-      "startFrame": 5008,
+      "startFrame": 4978,
       "before": [
         {
           "slug": "arthrobolt",
@@ -12352,7 +12324,7 @@
           "level": 12
         }
       ],
-      "endFrame": 5470,
+      "endFrame": 5440,
       "turns": 2,
       "outcome": "won",
       "after": [
@@ -12397,7 +12369,7 @@
     {
       "opponent": "wild:anoleaf",
       "kind": "wild",
-      "startFrame": 5874,
+      "startFrame": 5844,
       "before": [
         {
           "slug": "arthrobolt",
@@ -12442,7 +12414,7 @@
           "level": 12
         }
       ],
-      "endFrame": 6155,
+      "endFrame": 6125,
       "turns": 1,
       "outcome": "won",
       "after": [
@@ -12487,7 +12459,7 @@
     {
       "opponent": "spyder_routea_dagger",
       "kind": "trainer",
-      "startFrame": 6209,
+      "startFrame": 6179,
       "before": [
         {
           "slug": "arthrobolt",
@@ -12532,7 +12504,7 @@
           "level": 16
         }
       ],
-      "endFrame": 6457,
+      "endFrame": 6427,
       "turns": 1,
       "outcome": "won",
       "after": [
@@ -12577,7 +12549,7 @@
     {
       "opponent": "spyder_billie",
       "kind": "trainer",
-      "startFrame": 7063,
+      "startFrame": 7033,
       "before": [
         {
           "slug": "arthrobolt",
@@ -12634,7 +12606,7 @@
           "level": 17
         }
       ],
-      "endFrame": 8163,
+      "endFrame": 8133,
       "turns": 6,
       "outcome": "won",
       "after": [
@@ -12679,7 +12651,7 @@
     {
       "opponent": "wild:katapill",
       "kind": "wild",
-      "startFrame": 8425,
+      "startFrame": 8395,
       "before": [
         {
           "slug": "arthrobolt",
@@ -12724,7 +12696,7 @@
           "level": 14
         }
       ],
-      "endFrame": 8674,
+      "endFrame": 8644,
       "turns": 1,
       "outcome": "won",
       "after": [
@@ -12769,7 +12741,7 @@
     {
       "opponent": "spyder_routea_rosy",
       "kind": "trainer",
-      "startFrame": 8835,
+      "startFrame": 8805,
       "before": [
         {
           "slug": "arthrobolt",
@@ -12814,7 +12786,7 @@
           "level": 16
         }
       ],
-      "endFrame": 9115,
+      "endFrame": 9085,
       "turns": 1,
       "outcome": "won",
       "after": [
@@ -12859,7 +12831,7 @@
     {
       "opponent": "spyder_mansion_lucy",
       "kind": "trainer",
-      "startFrame": 9592,
+      "startFrame": 9562,
       "before": [
         {
           "slug": "arthrobolt",
@@ -12908,7 +12880,7 @@
           "level": 15
         }
       ],
-      "endFrame": 10032,
+      "endFrame": 10002,
       "turns": 2,
       "outcome": "won",
       "after": [
@@ -12953,7 +12925,7 @@
     {
       "opponent": "spyder_basement_catholi",
       "kind": "trainer",
-      "startFrame": 10660,
+      "startFrame": 10630,
       "before": [
         {
           "slug": "arthrobolt",
@@ -13002,7 +12974,7 @@
           "level": 24
         }
       ],
-      "endFrame": 11100,
+      "endFrame": 11070,
       "turns": 2,
       "outcome": "won",
       "after": [
@@ -13090,8 +13062,8 @@
       "maxHp": 137
     }
   ],
-  "initialStateSha256": "f1b71f16a39805454183f16bfa9f262e0614d1db6c0567ea96a9eaa12bba49df",
-  "terminalStateSha256": "b89ff22d9a4f342a56dc45b398994923d9ce139e41cd87922514e21bc8833b24",
-  "tapeSha256": "8afdd265b098a6300f32afd198061531ba21f53c3ab4f880846f8bebbafd0aae",
-  "combinedTapeSha256": "a3150d1c12ef6e42677cc215226d74db5119803c837e36f6c2e4e446f3f2ae1c"
+  "initialStateSha256": "177d808d17c5e2ef406709e955cf460730e4fe9371058610e61f61f383392e0d",
+  "terminalStateSha256": "9e9d046832aec6b720628bc4113fa076ff15418cc69e9c7838b5668780bd0fdc",
+  "tapeSha256": "18af446ceb72ddfc780c3d5f356efbfca07e5d525c0279432ad24b43dd601758",
+  "combinedTapeSha256": "c78f8ba93074acd6f6539f788057d64d0acac52bff8d2d1bd6739e6e44dcf44b"
 }

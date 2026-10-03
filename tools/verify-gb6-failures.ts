@@ -8,6 +8,7 @@ import { join, resolve } from "node:path";
 
 import { tuxemonExtensionState } from "../battle/extension.ts";
 import {
+  createTuxemonSessionOptions,
   TUXEMON_BATTLE_DB,
   TUXEMON_BATTLE_RULES,
   TUXEMON_EXTENSIONS,
@@ -23,16 +24,12 @@ import {
   type SessionState,
 } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import { readShardedProject } from "./generated-project.ts";
+import { journeyWorldTraversal } from "./gb6-journey.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
 const HEAL_BEFORE_LEAVE = "You should heal your monsters before heading off.";
 const FIRST_FIGHT_LOSE = "As expected! Old models can't compare to new ones!";
 const FIRST_FIGHT_AFTER = "I'll heal you up this time, but I'm not a charity. Rest up at home next time your monsters get worn out.";
-// COV-B fix-2's per-domain battle_last_* enum codes shift the variable
-// values the Billie fight writes, so the first-loss terminal hash moves;
-// the tape and recovery order are unchanged.
-const FIRST_LOSS_STATE_SHA256 = "c8aeff904146a139260b9800905e2a6506d2f7189d9d90c7fad3d9420d95f57d";
-
 interface SeenText {
   frame: number;
   map: string;
@@ -40,6 +37,7 @@ interface SeenText {
 }
 
 interface FrozenTape {
+  worldTraversal?: unknown;
   frames: number;
   masks: number[];
 }
@@ -85,12 +83,10 @@ function input(mask: number, previous: number): SessionInput {
 function replay(tape: FrozenTape): Replay {
   expect("frame count differs from masks", tape.frames === tape.masks.length);
   const { project, repository: maps } = readShardedProject(ROOT);
-  const session = createSession(project, 60, {
+  const worldTraversal = journeyWorldTraversal(tape, "GB6 failure tape");
+  const session = createSession(project, 60, createTuxemonSessionOptions(project, worldTraversal, {
     maps,
-    extensions: TUXEMON_EXTENSIONS,
-    battle: TUXEMON_BATTLE_RULES,
-    scenes: TUXEMON_SCENES,
-  });
+  }));
   let state = startSession(project, session);
   let previous = 0;
   let lastModalKey = "";
@@ -160,6 +156,7 @@ const first = JSON.parse(readFileSync(join(ROOT, "data/gb6-first-loss-journey.js
     position: [number, number];
     story: { billie_result: string; billie_lost: boolean; billie_won: boolean };
     tapeSha256: string;
+    terminalStateSha256: string;
     sha256: string;
   };
 const { sha256: firstRecordedSha, ...firstPayload } = first;
@@ -188,7 +185,7 @@ expect("first-loss faint notice was shown", firstReplay.texts.every((row) => !ro
 expect("First Fight - Lose did not heal the fainted party", firstReplay.sawHealedAfterFaint);
 const firstLossStateSha256 = sha256(canonicalJson(firstReplay.state));
 expect(`first-loss terminal state hash changed (got ${firstLossStateSha256})`,
-  firstLossStateSha256 === FIRST_LOSS_STATE_SHA256);
+  firstLossStateSha256 === first.terminalStateSha256);
 
 const later = JSON.parse(readFileSync(join(ROOT, "data/gb6-later-loss-journey.json"), "utf8")) as
   FrozenTape & {
@@ -223,11 +220,11 @@ expect("nurse did not restore the party after the blocked exit", laterReplay.saw
   laterExt.party.every((monster) => monster.currentHp === monster.base.hp));
 expect("healed player did not leave for Leather Town", laterReplay.state.mapId === later.end.map &&
   laterReplay.state.move.tx === later.end.position[0] && laterReplay.state.move.ty === later.end.position[1]);
-// Driver records the already-visible modal before its next pulse, whereas
-// replay observes the frame that first published it. A pulse occupies two
-// tape frames, so adjacent text commands differ by one or two in those two
-// conventions. Compare every visible row exactly and keep that bounded frame
-// relationship explicit rather than assuming one offset for the whole list.
+// The seamless migration records the replay publication frame exactly. The
+// adaptive generator can instead observe an already-visible modal before its
+// next one- or two-frame pulse, so regenerated fixtures may be ahead by one
+// or two frames. Compare every visible row exactly and keep that bounded
+// convention difference explicit rather than assuming one global offset.
 const laterTailTexts = laterReplay.texts.filter((row) => row.frame >= later.battle.endFrame);
 // Later replay rows also include the nurse conversation, which the failure
 // generator intentionally does not record; compare its captured prefix.
@@ -237,7 +234,7 @@ expect("later-loss visible recovery text sequence changed", canonicalJson(
 ) === canonicalJson(later.texts.map(({ map, lines }) => ({ map, lines }))));
 expect("later-loss visible recovery text frames changed", recordedTail.every((row, index) => {
   const delta = later.texts[index]!.frame - row.frame;
-  return delta === 1 || delta === 2;
+  return delta === 0 || delta === 1 || delta === 2;
 }));
 const laterTerminalStateSha256 = sha256(canonicalJson(laterReplay.state));
 expect(
@@ -250,7 +247,7 @@ console.log("GB6 FAILURE PATHS PASS " + JSON.stringify({
     frames: first.frames,
     battles: firstReplay.battles.length,
     end: `${firstReplay.state.mapId}@${firstReplay.state.move.tx},${firstReplay.state.move.ty}`,
-    terminalStateSha256: FIRST_LOSS_STATE_SHA256,
+    terminalStateSha256: first.terminalStateSha256,
   },
   later: {
     frames: later.frames,

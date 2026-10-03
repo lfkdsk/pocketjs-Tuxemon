@@ -9,6 +9,7 @@ import { join, resolve } from "node:path";
 
 import { tuxemonExtensionState } from "../battle/extension.ts";
 import {
+  createTuxemonSessionOptions,
   TUXEMON_BATTLE_DB,
   TUXEMON_BATTLE_RULES,
   TUXEMON_EXTENSIONS,
@@ -39,6 +40,7 @@ import type {
   Gb6JourneyResult,
   Gb6PartyRow,
 } from "./gb6-journey.ts";
+import { journeyWorldTraversal } from "./gb6-journey.ts";
 import { readInlineProject } from "./generated-project.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
@@ -147,7 +149,11 @@ function snapshot(session: Session, state: SessionState, held: number, nextFrame
 
 function replayBaseline(journey: Gb6JourneyResult): ReplayResult {
   const project = readInlineProject(ROOT);
-  const session = createSession(project, 60, GAME_OPTIONS);
+  const session = createSession(
+    project,
+    60,
+    createTuxemonSessionOptions(project, worldTraversal, GAME_OPTIONS),
+  );
   let state = startSession(project, session);
   let previous = 0;
   let active: Omit<Gb6BattleCheckpoint, "endFrame" | "turns" | "outcome" | "after"> | null = null;
@@ -221,7 +227,11 @@ function replayBaseline(journey: Gb6JourneyResult): ReplayResult {
 
 function replayFromSave(journey: Gb6JourneyResult, point: SavedPoint): SessionState {
   const project = readInlineProject(ROOT);
-  const session = createSession(project, 60, GAME_OPTIONS);
+  const session = createSession(
+    project,
+    60,
+    createTuxemonSessionOptions(project, worldTraversal, GAME_OPTIONS),
+  );
   const decoded = decodeEnvelopeText(point.envelope);
   let state = restoreSessionSnapshot(session, decoded);
   let previous = decoded.held;
@@ -256,7 +266,7 @@ function verifyRewind(journey: Gb6JourneyResult, expectedState: string): Record<
     hz: 60,
     attractEnabled: false,
     rewindSeconds: (from - target) / 60,
-    ...GAME_OPTIONS,
+    ...createTuxemonSessionOptions(project, worldTraversal, GAME_OPTIONS),
   });
   controller.startPlay();
   for (let frame = 0; frame < from; frame++) controller.step(journey.masks[frame]!);
@@ -281,8 +291,9 @@ function verifyRewind(journey: Gb6JourneyResult, expectedState: string): Record<
 
 function verifyAttractRate(journey: Gb6JourneyResult, hz: number): Record<string, number | string> {
   const project = readInlineProject(ROOT);
-  const controller = new AttractController(project, journey.masks, { hz, ...GAME_OPTIONS });
-  const referenceSession = createSession(project, 60, GAME_OPTIONS);
+  const options = createTuxemonSessionOptions(project, worldTraversal, GAME_OPTIONS);
+  const controller = new AttractController(project, journey.masks, { hz, ...options });
+  const referenceSession = createSession(project, 60, options);
   let reference = startSession(project, referenceSession);
   let referenceFrame = 0;
   let previous = 0;
@@ -333,6 +344,7 @@ expect(
   MODE === "ci" || MODE === "stateful" || MODE === "full" || rateMode !== null,
 );
 const journey = JSON.parse(readFileSync(JOURNEY_PATH, "utf8")) as Gb6JourneyResult;
+const worldTraversal = journeyWorldTraversal(journey, "GB6 mainline tape");
 expect("wrong journey format", journey.format === "pocket-tuxemon/gb6-mainline/v1");
 expect("journey is not authored at 60 Hz", journey.hz === 60);
 expect("frame count differs from masks", journey.frames === journey.masks.length);

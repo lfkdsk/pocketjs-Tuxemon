@@ -198,6 +198,18 @@ function touchingSides(event: TuxEvent, map: OutdoorWorldMap): WorldSide[] {
   return sides;
 }
 
+/** Stable provenance shared by the diagnostic topology index and the project
+ * converter. Keeping it in one helper prevents a harmless importer refactor
+ * from silently disconnecting transfer commands from their openings. */
+export function outdoorWorldPortalId(
+  mapId: string,
+  event: Readonly<TuxEvent>,
+  eventIndex: number,
+  actionIndex: number,
+): string {
+  return `${mapId}:${event.origin}:${event.source}:${event.objectId ?? `e${eventIndex}`}:a${actionIndex}`;
+}
+
 function portalsFor(member: SourceMember): WorldPortal[] {
   const portals: WorldPortal[] = [];
   for (const [eventIndex, event] of member.source.events.entries()) {
@@ -214,7 +226,7 @@ function portalsFor(member: SourceMember): WorldPortal[] {
       assert(targetMap.length > 0, `${member.map.mapId}/${event.name} has a teleport without target map`);
       assert(Number.isInteger(targetX) && Number.isInteger(targetY), `${member.map.mapId}/${event.name} has non-integer teleport coordinates`);
       portals.push({
-        id: `${member.map.mapId}:${event.origin}:${event.source}:${event.objectId ?? `e${eventIndex}`}:a${actionIndex}`,
+        id: outdoorWorldPortalId(member.map.mapId, event, eventIndex, actionIndex),
         sourceMap: member.map.mapId,
         targetMap,
         event: event.name,

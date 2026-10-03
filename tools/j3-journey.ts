@@ -5,7 +5,7 @@ import { createHash } from "node:crypto";
 import { readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
-import { TUXEMON_BATTLE_DB, TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS, TUXEMON_SCENES } from "../battle/game.ts";
+import { createTuxemonSessionOptions } from "../battle/game.ts";
 import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
 import { restoreSessionSnapshot } from "../vendor/pocket-rpgkit/src/engine/save-restore.ts";
 import {
@@ -21,12 +21,15 @@ import {
 } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import {
   Driver,
+  journeyWorldTraversal,
+  recordingWorldTraversal,
   type Gb6BattleCheckpoint,
   type Gb6MapCheckpoint,
   type Gb6PartyRow,
 } from "./gb6-journey.ts";
 import { buildJ2BaseState, type J2JourneyResult } from "./j2-journey.ts";
 import { readInlineProject } from "./generated-project.ts";
+import type { WorldTraversalMode } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 
 const ROOT = resolve(process.env.J3_PROJECT_ROOT ?? new URL("..", import.meta.url).pathname);
 const J2_PATH = resolve(process.env.J3_BASE_JOURNEY ?? join(ROOT, "data/j2-hospitalcure-journey.json"));
@@ -34,6 +37,7 @@ const BTN_CONFIRM = 0x2000;
 
 export interface J3BaseCheckpoint {
   format: string;
+  worldTraversal: WorldTraversalMode;
   frames: number;
   tapeSha256: string;
   terminalStateSha256: string;
@@ -46,6 +50,7 @@ export interface J3BaseCheckpoint {
 
 export interface J3JourneyResult {
   format: "pocket-tuxemon/j3-omnichannelradioannounce/v1";
+  worldTraversal: "seamless-v1";
   hz: 60;
   frames: number;
   combinedFrames: number;
@@ -81,8 +86,6 @@ export interface J3BaseState {
   state: SessionState;
   masks: number[];
 }
-
-const GAME_OPTIONS = { extensions: TUXEMON_EXTENSIONS, battle: TUXEMON_BATTLE_RULES, scenes: TUXEMON_SCENES } as const;
 
 function sha256(value: string): string {
   return createHash("sha256").update(value).digest("hex");
@@ -120,14 +123,21 @@ export function buildJ3BaseState(): J3BaseState {
   if (j2.frames !== j2.masks.length || sha256(JSON.stringify(j2.masks)) !== j2.tapeSha256) {
     throw new Error("J3 journey: J2 base metadata changed");
   }
-  if (canonicalJson(j2.base) !== canonicalJson(parent.checkpoint)) {
+  const worldTraversal = journeyWorldTraversal(j2, "J3 journey J2 base tape");
+  const j2BaseTraversal = journeyWorldTraversal(j2.base, "J3 journey J2 parent checkpoint");
+  if (worldTraversal !== parent.checkpoint.worldTraversal || j2BaseTraversal !== worldTraversal) {
+    throw new Error(
+      `J3 journey: ancestry traversal mismatch (${parent.checkpoint.worldTraversal}, ${j2BaseTraversal}, ${worldTraversal})`,
+    );
+  }
+  if (canonicalJson({ ...j2.base, worldTraversal: j2BaseTraversal }) !== canonicalJson(parent.checkpoint)) {
     throw new Error("J3 journey: J2 parent checkpoint changed");
   }
   const masks = [...parent.masks, ...j2.masks];
   if (j2.combinedFrames !== masks.length || sha256(JSON.stringify(masks)) !== j2.combinedTapeSha256) {
     throw new Error("J3 journey: J2 combined ancestry changed");
   }
-  const session = createSession(project, 60, GAME_OPTIONS);
+  const session = createSession(project, 60, createTuxemonSessionOptions(project, worldTraversal));
   let state = restoreSessionSnapshot(session, parent.snapshot);
   state.frame = parent.checkpoint.timelineFrame;
   if (sha256(canonicalJson(state)) !== j2.initialStateSha256) {
@@ -145,6 +155,7 @@ export function buildJ3BaseState(): J3BaseState {
   const snapshot = createSessionSnapshot(session, state, previous);
   const checkpoint: J3BaseCheckpoint = {
     format: j2.format,
+    worldTraversal,
     frames: masks.length,
     tapeSha256: j2.combinedTapeSha256,
     terminalStateSha256,
@@ -158,9 +169,14 @@ export function buildJ3BaseState(): J3BaseState {
 }
 
 function enterFromEdge(driver: Driver, x: number, y: number, direction: number, map: string): void {
-  driver.goTo(x, y);
-  driver.pulse(direction);
-  driver.settle();
+  const fromX = x + (direction === BTN_BITS.LEFT ? 1 : direction === BTN_BITS.RIGHT ? -1 : 0);
+  const fromY = y + (direction === BTN_BITS.UP ? 1 : direction === BTN_BITS.DOWN ? -1 : 0);
+  driver.goTo(fromX, fromY);
+  const sourceMap = driver.state.mapId;
+  for (let attempt = 0; attempt < 3 && driver.state.mapId === sourceMap; attempt++) {
+    driver.pulse(direction);
+    driver.settle();
+  }
   driver.expect(`entered ${map}`, driver.state.mapId === map);
 }
 
@@ -173,7 +189,13 @@ function healAtCenter(driver: Driver, name: string): void {
 export function runJ3Journey(): J3JourneyResult {
   const project = readInlineProject(ROOT);
   const base = buildJ3BaseState();
-  const session = createSession(project, 60, GAME_OPTIONS);
+  const worldTraversal = recordingWorldTraversal(project, "J3 journey");
+  if (base.checkpoint.worldTraversal !== worldTraversal) {
+    throw new Error(
+      `J3 journey: base traversal ${base.checkpoint.worldTraversal} does not match project ${worldTraversal}`,
+    );
+  }
+  const session = createSession(project, 60, createTuxemonSessionOptions(project, worldTraversal));
   const initial = restoreSessionSnapshot(session, base.snapshot);
   initial.frame = base.checkpoint.timelineFrame;
   const initialStateSha256 = sha256(canonicalJson(initial));
@@ -310,6 +332,7 @@ export function runJ3Journey(): J3JourneyResult {
     : checkpoint);
   return {
     format: "pocket-tuxemon/j3-omnichannelradioannounce/v1",
+    worldTraversal,
     hz: 60,
     frames: driver.masks.length,
     combinedFrames: base.checkpoint.frames + driver.masks.length,

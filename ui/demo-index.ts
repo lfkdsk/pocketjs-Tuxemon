@@ -8,107 +8,122 @@ export const DEMO_CHAPTER_INDEX = [
   {
     "id": "bedroom",
     "title": "Bedroom (new game)",
+    "worldTraversal": "seamless-v1",
     "frame": 0,
-    "suffixFrames": 185944,
+    "suffixFrames": 185802,
     "timelineFrame": 0
   },
   {
     "id": "paper-town",
     "title": "Paper Town",
+    "worldTraversal": "seamless-v1",
     "frame": 1399,
-    "suffixFrames": 184545,
+    "suffixFrames": 184403,
     "timelineFrame": 1399
   },
   {
     "id": "before-billie",
     "title": "Before the first Billie battle",
+    "worldTraversal": "seamless-v1",
     "frame": 1924,
-    "suffixFrames": 184020,
+    "suffixFrames": 183878,
     "timelineFrame": 1924
   },
   {
     "id": "starter",
     "title": "Starter chosen",
+    "worldTraversal": "seamless-v1",
     "frame": 3692,
-    "suffixFrames": 182252,
+    "suffixFrames": 182110,
     "timelineFrame": 3692
   },
   {
     "id": "route-1",
     "title": "Route 1",
-    "frame": 3990,
-    "suffixFrames": 181954,
-    "timelineFrame": 3990
+    "worldTraversal": "seamless-v1",
+    "frame": 3980,
+    "suffixFrames": 181822,
+    "timelineFrame": 3980
   },
   {
     "id": "cotton-town",
     "title": "Cotton Town",
-    "frame": 5402,
-    "suffixFrames": 180542,
-    "timelineFrame": 5402
+    "worldTraversal": "seamless-v1",
+    "frame": 5392,
+    "suffixFrames": 180410,
+    "timelineFrame": 5392
   },
   {
     "id": "city-park",
     "title": "City Park",
-    "frame": 45311,
-    "suffixFrames": 140633,
-    "timelineFrame": 45311
+    "worldTraversal": "seamless-v1",
+    "frame": 45301,
+    "suffixFrames": 140501,
+    "timelineFrame": 45301
   },
   {
     "id": "route-3-north",
     "title": "Route 3 north end",
+    "worldTraversal": "seamless-v1",
     "frame": 110866,
-    "suffixFrames": 75078,
+    "suffixFrames": 74936,
     "timelineFrame": 110866
   },
   {
     "id": "flower-city",
     "title": "Flower City",
-    "frame": 115644,
-    "suffixFrames": 70300,
-    "timelineFrame": 115644
+    "worldTraversal": "seamless-v1",
+    "frame": 115624,
+    "suffixFrames": 70178,
+    "timelineFrame": 115624
   },
   {
     "id": "captain-returns",
     "title": "Captain's return",
-    "frame": 122416,
-    "suffixFrames": 63528,
-    "timelineFrame": 122416
+    "worldTraversal": "seamless-v1",
+    "frame": 122386,
+    "suffixFrames": 63416,
+    "timelineFrame": 122386
   },
   {
     "id": "candy-town",
     "title": "Candy Town",
-    "frame": 165128,
-    "suffixFrames": 20816,
-    "timelineFrame": 165128
+    "worldTraversal": "seamless-v1",
+    "frame": 165037,
+    "suffixFrames": 20765,
+    "timelineFrame": 165037
   },
   {
     "id": "greenwash-aardant",
     "title": "Greenwash (Aardant acquired)",
-    "frame": 171514,
-    "suffixFrames": 14430,
-    "timelineFrame": 171514
+    "worldTraversal": "seamless-v1",
+    "frame": 171423,
+    "suffixFrames": 14379,
+    "timelineFrame": 171423
   },
   {
     "id": "hospital-cure",
     "title": "Hospital cure",
-    "frame": 172953,
-    "suffixFrames": 12991,
-    "timelineFrame": 172953
+    "worldTraversal": "seamless-v1",
+    "frame": 172862,
+    "suffixFrames": 12940,
+    "timelineFrame": 172862
   },
   {
     "id": "omnichannel-open",
     "title": "Omnichannel passage opened",
-    "frame": 180761,
+    "worldTraversal": "seamless-v1",
+    "frame": 180619,
     "suffixFrames": 5183,
-    "timelineFrame": 180761
+    "timelineFrame": 180619
   },
   {
     "id": "radio-broadcast",
     "title": "Radio Tower broadcast",
-    "frame": 185921,
+    "worldTraversal": "seamless-v1",
+    "frame": 185779,
     "suffixFrames": 23,
-    "timelineFrame": 185921
+    "timelineFrame": 185779
   }
 ] as const;
 

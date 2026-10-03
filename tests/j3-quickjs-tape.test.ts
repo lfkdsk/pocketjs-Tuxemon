@@ -7,7 +7,8 @@ describe("J3 QuickJS continuation tape", () => {
   test("starts at the hospital chapter and carries every J3 battle to the broadcast", () => {
     const tape = buildJ3QuickjsTape();
     expect(tape.format).toBe("pocket-tuxemon/j3-quickjs/v1");
-    expect(tape.frames).toBe(12_991);
+    expect(tape.worldTraversal).toBe("seamless-v1");
+    expect(tape.frames).toBe(12_940);
     expect(tape.frames).toBe(tape.masks.length);
     expect(tape.tapeSha256)
       .toBe(createHash("sha256").update(JSON.stringify(tape.masks)).digest("hex"));
@@ -20,6 +21,6 @@ describe("J3 QuickJS continuation tape", () => {
       outcome: "won",
     });
     expect(tape.terminalStateSha256)
-      .toBe("187ac1e3795cf702dd81d6e0ecc7d6c2a1aedb5f2e7893fa4a08daa0ff5e0572");
+      .toBe("9dd92c573dcb4f742c522513bccf68184efc691d1bedc8b8183a4f04652332c2");
   });
 });

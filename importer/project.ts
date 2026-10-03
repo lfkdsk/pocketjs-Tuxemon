@@ -22,7 +22,11 @@ import {
   type CoverageReport,
   type Disposition,
 } from "./coverage.ts";
-import { buildOutdoorWorldIndex, type WorldImportReport } from "./world.ts";
+import {
+  buildOutdoorWorldIndex,
+  outdoorWorldPortalId,
+  type WorldImportReport,
+} from "./world.ts";
 import type { OutdoorWorldIndex } from "./world-schema.ts";
 import { projectOutdoorWorldLayout } from "./world-layout.ts";
 import {
@@ -1602,8 +1606,21 @@ interface Ctx {
   options: ImportOptions;
   economies: ReadonlyMap<string, string>;
   surfaceLabels: Readonly<Record<string, readonly number[]>>;
+  /** Source event retained only long enough to attach stable world-opening
+   * provenance to its own top-level transition_teleport action. */
+  sourceEvent?: TuxEvent;
+  seamlessPortalIds: ReadonlySet<string>;
   /** the NPC slug whose event runs these commands (talk pages), if any */
   self?: string;
+}
+
+function portalIdForAction(ctx: Readonly<Ctx>, action: Rule): string | null {
+  const event = ctx.sourceEvent;
+  if (!event || event.origin !== "tmx") return null;
+  const actionIndex = event.acts.indexOf(action);
+  const eventIndex = ctx.m.events.indexOf(event);
+  if (actionIndex < 0 || eventIndex < 0) return null;
+  return outdoorWorldPortalId(ctx.m.slug, event, eventIndex, actionIndex);
 }
 
 function shopPlaceholder(npc: string, menu: string, economySlug: string | undefined): Command[] {
@@ -2401,7 +2418,18 @@ function convertActions(acts: readonly Rule[], ctx: Ctx): Command[] {
         }
         if (ctx.options.battle) out.push(clearNpcParties());
         out.push(resetLayerVariant());
-        out.push({ op: "transfer", map, x: emitted.x, y: emitted.y, dir, fade: Math.min(2, Number(g[4] ?? 0.3)) });
+        const portalId = portalIdForAction(ctx, a);
+        out.push({
+          op: "transfer",
+          map,
+          x: emitted.x,
+          y: emitted.y,
+          dir,
+          fade: Math.min(2, Number(g[4] ?? 0.3)),
+          ...(portalId && ctx.seamlessPortalIds.has(portalId)
+            ? { handoff: { mode: "seamless-v1" as const, portalId } }
+            : {}),
+        });
         return out;
       }
       case "load_yaml":
@@ -3221,6 +3249,7 @@ function convertMap(
   m: TuxMap,
   options: ImportOptions,
   surfaceLabels: Readonly<Record<string, readonly number[]>>,
+  seamlessPortalIds: ReadonlySet<string>,
 ): { map: MapDef; sprites: Record<string, SpriteDef> } {
   const events: GameEvent[] = [];
   const sprites: Record<string, SpriteDef> = {};
@@ -3329,7 +3358,7 @@ function convertMap(
         }
         const cmds = convertActions(
           e.acts.filter((a) => a.type !== "char_face" && a.type !== "char_wander"),
-          { m, options, economies, surfaceLabels },
+          { m, options, economies, surfaceLabels, sourceEvent: e, seamlessPortalIds },
         );
         for (const wander of wanderControls) {
           cmds.push(command({ op: "moveControl", target: { event: `npc_${slug(wander.slug)}` }, control: wander.control }));
@@ -3365,13 +3394,13 @@ function convertMap(
         const agg = npcOf(talk.args[0]!);
         agg.talks.push({
           cls: live,
-          cmds: convertActions(e.acts, { m, options, economies, surfaceLabels, self: talk.args[0] }),
+          cmds: convertActions(e.acts, { m, options, economies, surfaceLabels, sourceEvent: e, seamlessPortalIds, self: talk.args[0] }),
         });
         note("trigger", "talk", "T1", "NPC event action page (if-chain over talk guards)");
         continue;
       }
 
-      const cmds = convertActions(e.acts, { m, options, economies, surfaceLabels });
+      const cmds = convertActions(e.acts, { m, options, economies, surfaceLabels, sourceEvent: e, seamlessPortalIds });
       if (!cmds.length) {
         const reason = "every action was removed, so no project event was emitted";
         eventCoverage.dropAll(reason);
@@ -3898,12 +3927,45 @@ export interface ImportReport {
     missing: string[];
     uniqueIcons: number;
   };
+  seamlessHandoff: SeamlessHandoffReport;
   world: WorldImportReport;
   coverage: CoverageReport;
   /** D1: the 10-entry weather table exported from mods/tuxemon/db/weather. */
   weather: {
     source: "mods/tuxemon/db/weather/weathers.yaml";
     entries: WeatherEntry[];
+  };
+}
+
+export type SeamlessHandoffExclusionReason =
+  | "safe-opening-not-direct"
+  | "unreachable-source-facing"
+  | "target-outside-project"
+  | "portal-only-opening"
+  | "linked-gap"
+  | "rejected-contact"
+  | "indoor-source"
+  | "non-tmx-overlay"
+  | "outdoor-nonseam-or-story"
+  | "outside-world-layout"
+  | "non-player-transfer"
+  | "faint-transfer";
+
+export interface SeamlessHandoffReport {
+  mode: "seamless-v1";
+  sourceTransferActions: number;
+  topologySafeOpenings: number;
+  enabledTransfers: number;
+  enabledPortalIds: string[];
+  notEnabledSafePortalIds: string[];
+  notEnabled: { reason: SeamlessHandoffExclusionReason; count: number }[];
+  topologyExcluded: {
+    portalOnlyOpenings: number;
+    mixedUnsafeOpenings: number;
+    directionOnlySeams: number;
+    linkedGaps: number;
+    rejectedContacts: number;
+    indoorMaps: number;
   };
 }
 
@@ -3981,6 +4043,151 @@ function transferErrors(project: Project): TransferError[] {
   return errors;
 }
 
+/** Keep handoff markers only where the interpreter can prove direct
+ * playerTouch provenance. `if` and `loop` compile inline into the owning
+ * page program, so they preserve the runtime's one-frame fiber stack. Choice,
+ * battle, and scene continuations run as child programs and must fall back to
+ * the legacy transfer timeline. */
+function retainDirectHandoffMarkers(mapDefs: readonly MapDef[]): Set<string> {
+  const enabled = new Set<string>();
+  const visit = (commands: readonly Command[], direct: boolean): void => {
+    for (const command of commands) {
+      if (command.op === "transfer" && command.handoff) {
+        if (direct) enabled.add(command.handoff.portalId);
+        else delete command.handoff;
+      }
+      if (command.op === "if") {
+        visit(command.then, direct);
+        visit(command.else ?? [], direct);
+      } else if (command.op === "loop") {
+        visit(command.commands, direct);
+      } else if (command.op === "choices") {
+        for (const option of command.options) visit(option.commands, false);
+        visit(command.cancel?.commands ?? [], false);
+      } else if (command.op === "battle") {
+        visit(command.onWin ?? [], false);
+        visit(command.onLose ?? [], false);
+        visit(command.onEscape ?? [], false);
+      } else if (command.op === "scene") {
+        visit(command.onDone ?? [], false);
+        visit(command.onCancel ?? [], false);
+      }
+    }
+  };
+  for (const map of mapDefs) {
+    for (const event of map.events ?? []) {
+      for (const page of event.pages) visit(page.commands, page.trigger === "playerTouch");
+    }
+  }
+  return enabled;
+}
+
+function seamlessHandoffReport(
+  index: OutdoorWorldIndex,
+  selectedMaps: ReadonlySet<string>,
+  projectSafePortalIds: ReadonlySet<string>,
+  enabledPortalIds: ReadonlySet<string>,
+): SeamlessHandoffReport {
+  const globalSafePortalIds = new Set(index.worlds.flatMap((world) => world.seams.flatMap((seam) =>
+    seam.handoff.openings.filter((opening) => opening.compatibility === "coordinate-preserving")
+      .map((opening) => opening.portalId)
+  )));
+  const portalOnlyIds = new Set(index.worlds.flatMap((world) => world.seams.flatMap((seam) =>
+    seam.handoff.openings.filter((opening) => opening.compatibility === "portal-only")
+      .map((opening) => opening.portalId)
+  )));
+  const gapIds = new Set(index.worlds.flatMap((world) => world.diagnostics.rejectedContacts
+    .filter((contact) => contact.geometry === "gap")
+    .flatMap((contact) => contact.portalIds)));
+  const rejectedIds = new Set(index.worlds.flatMap((world) => world.diagnostics.rejectedContacts
+    .filter((contact) => contact.geometry !== "gap")
+    .flatMap((contact) => contact.portalIds)));
+  const outdoorMapIds = new Set(index.worlds.flatMap((world) => world.maps.map((map) => map.mapId)));
+  const indoorMapIds = new Set(index.worlds.flatMap((world) => world.excludedMaps.map((map) => map.mapId)));
+  const reasons = new Map<SeamlessHandoffExclusionReason, number>();
+  const exclude = (reason: SeamlessHandoffExclusionReason): void => {
+    reasons.set(reason, (reasons.get(reason) ?? 0) + 1);
+  };
+  let sourceTransferActions = 0;
+  const notEnabledSafePortalIds: string[] = [];
+
+  for (const mapId of [...selectedMaps].sort()) {
+    const map = allMaps.get(mapId)!;
+    for (const [eventIndex, event] of map.events.entries()) {
+      for (const [actionIndex, action] of event.acts.entries()) {
+        if (action.type === "teleport_faint") {
+          sourceTransferActions++;
+          exclude("faint-transfer");
+          continue;
+        }
+        if (action.type !== "transition_teleport") continue;
+        sourceTransferActions++;
+        if (action.args[0] !== "player") {
+          exclude("non-player-transfer");
+          continue;
+        }
+        if (event.origin !== "tmx") {
+          exclude("non-tmx-overlay");
+          continue;
+        }
+        const portalId = outdoorWorldPortalId(mapId, event, eventIndex, actionIndex);
+        if (projectSafePortalIds.has(portalId)) {
+          if (!enabledPortalIds.has(portalId)) {
+            notEnabledSafePortalIds.push(portalId);
+            const unreachableFacing = event.conds.some((condition) =>
+              condition.type === "char_facing" && condition.op === "is" &&
+              condition.args[0] === "player" && !DIRS.has(condition.args[1]!)
+            );
+            exclude(unreachableFacing ? "unreachable-source-facing" : "safe-opening-not-direct");
+          }
+        } else if (globalSafePortalIds.has(portalId)) {
+          exclude("target-outside-project");
+        } else if (portalOnlyIds.has(portalId)) {
+          exclude("portal-only-opening");
+        } else if (gapIds.has(portalId)) {
+          exclude("linked-gap");
+        } else if (rejectedIds.has(portalId)) {
+          exclude("rejected-contact");
+        } else if (indoorMapIds.has(mapId)) {
+          exclude("indoor-source");
+        } else if (outdoorMapIds.has(mapId)) {
+          exclude("outdoor-nonseam-or-story");
+        } else {
+          exclude("outside-world-layout");
+        }
+      }
+    }
+  }
+
+  const topologyOpenings = index.worlds.flatMap((world) => world.seams.flatMap((seam) =>
+    seam.handoff.openings.map((opening) => ({ seam, opening }))
+  ));
+  return {
+    mode: "seamless-v1",
+    sourceTransferActions,
+    topologySafeOpenings: projectSafePortalIds.size,
+    enabledTransfers: enabledPortalIds.size,
+    enabledPortalIds: [...enabledPortalIds].sort(),
+    notEnabledSafePortalIds: notEnabledSafePortalIds.sort(),
+    notEnabled: [...reasons.entries()]
+      .map(([reason, count]) => ({ reason, count }))
+      .sort((a, b) => a.reason.localeCompare(b.reason)),
+    topologyExcluded: {
+      portalOnlyOpenings: topologyOpenings.filter(({ opening }) => opening.compatibility === "portal-only").length,
+      mixedUnsafeOpenings: topologyOpenings.filter(({ seam, opening }) =>
+        seam.handoff.mode === "mixed" && opening.compatibility === "portal-only"
+      ).length,
+      directionOnlySeams: index.worlds.flatMap((world) => world.seams)
+        .filter((seam) => seam.handoff.mode === "direction-only").length,
+      linkedGaps: index.worlds.flatMap((world) => world.diagnostics.rejectedContacts)
+        .filter((contact) => contact.geometry === "gap").length,
+      rejectedContacts: index.worlds.flatMap((world) => world.diagnostics.rejectedContacts)
+        .filter((contact) => contact.geometry === "edge" || contact.geometry === "overlap").length,
+      indoorMaps: index.worlds.reduce((sum, world) => sum + world.excludedMaps.length, 0),
+    },
+  };
+}
+
 export function buildProject(
   want: readonly string[] = DEFAULT_MAPS,
   requestedOptions: Partial<ImportOptions> = {},
@@ -3997,6 +4204,13 @@ export function buildProject(
   transferRepairs.length = 0;
   conversionCoverage.reset();
   const world = buildOutdoorWorldIndex([...allMaps.values()]);
+  const selectedMaps = new Set(want);
+  const worldLayout = projectOutdoorWorldLayout(world.index, selectedMaps);
+  const seamlessPortalIds = new Set(worldLayout?.components.flatMap((component) =>
+    component.openings
+      .filter((opening) => opening.compatibility === "coordinate-preserving")
+      .map((opening) => opening.portalId)
+  ) ?? []);
   const surfaceLabels = providedSurfaceLabels ?? importTerrainSurfaceLabels(want);
 
   // Register authored presentation assets before trigger pruning. A fixed
@@ -4021,7 +4235,7 @@ export function buildProject(
   for (const s of want) {
     const m = allMaps.get(s);
     if (!m) throw new Error(`no map ${s}`);
-    const r = convertMap(m, options, surfaceLabels[s] ?? {});
+    const r = convertMap(m, options, surfaceLabels[s] ?? {}, seamlessPortalIds);
     mapDefs.push(r.map);
     Object.assign(sprites, r.sprites);
   }
@@ -4077,7 +4291,7 @@ export function buildProject(
     });
   }
 
-  const worldLayout = projectOutdoorWorldLayout(world.index, new Set(mapDefs.map((map) => map.id)));
+  const enabledHandoffPortalIds = retainDirectHandoffMarkers(mapDefs);
   const built: Project = {
     format: "rpgkit-project/v1",
     title: "Pocket Tuxemon",
@@ -4106,7 +4320,7 @@ export function buildProject(
     } : {}),
     sprites,
     audio: audioTable(),
-    ...(worldLayout ? { worldLayout } : {}),
+    ...(worldLayout ? { worldTraversal: "seamless-v1" as const, worldLayout } : {}),
     maps: mapDefs,
   };
 
@@ -4209,6 +4423,12 @@ export function buildProject(
         missing: itemIconPlan.missing,
         uniqueIcons: itemIconPlan.uniqueIcons,
       },
+      seamlessHandoff: seamlessHandoffReport(
+        world.index,
+        selectedMaps,
+        seamlessPortalIds,
+        enabledHandoffPortalIds,
+      ),
       world: world.report,
       coverage: conversionCoverage.report(),
       weather: {

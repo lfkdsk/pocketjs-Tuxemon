@@ -8,7 +8,10 @@ import { battleAutoplayInput } from "../battle/autoplay.ts";
 import { tuxemonExtensionState } from "../battle/extension.ts";
 import { utilitySceneAutoplayMask } from "./scene-autoplay.ts";
 import { battleDbToTuxemonBattleDb } from "../battle/from-battle-db.ts";
-import { TUXEMON_BATTLE_DB, TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS, TUXEMON_SCENES } from "../battle/game.ts";
+import {
+  createTuxemonSessionOptions,
+  TUXEMON_BATTLE_DB,
+} from "../battle/game.ts";
 import { tuxemonRuntimeBattleState } from "../battle/runtime.ts";
 import type { RuntimeBattleState } from "../battle/runtime.ts";
 import type { SpawnedMonsterSnapshot } from "../battle/types.ts";
@@ -25,6 +28,7 @@ import {
   type SessionState,
 } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import { readInlineProject } from "./generated-project.ts";
+import type { ProjectSource, WorldTraversalMode } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 
 const ROOT = resolve(process.env.GB6_PROJECT_ROOT ?? new URL("..", import.meta.url).pathname);
 const BTN_CONFIRM = 0x2000;
@@ -67,6 +71,7 @@ export interface Gb6MapCheckpoint {
 
 export interface Gb6JourneyResult {
   format: "pocket-tuxemon/gb6-mainline/v1";
+  worldTraversal: "seamless-v1";
   hz: number;
   frames: number;
   terminalMapFrame: number;
@@ -78,6 +83,30 @@ export interface Gb6JourneyResult {
   story: Record<string, number | boolean>;
   terminalStateSha256: string;
   tapeSha256: string;
+}
+
+/** Journey files predate traversal identities. Missing is the original
+ * transfer timeline; unknown values are corrupt rather than forward-safe. */
+export function journeyWorldTraversal(
+  journey: { worldTraversal?: unknown },
+  label: string,
+): WorldTraversalMode {
+  const identity = journey.worldTraversal ?? "legacy-transfer";
+  if (identity !== "legacy-transfer" && identity !== "seamless-v1") {
+    throw new Error(`${label}: unsupported world traversal identity ${String(identity)}`);
+  }
+  return identity;
+}
+
+/** All newly generated journey fixtures use the seamless project timeline. */
+export function recordingWorldTraversal(
+  project: Pick<ProjectSource, "worldTraversal" | "worldLayout">,
+  label: string,
+): "seamless-v1" {
+  if (project.worldTraversal !== "seamless-v1" || project.worldLayout === undefined) {
+    throw new Error(`${label}: recording requires a seamless-v1 project with WorldLayout`);
+  }
+  return project.worldTraversal;
 }
 
 interface ActiveBattle {
@@ -196,7 +225,16 @@ export class Driver {
   }
 
   replayPrefix(): void {
-    const prefix = JSON.parse(readFileSync(join(ROOT, "data/g6-journey.json"), "utf8")) as { masks: number[] };
+    const prefix = JSON.parse(readFileSync(join(ROOT, "data/g6-journey.json"), "utf8")) as {
+      masks: number[];
+      worldTraversal?: unknown;
+    };
+    const worldTraversal = journeyWorldTraversal(prefix, "GB6 opening prefix tape");
+    if (worldTraversal !== this.session.worldTraversal) {
+      throw new Error(
+        `GB6 journey: opening prefix traversal ${worldTraversal} does not match session ${this.session.worldTraversal}`,
+      );
+    }
     for (const mask of prefix.masks) this.tick(mask);
     this.expect("short journey reaches Route 1", this.state.mapId === "spyder_route1");
     this.expectWin("spyder_billie", 1);
@@ -485,11 +523,8 @@ function assertEvent(map: string, id: string, session: Session): void {
 export function runGb6Journey(hz = 60): Gb6JourneyResult {
   if (![60, 30, 20].includes(hz)) throw new Error(`GB6 journey: unsupported rate ${hz}`);
   const project = readInlineProject(ROOT);
-  const session = createSession(project, hz, {
-    extensions: TUXEMON_EXTENSIONS,
-    battle: TUXEMON_BATTLE_RULES,
-    scenes: TUXEMON_SCENES,
-  });
+  const worldTraversal = recordingWorldTraversal(project, "GB6 journey");
+  const session = createSession(project, hz, createTuxemonSessionOptions(project, worldTraversal));
   const driver = new Driver(session, hz, startSession(project, session));
   driver.replayPrefix();
 
@@ -741,6 +776,7 @@ export function runGb6Journey(hz = 60): Gb6JourneyResult {
   const variable = (id: string): number => value(driver.state, id);
   return {
     format: "pocket-tuxemon/gb6-mainline/v1",
+    worldTraversal,
     hz,
     frames: driver.masks.length,
     terminalMapFrame: driver.state.interp.frame,

@@ -5,7 +5,7 @@ import { createHash } from "node:crypto";
 import { readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
-import { TUXEMON_BATTLE_DB, TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS, TUXEMON_SCENES } from "../battle/game.ts";
+import { createTuxemonSessionOptions } from "../battle/game.ts";
 import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
 import { restoreSessionSnapshot } from "../vendor/pocket-rpgkit/src/engine/save-restore.ts";
 import {
@@ -22,12 +22,15 @@ import {
 } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import {
   Driver,
+  journeyWorldTraversal,
+  recordingWorldTraversal,
   type Gb6BattleCheckpoint,
   type Gb6JourneyResult,
   type Gb6MapCheckpoint,
   type Gb6PartyRow,
 } from "./gb6-journey.ts";
 import { readInlineProject } from "./generated-project.ts";
+import type { WorldTraversalMode } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 
 const ROOT = resolve(process.env.J1_PROJECT_ROOT ?? new URL("..", import.meta.url).pathname);
 const BASE_PATH = resolve(process.env.J1_BASE_JOURNEY ?? join(ROOT, "data/gb6-mainline-journey.json"));
@@ -35,6 +38,7 @@ const BTN_CONFIRM = 0x2000;
 
 export interface J1BaseCheckpoint {
   format: string;
+  worldTraversal: WorldTraversalMode;
   frames: number;
   tapeSha256: string;
   terminalStateSha256: string;
@@ -47,6 +51,7 @@ export interface J1BaseCheckpoint {
 
 export interface J1JourneyResult {
   format: "pocket-tuxemon/j1-captainreturns/v1";
+  worldTraversal: "seamless-v1";
   hz: 60;
   frames: number;
   combinedFrames: number;
@@ -77,8 +82,6 @@ export interface J1BaseState {
   state: SessionState;
   masks: number[];
 }
-
-const GAME_OPTIONS = { extensions: TUXEMON_EXTENSIONS, battle: TUXEMON_BATTLE_RULES, scenes: TUXEMON_SCENES } as const;
 
 function sha256(value: string): string {
   return createHash("sha256").update(value).digest("hex");
@@ -117,7 +120,8 @@ export function buildJ1BaseState(): J1BaseState {
   if (base.frames !== base.masks.length || sha256(JSON.stringify(base.masks)) !== base.tapeSha256) {
     throw new Error("J1 journey: GB6 base tape metadata changed");
   }
-  const session = createSession(project, 60, GAME_OPTIONS);
+  const worldTraversal = journeyWorldTraversal(base, "J1 journey GB6 base tape");
+  const session = createSession(project, 60, createTuxemonSessionOptions(project, worldTraversal));
   let state = startSession(project, session);
   let previous = 0;
   for (const mask of base.masks) {
@@ -131,6 +135,7 @@ export function buildJ1BaseState(): J1BaseState {
   const snapshot = createSessionSnapshot(session, state, previous);
   const checkpoint: J1BaseCheckpoint = {
     format: base.format,
+    worldTraversal,
     frames: base.frames,
     tapeSha256: base.tapeSha256,
     terminalStateSha256,
@@ -144,16 +149,27 @@ export function buildJ1BaseState(): J1BaseState {
 }
 
 function enterFromEdge(driver: Driver, x: number, y: number, direction: number, map: string): void {
-  driver.goTo(x, y);
-  driver.pulse(direction);
-  driver.settle();
+  const fromX = x + (direction === BTN_BITS.LEFT ? 1 : direction === BTN_BITS.RIGHT ? -1 : 0);
+  const fromY = y + (direction === BTN_BITS.UP ? 1 : direction === BTN_BITS.DOWN ? -1 : 0);
+  driver.goTo(fromX, fromY);
+  const sourceMap = driver.state.mapId;
+  for (let attempt = 0; attempt < 3 && driver.state.mapId === sourceMap; attempt++) {
+    driver.pulse(direction);
+    driver.settle();
+  }
   driver.expect(`entered ${map}`, driver.state.mapId === map);
 }
 
 export function runJ1Journey(): J1JourneyResult {
   const project = readInlineProject(ROOT);
   const base = buildJ1BaseState();
-  const session = createSession(project, 60, GAME_OPTIONS);
+  const worldTraversal = recordingWorldTraversal(project, "J1 journey");
+  if (base.checkpoint.worldTraversal !== worldTraversal) {
+    throw new Error(
+      `J1 journey: GB6 base traversal ${base.checkpoint.worldTraversal} does not match project ${worldTraversal}`,
+    );
+  }
+  const session = createSession(project, 60, createTuxemonSessionOptions(project, worldTraversal));
   const initial = restoreSessionSnapshot(session, base.snapshot);
   // SaveSnapshot intentionally omits the presentation-only top-level frame.
   // A continuation knows its parent timeline, so seed that derived counter
@@ -253,6 +269,7 @@ export function runJ1Journey(): J1JourneyResult {
     : checkpoint);
   return {
     format: "pocket-tuxemon/j1-captainreturns/v1",
+    worldTraversal,
     hz: 60,
     frames: driver.masks.length,
     combinedFrames: base.checkpoint.frames + driver.masks.length,

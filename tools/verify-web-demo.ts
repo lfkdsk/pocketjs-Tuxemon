@@ -16,7 +16,7 @@ import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { FIXED_INITIAL_CIVIL_TIME } from "../battle/time-weather.ts";
-import { TUXEMON_SESSION_OPTIONS } from "../battle/game.ts";
+import { createTuxemonSessionOptions } from "../battle/game.ts";
 import { decodeEnvelopeText, canonicalJson } from "../vendor/pocket-rpgkit/src/engine/save.ts";
 import { restoreSessionSnapshot } from "../vendor/pocket-rpgkit/src/engine/save-restore.ts";
 import {
@@ -26,7 +26,10 @@ import {
   type SessionInput,
   type SessionState,
 } from "../vendor/pocket-rpgkit/src/engine/session.ts";
+import type { WorldTraversalMode } from "../vendor/pocket-rpgkit/src/engine/types.ts";
+import { chapterWorldTraversal } from "./bake-chapters.ts";
 import { readInlineProject } from "./generated-project.ts";
+import { journeyWorldTraversal } from "./gb6-journey.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
 const SITE = resolve(ROOT, "dist/web");
@@ -68,30 +71,52 @@ interface ChapterRef {
   suffixFrames: number;
 }
 
-function loadChapters(): { chapters: ChapterRef[]; combined: number[] } {
+function loadChapters(): {
+  chapters: ChapterRef[];
+  combined: number[];
+  worldTraversal: WorldTraversalMode;
+} {
   const file = JSON.parse(readFileSync(join(ROOT, "data/chapters.json"), "utf8"));
   const gb6 = JSON.parse(readFileSync(join(ROOT, "data/gb6-mainline-journey.json"), "utf8"));
   const j1 = JSON.parse(readFileSync(join(ROOT, "data/j1-captainreturns-journey.json"), "utf8"));
   const j2 = JSON.parse(readFileSync(join(ROOT, "data/j2-hospitalcure-journey.json"), "utf8"));
   const j3 = JSON.parse(readFileSync(join(ROOT, "data/j3-omnichannelradioannounce-journey.json"), "utf8"));
+  const worldTraversal = chapterWorldTraversal(file, "web demo chapters");
+  if (worldTraversal !== "seamless-v1") {
+    throw new Error(`verify-web-demo: chapters use ${worldTraversal}; expected seamless-v1`);
+  }
+  for (const [label, journey] of [["GB6", gb6], ["J1", j1], ["J2", j2], ["J3", j3]] as const) {
+    const actual = journeyWorldTraversal(journey, `${label} journey`);
+    if (actual !== worldTraversal) {
+      throw new Error(`verify-web-demo: ${label} traversal ${actual} != chapters ${worldTraversal}`);
+    }
+  }
   return {
     chapters: file.chapters.map((c: any) => ({
       id: c.id, map: c.map, frame: c.frame, timelineFrame: c.timelineFrame,
       held: c.held, suffixFrames: c.suffixFrames,
     })),
     combined: [...gb6.masks, ...j1.masks, ...j2.masks, ...j3.masks],
+    worldTraversal,
   };
 }
 
 /** Restore a chapter and fold `frames` suffix masks through the pure reducer,
  *  the same contract verify:chapters proves end to end. */
 function expectedChapterState(chapterId: string, frames: number): { mapId: string; frame: number; hash: string } {
-  const { chapters, combined } = loadChapters();
+  const { chapters, combined, worldTraversal } = loadChapters();
   const chapter = chapters.find((c) => c.id === chapterId)!;
   const file = JSON.parse(readFileSync(join(ROOT, "data/chapters.json"), "utf8"));
   const record = file.chapters.find((c: any) => c.id === chapterId)!;
   const project = readInlineProject(ROOT);
-  const session: Session = createSession(project, 60, TUXEMON_SESSION_OPTIONS);
+  if ((project.worldTraversal ?? "legacy-transfer") !== worldTraversal) {
+    throw new Error(`verify-web-demo: project traversal ${project.worldTraversal ?? "legacy-transfer"} != chapters ${worldTraversal}`);
+  }
+  const session: Session = createSession(
+    project,
+    60,
+    createTuxemonSessionOptions(project, worldTraversal),
+  );
   const snapshot = decodeEnvelopeText(record.snapshot);
   let state: SessionState = restoreSessionSnapshot(session, snapshot);
   state = { ...state, frame: chapter.timelineFrame };

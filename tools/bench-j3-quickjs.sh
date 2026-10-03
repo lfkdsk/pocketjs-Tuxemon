@@ -30,5 +30,6 @@ run+=(
   G6_STATE_SHA256="$terminal_sha256"
   G6_SKIP_MAP_BENCH=1
   G6_FAST_BENCH=1
+  G6_HANDOFF_BUCKETS=1
   G6_HASH_EVERY=${J3_HASH_EVERY:-1})
 "${run[@]}" bash "$root/tools/bench-g6-quickjs.sh"

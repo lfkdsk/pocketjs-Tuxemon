@@ -6,7 +6,7 @@ import { join, resolve } from "node:path";
 import { createTuxemonExtensions } from "../battle/extension.ts";
 import { battleDbToTuxemonBattleDb } from "../battle/from-battle-db.ts";
 import { createTuxemonBattleRules } from "../battle/runtime.ts";
-import { TUXEMON_SCENES, TUXEMON_VARIABLE_ENUMS } from "../battle/game.ts";
+import { createTuxemonSessionOptions, TUXEMON_SCENES, TUXEMON_VARIABLE_ENUMS } from "../battle/game.ts";
 import { canonicalJson } from "../vendor/pocket-rpgkit/src/engine/save.ts";
 import {
   createSession,
@@ -16,16 +16,15 @@ import {
 } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import { readInlineProject } from "../tools/generated-project.ts";
 import { readInlineBattleDb, readShardedBattleDb } from "../tools/generated-battle.ts";
+import { journeyWorldTraversal } from "../tools/gb6-journey.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
 const journey = JSON.parse(readFileSync(join(ROOT, "data/g6-journey.json"), "utf8")) as {
+  worldTraversal?: unknown;
   masks: number[];
+  terminalStateSha256: string;
 };
-// Same pinned terminal state the G7 map repository test and the QuickJS
-// bench check; GP1 changes only how the battle database is loaded.
-// COV-B fix-2's per-domain battle_last_* enum codes shift the variable
-// values the player battles write, so the terminal hash moves.
-const EXPECTED_TERMINAL_STATE_SHA256 = "ce5b5706c70aa374553aa4f476f1cb73564ecc8e687c627c4e74312b5dc5064a";
+const worldTraversal = journeyWorldTraversal(journey, "battle repository journey");
 
 function input(mask: number, previous: number): SessionInput {
   const pressed = mask & ~previous;
@@ -77,8 +76,10 @@ describe("GP1 lazy battle-runtime repository", () => {
       battle: createTuxemonBattleRules(shardedProvider, TUXEMON_VARIABLE_ENUMS),
       scenes: TUXEMON_SCENES,
     } as const;
-    const inlineSession = createSession(project, 60, inlineOptions);
-    const shardedSession = createSession(project, 60, shardedOptions);
+    const inlineSession = createSession(project, 60,
+      createTuxemonSessionOptions(project, worldTraversal, inlineOptions));
+    const shardedSession = createSession(project, 60,
+      createTuxemonSessionOptions(project, worldTraversal, shardedOptions));
     let inlineState = startSession(project, inlineSession);
     let shardedState = startSession(project, shardedSession);
     let previous = 0;
@@ -96,6 +97,6 @@ describe("GP1 lazy battle-runtime repository", () => {
     expect([shardedState.mapId, shardedState.move.tx, shardedState.move.ty])
       .toEqual(["spyder_route1", 14, 19]);
     expect(createHash("sha256").update(canonicalJson(shardedState)).digest("hex"))
-      .toBe(EXPECTED_TERMINAL_STATE_SHA256);
+      .toBe(journey.terminalStateSha256);
   }, 60_000);
 });

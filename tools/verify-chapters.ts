@@ -9,6 +9,7 @@ import { join, resolve } from "node:path";
 
 import {
   bakeChapters,
+  chapterWorldTraversal,
   chaptersJson,
   CHAPTERS_PATH,
   ROOT,
@@ -26,11 +27,21 @@ function fail(message: string): never {
   process.exit(1);
 }
 
+if (!existsSync(CHAPTERS_PATH)) fail(`data/chapters.json is missing`);
+const committedJson = readFileSync(CHAPTERS_PATH, "utf8");
+try {
+  const committed = JSON.parse(committedJson) as Parameters<typeof chapterWorldTraversal>[0];
+  const worldTraversal = chapterWorldTraversal(committed, "committed chapters file");
+  if (worldTraversal !== "seamless-v1") {
+    fail(`committed chapters use ${worldTraversal}; new chapter artifacts must use seamless-v1`);
+  }
+} catch (error) {
+  fail(error instanceof Error ? error.message : String(error));
+}
+
 const baked = await bakeChapters(ROOT);
 const bakedJson = chaptersJson(baked.chapters);
 
-if (!existsSync(CHAPTERS_PATH)) fail(`data/chapters.json is missing`);
-const committedJson = readFileSync(CHAPTERS_PATH, "utf8");
 if (committedJson !== bakedJson) {
   // Locate the first differing chapter for a shorter error message.
   const committed = JSON.parse(committedJson) as { chapters?: { id: string }[] };

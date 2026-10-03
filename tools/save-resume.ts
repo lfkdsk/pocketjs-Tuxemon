@@ -20,7 +20,7 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
-import { TUXEMON_BATTLE_DB, TUXEMON_BATTLE_RULES, TUXEMON_SCENES } from "../battle/game.ts";
+import { createTuxemonSessionOptions, TUXEMON_BATTLE_DB } from "../battle/game.ts";
 import { createTuxemonExtensions, tuxemonExtensionState } from "../battle/extension.ts";
 import { DAYLIGHT_STAGE_VARIABLE } from "../battle/daylight.ts";
 import { timeWeatherAt, type CivilDateTime, FIXED_INITIAL_CIVIL_TIME } from "../battle/time-weather.ts";
@@ -31,6 +31,7 @@ import {
   stepSession,
   type Session,
   type SessionInput,
+  type SessionOptions,
   type SessionState,
 } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import {
@@ -46,15 +47,15 @@ import {
   type SlotStore,
   type StorageLike,
 } from "../ui/save-game.ts";
-import type { BattleRules } from "../vendor/pocket-rpgkit/src/engine/battle.ts";
-import type { ExtensionOptions } from "../vendor/pocket-rpgkit/src/engine/extensions.ts";
-import type { MapRepository, ProjectShell } from "../vendor/pocket-rpgkit/src/engine/types.ts";
+import type { ProjectShell, WorldTraversalMode } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 import { readShardedProject } from "./generated-project.ts";
+import { journeyWorldTraversal } from "./gb6-journey.ts";
 
 export const ROOT = resolve(import.meta.dir, "..");
 export const GB6_PATH = join(ROOT, "data/gb6-mainline-journey.json");
 
 export interface Gb6Tape {
+  worldTraversal: WorldTraversalMode;
   masks: number[];
   terminalStateSha256: string;
   /** Recorded battle windows and map arrivals, for picking save points. */
@@ -63,8 +64,11 @@ export interface Gb6Tape {
 }
 
 export function loadGb6Tape(): Gb6Tape {
-  const journey = JSON.parse(readFileSync(GB6_PATH, "utf8")) as Gb6Tape;
+  const journey = JSON.parse(readFileSync(GB6_PATH, "utf8")) as Omit<Gb6Tape, "worldTraversal"> & {
+    worldTraversal?: unknown;
+  };
   return {
+    worldTraversal: journeyWorldTraversal(journey, "save/resume GB6 tape"),
     masks: journey.masks,
     terminalStateSha256: journey.terminalStateSha256,
     battles: journey.battles,
@@ -176,17 +180,20 @@ function daylightStage(state: SessionState): number {
 export interface GameSession {
   project: ProjectShell;
   session: Session;
-  options: { maps: MapRepository; extensions: ExtensionOptions; battle: BattleRules; scenes: typeof TUXEMON_SCENES };
+  options: SessionOptions;
 }
 
 /** The production sharded project and game registrations, with the clock
  * starting at `start`. */
-export function createGameSession(start: CivilDateTime): GameSession {
+export function createGameSession(
+  start: CivilDateTime,
+  worldTraversal: WorldTraversalMode = "legacy-transfer",
+): GameSession {
   const { project, repository } = readShardedProject(ROOT);
   const extensions = createTuxemonExtensions(TUXEMON_BATTLE_DB, {
     initialTimeWeather: timeWeatherAt(start),
   });
-  const options = { maps: repository, extensions, battle: TUXEMON_BATTLE_RULES, scenes: TUXEMON_SCENES };
+  const options = createTuxemonSessionOptions(project, worldTraversal, { maps: repository, extensions });
   return { project, session: createSession(project, 60, options), options };
 }
 
@@ -227,8 +234,9 @@ export function verifySaveResume(
   masks: readonly number[],
   rules: readonly SavePointRule[],
   start: CivilDateTime = FIXED_INITIAL_CIVIL_TIME,
+  worldTraversal: WorldTraversalMode = "legacy-transfer",
 ): RunReport {
-  const { project, session } = createGameSession(start);
+  const { project, session } = createGameSession(start, worldTraversal);
   const storage = memoryStorage();
   const slots: SlotStore = { channel: "browser", store: browserSaveStore(storage) };
   const points: SavedPoint[] = [];

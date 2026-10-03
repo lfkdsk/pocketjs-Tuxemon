@@ -18,13 +18,13 @@ where noted. Set `TUXEMON_SRC` first (or keep a repo-local `.tuxemon-src`).
 | `verify:g6:determinism` | Two full imports into isolated roots produce byte-identical output (4,766 files). | Tuxemon source | ~25 s |
 | `verify:terrain:determinism` | The terrain corpus alone is byte-stable across two runs. | Tuxemon source | ~15 s |
 | `verify:terrain:collision` | Imported collision matches an independent Python oracle that mirrors Tuxemon's own movement code, cell by cell and direction by direction (default: 11 maps, 56,176 directed steps; `--all` for every map). | `data/terrain.json`, Tuxemon source, PyYAML | under a second for the default set; minutes for `--all` |
-| `verify:g6:locks` | Every imported `lockInput` page releases its lock, either through `unlockInput` or a map transfer (330 pages, 335 checks). | imported project | ~15 s |
+| `verify:g6:locks` | Every imported `lockInput` page releases its lock, either through `unlockInput` or a map transfer (331 pages, 336 checks). | imported project | ~15 s |
 | `verify:g6:frozen` | The freeze scan finds no permanent input lock or blocking fiber on any imported map: every map is entered and driven for 12,000 frames, flagging held input locks, blocking fibers and interpreter errors. This is an interpreter-liveness result, not a proof that a wanderer can never spatially block the player. | imported project | ~65 s |
 | `verify:gb6:mainline` | The 110,866-frame mainline tape replays at 60 Hz to the frozen terminal state, with every map checkpoint, all 107 battles (22 trainer, 85 wild) and the trainer win counts intact. | `data/gb6-mainline-journey.json` | ~72 s |
 | `verify:gb6:failures` | Both committed defeat tapes (the first loss against Billie, and the later Route 3 loss) replay with their visible recovery order: faint-point teleport, heal-before-leaving block, nurse recovery. | `data/gb6-first-loss-journey.json`, `data/gb6-later-loss-journey.json` | ~40 s |
-| `verify:j1:mainline` | The Captain-return continuation, concatenated with the GB6 tape and replayed from frame zero (122,416 frames), ends at the mansion with the captain's return and all 14 battles (10 trainer, 4 wild) intact. | `data/gb6-mainline-journey.json`, `data/j1-captainreturns-journey.json` | ~67 s |
-| `verify:j2:mainline` | The hospital-cure continuation, concatenated with GB6 and J1 and replayed from frame zero (172,964 frames), ends in the Candy Town hospital with the cure granted and all 54 battles (50 trainer, 4 wild) won. | `data/gb6-mainline-journey.json`, `data/j1-captainreturns-journey.json`, `data/j2-hospitalcure-journey.json` | ~130 s |
-| `verify:j3:mainline` | The Radio Tower continuation, concatenated with GB6, J1 and J2 and replayed from frame zero (185,944 frames), ends at the broadcast with all 13 new trainer battles won and the Omnichannel story flags intact. | the four maintained mainline tapes through `data/j3-omnichannelradioannounce-journey.json` | ~140 s |
+| `verify:j1:mainline` | The Captain-return continuation, concatenated with the GB6 tape and replayed from frame zero (122,386 frames), ends at the mansion with the captain's return and all 14 battles (10 trainer, 4 wild) intact. | `data/gb6-mainline-journey.json`, `data/j1-captainreturns-journey.json` | ~67 s |
+| `verify:j2:mainline` | The hospital-cure continuation, concatenated with GB6 and J1 and replayed from frame zero (172,873 frames), ends in the Candy Town hospital with the cure granted and all 54 battles (50 trainer, 4 wild) won. | `data/gb6-mainline-journey.json`, `data/j1-captainreturns-journey.json`, `data/j2-hospitalcure-journey.json` | ~130 s |
+| `verify:j3:mainline` | The Radio Tower continuation, concatenated with GB6, J1 and J2 and replayed from frame zero (185,802 frames), ends at the broadcast with all 13 new trainer battles won and the Omnichannel story flags intact. | the four maintained mainline tapes through `data/j3-omnichannelradioannounce-journey.json` | ~140 s |
 | `verify:chapters` | The demo chapters re-bake byte-identical: each save envelope passes the kit's save validator (decode + map-aware restore), the 480×272 thumbnails re-render from the built game to the committed PNG hashes, and every envelope restored and resumed at its `timelineFrame` suffix-replays to the full-tape terminal state. Fails with the rebake command when the kit, the tape or the importer moves a checkpoint. | `data/chapters.json`, `docs/screenshots/chapters/`, built bundle | ~12 min |
 | `verify:save` | Five saves through the game's own save path (save-point check, slot store or save code, content identity, decode, restore): after a battle, after a map change and after a late battle in the 09:00 GB6 replay, and one minute before noon plus mid-tint-tween right after the daylight stage turns in an 11:52 replay. Each restored state equals the live state at its save frame (one frame later for the rebuilt NPC table), and each resumed replay ends at the uninterrupted terminal state hash. Only the host frame counter `SessionState.frame`, which the reducer never reads, is set back for hashing. Report in `reports/save-resume.json`. | GB6 tape, generated shards | ~4 min |
 
@@ -46,6 +46,27 @@ runs the CI default:
 | `stateful` | Saves mid-journey, restores the snapshot, and continues to the frozen terminal; J1, J2 and J3 also verify the battle rewind. |
 | `rate-60`, `rate-30`, `rate-20` | Replays the same 60 Hz-authored tape at a lower host tick rate and compares the full session state against an independent 60 Hz fold, source frame by source frame. |
 | `full` | Standalone/merged replay plus save/load, rewind and all three rates. The release/acceptance gate; about ten minutes for GB6. |
+
+### Traversal identity and the seamless migration
+
+Every maintained tape now carries `worldTraversal: "seamless-v1"`. The chapter
+manifest repeats that identity at its root and for each GB6/J1/J2/J3 segment,
+and the demo binary encodes it. A tape with no identity retains the historical
+`legacy-transfer` meaning; unknown identities and a chapter manifest whose
+segments disagree are rejected instead of being guessed.
+
+Before migration, the old masks were replayed under both timelines and the
+first different reducer state was recorded. All seven tapes first diverged at
+the Paper Town north opening: source frame 3,971 for G6, GB6, its later-loss
+path and J1–J3, and source frame 3,306 for the first-loss tape. The seamless
+timeline starts the eight-tick atomic handoff where legacy starts its fade.
+G6, both failure paths and GB6 still reached their intended endpoints with the
+same masks, so only their traversal identity and derived metadata were
+rebuilt. J1 no longer reached the captain endpoint with the old continuation;
+J1, J2 and J3 were therefore re-recorded in order, then all chapter envelopes,
+timeline frames and affected goldens were rebaked. The G6 repository test also
+replays the maintained G6 masks with an explicit legacy session and pins its
+legacy terminal hash, preserving the other half of the compatibility contract.
 
 ### The QuickJS benches
 
@@ -93,7 +114,8 @@ so re-pinning the tape cannot leave a second stale literal in the wrapper.
 JavaScript compile/evaluation failures include the original message and stack.
 
 The J3 benchmark restores the production `hospital-cure` chapter snapshot,
-then replays the 11 remaining J2 masks plus all 12,980 J3 masks. It exercises
+then replays the 11 remaining J2 masks plus all 12,929 J3 masks (12,940 total).
+It exercises
 13 battles including Beaverbrook and checks the Radio Tower terminal hash at
 both 480×272 and 960×544. This also keeps chapter restore honest in the
 QuickJS guest, where browser-only globals such as `TextDecoder` do not exist.
@@ -115,14 +137,16 @@ build and long replay are too expensive for the normal push pipeline, and
 startup plus all-map first-visit measurements still contain wall-clock
 sensitivity on shared runners.
 
-The integrated production idle-GC path passes the 107-battle tape twice at
-each viewport. At 480×272 the two runs start in 180.512/164.172 ms, reach
-22.610/21.157 ms CPU-work maxima and 29.593/24.142 ms boundary-inclusive
-maxima. At 960×544 they start in 170.855/186.308 ms, reach 21.625/22.671 ms
-CPU-work maxima and 25.951/32.505 ms boundary-inclusive maxima. All four runs
-make five idle collections, no forced or in-tick collections, and finish with
-zero frames over 50 ms. `G6_GC_MODE=auto` remains available as a diagnostic
-control. Every run reaches the same GB6 terminal SHA-256.
+The migrated release runs keep every measured frame below 50 ms. GB6 reaches
+38.158/38.215 ms CPU/sampled maxima at 480×272 and 33.374/33.447 ms at
+960×544; its 54 atomic handoffs peak at 38.215 and 33.459 ms. J3 reaches
+45.768/45.804 ms and 48.425/48.483 ms respectively; its three handoffs peak
+at 25.125 and 18.089 ms. The all-map cache walk peaks at 36.870/37.284 ms and
+shows zero second-pass native-node or texture growth (post-GC heap growth is
+1,872/3,320 B). One cold 960×544 GB6 run transiently measured 59.071 ms CPU
+and 73.825 ms sampled wall time on an indoor Cotton Cafe transfer; the same
+build and command immediately passed at 33.374/33.459 ms. This outlier is
+retained here rather than treated as a seamless-frame regression.
 
 ## The tapes
 
@@ -137,9 +161,9 @@ fail on any mismatch, so a silently corrupted tape is a red build.
 | `data/gb6-mainline-journey.json` | 110,866 | Route 1 -> Cotton Town -> Paper Town -> Route 2 -> City Park -> Leather Center -> Route 3 -> Wayfarer Inn -> back to Route 3 | 107 (22 trainer, 85 wild) | `spyder_route3 @4,6` |
 | `data/gb6-first-loss-journey.json` | 3,325 | the opening, deliberately losing the first Billie fight | 1 | `spyder_route1 @14,19` |
 | `data/gb6-later-loss-journey.json` | 66,498 | the mainline prefix to Wanda, a deliberate loss, then the recovery path | 1 loss + prefix | `spyder_leather_town @23,10` |
-| `data/j1-captainreturns-journey.json` | 11,550 (122,416 combined with GB6) | Wayfarer Inn -> Route 4 -> Flower City -> Route A -> Mansion -> basement -> the captain's return | 14 (10 trainer, 4 wild) | `spyder_mansion @1,13` |
-| `data/j2-hospitalcure-journey.json` | 50,548 (172,964 combined) | Mansion -> Candy Town -> Greenwash -> hospital password -> the cure | 54 (50 trainer, 4 wild) | `spyder_candy_hospital3 @5,7` |
-| `data/j3-omnichannelradioannounce-journey.json` | 12,980 (185,944 combined) | hospital cure -> Paper Town -> Cotton Town -> Omnichannel floors 1–4 -> Radio Tower broadcast | 13 trainer | `spyder_radiotower @9,5` |
+| `data/j1-captainreturns-journey.json` | 11,520 (122,386 combined with GB6) | Wayfarer Inn -> Route 4 -> Flower City -> Route A -> Mansion -> basement -> the captain's return | 14 (10 trainer, 4 wild) | `spyder_mansion @1,13` |
+| `data/j2-hospitalcure-journey.json` | 50,487 (172,873 combined) | Mansion -> Candy Town -> Greenwash -> hospital password -> the cure | 54 (50 trainer, 4 wild) | `spyder_candy_hospital3 @5,7` |
+| `data/j3-omnichannelradioannounce-journey.json` | 12,929 (185,802 combined) | hospital cure -> Paper Town -> Cotton Town -> Omnichannel floors 1–4 -> Radio Tower broadcast | 13 trainer | `spyder_radiotower @9,5` |
 
 Terminal state hashes and per-checkpoint expectations live in the tapes or
 their verifiers (`tools/verify-gb6-mainline.ts`, `tools/verify-j1-mainline.ts`,
@@ -167,10 +191,12 @@ HZ=60 GB4_OUTCOME=lose GB4_JOURNEY_OUT=data/gb6-first-loss-journey.json bun tool
 GB6_LATER_LOSS_OUT=data/gb6-later-loss-journey.json bun tools/gb6-later-loss.ts
 ```
 
-After re-recording, update the verifier's pinned hashes and checkpoint lists,
-regenerate the affected goldens (below), and re-run every verify script plus
-the web journey. A re-recorded tape is a change to the game's contract, not a
-test fixture refresh.
+After re-recording, set the tape's explicit traversal identity, update the
+verifier's pinned hashes and checkpoint lists, and regenerate every descendant
+segment if an ancestor changed. Then rebake chapters (including
+`timelineFrame`, snapshots and thumbnails), regenerate the affected goldens,
+and re-run every verify script plus the web journey. A re-recorded tape is a
+change to the game's contract, not a test fixture refresh.
 
 ## Chapter snapshots and warp spawns
 
@@ -227,6 +253,7 @@ a single differing pixel fails.
 | `bun run goldens:j1` | The three Captain-return keyframes at both viewports and `data/j1-goldens.json`. |
 | `bun run goldens:j2` | The hospital-cure keyframes (Aardant acquired, hospital password, the cure) at both viewports and `data/j2-goldens.json`. |
 | `bun run goldens:j3` | The Omnichannel wall, Radio Tower entry and completed broadcast at both viewports, plus `data/j3-goldens.json`. |
+| `bun run goldens:world` | Phase 0–7 plus landing for one horizontal and one vertical production handoff at both viewports, plus two contact sheets and `docs/screenshots/world-seam/manifest.json`. The manifest pins PNG/RGBA hashes, visible-map ownership, camera/player geometry and cache counts; the test also asserts no fade or black frame and correct player/upper-layer compositing. |
 | `bun run goldens:daylight` | The same Paper Town checkpoint at fixed 09:00 and 21:00 starts, plus `data/daylight-goldens.json`. The test recomputes luminance, blue bias and per-pixel day/night differences from the decoded PNGs. |
 
 Regenerate goldens only when the rendering change is intentional, and always
@@ -252,6 +279,10 @@ These are the properties the `:full`, `:rates` and `:stateful` modes check:
   replaying the suffix must reproduce the frozen terminal. The J1 verifier
   additionally asserts the rewind refolded from a retained keyframe rather
   than from frame zero.
+- **Seam handoff boundaries.** The G6 repository test saves immediately before
+  and after a real handoff, refuses a save during phase 4, rewinds from phase 4
+  to the source-side state, and replays the suffix byte-identically at 60, 30
+  and 20 Hz (with the 4 Hz attract stress case retained as well).
 
 Battle scenes get the same treatment at the presentation layer: the
 hit-frame rewind test clones the runtime state, steps back one event tick,

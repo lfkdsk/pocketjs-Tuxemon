@@ -5,13 +5,18 @@ import {
   tuxemonExtensionState,
 } from "../battle/extension.ts";
 import { battleDbToTuxemonBattleDb } from "../battle/from-battle-db.ts";
-import { TUXEMON_BATTLE_DB as DB, TUXEMON_BATTLE_RULES as rules, TUXEMON_EXTENSIONS as extensions } from "../battle/game.ts";
+import {
+  createTuxemonSessionOptions,
+  TUXEMON_BATTLE_DB as DB,
+  TUXEMON_BATTLE_RULES as rules,
+  TUXEMON_EXTENSIONS as extensions,
+} from "../battle/game.ts";
 import { tuxemonRuntimeBattleState } from "../battle/runtime.ts";
 import { spawnMonster } from "../battle/spawn.ts";
 import { buildProject, G6_IMPORT_OPTIONS } from "../importer/project.ts";
 import { BTN_BITS } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
 import { createSession, startSession, stepSession, type SessionState } from "../vendor/pocket-rpgkit/src/engine/session.ts";
-import type { Command, JsonValue, Project } from "../vendor/pocket-rpgkit/src/engine/types.ts";
+import type { Command, JsonValue, Project, WorldTraversalMode } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 
 // Upstream drops every non-persistent NPC on each map transition
 // (npc_manager.clear_npcs) and builds a fresh one on create_npc, so a trainer
@@ -198,7 +203,7 @@ describe("NPC party lifecycle follows upstream", () => {
       ...TRANSFER_BUILD.project,
       start: { map: "spyder_route2", x: 1, y: 8, dir: "left" },
     };
-    const session = createSession(project, 60, { extensions, battle: rules });
+    const session = createSession(project, 60, createTuxemonSessionOptions(project));
     let state = startSession(project, session);
     const idle = { buttons: 0 };
     state = stepSession(session, state, idle);
@@ -212,10 +217,29 @@ describe("NPC party lifecycle follows upstream", () => {
     expect(state.mapId).toBe("spyder_route2");
     expect(npcParty(state.ext, "spyder_route2_marion")).toEqual(["aardorn@7", "aardorn@7"]);
 
-    // Walk into the door and let the fade finish.
-    for (let frame = 0; frame < 240 && state.mapId === "spyder_route2"; frame++) {
+    // Walk into the marked outdoor opening. This transfer sits under the
+    // importer's inline stacked-area guard; it is still a root fiber command
+    // and therefore starts a real seamless handoff.
+    for (let frame = 0; frame < 240 && state.handoff === undefined; frame++) {
       state = stepSession(session, state, { buttons: BTN_BITS.LEFT });
     }
+    expect(state.mapId).toBe("spyder_route2");
+    expect(state.handoff).toMatchObject({
+      sourceMapId: "spyder_route2",
+      targetMapId: "spyder_cotton_town",
+      phase: 0,
+      totalTicks: 8,
+    });
+    expect(state.fade).toBeNull();
+    // clearNpcParties precedes transfer, so no source or crossing frame can
+    // retain a trainer party.
+    expect(tuxemonExtensionState(state.ext, DB).npcParties).toEqual({});
+    const phases: number[] = [];
+    while (state.handoff) {
+      phases.push(state.handoff.phase);
+      state = stepSession(session, state, idle);
+    }
+    expect(phases).toEqual([0, 1, 2, 3, 4, 5, 6, 7]);
     expect(state.mapId).toBe("spyder_cotton_town");
     // Gone with the transfer itself, before the new map's first tick: no
     // frame on Cotton Town (saveable or not) still holds Route 2's NPCs.
@@ -225,6 +249,101 @@ describe("NPC party lifecycle follows upstream", () => {
     expect(parties["spyder_route2_marion"]).toBeUndefined();
     // Whatever is left was built by Cotton Town's own events on this visit.
     for (const npc of Object.keys(parties)) expect(COTTON_TOWN_TRAINERS.has(npc)).toBe(true);
+  });
+
+  test("seamless and legacy transfers preserve map-entry semantics with documented clock differences", () => {
+    const daycareStep = extensions.commands!["tux.daycare_step"]!;
+    const countedExtensions = {
+      ...extensions,
+      commands: {
+        ...extensions.commands,
+        "test.count_player_step": (ctx: Parameters<typeof daycareStep>[0], args: JsonValue) => {
+          const result = daycareStep(ctx, args);
+          const previous = ctx.variables["test.player_steps"];
+          return {
+            ...(result ?? {}),
+            writes: {
+              ...(result?.writes ?? {}),
+              "test.player_steps": (typeof previous === "number" ? previous : 0) + 1,
+            },
+          };
+        },
+      },
+      playerStep: { call: "test.count_player_step", args: {} },
+    };
+
+    const cross = (worldTraversal: WorldTraversalMode) => {
+      const project: Project = {
+        ...TRANSFER_BUILD.project,
+        system: { ...TRANSFER_BUILD.project.system, mapNameDisplay: true },
+        start: { map: "spyder_route2", x: 1, y: 8, dir: "left" },
+      };
+      const session = createSession(project, 60, createTuxemonSessionOptions(project, worldTraversal, {
+        extensions: countedExtensions,
+      }));
+      let state = startSession(project, session);
+      for (let frame = 0; frame < 180; frame++) state = stepSession(session, state, { buttons: 0 });
+      const add = extensions.commands!["tux.add_monster"]!;
+      state.ext = add(context(state), json({ character: "spyder_route2_marion", species: "aardorn", level: 7 }))!.ext!;
+      let guard = 0;
+      while (guard++ < 240 && state.handoff === undefined && state.fade === null) {
+        state = stepSession(session, state, { buttons: BTN_BITS.LEFT });
+      }
+      const onset = structuredClone(state);
+      let transferTicks = 0;
+      while (state.mapId === "spyder_route2" && transferTicks++ < 60) {
+        state = stepSession(session, state, { buttons: 0 });
+      }
+      const committed = structuredClone(state);
+      while (state.fade) state = stepSession(session, state, { buttons: 0 });
+      state = stepSession(session, state, { buttons: 0 });
+      return { onset, committed, entered: state, transferTicks };
+    };
+
+    const legacy = cross("legacy-transfer");
+    const seamless = cross("seamless-v1");
+    expect(legacy.onset.fade?.phase).toBe("out");
+    expect(legacy.onset.handoff).toBeUndefined();
+    expect(seamless.onset.fade).toBeNull();
+    expect(seamless.onset.handoff?.phase).toBe(0);
+    expect(seamless.transferTicks).toBe(8);
+    expect(legacy.transferTicks).toBe(9);
+
+    for (const sample of [legacy.onset, seamless.onset, legacy.committed, seamless.committed]) {
+      expect(tuxemonExtensionState(sample.ext, DB).npcParties).toEqual({});
+      expect(sample.sw.variables["test.player_steps"]).toBe(1);
+      expect(sample.scene).toBeNull();
+    }
+    expect([legacy.committed.mapId, legacy.committed.move.tx, legacy.committed.move.ty])
+      .toEqual(["spyder_cotton_town", 39, 28]);
+    expect([seamless.committed.mapId, seamless.committed.move.tx, seamless.committed.move.ty])
+      .toEqual(["spyder_cotton_town", 39, 28]);
+
+    const legacyOnset = tuxemonExtensionState(legacy.onset.ext, DB);
+    const seamlessOnset = tuxemonExtensionState(seamless.onset.ext, DB);
+    const legacyCommit = tuxemonExtensionState(legacy.committed.ext, DB);
+    const seamlessCommit = tuxemonExtensionState(seamless.committed.ext, DB);
+    expect(seamlessOnset.clock).toEqual(legacyOnset.clock);
+    expect(seamlessCommit.clock.refTick - seamlessOnset.clock.refTick).toBe(8);
+    expect(legacyCommit.clock.refTick).toBe(legacyOnset.clock.refTick);
+    expect(seamlessCommit.weather).toEqual(legacyCommit.weather);
+
+    // Audio ticks in both transitions, while source map tints/time advance
+    // only during seamless handoff. Target entry creates the same banner.
+    expect(seamless.committed.interp.audio?.bgm?.id).toBe(legacy.committed.interp.audio?.bgm?.id);
+    expect(seamless.committed.interp.audio!.bgm!.positionTicks - seamless.onset.interp.audio!.bgm!.positionTicks).toBe(8);
+    expect(legacy.committed.interp.audio!.bgm!.positionTicks - legacy.onset.interp.audio!.bgm!.positionTicks).toBe(9);
+    expect(seamless.onset.interp.screen!.tints!["tux.daylight"]!.left -
+      seamless.committed.interp.screen!.tints!["tux.daylight"]!.left).toBe(8);
+    expect(legacy.committed.interp.screen!.tints!["tux.daylight"]!.left)
+      .toBe(legacy.onset.interp.screen!.tints!["tux.daylight"]!.left);
+    expect(seamless.committed.interp.screen?.mapNameBanner)
+      .toEqual(legacy.committed.interp.screen?.mapNameBanner);
+    expect(seamless.committed.interp.screen?.mapNameBanner?.text).toBe("Cotton Town");
+    expect(seamless.entered.sw.variables["test.player_steps"]).toBe(1);
+    expect(legacy.entered.sw.variables["test.player_steps"]).toBe(1);
+    expect(tuxemonExtensionState(seamless.entered.ext, DB).weather)
+      .toEqual(tuxemonExtensionState(legacy.entered.ext, DB).weather);
   });
 
   test("a map entry that is not an imported transfer (a demo warp) still drops them", () => {

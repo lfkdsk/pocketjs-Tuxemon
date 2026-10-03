@@ -1,0 +1,2602 @@
+{
+  "format": "pocket-tuxemon/world-seam-crossings/v2",
+  "phases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    "landing"
+  ],
+  "frames": [
+    {
+      "orientation": "horizontal",
+      "viewport": {
+        "width": 480,
+        "height": 272
+      },
+      "capture": 0,
+      "phase": 0,
+      "sourceMap": "spyder_route2",
+      "targetMap": "spyder_cotton_town",
+      "activeMap": "spyder_route2",
+      "file": "world-seam-horizontal.480x272.phase-0.png",
+      "camera": [
+        2008,
+        2240
+      ],
+      "player": {
+        "tile": [
+          0,
+          8
+        ],
+        "localPixel": [
+          0,
+          128
+        ],
+        "worldPixel": [
+          2240,
+          2368
+        ],
+        "screenRect": [
+          232,
+          112,
+          16,
+          32
+        ],
+        "facing": 1,
+        "movePhase": 0
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route2"
+        ],
+        "textures": 10,
+        "resident": 10,
+        "pooled": 3,
+        "created": 13,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route2"
+        ],
+        "textures": 8,
+        "resident": 8,
+        "pooled": 0,
+        "created": 8,
+        "pending": 0
+      },
+      "nonBlackPixels": 130512,
+      "rgbaFnv1a": "77441c33",
+      "pngSha256": "d2ea3e7bff786af50e994c900e6dfd4bfba259d167d27e5783b18faf6e2731a7"
+    },
+    {
+      "orientation": "horizontal",
+      "viewport": {
+        "width": 480,
+        "height": 272
+      },
+      "capture": 1,
+      "phase": 1,
+      "sourceMap": "spyder_route2",
+      "targetMap": "spyder_cotton_town",
+      "activeMap": "spyder_route2",
+      "file": "world-seam-horizontal.480x272.phase-1.png",
+      "camera": [
+        2006,
+        2240
+      ],
+      "player": {
+        "tile": [
+          0,
+          8
+        ],
+        "localPixel": [
+          -2,
+          128
+        ],
+        "worldPixel": [
+          2238,
+          2368
+        ],
+        "screenRect": [
+          232,
+          112,
+          16,
+          32
+        ],
+        "facing": 1,
+        "movePhase": 1
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route2"
+        ],
+        "textures": 10,
+        "resident": 10,
+        "pooled": 3,
+        "created": 13,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route2"
+        ],
+        "textures": 8,
+        "resident": 8,
+        "pooled": 0,
+        "created": 8,
+        "pending": 0
+      },
+      "nonBlackPixels": 130512,
+      "rgbaFnv1a": "eff89ae1",
+      "pngSha256": "f977c2cdc44837383b5a9d548b46d191da4abd5b64a1f733c8b8d1646efdc193"
+    },
+    {
+      "orientation": "horizontal",
+      "viewport": {
+        "width": 480,
+        "height": 272
+      },
+      "capture": 2,
+      "phase": 2,
+      "sourceMap": "spyder_route2",
+      "targetMap": "spyder_cotton_town",
+      "activeMap": "spyder_route2",
+      "file": "world-seam-horizontal.480x272.phase-2.png",
+      "camera": [
+        2004,
+        2240
+      ],
+      "player": {
+        "tile": [
+          0,
+          8
+        ],
+        "localPixel": [
+          -4,
+          128
+        ],
+        "worldPixel": [
+          2236,
+          2368
+        ],
+        "screenRect": [
+          232,
+          112,
+          16,
+          32
+        ],
+        "facing": 1,
+        "movePhase": 2
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route2"
+        ],
+        "textures": 10,
+        "resident": 10,
+        "pooled": 3,
+        "created": 13,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route2"
+        ],
+        "textures": 8,
+        "resident": 8,
+        "pooled": 0,
+        "created": 8,
+        "pending": 0
+      },
+      "nonBlackPixels": 130507,
+      "rgbaFnv1a": "a6f3d637",
+      "pngSha256": "18c477d2c725dab754f8bb68b909ebd5aaff06c13ab06825e92ea49adaa71182"
+    },
+    {
+      "orientation": "horizontal",
+      "viewport": {
+        "width": 480,
+        "height": 272
+      },
+      "capture": 3,
+      "phase": 3,
+      "sourceMap": "spyder_route2",
+      "targetMap": "spyder_cotton_town",
+      "activeMap": "spyder_route2",
+      "file": "world-seam-horizontal.480x272.phase-3.png",
+      "camera": [
+        2002,
+        2240
+      ],
+      "player": {
+        "tile": [
+          0,
+          8
+        ],
+        "localPixel": [
+          -6,
+          128
+        ],
+        "worldPixel": [
+          2234,
+          2368
+        ],
+        "screenRect": [
+          232,
+          112,
+          16,
+          32
+        ],
+        "facing": 1,
+        "movePhase": 3
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route2"
+        ],
+        "textures": 10,
+        "resident": 10,
+        "pooled": 3,
+        "created": 13,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route2"
+        ],
+        "textures": 8,
+        "resident": 8,
+        "pooled": 0,
+        "created": 8,
+        "pending": 0
+      },
+      "nonBlackPixels": 130507,
+      "rgbaFnv1a": "dd0d1f02",
+      "pngSha256": "e5afb18660947d00c0da45541a63259e533a75f10edf53cca48be73a4f74c055"
+    },
+    {
+      "orientation": "horizontal",
+      "viewport": {
+        "width": 480,
+        "height": 272
+      },
+      "capture": 4,
+      "phase": 4,
+      "sourceMap": "spyder_route2",
+      "targetMap": "spyder_cotton_town",
+      "activeMap": "spyder_route2",
+      "file": "world-seam-horizontal.480x272.phase-4.png",
+      "camera": [
+        2000,
+        2240
+      ],
+      "player": {
+        "tile": [
+          0,
+          8
+        ],
+        "localPixel": [
+          -8,
+          128
+        ],
+        "worldPixel": [
+          2232,
+          2368
+        ],
+        "screenRect": [
+          232,
+          112,
+          16,
+          32
+        ],
+        "facing": 1,
+        "movePhase": 4
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route2"
+        ],
+        "textures": 10,
+        "resident": 10,
+        "pooled": 3,
+        "created": 13,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route2"
+        ],
+        "textures": 8,
+        "resident": 8,
+        "pooled": 0,
+        "created": 8,
+        "pending": 0
+      },
+      "nonBlackPixels": 130512,
+      "rgbaFnv1a": "65620e86",
+      "pngSha256": "f95ac6162c3af5bd2d80c6442bcb9913e0d83104e8242b8cbc0cf09213e503fc"
+    },
+    {
+      "orientation": "horizontal",
+      "viewport": {
+        "width": 480,
+        "height": 272
+      },
+      "capture": 5,
+      "phase": 5,
+      "sourceMap": "spyder_route2",
+      "targetMap": "spyder_cotton_town",
+      "activeMap": "spyder_route2",
+      "file": "world-seam-horizontal.480x272.phase-5.png",
+      "camera": [
+        1998,
+        2240
+      ],
+      "player": {
+        "tile": [
+          0,
+          8
+        ],
+        "localPixel": [
+          -10,
+          128
+        ],
+        "worldPixel": [
+          2230,
+          2368
+        ],
+        "screenRect": [
+          232,
+          112,
+          16,
+          32
+        ],
+        "facing": 1,
+        "movePhase": 5
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route2"
+        ],
+        "textures": 10,
+        "resident": 10,
+        "pooled": 3,
+        "created": 13,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route2"
+        ],
+        "textures": 8,
+        "resident": 8,
+        "pooled": 0,
+        "created": 8,
+        "pending": 0
+      },
+      "nonBlackPixels": 130512,
+      "rgbaFnv1a": "c39fb375",
+      "pngSha256": "761bd9cb2d90bd2801e7d3d572c038ce2fdfef893f8f6c2045c1dece363a5408"
+    },
+    {
+      "orientation": "horizontal",
+      "viewport": {
+        "width": 480,
+        "height": 272
+      },
+      "capture": 6,
+      "phase": 6,
+      "sourceMap": "spyder_route2",
+      "targetMap": "spyder_cotton_town",
+      "activeMap": "spyder_route2",
+      "file": "world-seam-horizontal.480x272.phase-6.png",
+      "camera": [
+        1996,
+        2240
+      ],
+      "player": {
+        "tile": [
+          0,
+          8
+        ],
+        "localPixel": [
+          -12,
+          128
+        ],
+        "worldPixel": [
+          2228,
+          2368
+        ],
+        "screenRect": [
+          232,
+          112,
+          16,
+          32
+        ],
+        "facing": 1,
+        "movePhase": 6
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route2"
+        ],
+        "textures": 10,
+        "resident": 10,
+        "pooled": 3,
+        "created": 13,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route2"
+        ],
+        "textures": 8,
+        "resident": 8,
+        "pooled": 0,
+        "created": 8,
+        "pending": 0
+      },
+      "nonBlackPixels": 130509,
+      "rgbaFnv1a": "7b7cacbf",
+      "pngSha256": "aa1aa73b5d475a453746af0157506bf8da9a2921df40d6f42d8df2ab9fdc3f5c"
+    },
+    {
+      "orientation": "horizontal",
+      "viewport": {
+        "width": 480,
+        "height": 272
+      },
+      "capture": 7,
+      "phase": 7,
+      "sourceMap": "spyder_route2",
+      "targetMap": "spyder_cotton_town",
+      "activeMap": "spyder_route2",
+      "file": "world-seam-horizontal.480x272.phase-7.png",
+      "camera": [
+        1994,
+        2240
+      ],
+      "player": {
+        "tile": [
+          0,
+          8
+        ],
+        "localPixel": [
+          -14,
+          128
+        ],
+        "worldPixel": [
+          2226,
+          2368
+        ],
+        "screenRect": [
+          232,
+          112,
+          16,
+          32
+        ],
+        "facing": 1,
+        "movePhase": 7
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route2"
+        ],
+        "textures": 10,
+        "resident": 10,
+        "pooled": 3,
+        "created": 13,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route2"
+        ],
+        "textures": 8,
+        "resident": 8,
+        "pooled": 0,
+        "created": 8,
+        "pending": 0
+      },
+      "nonBlackPixels": 130509,
+      "rgbaFnv1a": "ba370d52",
+      "pngSha256": "ebba653805780b16ac4e6a0dec3e74227184c81db218d0ae0c59fd83cefd7c7b"
+    },
+    {
+      "orientation": "horizontal",
+      "viewport": {
+        "width": 480,
+        "height": 272
+      },
+      "capture": "landing",
+      "phase": null,
+      "sourceMap": "spyder_route2",
+      "targetMap": "spyder_cotton_town",
+      "activeMap": "spyder_cotton_town",
+      "file": "world-seam-horizontal.480x272.landing.png",
+      "camera": [
+        1992,
+        2240
+      ],
+      "player": {
+        "tile": [
+          39,
+          28
+        ],
+        "localPixel": [
+          624,
+          448
+        ],
+        "worldPixel": [
+          2224,
+          2368
+        ],
+        "screenRect": [
+          232,
+          112,
+          16,
+          32
+        ],
+        "facing": 1,
+        "movePhase": 0
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route2"
+        ],
+        "textures": 10,
+        "resident": 10,
+        "pooled": 3,
+        "created": 13,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route2"
+        ],
+        "textures": 8,
+        "resident": 8,
+        "pooled": 0,
+        "created": 8,
+        "pending": 0
+      },
+      "nonBlackPixels": 130512,
+      "rgbaFnv1a": "9ce23564",
+      "pngSha256": "b79f36156a8ed634c5a05da364d372688434de2a60cb30b5a9e0bdfd7e6bf762"
+    },
+    {
+      "orientation": "vertical",
+      "viewport": {
+        "width": 480,
+        "height": 272
+      },
+      "capture": 0,
+      "phase": 0,
+      "sourceMap": "spyder_paper_town",
+      "targetMap": "spyder_route1",
+      "activeMap": "spyder_paper_town",
+      "file": "world-seam-vertical.480x272.phase-0.png",
+      "camera": [
+        1592,
+        2752
+      ],
+      "player": {
+        "tile": [
+          14,
+          0
+        ],
+        "localPixel": [
+          224,
+          0
+        ],
+        "worldPixel": [
+          1824,
+          2880
+        ],
+        "screenRect": [
+          232,
+          112,
+          16,
+          32
+        ],
+        "facing": 2,
+        "movePhase": 0
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 8,
+        "resident": 8,
+        "pooled": 5,
+        "created": 13,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 7,
+        "resident": 7,
+        "pooled": 1,
+        "created": 8,
+        "pending": 0
+      },
+      "nonBlackPixels": 130477,
+      "rgbaFnv1a": "6bbe3a95",
+      "pngSha256": "75c38dbe66554fbdaeba4c21fabd376eaefe5b77ed1390e3e50f294b9460d9a1"
+    },
+    {
+      "orientation": "vertical",
+      "viewport": {
+        "width": 480,
+        "height": 272
+      },
+      "capture": 1,
+      "phase": 1,
+      "sourceMap": "spyder_paper_town",
+      "targetMap": "spyder_route1",
+      "activeMap": "spyder_paper_town",
+      "file": "world-seam-vertical.480x272.phase-1.png",
+      "camera": [
+        1592,
+        2750
+      ],
+      "player": {
+        "tile": [
+          14,
+          0
+        ],
+        "localPixel": [
+          224,
+          -2
+        ],
+        "worldPixel": [
+          1824,
+          2878
+        ],
+        "screenRect": [
+          232,
+          112,
+          16,
+          32
+        ],
+        "facing": 2,
+        "movePhase": 1
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 8,
+        "resident": 8,
+        "pooled": 5,
+        "created": 13,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 7,
+        "resident": 7,
+        "pooled": 1,
+        "created": 8,
+        "pending": 0
+      },
+      "nonBlackPixels": 130477,
+      "rgbaFnv1a": "804afc5b",
+      "pngSha256": "9886a7e0687f00a5e2729760090ce4dd07bd334e6b089e5da7cb12641ba47517"
+    },
+    {
+      "orientation": "vertical",
+      "viewport": {
+        "width": 480,
+        "height": 272
+      },
+      "capture": 2,
+      "phase": 2,
+      "sourceMap": "spyder_paper_town",
+      "targetMap": "spyder_route1",
+      "activeMap": "spyder_paper_town",
+      "file": "world-seam-vertical.480x272.phase-2.png",
+      "camera": [
+        1592,
+        2748
+      ],
+      "player": {
+        "tile": [
+          14,
+          0
+        ],
+        "localPixel": [
+          224,
+          -4
+        ],
+        "worldPixel": [
+          1824,
+          2876
+        ],
+        "screenRect": [
+          232,
+          112,
+          16,
+          32
+        ],
+        "facing": 2,
+        "movePhase": 2
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 8,
+        "resident": 8,
+        "pooled": 5,
+        "created": 13,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 7,
+        "resident": 7,
+        "pooled": 1,
+        "created": 8,
+        "pending": 0
+      },
+      "nonBlackPixels": 130485,
+      "rgbaFnv1a": "5557f5d9",
+      "pngSha256": "40cfc4813618e435f4198a9410450aecfafa988a471f2da675a9dda5b471a016"
+    },
+    {
+      "orientation": "vertical",
+      "viewport": {
+        "width": 480,
+        "height": 272
+      },
+      "capture": 3,
+      "phase": 3,
+      "sourceMap": "spyder_paper_town",
+      "targetMap": "spyder_route1",
+      "activeMap": "spyder_paper_town",
+      "file": "world-seam-vertical.480x272.phase-3.png",
+      "camera": [
+        1592,
+        2746
+      ],
+      "player": {
+        "tile": [
+          14,
+          0
+        ],
+        "localPixel": [
+          224,
+          -6
+        ],
+        "worldPixel": [
+          1824,
+          2874
+        ],
+        "screenRect": [
+          232,
+          112,
+          16,
+          32
+        ],
+        "facing": 2,
+        "movePhase": 3
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 8,
+        "resident": 8,
+        "pooled": 5,
+        "created": 13,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 7,
+        "resident": 7,
+        "pooled": 1,
+        "created": 8,
+        "pending": 0
+      },
+      "nonBlackPixels": 130485,
+      "rgbaFnv1a": "a95d4534",
+      "pngSha256": "b173863a8e096c939264d2d0dd7def898e6b16df7e7d31689e4e7ae0898dbd5e"
+    },
+    {
+      "orientation": "vertical",
+      "viewport": {
+        "width": 480,
+        "height": 272
+      },
+      "capture": 4,
+      "phase": 4,
+      "sourceMap": "spyder_paper_town",
+      "targetMap": "spyder_route1",
+      "activeMap": "spyder_paper_town",
+      "file": "world-seam-vertical.480x272.phase-4.png",
+      "camera": [
+        1592,
+        2744
+      ],
+      "player": {
+        "tile": [
+          14,
+          0
+        ],
+        "localPixel": [
+          224,
+          -8
+        ],
+        "worldPixel": [
+          1824,
+          2872
+        ],
+        "screenRect": [
+          232,
+          112,
+          16,
+          32
+        ],
+        "facing": 2,
+        "movePhase": 4
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 8,
+        "resident": 8,
+        "pooled": 5,
+        "created": 13,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 7,
+        "resident": 7,
+        "pooled": 1,
+        "created": 8,
+        "pending": 0
+      },
+      "nonBlackPixels": 130477,
+      "rgbaFnv1a": "298d9b55",
+      "pngSha256": "f99b01f9a9050d93b91ff2db359a0499d74608605f07b950cee9d6ffd82871bb"
+    },
+    {
+      "orientation": "vertical",
+      "viewport": {
+        "width": 480,
+        "height": 272
+      },
+      "capture": 5,
+      "phase": 5,
+      "sourceMap": "spyder_paper_town",
+      "targetMap": "spyder_route1",
+      "activeMap": "spyder_paper_town",
+      "file": "world-seam-vertical.480x272.phase-5.png",
+      "camera": [
+        1592,
+        2742
+      ],
+      "player": {
+        "tile": [
+          14,
+          0
+        ],
+        "localPixel": [
+          224,
+          -10
+        ],
+        "worldPixel": [
+          1824,
+          2870
+        ],
+        "screenRect": [
+          232,
+          112,
+          16,
+          32
+        ],
+        "facing": 2,
+        "movePhase": 5
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 8,
+        "resident": 8,
+        "pooled": 5,
+        "created": 13,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 7,
+        "resident": 7,
+        "pooled": 1,
+        "created": 8,
+        "pending": 0
+      },
+      "nonBlackPixels": 130477,
+      "rgbaFnv1a": "44d1dca7",
+      "pngSha256": "0fef676379f6103b8a04254afea30e6078be2aa0ba3ea4916c84b07afd69c028"
+    },
+    {
+      "orientation": "vertical",
+      "viewport": {
+        "width": 480,
+        "height": 272
+      },
+      "capture": 6,
+      "phase": 6,
+      "sourceMap": "spyder_paper_town",
+      "targetMap": "spyder_route1",
+      "activeMap": "spyder_paper_town",
+      "file": "world-seam-vertical.480x272.phase-6.png",
+      "camera": [
+        1592,
+        2740
+      ],
+      "player": {
+        "tile": [
+          14,
+          0
+        ],
+        "localPixel": [
+          224,
+          -12
+        ],
+        "worldPixel": [
+          1824,
+          2868
+        ],
+        "screenRect": [
+          232,
+          112,
+          16,
+          32
+        ],
+        "facing": 2,
+        "movePhase": 6
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 8,
+        "resident": 8,
+        "pooled": 5,
+        "created": 13,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 7,
+        "resident": 7,
+        "pooled": 1,
+        "created": 8,
+        "pending": 0
+      },
+      "nonBlackPixels": 130485,
+      "rgbaFnv1a": "46879131",
+      "pngSha256": "9ae0ae2fcb4934abdeec43b7e495064eb4d9457df956da894bce6c5b7215ded4"
+    },
+    {
+      "orientation": "vertical",
+      "viewport": {
+        "width": 480,
+        "height": 272
+      },
+      "capture": 7,
+      "phase": 7,
+      "sourceMap": "spyder_paper_town",
+      "targetMap": "spyder_route1",
+      "activeMap": "spyder_paper_town",
+      "file": "world-seam-vertical.480x272.phase-7.png",
+      "camera": [
+        1592,
+        2738
+      ],
+      "player": {
+        "tile": [
+          14,
+          0
+        ],
+        "localPixel": [
+          224,
+          -14
+        ],
+        "worldPixel": [
+          1824,
+          2866
+        ],
+        "screenRect": [
+          232,
+          112,
+          16,
+          32
+        ],
+        "facing": 2,
+        "movePhase": 7
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 8,
+        "resident": 8,
+        "pooled": 5,
+        "created": 13,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 7,
+        "resident": 7,
+        "pooled": 1,
+        "created": 8,
+        "pending": 0
+      },
+      "nonBlackPixels": 130485,
+      "rgbaFnv1a": "70289d43",
+      "pngSha256": "339f9c648524589353f0ee69c6052a9d6f18ddae33cf2e89ab03a235474cf9c6"
+    },
+    {
+      "orientation": "vertical",
+      "viewport": {
+        "width": 480,
+        "height": 272
+      },
+      "capture": "landing",
+      "phase": null,
+      "sourceMap": "spyder_paper_town",
+      "targetMap": "spyder_route1",
+      "activeMap": "spyder_route1",
+      "file": "world-seam-vertical.480x272.landing.png",
+      "camera": [
+        1592,
+        2736
+      ],
+      "player": {
+        "tile": [
+          14,
+          19
+        ],
+        "localPixel": [
+          224,
+          304
+        ],
+        "worldPixel": [
+          1824,
+          2864
+        ],
+        "screenRect": [
+          232,
+          112,
+          16,
+          32
+        ],
+        "facing": 2,
+        "movePhase": 0
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 8,
+        "resident": 8,
+        "pooled": 5,
+        "created": 13,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 7,
+        "resident": 7,
+        "pooled": 1,
+        "created": 8,
+        "pending": 0
+      },
+      "nonBlackPixels": 130504,
+      "rgbaFnv1a": "bfba90af",
+      "pngSha256": "37e972f010d299740da53563f29e317212acb398511e350ff1cb19dd554e17c7"
+    },
+    {
+      "orientation": "horizontal",
+      "viewport": {
+        "width": 960,
+        "height": 544
+      },
+      "capture": 0,
+      "phase": 0,
+      "sourceMap": "spyder_route2",
+      "targetMap": "spyder_cotton_town",
+      "activeMap": "spyder_route2",
+      "file": "world-seam-horizontal.960x544.phase-0.png",
+      "camera": [
+        1768,
+        2104
+      ],
+      "player": {
+        "tile": [
+          0,
+          8
+        ],
+        "localPixel": [
+          0,
+          128
+        ],
+        "worldPixel": [
+          2240,
+          2368
+        ],
+        "screenRect": [
+          472,
+          248,
+          16,
+          32
+        ],
+        "facing": 1,
+        "movePhase": 0
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route1",
+          "spyder_route2"
+        ],
+        "textures": 32,
+        "resident": 32,
+        "pooled": 0,
+        "created": 32,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route1",
+          "spyder_route2"
+        ],
+        "textures": 27,
+        "resident": 27,
+        "pooled": 0,
+        "created": 27,
+        "pending": 0
+      },
+      "nonBlackPixels": 522144,
+      "rgbaFnv1a": "012b35b8",
+      "pngSha256": "de698339121705a8a1799f150601ba447e613ec50e9929ba7c8707886bf4e6a7"
+    },
+    {
+      "orientation": "horizontal",
+      "viewport": {
+        "width": 960,
+        "height": 544
+      },
+      "capture": 1,
+      "phase": 1,
+      "sourceMap": "spyder_route2",
+      "targetMap": "spyder_cotton_town",
+      "activeMap": "spyder_route2",
+      "file": "world-seam-horizontal.960x544.phase-1.png",
+      "camera": [
+        1766,
+        2104
+      ],
+      "player": {
+        "tile": [
+          0,
+          8
+        ],
+        "localPixel": [
+          -2,
+          128
+        ],
+        "worldPixel": [
+          2238,
+          2368
+        ],
+        "screenRect": [
+          472,
+          248,
+          16,
+          32
+        ],
+        "facing": 1,
+        "movePhase": 1
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route1",
+          "spyder_route2"
+        ],
+        "textures": 32,
+        "resident": 32,
+        "pooled": 0,
+        "created": 32,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route1",
+          "spyder_route2"
+        ],
+        "textures": 27,
+        "resident": 27,
+        "pooled": 0,
+        "created": 27,
+        "pending": 0
+      },
+      "nonBlackPixels": 522144,
+      "rgbaFnv1a": "60caae68",
+      "pngSha256": "f965bf1812f6c97e23d0fbc60288da0a3682c702918fdad1ce666d916867aea2"
+    },
+    {
+      "orientation": "horizontal",
+      "viewport": {
+        "width": 960,
+        "height": 544
+      },
+      "capture": 2,
+      "phase": 2,
+      "sourceMap": "spyder_route2",
+      "targetMap": "spyder_cotton_town",
+      "activeMap": "spyder_route2",
+      "file": "world-seam-horizontal.960x544.phase-2.png",
+      "camera": [
+        1764,
+        2104
+      ],
+      "player": {
+        "tile": [
+          0,
+          8
+        ],
+        "localPixel": [
+          -4,
+          128
+        ],
+        "worldPixel": [
+          2236,
+          2368
+        ],
+        "screenRect": [
+          472,
+          248,
+          16,
+          32
+        ],
+        "facing": 1,
+        "movePhase": 2
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route1",
+          "spyder_route2"
+        ],
+        "textures": 32,
+        "resident": 32,
+        "pooled": 0,
+        "created": 32,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route1",
+          "spyder_route2"
+        ],
+        "textures": 27,
+        "resident": 27,
+        "pooled": 0,
+        "created": 27,
+        "pending": 0
+      },
+      "nonBlackPixels": 522139,
+      "rgbaFnv1a": "5d428790",
+      "pngSha256": "e754f78130601c3cbe8a1bd961a56f2a48da711300bafe050b25aeb42424c567"
+    },
+    {
+      "orientation": "horizontal",
+      "viewport": {
+        "width": 960,
+        "height": 544
+      },
+      "capture": 3,
+      "phase": 3,
+      "sourceMap": "spyder_route2",
+      "targetMap": "spyder_cotton_town",
+      "activeMap": "spyder_route2",
+      "file": "world-seam-horizontal.960x544.phase-3.png",
+      "camera": [
+        1762,
+        2104
+      ],
+      "player": {
+        "tile": [
+          0,
+          8
+        ],
+        "localPixel": [
+          -6,
+          128
+        ],
+        "worldPixel": [
+          2234,
+          2368
+        ],
+        "screenRect": [
+          472,
+          248,
+          16,
+          32
+        ],
+        "facing": 1,
+        "movePhase": 3
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route1",
+          "spyder_route2"
+        ],
+        "textures": 32,
+        "resident": 32,
+        "pooled": 0,
+        "created": 32,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route1",
+          "spyder_route2"
+        ],
+        "textures": 27,
+        "resident": 27,
+        "pooled": 0,
+        "created": 27,
+        "pending": 0
+      },
+      "nonBlackPixels": 522139,
+      "rgbaFnv1a": "cf77da8d",
+      "pngSha256": "bff76b2eeb6a1b7cc5ee7abe63499439a15356754fa0b28816dcfac9606fe01e"
+    },
+    {
+      "orientation": "horizontal",
+      "viewport": {
+        "width": 960,
+        "height": 544
+      },
+      "capture": 4,
+      "phase": 4,
+      "sourceMap": "spyder_route2",
+      "targetMap": "spyder_cotton_town",
+      "activeMap": "spyder_route2",
+      "file": "world-seam-horizontal.960x544.phase-4.png",
+      "camera": [
+        1760,
+        2104
+      ],
+      "player": {
+        "tile": [
+          0,
+          8
+        ],
+        "localPixel": [
+          -8,
+          128
+        ],
+        "worldPixel": [
+          2232,
+          2368
+        ],
+        "screenRect": [
+          472,
+          248,
+          16,
+          32
+        ],
+        "facing": 1,
+        "movePhase": 4
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route1",
+          "spyder_route2"
+        ],
+        "textures": 32,
+        "resident": 32,
+        "pooled": 0,
+        "created": 32,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route1",
+          "spyder_route2"
+        ],
+        "textures": 27,
+        "resident": 27,
+        "pooled": 0,
+        "created": 27,
+        "pending": 0
+      },
+      "nonBlackPixels": 522144,
+      "rgbaFnv1a": "72328ff0",
+      "pngSha256": "101c30227b45225a21a3473d699df6fbd2f4f7eb57b838035363448818fdfda5"
+    },
+    {
+      "orientation": "horizontal",
+      "viewport": {
+        "width": 960,
+        "height": 544
+      },
+      "capture": 5,
+      "phase": 5,
+      "sourceMap": "spyder_route2",
+      "targetMap": "spyder_cotton_town",
+      "activeMap": "spyder_route2",
+      "file": "world-seam-horizontal.960x544.phase-5.png",
+      "camera": [
+        1758,
+        2104
+      ],
+      "player": {
+        "tile": [
+          0,
+          8
+        ],
+        "localPixel": [
+          -10,
+          128
+        ],
+        "worldPixel": [
+          2230,
+          2368
+        ],
+        "screenRect": [
+          472,
+          248,
+          16,
+          32
+        ],
+        "facing": 1,
+        "movePhase": 5
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route1",
+          "spyder_route2"
+        ],
+        "textures": 32,
+        "resident": 32,
+        "pooled": 0,
+        "created": 32,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route1",
+          "spyder_route2"
+        ],
+        "textures": 27,
+        "resident": 27,
+        "pooled": 0,
+        "created": 27,
+        "pending": 0
+      },
+      "nonBlackPixels": 522144,
+      "rgbaFnv1a": "bf7f48bc",
+      "pngSha256": "7e4d8d366ff21835eb6ebad39b4b30827a7ba54a9dadb2804e6a9983fcd06c83"
+    },
+    {
+      "orientation": "horizontal",
+      "viewport": {
+        "width": 960,
+        "height": 544
+      },
+      "capture": 6,
+      "phase": 6,
+      "sourceMap": "spyder_route2",
+      "targetMap": "spyder_cotton_town",
+      "activeMap": "spyder_route2",
+      "file": "world-seam-horizontal.960x544.phase-6.png",
+      "camera": [
+        1756,
+        2104
+      ],
+      "player": {
+        "tile": [
+          0,
+          8
+        ],
+        "localPixel": [
+          -12,
+          128
+        ],
+        "worldPixel": [
+          2228,
+          2368
+        ],
+        "screenRect": [
+          472,
+          248,
+          16,
+          32
+        ],
+        "facing": 1,
+        "movePhase": 6
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route1",
+          "spyder_route2"
+        ],
+        "textures": 32,
+        "resident": 32,
+        "pooled": 0,
+        "created": 32,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route1",
+          "spyder_route2"
+        ],
+        "textures": 27,
+        "resident": 27,
+        "pooled": 0,
+        "created": 27,
+        "pending": 0
+      },
+      "nonBlackPixels": 522141,
+      "rgbaFnv1a": "88785865",
+      "pngSha256": "f94909cc1f0a19c1c650a72a480b60e53d237328f2f4cace471b9b7f01433275"
+    },
+    {
+      "orientation": "horizontal",
+      "viewport": {
+        "width": 960,
+        "height": 544
+      },
+      "capture": 7,
+      "phase": 7,
+      "sourceMap": "spyder_route2",
+      "targetMap": "spyder_cotton_town",
+      "activeMap": "spyder_route2",
+      "file": "world-seam-horizontal.960x544.phase-7.png",
+      "camera": [
+        1754,
+        2104
+      ],
+      "player": {
+        "tile": [
+          0,
+          8
+        ],
+        "localPixel": [
+          -14,
+          128
+        ],
+        "worldPixel": [
+          2226,
+          2368
+        ],
+        "screenRect": [
+          472,
+          248,
+          16,
+          32
+        ],
+        "facing": 1,
+        "movePhase": 7
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route1",
+          "spyder_route2"
+        ],
+        "textures": 32,
+        "resident": 32,
+        "pooled": 0,
+        "created": 32,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route1",
+          "spyder_route2"
+        ],
+        "textures": 27,
+        "resident": 27,
+        "pooled": 0,
+        "created": 27,
+        "pending": 0
+      },
+      "nonBlackPixels": 522141,
+      "rgbaFnv1a": "23fd9b48",
+      "pngSha256": "14d75bb3694f42b0d596dbfa54d2bf40b70d1ed73d9684033fe7dab781224f89"
+    },
+    {
+      "orientation": "horizontal",
+      "viewport": {
+        "width": 960,
+        "height": 544
+      },
+      "capture": "landing",
+      "phase": null,
+      "sourceMap": "spyder_route2",
+      "targetMap": "spyder_cotton_town",
+      "activeMap": "spyder_cotton_town",
+      "file": "world-seam-horizontal.960x544.landing.png",
+      "camera": [
+        1752,
+        2104
+      ],
+      "player": {
+        "tile": [
+          39,
+          28
+        ],
+        "localPixel": [
+          624,
+          448
+        ],
+        "worldPixel": [
+          2224,
+          2368
+        ],
+        "screenRect": [
+          472,
+          248,
+          16,
+          32
+        ],
+        "facing": 1,
+        "movePhase": 0
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route1",
+          "spyder_route2"
+        ],
+        "textures": 32,
+        "resident": 32,
+        "pooled": 0,
+        "created": 32,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_citypark",
+          "spyder_cotton_town",
+          "spyder_route1",
+          "spyder_route2"
+        ],
+        "textures": 27,
+        "resident": 27,
+        "pooled": 0,
+        "created": 27,
+        "pending": 0
+      },
+      "nonBlackPixels": 522192,
+      "rgbaFnv1a": "634ce467",
+      "pngSha256": "baea88db4861b9a04bad5bb90c7002b5768d850fdbf96d71ebf1a1519a3b3374"
+    },
+    {
+      "orientation": "vertical",
+      "viewport": {
+        "width": 960,
+        "height": 544
+      },
+      "capture": 0,
+      "phase": 0,
+      "sourceMap": "spyder_paper_town",
+      "targetMap": "spyder_route1",
+      "activeMap": "spyder_paper_town",
+      "file": "world-seam-vertical.960x544.phase-0.png",
+      "camera": [
+        1352,
+        2616
+      ],
+      "player": {
+        "tile": [
+          14,
+          0
+        ],
+        "localPixel": [
+          224,
+          0
+        ],
+        "worldPixel": [
+          1824,
+          2880
+        ],
+        "screenRect": [
+          472,
+          248,
+          16,
+          32
+        ],
+        "facing": 2,
+        "movePhase": 0
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 23,
+        "resident": 23,
+        "pooled": 9,
+        "created": 32,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 15,
+        "resident": 15,
+        "pooled": 12,
+        "created": 27,
+        "pending": 0
+      },
+      "nonBlackPixels": 521557,
+      "rgbaFnv1a": "cf436511",
+      "pngSha256": "bbc4e0857fc8e7456d995d9fb663c08afa4f73a63286332e64e422692b8f32a5"
+    },
+    {
+      "orientation": "vertical",
+      "viewport": {
+        "width": 960,
+        "height": 544
+      },
+      "capture": 1,
+      "phase": 1,
+      "sourceMap": "spyder_paper_town",
+      "targetMap": "spyder_route1",
+      "activeMap": "spyder_paper_town",
+      "file": "world-seam-vertical.960x544.phase-1.png",
+      "camera": [
+        1352,
+        2614
+      ],
+      "player": {
+        "tile": [
+          14,
+          0
+        ],
+        "localPixel": [
+          224,
+          -2
+        ],
+        "worldPixel": [
+          1824,
+          2878
+        ],
+        "screenRect": [
+          472,
+          248,
+          16,
+          32
+        ],
+        "facing": 2,
+        "movePhase": 1
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 23,
+        "resident": 23,
+        "pooled": 9,
+        "created": 32,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 15,
+        "resident": 15,
+        "pooled": 12,
+        "created": 27,
+        "pending": 0
+      },
+      "nonBlackPixels": 521557,
+      "rgbaFnv1a": "97aaf329",
+      "pngSha256": "24eac2402ce8ee2a2a4cc4d2ae9cd006251fcfd008f5bfd3c2d7f7a5f09a0555"
+    },
+    {
+      "orientation": "vertical",
+      "viewport": {
+        "width": 960,
+        "height": 544
+      },
+      "capture": 2,
+      "phase": 2,
+      "sourceMap": "spyder_paper_town",
+      "targetMap": "spyder_route1",
+      "activeMap": "spyder_paper_town",
+      "file": "world-seam-vertical.960x544.phase-2.png",
+      "camera": [
+        1352,
+        2612
+      ],
+      "player": {
+        "tile": [
+          14,
+          0
+        ],
+        "localPixel": [
+          224,
+          -4
+        ],
+        "worldPixel": [
+          1824,
+          2876
+        ],
+        "screenRect": [
+          472,
+          248,
+          16,
+          32
+        ],
+        "facing": 2,
+        "movePhase": 2
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 23,
+        "resident": 23,
+        "pooled": 9,
+        "created": 32,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 15,
+        "resident": 15,
+        "pooled": 12,
+        "created": 27,
+        "pending": 0
+      },
+      "nonBlackPixels": 521565,
+      "rgbaFnv1a": "5d5db3ae",
+      "pngSha256": "1b15c2103064d43f074aa9b22957c988b35e181a4a4b2afc63e39ac621d4f83a"
+    },
+    {
+      "orientation": "vertical",
+      "viewport": {
+        "width": 960,
+        "height": 544
+      },
+      "capture": 3,
+      "phase": 3,
+      "sourceMap": "spyder_paper_town",
+      "targetMap": "spyder_route1",
+      "activeMap": "spyder_paper_town",
+      "file": "world-seam-vertical.960x544.phase-3.png",
+      "camera": [
+        1352,
+        2610
+      ],
+      "player": {
+        "tile": [
+          14,
+          0
+        ],
+        "localPixel": [
+          224,
+          -6
+        ],
+        "worldPixel": [
+          1824,
+          2874
+        ],
+        "screenRect": [
+          472,
+          248,
+          16,
+          32
+        ],
+        "facing": 2,
+        "movePhase": 3
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 23,
+        "resident": 23,
+        "pooled": 9,
+        "created": 32,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 15,
+        "resident": 15,
+        "pooled": 12,
+        "created": 27,
+        "pending": 0
+      },
+      "nonBlackPixels": 521565,
+      "rgbaFnv1a": "067ec53d",
+      "pngSha256": "b9b730b5d460fb0898896bb4666bbabbb7a4d7f2e8c89ea8db15c6f607c015ea"
+    },
+    {
+      "orientation": "vertical",
+      "viewport": {
+        "width": 960,
+        "height": 544
+      },
+      "capture": 4,
+      "phase": 4,
+      "sourceMap": "spyder_paper_town",
+      "targetMap": "spyder_route1",
+      "activeMap": "spyder_paper_town",
+      "file": "world-seam-vertical.960x544.phase-4.png",
+      "camera": [
+        1352,
+        2608
+      ],
+      "player": {
+        "tile": [
+          14,
+          0
+        ],
+        "localPixel": [
+          224,
+          -8
+        ],
+        "worldPixel": [
+          1824,
+          2872
+        ],
+        "screenRect": [
+          472,
+          248,
+          16,
+          32
+        ],
+        "facing": 2,
+        "movePhase": 4
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 23,
+        "resident": 23,
+        "pooled": 9,
+        "created": 32,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 15,
+        "resident": 15,
+        "pooled": 12,
+        "created": 27,
+        "pending": 0
+      },
+      "nonBlackPixels": 521557,
+      "rgbaFnv1a": "f04b389f",
+      "pngSha256": "370869a67904ac4bfe1c076b299241991c339337c466ecff80b6781dc886e51d"
+    },
+    {
+      "orientation": "vertical",
+      "viewport": {
+        "width": 960,
+        "height": 544
+      },
+      "capture": 5,
+      "phase": 5,
+      "sourceMap": "spyder_paper_town",
+      "targetMap": "spyder_route1",
+      "activeMap": "spyder_paper_town",
+      "file": "world-seam-vertical.960x544.phase-5.png",
+      "camera": [
+        1352,
+        2606
+      ],
+      "player": {
+        "tile": [
+          14,
+          0
+        ],
+        "localPixel": [
+          224,
+          -10
+        ],
+        "worldPixel": [
+          1824,
+          2870
+        ],
+        "screenRect": [
+          472,
+          248,
+          16,
+          32
+        ],
+        "facing": 2,
+        "movePhase": 5
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 23,
+        "resident": 23,
+        "pooled": 9,
+        "created": 32,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 15,
+        "resident": 15,
+        "pooled": 12,
+        "created": 27,
+        "pending": 0
+      },
+      "nonBlackPixels": 521557,
+      "rgbaFnv1a": "c6536207",
+      "pngSha256": "41943ac9c1af569ddcab7df4eb9d6a92f6c05d9a6af4e0dcc254d574eb6497b3"
+    },
+    {
+      "orientation": "vertical",
+      "viewport": {
+        "width": 960,
+        "height": 544
+      },
+      "capture": 6,
+      "phase": 6,
+      "sourceMap": "spyder_paper_town",
+      "targetMap": "spyder_route1",
+      "activeMap": "spyder_paper_town",
+      "file": "world-seam-vertical.960x544.phase-6.png",
+      "camera": [
+        1352,
+        2604
+      ],
+      "player": {
+        "tile": [
+          14,
+          0
+        ],
+        "localPixel": [
+          224,
+          -12
+        ],
+        "worldPixel": [
+          1824,
+          2868
+        ],
+        "screenRect": [
+          472,
+          248,
+          16,
+          32
+        ],
+        "facing": 2,
+        "movePhase": 6
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 23,
+        "resident": 23,
+        "pooled": 9,
+        "created": 32,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 15,
+        "resident": 15,
+        "pooled": 12,
+        "created": 27,
+        "pending": 0
+      },
+      "nonBlackPixels": 521565,
+      "rgbaFnv1a": "bf8700d5",
+      "pngSha256": "d05c90562e0ed378345d9c1c030414e44869c83cd201736286f8697dde0dd0bb"
+    },
+    {
+      "orientation": "vertical",
+      "viewport": {
+        "width": 960,
+        "height": 544
+      },
+      "capture": 7,
+      "phase": 7,
+      "sourceMap": "spyder_paper_town",
+      "targetMap": "spyder_route1",
+      "activeMap": "spyder_paper_town",
+      "file": "world-seam-vertical.960x544.phase-7.png",
+      "camera": [
+        1352,
+        2602
+      ],
+      "player": {
+        "tile": [
+          14,
+          0
+        ],
+        "localPixel": [
+          224,
+          -14
+        ],
+        "worldPixel": [
+          1824,
+          2866
+        ],
+        "screenRect": [
+          472,
+          248,
+          16,
+          32
+        ],
+        "facing": 2,
+        "movePhase": 7
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 23,
+        "resident": 23,
+        "pooled": 9,
+        "created": 32,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 15,
+        "resident": 15,
+        "pooled": 12,
+        "created": 27,
+        "pending": 0
+      },
+      "nonBlackPixels": 521565,
+      "rgbaFnv1a": "0b7f5df5",
+      "pngSha256": "fb54adbb85ce73da19261dfb01bcf9d38f5c4372ac8a4cd577840e3ed6d85dd5"
+    },
+    {
+      "orientation": "vertical",
+      "viewport": {
+        "width": 960,
+        "height": 544
+      },
+      "capture": "landing",
+      "phase": null,
+      "sourceMap": "spyder_paper_town",
+      "targetMap": "spyder_route1",
+      "activeMap": "spyder_route1",
+      "file": "world-seam-vertical.960x544.landing.png",
+      "camera": [
+        1352,
+        2600
+      ],
+      "player": {
+        "tile": [
+          14,
+          19
+        ],
+        "localPixel": [
+          224,
+          304
+        ],
+        "worldPixel": [
+          1824,
+          2864
+        ],
+        "screenRect": [
+          472,
+          248,
+          16,
+          32
+        ],
+        "facing": 2,
+        "movePhase": 0
+      },
+      "fade": null,
+      "scene": null,
+      "ground": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 23,
+        "resident": 23,
+        "pooled": 9,
+        "created": 32,
+        "pending": 0
+      },
+      "upper": {
+        "visibleMaps": [
+          "spyder_brideswood",
+          "spyder_paper_town",
+          "spyder_route1",
+          "spyder_routec"
+        ],
+        "textures": 15,
+        "resident": 15,
+        "pooled": 12,
+        "created": 27,
+        "pending": 0
+      },
+      "nonBlackPixels": 521611,
+      "rgbaFnv1a": "02cb9665",
+      "pngSha256": "f09308eec7c09037c0e24309c1dea46c3e0696416eaeedb9bd19fd39ebebd31b"
+    }
+  ],
+  "contactSheets": [
+    {
+      "viewport": {
+        "width": 480,
+        "height": 272
+      },
+      "file": "world-seam-crossings.480x272.contact-sheet.png",
+      "width": 4320,
+      "height": 544,
+      "columns": 9,
+      "rows": [
+        {
+          "orientation": "horizontal",
+          "files": [
+            "world-seam-horizontal.480x272.phase-0.png",
+            "world-seam-horizontal.480x272.phase-1.png",
+            "world-seam-horizontal.480x272.phase-2.png",
+            "world-seam-horizontal.480x272.phase-3.png",
+            "world-seam-horizontal.480x272.phase-4.png",
+            "world-seam-horizontal.480x272.phase-5.png",
+            "world-seam-horizontal.480x272.phase-6.png",
+            "world-seam-horizontal.480x272.phase-7.png",
+            "world-seam-horizontal.480x272.landing.png"
+          ]
+        },
+        {
+          "orientation": "vertical",
+          "files": [
+            "world-seam-vertical.480x272.phase-0.png",
+            "world-seam-vertical.480x272.phase-1.png",
+            "world-seam-vertical.480x272.phase-2.png",
+            "world-seam-vertical.480x272.phase-3.png",
+            "world-seam-vertical.480x272.phase-4.png",
+            "world-seam-vertical.480x272.phase-5.png",
+            "world-seam-vertical.480x272.phase-6.png",
+            "world-seam-vertical.480x272.phase-7.png",
+            "world-seam-vertical.480x272.landing.png"
+          ]
+        }
+      ],
+      "pngSha256": "20db657f80c8b52e8945785e90465aa77e651c459d3308a913c6b68c5c8ce6c1"
+    },
+    {
+      "viewport": {
+        "width": 960,
+        "height": 544
+      },
+      "file": "world-seam-crossings.960x544.contact-sheet.png",
+      "width": 8640,
+      "height": 1088,
+      "columns": 9,
+      "rows": [
+        {
+          "orientation": "horizontal",
+          "files": [
+            "world-seam-horizontal.960x544.phase-0.png",
+            "world-seam-horizontal.960x544.phase-1.png",
+            "world-seam-horizontal.960x544.phase-2.png",
+            "world-seam-horizontal.960x544.phase-3.png",
+            "world-seam-horizontal.960x544.phase-4.png",
+            "world-seam-horizontal.960x544.phase-5.png",
+            "world-seam-horizontal.960x544.phase-6.png",
+            "world-seam-horizontal.960x544.phase-7.png",
+            "world-seam-horizontal.960x544.landing.png"
+          ]
+        },
+        {
+          "orientation": "vertical",
+          "files": [
+            "world-seam-vertical.960x544.phase-0.png",
+            "world-seam-vertical.960x544.phase-1.png",
+            "world-seam-vertical.960x544.phase-2.png",
+            "world-seam-vertical.960x544.phase-3.png",
+            "world-seam-vertical.960x544.phase-4.png",
+            "world-seam-vertical.960x544.phase-5.png",
+            "world-seam-vertical.960x544.phase-6.png",
+            "world-seam-vertical.960x544.phase-7.png",
+            "world-seam-vertical.960x544.landing.png"
+          ]
+        }
+      ],
+      "pngSha256": "d6972fc93d34dc59b1864dc32445264549b9d87e3641f29b3aff0bfa543ca9cf"
+    }
+  ]
+}

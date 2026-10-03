@@ -6,7 +6,13 @@ import { readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
 import { tuxemonExtensionState } from "../battle/extension.ts";
-import { TUXEMON_BATTLE_DB, TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS, TUXEMON_SCENES } from "../battle/game.ts";
+import {
+  createTuxemonSessionOptions,
+  TUXEMON_BATTLE_DB,
+  TUXEMON_BATTLE_RULES,
+  TUXEMON_EXTENSIONS,
+  TUXEMON_SCENES,
+} from "../battle/game.ts";
 import { tuxemonRuntimeBattleState } from "../battle/runtime.ts";
 import type { SpawnedMonsterSnapshot } from "../battle/types.ts";
 import { AttractController } from "../vendor/pocket-rpgkit/src/engine/attract.ts";
@@ -27,6 +33,7 @@ import {
   type SessionState,
 } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import type { Gb6BattleCheckpoint, Gb6JourneyResult, Gb6PartyRow } from "./gb6-journey.ts";
+import { journeyWorldTraversal } from "./gb6-journey.ts";
 import type { J1JourneyResult } from "./j1-journey.ts";
 import type { J2JourneyResult } from "./j2-journey.ts";
 import { buildJ3BaseState, type J3JourneyResult } from "./j3-journey.ts";
@@ -171,6 +178,12 @@ function staticChecks(
   expect("J1 parent frame count changed", j1.base.frames === gb6.frames);
   expect("J1 parent tape hash changed", j1.base.tapeSha256 === gb6.tapeSha256);
   expect("J1 parent state hash changed", j1.base.terminalStateSha256 === gb6.terminalStateSha256);
+  expect("J1 parent traversal identity changed",
+    journeyWorldTraversal(j1.base, "J3 J1 parent checkpoint") ===
+      journeyWorldTraversal(gb6, "J3 GB6 ancestor tape"));
+  expect("J1 traversal identity differs from GB6",
+    journeyWorldTraversal(j1, "J3 J1 ancestor tape") ===
+      journeyWorldTraversal(gb6, "J3 GB6 ancestor tape"));
   const throughJ1 = [...gb6.masks, ...j1.masks];
   expect("J1 combined frame count changed", j1.combinedFrames === throughJ1.length);
   expect("J1 combined tape hash changed", sha256(JSON.stringify(throughJ1)) === j1.combinedTapeSha256);
@@ -181,6 +194,12 @@ function staticChecks(
   expect("J2 parent frame count changed", j2.base.frames === throughJ1.length);
   expect("J2 parent tape hash changed", j2.base.tapeSha256 === j1.combinedTapeSha256);
   expect("J2 parent state hash changed", j2.base.terminalStateSha256 === j1.terminalStateSha256);
+  expect("J2 parent traversal identity changed",
+    journeyWorldTraversal(j2.base, "J3 J2 parent checkpoint") ===
+      journeyWorldTraversal(j1, "J3 J1 ancestor tape"));
+  expect("J2 traversal identity differs from its ancestry",
+    journeyWorldTraversal(j2, "J3 J2 ancestor tape") ===
+      journeyWorldTraversal(j1, "J3 J1 ancestor tape"));
   const throughJ2 = [...throughJ1, ...j2.masks];
   expect("J2 combined frame count changed", j2.combinedFrames === throughJ2.length);
   expect("J2 combined tape hash changed", sha256(JSON.stringify(throughJ2)) === j2.combinedTapeSha256);
@@ -193,6 +212,11 @@ function staticChecks(
   expect("J3 parent frame count changed", journey.base.frames === throughJ2.length);
   expect("J3 parent tape hash changed", journey.base.tapeSha256 === j2.combinedTapeSha256);
   expect("J3 parent state hash changed", journey.base.terminalStateSha256 === j2.terminalStateSha256);
+  expect("J3 parent traversal identity changed",
+    journeyWorldTraversal(journey.base, "J3 parent checkpoint") ===
+      journeyWorldTraversal(j2, "J3 J2 ancestor tape"));
+  expect("J3 traversal identity differs from its ancestry",
+    journeyWorldTraversal(journey, "J3 tape") === journeyWorldTraversal(j2, "J3 J2 ancestor tape"));
   expect("J3 parent timeline changed", journey.base.timelineFrame === throughJ2.length);
   expect("J3 parent held mask changed",
     journey.base.heldMask === (j2.masks.at(-1) ?? j1.masks.at(-1) ?? gb6.masks.at(-1) ?? 0));
@@ -375,9 +399,16 @@ function validateBattles(
 function replayStandalone(journey: J3JourneyResult): ReplayResult {
   const base = buildJ3BaseState();
   expect("base snapshot hash changed", digest(base.snapshot) === journey.base.terminalSnapshotSha256);
-  expect("rebuilt base checkpoint changed", canonicalJson(base.checkpoint) === canonicalJson(journey.base));
+  expect("rebuilt base checkpoint changed", canonicalJson(base.checkpoint) === canonicalJson({
+    ...journey.base,
+    worldTraversal: journeyWorldTraversal(journey.base, "J3 parent checkpoint"),
+  }));
   const project = readInlineProject(ROOT);
-  const session = createSession(project, 60, GAME_OPTIONS);
+  const session = createSession(
+    project,
+    60,
+    createTuxemonSessionOptions(project, worldTraversal, GAME_OPTIONS),
+  );
   const initial = restoreSessionSnapshot(session, base.snapshot);
   initial.frame = journey.base.timelineFrame;
   expect("restored initial state hash changed", digest(initial) === journey.initialStateSha256);
@@ -395,7 +426,11 @@ function replayMerged(
   captureStateful = false,
 ): ReplayResult {
   const project = readInlineProject(ROOT);
-  const session = createSession(project, 60, GAME_OPTIONS);
+  const session = createSession(
+    project,
+    60,
+    createTuxemonSessionOptions(project, worldTraversal, GAME_OPTIONS),
+  );
   return replay(
     session,
     startSession(project, session),
@@ -410,7 +445,11 @@ function replayMerged(
 
 function replayFromSave(combined: readonly number[], point: SavedPoint): SessionState {
   const project = readInlineProject(ROOT);
-  const session = createSession(project, 60, GAME_OPTIONS);
+  const session = createSession(
+    project,
+    60,
+    createTuxemonSessionOptions(project, worldTraversal, GAME_OPTIONS),
+  );
   const decoded = decodeEnvelopeText(point.envelope);
   let state = restoreSessionSnapshot(session, decoded);
   state.frame = point.timelineFrame;
@@ -438,7 +477,7 @@ function verifyRewind(
     hz: 60,
     attractEnabled: false,
     rewindSeconds: (from - target) / 60,
-    ...GAME_OPTIONS,
+    ...createTuxemonSessionOptions(project, worldTraversal, GAME_OPTIONS),
   });
   controller.startPlay();
   for (let frame = 0; frame < from; frame++) controller.step(combined[frame]!);
@@ -476,8 +515,9 @@ function verifyRate(
   hz: number,
 ): Record<string, number | string> {
   const project = readInlineProject(ROOT);
-  const controller = new AttractController(project, combined, { hz, ...GAME_OPTIONS });
-  const referenceSession = createSession(project, 60, GAME_OPTIONS);
+  const options = createTuxemonSessionOptions(project, worldTraversal, GAME_OPTIONS);
+  const controller = new AttractController(project, combined, { hz, ...options });
+  const referenceSession = createSession(project, 60, options);
   let reference = startSession(project, referenceSession);
   let referenceFrame = 0;
   let previous = 0;
@@ -541,6 +581,7 @@ const gb6 = JSON.parse(readFileSync(GB6_PATH, "utf8")) as Gb6JourneyResult;
 const j1 = JSON.parse(readFileSync(J1_PATH, "utf8")) as J1JourneyResult;
 const j2 = JSON.parse(readFileSync(J2_PATH, "utf8")) as J2JourneyResult;
 const journey = JSON.parse(readFileSync(JOURNEY_PATH, "utf8")) as J3JourneyResult;
+const worldTraversal = journeyWorldTraversal(journey, "J3 tape");
 const combined = staticChecks(gb6, j1, j2, journey);
 const boundaries: AncestorBoundary[] = [
   { label: "GB6", frame: gb6.frames, stateSha256: gb6.terminalStateSha256 },

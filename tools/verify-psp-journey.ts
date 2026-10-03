@@ -6,6 +6,7 @@ import { createHash } from "node:crypto";
 import { readFileSync, statSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { createProductionTuxemonBattle } from "../battle/production.ts";
+import { createTuxemonSessionOptions } from "../battle/game.ts";
 import { FIXED_INITIAL_CIVIL_TIME, timeWeatherAt } from "../battle/time-weather.ts";
 import { canonicalJson } from "../vendor/pocket-rpgkit/src/engine/save.ts";
 import {
@@ -15,6 +16,7 @@ import {
 } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import type { JsonValue } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 import { readShardedProject } from "./generated-project.ts";
+import { journeyWorldTraversal } from "./gb6-journey.ts";
 
 interface LogEntry {
   kind?: unknown;
@@ -69,20 +71,25 @@ if (!terminal || terminal.buildId !== receipt.journeyBuildId) {
   throw new Error("Newest PSP journey session did not reach a terminal snapshot");
 }
 
-const tape = JSON.parse(readFileSync(join(root, "data/g6-journey.json"), "utf8")).masks as number[];
+const tapeDocument = JSON.parse(readFileSync(join(root, "data/g6-journey.json"), "utf8")) as {
+  masks: number[];
+  worldTraversal?: unknown;
+};
+const tape = tapeDocument.masks;
+const worldTraversal = journeyWorldTraversal(tapeDocument, "PSP journey tape");
 if (terminal.frame !== tape.length) throw new Error("PSP journey length mismatch");
 const { project, repository } = readShardedProject(root);
 const { extensions, rules, scenes } = createProductionTuxemonBattle(
   { read: (entry) => new Uint8Array(readFileSync(join(root, "dist", entry))) },
   { initialTimeWeather: timeWeatherAt(FIXED_INITIAL_CIVIL_TIME) },
 );
-const sessionRuntime = createSession(project, 60, {
+const sessionRuntime = createSession(project, 60, createTuxemonSessionOptions(project, worldTraversal, {
   maps: repository,
   extensions,
   battle: rules,
   scenes,
   immutableState: true,
-});
+}));
 let state = startSession(project, sessionRuntime);
 let previous = 0;
 for (const mask of tape) {

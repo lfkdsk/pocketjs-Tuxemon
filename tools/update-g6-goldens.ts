@@ -1,6 +1,6 @@
 // Regenerate the three maintained G6 journey keyframes from the built app.
-// Prerequisites: `bun run build` (bundle + pak) and `bun tools/smoke-spyder.ts`
-// (the adaptive reducer driver freezes the exact 60 Hz input tape).
+// Prerequisite: `bun run build` (bundle + pak). The committed journey is the
+// source of truth so a visual refresh never silently replaces preserved masks.
 
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
@@ -29,13 +29,11 @@ interface JourneyFile {
 const ROOT = resolve(import.meta.dir, "..");
 const NPC_SRC = createNpcSrcProvider(NPC_SRC_INDEX, { read: (entry) => readFileSync(join(ROOT, "dist", entry)) });
 const bundle = join(ROOT, "dist/main");
-const journeyPath = join(ROOT, "dist/journey-spyder-60hz.json");
+const journeyPath = join(ROOT, "data/g6-journey.json");
 if (!existsSync(bundle + ".js") || !existsSync(bundle + ".pak")) {
   throw new Error("G6 goldens: missing dist/main.{js,pak}; run `bun run build`");
 }
-if (!existsSync(journeyPath)) {
-  throw new Error("G6 goldens: missing 60 Hz tape; run `HZ=60 bun tools/smoke-spyder.ts`");
-}
+if (!existsSync(journeyPath)) throw new Error("G6 goldens: missing committed 60 Hz journey");
 
 const journey = JSON.parse(readFileSync(journeyPath, "utf8")) as JourneyFile;
 const project = JSON.parse(readFileSync(join(ROOT, "dist/project.json"), "utf8")) as Project;

@@ -1,13 +1,21 @@
 import { describe, expect, test } from "bun:test";
 import {
+  buildPassage,
+  canEnter,
+  cellBlocksExit,
+  compile,
   localToWorld,
   validateWorldLayout,
   worldToLocal,
+  type Command,
+  type Dir4,
   type Project,
   type WorldComponent,
 } from "../vendor/pocket-rpgkit/src/engine/index.ts";
+import { createWorldHandoffResolver } from "../vendor/pocket-rpgkit/src/engine/world-handoff.ts";
 import { splitProjectMaps } from "../vendor/pocket-rpgkit/tools/lib/map-project.ts";
-import { buildProject } from "../importer/project.ts";
+import { createTuxemonSessionOptions } from "../battle/game.ts";
+import { availableMapIds, buildProject, G6_IMPORT_OPTIONS } from "../importer/project.ts";
 import { loadAllMaps } from "../importer/source.ts";
 import { buildOutdoorWorldIndex } from "../importer/world.ts";
 import { projectOutdoorWorldLayout } from "../importer/world-layout.ts";
@@ -24,6 +32,31 @@ const sourceSeamKey = (seam: { a: string; sideA: string; b: string; sideB: strin
 
 function components(worldId: string): WorldComponent[] {
   return layout.components.filter((component) => component.worldId === worldId);
+}
+
+type TransferCommand = Extract<Command, { op: "transfer" }>;
+
+function markedTransfers(commands: readonly Command[]): TransferCommand[] {
+  const marked: TransferCommand[] = [];
+  for (const command of commands) {
+    if (command.op === "transfer" && command.handoff) marked.push(command);
+    if (command.op === "if") {
+      marked.push(...markedTransfers(command.then), ...markedTransfers(command.else ?? []));
+    } else if (command.op === "loop") {
+      marked.push(...markedTransfers(command.commands));
+    } else if (command.op === "choices") {
+      for (const option of command.options) marked.push(...markedTransfers(option.commands));
+      marked.push(...markedTransfers(command.cancel?.commands ?? []));
+    } else if (command.op === "battle") {
+      marked.push(...markedTransfers(command.onWin ?? []));
+      marked.push(...markedTransfers(command.onLose ?? []));
+      marked.push(...markedTransfers(command.onEscape ?? []));
+    } else if (command.op === "scene") {
+      marked.push(...markedTransfers(command.onDone ?? []));
+      marked.push(...markedTransfers(command.onCancel ?? []));
+    }
+  }
+  return marked;
 }
 
 describe("runtime WorldLayout projection", () => {
@@ -103,6 +136,114 @@ describe("runtime WorldLayout projection", () => {
     expect(openings.filter((opening) => opening.compatibility === "coordinate-preserving")).toHaveLength(4);
     expect(openings.filter((opening) => opening.compatibility === "portal-only").map((opening) => opening.portalId))
       .toEqual(["routea:tmx:routea.tmx:45:a0"]);
+  });
+
+  test("marks every reachable safe opening and every marker is a passable runtime-direct transfer", () => {
+    const imported = buildProject(availableMapIds(), G6_IMPORT_OPTIONS);
+    const project = imported.project;
+    expect(project.worldTraversal).toBe("seamless-v1");
+    expect(imported.report.seamlessHandoff).toMatchObject({
+      topologySafeOpenings: 258,
+      enabledTransfers: 253,
+    });
+    expect(imported.report.seamlessHandoff.notEnabledSafePortalIds).toEqual([
+      "route3:tmx:route3.tmx:153:a0",
+      "route3:tmx:route3.tmx:154:a0",
+      "route3:tmx:route3.tmx:155:a0",
+      "route3:tmx:route3.tmx:156:a0",
+      "route3:tmx:route3.tmx:157:a0",
+    ]);
+    expect(imported.report.seamlessHandoff.notEnabled).toContainEqual({
+      reason: "unreachable-source-facing",
+      count: 5,
+    });
+
+    const safeIds = new Set(project.worldLayout!.components.flatMap((component) =>
+      component.openings.filter((opening) => opening.compatibility === "coordinate-preserving")
+        .map((opening) => opening.portalId)
+    ));
+    const portalOnlyIds = new Set(project.worldLayout!.components.flatMap((component) =>
+      component.openings.filter((opening) => opening.compatibility === "portal-only")
+        .map((opening) => opening.portalId)
+    ));
+    const openingById = new Map(project.worldLayout!.components.flatMap((component) =>
+      component.openings.map((opening) => [opening.portalId, opening] as const)
+    ));
+    const mapById = new Map(project.maps.map((map) => [map.id, map] as const));
+    const sheets = new Map(project.sheets.map((sheet) => [sheet.id, sheet] as const));
+    const passage = new Map(project.maps.map((map) => [map.id, buildPassage(map, sheets)] as const));
+    const resolver = createWorldHandoffResolver(project.worldLayout!);
+    const markedIds = new Set<string>();
+    const compiledDirectIds = new Set<string>();
+    const sideDirection = { south: 0, west: 1, north: 2, east: 3 } as const;
+    const opposite = [2, 3, 0, 1] as const;
+
+    for (const map of project.maps) {
+      for (const event of map.events ?? []) {
+        for (const page of event.pages) {
+          const raw = markedTransfers(page.commands);
+          for (const transfer of raw) {
+            const portalId = transfer.handoff!.portalId;
+            markedIds.add(portalId);
+            expect(page.trigger, portalId).toBe("playerTouch");
+            expect(safeIds.has(portalId), portalId).toBeTrue();
+            expect(portalOnlyIds.has(portalId), portalId).toBeFalse();
+            if (typeof transfer.map !== "string" || typeof transfer.x !== "number" ||
+                typeof transfer.y !== "number") throw new Error(`${portalId}: dynamic marked endpoint`);
+            const transferDirection = transfer.dir ?? "keep";
+            if (typeof transferDirection !== "string") throw new Error(`${portalId}: dynamic marked direction`);
+            const opening = openingById.get(portalId)!;
+            const target = mapById.get(transfer.map)!;
+            const facing = sideDirection[opening.source.side] as Dir4;
+            const resolved = resolver.resolve({
+              portalId,
+              sourceMapId: map.id,
+              targetMapId: transfer.map,
+              sourceX: event.x,
+              sourceY: event.y,
+              targetX: transfer.x,
+              targetY: transfer.y,
+              sourceWidth: map.width,
+              sourceHeight: map.height,
+              targetWidth: target.width,
+              targetHeight: target.height,
+              facing,
+              transferDirection,
+            });
+            expect(resolved, portalId).toEqual({ direction: facing });
+            expect(cellBlocksExit(passage.get(map.id)!, event.x, event.y, facing), portalId).toBeFalse();
+            expect(canEnter(passage.get(target.id)!, transfer.x, transfer.y, opposite[facing]), portalId).toBeTrue();
+          }
+          for (const instruction of compile(page.commands)) {
+            if (instruction.op === "transfer" && instruction.handoff) {
+              compiledDirectIds.add(instruction.handoff.portalId);
+            }
+          }
+        }
+      }
+    }
+
+    expect([...markedIds].sort()).toEqual(imported.report.seamlessHandoff.enabledPortalIds);
+    expect([...compiledDirectIds].sort()).toEqual(imported.report.seamlessHandoff.enabledPortalIds);
+    expect(markedIds.size).toBe(253);
+    expect([...safeIds].filter((id) => !markedIds.has(id)).sort())
+      .toEqual(imported.report.seamlessHandoff.notEnabledSafePortalIds);
+  });
+
+  test("builds explicit seamless and legacy headless session options without silent fallback", () => {
+    const project = buildProject(["spyder_paper_town", "spyder_route1"], G6_IMPORT_OPTIONS).project;
+    const seamless = createTuxemonSessionOptions(project);
+    expect(seamless.worldTraversal).toBe("seamless-v1");
+    expect(seamless.handoff?.topologyHash).toBe(project.worldLayout?.topologyHash);
+
+    const legacy = createTuxemonSessionOptions(project, "legacy-transfer");
+    expect(legacy.worldTraversal).toBe("legacy-transfer");
+    expect(legacy.handoff).toBeUndefined();
+
+    expect(() => createTuxemonSessionOptions(
+      { ...project, worldTraversal: undefined },
+      "seamless-v1",
+    )).toThrow("requires a seamless project with WorldLayout");
   });
 
   test("does not promote gaps, rejected contacts or overlaps into layout seams", () => {

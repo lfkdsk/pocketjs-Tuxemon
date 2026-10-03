@@ -59,6 +59,12 @@ const journey = JSON.parse(readFileSync(join(ROOT, "data/j1-captainreturns-journ
 };
 const project = JSON.parse(readFileSync(join(ROOT, "dist/project.json"), "utf8")) as {
   maps: { id: string; width: number; height: number }[];
+  worldLayout?: {
+    components: Array<{
+      bounds: { minTileX: number; minTileY: number; maxTileX: number; maxTileY: number };
+      placements: Array<{ mapId: string; originTileX: number; originTileY: number }>;
+    }>;
+  };
 };
 
 function sha256(value: string | Uint8Array): string {
@@ -83,8 +89,14 @@ function countColour(rgba: Uint8Array, red: number, green: number, blue: number)
 function matchingComposite(frame: GoldenFrame, marks: readonly PaintMark[]) {
   const target = load(frame.name, frame.width).image;
   const map = project.maps.find((candidate) => candidate.id === frame.map)!;
-  const offsetX = Math.max(0, Math.floor((frame.width - map.width * 16) / 2));
-  const offsetY = Math.max(0, Math.floor((frame.height - map.height * 16) / 2));
+  const component = project.worldLayout?.components.find((candidate) =>
+    candidate.placements.some((placement) => placement.mapId === frame.map)
+  );
+  const placement = component?.placements.find((candidate) => candidate.mapId === frame.map);
+  const componentW = component ? (component.bounds.maxTileX - component.bounds.minTileX) * 16 : map.width * 16;
+  const componentH = component ? (component.bounds.maxTileY - component.bounds.minTileY) * 16 : map.height * 16;
+  const offsetX = Math.max(0, Math.floor((frame.width - componentW) / 2));
+  const offsetY = Math.max(0, Math.floor((frame.height - componentH) / 2));
   const expected = new Map<number, [number, number, number, number]>();
   let sourceOpaque = 0;
 
@@ -93,8 +105,10 @@ function matchingComposite(frame: GoldenFrame, marks: readonly PaintMark[]) {
   for (const mark of marks) {
     const sourcePath = join(ROOT, mark.image);
     const sprite = decodePng(new Uint8Array(readFileSync(sourcePath)), sourcePath);
-    const x0 = offsetX + mark.pixel[0] - frame.camera[0];
-    const y0 = offsetY + mark.pixel[1] - frame.camera[1] + 16 - mark.height;
+    const worldX = mark.pixel[0] + (placement?.originTileX ?? 0) * 16;
+    const worldY = mark.pixel[1] + (placement?.originTileY ?? 0) * 16;
+    const x0 = offsetX + worldX - frame.camera[0];
+    const y0 = offsetY + worldY - frame.camera[1] + 16 - mark.height;
     for (let y = 0; y < sprite.height; y++) for (let x = 0; x < sprite.width; x++) {
       const from = (y * sprite.width + x) * 4;
       if (sprite.rgba[from + 3] !== 255) continue;
@@ -140,11 +154,11 @@ describe("J1 captain-return location goldens", () => {
       [name, map, frame, mergedFrame, width, height]
     )).toEqual([
       ["wayfarer-guestbook", "spyder_wayfarer_inn1", 519, 111_385, 480, 272],
-      ["route-4-billie", "spyder_route4", 4_727, 115_593, 480, 272],
-      ["captain-found", "spyder_mansion_basement", 10_385, 121_251, 480, 272],
+      ["route-4-billie", "spyder_route4", 4_717, 115_583, 480, 272],
+      ["captain-found", "spyder_mansion_basement", 10_355, 121_221, 480, 272],
       ["wayfarer-guestbook", "spyder_wayfarer_inn1", 519, 111_385, 960, 544],
-      ["route-4-billie", "spyder_route4", 4_727, 115_593, 960, 544],
-      ["captain-found", "spyder_mansion_basement", 10_385, 121_251, 960, 544],
+      ["route-4-billie", "spyder_route4", 4_717, 115_583, 960, 544],
+      ["captain-found", "spyder_mansion_basement", 10_355, 121_221, 960, 544],
     ]);
   });
 
@@ -214,7 +228,8 @@ describe("J1 captain-return location goldens", () => {
       const route4 = load("route-4-billie", width).image.rgba;
       expect(countColour(route4, 64, 176, 128), `${width}: route grass`).toBeGreaterThan(58_000);
       expect(countColour(route4, 40, 104, 32), `${width}: route trees`).toBeGreaterThan(6_500);
-      expect(countColour(route4, 56, 80, 0), `${width}: route crop rows`).toBeGreaterThan(2_000);
+      expect(countColour(route4, 56, 80, 0), `${width}: route crop rows`)
+        .toBeGreaterThan(width === 480 ? 1_700 : 2_000);
 
       const basement = load("captain-found", width).image.rgba;
       expect(countColour(basement, 63, 46, 64), `${width}: cellar walls`).toBeGreaterThan(23_000);

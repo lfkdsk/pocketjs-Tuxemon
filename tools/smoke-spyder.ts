@@ -10,33 +10,31 @@ import { searchWalk } from "../vendor/pocket-rpgkit/src/engine/journey-search.ts
 import { canonicalJson } from "../vendor/pocket-rpgkit/src/engine/save.ts";
 import { AttractController } from "../vendor/pocket-rpgkit/src/engine/attract.ts";
 import { readInlineProject, readShardedProject } from "./generated-project.ts";
-import { TUXEMON_BATTLE_RULES, TUXEMON_EXTENSIONS, TUXEMON_SCENES } from "../battle/game.ts";
-import { TUXEMON_BATTLE_DB } from "../battle/game.ts";
+import { createTuxemonSessionOptions, TUXEMON_BATTLE_DB } from "../battle/game.ts";
 import { tuxemonExtensionState } from "../battle/extension.ts";
 import { utilitySceneAutoplayMask } from "./scene-autoplay.ts";
+import { recordingWorldTraversal } from "./gb6-journey.ts";
 
 const PROJECT_ROOT = resolve(process.env.G6_PROJECT_ROOT ?? new URL("..", import.meta.url).pathname);
 const OUT_DIR = resolve(process.env.G6_OUT_DIR ?? join(PROJECT_ROOT, "dist"));
 const inlineProject = readInlineProject(PROJECT_ROOT);
 const sharded = readShardedProject(PROJECT_ROOT);
 const project = sharded.project;
+const worldTraversal = recordingWorldTraversal(project, "Spyder smoke journey");
 const HZ = Number(process.env.HZ ?? 60); // host rate; the kit folds 60/HZ reference ticks per frame
 const OUTCOME = process.env.GB4_OUTCOME === "lose" ? "lose" : "win";
 const OUTPUT_TAG = OUTCOME === "win" ? `${HZ}hz` : `lose-${HZ}hz`;
 const JOURNEY_OUT = resolve(process.env.GB4_JOURNEY_OUT
   ?? join(OUT_DIR, `journey-spyder-${OUTPUT_TAG}.json`));
-const sess = createSession(project, HZ, {
+const sess = createSession(project, HZ, createTuxemonSessionOptions(project, worldTraversal, {
   maps: sharded.repository,
-  extensions: TUXEMON_EXTENSIONS,
-  battle: TUXEMON_BATTLE_RULES,
-  scenes: TUXEMON_SCENES,
-});
+}));
 let st: SessionState = startSession(project, sess);
-const inlineSession = createSession(inlineProject, HZ, {
-  extensions: TUXEMON_EXTENSIONS,
-  battle: TUXEMON_BATTLE_RULES,
-  scenes: TUXEMON_SCENES,
-});
+const inlineSession = createSession(
+  inlineProject,
+  HZ,
+  createTuxemonSessionOptions(inlineProject, worldTraversal),
+);
 let inlineState: SessionState = startSession(inlineProject, inlineSession);
 if (canonicalJson(st) !== canonicalJson(inlineState)) {
   throw new Error("smoke: initial sharded SessionState differs from inline");
@@ -371,11 +369,12 @@ try {
   goTo(14, 1);
   settle();
   expect("the overlapping Paper Town strip kept mom's quest", v("v.momquest") > 0);
+  // The quest's NPC approach may leave the player on either side of this
+  // two-cell strip. Re-center below the opening, then turn north on its edge
+  // so the direct playerTouch page and the handoff validate the same facing.
+  goTo(14, 1);
   goTo(14, 0);
-  // K1 retains Tuxemon's `char_facing player,down` guard. Turn while still
-  // on the exit mat; the area trigger observes the facing edge before the
-  // mover can step back south.
-  tick(BTN_BITS.DOWN);
+  tick(BTN_BITS.UP);
   settle();
 } catch (e) {
   requested = String(e);
@@ -391,9 +390,7 @@ expect("the journey entered and completed Battle Processing", battleStartFrame >
 const attractOptions = {
   hz: HZ,
   attractEnabled: false,
-  extensions: TUXEMON_EXTENSIONS,
-  battle: TUXEMON_BATTLE_RULES,
-  scenes: TUXEMON_SCENES,
+  ...createTuxemonSessionOptions(inlineProject, worldTraversal),
 } as const;
 const baseline = new AttractController(inlineProject, [], {
   ...attractOptions,
@@ -422,6 +419,7 @@ console.log(journal.join("\n"));
 const tapeDigest = createHash("sha256").update(JSON.stringify(masks)).digest("hex");
 const result = {
   ...(OUTCOME === "lose" ? { format: "pocket-tuxemon/gb6-first-loss/v1" } : {}),
+  worldTraversal,
   hz: HZ,
   frames,
   map: st.mapId,
@@ -442,9 +440,10 @@ const result = {
   },
   ...(OUTCOME === "lose" ? { tapeSha256: tapeDigest } : {}),
 };
-const digest = createHash("sha256").update(JSON.stringify(result)).digest("hex");
 const stateDigest = createHash("sha256").update(canonicalJson(st)).digest("hex");
-writeFileSync(JOURNEY_OUT, JSON.stringify({ ...result, sha256: digest }, null, 2) + "\n");
+const payload = { ...result, terminalStateSha256: stateDigest };
+const digest = createHash("sha256").update(JSON.stringify(payload)).digest("hex");
+writeFileSync(JOURNEY_OUT, JSON.stringify({ ...payload, sha256: digest }, null, 2) + "\n");
 console.log(`STATE sha256=${stateDigest} (inline=sharded every frame)`);
 console.log("RESULT " + JSON.stringify({
   hz: result.hz,

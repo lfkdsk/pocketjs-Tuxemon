@@ -552,6 +552,27 @@ mod g6_quickjs_bench {
         player_party: u8,
         enemy_party: u8,
         menu_mode: Option<String>,
+        // G6_HANDOFF_BUCKETS: actual live seamless state, even when the fast
+        // journey path uses frozen map/battle metadata for the older buckets.
+        live_map: String,
+        live_fade: bool,
+        handoff: Option<HandoffFrame>,
+    }
+
+    #[derive(Clone, Debug, Deserialize)]
+    #[serde(rename_all = "camelCase")]
+    struct HandoffFrame {
+        source_map_id: String,
+        target_map_id: String,
+        phase: usize,
+        total_ticks: usize,
+    }
+
+    #[derive(Deserialize)]
+    struct HandoffObservation {
+        map: String,
+        fade: bool,
+        handoff: Option<HandoffFrame>,
     }
 
     struct Bench {
@@ -560,6 +581,7 @@ mod g6_quickjs_bench {
         sample_structural: bool,
         hash_every: usize,
         battle_buckets: bool,
+        handoff_buckets: bool,
     }
 
     impl Bench {
@@ -647,6 +669,13 @@ mod g6_quickjs_bench {
             .expect("G6 rich state tuple")
         }
 
+        fn handoff_state(&self) -> HandoffObservation {
+            serde_json::from_str(&self.string(
+                r#"(()=>{const s=globalThis.__rpgSessionState;return JSON.stringify({map:s.mapId,fade:!!s.fade,handoff:s.handoff??null})})()"#,
+            ))
+            .expect("G6 handoff observation")
+        }
+
         fn frame(
             &mut self,
             frame: usize,
@@ -725,6 +754,23 @@ mod g6_quickjs_bench {
                 };
                 (map, moving, fade, battle, battle_event, 0, 0, None)
             };
+            // This eval is deliberately after all timing points. It neither
+            // inflates the phase sample nor trusts fast-tape map metadata:
+            // handoff completeness is proven against the live reducer state.
+            // Long-tape benches restrict it to forced framebuffer windows
+            // around map checkpoints, which cover phase 0..7 plus landing
+            // without allocating a JSON probe on every unrelated frame.
+            let handoff_observation = (self.handoff_buckets && force_hash)
+                .then(|| self.handoff_state());
+            let live_map = handoff_observation
+                .as_ref()
+                .map(|observation| observation.map.clone())
+                .unwrap_or_else(|| map.clone());
+            let live_fade = handoff_observation
+                .as_ref()
+                .map(|observation| observation.fade)
+                .unwrap_or(fade);
+            let handoff = handoff_observation.and_then(|observation| observation.handoff);
             let structural = if self.sample_structural {
                 self.structural_ops()
             } else {
@@ -751,6 +797,9 @@ mod g6_quickjs_bench {
                 player_party,
                 enemy_party,
                 menu_mode,
+                live_map,
+                live_fade,
+                handoff,
             }
         }
     }
@@ -1109,6 +1158,171 @@ mod g6_quickjs_bench {
         );
     }
 
+    struct CompletedHandoff {
+        source: String,
+        target: String,
+        phases: Vec<Sample>,
+        landing: Sample,
+    }
+
+    #[derive(Default)]
+    struct HandoffTracker {
+        active: Option<(String, String, Vec<Sample>)>,
+        completed: Vec<CompletedHandoff>,
+    }
+
+    impl HandoffTracker {
+        fn observe(&mut self, sample: &Sample) {
+            match &sample.handoff {
+                Some(handoff) => {
+                    assert_eq!(
+                        handoff.total_ticks, 8,
+                        "handoff {} -> {} must expose the eight 60 Hz phases",
+                        handoff.source_map_id, handoff.target_map_id,
+                    );
+                    assert_eq!(
+                        sample.live_map, handoff.source_map_id,
+                        "handoff phase {} changed the active map early",
+                        handoff.phase,
+                    );
+                    assert!(!sample.live_fade, "handoff phase {} retained a fade", handoff.phase);
+                    if self.active.is_none() {
+                        assert_eq!(handoff.phase, 0, "first observed handoff frame must be phase 0");
+                        self.active = Some((
+                            handoff.source_map_id.clone(),
+                            handoff.target_map_id.clone(),
+                            Vec::with_capacity(handoff.total_ticks),
+                        ));
+                    }
+                    let (source, target, phases) = self.active.as_mut().unwrap();
+                    assert_eq!(&handoff.source_map_id, source, "handoff source changed mid-crossing");
+                    assert_eq!(&handoff.target_map_id, target, "handoff target changed mid-crossing");
+                    assert_eq!(
+                        handoff.phase,
+                        phases.len(),
+                        "handoff {} -> {} skipped or duplicated a phase",
+                        source,
+                        target,
+                    );
+                    phases.push(sample.clone());
+                }
+                None => {
+                    let Some((source, target, phases)) = self.active.take() else {
+                        return;
+                    };
+                    let observed: Vec<usize> = phases
+                        .iter()
+                        .map(|phase| phase.handoff.as_ref().unwrap().phase)
+                        .collect();
+                    assert_eq!(
+                        observed,
+                        (0..8).collect::<Vec<_>>(),
+                        "handoff {source} -> {target} has an incomplete phase sequence",
+                    );
+                    assert_eq!(sample.live_map, target, "handoff landing did not enter its target map");
+                    assert!(!sample.live_fade, "handoff landing retained a fade");
+                    self.completed.push(CompletedHandoff {
+                        source,
+                        target,
+                        phases,
+                        landing: sample.clone(),
+                    });
+                }
+            }
+        }
+
+        fn finish(self) -> Vec<CompletedHandoff> {
+            assert!(self.active.is_none(), "journey ended during a seamless handoff");
+            assert!(
+                !self.completed.is_empty(),
+                "G6_HANDOFF_BUCKETS requires at least one complete seamless handoff",
+            );
+            self.completed
+        }
+    }
+
+    /// Handoff buckets have a fixed, strict release gate. In particular this
+    /// does not inherit G6_BUDGET_MS, which exists for exploratory GC runs:
+    /// every phase and landing must remain below 50 ms in GB6/J3 evidence.
+    fn report_handoff_bucket(viewport: &str, label: &str, samples: &[Sample]) {
+        report(viewport, label, samples);
+        let work = samples
+            .iter()
+            .max_by(|a, b| {
+                (a.js_cpu_ms + a.core_cpu_ms)
+                    .partial_cmp(&(b.js_cpu_ms + b.core_cpu_ms))
+                    .unwrap()
+            })
+            .expect("handoff bucket must not be empty");
+        let work_cpu = work.js_cpu_ms + work.core_cpu_ms;
+        let total = samples
+            .iter()
+            .filter(|sample| sample.draw_sampled)
+            .max_by(|a, b| {
+                (a.js_cpu_ms + a.core_cpu_ms + a.draw_cpu_ms)
+                    .partial_cmp(&(b.js_cpu_ms + b.core_cpu_ms + b.draw_cpu_ms))
+                    .unwrap()
+            })
+            .unwrap_or_else(|| panic!("{label} has no framebuffer sample"));
+        let total_cpu = total.js_cpu_ms + total.core_cpu_ms + total.draw_cpu_ms;
+        assert!(
+            work_cpu < 50.0,
+            "{label} frame f{}:{} reached the 50 ms QJS/core CPU gate: {:.3} ms",
+            work.frame,
+            work.live_map,
+            work_cpu,
+        );
+        assert!(
+            total_cpu < 50.0,
+            "{label} frame f{}:{} reached the 50 ms sampled-total CPU gate: {:.3} ms",
+            total.frame,
+            total.live_map,
+            total_cpu,
+        );
+        println!(
+            "HANDOFF_BUCKET viewport={viewport} kind={label} n={} qjs_core_cpu_max={work_cpu:.3}ms qjs_core_wall={:.3}ms total_cpu_max={total_cpu:.3}ms total_wall={:.3}ms limit=<50ms",
+            samples.len(),
+            work.js_ms + work.core_ms,
+            total.js_ms + total.core_ms + total.draw_ms,
+        );
+    }
+
+    fn report_handoffs(viewport: &str, completed: &[CompletedHandoff]) {
+        assert!(!completed.is_empty(), "handoff report must not be empty");
+        let mut phases: Vec<Vec<Sample>> = (0..8).map(|_| Vec::new()).collect();
+        let mut landings = Vec::with_capacity(completed.len());
+        for (index, handoff) in completed.iter().enumerate() {
+            assert_eq!(handoff.phases.len(), 8, "handoff sequence must contain every phase");
+            for (phase, sample) in handoff.phases.iter().enumerate() {
+                assert_eq!(sample.handoff.as_ref().unwrap().phase, phase);
+                phases[phase].push(sample.clone());
+            }
+            landings.push(handoff.landing.clone());
+            println!(
+                "HANDOFF_SEQUENCE viewport={viewport} index={index} source={} target={} phases=0,1,2,3,4,5,6,7 landing=f{}",
+                handoff.source,
+                handoff.target,
+                handoff.landing.frame,
+            );
+        }
+        println!(
+            "HANDOFFS viewport={viewport} crossings={} phase_frames={} landing_frames={}",
+            completed.len(),
+            phases.iter().map(Vec::len).sum::<usize>(),
+            landings.len(),
+        );
+        for (phase, samples) in phases.iter().enumerate() {
+            assert_eq!(
+                samples.len(),
+                completed.len(),
+                "handoff phase {phase} must occur once per crossing",
+            );
+            report_handoff_bucket(viewport, &format!("handoff-phase-{phase}"), samples);
+        }
+        assert_eq!(landings.len(), completed.len(), "every crossing must have one landing frame");
+        report_handoff_bucket(viewport, "handoff-landing", &landings);
+    }
+
     fn args(dist: &PathBuf, app: &str, data: PathBuf, width: u32, height: u32) -> Args {
         Args {
             app: app.into(),
@@ -1268,6 +1482,7 @@ mod g6_quickjs_bench {
         let boot_ms = boot_start.elapsed().as_secs_f64() * 1_000.0;
         let sample_structural = std::env::var("G6_FAST_BENCH").as_deref() != Ok("1");
         let battle_buckets = std::env::var("G6_BATTLE_BUCKETS").as_deref() == Ok("1");
+        let handoff_buckets = std::env::var("G6_HANDOFF_BUCKETS").as_deref() == Ok("1");
         let hash_every = std::env::var("G6_HASH_EVERY")
             .ok()
             .and_then(|value| value.parse().ok())
@@ -1279,6 +1494,7 @@ mod g6_quickjs_bench {
             sample_structural,
             hash_every,
             battle_buckets,
+            handoff_buckets,
         };
         report_startup_stages(&viewport, &bench, boot_ms, &stages);
         if sample_structural {
@@ -1351,7 +1567,11 @@ mod g6_quickjs_bench {
         let mut forced_hashes = HashSet::new();
         if !sample_structural {
             for mark in &journey.maps {
-                for frame in mark.frame.saturating_sub(1)..=mark.frame.saturating_add(16) {
+                // The seamless phase-0 frame is eight 60 Hz ticks before the
+                // target-map checkpoint. Hash the whole lead-in so every
+                // handoff bucket, as well as its landing, has a real draw
+                // sample even when the long-tape default hashes 1/10 frames.
+                for frame in mark.frame.saturating_sub(9)..=mark.frame.saturating_add(16) {
                     forced_hashes.insert(frame);
                 }
             }
@@ -1389,6 +1609,10 @@ mod g6_quickjs_bench {
         let mut walking = Vec::new();
         let mut all_frames = Vec::with_capacity(journey.masks.len());
         all_frames.push(first.clone());
+        let mut handoff_tracker = HandoffTracker::default();
+        if handoff_buckets {
+            handoff_tracker.observe(&first);
+        }
         let mut walking_before_battle = Vec::new();
         let mut walking_after_battle = Vec::new();
         let mut switches = Vec::new();
@@ -1411,6 +1635,9 @@ mod g6_quickjs_bench {
                 forced_hashes.contains(&index),
             );
             all_frames.push(sample.clone());
+            if handoff_buckets {
+                handoff_tracker.observe(&sample);
+            }
             if sample.battle {
                 battle.push(sample.clone());
                 if last_battle {
@@ -1490,6 +1717,10 @@ mod g6_quickjs_bench {
         report(&viewport, "all", &all_frames);
         idle_gc_summary(&viewport, &bench, &all_frames);
         assert_frame_budget("all", &all_frames, 50.0);
+        if handoff_buckets {
+            let completed = handoff_tracker.finish();
+            report_handoffs(&viewport, &completed);
+        }
         let measured_qjs_core_ms = all_frames
             .iter()
             .map(|sample| sample.js_ms + sample.core_ms)
@@ -1577,6 +1808,7 @@ mod g6_quickjs_bench {
             sample_structural: false,
             hash_every: 1,
             battle_buckets: false,
+            handoff_buckets: false,
         };
         // Warm-up: replay up to `start` so the probe measures a specific
         // outdoor segment (the G6 tape opens indoors in a bedroom).
@@ -1690,6 +1922,7 @@ mod g6_quickjs_bench {
             sample_structural: false,
             hash_every: 10,
             battle_buckets: false,
+            handoff_buckets: false,
         };
         assert!(
             !bench.boolean("typeof globalThis.__pocketTuxemonWorldDiagnostics !== 'undefined'"),
@@ -1747,6 +1980,7 @@ mod g6_quickjs_bench {
             sample_structural: false,
             hash_every: 1,
             battle_buckets: false,
+            handoff_buckets: false,
         };
         let metadata: Vec<MapMeta> = serde_json::from_str(
             &bench.string("JSON.stringify(globalThis.__rpgMapBenchmark.maps)"),
@@ -2216,6 +2450,7 @@ mod g6_quickjs_bench {
             sample_structural: false,
             hash_every: 1,
             battle_buckets: false,
+            handoff_buckets: false,
         };
         let initial_diagnostics = world_stress_diagnostics(&bench);
         let maps = initial_diagnostics.maps.clone();

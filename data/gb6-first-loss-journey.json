@@ -1,5 +1,6 @@
 {
   "format": "pocket-tuxemon/gb6-first-loss/v1",
+  "worldTraversal": "seamless-v1",
   "hz": 60,
   "frames": 3325,
   "map": "spyder_route1",
@@ -3389,5 +3390,6 @@
     "billie_lost": true
   },
   "tapeSha256": "e57de3e775a6facc2537064b8f3a60762a0348134969aaca0a9f8209c28ceb7c",
-  "sha256": "957e60b3056146af2c3291be54b10e351cbed14101cc9e44e62851ca5dc8a98a"
+  "terminalStateSha256": "9868349448562750964673be18adb283f693387913e3c78261e23be001f298db",
+  "sha256": "d2479af3535af8e6a6fecd2a23835983aa251643f9799471c1c779026a2e6c4e"
 }

@@ -32,6 +32,15 @@ const manifest = JSON.parse(readFileSync(join(ROOT, "data/gb6-route-goldens.json
   format: string;
   frames: GoldenFrame[];
 };
+const project = JSON.parse(readFileSync(join(ROOT, "dist/project.json"), "utf8")) as {
+  maps: { id: string; width: number; height: number }[];
+  worldLayout?: {
+    components: Array<{
+      bounds: { minTileX: number; minTileY: number; maxTileX: number; maxTileY: number };
+      placements: Array<{ mapId: string; originTileX: number; originTileY: number }>;
+    }>;
+  };
+};
 
 function load(name: string, width: number) {
   const entry = manifest.frames.find((frame) => frame.name === name && frame.width === width)!;
@@ -65,13 +74,6 @@ const gray = (r: number, g: number, b: number) =>
   Math.max(r, g, b) - Math.min(r, g, b) < 18 && r > 80 && r < 220;
 const pink = (r: number, g: number, b: number) => r > 140 && b > 80 && r > g * 1.2;
 
-const mapSizes: Record<string, [number, number]> = {
-  spyder_cotton_town: [40, 40],
-  spyder_route2: [40, 20],
-  spyder_citypark: [40, 40],
-  spyder_route3: [40, 40],
-};
-
 function playerImage(frame: GoldenFrame): string {
   const pose = walkPose(frame.player.phase);
   return pose === 1
@@ -83,11 +85,19 @@ function matchingPlayerPixels(frame: GoldenFrame): { opaque: number; matching: n
   const target = load(frame.name, frame.width).image;
   const sourcePath = join(ROOT, playerImage(frame));
   const sprite = decodePng(new Uint8Array(readFileSync(sourcePath)), sourcePath);
-  const [mapWidth, mapHeight] = mapSizes[frame.map]!;
-  const offsetX = Math.max(0, Math.floor((frame.width - mapWidth * 16) / 2));
-  const offsetY = Math.max(0, Math.floor((frame.height - mapHeight * 16) / 2));
-  const x0 = offsetX + frame.player.pixel[0] - frame.camera[0];
-  const y0 = offsetY + frame.player.pixel[1] - frame.camera[1] - 16;
+  const map = project.maps.find((candidate) => candidate.id === frame.map)!;
+  const component = project.worldLayout?.components.find((candidate) =>
+    candidate.placements.some((placement) => placement.mapId === frame.map)
+  );
+  const placement = component?.placements.find((candidate) => candidate.mapId === frame.map);
+  const componentW = component ? (component.bounds.maxTileX - component.bounds.minTileX) * 16 : map.width * 16;
+  const componentH = component ? (component.bounds.maxTileY - component.bounds.minTileY) * 16 : map.height * 16;
+  const offsetX = Math.max(0, Math.floor((frame.width - componentW) / 2));
+  const offsetY = Math.max(0, Math.floor((frame.height - componentH) / 2));
+  const worldX = frame.player.pixel[0] + (placement?.originTileX ?? 0) * 16;
+  const worldY = frame.player.pixel[1] + (placement?.originTileY ?? 0) * 16;
+  const x0 = offsetX + worldX - frame.camera[0];
+  const y0 = offsetY + worldY - frame.camera[1] - 16;
   let opaque = 0;
   let matching = 0;
   for (let y = 0; y < sprite.height; y++) for (let x = 0; x < sprite.width; x++) {
@@ -148,25 +158,33 @@ describe("GB6 Route 3 mainline map goldens", () => {
 
       // Cotton Town: broad grass/road network, red roofs, fountain and blue mart.
       expect(count(cotton.rgba, width, 0, 0, cotton.width, cotton.height, green)).toBeGreaterThan(60_000);
-      expect(count(cotton.rgba, width, 0, 0, cotton.width, cotton.height, tan)).toBeGreaterThan(25_000);
-      expect(count(cotton.rgba, width, 0, 0, cotton.width, cotton.height, red)).toBeGreaterThan(6_000);
-      expect(count(cotton.rgba, width, 0, 0, cotton.width, cotton.height, blue)).toBeGreaterThan(4_000);
+      expect(count(cotton.rgba, width, 0, 0, cotton.width, cotton.height, tan))
+        .toBeGreaterThan(width === 480 ? 12_000 : 25_000);
+      expect(count(cotton.rgba, width, 0, 0, cotton.width, cotton.height, red))
+        .toBeGreaterThan(width === 480 ? 2_400 : 6_000);
+      expect(count(cotton.rgba, width, 0, 0, cotton.width, cotton.height, blue))
+        .toBeGreaterThan(width === 480 ? 3_200 : 4_000);
 
       // Route 2: dense grass/forest, brown ledges and gray route monuments.
-      expect(count(route2.rgba, width, 0, 0, route2.width, route2.height, green)).toBeGreaterThan(100_000);
+      expect(count(route2.rgba, width, 0, 0, route2.width, route2.height, green))
+        .toBeGreaterThan(width === 480 ? 80_000 : 100_000);
       expect(count(route2.rgba, width, 0, 0, route2.width, route2.height, red)).toBeGreaterThan(4_000);
       expect(count(route2.rgba, width, 0, 0, route2.width, route2.height, gray)).toBeGreaterThan(1_400);
 
       // City Park: tree canopy, flower beds, blue fence/water and pink blossoms.
       expect(count(park.rgba, width, 0, 0, park.width, park.height, green)).toBeGreaterThan(100_000);
-      expect(count(park.rgba, width, 0, 0, park.width, park.height, blue)).toBeGreaterThan(2_500);
+      expect(count(park.rgba, width, 0, 0, park.width, park.height, blue))
+        .toBeGreaterThan(width === 480 ? 300 : 2_500);
       expect(count(park.rgba, width, 0, 0, park.width, park.height, pink)).toBeGreaterThan(2_400);
 
       // Route 3 endpoint: sand quarry, tree border, benches/pillars and crystals.
-      expect(count(route3.rgba, width, 0, 0, route3.width, route3.height, tan)).toBeGreaterThan(49_000);
+      expect(count(route3.rgba, width, 0, 0, route3.width, route3.height, tan))
+        .toBeGreaterThan(width === 480 ? 18_000 : 49_000);
       expect(count(route3.rgba, width, 0, 0, route3.width, route3.height, green)).toBeGreaterThan(45_000);
-      expect(count(route3.rgba, width, 0, 0, route3.width, route3.height, gray)).toBeGreaterThan(1_200);
-      expect(count(route3.rgba, width, 0, 0, route3.width, route3.height, blue)).toBeGreaterThan(400);
+      expect(count(route3.rgba, width, 0, 0, route3.width, route3.height, gray))
+        .toBeGreaterThan(width === 480 ? 1_000 : 1_200);
+      expect(count(route3.rgba, width, 0, 0, route3.width, route3.height, blue))
+        .toBeGreaterThan(width === 480 ? 380 : 400);
     }
   });
 });

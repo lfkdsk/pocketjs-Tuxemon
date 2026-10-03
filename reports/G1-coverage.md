@@ -149,6 +149,45 @@ accepted seams; generated 71
 | normal | 17 / 17 | 200×341 | 18 | 15 | 13 / 1 / 1 / 0 | 3 | 4 | 0 | 16 + 1 |
 | spyder | 23 / 95 | 180×200 | 44 | 32 | 28 / 0 / 3 / 1 | 12 | 10 | 49 | 23 |
 
+## Seamless opening handoff
+
+The generated project opts into `seamless-v1`. Of
+258 coordinate-preserving topology openings,
+253 runtime-direct `playerTouch` transfers
+carry a stable `handoff.portalId`; every other transfer
+keeps the legacy timeline. The source maps selected for this build contain
+1161 transfer-like actions
+(`transition_teleport` plus faint recovery). Exclusions are classified without
+per-map overrides:
+
+| Not enabled reason | Count |
+|---|---:|
+| `faint-transfer` | 109 |
+| `indoor-source` | 127 |
+| `linked-gap` | 33 |
+| `non-tmx-overlay` | 163 |
+| `outdoor-nonseam-or-story` | 118 |
+| `outside-world-layout` | 310 |
+| `portal-only-opening` | 39 |
+| `rejected-contact` | 4 |
+| `unreachable-source-facing` | 5 |
+
+Safe topology openings not emitted as runtime-direct transfers:
+
+- `route3:tmx:route3.tmx:153:a0`
+- `route3:tmx:route3.tmx:154:a0`
+- `route3:tmx:route3.tmx:155:a0`
+- `route3:tmx:route3.tmx:156:a0`
+- `route3:tmx:route3.tmx:157:a0`
+
+Topology-only exclusions use their natural units: 39
+portal-only openings (including 1
+unsafe opening on a mixed seam), 10
+direction-only seams, 14 linked gaps,
+20 rejected contacts, and
+72 indoor world members. None is marked
+for seamless handoff.
+
 ## Transfer repairs
 
 The generated project has 0 invalid transfers.

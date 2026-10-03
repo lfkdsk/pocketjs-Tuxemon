@@ -1,5 +1,6 @@
 {
   "format": "pocket-tuxemon/gb6-later-loss/v1",
+  "worldTraversal": "seamless-v1",
   "hz": 60,
   "frames": 66498,
   "prefixFrames": 63265,
@@ -66530,7 +66531,7 @@
   },
   "texts": [
     {
-      "frame": 66208,
+      "frame": 66207,
       "map": "spyder_route3",
       "lines": [
         "The fishing's good in Flower City - but who wants to",
@@ -66538,34 +66539,34 @@
       ]
     },
     {
-      "frame": 66212,
+      "frame": 66210,
       "map": "spyder_route3",
       "lines": [
         "Here, you can have my Fishing Rod."
       ]
     },
     {
-      "frame": 66216,
+      "frame": 66214,
       "map": "spyder_route3",
       "lines": [
         "Fishing Rod"
       ]
     },
     {
-      "frame": 66240,
+      "frame": 66239,
       "map": "spyder_leather_center",
       "lines": [
         "You should heal your monsters before heading off."
       ]
     },
     {
-      "frame": 66280,
+      "frame": 66279,
       "map": "spyder_leather_center",
       "lines": [
         "You should heal your monsters before heading off."
       ]
     }
   ],
-  "terminalStateSha256": "ca3cc88ba2b53541d97ffdfe2c28e8e5b52b43dbc9ccceb5862ee761fd4a2917",
+  "terminalStateSha256": "1355a9d0683c71512dda8ac06a90184e648b44aa93f20396a60a4bbe921314c3",
   "tapeSha256": "00acc854e2a852d2834058ea8630e868874fe2b70960293385cdac9b6ffd63ed"
 }

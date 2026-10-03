@@ -25,14 +25,16 @@ summary:
   campaign plays from the bedroom through Paper Town, Cotton Town, City Park,
   the north end of Route 3, Route 4 and Flower City to the Captain's return
   in the Mansion and on through Candy Town, the hospital cure and Omnichannel
-  to the Radio Tower broadcast — 185,944 frames at 60 Hz for the full
+  to the Radio Tower broadcast — 185,802 frames at 60 Hz for the full
   mainline, driven by
   deterministic autoplay tapes — and every imported input lock is executed
   to its unlock. On the 67 placed outdoor maps, the streamed renderer paints
   neighbouring ground, upper layers and animated tiles across authored seams,
   with map, texture-shard and NPC-art caches bounded to the current world
-  working set. Player transfer still uses the legacy transition; seamless
-  handoff is planned separately.
+  working set. The project now opts into `seamless-v1`: 253 of the 258
+  coordinate-preserving outdoor openings cross atomically in eight ticks with
+  no fade. Portal-only, gap, rejected, indoor, faint and story transfers keep
+  their legacy transition, and neighbouring-map NPC preview remains planned.
 - **Battles (P2, complete):** the battle database and 590 battle
   textures are imported from Tuxemon's YAML, and `battle/` is a pure
   reducer whose results match Tuxemon's own Python engine on 8,560 recorded
@@ -59,26 +61,25 @@ summary:
   journal previews and the normal browser render monster details through the
   same indexed, lazily loaded battle-image shards as combat.
 - **Performance:** 260 compact map shards plus 3 canonical JSON shards use
-  5,225,836 B instead of 10,131,297 B for all-canonical JSON. The three
+  5,245,837 B instead of 10,153,692 B for all-canonical JSON. The three
   event-heavy maps cross a 128 KiB compact-decode cap, trading a small amount
   of storage for bounded first-visit latency on QuickJS. Indexed battle art
   plus its lazy database occupies 3,516,960 B in the pak. The Web game pak is
-  48,606,096 B; before compact
+  48,626,112 B; before compact
   maps and indexed battle art it was 66,791,328 B, measured on the tree just
   before day and night were added. The all-image battle encoding is
   2,206,076 B on disk and 13,394,688 B if every PSM_T8 texture were decoded,
   but only the active battle working set is resident.
 
   On the desktop QuickJS host, the current 110,866-frame, 107-battle replay
-  matches the canonical terminal state. Two production idle-GC runs at each
-  viewport have CPU-work maxima of 22.610/21.157 ms at 480×272 and
-  21.625/22.671 ms at 960×544; the corresponding boundary-inclusive maxima
-  are 29.593/24.142 ms and 25.951/32.505 ms. Every run stays below the 250 ms
-  startup and 50 ms per-frame budgets, with no in-tick collections or frames
-  over budget. A production continuation benchmark restores the hospital-cure
-  chapter and replays the remaining 12,991 frames and 13 battles to the radio
-  broadcast; its worst core/sampled frames are 46.316/46.354 ms at 480×272
-  and 46.142/46.212 ms at 960×544.
+  matches the canonical terminal state. Its release runs have CPU/sampled
+  maxima of 38.158/38.215 ms at 480×272 and 33.374/33.447 ms at 960×544;
+  all 54 seamless handoffs stay below 38.215/33.459 ms. A production
+  continuation benchmark restores the hospital-cure chapter and replays the
+  remaining 12,940 frames and 13 battles to the radio broadcast; its worst
+  CPU/sampled frames are 45.768/45.804 ms at 480×272 and 48.425/48.483 ms at
+  960×544. Every passing release run stays below the 250 ms startup and 50 ms
+  per-frame budgets.
 - **Import coverage:** 89.3% of Tuxemon action uses and 96.3% of condition
   uses map natively to kit commands; 97.3% / 96.7% are executable (native,
   degraded, or a deliberate placeholder). The full per-type breakdown is in
@@ -114,6 +115,16 @@ mainline.
 <p align="center">
   <img src="docs/screenshots/cotton-town.png" width="480" alt="Cotton Town, a frame from the autoplay journey">
   <img src="docs/screenshots/route-3-end.png" width="480" alt="The north end of Route 3, a frame from the autoplay journey">
+</p>
+
+Safe outdoor openings now scroll directly into the neighbouring map. The two
+contact sheets below show all eight crossing phases plus the landing frame for
+a horizontal and vertical seam; each row is also captured at both supported
+viewports in [docs/screenshots/world-seam](docs/screenshots/world-seam/).
+
+<p align="center">
+  <img src="docs/screenshots/world-seam/world-seam-crossings.480x272.contact-sheet.png" width="480" alt="Horizontal and vertical seamless outdoor crossings at 480 by 272">
+  <img src="docs/screenshots/world-seam/world-seam-crossings.960x544.contact-sheet.png" width="480" alt="Horizontal and vertical seamless outdoor crossings at 960 by 544">
 </p>
 
 The same Paper Town checkpoint at fixed 09:00 and 21:00 starts. The night
@@ -196,8 +207,8 @@ bookmarked or shared:
 - `?autoplay=<id>&speed=<1|2|4>` — start a chapter on autoplay (e.g. `?autoplay=starter&speed=2`)
 
 An invalid id (e.g. `?chapter=missing`) is a visible `BAD DEMO LINK` error,
-not a crash. The chapter snapshots and the 185,944-frame tape are packed into
-the pak (a nibble-dictionary tape binary, 93,000 B) and read on demand, so the
+not a crash. The chapter snapshots and the 185,802-frame tape are packed into
+the pak (a nibble-dictionary tape binary, 92,929 B) and read on demand, so the
 JS bundle keeps only a tiny chapter index; the tape is decoded once, on the
 first chapter selection, and every chapter plays a window of it.
 `bun tools/verify-web-demo.ts` drives all of the above in headless Chrome,

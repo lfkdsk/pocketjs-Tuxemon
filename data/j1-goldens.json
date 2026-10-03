@@ -1,8 +1,8 @@
 {
   "format": "pocket-tuxemon/j1-goldens/v1",
   "baseFrames": 110866,
-  "segmentTapeSha256": "8afdd265b098a6300f32afd198061531ba21f53c3ab4f880846f8bebbafd0aae",
-  "combinedTapeSha256": "a3150d1c12ef6e42677cc215226d74db5119803c837e36f6c2e4e446f3f2ae1c",
+  "segmentTapeSha256": "18af446ceb72ddfc780c3d5f356efbfca07e5d525c0279432ad24b43dd601758",
+  "combinedTapeSha256": "c78f8ba93074acd6f6539f788057d64d0acac52bff8d2d1bd6739e6e44dcf44b",
   "frames": [
     {
       "name": "wayfarer-guestbook",
@@ -46,8 +46,8 @@
     },
     {
       "name": "route-4-billie",
-      "frame": 4727,
-      "mergedFrame": 115593,
+      "frame": 4717,
+      "mergedFrame": 115583,
       "map": "spyder_route4",
       "position": [
         2,
@@ -56,11 +56,11 @@
       "width": 480,
       "height": 272,
       "file": "j1-route-4-billie.480x272.png",
-      "rgbaFnv1a": "5e41934b",
-      "pngSha256": "93050657e60f60e3661a3cdf773ab0139d11237af9bc0493576373f17570c208",
+      "rgbaFnv1a": "ae4e31c1",
+      "pngSha256": "fd03a1494cf2f306506261c63d435524e618aaf38a2408d56e7da5bb7385ddd2",
       "camera": [
-        0,
-        0
+        1080,
+        608
       ],
       "story": {
         "enforcersResponseDone": 1,
@@ -86,8 +86,8 @@
     },
     {
       "name": "captain-found",
-      "frame": 10385,
-      "mergedFrame": 121251,
+      "frame": 10355,
+      "mergedFrame": 121221,
       "map": "spyder_mansion_basement",
       "position": [
         3,
@@ -182,8 +182,8 @@
     },
     {
       "name": "route-4-billie",
-      "frame": 4727,
-      "mergedFrame": 115593,
+      "frame": 4717,
+      "mergedFrame": 115583,
       "map": "spyder_route4",
       "position": [
         2,
@@ -192,11 +192,11 @@
       "width": 960,
       "height": 544,
       "file": "j1-route-4-billie.960x544.png",
-      "rgbaFnv1a": "7c6df013",
-      "pngSha256": "c4823d4a3b26ce90f5a466f72fab48cec723abc13484e936210abc5829098b0b",
+      "rgbaFnv1a": "87fce723",
+      "pngSha256": "e181f408afc59415655f6e98210c039f0f887c4a1f498d5438147759d7ef36a5",
       "camera": [
-        0,
-        0
+        840,
+        472
       ],
       "story": {
         "enforcersResponseDone": 1,
@@ -222,8 +222,8 @@
     },
     {
       "name": "captain-found",
-      "frame": 10385,
-      "mergedFrame": 121251,
+      "frame": 10355,
+      "mergedFrame": 121221,
       "map": "spyder_mansion_basement",
       "position": [
         3,

@@ -1,5 +1,6 @@
 {
   "format": "pocket-tuxemon/gb6-mainline/v1",
+  "worldTraversal": "seamless-v1",
   "hz": 60,
   "frames": 110866,
   "terminalMapFrame": 31,
@@ -110924,7 +110925,7 @@
     },
     {
       "name": "route1",
-      "frame": 3980,
+      "frame": 3979,
       "map": "spyder_route1",
       "position": [
         14,
@@ -110933,7 +110934,7 @@
     },
     {
       "name": "cotton_town",
-      "frame": 5392,
+      "frame": 5391,
       "map": "spyder_cotton_town",
       "position": [
         21,
@@ -110960,7 +110961,7 @@
     },
     {
       "name": "route1",
-      "frame": 6840,
+      "frame": 6839,
       "map": "spyder_route1",
       "position": [
         22,
@@ -110969,7 +110970,7 @@
     },
     {
       "name": "paper_town",
-      "frame": 7694,
+      "frame": 7693,
       "map": "spyder_paper_town",
       "position": [
         14,
@@ -110996,7 +110997,7 @@
     },
     {
       "name": "route1",
-      "frame": 8045,
+      "frame": 8044,
       "map": "spyder_route1",
       "position": [
         14,
@@ -111005,7 +111006,7 @@
     },
     {
       "name": "cotton_town",
-      "frame": 9135,
+      "frame": 9134,
       "map": "spyder_cotton_town",
       "position": [
         21,
@@ -111032,7 +111033,7 @@
     },
     {
       "name": "route2",
-      "frame": 10598,
+      "frame": 10597,
       "map": "spyder_route2",
       "position": [
         0,
@@ -111041,7 +111042,7 @@
     },
     {
       "name": "cotton_town",
-      "frame": 12021,
+      "frame": 12020,
       "map": "spyder_cotton_town",
       "position": [
         39,
@@ -111068,7 +111069,7 @@
     },
     {
       "name": "route2",
-      "frame": 13007,
+      "frame": 13006,
       "map": "spyder_route2",
       "position": [
         0,
@@ -111077,7 +111078,7 @@
     },
     {
       "name": "cotton_town",
-      "frame": 14629,
+      "frame": 14628,
       "map": "spyder_cotton_town",
       "position": [
         39,
@@ -111104,7 +111105,7 @@
     },
     {
       "name": "route2",
-      "frame": 15615,
+      "frame": 15614,
       "map": "spyder_route2",
       "position": [
         0,
@@ -111113,7 +111114,7 @@
     },
     {
       "name": "cotton_town",
-      "frame": 17301,
+      "frame": 17300,
       "map": "spyder_cotton_town",
       "position": [
         39,
@@ -111140,7 +111141,7 @@
     },
     {
       "name": "route2",
-      "frame": 18287,
+      "frame": 18286,
       "map": "spyder_route2",
       "position": [
         0,
@@ -111149,7 +111150,7 @@
     },
     {
       "name": "cotton_town",
-      "frame": 19188,
+      "frame": 19187,
       "map": "spyder_cotton_town",
       "position": [
         39,
@@ -111176,7 +111177,7 @@
     },
     {
       "name": "route2",
-      "frame": 20174,
+      "frame": 20173,
       "map": "spyder_route2",
       "position": [
         0,
@@ -111185,7 +111186,7 @@
     },
     {
       "name": "cotton_town",
-      "frame": 21317,
+      "frame": 21316,
       "map": "spyder_cotton_town",
       "position": [
         39,
@@ -111212,7 +111213,7 @@
     },
     {
       "name": "route2",
-      "frame": 22303,
+      "frame": 22302,
       "map": "spyder_route2",
       "position": [
         0,
@@ -111221,7 +111222,7 @@
     },
     {
       "name": "cotton_town",
-      "frame": 22901,
+      "frame": 22900,
       "map": "spyder_cotton_town",
       "position": [
         39,
@@ -111248,7 +111249,7 @@
     },
     {
       "name": "route2",
-      "frame": 23887,
+      "frame": 23886,
       "map": "spyder_route2",
       "position": [
         0,
@@ -111257,7 +111258,7 @@
     },
     {
       "name": "cotton_town",
-      "frame": 25374,
+      "frame": 25373,
       "map": "spyder_cotton_town",
       "position": [
         39,
@@ -111284,7 +111285,7 @@
     },
     {
       "name": "route2",
-      "frame": 26360,
+      "frame": 26359,
       "map": "spyder_route2",
       "position": [
         0,
@@ -111293,7 +111294,7 @@
     },
     {
       "name": "cotton_town",
-      "frame": 28319,
+      "frame": 28318,
       "map": "spyder_cotton_town",
       "position": [
         39,
@@ -111320,7 +111321,7 @@
     },
     {
       "name": "route2",
-      "frame": 29305,
+      "frame": 29304,
       "map": "spyder_route2",
       "position": [
         0,
@@ -111329,7 +111330,7 @@
     },
     {
       "name": "cotton_town",
-      "frame": 30734,
+      "frame": 30733,
       "map": "spyder_cotton_town",
       "position": [
         39,
@@ -111356,7 +111357,7 @@
     },
     {
       "name": "route2",
-      "frame": 31720,
+      "frame": 31719,
       "map": "spyder_route2",
       "position": [
         0,
@@ -111365,7 +111366,7 @@
     },
     {
       "name": "cotton_town",
-      "frame": 32406,
+      "frame": 32405,
       "map": "spyder_cotton_town",
       "position": [
         39,
@@ -111392,7 +111393,7 @@
     },
     {
       "name": "route2",
-      "frame": 33392,
+      "frame": 33391,
       "map": "spyder_route2",
       "position": [
         0,
@@ -111401,7 +111402,7 @@
     },
     {
       "name": "cotton_town",
-      "frame": 34722,
+      "frame": 34721,
       "map": "spyder_cotton_town",
       "position": [
         39,
@@ -111428,7 +111429,7 @@
     },
     {
       "name": "route2",
-      "frame": 35708,
+      "frame": 35707,
       "map": "spyder_route2",
       "position": [
         0,
@@ -111437,7 +111438,7 @@
     },
     {
       "name": "cotton_town",
-      "frame": 36304,
+      "frame": 36303,
       "map": "spyder_cotton_town",
       "position": [
         39,
@@ -111464,7 +111465,7 @@
     },
     {
       "name": "route2",
-      "frame": 37290,
+      "frame": 37289,
       "map": "spyder_route2",
       "position": [
         0,
@@ -111473,7 +111474,7 @@
     },
     {
       "name": "cotton_town",
-      "frame": 38202,
+      "frame": 38201,
       "map": "spyder_cotton_town",
       "position": [
         39,
@@ -111500,7 +111501,7 @@
     },
     {
       "name": "route2",
-      "frame": 39188,
+      "frame": 39187,
       "map": "spyder_route2",
       "position": [
         0,
@@ -111509,7 +111510,7 @@
     },
     {
       "name": "cotton_town",
-      "frame": 41698,
+      "frame": 41697,
       "map": "spyder_cotton_town",
       "position": [
         39,
@@ -111536,7 +111537,7 @@
     },
     {
       "name": "route2",
-      "frame": 42684,
+      "frame": 42683,
       "map": "spyder_route2",
       "position": [
         0,
@@ -111545,7 +111546,7 @@
     },
     {
       "name": "citypark",
-      "frame": 45301,
+      "frame": 45300,
       "map": "spyder_citypark",
       "position": [
         10,
@@ -111554,7 +111555,7 @@
     },
     {
       "name": "leather_town",
-      "frame": 56504,
+      "frame": 56503,
       "map": "spyder_leather_town",
       "position": [
         39,
@@ -111581,7 +111582,7 @@
     },
     {
       "name": "route3",
-      "frame": 57292,
+      "frame": 57291,
       "map": "spyder_route3",
       "position": [
         7,
@@ -111590,7 +111591,7 @@
     },
     {
       "name": "leather_town",
-      "frame": 58444,
+      "frame": 58443,
       "map": "spyder_leather_town",
       "position": [
         7,
@@ -111617,7 +111618,7 @@
     },
     {
       "name": "route3",
-      "frame": 59128,
+      "frame": 59127,
       "map": "spyder_route3",
       "position": [
         7,
@@ -111626,7 +111627,7 @@
     },
     {
       "name": "leather_town",
-      "frame": 60828,
+      "frame": 60827,
       "map": "spyder_leather_town",
       "position": [
         7,
@@ -111653,7 +111654,7 @@
     },
     {
       "name": "route3",
-      "frame": 61512,
+      "frame": 61511,
       "map": "spyder_route3",
       "position": [
         7,
@@ -111662,7 +111663,7 @@
     },
     {
       "name": "leather_town",
-      "frame": 66304,
+      "frame": 66303,
       "map": "spyder_leather_town",
       "position": [
         7,
@@ -111689,7 +111690,7 @@
     },
     {
       "name": "route3",
-      "frame": 66988,
+      "frame": 66987,
       "map": "spyder_route3",
       "position": [
         7,
@@ -111698,7 +111699,7 @@
     },
     {
       "name": "leather_town",
-      "frame": 75554,
+      "frame": 75553,
       "map": "spyder_leather_town",
       "position": [
         7,
@@ -111725,7 +111726,7 @@
     },
     {
       "name": "route3",
-      "frame": 76238,
+      "frame": 76237,
       "map": "spyder_route3",
       "position": [
         7,
@@ -111734,7 +111735,7 @@
     },
     {
       "name": "leather_town",
-      "frame": 82776,
+      "frame": 82775,
       "map": "spyder_leather_town",
       "position": [
         7,
@@ -111761,7 +111762,7 @@
     },
     {
       "name": "route3",
-      "frame": 83460,
+      "frame": 83459,
       "map": "spyder_route3",
       "position": [
         7,
@@ -111770,7 +111771,7 @@
     },
     {
       "name": "leather_town",
-      "frame": 89917,
+      "frame": 89916,
       "map": "spyder_leather_town",
       "position": [
         7,
@@ -111797,7 +111798,7 @@
     },
     {
       "name": "route3",
-      "frame": 90601,
+      "frame": 90600,
       "map": "spyder_route3",
       "position": [
         7,
@@ -111806,7 +111807,7 @@
     },
     {
       "name": "leather_town",
-      "frame": 97722,
+      "frame": 97721,
       "map": "spyder_leather_town",
       "position": [
         7,
@@ -111833,7 +111834,7 @@
     },
     {
       "name": "route3",
-      "frame": 98406,
+      "frame": 98405,
       "map": "spyder_route3",
       "position": [
         7,
@@ -111842,7 +111843,7 @@
     },
     {
       "name": "leather_town",
-      "frame": 104409,
+      "frame": 104408,
       "map": "spyder_leather_town",
       "position": [
         7,
@@ -111869,7 +111870,7 @@
     },
     {
       "name": "route3",
-      "frame": 105093,
+      "frame": 105092,
       "map": "spyder_route3",
       "position": [
         7,
@@ -120057,6 +120058,6 @@
     "shaftscheme": 1,
     "zoolanderWon": true
   },
-  "terminalStateSha256": "f1b71f16a39805454183f16bfa9f262e0614d1db6c0567ea96a9eaa12bba49df",
+  "terminalStateSha256": "177d808d17c5e2ef406709e955cf460730e4fe9371058610e61f61f383392e0d",
   "tapeSha256": "3e754f6bc872878e9194dff5061f80ce854c8d9e42bbeabf9e97850d582263aa"
 }

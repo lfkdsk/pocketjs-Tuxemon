@@ -6,6 +6,7 @@
 // provider once and windows the decoded tape without copying it.
 
 import { decodeEnvelopeText, type SaveSnapshot } from "../vendor/pocket-rpgkit/src/engine/save.ts";
+import type { WorldTraversalMode } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 import { utf8ToString } from "../vendor/pocket-rpgkit/vendor/pocketjs/framework/src/bytes.ts";
 import type { DemoChapter, DemoOptions, DemoSpawn } from "../vendor/pocket-rpgkit/src/ui/demo/types.ts";
 import {
@@ -17,23 +18,62 @@ import {
 
 const TAPE_FMT_NIBBLE = 1;
 const TAPE_FMT_RAW = 2;
+const TAPE_DICT_MASK = 0x1f;
+const TAPE_TRAVERSAL_SHIFT = 5;
 
-let snapshotsCache: Record<string, string> | null = null;
+interface DecodedDemoTape {
+  masks: Uint16Array;
+  worldTraversal: WorldTraversalMode;
+}
+
+function worldTraversal(value: unknown, label: string): WorldTraversalMode {
+  const identity = value ?? "legacy-transfer";
+  if (identity !== "legacy-transfer" && identity !== "seamless-v1") {
+    throw new Error(`${label}: unsupported worldTraversal ${String(identity)}`);
+  }
+  return identity;
+}
+
+function traversalFromCode(code: number): WorldTraversalMode {
+  if (code === 0) return "legacy-transfer";
+  if (code === 1) return "seamless-v1";
+  throw new Error(`demo tape: unknown traversal code ${code}`);
+}
 
 /** Decode the self-describing tape binary (nibble dictionary or raw u16)
  *  into one contiguous u16 mask stream. */
-function decodeTape(bytes: Uint8Array): Uint16Array {
-  if (bytes[0] !== 0x54 || bytes[1] !== 1) throw new Error("demo tape: bad magic or version");
+export function decodeDemoTape(bytes: Uint8Array): DecodedDemoTape {
+  if (bytes.byteLength < 8 || bytes[0] !== 0x54) throw new Error("demo tape: bad magic or truncated header");
+  const version = bytes[1];
+  if (version !== 1 && version !== 2) throw new Error(`demo tape: unsupported version ${version}`);
   const dv = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
   const frames = dv.getUint32(4, true);
   const format = bytes[2];
+  // Version 1 had no identity and is intentionally the legacy timeline.
+  const worldTraversal = version === 1
+    ? "legacy-transfer"
+    : traversalFromCode(bytes[3]! >> TAPE_TRAVERSAL_SHIFT);
   if (format === TAPE_FMT_RAW) {
+    if (version === 2 && (bytes[3]! & TAPE_DICT_MASK) !== 0) {
+      throw new Error("demo tape: raw format has a dictionary size");
+    }
+    const expected = 8 + frames * 2;
+    if (bytes.byteLength !== expected) {
+      throw new Error(`demo tape: raw payload length ${bytes.byteLength} != ${expected}`);
+    }
     const out = new Uint16Array(frames);
     for (let i = 0; i < frames; i++) out[i] = dv.getUint16(8 + i * 2, true);
-    return out;
+    return { masks: out, worldTraversal };
   }
   if (format !== TAPE_FMT_NIBBLE) throw new Error(`demo tape: unknown format ${format}`);
-  const dictSize = bytes[3]!;
+  const dictSize = version === 1 ? bytes[3]! : bytes[3]! & TAPE_DICT_MASK;
+  if (dictSize > 16 || (frames > 0 && dictSize === 0)) {
+    throw new Error(`demo tape: invalid dictionary size ${dictSize}`);
+  }
+  const expected = 8 + dictSize * 2 + ((frames + 1) >> 1);
+  if (bytes.byteLength !== expected) {
+    throw new Error(`demo tape: nibble payload length ${bytes.byteLength} != ${expected}`);
+  }
   const dict = new Uint16Array(dictSize);
   for (let i = 0; i < dictSize; i++) dict[i] = dv.getUint16(8 + i * 2, true);
   const base = 8 + dictSize * 2;
@@ -42,19 +82,53 @@ function decodeTape(bytes: Uint8Array): Uint16Array {
     const byte = bytes[base + (i >> 1)]!;
     out[i] = dict[(i & 1) === 0 ? byte & 0xf : byte >> 4]!;
   }
-  return out;
+  return { masks: out, worldTraversal };
 }
 
 /** Build the kit DemoOptions from the generated index. All chapters share
  *  one provider for the combined tape and window it by their index entry;
  *  the snapshot getter decodes the envelope on first selection. Neither
  *  touches the pak at boot. */
-export function createDemoOptions(read: (entry: string) => Uint8Array): DemoOptions {
-  const tape = (): Uint16Array => decodeTape(read(DEMO_TAPE_ENTRY));
+export function createDemoOptions(
+  read: (entry: string) => Uint8Array,
+  expectedWorldTraversal: WorldTraversalMode = "seamless-v1",
+): DemoOptions {
+  const expected = worldTraversal(expectedWorldTraversal, "demo index");
+  for (const entry of DEMO_CHAPTER_INDEX) {
+    const indexed = entry as typeof entry & { worldTraversal?: unknown };
+    const actual = worldTraversal(indexed.worldTraversal, `demo chapter ${entry.id}`);
+    if (actual !== expected) {
+      throw new Error(`demo chapter ${entry.id}: worldTraversal ${actual} != expected ${expected}`);
+    }
+  }
+
+  const tape = (): Uint16Array => {
+    const decoded = decodeDemoTape(read(DEMO_TAPE_ENTRY));
+    if (decoded.worldTraversal !== expected) {
+      throw new Error(`demo tape: worldTraversal ${decoded.worldTraversal} != expected ${expected}`);
+    }
+    return decoded.masks;
+  };
+  let snapshotsCache: Record<string, string> | null = null;
   const snapshots = (): Record<string, string> => {
     if (!snapshotsCache) {
       const text = utf8ToString(read(DEMO_SNAPSHOTS_ENTRY));
-      snapshotsCache = (JSON.parse(text) as { snapshots: Record<string, string> }).snapshots;
+      const manifest = JSON.parse(text) as {
+        format?: unknown;
+        worldTraversal?: unknown;
+        snapshots?: unknown;
+      };
+      if (manifest.format !== undefined && manifest.format !== "pocket-tuxemon/demo-snapshots/v1") {
+        throw new Error(`demo snapshots: unexpected format ${String(manifest.format)}`);
+      }
+      const actual = worldTraversal(manifest.worldTraversal, "demo snapshots");
+      if (actual !== expected) {
+        throw new Error(`demo snapshots: worldTraversal ${actual} != expected ${expected}`);
+      }
+      if (!manifest.snapshots || typeof manifest.snapshots !== "object" || Array.isArray(manifest.snapshots)) {
+        throw new Error("demo snapshots: missing snapshots record");
+      }
+      snapshotsCache = manifest.snapshots as Record<string, string>;
     }
     return snapshotsCache;
   };

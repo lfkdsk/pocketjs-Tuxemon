@@ -8,7 +8,7 @@ import { createHash } from "node:crypto";
 import { readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
-import type { Gb6JourneyResult } from "./gb6-journey.ts";
+import { journeyWorldTraversal, type Gb6JourneyResult } from "./gb6-journey.ts";
 import type { J1JourneyResult } from "./j1-journey.ts";
 import type { J2JourneyResult } from "./j2-journey.ts";
 import type { J3JourneyResult } from "./j3-journey.ts";
@@ -24,6 +24,7 @@ interface ChapterRow {
 
 export interface J3QuickjsTape {
   format: "pocket-tuxemon/j3-quickjs/v1";
+  worldTraversal: "seamless-v1";
   hz: 60;
   startChapter: "hospital-cure";
   frames: number;
@@ -51,9 +52,17 @@ export function buildJ3QuickjsTape(root: string = ROOT): J3QuickjsTape {
   const j1 = read<J1JourneyResult>("data/j1-captainreturns-journey.json");
   const j2 = read<J2JourneyResult>("data/j2-hospitalcure-journey.json");
   const j3 = read<J3JourneyResult>("data/j3-omnichannelradioannounce-journey.json");
-  const chapters = read<{ chapters: ChapterRow[] }>("data/chapters.json");
+  const chapters = read<{ worldTraversal?: unknown; chapters: ChapterRow[] }>("data/chapters.json");
   const chapter = chapters.chapters.find((candidate) => candidate.id === "hospital-cure");
   expect(chapter, "missing hospital-cure chapter");
+  const worldTraversal = journeyWorldTraversal(j3, "J3 QuickJS tape");
+  expect(worldTraversal === "seamless-v1", "J3 QuickJS tape must use seamless-v1");
+  for (const [label, source] of [["GB6", gb6], ["J1", j1], ["J2", j2]] as const) {
+    expect(journeyWorldTraversal(source, label) === worldTraversal,
+      `${label} traversal identity changed`);
+  }
+  expect(journeyWorldTraversal(chapters, "chapters") === worldTraversal,
+    "chapter manifest traversal identity changed");
 
   const j1Masks = [...gb6.masks, ...j1.masks];
   const j2Masks = [...j1Masks, ...j2.masks];
@@ -71,7 +80,8 @@ export function buildJ3QuickjsTape(root: string = ROOT): J3QuickjsTape {
   const masks = [...parentTail, ...j3.masks];
   const offset = parentTail.length;
   expect(offset === 11, `expected 11 J2 tail frames, got ${offset}`);
-  expect(masks.length === 12_991, `expected 12,991 continuation frames, got ${masks.length}`);
+  expect(j3.frames === j3.masks.length, "J3 frame count changed");
+  expect(masks.length === offset + j3.frames, "continuation frame count changed");
   const maps = [
     { frame: 0, map: chapter.map },
     ...j3.maps
@@ -85,6 +95,7 @@ export function buildJ3QuickjsTape(root: string = ROOT): J3QuickjsTape {
   }));
   return {
     format: "pocket-tuxemon/j3-quickjs/v1",
+    worldTraversal,
     hz: 60,
     startChapter: "hospital-cure",
     frames: masks.length,
