@@ -4,13 +4,15 @@
 #[cfg(test)]
 mod g6_quickjs_bench {
     use super::*;
+    use pocket_mod::qjs::Function;
     use serde::Deserialize;
     use std::collections::{HashMap, HashSet};
     use std::ffi::CString;
     use std::fmt::Write as _;
     use std::path::Path;
+    use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
+    use std::sync::{Arc, Mutex};
     use std::time::Duration;
-    use std::sync::atomic::{AtomicU64, Ordering};
     use std::time::Instant;
 
     const BENCH_APP_ID: &str = "dev.lfkdsk.pocket-tuxemon-bench";
@@ -74,7 +76,9 @@ mod g6_quickjs_bench {
 
     impl CountingAllocator {
         fn new() -> Self {
-            Self { inner: pocket_mod::qjs::allocator::RustAllocator }
+            Self {
+                inner: pocket_mod::qjs::allocator::RustAllocator,
+            }
         }
     }
 
@@ -227,8 +231,13 @@ mod g6_quickjs_bench {
     /// regression (a wrapper stopped importing what it used to, or a new
     /// stage was inserted without updating this list) and must fail the
     /// bench, not print a silently-ignored partial table.
-    const EXPECTED_GP1_MARKS: [&str; 5] =
-        ["module-start", "engine", "json-literals", "battle-registration", "mount"];
+    const EXPECTED_GP1_MARKS: [&str; 5] = [
+        "module-start",
+        "engine",
+        "json-literals",
+        "battle-registration",
+        "mount",
+    ];
 
     fn assert_gp1_marks(marks: &[Gp1Mark]) {
         let names: Vec<&str> = marks.iter().map(|mark| mark.name.as_str()).collect();
@@ -335,7 +344,10 @@ mod g6_quickjs_bench {
         )
         .unwrap_err()
         .to_string();
-        assert!(error.contains("evaluating 'diagnostic-probe' failed"), "{error}");
+        assert!(
+            error.contains("evaluating 'diagnostic-probe' failed"),
+            "{error}"
+        );
         assert!(error.contains("staged-eval sentinel"), "{error}");
         assert!(error.contains("explode"), "{error}");
     }
@@ -385,7 +397,11 @@ mod g6_quickjs_bench {
         // The diagnostic counting allocator predates the production idle-GC
         // allocator and cannot be composed with it. Allocation probes run in
         // explicit auto mode; ordinary benchmark runs exercise idle GC.
-        let gc_mode = if count_allocs { GcMode::Auto } else { GcMode::from_env() };
+        let gc_mode = if count_allocs {
+            GcMode::Auto
+        } else {
+            GcMode::from_env()
+        };
         let guest = if count_allocs {
             Guest::new_with_alloc(CountingAllocator::new())?
         } else {
@@ -419,7 +435,10 @@ mod g6_quickjs_bench {
         if let Ok(slug) = std::env::var("G6_WEATHER") {
             guest.eval(
                 "g6-fixed-weather",
-                &format!("globalThis.__pocketTuxemonInitialWeather={{slug:{}}};", serde_json::to_string(&slug).unwrap()),
+                &format!(
+                    "globalThis.__pocketTuxemonInitialWeather={{slug:{}}};",
+                    serde_json::to_string(&slug).unwrap()
+                ),
             )?;
         }
         // Optional language override so the zh_CN smoke tape can be replayed
@@ -460,7 +479,9 @@ mod g6_quickjs_bench {
         // Match Runtime::boot exactly: bundle evaluation is unbounded, then
         // the hard cap is based on the fully booted heap before frame zero.
         if gc_mode == GcMode::Idle && !guest.arm_idle_gc() {
-            return Err(anyhow!("idle-GC guest was not armed after bundle evaluation"));
+            return Err(anyhow!(
+                "idle-GC guest was not armed after bundle evaluation"
+            ));
         }
         surface.svc_push(
             json!({"t":"hello","w":args.viewport.0,"h":args.viewport.1,"epoch":epoch_ms()})
@@ -495,7 +516,15 @@ mod g6_quickjs_bench {
             mouse_down: false,
             wire,
         };
-        Ok((runtime, StageTimes { host_init_ms, compile_ms, eval_ms, host_finish_ms }))
+        Ok((
+            runtime,
+            StageTimes {
+                host_init_ms,
+                compile_ms,
+                eval_ms,
+                host_finish_ms,
+            },
+        ))
     }
 
     #[derive(Deserialize)]
@@ -532,13 +561,23 @@ mod g6_quickjs_bench {
     }
 
     #[derive(Clone)]
+    struct FrameProfilePoint {
+        stage: String,
+        wall_ms: f64,
+        cpu_ms: f64,
+    }
+
+    #[derive(Clone)]
     struct Sample {
         frame: usize,
         map: String,
+        class: String,
+        temperature: &'static str,
         moving: bool,
         fade: bool,
         battle: bool,
         battle_event: Option<String>,
+        modal: Option<String>,
         js_ms: f64,
         core_ms: f64,
         draw_ms: f64,
@@ -565,6 +604,13 @@ mod g6_quickjs_bench {
         live_map: String,
         live_fade: bool,
         handoff: Option<HandoffFrame>,
+        profile: Vec<FrameProfilePoint>,
+    }
+
+    struct RawFrameProfilePoint {
+        stage: String,
+        wall: Instant,
+        cpu_ms: f64,
     }
 
     #[derive(Clone, Debug, Deserialize)]
@@ -590,20 +636,25 @@ mod g6_quickjs_bench {
         hash_every: usize,
         battle_buckets: bool,
         handoff_buckets: bool,
+        profile_frames: HashSet<usize>,
+        profile_marks: Arc<Mutex<Vec<RawFrameProfilePoint>>>,
+        profile_capture: Arc<AtomicBool>,
     }
 
     impl Bench {
         fn string(&self, source: &str) -> String {
-            self.rt.guest.with(|ctx| match ctx.eval::<String, _>(source) {
-                Ok(value) => value,
-                Err(error) => {
-                    let message = ctx
-                        .catch()
-                        .as_exception()
-                        .map(|exception| format!("{:?}", exception.message()));
-                    panic!("QuickJS eval failed: {error} {message:?} source={source}")
-                }
-            })
+            self.rt
+                .guest
+                .with(|ctx| match ctx.eval::<String, _>(source) {
+                    Ok(value) => value,
+                    Err(error) => {
+                        let message = ctx
+                            .catch()
+                            .as_exception()
+                            .map(|exception| format!("{:?}", exception.message()));
+                        panic!("QuickJS eval failed: {error} {message:?} source={source}")
+                    }
+                })
         }
 
         fn boolean(&self, source: &str) -> bool {
@@ -659,9 +710,9 @@ mod g6_quickjs_bench {
             }
         }
 
-        fn state(&self) -> (String, bool, bool, bool, Option<String>) {
+        fn state(&self) -> (String, bool, bool, bool, Option<String>, Option<String>) {
             serde_json::from_str(&self.string(
-                r#"(()=>{const s=globalThis.__rpgSessionState;const b=s.scene?.kind==='battle'?s.scene.state:null;return JSON.stringify([s.mapId,!!s.move.moving,!!s.fade,!!b,b?.battle?.events?.[b.eventCursor]?.type??null])})()"#,
+                r#"(()=>{const s=globalThis.__rpgSessionState;const b=s.scene?.kind==='battle'?s.scene.state:null;return JSON.stringify([s.mapId,!!s.move.moving,!!s.fade,!!b,b?.battle?.events?.[b.eventCursor]?.type??null,s.interp?.modal?.kind??null])})()"#,
             ))
             .expect("G6 state tuple")
         }
@@ -670,11 +721,45 @@ mod g6_quickjs_bench {
         /// (full party, active+reserve) and the battle menu mode.  Read AFTER
         /// the frame timing points (same as `state`), so the extra eval never
         /// skews js_ms/core_ms/draw_ms.
-        fn state_rich(&self) -> (String, bool, bool, bool, Option<String>, u8, u8, Option<String>) {
+        fn state_rich(
+            &self,
+        ) -> (
+            String,
+            bool,
+            bool,
+            bool,
+            Option<String>,
+            u8,
+            u8,
+            Option<String>,
+            Option<String>,
+        ) {
             serde_json::from_str(&self.string(
-                r#"(()=>{const s=globalThis.__rpgSessionState;const b=s.scene?.kind==='battle'?s.scene.state:null;return JSON.stringify([s.mapId,!!s.move.moving,!!s.fade,!!b,b?.battle?.events?.[b.eventCursor]?.type??null,b?b.battle.parties[0].length:0,b?b.battle.parties[1].length:0,b?b.menuMode:null])})()"#,
+                r#"(()=>{const s=globalThis.__rpgSessionState;const b=s.scene?.kind==='battle'?s.scene.state:null;return JSON.stringify([s.mapId,!!s.move.moving,!!s.fade,!!b,b?.battle?.events?.[b.eventCursor]?.type??null,b?b.battle.parties[0].length:0,b?b.battle.parties[1].length:0,b?b.menuMode:null,s.interp?.modal?.kind??null])})()"#,
             ))
             .expect("G6 rich state tuple")
+        }
+
+        fn install_frame_profiler(&self) {
+            if self.profile_frames.is_empty() {
+                return;
+            }
+            let marks = self.profile_marks.clone();
+            let capture = self.profile_capture.clone();
+            self.rt.guest.with(|ctx| {
+                let mark = Function::new(ctx.clone(), move |stage: String| {
+                    if !capture.load(Ordering::Relaxed) {
+                        return;
+                    }
+                    marks.lock().unwrap().push(RawFrameProfilePoint {
+                        stage,
+                        wall: Instant::now(),
+                        cpu_ms: thread_cpu::now_ms(),
+                    });
+                })
+                .unwrap();
+                ctx.globals().set("__rpgkitFrameProfileMark", mark).unwrap();
+            });
         }
 
         fn handoff_state(&self) -> HandoffObservation {
@@ -694,6 +779,12 @@ mod g6_quickjs_bench {
             if self.sample_structural {
                 self.reset_structural_counter();
             }
+            let capture_profile = self.profile_frames.contains(&frame);
+            if capture_profile {
+                self.profile_marks.lock().unwrap().clear();
+            }
+            self.profile_capture
+                .store(capture_profile, Ordering::Relaxed);
             // The desktop host's boundary budget starts before all per-tick
             // audio/offload work, so keep a separate whole-tick timestamp
             // while preserving the existing js/core segment timings.
@@ -713,6 +804,7 @@ mod g6_quickjs_bench {
             // immune to it.
             maybe_inject_sleep(frame);
             self.rt.guest.frame(mask).expect("QuickJS frame");
+            self.profile_capture.store(false, Ordering::Relaxed);
             let b = Instant::now();
             let b_cpu = thread_cpu::now_ms();
             self.rt.surface.tick();
@@ -747,20 +839,55 @@ mod g6_quickjs_bench {
                 pocket_mod::IdleGcOutcome::Collected(pause) => pause.as_secs_f64() * 1_000.0,
                 _ => 0.0,
             };
-            let (map, moving, fade, battle, battle_event, player_party, enemy_party, menu_mode) = if self.battle_buckets {
+            let profile = if capture_profile {
+                self.profile_marks
+                    .lock()
+                    .unwrap()
+                    .iter()
+                    .map(|mark| FrameProfilePoint {
+                        stage: mark.stage.clone(),
+                        wall_ms: mark.wall.duration_since(a).as_secs_f64() * 1_000.0,
+                        cpu_ms: mark.cpu_ms - a_cpu,
+                    })
+                    .collect()
+            } else {
+                Vec::new()
+            };
+            let (
+                map,
+                moving,
+                fade,
+                battle,
+                battle_event,
+                player_party,
+                enemy_party,
+                menu_mode,
+                modal,
+            ) = if self.battle_buckets {
                 let rich = self.state_rich();
                 match frozen {
-                    Some((fmap, fbattle)) => {
-                        (fmap.to_owned(), rich.1, rich.2, fbattle, rich.4, rich.5, rich.6, rich.7)
-                    }
+                    Some((fmap, fbattle)) => (
+                        fmap.to_owned(),
+                        rich.1,
+                        rich.2,
+                        fbattle,
+                        rich.4,
+                        rich.5,
+                        rich.6,
+                        rich.7,
+                        rich.8,
+                    ),
                     None => rich,
                 }
             } else {
-                let (map, moving, fade, battle, battle_event) = match frozen {
-                    Some((map, battle)) => (map.to_owned(), false, false, battle, None),
+                let (map, moving, fade, battle, battle_event, modal) = match frozen {
+                    Some((map, battle)) => {
+                        let live = self.state();
+                        (map.to_owned(), false, false, battle, live.4, live.5)
+                    }
                     None => self.state(),
                 };
-                (map, moving, fade, battle, battle_event, 0, 0, None)
+                (map, moving, fade, battle, battle_event, 0, 0, None, modal)
             };
             // This eval is deliberately after all timing points. It neither
             // inflates the phase sample nor trusts fast-tape map metadata:
@@ -768,8 +895,8 @@ mod g6_quickjs_bench {
             // Long-tape benches restrict it to forced framebuffer windows
             // around map checkpoints, which cover phase 0..7 plus landing
             // without allocating a JSON probe on every unrelated frame.
-            let handoff_observation = (self.handoff_buckets && force_hash)
-                .then(|| self.handoff_state());
+            let handoff_observation =
+                (self.handoff_buckets && force_hash).then(|| self.handoff_state());
             let live_map = handoff_observation
                 .as_ref()
                 .map(|observation| observation.map.clone())
@@ -787,10 +914,13 @@ mod g6_quickjs_bench {
             Sample {
                 frame,
                 map,
+                class: "unclassified".into(),
+                temperature: "hot",
                 moving,
                 fade,
                 battle,
                 battle_event,
+                modal,
                 js_ms: (b - a).as_secs_f64() * 1_000.0,
                 core_ms: (c - b).as_secs_f64() * 1_000.0,
                 draw_ms: (d - c).as_secs_f64() * 1_000.0,
@@ -808,6 +938,7 @@ mod g6_quickjs_bench {
                 live_map,
                 live_fade,
                 handoff,
+                profile,
             }
         }
     }
@@ -858,11 +989,136 @@ mod g6_quickjs_bench {
         sorted[((sorted.len() as f64 - 1.0) * fraction).ceil() as usize]
     }
 
+    fn frame_profile_config() -> (
+        HashSet<usize>,
+        Arc<Mutex<Vec<RawFrameProfilePoint>>>,
+        Arc<AtomicBool>,
+    ) {
+        let frames = std::env::var("G6_PROFILE_FRAMES")
+            .ok()
+            .map(|value| {
+                value
+                    .split(',')
+                    .filter(|item| !item.is_empty())
+                    .map(|item| {
+                        item.parse::<usize>().unwrap_or_else(|_| {
+                            panic!("G6_PROFILE_FRAMES must be comma-separated frame numbers, got {item:?}")
+                        })
+                    })
+                    .collect()
+            })
+            .unwrap_or_default();
+        (
+            frames,
+            Arc::new(Mutex::new(Vec::new())),
+            Arc::new(AtomicBool::new(false)),
+        )
+    }
+
+    fn report_temperature(viewport: &str, label: &str, samples: &[Sample]) {
+        for temperature in ["cold", "hot"] {
+            let selected: Vec<&Sample> = samples
+                .iter()
+                .filter(|sample| sample.temperature == temperature)
+                .collect();
+            if selected.is_empty() {
+                continue;
+            }
+            let mut qjs_core: Vec<f64> = selected
+                .iter()
+                .map(|sample| sample.js_cpu_ms + sample.core_cpu_ms)
+                .collect();
+            qjs_core.sort_by(|a, b| a.partial_cmp(b).unwrap());
+            let worst = selected
+                .iter()
+                .max_by(|a, b| {
+                    (a.js_cpu_ms + a.core_cpu_ms)
+                        .partial_cmp(&(b.js_cpu_ms + b.core_cpu_ms))
+                        .unwrap()
+                })
+                .unwrap();
+            println!(
+                "TEMP_CASE viewport={viewport} kind={label} temperature={temperature} n={} qjs_core_cpu_p95={:.3}ms qjs_core_cpu_max={:.3}ms worst=f{}:{} class={}",
+                selected.len(),
+                percentile(&qjs_core, 0.95),
+                qjs_core[qjs_core.len() - 1],
+                worst.frame,
+                worst.map,
+                worst.class,
+            );
+        }
+    }
+
+    fn format_frame_profile(sample: &Sample) -> String {
+        sample
+            .profile
+            .iter()
+            .map(|point| format!("{}@{:.3}/{:.3}", point.stage, point.wall_ms, point.cpu_ms))
+            .collect::<Vec<_>>()
+            .join(",")
+    }
+
+    fn report_slowest(viewport: &str, label: &str, samples: &[Sample]) {
+        let mut sorted: Vec<&Sample> = samples.iter().collect();
+        sorted.sort_by(|a, b| {
+            (b.js_cpu_ms + b.core_cpu_ms)
+                .partial_cmp(&(a.js_cpu_ms + a.core_cpu_ms))
+                .unwrap()
+                .then_with(|| a.frame.cmp(&b.frame))
+        });
+        let run = std::env::var("G6_RUN_LABEL").unwrap_or_else(|_| "1".into());
+        let ranked: Vec<&Sample> = sorted.into_iter().take(20).collect();
+        let ranked_frames: HashSet<usize> = ranked.iter().map(|sample| sample.frame).collect();
+        for (index, sample) in ranked.into_iter().enumerate() {
+            let profile = format_frame_profile(sample);
+            println!(
+                "SLOW_FRAME suite={label} run={run} pid={} viewport={viewport} rank={} frame={} map={} class={} temperature={} qjs_cpu={:.3}ms core_cpu={:.3}ms draw_cpu={:.3}ms qjs_wall={:.3}ms core_wall={:.3}ms draw_wall={:.3}ms gc={:.3}ms in_tick_gc={} draw_sampled={} profile=[{}]",
+                std::process::id(),
+                index + 1,
+                sample.frame,
+                sample.map,
+                sample.class,
+                sample.temperature,
+                sample.js_cpu_ms,
+                sample.core_cpu_ms,
+                sample.draw_cpu_ms,
+                sample.js_ms,
+                sample.core_ms,
+                sample.draw_ms,
+                sample.gc_ms,
+                sample.in_tick_gc,
+                sample.draw_sampled,
+                if profile.is_empty() { "none" } else { &profile },
+            );
+        }
+        for sample in samples
+            .iter()
+            .filter(|sample| !sample.profile.is_empty() && !ranked_frames.contains(&sample.frame))
+        {
+            println!(
+                "PROFILE_FRAME suite={label} run={run} pid={} viewport={viewport} frame={} map={} class={} temperature={} qjs_cpu={:.3}ms core_cpu={:.3}ms qjs_wall={:.3}ms core_wall={:.3}ms profile=[{}]",
+                std::process::id(),
+                sample.frame,
+                sample.map,
+                sample.class,
+                sample.temperature,
+                sample.js_cpu_ms,
+                sample.core_cpu_ms,
+                sample.js_ms,
+                sample.core_ms,
+                format_frame_profile(sample),
+            );
+        }
+    }
+
     /// One line per viewport for the production boundary-GC contract. CPU
     /// work remains the 50 ms gate; wall work + boundary pause is reported
     /// separately so the collector never disappears from the evidence.
     fn idle_gc_summary(viewport: &str, bench: &Bench, samples: &[Sample]) {
-        assert!(!samples.is_empty(), "GC summary requires at least one frame");
+        assert!(
+            !samples.is_empty(),
+            "GC summary requires at least one frame"
+        );
         let mut cpu_work: Vec<f64> = samples
             .iter()
             .map(|sample| sample.js_cpu_ms + sample.core_cpu_ms)
@@ -1063,10 +1319,9 @@ mod g6_quickjs_bench {
     /// missing, renamed, or reordered mark — this can no longer silently
     /// print a partial table.
     fn report_startup_stages(viewport: &str, bench: &Bench, boot_ms: f64, stages: &StageTimes) {
-        let marks: Vec<Gp1Mark> = serde_json::from_str(&bench.string(
-            "JSON.stringify(globalThis.__gp1Marks ?? [])",
-        ))
-        .expect("gp1 marks JSON");
+        let marks: Vec<Gp1Mark> =
+            serde_json::from_str(&bench.string("JSON.stringify(globalThis.__gp1Marks ?? [])"))
+                .expect("gp1 marks JSON");
         assert_gp1_marks(&marks);
         println!(
             "STAGE viewport={viewport} name=host-init at_ms=0.000 delta_ms={:.3}",
@@ -1074,8 +1329,7 @@ mod g6_quickjs_bench {
         );
         println!(
             "STAGE viewport={viewport} name=compile at_ms={:.3} delta_ms={:.3}",
-            stages.host_init_ms,
-            stages.compile_ms,
+            stages.host_init_ms, stages.compile_ms,
         );
         let eval_start_ms = stages.host_init_ms + stages.compile_ms;
         let t0 = marks[0].at;
@@ -1083,8 +1337,7 @@ mod g6_quickjs_bench {
         let pre_module_start_ms = (stages.eval_ms - marked_span_ms).max(0.0);
         println!(
             "STAGE viewport={viewport} name=eval-before-module-start at_ms={:.3} delta_ms={:.3}",
-            eval_start_ms,
-            pre_module_start_ms,
+            eval_start_ms, pre_module_start_ms,
         );
         let mut prev = t0;
         for mark in &marks {
@@ -1099,8 +1352,7 @@ mod g6_quickjs_bench {
         let eval_end_ms = eval_start_ms + stages.eval_ms;
         println!(
             "STAGE viewport={viewport} name=host-finish at_ms={:.3} delta_ms={:.3}",
-            eval_end_ms,
-            stages.host_finish_ms,
+            eval_end_ms, stages.host_finish_ms,
         );
         let accounted_ms = eval_end_ms + stages.host_finish_ms;
         println!(
@@ -1171,7 +1423,11 @@ mod g6_quickjs_bench {
         println!(
             "BUDGET kind={label} frames={} qjs_core_max_cpu={qjs_core_cpu:.3}ms wall={qjs_core_wall:.3}ms sampled_total_max_cpu={total_cpu:.3}ms wall={total_wall:.3}ms limit={limit_ms:.0}ms cpu_clock={}",
             samples.len(),
-            if thread_cpu::AVAILABLE { "thread-cputime" } else { "wall-fallback" },
+            if thread_cpu::AVAILABLE {
+                "thread-cputime"
+            } else {
+                "wall-fallback"
+            },
         );
     }
 
@@ -1202,9 +1458,16 @@ mod g6_quickjs_bench {
                         "handoff phase {} changed the active map early",
                         handoff.phase,
                     );
-                    assert!(!sample.live_fade, "handoff phase {} retained a fade", handoff.phase);
+                    assert!(
+                        !sample.live_fade,
+                        "handoff phase {} retained a fade",
+                        handoff.phase
+                    );
                     if self.active.is_none() {
-                        assert_eq!(handoff.phase, 0, "first observed handoff frame must be phase 0");
+                        assert_eq!(
+                            handoff.phase, 0,
+                            "first observed handoff frame must be phase 0"
+                        );
                         self.active = Some((
                             handoff.source_map_id.clone(),
                             handoff.target_map_id.clone(),
@@ -1212,8 +1475,14 @@ mod g6_quickjs_bench {
                         ));
                     }
                     let (source, target, phases) = self.active.as_mut().unwrap();
-                    assert_eq!(&handoff.source_map_id, source, "handoff source changed mid-crossing");
-                    assert_eq!(&handoff.target_map_id, target, "handoff target changed mid-crossing");
+                    assert_eq!(
+                        &handoff.source_map_id, source,
+                        "handoff source changed mid-crossing"
+                    );
+                    assert_eq!(
+                        &handoff.target_map_id, target,
+                        "handoff target changed mid-crossing"
+                    );
                     assert_eq!(
                         handoff.phase,
                         phases.len(),
@@ -1236,7 +1505,10 @@ mod g6_quickjs_bench {
                         (0..8).collect::<Vec<_>>(),
                         "handoff {source} -> {target} has an incomplete phase sequence",
                     );
-                    assert_eq!(sample.live_map, target, "handoff landing did not enter its target map");
+                    assert_eq!(
+                        sample.live_map, target,
+                        "handoff landing did not enter its target map"
+                    );
                     assert!(!sample.live_fade, "handoff landing retained a fade");
                     self.completed.push(CompletedHandoff {
                         source,
@@ -1249,7 +1521,10 @@ mod g6_quickjs_bench {
         }
 
         fn finish(self) -> Vec<CompletedHandoff> {
-            assert!(self.active.is_none(), "journey ended during a seamless handoff");
+            assert!(
+                self.active.is_none(),
+                "journey ended during a seamless handoff"
+            );
             assert!(
                 !self.completed.is_empty(),
                 "G6_HANDOFF_BUCKETS requires at least one complete seamless handoff",
@@ -1309,7 +1584,11 @@ mod g6_quickjs_bench {
         let mut phases: Vec<Vec<Sample>> = (0..8).map(|_| Vec::new()).collect();
         let mut landings = Vec::with_capacity(completed.len());
         for (index, handoff) in completed.iter().enumerate() {
-            assert_eq!(handoff.phases.len(), 8, "handoff sequence must contain every phase");
+            assert_eq!(
+                handoff.phases.len(),
+                8,
+                "handoff sequence must contain every phase"
+            );
             for (phase, sample) in handoff.phases.iter().enumerate() {
                 assert_eq!(sample.handoff.as_ref().unwrap().phase, phase);
                 phases[phase].push(sample.clone());
@@ -1317,9 +1596,7 @@ mod g6_quickjs_bench {
             landings.push(handoff.landing.clone());
             println!(
                 "HANDOFF_SEQUENCE viewport={viewport} index={index} source={} target={} phases=0,1,2,3,4,5,6,7 landing=f{}",
-                handoff.source,
-                handoff.target,
-                handoff.landing.frame,
+                handoff.source, handoff.target, handoff.landing.frame,
             );
         }
         println!(
@@ -1336,7 +1613,11 @@ mod g6_quickjs_bench {
             );
             report_handoff_bucket(viewport, &format!("handoff-phase-{phase}"), samples);
         }
-        assert_eq!(landings.len(), completed.len(), "every crossing must have one landing frame");
+        assert_eq!(
+            landings.len(),
+            completed.len(),
+            "every crossing must have one landing frame"
+        );
         report_handoff_bucket(viewport, "handoff-landing", &landings);
     }
 
@@ -1437,7 +1718,10 @@ mod g6_quickjs_bench {
         let destination = app_data.join("battle");
         let _ = std::fs::remove_dir_all(&destination);
         let copied = copy_dir_recursive(source, &destination);
-        assert!(copied > 0, "benchmark must stage the sharded battle database");
+        assert!(
+            copied > 0,
+            "benchmark must stage the sharded battle database"
+        );
     }
 
     /// Stages the sharded animated-tile tree (`dist/animated/<mapId>.json`)
@@ -1449,7 +1733,10 @@ mod g6_quickjs_bench {
         let destination = app_data.join("animated");
         let _ = std::fs::remove_dir_all(&destination);
         let copied = copy_dir_recursive(source, &destination);
-        assert!(copied > 0, "benchmark must stage the sharded animated-tile table");
+        assert!(
+            copied > 0,
+            "benchmark must stage the sharded animated-tile table"
+        );
     }
 
     /// Stages the sharded per-NPC sprite table (`dist/npc-src/<npcId>.json`),
@@ -1459,7 +1746,10 @@ mod g6_quickjs_bench {
         let destination = app_data.join("npc-src");
         let _ = std::fs::remove_dir_all(&destination);
         let copied = copy_dir_recursive(source, &destination);
-        assert!(copied > 0, "benchmark must stage the sharded NPC sprite table");
+        assert!(
+            copied > 0,
+            "benchmark must stage the sharded NPC sprite table"
+        );
     }
 
     /// Stages the sharded terrain-stream ground/upper chunk-ref tables
@@ -1470,7 +1760,10 @@ mod g6_quickjs_bench {
         let destination = app_data.join("terrain-stream");
         let _ = std::fs::remove_dir_all(&destination);
         let copied = copy_dir_recursive(source, &destination);
-        assert!(copied > 0, "benchmark must stage the sharded terrain-stream tables");
+        assert!(
+            copied > 0,
+            "benchmark must stage the sharded terrain-stream tables"
+        );
     }
 
     /// Stages the packed chapter snapshots and input tape used by an optional
@@ -1517,7 +1810,8 @@ mod g6_quickjs_bench {
         seed_animated(&animated, &data);
         let npc_src = PathBuf::from(std::env::var("G6_NPC_SRC").expect("G6_NPC_SRC"));
         seed_npc_src(&npc_src, &data);
-        let terrain_stream = PathBuf::from(std::env::var("G6_TERRAIN_STREAM").expect("G6_TERRAIN_STREAM"));
+        let terrain_stream =
+            PathBuf::from(std::env::var("G6_TERRAIN_STREAM").expect("G6_TERRAIN_STREAM"));
         seed_terrain_stream(&terrain_stream, &data);
         if std::env::var("G6_START_CHAPTER").is_ok() {
             let demo = PathBuf::from(std::env::var("G6_DEMO").expect("G6_DEMO"));
@@ -1536,6 +1830,7 @@ mod g6_quickjs_bench {
             .and_then(|value| value.parse().ok())
             .unwrap_or(1usize)
             .max(1);
+        let (profile_frames, profile_marks, profile_capture) = frame_profile_config();
         let mut bench = Bench {
             rt: runtime,
             gc_mode: GcMode::from_env(),
@@ -1543,7 +1838,11 @@ mod g6_quickjs_bench {
             hash_every,
             battle_buckets,
             handoff_buckets,
+            profile_frames,
+            profile_marks,
+            profile_capture,
         };
+        bench.install_frame_profiler();
         report_startup_stages(&viewport, &bench, boot_ms, &stages);
         if sample_structural {
             bench.install_structural_counter();
@@ -1565,7 +1864,12 @@ mod g6_quickjs_bench {
                 serde_json::to_string(&chapter).unwrap(),
             ));
             let _ = bench.frame(0, 0, None, true);
-            let expected = journey.maps.first().expect("continuation map checkpoint").map.as_str();
+            let expected = journey
+                .maps
+                .first()
+                .expect("continuation map checkpoint")
+                .map
+                .as_str();
             let actual = bench.state().0;
             if actual != expected {
                 let text = bench.rt.surface.with_ui(|ui| {
@@ -1581,16 +1885,26 @@ mod g6_quickjs_bench {
                     visit(ui, pocketjs_core::spec::ROOT_ID, &mut out);
                     out.join(" | ")
                 });
-                panic!("chapter {chapter:?} restored {actual:?}, expected {expected:?}; UI: {text}");
+                panic!(
+                    "chapter {chapter:?} restored {actual:?}, expected {expected:?}; UI: {text}"
+                );
             }
             (first_paint, first_paint_ms)
         });
         if sample_structural {
-            assert!(journey.maps.is_empty() || journey.battles.is_empty(),
-                "short probe mode must classify live state rather than frozen metadata");
+            assert!(
+                journey.maps.is_empty() || journey.battles.is_empty(),
+                "short probe mode must classify live state rather than frozen metadata"
+            );
         } else {
-            assert!(!journey.maps.is_empty(), "fast benchmark requires journey map checkpoints");
-            assert!(!journey.battles.is_empty(), "fast benchmark requires journey battle checkpoints");
+            assert!(
+                !journey.maps.is_empty(),
+                "fast benchmark requires journey map checkpoints"
+            );
+            assert!(
+                !journey.battles.is_empty(),
+                "fast benchmark requires journey battle checkpoints"
+            );
         }
         let initial_map = if !sample_structural {
             journey.maps[0].map.clone()
@@ -1599,14 +1913,20 @@ mod g6_quickjs_bench {
         };
         let frozen_at = |frame: usize| -> Option<(&str, bool)> {
             if !sample_structural {
-                let map = journey.maps.iter().rev().find(|mark| mark.frame <= frame).unwrap();
+                let map = journey
+                    .maps
+                    .iter()
+                    .rev()
+                    .find(|mark| mark.frame <= frame)
+                    .unwrap();
                 // Checkpoints describe the post-step scene. `startFrame` is
                 // the input that enters battle; `endFrame` is one past the
                 // input that exits it, so that exit input is already a world
                 // scene sample.
-                let battle = journey.battles.iter().any(|mark|
-                    mark.start_frame <= frame && frame + 1 < mark.end_frame
-                );
+                let battle = journey
+                    .battles
+                    .iter()
+                    .any(|mark| mark.start_frame <= frame && frame + 1 < mark.end_frame);
                 Some((map.map.as_str(), battle))
             } else {
                 None
@@ -1631,7 +1951,14 @@ mod g6_quickjs_bench {
             }
         }
         let replay_started = Instant::now();
-        let first = bench.frame(0, journey.masks[0], frozen_at(0), forced_hashes.contains(&0));
+        let mut first = bench.frame(
+            0,
+            journey.masks[0],
+            frozen_at(0),
+            forced_hashes.contains(&0),
+        );
+        first.class = "first-frame".into();
+        first.temperature = "cold";
         let (first_paint, first_paint_ms) = chapter_startup.unwrap_or_else(|| {
             let first_paint_ms = boot_start.elapsed().as_secs_f64() * 1_000.0;
             (first.clone(), first_paint_ms)
@@ -1672,17 +1999,80 @@ mod g6_quickjs_bench {
         let mut battle_exit = Vec::new();
         let mut last_map = initial_map;
         let mut last_battle = first.battle;
+        let mut last_modal = first.modal.clone();
+        let mut last_handoff = first.handoff.is_some();
+        let mut seen_maps = HashSet::from([first.map.clone()]);
+        let mut seen_modals: HashSet<String> = first.modal.iter().cloned().collect();
+        let mut battle_entries = usize::from(first.battle);
+        let mut battle_exits = 0usize;
         let mut battle_completed = false;
         let mut switch_tail = 0usize;
+        let mut switch_temperature = "hot";
+        let mut handoff_temperature = "hot";
         let mut transfers = 0usize;
         for (index, mask) in journey.masks.iter().copied().enumerate().skip(1) {
-            let sample = bench.frame(
+            let mut sample = bench.frame(
                 index,
                 mask,
                 frozen_at(index),
                 forced_hashes.contains(&index),
             );
-            all_frames.push(sample.clone());
+            let battle_changed = sample.battle != last_battle;
+            let map_changed = sample.map != last_map;
+            let modal_opened = sample.modal.is_some() && sample.modal != last_modal;
+            let first_map_visit = map_changed && !seen_maps.contains(&sample.map);
+            if let Some(handoff) = &sample.handoff {
+                if !last_handoff {
+                    handoff_temperature = if seen_maps.contains(&handoff.target_map_id) {
+                        "hot"
+                    } else {
+                        "cold"
+                    };
+                }
+            }
+            if map_changed {
+                switch_temperature = if first_map_visit { "cold" } else { "hot" };
+            }
+            if battle_changed && sample.battle {
+                sample.class = "battle-entry".into();
+                sample.temperature = if battle_entries == 0 { "cold" } else { "hot" };
+                battle_entries += 1;
+            } else if battle_changed {
+                sample.class = "battle-exit".into();
+                sample.temperature = if battle_exits == 0 { "cold" } else { "hot" };
+                battle_exits += 1;
+            } else if let Some(handoff) = &sample.handoff {
+                sample.class = format!("handoff-phase-{}", handoff.phase);
+                sample.temperature = handoff_temperature;
+            } else if last_handoff {
+                sample.class = "handoff-landing".into();
+                sample.temperature = handoff_temperature;
+            } else if map_changed {
+                sample.class = if first_map_visit {
+                    "map-first-visit"
+                } else {
+                    "map-revisit"
+                }
+                .into();
+                sample.temperature = switch_temperature;
+            } else if modal_opened {
+                let kind = sample.modal.as_deref().unwrap();
+                let first_open = seen_modals.insert(kind.to_owned());
+                sample.class = format!("dialog-open-{kind}");
+                sample.temperature = if first_open { "cold" } else { "hot" };
+            } else if sample.fade || switch_tail > 0 {
+                sample.class = "map-switch-tail".into();
+                sample.temperature = switch_temperature;
+            } else if sample.battle {
+                sample.class = match sample.battle_event.as_deref() {
+                    Some(event) => format!("battle-{event}"),
+                    None => "battle-steady".into(),
+                };
+            } else if sample.moving || mask & 0x00f0 != 0 {
+                sample.class = "walking".into();
+            } else {
+                sample.class = "idle".into();
+            }
             if handoff_buckets {
                 handoff_tracker.observe(&sample);
             }
@@ -1698,7 +2088,7 @@ mod g6_quickjs_bench {
                     battle_decision.push(sample.clone());
                 }
             }
-            if sample.battle != last_battle {
+            if battle_changed {
                 if sample.battle {
                     battle_entry.push(sample.clone());
                 } else {
@@ -1707,13 +2097,14 @@ mod g6_quickjs_bench {
                 }
                 last_battle = sample.battle;
             }
-            if sample.map != last_map {
+            if map_changed {
+                seen_maps.insert(sample.map.clone());
                 last_map = sample.map.clone();
                 transfers += 1;
                 switch_tail = 16;
             }
             if sample.fade || switch_tail > 0 {
-                switches.push(sample);
+                switches.push(sample.clone());
                 switch_tail = switch_tail.saturating_sub(1);
             } else if sample.moving || mask & 0x00f0 != 0 {
                 if battle_completed {
@@ -1721,12 +2112,16 @@ mod g6_quickjs_bench {
                 } else {
                     walking_before_battle.push(sample.clone());
                 }
-                walking.push(sample);
+                walking.push(sample.clone());
             }
+            all_frames.push(sample.clone());
+            last_modal = sample.modal.clone();
+            last_handoff = sample.handoff.is_some();
         }
         let replay_wall_ms = replay_started.elapsed().as_secs_f64() * 1_000.0;
-        let (end_map, _, _, _, _) = bench.state();
-        let expected_map = std::env::var("G6_EXPECTED_MAP").unwrap_or_else(|_| "spyder_route1".into());
+        let (end_map, _, _, _, _, _) = bench.state();
+        let expected_map =
+            std::env::var("G6_EXPECTED_MAP").unwrap_or_else(|_| "spyder_route1".into());
         assert_eq!(end_map, expected_map);
         let state_text = bench.string("JSON.stringify(globalThis.__rpgSessionState)");
         let state: serde_json::Value =
@@ -1738,7 +2133,6 @@ mod g6_quickjs_bench {
         report(&viewport, "walking-before-battle", &walking_before_battle);
         report(&viewport, "walking-after-battle", &walking_after_battle);
         report(&viewport, "map-switch", &switches);
-        assert_frame_budget("map-switch", &switches, 50.0);
         report(&viewport, "battle", &battle);
         report(&viewport, "battle-steady", &battle_steady);
         if sample_structural {
@@ -1753,17 +2147,25 @@ mod g6_quickjs_bench {
             report(&viewport, "battle-round", &battle_round);
             report(&viewport, "battle-decision", &battle_decision);
         } else {
-            println!("CASE viewport={viewport} kind=battle-round source=standalone-reducer-benchmark");
+            println!(
+                "CASE viewport={viewport} kind=battle-round source=standalone-reducer-benchmark"
+            );
         }
         report(&viewport, "battle-entry", &battle_entry);
         report(&viewport, "battle-exit", &battle_exit);
-        assert_frame_budget("battle-entry", &battle_entry, 50.0);
-        assert_frame_budget("battle-exit", &battle_exit, 50.0);
         if battle_buckets {
             report_buckets(&viewport, "battle-steady", &battle_steady);
         }
         report(&viewport, "all", &all_frames);
+        report_temperature(&viewport, "journey", &all_frames);
+        report_slowest(&viewport, "journey", &all_frames);
         idle_gc_summary(&viewport, &bench, &all_frames);
+        // Emit all diagnostics before enforcing the gates, so an over-budget
+        // run still records its classified slow frame and opt-in profile
+        // markers instead of stopping at the first aggregate table.
+        assert_frame_budget("map-switch", &switches, 50.0);
+        assert_frame_budget("battle-entry", &battle_entry, 50.0);
+        assert_frame_budget("battle-exit", &battle_exit, 50.0);
         assert_frame_budget("all", &all_frames, 50.0);
         if handoff_buckets {
             let completed = handoff_tracker.finish();
@@ -1843,13 +2245,15 @@ mod g6_quickjs_bench {
         seed_animated(&animated, &data);
         let npc_src = PathBuf::from(std::env::var("G6_NPC_SRC").expect("G6_NPC_SRC"));
         seed_npc_src(&npc_src, &data);
-        let terrain_stream = PathBuf::from(std::env::var("G6_TERRAIN_STREAM").expect("G6_TERRAIN_STREAM"));
+        let terrain_stream =
+            PathBuf::from(std::env::var("G6_TERRAIN_STREAM").expect("G6_TERRAIN_STREAM"));
         seed_terrain_stream(&terrain_stream, &data);
 
         let (runtime, _stages) =
             boot_staged(args(&dist, "pocket-tuxemon", data.clone(), width, height)).unwrap();
         // CountingAllocator cannot be composed with the production idle-GC
         // allocator; boot_staged therefore forces this probe to auto mode.
+        let (profile_frames, profile_marks, profile_capture) = frame_profile_config();
         let mut bench = Bench {
             rt: runtime,
             gc_mode: GcMode::Auto,
@@ -1857,7 +2261,11 @@ mod g6_quickjs_bench {
             hash_every: 1,
             battle_buckets: false,
             handoff_buckets: false,
+            profile_frames,
+            profile_marks,
+            profile_capture,
         };
+        bench.install_frame_profiler();
         // Warm-up: replay up to `start` so the probe measures a specific
         // outdoor segment (the G6 tape opens indoors in a bedroom).
         for index in 0..start {
@@ -1941,9 +2349,12 @@ mod g6_quickjs_bench {
             .ok()
             .and_then(|value| value.parse().ok())
             .unwrap_or(4_000);
-        let expected_map = std::env::var("G6_INDOOR_MAP")
-            .unwrap_or_else(|_| "spyder_downstairs".into());
-        assert!(start < journey.masks.len(), "indoor start lies beyond the journey");
+        let expected_map =
+            std::env::var("G6_INDOOR_MAP").unwrap_or_else(|_| "spyder_downstairs".into());
+        assert!(
+            start < journey.masks.len(),
+            "indoor start lies beyond the journey"
+        );
 
         let bench_root = PathBuf::from(std::env::var("G6_BENCH_ROOT").expect("G6_BENCH_ROOT"));
         let data = bench_root.join(format!(
@@ -1964,6 +2375,7 @@ mod g6_quickjs_bench {
 
         let (runtime, _stages) =
             boot_staged(args(&dist, "pocket-tuxemon", data, width, height)).unwrap();
+        let (profile_frames, profile_marks, profile_capture) = frame_profile_config();
         let mut bench = Bench {
             rt: runtime,
             gc_mode: GcMode::from_env(),
@@ -1971,7 +2383,11 @@ mod g6_quickjs_bench {
             hash_every: 10,
             battle_buckets: false,
             handoff_buckets: false,
+            profile_frames,
+            profile_marks,
+            profile_capture,
         };
+        bench.install_frame_profiler();
         assert!(
             !bench.boolean("typeof globalThis.__pocketTuxemonWorldDiagnostics !== 'undefined'"),
             "indoor fast-path probe must not enable world diagnostics",
@@ -1979,7 +2395,11 @@ mod g6_quickjs_bench {
         for index in 0..=start {
             let _sample = bench.frame(index, journey.masks[index], None, false);
         }
-        assert_eq!(bench.state().0, expected_map, "tape did not reach the indoor fixture");
+        assert_eq!(
+            bench.state().0,
+            expected_map,
+            "tape did not reach the indoor fixture"
+        );
         for offset in 0..warmup {
             let _sample = bench.frame(start + 1 + offset, 0, None, false);
         }
@@ -1988,7 +2408,9 @@ mod g6_quickjs_bench {
             .map(|offset| bench.frame(start + 1 + warmup + offset, 0, None, false))
             .collect();
         assert!(
-            samples.iter().all(|sample| sample.map == expected_map && !sample.battle),
+            samples
+                .iter()
+                .all(|sample| sample.map == expected_map && !sample.battle),
             "indoor fixture left the single-map world path",
         );
         report(&viewport, "indoor-fast-path", &samples);
@@ -2022,6 +2444,7 @@ mod g6_quickjs_bench {
         seed_maps(&maps, &data);
         let runtime =
             Runtime::boot(args(&dist, "map-benchmark-entry", data.clone(), 480, 272)).unwrap();
+        let (profile_frames, profile_marks, profile_capture) = frame_profile_config();
         let bench = Bench {
             rt: runtime,
             gc_mode: GcMode::from_env(),
@@ -2029,6 +2452,9 @@ mod g6_quickjs_bench {
             hash_every: 1,
             battle_buckets: false,
             handoff_buckets: false,
+            profile_frames,
+            profile_marks,
+            profile_capture,
         };
         let metadata: Vec<MapMeta> = serde_json::from_str(
             &bench.string("JSON.stringify(globalThis.__rpgMapBenchmark.maps)"),
@@ -2270,7 +2696,9 @@ mod g6_quickjs_bench {
             surface: &UiSurface,
             heap_bytes: usize,
         ) {
-            let Some(cache) = &diagnostic.cache else { return };
+            let Some(cache) = &diagnostic.cache else {
+                return;
+            };
             self.maps = self.maps.max(cache.driver.maps);
             self.worlds = self.worlds.max(cache.driver.worlds);
             self.tables = self.tables.max(cache.driver.tables);
@@ -2283,18 +2711,18 @@ mod g6_quickjs_bench {
                 let ground = stream.ground.as_ref();
                 let upper = stream.upper.as_ref();
                 self.stream_textures = self.stream_textures.max(
-                    ground.map_or(0, |value| value.textures) +
-                    upper.map_or(0, |value| value.textures),
+                    ground.map_or(0, |value| value.textures)
+                        + upper.map_or(0, |value| value.textures),
                 );
                 self.terrain_nodes = self.terrain_nodes.max(
-                    ground.map_or(0, |value| value.created) +
-                    upper.map_or(0, |value| value.created),
+                    ground.map_or(0, |value| value.created)
+                        + upper.map_or(0, |value| value.created),
                 );
             }
             if let Some(animated) = &diagnostic.animated {
                 self.animated_nodes = self.animated_nodes.max(
-                    animated.below.as_ref().map_or(0, |value| value.created) +
-                    animated.above.as_ref().map_or(0, |value| value.created),
+                    animated.below.as_ref().map_or(0, |value| value.created)
+                        + animated.above.as_ref().map_or(0, |value| value.created),
                 );
             }
             let (nodes, live_textures, texture_slots) = surface_counts(surface);
@@ -2306,9 +2734,9 @@ mod g6_quickjs_bench {
     }
 
     fn world_stress_diagnostics(bench: &Bench) -> WorldStressDiagnostics {
-        serde_json::from_str(&bench.string(
-            "JSON.stringify(globalThis.__pocketTuxemonWorldDiagnostics)",
-        ))
+        serde_json::from_str(
+            &bench.string("JSON.stringify(globalThis.__pocketTuxemonWorldDiagnostics)"),
+        )
         .expect("world-cache diagnostics JSON")
     }
 
@@ -2338,14 +2766,16 @@ mod g6_quickjs_bench {
         });
     }
 
-    fn world_stress_settled(
-        diagnostic: &WorldStressDiagnostics,
-        seq: usize,
-        map_id: &str,
-    ) -> bool {
-        let Some(cache) = &diagnostic.cache else { return false };
-        let Some(stream) = &diagnostic.stream else { return false };
-        let (Some(ground), Some(upper)) = (&stream.ground, &stream.upper) else { return false };
+    fn world_stress_settled(diagnostic: &WorldStressDiagnostics, seq: usize, map_id: &str) -> bool {
+        let Some(cache) = &diagnostic.cache else {
+            return false;
+        };
+        let Some(stream) = &diagnostic.stream else {
+            return false;
+        };
+        let (Some(ground), Some(upper)) = (&stream.ground, &stream.upper) else {
+            return false;
+        };
         diagnostic.acknowledged == Some(seq)
             && cache.driver.active == map_id
             && ground.map_id == map_id
@@ -2359,48 +2789,127 @@ mod g6_quickjs_bench {
     }
 
     fn assert_world_stress_contract(diagnostic: &WorldStressDiagnostics, map_id: &str) {
-        let cache = diagnostic.cache.as_ref().expect("settled cache diagnostics");
-        let stream = diagnostic.stream.as_ref().expect("settled stream diagnostics");
+        let cache = diagnostic
+            .cache
+            .as_ref()
+            .expect("settled cache diagnostics");
+        let stream = diagnostic
+            .stream
+            .as_ref()
+            .expect("settled stream diagnostics");
         let ground = stream.ground.as_ref().expect("settled ground diagnostics");
         let upper = stream.upper.as_ref().expect("settled upper diagnostics");
-        let animated = diagnostic.animated.as_ref().expect("settled animated diagnostics");
+        let animated = diagnostic
+            .animated
+            .as_ref()
+            .expect("settled animated diagnostics");
         let driver = &cache.driver;
 
-        assert_eq!(driver.active, map_id, "active map must follow the requested entry");
-        assert!(driver.visible.iter().any(|id| id == map_id), "active map must be visible");
-        assert!(driver.parsed_keep.iter().any(|id| id == map_id), "active map must be parsed");
-        assert!(driver.compiled_keep.iter().any(|id| id == map_id), "active map must be compiled");
+        assert_eq!(
+            driver.active, map_id,
+            "active map must follow the requested entry"
+        );
         assert!(
-            driver.visible.iter().all(|id| driver.parsed_keep.contains(id)),
+            driver.visible.iter().any(|id| id == map_id),
+            "active map must be visible"
+        );
+        assert!(
+            driver.parsed_keep.iter().any(|id| id == map_id),
+            "active map must be parsed"
+        );
+        assert!(
+            driver.compiled_keep.iter().any(|id| id == map_id),
+            "active map must be compiled"
+        );
+        assert!(
+            driver
+                .visible
+                .iter()
+                .all(|id| driver.parsed_keep.contains(id)),
             "visible maps must be retained in the parsed working set",
         );
-        assert!(driver.maps <= driver.parsed_keep.len(), "parsed map cache exceeded its keep-set");
-        assert!(driver.repo_cached <= driver.parsed_keep.len(), "repository cache exceeded its keep-set");
-        assert!(driver.worlds <= driver.compiled_keep.len(), "compiled world cache exceeded its keep-set");
-        assert!(driver.tables <= driver.compiled_keep.len(), "passage cache exceeded its keep-set");
-        assert!(driver.runtime <= 1, "mutable passage cache must remain active-map-only");
-        assert_eq!(driver.pending, 0, "settled route still has pending prefetch work");
-        assert_eq!(driver.preparing, driver.staged, "all remaining preparations must be complete");
-        assert!(driver.failures.as_object().is_some_and(|value| value.is_empty()), "world prefetch failed");
+        assert!(
+            driver.maps <= driver.parsed_keep.len(),
+            "parsed map cache exceeded its keep-set"
+        );
+        assert!(
+            driver.repo_cached <= driver.parsed_keep.len(),
+            "repository cache exceeded its keep-set"
+        );
+        assert!(
+            driver.worlds <= driver.compiled_keep.len(),
+            "compiled world cache exceeded its keep-set"
+        );
+        assert!(
+            driver.tables <= driver.compiled_keep.len(),
+            "passage cache exceeded its keep-set"
+        );
+        assert!(
+            driver.runtime <= 1,
+            "mutable passage cache must remain active-map-only"
+        );
+        assert_eq!(
+            driver.pending, 0,
+            "settled route still has pending prefetch work"
+        );
+        assert_eq!(
+            driver.preparing, driver.staged,
+            "all remaining preparations must be complete"
+        );
+        assert!(
+            driver
+                .failures
+                .as_object()
+                .is_some_and(|value| value.is_empty()),
+            "world prefetch failed"
+        );
 
-        assert_eq!(ground.visible_maps, cache.visual_keep, "ground/provider visible set drift");
-        assert_eq!(upper.visible_maps, cache.visual_keep, "upper/provider visible set drift");
-        assert!(cache.assets.ground.resident <= cache.visual_keep.len(),
-            "{map_id}: ground shards {} exceeded visual keep-set {:?}", cache.assets.ground.resident, cache.visual_keep);
-        assert!(cache.assets.upper.resident <= cache.visual_keep.len(),
-            "{map_id}: upper shards {} exceeded visual keep-set {:?}", cache.assets.upper.resident, cache.visual_keep);
-        assert!(cache.assets.animated.resident <= cache.visual_keep.len(),
-            "{map_id}: animated shards {} exceeded visual keep-set {:?}", cache.assets.animated.resident, cache.visual_keep);
-        assert!(cache.assets.npc_src.resident <= cache.npc_keep.len(),
-            "{map_id}: NPC refs {} exceeded active-map keep-set {:?}", cache.assets.npc_src.resident, cache.npc_keep);
+        assert_eq!(
+            ground.visible_maps, cache.visual_keep,
+            "ground/provider visible set drift"
+        );
+        assert_eq!(
+            upper.visible_maps, cache.visual_keep,
+            "upper/provider visible set drift"
+        );
+        assert!(
+            cache.assets.ground.resident <= cache.visual_keep.len(),
+            "{map_id}: ground shards {} exceeded visual keep-set {:?}",
+            cache.assets.ground.resident,
+            cache.visual_keep
+        );
+        assert!(
+            cache.assets.upper.resident <= cache.visual_keep.len(),
+            "{map_id}: upper shards {} exceeded visual keep-set {:?}",
+            cache.assets.upper.resident,
+            cache.visual_keep
+        );
+        assert!(
+            cache.assets.animated.resident <= cache.visual_keep.len(),
+            "{map_id}: animated shards {} exceeded visual keep-set {:?}",
+            cache.assets.animated.resident,
+            cache.visual_keep
+        );
+        assert!(
+            cache.assets.npc_src.resident <= cache.npc_keep.len(),
+            "{map_id}: NPC refs {} exceeded active-map keep-set {:?}",
+            cache.assets.npc_src.resident,
+            cache.npc_keep
+        );
         for (name, stats) in [
             ("ground", &cache.assets.ground),
             ("upper", &cache.assets.upper),
             ("npc", &cache.assets.npc_src),
         ] {
             assert_eq!(stats.missing, 0, "{name} provider reported missing entries");
-            assert!(stats.loads >= stats.resident, "{name} provider load counter regressed");
-            assert!(stats.loads >= stats.evictions, "{name} provider eviction counter exceeded loads");
+            assert!(
+                stats.loads >= stats.resident,
+                "{name} provider load counter regressed"
+            );
+            assert!(
+                stats.loads >= stats.evictions,
+                "{name} provider eviction counter exceeded loads"
+            );
         }
         // Most maps intentionally have no authored animation shard, so a
         // lookup miss is the provider's normal `tiles[id] ?? []` path.
@@ -2408,14 +2917,37 @@ mod g6_quickjs_bench {
         assert!(cache.assets.animated.loads >= cache.assets.animated.evictions);
         for (name, stats) in [("ground", ground), ("upper", upper)] {
             assert_eq!(stats.pending, 0, "{name} terrain still pending");
-            assert_eq!(stats.resident + stats.pooled, stats.created, "{name} terrain node pool leaked");
-            assert_eq!(stats.textures, stats.resident, "{name} terrain texture residency drifted");
+            assert_eq!(
+                stats.resident + stats.pooled,
+                stats.created,
+                "{name} terrain node pool leaked"
+            );
+            assert_eq!(
+                stats.textures, stats.resident,
+                "{name} terrain texture residency drifted"
+            );
         }
         for (name, stats) in [
-            ("below", animated.below.as_ref().expect("below animation diagnostics")),
-            ("above", animated.above.as_ref().expect("above animation diagnostics")),
+            (
+                "below",
+                animated
+                    .below
+                    .as_ref()
+                    .expect("below animation diagnostics"),
+            ),
+            (
+                "above",
+                animated
+                    .above
+                    .as_ref()
+                    .expect("above animation diagnostics"),
+            ),
         ] {
-            assert_eq!(stats.mounted + stats.pooled, stats.created, "{name} animation node pool leaked");
+            assert_eq!(
+                stats.mounted + stats.pooled,
+                stats.created,
+                "{name} animation node pool leaked"
+            );
         }
     }
 
@@ -2460,7 +2992,11 @@ mod g6_quickjs_bench {
             route.push((map_id.clone(), false));
             append_world_walk(map_id, &diagnostic.links, &mut visited, &mut route);
         }
-        assert_eq!(visited.len(), diagnostic.maps.len(), "world walk omitted an outdoor map");
+        assert_eq!(
+            visited.len(),
+            diagnostic.maps.len(),
+            "world walk omitted an outdoor map"
+        );
         route
     }
 
@@ -2481,10 +3017,22 @@ mod g6_quickjs_bench {
         let viewport = format!("{width}x{height}");
         let bench_root = PathBuf::from(std::env::var("G6_BENCH_ROOT").expect("G6_BENCH_ROOT"));
         let data = bench_root.join(format!("qjs-world-{}-{width}x{height}", std::process::id()));
-        seed_maps(&PathBuf::from(std::env::var("G6_MAPS").expect("G6_MAPS")), &data);
-        seed_battle(&PathBuf::from(std::env::var("G6_BATTLE").expect("G6_BATTLE")), &data);
-        seed_animated(&PathBuf::from(std::env::var("G6_ANIMATED").expect("G6_ANIMATED")), &data);
-        seed_npc_src(&PathBuf::from(std::env::var("G6_NPC_SRC").expect("G6_NPC_SRC")), &data);
+        seed_maps(
+            &PathBuf::from(std::env::var("G6_MAPS").expect("G6_MAPS")),
+            &data,
+        );
+        seed_battle(
+            &PathBuf::from(std::env::var("G6_BATTLE").expect("G6_BATTLE")),
+            &data,
+        );
+        seed_animated(
+            &PathBuf::from(std::env::var("G6_ANIMATED").expect("G6_ANIMATED")),
+            &data,
+        );
+        seed_npc_src(
+            &PathBuf::from(std::env::var("G6_NPC_SRC").expect("G6_NPC_SRC")),
+            &data,
+        );
         seed_terrain_stream(
             &PathBuf::from(std::env::var("G6_TERRAIN_STREAM").expect("G6_TERRAIN_STREAM")),
             &data,
@@ -2492,6 +3040,7 @@ mod g6_quickjs_bench {
 
         let (runtime, _) =
             boot_staged(args(&dist, "pocket-tuxemon", data.clone(), width, height)).unwrap();
+        let (profile_frames, profile_marks, profile_capture) = frame_profile_config();
         let mut bench = Bench {
             rt: runtime,
             gc_mode: GcMode::from_env(),
@@ -2499,16 +3048,29 @@ mod g6_quickjs_bench {
             hash_every: 1,
             battle_buckets: false,
             handoff_buckets: false,
+            profile_frames,
+            profile_marks,
+            profile_capture,
         };
+        bench.install_frame_profiler();
         let initial_diagnostics = world_stress_diagnostics(&bench);
         let maps = initial_diagnostics.maps.clone();
-        assert_eq!(maps.len(), 67, "world-cache route must cover all 67 outdoor placements");
-        assert_eq!(maps.iter().collect::<HashSet<_>>().len(), 67, "world-cache route contains duplicate maps");
+        assert_eq!(
+            maps.len(),
+            67,
+            "world-cache route must cover all 67 outdoor placements"
+        );
+        assert_eq!(
+            maps.iter().collect::<HashSet<_>>().len(),
+            67,
+            "world-cache route contains duplicate maps"
+        );
         let route = world_stress_route(&initial_diagnostics);
 
         let mut timed_frames = Vec::new();
         let mut cross_map_frames = Vec::new();
         let mut direct_entry_frames = Vec::new();
+        let mut world_all_frames = Vec::new();
         let mut prefetched_crossings = 0usize;
         let mut peaks = Vec::new();
         let mut heap_after_gc = Vec::new();
@@ -2520,11 +3082,15 @@ mod g6_quickjs_bench {
             for (map_id, authored_edge) in &route {
                 unique.insert(map_id);
                 let before = world_stress_diagnostics(&bench);
-                let prefetched = before.cache.as_ref().is_some_and(|cache|
-                    cache.driver.active != *map_id &&
-                    cache.driver.compiled_keep.iter().any(|candidate| candidate == map_id) &&
-                    cache.driver.pending == 0
-                );
+                let prefetched = before.cache.as_ref().is_some_and(|cache| {
+                    cache.driver.active != *map_id
+                        && cache
+                            .driver
+                            .compiled_keep
+                            .iter()
+                            .any(|candidate| candidate == map_id)
+                        && cache.driver.pending == 0
+                });
                 if *authored_edge {
                     assert!(prefetched, "authored edge to {map_id} was not staged by W3");
                 }
@@ -2540,8 +3106,21 @@ mod g6_quickjs_bench {
                 let mut settled = false;
                 let mut entry_presented = false;
                 let mut sampled_cross_frame = false;
-                for attempt in 0..32 {
-                    let sample = bench.frame(frame, 0, None, true);
+                // A stable two-hop outdoor keep-set can contain 12 maps.
+                // Each synchronous map preparation has at most four fixed
+                // stages, followed by two settled confirmation frames; 64
+                // preserves a finite deadline without conflating that bounded
+                // staging latency with the per-frame 50 ms CPU gate below.
+                for attempt in 0..64 {
+                    let mut sample = bench.frame(frame, 0, None, true);
+                    sample.temperature = if pass == 1 { "cold" } else { "hot" };
+                    sample.class = if attempt == 0 {
+                        format!("world-control-p{pass}")
+                    } else if entry_presented && !sampled_cross_frame {
+                        format!("world-cross-map-p{pass}")
+                    } else {
+                        format!("world-render-p{pass}-a{attempt}")
+                    };
                     let sample_cpu = sample.js_cpu_ms + sample.core_cpu_ms + sample.draw_cpu_ms;
                     if attempt == 0 {
                         // The diagnostics overlay performs startSession in
@@ -2556,11 +3135,19 @@ mod g6_quickjs_bench {
                             sampled_cross_frame = true;
                         }
                     }
+                    world_all_frames.push(sample.clone());
                     let diagnostic = world_stress_diagnostics(&bench);
                     if sample_cpu > 45.0 {
-                        let cache = diagnostic.cache.as_ref().expect("slow-frame cache diagnostics");
-                        let stream = diagnostic.stream.as_ref().expect("slow-frame stream diagnostics");
-                        let ground_pending = stream.ground.as_ref().map_or(0, |value| value.pending);
+                        let cache = diagnostic
+                            .cache
+                            .as_ref()
+                            .expect("slow-frame cache diagnostics");
+                        let stream = diagnostic
+                            .stream
+                            .as_ref()
+                            .expect("slow-frame stream diagnostics");
+                        let ground_pending =
+                            stream.ground.as_ref().map_or(0, |value| value.pending);
                         let upper_pending = stream.upper.as_ref().map_or(0, |value| value.pending);
                         println!(
                             "WORLD_SLOW viewport={viewport} pass={pass} map={map_id} attempt={attempt} prefetched={prefetched} cpu={sample_cpu:.3}ms js={:.3}ms core={:.3}ms draw={:.3}ms driver_pending={} driver_staged={} driver_preparing={} stream_pending={}/{}",
@@ -2590,17 +3177,33 @@ mod g6_quickjs_bench {
                         settled_frames = 0;
                     }
                 }
-                assert!(settled, "map {map_id} did not settle within 32 production frames");
+                assert!(
+                    settled,
+                    "map {map_id} did not settle within 64 production frames"
+                );
             }
             force_qjs_gc(&bench.rt.guest);
             let (used, _, _) = qjs_memory(&bench.rt.guest);
             heap_after_gc.push(used.max(0) as usize);
             println!(
                 "WORLD_PASS viewport={viewport} pass={pass} unique_maps={} route_entries={} maps={} worlds={} tables={} repo={} shards={}/{}/{} npc={} stream_textures={} terrain_nodes={} animated_nodes={} native_nodes={} live_textures={} texture_slots={} heap_peak={} heap_after_gc={}",
-                unique.len(), route.len(), peak.maps, peak.worlds, peak.tables, peak.repo_cached,
-                peak.ground_shards, peak.upper_shards, peak.animated_shards, peak.npc_refs,
-                peak.stream_textures, peak.terrain_nodes, peak.animated_nodes, peak.native_nodes,
-                peak.live_textures, peak.texture_slots, peak.heap_bytes,
+                unique.len(),
+                route.len(),
+                peak.maps,
+                peak.worlds,
+                peak.tables,
+                peak.repo_cached,
+                peak.ground_shards,
+                peak.upper_shards,
+                peak.animated_shards,
+                peak.npc_refs,
+                peak.stream_textures,
+                peak.terrain_nodes,
+                peak.animated_nodes,
+                peak.native_nodes,
+                peak.live_textures,
+                peak.texture_slots,
+                peak.heap_bytes,
                 heap_after_gc.last().unwrap(),
             );
             peaks.push(peak);
@@ -2608,7 +3211,13 @@ mod g6_quickjs_bench {
 
         report(&viewport, "world-stress-cross-map", &cross_map_frames);
         report(&viewport, "world-stress-render", &timed_frames);
-        report(&viewport, "world-stress-direct-control", &direct_entry_frames);
+        report(
+            &viewport,
+            "world-stress-direct-control",
+            &direct_entry_frames,
+        );
+        report_temperature(&viewport, "world-cache", &world_all_frames);
+        report_slowest(&viewport, "world-cache", &world_all_frames);
         assert_frame_budget("world-stress-cross-map", &cross_map_frames, 50.0);
         assert_frame_budget("world-stress-render", &timed_frames, 50.0);
         let first = &peaks[0];
@@ -2620,11 +3229,23 @@ mod g6_quickjs_bench {
             ("repository entries", revisit.repo_cached, first.repo_cached),
             ("ground shards", revisit.ground_shards, first.ground_shards),
             ("upper shards", revisit.upper_shards, first.upper_shards),
-            ("animated shards", revisit.animated_shards, first.animated_shards),
+            (
+                "animated shards",
+                revisit.animated_shards,
+                first.animated_shards,
+            ),
             ("NPC refs", revisit.npc_refs, first.npc_refs),
-            ("stream textures", revisit.stream_textures, first.stream_textures),
+            (
+                "stream textures",
+                revisit.stream_textures,
+                first.stream_textures,
+            ),
             ("terrain nodes", revisit.terrain_nodes, first.terrain_nodes),
-            ("animated nodes", revisit.animated_nodes, first.animated_nodes),
+            (
+                "animated nodes",
+                revisit.animated_nodes,
+                first.animated_nodes,
+            ),
             ("native nodes", revisit.native_nodes, first.native_nodes),
             ("live textures", revisit.live_textures, first.live_textures),
             ("texture slots", revisit.texture_slots, first.texture_slots),
@@ -2638,16 +3259,22 @@ mod g6_quickjs_bench {
         assert!(
             heap_after_gc[1] <= heap_after_gc[0] + heap_slack,
             "revisit QuickJS heap grew beyond plateau slack: first={} second={} slack={heap_slack}",
-            heap_after_gc[0], heap_after_gc[1],
+            heap_after_gc[0],
+            heap_after_gc[1],
         );
         println!(
             "WORLD_PLATEAU viewport={viewport} unique_visits={} route_entries={} prefetched_crossings={} diagnostic_control_entries={} revisit_growth nodes={} textures={} ground={} upper={} animated={} npc={} heap={}B slack={}B",
-            maps.len() * 2, route.len() * 2, prefetched_crossings, direct_entry_frames.len(),
+            maps.len() * 2,
+            route.len() * 2,
+            prefetched_crossings,
+            direct_entry_frames.len(),
             revisit.native_nodes.saturating_sub(first.native_nodes),
             revisit.texture_slots.saturating_sub(first.texture_slots),
             revisit.ground_shards.saturating_sub(first.ground_shards),
             revisit.upper_shards.saturating_sub(first.upper_shards),
-            revisit.animated_shards.saturating_sub(first.animated_shards),
+            revisit
+                .animated_shards
+                .saturating_sub(first.animated_shards),
             revisit.npc_refs.saturating_sub(first.npc_refs),
             heap_after_gc[1] as i64 - heap_after_gc[0] as i64,
             heap_slack,

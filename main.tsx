@@ -50,10 +50,11 @@ import {
   type PocketTuxemonWorldDiagnostics,
   withWorldDiagnostics,
 } from "./ui/world-diagnostics.ts";
-import { createGameWorldRenderer } from "./ui/world-renderer.tsx";
+import { createWorldRenderer } from "./vendor/pocket-rpgkit/src/ui/world/index.ts";
 import { ChoiceIconBox } from "./vendor/pocket-rpgkit/src/ui/ChoiceIconBox.tsx";
 import { createDemo } from "./vendor/pocket-rpgkit/src/ui/demo/index.ts";
-import { createWorldCacheDriver } from "./vendor/pocket-rpgkit/src/ui/world-cache-driver.ts";
+import { frameProfileMark } from "./vendor/pocket-rpgkit/src/frame-profile.ts";
+import { createGameWorldCacheDriver } from "./ui/game-world-cache-driver.ts";
 import type { WorldStreamedTerrainStats } from "./vendor/pocket-rpgkit/src/ui/WorldStreamedTerrain.tsx";
 import { createDemoOptions } from "./ui/demo-tape.ts";
 import type {
@@ -235,11 +236,15 @@ mount(() => (
         [TUXEMON_DAYCARE_SCENE_ID]: TuxemonDaycareScene,
       }}
       assets={assets}
-      world={createGameWorldRenderer()}
-      createWorldCacheDriver={(session, layout) => createWorldCacheDriver(session, layout, {
+      world={createWorldRenderer()}
+      createWorldCacheDriver={(session, layout) => createGameWorldCacheDriver(session, layout, {
         onStats: worldAssetCache.onWorldCacheStats,
       })}
-      onMapChange={worldAssetCache.onMapChange}
+      onMapChange={(mapId, map) => {
+        frameProfileMark("map-change-assets:start");
+        worldAssetCache.onMapChange(mapId, map);
+        frameProfileMark("map-change-assets:end");
+      }}
       onStreamStats={(_layer, stats) => {
         const worldStats = stats as WorldStreamedTerrainStats;
         if (worldDiagnostics) {

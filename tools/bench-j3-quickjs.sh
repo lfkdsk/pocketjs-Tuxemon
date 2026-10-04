@@ -2,7 +2,7 @@
 set -euo pipefail
 
 root=$(cd "$(dirname "$0")/.." && pwd)
-bench_root=${J3_BENCH_ROOT:-${TMPDIR:-/tmp}/pocket-tuxemon-j3-quickjs}
+bench_root=${J3_BENCH_ROOT:-${TMPDIR:-/var/tmp}/pocket-tuxemon-j3-quickjs}
 journey="$bench_root/j3-quickjs-tape.json"
 mkdir -p "$bench_root"
 bun "$root/tools/j3-quickjs-tape.ts" "$journey"
@@ -29,6 +29,7 @@ run+=(
   G6_EXPECTED_MAP=spyder_radiotower
   G6_STATE_SHA256="$terminal_sha256"
   G6_SKIP_MAP_BENCH=1
+  G6_COLD_RUNS=${J3_COLD_RUNS:-1}
   G6_FAST_BENCH=1
   G6_HANDOFF_BUCKETS=1
   G6_HASH_EVERY=${J3_HASH_EVERY:-1})

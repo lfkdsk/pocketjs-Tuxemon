@@ -10,10 +10,15 @@
 // keeps the QuickJS fast path shared with map entries instead of adding a
 // second byte-to-string routine.
 import { decodeMapEntryBytes } from "../vendor/pocket-rpgkit/src/engine/map-repository.ts";
-import type { BattleDb, BattleRuntimeIndexEntry, BattleRuntimeShell } from "../importer/battle-schema.ts";
+import type {
+  BattleDb,
+  BattleRuntimeIndexEntry,
+  BattleRuntimeShell,
+  BattleRuntimeStatusIndexEntry,
+} from "../importer/battle-schema.ts";
 import type { BattleDbProvider } from "./extension.ts";
 
-export type { BattleRuntimeIndexEntry, BattleRuntimeShell };
+export type { BattleRuntimeIndexEntry, BattleRuntimeShell, BattleRuntimeStatusIndexEntry };
 
 export interface BattleEntrySource {
   read(entry: string): string | Uint8Array | undefined;
@@ -83,7 +88,11 @@ export function createTuxemonBattleDbProvider(
   source: BattleEntrySource,
 ): BattleDbProvider {
   let db: BattleDb | null = null;
+  const statusIcons = Object.fromEntries(
+    shell.statusesIndex.map((entry) => [entry.id, entry.icon]),
+  );
   return {
+    statusIcons,
     load(): BattleDb {
       if (db) return db;
       db = {

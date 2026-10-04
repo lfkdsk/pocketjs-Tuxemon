@@ -4,7 +4,7 @@ import type {
   ExtensionReadContext,
 } from "../vendor/pocket-rpgkit/src/engine/extensions.ts";
 import type { JsonValue } from "../vendor/pocket-rpgkit/src/engine/types.ts";
-import type { BattleDb } from "../importer/battle-schema.ts";
+import type { BattleDb, BattleImageRef } from "../importer/battle-schema.ts";
 import { type RngState } from "./core.ts";
 import {
   DAYLIGHT_STAGE_VARIABLE,
@@ -54,6 +54,14 @@ interface TuxemonRuntimeEnvelope {
   weatherEnteredAtTick: number;
   weatherNextTransitionTick: number;
   weatherRngCursor: number;
+}
+
+/** Forward-compatible cache contract consumed by the reducer optimization.
+ * Older kit revisions accept the registration structurally and ignore the
+ * extra hook; the companion engine patch gives it meaning. */
+export interface TuxemonExtensionOptions extends ExtensionOptions {
+  conditionCacheKey(value: JsonValue): unknown;
+  entryConditionCacheKey(context: ExtensionReadContext, call?: string, args?: JsonValue): unknown;
 }
 
 export interface PendingMonster {
@@ -161,6 +169,9 @@ export type GameLang = "en_US" | "zh_CN";
 export interface BattleDbProvider {
   load(): BattleDb;
   release?(): void;
+  /** Stable shell projection used by presentation without forcing all status
+   * rule shards to parse. Key order matches the canonical status index. */
+  readonly statusIcons?: Readonly<Record<string, BattleImageRef>>;
 }
 
 export type BattleDbSource = BattleDb | (() => BattleDb) | BattleDbProvider;
@@ -2285,7 +2296,7 @@ function billIsCondition() {
 export function createTuxemonExtensions(
   source: BattleDbSource,
   options: Readonly<TuxemonExtensionRuntimeOptions> = {},
-): ExtensionOptions {
+): TuxemonExtensionOptions {
   const weatherSchedule: WeatherSchedule = {
     slugs: [...new Set(options.weatherSchedule?.slugs ?? DEFAULT_WEATHER_SLUGS)].sort(),
     ...(options.weatherSchedule?.minDurationMinutes === undefined
@@ -2311,10 +2322,63 @@ export function createTuxemonExtensions(
   // one-shot marker so applyExtensionResult need not parse and re-walk the
   // unchanged party/history before publishing that exact result.
   let trustedTickRuntime: string | null = null;
-  return {
+  // The packed clock changes every reference tick, while every extension
+  // condition except tux.time_is reads only coreWire. time_is observes civil
+  // minutes (plus an optional one-tick lookahead), so its truth table can
+  // change only at the pre-minute boundary or when the minute/day rolls.
+  // Reuse an opaque identity between those points so the kit can retain page,
+  // trigger-scan and sleeping-guard condition results without parsing the
+  // full extension state on every tick.
+  let conditionKeyCoreWire: string | null = null;
+  let conditionKeyEpochDay = -1;
+  let conditionKeyMinuteOfDay = -1;
+  let conditionKeyPreMinuteBoundary = false;
+  let conditionKey: object = Object.freeze({});
+  const conditionCacheKey = (value: JsonValue): unknown => {
+    const envelope = runtimeEnvelope(value);
+    if (!envelope) return value;
+    const preMinuteBoundary = envelope.subMinuteTicks === envelope.ticksPerGameMinute - 1;
+    if (envelope.coreWire !== conditionKeyCoreWire ||
+        envelope.epochDay !== conditionKeyEpochDay ||
+        envelope.minuteOfDay !== conditionKeyMinuteOfDay ||
+        preMinuteBoundary !== conditionKeyPreMinuteBoundary) {
+      conditionKeyCoreWire = envelope.coreWire;
+      conditionKeyEpochDay = envelope.epochDay;
+      conditionKeyMinuteOfDay = envelope.minuteOfDay;
+      conditionKeyPreMinuteBoundary = preMinuteBoundary;
+      conditionKey = Object.freeze({});
+    }
+    return conditionKey;
+  };
+  let entryConditionExtKey: unknown;
+  let entryConditionPlayerName: string | null = null;
+  let entryConditionKey: object = Object.freeze({});
+  let registration: TuxemonExtensionOptions;
+  registration = {
     initial,
     immutableConditions: true,
     deterministicConditions: true,
+    conditionCacheKey,
+    // The exact boolean is a minimal complete dependency key. Parsing the
+    // packed state is shared across these calls, so this is far cheaper than
+    // serializing every built-in bank or rebuilding all entry characters.
+    entryConditionCacheKey: (context, call, args) => {
+      // Source compatibility with older kits that ask for one complete
+      // entry key. Newer kits pass the exact condition and get its boolean
+      // outcome, avoiding invalidation from unrelated packed-state changes.
+      if (call === undefined || args === undefined) {
+        const extKey = conditionCacheKey(context.ext);
+        if (extKey !== entryConditionExtKey || context.playerName !== entryConditionPlayerName) {
+          entryConditionExtKey = extKey;
+          entryConditionPlayerName = context.playerName;
+          entryConditionKey = Object.freeze({});
+        }
+        return entryConditionKey;
+      }
+      const handler = registration.conditions?.[call];
+      if (!handler) throw new Error(`unknown Tuxemon extension condition ${JSON.stringify(call)}`);
+      return handler(context, args);
+    },
     playerStep: { call: "tux.daycare_step", args: {} },
     commands: {
       "tux.add_monster": addMonsterCommand(source),
@@ -2621,4 +2685,5 @@ export function createTuxemonExtensions(
       return problem ?? undefined;
     },
   };
+  return registration;
 }

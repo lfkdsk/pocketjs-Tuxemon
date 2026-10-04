@@ -303,6 +303,12 @@ export interface JournalMonsterIndexEntry extends BattleRuntimeIndexEntry {
   readonly name: string;
 }
 
+/** Presentation metadata that every battle needs. Keeping the icon in the
+ * eager shell avoids resolving every status rule shard on first battle. */
+export interface BattleRuntimeStatusIndexEntry extends BattleRuntimeIndexEntry {
+  readonly icon: BattleImageRef;
+}
+
 /** GP1: the compact, bundled projection of `runtimeBattleDb()`. Carries every
  * small, always-needed table inline and replaces `monsters`/`techniques`/
  * `items`/`statuses` — together ~80% of the runtime database's bytes — with
@@ -325,7 +331,7 @@ export interface BattleRuntimeShell {
   monstersIndex: JournalMonsterIndexEntry[];
   techniquesIndex: BattleRuntimeIndexEntry[];
   itemsIndex: BattleRuntimeIndexEntry[];
-  statusesIndex: BattleRuntimeIndexEntry[];
+  statusesIndex: BattleRuntimeStatusIndexEntry[];
 }
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>

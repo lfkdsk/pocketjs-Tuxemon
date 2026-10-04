@@ -24,7 +24,8 @@ import {
   restoreSessionSnapshot,
 } from "../vendor/pocket-rpgkit/src/engine/save-restore.ts";
 import { AttractController } from "../vendor/pocket-rpgkit/src/engine/attract.ts";
-import type { ProjectShell } from "../vendor/pocket-rpgkit/src/engine/types.ts";
+import { followCamera } from "../vendor/pocket-rpgkit/src/engine/camera.ts";
+import type { CameraState, ProjectShell } from "../vendor/pocket-rpgkit/src/engine/types.ts";
 import { readInlineProject, readShardedProject } from "../tools/generated-project.ts";
 import {
   createTuxemonSessionOptions,
@@ -38,6 +39,10 @@ import {
   saveBlockReason,
   takeSaveSnapshot,
 } from "../ui/save-game.ts";
+import {
+  createGameWorldCacheDriver,
+  GAME_WORLD_ENTRY_SETTLE_FRAMES,
+} from "../ui/game-world-cache-driver.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
 const journey = JSON.parse(readFileSync(join(ROOT, "data/g6-journey.json"), "utf8")) as {
@@ -53,6 +58,7 @@ const BEFORE_HANDOFF_FRAME = 3_964;
 const MID_HANDOFF_FRAME = 3_976;
 const AFTER_HANDOFF_FRAME = 3_980;
 const BTN_LTRIGGER = 0x0100;
+const VIEWPORT = { w: 480, h: 272 } as const;
 
 function input(mask: number, previous: number): SessionInput {
   const pressed = mask & ~previous;
@@ -67,6 +73,42 @@ function input(mask: number, previous: number): SessionInput {
   };
 }
 
+function createProductionCacheSync(
+  session: ReturnType<typeof createSession>,
+  project: ProjectShell,
+): (state: Readonly<SessionState>) => void {
+  const layout = project.worldLayout;
+  if (!layout) throw new Error("G7 repository: generated project has no world layout");
+  const driver = createGameWorldCacheDriver(session, layout, { now: () => 0 });
+  return (state) => {
+    let camera: CameraState = {
+      x: 0,
+      y: 0,
+      facing: state.move.facing,
+    };
+    for (const component of layout.components) {
+      const placement = component.placements.find((candidate) => candidate.mapId === state.mapId);
+      if (!placement) continue;
+      camera = followCamera(
+        placement.originTileX * project.tileSize + state.move.px,
+        placement.originTileY * project.tileSize + state.move.py,
+        project.tileSize,
+        state.move.facing,
+        {
+          worldX: component.bounds.minTileX * project.tileSize,
+          worldY: component.bounds.minTileY * project.tileSize,
+          worldW: (component.bounds.maxTileX - component.bounds.minTileX) * project.tileSize,
+          worldH: (component.bounds.maxTileY - component.bounds.minTileY) * project.tileSize,
+          viewportW: VIEWPORT.w,
+          viewportH: VIEWPORT.h,
+        },
+      );
+      break;
+    }
+    driver.sync(state, camera, VIEWPORT);
+  };
+}
+
 describe("G6 production map repository", () => {
   test("the maintained journey is byte-identical to inline on every frame", () => {
     const inlineProject = readInlineProject(ROOT);
@@ -77,14 +119,17 @@ describe("G6 production map repository", () => {
       createTuxemonSessionOptions(sharded.project, worldTraversal, { maps: sharded.repository, ...GAME_OPTIONS }));
     let inlineState = startSession(inlineProject, inlineSession);
     let shardedState = startSession(sharded.project, shardedSession);
+    const syncCache = createProductionCacheSync(shardedSession, sharded.project);
     let previous = 0;
 
+    syncCache(shardedState);
     expect(canonicalJson(shardedState)).toBe(canonicalJson(inlineState));
     for (let frame = 0; frame < journey.masks.length; frame++) {
       const mask = journey.masks[frame]!;
       const frameInput = input(mask, previous);
       inlineState = stepSession(inlineSession, inlineState, frameInput);
       shardedState = stepSession(shardedSession, shardedState, frameInput);
+      syncCache(shardedState);
       expect(canonicalJson(shardedState), `frame ${frame}`).toBe(canonicalJson(inlineState));
       const resident = [...shardedSession.maps.keys()];
       expect(resident, `current map resident at frame ${frame}`).toContain(shardedState.mapId);
@@ -255,21 +300,26 @@ describe("G6 production map repository", () => {
       createTuxemonSessionOptions(sharded.project, worldTraversal, { maps: sharded.repository, ...GAME_OPTIONS }));
     let inlineState: SessionState = startSession(inlineProject, inlineSession);
     let shardedState: SessionState = startSession(sharded.project, shardedSession);
+    const syncCache = createProductionCacheSync(shardedSession, sharded.project);
     let previous = 0;
     let inlineEnvelope = "";
     let shardedEnvelope = "";
     let savedMap = "";
+    let retainedDuringEntrySettle = false;
+    let evictedAfterEntrySettle = false;
     const saveFrame = journey.checkpoints.find((mark) => mark.name === "bedroom")?.frame;
     const endFrame = journey.checkpoints.find((mark) => mark.name === "downstairs-mom")?.frame;
     if (saveFrame === undefined || endFrame === undefined) {
       throw new Error("G7 repository: maintained journey is missing save/eviction checkpoints");
     }
 
+    syncCache(shardedState);
     for (let frame = 0; frame <= endFrame; frame++) {
       const mask = journey.masks[frame]!;
       const frameInput = input(mask, previous);
       inlineState = stepSession(inlineSession, inlineState, frameInput);
       shardedState = stepSession(shardedSession, shardedState, frameInput);
+      syncCache(shardedState);
       previous = mask;
       if (frame === saveFrame) {
         savedMap = shardedState.mapId;
@@ -280,10 +330,19 @@ describe("G6 production map repository", () => {
         expect(canonicalJson(shardedSnapshot)).toBe(canonicalJson(inlineSnapshot));
         expect(JSON.parse(shardedEnvelope).checksum).toBe(JSON.parse(inlineEnvelope).checksum);
       }
+      if (savedMap !== "" && shardedState.mapId !== savedMap) {
+        if (shardedState.interp.frame < GAME_WORLD_ENTRY_SETTLE_FRAMES) {
+          retainedDuringEntrySettle ||= shardedSession.maps.has(savedMap);
+        } else if (!shardedSession.maps.has(savedMap)) {
+          evictedAfterEntrySettle = true;
+        }
+      }
     }
 
     expect(savedMap).toBe("spyder_bedroom");
     expect(shardedState.mapId).toBe("spyder_downstairs");
+    expect(retainedDuringEntrySettle).toBeTrue();
+    expect(evictedAfterEntrySettle).toBeTrue();
     expect(shardedSession.maps.has(savedMap)).toBeFalse();
     const restoredInline = restoreSessionSnapshot(
       inlineSession,

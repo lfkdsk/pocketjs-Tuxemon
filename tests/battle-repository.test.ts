@@ -16,6 +16,7 @@ import {
 } from "../vendor/pocket-rpgkit/src/engine/session.ts";
 import { readInlineProject } from "../tools/generated-project.ts";
 import { readInlineBattleDb, readShardedBattleDb } from "../tools/generated-battle.ts";
+import type { BattleDb } from "../importer/battle-schema.ts";
 import { journeyWorldTraversal } from "../tools/gb6-journey.ts";
 
 const ROOT = resolve(import.meta.dir, "..");
@@ -64,8 +65,12 @@ describe("GP1 lazy battle-runtime repository", () => {
 
   test("the maintained journey is byte-identical to the inline battle database on every frame", () => {
     const project = readInlineProject(ROOT);
-    const inlineDb = readInlineBattleDb(ROOT);
-    const shardedProvider = readShardedBattleDb(ROOT);
+    const inlineDb = readInlineBattleDb(ROOT) as BattleDb;
+    const reads: string[] = [];
+    const shardedProvider = readShardedBattleDb(ROOT, (entry) => reads.push(entry));
+    expect(shardedProvider.statusIcons).toEqual(Object.fromEntries(
+      Object.entries(inlineDb.statuses).map(([slug, status]) => [slug, status.icon]),
+    ));
     const inlineOptions = {
       extensions: createTuxemonExtensions(inlineDb as never),
       battle: createTuxemonBattleRules(inlineDb as never, TUXEMON_VARIABLE_ENUMS),
@@ -83,6 +88,7 @@ describe("GP1 lazy battle-runtime repository", () => {
     let inlineState = startSession(project, inlineSession);
     let shardedState = startSession(project, shardedSession);
     let previous = 0;
+    let checkedFirstBattle = false;
 
     expect(canonicalJson(shardedState)).toBe(canonicalJson(inlineState));
     for (let frame = 0; frame < journey.masks.length; frame++) {
@@ -91,9 +97,14 @@ describe("GP1 lazy battle-runtime repository", () => {
       inlineState = stepSession(inlineSession, inlineState, frameInput);
       shardedState = stepSession(shardedSession, shardedState, frameInput);
       expect(canonicalJson(shardedState), `frame ${frame}`).toBe(canonicalJson(inlineState));
+      if (!checkedFirstBattle && shardedState.scene?.kind === "battle") {
+        expect(reads.filter((entry) => entry.startsWith("battle/statuses/"))).toEqual([]);
+        checkedFirstBattle = true;
+      }
       previous = mask;
     }
 
+    expect(checkedFirstBattle).toBeTrue();
     expect([shardedState.mapId, shardedState.move.tx, shardedState.move.ty])
       .toEqual(["spyder_route1", 14, 19]);
     expect(createHash("sha256").update(canonicalJson(shardedState)).digest("hex"))

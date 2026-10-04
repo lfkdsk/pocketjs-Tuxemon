@@ -130,7 +130,7 @@
  "runtimeDbBytes": 1115596,
  "pakKey": "game:battle-db",
  "battleRepository": {
-  "shellBytes": 201414,
+  "shellBytes": 207353,
   "entries": 662,
   "entryBytes": 849095
  }

@@ -80,6 +80,12 @@ battle entry/exit/steady). The final terminal state must hash to the pinned
 tape value. Use these for any performance claim; Bun/JSC timings are not
 representative of the desktop or PSP targets.
 
+The production-frame gate uses the current thread's QuickJS plus core CPU
+time. Wall time, sampled drawing and boundary GC are printed as supporting
+diagnostics, but scheduler pauses do not become false CPU regressions. Every
+run also prints its 20 slowest production frames with first-visit/revisit,
+map-tail, dialogue-open, battle entry/exit and world-stress classifications.
+
 The harness defaults to the desktop production GC lifecycle. It creates an
 idle-GC guest, evaluates the complete bundle, verifies `has_frame`, arms idle
 GC, and then enters frame zero. At every frame boundary it gives GC the unused
@@ -87,6 +93,50 @@ part of the 60 Hz budget. `G6_GC_MODE=auto` selects QuickJS's automatic trigger
 as an explicit comparison; it does not arm or service boundary GC. The
 `G6_BUDGET_MS` and `G6_STARTUP_MS` overrides are diagnostics only and must stay
 unset for a release-gate run.
+
+The `:cold` commands run five samples at each viewport. Every sample executes
+the already-built test binary as a fresh OS process with a fresh QuickJS realm
+and no application prewarm; the OS page cache is deliberately not dropped.
+Within each process, `TEMP_CASE temperature=cold` covers first-use work (first
+map visits, first battle and first modal kind, or world-cache pass 1), while
+`temperature=hot` covers revisits and world-cache pass 2. Thus each group of
+five fresh processes supplies five independent maxima for both columns.
+Pin the commands to one logical CPU and record `uptime` before and after a
+measurement batch; choose a CPU appropriate for the test machine:
+
+```sh
+BENCH_CPU=6
+uptime
+taskset -c "$BENCH_CPU" bun run bench:gb6:quickjs:cold
+taskset -c "$BENCH_CPU" bun run bench:j3:quickjs:cold
+taskset -c "$BENCH_CPU" bun run verify:world-cache:cold
+uptime
+```
+
+For the low-load acceptance matrix, run each suite/viewport cell as its own
+five-process batch, keep `G6_PROFILE_FRAMES`, `G6_BUDGET_MS` and
+`G6_STARTUP_MS` unset, and require every production frame to be below 45 ms
+while the recorded one-minute load average is at most 6. Preserve a process
+that fails the 250 ms startup gate in the record; do not replace it with a
+successful sample. Run a separate five-process GB6 960×544 batch at the
+highest naturally available load and judge its production frames against the
+normal 50 ms gate. A diagnostic startup override may retain all five replays
+for attribution, but does not turn an over-250 ms startup into a pass.
+
+`BUILD_INPUT` identifies the exact JavaScript, pak, generated project shell and
+map-manifest hash used by each batch. `HOST_INPUT` hashes the journey harness
+and vendored PocketJS inputs. `PROCESS_COLD` identifies each process sample.
+`STAGE` and `BOOT` split bundle startup, `TEMP_CASE` reports cold/hot p95 and
+maximum thread CPU, `SLOW_FRAME` reports the ranked frames, `IDLEGC_CPU`
+separates production work from GC, and `WORLD_PLATEAU` proves the second
+outdoor pass did not grow native nodes or textures.
+
+`G6_REUSE_HOST=1` may reuse only the compiled Rust test host. The wrapper
+rejects it unless the saved `HOST_INPUT` stamp still matches, and every sample
+remains a fresh OS process and QuickJS realm. `G6_PROFILE_FRAMES=97,123` is an
+opt-in diagnosis aid: selected frames additionally retain the raw reducer,
+cache, signal and mount markers. It adds native timing callbacks and is not a
+release-gate mode.
 
 Build the matching desktop bundle before any benchmark. The benchmark
 checks that its embedded map-manifest hash matches the generated project shell
@@ -98,18 +148,21 @@ bun run build:wasm
 bun tools/desktop.ts --build-only
 bun run bench:g6:quickjs
 bun run bench:gb6:quickjs
+bun run bench:gb6:quickjs:cold
 bun run bench:j3:quickjs
+bun run bench:j3:quickjs:cold
 bun run bench:indoor-fast-path
 bun run verify:world-cache
+bun run verify:world-cache:cold
 ```
 
 The short G6 benchmark replays 3,990 frames at 480×272 and 960×544, then
 measures the first visit to all 263 maps. The long GB6 benchmark replays all
-110,866 frames and 107 battles; it defaults to 480×272, while
-`GB6_BENCH_VIEWPORT="960 544" bun run bench:gb6:quickjs` selects the larger
-viewport. On the reference workstation the replay itself takes roughly two
-minutes; a cold isolated Rust host build adds about 40–60 seconds. GB6 reads
-its expected terminal SHA-256 from the tape,
+110,866 frames and 107 battles at both viewports; set
+`GB6_BENCH_VIEWPORT="960 544"` (or `"480 272"`) to select one viewport. On the
+reference workstation each viewport takes roughly two minutes; a cold
+isolated Rust host build adds about 40–60 seconds. GB6 reads its expected
+terminal SHA-256 from the tape,
 so re-pinning the tape cannot leave a second stale literal in the wrapper.
 JavaScript compile/evaluation failures include the original message and stack.
 
@@ -137,16 +190,65 @@ build and long replay are too expensive for the normal push pipeline, and
 startup plus all-map first-visit measurements still contain wall-clock
 sensitivity on shared runners.
 
-The migrated release runs keep every measured frame below 50 ms. GB6 reaches
-38.158/38.215 ms CPU/sampled maxima at 480×272 and 33.374/33.447 ms at
-960×544; its 54 atomic handoffs peak at 38.215 and 33.459 ms. J3 reaches
-45.768/45.804 ms and 48.425/48.483 ms respectively; its three handoffs peak
-at 25.125 and 18.089 ms. The all-map cache walk peaks at 36.870/37.284 ms and
-shows zero second-pass native-node or texture growth (post-GC heap growth is
-1,872/3,320 B). One cold 960×544 GB6 run transiently measured 59.071 ms CPU
-and 73.825 ms sampled wall time on an indoor Cotton Cafe transfer; the same
-build and command immediately passed at 33.374/33.459 ms. This outlier is
-retained here rather than treated as a seamless-frame regression.
+The current fixed-CPU matrix below reports the median and worst per-process
+maximum QuickJS-plus-core CPU frame, in milliseconds. It uses the component
+release containing the reducer entry-page cache and deferred seamless
+eviction, CPU 6, the `powersave` governor, and recorded one-minute load
+averages of 1.30–4.89. Five fresh processes were started for every formal
+cell. The 250 ms startup gate stopped both GB6 cells before replay and stopped
+four of five J3 480×272 processes; those failures remain in the record. A
+separate five-process diagnostic with only `G6_STARTUP_MS=500` supplied the
+missing production distributions. This does not turn an over-250 ms startup
+into a pass. J3 960×544 and both world-cache rows are unmodified formal runs.
+
+| Route / viewport | Production source | Formal completed / started | Cold median / worst | Hot median / worst |
+| --- | --- | ---: | ---: | ---: |
+| GB6 480×272 | 500 ms startup diagnostic | 0 / 5 | 19.802 / 22.578 | 34.088 / 39.913 |
+| GB6 960×544 | 500 ms startup diagnostic | 0 / 5 | 22.513 / 22.636 | 28.674 / 32.960 |
+| J3 480×272 | 500 ms startup diagnostic | 1 / 5 | 36.311 / 41.500 | 19.470 / 19.545 |
+| J3 960×544 | formal | 5 / 5 | 36.764 / 41.595 | 19.693 / 20.205 |
+| world cache 480×272 | formal | 5 / 5 | 31.880 / 38.294 | 31.989 / 32.362 |
+| world cache 960×544 | formal | 5 / 5 | 33.666 / 36.249 | 37.250 / 42.287 |
+
+Every completed production frame is below the stricter 45 ms low-load line.
+The global maximum is a hot world-cache frame at 960×544, 42.287 ms. This is
+0.199 ms below the previous five-run result (42.486 ms) and 0.371 ms above its
+three-run review result (41.916 ms), leaving 2.713 ms to 45 ms and 7.713 ms to
+the normal 50 ms gate. Every completed journey process retained its canonical
+terminal hash.
+
+Formal startup was much less reliable than production replay. The median /
+worst startup-to-first-paint times were 269.968 / 299.410 ms for GB6 480×272,
+283.591 / 294.595 ms for GB6 960×544, 272.358 / 286.976 ms for J3 480×272 and
+211.897 / 232.970 ms for J3 960×544. The misses happened before frame zero.
+They continued the known shared-host sensitivity: CPU affinity fixes process
+placement but not `powersave` frequency, page-cache state or other host work.
+The current gate is intentionally unchanged.
+
+The Chinese smoke tape was also run in three new processes at both viewports.
+The formal startup gate completed zero of three 480×272 processes and one of
+three 960×544 processes, so separate 500 ms startup diagnostics retained all
+six production replays. The first long-dialog frame now stayed below 50 ms:
+
+| Viewport | Cold median / worst | Hot median / worst |
+| --- | ---: | ---: |
+| 480×272 | 9.956 / 11.629 | 41.700 / 49.258 |
+| 960×544 | 10.510 / 12.495 | 46.340 / 46.847 |
+
+This is better than the earlier 43–64 ms range, but the 480×272 maximum still
+misses the optional 45 ms low-load target. All six processes produced the same
+Chinese terminal hash.
+
+The world-cache second pass has zero native-node and texture growth in every
+clean matrix sample, with only 1,467 B and 2,915 B of post-GC heap growth at
+the two viewports. One discarded 480×272 batch coincided with another worktree
+starting a many-core release build: one-minute load rose from 5.32 to 10.37
+and its third process exceeded 50 ms. The foreign build was identified and
+allowed to finish; the clean five-process batch above started only after its
+compiler processes had exited and load returned below 6. Boundary collection
+is not performed inside production work (`in_tick_gc=0` throughout). See the
+[cold-path performance report](../findings/PERF-COLD.md) for the original
+reducer attribution and component patch measurements.
 
 ## The tapes
 
@@ -164,6 +266,7 @@ fail on any mismatch, so a silently corrupted tape is a red build.
 | `data/j1-captainreturns-journey.json` | 11,520 (122,386 combined with GB6) | Wayfarer Inn -> Route 4 -> Flower City -> Route A -> Mansion -> basement -> the captain's return | 14 (10 trainer, 4 wild) | `spyder_mansion @1,13` |
 | `data/j2-hospitalcure-journey.json` | 50,487 (172,873 combined) | Mansion -> Candy Town -> Greenwash -> hospital password -> the cure | 54 (50 trainer, 4 wild) | `spyder_candy_hospital3 @5,7` |
 | `data/j3-omnichannelradioannounce-journey.json` | 12,929 (185,802 combined) | hospital cure -> Paper Town -> Cotton Town -> Omnichannel floors 1–4 -> Radio Tower broadcast | 13 trainer | `spyder_radiotower @9,5` |
+| `data/zh-smoke-journey.json` | 3,201 | Chinese bedroom opening -> downstairs dialogue -> Paper Town -> first battle | 1 | `spyder_paper_town @26,9` |
 
 Terminal state hashes and per-checkpoint expectations live in the tapes or
 their verifiers (`tools/verify-gb6-mainline.ts`, `tools/verify-j1-mainline.ts`,

@@ -3,7 +3,12 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync } from "node:f
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { battleArtifactPaths, runtimeBattleDb, writeBattleArtifacts } from "../importer/battle.ts";
-import { collectBattleArtRefs, validateBattleDb, type BattleDb } from "../importer/battle-schema.ts";
+import {
+  collectBattleArtRefs,
+  validateBattleDb,
+  type BattleDb,
+  type BattleRuntimeStatusIndexEntry,
+} from "../importer/battle-schema.ts";
 import { decodePng } from "../importer/png.ts";
 import { BATTLE_PREVIEW_HEIGHT, BATTLE_PREVIEW_WIDTH, renderBattlePreview } from "../tools/render-battle-preview.ts";
 import {
@@ -20,6 +25,7 @@ const db = JSON.parse(readFileSync(join(ROOT, "data/battle-db.json"), "utf8")) a
 const runtimeDb = JSON.parse(readFileSync(join(ROOT, "data/battle-runtime-db.json"), "utf8")) as unknown;
 const runtimeShell = JSON.parse(readFileSync(join(ROOT, "dist/battle-runtime-shell.json"), "utf8")) as {
   monstersIndex: Array<{ id: string; entry: string; txmnId: number; name: string }>;
+  statusesIndex: BattleRuntimeStatusIndexEntry[];
 };
 const report = JSON.parse(readFileSync(join(ROOT, "data/battle-assets-report.json"), "utf8"));
 const images = JSON.parse(readFileSync(join(ROOT, "images.json"), "utf8")) as Record<string, { psm: number }>;
@@ -157,6 +163,11 @@ describe("GB1 battle database", () => {
       entry: "battle/monsters/rockitten.json",
       txmnId: 1,
       name: "Rockitten",
+    });
+    expect(runtimeShell.statusesIndex.find((entry) => entry.id === "burn")).toEqual({
+      id: "burn",
+      entry: "battle/statuses/burn.json",
+      icon: (runtimeDb as BattleDb).statuses.burn.icon,
     });
     expect((runtimeDb as BattleDb).monsters.rockitten).toMatchObject({
       name: "Rockitten",

@@ -1122,7 +1122,14 @@ export function splitBattleRuntimeDb(db: BattleDb, entryPrefix = "battle"): Spli
   };
   const techniques = tableEntries(db.techniques, "techniques");
   const items = tableEntries(db.items, "items");
-  const statuses = tableEntries(db.statuses, "statuses");
+  const statusEntries = tableEntries(db.statuses, "statuses");
+  const statuses = {
+    ...statusEntries,
+    index: statusEntries.index.map((entry) => ({
+      ...entry,
+      icon: db.statuses[entry.id]!.icon,
+    })),
+  };
   const shell: BattleRuntimeShell = {
     format: db.format,
     sourceRevision: db.sourceRevision,

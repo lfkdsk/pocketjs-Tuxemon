@@ -35,7 +35,7 @@
   "canonicalJsonBytes": 10153692,
   "entries": 263,
   "manifestHash": "e49b0d404fd404025f99721888446798700f54e4f23f32f328775d5188d0e66a",
-  "schemaHash": "0e510772cbf540414553fd8f4204e0cecba80f4d8c844146e3be46d23841daae"
+  "schemaHash": "c0e962138a1f12dc5627590869b99f7c9b2ced3040e3d05ed0ebd663142d4857"
  },
  "terrain": {
   "entries": 430,
@@ -214,7 +214,7 @@
   "runtimeDbBytes": 1115596,
   "pakKey": "game:battle-db",
   "battleRepository": {
-   "shellBytes": 201414,
+   "shellBytes": 207353,
    "entries": 662,
    "entryBytes": 849095
   }

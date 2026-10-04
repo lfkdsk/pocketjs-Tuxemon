@@ -2,16 +2,19 @@
 set -euo pipefail
 
 root=$(cd "$(dirname "$0")/.." && pwd)
-bench_root=${WORLD_CACHE_BENCH_ROOT:-${TMPDIR:-/tmp}/pocket-tuxemon-world-cache}
+bench_root=${WORLD_CACHE_BENCH_ROOT:-${TMPDIR:-/var/tmp}/pocket-tuxemon-world-cache}
 scratch="$bench_root/quickjs-host"
 target="$bench_root/quickjs-target"
 pocketjs="$root/vendor/pocket-rpgkit/vendor/pocketjs"
 app_dist=${WORLD_CACHE_DIST:-$root/dist/linux-app}
+app_js="$app_dist/pocket-tuxemon.js"
+app_pak="$app_dist/pocket-tuxemon.pak"
+project_shell="$root/dist/project-shell.json"
 
 for artifact in \
-  "$app_dist/pocket-tuxemon.js" \
-  "$app_dist/pocket-tuxemon.pak" \
-  "$root/dist/project-shell.json"; do
+  "$app_js" \
+  "$app_pak" \
+  "$project_shell"; do
   if [[ ! -f "$artifact" ]]; then
     echo "verify-world-cache: missing build artifact: $artifact" >&2
     echo "run 'bun tools/desktop.ts --build-only' first" >&2
@@ -26,12 +29,17 @@ map_manifest_hash=$(bun -e '
     throw new Error("missing or malformed mapManifestHash");
   }
   console.log(value);
-' "$root/dist/project-shell.json")
-if ! grep -Fq "$map_manifest_hash" "$app_dist/pocket-tuxemon.js"; then
+' "$project_shell")
+if ! grep -Fq "$map_manifest_hash" "$app_js"; then
   echo "verify-world-cache: desktop bundle is stale relative to project-shell.json" >&2
   echo "run 'bun tools/desktop.ts --build-only' first" >&2
   exit 1
 fi
+
+app_js_sha256=$(sha256sum "$app_js" | cut -d' ' -f1)
+app_pak_sha256=$(sha256sum "$app_pak" | cut -d' ' -f1)
+project_shell_sha256=$(sha256sum "$project_shell" | cut -d' ' -f1)
+echo "BUILD_INPUT app_js_sha256=$app_js_sha256 app_pak_sha256=$app_pak_sha256 project_shell_sha256=$project_shell_sha256 map_manifest_sha256=$map_manifest_hash"
 
 rm -rf "$scratch"
 mkdir -p "$scratch"
@@ -52,17 +60,26 @@ if [[ -n ${WORLD_CACHE_VIEWPORT:-} ]]; then
 else
   viewports=("480 272" "960 544")
 fi
+cold_runs=${WORLD_CACHE_COLD_RUNS:-1}
+if [[ ! $cold_runs =~ ^[1-9][0-9]*$ ]]; then
+  echo "verify-world-cache: WORLD_CACHE_COLD_RUNS must be a positive integer" >&2
+  exit 1
+fi
 for viewport in "${viewports[@]}"; do
   read -r width height <<<"$viewport"
-  G6_WORLD_CACHE_STRESS=1 \
-    G6_DIST="$app_dist" \
-    G6_MAPS="$root/dist/maps" \
-    G6_BATTLE="$root/dist/battle" \
-    G6_ANIMATED="$root/dist/animated" \
-    G6_NPC_SRC="$root/dist/npc-src" \
-    G6_TERRAIN_STREAM="$root/dist/terrain-stream" \
-    G6_BENCH_ROOT="$bench_root" \
-    G6_BENCH_W="$width" \
-    G6_BENCH_H="$height" \
-    "$binary" g6_quickjs_bench::world_cache_stress --ignored --exact --nocapture
+  for ((run = 1; run <= cold_runs; run++)); do
+    echo "PROCESS_COLD suite=world-cache viewport=${width}x${height} run=$run/$cold_runs prewarm=none"
+    G6_WORLD_CACHE_STRESS=1 \
+      G6_DIST="$app_dist" \
+      G6_MAPS="$root/dist/maps" \
+      G6_BATTLE="$root/dist/battle" \
+      G6_ANIMATED="$root/dist/animated" \
+      G6_NPC_SRC="$root/dist/npc-src" \
+      G6_TERRAIN_STREAM="$root/dist/terrain-stream" \
+      G6_BENCH_ROOT="$bench_root" \
+      G6_RUN_LABEL="$run" \
+      G6_BENCH_W="$width" \
+      G6_BENCH_H="$height" \
+      "$binary" g6_quickjs_bench::world_cache_stress --ignored --exact --nocapture
+  done
 done

@@ -854,9 +854,14 @@ export function createTuxemonBattleRules(source: BattleDbSource, enums: Variable
             ...(item?.animation ? { animation: item.animation } : {}),
           }];
         }));
-        const statusIcons = Object.fromEntries(Object.entries(db.statuses).flatMap(([slug, status]) =>
-          status.icon ? [[slug, status.icon] as const] : []
-        ));
+        const indexedStatusIcons = typeof source !== "function" && "load" in source
+          ? source.statusIcons
+          : undefined;
+        const statusIcons = indexedStatusIcons
+          ? { ...indexedStatusIcons }
+          : Object.fromEntries(Object.entries(db.statuses).flatMap(([slug, status]) =>
+            status.icon ? [[slug, status.icon] as const] : []
+          ));
         const state: RuntimeBattleState = {
           format: TUXEMON_BATTLE_STATE_FORMAT,
           battle,

@@ -64,22 +64,29 @@ summary:
   5,245,837 B instead of 10,153,692 B for all-canonical JSON. The three
   event-heavy maps cross a 128 KiB compact-decode cap, trading a small amount
   of storage for bounded first-visit latency on QuickJS. Indexed battle art
-  plus its lazy database occupies 3,516,960 B in the pak. The Web game pak is
-  48,626,112 B; before compact
-  maps and indexed battle art it was 66,791,328 B, measured on the tree just
-  before day and night were added. The all-image battle encoding is
+  plus its lazy database occupies 3,516,960 B in the pak. The current bilingual
+  Web game pak is 71,089,840 B, including English and Chinese content, CJK font
+  atlases, audio and demo data; the desktop pak is 58,338,640 B. Before compact
+  maps and indexed battle art, an earlier English-only Web build was
+  66,791,328 B. The all-image battle encoding is
   2,206,076 B on disk and 13,394,688 B if every PSM_T8 texture were decoded,
   but only the active battle working set is resident.
 
-  On the desktop QuickJS host, the current 110,866-frame, 107-battle replay
-  matches the canonical terminal state. Its release runs have CPU/sampled
-  maxima of 38.158/38.215 ms at 480×272 and 33.374/33.447 ms at 960×544;
-  all 54 seamless handoffs stay below 38.215/33.459 ms. A production
-  continuation benchmark restores the hospital-cure chapter and replays the
-  remaining 12,940 frames and 13 battles to the radio broadcast; its worst
-  CPU/sampled frames are 45.768/45.804 ms at 480×272 and 48.425/48.483 ms at
-  960×544. Every passing release run stays below the 250 ms startup and 50 ms
-  per-frame budgets.
+  On the desktop QuickJS host, the current fixed-CPU matrix starts five fresh
+  processes per route and viewport. Under one-minute loads of 1.30–4.89, all
+  completed GB6, hospital-to-radio J3 and two-pass outdoor-cache production
+  frames stayed below the stricter 45 ms line; the worst QuickJS-plus-core CPU
+  frame was 42.287 ms. That is 0.199 ms below the previous five-run maximum and
+  0.371 ms above its three-run review maximum. Every cache-walk sample had zero
+  second-pass native-node or texture growth. Shared-host startup remains
+  unreliable: the unchanged 250 ms gate rejected both five-process GB6 groups
+  before replay and four of five J3 480×272 starts, so separately labelled
+  500 ms startup diagnostics supplied those production-frame distributions
+  without being counted as startup passes. The Chinese smoke tape also stayed
+  below 50 ms in three diagnostic processes at each viewport (49.258 ms worst),
+  although it did not always meet the stricter 45 ms line. Cold/hot medians,
+  exact startup counts, load ranges, bundle identities and attribution are in
+  [the verification guide](docs/verification.md#the-quickjs-benches).
 - **Import coverage:** 89.3% of Tuxemon action uses and 96.3% of condition
   uses map natively to kit commands; 97.3% / 96.7% are executable (native,
   degraded, or a deliberate placeholder). The full per-type breakdown is in
@@ -161,8 +168,11 @@ world is paused while the menu is open.
 - **Save code (export) / Load code (import):** the same save as URL-safe text,
   paged on screen. Hosts with no file system or browser storage (PSP) have only
   these two rows. Codes are compressed, but still a few thousand characters
-  (3,100–5,300 at the `verify:save` points), so they suit copying between
-  tools more than typing on the on-screen keyboard.
+  (3,209–5,297 at the `verify:save` points; 3,657 in the documented screenshot),
+  so they suit copying between tools more than typing on the on-screen
+  keyboard. Additive project-schema upgrades change the encoded text, but the
+  runtime accepts compatible older schema identities and rewrites the next
+  save under the current identity.
 
 You can save only when nothing is in progress. During dialogue, a battle, a
 scripted scene, a map change or a step, the menu says why it can't save.
@@ -312,10 +322,13 @@ bun run verify:j1:mainline      # replay the Captain-return tape
 bun run verify:j2:mainline      # replay the hospital-cure tape
 bun run verify:j3:mainline      # replay through the Radio Tower broadcast
 bun run bench:g6:quickjs        # short two-viewport QuickJS performance gate
-bun run bench:gb6:quickjs       # full 480x272 QuickJS journey gate
+bun run bench:gb6:quickjs       # full QuickJS journey, both viewports
+bun run bench:gb6:quickjs:cold  # five fresh processes at each viewport
 bun run bench:j3:quickjs        # hospital chapter -> radio, both viewports
+bun run bench:j3:quickjs:cold   # five fresh processes at each viewport
 bun run bench:indoor-fast-path  # production-entry indoor single-map probe
 bun run verify:world-cache      # visit all 67 outdoor maps twice at both viewports
+bun run verify:world-cache:cold # five fresh cache walks at each viewport
 bun run build:psp               # release EBOOT plus external asset pak
 ```
 

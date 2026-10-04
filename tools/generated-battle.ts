@@ -13,12 +13,18 @@ export function readInlineBattleDb(root: string): unknown {
   return JSON.parse(readFileSync(join(resolve(root), "data/battle-runtime-db.json"), "utf8"));
 }
 
-export function readShardedBattleDb(root: string): BattleDbProvider {
+export function readShardedBattleDb(
+  root: string,
+  onRead: (entry: string) => void = () => {},
+): BattleDbProvider {
   const absolute = resolve(root);
   const shell = JSON.parse(
     readFileSync(join(absolute, "dist/battle-runtime-shell.json"), "utf8"),
   ) as BattleRuntimeShell;
   return createTuxemonBattleDbProvider(shell, {
-    read: (entry) => new Uint8Array(readFileSync(join(absolute, "dist", entry))),
+    read: (entry) => {
+      onRead(entry);
+      return new Uint8Array(readFileSync(join(absolute, "dist", entry)));
+    },
   });
 }

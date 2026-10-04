@@ -38,11 +38,12 @@ else
   run+=(-u G6_BENCH_VIEWPORT)
 fi
 run+=(
-  G6_BENCH_ROOT=${GB6_BENCH_ROOT:-${TMPDIR:-/tmp}/pocket-tuxemon-gb6-quickjs}
+  G6_BENCH_ROOT=${GB6_BENCH_ROOT:-${TMPDIR:-/var/tmp}/pocket-tuxemon-gb6-quickjs}
   G6_JOURNEY="$journey"
   G6_EXPECTED_MAP=${G6_EXPECTED_MAP:-$terminal_map}
   G6_STATE_SHA256=${G6_STATE_SHA256:-$terminal_sha256}
   G6_SKIP_MAP_BENCH=1
+  G6_COLD_RUNS=${GB6_COLD_RUNS:-1}
   G6_FAST_BENCH=1
   G6_HASH_EVERY=${GB6_HASH_EVERY:-10})
 # The handoff bucket gate applies to the English GB6 mainline tape (which

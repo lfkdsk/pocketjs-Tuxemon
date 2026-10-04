@@ -143,6 +143,40 @@ describe("reference-tick time/weather integration", () => {
     }
   });
 
+  test("condition cache identity changes only when extension conditions can change", () => {
+    const source = project();
+    const extensions = createTuxemonExtensions({} as never, {
+      initialTimeWeather: timeWeatherAt({ year: 2024, month: 6, day: 15, hour: 9, minute: 0 }, 4),
+    });
+    const session = createSession(source, 60, { extensions });
+    let state = startSession(source, session);
+    const key = extensions.conditionCacheKey!;
+    const keys = [key(state.ext)];
+    for (let tick = 0; tick < 4; tick++) {
+      state = stepSession(session, state, { buttons: 0 });
+      keys.push(key(state.ext));
+    }
+    expect(keys[1]).toBe(keys[0]);
+    expect(keys[2]).toBe(keys[0]);
+    expect(keys[3]).not.toBe(keys[2]);
+    expect(keys[4]).not.toBe(keys[3]);
+    expect(clockOf(state)).toMatchObject({ minuteOfDay: 541, subMinuteTicks: 0 });
+
+    const entryKey = extensions.entryConditionCacheKey;
+    const context = (playerName: string) => ({
+      ext: state.ext,
+      switches: state.sw.switches,
+      variables: state.sw.variables,
+      items: state.sw.items,
+      gold: state.sw.gold,
+      playerName,
+    });
+    const args = { name: "Avery" };
+    const firstEntryKey = entryKey(context("Avery"), "tux.player_name_is", args);
+    expect(entryKey(context("Avery"), "tux.player_name_is", args)).toBe(firstEntryKey);
+    expect(entryKey(context("Morgan"), "tux.player_name_is", args)).not.toBe(firstEntryKey);
+  });
+
   test("fade and a frozen battle scene do not advance the clock", () => {
     const inertBattle: BattleRules = {
       start: () => null,

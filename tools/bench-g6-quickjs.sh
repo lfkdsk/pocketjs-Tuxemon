@@ -2,7 +2,7 @@
 set -euo pipefail
 
 root=$(cd "$(dirname "$0")/.." && pwd)
-bench_root=${G6_BENCH_ROOT:-${TMPDIR:-/tmp}/pocket-tuxemon-quickjs}
+bench_root=${G6_BENCH_ROOT:-${TMPDIR:-/var/tmp}/pocket-tuxemon-quickjs}
 scratch="$bench_root/quickjs-host"
 target="$bench_root/quickjs-target"
 pocketjs="$root/vendor/pocket-rpgkit/vendor/pocketjs"
@@ -27,6 +27,7 @@ app_dist=${G6_DIST:-$root/dist/linux-app}
 app_js="$app_dist/pocket-tuxemon.js"
 app_pak="$app_dist/pocket-tuxemon.pak"
 project_shell="$root/dist/project-shell.json"
+host_stamp="$bench_root/quickjs-host-input.sha256"
 
 for artifact in "$app_js" "$app_pak" "$project_shell"; do
   if [[ ! -f "$artifact" ]]; then
@@ -53,12 +54,33 @@ if ! grep -Fq "$map_manifest_hash" "$app_js"; then
   exit 1
 fi
 
-rm -rf "$scratch"
-mkdir -p "$scratch"
-cp -a "$pocketjs/hosts/desktop/." "$scratch/"
-cp "$root/tools/g6-quickjs-bench.rs" "$scratch/src/g6-quickjs-bench.rs"
-sed -i "s#path = \"../../engine#path = \"$pocketjs/engine#g" "$scratch/Cargo.toml"
-sed -i '$a include!("g6-quickjs-bench.rs");' "$scratch/src/main.rs"
+app_js_sha256=$(sha256sum "$app_js" | cut -d' ' -f1)
+app_pak_sha256=$(sha256sum "$app_pak" | cut -d' ' -f1)
+project_shell_sha256=$(sha256sum "$project_shell" | cut -d' ' -f1)
+echo "BUILD_INPUT app_js_sha256=$app_js_sha256 app_pak_sha256=$app_pak_sha256 project_shell_sha256=$project_shell_sha256 map_manifest_sha256=$map_manifest_hash"
+
+host_input_sha256=$(
+  {
+    sha256sum "$root/tools/g6-quickjs-bench.rs"
+    git -C "$pocketjs" rev-parse HEAD
+  } | sha256sum | cut -d' ' -f1
+)
+echo "HOST_INPUT sha256=$host_input_sha256 reuse=${G6_REUSE_HOST:-0}"
+
+if [[ ${G6_REUSE_HOST:-0} == 1 ]]; then
+  if [[ ! -f "$host_stamp" || $(<"$host_stamp") != "$host_input_sha256" ]]; then
+    echo "bench-g6-quickjs: G6_REUSE_HOST=1 requested without a matching compiled host" >&2
+    echo "run once without G6_REUSE_HOST to refresh $bench_root" >&2
+    exit 1
+  fi
+else
+  rm -rf "$scratch"
+  mkdir -p "$scratch"
+  cp -a "$pocketjs/hosts/desktop/." "$scratch/"
+  cp "$root/tools/g6-quickjs-bench.rs" "$scratch/src/g6-quickjs-bench.rs"
+  sed -i "s#path = \"../../engine#path = \"$pocketjs/engine#g" "$scratch/Cargo.toml"
+  sed -i '$a include!("g6-quickjs-bench.rs");' "$scratch/src/main.rs"
+fi
 
 if [[ ${G6_SKIP_MAP_BENCH:-0} != 1 ]]; then
   rm -rf "$map_bundle"
@@ -67,35 +89,50 @@ if [[ ${G6_SKIP_MAP_BENCH:-0} != 1 ]]; then
     --framework=solid --project-root="$root" --outdir="$map_bundle"
 fi
 
-CARGO_TARGET_DIR="$target" cargo test --manifest-path "$scratch/Cargo.toml" --release --no-default-features --no-run
+if [[ ${G6_REUSE_HOST:-0} != 1 ]]; then
+  CARGO_TARGET_DIR="$target" cargo test --manifest-path "$scratch/Cargo.toml" --release --no-default-features --no-run
+  printf '%s\n' "$host_input_sha256" >"$host_stamp"
+fi
 binary=$(find "$target/release/deps" -maxdepth 1 -type f -name 'pocket_desktop_host-*' -perm -111 -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)
+if [[ -z $binary ]]; then
+  echo "bench-g6-quickjs: compiled QuickJS host not found under $target" >&2
+  exit 1
+fi
 
 if [[ -n ${G6_BENCH_VIEWPORT:-} ]]; then
   viewports=("$G6_BENCH_VIEWPORT")
 else
   viewports=("480 272" "960 544")
 fi
+cold_runs=${G6_COLD_RUNS:-1}
+if [[ ! $cold_runs =~ ^[1-9][0-9]*$ ]]; then
+  echo "bench-g6-quickjs: G6_COLD_RUNS must be a positive integer" >&2
+  exit 1
+fi
 for viewport in "${viewports[@]}"; do
   read -r width height <<<"$viewport"
-  state="$bench_root/state-${width}x${height}.json"
-  G6_DIST="$app_dist" G6_JOURNEY="$journey" \
-    G6_MAPS="$root/dist/maps" G6_BATTLE="$root/dist/battle" \
-    G6_MAPS_ZH="$root/dist/maps-zh" G6_BATTLE_ZH="$root/dist/battle-zh" \
-    G6_ANIMATED="$root/dist/animated" G6_NPC_SRC="$root/dist/npc-src" \
-    G6_TERRAIN_STREAM="$root/dist/terrain-stream" G6_DEMO="$root/dist/demo" \
-    G6_BENCH_ROOT="$bench_root" \
-    G6_STATE_OUT="$state" G6_EXPECTED_MAP="$expected_map" \
-    G6_BENCH_W="$width" G6_BENCH_H="$height" \
-    "$binary" g6_quickjs_bench::journey --ignored --exact --nocapture
-  actual=$(sha256sum "$state" | cut -d' ' -f1)
-  # Complete post-Billie state, including persistent party/history, the
-  # independent battle/weather RNG cursors, saved clock/daylight state, and
-  # persistent shop-stock banks.
-  if [[ "$actual" != "$expected_state" ]]; then
-    echo "STATE MISMATCH viewport=${width}x${height} expected=$expected_state actual=$actual" >&2
-    exit 1
-  fi
-  echo "STATE viewport=${width}x${height} canonical_sha256=$actual"
+  for ((run = 1; run <= cold_runs; run++)); do
+    state="$bench_root/state-${width}x${height}-run${run}.json"
+    echo "PROCESS_COLD suite=journey viewport=${width}x${height} run=$run/$cold_runs prewarm=none"
+    G6_DIST="$app_dist" G6_JOURNEY="$journey" \
+      G6_MAPS="$root/dist/maps" G6_BATTLE="$root/dist/battle" \
+      G6_MAPS_ZH="$root/dist/maps-zh" G6_BATTLE_ZH="$root/dist/battle-zh" \
+      G6_ANIMATED="$root/dist/animated" G6_NPC_SRC="$root/dist/npc-src" \
+      G6_TERRAIN_STREAM="$root/dist/terrain-stream" G6_DEMO="$root/dist/demo" \
+      G6_BENCH_ROOT="$bench_root" G6_RUN_LABEL="$run" \
+      G6_STATE_OUT="$state" G6_EXPECTED_MAP="$expected_map" \
+      G6_BENCH_W="$width" G6_BENCH_H="$height" \
+      "$binary" g6_quickjs_bench::journey --ignored --exact --nocapture
+    actual=$(sha256sum "$state" | cut -d' ' -f1)
+    # Complete post-Billie state, including persistent party/history, the
+    # independent battle/weather RNG cursors, saved clock/daylight state, and
+    # persistent shop-stock banks.
+    if [[ "$actual" != "$expected_state" ]]; then
+      echo "STATE MISMATCH viewport=${width}x${height} run=$run expected=$expected_state actual=$actual" >&2
+      exit 1
+    fi
+    echo "STATE viewport=${width}x${height} run=$run canonical_sha256=$actual"
+  done
 done
 
 if [[ ${G6_SKIP_MAP_BENCH:-0} != 1 ]]; then
